@@ -18,12 +18,12 @@ java:
   additionalPlugins: []
   artifactID: openapi
   clientServerStatusCodesAsErrors: true
-  companyEmail: info@mycompany.com
-  companyName: My Company
-  companyURL: www.mycompany.com
+  companyEmail: info@moov.io
+  companyName: Moov
+  companyURL: https://moov.io/
   defaultErrorName: APIException
   flattenGlobalSecurity: true
-  githubURL: github.com/owner/repo
+  githubURL: https://github.com/moovfinancial/
   groupID: io.moov
   imports:
     option: openapi

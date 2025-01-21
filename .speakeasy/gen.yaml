@@ -18,7 +18,7 @@ java:
   additionalPlugins: []
   artifactID: openapi
   clientServerStatusCodesAsErrors: true
-  companyEmail: info@moov.io
+  companyEmail: help@moov.io
   companyName: Moov
   companyURL: https://moov.io/
   defaultErrorName: APIException

@@ -1,0 +1,14 @@
+# RunTransfer
+
+Defines the attributes of a transfer.
+
+
+## Fields
+
+| Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `amount`                                                                  | [Amount](../../models/components/Amount.md)                               | :heavy_check_mark:                                                        | N/A                                                                       |                                                                           |
+| `destination`                                                             | [SchedulePaymentMethod](../../models/components/SchedulePaymentMethod.md) | :heavy_check_mark:                                                        | N/A                                                                       |                                                                           |
+| `partnerAccountID`                                                        | *String*                                                                  | :heavy_check_mark:                                                        | N/A                                                                       | c520f1b9-0ba7-42f5-b977-248cdbe41c69                                      |
+| `source`                                                                  | [SchedulePaymentMethod](../../models/components/SchedulePaymentMethod.md) | :heavy_check_mark:                                                        | N/A                                                                       |                                                                           |
+| `description`                                                             | *String*                                                                  | :heavy_check_mark:                                                        | Simple description to place on the transfer.                              |                                                                           |

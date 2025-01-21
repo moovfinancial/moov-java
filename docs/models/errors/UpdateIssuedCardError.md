@@ -1,0 +1,10 @@
+# UpdateIssuedCardError
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `state`                                                                                      | *Optional\<String>*                                                                          | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `memo`                                                                                       | *Optional\<String>*                                                                          | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `authorizedUser`                                                                             | [Optional\<CreateAuthorizedUserError>](../../models/components/CreateAuthorizedUserError.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |

@@ -1,0 +1,13 @@
+# AccountNameVerification
+
+The results of submitting cardholder name to a card network for verification.
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `firstName`                                                                 | [CardVerificationResult](../../models/components/CardVerificationResult.md) | :heavy_check_mark:                                                          | N/A                                                                         | match                                                                       |
+| `lastName`                                                                  | [CardVerificationResult](../../models/components/CardVerificationResult.md) | :heavy_check_mark:                                                          | N/A                                                                         | match                                                                       |
+| `middleName`                                                                | [CardVerificationResult](../../models/components/CardVerificationResult.md) | :heavy_check_mark:                                                          | N/A                                                                         | match                                                                       |
+| `fullName`                                                                  | [CardVerificationResult](../../models/components/CardVerificationResult.md) | :heavy_check_mark:                                                          | N/A                                                                         | match                                                                       |

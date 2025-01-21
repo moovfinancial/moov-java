@@ -1,0 +1,10 @@
+# BankAccountVerification
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `verificationMethod`                                                                          | [BankAccountVerificationMethod](../../models/components/BankAccountVerificationMethod.md)     | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `status`                                                                                      | [BankAccountVerificationStatus](../../models/components/BankAccountVerificationStatus.md)     | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `exceptionDetails`                                                                            | [Optional\<BankAccountException>](../../models/components/BankAccountException.md)            | :heavy_minus_sign:                                                                            | Reason for, and details related to, an `errored` or `verificationFailed` bank account status. |

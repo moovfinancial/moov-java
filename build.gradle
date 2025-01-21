@@ -61,7 +61,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "io.moov"
-version = "0.0.2"
+version = "0.0.3"
 
 sourcesJar {
     archiveBaseName = "openapi"
@@ -78,7 +78,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'io.moov'
             artifactId = 'openapi'
-            version = '0.0.2'
+            version = '0.0.3'
 
             from components.java
 

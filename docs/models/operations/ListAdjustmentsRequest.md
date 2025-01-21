@@ -1,0 +1,10 @@
+# ListAdjustmentsRequest
+
+
+## Fields
+
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `walletID`                                                 | *Optional\<String>*                                        | :heavy_minus_sign:                                         | A wallet ID to filter adjustments by.                      |

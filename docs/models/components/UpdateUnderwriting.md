@@ -1,0 +1,13 @@
+# UpdateUnderwriting
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `averageTransactionSize`                                                    | *long*                                                                      | :heavy_check_mark:                                                          | N/A                                                                         |
+| `maxTransactionSize`                                                        | *long*                                                                      | :heavy_check_mark:                                                          | N/A                                                                         |
+| `averageMonthlyTransactionVolume`                                           | *long*                                                                      | :heavy_check_mark:                                                          | N/A                                                                         |
+| `volumeByCustomerType`                                                      | [VolumeByCustomerType](../../models/components/VolumeByCustomerType.md)     | :heavy_check_mark:                                                          | N/A                                                                         |
+| `cardVolumeDistribution`                                                    | [CardVolumeDistribution](../../models/components/CardVolumeDistribution.md) | :heavy_check_mark:                                                          | N/A                                                                         |
+| `fulfillment`                                                               | [FulfillmentDetails](../../models/components/FulfillmentDetails.md)         | :heavy_check_mark:                                                          | N/A                                                                         |

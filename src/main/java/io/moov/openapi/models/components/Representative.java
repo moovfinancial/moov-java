@@ -38,8 +38,9 @@ public class Representative {
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
-    private String email;
+    private Optional<String> email;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
@@ -81,7 +82,7 @@ public class Representative {
             @JsonProperty("representativeID") String representativeID,
             @JsonProperty("name") IndividualName name,
             @JsonProperty("phone") Optional<? extends PhoneNumber> phone,
-            @JsonProperty("email") String email,
+            @JsonProperty("email") Optional<String> email,
             @JsonProperty("address") Optional<? extends Address> address,
             @JsonProperty("birthDateProvided") Optional<Boolean> birthDateProvided,
             @JsonProperty("governmentIDProvided") Optional<Boolean> governmentIDProvided,
@@ -116,10 +117,9 @@ public class Representative {
     public Representative(
             String representativeID,
             IndividualName name,
-            String email,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(representativeID, name, Optional.empty(), email, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn, Optional.empty());
+        this(representativeID, name, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn, Optional.empty());
     }
 
     /**
@@ -142,7 +142,7 @@ public class Representative {
     }
 
     @JsonIgnore
-    public String email() {
+    public Optional<String> email() {
         return email;
     }
 
@@ -224,6 +224,12 @@ public class Representative {
     }
 
     public Representative withEmail(String email) {
+        Utils.checkNotNull(email, "email");
+        this.email = Optional.ofNullable(email);
+        return this;
+    }
+
+    public Representative withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
@@ -382,7 +388,7 @@ public class Representative {
  
         private Optional<? extends PhoneNumber> phone = Optional.empty();
  
-        private String email;
+        private Optional<String> email = Optional.empty();
  
         private Optional<? extends Address> address = Optional.empty();
  
@@ -430,6 +436,12 @@ public class Representative {
         }
 
         public Builder email(String email) {
+            Utils.checkNotNull(email, "email");
+            this.email = Optional.ofNullable(email);
+            return this;
+        }
+
+        public Builder email(Optional<String> email) {
             Utils.checkNotNull(email, "email");
             this.email = email;
             return this;

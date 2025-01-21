@@ -18,27 +18,36 @@ import io.moov.openapi.models.components.CreateAccountUpdate;
 import io.moov.openapi.models.components.CreateApplePaySession;
 import io.moov.openapi.models.components.CreateEvidenceFileMultiPart;
 import io.moov.openapi.models.components.CreateEvidenceText;
+import io.moov.openapi.models.components.CreateFeePlanAgreement;
 import io.moov.openapi.models.components.CreatePaymentLink;
+import io.moov.openapi.models.components.CreateRepresentative;
 import io.moov.openapi.models.components.CreateSweepConfig;
+import io.moov.openapi.models.components.E2EEToken;
+import io.moov.openapi.models.components.FeePlanAgreementStatus;
 import io.moov.openapi.models.components.FileUploadRequestMultiPart;
 import io.moov.openapi.models.components.LinkApplePay;
 import io.moov.openapi.models.components.LinkBankAccount;
 import io.moov.openapi.models.components.LinkCard;
 import io.moov.openapi.models.components.LinkCardWaitFor;
+import io.moov.openapi.models.components.OnboardingInviteRequest;
 import io.moov.openapi.models.components.PatchSweepConfig;
 import io.moov.openapi.models.components.PaymentMethodType;
 import io.moov.openapi.models.components.RegisterApplePayMerchantDomains;
 import io.moov.openapi.models.components.RequestCard;
+import io.moov.openapi.models.components.RevokeTokenRequest;
 import io.moov.openapi.models.components.UpdateApplePayMerchantDomains;
 import io.moov.openapi.models.components.UpdateBrand;
 import io.moov.openapi.models.components.UpdateCard;
 import io.moov.openapi.models.components.UpdateIssuedCard;
 import io.moov.openapi.models.components.UpdatePaymentLink;
+import io.moov.openapi.models.components.UpdateRepresentative;
+import io.moov.openapi.models.components.UpdateUnderwriting;
 import io.moov.openapi.models.components.UpsertSchedule;
 import io.moov.openapi.models.components.Versions;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
+import java.util.List;
 import java.util.Optional;
 
 public class SDKMethodInterfaces {
@@ -115,6 +124,24 @@ public class SDKMethodInterfaces {
             Optional<? extends Versions> xMoovVersion,
             Optional<String> origin,
             Optional<String> referer) throws Exception;
+    }
+
+
+    public interface MethodCallListAdjustments {
+        ListAdjustmentsResponse listAdjustments(
+            ListAdjustmentsSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            Optional<String> walletID) throws Exception;
+    }
+
+
+    public interface MethodCallGetAdjustment {
+        GetAdjustmentResponse getAdjustment(
+            GetAdjustmentSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            String adjustmentID) throws Exception;
     }
 
 
@@ -453,6 +480,53 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallListFeePlanAgreements {
+        ListFeePlanAgreementsResponse listFeePlanAgreements(
+            ListFeePlanAgreementsSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            Optional<? extends List<String>> agreementID,
+            Optional<? extends List<FeePlanAgreementStatus>> status) throws Exception;
+    }
+
+
+    public interface MethodCallCreateFeePlanAgreements {
+        CreateFeePlanAgreementsResponse createFeePlanAgreements(
+            CreateFeePlanAgreementsSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            CreateFeePlanAgreement createFeePlanAgreement) throws Exception;
+    }
+
+
+    public interface MethodCallListFeePlans {
+        ListFeePlansResponse listFeePlans(
+            ListFeePlansSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            Optional<? extends List<String>> planIDs) throws Exception;
+    }
+
+
+    public interface MethodCallListPartnerPricing {
+        ListPartnerPricingResponse listPartnerPricing(
+            ListPartnerPricingSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            Optional<? extends List<String>> planIDs) throws Exception;
+    }
+
+
+    public interface MethodCallListPartnerPricingAgreements {
+        ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(
+            ListPartnerPricingAgreementsSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            Optional<? extends List<String>> agreementID,
+            Optional<? extends List<FeePlanAgreementStatus>> status) throws Exception;
+    }
+
+
     public interface MethodCallUploadFile {
         UploadFileResponse uploadFile(
             UploadFileSecurity security,
@@ -549,6 +623,51 @@ public class SDKMethodInterfaces {
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String paymentMethodID) throws Exception;
+    }
+
+
+    public interface MethodCallCreateRepresentative {
+        CreateRepresentativeResponse createRepresentative(
+            CreateRepresentativeSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            CreateRepresentative createRepresentative) throws Exception;
+    }
+
+
+    public interface MethodCallListRepresentatives {
+        ListRepresentativesResponse listRepresentatives(
+            ListRepresentativesSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID) throws Exception;
+    }
+
+
+    public interface MethodCallDeleteRepresentative {
+        DeleteRepresentativeResponse deleteRepresentative(
+            DeleteRepresentativeSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            String representativeID) throws Exception;
+    }
+
+
+    public interface MethodCallGetRepresentative {
+        GetRepresentativeResponse getRepresentative(
+            GetRepresentativeSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            String representativeID) throws Exception;
+    }
+
+
+    public interface MethodCallUpdateRepresentative {
+        UpdateRepresentativeResponse updateRepresentative(
+            UpdateRepresentativeSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            String representativeID,
+            UpdateRepresentative updateRepresentative) throws Exception;
     }
 
 
@@ -720,10 +839,34 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallReverseTransfer {
+        ReverseTransferResponse reverseTransfer(
+            ReverseTransferRequest request,
+            ReverseTransferSecurity security) throws Exception;
+    }
+
+
     public interface MethodCallCreateTransferOptions {
         CreateTransferOptionsResponse createTransferOptions(
             CreateTransferOptionsSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception;
+    }
+
+
+    public interface MethodCallGetUnderwriting {
+        GetUnderwritingResponse getUnderwriting(
+            GetUnderwritingSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID) throws Exception;
+    }
+
+
+    public interface MethodCallUpdateUnderwriting {
+        UpdateUnderwritingResponse updateUnderwriting(
+            UpdateUnderwritingSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            UpdateUnderwriting updateUnderwriting) throws Exception;
     }
 
 
@@ -761,6 +904,28 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallGetAvatar {
+        GetAvatarResponse getAvatar(
+            GetAvatarSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String uniqueID) throws Exception;
+    }
+
+
+    public interface MethodCallTestEndToEndToken {
+        TestEndToEndTokenResponse testEndToEndToken(
+            TestEndToEndTokenSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            E2EEToken e2EEToken) throws Exception;
+    }
+
+
+    public interface MethodCallGenerateEndToEndKey {
+        GenerateEndToEndKeyResponse generateEndToEndKey(
+            Optional<? extends Versions> xMoovVersion) throws Exception;
+    }
+
+
     public interface MethodCallGetEnrichmentAddress {
         GetEnrichmentAddressResponse getEnrichmentAddress(
             GetEnrichmentAddressRequest request,
@@ -773,6 +938,20 @@ public class SDKMethodInterfaces {
             GetEnrichmentProfileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String email) throws Exception;
+    }
+
+
+    public interface MethodCallListIndustries {
+        ListIndustriesResponse listIndustries(
+            ListIndustriesSecurity security,
+            Optional<? extends Versions> xMoovVersion) throws Exception;
+    }
+
+
+    public interface MethodCallListInstitutions {
+        ListInstitutionsResponse listInstitutions(
+            ListInstitutionsRequest request,
+            ListInstitutionsSecurity security) throws Exception;
     }
 
 
@@ -859,9 +1038,55 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallRevokeAuthToken {
+        RevokeAuthTokenResponse revokeAuthToken(
+            Optional<? extends Versions> xMoovVersion,
+            RevokeTokenRequest revokeTokenRequest) throws Exception;
+    }
+
+
     public interface MethodCallCreateAuthToken {
         CreateAuthTokenResponse createAuthToken(
-            AuthTokenRequest request) throws Exception;
+            Optional<? extends Versions> xMoovVersion,
+            AuthTokenRequest authTokenRequest) throws Exception;
+    }
+
+
+    public interface MethodCallCreateOnboardingInvite {
+        CreateOnboardingInviteResponse createOnboardingInvite(
+            CreateOnboardingInviteSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            OnboardingInviteRequest onboardingInviteRequest) throws Exception;
+    }
+
+
+    public interface MethodCallListOnboardingInvites {
+        ListOnboardingInvitesResponse listOnboardingInvites(
+            ListOnboardingInvitesSecurity security,
+            Optional<? extends Versions> xMoovVersion) throws Exception;
+    }
+
+
+    public interface MethodCallGetOnboardingInvite {
+        GetOnboardingInviteResponse getOnboardingInvite(
+            GetOnboardingInviteSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String code) throws Exception;
+    }
+
+
+    public interface MethodCallRevokeOnboardingInvite {
+        RevokeOnboardingInviteResponse revokeOnboardingInvite(
+            RevokeOnboardingInviteSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String code) throws Exception;
+    }
+
+
+    public interface MethodCallPing {
+        PingResponse ping(
+            PingSecurity security,
+            Optional<? extends Versions> xMoovVersion) throws Exception;
     }
 
 

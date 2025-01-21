@@ -1,12 +1,13 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: a24ae9499da4de719991fab206e7d5e7
+  docChecksum: 1400cc1c0d1de1df92719a13aefce704
   docVersion: latest
   speakeasyVersion: 1.469.12
   generationVersion: 2.493.34
-  releaseVersion: 0.0.2
-  configChecksum: 7867ae00670a818cdf539f34d9ae264c
+  releaseVersion: 0.0.3
+  configChecksum: b992b329bcf432b263d9de864dd6e32c
+  published: true
 features:
   java:
     acceptHeaders: 2.81.2
@@ -34,7 +35,6 @@ generatedFiles:
   - docs/models/components/ACHReturnCode.md
   - docs/models/components/ACHTransactionDetails.md
   - docs/models/components/ACHTransactionStatus.md
-  - docs/models/components/AccessToken.md
   - docs/models/components/Account.md
   - docs/models/components/AccountCapability.md
   - docs/models/components/AccountCountries.md
@@ -51,12 +51,16 @@ generatedFiles:
   - docs/models/components/AchDebitFundPaymentMethod.md
   - docs/models/components/AchDebitFundPaymentMethodPaymentMethodType.md
   - docs/models/components/AchDetails.md
+  - docs/models/components/AchLocation.md
+  - docs/models/components/AchParticipant.md
   - docs/models/components/AchPayment.md
   - docs/models/components/AddCapabilities.md
   - docs/models/components/Address.md
   - docs/models/components/AddressError.md
   - docs/models/components/AddressUpdate.md
+  - docs/models/components/Adjustment.md
   - docs/models/components/Amount.md
+  - docs/models/components/AmountDecimal.md
   - docs/models/components/AmountUpdate.md
   - docs/models/components/AmountValidationError.md
   - docs/models/components/AppleBillingContact.md
@@ -65,8 +69,10 @@ generatedFiles:
   - docs/models/components/ApplePayPaymentMethod.md
   - docs/models/components/ApplePayPaymentMethodPaymentMethodType.md
   - docs/models/components/ApplePayResponse.md
+  - docs/models/components/ApplicationScope.md
   - docs/models/components/AsyncCreatedRefund.md
   - docs/models/components/AsyncTransfer.md
+  - docs/models/components/AuthToken.md
   - docs/models/components/AuthTokenRequest.md
   - docs/models/components/AuthorizedUser.md
   - docs/models/components/BankAccount.md
@@ -83,15 +89,19 @@ generatedFiles:
   - docs/models/components/BankAccountVerificationStatus.md
   - docs/models/components/BankAccountWaitFor.md
   - docs/models/components/BasicPaymentMethod.md
+  - docs/models/components/BillableFee.md
   - docs/models/components/BirthDate.md
   - docs/models/components/BirthDateError.md
   - docs/models/components/BirthDateUpdate.md
+  - docs/models/components/BirthDateValidationError.md
   - docs/models/components/Brand.md
   - docs/models/components/BrandColor.md
   - docs/models/components/BrandColorValidationError.md
   - docs/models/components/BusinessProfile.md
   - docs/models/components/BusinessType.md
   - docs/models/components/CallToAction.md
+  - docs/models/components/Cancellation.md
+  - docs/models/components/CancellationStatus.md
   - docs/models/components/CapabilitiesError.md
   - docs/models/components/Capability.md
   - docs/models/components/CapabilityID.md
@@ -101,6 +111,7 @@ generatedFiles:
   - docs/models/components/CardAccountUpdater.md
   - docs/models/components/CardAcquiringDispute.md
   - docs/models/components/CardAcquiringRefund.md
+  - docs/models/components/CardAcquringModel.md
   - docs/models/components/CardAddress.md
   - docs/models/components/CardAddressError.md
   - docs/models/components/CardBrand.md
@@ -121,6 +132,8 @@ generatedFiles:
   - docs/models/components/CardUpdateReason.md
   - docs/models/components/CardVerification.md
   - docs/models/components/CardVerificationResult.md
+  - docs/models/components/CardVolumeDistribution.md
+  - docs/models/components/CardVolumeDistributionError.md
   - docs/models/components/CollectionPaymentMethodType.md
   - docs/models/components/Colors.md
   - docs/models/components/ColorsValidationError.md
@@ -146,6 +159,7 @@ generatedFiles:
   - docs/models/components/CreateBusinessProfileUpdate.md
   - docs/models/components/CreateEvidenceFileMultiPart.md
   - docs/models/components/CreateEvidenceText.md
+  - docs/models/components/CreateFeePlanAgreement.md
   - docs/models/components/CreateIndividualError.md
   - docs/models/components/CreateIndividualErrorGovernmentID.md
   - docs/models/components/CreateIndividualErrorItin.md
@@ -158,6 +172,8 @@ generatedFiles:
   - docs/models/components/CreateProfileUpdate.md
   - docs/models/components/CreateRefund.md
   - docs/models/components/CreateRefundResponse.md
+  - docs/models/components/CreateRepresentative.md
+  - docs/models/components/CreateReversal.md
   - docs/models/components/CreateSweepConfig.md
   - docs/models/components/CreateTransfer.md
   - docs/models/components/CreateTransferDestination.md
@@ -181,25 +197,39 @@ generatedFiles:
   - docs/models/components/DocumentType.md
   - docs/models/components/DomesticPullFromCard.md
   - docs/models/components/DomesticPushToCard.md
+  - docs/models/components/E2EEToken.md
+  - docs/models/components/E2EETokenUpdate.md
   - docs/models/components/Ein.md
-  - docs/models/components/End2EndEncryption.md
+  - docs/models/components/Email.md
   - docs/models/components/End2EndEncryptionError.md
-  - docs/models/components/End2EndEncryptionUpdate.md
   - docs/models/components/EnrichedAddressResponse.md
   - docs/models/components/EnrichedBusinessProfile.md
+  - docs/models/components/EnrichedIndustry.md
   - docs/models/components/EnrichedIndustryCodes.md
   - docs/models/components/Error.md
   - docs/models/components/EvidenceText.md
   - docs/models/components/EvidenceType.md
   - docs/models/components/FacilitatorFee.md
+  - docs/models/components/FeeCategory.md
+  - docs/models/components/FeeModel.md
+  - docs/models/components/FeePlan.md
+  - docs/models/components/FeePlanAgreement.md
+  - docs/models/components/FeePlanAgreementStatus.md
+  - docs/models/components/FeeProperties.md
   - docs/models/components/File.md
   - docs/models/components/FileDetails.md
   - docs/models/components/FilePurpose.md
   - docs/models/components/FileStatus.md
   - docs/models/components/FileUploadRequestMultiPart.md
   - docs/models/components/FileUploadRequestMultiPartFile.md
+  - docs/models/components/FinancialInstitutions.md
+  - docs/models/components/FulfillmentDetails.md
+  - docs/models/components/FulfillmentDetailsError.md
   - docs/models/components/FullIssuedCard.md
   - docs/models/components/GovernmentID.md
+  - docs/models/components/GovernmentIDError.md
+  - docs/models/components/GovernmentIDErrorItin.md
+  - docs/models/components/GovernmentIDErrorSsn.md
   - docs/models/components/GrantType.md
   - docs/models/components/IndividualName.md
   - docs/models/components/IndividualNameError.md
@@ -223,6 +253,7 @@ generatedFiles:
   - docs/models/components/IssuingVelocityLimit.md
   - docs/models/components/IssuingVelocityLimitError.md
   - docs/models/components/Itin.md
+  - docs/models/components/JSONWebKey.md
   - docs/models/components/LinkApplePay.md
   - docs/models/components/LinkApplePayToken.md
   - docs/models/components/LinkApplePaymentData.md
@@ -231,6 +262,7 @@ generatedFiles:
   - docs/models/components/LinkCard.md
   - docs/models/components/LinkCardWaitFor.md
   - docs/models/components/LinkedApplePayPaymentMethod.md
+  - docs/models/components/Logo.md
   - docs/models/components/MXAuthorizationCode.md
   - docs/models/components/Manual.md
   - docs/models/components/ManualTermsOfService.md
@@ -244,6 +276,11 @@ generatedFiles:
   - docs/models/components/Occurrence.md
   - docs/models/components/OccurrenceStatus.md
   - docs/models/components/OccurrencesResponse.md
+  - docs/models/components/OnboardingInvite.md
+  - docs/models/components/OnboardingInviteRequest.md
+  - docs/models/components/OnboardingPartnerAccount.md
+  - docs/models/components/PartnerPricing.md
+  - docs/models/components/PartnerPricingAgreement.md
   - docs/models/components/PatchAccountError.md
   - docs/models/components/PatchSweepConfig.md
   - docs/models/components/PaymentDetailsError.md
@@ -262,6 +299,7 @@ generatedFiles:
   - docs/models/components/PayoutRecipient.md
   - docs/models/components/PayoutRecipientError.md
   - docs/models/components/PayoutRecipientUpdate.md
+  - docs/models/components/Phone.md
   - docs/models/components/PhoneNumber.md
   - docs/models/components/PhoneNumberError.md
   - docs/models/components/PlaidIntegration.md
@@ -286,10 +324,17 @@ generatedFiles:
   - docs/models/components/RegisterApplePayMerchantDomains.md
   - docs/models/components/Representative.md
   - docs/models/components/RepresentativeResponsibilities.md
+  - docs/models/components/RepresentativeResponsibilitiesError.md
   - docs/models/components/RequestCard.md
   - docs/models/components/RequirementError.md
   - docs/models/components/RequirementErrorCode.md
   - docs/models/components/RequirementID.md
+  - docs/models/components/Responsibilities.md
+  - docs/models/components/ReturnPolicyType.md
+  - docs/models/components/Reversal.md
+  - docs/models/components/ReversedWithCancellation.md
+  - docs/models/components/ReversedWithRefund.md
+  - docs/models/components/RevokeTokenRequest.md
   - docs/models/components/RtpCreditPaymentMethod.md
   - docs/models/components/RtpCreditPaymentMethodPaymentMethodType.md
   - docs/models/components/RunTransfer.md
@@ -314,6 +359,7 @@ generatedFiles:
   - docs/models/components/TermsOfServiceToken.md
   - docs/models/components/TermsOfServiceTokenUpdate.md
   - docs/models/components/TokenType.md
+  - docs/models/components/TokenTypeHint.md
   - docs/models/components/TransactionSource.md
   - docs/models/components/Transfer.md
   - docs/models/components/TransferAccount.md
@@ -323,6 +369,9 @@ generatedFiles:
   - docs/models/components/TransferSource.md
   - docs/models/components/TransferStatus.md
   - docs/models/components/TransferWaitFor.md
+  - docs/models/components/Two.md
+  - docs/models/components/Underwriting.md
+  - docs/models/components/UnderwritingStatus.md
   - docs/models/components/UpdateApplePayMerchantDomains.md
   - docs/models/components/UpdateBrand.md
   - docs/models/components/UpdateCard.md
@@ -333,11 +382,21 @@ generatedFiles:
   - docs/models/components/UpdateEvidence.md
   - docs/models/components/UpdateIssuedCard.md
   - docs/models/components/UpdatePaymentLink.md
+  - docs/models/components/UpdateRepresentative.md
+  - docs/models/components/UpdateRepresentativeAddress.md
+  - docs/models/components/UpdateRepresentativeBirthDate.md
+  - docs/models/components/UpdateRepresentativeGovernmentID.md
+  - docs/models/components/UpdateRepresentativeItin.md
+  - docs/models/components/UpdateRepresentativeSsn.md
+  - docs/models/components/UpdateUnderwriting.md
   - docs/models/components/UpsertSchedule.md
+  - docs/models/components/Use.md
   - docs/models/components/Verification.md
   - docs/models/components/VerificationStatus.md
   - docs/models/components/VerificationStatusDetail.md
   - docs/models/components/Versions.md
+  - docs/models/components/VolumeByCustomerType.md
+  - docs/models/components/VolumeByCustomerTypeError.md
   - docs/models/components/Wallet.md
   - docs/models/components/WalletAvailableBalance.md
   - docs/models/components/WalletTransaction.md
@@ -346,22 +405,28 @@ generatedFiles:
   - docs/models/components/WalletTransactionType.md
   - docs/models/errors/AddCapabilitiesError.md
   - docs/models/errors/AssignCountriesError.md
+  - docs/models/errors/AuthTokenRequestError.md
   - docs/models/errors/BankAccountValidationError.md
   - docs/models/errors/BrandValidationError.md
   - docs/models/errors/CardAcquiringRefund.md
   - docs/models/errors/CreateAccountResponseBody.md
-  - docs/models/errors/CreateAuthTokenResponseBody.md
   - docs/models/errors/CreatePaymentLinkError.md
   - docs/models/errors/CreateSweepConfigError.md
+  - docs/models/errors/Error.md
+  - docs/models/errors/FeePlanAgreementError.md
   - docs/models/errors/FileValidationError.md
   - docs/models/errors/GenericError.md
   - docs/models/errors/LinkApplePayError.md
   - docs/models/errors/LinkCardError.md
   - docs/models/errors/MicroDepositValidationError.md
+  - docs/models/errors/OnboardingInviteError.md
   - docs/models/errors/PatchAccountResponseBody.md
   - docs/models/errors/PatchSweepConfigError.md
   - docs/models/errors/RefundValidationError.md
+  - docs/models/errors/RepresentativeValidationError.md
   - docs/models/errors/RequestCardError.md
+  - docs/models/errors/ReversalValidationError.md
+  - docs/models/errors/RevokeTokenRequestError.md
   - docs/models/errors/ScheduleValidationError.md
   - docs/models/errors/Transfer.md
   - docs/models/errors/TransferOptionsValidationError.md
@@ -369,6 +434,8 @@ generatedFiles:
   - docs/models/errors/UpdateCardError.md
   - docs/models/errors/UpdateIssuedCardError.md
   - docs/models/errors/UpdatePaymentLinkError.md
+  - docs/models/errors/UpdateUnderwritingError.md
+  - docs/models/errors/UpdateUnderwritingErrorError.md
   - docs/models/operations/AcceptDisputeRequest.md
   - docs/models/operations/AcceptDisputeResponse.md
   - docs/models/operations/AcceptDisputeSecurity.md
@@ -393,10 +460,20 @@ generatedFiles:
   - docs/models/operations/CreateApplePaySessionRequest.md
   - docs/models/operations/CreateApplePaySessionResponse.md
   - docs/models/operations/CreateApplePaySessionSecurity.md
+  - docs/models/operations/CreateAuthTokenRequest.md
   - docs/models/operations/CreateAuthTokenResponse.md
+  - docs/models/operations/CreateFeePlanAgreementsRequest.md
+  - docs/models/operations/CreateFeePlanAgreementsResponse.md
+  - docs/models/operations/CreateFeePlanAgreementsSecurity.md
+  - docs/models/operations/CreateOnboardingInviteRequest.md
+  - docs/models/operations/CreateOnboardingInviteResponse.md
+  - docs/models/operations/CreateOnboardingInviteSecurity.md
   - docs/models/operations/CreatePaymentLinkRequest.md
   - docs/models/operations/CreatePaymentLinkResponse.md
   - docs/models/operations/CreatePaymentLinkSecurity.md
+  - docs/models/operations/CreateRepresentativeRequest.md
+  - docs/models/operations/CreateRepresentativeResponse.md
+  - docs/models/operations/CreateRepresentativeSecurity.md
   - docs/models/operations/CreateScheduleRequest.md
   - docs/models/operations/CreateScheduleResponse.md
   - docs/models/operations/CreateScheduleSecurity.md
@@ -413,6 +490,9 @@ generatedFiles:
   - docs/models/operations/DeleteDisputeEvidenceFileRequest.md
   - docs/models/operations/DeleteDisputeEvidenceFileResponse.md
   - docs/models/operations/DeleteDisputeEvidenceFileSecurity.md
+  - docs/models/operations/DeleteRepresentativeRequest.md
+  - docs/models/operations/DeleteRepresentativeResponse.md
+  - docs/models/operations/DeleteRepresentativeSecurity.md
   - docs/models/operations/DisableBankAccountRequest.md
   - docs/models/operations/DisableBankAccountResponse.md
   - docs/models/operations/DisableBankAccountSecurity.md
@@ -428,15 +508,23 @@ generatedFiles:
   - docs/models/operations/DisconnectAccountRequest.md
   - docs/models/operations/DisconnectAccountResponse.md
   - docs/models/operations/DisconnectAccountSecurity.md
+  - docs/models/operations/GenerateEndToEndKeyRequest.md
+  - docs/models/operations/GenerateEndToEndKeyResponse.md
   - docs/models/operations/GetAccountCountriesRequest.md
   - docs/models/operations/GetAccountCountriesResponse.md
   - docs/models/operations/GetAccountCountriesSecurity.md
   - docs/models/operations/GetAccountRequest.md
   - docs/models/operations/GetAccountResponse.md
   - docs/models/operations/GetAccountSecurity.md
+  - docs/models/operations/GetAdjustmentRequest.md
+  - docs/models/operations/GetAdjustmentResponse.md
+  - docs/models/operations/GetAdjustmentSecurity.md
   - docs/models/operations/GetApplePayMerchantDomainsRequest.md
   - docs/models/operations/GetApplePayMerchantDomainsResponse.md
   - docs/models/operations/GetApplePayMerchantDomainsSecurity.md
+  - docs/models/operations/GetAvatarRequest.md
+  - docs/models/operations/GetAvatarResponse.md
+  - docs/models/operations/GetAvatarSecurity.md
   - docs/models/operations/GetBankAccountRequest.md
   - docs/models/operations/GetBankAccountResponse.md
   - docs/models/operations/GetBankAccountSecurity.md
@@ -485,6 +573,9 @@ generatedFiles:
   - docs/models/operations/GetMerchantProcessingAgreementRequest.md
   - docs/models/operations/GetMerchantProcessingAgreementResponse.md
   - docs/models/operations/GetMerchantProcessingAgreementSecurity.md
+  - docs/models/operations/GetOnboardingInviteRequest.md
+  - docs/models/operations/GetOnboardingInviteResponse.md
+  - docs/models/operations/GetOnboardingInviteSecurity.md
   - docs/models/operations/GetPaymentLinkQRCodeRequest.md
   - docs/models/operations/GetPaymentLinkQRCodeResponse.md
   - docs/models/operations/GetPaymentLinkQRCodeSecurity.md
@@ -497,6 +588,9 @@ generatedFiles:
   - docs/models/operations/GetRefundRequest.md
   - docs/models/operations/GetRefundResponse.md
   - docs/models/operations/GetRefundSecurity.md
+  - docs/models/operations/GetRepresentativeRequest.md
+  - docs/models/operations/GetRepresentativeResponse.md
+  - docs/models/operations/GetRepresentativeSecurity.md
   - docs/models/operations/GetScheduledOccurrenceRequest.md
   - docs/models/operations/GetScheduledOccurrenceResponse.md
   - docs/models/operations/GetScheduledOccurrenceSecurity.md
@@ -514,6 +608,9 @@ generatedFiles:
   - docs/models/operations/GetTransferRequest.md
   - docs/models/operations/GetTransferResponse.md
   - docs/models/operations/GetTransferSecurity.md
+  - docs/models/operations/GetUnderwritingRequest.md
+  - docs/models/operations/GetUnderwritingResponse.md
+  - docs/models/operations/GetUnderwritingSecurity.md
   - docs/models/operations/GetWalletRequest.md
   - docs/models/operations/GetWalletResponse.md
   - docs/models/operations/GetWalletSecurity.md
@@ -538,6 +635,9 @@ generatedFiles:
   - docs/models/operations/ListAccountsRequest.md
   - docs/models/operations/ListAccountsResponse.md
   - docs/models/operations/ListAccountsSecurity.md
+  - docs/models/operations/ListAdjustmentsRequest.md
+  - docs/models/operations/ListAdjustmentsResponse.md
+  - docs/models/operations/ListAdjustmentsSecurity.md
   - docs/models/operations/ListBankAccountsRequest.md
   - docs/models/operations/ListBankAccountsResponse.md
   - docs/models/operations/ListBankAccountsSecurity.md
@@ -553,9 +653,21 @@ generatedFiles:
   - docs/models/operations/ListDisputesRequest.md
   - docs/models/operations/ListDisputesResponse.md
   - docs/models/operations/ListDisputesSecurity.md
+  - docs/models/operations/ListFeePlanAgreementsRequest.md
+  - docs/models/operations/ListFeePlanAgreementsResponse.md
+  - docs/models/operations/ListFeePlanAgreementsSecurity.md
+  - docs/models/operations/ListFeePlansRequest.md
+  - docs/models/operations/ListFeePlansResponse.md
+  - docs/models/operations/ListFeePlansSecurity.md
   - docs/models/operations/ListFilesRequest.md
   - docs/models/operations/ListFilesResponse.md
   - docs/models/operations/ListFilesSecurity.md
+  - docs/models/operations/ListIndustriesRequest.md
+  - docs/models/operations/ListIndustriesResponse.md
+  - docs/models/operations/ListIndustriesSecurity.md
+  - docs/models/operations/ListInstitutionsRequest.md
+  - docs/models/operations/ListInstitutionsResponse.md
+  - docs/models/operations/ListInstitutionsSecurity.md
   - docs/models/operations/ListIssuedCardAuthorizationEventsRequest.md
   - docs/models/operations/ListIssuedCardAuthorizationEventsResponse.md
   - docs/models/operations/ListIssuedCardAuthorizationEventsSecurity.md
@@ -568,6 +680,15 @@ generatedFiles:
   - docs/models/operations/ListIssuedCardsRequest.md
   - docs/models/operations/ListIssuedCardsResponse.md
   - docs/models/operations/ListIssuedCardsSecurity.md
+  - docs/models/operations/ListOnboardingInvitesRequest.md
+  - docs/models/operations/ListOnboardingInvitesResponse.md
+  - docs/models/operations/ListOnboardingInvitesSecurity.md
+  - docs/models/operations/ListPartnerPricingAgreementsRequest.md
+  - docs/models/operations/ListPartnerPricingAgreementsResponse.md
+  - docs/models/operations/ListPartnerPricingAgreementsSecurity.md
+  - docs/models/operations/ListPartnerPricingRequest.md
+  - docs/models/operations/ListPartnerPricingResponse.md
+  - docs/models/operations/ListPartnerPricingSecurity.md
   - docs/models/operations/ListPaymentLinksRequest.md
   - docs/models/operations/ListPaymentLinksResponse.md
   - docs/models/operations/ListPaymentLinksSecurity.md
@@ -577,6 +698,9 @@ generatedFiles:
   - docs/models/operations/ListRefundsRequest.md
   - docs/models/operations/ListRefundsResponse.md
   - docs/models/operations/ListRefundsSecurity.md
+  - docs/models/operations/ListRepresentativesRequest.md
+  - docs/models/operations/ListRepresentativesResponse.md
+  - docs/models/operations/ListRepresentativesSecurity.md
   - docs/models/operations/ListSchedulesRequest.md
   - docs/models/operations/ListSchedulesResponse.md
   - docs/models/operations/ListSchedulesSecurity.md
@@ -604,6 +728,9 @@ generatedFiles:
   - docs/models/operations/PatchTransferRequest.md
   - docs/models/operations/PatchTransferResponse.md
   - docs/models/operations/PatchTransferSecurity.md
+  - docs/models/operations/PingRequest.md
+  - docs/models/operations/PingResponse.md
+  - docs/models/operations/PingSecurity.md
   - docs/models/operations/PostBrandRequest.md
   - docs/models/operations/PostBrandResponse.md
   - docs/models/operations/PostBrandSecurity.md
@@ -616,9 +743,20 @@ generatedFiles:
   - docs/models/operations/RequestCardRequest.md
   - docs/models/operations/RequestCardResponse.md
   - docs/models/operations/RequestCardSecurity.md
+  - docs/models/operations/ReverseTransferRequest.md
+  - docs/models/operations/ReverseTransferResponse.md
+  - docs/models/operations/ReverseTransferSecurity.md
+  - docs/models/operations/RevokeAuthTokenRequest.md
+  - docs/models/operations/RevokeAuthTokenResponse.md
+  - docs/models/operations/RevokeOnboardingInviteRequest.md
+  - docs/models/operations/RevokeOnboardingInviteResponse.md
+  - docs/models/operations/RevokeOnboardingInviteSecurity.md
   - docs/models/operations/SubmitDisputeEvidenceRequest.md
   - docs/models/operations/SubmitDisputeEvidenceResponse.md
   - docs/models/operations/SubmitDisputeEvidenceSecurity.md
+  - docs/models/operations/TestEndToEndTokenRequest.md
+  - docs/models/operations/TestEndToEndTokenResponse.md
+  - docs/models/operations/TestEndToEndTokenSecurity.md
   - docs/models/operations/UpdateApplePayMerchantDomainsRequest.md
   - docs/models/operations/UpdateApplePayMerchantDomainsResponse.md
   - docs/models/operations/UpdateApplePayMerchantDomainsSecurity.md
@@ -637,9 +775,15 @@ generatedFiles:
   - docs/models/operations/UpdatePaymentLinkRequest.md
   - docs/models/operations/UpdatePaymentLinkResponse.md
   - docs/models/operations/UpdatePaymentLinkSecurity.md
+  - docs/models/operations/UpdateRepresentativeRequest.md
+  - docs/models/operations/UpdateRepresentativeResponse.md
+  - docs/models/operations/UpdateRepresentativeSecurity.md
   - docs/models/operations/UpdateScheduleRequest.md
   - docs/models/operations/UpdateScheduleResponse.md
   - docs/models/operations/UpdateScheduleSecurity.md
+  - docs/models/operations/UpdateUnderwritingRequest.md
+  - docs/models/operations/UpdateUnderwritingResponse.md
+  - docs/models/operations/UpdateUnderwritingSecurity.md
   - docs/models/operations/UploadDisputeEvidenceFileRequest.md
   - docs/models/operations/UploadDisputeEvidenceFileResponse.md
   - docs/models/operations/UploadDisputeEvidenceFileSecurity.md
@@ -650,23 +794,33 @@ generatedFiles:
   - docs/models/operations/UploadFileResponse.md
   - docs/models/operations/UploadFileSecurity.md
   - docs/sdks/accounts/README.md
+  - docs/sdks/adjustments/README.md
   - docs/sdks/authentication/README.md
+  - docs/sdks/avatars/README.md
   - docs/sdks/bankaccounts/README.md
+  - docs/sdks/billing/README.md
   - docs/sdks/branding/README.md
   - docs/sdks/capabilities/README.md
   - docs/sdks/cardissuing/README.md
   - docs/sdks/cards/README.md
   - docs/sdks/disputes/README.md
+  - docs/sdks/endtoendencryption/README.md
   - docs/sdks/enrichedaddress/README.md
   - docs/sdks/enrichedprofile/README.md
   - docs/sdks/files/README.md
+  - docs/sdks/industries/README.md
+  - docs/sdks/institutions/README.md
   - docs/sdks/issuingtransactions/README.md
   - docs/sdks/moov/README.md
+  - docs/sdks/onboarding/README.md
   - docs/sdks/paymentlinks/README.md
   - docs/sdks/paymentmethods/README.md
+  - docs/sdks/ping/README.md
+  - docs/sdks/representatives/README.md
   - docs/sdks/scheduling/README.md
   - docs/sdks/sweeps/README.md
   - docs/sdks/transfers/README.md
+  - docs/sdks/underwriting/README.md
   - docs/sdks/wallets/README.md
   - docs/sdks/wallettransactions/README.md
   - gradle/wrapper/gradle-wrapper.jar
@@ -675,25 +829,35 @@ generatedFiles:
   - gradlew.bat
   - settings.gradle
   - src/main/java/io/moov/openapi/Accounts.java
+  - src/main/java/io/moov/openapi/Adjustments.java
   - src/main/java/io/moov/openapi/Authentication.java
+  - src/main/java/io/moov/openapi/Avatars.java
   - src/main/java/io/moov/openapi/BankAccounts.java
+  - src/main/java/io/moov/openapi/Billing.java
   - src/main/java/io/moov/openapi/Branding.java
   - src/main/java/io/moov/openapi/Capabilities.java
   - src/main/java/io/moov/openapi/CardIssuing.java
   - src/main/java/io/moov/openapi/Cards.java
   - src/main/java/io/moov/openapi/Disputes.java
+  - src/main/java/io/moov/openapi/EndToEndEncryption.java
   - src/main/java/io/moov/openapi/EnrichedAddress.java
   - src/main/java/io/moov/openapi/EnrichedProfile.java
   - src/main/java/io/moov/openapi/Files.java
+  - src/main/java/io/moov/openapi/Industries.java
+  - src/main/java/io/moov/openapi/Institutions.java
   - src/main/java/io/moov/openapi/IssuingTransactions.java
   - src/main/java/io/moov/openapi/Moov.java
+  - src/main/java/io/moov/openapi/Onboarding.java
   - src/main/java/io/moov/openapi/PaymentLinks.java
   - src/main/java/io/moov/openapi/PaymentMethods.java
+  - src/main/java/io/moov/openapi/Ping.java
+  - src/main/java/io/moov/openapi/Representatives.java
   - src/main/java/io/moov/openapi/SDKConfiguration.java
   - src/main/java/io/moov/openapi/Scheduling.java
   - src/main/java/io/moov/openapi/SecuritySource.java
   - src/main/java/io/moov/openapi/Sweeps.java
   - src/main/java/io/moov/openapi/Transfers.java
+  - src/main/java/io/moov/openapi/Underwriting.java
   - src/main/java/io/moov/openapi/WalletTransactions.java
   - src/main/java/io/moov/openapi/Wallets.java
   - src/main/java/io/moov/openapi/models/components/ACHException.java
@@ -704,7 +868,6 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/ACHReturnCode.java
   - src/main/java/io/moov/openapi/models/components/ACHTransactionDetails.java
   - src/main/java/io/moov/openapi/models/components/ACHTransactionStatus.java
-  - src/main/java/io/moov/openapi/models/components/AccessToken.java
   - src/main/java/io/moov/openapi/models/components/Account.java
   - src/main/java/io/moov/openapi/models/components/AccountCapability.java
   - src/main/java/io/moov/openapi/models/components/AccountCountries.java
@@ -721,12 +884,16 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/AchDebitFundPaymentMethod.java
   - src/main/java/io/moov/openapi/models/components/AchDebitFundPaymentMethodPaymentMethodType.java
   - src/main/java/io/moov/openapi/models/components/AchDetails.java
+  - src/main/java/io/moov/openapi/models/components/AchLocation.java
+  - src/main/java/io/moov/openapi/models/components/AchParticipant.java
   - src/main/java/io/moov/openapi/models/components/AchPayment.java
   - src/main/java/io/moov/openapi/models/components/AddCapabilities.java
   - src/main/java/io/moov/openapi/models/components/Address.java
   - src/main/java/io/moov/openapi/models/components/AddressError.java
   - src/main/java/io/moov/openapi/models/components/AddressUpdate.java
+  - src/main/java/io/moov/openapi/models/components/Adjustment.java
   - src/main/java/io/moov/openapi/models/components/Amount.java
+  - src/main/java/io/moov/openapi/models/components/AmountDecimal.java
   - src/main/java/io/moov/openapi/models/components/AmountUpdate.java
   - src/main/java/io/moov/openapi/models/components/AmountValidationError.java
   - src/main/java/io/moov/openapi/models/components/AppleBillingContact.java
@@ -735,8 +902,10 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/ApplePayPaymentMethod.java
   - src/main/java/io/moov/openapi/models/components/ApplePayPaymentMethodPaymentMethodType.java
   - src/main/java/io/moov/openapi/models/components/ApplePayResponse.java
+  - src/main/java/io/moov/openapi/models/components/ApplicationScope.java
   - src/main/java/io/moov/openapi/models/components/AsyncCreatedRefund.java
   - src/main/java/io/moov/openapi/models/components/AsyncTransfer.java
+  - src/main/java/io/moov/openapi/models/components/AuthToken.java
   - src/main/java/io/moov/openapi/models/components/AuthTokenRequest.java
   - src/main/java/io/moov/openapi/models/components/AuthorizedUser.java
   - src/main/java/io/moov/openapi/models/components/BankAccount.java
@@ -753,15 +922,19 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/BankAccountVerificationStatus.java
   - src/main/java/io/moov/openapi/models/components/BankAccountWaitFor.java
   - src/main/java/io/moov/openapi/models/components/BasicPaymentMethod.java
+  - src/main/java/io/moov/openapi/models/components/BillableFee.java
   - src/main/java/io/moov/openapi/models/components/BirthDate.java
   - src/main/java/io/moov/openapi/models/components/BirthDateError.java
   - src/main/java/io/moov/openapi/models/components/BirthDateUpdate.java
+  - src/main/java/io/moov/openapi/models/components/BirthDateValidationError.java
   - src/main/java/io/moov/openapi/models/components/Brand.java
   - src/main/java/io/moov/openapi/models/components/BrandColor.java
   - src/main/java/io/moov/openapi/models/components/BrandColorValidationError.java
   - src/main/java/io/moov/openapi/models/components/BusinessProfile.java
   - src/main/java/io/moov/openapi/models/components/BusinessType.java
   - src/main/java/io/moov/openapi/models/components/CallToAction.java
+  - src/main/java/io/moov/openapi/models/components/Cancellation.java
+  - src/main/java/io/moov/openapi/models/components/CancellationStatus.java
   - src/main/java/io/moov/openapi/models/components/CapabilitiesError.java
   - src/main/java/io/moov/openapi/models/components/Capability.java
   - src/main/java/io/moov/openapi/models/components/CapabilityID.java
@@ -771,6 +944,7 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/CardAccountUpdater.java
   - src/main/java/io/moov/openapi/models/components/CardAcquiringDispute.java
   - src/main/java/io/moov/openapi/models/components/CardAcquiringRefund.java
+  - src/main/java/io/moov/openapi/models/components/CardAcquringModel.java
   - src/main/java/io/moov/openapi/models/components/CardAddress.java
   - src/main/java/io/moov/openapi/models/components/CardAddressError.java
   - src/main/java/io/moov/openapi/models/components/CardBrand.java
@@ -791,6 +965,8 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/CardUpdateReason.java
   - src/main/java/io/moov/openapi/models/components/CardVerification.java
   - src/main/java/io/moov/openapi/models/components/CardVerificationResult.java
+  - src/main/java/io/moov/openapi/models/components/CardVolumeDistribution.java
+  - src/main/java/io/moov/openapi/models/components/CardVolumeDistributionError.java
   - src/main/java/io/moov/openapi/models/components/CollectionPaymentMethodType.java
   - src/main/java/io/moov/openapi/models/components/Colors.java
   - src/main/java/io/moov/openapi/models/components/ColorsValidationError.java
@@ -816,6 +992,7 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/CreateBusinessProfileUpdate.java
   - src/main/java/io/moov/openapi/models/components/CreateEvidenceFileMultiPart.java
   - src/main/java/io/moov/openapi/models/components/CreateEvidenceText.java
+  - src/main/java/io/moov/openapi/models/components/CreateFeePlanAgreement.java
   - src/main/java/io/moov/openapi/models/components/CreateIndividualError.java
   - src/main/java/io/moov/openapi/models/components/CreateIndividualErrorGovernmentID.java
   - src/main/java/io/moov/openapi/models/components/CreateIndividualErrorItin.java
@@ -828,6 +1005,8 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/CreateProfileUpdate.java
   - src/main/java/io/moov/openapi/models/components/CreateRefund.java
   - src/main/java/io/moov/openapi/models/components/CreateRefundResponse.java
+  - src/main/java/io/moov/openapi/models/components/CreateRepresentative.java
+  - src/main/java/io/moov/openapi/models/components/CreateReversal.java
   - src/main/java/io/moov/openapi/models/components/CreateSweepConfig.java
   - src/main/java/io/moov/openapi/models/components/CreateTransfer.java
   - src/main/java/io/moov/openapi/models/components/CreateTransferDestination.java
@@ -851,25 +1030,39 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/DocumentType.java
   - src/main/java/io/moov/openapi/models/components/DomesticPullFromCard.java
   - src/main/java/io/moov/openapi/models/components/DomesticPushToCard.java
+  - src/main/java/io/moov/openapi/models/components/E2EEToken.java
+  - src/main/java/io/moov/openapi/models/components/E2EETokenUpdate.java
   - src/main/java/io/moov/openapi/models/components/Ein.java
-  - src/main/java/io/moov/openapi/models/components/End2EndEncryption.java
+  - src/main/java/io/moov/openapi/models/components/Email.java
   - src/main/java/io/moov/openapi/models/components/End2EndEncryptionError.java
-  - src/main/java/io/moov/openapi/models/components/End2EndEncryptionUpdate.java
   - src/main/java/io/moov/openapi/models/components/EnrichedAddressResponse.java
   - src/main/java/io/moov/openapi/models/components/EnrichedBusinessProfile.java
+  - src/main/java/io/moov/openapi/models/components/EnrichedIndustry.java
   - src/main/java/io/moov/openapi/models/components/EnrichedIndustryCodes.java
   - src/main/java/io/moov/openapi/models/components/Error.java
   - src/main/java/io/moov/openapi/models/components/EvidenceText.java
   - src/main/java/io/moov/openapi/models/components/EvidenceType.java
   - src/main/java/io/moov/openapi/models/components/FacilitatorFee.java
+  - src/main/java/io/moov/openapi/models/components/FeeCategory.java
+  - src/main/java/io/moov/openapi/models/components/FeeModel.java
+  - src/main/java/io/moov/openapi/models/components/FeePlan.java
+  - src/main/java/io/moov/openapi/models/components/FeePlanAgreement.java
+  - src/main/java/io/moov/openapi/models/components/FeePlanAgreementStatus.java
+  - src/main/java/io/moov/openapi/models/components/FeeProperties.java
   - src/main/java/io/moov/openapi/models/components/File.java
   - src/main/java/io/moov/openapi/models/components/FileDetails.java
   - src/main/java/io/moov/openapi/models/components/FilePurpose.java
   - src/main/java/io/moov/openapi/models/components/FileStatus.java
   - src/main/java/io/moov/openapi/models/components/FileUploadRequestMultiPart.java
   - src/main/java/io/moov/openapi/models/components/FileUploadRequestMultiPartFile.java
+  - src/main/java/io/moov/openapi/models/components/FinancialInstitutions.java
+  - src/main/java/io/moov/openapi/models/components/FulfillmentDetails.java
+  - src/main/java/io/moov/openapi/models/components/FulfillmentDetailsError.java
   - src/main/java/io/moov/openapi/models/components/FullIssuedCard.java
   - src/main/java/io/moov/openapi/models/components/GovernmentID.java
+  - src/main/java/io/moov/openapi/models/components/GovernmentIDError.java
+  - src/main/java/io/moov/openapi/models/components/GovernmentIDErrorItin.java
+  - src/main/java/io/moov/openapi/models/components/GovernmentIDErrorSsn.java
   - src/main/java/io/moov/openapi/models/components/GrantType.java
   - src/main/java/io/moov/openapi/models/components/IndividualName.java
   - src/main/java/io/moov/openapi/models/components/IndividualNameError.java
@@ -893,6 +1086,7 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/IssuingVelocityLimit.java
   - src/main/java/io/moov/openapi/models/components/IssuingVelocityLimitError.java
   - src/main/java/io/moov/openapi/models/components/Itin.java
+  - src/main/java/io/moov/openapi/models/components/JSONWebKey.java
   - src/main/java/io/moov/openapi/models/components/LinkApplePay.java
   - src/main/java/io/moov/openapi/models/components/LinkApplePayToken.java
   - src/main/java/io/moov/openapi/models/components/LinkApplePaymentData.java
@@ -901,6 +1095,7 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/LinkCard.java
   - src/main/java/io/moov/openapi/models/components/LinkCardWaitFor.java
   - src/main/java/io/moov/openapi/models/components/LinkedApplePayPaymentMethod.java
+  - src/main/java/io/moov/openapi/models/components/Logo.java
   - src/main/java/io/moov/openapi/models/components/MXAuthorizationCode.java
   - src/main/java/io/moov/openapi/models/components/Manual.java
   - src/main/java/io/moov/openapi/models/components/ManualTermsOfService.java
@@ -914,6 +1109,11 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/Occurrence.java
   - src/main/java/io/moov/openapi/models/components/OccurrenceStatus.java
   - src/main/java/io/moov/openapi/models/components/OccurrencesResponse.java
+  - src/main/java/io/moov/openapi/models/components/OnboardingInvite.java
+  - src/main/java/io/moov/openapi/models/components/OnboardingInviteRequest.java
+  - src/main/java/io/moov/openapi/models/components/OnboardingPartnerAccount.java
+  - src/main/java/io/moov/openapi/models/components/PartnerPricing.java
+  - src/main/java/io/moov/openapi/models/components/PartnerPricingAgreement.java
   - src/main/java/io/moov/openapi/models/components/PatchAccountError.java
   - src/main/java/io/moov/openapi/models/components/PatchSweepConfig.java
   - src/main/java/io/moov/openapi/models/components/PaymentDetailsError.java
@@ -932,6 +1132,7 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/PayoutRecipient.java
   - src/main/java/io/moov/openapi/models/components/PayoutRecipientError.java
   - src/main/java/io/moov/openapi/models/components/PayoutRecipientUpdate.java
+  - src/main/java/io/moov/openapi/models/components/Phone.java
   - src/main/java/io/moov/openapi/models/components/PhoneNumber.java
   - src/main/java/io/moov/openapi/models/components/PhoneNumberError.java
   - src/main/java/io/moov/openapi/models/components/PlaidIntegration.java
@@ -956,10 +1157,17 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/RegisterApplePayMerchantDomains.java
   - src/main/java/io/moov/openapi/models/components/Representative.java
   - src/main/java/io/moov/openapi/models/components/RepresentativeResponsibilities.java
+  - src/main/java/io/moov/openapi/models/components/RepresentativeResponsibilitiesError.java
   - src/main/java/io/moov/openapi/models/components/RequestCard.java
   - src/main/java/io/moov/openapi/models/components/RequirementError.java
   - src/main/java/io/moov/openapi/models/components/RequirementErrorCode.java
   - src/main/java/io/moov/openapi/models/components/RequirementID.java
+  - src/main/java/io/moov/openapi/models/components/Responsibilities.java
+  - src/main/java/io/moov/openapi/models/components/ReturnPolicyType.java
+  - src/main/java/io/moov/openapi/models/components/Reversal.java
+  - src/main/java/io/moov/openapi/models/components/ReversedWithCancellation.java
+  - src/main/java/io/moov/openapi/models/components/ReversedWithRefund.java
+  - src/main/java/io/moov/openapi/models/components/RevokeTokenRequest.java
   - src/main/java/io/moov/openapi/models/components/RtpCreditPaymentMethod.java
   - src/main/java/io/moov/openapi/models/components/RtpCreditPaymentMethodPaymentMethodType.java
   - src/main/java/io/moov/openapi/models/components/RunTransfer.java
@@ -984,6 +1192,7 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/TermsOfServiceToken.java
   - src/main/java/io/moov/openapi/models/components/TermsOfServiceTokenUpdate.java
   - src/main/java/io/moov/openapi/models/components/TokenType.java
+  - src/main/java/io/moov/openapi/models/components/TokenTypeHint.java
   - src/main/java/io/moov/openapi/models/components/TransactionSource.java
   - src/main/java/io/moov/openapi/models/components/Transfer.java
   - src/main/java/io/moov/openapi/models/components/TransferAccount.java
@@ -993,6 +1202,9 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/TransferSource.java
   - src/main/java/io/moov/openapi/models/components/TransferStatus.java
   - src/main/java/io/moov/openapi/models/components/TransferWaitFor.java
+  - src/main/java/io/moov/openapi/models/components/Two.java
+  - src/main/java/io/moov/openapi/models/components/Underwriting.java
+  - src/main/java/io/moov/openapi/models/components/UnderwritingStatus.java
   - src/main/java/io/moov/openapi/models/components/UpdateApplePayMerchantDomains.java
   - src/main/java/io/moov/openapi/models/components/UpdateBrand.java
   - src/main/java/io/moov/openapi/models/components/UpdateCard.java
@@ -1003,11 +1215,21 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/UpdateEvidence.java
   - src/main/java/io/moov/openapi/models/components/UpdateIssuedCard.java
   - src/main/java/io/moov/openapi/models/components/UpdatePaymentLink.java
+  - src/main/java/io/moov/openapi/models/components/UpdateRepresentative.java
+  - src/main/java/io/moov/openapi/models/components/UpdateRepresentativeAddress.java
+  - src/main/java/io/moov/openapi/models/components/UpdateRepresentativeBirthDate.java
+  - src/main/java/io/moov/openapi/models/components/UpdateRepresentativeGovernmentID.java
+  - src/main/java/io/moov/openapi/models/components/UpdateRepresentativeItin.java
+  - src/main/java/io/moov/openapi/models/components/UpdateRepresentativeSsn.java
+  - src/main/java/io/moov/openapi/models/components/UpdateUnderwriting.java
   - src/main/java/io/moov/openapi/models/components/UpsertSchedule.java
+  - src/main/java/io/moov/openapi/models/components/Use.java
   - src/main/java/io/moov/openapi/models/components/Verification.java
   - src/main/java/io/moov/openapi/models/components/VerificationStatus.java
   - src/main/java/io/moov/openapi/models/components/VerificationStatusDetail.java
   - src/main/java/io/moov/openapi/models/components/Versions.java
+  - src/main/java/io/moov/openapi/models/components/VolumeByCustomerType.java
+  - src/main/java/io/moov/openapi/models/components/VolumeByCustomerTypeError.java
   - src/main/java/io/moov/openapi/models/components/Wallet.java
   - src/main/java/io/moov/openapi/models/components/WalletAvailableBalance.java
   - src/main/java/io/moov/openapi/models/components/WalletTransaction.java
@@ -1018,22 +1240,28 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/errors/AddCapabilitiesError.java
   - src/main/java/io/moov/openapi/models/errors/AssignCountriesError.java
   - src/main/java/io/moov/openapi/models/errors/AuthException.java
+  - src/main/java/io/moov/openapi/models/errors/AuthTokenRequestError.java
   - src/main/java/io/moov/openapi/models/errors/BankAccountValidationError.java
   - src/main/java/io/moov/openapi/models/errors/BrandValidationError.java
   - src/main/java/io/moov/openapi/models/errors/CardAcquiringRefund.java
   - src/main/java/io/moov/openapi/models/errors/CreateAccountResponseBody.java
-  - src/main/java/io/moov/openapi/models/errors/CreateAuthTokenResponseBody.java
   - src/main/java/io/moov/openapi/models/errors/CreatePaymentLinkError.java
   - src/main/java/io/moov/openapi/models/errors/CreateSweepConfigError.java
+  - src/main/java/io/moov/openapi/models/errors/Error.java
+  - src/main/java/io/moov/openapi/models/errors/FeePlanAgreementError.java
   - src/main/java/io/moov/openapi/models/errors/FileValidationError.java
   - src/main/java/io/moov/openapi/models/errors/GenericError.java
   - src/main/java/io/moov/openapi/models/errors/LinkApplePayError.java
   - src/main/java/io/moov/openapi/models/errors/LinkCardError.java
   - src/main/java/io/moov/openapi/models/errors/MicroDepositValidationError.java
+  - src/main/java/io/moov/openapi/models/errors/OnboardingInviteError.java
   - src/main/java/io/moov/openapi/models/errors/PatchAccountResponseBody.java
   - src/main/java/io/moov/openapi/models/errors/PatchSweepConfigError.java
   - src/main/java/io/moov/openapi/models/errors/RefundValidationError.java
+  - src/main/java/io/moov/openapi/models/errors/RepresentativeValidationError.java
   - src/main/java/io/moov/openapi/models/errors/RequestCardError.java
+  - src/main/java/io/moov/openapi/models/errors/ReversalValidationError.java
+  - src/main/java/io/moov/openapi/models/errors/RevokeTokenRequestError.java
   - src/main/java/io/moov/openapi/models/errors/ScheduleValidationError.java
   - src/main/java/io/moov/openapi/models/errors/Transfer.java
   - src/main/java/io/moov/openapi/models/errors/TransferOptionsValidationError.java
@@ -1041,6 +1269,8 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/errors/UpdateCardError.java
   - src/main/java/io/moov/openapi/models/errors/UpdateIssuedCardError.java
   - src/main/java/io/moov/openapi/models/errors/UpdatePaymentLinkError.java
+  - src/main/java/io/moov/openapi/models/errors/UpdateUnderwritingError.java
+  - src/main/java/io/moov/openapi/models/errors/UpdateUnderwritingErrorError.java
   - src/main/java/io/moov/openapi/models/operations/AcceptDisputeRequest.java
   - src/main/java/io/moov/openapi/models/operations/AcceptDisputeRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/AcceptDisputeResponse.java
@@ -1073,12 +1303,25 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/CreateApplePaySessionRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/CreateApplePaySessionResponse.java
   - src/main/java/io/moov/openapi/models/operations/CreateApplePaySessionSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/CreateAuthTokenRequest.java
   - src/main/java/io/moov/openapi/models/operations/CreateAuthTokenRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/CreateAuthTokenResponse.java
+  - src/main/java/io/moov/openapi/models/operations/CreateFeePlanAgreementsRequest.java
+  - src/main/java/io/moov/openapi/models/operations/CreateFeePlanAgreementsRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/CreateFeePlanAgreementsResponse.java
+  - src/main/java/io/moov/openapi/models/operations/CreateFeePlanAgreementsSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/CreateOnboardingInviteRequest.java
+  - src/main/java/io/moov/openapi/models/operations/CreateOnboardingInviteRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/CreateOnboardingInviteResponse.java
+  - src/main/java/io/moov/openapi/models/operations/CreateOnboardingInviteSecurity.java
   - src/main/java/io/moov/openapi/models/operations/CreatePaymentLinkRequest.java
   - src/main/java/io/moov/openapi/models/operations/CreatePaymentLinkRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/CreatePaymentLinkResponse.java
   - src/main/java/io/moov/openapi/models/operations/CreatePaymentLinkSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/CreateRepresentativeRequest.java
+  - src/main/java/io/moov/openapi/models/operations/CreateRepresentativeRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/CreateRepresentativeResponse.java
+  - src/main/java/io/moov/openapi/models/operations/CreateRepresentativeSecurity.java
   - src/main/java/io/moov/openapi/models/operations/CreateScheduleRequest.java
   - src/main/java/io/moov/openapi/models/operations/CreateScheduleRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/CreateScheduleResponse.java
@@ -1100,6 +1343,10 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/DeleteDisputeEvidenceFileRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/DeleteDisputeEvidenceFileResponse.java
   - src/main/java/io/moov/openapi/models/operations/DeleteDisputeEvidenceFileSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/DeleteRepresentativeRequest.java
+  - src/main/java/io/moov/openapi/models/operations/DeleteRepresentativeRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/DeleteRepresentativeResponse.java
+  - src/main/java/io/moov/openapi/models/operations/DeleteRepresentativeSecurity.java
   - src/main/java/io/moov/openapi/models/operations/DisableBankAccountRequest.java
   - src/main/java/io/moov/openapi/models/operations/DisableBankAccountRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/DisableBankAccountResponse.java
@@ -1120,6 +1367,9 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/DisconnectAccountRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/DisconnectAccountResponse.java
   - src/main/java/io/moov/openapi/models/operations/DisconnectAccountSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/GenerateEndToEndKeyRequest.java
+  - src/main/java/io/moov/openapi/models/operations/GenerateEndToEndKeyRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/GenerateEndToEndKeyResponse.java
   - src/main/java/io/moov/openapi/models/operations/GetAccountCountriesRequest.java
   - src/main/java/io/moov/openapi/models/operations/GetAccountCountriesRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetAccountCountriesResponse.java
@@ -1128,10 +1378,18 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/GetAccountRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetAccountResponse.java
   - src/main/java/io/moov/openapi/models/operations/GetAccountSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/GetAdjustmentRequest.java
+  - src/main/java/io/moov/openapi/models/operations/GetAdjustmentRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/GetAdjustmentResponse.java
+  - src/main/java/io/moov/openapi/models/operations/GetAdjustmentSecurity.java
   - src/main/java/io/moov/openapi/models/operations/GetApplePayMerchantDomainsRequest.java
   - src/main/java/io/moov/openapi/models/operations/GetApplePayMerchantDomainsRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetApplePayMerchantDomainsResponse.java
   - src/main/java/io/moov/openapi/models/operations/GetApplePayMerchantDomainsSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/GetAvatarRequest.java
+  - src/main/java/io/moov/openapi/models/operations/GetAvatarRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/GetAvatarResponse.java
+  - src/main/java/io/moov/openapi/models/operations/GetAvatarSecurity.java
   - src/main/java/io/moov/openapi/models/operations/GetBankAccountRequest.java
   - src/main/java/io/moov/openapi/models/operations/GetBankAccountRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetBankAccountResponse.java
@@ -1196,6 +1454,10 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/GetMerchantProcessingAgreementRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetMerchantProcessingAgreementResponse.java
   - src/main/java/io/moov/openapi/models/operations/GetMerchantProcessingAgreementSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/GetOnboardingInviteRequest.java
+  - src/main/java/io/moov/openapi/models/operations/GetOnboardingInviteRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/GetOnboardingInviteResponse.java
+  - src/main/java/io/moov/openapi/models/operations/GetOnboardingInviteSecurity.java
   - src/main/java/io/moov/openapi/models/operations/GetPaymentLinkQRCodeRequest.java
   - src/main/java/io/moov/openapi/models/operations/GetPaymentLinkQRCodeRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetPaymentLinkQRCodeResponse.java
@@ -1212,6 +1474,10 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/GetRefundRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetRefundResponse.java
   - src/main/java/io/moov/openapi/models/operations/GetRefundSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/GetRepresentativeRequest.java
+  - src/main/java/io/moov/openapi/models/operations/GetRepresentativeRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/GetRepresentativeResponse.java
+  - src/main/java/io/moov/openapi/models/operations/GetRepresentativeSecurity.java
   - src/main/java/io/moov/openapi/models/operations/GetScheduledOccurrenceRequest.java
   - src/main/java/io/moov/openapi/models/operations/GetScheduledOccurrenceRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetScheduledOccurrenceResponse.java
@@ -1235,6 +1501,10 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/GetTransferRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetTransferResponse.java
   - src/main/java/io/moov/openapi/models/operations/GetTransferSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/GetUnderwritingRequest.java
+  - src/main/java/io/moov/openapi/models/operations/GetUnderwritingRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/GetUnderwritingResponse.java
+  - src/main/java/io/moov/openapi/models/operations/GetUnderwritingSecurity.java
   - src/main/java/io/moov/openapi/models/operations/GetWalletRequest.java
   - src/main/java/io/moov/openapi/models/operations/GetWalletRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/GetWalletResponse.java
@@ -1267,6 +1537,10 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/ListAccountsRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/ListAccountsResponse.java
   - src/main/java/io/moov/openapi/models/operations/ListAccountsSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ListAdjustmentsRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ListAdjustmentsRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ListAdjustmentsResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ListAdjustmentsSecurity.java
   - src/main/java/io/moov/openapi/models/operations/ListBankAccountsRequest.java
   - src/main/java/io/moov/openapi/models/operations/ListBankAccountsRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/ListBankAccountsResponse.java
@@ -1287,10 +1561,26 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/ListDisputesRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/ListDisputesResponse.java
   - src/main/java/io/moov/openapi/models/operations/ListDisputesSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ListFeePlanAgreementsRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ListFeePlanAgreementsRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ListFeePlanAgreementsResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ListFeePlanAgreementsSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ListFeePlansRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ListFeePlansRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ListFeePlansResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ListFeePlansSecurity.java
   - src/main/java/io/moov/openapi/models/operations/ListFilesRequest.java
   - src/main/java/io/moov/openapi/models/operations/ListFilesRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/ListFilesResponse.java
   - src/main/java/io/moov/openapi/models/operations/ListFilesSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ListIndustriesRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ListIndustriesRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ListIndustriesResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ListIndustriesSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ListInstitutionsRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ListInstitutionsRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ListInstitutionsResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ListInstitutionsSecurity.java
   - src/main/java/io/moov/openapi/models/operations/ListIssuedCardAuthorizationEventsRequest.java
   - src/main/java/io/moov/openapi/models/operations/ListIssuedCardAuthorizationEventsRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/ListIssuedCardAuthorizationEventsResponse.java
@@ -1307,6 +1597,18 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/ListIssuedCardsRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/ListIssuedCardsResponse.java
   - src/main/java/io/moov/openapi/models/operations/ListIssuedCardsSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ListOnboardingInvitesRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ListOnboardingInvitesRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ListOnboardingInvitesResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ListOnboardingInvitesSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ListPartnerPricingAgreementsRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ListPartnerPricingAgreementsRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ListPartnerPricingAgreementsResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ListPartnerPricingAgreementsSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ListPartnerPricingRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ListPartnerPricingRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ListPartnerPricingResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ListPartnerPricingSecurity.java
   - src/main/java/io/moov/openapi/models/operations/ListPaymentLinksRequest.java
   - src/main/java/io/moov/openapi/models/operations/ListPaymentLinksRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/ListPaymentLinksResponse.java
@@ -1319,6 +1621,10 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/ListRefundsRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/ListRefundsResponse.java
   - src/main/java/io/moov/openapi/models/operations/ListRefundsSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ListRepresentativesRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ListRepresentativesRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ListRepresentativesResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ListRepresentativesSecurity.java
   - src/main/java/io/moov/openapi/models/operations/ListSchedulesRequest.java
   - src/main/java/io/moov/openapi/models/operations/ListSchedulesRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/ListSchedulesResponse.java
@@ -1355,6 +1661,10 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/PatchTransferRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/PatchTransferResponse.java
   - src/main/java/io/moov/openapi/models/operations/PatchTransferSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/PingRequest.java
+  - src/main/java/io/moov/openapi/models/operations/PingRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/PingResponse.java
+  - src/main/java/io/moov/openapi/models/operations/PingSecurity.java
   - src/main/java/io/moov/openapi/models/operations/PostBrandRequest.java
   - src/main/java/io/moov/openapi/models/operations/PostBrandRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/PostBrandResponse.java
@@ -1371,11 +1681,26 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/RequestCardRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/RequestCardResponse.java
   - src/main/java/io/moov/openapi/models/operations/RequestCardSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/ReverseTransferRequest.java
+  - src/main/java/io/moov/openapi/models/operations/ReverseTransferRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/ReverseTransferResponse.java
+  - src/main/java/io/moov/openapi/models/operations/ReverseTransferSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/RevokeAuthTokenRequest.java
+  - src/main/java/io/moov/openapi/models/operations/RevokeAuthTokenRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/RevokeAuthTokenResponse.java
+  - src/main/java/io/moov/openapi/models/operations/RevokeOnboardingInviteRequest.java
+  - src/main/java/io/moov/openapi/models/operations/RevokeOnboardingInviteRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/RevokeOnboardingInviteResponse.java
+  - src/main/java/io/moov/openapi/models/operations/RevokeOnboardingInviteSecurity.java
   - src/main/java/io/moov/openapi/models/operations/SDKMethodInterfaces.java
   - src/main/java/io/moov/openapi/models/operations/SubmitDisputeEvidenceRequest.java
   - src/main/java/io/moov/openapi/models/operations/SubmitDisputeEvidenceRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/SubmitDisputeEvidenceResponse.java
   - src/main/java/io/moov/openapi/models/operations/SubmitDisputeEvidenceSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/TestEndToEndTokenRequest.java
+  - src/main/java/io/moov/openapi/models/operations/TestEndToEndTokenRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/TestEndToEndTokenResponse.java
+  - src/main/java/io/moov/openapi/models/operations/TestEndToEndTokenSecurity.java
   - src/main/java/io/moov/openapi/models/operations/UpdateApplePayMerchantDomainsRequest.java
   - src/main/java/io/moov/openapi/models/operations/UpdateApplePayMerchantDomainsRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/UpdateApplePayMerchantDomainsResponse.java
@@ -1400,10 +1725,18 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/operations/UpdatePaymentLinkRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/UpdatePaymentLinkResponse.java
   - src/main/java/io/moov/openapi/models/operations/UpdatePaymentLinkSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/UpdateRepresentativeRequest.java
+  - src/main/java/io/moov/openapi/models/operations/UpdateRepresentativeRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/UpdateRepresentativeResponse.java
+  - src/main/java/io/moov/openapi/models/operations/UpdateRepresentativeSecurity.java
   - src/main/java/io/moov/openapi/models/operations/UpdateScheduleRequest.java
   - src/main/java/io/moov/openapi/models/operations/UpdateScheduleRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/UpdateScheduleResponse.java
   - src/main/java/io/moov/openapi/models/operations/UpdateScheduleSecurity.java
+  - src/main/java/io/moov/openapi/models/operations/UpdateUnderwritingRequest.java
+  - src/main/java/io/moov/openapi/models/operations/UpdateUnderwritingRequestBuilder.java
+  - src/main/java/io/moov/openapi/models/operations/UpdateUnderwritingResponse.java
+  - src/main/java/io/moov/openapi/models/operations/UpdateUnderwritingSecurity.java
   - src/main/java/io/moov/openapi/models/operations/UploadDisputeEvidenceFileRequest.java
   - src/main/java/io/moov/openapi/models/operations/UploadDisputeEvidenceFileRequestBuilder.java
   - src/main/java/io/moov/openapi/models/operations/UploadDisputeEvidenceFileResponse.java
@@ -2747,11 +3080,11 @@ examples:
   createAuthToken:
     speakeasy-default-create-auth-token:
       requestBody:
-        application/json: {"grant_type": "refresh_token", "scopes": "/moov/support.read /moov/support.write"}
-        application/x-www-form-urlencoded: {"grant_type": "refresh_token", "client_id": "5clTR_MdVrrkgxw2", "client_secret": "dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-", "scope": "/accounts.read /accounts.write", "refresh_token": "eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a..."}
+        application/json: {"grant_type": "refresh_token"}
+        application/x-www-form-urlencoded: {"grant_type": "refresh_token"}
       responses:
         "200":
-          application/json: {"access_token": "i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6...", "expires_in": 900, "refresh_token": "i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6...", "scope": "/accounts.write", "token_type": "opaque"}
+          application/json: {"token_type": "opaque", "access_token": "eyJhbGciOiJFZERTQSIsImN0eSI6IkpXVCIsImtpZCI6IkR...", "refresh_token": "eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a...", "expires_in": 1736964352, "scope": "/accounts.read /accounts.write"}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -2788,5 +3121,25 @@ examples:
           code: "N1IA5eWYNh"
         header: {}
   ping: {}
+  listAdjustments:
+    speakeasy-default-list-adjustments:
+      parameters:
+        path:
+          accountID: "27396e19-5d2d-4fba-876d-423579b4f37e"
+        query: {}
+        header: {}
+      responses:
+        "200":
+          application/json: [{"adjustmentID": "96b97f3f-0d80-4009-b359-c402faa37813", "walletID": "744c19da-697d-4cfc-89f8-f80d886ed2f2", "amount": {"currency": "Mexican Peso", "valueDecimal": "12.987654321"}, "createdOn": "2023-03-30T20:55:00.660Z"}, {"adjustmentID": "64a49a4a-4f5c-4f39-b104-32ace3219a8d", "walletID": "37146b91-373a-42f5-9a1e-30c8158a194c", "amount": {"currency": "Lek", "valueDecimal": "12.987654321"}, "createdOn": "2025-08-21T09:03:55.201Z"}, {"adjustmentID": "1432dd28-c763-4cfb-8e05-33e72377ff45", "walletID": "9357cd43-fcf3-4f46-9532-7d5e0f92271d", "amount": {"currency": "Sri Lanka Rupee", "valueDecimal": "12.987654321"}, "createdOn": "2023-05-14T05:31:18.789Z"}]
+  getAdjustment:
+    speakeasy-default-get-adjustment:
+      parameters:
+        path:
+          accountID: "7c43cb4c-5944-40f9-9bef-7925774b06b4"
+          adjustmentID: "244e9b18-1d97-4344-8a69-abf3c48078bc"
+        header: {}
+      responses:
+        "200":
+          application/json: {"adjustmentID": "394bed82-c0e6-43f2-ab37-e1667215de40", "walletID": "3c25451d-91a3-41e7-a262-f0e081ecaf44", "amount": {"currency": "Iceland Krona", "valueDecimal": "12.987654321"}, "createdOn": "2024-02-22T13:21:12.893Z"}
 examplesVersion: 1.0.0
 generatedTests: {}

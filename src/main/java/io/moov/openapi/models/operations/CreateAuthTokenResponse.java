@@ -7,7 +7,7 @@ package io.moov.openapi.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.openapi.models.components.AccessToken;
+import io.moov.openapi.models.components.AuthToken;
 import io.moov.openapi.utils.Response;
 import io.moov.openapi.utils.Utils;
 import java.io.InputStream;
@@ -40,22 +40,22 @@ public class CreateAuthTokenResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends AccessToken> accessToken;
+    private Optional<? extends AuthToken> authToken;
 
     @JsonCreator
     public CreateAuthTokenResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends AccessToken> accessToken) {
+            Optional<? extends AuthToken> authToken) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(accessToken, "accessToken");
+        Utils.checkNotNull(authToken, "authToken");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.accessToken = accessToken;
+        this.authToken = authToken;
     }
     
     public CreateAuthTokenResponse(
@@ -94,8 +94,8 @@ public class CreateAuthTokenResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AccessToken> accessToken() {
-        return (Optional<AccessToken>) accessToken;
+    public Optional<AuthToken> authToken() {
+        return (Optional<AuthToken>) authToken;
     }
 
     public final static Builder builder() {
@@ -132,18 +132,18 @@ public class CreateAuthTokenResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public CreateAuthTokenResponse withAccessToken(AccessToken accessToken) {
-        Utils.checkNotNull(accessToken, "accessToken");
-        this.accessToken = Optional.ofNullable(accessToken);
+    public CreateAuthTokenResponse withAuthToken(AuthToken authToken) {
+        Utils.checkNotNull(authToken, "authToken");
+        this.authToken = Optional.ofNullable(authToken);
         return this;
     }
 
     /**
      * The request completed successfully.
      */
-    public CreateAuthTokenResponse withAccessToken(Optional<? extends AccessToken> accessToken) {
-        Utils.checkNotNull(accessToken, "accessToken");
-        this.accessToken = accessToken;
+    public CreateAuthTokenResponse withAuthToken(Optional<? extends AuthToken> authToken) {
+        Utils.checkNotNull(authToken, "authToken");
+        this.authToken = authToken;
         return this;
     }
     
@@ -160,7 +160,7 @@ public class CreateAuthTokenResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.accessToken, other.accessToken);
+            Objects.deepEquals(this.authToken, other.authToken);
     }
     
     @Override
@@ -169,7 +169,7 @@ public class CreateAuthTokenResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            accessToken);
+            authToken);
     }
     
     @Override
@@ -178,7 +178,7 @@ public class CreateAuthTokenResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "accessToken", accessToken);
+                "authToken", authToken);
     }
     
     public final static class Builder {
@@ -189,7 +189,7 @@ public class CreateAuthTokenResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends AccessToken> accessToken = Optional.empty();  
+        private Optional<? extends AuthToken> authToken = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -225,18 +225,18 @@ public class CreateAuthTokenResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder accessToken(AccessToken accessToken) {
-            Utils.checkNotNull(accessToken, "accessToken");
-            this.accessToken = Optional.ofNullable(accessToken);
+        public Builder authToken(AuthToken authToken) {
+            Utils.checkNotNull(authToken, "authToken");
+            this.authToken = Optional.ofNullable(authToken);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder accessToken(Optional<? extends AccessToken> accessToken) {
-            Utils.checkNotNull(accessToken, "accessToken");
-            this.accessToken = accessToken;
+        public Builder authToken(Optional<? extends AuthToken> authToken) {
+            Utils.checkNotNull(authToken, "authToken");
+            this.authToken = authToken;
             return this;
         }
         
@@ -245,7 +245,7 @@ public class CreateAuthTokenResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                accessToken);
+                authToken);
         }
     }
 }

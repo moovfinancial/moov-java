@@ -34,6 +34,8 @@ public class Moov {
 
     private final Accounts accounts;
 
+    private final Adjustments adjustments;
+
     private final Cards cards;
 
     private final BankAccounts bankAccounts;
@@ -44,11 +46,15 @@ public class Moov {
 
     private final Disputes disputes;
 
+    private final Billing billing;
+
     private final Files files;
 
     private final PaymentLinks paymentLinks;
 
     private final PaymentMethods paymentMethods;
+
+    private final Representatives representatives;
 
     private final Scheduling scheduling;
 
@@ -56,13 +62,23 @@ public class Moov {
 
     private final Transfers transfers;
 
+    private final Underwriting underwriting;
+
     private final Wallets wallets;
 
     private final WalletTransactions walletTransactions;
 
+    private final Avatars avatars;
+
+    private final EndToEndEncryption endToEndEncryption;
+
     private final EnrichedAddress enrichedAddress;
 
     private final EnrichedProfile enrichedProfile;
+
+    private final Industries industries;
+
+    private final Institutions institutions;
 
     private final IssuingTransactions issuingTransactions;
 
@@ -70,8 +86,16 @@ public class Moov {
 
     private final Authentication authentication;
 
+    private final Onboarding onboarding;
+
+    private final Ping ping;
+
     public Accounts accounts() {
         return accounts;
+    }
+
+    public Adjustments adjustments() {
+        return adjustments;
     }
 
     public Cards cards() {
@@ -94,6 +118,10 @@ public class Moov {
         return disputes;
     }
 
+    public Billing billing() {
+        return billing;
+    }
+
     public Files files() {
         return files;
     }
@@ -104,6 +132,10 @@ public class Moov {
 
     public PaymentMethods paymentMethods() {
         return paymentMethods;
+    }
+
+    public Representatives representatives() {
+        return representatives;
     }
 
     public Scheduling scheduling() {
@@ -118,6 +150,10 @@ public class Moov {
         return transfers;
     }
 
+    public Underwriting underwriting() {
+        return underwriting;
+    }
+
     public Wallets wallets() {
         return wallets;
     }
@@ -126,12 +162,28 @@ public class Moov {
         return walletTransactions;
     }
 
+    public Avatars avatars() {
+        return avatars;
+    }
+
+    public EndToEndEncryption endToEndEncryption() {
+        return endToEndEncryption;
+    }
+
     public EnrichedAddress enrichedAddress() {
         return enrichedAddress;
     }
 
     public EnrichedProfile enrichedProfile() {
         return enrichedProfile;
+    }
+
+    public Industries industries() {
+        return industries;
+    }
+
+    public Institutions institutions() {
+        return institutions;
     }
 
     public IssuingTransactions issuingTransactions() {
@@ -144,6 +196,14 @@ public class Moov {
 
     public Authentication authentication() {
         return authentication;
+    }
+
+    public Onboarding onboarding() {
+        return onboarding;
+    }
+
+    public Ping ping() {
+        return ping;
     }
 
     private final SDKConfiguration sdkConfiguration;
@@ -280,23 +340,33 @@ public class Moov {
     private Moov(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
         this.accounts = new Accounts(sdkConfiguration);
+        this.adjustments = new Adjustments(sdkConfiguration);
         this.cards = new Cards(sdkConfiguration);
         this.bankAccounts = new BankAccounts(sdkConfiguration);
         this.branding = new Branding(sdkConfiguration);
         this.capabilities = new Capabilities(sdkConfiguration);
         this.disputes = new Disputes(sdkConfiguration);
+        this.billing = new Billing(sdkConfiguration);
         this.files = new Files(sdkConfiguration);
         this.paymentLinks = new PaymentLinks(sdkConfiguration);
         this.paymentMethods = new PaymentMethods(sdkConfiguration);
+        this.representatives = new Representatives(sdkConfiguration);
         this.scheduling = new Scheduling(sdkConfiguration);
         this.sweeps = new Sweeps(sdkConfiguration);
         this.transfers = new Transfers(sdkConfiguration);
+        this.underwriting = new Underwriting(sdkConfiguration);
         this.wallets = new Wallets(sdkConfiguration);
         this.walletTransactions = new WalletTransactions(sdkConfiguration);
+        this.avatars = new Avatars(sdkConfiguration);
+        this.endToEndEncryption = new EndToEndEncryption(sdkConfiguration);
         this.enrichedAddress = new EnrichedAddress(sdkConfiguration);
         this.enrichedProfile = new EnrichedProfile(sdkConfiguration);
+        this.industries = new Industries(sdkConfiguration);
+        this.institutions = new Institutions(sdkConfiguration);
         this.issuingTransactions = new IssuingTransactions(sdkConfiguration);
         this.cardIssuing = new CardIssuing(sdkConfiguration);
         this.authentication = new Authentication(sdkConfiguration);
+        this.onboarding = new Onboarding(sdkConfiguration);
+        this.ping = new Ping(sdkConfiguration);
         this.sdkConfiguration.initialize();
     }}

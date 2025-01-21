@@ -124,7 +124,7 @@ public class PaymentMethods implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -188,7 +188,7 @@ public class PaymentMethods implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -280,7 +280,7 @@ public class PaymentMethods implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -344,7 +344,7 @@ public class PaymentMethods implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

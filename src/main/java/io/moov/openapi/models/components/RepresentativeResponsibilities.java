@@ -42,18 +42,20 @@ public class RepresentativeResponsibilities {
     /**
      * The percentage of ownership this individual has in the business (required if `isOwner` is `true`).
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ownershipPercentage")
-    private long ownershipPercentage;
+    private Optional<Long> ownershipPercentage;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("jobTitle")
-    private String jobTitle;
+    private Optional<String> jobTitle;
 
     @JsonCreator
     public RepresentativeResponsibilities(
             @JsonProperty("isController") Optional<Boolean> isController,
             @JsonProperty("isOwner") Optional<Boolean> isOwner,
-            @JsonProperty("ownershipPercentage") long ownershipPercentage,
-            @JsonProperty("jobTitle") String jobTitle) {
+            @JsonProperty("ownershipPercentage") Optional<Long> ownershipPercentage,
+            @JsonProperty("jobTitle") Optional<String> jobTitle) {
         Utils.checkNotNull(isController, "isController");
         Utils.checkNotNull(isOwner, "isOwner");
         Utils.checkNotNull(ownershipPercentage, "ownershipPercentage");
@@ -64,10 +66,8 @@ public class RepresentativeResponsibilities {
         this.jobTitle = jobTitle;
     }
     
-    public RepresentativeResponsibilities(
-            long ownershipPercentage,
-            String jobTitle) {
-        this(Optional.empty(), Optional.empty(), ownershipPercentage, jobTitle);
+    public RepresentativeResponsibilities() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -91,12 +91,12 @@ public class RepresentativeResponsibilities {
      * The percentage of ownership this individual has in the business (required if `isOwner` is `true`).
      */
     @JsonIgnore
-    public long ownershipPercentage() {
+    public Optional<Long> ownershipPercentage() {
         return ownershipPercentage;
     }
 
     @JsonIgnore
-    public String jobTitle() {
+    public Optional<String> jobTitle() {
         return jobTitle;
     }
 
@@ -147,11 +147,26 @@ public class RepresentativeResponsibilities {
      */
     public RepresentativeResponsibilities withOwnershipPercentage(long ownershipPercentage) {
         Utils.checkNotNull(ownershipPercentage, "ownershipPercentage");
+        this.ownershipPercentage = Optional.ofNullable(ownershipPercentage);
+        return this;
+    }
+
+    /**
+     * The percentage of ownership this individual has in the business (required if `isOwner` is `true`).
+     */
+    public RepresentativeResponsibilities withOwnershipPercentage(Optional<Long> ownershipPercentage) {
+        Utils.checkNotNull(ownershipPercentage, "ownershipPercentage");
         this.ownershipPercentage = ownershipPercentage;
         return this;
     }
 
     public RepresentativeResponsibilities withJobTitle(String jobTitle) {
+        Utils.checkNotNull(jobTitle, "jobTitle");
+        this.jobTitle = Optional.ofNullable(jobTitle);
+        return this;
+    }
+
+    public RepresentativeResponsibilities withJobTitle(Optional<String> jobTitle) {
         Utils.checkNotNull(jobTitle, "jobTitle");
         this.jobTitle = jobTitle;
         return this;
@@ -197,9 +212,9 @@ public class RepresentativeResponsibilities {
  
         private Optional<Boolean> isOwner = Optional.empty();
  
-        private Long ownershipPercentage;
+        private Optional<Long> ownershipPercentage = Optional.empty();
  
-        private String jobTitle;  
+        private Optional<String> jobTitle = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -248,11 +263,26 @@ public class RepresentativeResponsibilities {
          */
         public Builder ownershipPercentage(long ownershipPercentage) {
             Utils.checkNotNull(ownershipPercentage, "ownershipPercentage");
+            this.ownershipPercentage = Optional.ofNullable(ownershipPercentage);
+            return this;
+        }
+
+        /**
+         * The percentage of ownership this individual has in the business (required if `isOwner` is `true`).
+         */
+        public Builder ownershipPercentage(Optional<Long> ownershipPercentage) {
+            Utils.checkNotNull(ownershipPercentage, "ownershipPercentage");
             this.ownershipPercentage = ownershipPercentage;
             return this;
         }
 
         public Builder jobTitle(String jobTitle) {
+            Utils.checkNotNull(jobTitle, "jobTitle");
+            this.jobTitle = Optional.ofNullable(jobTitle);
+            return this;
+        }
+
+        public Builder jobTitle(Optional<String> jobTitle) {
             Utils.checkNotNull(jobTitle, "jobTitle");
             this.jobTitle = jobTitle;
             return this;

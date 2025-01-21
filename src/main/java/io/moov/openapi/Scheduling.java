@@ -157,7 +157,7 @@ public class Scheduling implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -249,7 +249,7 @@ public class Scheduling implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -347,7 +347,7 @@ public class Scheduling implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -411,7 +411,7 @@ public class Scheduling implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -521,7 +521,7 @@ public class Scheduling implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -613,7 +613,7 @@ public class Scheduling implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -705,7 +705,7 @@ public class Scheduling implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -769,7 +769,7 @@ public class Scheduling implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -861,7 +861,7 @@ public class Scheduling implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -928,7 +928,7 @@ public class Scheduling implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -958,11 +958,11 @@ public class Scheduling implements
      * @param security The security details to use for authentication.
      * @param accountID
      * @param scheduleID
-     * @param occurrenceFilter   Allows the specification of additional filters beyond the UUID.
+     * @param occurrenceFilter Allows the specification of additional filters beyond the UUID.
 
-      Specifying a UUID string returns the exact occurrence.
-      Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
-      Specifying `latest` returns the latest occurrence at or before now.
+    Specifying a UUID string returns the exact occurrence.
+    Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
+    Specifying `latest` returns the latest occurrence at or before now.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -980,11 +980,11 @@ public class Scheduling implements
      * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
      * @param accountID
      * @param scheduleID
-     * @param occurrenceFilter   Allows the specification of additional filters beyond the UUID.
+     * @param occurrenceFilter Allows the specification of additional filters beyond the UUID.
 
-      Specifying a UUID string returns the exact occurrence.
-      Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
-      Specifying `latest` returns the latest occurrence at or before now.
+    Specifying a UUID string returns the exact occurrence.
+    Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
+    Specifying `latest` returns the latest occurrence at or before now.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1033,7 +1033,7 @@ public class Scheduling implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -1097,7 +1097,7 @@ public class Scheduling implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

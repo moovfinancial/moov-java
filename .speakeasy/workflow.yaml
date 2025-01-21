@@ -3,9 +3,7 @@ speakeasyVersion: latest
 sources:
     latest:
         inputs:
-            - location: ./moov-api/openapi/latest/openapi.yaml
-        registry:
-            location: registry.speakeasyapi.dev/moov/moov/latest
+            - location: registry.speakeasyapi.dev/moov/moov/api-latest
 targets:
     latest:
         target: java

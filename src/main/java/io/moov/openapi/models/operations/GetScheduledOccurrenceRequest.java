@@ -32,11 +32,11 @@ public class GetScheduledOccurrenceRequest {
     private String scheduleID;
 
     /**
-     *   Allows the specification of additional filters beyond the UUID.
+     * Allows the specification of additional filters beyond the UUID.
      * 
-     *   Specifying a UUID string returns the exact occurrence.
-     *   Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
-     *   Specifying `latest` returns the latest occurrence at or before now.
+     * Specifying a UUID string returns the exact occurrence.
+     * Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
+     * Specifying `latest` returns the latest occurrence at or before now.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=occurrenceFilter")
     private String occurrenceFilter;
@@ -84,11 +84,11 @@ public class GetScheduledOccurrenceRequest {
     }
 
     /**
-     *   Allows the specification of additional filters beyond the UUID.
+     * Allows the specification of additional filters beyond the UUID.
      * 
-     *   Specifying a UUID string returns the exact occurrence.
-     *   Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
-     *   Specifying `latest` returns the latest occurrence at or before now.
+     * Specifying a UUID string returns the exact occurrence.
+     * Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
+     * Specifying `latest` returns the latest occurrence at or before now.
      */
     @JsonIgnore
     public String occurrenceFilter() {
@@ -130,11 +130,11 @@ public class GetScheduledOccurrenceRequest {
     }
 
     /**
-     *   Allows the specification of additional filters beyond the UUID.
+     * Allows the specification of additional filters beyond the UUID.
      * 
-     *   Specifying a UUID string returns the exact occurrence.
-     *   Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
-     *   Specifying `latest` returns the latest occurrence at or before now.
+     * Specifying a UUID string returns the exact occurrence.
+     * Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
+     * Specifying `latest` returns the latest occurrence at or before now.
      */
     public GetScheduledOccurrenceRequest withOccurrenceFilter(String occurrenceFilter) {
         Utils.checkNotNull(occurrenceFilter, "occurrenceFilter");
@@ -221,11 +221,11 @@ public class GetScheduledOccurrenceRequest {
         }
 
         /**
-         *   Allows the specification of additional filters beyond the UUID.
+         * Allows the specification of additional filters beyond the UUID.
          * 
-         *   Specifying a UUID string returns the exact occurrence.
-         *   Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
-         *   Specifying `latest` returns the latest occurrence at or before now.
+         * Specifying a UUID string returns the exact occurrence.
+         * Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
+         * Specifying `latest` returns the latest occurrence at or before now.
          */
         public Builder occurrenceFilter(String occurrenceFilter) {
             Utils.checkNotNull(occurrenceFilter, "occurrenceFilter");

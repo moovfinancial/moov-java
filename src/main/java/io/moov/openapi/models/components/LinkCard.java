@@ -22,13 +22,14 @@ import java.util.Optional;
 public class LinkCard {
 
     /**
-     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
-     * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+     * Optional and only used if planning to use End to End Encryption to pass PCI data through an intermediary. 
+     * This is the output of using compact serialization of a JWE token that wraps an AES key and uses the public key returned from /end-to-end-keys.
+     * Examples of how to create this token can be found on our [GitHub](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+     * Body for a JWE token following [RFC](https://datatracker.ietf.org/doc/html/rfc7516).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("e2ee")
-    private Optional<? extends E2EEToken> e2ee;
+    private Optional<? extends End2EndEncryption> e2ee;
 
     @JsonProperty("cardNumber")
     private String cardNumber;
@@ -63,7 +64,7 @@ public class LinkCard {
 
     @JsonCreator
     public LinkCard(
-            @JsonProperty("e2ee") Optional<? extends E2EEToken> e2ee,
+            @JsonProperty("e2ee") Optional<? extends End2EndEncryption> e2ee,
             @JsonProperty("cardNumber") String cardNumber,
             @JsonProperty("cardCvv") String cardCvv,
             @JsonProperty("expiration") CardExpiration expiration,
@@ -101,14 +102,15 @@ public class LinkCard {
     }
 
     /**
-     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
-     * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+     * Optional and only used if planning to use End to End Encryption to pass PCI data through an intermediary. 
+     * This is the output of using compact serialization of a JWE token that wraps an AES key and uses the public key returned from /end-to-end-keys.
+     * Examples of how to create this token can be found on our [GitHub](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+     * Body for a JWE token following [RFC](https://datatracker.ietf.org/doc/html/rfc7516).
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<E2EEToken> e2ee() {
-        return (Optional<E2EEToken>) e2ee;
+    public Optional<End2EndEncryption> e2ee() {
+        return (Optional<End2EndEncryption>) e2ee;
     }
 
     @JsonIgnore
@@ -159,22 +161,24 @@ public class LinkCard {
     }
 
     /**
-     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
-     * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+     * Optional and only used if planning to use End to End Encryption to pass PCI data through an intermediary. 
+     * This is the output of using compact serialization of a JWE token that wraps an AES key and uses the public key returned from /end-to-end-keys.
+     * Examples of how to create this token can be found on our [GitHub](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+     * Body for a JWE token following [RFC](https://datatracker.ietf.org/doc/html/rfc7516).
      */
-    public LinkCard withE2ee(E2EEToken e2ee) {
+    public LinkCard withE2ee(End2EndEncryption e2ee) {
         Utils.checkNotNull(e2ee, "e2ee");
         this.e2ee = Optional.ofNullable(e2ee);
         return this;
     }
 
     /**
-     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
-     * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+     * Optional and only used if planning to use End to End Encryption to pass PCI data through an intermediary. 
+     * This is the output of using compact serialization of a JWE token that wraps an AES key and uses the public key returned from /end-to-end-keys.
+     * Examples of how to create this token can be found on our [GitHub](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+     * Body for a JWE token following [RFC](https://datatracker.ietf.org/doc/html/rfc7516).
      */
-    public LinkCard withE2ee(Optional<? extends E2EEToken> e2ee) {
+    public LinkCard withE2ee(Optional<? extends End2EndEncryption> e2ee) {
         Utils.checkNotNull(e2ee, "e2ee");
         this.e2ee = e2ee;
         return this;
@@ -306,7 +310,7 @@ public class LinkCard {
     
     public final static class Builder {
  
-        private Optional<? extends E2EEToken> e2ee = Optional.empty();
+        private Optional<? extends End2EndEncryption> e2ee = Optional.empty();
  
         private String cardNumber;
  
@@ -329,22 +333,24 @@ public class LinkCard {
         }
 
         /**
-         * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-         * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
-         * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+         * Optional and only used if planning to use End to End Encryption to pass PCI data through an intermediary. 
+         * This is the output of using compact serialization of a JWE token that wraps an AES key and uses the public key returned from /end-to-end-keys.
+         * Examples of how to create this token can be found on our [GitHub](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+         * Body for a JWE token following [RFC](https://datatracker.ietf.org/doc/html/rfc7516).
          */
-        public Builder e2ee(E2EEToken e2ee) {
+        public Builder e2ee(End2EndEncryption e2ee) {
             Utils.checkNotNull(e2ee, "e2ee");
             this.e2ee = Optional.ofNullable(e2ee);
             return this;
         }
 
         /**
-         * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-         * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
-         * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+         * Optional and only used if planning to use End to End Encryption to pass PCI data through an intermediary. 
+         * This is the output of using compact serialization of a JWE token that wraps an AES key and uses the public key returned from /end-to-end-keys.
+         * Examples of how to create this token can be found on our [GitHub](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+         * Body for a JWE token following [RFC](https://datatracker.ietf.org/doc/html/rfc7516).
          */
-        public Builder e2ee(Optional<? extends E2EEToken> e2ee) {
+        public Builder e2ee(Optional<? extends End2EndEncryption> e2ee) {
             Utils.checkNotNull(e2ee, "e2ee");
             this.e2ee = e2ee;
             return this;

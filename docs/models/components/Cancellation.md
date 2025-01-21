@@ -1,9 +1,0 @@
-# Cancellation
-
-
-## Fields
-
-| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `status`                                                                                  | [CancellationStatus](../../models/components/CancellationStatus.md)                       | :heavy_check_mark:                                                                        | N/A                                                                                       |
-| `createdOn`                                                                               | [OffsetDateTime](https://docs.oracle.com/javase/8/docs/api/java/time/OffsetDateTime.html) | :heavy_check_mark:                                                                        | N/A                                                                                       |

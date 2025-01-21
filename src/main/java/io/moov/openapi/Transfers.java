@@ -8,14 +8,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.openapi.models.components.AsyncTransfer;
 import io.moov.openapi.models.components.CardAcquiringRefund;
 import io.moov.openapi.models.components.CreateRefundResponse;
-import io.moov.openapi.models.components.Reversal;
 import io.moov.openapi.models.components.Transfer;
 import io.moov.openapi.models.components.TransferOptions;
 import io.moov.openapi.models.components.Versions;
 import io.moov.openapi.models.errors.APIException;
 import io.moov.openapi.models.errors.GenericError;
 import io.moov.openapi.models.errors.RefundValidationError;
-import io.moov.openapi.models.errors.ReversalValidationError;
 import io.moov.openapi.models.errors.TransferOptionsValidationError;
 import io.moov.openapi.models.errors.TransferValidationError;
 import io.moov.openapi.models.operations.CreateTransferOptionsRequest;
@@ -51,10 +49,6 @@ import io.moov.openapi.models.operations.RefundTransferRequest;
 import io.moov.openapi.models.operations.RefundTransferRequestBuilder;
 import io.moov.openapi.models.operations.RefundTransferResponse;
 import io.moov.openapi.models.operations.RefundTransferSecurity;
-import io.moov.openapi.models.operations.ReverseTransferRequest;
-import io.moov.openapi.models.operations.ReverseTransferRequestBuilder;
-import io.moov.openapi.models.operations.ReverseTransferResponse;
-import io.moov.openapi.models.operations.ReverseTransferSecurity;
 import io.moov.openapi.models.operations.SDKMethodInterfaces.*;
 import io.moov.openapi.utils.HTTPClient;
 import io.moov.openapi.utils.HTTPRequest;
@@ -81,7 +75,6 @@ public class Transfers implements
             MethodCallRefundTransfer,
             MethodCallListRefunds,
             MethodCallGetRefund,
-            MethodCallReverseTransfer,
             MethodCallCreateTransferOptions {
 
     private final SDKConfiguration sdkConfiguration;
@@ -152,7 +145,7 @@ public class Transfers implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "409", "422", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -288,7 +281,7 @@ public class Transfers implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -358,7 +351,7 @@ public class Transfers implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -422,7 +415,7 @@ public class Transfers implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -514,7 +507,7 @@ public class Transfers implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -578,7 +571,7 @@ public class Transfers implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -670,7 +663,7 @@ public class Transfers implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -734,7 +727,7 @@ public class Transfers implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -809,7 +802,7 @@ public class Transfers implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "409", "422", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -930,7 +923,7 @@ public class Transfers implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -1022,7 +1015,7 @@ public class Transfers implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -1086,7 +1079,7 @@ public class Transfers implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -1183,7 +1176,7 @@ public class Transfers implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -1247,174 +1240,7 @@ public class Transfers implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
-    }
-
-
-
-    /**
-     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.  - Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)  - to learn more. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @return The call builder
-     */
-    public ReverseTransferRequestBuilder reverseTransfer() {
-        return new ReverseTransferRequestBuilder(this);
-    }
-
-    /**
-     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.  - Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)  - to learn more. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ReverseTransferResponse reverseTransfer(
-            ReverseTransferRequest request,
-            ReverseTransferSecurity security) throws Exception {
-        String _baseUrl = this.sdkConfiguration.serverUrl;
-        String _url = Utils.generateURL(
-                ReverseTransferRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers/{transferID}/reversals",
-                request, null);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<ReverseTransferRequest>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "createReversal",
-                "json",
-                false);
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      "reverseTransfer", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            "reverseTransfer",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            "reverseTransfer",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            "reverseTransfer",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        ReverseTransferResponse.Builder _resBuilder = 
-            ReverseTransferResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        ReverseTransferResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200", "202")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Reversal _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Reversal>() {});
-                _res.withReversal(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ReversalValidationError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<ReversalValidationError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -1494,7 +1320,7 @@ public class Transfers implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "422", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "422", "429", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -1586,7 +1412,7 @@ public class Transfers implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

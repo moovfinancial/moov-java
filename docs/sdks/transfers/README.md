@@ -50,12 +50,6 @@ scope.
 
 To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read` 
 scope.
-* [reverseTransfer](#reversetransfer) - Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
-Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
-to learn more.
-
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
 * [createTransferOptions](#createtransferoptions) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
 supply in the request. 
 
@@ -596,82 +590,6 @@ public class Application {
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## reverseTransfer
-
-Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
-Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
-to learn more.
-
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.CreateReversal;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.errors.ReversalValidationError;
-import io.moov.openapi.models.operations.ReverseTransferRequest;
-import io.moov.openapi.models.operations.ReverseTransferResponse;
-import io.moov.openapi.models.operations.ReverseTransferSecurity;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, ReversalValidationError, Exception {
-
-        Moov sdk = Moov.builder()
-            .build();
-
-        ReverseTransferRequest req = ReverseTransferRequest.builder()
-                .xIdempotencyKey("16ad771b-54f6-4f38-86a5-09d5f907e897")
-                .accountID("47d7634a-2772-4a99-a0bc-2bb960cea7e2")
-                .transferID("c39f87ae-8349-4b5b-9f87-1669f5d784aa")
-                .createReversal(CreateReversal.builder()
-                    .amount(1000L)
-                    .build())
-                .build();
-
-        ReverseTransferResponse res = sdk.transfers().reverseTransfer()
-                .request(req)
-                .security(ReverseTransferSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
-                .call();
-
-        if (res.reversal().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                       | [ReverseTransferRequest](../../models/operations/ReverseTransferRequest.md)                                     | :heavy_check_mark:                                                                                              | The request object to use for the request.                                                                      |
-| `security`                                                                                                      | [io.moov.openapi.models.operations.ReverseTransferSecurity](../../models/operations/ReverseTransferSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
-
-### Response
-
-**[ReverseTransferResponse](../../models/operations/ReverseTransferResponse.md)**
-
-### Errors
-
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| models/errors/GenericError            | 400, 409                              | application/json                      |
-| models/errors/ReversalValidationError | 422                                   | application/json                      |
-| models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |
 
 ## createTransferOptions
 

@@ -5,42 +5,26 @@
 package io.moov.openapi.models.operations;
 
 import io.moov.openapi.models.components.AuthTokenRequest;
-import io.moov.openapi.models.components.Versions;
 import io.moov.openapi.utils.Utils;
-import java.util.Optional;
 
 public class CreateAuthTokenRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
-    private AuthTokenRequest authTokenRequest;
+    private AuthTokenRequest request;
     private final SDKMethodInterfaces.MethodCallCreateAuthToken sdk;
 
     public CreateAuthTokenRequestBuilder(SDKMethodInterfaces.MethodCallCreateAuthToken sdk) {
         this.sdk = sdk;
     }
-                
-    public CreateAuthTokenRequestBuilder xMoovVersion(Versions xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
 
-    public CreateAuthTokenRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
-
-    public CreateAuthTokenRequestBuilder authTokenRequest(AuthTokenRequest authTokenRequest) {
-        Utils.checkNotNull(authTokenRequest, "authTokenRequest");
-        this.authTokenRequest = authTokenRequest;
+    public CreateAuthTokenRequestBuilder request(AuthTokenRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
 
     public CreateAuthTokenResponse call() throws Exception {
 
         return sdk.createAuthToken(
-            xMoovVersion,
-            authTokenRequest);
+            request);
     }
 }

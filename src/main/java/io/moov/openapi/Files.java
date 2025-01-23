@@ -103,7 +103,7 @@ public class Files implements
                 UploadFileRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/files",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "POST");
         Object _convertedRequest = Utils.convertToShape(
@@ -122,7 +122,7 @@ public class Files implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -295,13 +295,13 @@ public class Files implements
                 ListFilesRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/files",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -451,13 +451,13 @@ public class Files implements
                 GetFileDetailsRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/files/{fileID}",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 

@@ -121,7 +121,7 @@ public class Sweeps implements
                 CreateSweepConfigRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/sweep-configs",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "POST");
         Object _convertedRequest = Utils.convertToShape(
@@ -140,7 +140,7 @@ public class Sweeps implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -313,13 +313,13 @@ public class Sweeps implements
                 ListSweepConfigsRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/sweep-configs",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -469,13 +469,13 @@ public class Sweeps implements
                 GetSweepConfigRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/sweep-configs/{sweepConfigID}",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -630,7 +630,7 @@ public class Sweeps implements
                 PatchSweepConfigRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/sweep-configs/{sweepConfigID}",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "PATCH");
         Object _convertedRequest = Utils.convertToShape(
@@ -649,7 +649,7 @@ public class Sweeps implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -800,7 +800,7 @@ public class Sweeps implements
                 ListSweepsRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/wallets/{walletID}/sweeps",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -810,8 +810,8 @@ public class Sweeps implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListSweepsRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -966,13 +966,13 @@ public class Sweeps implements
                 GetSweepRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/wallets/{walletID}/sweeps/{sweepID}",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 

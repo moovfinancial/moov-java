@@ -79,7 +79,7 @@ public class Ping implements
         _req.addHeader("Accept", "*/*")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 

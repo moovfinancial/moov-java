@@ -67,8 +67,8 @@ public class EnrichedAddress implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetEnrichmentAddressRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 

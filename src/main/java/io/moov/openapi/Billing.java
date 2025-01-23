@@ -118,7 +118,7 @@ public class Billing implements
                 ListFeePlanAgreementsRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/fee-plan-agreements",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -128,8 +128,8 @@ public class Billing implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListFeePlanAgreementsRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -279,7 +279,7 @@ public class Billing implements
                 CreateFeePlanAgreementsRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/fee-plan-agreements",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "POST");
         Object _convertedRequest = Utils.convertToShape(
@@ -298,7 +298,7 @@ public class Billing implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -474,7 +474,7 @@ public class Billing implements
                 ListFeePlansRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/fee-plans",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -484,8 +484,8 @@ public class Billing implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListFeePlansRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -633,7 +633,7 @@ public class Billing implements
                 ListPartnerPricingRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/partner-pricing",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -643,8 +643,8 @@ public class Billing implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListPartnerPricingRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -795,7 +795,7 @@ public class Billing implements
                 ListPartnerPricingAgreementsRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/partner-pricing-agreements",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -805,8 +805,8 @@ public class Billing implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListPartnerPricingAgreementsRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 

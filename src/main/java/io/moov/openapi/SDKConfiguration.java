@@ -9,7 +9,11 @@ import io.moov.openapi.utils.HTTPClient;
 import io.moov.openapi.utils.Hook.SdkInitData;
 import io.moov.openapi.utils.Hooks;
 import io.moov.openapi.utils.RetryConfig;
+import java.lang.Object;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 class SDKConfiguration {
@@ -29,7 +33,7 @@ class SDKConfiguration {
     public int serverIdx = 0;
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "latest";
-    public static final String SDK_VERSION = "0.0.4";
+    public static final String SDK_VERSION = "0.1.0";
     public static final String GEN_VERSION = "2.493.34";
     private static final String BASE_PACKAGE = "io.moov.openapi";
     public static final String USER_AGENT = 
@@ -62,7 +66,10 @@ class SDKConfiguration {
         this.defaultClient = data.client();
     }
 
-    
+    @SuppressWarnings("serial")
+    public Map<String, Map<String, Map<String,Object>>> globals = new HashMap<>(){ {
+        put("parameters", new HashMap<>());
+    } };
     
     public Optional<RetryConfig> retryConfig = Optional.empty();
 }

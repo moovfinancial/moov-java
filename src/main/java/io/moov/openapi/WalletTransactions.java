@@ -65,7 +65,7 @@ public class WalletTransactions implements
                 ListWalletTransactionsRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/wallets/{walletID}/transactions",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -75,8 +75,8 @@ public class WalletTransactions implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListWalletTransactionsRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -231,13 +231,13 @@ public class WalletTransactions implements
                 GetWalletTransactionRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/wallets/{walletID}/transactions/{transactionID}",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 

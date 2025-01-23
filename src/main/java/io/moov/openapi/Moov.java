@@ -9,6 +9,7 @@ import io.moov.openapi.utils.RetryConfig;
 import io.moov.openapi.utils.SpeakeasyHTTPClient;
 import io.moov.openapi.utils.Utils;
 import java.lang.String;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -295,6 +296,22 @@ public class Moov {
             this.sdkConfiguration.retryConfig = Optional.of(retryConfig);
             return this;
         }
+        /**
+         * Allows setting the xMoovVersion parameter for all supported operations.
+         *
+         * @param xMoovVersion The value to set.
+         * @return The builder instance.
+         */
+        public Builder xMoovVersion(String xMoovVersion) {
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
+                this.sdkConfiguration.globals.get("parameters").put("header", new HashMap<>());
+            }
+
+            this.sdkConfiguration.globals.get("parameters").get("header").put("xMoovVersion", xMoovVersion);
+
+            return this;
+        }
+        
         // Visible for testing, may be accessed via reflection in tests
         Builder _hooks(io.moov.openapi.utils.Hooks hooks) {
             sdkConfiguration.setHooks(hooks);  

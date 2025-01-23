@@ -82,7 +82,7 @@ public class IssuingTransactions implements
                 ListIssuedCardAuthorizationsRequest.class,
                 _baseUrl,
                 "/issuing/{accountID}/authorizations",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -92,8 +92,8 @@ public class IssuingTransactions implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListIssuedCardAuthorizationsRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -243,13 +243,13 @@ public class IssuingTransactions implements
                 GetIssuedCardAuthorizationRequest.class,
                 _baseUrl,
                 "/issuing/{accountID}/authorizations/{authorizationID}",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -372,7 +372,7 @@ public class IssuingTransactions implements
                 ListIssuedCardAuthorizationEventsRequest.class,
                 _baseUrl,
                 "/issuing/{accountID}/authorizations/{authorizationID}/events",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -382,8 +382,8 @@ public class IssuingTransactions implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListIssuedCardAuthorizationEventsRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -506,7 +506,7 @@ public class IssuingTransactions implements
                 ListIssuedCardTransactionsRequest.class,
                 _baseUrl,
                 "/issuing/{accountID}/card-transactions",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -516,8 +516,8 @@ public class IssuingTransactions implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListIssuedCardTransactionsRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -667,13 +667,13 @@ public class IssuingTransactions implements
                 GetIssuedCardTransactionRequest.class,
                 _baseUrl,
                 "/issuing/{accountID}/card-transactions/{cardTransactionID}",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 

@@ -90,7 +90,7 @@ public class Adjustments implements
                 ListAdjustmentsRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/adjustments",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -100,8 +100,8 @@ public class Adjustments implements
         _req.addQueryParams(Utils.getQueryParams(
                 ListAdjustmentsRequest.class,
                 request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 
@@ -251,13 +251,13 @@ public class Adjustments implements
                 GetAdjustmentRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/adjustments/{adjustmentID}",
-                request, null);
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         // hooks will have access to global security options
         // TODO pass the method level security object to hooks (type system doesn't allow 

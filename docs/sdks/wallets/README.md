@@ -23,11 +23,11 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.ListWalletsResponse;
-import io.moov.openapi.models.operations.ListWalletsSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.ListWalletsResponse;
+import io.moov.api.models.operations.ListWalletsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -57,11 +57,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                              | [io.moov.openapi.models.operations.ListWalletsSecurity](../../models/operations/ListWalletsSecurity.md) | :heavy_check_mark:                                                                                      | The security requirements to use for the request.                                                       |
-| `xMoovVersion`                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                              | :heavy_minus_sign:                                                                                      | Specify an API version.                                                                                 |
-| `accountID`                                                                                             | *String*                                                                                                | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `security`                                                                                          | [io.moov.api.models.operations.ListWalletsSecurity](../../models/operations/ListWalletsSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |
+| `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |
+| `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 
 ### Response
 
@@ -84,11 +84,11 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.GetWalletResponse;
-import io.moov.openapi.models.operations.GetWalletSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.GetWalletResponse;
+import io.moov.api.models.operations.GetWalletSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -119,12 +119,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `security`                                                                                          | [io.moov.openapi.models.operations.GetWalletSecurity](../../models/operations/GetWalletSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |
-| `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |
-| `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
-| `walletID`                                                                                          | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `security`                                                                                      | [io.moov.api.models.operations.GetWalletSecurity](../../models/operations/GetWalletSecurity.md) | :heavy_check_mark:                                                                              | The security requirements to use for the request.                                               |
+| `xMoovVersion`                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                      | :heavy_minus_sign:                                                                              | Specify an API version.                                                                         |
+| `accountID`                                                                                     | *String*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `walletID`                                                                                      | *String*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
 
 ### Response
 

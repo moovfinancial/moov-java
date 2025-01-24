@@ -21,13 +21,13 @@ Allows clients to notify the authorization server that a previously obtained ref
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.RevokeTokenRequest;
-import io.moov.openapi.models.components.Security;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.errors.RevokeTokenRequestError;
-import io.moov.openapi.models.operations.RevokeAuthTokenResponse;
+import io.moov.api.Moov;
+import io.moov.api.models.components.RevokeTokenRequest;
+import io.moov.api.models.components.Security;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.errors.RevokeTokenRequestError;
+import io.moov.api.models.operations.RevokeAuthTokenResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -83,14 +83,14 @@ Create or refresh an access token.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.AuthTokenRequest;
-import io.moov.openapi.models.components.GrantType;
-import io.moov.openapi.models.components.Security;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.AuthTokenRequestError;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.CreateAuthTokenResponse;
+import io.moov.api.Moov;
+import io.moov.api.models.components.AuthTokenRequest;
+import io.moov.api.models.components.GrantType;
+import io.moov.api.models.components.Security;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.AuthTokenRequestError;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.CreateAuthTokenResponse;
 import java.lang.Exception;
 
 public class Application {

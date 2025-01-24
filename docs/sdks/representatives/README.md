@@ -52,19 +52,19 @@ To use this endpoint from the browser, you’ll need to specify the `/accounts/{
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.Address;
-import io.moov.openapi.models.components.BirthDate;
-import io.moov.openapi.models.components.CreateRepresentative;
-import io.moov.openapi.models.components.IndividualName;
-import io.moov.openapi.models.components.PhoneNumber;
-import io.moov.openapi.models.components.RepresentativeResponsibilities;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.errors.RepresentativeValidationError;
-import io.moov.openapi.models.operations.CreateRepresentativeResponse;
-import io.moov.openapi.models.operations.CreateRepresentativeSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.Address;
+import io.moov.api.models.components.BirthDate;
+import io.moov.api.models.components.CreateRepresentative;
+import io.moov.api.models.components.IndividualName;
+import io.moov.api.models.components.PhoneNumber;
+import io.moov.api.models.components.RepresentativeResponsibilities;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.errors.RepresentativeValidationError;
+import io.moov.api.models.operations.CreateRepresentativeResponse;
+import io.moov.api.models.operations.CreateRepresentativeSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -124,12 +124,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [io.moov.openapi.models.operations.CreateRepresentativeSecurity](../../models/operations/CreateRepresentativeSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |
-| `xMoovVersion`                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                | :heavy_minus_sign:                                                                                                        | Specify an API version.                                                                                                   |
-| `accountID`                                                                                                               | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | ID of the account.                                                                                                        |
-| `createRepresentative`                                                                                                    | [CreateRepresentative](../../models/components/CreateRepresentative.md)                                                   | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
+| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                            | [io.moov.api.models.operations.CreateRepresentativeSecurity](../../models/operations/CreateRepresentativeSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |
+| `xMoovVersion`                                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                                            | :heavy_minus_sign:                                                                                                    | Specify an API version.                                                                                               |
+| `accountID`                                                                                                           | *String*                                                                                                              | :heavy_check_mark:                                                                                                    | ID of the account.                                                                                                    |
+| `createRepresentative`                                                                                                | [CreateRepresentative](../../models/components/CreateRepresentative.md)                                               | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   |
 
 ### Response
 
@@ -157,11 +157,11 @@ To use this endpoint from the browser, you’ll need to specify the `/accounts/{
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.ListRepresentativesResponse;
-import io.moov.openapi.models.operations.ListRepresentativesSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.ListRepresentativesResponse;
+import io.moov.api.models.operations.ListRepresentativesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -191,11 +191,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.openapi.models.operations.ListRepresentativesSecurity](../../models/operations/ListRepresentativesSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
-| `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
-| `accountID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | ID of the account.                                                                                                      |
+| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                          | [io.moov.api.models.operations.ListRepresentativesSecurity](../../models/operations/ListRepresentativesSecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |
+| `xMoovVersion`                                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                                          | :heavy_minus_sign:                                                                                                  | Specify an API version.                                                                                             |
+| `accountID`                                                                                                         | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | ID of the account.                                                                                                  |
 
 ### Response
 
@@ -218,12 +218,12 @@ To use this endpoint from the browser, you’ll need to specify the `/accounts/{
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.DeleteRepresentativeResponse;
-import io.moov.openapi.models.operations.DeleteRepresentativeSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.DeleteRepresentativeResponse;
+import io.moov.api.models.operations.DeleteRepresentativeSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -252,12 +252,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [io.moov.openapi.models.operations.DeleteRepresentativeSecurity](../../models/operations/DeleteRepresentativeSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |
-| `xMoovVersion`                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                | :heavy_minus_sign:                                                                                                        | Specify an API version.                                                                                                   |
-| `accountID`                                                                                                               | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | ID of the account.                                                                                                        |
-| `representativeID`                                                                                                        | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | ID of the representative.                                                                                                 |
+| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                            | [io.moov.api.models.operations.DeleteRepresentativeSecurity](../../models/operations/DeleteRepresentativeSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |
+| `xMoovVersion`                                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                                            | :heavy_minus_sign:                                                                                                    | Specify an API version.                                                                                               |
+| `accountID`                                                                                                           | *String*                                                                                                              | :heavy_check_mark:                                                                                                    | ID of the account.                                                                                                    |
+| `representativeID`                                                                                                    | *String*                                                                                                              | :heavy_check_mark:                                                                                                    | ID of the representative.                                                                                             |
 
 ### Response
 
@@ -281,11 +281,11 @@ To use this endpoint from the browser, you’ll need to specify the `/accounts/{
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.GetRepresentativeResponse;
-import io.moov.openapi.models.operations.GetRepresentativeSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.GetRepresentativeResponse;
+import io.moov.api.models.operations.GetRepresentativeSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -316,12 +316,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                          | [io.moov.openapi.models.operations.GetRepresentativeSecurity](../../models/operations/GetRepresentativeSecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |
-| `xMoovVersion`                                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                                          | :heavy_minus_sign:                                                                                                  | Specify an API version.                                                                                             |
-| `accountID`                                                                                                         | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | ID of the account.                                                                                                  |
-| `representativeID`                                                                                                  | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | ID of the representative.                                                                                           |
+| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                      | [io.moov.api.models.operations.GetRepresentativeSecurity](../../models/operations/GetRepresentativeSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
+| `xMoovVersion`                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                      | :heavy_minus_sign:                                                                                              | Specify an API version.                                                                                         |
+| `accountID`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | ID of the account.                                                                                              |
+| `representativeID`                                                                                              | *String*                                                                                                        | :heavy_check_mark:                                                                                              | ID of the representative.                                                                                       |
 
 ### Response
 
@@ -357,18 +357,18 @@ If you need to update information in a locked state, please contact Moov support
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.IndividualNameUpdate;
-import io.moov.openapi.models.components.Phone;
-import io.moov.openapi.models.components.Responsibilities;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.UpdateRepresentative;
-import io.moov.openapi.models.components.UpdateRepresentativeAddress;
-import io.moov.openapi.models.components.UpdateRepresentativeBirthDate;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.UpdateRepresentativeResponse;
-import io.moov.openapi.models.operations.UpdateRepresentativeSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.IndividualNameUpdate;
+import io.moov.api.models.components.Phone;
+import io.moov.api.models.components.Responsibilities;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.UpdateRepresentative;
+import io.moov.api.models.components.UpdateRepresentativeAddress;
+import io.moov.api.models.components.UpdateRepresentativeBirthDate;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.UpdateRepresentativeResponse;
+import io.moov.api.models.operations.UpdateRepresentativeSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -428,13 +428,13 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [io.moov.openapi.models.operations.UpdateRepresentativeSecurity](../../models/operations/UpdateRepresentativeSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |
-| `xMoovVersion`                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                | :heavy_minus_sign:                                                                                                        | Specify an API version.                                                                                                   |
-| `accountID`                                                                                                               | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | ID of the account.                                                                                                        |
-| `representativeID`                                                                                                        | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | ID of the representative.                                                                                                 |
-| `updateRepresentative`                                                                                                    | [UpdateRepresentative](../../models/components/UpdateRepresentative.md)                                                   | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
+| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                            | [io.moov.api.models.operations.UpdateRepresentativeSecurity](../../models/operations/UpdateRepresentativeSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |
+| `xMoovVersion`                                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                                            | :heavy_minus_sign:                                                                                                    | Specify an API version.                                                                                               |
+| `accountID`                                                                                                           | *String*                                                                                                              | :heavy_check_mark:                                                                                                    | ID of the account.                                                                                                    |
+| `representativeID`                                                                                                    | *String*                                                                                                              | :heavy_check_mark:                                                                                                    | ID of the representative.                                                                                             |
+| `updateRepresentative`                                                                                                | [UpdateRepresentative](../../models/components/UpdateRepresentative.md)                                               | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   |
 
 ### Response
 

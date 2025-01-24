@@ -18,16 +18,16 @@ Creates the brand properties for the specified account.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.Brand;
-import io.moov.openapi.models.components.BrandColor;
-import io.moov.openapi.models.components.Colors;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.BrandValidationError;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.PostBrandResponse;
-import io.moov.openapi.models.operations.PostBrandSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.Brand;
+import io.moov.api.models.components.BrandColor;
+import io.moov.api.models.components.Colors;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.BrandValidationError;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.PostBrandResponse;
+import io.moov.api.models.operations.PostBrandSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -67,12 +67,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `security`                                                                                          | [io.moov.openapi.models.operations.PostBrandSecurity](../../models/operations/PostBrandSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |
-| `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |
-| `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
-| `brand`                                                                                             | [Brand](../../models/components/Brand.md)                                                           | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `security`                                                                                      | [io.moov.api.models.operations.PostBrandSecurity](../../models/operations/PostBrandSecurity.md) | :heavy_check_mark:                                                                              | The security requirements to use for the request.                                               |
+| `xMoovVersion`                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                      | :heavy_minus_sign:                                                                              | Specify an API version.                                                                         |
+| `accountID`                                                                                     | *String*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `brand`                                                                                         | [Brand](../../models/components/Brand.md)                                                       | :heavy_check_mark:                                                                              | N/A                                                                                             |
 
 ### Response
 
@@ -95,11 +95,11 @@ Gets the brand properties for the specified account.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.GetBrandResponse;
-import io.moov.openapi.models.operations.GetBrandSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.GetBrandResponse;
+import io.moov.api.models.operations.GetBrandSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -129,11 +129,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [io.moov.openapi.models.operations.GetBrandSecurity](../../models/operations/GetBrandSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |
-| `xMoovVersion`                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                        | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |
-| `accountID`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `security`                                                                                    | [io.moov.api.models.operations.GetBrandSecurity](../../models/operations/GetBrandSecurity.md) | :heavy_check_mark:                                                                            | The security requirements to use for the request.                                             |
+| `xMoovVersion`                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                    | :heavy_minus_sign:                                                                            | Specify an API version.                                                                       |
+| `accountID`                                                                                   | *String*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 
 ### Response
 
@@ -154,14 +154,14 @@ Updates the brand properties for the specified account.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.UpdateBrand;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.BrandValidationError;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.UpdateBrandResponse;
-import io.moov.openapi.models.operations.UpdateBrandSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.UpdateBrand;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.BrandValidationError;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.UpdateBrandResponse;
+import io.moov.api.models.operations.UpdateBrandSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -193,12 +193,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                              | [io.moov.openapi.models.operations.UpdateBrandSecurity](../../models/operations/UpdateBrandSecurity.md) | :heavy_check_mark:                                                                                      | The security requirements to use for the request.                                                       |
-| `xMoovVersion`                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                              | :heavy_minus_sign:                                                                                      | Specify an API version.                                                                                 |
-| `accountID`                                                                                             | *String*                                                                                                | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
-| `updateBrand`                                                                                           | [UpdateBrand](../../models/components/UpdateBrand.md)                                                   | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `security`                                                                                          | [io.moov.api.models.operations.UpdateBrandSecurity](../../models/operations/UpdateBrandSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |
+| `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |
+| `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `updateBrand`                                                                                       | [UpdateBrand](../../models/components/UpdateBrand.md)                                               | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 
 ### Response
 

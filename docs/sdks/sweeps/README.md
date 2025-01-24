@@ -21,15 +21,15 @@ Create a sweep config for a wallet.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.CreateSweepConfig;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.SweepConfigStatus;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.CreateSweepConfigError;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.CreateSweepConfigResponse;
-import io.moov.openapi.models.operations.CreateSweepConfigSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.CreateSweepConfig;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.SweepConfigStatus;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.CreateSweepConfigError;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.CreateSweepConfigResponse;
+import io.moov.api.models.operations.CreateSweepConfigSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -65,12 +65,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                          | [io.moov.openapi.models.operations.CreateSweepConfigSecurity](../../models/operations/CreateSweepConfigSecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |
-| `xMoovVersion`                                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                                          | :heavy_minus_sign:                                                                                                  | Specify an API version.                                                                                             |
-| `accountID`                                                                                                         | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
-| `createSweepConfig`                                                                                                 | [CreateSweepConfig](../../models/components/CreateSweepConfig.md)                                                   | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
+| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                      | [io.moov.api.models.operations.CreateSweepConfigSecurity](../../models/operations/CreateSweepConfigSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
+| `xMoovVersion`                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                      | :heavy_minus_sign:                                                                                              | Specify an API version.                                                                                         |
+| `accountID`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `createSweepConfig`                                                                                             | [CreateSweepConfig](../../models/components/CreateSweepConfig.md)                                               | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
 
 ### Response
 
@@ -93,11 +93,11 @@ List sweep configs associated with an account.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.ListSweepConfigsResponse;
-import io.moov.openapi.models.operations.ListSweepConfigsSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.ListSweepConfigsResponse;
+import io.moov.api.models.operations.ListSweepConfigsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -127,11 +127,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                        | [io.moov.openapi.models.operations.ListSweepConfigsSecurity](../../models/operations/ListSweepConfigsSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
-| `xMoovVersion`                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                        | :heavy_minus_sign:                                                                                                | Specify an API version.                                                                                           |
-| `accountID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                    | [io.moov.api.models.operations.ListSweepConfigsSecurity](../../models/operations/ListSweepConfigsSecurity.md) | :heavy_check_mark:                                                                                            | The security requirements to use for the request.                                                             |
+| `xMoovVersion`                                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                                    | :heavy_minus_sign:                                                                                            | Specify an API version.                                                                                       |
+| `accountID`                                                                                                   | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
 
 ### Response
 
@@ -152,11 +152,11 @@ Get a sweep config associated with a wallet.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.GetSweepConfigResponse;
-import io.moov.openapi.models.operations.GetSweepConfigSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.GetSweepConfigResponse;
+import io.moov.api.models.operations.GetSweepConfigSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -187,12 +187,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                    | [io.moov.openapi.models.operations.GetSweepConfigSecurity](../../models/operations/GetSweepConfigSecurity.md) | :heavy_check_mark:                                                                                            | The security requirements to use for the request.                                                             |
-| `xMoovVersion`                                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                                    | :heavy_minus_sign:                                                                                            | Specify an API version.                                                                                       |
-| `accountID`                                                                                                   | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
-| `sweepConfigID`                                                                                               | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                | [io.moov.api.models.operations.GetSweepConfigSecurity](../../models/operations/GetSweepConfigSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
+| `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |
+| `accountID`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `sweepConfigID`                                                                                           | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
 
 ### Response
 
@@ -213,15 +213,15 @@ Update settings on a sweep config.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.PatchSweepConfig;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.SweepConfigStatus;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.errors.PatchSweepConfigError;
-import io.moov.openapi.models.operations.PatchSweepConfigResponse;
-import io.moov.openapi.models.operations.PatchSweepConfigSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.PatchSweepConfig;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.SweepConfigStatus;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.errors.PatchSweepConfigError;
+import io.moov.api.models.operations.PatchSweepConfigResponse;
+import io.moov.api.models.operations.PatchSweepConfigSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -255,13 +255,13 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                        | [io.moov.openapi.models.operations.PatchSweepConfigSecurity](../../models/operations/PatchSweepConfigSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
-| `xMoovVersion`                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                        | :heavy_minus_sign:                                                                                                | Specify an API version.                                                                                           |
-| `accountID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
-| `sweepConfigID`                                                                                                   | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
-| `patchSweepConfig`                                                                                                | [PatchSweepConfig](../../models/components/PatchSweepConfig.md)                                                   | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                    | [io.moov.api.models.operations.PatchSweepConfigSecurity](../../models/operations/PatchSweepConfigSecurity.md) | :heavy_check_mark:                                                                                            | The security requirements to use for the request.                                                             |
+| `xMoovVersion`                                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                                    | :heavy_minus_sign:                                                                                            | Specify an API version.                                                                                       |
+| `accountID`                                                                                                   | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `sweepConfigID`                                                                                               | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| `patchSweepConfig`                                                                                            | [PatchSweepConfig](../../models/components/PatchSweepConfig.md)                                               | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
 
 ### Response
 
@@ -284,11 +284,11 @@ List sweeps associated with a wallet.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.operations.ListSweepsRequest;
-import io.moov.openapi.models.operations.ListSweepsResponse;
-import io.moov.openapi.models.operations.ListSweepsSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.operations.ListSweepsRequest;
+import io.moov.api.models.operations.ListSweepsResponse;
+import io.moov.api.models.operations.ListSweepsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -324,10 +324,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `request`                                                                                             | [ListSweepsRequest](../../models/operations/ListSweepsRequest.md)                                     | :heavy_check_mark:                                                                                    | The request object to use for the request.                                                            |
-| `security`                                                                                            | [io.moov.openapi.models.operations.ListSweepsSecurity](../../models/operations/ListSweepsSecurity.md) | :heavy_check_mark:                                                                                    | The security requirements to use for the request.                                                     |
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `request`                                                                                         | [ListSweepsRequest](../../models/operations/ListSweepsRequest.md)                                 | :heavy_check_mark:                                                                                | The request object to use for the request.                                                        |
+| `security`                                                                                        | [io.moov.api.models.operations.ListSweepsSecurity](../../models/operations/ListSweepsSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |
 
 ### Response
 
@@ -348,11 +348,11 @@ Get details on a specific sweep.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.GetSweepResponse;
-import io.moov.openapi.models.operations.GetSweepSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.GetSweepResponse;
+import io.moov.api.models.operations.GetSweepSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -384,13 +384,13 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [io.moov.openapi.models.operations.GetSweepSecurity](../../models/operations/GetSweepSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |
-| `xMoovVersion`                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                        | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |
-| `accountID`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `walletID`                                                                                        | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `sweepID`                                                                                         | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `security`                                                                                    | [io.moov.api.models.operations.GetSweepSecurity](../../models/operations/GetSweepSecurity.md) | :heavy_check_mark:                                                                            | The security requirements to use for the request.                                             |
+| `xMoovVersion`                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                    | :heavy_minus_sign:                                                                            | Specify an API version.                                                                       |
+| `accountID`                                                                                   | *String*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `walletID`                                                                                    | *String*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `sweepID`                                                                                     | *String*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 
 ### Response
 

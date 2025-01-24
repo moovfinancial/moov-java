@@ -1,4 +1,4 @@
-speakeasyVersion: 1.474.0
+speakeasyVersion: 1.475.0
 sources:
     latest:
         sourceNamespace: api-latest
@@ -6,7 +6,6 @@ sources:
         sourceBlobDigest: sha256:4bee50e6567f031617e00f43e3442e9f4c7ce0e317b689f2539dfd71905d08ce
         tags:
             - latest
-            - speakeasy-sdk-regen-1737678381
 targets:
     latest:
         source: latest

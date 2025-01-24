@@ -22,11 +22,11 @@ to specify the `/ping.read` scope.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.PingResponse;
-import io.moov.openapi.models.operations.PingSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.PingResponse;
+import io.moov.api.models.operations.PingSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -53,10 +53,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `security`                                                                                | [io.moov.openapi.models.operations.PingSecurity](../../models/operations/PingSecurity.md) | :heavy_check_mark:                                                                        | The security requirements to use for the request.                                         |
-| `xMoovVersion`                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                | :heavy_minus_sign:                                                                        | Specify an API version.                                                                   |
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `security`                                                                            | [io.moov.api.models.operations.PingSecurity](../../models/operations/PingSecurity.md) | :heavy_check_mark:                                                                    | The security requirements to use for the request.                                     |
+| `xMoovVersion`                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                            | :heavy_minus_sign:                                                                    | Specify an API version.                                                               |
 
 ### Response
 

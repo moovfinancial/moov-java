@@ -50,15 +50,15 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:openapi:0.1.1'
+implementation 'io.moov:api:0.1.2'
 ```
 
 Maven:
 ```xml
 <dependency>
     <groupId>io.moov</groupId>
-    <artifactId>openapi</artifactId>
-    <version>0.1.1</version>
+    <artifactId>api</artifactId>
+    <version>0.1.2</version>
 </dependency>
 ```
 
@@ -85,18 +85,18 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.AccountType;
-import io.moov.openapi.models.components.AccountWaitFor;
-import io.moov.openapi.models.components.CreateAccount;
-import io.moov.openapi.models.components.CreateBusinessProfile;
-import io.moov.openapi.models.components.CreateProfile;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.CreateAccountResponseBody;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.CreateAccountResponse;
-import io.moov.openapi.models.operations.CreateAccountSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.AccountType;
+import io.moov.api.models.components.AccountWaitFor;
+import io.moov.api.models.components.CreateAccount;
+import io.moov.api.models.components.CreateBusinessProfile;
+import io.moov.api.models.components.CreateProfile;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.CreateAccountResponseBody;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.CreateAccountResponse;
+import io.moov.api.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -148,10 +148,10 @@ You can set the security parameters through the `security` builder method when i
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.Security;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.GetTermsOfServiceTokenResponse;
+import io.moov.api.Moov;
+import io.moov.api.models.components.Security;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.GetTermsOfServiceTokenResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -184,18 +184,18 @@ Some operations in this SDK require the security scheme to be specified at the r
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.AccountType;
-import io.moov.openapi.models.components.AccountWaitFor;
-import io.moov.openapi.models.components.CreateAccount;
-import io.moov.openapi.models.components.CreateBusinessProfile;
-import io.moov.openapi.models.components.CreateProfile;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.CreateAccountResponseBody;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.CreateAccountResponse;
-import io.moov.openapi.models.operations.CreateAccountSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.AccountType;
+import io.moov.api.models.components.AccountWaitFor;
+import io.moov.api.models.components.CreateAccount;
+import io.moov.api.models.components.CreateBusinessProfile;
+import io.moov.api.models.components.CreateProfile;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.CreateAccountResponseBody;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.CreateAccountResponse;
+import io.moov.api.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -933,18 +933,18 @@ By default, an API error will throw a `models/errors/APIException` exception. Wh
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.AccountType;
-import io.moov.openapi.models.components.AccountWaitFor;
-import io.moov.openapi.models.components.CreateAccount;
-import io.moov.openapi.models.components.CreateBusinessProfile;
-import io.moov.openapi.models.components.CreateProfile;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.CreateAccountResponseBody;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.CreateAccountResponse;
-import io.moov.openapi.models.operations.CreateAccountSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.AccountType;
+import io.moov.api.models.components.AccountWaitFor;
+import io.moov.api.models.components.CreateAccount;
+import io.moov.api.models.components.CreateBusinessProfile;
+import io.moov.api.models.components.CreateProfile;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.CreateAccountResponseBody;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.CreateAccountResponse;
+import io.moov.api.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -990,18 +990,18 @@ The default server can also be overridden globally using the `.serverURL(String 
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.AccountType;
-import io.moov.openapi.models.components.AccountWaitFor;
-import io.moov.openapi.models.components.CreateAccount;
-import io.moov.openapi.models.components.CreateBusinessProfile;
-import io.moov.openapi.models.components.CreateProfile;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.errors.CreateAccountResponseBody;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.CreateAccountResponse;
-import io.moov.openapi.models.operations.CreateAccountSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.AccountType;
+import io.moov.api.models.components.AccountWaitFor;
+import io.moov.api.models.components.CreateAccount;
+import io.moov.api.models.components.CreateBusinessProfile;
+import io.moov.api.models.components.CreateProfile;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.errors.CreateAccountResponseBody;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.CreateAccountResponse;
+import io.moov.api.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {

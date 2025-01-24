@@ -26,11 +26,11 @@ to specify the `/accounts/{accountID}/wallets.read` scope.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.ListAdjustmentsResponse;
-import io.moov.openapi.models.operations.ListAdjustmentsSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.ListAdjustmentsResponse;
+import io.moov.api.models.operations.ListAdjustmentsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -61,12 +61,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                      | [io.moov.openapi.models.operations.ListAdjustmentsSecurity](../../models/operations/ListAdjustmentsSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
-| `xMoovVersion`                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                      | :heavy_minus_sign:                                                                                              | Specify an API version.                                                                                         |
-| `accountID`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
-| `walletID`                                                                                                      | *Optional\<String>*                                                                                             | :heavy_minus_sign:                                                                                              | A wallet ID to filter adjustments by.                                                                           |
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                  | [io.moov.api.models.operations.ListAdjustmentsSecurity](../../models/operations/ListAdjustmentsSecurity.md) | :heavy_check_mark:                                                                                          | The security requirements to use for the request.                                                           |
+| `xMoovVersion`                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                  | :heavy_minus_sign:                                                                                          | Specify an API version.                                                                                     |
+| `accountID`                                                                                                 | *String*                                                                                                    | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `walletID`                                                                                                  | *Optional\<String>*                                                                                         | :heavy_minus_sign:                                                                                          | A wallet ID to filter adjustments by.                                                                       |
 
 ### Response
 
@@ -90,11 +90,11 @@ to specify the `/accounts/{accountID}/wallets.read` scope.
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.components.Versions;
-import io.moov.openapi.models.operations.GetAdjustmentResponse;
-import io.moov.openapi.models.operations.GetAdjustmentSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.components.Versions;
+import io.moov.api.models.operations.GetAdjustmentResponse;
+import io.moov.api.models.operations.GetAdjustmentSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -125,12 +125,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                  | [io.moov.openapi.models.operations.GetAdjustmentSecurity](../../models/operations/GetAdjustmentSecurity.md) | :heavy_check_mark:                                                                                          | The security requirements to use for the request.                                                           |
-| `xMoovVersion`                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                  | :heavy_minus_sign:                                                                                          | Specify an API version.                                                                                     |
-| `accountID`                                                                                                 | *String*                                                                                                    | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
-| `adjustmentID`                                                                                              | *String*                                                                                                    | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                              | [io.moov.api.models.operations.GetAdjustmentSecurity](../../models/operations/GetAdjustmentSecurity.md) | :heavy_check_mark:                                                                                      | The security requirements to use for the request.                                                       |
+| `xMoovVersion`                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                              | :heavy_minus_sign:                                                                                      | Specify an API version.                                                                                 |
+| `accountID`                                                                                             | *String*                                                                                                | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| `adjustmentID`                                                                                          | *String*                                                                                                | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
 
 ### Response
 

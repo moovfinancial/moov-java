@@ -20,12 +20,12 @@
 ```java
 package hello.world;
 
-import io.moov.openapi.Moov;
-import io.moov.openapi.models.components.SchemeBasicAuth;
-import io.moov.openapi.models.errors.GenericError;
-import io.moov.openapi.models.operations.ListInstitutionsRequest;
-import io.moov.openapi.models.operations.ListInstitutionsResponse;
-import io.moov.openapi.models.operations.ListInstitutionsSecurity;
+import io.moov.api.Moov;
+import io.moov.api.models.components.SchemeBasicAuth;
+import io.moov.api.models.errors.GenericError;
+import io.moov.api.models.operations.ListInstitutionsRequest;
+import io.moov.api.models.operations.ListInstitutionsResponse;
+import io.moov.api.models.operations.ListInstitutionsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -57,10 +57,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                         | [ListInstitutionsRequest](../../models/operations/ListInstitutionsRequest.md)                                     | :heavy_check_mark:                                                                                                | The request object to use for the request.                                                                        |
-| `security`                                                                                                        | [io.moov.openapi.models.operations.ListInstitutionsSecurity](../../models/operations/ListInstitutionsSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                     | [ListInstitutionsRequest](../../models/operations/ListInstitutionsRequest.md)                                 | :heavy_check_mark:                                                                                            | The request object to use for the request.                                                                    |
+| `security`                                                                                                    | [io.moov.api.models.operations.ListInstitutionsSecurity](../../models/operations/ListInstitutionsSecurity.md) | :heavy_check_mark:                                                                                            | The security requirements to use for the request.                                                             |
 
 ### Response
 

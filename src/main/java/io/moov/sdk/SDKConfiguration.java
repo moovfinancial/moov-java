@@ -33,7 +33,7 @@ class SDKConfiguration {
     public int serverIdx = 0;
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "latest";
-    public static final String SDK_VERSION = "0.1.6";
+    public static final String SDK_VERSION = "0.3.0";
     public static final String GEN_VERSION = "2.496.0";
     private static final String BASE_PACKAGE = "io.moov.sdk";
     public static final String USER_AGENT = 

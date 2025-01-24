@@ -1,4 +1,6 @@
-# AmountDecimal
+# MinPerTransaction
+
+Specifies the minimum allowable spending for a single transaction, working as a transaction floor.
 
 
 ## Fields

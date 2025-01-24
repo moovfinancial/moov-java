@@ -204,7 +204,15 @@ public class WalletTransactions implements
     /**
      * Get details on a specific wallet transaction. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To use this endpoint from a browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param walletID
      * @param transactionID

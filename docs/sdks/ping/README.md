@@ -43,7 +43,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .call();
 
         // handle response

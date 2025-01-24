@@ -41,7 +41,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .call();
 
         if (res.enrichedIndustries().isPresent()) {

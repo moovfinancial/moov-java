@@ -53,7 +53,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("32ccafba-5d99-40e5-a8af-d05cc5d73a4e")
                 .call();
 
@@ -124,7 +124,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202401)
                 .accountID("455b1698-1657-4c75-944b-57db42578d81")
                 .updateUnderwriting(UpdateUnderwriting.builder()
                     .averageTransactionSize(686L)

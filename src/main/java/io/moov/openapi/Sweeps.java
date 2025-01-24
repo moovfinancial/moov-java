@@ -97,7 +97,15 @@ public class Sweeps implements
     /**
      * Create a sweep config for a wallet.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param createSweepConfig
      * @return The response from the API call
@@ -292,7 +300,15 @@ public class Sweeps implements
     /**
      * List sweep configs associated with an account.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -445,7 +461,15 @@ public class Sweeps implements
     /**
      * Get a sweep config associated with a wallet.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param sweepConfigID
      * @return The response from the API call
@@ -603,7 +627,15 @@ public class Sweeps implements
     /**
      * Update settings on a sweep config.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param sweepConfigID
      * @param patchSweepConfig
@@ -939,7 +971,15 @@ public class Sweeps implements
     /**
      * Get details on a specific sweep.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param walletID
      * @param sweepID

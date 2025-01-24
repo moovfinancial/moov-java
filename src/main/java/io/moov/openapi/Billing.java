@@ -91,7 +91,15 @@ public class Billing implements
     /**
      * List all fee plan agreements associated with an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param agreementID A comma-separated list of agreement IDs to filter the results by.
      * @param status A comma-separated list of statuses to filter the results by.
@@ -255,7 +263,15 @@ public class Billing implements
     /**
      * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param createFeePlanAgreement
      * @return The response from the API call
@@ -450,7 +466,15 @@ public class Billing implements
     /**
      * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param planIDs A comma-separated list of plan IDs to filter the results by.
      * @return The response from the API call
@@ -609,7 +633,15 @@ public class Billing implements
     /**
      * List all partner pricing plans available for use by an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param planIDs A comma-separated list of plan IDs to filter the results by.
      * @return The response from the API call
@@ -768,7 +800,15 @@ public class Billing implements
     /**
      * List all partner pricing agreements associated with an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param agreementID A comma-separated list of agreement IDs to filter the results by.
      * @param status A comma-separated list of statuses to filter the results by.

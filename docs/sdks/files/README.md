@@ -63,7 +63,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("68f95825-1ae3-4f3f-8af2-789dd2a59d6d")
                 .fileUploadRequestMultiPart(FileUploadRequestMultiPart.builder()
                     .file(FileUploadRequestMultiPartFile.builder()
@@ -136,7 +136,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("a3c35406-9eb6-4801-bbac-0649c31c058a")
                 .call();
 
@@ -198,7 +198,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("346add0a-4dae-4729-8e74-1a50d00d677a")
                 .fileID("bf657841-ba2d-4060-ad21-eb2b7372cf85")
                 .call();

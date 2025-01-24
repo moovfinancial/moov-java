@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 242de1d47cbbb2b95af72813e88bd7c7
+  docChecksum: 5565b71e7da4150e92d10b9020d0b922
   docVersion: latest
-  speakeasyVersion: 1.470.1
-  generationVersion: 2.493.34
-  releaseVersion: 0.1.0
-  configChecksum: 7baed53903d089eb7158d0d496a32d26
+  speakeasyVersion: 1.474.0
+  generationVersion: 2.495.0
+  releaseVersion: 0.1.1
+  configChecksum: 270a603817b05f55cbb76c881e054623
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -225,6 +225,7 @@ generatedFiles:
   - docs/models/components/FileUploadRequestMultiPart.md
   - docs/models/components/FileUploadRequestMultiPartFile.md
   - docs/models/components/FinancialInstitutions.md
+  - docs/models/components/FixedAmount.md
   - docs/models/components/FulfillmentDetails.md
   - docs/models/components/FulfillmentDetailsError.md
   - docs/models/components/FullIssuedCard.md
@@ -269,7 +270,9 @@ generatedFiles:
   - docs/models/components/Manual.md
   - docs/models/components/ManualTermsOfService.md
   - docs/models/components/ManualTermsOfServiceUpdate.md
+  - docs/models/components/MaxPerTransaction.md
   - docs/models/components/MicroDepositStatus.md
+  - docs/models/components/MinPerTransaction.md
   - docs/models/components/Mode.md
   - docs/models/components/MoovFeeDetails.md
   - docs/models/components/MoovWalletPaymentMethod.md
@@ -1058,6 +1061,7 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/FileUploadRequestMultiPart.java
   - src/main/java/io/moov/openapi/models/components/FileUploadRequestMultiPartFile.java
   - src/main/java/io/moov/openapi/models/components/FinancialInstitutions.java
+  - src/main/java/io/moov/openapi/models/components/FixedAmount.java
   - src/main/java/io/moov/openapi/models/components/FulfillmentDetails.java
   - src/main/java/io/moov/openapi/models/components/FulfillmentDetailsError.java
   - src/main/java/io/moov/openapi/models/components/FullIssuedCard.java
@@ -1102,7 +1106,9 @@ generatedFiles:
   - src/main/java/io/moov/openapi/models/components/Manual.java
   - src/main/java/io/moov/openapi/models/components/ManualTermsOfService.java
   - src/main/java/io/moov/openapi/models/components/ManualTermsOfServiceUpdate.java
+  - src/main/java/io/moov/openapi/models/components/MaxPerTransaction.java
   - src/main/java/io/moov/openapi/models/components/MicroDepositStatus.java
+  - src/main/java/io/moov/openapi/models/components/MinPerTransaction.java
   - src/main/java/io/moov/openapi/models/components/Mode.java
   - src/main/java/io/moov/openapi/models/components/MoovFeeDetails.java
   - src/main/java/io/moov/openapi/models/components/MoovWalletPaymentMethod.java
@@ -2332,7 +2338,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"aggreementID": "e326d153-ca61-4e3e-a86a-3e450e955fd6", "planID": "7a6c5eb4-879b-4c21-b9fa-71eb2181b3ad", "acceptedOn": "2024-03-10T19:49:08.718Z", "status": "terminated", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}]}, {"aggreementID": "0c6542c4-837f-4de6-bbbf-3a11a1ba31f2", "planID": "50844514-ef1f-40ee-adc6-d314e85a7739", "acceptedOn": "2024-02-27T23:25:25.370Z", "status": "terminated", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}]}]
+          application/json: [{"aggreementID": "e326d153-ca61-4e3e-a86a-3e450e955fd6", "planID": "7a6c5eb4-879b-4c21-b9fa-71eb2181b3ad", "acceptedOn": "2024-03-10T19:49:08.718Z", "status": "terminated", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}, {"aggreementID": "0c6542c4-837f-4de6-bbbf-3a11a1ba31f2", "planID": "50844514-ef1f-40ee-adc6-d314e85a7739", "acceptedOn": "2024-02-27T23:25:25.370Z", "status": "terminated", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}]
   createFeePlanAgreements:
     speakeasy-default-create-fee-plan-agreements:
       parameters:
@@ -2343,7 +2349,7 @@ examples:
         application/json: {"planID": "b97c2d59-80c5-49ac-b1fc-40e3a81d8daf"}
       responses:
         "201":
-          application/json: {"aggreementID": "0e7fb8cc-5d6a-4a0e-8955-4d9f85c03fa6", "planID": "10fadd5b-11fb-4499-ae95-794da03fdea6", "acceptedOn": "2024-03-30T02:16:07.411Z", "status": "active", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}]}
+          application/json: {"aggreementID": "0e7fb8cc-5d6a-4a0e-8955-4d9f85c03fa6", "planID": "10fadd5b-11fb-4499-ae95-794da03fdea6", "acceptedOn": "2024-03-30T02:16:07.411Z", "status": "active", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -2357,7 +2363,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"planID": "f1a4db2c-3482-4573-9821-edd05204e301", "name": "Fixed Rate Merchant Plan", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2023-12-22T05:57:14.362Z"}, {"planID": "a628b889-6bfb-4f2f-912a-3c4b130a524d", "name": "Fixed Rate Merchant Plan", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2023-01-09T04:17:35.274Z"}, {"planID": "9cfe1840-53c0-4033-9160-f52358028560", "name": "Fixed Rate Merchant Plan", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2023-09-22T11:26:32.898Z"}]
+          application/json: [{"planID": "f1a4db2c-3482-4573-9821-edd05204e301", "name": "Fixed Rate Merchant Plan", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2023-12-22T05:57:14.362Z"}, {"planID": "a628b889-6bfb-4f2f-912a-3c4b130a524d", "name": "Fixed Rate Merchant Plan", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2023-01-09T04:17:35.274Z"}, {"planID": "9cfe1840-53c0-4033-9160-f52358028560", "name": "Fixed Rate Merchant Plan", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2023-09-22T11:26:32.898Z"}]
   listPartnerPricing:
     speakeasy-default-list-partner-pricing:
       parameters:
@@ -2367,7 +2373,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"planID": "22ea0420-e1a7-4f8c-a9bf-8f0da89f6cb4", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "other", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2025-08-17T12:11:01.383Z"}, {"planID": "324369ab-9721-41b3-a7e8-71264af093a2", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "card-other", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "rtp", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2024-12-29T12:10:26.937Z"}, {"planID": "6958b000-957d-46d5-aac4-ed28a886adea", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquringModel": "flat-rate", "billableFees": [], "createdAt": "2023-01-12T00:50:08.214Z"}]
+          application/json: [{"planID": "22ea0420-e1a7-4f8c-a9bf-8f0da89f6cb4", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2025-08-17T12:11:01.383Z"}, {"planID": "324369ab-9721-41b3-a7e8-71264af093a2", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "card-other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "rtp", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2024-12-29T12:10:26.937Z"}, {"planID": "6958b000-957d-46d5-aac4-ed28a886adea", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquringModel": "flat-rate", "billableFees": [], "createdAt": "2023-01-12T00:50:08.214Z"}]
   listPartnerPricingAgreements:
     speakeasy-default-list-partner-pricing-agreements:
       parameters:
@@ -2377,7 +2383,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"aggreementID": "2e58b719-fcad-47dc-8484-21ac31dce8dd", "planID": "3f51f992-c3cc-4fd2-b0b7-17c682c67267", "acceptedOn": "2025-10-11T07:38:13.898Z", "status": "active", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": "0.15", "variableRate": "0.14", "minPerTransaction": "1.75", "maxPerTransaction": "3.50"}, "feeConditions": {"cardBrand": ["visa"]}}], "revenueShare": 10}]
+          application/json: [{"aggreementID": "2e58b719-fcad-47dc-8484-21ac31dce8dd", "planID": "3f51f992-c3cc-4fd2-b0b7-17c682c67267", "acceptedOn": "2025-10-11T07:38:13.898Z", "status": "active", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "revenueShare": 10}]
   uploadFile:
     speakeasy-default-upload-file:
       parameters:

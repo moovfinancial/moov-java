@@ -62,7 +62,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("4c49ae91-2b32-4a4d-91bf-f062f3c2f38d")
                 .agreementID(List.of(
                     "<id>"))
@@ -133,7 +133,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .accountID("19962eb8-00cd-44e5-8a66-a1ebaf88c2fe")
                 .createFeePlanAgreement(CreateFeePlanAgreement.builder()
                     .planID("b97c2d59-80c5-49ac-b1fc-40e3a81d8daf")
@@ -203,7 +203,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("ac8fa716-4b75-4902-b296-d734524ca45c")
                 .planIDs(List.of(
                     "<value>"))
@@ -269,7 +269,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("85f15b07-5c44-4302-ab6f-d22f8d45b7f4")
                 .planIDs(List.of(
                     "<value>"))
@@ -336,7 +336,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("9366921a-25de-4c52-8ec6-4cd4ef557223")
                 .agreementID(List.of(
                     "<id>"))

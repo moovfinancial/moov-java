@@ -42,7 +42,7 @@ public class Application {
             .build();
 
         RevokeAuthTokenResponse res = sdk.authentication().revokeAuthToken()
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .revokeTokenRequest(RevokeTokenRequest.builder()
                     .token("<value>")
                     .clientId("5clTR_MdVrrkgxw2")
@@ -105,7 +105,7 @@ public class Application {
             .build();
 
         CreateAuthTokenResponse res = sdk.authentication().createAuthToken()
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .authTokenRequest(AuthTokenRequest.builder()
                     .grantType(GrantType.REFRESH_TOKEN)
                     .build())

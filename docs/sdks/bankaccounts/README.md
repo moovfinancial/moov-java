@@ -127,7 +127,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .xWaitFor(BankAccountWaitFor.PAYMENT_METHOD)
                 .accountID("5049418d-b6dc-4a6f-a285-091c0e15dc6a")
                 .linkBankAccount(LinkBankAccount.of(PlaidPayload.builder()
@@ -200,7 +200,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("91095bec-ade2-4a8c-9f46-ae7f07234fee")
                 .call();
 
@@ -263,7 +263,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("30085225-d87e-47cd-8f08-001465f8cd22")
                 .bankAccountID("6c5a7be6-792b-4628-af28-a852f8c9de5b")
                 .call();
@@ -545,7 +545,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202401)
                 .accountID("0102058c-a936-482a-a3ca-2355850903d7")
                 .bankAccountID("ee6888ef-544e-4146-bab7-ea04e31b2274")
                 .call();
@@ -626,7 +626,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .xWaitFor(BankAccountWaitFor.PAYMENT_METHOD)
                 .accountID("c2b4967e-86a5-474e-a78e-f013315f7dcc")
                 .bankAccountID("d648f8f3-7641-4e40-8a99-c08de14889c8")
@@ -702,7 +702,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("88cf5aa5-bf76-406e-a986-eb33cd8890e3")
                 .bankAccountID("0157260f-ae3c-496c-a9d8-24de5fbc6b31")
                 .completeBankAccountVerification(CompleteBankAccountVerification.builder()

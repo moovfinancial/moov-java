@@ -49,6 +49,9 @@ public class BillableFee {
     @JsonProperty("feeCategory")
     private FeeCategory feeCategory;
 
+    /**
+     * Defines the specific parameters used for fee calculation.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("feeProperties")
     private Optional<? extends FeeProperties> feeProperties;
@@ -125,6 +128,9 @@ public class BillableFee {
         return feeCategory;
     }
 
+    /**
+     * Defines the specific parameters used for fee calculation.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<FeeProperties> feeProperties() {
@@ -207,12 +213,18 @@ public class BillableFee {
         return this;
     }
 
+    /**
+     * Defines the specific parameters used for fee calculation.
+     */
     public BillableFee withFeeProperties(FeeProperties feeProperties) {
         Utils.checkNotNull(feeProperties, "feeProperties");
         this.feeProperties = Optional.ofNullable(feeProperties);
         return this;
     }
 
+    /**
+     * Defines the specific parameters used for fee calculation.
+     */
     public BillableFee withFeeProperties(Optional<? extends FeeProperties> feeProperties) {
         Utils.checkNotNull(feeProperties, "feeProperties");
         this.feeProperties = feeProperties;
@@ -363,12 +375,18 @@ public class BillableFee {
             return this;
         }
 
+        /**
+         * Defines the specific parameters used for fee calculation.
+         */
         public Builder feeProperties(FeeProperties feeProperties) {
             Utils.checkNotNull(feeProperties, "feeProperties");
             this.feeProperties = Optional.ofNullable(feeProperties);
             return this;
         }
 
+        /**
+         * Defines the specific parameters used for fee calculation.
+         */
         public Builder feeProperties(Optional<? extends FeeProperties> feeProperties) {
             Utils.checkNotNull(feeProperties, "feeProperties");
             this.feeProperties = feeProperties;

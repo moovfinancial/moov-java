@@ -1,4 +1,6 @@
-# AmountDecimal
+# MaxPerTransaction
+
+Specifies the maximum allowable spending for a single transaction, working as a transaction ceiling.
 
 
 ## Fields

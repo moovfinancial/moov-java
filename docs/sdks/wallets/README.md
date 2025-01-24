@@ -44,7 +44,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202504)
                 .accountID("60acf390-dc7f-4510-9b9b-ec968d375f0c")
                 .call();
 
@@ -105,7 +105,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("499bec36-0099-43cb-884f-620887342259")
                 .walletID("bc779af6-b7d5-464a-ad1f-f6476fa72706")
                 .call();

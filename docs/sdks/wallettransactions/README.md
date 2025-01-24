@@ -110,7 +110,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("a5040923-7566-4f60-af63-86465493f971")
                 .walletID("a49156a6-65e8-4c24-a71a-eca54c2c3855")
                 .transactionID("8b5c4f2a-2bb8-4145-b0ea-69212338b5a1")

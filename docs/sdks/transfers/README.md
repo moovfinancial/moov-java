@@ -292,7 +292,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202504)
                 .transferID("64607ba5-82d4-4278-93b5-c5c5ca5c9cd8")
                 .accountID("cb1b48c3-1c11-4648-aa00-691b74c9ea1b")
                 .call();
@@ -358,7 +358,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .transferID("9cc2093a-b55d-4f3f-b8e9-e13ac2df16ab")
                 .accountID("f0dfbcc6-c1a2-42ff-b3f9-a41de383cabc")
                 .call();
@@ -501,7 +501,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202504)
                 .accountID("7d74a845-fe17-4ebe-a05e-71847ef8c510")
                 .transferID("d081988f-448f-492c-8c60-836126fa0dfb")
                 .call();
@@ -565,7 +565,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .transferID("dbc09cb2-ef99-4553-8501-94323f377dbf")
                 .accountID("7f90bf73-6fb7-41e7-90aa-a9133e7d92c2")
                 .refundID("0f86fa43-1a9b-4a5d-8227-f253063f7fb1")

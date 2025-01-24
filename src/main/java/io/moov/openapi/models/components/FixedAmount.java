@@ -13,8 +13,11 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 
+/**
+ * FixedAmount - A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
+ */
 
-public class AmountDecimal {
+public class FixedAmount {
 
     /**
      * A 3-letter ISO 4217 currency code.
@@ -31,7 +34,7 @@ public class AmountDecimal {
     private String valueDecimal;
 
     @JsonCreator
-    public AmountDecimal(
+    public FixedAmount(
             @JsonProperty("currency") String currency,
             @JsonProperty("valueDecimal") String valueDecimal) {
         Utils.checkNotNull(currency, "currency");
@@ -65,7 +68,7 @@ public class AmountDecimal {
     /**
      * A 3-letter ISO 4217 currency code.
      */
-    public AmountDecimal withCurrency(String currency) {
+    public FixedAmount withCurrency(String currency) {
         Utils.checkNotNull(currency, "currency");
         this.currency = currency;
         return this;
@@ -76,7 +79,7 @@ public class AmountDecimal {
      * 
      * For example, $12.987654321 is '12.987654321'.
      */
-    public AmountDecimal withValueDecimal(String valueDecimal) {
+    public FixedAmount withValueDecimal(String valueDecimal) {
         Utils.checkNotNull(valueDecimal, "valueDecimal");
         this.valueDecimal = valueDecimal;
         return this;
@@ -90,7 +93,7 @@ public class AmountDecimal {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AmountDecimal other = (AmountDecimal) o;
+        FixedAmount other = (FixedAmount) o;
         return 
             Objects.deepEquals(this.currency, other.currency) &&
             Objects.deepEquals(this.valueDecimal, other.valueDecimal);
@@ -105,7 +108,7 @@ public class AmountDecimal {
     
     @Override
     public String toString() {
-        return Utils.toString(AmountDecimal.class,
+        return Utils.toString(FixedAmount.class,
                 "currency", currency,
                 "valueDecimal", valueDecimal);
     }
@@ -140,8 +143,8 @@ public class AmountDecimal {
             return this;
         }
         
-        public AmountDecimal build() {
-            return new AmountDecimal(
+        public FixedAmount build() {
+            return new FixedAmount(
                 currency,
                 valueDecimal);
         }

@@ -180,7 +180,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("9f728868-b3c8-409c-9aa0-282a13d8ddc8")
                 .call();
 
@@ -242,7 +242,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("34a1451d-384e-4fff-a7ce-e90c2bb61969")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();
@@ -316,7 +316,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("94fe6aeb-a005-4850-b45d-bb0fa580425d")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .updatePaymentLink(UpdatePaymentLink.builder()
@@ -471,7 +471,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("248ffcf9-c53a-4e8e-a8b8-8c5014496a79")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();

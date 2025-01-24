@@ -1,4 +1,6 @@
-# AmountDecimal
+# FixedAmount
+
+A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
 
 
 ## Fields

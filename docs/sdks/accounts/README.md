@@ -245,7 +245,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("45ce7519-7f28-40c8-94bf-6edae7a38315")
                 .call();
 
@@ -321,7 +321,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202504)
                 .accountID("7909eaa5-21eb-4fc4-bc91-9f7385408829")
                 .createAccountUpdate(CreateAccountUpdate.builder()
                     .accountType(AccountType.BUSINESS)
@@ -396,7 +396,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("97814a93-ba26-470e-bb15-3cb32711e8ea")
                 .call();
 
@@ -525,7 +525,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("9ba3f09c-c93c-4ca1-b68f-1dbb0841a40a")
                 .accountCountries(AccountCountries.builder()
                     .countries(List.of(
@@ -594,7 +594,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .accountID("d2cfd0d3-6efb-4bc4-a193-53f35dd0d912")
                 .call();
 
@@ -653,7 +653,7 @@ public class Application {
             .build();
 
         GetTermsOfServiceTokenResponse res = sdk.accounts().getTermsOfServiceToken()
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .origin("<value>")
                 .referer("powerless-humidity.org")
                 .call();

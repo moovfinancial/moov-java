@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:openapi:0.1.0'
+implementation 'io.moov:openapi:0.1.1'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>openapi</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 </dependency>
 ```
 
@@ -166,7 +166,7 @@ public class Application {
             .build();
 
         GetTermsOfServiceTokenResponse res = sdk.accounts().getTermsOfServiceToken()
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .origin("<value>")
                 .referer("powerless-humidity.org")
                 .call();

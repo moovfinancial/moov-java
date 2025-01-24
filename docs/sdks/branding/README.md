@@ -116,7 +116,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202401)
                 .accountID("07eb5173-1869-4649-9aa6-f399787a2751")
                 .call();
 
@@ -178,7 +178,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202504)
                 .accountID("6c1f5632-7f37-4b3d-861e-10e31b8853de")
                 .updateBrand(UpdateBrand.builder()
                     .build())

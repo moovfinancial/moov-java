@@ -125,7 +125,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("8c490d50-8951-4810-9506-ecd5648c2a39")
                 .authorizationID("f037a459-fbd3-47b9-8181-09847ea9f557")
                 .call();
@@ -322,7 +322,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("4bebfda4-7627-4fb8-9945-5ef57c25a867")
                 .cardTransactionID("33615eaf-e358-4f62-ac49-f7cca27d44ba")
                 .call();

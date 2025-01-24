@@ -67,7 +67,15 @@ public class PaymentMethods implements
     /**
      * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param sourceID Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      * @param paymentMethodType The payment method type that represents a payment rail and directionality
@@ -231,7 +239,15 @@ public class PaymentMethods implements
     /**
      * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param paymentMethodID
      * @return The response from the API call

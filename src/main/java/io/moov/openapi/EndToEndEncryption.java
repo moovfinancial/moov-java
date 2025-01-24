@@ -72,7 +72,15 @@ public class EndToEndEncryption implements
     /**
      * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/ping.read` scope.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param e2EEToken Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
     This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
     [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
@@ -234,7 +242,15 @@ public class EndToEndEncryption implements
     
     /**
      * Generates a public key used to create a JWE token for passing secure authentication data through non-PCI compliant intermediaries.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */

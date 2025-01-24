@@ -81,7 +81,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202504)
                 .accountID("602bcb92-e33e-47e9-874b-f8c8cdea8a6e")
                 .createRepresentative(CreateRepresentative.builder()
                     .name(IndividualName.builder()
@@ -178,7 +178,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("33c72fc5-9781-4400-9547-0fa6966c8791")
                 .call();
 
@@ -240,7 +240,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("8c15ae30-39cc-45a6-a9b1-f96dfd44efa8")
                 .representativeID("302eff0a-1b46-4437-bfa0-532d4401ffcd")
                 .call();
@@ -302,7 +302,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202504)
                 .accountID("64980616-9a3a-476e-b482-151eb6571b76")
                 .representativeID("7b611595-93d0-48cc-9da4-3aac709d069a")
                 .call();
@@ -385,7 +385,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("377d9553-179a-45f6-8ed4-c92810fbb4d0")
                 .representativeID("54619159-548e-45ed-b917-271fb71fc438")
                 .updateRepresentative(UpdateRepresentative.builder()

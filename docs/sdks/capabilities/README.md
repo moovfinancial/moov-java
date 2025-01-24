@@ -50,7 +50,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .accountID("c236a258-0a99-455d-9fbb-2312bc028cd2")
                 .call();
 
@@ -116,7 +116,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202401)
                 .accountID("1f48b82c-3158-4fa6-a507-0bd22afd441e")
                 .addCapabilities(AddCapabilities.builder()
                     .capabilities(List.of(
@@ -185,7 +185,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202401)
                 .accountID("15fbc94d-721f-44a3-b5fb-77f58657305f")
                 .capabilityID(CapabilityID.TRANSFERS)
                 .call();
@@ -250,7 +250,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .accountID("c57b48d7-4182-4632-a345-eeed5a742b0d")
                 .capabilityID(CapabilityID.CARD_ISSUING)
                 .call();

@@ -124,7 +124,15 @@ public class Cards implements
     /**
      * Add domains to be registered with Apple Pay. -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a  - [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the merchant.
      * @param registerApplePayMerchantDomains
      * @return The response from the API call
@@ -307,7 +315,15 @@ public class Cards implements
     /**
      *   Add or remove domains to be registered with Apple Pay.  -  -   Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  -   with Apple. -    -   To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a  -   [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the merchant.
      * @param updateApplePayMerchantDomains
      * @return The response from the API call
@@ -477,7 +493,15 @@ public class Cards implements
     /**
      *   Get domains registered with Apple Pay.  -    -   Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  -    -   To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope when generating a  -   [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the merchant.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -630,7 +654,15 @@ public class Cards implements
     /**
      * Create a session with Apple Pay to facilitate a payment.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - A successful response from this endpoint should be passed through to Apple Pay unchanged.  -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the merchant.
      * @param createApplePaySession
      * @return The response from the API call
@@ -816,7 +848,15 @@ public class Cards implements
     /**
      * Connect an Apple Pay token to the specified account.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the cardholder.
      * @param linkApplePay   The JSON structure returned from Apple Pay when authorizing a payment session.
 
@@ -1016,7 +1056,15 @@ public class Cards implements
     /**
      * Link a card to an existing Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request.  - If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address.  - Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will  - use the account's name instead. -  - It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked  - card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment  - Methods](https://docs.moov.io/api/sources/payment-methods/list/) - endpoint to wait for the new payment methods to be available for use. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope - when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param xWaitFor
      * @param accountID
      * @param linkCard
@@ -1214,7 +1262,15 @@ public class Cards implements
     /**
      * List all the active cards associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1367,7 +1423,15 @@ public class Cards implements
     /**
      * Fetch a specific card associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param cardID
      * @return The response from the API call
@@ -1525,7 +1589,15 @@ public class Cards implements
     /**
      * Update a linked card and/or resubmit it for verification.  -  - If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration  - date or  - address will update the information stored on file for the card but will not be verified. -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn  - more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param cardID
      * @param updateCard
@@ -1725,7 +1797,15 @@ public class Cards implements
     /**
      * Disables a card associated with a Moov account. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param cardID
      * @return The response from the API call

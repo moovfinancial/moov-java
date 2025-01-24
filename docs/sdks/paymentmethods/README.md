@@ -45,7 +45,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202401)
                 .accountID("062d9768-0375-4e19-a48f-00ae75251086")
                 .sourceID("62d97680-375e-4194-b8f0-0ae752510868")
                 .paymentMethodType(PaymentMethodType.PULL_FROM_CARD)

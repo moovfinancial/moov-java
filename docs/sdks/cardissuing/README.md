@@ -231,7 +231,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .accountID("c63d9bae-2097-4bfa-8ac7-e9e8dff6e9ae")
                 .issuedCardID("aa0c86df-7f7d-4200-9ee4-24ba8870a7d4")
                 .call();

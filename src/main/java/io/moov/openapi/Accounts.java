@@ -112,7 +112,15 @@ public class Accounts implements
     /**
      * You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required - information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/). -  - If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities, you'll need to: -   + Send Moov the user [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance. -     This can be done upon account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field. - If you're creating a business account with the business type `llc`, `partnership`, or `privateCorporation`, you'll need to: -   + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after creating the account. -   + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that business representative ownership information is complete. -  - Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/). - Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param xWaitFor
      * @param createAccount
      * @return The response from the API call
@@ -439,7 +447,15 @@ public class Accounts implements
     /**
      * Retrieves details for the account with the specified ID.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -592,7 +608,15 @@ public class Accounts implements
     /**
      * When **can** profile data be updated: -   + For unverified accounts, all profile data can be edited. -   + During the verification process, missing or incomplete profile data can be edited. -   + Verified accounts can only add missing profile data. -  -   When **can't** profile data be updated: -   + Verified accounts cannot change any existing profile data. -  - If you need to update information in a locked state, please contact Moov support. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/), and provide the changed information.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param createAccountUpdate
      * @return The response from the API call
@@ -789,7 +813,15 @@ public class Accounts implements
     /**
      *   This will sever the connection between you and the account specified and it will no longer be listed as active in the list of accounts.  -   This also means you'll only have read-only access to the account going forward for reporting purposes. -  -   To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope when generating  -   a [token](https://docs.moov.io/api/authentication/access-tokens/), and provide the changed information.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -943,7 +975,15 @@ public class Accounts implements
     /**
      * Retrieve the specified countries of operation for an account.  -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1096,7 +1136,15 @@ public class Accounts implements
     /**
      * Assign the countries of operation for an account. -  - This endpoint will always overwrite the previously assigned values.  -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param accountCountries The countries in which an account operates.
      * @return The response from the API call
@@ -1291,7 +1339,15 @@ public class Accounts implements
     /**
      * Retrieve a merchant account's processing agreement. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1436,7 +1492,15 @@ public class Accounts implements
     
     /**
      *   Generates a non-expiring token that can then be used to accept Moov’s terms of service.  -  -   This token can only be generated via API. Any Moov account requesting the collect funds, send funds, wallet, or card issuing capabilities  -   must accept Moov’s terms of service, then have the generated terms of service token patched to the account. Read more in our [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
-     * @param xMoovVersion Moov API versions. Version strings are formatted as `vYYYY.MM.DD`, except preVerioned and latest.
+     * @param xMoovVersion Moov API versions. 
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+        - If no build number is specified, the version refers to the initial release of the quarter.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param origin Indicates the domain from which the request originated. Required if referer header is not present.
      * @param referer Specifies the URL of the resource from which the request originated. Required if origin header is not present.
      * @return The response from the API call

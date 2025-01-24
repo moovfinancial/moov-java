@@ -126,7 +126,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202401)
                 .accountID("133fed79-519d-4b63-99ec-26b95076a45b")
                 .registerApplePayMerchantDomains(RegisterApplePayMerchantDomains.builder()
                     .domains(List.of(
@@ -200,7 +200,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .accountID("b7d68fce-1dbc-4562-93aa-d9ad030c78e6")
                 .updateApplePayMerchantDomains(UpdateApplePayMerchantDomains.builder()
                     .addDomains(List.of(
@@ -270,7 +270,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .accountID("cd0931b0-e02f-47b3-87fc-0789a05479e9")
                 .call();
 
@@ -337,7 +337,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("1d911f27-36e5-4497-8e9e-c3ecff1a8ae0")
                 .createApplePaySession(CreateApplePaySession.builder()
                     .domain("checkout.classbooker.dev")
@@ -530,7 +530,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .xWaitFor(LinkCardWaitFor.PAYMENT_METHOD)
                 .accountID("500c4473-7f7b-4a70-8a8c-d5cb2e08e0e4")
                 .linkCard(LinkCard.builder()
@@ -619,7 +619,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202504)
                 .accountID("5881119b-63c7-492b-8c20-09d0fca99676")
                 .call();
 
@@ -683,7 +683,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .accountID("21f0d82e-dc9b-4e80-ac2a-99b6babfebd7")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
                 .call();
@@ -759,7 +759,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("a960061d-fb6d-4929-99b5-c96c672840f6")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
                 .updateCard(UpdateCard.builder()
@@ -830,7 +830,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202507)
                 .accountID("a6b47d56-0b54-4dd8-9692-efad0ab1ebb4")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
                 .call();

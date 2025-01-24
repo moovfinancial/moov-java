@@ -65,7 +65,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .onboardingInviteRequest(OnboardingInviteRequest.builder()
                     .scopes(List.of(
                         ApplicationScope.ACCOUNTS_READ))
@@ -144,7 +144,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202501)
                 .call();
 
         if (res.onboardingInvites().isPresent()) {
@@ -204,7 +204,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V20240000)
+                .xMoovVersion(Versions.V202401)
                 .code("N1IA5eWYNh")
                 .call();
 
@@ -266,7 +266,7 @@ public class Application {
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .code("N1IA5eWYNh")
                 .call();
 

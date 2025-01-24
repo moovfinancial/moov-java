@@ -39,12 +39,12 @@ to specify the `/accounts/{accountID}/profile.read` scope.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.FeePlanAgreementStatus;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.ListFeePlanAgreementsResponse;
-import io.moov.api.models.operations.ListFeePlanAgreementsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.FeePlanAgreementStatus;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.ListFeePlanAgreementsResponse;
+import io.moov.sdk.models.operations.ListFeePlanAgreementsSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -81,7 +81,7 @@ public class Application {
 
 | Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
 | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.api.models.operations.ListFeePlanAgreementsSecurity](../../models/operations/ListFeePlanAgreementsSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
+| `security`                                                                                                              | [io.moov.sdk.models.operations.ListFeePlanAgreementsSecurity](../../models/operations/ListFeePlanAgreementsSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
 | `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
 | `accountID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
 | `agreementID`                                                                                                           | List\<*String*>                                                                                                         | :heavy_minus_sign:                                                                                                      | A comma-separated list of agreement IDs to filter the results by.                                                       |
@@ -109,14 +109,14 @@ to specify the `/accounts/{accountID}/profile.write` scope.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.CreateFeePlanAgreement;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.FeePlanAgreementError;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.CreateFeePlanAgreementsResponse;
-import io.moov.api.models.operations.CreateFeePlanAgreementsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CreateFeePlanAgreement;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.FeePlanAgreementError;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateFeePlanAgreementsResponse;
+import io.moov.sdk.models.operations.CreateFeePlanAgreementsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -151,7 +151,7 @@ public class Application {
 
 | Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
 | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                  | [io.moov.api.models.operations.CreateFeePlanAgreementsSecurity](../../models/operations/CreateFeePlanAgreementsSecurity.md) | :heavy_check_mark:                                                                                                          | The security requirements to use for the request.                                                                           |
+| `security`                                                                                                                  | [io.moov.sdk.models.operations.CreateFeePlanAgreementsSecurity](../../models/operations/CreateFeePlanAgreementsSecurity.md) | :heavy_check_mark:                                                                                                          | The security requirements to use for the request.                                                                           |
 | `xMoovVersion`                                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                                  | :heavy_minus_sign:                                                                                                          | Specify an API version.                                                                                                     |
 | `accountID`                                                                                                                 | *String*                                                                                                                    | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
 | `createFeePlanAgreement`                                                                                                    | [CreateFeePlanAgreement](../../models/components/CreateFeePlanAgreement.md)                                                 | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
@@ -181,11 +181,11 @@ to specify the `/accounts/{accountID}/profile.read` scope.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.ListFeePlansResponse;
-import io.moov.api.models.operations.ListFeePlansSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.ListFeePlansResponse;
+import io.moov.sdk.models.operations.ListFeePlansSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -220,7 +220,7 @@ public class Application {
 
 | Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
 | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `security`                                                                                            | [io.moov.api.models.operations.ListFeePlansSecurity](../../models/operations/ListFeePlansSecurity.md) | :heavy_check_mark:                                                                                    | The security requirements to use for the request.                                                     |
+| `security`                                                                                            | [io.moov.sdk.models.operations.ListFeePlansSecurity](../../models/operations/ListFeePlansSecurity.md) | :heavy_check_mark:                                                                                    | The security requirements to use for the request.                                                     |
 | `xMoovVersion`                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                            | :heavy_minus_sign:                                                                                    | Specify an API version.                                                                               |
 | `accountID`                                                                                           | *String*                                                                                              | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
 | `planIDs`                                                                                             | List\<*String*>                                                                                       | :heavy_minus_sign:                                                                                    | A comma-separated list of plan IDs to filter the results by.                                          |
@@ -247,11 +247,11 @@ to specify the `/accounts/{accountID}/profile.read` scope.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.ListPartnerPricingResponse;
-import io.moov.api.models.operations.ListPartnerPricingSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.ListPartnerPricingResponse;
+import io.moov.sdk.models.operations.ListPartnerPricingSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -286,7 +286,7 @@ public class Application {
 
 | Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
 | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                        | [io.moov.api.models.operations.ListPartnerPricingSecurity](../../models/operations/ListPartnerPricingSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
+| `security`                                                                                                        | [io.moov.sdk.models.operations.ListPartnerPricingSecurity](../../models/operations/ListPartnerPricingSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
 | `xMoovVersion`                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                        | :heavy_minus_sign:                                                                                                | Specify an API version.                                                                                           |
 | `accountID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
 | `planIDs`                                                                                                         | List\<*String*>                                                                                                   | :heavy_minus_sign:                                                                                                | A comma-separated list of plan IDs to filter the results by.                                                      |
@@ -313,12 +313,12 @@ to specify the `/accounts/{accountID}/profile.read` scope.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.FeePlanAgreementStatus;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.ListPartnerPricingAgreementsResponse;
-import io.moov.api.models.operations.ListPartnerPricingAgreementsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.FeePlanAgreementStatus;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.ListPartnerPricingAgreementsResponse;
+import io.moov.sdk.models.operations.ListPartnerPricingAgreementsSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -355,7 +355,7 @@ public class Application {
 
 | Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                            | [io.moov.api.models.operations.ListPartnerPricingAgreementsSecurity](../../models/operations/ListPartnerPricingAgreementsSecurity.md) | :heavy_check_mark:                                                                                                                    | The security requirements to use for the request.                                                                                     |
+| `security`                                                                                                                            | [io.moov.sdk.models.operations.ListPartnerPricingAgreementsSecurity](../../models/operations/ListPartnerPricingAgreementsSecurity.md) | :heavy_check_mark:                                                                                                                    | The security requirements to use for the request.                                                                                     |
 | `xMoovVersion`                                                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                                                            | :heavy_minus_sign:                                                                                                                    | Specify an API version.                                                                                                               |
 | `accountID`                                                                                                                           | *String*                                                                                                                              | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
 | `agreementID`                                                                                                                         | List\<*String*>                                                                                                                       | :heavy_minus_sign:                                                                                                                    | A comma-separated list of agreement IDs to filter the results by.                                                                     |

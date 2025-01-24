@@ -20,11 +20,11 @@
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.operations.GetEnrichmentAddressRequest;
-import io.moov.api.models.operations.GetEnrichmentAddressResponse;
-import io.moov.api.models.operations.GetEnrichmentAddressSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.operations.GetEnrichmentAddressRequest;
+import io.moov.sdk.models.operations.GetEnrichmentAddressResponse;
+import io.moov.sdk.models.operations.GetEnrichmentAddressSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -60,7 +60,7 @@ public class Application {
 | Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `request`                                                                                                             | [GetEnrichmentAddressRequest](../../models/operations/GetEnrichmentAddressRequest.md)                                 | :heavy_check_mark:                                                                                                    | The request object to use for the request.                                                                            |
-| `security`                                                                                                            | [io.moov.api.models.operations.GetEnrichmentAddressSecurity](../../models/operations/GetEnrichmentAddressSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |
+| `security`                                                                                                            | [io.moov.sdk.models.operations.GetEnrichmentAddressSecurity](../../models/operations/GetEnrichmentAddressSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |
 
 ### Response
 

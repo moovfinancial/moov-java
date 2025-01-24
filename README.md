@@ -1,9 +1,9 @@
-# openapi
+# sdk
 
-Developer-friendly & type-safe Java SDK specifically catered to leverage *openapi* API.
+Developer-friendly & type-safe Java SDK specifically catered to leverage *sdk* API.
 
 <div align="left">
-    <a href="https://www.speakeasy.com/?utm_source=openapi&utm_campaign=java"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
+    <a href="https://www.speakeasy.com/?utm_source=sdk&utm_campaign=java"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
     <a href="https://mit-license.org/">
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
@@ -26,7 +26,7 @@ works at a high level, read our [concepts](https://docs.moov.io/guides/get-start
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [openapi](#openapi)
+* [sdk](#sdk)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
@@ -50,15 +50,15 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:api:0.1.3'
+implementation 'io.moov:sdk:0.1.6'
 ```
 
 Maven:
 ```xml
 <dependency>
     <groupId>io.moov</groupId>
-    <artifactId>api</artifactId>
-    <version>0.1.3</version>
+    <artifactId>sdk</artifactId>
+    <version>0.1.6</version>
 </dependency>
 ```
 
@@ -85,18 +85,18 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.AccountType;
-import io.moov.api.models.components.AccountWaitFor;
-import io.moov.api.models.components.CreateAccount;
-import io.moov.api.models.components.CreateBusinessProfile;
-import io.moov.api.models.components.CreateProfile;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.CreateAccountResponseBody;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.CreateAccountResponse;
-import io.moov.api.models.operations.CreateAccountSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.AccountType;
+import io.moov.sdk.models.components.AccountWaitFor;
+import io.moov.sdk.models.components.CreateAccount;
+import io.moov.sdk.models.components.CreateBusinessProfile;
+import io.moov.sdk.models.components.CreateProfile;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateAccountResponse;
+import io.moov.sdk.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -148,10 +148,10 @@ You can set the security parameters through the `security` builder method when i
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.Security;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.GetTermsOfServiceTokenResponse;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.GetTermsOfServiceTokenResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -184,18 +184,18 @@ Some operations in this SDK require the security scheme to be specified at the r
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.AccountType;
-import io.moov.api.models.components.AccountWaitFor;
-import io.moov.api.models.components.CreateAccount;
-import io.moov.api.models.components.CreateBusinessProfile;
-import io.moov.api.models.components.CreateProfile;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.CreateAccountResponseBody;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.CreateAccountResponse;
-import io.moov.api.models.operations.CreateAccountSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.AccountType;
+import io.moov.sdk.models.components.AccountWaitFor;
+import io.moov.sdk.models.components.CreateAccount;
+import io.moov.sdk.models.components.CreateBusinessProfile;
+import io.moov.sdk.models.components.CreateProfile;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateAccountResponse;
+import io.moov.sdk.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -933,18 +933,18 @@ By default, an API error will throw a `models/errors/APIException` exception. Wh
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.AccountType;
-import io.moov.api.models.components.AccountWaitFor;
-import io.moov.api.models.components.CreateAccount;
-import io.moov.api.models.components.CreateBusinessProfile;
-import io.moov.api.models.components.CreateProfile;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.CreateAccountResponseBody;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.CreateAccountResponse;
-import io.moov.api.models.operations.CreateAccountSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.AccountType;
+import io.moov.sdk.models.components.AccountWaitFor;
+import io.moov.sdk.models.components.CreateAccount;
+import io.moov.sdk.models.components.CreateBusinessProfile;
+import io.moov.sdk.models.components.CreateProfile;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateAccountResponse;
+import io.moov.sdk.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -990,18 +990,18 @@ The default server can also be overridden globally using the `.serverURL(String 
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.AccountType;
-import io.moov.api.models.components.AccountWaitFor;
-import io.moov.api.models.components.CreateAccount;
-import io.moov.api.models.components.CreateBusinessProfile;
-import io.moov.api.models.components.CreateProfile;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.CreateAccountResponseBody;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.CreateAccountResponse;
-import io.moov.api.models.operations.CreateAccountSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.AccountType;
+import io.moov.sdk.models.components.AccountWaitFor;
+import io.moov.sdk.models.components.CreateAccount;
+import io.moov.sdk.models.components.CreateBusinessProfile;
+import io.moov.sdk.models.components.CreateProfile;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateAccountResponse;
+import io.moov.sdk.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -1054,4 +1054,4 @@ looking for the latest version.
 While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
 We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
 
-### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=openapi&utm_campaign=java)
+### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=sdk&utm_campaign=java)

@@ -102,13 +102,13 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.RegisterApplePayMerchantDomains;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.RegisterApplePayMerchantDomainsResponse;
-import io.moov.api.models.operations.RegisterApplePayMerchantDomainsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.RegisterApplePayMerchantDomains;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsResponse;
+import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -145,7 +145,7 @@ public class Application {
 
 | Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                  | [io.moov.api.models.operations.RegisterApplePayMerchantDomainsSecurity](../../models/operations/RegisterApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                          | The security requirements to use for the request.                                                                                           |
+| `security`                                                                                                                                  | [io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsSecurity](../../models/operations/RegisterApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                          | The security requirements to use for the request.                                                                                           |
 | `xMoovVersion`                                                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                                                  | :heavy_minus_sign:                                                                                                                          | Specify an API version.                                                                                                                     |
 | `accountID`                                                                                                                                 | *String*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | ID of the Moov account representing the merchant.                                                                                           |
 | `registerApplePayMerchantDomains`                                                                                                           | [RegisterApplePayMerchantDomains](../../models/components/RegisterApplePayMerchantDomains.md)                                               | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
@@ -176,13 +176,13 @@ public class Application {
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.UpdateApplePayMerchantDomains;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.UpdateApplePayMerchantDomainsResponse;
-import io.moov.api.models.operations.UpdateApplePayMerchantDomainsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.UpdateApplePayMerchantDomains;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsResponse;
+import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -219,7 +219,7 @@ public class Application {
 
 | Parameter                                                                                                                               | Type                                                                                                                                    | Required                                                                                                                                | Description                                                                                                                             |
 | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                              | [io.moov.api.models.operations.UpdateApplePayMerchantDomainsSecurity](../../models/operations/UpdateApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                      | The security requirements to use for the request.                                                                                       |
+| `security`                                                                                                                              | [io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsSecurity](../../models/operations/UpdateApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                      | The security requirements to use for the request.                                                                                       |
 | `xMoovVersion`                                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                                              | :heavy_minus_sign:                                                                                                                      | Specify an API version.                                                                                                                 |
 | `accountID`                                                                                                                             | *String*                                                                                                                                | :heavy_check_mark:                                                                                                                      | ID of the Moov account representing the merchant.                                                                                       |
 | `updateApplePayMerchantDomains`                                                                                                         | [UpdateApplePayMerchantDomains](../../models/components/UpdateApplePayMerchantDomains.md)                                               | :heavy_check_mark:                                                                                                                      | N/A                                                                                                                                     |
@@ -249,11 +249,11 @@ public class Application {
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.GetApplePayMerchantDomainsResponse;
-import io.moov.api.models.operations.GetApplePayMerchantDomainsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.GetApplePayMerchantDomainsResponse;
+import io.moov.sdk.models.operations.GetApplePayMerchantDomainsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -285,7 +285,7 @@ public class Application {
 
 | Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                        | [io.moov.api.models.operations.GetApplePayMerchantDomainsSecurity](../../models/operations/GetApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                | The security requirements to use for the request.                                                                                 |
+| `security`                                                                                                                        | [io.moov.sdk.models.operations.GetApplePayMerchantDomainsSecurity](../../models/operations/GetApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                | The security requirements to use for the request.                                                                                 |
 | `xMoovVersion`                                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                                        | :heavy_minus_sign:                                                                                                                | Specify an API version.                                                                                                           |
 | `accountID`                                                                                                                       | *String*                                                                                                                          | :heavy_check_mark:                                                                                                                | ID of the Moov account representing the merchant.                                                                                 |
 
@@ -314,13 +314,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.CreateApplePaySession;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.CreateApplePaySessionResponse;
-import io.moov.api.models.operations.CreateApplePaySessionSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CreateApplePaySession;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateApplePaySessionResponse;
+import io.moov.sdk.models.operations.CreateApplePaySessionSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -356,7 +356,7 @@ public class Application {
 
 | Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
 | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.api.models.operations.CreateApplePaySessionSecurity](../../models/operations/CreateApplePaySessionSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
+| `security`                                                                                                              | [io.moov.sdk.models.operations.CreateApplePaySessionSecurity](../../models/operations/CreateApplePaySessionSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
 | `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
 | `accountID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | ID of the Moov account representing the merchant.                                                                       |
 | `createApplePaySession`                                                                                                 | [CreateApplePaySession](../../models/components/CreateApplePaySession.md)                                               | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
@@ -387,19 +387,19 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.AppleBillingContact;
-import io.moov.api.models.components.ApplePayHeader;
-import io.moov.api.models.components.LinkApplePay;
-import io.moov.api.models.components.LinkApplePayToken;
-import io.moov.api.models.components.LinkApplePaymentData;
-import io.moov.api.models.components.LinkApplePaymentMethod;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.errors.LinkApplePayError;
-import io.moov.api.models.operations.LinkApplePayTokenResponse;
-import io.moov.api.models.operations.LinkApplePayTokenSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.AppleBillingContact;
+import io.moov.sdk.models.components.ApplePayHeader;
+import io.moov.sdk.models.components.LinkApplePay;
+import io.moov.sdk.models.components.LinkApplePayToken;
+import io.moov.sdk.models.components.LinkApplePaymentData;
+import io.moov.sdk.models.components.LinkApplePaymentMethod;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.LinkApplePayError;
+import io.moov.sdk.models.operations.LinkApplePayTokenResponse;
+import io.moov.sdk.models.operations.LinkApplePayTokenSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -460,7 +460,7 @@ public class Application {
 
 | Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
 | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                      | [io.moov.api.models.operations.LinkApplePayTokenSecurity](../../models/operations/LinkApplePayTokenSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
+| `security`                                                                                                      | [io.moov.sdk.models.operations.LinkApplePayTokenSecurity](../../models/operations/LinkApplePayTokenSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
 | `xMoovVersion`                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                      | :heavy_minus_sign:                                                                                              | Specify an API version.                                                                                         |
 | `accountID`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | ID of the Moov account representing the cardholder.                                                             |
 | `linkApplePay`                                                                                                  | [LinkApplePay](../../models/components/LinkApplePay.md)                                                         | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
@@ -503,17 +503,17 @@ when generating a [token](https://docs.moov.io/api/authentication/access-tokens/
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.CardAddress;
-import io.moov.api.models.components.CardExpiration;
-import io.moov.api.models.components.LinkCard;
-import io.moov.api.models.components.LinkCardWaitFor;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.errors.LinkCardError;
-import io.moov.api.models.operations.LinkCardResponse;
-import io.moov.api.models.operations.LinkCardSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CardAddress;
+import io.moov.sdk.models.components.CardExpiration;
+import io.moov.sdk.models.components.LinkCard;
+import io.moov.sdk.models.components.LinkCardWaitFor;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.LinkCardError;
+import io.moov.sdk.models.operations.LinkCardResponse;
+import io.moov.sdk.models.operations.LinkCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -566,7 +566,7 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                                                                                                                                                                                                              | Required                                                                                                                                                                                                                                                                                                                                                                                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                       | Example                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                                                                                                                                                                                        | [io.moov.api.models.operations.LinkCardSecurity](../../models/operations/LinkCardSecurity.md)                                                                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                | The security requirements to use for the request.                                                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `security`                                                                                                                                                                                                                                                                                                                                                                                                        | [io.moov.sdk.models.operations.LinkCardSecurity](../../models/operations/LinkCardSecurity.md)                                                                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                | The security requirements to use for the request.                                                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `xMoovVersion`                                                                                                                                                                                                                                                                                                                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                                                                                                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                | Specify an API version.                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `xWaitFor`                                                                                                                                                                                                                                                                                                                                                                                                        | [Optional\<LinkCardWaitFor>](../../models/components/LinkCardWaitFor.md)                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                | Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.<br/><br/>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly <br/>linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.                          | payment-method                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `accountID`                                                                                                                                                                                                                                                                                                                                                                                                       | *String*                                                                                                                                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                                                                                                                                                                                               |                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -598,11 +598,11 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.ListCardsResponse;
-import io.moov.api.models.operations.ListCardsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.ListCardsResponse;
+import io.moov.sdk.models.operations.ListCardsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -634,7 +634,7 @@ public class Application {
 
 | Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
 | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `security`                                                                                      | [io.moov.api.models.operations.ListCardsSecurity](../../models/operations/ListCardsSecurity.md) | :heavy_check_mark:                                                                              | The security requirements to use for the request.                                               |
+| `security`                                                                                      | [io.moov.sdk.models.operations.ListCardsSecurity](../../models/operations/ListCardsSecurity.md) | :heavy_check_mark:                                                                              | The security requirements to use for the request.                                               |
 | `xMoovVersion`                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                      | :heavy_minus_sign:                                                                              | Specify an API version.                                                                         |
 | `accountID`                                                                                     | *String*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
 
@@ -662,11 +662,11 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.GetCardResponse;
-import io.moov.api.models.operations.GetCardSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.GetCardResponse;
+import io.moov.sdk.models.operations.GetCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -699,7 +699,7 @@ public class Application {
 
 | Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
 | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `security`                                                                                  | [io.moov.api.models.operations.GetCardSecurity](../../models/operations/GetCardSecurity.md) | :heavy_check_mark:                                                                          | The security requirements to use for the request.                                           |                                                                                             |
+| `security`                                                                                  | [io.moov.sdk.models.operations.GetCardSecurity](../../models/operations/GetCardSecurity.md) | :heavy_check_mark:                                                                          | The security requirements to use for the request.                                           |                                                                                             |
 | `xMoovVersion`                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                  | :heavy_minus_sign:                                                                          | Specify an API version.                                                                     |                                                                                             |
 | `accountID`                                                                                 | *String*                                                                                    | :heavy_check_mark:                                                                          | N/A                                                                                         |                                                                                             |
 | `cardID`                                                                                    | *String*                                                                                    | :heavy_check_mark:                                                                          | N/A                                                                                         | 01234567-89ab-cdef-0123-456789abcdef                                                        |
@@ -735,14 +735,14 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.UpdateCard;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.errors.UpdateCardError;
-import io.moov.api.models.operations.UpdateCardResponse;
-import io.moov.api.models.operations.UpdateCardSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.UpdateCard;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.UpdateCardError;
+import io.moov.sdk.models.operations.UpdateCardResponse;
+import io.moov.sdk.models.operations.UpdateCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -778,7 +778,7 @@ public class Application {
 
 | Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
 | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [io.moov.api.models.operations.UpdateCardSecurity](../../models/operations/UpdateCardSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |                                                                                                   |
+| `security`                                                                                        | [io.moov.sdk.models.operations.UpdateCardSecurity](../../models/operations/UpdateCardSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |                                                                                                   |
 | `xMoovVersion`                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                        | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |                                                                                                   |
 | `accountID`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
 | `cardID`                                                                                          | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               | 01234567-89ab-cdef-0123-456789abcdef                                                              |
@@ -808,12 +808,12 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.DisableCardResponse;
-import io.moov.api.models.operations.DisableCardSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.DisableCardResponse;
+import io.moov.sdk.models.operations.DisableCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -844,7 +844,7 @@ public class Application {
 
 | Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         | Example                                                                                             |
 | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `security`                                                                                          | [io.moov.api.models.operations.DisableCardSecurity](../../models/operations/DisableCardSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |                                                                                                     |
+| `security`                                                                                          | [io.moov.sdk.models.operations.DisableCardSecurity](../../models/operations/DisableCardSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |                                                                                                     |
 | `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |                                                                                                     |
 | `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |                                                                                                     |
 | `cardID`                                                                                            | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 | 01234567-89ab-cdef-0123-456789abcdef                                                                |

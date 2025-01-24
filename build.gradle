@@ -41,9 +41,9 @@ model {
 
 jar {
     dependsOn(":generatePomFileForMavenPublication")
-    archiveBaseName = "api"
+    archiveBaseName = "sdk"
 
-    into("META-INF/maven/io.moov/api") {
+    into("META-INF/maven/io.moov/sdk") {
         from("$buildDir/pom.xml")
     }
 }
@@ -63,14 +63,14 @@ tasks.withType(Javadoc) {
 }
 
 group = "io.moov"
-version = "0.1.3"
+version = "0.1.6"
 
 sourcesJar {
-    archiveBaseName = "api"
+    archiveBaseName = "sdk"
 }
 
 javadocJar {
-    archiveBaseName = "api"
+    archiveBaseName = "sdk"
 }
 sonatypeCentralUpload {
     // This is your Sonatype generated username
@@ -80,9 +80,9 @@ sonatypeCentralUpload {
 
     // This is a list of files to upload. Ideally you would point to your jar file, source and javadoc jar (required by central)
     archives = files(
-      "$buildDir/libs/api-${version}.jar",
-      "$buildDir/libs/api-${version}-sources.jar",
-      "$buildDir/libs/api-${version}-javadoc.jar"
+      "$buildDir/libs/sdk-${version}.jar",
+      "$buildDir/libs/sdk-${version}-sources.jar",
+      "$buildDir/libs/sdk-${version}-javadoc.jar"
     )
 
     // This is the pom file to upload. This is required by central
@@ -100,8 +100,8 @@ publishing {
     publications {
         maven(MavenPublication) {
             groupId = 'io.moov'
-            artifactId = 'api'
-            version = '0.1.3'
+            artifactId = 'sdk'
+            version = '0.1.6'
 
             from components.java
 

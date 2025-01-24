@@ -20,11 +20,11 @@
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.ListIndustriesResponse;
-import io.moov.api.models.operations.ListIndustriesSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.ListIndustriesResponse;
+import io.moov.sdk.models.operations.ListIndustriesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -55,7 +55,7 @@ public class Application {
 
 | Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
 | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                | [io.moov.api.models.operations.ListIndustriesSecurity](../../models/operations/ListIndustriesSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
+| `security`                                                                                                | [io.moov.sdk.models.operations.ListIndustriesSecurity](../../models/operations/ListIndustriesSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
 | `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |
 
 ### Response

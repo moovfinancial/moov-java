@@ -36,16 +36,16 @@ To access this endpoint using a [token](https://docs.moov.io/api/authentication/
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.FilePurpose;
-import io.moov.api.models.components.FileUploadRequestMultiPart;
-import io.moov.api.models.components.FileUploadRequestMultiPartFile;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.FileValidationError;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.UploadFileResponse;
-import io.moov.api.models.operations.UploadFileSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.FilePurpose;
+import io.moov.sdk.models.components.FileUploadRequestMultiPart;
+import io.moov.sdk.models.components.FileUploadRequestMultiPartFile;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.FileValidationError;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.UploadFileResponse;
+import io.moov.sdk.models.operations.UploadFileSecurity;
 import java.lang.Exception;
 import java.nio.charset.StandardCharsets;
 
@@ -86,7 +86,7 @@ public class Application {
 
 | Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
 | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [io.moov.api.models.operations.UploadFileSecurity](../../models/operations/UploadFileSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |
+| `security`                                                                                        | [io.moov.sdk.models.operations.UploadFileSecurity](../../models/operations/UploadFileSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |
 | `xMoovVersion`                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                        | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |
 | `accountID`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
 | `fileUploadRequestMultiPart`                                                                      | [FileUploadRequestMultiPart](../../models/components/FileUploadRequestMultiPart.md)               | :heavy_check_mark:                                                                                | N/A                                                                                               |
@@ -115,11 +115,11 @@ To access this endpoint using a [token](https://docs.moov.io/api/authentication/
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.ListFilesResponse;
-import io.moov.api.models.operations.ListFilesSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.ListFilesResponse;
+import io.moov.sdk.models.operations.ListFilesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -151,7 +151,7 @@ public class Application {
 
 | Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
 | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `security`                                                                                      | [io.moov.api.models.operations.ListFilesSecurity](../../models/operations/ListFilesSecurity.md) | :heavy_check_mark:                                                                              | The security requirements to use for the request.                                               |
+| `security`                                                                                      | [io.moov.sdk.models.operations.ListFilesSecurity](../../models/operations/ListFilesSecurity.md) | :heavy_check_mark:                                                                              | The security requirements to use for the request.                                               |
 | `xMoovVersion`                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                      | :heavy_minus_sign:                                                                              | Specify an API version.                                                                         |
 | `accountID`                                                                                     | *String*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
 
@@ -177,11 +177,11 @@ To access this endpoint using a [token](https://docs.moov.io/api/authentication/
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.GetFileDetailsResponse;
-import io.moov.api.models.operations.GetFileDetailsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.GetFileDetailsResponse;
+import io.moov.sdk.models.operations.GetFileDetailsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -214,7 +214,7 @@ public class Application {
 
 | Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
 | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                | [io.moov.api.models.operations.GetFileDetailsSecurity](../../models/operations/GetFileDetailsSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
+| `security`                                                                                                | [io.moov.sdk.models.operations.GetFileDetailsSecurity](../../models/operations/GetFileDetailsSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
 | `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |
 | `accountID`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
 | `fileID`                                                                                                  | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |

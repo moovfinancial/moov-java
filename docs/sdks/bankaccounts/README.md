@@ -100,17 +100,17 @@ endpoint to wait for the new payment methods to be available for use.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.BankAccountWaitFor;
-import io.moov.api.models.components.LinkBankAccount;
-import io.moov.api.models.components.PlaidIntegration;
-import io.moov.api.models.components.PlaidPayload;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.BankAccountValidationError;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.LinkBankAccountResponse;
-import io.moov.api.models.operations.LinkBankAccountSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.BankAccountWaitFor;
+import io.moov.sdk.models.components.LinkBankAccount;
+import io.moov.sdk.models.components.PlaidIntegration;
+import io.moov.sdk.models.components.PlaidPayload;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.BankAccountValidationError;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.LinkBankAccountResponse;
+import io.moov.sdk.models.operations.LinkBankAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -148,7 +148,7 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                   | Type                                                                                                                                                                                                                                                                                                                                                                        | Required                                                                                                                                                                                                                                                                                                                                                                    | Description                                                                                                                                                                                                                                                                                                                                                                 |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                                                                                                                                                  | [io.moov.api.models.operations.LinkBankAccountSecurity](../../models/operations/LinkBankAccountSecurity.md)                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                          | The security requirements to use for the request.                                                                                                                                                                                                                                                                                                                           |
+| `security`                                                                                                                                                                                                                                                                                                                                                                  | [io.moov.sdk.models.operations.LinkBankAccountSecurity](../../models/operations/LinkBankAccountSecurity.md)                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                          | The security requirements to use for the request.                                                                                                                                                                                                                                                                                                                           |
 | `xMoovVersion`                                                                                                                                                                                                                                                                                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                                                                                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                          | Specify an API version.                                                                                                                                                                                                                                                                                                                                                     |
 | `xWaitFor`                                                                                                                                                                                                                                                                                                                                                                  | [Optional\<BankAccountWaitFor>](../../models/components/BankAccountWaitFor.md)                                                                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                          | Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.<br/><br/>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly<br/>linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response. |
 | `accountID`                                                                                                                                                                                                                                                                                                                                                                 | *String*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                                                                         |
@@ -179,11 +179,11 @@ from the browser, you'll need to specify the `/accounts/{accountID}/bank-account
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.ListBankAccountsResponse;
-import io.moov.api.models.operations.ListBankAccountsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.ListBankAccountsResponse;
+import io.moov.sdk.models.operations.ListBankAccountsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -215,7 +215,7 @@ public class Application {
 
 | Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
 | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                    | [io.moov.api.models.operations.ListBankAccountsSecurity](../../models/operations/ListBankAccountsSecurity.md) | :heavy_check_mark:                                                                                            | The security requirements to use for the request.                                                             |
+| `security`                                                                                                    | [io.moov.sdk.models.operations.ListBankAccountsSecurity](../../models/operations/ListBankAccountsSecurity.md) | :heavy_check_mark:                                                                                            | The security requirements to use for the request.                                                             |
 | `xMoovVersion`                                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                                    | :heavy_minus_sign:                                                                                            | Specify an API version.                                                                                       |
 | `accountID`                                                                                                   | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
 
@@ -242,11 +242,11 @@ generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.GetBankAccountResponse;
-import io.moov.api.models.operations.GetBankAccountSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.GetBankAccountResponse;
+import io.moov.sdk.models.operations.GetBankAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -279,7 +279,7 @@ public class Application {
 
 | Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
 | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                | [io.moov.api.models.operations.GetBankAccountSecurity](../../models/operations/GetBankAccountSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
+| `security`                                                                                                | [io.moov.sdk.models.operations.GetBankAccountSecurity](../../models/operations/GetBankAccountSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
 | `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |
 | `accountID`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
 | `bankAccountID`                                                                                           | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
@@ -306,12 +306,12 @@ when generating a [token](https://docs.moov.io/api/authentication/access-tokens/
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.DisableBankAccountResponse;
-import io.moov.api.models.operations.DisableBankAccountSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.DisableBankAccountResponse;
+import io.moov.sdk.models.operations.DisableBankAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -342,7 +342,7 @@ public class Application {
 
 | Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
 | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                        | [io.moov.api.models.operations.DisableBankAccountSecurity](../../models/operations/DisableBankAccountSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
+| `security`                                                                                                        | [io.moov.sdk.models.operations.DisableBankAccountSecurity](../../models/operations/DisableBankAccountSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
 | `xMoovVersion`                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                        | :heavy_minus_sign:                                                                                                | Specify an API version.                                                                                           |
 | `accountID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
 | `bankAccountID`                                                                                                   | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
@@ -375,12 +375,12 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.InitiateMicroDepositsResponse;
-import io.moov.api.models.operations.InitiateMicroDepositsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.InitiateMicroDepositsResponse;
+import io.moov.sdk.models.operations.InitiateMicroDepositsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -411,7 +411,7 @@ public class Application {
 
 | Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
 | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.api.models.operations.InitiateMicroDepositsSecurity](../../models/operations/InitiateMicroDepositsSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
+| `security`                                                                                                              | [io.moov.sdk.models.operations.InitiateMicroDepositsSecurity](../../models/operations/InitiateMicroDepositsSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
 | `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
 | `accountID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
 | `bankAccountID`                                                                                                         | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
@@ -439,14 +439,14 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.CompleteMicroDeposits;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.errors.MicroDepositValidationError;
-import io.moov.api.models.operations.CompleteMicroDepositsResponse;
-import io.moov.api.models.operations.CompleteMicroDepositsSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CompleteMicroDeposits;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.MicroDepositValidationError;
+import io.moov.sdk.models.operations.CompleteMicroDepositsResponse;
+import io.moov.sdk.models.operations.CompleteMicroDepositsSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -485,7 +485,7 @@ public class Application {
 
 | Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
 | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.api.models.operations.CompleteMicroDepositsSecurity](../../models/operations/CompleteMicroDepositsSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
+| `security`                                                                                                              | [io.moov.sdk.models.operations.CompleteMicroDepositsSecurity](../../models/operations/CompleteMicroDepositsSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
 | `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
 | `accountID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
 | `bankAccountID`                                                                                                         | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
@@ -524,11 +524,11 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.GetBankAccountVerificationResponse;
-import io.moov.api.models.operations.GetBankAccountVerificationSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.GetBankAccountVerificationResponse;
+import io.moov.sdk.models.operations.GetBankAccountVerificationSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -561,7 +561,7 @@ public class Application {
 
 | Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                        | [io.moov.api.models.operations.GetBankAccountVerificationSecurity](../../models/operations/GetBankAccountVerificationSecurity.md) | :heavy_check_mark:                                                                                                                | The security requirements to use for the request.                                                                                 |
+| `security`                                                                                                                        | [io.moov.sdk.models.operations.GetBankAccountVerificationSecurity](../../models/operations/GetBankAccountVerificationSecurity.md) | :heavy_check_mark:                                                                                                                | The security requirements to use for the request.                                                                                 |
 | `xMoovVersion`                                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                                        | :heavy_minus_sign:                                                                                                                | Specify an API version.                                                                                                           |
 | `accountID`                                                                                                                       | *String*                                                                                                                          | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
 | `bankAccountID`                                                                                                                   | *String*                                                                                                                          | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
@@ -603,13 +603,13 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.BankAccountWaitFor;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.InitiateBankAccountVerificationResponse;
-import io.moov.api.models.operations.InitiateBankAccountVerificationSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.BankAccountWaitFor;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.InitiateBankAccountVerificationResponse;
+import io.moov.sdk.models.operations.InitiateBankAccountVerificationSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -643,7 +643,7 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                                  | Type                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                                                                                 | [io.moov.api.models.operations.InitiateBankAccountVerificationSecurity](../../models/operations/InitiateBankAccountVerificationSecurity.md)                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                         | The security requirements to use for the request.                                                                                                                                                                                          |
+| `security`                                                                                                                                                                                                                                 | [io.moov.sdk.models.operations.InitiateBankAccountVerificationSecurity](../../models/operations/InitiateBankAccountVerificationSecurity.md)                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                         | The security requirements to use for the request.                                                                                                                                                                                          |
 | `xMoovVersion`                                                                                                                                                                                                                             | [Optional\<Versions>](../../models/components/Versions.md)                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                         | Specify an API version.                                                                                                                                                                                                                    |
 | `xWaitFor`                                                                                                                                                                                                                                 | [BankAccountWaitFor](../../models/components/BankAccountWaitFor.md)                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                                         | Optional header to wait for certain events, such as the rail response, to occur before returning a response.<br/><br/>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail. |
 | `accountID`                                                                                                                                                                                                                                | *String*                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                                        |
@@ -679,13 +679,13 @@ generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.CompleteBankAccountVerification;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.CompleteBankAccountVerificationResponse;
-import io.moov.api.models.operations.CompleteBankAccountVerificationSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CompleteBankAccountVerification;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CompleteBankAccountVerificationResponse;
+import io.moov.sdk.models.operations.CompleteBankAccountVerificationSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -721,7 +721,7 @@ public class Application {
 
 | Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                  | [io.moov.api.models.operations.CompleteBankAccountVerificationSecurity](../../models/operations/CompleteBankAccountVerificationSecurity.md) | :heavy_check_mark:                                                                                                                          | The security requirements to use for the request.                                                                                           |
+| `security`                                                                                                                                  | [io.moov.sdk.models.operations.CompleteBankAccountVerificationSecurity](../../models/operations/CompleteBankAccountVerificationSecurity.md) | :heavy_check_mark:                                                                                                                          | The security requirements to use for the request.                                                                                           |
 | `xMoovVersion`                                                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                                                  | :heavy_minus_sign:                                                                                                                          | Specify an API version.                                                                                                                     |
 | `accountID`                                                                                                                                 | *String*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
 | `bankAccountID`                                                                                                                             | *String*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |

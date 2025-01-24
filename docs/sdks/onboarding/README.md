@@ -34,20 +34,20 @@ to specify the `/accounts.write` scope.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.AccountType;
-import io.moov.api.models.components.ApplicationScope;
-import io.moov.api.models.components.CapabilityID;
-import io.moov.api.models.components.CreateAccount;
-import io.moov.api.models.components.CreateBusinessProfile;
-import io.moov.api.models.components.CreateProfile;
-import io.moov.api.models.components.OnboardingInviteRequest;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.errors.OnboardingInviteError;
-import io.moov.api.models.operations.CreateOnboardingInviteResponse;
-import io.moov.api.models.operations.CreateOnboardingInviteSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.AccountType;
+import io.moov.sdk.models.components.ApplicationScope;
+import io.moov.sdk.models.components.CapabilityID;
+import io.moov.sdk.models.components.CreateAccount;
+import io.moov.sdk.models.components.CreateBusinessProfile;
+import io.moov.sdk.models.components.CreateProfile;
+import io.moov.sdk.models.components.OnboardingInviteRequest;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.OnboardingInviteError;
+import io.moov.sdk.models.operations.CreateOnboardingInviteResponse;
+import io.moov.sdk.models.operations.CreateOnboardingInviteSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -95,7 +95,7 @@ public class Application {
 
 | Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
 | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [io.moov.api.models.operations.CreateOnboardingInviteSecurity](../../models/operations/CreateOnboardingInviteSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |
+| `security`                                                                                                                | [io.moov.sdk.models.operations.CreateOnboardingInviteSecurity](../../models/operations/CreateOnboardingInviteSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |
 | `xMoovVersion`                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                | :heavy_minus_sign:                                                                                                        | Specify an API version.                                                                                                   |
 | `onboardingInviteRequest`                                                                                                 | [OnboardingInviteRequest](../../models/components/OnboardingInviteRequest.md)                                             | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
 
@@ -123,11 +123,11 @@ to specify the `/accounts.read` scope.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.ListOnboardingInvitesResponse;
-import io.moov.api.models.operations.ListOnboardingInvitesSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.ListOnboardingInvitesResponse;
+import io.moov.sdk.models.operations.ListOnboardingInvitesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -158,7 +158,7 @@ public class Application {
 
 | Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
 | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.api.models.operations.ListOnboardingInvitesSecurity](../../models/operations/ListOnboardingInvitesSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
+| `security`                                                                                                              | [io.moov.sdk.models.operations.ListOnboardingInvitesSecurity](../../models/operations/ListOnboardingInvitesSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
 | `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
 
 ### Response
@@ -183,11 +183,11 @@ to specify the `/accounts.read` scope.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.GetOnboardingInviteResponse;
-import io.moov.api.models.operations.GetOnboardingInviteSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.GetOnboardingInviteResponse;
+import io.moov.sdk.models.operations.GetOnboardingInviteSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -219,7 +219,7 @@ public class Application {
 
 | Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         | Example                                                                                                             |
 | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                          | [io.moov.api.models.operations.GetOnboardingInviteSecurity](../../models/operations/GetOnboardingInviteSecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |                                                                                                                     |
+| `security`                                                                                                          | [io.moov.sdk.models.operations.GetOnboardingInviteSecurity](../../models/operations/GetOnboardingInviteSecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |                                                                                                                     |
 | `xMoovVersion`                                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                                          | :heavy_minus_sign:                                                                                                  | Specify an API version.                                                                                             |                                                                                                                     |
 | `code`                                                                                                              | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 | N1IA5eWYNh                                                                                                          |
 
@@ -245,11 +245,11 @@ to specify the `/accounts.write` scope.
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.RevokeOnboardingInviteResponse;
-import io.moov.api.models.operations.RevokeOnboardingInviteSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.RevokeOnboardingInviteResponse;
+import io.moov.sdk.models.operations.RevokeOnboardingInviteSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -279,7 +279,7 @@ public class Application {
 
 | Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               | Example                                                                                                                   |
 | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [io.moov.api.models.operations.RevokeOnboardingInviteSecurity](../../models/operations/RevokeOnboardingInviteSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |                                                                                                                           |
+| `security`                                                                                                                | [io.moov.sdk.models.operations.RevokeOnboardingInviteSecurity](../../models/operations/RevokeOnboardingInviteSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |                                                                                                                           |
 | `xMoovVersion`                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                | :heavy_minus_sign:                                                                                                        | Specify an API version.                                                                                                   |                                                                                                                           |
 | `code`                                                                                                                    | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       | N1IA5eWYNh                                                                                                                |
 

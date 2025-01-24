@@ -2,18 +2,18 @@
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.AccountType;
-import io.moov.api.models.components.AccountWaitFor;
-import io.moov.api.models.components.CreateAccount;
-import io.moov.api.models.components.CreateBusinessProfile;
-import io.moov.api.models.components.CreateProfile;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.errors.CreateAccountResponseBody;
-import io.moov.api.models.errors.GenericError;
-import io.moov.api.models.operations.CreateAccountResponse;
-import io.moov.api.models.operations.CreateAccountSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.AccountType;
+import io.moov.sdk.models.components.AccountWaitFor;
+import io.moov.sdk.models.components.CreateAccount;
+import io.moov.sdk.models.components.CreateBusinessProfile;
+import io.moov.sdk.models.components.CreateProfile;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateAccountResponse;
+import io.moov.sdk.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {

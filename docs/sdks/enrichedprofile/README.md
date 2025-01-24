@@ -20,11 +20,11 @@
 ```java
 package hello.world;
 
-import io.moov.api.Moov;
-import io.moov.api.models.components.SchemeBasicAuth;
-import io.moov.api.models.components.Versions;
-import io.moov.api.models.operations.GetEnrichmentProfileResponse;
-import io.moov.api.models.operations.GetEnrichmentProfileSecurity;
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.models.operations.GetEnrichmentProfileResponse;
+import io.moov.sdk.models.operations.GetEnrichmentProfileSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -56,7 +56,7 @@ public class Application {
 
 | Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                            | [io.moov.api.models.operations.GetEnrichmentProfileSecurity](../../models/operations/GetEnrichmentProfileSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |
+| `security`                                                                                                            | [io.moov.sdk.models.operations.GetEnrichmentProfileSecurity](../../models/operations/GetEnrichmentProfileSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |
 | `xMoovVersion`                                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                                            | :heavy_minus_sign:                                                                                                    | Specify an API version.                                                                                               |
 | `email`                                                                                                               | *String*                                                                                                              | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   |
 

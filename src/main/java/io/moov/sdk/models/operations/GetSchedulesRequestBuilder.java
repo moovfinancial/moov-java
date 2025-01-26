@@ -53,7 +53,7 @@ public class GetSchedulesRequestBuilder {
 
     public GetSchedulesResponse call() throws Exception {
 
-        return sdk.getSchedules(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

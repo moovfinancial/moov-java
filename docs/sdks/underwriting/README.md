@@ -5,27 +5,27 @@
 
 ### Available Operations
 
-* [getUnderwriting](#getunderwriting) - Retrieve underwriting associated with a given Moov account. 
+* [get](#get) - Retrieve underwriting associated with a given Moov account. 
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/profile.read` scope.
-* [updateUnderwriting](#updateunderwriting) - Update the account's underwriting by passing new values for one or more of the fields. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [update](#update) - Update the account's underwriting by passing new values for one or more of the fields. 
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/profile.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
-## getUnderwriting
+## get
 
 Retrieve underwriting associated with a given Moov account. 
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/profile.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
@@ -46,14 +46,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetUnderwritingResponse res = sdk.underwriting().getUnderwriting()
+        GetUnderwritingResponse res = sdk.underwriting().get()
                 .security(GetUnderwritingSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .accountID("32ccafba-5d99-40e5-a8af-d05cc5d73a4e")
                 .call();
 
@@ -82,14 +82,14 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## updateUnderwriting
+## update
 
 Update the account's underwriting by passing new values for one or more of the fields. 
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/profile.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
@@ -117,14 +117,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        UpdateUnderwritingResponse res = sdk.underwriting().updateUnderwriting()
+        UpdateUnderwritingResponse res = sdk.underwriting().update()
                 .security(UpdateUnderwritingSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202401)
+                .xMoovVersion(Versions.LATEST)
                 .accountID("455b1698-1657-4c75-944b-57db42578d81")
                 .updateUnderwriting(UpdateUnderwriting.builder()
                     .averageTransactionSize(686L)

@@ -53,7 +53,7 @@ public class GetBankAccountVerificationRequestBuilder {
 
     public GetBankAccountVerificationResponse call() throws Exception {
 
-        return sdk.getBankAccountVerification(
+        return sdk.getVerification(
             security,
             xMoovVersion,
             accountID,

@@ -61,7 +61,7 @@ public class UpdateRepresentativeRequestBuilder {
 
     public UpdateRepresentativeResponse call() throws Exception {
 
-        return sdk.updateRepresentative(
+        return sdk.update(
             security,
             xMoovVersion,
             accountID,

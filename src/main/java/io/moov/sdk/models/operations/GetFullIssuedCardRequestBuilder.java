@@ -53,7 +53,7 @@ public class GetFullIssuedCardRequestBuilder {
 
     public GetFullIssuedCardResponse call() throws Exception {
 
-        return sdk.getFullIssuedCard(
+        return sdk.getFull(
             security,
             xMoovVersion,
             accountID,

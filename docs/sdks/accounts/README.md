@@ -5,7 +5,7 @@
 
 ### Available Operations
 
-* [createAccount](#createaccount) - You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
+* [create](#create) - You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
 information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
 
 If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities, you'll need to:
@@ -17,13 +17,22 @@ If you're creating a business account with the business type `llc`, `partnership
 
 Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/).
 Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode.
-* [listAccounts](#listaccounts) - List or search accounts to which the caller is connected.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts.write` scope.
+* [list](#list) - List or search accounts to which the caller is connected.
 
 All supported query parameters are optional. If none are provided the response will include all connected accounts.
-Pagination is supported via the `skip` and `count` query parameters.
-Searching by name and email will overlap and return results based on relevance.
-* [getAccount](#getaccount) - Retrieves details for the account with the specified ID.
-* [patchAccount](#patchaccount) - When **can** profile data be updated:
+Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and 
+return results based on relevance.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts.read` scope.
+* [get](#get) - Retrieves details for the account with the specified ID.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts/{accountID}/profile.read` scope.
+* [update](#update) - When **can** profile data be updated:
   + For unverified accounts, all profile data can be edited.
   + During the verification process, missing or incomplete profile data can be edited.
   + Verified accounts can only add missing profile data.
@@ -33,33 +42,35 @@ Searching by name and email will overlap and return results based on relevance.
 
 If you need to update information in a locked state, please contact Moov support.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/), and provide the changed information.
-* [disconnectAccount](#disconnectaccount) -   This will sever the connection between you and the account specified and it will no longer be listed as active in the list of accounts. 
-  This also means you'll only have read-only access to the account going forward for reporting purposes.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts/{accountID}/profile.write` scope.
+* [disconnect](#disconnect) - This will sever the connection between you and the account specified and it will no longer be listed as 
+active in the list of accounts. This also means you'll only have read-only access to the account going 
+forward for reporting purposes.
 
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope when generating 
-  a [token](https://docs.moov.io/api/authentication/access-tokens/), and provide the changed information.
-* [getAccountCountries](#getaccountcountries) - Retrieve the specified countries of operation for an account. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
+* [getCountries](#getcountries) - Retrieve the specified countries of operation for an account. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [assignAccountCountries](#assignaccountcountries) - Assign the countries of operation for an account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [assignCountries](#assigncountries) - Assign the countries of operation for an account.
 
 This endpoint will always overwrite the previously assigned values. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 * [getMerchantProcessingAgreement](#getmerchantprocessingagreement) - Retrieve a merchant account's processing agreement.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/profile.read` scope.
-* [getTermsOfServiceToken](#gettermsofservicetoken) -   Generates a non-expiring token that can then be used to accept Moov’s terms of service. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [getTermsOfServiceToken](#gettermsofservicetoken) - Generates a non-expiring token that can then be used to accept Moov's terms of service. 
 
-  This token can only be generated via API. Any Moov account requesting the collect funds, send funds, wallet, or card issuing capabilities 
-  must accept Moov’s terms of service, then have the generated terms of service token patched to the account. Read more in our [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
+This token can only be generated via API. Any Moov account requesting the collect funds, send funds, wallet, 
+or card issuing capabilities must accept Moov's terms of service, then have the generated terms of service 
+token patched to the account. Read more in our [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
 
-## createAccount
+## create
 
 You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
 information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
@@ -73,6 +84,9 @@ If you're creating a business account with the business type `llc`, `partnership
 
 Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/).
 Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts.write` scope.
 
 ### Example Usage
 
@@ -100,14 +114,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        CreateAccountResponse res = sdk.accounts().createAccount()
+        CreateAccountResponse res = sdk.accounts().create()
                 .security(CreateAccountSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202504)
                 .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
@@ -147,13 +161,16 @@ public class Application {
 | models/errors/CreateAccountResponseBody | 422                                     | application/json                        |
 | models/errors/APIException              | 4XX, 5XX                                | \*/\*                                   |
 
-## listAccounts
+## list
 
 List or search accounts to which the caller is connected.
 
 All supported query parameters are optional. If none are provided the response will include all connected accounts.
-Pagination is supported via the `skip` and `count` query parameters.
-Searching by name and email will overlap and return results based on relevance.
+Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and 
+return results based on relevance.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts.read` scope.
 
 ### Example Usage
 
@@ -181,7 +198,7 @@ public class Application {
                 .count(20L)
                 .build();
 
-        ListAccountsResponse res = sdk.accounts().listAccounts()
+        ListAccountsResponse res = sdk.accounts().list()
                 .request(req)
                 .security(ListAccountsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
@@ -215,9 +232,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getAccount
+## get
 
 Retrieves details for the account with the specified ID.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
@@ -238,14 +258,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetAccountResponse res = sdk.accounts().getAccount()
+        GetAccountResponse res = sdk.accounts().get()
                 .security(GetAccountSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .accountID("45ce7519-7f28-40c8-94bf-6edae7a38315")
                 .call();
 
@@ -274,7 +294,7 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## patchAccount
+## update
 
 When **can** profile data be updated:
   + For unverified accounts, all profile data can be edited.
@@ -286,8 +306,8 @@ When **can** profile data be updated:
 
 If you need to update information in a locked state, please contact Moov support.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/), and provide the changed information.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
@@ -302,27 +322,27 @@ import io.moov.sdk.models.components.CreateProfileUpdate;
 import io.moov.sdk.models.components.SchemeBasicAuth;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.PatchAccountResponseBody;
-import io.moov.sdk.models.operations.PatchAccountResponse;
-import io.moov.sdk.models.operations.PatchAccountSecurity;
+import io.moov.sdk.models.errors.UpdateAccountResponseBody;
+import io.moov.sdk.models.operations.UpdateAccountResponse;
+import io.moov.sdk.models.operations.UpdateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, PatchAccountResponseBody, Exception {
+    public static void main(String[] args) throws GenericError, UpdateAccountResponseBody, Exception {
 
         Moov sdk = Moov.builder()
             .build();
 
-        PatchAccountResponse res = sdk.accounts().patchAccount()
-                .security(PatchAccountSecurity.builder()
+        UpdateAccountResponse res = sdk.accounts().update()
+                .security(UpdateAccountSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202504)
-                .accountID("7909eaa5-21eb-4fc4-bc91-9f7385408829")
+                .xMoovVersion(Versions.LATEST)
+                .accountID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
                 .createAccountUpdate(CreateAccountUpdate.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfileUpdate.builder()
@@ -344,30 +364,31 @@ public class Application {
 
 | Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 | Example                                                                                                     |
 | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                  | [io.moov.sdk.models.operations.PatchAccountSecurity](../../models/operations/PatchAccountSecurity.md)       | :heavy_check_mark:                                                                                          | The security requirements to use for the request.                                                           |                                                                                                             |
+| `security`                                                                                                  | [io.moov.sdk.models.operations.UpdateAccountSecurity](../../models/operations/UpdateAccountSecurity.md)     | :heavy_check_mark:                                                                                          | The security requirements to use for the request.                                                           |                                                                                                             |
 | `xMoovVersion`                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                  | :heavy_minus_sign:                                                                                          | Specify an API version.                                                                                     |                                                                                                             |
 | `accountID`                                                                                                 | *String*                                                                                                    | :heavy_check_mark:                                                                                          | N/A                                                                                                         |                                                                                                             |
 | `createAccountUpdate`                                                                                       | [CreateAccountUpdate](../../models/components/CreateAccountUpdate.md)                                       | :heavy_check_mark:                                                                                          | N/A                                                                                                         | {<br/>"accountType": "business",<br/>"profile": {<br/>"business": {<br/>"legalBusinessName": "Whole Body Fitness LLC"<br/>}<br/>}<br/>} |
 
 ### Response
 
-**[PatchAccountResponse](../../models/operations/PatchAccountResponse.md)**
+**[UpdateAccountResponse](../../models/operations/UpdateAccountResponse.md)**
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/GenericError             | 400, 409                               | application/json                       |
-| models/errors/PatchAccountResponseBody | 422                                    | application/json                       |
-| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| models/errors/GenericError              | 400, 409                                | application/json                        |
+| models/errors/UpdateAccountResponseBody | 422                                     | application/json                        |
+| models/errors/APIException              | 4XX, 5XX                                | \*/\*                                   |
 
-## disconnectAccount
+## disconnect
 
-  This will sever the connection between you and the account specified and it will no longer be listed as active in the list of accounts. 
-  This also means you'll only have read-only access to the account going forward for reporting purposes.
+This will sever the connection between you and the account specified and it will no longer be listed as 
+active in the list of accounts. This also means you'll only have read-only access to the account going 
+forward for reporting purposes.
 
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope when generating 
-  a [token](https://docs.moov.io/api/authentication/access-tokens/), and provide the changed information.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
 
 ### Example Usage
 
@@ -389,7 +410,7 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        DisconnectAccountResponse res = sdk.accounts().disconnectAccount()
+        DisconnectAccountResponse res = sdk.accounts().disconnect()
                 .security(DisconnectAccountSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
@@ -424,12 +445,12 @@ public class Application {
 | models/errors/GenericError | 400, 409                   | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getAccountCountries
+## getCountries
 
 Retrieve the specified countries of operation for an account. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
@@ -450,14 +471,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetAccountCountriesResponse res = sdk.accounts().getAccountCountries()
+        GetAccountCountriesResponse res = sdk.accounts().getCountries()
                 .security(GetAccountCountriesSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .accountID("df471fd8-7bb3-4db3-bf74-52fe588b8d2b")
                 .call();
 
@@ -486,14 +507,14 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## assignAccountCountries
+## assignCountries
 
 Assign the countries of operation for an account.
 
 This endpoint will always overwrite the previously assigned values. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/profile.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
@@ -518,14 +539,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        AssignAccountCountriesResponse res = sdk.accounts().assignAccountCountries()
+        AssignAccountCountriesResponse res = sdk.accounts().assignCountries()
                 .security(AssignAccountCountriesSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202510)
                 .accountID("9ba3f09c-c93c-4ca1-b68f-1dbb0841a40a")
                 .accountCountries(AccountCountries.builder()
                     .countries(List.of(
@@ -565,8 +586,8 @@ public class Application {
 
 Retrieve a merchant account's processing agreement.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/profile.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
@@ -625,10 +646,11 @@ public class Application {
 
 ## getTermsOfServiceToken
 
-  Generates a non-expiring token that can then be used to accept Moov’s terms of service. 
+Generates a non-expiring token that can then be used to accept Moov's terms of service. 
 
-  This token can only be generated via API. Any Moov account requesting the collect funds, send funds, wallet, or card issuing capabilities 
-  must accept Moov’s terms of service, then have the generated terms of service token patched to the account. Read more in our [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
+This token can only be generated via API. Any Moov account requesting the collect funds, send funds, wallet, 
+or card issuing capabilities must accept Moov's terms of service, then have the generated terms of service 
+token patched to the account. Read more in our [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
 
 ### Example Usage
 

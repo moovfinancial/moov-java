@@ -46,7 +46,7 @@ public class GetBrandRequestBuilder {
 
     public GetBrandResponse call() throws Exception {
 
-        return sdk.getBrand(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID);

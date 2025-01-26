@@ -60,7 +60,7 @@ public class GetDisputeEvidenceRequestBuilder {
 
     public GetDisputeEvidenceResponse call() throws Exception {
 
-        return sdk.getDisputeEvidence(
+        return sdk.getEvidence(
             security,
             xMoovVersion,
             accountID,

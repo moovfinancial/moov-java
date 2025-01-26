@@ -87,7 +87,7 @@ public class GetEnrichmentAddressRequest {
     private Optional<Long> preferRatio;
 
     /**
-     *   If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state 
+     *   If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
      *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
      *   not set to `none`, you may see addresses from areas you do not wish to see.
      */
@@ -247,7 +247,7 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     *   If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state 
+     *   If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
      *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
      *   not set to `none`, you may see addresses from areas you do not wish to see.
      */
@@ -466,7 +466,7 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     *   If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state 
+     *   If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
      *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
      *   not set to `none`, you may see addresses from areas you do not wish to see.
      */
@@ -477,7 +477,7 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     *   If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state 
+     *   If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
      *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
      *   not set to `none`, you may see addresses from areas you do not wish to see.
      */
@@ -811,7 +811,7 @@ public class GetEnrichmentAddressRequest {
         }
 
         /**
-         *   If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state 
+         *   If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
          *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
          *   not set to `none`, you may see addresses from areas you do not wish to see.
          */
@@ -822,7 +822,7 @@ public class GetEnrichmentAddressRequest {
         }
 
         /**
-         *   If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state 
+         *   If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
          *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
          *   not set to `none`, you may see addresses from areas you do not wish to see.
          */

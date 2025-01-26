@@ -46,7 +46,7 @@ public class GetEnrichmentProfileRequestBuilder {
 
     public GetEnrichmentProfileResponse call() throws Exception {
 
-        return sdk.getEnrichmentProfile(
+        return sdk.get(
             security,
             xMoovVersion,
             email);

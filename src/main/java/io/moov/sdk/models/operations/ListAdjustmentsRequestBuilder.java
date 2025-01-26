@@ -59,7 +59,7 @@ public class ListAdjustmentsRequestBuilder {
 
     public ListAdjustmentsResponse call() throws Exception {
 
-        return sdk.listAdjustments(
+        return sdk.list(
             security,
             xMoovVersion,
             accountID,

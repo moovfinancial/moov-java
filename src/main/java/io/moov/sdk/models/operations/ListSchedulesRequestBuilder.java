@@ -73,7 +73,7 @@ public class ListSchedulesRequestBuilder {
 
     public ListSchedulesResponse call() throws Exception {
 
-        return sdk.listSchedules(
+        return sdk.list(
             security,
             xMoovVersion,
             skip,

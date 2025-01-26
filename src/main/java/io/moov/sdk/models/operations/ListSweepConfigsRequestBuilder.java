@@ -46,7 +46,7 @@ public class ListSweepConfigsRequestBuilder {
 
     public ListSweepConfigsResponse call() throws Exception {
 
-        return sdk.listSweepConfigs(
+        return sdk.listConfigs(
             security,
             xMoovVersion,
             accountID);

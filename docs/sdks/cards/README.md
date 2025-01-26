@@ -5,41 +5,7 @@
 
 ### Available Operations
 
-* [registerApplePayMerchantDomains](#registerapplepaymerchantdomains) - Add domains to be registered with Apple Pay.
-
-Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
-with Apple.
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a 
-[token](https://docs.moov.io/api/authentication/access-tokens/).
-* [updateApplePayMerchantDomains](#updateapplepaymerchantdomains) -   Add or remove domains to be registered with Apple Pay. 
-
-  Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
-  with Apple.
-  
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a 
-  [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [getApplePayMerchantDomains](#getapplepaymerchantdomains) -   Get domains registered with Apple Pay. 
-  
-  Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-  
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope when generating a 
-  [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [createApplePaySession](#createapplepaysession) - Create a session with Apple Pay to facilitate a payment. 
-
-Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-A successful response from this endpoint should be passed through to Apple Pay unchanged. 
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [linkApplePayToken](#linkapplepaytoken) - Connect an Apple Pay token to the specified account. 
-
-Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [linkCard](#linkcard) - Link a card to an existing Moov account. 
+* [link](#link) - Link a card to an existing Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
 
@@ -55,21 +21,21 @@ card is intended to be used right away. If this header is not included, the call
 Methods](https://docs.moov.io/api/sources/payment-methods/list/)
 endpoint to wait for the new payment methods to be available for use.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope
-when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [listCards](#listcards) - List all the active cards associated with a Moov account. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+* [list](#list) - List all the active cards associated with a Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [getCard](#getcard) - Fetch a specific card associated with a Moov account. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+* [get](#get) - Fetch a specific card associated with a Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [updateCard](#updatecard) - Update a linked card and/or resubmit it for verification. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+* [update](#update) - Update a linked card and/or resubmit it for verification. 
 
 If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration 
 date or 
@@ -80,404 +46,14 @@ more.
 
 Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [disableCard](#disablecard) - Disables a card associated with a Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+* [disable](#disable) - Disables a card associated with a Moov account.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
-## registerApplePayMerchantDomains
-
-Add domains to be registered with Apple Pay.
-
-Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
-with Apple.
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a 
-[token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.RegisterApplePayMerchantDomains;
-import io.moov.sdk.models.components.SchemeBasicAuth;
-import io.moov.sdk.models.components.Versions;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsResponse;
-import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsSecurity;
-import java.lang.Exception;
-import java.util.List;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, Exception {
-
-        Moov sdk = Moov.builder()
-            .build();
-
-        RegisterApplePayMerchantDomainsResponse res = sdk.cards().registerApplePayMerchantDomains()
-                .security(RegisterApplePayMerchantDomainsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
-                .xMoovVersion(Versions.V202401)
-                .accountID("133fed79-519d-4b63-99ec-26b95076a45b")
-                .registerApplePayMerchantDomains(RegisterApplePayMerchantDomains.builder()
-                    .domains(List.of(
-                        "checkout.classbooker.dev"))
-                    .build())
-                .call();
-
-        if (res.applePayMerchantDomains().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                  | [io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsSecurity](../../models/operations/RegisterApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                          | The security requirements to use for the request.                                                                                           |
-| `xMoovVersion`                                                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                                                  | :heavy_minus_sign:                                                                                                                          | Specify an API version.                                                                                                                     |
-| `accountID`                                                                                                                                 | *String*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | ID of the Moov account representing the merchant.                                                                                           |
-| `registerApplePayMerchantDomains`                                                                                                           | [RegisterApplePayMerchantDomains](../../models/components/RegisterApplePayMerchantDomains.md)                                               | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
-
-### Response
-
-**[RegisterApplePayMerchantDomainsResponse](../../models/operations/RegisterApplePayMerchantDomainsResponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/GenericError | 400                        | application/json           |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## updateApplePayMerchantDomains
-
-  Add or remove domains to be registered with Apple Pay. 
-
-  Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
-  with Apple.
-  
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a 
-  [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
-import io.moov.sdk.models.components.UpdateApplePayMerchantDomains;
-import io.moov.sdk.models.components.Versions;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsResponse;
-import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsSecurity;
-import java.lang.Exception;
-import java.util.List;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, Exception {
-
-        Moov sdk = Moov.builder()
-            .build();
-
-        UpdateApplePayMerchantDomainsResponse res = sdk.cards().updateApplePayMerchantDomains()
-                .security(UpdateApplePayMerchantDomainsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
-                .xMoovVersion(Versions.V202510)
-                .accountID("b7d68fce-1dbc-4562-93aa-d9ad030c78e6")
-                .updateApplePayMerchantDomains(UpdateApplePayMerchantDomains.builder()
-                    .addDomains(List.of(
-                        "pay.classbooker.dev"))
-                    .removeDomains(List.of(
-                        "checkout.classbooker.dev"))
-                    .build())
-                .call();
-
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                               | Type                                                                                                                                    | Required                                                                                                                                | Description                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                              | [io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsSecurity](../../models/operations/UpdateApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                      | The security requirements to use for the request.                                                                                       |
-| `xMoovVersion`                                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                                              | :heavy_minus_sign:                                                                                                                      | Specify an API version.                                                                                                                 |
-| `accountID`                                                                                                                             | *String*                                                                                                                                | :heavy_check_mark:                                                                                                                      | ID of the Moov account representing the merchant.                                                                                       |
-| `updateApplePayMerchantDomains`                                                                                                         | [UpdateApplePayMerchantDomains](../../models/components/UpdateApplePayMerchantDomains.md)                                               | :heavy_check_mark:                                                                                                                      | N/A                                                                                                                                     |
-
-### Response
-
-**[UpdateApplePayMerchantDomainsResponse](../../models/operations/UpdateApplePayMerchantDomainsResponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/GenericError | 400                        | application/json           |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## getApplePayMerchantDomains
-
-  Get domains registered with Apple Pay. 
-  
-  Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-  
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope when generating a 
-  [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
-import io.moov.sdk.models.components.Versions;
-import io.moov.sdk.models.operations.GetApplePayMerchantDomainsResponse;
-import io.moov.sdk.models.operations.GetApplePayMerchantDomainsSecurity;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws Exception {
-
-        Moov sdk = Moov.builder()
-            .build();
-
-        GetApplePayMerchantDomainsResponse res = sdk.cards().getApplePayMerchantDomains()
-                .security(GetApplePayMerchantDomainsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
-                .xMoovVersion(Versions.V202510)
-                .accountID("cd0931b0-e02f-47b3-87fc-0789a05479e9")
-                .call();
-
-        if (res.applePayMerchantDomains().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
-| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                        | [io.moov.sdk.models.operations.GetApplePayMerchantDomainsSecurity](../../models/operations/GetApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                | The security requirements to use for the request.                                                                                 |
-| `xMoovVersion`                                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                                        | :heavy_minus_sign:                                                                                                                | Specify an API version.                                                                                                           |
-| `accountID`                                                                                                                       | *String*                                                                                                                          | :heavy_check_mark:                                                                                                                | ID of the Moov account representing the merchant.                                                                                 |
-
-### Response
-
-**[GetApplePayMerchantDomainsResponse](../../models/operations/GetApplePayMerchantDomainsResponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## createApplePaySession
-
-Create a session with Apple Pay to facilitate a payment. 
-
-Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-A successful response from this endpoint should be passed through to Apple Pay unchanged. 
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateApplePaySession;
-import io.moov.sdk.models.components.SchemeBasicAuth;
-import io.moov.sdk.models.components.Versions;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.operations.CreateApplePaySessionResponse;
-import io.moov.sdk.models.operations.CreateApplePaySessionSecurity;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, Exception {
-
-        Moov sdk = Moov.builder()
-            .build();
-
-        CreateApplePaySessionResponse res = sdk.cards().createApplePaySession()
-                .security(CreateApplePaySessionSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
-                .xMoovVersion(Versions.V202507)
-                .accountID("1d911f27-36e5-4497-8e9e-c3ecff1a8ae0")
-                .createApplePaySession(CreateApplePaySession.builder()
-                    .domain("checkout.classbooker.dev")
-                    .displayName("Lillie.Abbott74")
-                    .build())
-                .call();
-
-        if (res.applePaySession().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.sdk.models.operations.CreateApplePaySessionSecurity](../../models/operations/CreateApplePaySessionSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
-| `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
-| `accountID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | ID of the Moov account representing the merchant.                                                                       |
-| `createApplePaySession`                                                                                                 | [CreateApplePaySession](../../models/components/CreateApplePaySession.md)                                               | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
-
-### Response
-
-**[CreateApplePaySessionResponse](../../models/operations/CreateApplePaySessionResponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/GenericError | 400, 409, 422              | application/json           |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## linkApplePayToken
-
-Connect an Apple Pay token to the specified account. 
-
-Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.AppleBillingContact;
-import io.moov.sdk.models.components.ApplePayHeader;
-import io.moov.sdk.models.components.LinkApplePay;
-import io.moov.sdk.models.components.LinkApplePayToken;
-import io.moov.sdk.models.components.LinkApplePaymentData;
-import io.moov.sdk.models.components.LinkApplePaymentMethod;
-import io.moov.sdk.models.components.SchemeBasicAuth;
-import io.moov.sdk.models.components.Versions;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.LinkApplePayError;
-import io.moov.sdk.models.operations.LinkApplePayTokenResponse;
-import io.moov.sdk.models.operations.LinkApplePayTokenSecurity;
-import java.lang.Exception;
-import java.util.List;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, LinkApplePayError, Exception {
-
-        Moov sdk = Moov.builder()
-            .build();
-
-        LinkApplePayTokenResponse res = sdk.cards().linkApplePayToken()
-                .security(LinkApplePayTokenSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
-                .xMoovVersion(Versions.LATEST)
-                .accountID("f4d3b593-6370-42f3-acf5-eab4393e2a01")
-                .linkApplePay(LinkApplePay.builder()
-                    .token(LinkApplePayToken.builder()
-                        .paymentData(LinkApplePaymentData.builder()
-                            .version("EC_v1")
-                            .data("3+f4oOTwPa6f1UZ6tG...CE=")
-                            .signature("MIAGCSqGSIb3DQ.AAAA==")
-                            .header(ApplePayHeader.builder()
-                                .publicKeyHash("l0CnXdMv...D1I=")
-                                .transactionId("32b...4f3")
-                                .ephemeralPublicKey("MFkwEK...Md==")
-                                .build())
-                            .build())
-                        .paymentMethod(LinkApplePaymentMethod.builder()
-                            .displayName("Visa 1234")
-                            .network("Visa")
-                            .type("debit")
-                            .build())
-                        .transactionIdentifier("32b...4f3")
-                        .build())
-                    .billingContact(AppleBillingContact.builder()
-                        .addressLines(List.of(
-                            "123 Sesame Street"))
-                        .locality("Phoenix")
-                        .postalCode("30345")
-                        .administrativeArea("AZ")
-                        .countryCode("US")
-                        .build())
-                    .build())
-                .call();
-
-        if (res.linkedApplePayPaymentMethod().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                      | [io.moov.sdk.models.operations.LinkApplePayTokenSecurity](../../models/operations/LinkApplePayTokenSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
-| `xMoovVersion`                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                      | :heavy_minus_sign:                                                                                              | Specify an API version.                                                                                         |
-| `accountID`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | ID of the Moov account representing the cardholder.                                                             |
-| `linkApplePay`                                                                                                  | [LinkApplePay](../../models/components/LinkApplePay.md)                                                         | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
-
-### Response
-
-**[LinkApplePayTokenResponse](../../models/operations/LinkApplePayTokenResponse.md)**
-
-### Errors
-
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models/errors/GenericError      | 400, 409                        | application/json                |
-| models/errors/LinkApplePayError | 422                             | application/json                |
-| models/errors/APIException      | 4XX, 5XX                        | \*/\*                           |
-
-## linkCard
+## link
 
 Link a card to an existing Moov account. 
 
@@ -495,8 +71,8 @@ card is intended to be used right away. If this header is not included, the call
 Methods](https://docs.moov.io/api/sources/payment-methods/list/)
 endpoint to wait for the new payment methods to be available for use.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope
-when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
@@ -523,14 +99,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        LinkCardResponse res = sdk.cards().linkCard()
+        LinkCardResponse res = sdk.cards().link()
                 .security(LinkCardSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202504)
                 .xWaitFor(LinkCardWaitFor.PAYMENT_METHOD)
                 .accountID("500c4473-7f7b-4a70-8a8c-d5cb2e08e0e4")
                 .linkCard(LinkCard.builder()
@@ -584,14 +160,14 @@ public class Application {
 | models/errors/LinkCardError | 422                         | application/json            |
 | models/errors/APIException  | 4XX, 5XX                    | \*/\*                       |
 
-## listCards
+## list
 
 List all the active cards associated with a Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
@@ -612,14 +188,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListCardsResponse res = sdk.cards().listCards()
+        ListCardsResponse res = sdk.cards().list()
                 .security(ListCardsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion(Versions.V202510)
                 .accountID("5881119b-63c7-492b-8c20-09d0fca99676")
                 .call();
 
@@ -648,14 +224,14 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getCard
+## get
 
 Fetch a specific card associated with a Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
@@ -676,14 +252,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetCardResponse res = sdk.cards().getCard()
+        GetCardResponse res = sdk.cards().get()
                 .security(GetCardSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .accountID("21f0d82e-dc9b-4e80-ac2a-99b6babfebd7")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
                 .call();
@@ -714,7 +290,7 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## updateCard
+## update
 
 Update a linked card and/or resubmit it for verification. 
 
@@ -727,8 +303,8 @@ more.
 
 Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
@@ -752,14 +328,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        UpdateCardResponse res = sdk.cards().updateCard()
+        UpdateCardResponse res = sdk.cards().update()
                 .security(UpdateCardSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.LATEST)
                 .accountID("a960061d-fb6d-4929-99b5-c96c672840f6")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
                 .updateCard(UpdateCard.builder()
@@ -796,12 +372,12 @@ public class Application {
 | models/errors/UpdateCardError | 422                           | application/json              |
 | models/errors/APIException    | 4XX, 5XX                      | \*/\*                         |
 
-## disableCard
+## disable
 
 Disables a card associated with a Moov account.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
@@ -823,14 +399,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        DisableCardResponse res = sdk.cards().disableCard()
+        DisableCardResponse res = sdk.cards().disable()
                 .security(DisableCardSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202510)
                 .accountID("a6b47d56-0b54-4dd8-9692-efad0ab1ebb4")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
                 .call();

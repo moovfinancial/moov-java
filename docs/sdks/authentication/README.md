@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [revokeAuthToken](#revokeauthtoken) - Revoke an auth token.
+* [revokeAccessToken](#revokeaccesstoken) - Revoke an auth token.
 
 Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed.
-* [createAuthToken](#createauthtoken) - Create or refresh an access token.
+* [createAccessToken](#createaccesstoken) - Create or refresh an access token.
 
-## revokeAuthToken
+## revokeAccessToken
 
 Revoke an auth token.
 
@@ -27,7 +27,7 @@ import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.RevokeTokenRequestError;
-import io.moov.sdk.models.operations.RevokeAuthTokenResponse;
+import io.moov.sdk.models.operations.RevokeAccessTokenResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -41,7 +41,7 @@ public class Application {
                     .build())
             .build();
 
-        RevokeAuthTokenResponse res = sdk.authentication().revokeAuthToken()
+        RevokeAccessTokenResponse res = sdk.authentication().revokeAccessToken()
                 .xMoovVersion(Versions.V202510)
                 .revokeTokenRequest(RevokeTokenRequest.builder()
                     .token("<value>")
@@ -64,7 +64,7 @@ public class Application {
 
 ### Response
 
-**[RevokeAuthTokenResponse](../../models/operations/RevokeAuthTokenResponse.md)**
+**[RevokeAccessTokenResponse](../../models/operations/RevokeAccessTokenResponse.md)**
 
 ### Errors
 
@@ -74,7 +74,7 @@ public class Application {
 | models/errors/RevokeTokenRequestError | 422                                   | application/json                      |
 | models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |
 
-## createAuthToken
+## createAccessToken
 
 Create or refresh an access token.
 
@@ -90,7 +90,7 @@ import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.AuthTokenRequestError;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.operations.CreateAuthTokenResponse;
+import io.moov.sdk.models.operations.CreateAccessTokenResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -104,10 +104,14 @@ public class Application {
                     .build())
             .build();
 
-        CreateAuthTokenResponse res = sdk.authentication().createAuthToken()
-                .xMoovVersion(Versions.V202507)
+        CreateAccessTokenResponse res = sdk.authentication().createAccessToken()
+                .xMoovVersion(Versions.V202504)
                 .authTokenRequest(AuthTokenRequest.builder()
-                    .grantType(GrantType.REFRESH_TOKEN)
+                    .grantType(GrantType.CLIENT_CREDENTIALS)
+                    .clientId("5clTR_MdVrrkgxw2")
+                    .clientSecret("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-")
+                    .scope("/accounts.read /accounts.write")
+                    .refreshToken("eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a...")
                     .build())
                 .call();
 
@@ -127,7 +131,7 @@ public class Application {
 
 ### Response
 
-**[CreateAuthTokenResponse](../../models/operations/CreateAuthTokenResponse.md)**
+**[CreateAccessTokenResponse](../../models/operations/CreateAccessTokenResponse.md)**
 
 ### Errors
 

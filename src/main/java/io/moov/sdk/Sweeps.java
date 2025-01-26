@@ -34,11 +34,11 @@ import io.moov.sdk.models.operations.ListSweepsRequest;
 import io.moov.sdk.models.operations.ListSweepsRequestBuilder;
 import io.moov.sdk.models.operations.ListSweepsResponse;
 import io.moov.sdk.models.operations.ListSweepsSecurity;
-import io.moov.sdk.models.operations.PatchSweepConfigRequest;
-import io.moov.sdk.models.operations.PatchSweepConfigRequestBuilder;
-import io.moov.sdk.models.operations.PatchSweepConfigResponse;
-import io.moov.sdk.models.operations.PatchSweepConfigSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
+import io.moov.sdk.models.operations.UpdateSweepConfigRequest;
+import io.moov.sdk.models.operations.UpdateSweepConfigRequestBuilder;
+import io.moov.sdk.models.operations.UpdateSweepConfigResponse;
+import io.moov.sdk.models.operations.UpdateSweepConfigSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -60,7 +60,7 @@ public class Sweeps implements
             MethodCallCreateSweepConfig,
             MethodCallListSweepConfigs,
             MethodCallGetSweepConfig,
-            MethodCallPatchSweepConfig,
+            MethodCallUpdateSweepConfig,
             MethodCallListSweeps,
             MethodCallGetSweep {
 
@@ -72,30 +72,30 @@ public class Sweeps implements
 
 
     /**
-     * Create a sweep config for a wallet.
+     * Create a sweep config for a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * @return The call builder
      */
-    public CreateSweepConfigRequestBuilder createSweepConfig() {
+    public CreateSweepConfigRequestBuilder createConfig() {
         return new CreateSweepConfigRequestBuilder(this);
     }
 
     /**
-     * Create a sweep config for a wallet.
+     * Create a sweep config for a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param createSweepConfig
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateSweepConfigResponse createSweepConfig(
+    public CreateSweepConfigResponse createConfig(
             CreateSweepConfigSecurity security,
             String accountID,
             CreateSweepConfig createSweepConfig) throws Exception {
-        return createSweepConfig(security, Optional.empty(), accountID, createSweepConfig);
+        return createConfig(security, Optional.empty(), accountID, createSweepConfig);
     }
     
     /**
-     * Create a sweep config for a wallet.
+     * Create a sweep config for a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -111,7 +111,7 @@ public class Sweeps implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateSweepConfigResponse createSweepConfig(
+    public CreateSweepConfigResponse createConfig(
             CreateSweepConfigSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -277,28 +277,28 @@ public class Sweeps implements
 
 
     /**
-     * List sweep configs associated with an account.
+     * List sweep configs associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public ListSweepConfigsRequestBuilder listSweepConfigs() {
+    public ListSweepConfigsRequestBuilder listConfigs() {
         return new ListSweepConfigsRequestBuilder(this);
     }
 
     /**
-     * List sweep configs associated with an account.
+     * List sweep configs associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListSweepConfigsResponse listSweepConfigs(
+    public ListSweepConfigsResponse listConfigs(
             ListSweepConfigsSecurity security,
             String accountID) throws Exception {
-        return listSweepConfigs(security, Optional.empty(), accountID);
+        return listConfigs(security, Optional.empty(), accountID);
     }
     
     /**
-     * List sweep configs associated with an account.
+     * List sweep configs associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -313,7 +313,7 @@ public class Sweeps implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListSweepConfigsResponse listSweepConfigs(
+    public ListSweepConfigsResponse listConfigs(
             ListSweepConfigsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
@@ -436,30 +436,30 @@ public class Sweeps implements
 
 
     /**
-     * Get a sweep config associated with a wallet.
+     * Get a sweep config associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public GetSweepConfigRequestBuilder getSweepConfig() {
+    public GetSweepConfigRequestBuilder getConfig() {
         return new GetSweepConfigRequestBuilder(this);
     }
 
     /**
-     * Get a sweep config associated with a wallet.
+     * Get a sweep config associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param sweepConfigID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetSweepConfigResponse getSweepConfig(
+    public GetSweepConfigResponse getConfig(
             GetSweepConfigSecurity security,
             String accountID,
             String sweepConfigID) throws Exception {
-        return getSweepConfig(security, Optional.empty(), accountID, sweepConfigID);
+        return getConfig(security, Optional.empty(), accountID, sweepConfigID);
     }
     
     /**
-     * Get a sweep config associated with a wallet.
+     * Get a sweep config associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -475,7 +475,7 @@ public class Sweeps implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetSweepConfigResponse getSweepConfig(
+    public GetSweepConfigResponse getConfig(
             GetSweepConfigSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -600,15 +600,15 @@ public class Sweeps implements
 
 
     /**
-     * Update settings on a sweep config.
+     * Update settings on a sweep config. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * @return The call builder
      */
-    public PatchSweepConfigRequestBuilder patchSweepConfig() {
-        return new PatchSweepConfigRequestBuilder(this);
+    public UpdateSweepConfigRequestBuilder updateConfig() {
+        return new UpdateSweepConfigRequestBuilder(this);
     }
 
     /**
-     * Update settings on a sweep config.
+     * Update settings on a sweep config. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param sweepConfigID
@@ -616,16 +616,16 @@ public class Sweeps implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public PatchSweepConfigResponse patchSweepConfig(
-            PatchSweepConfigSecurity security,
+    public UpdateSweepConfigResponse updateConfig(
+            UpdateSweepConfigSecurity security,
             String accountID,
             String sweepConfigID,
             PatchSweepConfig patchSweepConfig) throws Exception {
-        return patchSweepConfig(security, Optional.empty(), accountID, sweepConfigID, patchSweepConfig);
+        return updateConfig(security, Optional.empty(), accountID, sweepConfigID, patchSweepConfig);
     }
     
     /**
-     * Update settings on a sweep config.
+     * Update settings on a sweep config. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -642,14 +642,14 @@ public class Sweeps implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public PatchSweepConfigResponse patchSweepConfig(
-            PatchSweepConfigSecurity security,
+    public UpdateSweepConfigResponse updateConfig(
+            UpdateSweepConfigSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String sweepConfigID,
             PatchSweepConfig patchSweepConfig) throws Exception {
-        PatchSweepConfigRequest request =
-            PatchSweepConfigRequest
+        UpdateSweepConfigRequest request =
+            UpdateSweepConfigRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
@@ -659,7 +659,7 @@ public class Sweeps implements
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
-                PatchSweepConfigRequest.class,
+                UpdateSweepConfigRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/sweep-configs/{sweepConfigID}",
                 request, this.sdkConfiguration.globals);
@@ -693,7 +693,7 @@ public class Sweeps implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
-                      "patchSweepConfig", 
+                      "updateSweepConfig", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -704,7 +704,7 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "patchSweepConfig",
+                            "updateSweepConfig",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -713,7 +713,7 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
-                            "patchSweepConfig",
+                            "updateSweepConfig",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -722,7 +722,7 @@ public class Sweeps implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "patchSweepConfig",
+                            "updateSweepConfig",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -732,14 +732,14 @@ public class Sweeps implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        PatchSweepConfigResponse.Builder _resBuilder = 
-            PatchSweepConfigResponse
+        UpdateSweepConfigResponse.Builder _resBuilder = 
+            UpdateSweepConfigResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        PatchSweepConfigResponse _res = _resBuilder.build();
+        UpdateSweepConfigResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
@@ -810,21 +810,21 @@ public class Sweeps implements
 
 
     /**
-     * List sweeps associated with a wallet.
+     * List sweeps associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public ListSweepsRequestBuilder listSweeps() {
+    public ListSweepsRequestBuilder list() {
         return new ListSweepsRequestBuilder(this);
     }
 
     /**
-     * List sweeps associated with a wallet.
+     * List sweeps associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param request The request object containing all of the parameters for the API call.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListSweepsResponse listSweeps(
+    public ListSweepsResponse list(
             ListSweepsRequest request,
             ListSweepsSecurity security) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -944,15 +944,15 @@ public class Sweeps implements
 
 
     /**
-     * Get details on a specific sweep.
+     * Get details on a specific sweep. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public GetSweepRequestBuilder getSweep() {
+    public GetSweepRequestBuilder get() {
         return new GetSweepRequestBuilder(this);
     }
 
     /**
-     * Get details on a specific sweep.
+     * Get details on a specific sweep. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param walletID
@@ -960,16 +960,16 @@ public class Sweeps implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetSweepResponse getSweep(
+    public GetSweepResponse get(
             GetSweepSecurity security,
             String accountID,
             String walletID,
             String sweepID) throws Exception {
-        return getSweep(security, Optional.empty(), accountID, walletID, sweepID);
+        return get(security, Optional.empty(), accountID, walletID, sweepID);
     }
     
     /**
-     * Get details on a specific sweep.
+     * Get details on a specific sweep. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -986,7 +986,7 @@ public class Sweeps implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetSweepResponse getSweep(
+    public GetSweepResponse get(
             GetSweepSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

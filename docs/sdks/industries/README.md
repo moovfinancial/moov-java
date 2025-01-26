@@ -5,15 +5,17 @@
 
 ### Available Operations
 
-* [listIndustries](#listindustries) -   Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
-  
-  To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+* [list](#list) - Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
 
-## listIndustries
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
-  Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
-  
-  To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+## list
+
+Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
 ### Example Usage
 
@@ -34,14 +36,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListIndustriesResponse res = sdk.industries().listIndustries()
+        ListIndustriesResponse res = sdk.industries().list()
                 .security(ListIndustriesSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202510)
                 .call();
 
         if (res.enrichedIndustries().isPresent()) {

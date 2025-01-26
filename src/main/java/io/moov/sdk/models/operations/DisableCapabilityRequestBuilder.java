@@ -54,7 +54,7 @@ public class DisableCapabilityRequestBuilder {
 
     public DisableCapabilityResponse call() throws Exception {
 
-        return sdk.disableCapability(
+        return sdk.disable(
             security,
             xMoovVersion,
             accountID,

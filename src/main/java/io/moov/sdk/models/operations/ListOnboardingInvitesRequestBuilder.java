@@ -38,7 +38,7 @@ public class ListOnboardingInvitesRequestBuilder {
 
     public ListOnboardingInvitesResponse call() throws Exception {
 
-        return sdk.listOnboardingInvites(
+        return sdk.listInvites(
             security,
             xMoovVersion);
     }

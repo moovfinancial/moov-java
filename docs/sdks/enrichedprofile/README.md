@@ -5,15 +5,17 @@
 
 ### Available Operations
 
-* [getEnrichmentProfile](#getenrichmentprofile) -   Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
+* [get](#get) - Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
 
-  To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
-## getEnrichmentProfile
+## get
 
-  Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
+Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
 
-  To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
 ### Example Usage
 
@@ -34,14 +36,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetEnrichmentProfileResponse res = sdk.enrichedProfile().getEnrichmentProfile()
+        GetEnrichmentProfileResponse res = sdk.enrichedProfile().get()
                 .security(GetEnrichmentProfileSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .email("Sheldon.Effertz@gmail.com")
                 .call();
 

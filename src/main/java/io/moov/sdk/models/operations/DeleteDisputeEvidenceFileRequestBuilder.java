@@ -60,7 +60,7 @@ public class DeleteDisputeEvidenceFileRequestBuilder {
 
     public DeleteDisputeEvidenceFileResponse call() throws Exception {
 
-        return sdk.deleteDisputeEvidenceFile(
+        return sdk.deleteEvidence(
             security,
             xMoovVersion,
             accountID,

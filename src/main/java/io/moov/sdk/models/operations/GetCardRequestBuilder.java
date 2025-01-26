@@ -53,7 +53,7 @@ public class GetCardRequestBuilder {
 
     public GetCardResponse call() throws Exception {
 
-        return sdk.getCard(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

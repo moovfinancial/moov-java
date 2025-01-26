@@ -53,7 +53,7 @@ public class AcceptDisputeRequestBuilder {
 
     public AcceptDisputeResponse call() throws Exception {
 
-        return sdk.acceptDispute(
+        return sdk.accept(
             security,
             xMoovVersion,
             accountID,

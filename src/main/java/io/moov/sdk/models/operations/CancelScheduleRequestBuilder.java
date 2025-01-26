@@ -53,7 +53,7 @@ public class CancelScheduleRequestBuilder {
 
     public CancelScheduleResponse call() throws Exception {
 
-        return sdk.cancelSchedule(
+        return sdk.cancel(
             security,
             xMoovVersion,
             accountID,

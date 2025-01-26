@@ -61,7 +61,7 @@ public class InitiateBankAccountVerificationRequestBuilder {
 
     public InitiateBankAccountVerificationResponse call() throws Exception {
 
-        return sdk.initiateBankAccountVerification(
+        return sdk.initiateVerification(
             security,
             xMoovVersion,
             xWaitFor,

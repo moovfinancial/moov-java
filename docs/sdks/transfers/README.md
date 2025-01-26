@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [createTransfer](#createtransfer) - Move money by providing the source, destination, and amount in the request body.
+* [create](#create) - Move money by providing the source, destination, and amount in the request body.
 
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write` 
-scope.
-* [listTransfers](#listtransfers) - List all the transfers associated with a particular Moov account. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [list](#list) - List all the transfers associated with a particular Moov account. 
 
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
 
@@ -20,59 +20,58 @@ if you set `skip`= 10, you will see a results set of 200 transfers after the fir
 process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited 
 period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read` 
-scope.
-* [getTransfer](#gettransfer) - Retrieve full transfer details for an individual transfer of a particular Moov account. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [get](#get) - Retrieve full transfer details for an individual transfer of a particular Moov account. 
 
 Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) 
 to learn more.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read` 
-scope.
-* [patchTransfer](#patchtransfer) - Update the metadata contained on a transfer. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [update](#update) - Update the metadata contained on a transfer. 
 
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write` 
-scope.
-* [refundTransfer](#refundtransfer) - Initiate a refund for a card transfer.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [initiateRefund](#initiaterefund) - Initiate a refund for a card transfer.
 
 **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
 See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write` 
-scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 * [listRefunds](#listrefunds) - Get a list of refunds for a card transfer.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read` 
-scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 * [getRefund](#getrefund) - Get details of a refund for a card transfer.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read` 
-scope.
-* [reverseTransfer](#reversetransfer) - Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [createReversal](#createreversal) - Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
 Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
 to learn more.
 
 To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
 to specify the `/accounts/{accountID}/transfers.write` scope.
-* [createTransferOptions](#createtransferoptions) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+* [generateOptions](#generateoptions) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
 supply in the request. 
 
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{yourAccountID}/transfers.read` scope when generating a 
-[token](https://docs.moov.io/api/authentication/access-tokens/). The accountID included must be your accountID. You can find your 
-accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-## createTransfer
+## create
 
 Move money by providing the source, destination, and amount in the request body.
 
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write` 
-scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -146,7 +145,7 @@ public class Application {
                     .build())
                 .build();
 
-        CreateTransferResponse res = sdk.transfers().createTransfer()
+        CreateTransferResponse res = sdk.transfers().create()
                 .request(req)
                 .security(CreateTransferSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
@@ -183,7 +182,7 @@ public class Application {
 | models/errors/TransferValidationError | 422                                   | application/json                      |
 | models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |
 
-## listTransfers
+## list
 
 List all the transfers associated with a particular Moov account. 
 
@@ -194,8 +193,8 @@ if you set `skip`= 10, you will see a results set of 200 transfers after the fir
 process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited 
 period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read` 
-scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -222,7 +221,7 @@ public class Application {
                 .count(20L)
                 .build();
 
-        ListTransfersResponse res = sdk.transfers().listTransfers()
+        ListTransfersResponse res = sdk.transfers().list()
                 .request(req)
                 .security(ListTransfersSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
@@ -256,15 +255,15 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getTransfer
+## get
 
 Retrieve full transfer details for an individual transfer of a particular Moov account. 
 
 Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) 
 to learn more.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read` 
-scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -285,14 +284,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetTransferResponse res = sdk.transfers().getTransfer()
+        GetTransferResponse res = sdk.transfers().get()
                 .security(GetTransferSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion(Versions.V202510)
                 .transferID("64607ba5-82d4-4278-93b5-c5c5ca5c9cd8")
                 .accountID("cb1b48c3-1c11-4648-aa00-691b74c9ea1b")
                 .call();
@@ -323,14 +322,14 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## patchTransfer
+## update
 
 Update the metadata contained on a transfer. 
 
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write` 
-scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -340,8 +339,8 @@ package hello.world;
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.SchemeBasicAuth;
 import io.moov.sdk.models.components.Versions;
-import io.moov.sdk.models.operations.PatchTransferResponse;
-import io.moov.sdk.models.operations.PatchTransferSecurity;
+import io.moov.sdk.models.operations.UpdateTransferResponse;
+import io.moov.sdk.models.operations.UpdateTransferSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -351,16 +350,16 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        PatchTransferResponse res = sdk.transfers().patchTransfer()
-                .security(PatchTransferSecurity.builder()
+        UpdateTransferResponse res = sdk.transfers().update()
+                .security(UpdateTransferSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
-                .transferID("9cc2093a-b55d-4f3f-b8e9-e13ac2df16ab")
-                .accountID("f0dfbcc6-c1a2-42ff-b3f9-a41de383cabc")
+                .xMoovVersion(Versions.LATEST)
+                .transferID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
+                .accountID("b85898c1-25a1-4907-a1c5-562af6646dad")
                 .call();
 
         if (res.transfer().isPresent()) {
@@ -372,16 +371,16 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                              | [io.moov.sdk.models.operations.PatchTransferSecurity](../../models/operations/PatchTransferSecurity.md) | :heavy_check_mark:                                                                                      | The security requirements to use for the request.                                                       |
-| `xMoovVersion`                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                              | :heavy_minus_sign:                                                                                      | Specify an API version.                                                                                 |
-| `transferID`                                                                                            | *String*                                                                                                | :heavy_check_mark:                                                                                      | Identifier for the transfer.                                                                            |
-| `accountID`                                                                                             | *String*                                                                                                | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                | [io.moov.sdk.models.operations.UpdateTransferSecurity](../../models/operations/UpdateTransferSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
+| `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |
+| `transferID`                                                                                              | *String*                                                                                                  | :heavy_check_mark:                                                                                        | Identifier for the transfer.                                                                              |
+| `accountID`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
 
 ### Response
 
-**[PatchTransferResponse](../../models/operations/PatchTransferResponse.md)**
+**[UpdateTransferResponse](../../models/operations/UpdateTransferResponse.md)**
 
 ### Errors
 
@@ -389,15 +388,15 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## refundTransfer
+## initiateRefund
 
 Initiate a refund for a card transfer.
 
 **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
 See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write` 
-scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -410,9 +409,9 @@ import io.moov.sdk.models.components.SchemeBasicAuth;
 import io.moov.sdk.models.errors.CardAcquiringRefund;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.RefundValidationError;
-import io.moov.sdk.models.operations.RefundTransferRequest;
-import io.moov.sdk.models.operations.RefundTransferResponse;
-import io.moov.sdk.models.operations.RefundTransferSecurity;
+import io.moov.sdk.models.operations.InitiateRefundRequest;
+import io.moov.sdk.models.operations.InitiateRefundResponse;
+import io.moov.sdk.models.operations.InitiateRefundSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -422,18 +421,18 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        RefundTransferRequest req = RefundTransferRequest.builder()
-                .xIdempotencyKey("3ba7635c-ceda-4c22-b383-46b4447b555b")
-                .accountID("fcf8bc06-0dab-429a-b25f-0547cda2b142")
-                .transferID("9032ecd3-7cf8-4760-a23e-09456a22dfb6")
+        InitiateRefundRequest req = InitiateRefundRequest.builder()
+                .xIdempotencyKey("bdfa6a76-31f8-4cdf-a007-3d8aac713b91")
+                .accountID("9b1350b2-a5be-41e3-92be-61f5cf4372a8")
+                .transferID("7390ad29-1a0d-4a0c-8c17-da1708ee9ac2")
                 .createRefund(CreateRefund.builder()
                     .amount(1000L)
                     .build())
                 .build();
 
-        RefundTransferResponse res = sdk.transfers().refundTransfer()
+        InitiateRefundResponse res = sdk.transfers().initiateRefund()
                 .request(req)
-                .security(RefundTransferSecurity.builder()
+                .security(InitiateRefundSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
@@ -452,12 +451,12 @@ public class Application {
 
 | Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
 | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                 | [RefundTransferRequest](../../models/operations/RefundTransferRequest.md)                                 | :heavy_check_mark:                                                                                        | The request object to use for the request.                                                                |
-| `security`                                                                                                | [io.moov.sdk.models.operations.RefundTransferSecurity](../../models/operations/RefundTransferSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
+| `request`                                                                                                 | [InitiateRefundRequest](../../models/operations/InitiateRefundRequest.md)                                 | :heavy_check_mark:                                                                                        | The request object to use for the request.                                                                |
+| `security`                                                                                                | [io.moov.sdk.models.operations.InitiateRefundSecurity](../../models/operations/InitiateRefundSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
 
 ### Response
 
-**[RefundTransferResponse](../../models/operations/RefundTransferResponse.md)**
+**[InitiateRefundResponse](../../models/operations/InitiateRefundResponse.md)**
 
 ### Errors
 
@@ -472,8 +471,8 @@ public class Application {
 
 Get a list of refunds for a card transfer.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read` 
-scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -536,8 +535,8 @@ public class Application {
 
 Get details of a refund for a card transfer.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read` 
-scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -598,7 +597,7 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## reverseTransfer
+## createReversal
 
 Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
 Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
@@ -617,9 +616,9 @@ import io.moov.sdk.models.components.CreateReversal;
 import io.moov.sdk.models.components.SchemeBasicAuth;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ReversalValidationError;
-import io.moov.sdk.models.operations.ReverseTransferRequest;
-import io.moov.sdk.models.operations.ReverseTransferResponse;
-import io.moov.sdk.models.operations.ReverseTransferSecurity;
+import io.moov.sdk.models.operations.CreateReversalRequest;
+import io.moov.sdk.models.operations.CreateReversalResponse;
+import io.moov.sdk.models.operations.CreateReversalSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -629,18 +628,18 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ReverseTransferRequest req = ReverseTransferRequest.builder()
-                .xIdempotencyKey("16ad771b-54f6-4f38-86a5-09d5f907e897")
-                .accountID("47d7634a-2772-4a99-a0bc-2bb960cea7e2")
-                .transferID("c39f87ae-8349-4b5b-9f87-1669f5d784aa")
+        CreateReversalRequest req = CreateReversalRequest.builder()
+                .xIdempotencyKey("9d4b2ed0-777b-40e6-ba88-d6ca730c3503")
+                .accountID("16452b89-d33c-4be9-8f92-205130a46467")
+                .transferID("c7f1b114-0545-47ba-9d79-fdba229c3df7")
                 .createReversal(CreateReversal.builder()
                     .amount(1000L)
                     .build())
                 .build();
 
-        ReverseTransferResponse res = sdk.transfers().reverseTransfer()
+        CreateReversalResponse res = sdk.transfers().createReversal()
                 .request(req)
-                .security(ReverseTransferSecurity.builder()
+                .security(CreateReversalSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
@@ -657,14 +656,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                   | [ReverseTransferRequest](../../models/operations/ReverseTransferRequest.md)                                 | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
-| `security`                                                                                                  | [io.moov.sdk.models.operations.ReverseTransferSecurity](../../models/operations/ReverseTransferSecurity.md) | :heavy_check_mark:                                                                                          | The security requirements to use for the request.                                                           |
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                 | [CreateReversalRequest](../../models/operations/CreateReversalRequest.md)                                 | :heavy_check_mark:                                                                                        | The request object to use for the request.                                                                |
+| `security`                                                                                                | [io.moov.sdk.models.operations.CreateReversalSecurity](../../models/operations/CreateReversalSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
 
 ### Response
 
-**[ReverseTransferResponse](../../models/operations/ReverseTransferResponse.md)**
+**[CreateReversalResponse](../../models/operations/CreateReversalResponse.md)**
 
 ### Errors
 
@@ -674,16 +673,15 @@ public class Application {
 | models/errors/ReversalValidationError | 422                                   | application/json                      |
 | models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |
 
-## createTransferOptions
+## generateOptions
 
 Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
 supply in the request. 
 
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{yourAccountID}/transfers.read` scope when generating a 
-[token](https://docs.moov.io/api/authentication/access-tokens/). The accountID included must be your accountID. You can find your 
-accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -706,14 +704,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        CreateTransferOptionsResponse res = sdk.transfers().createTransferOptions()
+        CreateTransferOptionsResponse res = sdk.transfers().generateOptions()
                 .security(CreateTransferOptionsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202504)
                 .call();
 
         if (res.transferOptions().isPresent()) {

@@ -38,7 +38,7 @@ public class ListIndustriesRequestBuilder {
 
     public ListIndustriesResponse call() throws Exception {
 
-        return sdk.listIndustries(
+        return sdk.list(
             security,
             xMoovVersion);
     }

@@ -30,7 +30,7 @@ public class ListTransfersRequestBuilder {
 
     public ListTransfersResponse call() throws Exception {
 
-        return sdk.listTransfers(
+        return sdk.list(
             request,
             security);
     }

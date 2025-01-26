@@ -53,7 +53,7 @@ public class DisableBankAccountRequestBuilder {
 
     public DisableBankAccountResponse call() throws Exception {
 
-        return sdk.disableBankAccount(
+        return sdk.disable(
             security,
             xMoovVersion,
             accountID,

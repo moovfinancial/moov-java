@@ -54,7 +54,7 @@ public class CreateScheduleRequestBuilder {
 
     public CreateScheduleResponse call() throws Exception {
 
-        return sdk.createSchedule(
+        return sdk.create(
             security,
             xMoovVersion,
             accountID,

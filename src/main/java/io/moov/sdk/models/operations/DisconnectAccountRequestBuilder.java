@@ -46,7 +46,7 @@ public class DisconnectAccountRequestBuilder {
 
     public DisconnectAccountResponse call() throws Exception {
 
-        return sdk.disconnectAccount(
+        return sdk.disconnect(
             security,
             xMoovVersion,
             accountID);

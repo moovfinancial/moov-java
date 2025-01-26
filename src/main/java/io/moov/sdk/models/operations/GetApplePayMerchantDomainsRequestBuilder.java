@@ -46,7 +46,7 @@ public class GetApplePayMerchantDomainsRequestBuilder {
 
     public GetApplePayMerchantDomainsResponse call() throws Exception {
 
-        return sdk.getApplePayMerchantDomains(
+        return sdk.getMerchantDomains(
             security,
             xMoovVersion,
             accountID);

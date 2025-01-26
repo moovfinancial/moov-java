@@ -53,7 +53,7 @@ public class GetAdjustmentRequestBuilder {
 
     public GetAdjustmentResponse call() throws Exception {
 
-        return sdk.getAdjustment(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

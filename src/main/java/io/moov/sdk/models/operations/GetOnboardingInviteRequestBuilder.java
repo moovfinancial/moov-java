@@ -46,7 +46,7 @@ public class GetOnboardingInviteRequestBuilder {
 
     public GetOnboardingInviteResponse call() throws Exception {
 
-        return sdk.getOnboardingInvite(
+        return sdk.getInvite(
             security,
             xMoovVersion,
             code);

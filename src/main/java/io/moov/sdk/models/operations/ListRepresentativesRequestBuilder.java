@@ -46,7 +46,7 @@ public class ListRepresentativesRequestBuilder {
 
     public ListRepresentativesResponse call() throws Exception {
 
-        return sdk.listRepresentatives(
+        return sdk.list(
             security,
             xMoovVersion,
             accountID);

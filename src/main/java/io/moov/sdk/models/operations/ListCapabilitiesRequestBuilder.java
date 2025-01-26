@@ -46,7 +46,7 @@ public class ListCapabilitiesRequestBuilder {
 
     public ListCapabilitiesResponse call() throws Exception {
 
-        return sdk.listCapabilities(
+        return sdk.list(
             security,
             xMoovVersion,
             accountID);

@@ -30,7 +30,7 @@ public class ListDisputesRequestBuilder {
 
     public ListDisputesResponse call() throws Exception {
 
-        return sdk.listDisputes(
+        return sdk.list(
             request,
             security);
     }

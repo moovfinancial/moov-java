@@ -31,7 +31,7 @@ public class GenerateEndToEndKeyRequestBuilder {
 
     public GenerateEndToEndKeyResponse call() throws Exception {
 
-        return sdk.generateEndToEndKey(
+        return sdk.generateKey(
             xMoovVersion);
     }
 }

@@ -54,30 +54,30 @@ public class Files implements
 
 
     /**
-     * Upload a file and link it to the specified Moov account.  -  - The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf,  - and png.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the  - `/accounts/{accountID}/files.write` scope.
+     * Upload a file and link it to the specified Moov account.  -  - The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf,  - and png.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.write` scope.
      * @return The call builder
      */
-    public UploadFileRequestBuilder uploadFile() {
+    public UploadFileRequestBuilder upload() {
         return new UploadFileRequestBuilder(this);
     }
 
     /**
-     * Upload a file and link it to the specified Moov account.  -  - The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf,  - and png.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the  - `/accounts/{accountID}/files.write` scope.
+     * Upload a file and link it to the specified Moov account.  -  - The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf,  - and png.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param fileUploadRequestMultiPart Request to upload a file for an account.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UploadFileResponse uploadFile(
+    public UploadFileResponse upload(
             UploadFileSecurity security,
             String accountID,
             FileUploadRequestMultiPart fileUploadRequestMultiPart) throws Exception {
-        return uploadFile(security, Optional.empty(), accountID, fileUploadRequestMultiPart);
+        return upload(security, Optional.empty(), accountID, fileUploadRequestMultiPart);
     }
     
     /**
-     * Upload a file and link it to the specified Moov account.  -  - The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf,  - and png.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the  - `/accounts/{accountID}/files.write` scope.
+     * Upload a file and link it to the specified Moov account.  -  - The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf,  - and png.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -93,7 +93,7 @@ public class Files implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UploadFileResponse uploadFile(
+    public UploadFileResponse upload(
             UploadFileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -259,28 +259,28 @@ public class Files implements
 
 
     /**
-     * List all the files associated with a particular Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the  - `/accounts/{accountID}/files.read` scope.
+     * List all the files associated with a particular Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * @return The call builder
      */
-    public ListFilesRequestBuilder listFiles() {
+    public ListFilesRequestBuilder list() {
         return new ListFilesRequestBuilder(this);
     }
 
     /**
-     * List all the files associated with a particular Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the  - `/accounts/{accountID}/files.read` scope.
+     * List all the files associated with a particular Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListFilesResponse listFiles(
+    public ListFilesResponse list(
             ListFilesSecurity security,
             String accountID) throws Exception {
-        return listFiles(security, Optional.empty(), accountID);
+        return list(security, Optional.empty(), accountID);
     }
     
     /**
-     * List all the files associated with a particular Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the  - `/accounts/{accountID}/files.read` scope.
+     * List all the files associated with a particular Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -295,7 +295,7 @@ public class Files implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListFilesResponse listFiles(
+    public ListFilesResponse list(
             ListFilesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
@@ -418,30 +418,30 @@ public class Files implements
 
 
     /**
-     * Retrieve file details associated with a specific Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the  - `/accounts/{accountID}/files.read` scope.
+     * Retrieve file details associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * @return The call builder
      */
-    public GetFileDetailsRequestBuilder getFileDetails() {
+    public GetFileDetailsRequestBuilder get() {
         return new GetFileDetailsRequestBuilder(this);
     }
 
     /**
-     * Retrieve file details associated with a specific Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the  - `/accounts/{accountID}/files.read` scope.
+     * Retrieve file details associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param fileID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetFileDetailsResponse getFileDetails(
+    public GetFileDetailsResponse get(
             GetFileDetailsSecurity security,
             String accountID,
             String fileID) throws Exception {
-        return getFileDetails(security, Optional.empty(), accountID, fileID);
+        return get(security, Optional.empty(), accountID, fileID);
     }
     
     /**
-     * Retrieve file details associated with a specific Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the  - `/accounts/{accountID}/files.read` scope.
+     * Retrieve file details associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -457,7 +457,7 @@ public class Files implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetFileDetailsResponse getFileDetails(
+    public GetFileDetailsResponse get(
             GetFileDetailsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

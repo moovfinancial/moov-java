@@ -73,7 +73,7 @@ public class ListPaymentMethodsRequestBuilder {
 
     public ListPaymentMethodsResponse call() throws Exception {
 
-        return sdk.listPaymentMethods(
+        return sdk.list(
             security,
             xMoovVersion,
             accountID,

@@ -53,7 +53,7 @@ public class GetPaymentLinkRequestBuilder {
 
     public GetPaymentLinkResponse call() throws Exception {
 
-        return sdk.getPaymentLink(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

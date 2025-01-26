@@ -53,7 +53,7 @@ public class ListDisputeEvidenceRequestBuilder {
 
     public ListDisputeEvidenceResponse call() throws Exception {
 
-        return sdk.listDisputeEvidence(
+        return sdk.listEvidence(
             security,
             xMoovVersion,
             accountID,

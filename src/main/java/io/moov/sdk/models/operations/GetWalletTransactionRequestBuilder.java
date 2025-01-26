@@ -60,7 +60,7 @@ public class GetWalletTransactionRequestBuilder {
 
     public GetWalletTransactionResponse call() throws Exception {
 
-        return sdk.getWalletTransaction(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

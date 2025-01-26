@@ -53,7 +53,7 @@ public class DisablePaymentLinkRequestBuilder {
 
     public DisablePaymentLinkResponse call() throws Exception {
 
-        return sdk.disablePaymentLink(
+        return sdk.disable(
             security,
             xMoovVersion,
             accountID,

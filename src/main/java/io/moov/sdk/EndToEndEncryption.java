@@ -47,15 +47,15 @@ public class EndToEndEncryption implements
 
 
     /**
-     * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/ping.read` scope.
+     * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
      * @return The call builder
      */
-    public TestEndToEndTokenRequestBuilder testEndToEndToken() {
+    public TestEndToEndTokenRequestBuilder testEncryptedToken() {
         return new TestEndToEndTokenRequestBuilder(this);
     }
 
     /**
-     * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/ping.read` scope.
+     * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
      * @param security The security details to use for authentication.
      * @param e2EEToken Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
     This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
@@ -63,14 +63,14 @@ public class EndToEndEncryption implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public TestEndToEndTokenResponse testEndToEndToken(
+    public TestEndToEndTokenResponse testEncryptedToken(
             TestEndToEndTokenSecurity security,
             E2EEToken e2EEToken) throws Exception {
-        return testEndToEndToken(security, Optional.empty(), e2EEToken);
+        return testEncryptedToken(security, Optional.empty(), e2EEToken);
     }
     
     /**
-     * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/ping.read` scope.
+     * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -87,7 +87,7 @@ public class EndToEndEncryption implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public TestEndToEndTokenResponse testEndToEndToken(
+    public TestEndToEndTokenResponse testEncryptedToken(
             TestEndToEndTokenSecurity security,
             Optional<? extends Versions> xMoovVersion,
             E2EEToken e2EEToken) throws Exception {
@@ -227,7 +227,7 @@ public class EndToEndEncryption implements
      * Generates a public key used to create a JWE token for passing secure authentication data through non-PCI compliant intermediaries.
      * @return The call builder
      */
-    public GenerateEndToEndKeyRequestBuilder generateEndToEndKey() {
+    public GenerateEndToEndKeyRequestBuilder generateKey() {
         return new GenerateEndToEndKeyRequestBuilder(this);
     }
 
@@ -236,8 +236,8 @@ public class EndToEndEncryption implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GenerateEndToEndKeyResponse generateEndToEndKeyDirect() throws Exception {
-        return generateEndToEndKey(Optional.empty());
+    public GenerateEndToEndKeyResponse generateKeyDirect() throws Exception {
+        return generateKey(Optional.empty());
     }
     
     /**
@@ -254,7 +254,7 @@ public class EndToEndEncryption implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GenerateEndToEndKeyResponse generateEndToEndKey(
+    public GenerateEndToEndKeyResponse generateKey(
             Optional<? extends Versions> xMoovVersion) throws Exception {
         GenerateEndToEndKeyRequest request =
             GenerateEndToEndKeyRequest

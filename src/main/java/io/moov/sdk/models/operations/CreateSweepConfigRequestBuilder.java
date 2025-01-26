@@ -54,7 +54,7 @@ public class CreateSweepConfigRequestBuilder {
 
     public CreateSweepConfigResponse call() throws Exception {
 
-        return sdk.createSweepConfig(
+        return sdk.createConfig(
             security,
             xMoovVersion,
             accountID,

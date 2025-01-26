@@ -44,28 +44,28 @@ public class PaymentMethods implements
 
 
     /**
-     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods  - guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * @return The call builder
      */
-    public ListPaymentMethodsRequestBuilder listPaymentMethods() {
+    public ListPaymentMethodsRequestBuilder list() {
         return new ListPaymentMethodsRequestBuilder(this);
     }
 
     /**
-     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods  - guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListPaymentMethodsResponse listPaymentMethods(
+    public ListPaymentMethodsResponse list(
             ListPaymentMethodsSecurity security,
             String accountID) throws Exception {
-        return listPaymentMethods(security, Optional.empty(), accountID, Optional.empty(), Optional.empty());
+        return list(security, Optional.empty(), accountID, Optional.empty(), Optional.empty());
     }
     
     /**
-     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods  - guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -77,12 +77,15 @@ public class PaymentMethods implements
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
-     * @param sourceID Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+     * @param sourceID Optional parameter to filter the account's payment methods by source ID. 
+
+    A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+    or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      * @param paymentMethodType The payment method type that represents a payment rail and directionality
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListPaymentMethodsResponse listPaymentMethods(
+    public ListPaymentMethodsResponse list(
             ListPaymentMethodsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -214,30 +217,30 @@ public class PaymentMethods implements
 
 
     /**
-     * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * @return The call builder
      */
-    public GetPaymentMethodRequestBuilder getPaymentMethod() {
+    public GetPaymentMethodRequestBuilder get() {
         return new GetPaymentMethodRequestBuilder(this);
     }
 
     /**
-     * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentMethodID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPaymentMethodResponse getPaymentMethod(
+    public GetPaymentMethodResponse get(
             GetPaymentMethodSecurity security,
             String accountID,
             String paymentMethodID) throws Exception {
-        return getPaymentMethod(security, Optional.empty(), accountID, paymentMethodID);
+        return get(security, Optional.empty(), accountID, paymentMethodID);
     }
     
     /**
-     * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -253,7 +256,7 @@ public class PaymentMethods implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPaymentMethodResponse getPaymentMethod(
+    public GetPaymentMethodResponse get(
             GetPaymentMethodSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

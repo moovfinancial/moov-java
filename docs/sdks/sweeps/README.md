@@ -5,16 +5,37 @@
 
 ### Available Operations
 
-* [createSweepConfig](#createsweepconfig) - Create a sweep config for a wallet.
-* [listSweepConfigs](#listsweepconfigs) - List sweep configs associated with an account.
-* [getSweepConfig](#getsweepconfig) - Get a sweep config associated with a wallet.
-* [patchSweepConfig](#patchsweepconfig) - Update settings on a sweep config.
-* [listSweeps](#listsweeps) - List sweeps associated with a wallet.
-* [getSweep](#getsweep) - Get details on a specific sweep.
+* [createConfig](#createconfig) - Create a sweep config for a wallet.
 
-## createSweepConfig
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+* [listConfigs](#listconfigs) - List sweep configs associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+* [getConfig](#getconfig) - Get a sweep config associated with a wallet.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+* [updateConfig](#updateconfig) - Update settings on a sweep config.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+* [list](#list) - List sweeps associated with a wallet.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+* [get](#get) - Get details on a specific sweep.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
+## createConfig
 
 Create a sweep config for a wallet.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 
 ### Example Usage
 
@@ -39,14 +60,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        CreateSweepConfigResponse res = sdk.sweeps().createSweepConfig()
+        CreateSweepConfigResponse res = sdk.sweeps().createConfig()
                 .security(CreateSweepConfigSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202401)
                 .accountID("3a373e85-2777-40fe-aacd-52d6fc641d76")
                 .createSweepConfig(CreateSweepConfig.builder()
                     .walletID("01234567-89ab-cdef-0123-456789abcdef")
@@ -84,9 +105,12 @@ public class Application {
 | models/errors/CreateSweepConfigError | 422                                  | application/json                     |
 | models/errors/APIException           | 4XX, 5XX                             | \*/\*                                |
 
-## listSweepConfigs
+## listConfigs
 
 List sweep configs associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
@@ -107,14 +131,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListSweepConfigsResponse res = sdk.sweeps().listSweepConfigs()
+        ListSweepConfigsResponse res = sdk.sweeps().listConfigs()
                 .security(ListSweepConfigsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202510)
+                .xMoovVersion(Versions.V202504)
                 .accountID("b06d7726-4020-4fef-9035-75779c0fc48c")
                 .call();
 
@@ -143,9 +167,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getSweepConfig
+## getConfig
 
 Get a sweep config associated with a wallet.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
@@ -166,7 +193,7 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetSweepConfigResponse res = sdk.sweeps().getSweepConfig()
+        GetSweepConfigResponse res = sdk.sweeps().getConfig()
                 .security(GetSweepConfigSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
@@ -204,9 +231,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## patchSweepConfig
+## updateConfig
 
 Update settings on a sweep config.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 
 ### Example Usage
 
@@ -220,8 +250,8 @@ import io.moov.sdk.models.components.SweepConfigStatus;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.PatchSweepConfigError;
-import io.moov.sdk.models.operations.PatchSweepConfigResponse;
-import io.moov.sdk.models.operations.PatchSweepConfigSecurity;
+import io.moov.sdk.models.operations.UpdateSweepConfigResponse;
+import io.moov.sdk.models.operations.UpdateSweepConfigSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -231,16 +261,16 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        PatchSweepConfigResponse res = sdk.sweeps().patchSweepConfig()
-                .security(PatchSweepConfigSecurity.builder()
+        UpdateSweepConfigResponse res = sdk.sweeps().updateConfig()
+                .security(UpdateSweepConfigSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202510)
-                .accountID("c0ee091a-5b72-49c9-9c8b-7cb99d7f9309")
-                .sweepConfigID("c1f1c60c-cb13-4bc6-891c-f34d96682f06")
+                .xMoovVersion(Versions.V202504)
+                .accountID("7573cb48-6325-4d3d-841d-81108fcfe6f2")
+                .sweepConfigID("49e8f3b1-259f-458e-9367-adb3b938f8c8")
                 .patchSweepConfig(PatchSweepConfig.builder()
                     .status(SweepConfigStatus.DISABLED)
                     .build())
@@ -255,17 +285,17 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                    | [io.moov.sdk.models.operations.PatchSweepConfigSecurity](../../models/operations/PatchSweepConfigSecurity.md) | :heavy_check_mark:                                                                                            | The security requirements to use for the request.                                                             |
-| `xMoovVersion`                                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                                    | :heavy_minus_sign:                                                                                            | Specify an API version.                                                                                       |
-| `accountID`                                                                                                   | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
-| `sweepConfigID`                                                                                               | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
-| `patchSweepConfig`                                                                                            | [PatchSweepConfig](../../models/components/PatchSweepConfig.md)                                               | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                      | [io.moov.sdk.models.operations.UpdateSweepConfigSecurity](../../models/operations/UpdateSweepConfigSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
+| `xMoovVersion`                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                      | :heavy_minus_sign:                                                                                              | Specify an API version.                                                                                         |
+| `accountID`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `sweepConfigID`                                                                                                 | *String*                                                                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `patchSweepConfig`                                                                                              | [PatchSweepConfig](../../models/components/PatchSweepConfig.md)                                                 | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
 
 ### Response
 
-**[PatchSweepConfigResponse](../../models/operations/PatchSweepConfigResponse.md)**
+**[UpdateSweepConfigResponse](../../models/operations/UpdateSweepConfigResponse.md)**
 
 ### Errors
 
@@ -275,9 +305,12 @@ public class Application {
 | models/errors/PatchSweepConfigError | 422                                 | application/json                    |
 | models/errors/APIException          | 4XX, 5XX                            | \*/\*                               |
 
-## listSweeps
+## list
 
 List sweeps associated with a wallet.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
@@ -305,7 +338,7 @@ public class Application {
                 .count(20L)
                 .build();
 
-        ListSweepsResponse res = sdk.sweeps().listSweeps()
+        ListSweepsResponse res = sdk.sweeps().list()
                 .request(req)
                 .security(ListSweepsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
@@ -339,9 +372,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getSweep
+## get
 
 Get details on a specific sweep.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
@@ -362,14 +398,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetSweepResponse res = sdk.sweeps().getSweep()
+        GetSweepResponse res = sdk.sweeps().get()
                 .security(GetSweepSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202510)
                 .accountID("adb697e6-2888-48b9-b2c5-f2c3d487add5")
                 .walletID("9f00e2b3-9dfb-48a3-9a25-a08e80f9cf36")
                 .sweepID("a5324f55-fbec-4323-94e4-c512608bb175")

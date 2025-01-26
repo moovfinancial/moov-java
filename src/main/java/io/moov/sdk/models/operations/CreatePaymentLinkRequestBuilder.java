@@ -54,7 +54,7 @@ public class CreatePaymentLinkRequestBuilder {
 
     public CreatePaymentLinkResponse call() throws Exception {
 
-        return sdk.createPaymentLink(
+        return sdk.create(
             security,
             xMoovVersion,
             accountID,

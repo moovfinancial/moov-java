@@ -68,7 +68,7 @@ public class LinkCardRequestBuilder {
 
     public LinkCardResponse call() throws Exception {
 
-        return sdk.linkCard(
+        return sdk.link(
             security,
             xMoovVersion,
             xWaitFor,

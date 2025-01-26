@@ -11,14 +11,14 @@ import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.BrandValidationError;
 import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateBrandRequest;
+import io.moov.sdk.models.operations.CreateBrandRequestBuilder;
+import io.moov.sdk.models.operations.CreateBrandResponse;
+import io.moov.sdk.models.operations.CreateBrandSecurity;
 import io.moov.sdk.models.operations.GetBrandRequest;
 import io.moov.sdk.models.operations.GetBrandRequestBuilder;
 import io.moov.sdk.models.operations.GetBrandResponse;
 import io.moov.sdk.models.operations.GetBrandSecurity;
-import io.moov.sdk.models.operations.PostBrandRequest;
-import io.moov.sdk.models.operations.PostBrandRequestBuilder;
-import io.moov.sdk.models.operations.PostBrandResponse;
-import io.moov.sdk.models.operations.PostBrandSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateBrandRequest;
 import io.moov.sdk.models.operations.UpdateBrandRequestBuilder;
@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Optional; 
 
 public class Branding implements
-            MethodCallPostBrand,
+            MethodCallCreateBrand,
             MethodCallGetBrand,
             MethodCallUpdateBrand {
 
@@ -54,30 +54,30 @@ public class Branding implements
 
 
     /**
-     * Creates the brand properties for the specified account.
+     * Create brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * @return The call builder
      */
-    public PostBrandRequestBuilder postBrand() {
-        return new PostBrandRequestBuilder(this);
+    public CreateBrandRequestBuilder create() {
+        return new CreateBrandRequestBuilder(this);
     }
 
     /**
-     * Creates the brand properties for the specified account.
+     * Create brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param brand
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public PostBrandResponse postBrand(
-            PostBrandSecurity security,
+    public CreateBrandResponse create(
+            CreateBrandSecurity security,
             String accountID,
             Brand brand) throws Exception {
-        return postBrand(security, Optional.empty(), accountID, brand);
+        return create(security, Optional.empty(), accountID, brand);
     }
     
     /**
-     * Creates the brand properties for the specified account.
+     * Create brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -93,13 +93,13 @@ public class Branding implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public PostBrandResponse postBrand(
-            PostBrandSecurity security,
+    public CreateBrandResponse create(
+            CreateBrandSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             Brand brand) throws Exception {
-        PostBrandRequest request =
-            PostBrandRequest
+        CreateBrandRequest request =
+            CreateBrandRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
@@ -108,7 +108,7 @@ public class Branding implements
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
-                PostBrandRequest.class,
+                CreateBrandRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/branding",
                 request, this.sdkConfiguration.globals);
@@ -142,7 +142,7 @@ public class Branding implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
-                      "postBrand", 
+                      "createBrand", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -153,7 +153,7 @@ public class Branding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "postBrand",
+                            "createBrand",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -162,7 +162,7 @@ public class Branding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
-                            "postBrand",
+                            "createBrand",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -171,7 +171,7 @@ public class Branding implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "postBrand",
+                            "createBrand",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -181,14 +181,14 @@ public class Branding implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        PostBrandResponse.Builder _resBuilder = 
-            PostBrandResponse
+        CreateBrandResponse.Builder _resBuilder = 
+            CreateBrandResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        PostBrandResponse _res = _resBuilder.build();
+        CreateBrandResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
@@ -259,28 +259,28 @@ public class Branding implements
 
 
     /**
-     * Gets the brand properties for the specified account.
+     * Get brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.read` scope.
      * @return The call builder
      */
-    public GetBrandRequestBuilder getBrand() {
+    public GetBrandRequestBuilder get() {
         return new GetBrandRequestBuilder(this);
     }
 
     /**
-     * Gets the brand properties for the specified account.
+     * Get brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetBrandResponse getBrand(
+    public GetBrandResponse get(
             GetBrandSecurity security,
             String accountID) throws Exception {
-        return getBrand(security, Optional.empty(), accountID);
+        return get(security, Optional.empty(), accountID);
     }
     
     /**
-     * Gets the brand properties for the specified account.
+     * Get brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -295,7 +295,7 @@ public class Branding implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetBrandResponse getBrand(
+    public GetBrandResponse get(
             GetBrandSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
@@ -418,30 +418,30 @@ public class Branding implements
 
 
     /**
-     * Updates the brand properties for the specified account.
+     * Updates the brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * @return The call builder
      */
-    public UpdateBrandRequestBuilder updateBrand() {
+    public UpdateBrandRequestBuilder update() {
         return new UpdateBrandRequestBuilder(this);
     }
 
     /**
-     * Updates the brand properties for the specified account.
+     * Updates the brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param updateBrand
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateBrandResponse updateBrand(
+    public UpdateBrandResponse update(
             UpdateBrandSecurity security,
             String accountID,
             UpdateBrand updateBrand) throws Exception {
-        return updateBrand(security, Optional.empty(), accountID, updateBrand);
+        return update(security, Optional.empty(), accountID, updateBrand);
     }
     
     /**
-     * Updates the brand properties for the specified account.
+     * Updates the brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -457,7 +457,7 @@ public class Branding implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateBrandResponse updateBrand(
+    public UpdateBrandResponse update(
             UpdateBrandSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

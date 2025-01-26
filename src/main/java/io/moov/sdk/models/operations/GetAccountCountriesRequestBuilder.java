@@ -46,7 +46,7 @@ public class GetAccountCountriesRequestBuilder {
 
     public GetAccountCountriesResponse call() throws Exception {
 
-        return sdk.getAccountCountries(
+        return sdk.getCountries(
             security,
             xMoovVersion,
             accountID);

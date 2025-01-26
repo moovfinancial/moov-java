@@ -30,7 +30,7 @@ public class ListIssuedCardAuthorizationEventsRequestBuilder {
 
     public ListIssuedCardAuthorizationEventsResponse call() throws Exception {
 
-        return sdk.listIssuedCardAuthorizationEvents(
+        return sdk.listAuthorizationEvents(
             request,
             security);
     }

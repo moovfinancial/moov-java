@@ -5,15 +5,17 @@
 
 ### Available Operations
 
-* [getEnrichmentAddress](#getenrichmentaddress) -   Fetch enriched address suggestions. Requires a partial address. 
+* [get](#get) - Fetch enriched address suggestions. Requires a partial address. 
   
-  To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
-## getEnrichmentAddress
+## get
 
-  Fetch enriched address suggestions. Requires a partial address. 
+Fetch enriched address suggestions. Requires a partial address. 
   
-  To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
 ### Example Usage
 
@@ -38,7 +40,7 @@ public class Application {
                 .search("<value>")
                 .build();
 
-        GetEnrichmentAddressResponse res = sdk.enrichedAddress().getEnrichmentAddress()
+        GetEnrichmentAddressResponse res = sdk.enrichedAddress().get()
                 .request(req)
                 .security(GetEnrichmentAddressSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()

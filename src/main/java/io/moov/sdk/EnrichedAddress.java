@@ -37,21 +37,21 @@ public class EnrichedAddress implements
 
 
     /**
-     *   Fetch enriched address suggestions. Requires a partial address.  -    -   To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Fetch enriched address suggestions. Requires a partial address.  -    - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @return The call builder
      */
-    public GetEnrichmentAddressRequestBuilder getEnrichmentAddress() {
+    public GetEnrichmentAddressRequestBuilder get() {
         return new GetEnrichmentAddressRequestBuilder(this);
     }
 
     /**
-     *   Fetch enriched address suggestions. Requires a partial address.  -    -   To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Fetch enriched address suggestions. Requires a partial address.  -    - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @param request The request object containing all of the parameters for the API call.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetEnrichmentAddressResponse getEnrichmentAddress(
+    public GetEnrichmentAddressResponse get(
             GetEnrichmentAddressRequest request,
             GetEnrichmentAddressSecurity security) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;

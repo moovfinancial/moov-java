@@ -54,7 +54,7 @@ public class CreateRepresentativeRequestBuilder {
 
     public CreateRepresentativeResponse call() throws Exception {
 
-        return sdk.createRepresentative(
+        return sdk.create(
             security,
             xMoovVersion,
             accountID,

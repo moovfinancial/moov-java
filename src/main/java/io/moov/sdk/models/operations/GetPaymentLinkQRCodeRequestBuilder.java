@@ -53,7 +53,7 @@ public class GetPaymentLinkQRCodeRequestBuilder {
 
     public GetPaymentLinkQRCodeResponse call() throws Exception {
 
-        return sdk.getPaymentLinkQRCode(
+        return sdk.getQRCode(
             security,
             xMoovVersion,
             accountID,

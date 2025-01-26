@@ -53,7 +53,7 @@ public class GetTransferRequestBuilder {
 
     public GetTransferResponse call() throws Exception {
 
-        return sdk.getTransfer(
+        return sdk.get(
             security,
             xMoovVersion,
             transferID,

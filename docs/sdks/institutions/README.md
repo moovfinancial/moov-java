@@ -5,15 +5,17 @@
 
 ### Available Operations
 
-* [listInstitutions](#listinstitutions) -   Search for institutions by either their name or routing number.
-  
-  To use this endpoint from the browser, you'll need to specify the `/fed.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+* [search](#search) - Search for institutions by either their name or routing number.
 
-## listInstitutions
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/fed.read` scope.
 
-  Search for institutions by either their name or routing number.
-  
-  To use this endpoint from the browser, you'll need to specify the `/fed.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+## search
+
+Search for institutions by either their name or routing number.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/fed.read` scope.
 
 ### Example Usage
 
@@ -38,7 +40,7 @@ public class Application {
         ListInstitutionsRequest req = ListInstitutionsRequest.builder()
                 .build();
 
-        ListInstitutionsResponse res = sdk.institutions().listInstitutions()
+        ListInstitutionsResponse res = sdk.institutions().search()
                 .request(req)
                 .security(ListInstitutionsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()

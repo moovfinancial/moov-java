@@ -46,7 +46,7 @@ public class RevokeOnboardingInviteRequestBuilder {
 
     public RevokeOnboardingInviteResponse call() throws Exception {
 
-        return sdk.revokeOnboardingInvite(
+        return sdk.revokeInvite(
             security,
             xMoovVersion,
             code);

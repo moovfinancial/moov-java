@@ -46,7 +46,7 @@ public class ListBankAccountsRequestBuilder {
 
     public ListBankAccountsResponse call() throws Exception {
 
-        return sdk.listBankAccounts(
+        return sdk.list(
             security,
             xMoovVersion,
             accountID);

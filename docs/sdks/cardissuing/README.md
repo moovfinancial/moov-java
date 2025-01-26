@@ -5,35 +5,35 @@
 
 ### Available Operations
 
-* [requestCard](#requestcard) - Request a virtual card be issued.
+* [request](#request) - Request a virtual card be issued.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [listIssuedCards](#listissuedcards) - List Moov issued cards existing for the account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+* [list](#list) - List Moov issued cards existing for the account.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [getIssuedCard](#getissuedcard) - Retrieve a single issued card associated with a Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+* [get](#get) - Retrieve a single issued card associated with a Moov account.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [updateIssuedCard](#updateissuedcard) - Update a Moov issued card.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+* [update](#update) - Update a Moov issued card.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [getFullIssuedCard](#getfullissuedcard) - Get issued card with PAN, CVV, and expiration. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
+* [getFull](#getfull) - Get issued card with PAN, CVV, and expiration. 
 
 Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
 
-## requestCard
+## request
 
 Request a virtual card be issued.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
 ### Example Usage
 
@@ -65,14 +65,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        RequestCardResponse res = sdk.cardIssuing().requestCard()
+        RequestCardResponse res = sdk.cardIssuing().request()
                 .security(RequestCardSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202501)
                 .accountID("9c0ff49b-9aaf-4815-b4a4-3e412558f6bc")
                 .requestCard(RequestCard.builder()
                     .fundingWalletID("df7610a6-b14e-4eee-9a55-1890b6b3207c")
@@ -132,12 +132,12 @@ public class Application {
 | models/errors/RequestCardError | 422                            | application/json               |
 | models/errors/APIException     | 4XX, 5XX                       | \*/\*                          |
 
-## listIssuedCards
+## list
 
 List Moov issued cards existing for the account.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
@@ -164,7 +164,7 @@ public class Application {
                 .count(20L)
                 .build();
 
-        ListIssuedCardsResponse res = sdk.cardIssuing().listIssuedCards()
+        ListIssuedCardsResponse res = sdk.cardIssuing().list()
                 .request(req)
                 .security(ListIssuedCardsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
@@ -198,12 +198,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getIssuedCard
+## get
 
 Retrieve a single issued card associated with a Moov account.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
@@ -224,7 +224,7 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetIssuedCardResponse res = sdk.cardIssuing().getIssuedCard()
+        GetIssuedCardResponse res = sdk.cardIssuing().get()
                 .security(GetIssuedCardSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
@@ -262,12 +262,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## updateIssuedCard
+## update
 
 Update a Moov issued card.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
 ### Example Usage
 
@@ -293,7 +293,7 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        UpdateIssuedCardResponse res = sdk.cardIssuing().updateIssuedCard()
+        UpdateIssuedCardResponse res = sdk.cardIssuing().update()
                 .security(UpdateIssuedCardSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
@@ -341,14 +341,14 @@ public class Application {
 | models/errors/UpdateIssuedCardError | 422                                 | application/json                    |
 | models/errors/APIException          | 4XX, 5XX                            | \*/\*                               |
 
-## getFullIssuedCard
+## getFull
 
 Get issued card with PAN, CVV, and expiration. 
 
 Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
 
 ### Example Usage
 
@@ -369,14 +369,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetFullIssuedCardResponse res = sdk.cardIssuing().getFullIssuedCard()
+        GetFullIssuedCardResponse res = sdk.cardIssuing().getFull()
                 .security(GetFullIssuedCardSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202401)
                 .accountID("f03c4c3e-2685-44e6-8d4b-0d5bd082a301")
                 .issuedCardID("1da6b593-679e-44ab-a9e4-6db6db4b8f46")
                 .call();

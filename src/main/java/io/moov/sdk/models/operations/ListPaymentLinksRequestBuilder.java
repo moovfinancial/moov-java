@@ -46,7 +46,7 @@ public class ListPaymentLinksRequestBuilder {
 
     public ListPaymentLinksResponse call() throws Exception {
 
-        return sdk.listPaymentLinks(
+        return sdk.list(
             security,
             xMoovVersion,
             accountID);

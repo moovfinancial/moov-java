@@ -43,28 +43,28 @@ public class Adjustments implements
 
 
     /**
-     * List adjustments associated with a Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/wallets.read` scope.
+     * List adjustments associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public ListAdjustmentsRequestBuilder listAdjustments() {
+    public ListAdjustmentsRequestBuilder list() {
         return new ListAdjustmentsRequestBuilder(this);
     }
 
     /**
-     * List adjustments associated with a Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/wallets.read` scope.
+     * List adjustments associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListAdjustmentsResponse listAdjustments(
+    public ListAdjustmentsResponse list(
             ListAdjustmentsSecurity security,
             String accountID) throws Exception {
-        return listAdjustments(security, Optional.empty(), accountID, Optional.empty());
+        return list(security, Optional.empty(), accountID, Optional.empty());
     }
     
     /**
-     * List adjustments associated with a Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/wallets.read` scope.
+     * List adjustments associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -80,7 +80,7 @@ public class Adjustments implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListAdjustmentsResponse listAdjustments(
+    public ListAdjustmentsResponse list(
             ListAdjustmentsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -210,30 +210,30 @@ public class Adjustments implements
 
 
     /**
-     * Retrieve a specific adjustment associated with a Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/wallets.read` scope.
+     * Retrieve a specific adjustment associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public GetAdjustmentRequestBuilder getAdjustment() {
+    public GetAdjustmentRequestBuilder get() {
         return new GetAdjustmentRequestBuilder(this);
     }
 
     /**
-     * Retrieve a specific adjustment associated with a Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/wallets.read` scope.
+     * Retrieve a specific adjustment associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param adjustmentID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAdjustmentResponse getAdjustment(
+    public GetAdjustmentResponse get(
             GetAdjustmentSecurity security,
             String accountID,
             String adjustmentID) throws Exception {
-        return getAdjustment(security, Optional.empty(), accountID, adjustmentID);
+        return get(security, Optional.empty(), accountID, adjustmentID);
     }
     
     /**
-     * Retrieve a specific adjustment associated with a Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/wallets.read` scope.
+     * Retrieve a specific adjustment associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -249,7 +249,7 @@ public class Adjustments implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAdjustmentResponse getAdjustment(
+    public GetAdjustmentResponse get(
             GetAdjustmentSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

@@ -38,21 +38,21 @@ public class Institutions implements
 
 
     /**
-     *   Search for institutions by either their name or routing number. -    -   To use this endpoint from the browser, you'll need to specify the `/fed.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Search for institutions by either their name or routing number. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/fed.read` scope.
      * @return The call builder
      */
-    public ListInstitutionsRequestBuilder listInstitutions() {
+    public ListInstitutionsRequestBuilder search() {
         return new ListInstitutionsRequestBuilder(this);
     }
 
     /**
-     *   Search for institutions by either their name or routing number. -    -   To use this endpoint from the browser, you'll need to specify the `/fed.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Search for institutions by either their name or routing number. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/fed.read` scope.
      * @param request The request object containing all of the parameters for the API call.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListInstitutionsResponse listInstitutions(
+    public ListInstitutionsResponse search(
             ListInstitutionsRequest request,
             ListInstitutionsSecurity security) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;

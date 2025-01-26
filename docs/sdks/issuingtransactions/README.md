@@ -5,33 +5,33 @@
 
 ### Available Operations
 
-* [listIssuedCardAuthorizations](#listissuedcardauthorizations) - List issued card authorizations associated with a Moov account.
+* [listAuthorizations](#listauthorizations) - List issued card authorizations associated with a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
-* [getIssuedCardAuthorization](#getissuedcardauthorization) - Retrieves details of an authorization associated with a specific Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+* [getAuthorization](#getauthorization) - Retrieves details of an authorization associated with a specific Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
-* [listIssuedCardAuthorizationEvents](#listissuedcardauthorizationevents) - List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+* [listAuthorizationEvents](#listauthorizationevents) - List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
-* [listIssuedCardTransactions](#listissuedcardtransactions) - List issued card transactions associated with a Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+* [list](#list) - List issued card transactions associated with a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
-* [getIssuedCardTransaction](#getissuedcardtransaction) - Retrieves details of an issued card transaction associated with a specific Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+* [get](#get) - Retrieves details of an issued card transaction associated with a specific Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
-## listIssuedCardAuthorizations
+## listAuthorizations
 
 List issued card authorizations associated with a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
@@ -58,7 +58,7 @@ public class Application {
                 .count(20L)
                 .build();
 
-        ListIssuedCardAuthorizationsResponse res = sdk.issuingTransactions().listIssuedCardAuthorizations()
+        ListIssuedCardAuthorizationsResponse res = sdk.issuingTransactions().listAuthorizations()
                 .request(req)
                 .security(ListIssuedCardAuthorizationsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
@@ -92,12 +92,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getIssuedCardAuthorization
+## getAuthorization
 
 Retrieves details of an authorization associated with a specific Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
@@ -118,14 +118,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetIssuedCardAuthorizationResponse res = sdk.issuingTransactions().getIssuedCardAuthorization()
+        GetIssuedCardAuthorizationResponse res = sdk.issuingTransactions().getAuthorization()
                 .security(GetIssuedCardAuthorizationSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202504)
                 .accountID("8c490d50-8951-4810-9506-ecd5648c2a39")
                 .authorizationID("f037a459-fbd3-47b9-8181-09847ea9f557")
                 .call();
@@ -156,12 +156,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## listIssuedCardAuthorizationEvents
+## listAuthorizationEvents
 
 List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
@@ -189,7 +189,7 @@ public class Application {
                 .count(20L)
                 .build();
 
-        ListIssuedCardAuthorizationEventsResponse res = sdk.issuingTransactions().listIssuedCardAuthorizationEvents()
+        ListIssuedCardAuthorizationEventsResponse res = sdk.issuingTransactions().listAuthorizationEvents()
                 .request(req)
                 .security(ListIssuedCardAuthorizationEventsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
@@ -223,12 +223,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## listIssuedCardTransactions
+## list
 
 List issued card transactions associated with a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
@@ -255,7 +255,7 @@ public class Application {
                 .count(20L)
                 .build();
 
-        ListIssuedCardTransactionsResponse res = sdk.issuingTransactions().listIssuedCardTransactions()
+        ListIssuedCardTransactionsResponse res = sdk.issuingTransactions().list()
                 .request(req)
                 .security(ListIssuedCardTransactionsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
@@ -289,12 +289,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getIssuedCardTransaction
+## get
 
 Retrieves details of an issued card transaction associated with a specific Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify 
-the `/accounts/{accountID}/issued-cards.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
@@ -315,14 +315,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetIssuedCardTransactionResponse res = sdk.issuingTransactions().getIssuedCardTransaction()
+        GetIssuedCardTransactionResponse res = sdk.issuingTransactions().get()
                 .security(GetIssuedCardTransactionSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .accountID("4bebfda4-7627-4fb8-9945-5ef57c25a867")
                 .cardTransactionID("33615eaf-e358-4f62-ac49-f7cca27d44ba")
                 .call();

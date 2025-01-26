@@ -54,7 +54,7 @@ public class CreateApplePaySessionRequestBuilder {
 
     public CreateApplePaySessionResponse call() throws Exception {
 
-        return sdk.createApplePaySession(
+        return sdk.createSession(
             security,
             xMoovVersion,
             accountID,

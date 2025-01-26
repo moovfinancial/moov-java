@@ -59,28 +59,28 @@ public class Onboarding implements
 
 
     /**
-     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.write` scope.
+     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
      * @return The call builder
      */
-    public CreateOnboardingInviteRequestBuilder createOnboardingInvite() {
+    public CreateOnboardingInviteRequestBuilder createInvite() {
         return new CreateOnboardingInviteRequestBuilder(this);
     }
 
     /**
-     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.write` scope.
+     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
      * @param security The security details to use for authentication.
      * @param onboardingInviteRequest Request to create an onboarding invite.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateOnboardingInviteResponse createOnboardingInvite(
+    public CreateOnboardingInviteResponse createInvite(
             CreateOnboardingInviteSecurity security,
             OnboardingInviteRequest onboardingInviteRequest) throws Exception {
-        return createOnboardingInvite(security, Optional.empty(), onboardingInviteRequest);
+        return createInvite(security, Optional.empty(), onboardingInviteRequest);
     }
     
     /**
-     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.write` scope.
+     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -95,7 +95,7 @@ public class Onboarding implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateOnboardingInviteResponse createOnboardingInvite(
+    public CreateOnboardingInviteResponse createInvite(
             CreateOnboardingInviteSecurity security,
             Optional<? extends Versions> xMoovVersion,
             OnboardingInviteRequest onboardingInviteRequest) throws Exception {
@@ -257,26 +257,26 @@ public class Onboarding implements
 
 
     /**
-     * List all the onboarding invites created by the caller's account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.read` scope.
+     * List all the onboarding invites created by the caller's account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
      * @return The call builder
      */
-    public ListOnboardingInvitesRequestBuilder listOnboardingInvites() {
+    public ListOnboardingInvitesRequestBuilder listInvites() {
         return new ListOnboardingInvitesRequestBuilder(this);
     }
 
     /**
-     * List all the onboarding invites created by the caller's account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.read` scope.
+     * List all the onboarding invites created by the caller's account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListOnboardingInvitesResponse listOnboardingInvites(
+    public ListOnboardingInvitesResponse listInvites(
             ListOnboardingInvitesSecurity security) throws Exception {
-        return listOnboardingInvites(security, Optional.empty());
+        return listInvites(security, Optional.empty());
     }
     
     /**
-     * List all the onboarding invites created by the caller's account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.read` scope.
+     * List all the onboarding invites created by the caller's account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -290,7 +290,7 @@ public class Onboarding implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListOnboardingInvitesResponse listOnboardingInvites(
+    public ListOnboardingInvitesResponse listInvites(
             ListOnboardingInvitesSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception {
         ListOnboardingInvitesRequest request =
@@ -409,28 +409,28 @@ public class Onboarding implements
 
 
     /**
-     * Retrieve details about an onboarding invite. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.read` scope.
+     * Retrieve details about an onboarding invite. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
      * @return The call builder
      */
-    public GetOnboardingInviteRequestBuilder getOnboardingInvite() {
+    public GetOnboardingInviteRequestBuilder getInvite() {
         return new GetOnboardingInviteRequestBuilder(this);
     }
 
     /**
-     * Retrieve details about an onboarding invite. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.read` scope.
+     * Retrieve details about an onboarding invite. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
      * @param security The security details to use for authentication.
      * @param code
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetOnboardingInviteResponse getOnboardingInvite(
+    public GetOnboardingInviteResponse getInvite(
             GetOnboardingInviteSecurity security,
             String code) throws Exception {
-        return getOnboardingInvite(security, Optional.empty(), code);
+        return getInvite(security, Optional.empty(), code);
     }
     
     /**
-     * Retrieve details about an onboarding invite. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.read` scope.
+     * Retrieve details about an onboarding invite. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -445,7 +445,7 @@ public class Onboarding implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetOnboardingInviteResponse getOnboardingInvite(
+    public GetOnboardingInviteResponse getInvite(
             GetOnboardingInviteSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String code) throws Exception {
@@ -568,28 +568,28 @@ public class Onboarding implements
 
 
     /**
-     * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.write` scope.
+     * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
      * @return The call builder
      */
-    public RevokeOnboardingInviteRequestBuilder revokeOnboardingInvite() {
+    public RevokeOnboardingInviteRequestBuilder revokeInvite() {
         return new RevokeOnboardingInviteRequestBuilder(this);
     }
 
     /**
-     * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.write` scope.
+     * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
      * @param security The security details to use for authentication.
      * @param code
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RevokeOnboardingInviteResponse revokeOnboardingInvite(
+    public RevokeOnboardingInviteResponse revokeInvite(
             RevokeOnboardingInviteSecurity security,
             String code) throws Exception {
-        return revokeOnboardingInvite(security, Optional.empty(), code);
+        return revokeInvite(security, Optional.empty(), code);
     }
     
     /**
-     * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.write` scope.
+     * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -604,7 +604,7 @@ public class Onboarding implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RevokeOnboardingInviteResponse revokeOnboardingInvite(
+    public RevokeOnboardingInviteResponse revokeInvite(
             RevokeOnboardingInviteSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String code) throws Exception {

@@ -7,15 +7,15 @@
 
 * [ping](#ping) - A simple endpoint to check auth.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/ping.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/ping.read` scope.
 
 ## ping
 
 A simple endpoint to check auth.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/ping.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/ping.read` scope.
 
 ### Example Usage
 

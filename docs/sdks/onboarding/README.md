@@ -5,29 +5,29 @@
 
 ### Available Operations
 
-* [createOnboardingInvite](#createonboardinginvite) - Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
+* [createInvite](#createinvite) - Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts.write` scope.
-* [listOnboardingInvites](#listonboardinginvites) - List all the onboarding invites created by the caller's account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts.write` scope.
+* [listInvites](#listinvites) - List all the onboarding invites created by the caller's account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts.read` scope.
-* [getOnboardingInvite](#getonboardinginvite) - Retrieve details about an onboarding invite.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts.read` scope.
+* [getInvite](#getinvite) - Retrieve details about an onboarding invite.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts.read` scope.
-* [revokeOnboardingInvite](#revokeonboardinginvite) - Revoke an onboarding invite, rendering the invitation link unusable.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts.read` scope.
+* [revokeInvite](#revokeinvite) - Revoke an onboarding invite, rendering the invitation link unusable.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts.write` scope.
 
-## createOnboardingInvite
+## createInvite
 
 Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts.write` scope.
 
 ### Example Usage
 
@@ -58,7 +58,7 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        CreateOnboardingInviteResponse res = sdk.onboarding().createOnboardingInvite()
+        CreateOnboardingInviteResponse res = sdk.onboarding().createInvite()
                 .security(CreateOnboardingInviteSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
@@ -111,12 +111,12 @@ public class Application {
 | models/errors/OnboardingInviteError | 422                                 | application/json                    |
 | models/errors/APIException          | 4XX, 5XX                            | \*/\*                               |
 
-## listOnboardingInvites
+## listInvites
 
 List all the onboarding invites created by the caller's account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts.read` scope.
 
 ### Example Usage
 
@@ -137,14 +137,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListOnboardingInvitesResponse res = sdk.onboarding().listOnboardingInvites()
+        ListOnboardingInvitesResponse res = sdk.onboarding().listInvites()
                 .security(ListOnboardingInvitesSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202504)
                 .call();
 
         if (res.onboardingInvites().isPresent()) {
@@ -171,12 +171,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getOnboardingInvite
+## getInvite
 
 Retrieve details about an onboarding invite.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts.read` scope.
 
 ### Example Usage
 
@@ -197,14 +197,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetOnboardingInviteResponse res = sdk.onboarding().getOnboardingInvite()
+        GetOnboardingInviteResponse res = sdk.onboarding().getInvite()
                 .security(GetOnboardingInviteSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202401)
+                .xMoovVersion(Versions.V202510)
                 .code("N1IA5eWYNh")
                 .call();
 
@@ -233,12 +233,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## revokeOnboardingInvite
+## revokeInvite
 
 Revoke an onboarding invite, rendering the invitation link unusable.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts.write` scope.
 
 ### Example Usage
 
@@ -259,14 +259,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        RevokeOnboardingInviteResponse res = sdk.onboarding().revokeOnboardingInvite()
+        RevokeOnboardingInviteResponse res = sdk.onboarding().revokeInvite()
                 .security(RevokeOnboardingInviteSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202510)
+                .xMoovVersion(Versions.V202401)
                 .code("N1IA5eWYNh")
                 .call();
 

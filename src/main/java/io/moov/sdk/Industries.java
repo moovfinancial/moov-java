@@ -38,26 +38,26 @@ public class Industries implements
 
 
     /**
-     *   Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.     -    -   To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @return The call builder
      */
-    public ListIndustriesRequestBuilder listIndustries() {
+    public ListIndustriesRequestBuilder list() {
         return new ListIndustriesRequestBuilder(this);
     }
 
     /**
-     *   Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.     -    -   To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListIndustriesResponse listIndustries(
+    public ListIndustriesResponse list(
             ListIndustriesSecurity security) throws Exception {
-        return listIndustries(security, Optional.empty());
+        return list(security, Optional.empty());
     }
     
     /**
-     *   Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.     -    -   To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -71,7 +71,7 @@ public class Industries implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListIndustriesResponse listIndustries(
+    public ListIndustriesResponse list(
             ListIndustriesSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception {
         ListIndustriesRequest request =

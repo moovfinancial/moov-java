@@ -54,7 +54,7 @@ public class UpdateBrandRequestBuilder {
 
     public UpdateBrandResponse call() throws Exception {
 
-        return sdk.updateBrand(
+        return sdk.update(
             security,
             xMoovVersion,
             accountID,

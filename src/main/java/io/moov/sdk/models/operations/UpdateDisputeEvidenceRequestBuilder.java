@@ -30,7 +30,7 @@ public class UpdateDisputeEvidenceRequestBuilder {
 
     public UpdateDisputeEvidenceResponse call() throws Exception {
 
-        return sdk.updateDisputeEvidence(
+        return sdk.updateEvidence(
             request,
             security);
     }

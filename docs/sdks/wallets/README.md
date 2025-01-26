@@ -5,18 +5,27 @@
 
 ### Available Operations
 
-* [listWallets](#listwallets) - List the wallets associated with a Moov account. Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+* [list](#list) - List the wallets associated with a Moov account. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [getWallet](#getwallet) - Get information on a specific wallet (e.g., the available balance). Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+* [get](#get) - Get information on a specific wallet (e.g., the available balance). 
 
-## listWallets
+Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
 
-List the wallets associated with a Moov account. Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+## list
+
+List the wallets associated with a Moov account. 
+
+Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
@@ -37,14 +46,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListWalletsResponse res = sdk.wallets().listWallets()
+        ListWalletsResponse res = sdk.wallets().list()
                 .security(ListWalletsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion(Versions.V202510)
                 .accountID("60acf390-dc7f-4510-9b9b-ec968d375f0c")
                 .call();
 
@@ -73,11 +82,14 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getWallet
+## get
 
-Get information on a specific wallet (e.g., the available balance). Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+Get information on a specific wallet (e.g., the available balance). 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
@@ -98,14 +110,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetWalletResponse res = sdk.wallets().getWallet()
+        GetWalletResponse res = sdk.wallets().get()
                 .security(GetWalletSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .accountID("499bec36-0099-43cb-884f-620887342259")
                 .walletID("bc779af6-b7d5-464a-ad1f-f6476fa72706")
                 .call();

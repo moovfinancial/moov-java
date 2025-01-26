@@ -54,7 +54,7 @@ public class UploadFileRequestBuilder {
 
     public UploadFileResponse call() throws Exception {
 
-        return sdk.uploadFile(
+        return sdk.upload(
             security,
             xMoovVersion,
             accountID,

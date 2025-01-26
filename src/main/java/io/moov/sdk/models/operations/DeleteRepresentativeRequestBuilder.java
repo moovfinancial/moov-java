@@ -53,7 +53,7 @@ public class DeleteRepresentativeRequestBuilder {
 
     public DeleteRepresentativeResponse call() throws Exception {
 
-        return sdk.deleteRepresentative(
+        return sdk.delete(
             security,
             xMoovVersion,
             accountID,

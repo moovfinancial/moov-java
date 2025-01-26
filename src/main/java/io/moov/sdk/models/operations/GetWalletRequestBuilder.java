@@ -53,7 +53,7 @@ public class GetWalletRequestBuilder {
 
     public GetWalletResponse call() throws Exception {
 
-        return sdk.getWallet(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

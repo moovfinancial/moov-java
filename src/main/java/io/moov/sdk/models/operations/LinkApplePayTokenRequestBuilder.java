@@ -54,7 +54,7 @@ public class LinkApplePayTokenRequestBuilder {
 
     public LinkApplePayTokenResponse call() throws Exception {
 
-        return sdk.linkApplePayToken(
+        return sdk.linkToken(
             security,
             xMoovVersion,
             accountID,

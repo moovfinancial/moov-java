@@ -61,7 +61,7 @@ public class UpdateScheduleRequestBuilder {
 
     public UpdateScheduleResponse call() throws Exception {
 
-        return sdk.updateSchedule(
+        return sdk.update(
             security,
             xMoovVersion,
             accountID,

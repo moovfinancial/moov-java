@@ -5,31 +5,31 @@
 
 ### Available Operations
 
-* [uploadFile](#uploadfile) - Upload a file and link it to the specified Moov account. 
+* [upload](#upload) - Upload a file and link it to the specified Moov account. 
 
 The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf, 
 and png. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the 
-`/accounts/{accountID}/files.write` scope.
-* [listFiles](#listfiles) - List all the files associated with a particular Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/files.write` scope.
+* [list](#list) - List all the files associated with a particular Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the 
-`/accounts/{accountID}/files.read` scope.
-* [getFileDetails](#getfiledetails) - Retrieve file details associated with a specific Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/files.read` scope.
+* [get](#get) - Retrieve file details associated with a specific Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the 
-`/accounts/{accountID}/files.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
-## uploadFile
+## upload
 
 Upload a file and link it to the specified Moov account. 
 
 The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf, 
 and png. 
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the 
-`/accounts/{accountID}/files.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/files.write` scope.
 
 ### Example Usage
 
@@ -56,19 +56,19 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        UploadFileResponse res = sdk.files().uploadFile()
+        UploadFileResponse res = sdk.files().upload()
                 .security(UploadFileSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202504)
                 .accountID("68f95825-1ae3-4f3f-8af2-789dd2a59d6d")
                 .fileUploadRequestMultiPart(FileUploadRequestMultiPart.builder()
                     .file(FileUploadRequestMultiPartFile.builder()
                         .fileName("example.file")
-                        .content("0xcaF7dB59f9".getBytes(StandardCharsets.UTF_8))
+                        .content("0xcc9e675ad1".getBytes(StandardCharsets.UTF_8))
                         .build())
                     .filePurpose(FilePurpose.REPRESENTATIVE_VERIFICATION)
                     .metadata("{\"requirement_id\": \"document.individual.verification\"}")
@@ -103,12 +103,12 @@ public class Application {
 | models/errors/FileValidationError | 422                               | application/json                  |
 | models/errors/APIException        | 4XX, 5XX                          | \*/\*                             |
 
-## listFiles
+## list
 
 List all the files associated with a particular Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the 
-`/accounts/{accountID}/files.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 ### Example Usage
 
@@ -129,14 +129,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListFilesResponse res = sdk.files().listFiles()
+        ListFilesResponse res = sdk.files().list()
                 .security(ListFilesSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202510)
                 .accountID("a3c35406-9eb6-4801-bbac-0649c31c058a")
                 .call();
 
@@ -165,12 +165,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getFileDetails
+## get
 
 Retrieve file details associated with a specific Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the 
-`/accounts/{accountID}/files.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 ### Example Usage
 
@@ -191,14 +191,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetFileDetailsResponse res = sdk.files().getFileDetails()
+        GetFileDetailsResponse res = sdk.files().get()
                 .security(GetFileDetailsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .accountID("346add0a-4dae-4729-8e74-1a50d00d677a")
                 .fileID("bf657841-ba2d-4060-ad21-eb2b7372cf85")
                 .call();

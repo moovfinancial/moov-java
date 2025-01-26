@@ -96,21 +96,21 @@ public class Disputes implements
 
 
     /**
-     * Returns the list of disputes.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Returns the list of disputes.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public ListDisputesRequestBuilder listDisputes() {
+    public ListDisputesRequestBuilder list() {
         return new ListDisputesRequestBuilder(this);
     }
 
     /**
-     * Returns the list of disputes.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Returns the list of disputes.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param request The request object containing all of the parameters for the API call.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListDisputesResponse listDisputes(
+    public ListDisputesResponse list(
             ListDisputesRequest request,
             ListDisputesSecurity security) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -230,30 +230,30 @@ public class Disputes implements
 
 
     /**
-     * Get a dispute by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get a dispute by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public GetDisputeRequestBuilder getDispute() {
+    public GetDisputeRequestBuilder get() {
         return new GetDisputeRequestBuilder(this);
     }
 
     /**
-     * Get a dispute by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get a dispute by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetDisputeResponse getDispute(
+    public GetDisputeResponse get(
             GetDisputeSecurity security,
             String accountID,
             String disputeID) throws Exception {
-        return getDispute(security, Optional.empty(), accountID, disputeID);
+        return get(security, Optional.empty(), accountID, disputeID);
     }
     
     /**
-     * Get a dispute by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get a dispute by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -269,7 +269,7 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetDisputeResponse getDispute(
+    public GetDisputeResponse get(
             GetDisputeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -394,30 +394,30 @@ public class Disputes implements
 
 
     /**
-     * Accepts a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Accepts liability for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public AcceptDisputeRequestBuilder acceptDispute() {
+    public AcceptDisputeRequestBuilder accept() {
         return new AcceptDisputeRequestBuilder(this);
     }
 
     /**
-     * Accepts a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Accepts liability for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public AcceptDisputeResponse acceptDispute(
+    public AcceptDisputeResponse accept(
             AcceptDisputeSecurity security,
             String accountID,
             String disputeID) throws Exception {
-        return acceptDispute(security, Optional.empty(), accountID, disputeID);
+        return accept(security, Optional.empty(), accountID, disputeID);
     }
     
     /**
-     * Accepts a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Accepts liability for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -433,7 +433,7 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public AcceptDisputeResponse acceptDispute(
+    public AcceptDisputeResponse accept(
             AcceptDisputeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -572,30 +572,30 @@ public class Disputes implements
 
 
     /**
-     * Returns a dispute's public evidence by its ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Returns a dispute's public evidence by its ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public ListDisputeEvidenceRequestBuilder listDisputeEvidence() {
+    public ListDisputeEvidenceRequestBuilder listEvidence() {
         return new ListDisputeEvidenceRequestBuilder(this);
     }
 
     /**
-     * Returns a dispute's public evidence by its ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Returns a dispute's public evidence by its ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListDisputeEvidenceResponse listDisputeEvidence(
+    public ListDisputeEvidenceResponse listEvidence(
             ListDisputeEvidenceSecurity security,
             String accountID,
             String disputeID) throws Exception {
-        return listDisputeEvidence(security, Optional.empty(), accountID, disputeID);
+        return listEvidence(security, Optional.empty(), accountID, disputeID);
     }
     
     /**
-     * Returns a dispute's public evidence by its ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Returns a dispute's public evidence by its ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -611,7 +611,7 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListDisputeEvidenceResponse listDisputeEvidence(
+    public ListDisputeEvidenceResponse listEvidence(
             ListDisputeEvidenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -736,15 +736,15 @@ public class Disputes implements
 
 
     /**
-     * Uploads a file as evidence for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Uploads a file as evidence for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public UploadDisputeEvidenceFileRequestBuilder uploadDisputeEvidenceFile() {
+    public UploadDisputeEvidenceFileRequestBuilder uploadEvidenceFile() {
         return new UploadDisputeEvidenceFileRequestBuilder(this);
     }
 
     /**
-     * Uploads a file as evidence for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Uploads a file as evidence for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
@@ -752,16 +752,16 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UploadDisputeEvidenceFileResponse uploadDisputeEvidenceFile(
+    public UploadDisputeEvidenceFileResponse uploadEvidenceFile(
             UploadDisputeEvidenceFileSecurity security,
             String accountID,
             String disputeID,
             CreateEvidenceFileMultiPart createEvidenceFileMultiPart) throws Exception {
-        return uploadDisputeEvidenceFile(security, Optional.empty(), accountID, disputeID, createEvidenceFileMultiPart);
+        return uploadEvidenceFile(security, Optional.empty(), accountID, disputeID, createEvidenceFileMultiPart);
     }
     
     /**
-     * Uploads a file as evidence for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Uploads a file as evidence for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -778,7 +778,7 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UploadDisputeEvidenceFileResponse uploadDisputeEvidenceFile(
+    public UploadDisputeEvidenceFileResponse uploadEvidenceFile(
             UploadDisputeEvidenceFileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -921,15 +921,15 @@ public class Disputes implements
 
 
     /**
-     * Uploads text as evidence for a dispute. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Uploads text as evidence for a dispute. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public UploadDisputeEvidenceTextRequestBuilder uploadDisputeEvidenceText() {
+    public UploadDisputeEvidenceTextRequestBuilder uploadEvidenceText() {
         return new UploadDisputeEvidenceTextRequestBuilder(this);
     }
 
     /**
-     * Uploads text as evidence for a dispute. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Uploads text as evidence for a dispute. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
@@ -937,16 +937,16 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UploadDisputeEvidenceTextResponse uploadDisputeEvidenceText(
+    public UploadDisputeEvidenceTextResponse uploadEvidenceText(
             UploadDisputeEvidenceTextSecurity security,
             String accountID,
             String disputeID,
             CreateEvidenceText createEvidenceText) throws Exception {
-        return uploadDisputeEvidenceText(security, Optional.empty(), accountID, disputeID, createEvidenceText);
+        return uploadEvidenceText(security, Optional.empty(), accountID, disputeID, createEvidenceText);
     }
     
     /**
-     * Uploads text as evidence for a dispute. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Uploads text as evidence for a dispute. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -963,7 +963,7 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UploadDisputeEvidenceTextResponse uploadDisputeEvidenceText(
+    public UploadDisputeEvidenceTextResponse uploadEvidenceText(
             UploadDisputeEvidenceTextSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -1117,30 +1117,30 @@ public class Disputes implements
 
 
     /**
-     * Submit the evidence associated with a dispute. -  - Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only - be submitted once per dispute.** -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Submit the evidence associated with a dispute. -  - Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only - be submitted once per dispute.** -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public SubmitDisputeEvidenceRequestBuilder submitDisputeEvidence() {
+    public SubmitDisputeEvidenceRequestBuilder submitEvidence() {
         return new SubmitDisputeEvidenceRequestBuilder(this);
     }
 
     /**
-     * Submit the evidence associated with a dispute. -  - Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only - be submitted once per dispute.** -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Submit the evidence associated with a dispute. -  - Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only - be submitted once per dispute.** -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public SubmitDisputeEvidenceResponse submitDisputeEvidence(
+    public SubmitDisputeEvidenceResponse submitEvidence(
             SubmitDisputeEvidenceSecurity security,
             String accountID,
             String disputeID) throws Exception {
-        return submitDisputeEvidence(security, Optional.empty(), accountID, disputeID);
+        return submitEvidence(security, Optional.empty(), accountID, disputeID);
     }
     
     /**
-     * Submit the evidence associated with a dispute. -  - Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only - be submitted once per dispute.** -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Submit the evidence associated with a dispute. -  - Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only - be submitted once per dispute.** -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -1156,7 +1156,7 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public SubmitDisputeEvidenceResponse submitDisputeEvidence(
+    public SubmitDisputeEvidenceResponse submitEvidence(
             SubmitDisputeEvidenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -1295,15 +1295,15 @@ public class Disputes implements
 
 
     /**
-     * Get dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public GetDisputeEvidenceRequestBuilder getDisputeEvidence() {
+    public GetDisputeEvidenceRequestBuilder getEvidence() {
         return new GetDisputeEvidenceRequestBuilder(this);
     }
 
     /**
-     * Get dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
@@ -1311,16 +1311,16 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetDisputeEvidenceResponse getDisputeEvidence(
+    public GetDisputeEvidenceResponse getEvidence(
             GetDisputeEvidenceSecurity security,
             String accountID,
             String disputeID,
             String evidenceID) throws Exception {
-        return getDisputeEvidence(security, Optional.empty(), accountID, disputeID, evidenceID);
+        return getEvidence(security, Optional.empty(), accountID, disputeID, evidenceID);
     }
     
     /**
-     * Get dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -1337,7 +1337,7 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetDisputeEvidenceResponse getDisputeEvidence(
+    public GetDisputeEvidenceResponse getEvidence(
             GetDisputeEvidenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -1464,21 +1464,21 @@ public class Disputes implements
 
 
     /**
-     * Updates dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Updates dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public UpdateDisputeEvidenceRequestBuilder updateDisputeEvidence() {
+    public UpdateDisputeEvidenceRequestBuilder updateEvidence() {
         return new UpdateDisputeEvidenceRequestBuilder(this);
     }
 
     /**
-     * Updates dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Updates dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param request The request object containing all of the parameters for the API call.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateDisputeEvidenceResponse updateDisputeEvidence(
+    public UpdateDisputeEvidenceResponse updateEvidence(
             UpdateDisputeEvidenceRequest request,
             UpdateDisputeEvidenceSecurity security) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -1620,15 +1620,15 @@ public class Disputes implements
 
 
     /**
-     * Deletes dispute evidence by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Deletes dispute evidence by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public DeleteDisputeEvidenceFileRequestBuilder deleteDisputeEvidenceFile() {
+    public DeleteDisputeEvidenceFileRequestBuilder deleteEvidence() {
         return new DeleteDisputeEvidenceFileRequestBuilder(this);
     }
 
     /**
-     * Deletes dispute evidence by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Deletes dispute evidence by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
@@ -1636,16 +1636,16 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DeleteDisputeEvidenceFileResponse deleteDisputeEvidenceFile(
+    public DeleteDisputeEvidenceFileResponse deleteEvidence(
             DeleteDisputeEvidenceFileSecurity security,
             String accountID,
             String disputeID,
             String evidenceID) throws Exception {
-        return deleteDisputeEvidenceFile(security, Optional.empty(), accountID, disputeID, evidenceID);
+        return deleteEvidence(security, Optional.empty(), accountID, disputeID, evidenceID);
     }
     
     /**
-     * Deletes dispute evidence by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Deletes dispute evidence by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -1662,7 +1662,7 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DeleteDisputeEvidenceFileResponse deleteDisputeEvidenceFile(
+    public DeleteDisputeEvidenceFileResponse deleteEvidence(
             DeleteDisputeEvidenceFileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -1792,15 +1792,15 @@ public class Disputes implements
 
 
     /**
-     * Downloads dispute evidence data by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Downloads dispute evidence data by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public GetDisputeEvidenceDataRequestBuilder getDisputeEvidenceData() {
+    public GetDisputeEvidenceDataRequestBuilder getEvidenceData() {
         return new GetDisputeEvidenceDataRequestBuilder(this);
     }
 
     /**
-     * Downloads dispute evidence data by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Downloads dispute evidence data by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
@@ -1808,16 +1808,16 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetDisputeEvidenceDataResponse getDisputeEvidenceData(
+    public GetDisputeEvidenceDataResponse getEvidenceData(
             GetDisputeEvidenceDataSecurity security,
             String accountID,
             String disputeID,
             String evidenceID) throws Exception {
-        return getDisputeEvidenceData(security, Optional.empty(), accountID, disputeID, evidenceID);
+        return getEvidenceData(security, Optional.empty(), accountID, disputeID, evidenceID);
     }
     
     /**
-     * Downloads dispute evidence data by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Downloads dispute evidence data by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -1834,7 +1834,7 @@ public class Disputes implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetDisputeEvidenceDataResponse getDisputeEvidenceData(
+    public GetDisputeEvidenceDataResponse getEvidenceData(
             GetDisputeEvidenceDataSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

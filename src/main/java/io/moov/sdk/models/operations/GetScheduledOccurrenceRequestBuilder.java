@@ -60,7 +60,7 @@ public class GetScheduledOccurrenceRequestBuilder {
 
     public GetScheduledOccurrenceResponse call() throws Exception {
 
-        return sdk.getScheduledOccurrence(
+        return sdk.getOccurrance(
             security,
             xMoovVersion,
             accountID,

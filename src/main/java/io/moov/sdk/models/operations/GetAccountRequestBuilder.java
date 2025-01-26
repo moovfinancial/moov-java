@@ -46,7 +46,7 @@ public class GetAccountRequestBuilder {
 
     public GetAccountResponse call() throws Exception {
 
-        return sdk.getAccount(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID);

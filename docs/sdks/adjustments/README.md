@@ -5,21 +5,21 @@
 
 ### Available Operations
 
-* [listAdjustments](#listadjustments) - List adjustments associated with a Moov account.
+* [list](#list) - List adjustments associated with a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/wallets.read` scope.
-* [getAdjustment](#getadjustment) - Retrieve a specific adjustment associated with a Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+* [get](#get) - Retrieve a specific adjustment associated with a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/wallets.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
-## listAdjustments
+## list
 
 List adjustments associated with a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/wallets.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
@@ -40,16 +40,16 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListAdjustmentsResponse res = sdk.adjustments().listAdjustments()
+        ListAdjustmentsResponse res = sdk.adjustments().list()
                 .security(ListAdjustmentsSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .accountID("27396e19-5d2d-4fba-876d-423579b4f37e")
-                .walletID("7396e195-d2df-4ba7-b6d4-23579b4f37e2")
+                .walletID("8a232aa0-b11b-48a0-8057-1e9e705d0e6e")
                 .call();
 
         if (res.adjustments().isPresent()) {
@@ -78,12 +78,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getAdjustment
+## get
 
 Retrieve a specific adjustment associated with a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/wallets.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
@@ -104,14 +104,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetAdjustmentResponse res = sdk.adjustments().getAdjustment()
+        GetAdjustmentResponse res = sdk.adjustments().get()
                 .security(GetAdjustmentSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion(Versions.V202510)
                 .accountID("7c43cb4c-5944-40f9-9bef-7925774b06b4")
                 .adjustmentID("244e9b18-1d97-4344-8a69-abf3c48078bc")
                 .call();

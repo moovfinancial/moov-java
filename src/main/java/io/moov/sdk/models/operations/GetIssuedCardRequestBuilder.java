@@ -53,7 +53,7 @@ public class GetIssuedCardRequestBuilder {
 
     public GetIssuedCardResponse call() throws Exception {
 
-        return sdk.getIssuedCard(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

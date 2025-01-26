@@ -61,7 +61,7 @@ public class UpdatePaymentLinkRequestBuilder {
 
     public UpdatePaymentLinkResponse call() throws Exception {
 
-        return sdk.updatePaymentLink(
+        return sdk.update(
             security,
             xMoovVersion,
             accountID,

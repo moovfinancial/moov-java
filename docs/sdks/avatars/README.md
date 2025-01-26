@@ -5,15 +5,17 @@
 
 ### Available Operations
 
-* [getAvatar](#getavatar) - Get avatar image for an account using a unique ID.    
+* [get](#get) - Get avatar image for an account using a unique ID.    
 
-To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
-## getAvatar
+## get
 
 Get avatar image for an account using a unique ID.    
 
-To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
 ### Example Usage
 
@@ -34,14 +36,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetAvatarResponse res = sdk.avatars().getAvatar()
+        GetAvatarResponse res = sdk.avatars().get()
                 .security(GetAvatarSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202401)
+                .xMoovVersion(Versions.V202510)
                 .uniqueID("<id>")
                 .call();
 

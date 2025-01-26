@@ -48,28 +48,28 @@ public class Underwriting implements
 
 
     /**
-     * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @return The call builder
      */
-    public GetUnderwritingRequestBuilder getUnderwriting() {
+    public GetUnderwritingRequestBuilder get() {
         return new GetUnderwritingRequestBuilder(this);
     }
 
     /**
-     * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetUnderwritingResponse getUnderwriting(
+    public GetUnderwritingResponse get(
             GetUnderwritingSecurity security,
             String accountID) throws Exception {
-        return getUnderwriting(security, Optional.empty(), accountID);
+        return get(security, Optional.empty(), accountID);
     }
     
     /**
-     * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -84,7 +84,7 @@ public class Underwriting implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetUnderwritingResponse getUnderwriting(
+    public GetUnderwritingResponse get(
             GetUnderwritingSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
@@ -207,30 +207,30 @@ public class Underwriting implements
 
 
     /**
-     * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
+     * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * @return The call builder
      */
-    public UpdateUnderwritingRequestBuilder updateUnderwriting() {
+    public UpdateUnderwritingRequestBuilder update() {
         return new UpdateUnderwritingRequestBuilder(this);
     }
 
     /**
-     * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
+     * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param updateUnderwriting
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateUnderwritingResponse updateUnderwriting(
+    public UpdateUnderwritingResponse update(
             UpdateUnderwritingSecurity security,
             String accountID,
             UpdateUnderwriting updateUnderwriting) throws Exception {
-        return updateUnderwriting(security, Optional.empty(), accountID, updateUnderwriting);
+        return update(security, Optional.empty(), accountID, updateUnderwriting);
     }
     
     /**
-     * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
+     * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -246,7 +246,7 @@ public class Underwriting implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateUnderwritingResponse updateUnderwriting(
+    public UpdateUnderwritingResponse update(
             UpdateUnderwritingSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

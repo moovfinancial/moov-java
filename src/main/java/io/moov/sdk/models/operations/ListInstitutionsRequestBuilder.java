@@ -30,7 +30,7 @@ public class ListInstitutionsRequestBuilder {
 
     public ListInstitutionsResponse call() throws Exception {
 
-        return sdk.listInstitutions(
+        return sdk.search(
             request,
             security);
     }

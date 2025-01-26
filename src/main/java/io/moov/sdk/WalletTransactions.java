@@ -43,21 +43,21 @@ public class WalletTransactions implements
 
 
     /**
-     * List all the transactions associated with a particular Moov wallet. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * List all the transactions associated with a particular Moov wallet.  -  - Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public ListWalletTransactionsRequestBuilder listWalletTransactions() {
+    public ListWalletTransactionsRequestBuilder list() {
         return new ListWalletTransactionsRequestBuilder(this);
     }
 
     /**
-     * List all the transactions associated with a particular Moov wallet. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * List all the transactions associated with a particular Moov wallet.  -  - Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param request The request object containing all of the parameters for the API call.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListWalletTransactionsResponse listWalletTransactions(
+    public ListWalletTransactionsResponse list(
             ListWalletTransactionsRequest request,
             ListWalletTransactionsSecurity security) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -177,15 +177,15 @@ public class WalletTransactions implements
 
 
     /**
-     * Get details on a specific wallet transaction. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To use this endpoint from a browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get details on a specific wallet transaction.  -  - Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public GetWalletTransactionRequestBuilder getWalletTransaction() {
+    public GetWalletTransactionRequestBuilder get() {
         return new GetWalletTransactionRequestBuilder(this);
     }
 
     /**
-     * Get details on a specific wallet transaction. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To use this endpoint from a browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get details on a specific wallet transaction.  -  - Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param walletID
@@ -193,16 +193,16 @@ public class WalletTransactions implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetWalletTransactionResponse getWalletTransaction(
+    public GetWalletTransactionResponse get(
             GetWalletTransactionSecurity security,
             String accountID,
             String walletID,
             String transactionID) throws Exception {
-        return getWalletTransaction(security, Optional.empty(), accountID, walletID, transactionID);
+        return get(security, Optional.empty(), accountID, walletID, transactionID);
     }
     
     /**
-     * Get details on a specific wallet transaction. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To use this endpoint from a browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get details on a specific wallet transaction.  -  - Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -219,7 +219,7 @@ public class WalletTransactions implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetWalletTransactionResponse getWalletTransaction(
+    public GetWalletTransactionResponse get(
             GetWalletTransactionSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

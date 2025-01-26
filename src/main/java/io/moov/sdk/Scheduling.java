@@ -70,30 +70,30 @@ public class Scheduling implements
 
 
     /**
-     * Describes the schedule to create or modify.
+     * Describes the schedule to create or modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public CreateScheduleRequestBuilder createSchedule() {
+    public CreateScheduleRequestBuilder create() {
         return new CreateScheduleRequestBuilder(this);
     }
 
     /**
-     * Describes the schedule to create or modify.
+     * Describes the schedule to create or modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param upsertSchedule
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateScheduleResponse createSchedule(
+    public CreateScheduleResponse create(
             CreateScheduleSecurity security,
             String accountID,
             UpsertSchedule upsertSchedule) throws Exception {
-        return createSchedule(security, Optional.empty(), accountID, upsertSchedule);
+        return create(security, Optional.empty(), accountID, upsertSchedule);
     }
     
     /**
-     * Describes the schedule to create or modify.
+     * Describes the schedule to create or modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -109,7 +109,7 @@ public class Scheduling implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateScheduleResponse createSchedule(
+    public CreateScheduleResponse create(
             CreateScheduleSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -275,28 +275,28 @@ public class Scheduling implements
 
 
     /**
-     * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+     * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public ListSchedulesRequestBuilder listSchedules() {
+    public ListSchedulesRequestBuilder list() {
         return new ListSchedulesRequestBuilder(this);
     }
 
     /**
-     * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+     * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListSchedulesResponse listSchedules(
+    public ListSchedulesResponse list(
             ListSchedulesSecurity security,
             String accountID) throws Exception {
-        return listSchedules(security, Optional.empty(), Optional.empty(), Optional.empty(), accountID);
+        return list(security, Optional.empty(), Optional.empty(), Optional.empty(), accountID);
     }
     
     /**
-     * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+     * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -313,7 +313,7 @@ public class Scheduling implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListSchedulesResponse listSchedules(
+    public ListSchedulesResponse list(
             ListSchedulesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             Optional<Long> skip,
@@ -445,15 +445,15 @@ public class Scheduling implements
 
 
     /**
-     * Describes the schedule to modify.
+     * Describes the schedule to modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public UpdateScheduleRequestBuilder updateSchedule() {
+    public UpdateScheduleRequestBuilder update() {
         return new UpdateScheduleRequestBuilder(this);
     }
 
     /**
-     * Describes the schedule to modify.
+     * Describes the schedule to modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param scheduleID
@@ -461,16 +461,16 @@ public class Scheduling implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateScheduleResponse updateSchedule(
+    public UpdateScheduleResponse update(
             UpdateScheduleSecurity security,
             String accountID,
             String scheduleID,
             UpsertSchedule upsertSchedule) throws Exception {
-        return updateSchedule(security, Optional.empty(), accountID, scheduleID, upsertSchedule);
+        return update(security, Optional.empty(), accountID, scheduleID, upsertSchedule);
     }
     
     /**
-     * Describes the schedule to modify.
+     * Describes the schedule to modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -487,7 +487,7 @@ public class Scheduling implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateScheduleResponse updateSchedule(
+    public UpdateScheduleResponse update(
             UpdateScheduleSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -655,30 +655,30 @@ public class Scheduling implements
 
 
     /**
-     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public GetSchedulesRequestBuilder getSchedules() {
+    public GetSchedulesRequestBuilder get() {
         return new GetSchedulesRequestBuilder(this);
     }
 
     /**
-     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param scheduleID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetSchedulesResponse getSchedules(
+    public GetSchedulesResponse get(
             GetSchedulesSecurity security,
             String accountID,
             String scheduleID) throws Exception {
-        return getSchedules(security, Optional.empty(), accountID, scheduleID);
+        return get(security, Optional.empty(), accountID, scheduleID);
     }
     
     /**
-     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -694,7 +694,7 @@ public class Scheduling implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetSchedulesResponse getSchedules(
+    public GetSchedulesResponse get(
             GetSchedulesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -819,30 +819,30 @@ public class Scheduling implements
 
 
     /**
-     * Describes the schedule to cancel.
+     * Describes the schedule to cancel. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public CancelScheduleRequestBuilder cancelSchedule() {
+    public CancelScheduleRequestBuilder cancel() {
         return new CancelScheduleRequestBuilder(this);
     }
 
     /**
-     * Describes the schedule to cancel.
+     * Describes the schedule to cancel. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param scheduleID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CancelScheduleResponse cancelSchedule(
+    public CancelScheduleResponse cancel(
             CancelScheduleSecurity security,
             String accountID,
             String scheduleID) throws Exception {
-        return cancelSchedule(security, Optional.empty(), accountID, scheduleID);
+        return cancel(security, Optional.empty(), accountID, scheduleID);
     }
     
     /**
-     * Describes the schedule to cancel.
+     * Describes the schedule to cancel. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -858,7 +858,7 @@ public class Scheduling implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CancelScheduleResponse cancelSchedule(
+    public CancelScheduleResponse cancel(
             CancelScheduleSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -986,15 +986,15 @@ public class Scheduling implements
 
 
     /**
-     * Defines an occurrence for when to run a transfer.
+     * Defines an occurrence for when to run a transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public GetScheduledOccurrenceRequestBuilder getScheduledOccurrence() {
+    public GetScheduledOccurrenceRequestBuilder getOccurrance() {
         return new GetScheduledOccurrenceRequestBuilder(this);
     }
 
     /**
-     * Defines an occurrence for when to run a transfer.
+     * Defines an occurrence for when to run a transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param scheduleID
@@ -1006,16 +1006,16 @@ public class Scheduling implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetScheduledOccurrenceResponse getScheduledOccurrence(
+    public GetScheduledOccurrenceResponse getOccurrance(
             GetScheduledOccurrenceSecurity security,
             String accountID,
             String scheduleID,
             String occurrenceFilter) throws Exception {
-        return getScheduledOccurrence(security, Optional.empty(), accountID, scheduleID, occurrenceFilter);
+        return getOccurrance(security, Optional.empty(), accountID, scheduleID, occurrenceFilter);
     }
     
     /**
-     * Defines an occurrence for when to run a transfer.
+     * Defines an occurrence for when to run a transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -1036,7 +1036,7 @@ public class Scheduling implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetScheduledOccurrenceResponse getScheduledOccurrence(
+    public GetScheduledOccurrenceResponse getOccurrance(
             GetScheduledOccurrenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

@@ -60,7 +60,7 @@ public class GetSweepRequestBuilder {
 
     public GetSweepResponse call() throws Exception {
 
-        return sdk.getSweep(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

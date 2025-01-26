@@ -46,7 +46,7 @@ public class GetAvatarRequestBuilder {
 
     public GetAvatarResponse call() throws Exception {
 
-        return sdk.getAvatar(
+        return sdk.get(
             security,
             xMoovVersion,
             uniqueID);

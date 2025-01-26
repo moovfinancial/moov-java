@@ -43,28 +43,28 @@ public class Wallets implements
 
 
     /**
-     * List the wallets associated with a Moov account. Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * List the wallets associated with a Moov account.  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public ListWalletsRequestBuilder listWallets() {
+    public ListWalletsRequestBuilder list() {
         return new ListWalletsRequestBuilder(this);
     }
 
     /**
-     * List the wallets associated with a Moov account. Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * List the wallets associated with a Moov account.  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListWalletsResponse listWallets(
+    public ListWalletsResponse list(
             ListWalletsSecurity security,
             String accountID) throws Exception {
-        return listWallets(security, Optional.empty(), accountID);
+        return list(security, Optional.empty(), accountID);
     }
     
     /**
-     * List the wallets associated with a Moov account. Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * List the wallets associated with a Moov account.  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -79,7 +79,7 @@ public class Wallets implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListWalletsResponse listWallets(
+    public ListWalletsResponse list(
             ListWalletsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
@@ -202,30 +202,30 @@ public class Wallets implements
 
 
     /**
-     * Get information on a specific wallet (e.g., the available balance). Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get information on a specific wallet (e.g., the available balance).  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @return The call builder
      */
-    public GetWalletRequestBuilder getWallet() {
+    public GetWalletRequestBuilder get() {
         return new GetWalletRequestBuilder(this);
     }
 
     /**
-     * Get information on a specific wallet (e.g., the available balance). Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get information on a specific wallet (e.g., the available balance).  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param walletID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetWalletResponse getWallet(
+    public GetWalletResponse get(
             GetWalletSecurity security,
             String accountID,
             String walletID) throws Exception {
-        return getWallet(security, Optional.empty(), accountID, walletID);
+        return get(security, Optional.empty(), accountID, walletID);
     }
     
     /**
-     * Get information on a specific wallet (e.g., the available balance). Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get information on a specific wallet (e.g., the available balance).  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -241,7 +241,7 @@ public class Wallets implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetWalletResponse getWallet(
+    public GetWalletResponse get(
             GetWalletSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

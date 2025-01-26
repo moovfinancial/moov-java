@@ -53,7 +53,7 @@ public class DisableCardRequestBuilder {
 
     public DisableCardResponse call() throws Exception {
 
-        return sdk.disableCard(
+        return sdk.disable(
             security,
             xMoovVersion,
             accountID,

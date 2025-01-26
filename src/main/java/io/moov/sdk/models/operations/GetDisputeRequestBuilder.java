@@ -53,7 +53,7 @@ public class GetDisputeRequestBuilder {
 
     public GetDisputeResponse call() throws Exception {
 
-        return sdk.getDispute(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

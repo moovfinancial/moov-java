@@ -46,7 +46,7 @@ public class GetUnderwritingRequestBuilder {
 
     public GetUnderwritingResponse call() throws Exception {
 
-        return sdk.getUnderwriting(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID);

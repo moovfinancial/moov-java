@@ -30,7 +30,10 @@ public class ListPaymentMethodsRequest {
     private String accountID;
 
     /**
-     * Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+     * Optional parameter to filter the account's payment methods by source ID. 
+     * 
+     * A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+     * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=sourceID")
     private Optional<String> sourceID;
@@ -77,7 +80,10 @@ public class ListPaymentMethodsRequest {
     }
 
     /**
-     * Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+     * Optional parameter to filter the account's payment methods by source ID. 
+     * 
+     * A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+     * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      */
     @JsonIgnore
     public Optional<String> sourceID() {
@@ -122,7 +128,10 @@ public class ListPaymentMethodsRequest {
     }
 
     /**
-     * Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+     * Optional parameter to filter the account's payment methods by source ID. 
+     * 
+     * A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+     * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      */
     public ListPaymentMethodsRequest withSourceID(String sourceID) {
         Utils.checkNotNull(sourceID, "sourceID");
@@ -131,7 +140,10 @@ public class ListPaymentMethodsRequest {
     }
 
     /**
-     * Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+     * Optional parameter to filter the account's payment methods by source ID. 
+     * 
+     * A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+     * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      */
     public ListPaymentMethodsRequest withSourceID(Optional<String> sourceID) {
         Utils.checkNotNull(sourceID, "sourceID");
@@ -230,7 +242,10 @@ public class ListPaymentMethodsRequest {
         }
 
         /**
-         * Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+         * Optional parameter to filter the account's payment methods by source ID. 
+         * 
+         * A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+         * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
          */
         public Builder sourceID(String sourceID) {
             Utils.checkNotNull(sourceID, "sourceID");
@@ -239,7 +254,10 @@ public class ListPaymentMethodsRequest {
         }
 
         /**
-         * Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+         * Optional parameter to filter the account's payment methods by source ID. 
+         * 
+         * A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+         * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
          */
         public Builder sourceID(Optional<String> sourceID) {
             Utils.checkNotNull(sourceID, "sourceID");

@@ -33,14 +33,14 @@ public class ListWalletTransactionsRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=walletID")
-    private String walletID;
-
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
+
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=walletID")
+    private String walletID;
 
     /**
      * Optional parameter to filter by transaction type.
@@ -100,9 +100,9 @@ public class ListWalletTransactionsRequest {
     public ListWalletTransactionsRequest(
             Optional<? extends Versions> xMoovVersion,
             String accountID,
-            String walletID,
             Optional<Long> skip,
             Optional<Long> count,
+            String walletID,
             Optional<? extends WalletTransactionType> transactionType,
             Optional<? extends WalletTransactionSourceType> sourceType,
             Optional<String> sourceID,
@@ -114,9 +114,9 @@ public class ListWalletTransactionsRequest {
             Optional<String> sweepID) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(accountID, "accountID");
-        Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
+        Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(transactionType, "transactionType");
         Utils.checkNotNull(sourceType, "sourceType");
         Utils.checkNotNull(sourceID, "sourceID");
@@ -128,9 +128,9 @@ public class ListWalletTransactionsRequest {
         Utils.checkNotNull(sweepID, "sweepID");
         this.xMoovVersion = xMoovVersion;
         this.accountID = accountID;
-        this.walletID = walletID;
         this.skip = skip;
         this.count = count;
+        this.walletID = walletID;
         this.transactionType = transactionType;
         this.sourceType = sourceType;
         this.sourceID = sourceID;
@@ -145,7 +145,7 @@ public class ListWalletTransactionsRequest {
     public ListWalletTransactionsRequest(
             String accountID,
             String walletID) {
-        this(Optional.empty(), accountID, walletID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), accountID, Optional.empty(), Optional.empty(), walletID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -163,11 +163,6 @@ public class ListWalletTransactionsRequest {
     }
 
     @JsonIgnore
-    public String walletID() {
-        return walletID;
-    }
-
-    @JsonIgnore
     public Optional<Long> skip() {
         return skip;
     }
@@ -175,6 +170,11 @@ public class ListWalletTransactionsRequest {
     @JsonIgnore
     public Optional<Long> count() {
         return count;
+    }
+
+    @JsonIgnore
+    public String walletID() {
+        return walletID;
     }
 
     /**
@@ -280,12 +280,6 @@ public class ListWalletTransactionsRequest {
         return this;
     }
 
-    public ListWalletTransactionsRequest withWalletID(String walletID) {
-        Utils.checkNotNull(walletID, "walletID");
-        this.walletID = walletID;
-        return this;
-    }
-
     public ListWalletTransactionsRequest withSkip(long skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = Optional.ofNullable(skip);
@@ -307,6 +301,12 @@ public class ListWalletTransactionsRequest {
     public ListWalletTransactionsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
+        return this;
+    }
+
+    public ListWalletTransactionsRequest withWalletID(String walletID) {
+        Utils.checkNotNull(walletID, "walletID");
+        this.walletID = walletID;
         return this;
     }
 
@@ -484,9 +484,9 @@ public class ListWalletTransactionsRequest {
         return 
             Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.walletID, other.walletID) &&
             Objects.deepEquals(this.skip, other.skip) &&
             Objects.deepEquals(this.count, other.count) &&
+            Objects.deepEquals(this.walletID, other.walletID) &&
             Objects.deepEquals(this.transactionType, other.transactionType) &&
             Objects.deepEquals(this.sourceType, other.sourceType) &&
             Objects.deepEquals(this.sourceID, other.sourceID) &&
@@ -503,9 +503,9 @@ public class ListWalletTransactionsRequest {
         return Objects.hash(
             xMoovVersion,
             accountID,
-            walletID,
             skip,
             count,
+            walletID,
             transactionType,
             sourceType,
             sourceID,
@@ -522,9 +522,9 @@ public class ListWalletTransactionsRequest {
         return Utils.toString(ListWalletTransactionsRequest.class,
                 "xMoovVersion", xMoovVersion,
                 "accountID", accountID,
-                "walletID", walletID,
                 "skip", skip,
                 "count", count,
+                "walletID", walletID,
                 "transactionType", transactionType,
                 "sourceType", sourceType,
                 "sourceID", sourceID,
@@ -542,11 +542,11 @@ public class ListWalletTransactionsRequest {
  
         private String accountID;
  
-        private String walletID;
- 
         private Optional<Long> skip = Optional.empty();
  
         private Optional<Long> count = Optional.empty();
+ 
+        private String walletID;
  
         private Optional<? extends WalletTransactionType> transactionType = Optional.empty();
  
@@ -594,12 +594,6 @@ public class ListWalletTransactionsRequest {
             return this;
         }
 
-        public Builder walletID(String walletID) {
-            Utils.checkNotNull(walletID, "walletID");
-            this.walletID = walletID;
-            return this;
-        }
-
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
@@ -621,6 +615,12 @@ public class ListWalletTransactionsRequest {
         public Builder count(Optional<Long> count) {
             Utils.checkNotNull(count, "count");
             this.count = count;
+            return this;
+        }
+
+        public Builder walletID(String walletID) {
+            Utils.checkNotNull(walletID, "walletID");
+            this.walletID = walletID;
             return this;
         }
 
@@ -790,9 +790,9 @@ public class ListWalletTransactionsRequest {
             return new ListWalletTransactionsRequest(
                 xMoovVersion,
                 accountID,
-                walletID,
                 skip,
                 count,
+                walletID,
                 transactionType,
                 sourceType,
                 sourceID,

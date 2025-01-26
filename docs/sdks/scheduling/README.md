@@ -5,16 +5,37 @@
 
 ### Available Operations
 
-* [createSchedule](#createschedule) - Describes the schedule to create or modify.
-* [listSchedules](#listschedules) - Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
-* [updateSchedule](#updateschedule) - Describes the schedule to modify.
-* [getSchedules](#getschedules) - Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
-* [cancelSchedule](#cancelschedule) - Describes the schedule to cancel.
-* [getScheduledOccurrence](#getscheduledoccurrence) - Defines an occurrence for when to run a transfer.
+* [create](#create) - Describes the schedule to create or modify.
 
-## createSchedule
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [list](#list) - Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [update](#update) - Describes the schedule to modify.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [get](#get) - Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [cancel](#cancel) - Describes the schedule to cancel.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [getOccurrance](#getoccurrance) - Defines an occurrence for when to run a transfer.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+## create
 
 Describes the schedule to create or modify.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -47,14 +68,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        CreateScheduleResponse res = sdk.scheduling().createSchedule()
+        CreateScheduleResponse res = sdk.scheduling().create()
                 .security(CreateScheduleSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202510)
+                .xMoovVersion(Versions.V202504)
                 .accountID("4ee0c8f9-d96c-44a5-924b-28f02e5d05ca")
                 .upsertSchedule(UpsertSchedule.builder()
                     .occurrences(List.of(
@@ -217,9 +238,12 @@ public class Application {
 | models/errors/ScheduleValidationError | 422                                   | application/json                      |
 | models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |
 
-## listSchedules
+## list
 
 Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -240,14 +264,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListSchedulesResponse res = sdk.scheduling().listSchedules()
+        ListSchedulesResponse res = sdk.scheduling().list()
                 .security(ListSchedulesSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .skip(60L)
                 .count(20L)
                 .accountID("f5b39da1-b677-43d6-b114-65cbbea83ad5")
@@ -280,9 +304,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## updateSchedule
+## update
 
 Describes the schedule to modify.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -315,14 +342,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        UpdateScheduleResponse res = sdk.scheduling().updateSchedule()
+        UpdateScheduleResponse res = sdk.scheduling().update()
                 .security(UpdateScheduleSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion(Versions.LATEST)
                 .accountID("c0aa3b4b-9122-4f67-8d60-fde10f180239")
                 .scheduleID("9ab32094-a459-49c7-9ce9-437b9e400834")
                 .upsertSchedule(UpsertSchedule.builder()
@@ -455,9 +482,12 @@ public class Application {
 | models/errors/ScheduleValidationError | 422                                   | application/json                      |
 | models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |
 
-## getSchedules
+## get
 
 Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -478,14 +508,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetSchedulesResponse res = sdk.scheduling().getSchedules()
+        GetSchedulesResponse res = sdk.scheduling().get()
                 .security(GetSchedulesSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202510)
                 .accountID("aa7a59b8-5d59-4efd-99e7-b644e71e5f8c")
                 .scheduleID("605976e8-f3ff-4e64-9b41-7255577d6f44")
                 .call();
@@ -516,9 +546,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## cancelSchedule
+## cancel
 
 Describes the schedule to cancel.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -540,14 +573,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        CancelScheduleResponse res = sdk.scheduling().cancelSchedule()
+        CancelScheduleResponse res = sdk.scheduling().cancel()
                 .security(CancelScheduleSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202401)
                 .accountID("a1303a1c-8708-447e-a64b-5dba8417b641")
                 .scheduleID("ab5ca483-e27d-48f0-b596-09eed517874f")
                 .call();
@@ -577,9 +610,12 @@ public class Application {
 | models/errors/GenericError | 400, 409                   | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getScheduledOccurrence
+## getOccurrance
 
 Defines an occurrence for when to run a transfer.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -600,14 +636,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetScheduledOccurrenceResponse res = sdk.scheduling().getScheduledOccurrence()
+        GetScheduledOccurrenceResponse res = sdk.scheduling().getOccurrance()
                 .security(GetScheduledOccurrenceSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion(Versions.V202510)
                 .accountID("7175f455-a6d6-4b87-8e24-cbd12c7dabe7")
                 .scheduleID("a4ffa63d-9228-4488-8f27-d2ff59d7760c")
                 .occurrenceFilter("<value>")

@@ -30,7 +30,7 @@ public class ListSweepsRequestBuilder {
 
     public ListSweepsResponse call() throws Exception {
 
-        return sdk.listSweeps(
+        return sdk.list(
             request,
             security);
     }

@@ -53,7 +53,7 @@ public class GetIssuedCardAuthorizationRequestBuilder {
 
     public GetIssuedCardAuthorizationResponse call() throws Exception {
 
-        return sdk.getIssuedCardAuthorization(
+        return sdk.getAuthorization(
             security,
             xMoovVersion,
             accountID,

@@ -54,7 +54,7 @@ public class GetCapabilityRequestBuilder {
 
     public GetCapabilityResponse call() throws Exception {
 
-        return sdk.getCapability(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

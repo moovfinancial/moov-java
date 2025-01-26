@@ -37,13 +37,15 @@ public class Moov {
 
     private final Adjustments adjustments;
 
-    private final Cards cards;
+    private final ApplePay applePay;
 
     private final BankAccounts bankAccounts;
 
     private final Branding branding;
 
     private final Capabilities capabilities;
+
+    private final Cards cards;
 
     private final Disputes disputes;
 
@@ -99,8 +101,8 @@ public class Moov {
         return adjustments;
     }
 
-    public Cards cards() {
-        return cards;
+    public ApplePay applePay() {
+        return applePay;
     }
 
     public BankAccounts bankAccounts() {
@@ -113,6 +115,10 @@ public class Moov {
 
     public Capabilities capabilities() {
         return capabilities;
+    }
+
+    public Cards cards() {
+        return cards;
     }
 
     public Disputes disputes() {
@@ -358,10 +364,11 @@ public class Moov {
         this.sdkConfiguration = sdkConfiguration;
         this.accounts = new Accounts(sdkConfiguration);
         this.adjustments = new Adjustments(sdkConfiguration);
-        this.cards = new Cards(sdkConfiguration);
+        this.applePay = new ApplePay(sdkConfiguration);
         this.bankAccounts = new BankAccounts(sdkConfiguration);
         this.branding = new Branding(sdkConfiguration);
         this.capabilities = new Capabilities(sdkConfiguration);
+        this.cards = new Cards(sdkConfiguration);
         this.disputes = new Disputes(sdkConfiguration);
         this.billing = new Billing(sdkConfiguration);
         this.files = new Files(sdkConfiguration);

@@ -5,27 +5,29 @@
 
 ### Available Operations
 
-* [createRepresentative](#createrepresentative) - Moov accounts associated with businesses require information regarding individuals who represent the business. 
+* [create](#create) - Moov accounts associated with businesses require information regarding individuals who represent the business. 
 You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [listRepresentatives](#listrepresentatives) - A Moov account may have multiple representatives depending on the associated business’s ownership and management structure. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+* [list](#list) - A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
 You can use this method to list all the representatives for a given Moov account. 
 Note that Moov accounts associated with an individual do not have representatives. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [deleteRepresentative](#deleterepresentative) - Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+* [delete](#delete) - Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [getRepresentative](#getrepresentative) - Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+* [get](#get) - Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [updateRepresentative](#updaterepresentative) - If a representative’s information has changed you can patch the information associated with a specific representative ID. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+* [update](#update) - If a representative's information has changed you can patch the information associated with a specific representative ID. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
-
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 
 When **can** profile data be updated:
 
@@ -33,19 +35,23 @@ When **can** profile data be updated:
 - During the verification process, missing or incomplete profile data can be edited.
 - Verified representatives can only add missing profile data.
 
-When **can’t** profile data be updated:
+When **can't** profile data be updated:
 
 - Verified representatives cannot change any existing profile data.
 
 If you need to update information in a locked state, please contact Moov support.
 
-## createRepresentative
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+
+## create
 
 Moov accounts associated with businesses require information regarding individuals who represent the business. 
 You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
@@ -74,7 +80,7 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        CreateRepresentativeResponse res = sdk.representatives().createRepresentative()
+        CreateRepresentativeResponse res = sdk.representatives().create()
                 .security(CreateRepresentativeSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
@@ -143,14 +149,15 @@ public class Application {
 | models/errors/RepresentativeValidationError | 422                                         | application/json                            |
 | models/errors/APIException                  | 4XX, 5XX                                    | \*/\*                                       |
 
-## listRepresentatives
+## list
 
-A Moov account may have multiple representatives depending on the associated business’s ownership and management structure. 
+A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
 You can use this method to list all the representatives for a given Moov account. 
 Note that Moov accounts associated with an individual do not have representatives. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
@@ -171,14 +178,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListRepresentativesResponse res = sdk.representatives().listRepresentatives()
+        ListRepresentativesResponse res = sdk.representatives().list()
                 .security(ListRepresentativesSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .accountID("33c72fc5-9781-4400-9547-0fa6966c8791")
                 .call();
 
@@ -207,11 +214,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## deleteRepresentative
+## delete
 
 Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
@@ -233,7 +241,7 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        DeleteRepresentativeResponse res = sdk.representatives().deleteRepresentative()
+        DeleteRepresentativeResponse res = sdk.representatives().delete()
                 .security(DeleteRepresentativeSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
@@ -270,11 +278,12 @@ public class Application {
 | models/errors/GenericError | 400, 409                   | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getRepresentative
+## get
 
 Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
@@ -295,14 +304,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetRepresentativeResponse res = sdk.representatives().getRepresentative()
+        GetRepresentativeResponse res = sdk.representatives().get()
                 .security(GetRepresentativeSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion(Versions.V202510)
                 .accountID("64980616-9a3a-476e-b482-151eb6571b76")
                 .representativeID("7b611595-93d0-48cc-9da4-3aac709d069a")
                 .call();
@@ -333,12 +342,10 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## updateRepresentative
+## update
 
-If a representative’s information has changed you can patch the information associated with a specific representative ID. 
+If a representative's information has changed you can patch the information associated with a specific representative ID. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
-
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 
 When **can** profile data be updated:
 
@@ -346,11 +353,14 @@ When **can** profile data be updated:
 - During the verification process, missing or incomplete profile data can be edited.
 - Verified representatives can only add missing profile data.
 
-When **can’t** profile data be updated:
+When **can't** profile data be updated:
 
 - Verified representatives cannot change any existing profile data.
 
 If you need to update information in a locked state, please contact Moov support.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
@@ -378,14 +388,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        UpdateRepresentativeResponse res = sdk.representatives().updateRepresentative()
+        UpdateRepresentativeResponse res = sdk.representatives().update()
                 .security(UpdateRepresentativeSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.LATEST)
                 .accountID("377d9553-179a-45f6-8ed4-c92810fbb4d0")
                 .representativeID("54619159-548e-45ed-b917-271fb71fc438")
                 .updateRepresentative(UpdateRepresentative.builder()

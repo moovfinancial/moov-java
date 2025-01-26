@@ -46,7 +46,7 @@ public class TestEndToEndTokenRequestBuilder {
 
     public TestEndToEndTokenResponse call() throws Exception {
 
-        return sdk.testEndToEndToken(
+        return sdk.testEncryptedToken(
             security,
             xMoovVersion,
             e2EEToken);

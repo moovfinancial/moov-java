@@ -53,7 +53,7 @@ public class GetPaymentMethodRequestBuilder {
 
     public GetPaymentMethodResponse call() throws Exception {
 
-        return sdk.getPaymentMethod(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

@@ -54,7 +54,7 @@ public class UpdateApplePayMerchantDomainsRequestBuilder {
 
     public UpdateApplePayMerchantDomainsResponse call() throws Exception {
 
-        return sdk.updateApplePayMerchantDomains(
+        return sdk.updateMerchantDomains(
             security,
             xMoovVersion,
             accountID,

@@ -68,7 +68,7 @@ public class Billing implements
 
 
     /**
-     * List all fee plan agreements associated with an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all fee plan agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @return The call builder
      */
     public ListFeePlanAgreementsRequestBuilder listFeePlanAgreements() {
@@ -76,7 +76,7 @@ public class Billing implements
     }
 
     /**
-     * List all fee plan agreements associated with an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all fee plan agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
@@ -89,7 +89,7 @@ public class Billing implements
     }
     
     /**
-     * List all fee plan agreements associated with an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all fee plan agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -238,7 +238,7 @@ public class Billing implements
 
 
     /**
-     * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
+     * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * @return The call builder
      */
     public CreateFeePlanAgreementsRequestBuilder createFeePlanAgreements() {
@@ -246,7 +246,7 @@ public class Billing implements
     }
 
     /**
-     * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
+     * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param createFeePlanAgreement
@@ -261,7 +261,7 @@ public class Billing implements
     }
     
     /**
-     * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
+     * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -443,7 +443,7 @@ public class Billing implements
 
 
     /**
-     * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @return The call builder
      */
     public ListFeePlansRequestBuilder listFeePlans() {
@@ -451,7 +451,7 @@ public class Billing implements
     }
 
     /**
-     * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
@@ -464,7 +464,7 @@ public class Billing implements
     }
     
     /**
-     * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -610,7 +610,7 @@ public class Billing implements
 
 
     /**
-     * List all partner pricing plans available for use by an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all partner pricing plans available for use by an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @return The call builder
      */
     public ListPartnerPricingRequestBuilder listPartnerPricing() {
@@ -618,7 +618,7 @@ public class Billing implements
     }
 
     /**
-     * List all partner pricing plans available for use by an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all partner pricing plans available for use by an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
@@ -631,7 +631,7 @@ public class Billing implements
     }
     
     /**
-     * List all partner pricing plans available for use by an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all partner pricing plans available for use by an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -777,7 +777,7 @@ public class Billing implements
 
 
     /**
-     * List all partner pricing agreements associated with an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all partner pricing agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @return The call builder
      */
     public ListPartnerPricingAgreementsRequestBuilder listPartnerPricingAgreements() {
@@ -785,7 +785,7 @@ public class Billing implements
     }
 
     /**
-     * List all partner pricing agreements associated with an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all partner pricing agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
@@ -798,7 +798,7 @@ public class Billing implements
     }
     
     /**
-     * List all partner pricing agreements associated with an account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
+     * List all partner pricing agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 

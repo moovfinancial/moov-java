@@ -46,7 +46,7 @@ public class ListFilesRequestBuilder {
 
     public ListFilesResponse call() throws Exception {
 
-        return sdk.listFiles(
+        return sdk.list(
             security,
             xMoovVersion,
             accountID);

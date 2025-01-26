@@ -46,7 +46,7 @@ public class ListCardsRequestBuilder {
 
     public ListCardsResponse call() throws Exception {
 
-        return sdk.listCards(
+        return sdk.list(
             security,
             xMoovVersion,
             accountID);

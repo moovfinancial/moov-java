@@ -72,15 +72,15 @@ public class PaymentLinks implements
 
 
     /**
-     * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public CreatePaymentLinkRequestBuilder createPaymentLink() {
+    public CreatePaymentLinkRequestBuilder create() {
         return new CreatePaymentLinkRequestBuilder(this);
     }
 
     /**
-     * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param createPaymentLink Request to create a new payment link.
@@ -93,15 +93,15 @@ public class PaymentLinks implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreatePaymentLinkResponse createPaymentLink(
+    public CreatePaymentLinkResponse create(
             CreatePaymentLinkSecurity security,
             String accountID,
             CreatePaymentLink createPaymentLink) throws Exception {
-        return createPaymentLink(security, Optional.empty(), accountID, createPaymentLink);
+        return create(security, Optional.empty(), accountID, createPaymentLink);
     }
     
     /**
-     * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -123,7 +123,7 @@ public class PaymentLinks implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreatePaymentLinkResponse createPaymentLink(
+    public CreatePaymentLinkResponse create(
             CreatePaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -289,28 +289,28 @@ public class PaymentLinks implements
 
 
     /**
-     * List all the payment links created under a Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.read` scope.
+     * List all the payment links created under a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public ListPaymentLinksRequestBuilder listPaymentLinks() {
+    public ListPaymentLinksRequestBuilder list() {
         return new ListPaymentLinksRequestBuilder(this);
     }
 
     /**
-     * List all the payment links created under a Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.read` scope.
+     * List all the payment links created under a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListPaymentLinksResponse listPaymentLinks(
+    public ListPaymentLinksResponse list(
             ListPaymentLinksSecurity security,
             String accountID) throws Exception {
-        return listPaymentLinks(security, Optional.empty(), accountID);
+        return list(security, Optional.empty(), accountID);
     }
     
     /**
-     * List all the payment links created under a Moov account. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.read` scope.
+     * List all the payment links created under a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -325,7 +325,7 @@ public class PaymentLinks implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListPaymentLinksResponse listPaymentLinks(
+    public ListPaymentLinksResponse list(
             ListPaymentLinksSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
@@ -448,30 +448,30 @@ public class PaymentLinks implements
 
 
     /**
-     * Retrieve a payment link by code. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Retrieve a payment link by code. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
-    public GetPaymentLinkRequestBuilder getPaymentLink() {
+    public GetPaymentLinkRequestBuilder get() {
         return new GetPaymentLinkRequestBuilder(this);
     }
 
     /**
-     * Retrieve a payment link by code. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Retrieve a payment link by code. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentLinkCode
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPaymentLinkResponse getPaymentLink(
+    public GetPaymentLinkResponse get(
             GetPaymentLinkSecurity security,
             String accountID,
             String paymentLinkCode) throws Exception {
-        return getPaymentLink(security, Optional.empty(), accountID, paymentLinkCode);
+        return get(security, Optional.empty(), accountID, paymentLinkCode);
     }
     
     /**
-     * Retrieve a payment link by code. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Retrieve a payment link by code. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -487,7 +487,7 @@ public class PaymentLinks implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPaymentLinkResponse getPaymentLink(
+    public GetPaymentLinkResponse get(
             GetPaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -612,15 +612,15 @@ public class PaymentLinks implements
 
 
     /**
-     * Update a payment link. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Update a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public UpdatePaymentLinkRequestBuilder updatePaymentLink() {
+    public UpdatePaymentLinkRequestBuilder update() {
         return new UpdatePaymentLinkRequestBuilder(this);
     }
 
     /**
-     * Update a payment link. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Update a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentLinkCode
@@ -628,16 +628,16 @@ public class PaymentLinks implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdatePaymentLinkResponse updatePaymentLink(
+    public UpdatePaymentLinkResponse update(
             UpdatePaymentLinkSecurity security,
             String accountID,
             String paymentLinkCode,
             UpdatePaymentLink updatePaymentLink) throws Exception {
-        return updatePaymentLink(security, Optional.empty(), accountID, paymentLinkCode, updatePaymentLink);
+        return update(security, Optional.empty(), accountID, paymentLinkCode, updatePaymentLink);
     }
     
     /**
-     * Update a payment link. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Update a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -654,7 +654,7 @@ public class PaymentLinks implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdatePaymentLinkResponse updatePaymentLink(
+    public UpdatePaymentLinkResponse update(
             UpdatePaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -822,30 +822,30 @@ public class PaymentLinks implements
 
 
     /**
-     * Disable a payment link. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Disable a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public DisablePaymentLinkRequestBuilder disablePaymentLink() {
+    public DisablePaymentLinkRequestBuilder disable() {
         return new DisablePaymentLinkRequestBuilder(this);
     }
 
     /**
-     * Disable a payment link. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Disable a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentLinkCode
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DisablePaymentLinkResponse disablePaymentLink(
+    public DisablePaymentLinkResponse disable(
             DisablePaymentLinkSecurity security,
             String accountID,
             String paymentLinkCode) throws Exception {
-        return disablePaymentLink(security, Optional.empty(), accountID, paymentLinkCode);
+        return disable(security, Optional.empty(), accountID, paymentLinkCode);
     }
     
     /**
-     * Disable a payment link. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Disable a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -861,7 +861,7 @@ public class PaymentLinks implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DisablePaymentLinkResponse disablePaymentLink(
+    public DisablePaymentLinkResponse disable(
             DisablePaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -975,30 +975,30 @@ public class PaymentLinks implements
 
 
     /**
-     * Retrieve the payment link encoded in a QR code.  -  - Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Retrieve the payment link encoded in a QR code.  -  - Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @return The call builder
      */
-    public GetPaymentLinkQRCodeRequestBuilder getPaymentLinkQRCode() {
+    public GetPaymentLinkQRCodeRequestBuilder getQRCode() {
         return new GetPaymentLinkQRCodeRequestBuilder(this);
     }
 
     /**
-     * Retrieve the payment link encoded in a QR code.  -  - Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Retrieve the payment link encoded in a QR code.  -  - Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentLinkCode
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPaymentLinkQRCodeResponse getPaymentLinkQRCode(
+    public GetPaymentLinkQRCodeResponse getQRCode(
             GetPaymentLinkQRCodeSecurity security,
             String accountID,
             String paymentLinkCode) throws Exception {
-        return getPaymentLinkQRCode(security, Optional.empty(), accountID, paymentLinkCode);
+        return getQRCode(security, Optional.empty(), accountID, paymentLinkCode);
     }
     
     /**
-     * Retrieve the payment link encoded in a QR code.  -  - Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Retrieve the payment link encoded in a QR code.  -  - Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -1014,7 +1014,7 @@ public class PaymentLinks implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPaymentLinkQRCodeResponse getPaymentLinkQRCode(
+    public GetPaymentLinkQRCodeResponse getQRCode(
             GetPaymentLinkQRCodeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

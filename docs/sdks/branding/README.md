@@ -5,13 +5,25 @@
 
 ### Available Operations
 
-* [postBrand](#postbrand) - Creates the brand properties for the specified account.
-* [getBrand](#getbrand) - Gets the brand properties for the specified account.
-* [updateBrand](#updatebrand) - Updates the brand properties for the specified account.
+* [create](#create) - Create brand properties for the specified account.
 
-## postBrand
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+* [get](#get) - Get brand properties for the specified account.
 
-Creates the brand properties for the specified account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.read` scope.
+* [update](#update) - Updates the brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+
+## create
+
+Create brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
@@ -26,8 +38,8 @@ import io.moov.sdk.models.components.SchemeBasicAuth;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.BrandValidationError;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.operations.PostBrandResponse;
-import io.moov.sdk.models.operations.PostBrandSecurity;
+import io.moov.sdk.models.operations.CreateBrandResponse;
+import io.moov.sdk.models.operations.CreateBrandSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -37,15 +49,15 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        PostBrandResponse res = sdk.branding().postBrand()
-                .security(PostBrandSecurity.builder()
+        CreateBrandResponse res = sdk.branding().create()
+                .security(CreateBrandSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
-                .accountID("e0ae5cc2-d23b-44c7-b778-06f786dadb4b")
+                .xMoovVersion(Versions.V202504)
+                .accountID("7a621cf0-21cd-49cf-8540-3315211a509a")
                 .brand(Brand.builder()
                     .colors(Colors.builder()
                         .dark(BrandColor.builder()
@@ -67,16 +79,16 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `security`                                                                                      | [io.moov.sdk.models.operations.PostBrandSecurity](../../models/operations/PostBrandSecurity.md) | :heavy_check_mark:                                                                              | The security requirements to use for the request.                                               |
-| `xMoovVersion`                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                      | :heavy_minus_sign:                                                                              | Specify an API version.                                                                         |
-| `accountID`                                                                                     | *String*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
-| `brand`                                                                                         | [Brand](../../models/components/Brand.md)                                                       | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `security`                                                                                          | [io.moov.sdk.models.operations.CreateBrandSecurity](../../models/operations/CreateBrandSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |
+| `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |
+| `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `brand`                                                                                             | [Brand](../../models/components/Brand.md)                                                           | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 
 ### Response
 
-**[PostBrandResponse](../../models/operations/PostBrandResponse.md)**
+**[CreateBrandResponse](../../models/operations/CreateBrandResponse.md)**
 
 ### Errors
 
@@ -86,9 +98,12 @@ public class Application {
 | models/errors/BrandValidationError | 422                                | application/json                   |
 | models/errors/APIException         | 4XX, 5XX                           | \*/\*                              |
 
-## getBrand
+## get
 
-Gets the brand properties for the specified account.
+Get brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.read` scope.
 
 ### Example Usage
 
@@ -109,14 +124,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetBrandResponse res = sdk.branding().getBrand()
+        GetBrandResponse res = sdk.branding().get()
                 .security(GetBrandSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202401)
+                .xMoovVersion(Versions.V202510)
                 .accountID("07eb5173-1869-4649-9aa6-f399787a2751")
                 .call();
 
@@ -145,9 +160,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## updateBrand
+## update
 
 Updates the brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
@@ -171,14 +189,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        UpdateBrandResponse res = sdk.branding().updateBrand()
+        UpdateBrandResponse res = sdk.branding().update()
                 .security(UpdateBrandSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion(Versions.LATEST)
                 .accountID("6c1f5632-7f37-4b3d-861e-10e31b8853de")
                 .updateBrand(UpdateBrand.builder()
                     .build())

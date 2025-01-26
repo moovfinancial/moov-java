@@ -36,7 +36,7 @@ public class Ping implements
 
 
     /**
-     * A simple endpoint to check auth. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/ping.read` scope.
+     * A simple endpoint to check auth. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
      * @return The call builder
      */
     public PingRequestBuilder ping() {
@@ -44,7 +44,7 @@ public class Ping implements
     }
 
     /**
-     * A simple endpoint to check auth. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/ping.read` scope.
+     * A simple endpoint to check auth. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -55,7 +55,7 @@ public class Ping implements
     }
     
     /**
-     * A simple endpoint to check auth. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/ping.read` scope.
+     * A simple endpoint to check auth. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 

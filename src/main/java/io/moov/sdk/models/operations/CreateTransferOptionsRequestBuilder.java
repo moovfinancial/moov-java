@@ -38,7 +38,7 @@ public class CreateTransferOptionsRequestBuilder {
 
     public CreateTransferOptionsResponse call() throws Exception {
 
-        return sdk.createTransferOptions(
+        return sdk.generateOptions(
             security,
             xMoovVersion);
     }

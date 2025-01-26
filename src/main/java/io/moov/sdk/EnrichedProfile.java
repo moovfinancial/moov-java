@@ -38,28 +38,28 @@ public class EnrichedProfile implements
 
 
     /**
-     *   Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.  -  -   To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @return The call builder
      */
-    public GetEnrichmentProfileRequestBuilder getEnrichmentProfile() {
+    public GetEnrichmentProfileRequestBuilder get() {
         return new GetEnrichmentProfileRequestBuilder(this);
     }
 
     /**
-     *   Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.  -  -   To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @param security The security details to use for authentication.
      * @param email
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetEnrichmentProfileResponse getEnrichmentProfile(
+    public GetEnrichmentProfileResponse get(
             GetEnrichmentProfileSecurity security,
             String email) throws Exception {
-        return getEnrichmentProfile(security, Optional.empty(), email);
+        return get(security, Optional.empty(), email);
     }
     
     /**
-     *   Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.  -  -   To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -74,7 +74,7 @@ public class EnrichedProfile implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetEnrichmentProfileResponse getEnrichmentProfile(
+    public GetEnrichmentProfileResponse get(
             GetEnrichmentProfileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String email) throws Exception {

@@ -53,7 +53,7 @@ public class GetSweepConfigRequestBuilder {
 
     public GetSweepConfigResponse call() throws Exception {
 
-        return sdk.getSweepConfig(
+        return sdk.getConfig(
             security,
             xMoovVersion,
             accountID,

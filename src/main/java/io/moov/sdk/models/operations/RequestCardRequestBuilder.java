@@ -54,7 +54,7 @@ public class RequestCardRequestBuilder {
 
     public RequestCardResponse call() throws Exception {
 
-        return sdk.requestCard(
+        return sdk.request(
             security,
             xMoovVersion,
             accountID,

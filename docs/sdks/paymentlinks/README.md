@@ -5,39 +5,39 @@
 
 ### Available Operations
 
-* [createPaymentLink](#createpaymentlink) - Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
+* [create](#create) - Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
-* [listPaymentLinks](#listpaymentlinks) - List all the payment links created under a Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [list](#list) - List all the payment links created under a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.read` scope.
-* [getPaymentLink](#getpaymentlink) - Retrieve a payment link by code.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [get](#get) - Retrieve a payment link by code.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.read` scope.
-* [updatePaymentLink](#updatepaymentlink) - Update a payment link.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [update](#update) - Update a payment link.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
-* [disablePaymentLink](#disablepaymentlink) - Disable a payment link.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [disable](#disable) - Disable a payment link.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
-* [getPaymentLinkQRCode](#getpaymentlinkqrcode) - Retrieve the payment link encoded in a QR code. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [getQRCode](#getqrcode) - Retrieve the payment link encoded in a QR code. 
 
 Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-## createPaymentLink
+## create
 
 Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -73,14 +73,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        CreatePaymentLinkResponse res = sdk.paymentLinks().createPaymentLink()
+        CreatePaymentLinkResponse res = sdk.paymentLinks().create()
                 .security(CreatePaymentLinkSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202504)
                 .accountID("831ce989-44b7-4d2f-8990-b0ab3c903956")
                 .createPaymentLink(CreatePaymentLink.builder()
                     .partnerAccountID("d290f1ee-6c54-4b01-90e6-d701748f0851")
@@ -147,12 +147,12 @@ public class Application {
 | models/errors/CreatePaymentLinkError | 422                                  | application/json                     |
 | models/errors/APIException           | 4XX, 5XX                             | \*/\*                                |
 
-## listPaymentLinks
+## list
 
 List all the payment links created under a Moov account.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -173,14 +173,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        ListPaymentLinksResponse res = sdk.paymentLinks().listPaymentLinks()
+        ListPaymentLinksResponse res = sdk.paymentLinks().list()
                 .security(ListPaymentLinksSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.V202510)
                 .accountID("9f728868-b3c8-409c-9aa0-282a13d8ddc8")
                 .call();
 
@@ -209,12 +209,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getPaymentLink
+## get
 
 Retrieve a payment link by code.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.read` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
@@ -235,14 +235,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetPaymentLinkResponse res = sdk.paymentLinks().getPaymentLink()
+        GetPaymentLinkResponse res = sdk.paymentLinks().get()
                 .security(GetPaymentLinkSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202510)
                 .accountID("34a1451d-384e-4fff-a7ce-e90c2bb61969")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();
@@ -273,12 +273,12 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## updatePaymentLink
+## update
 
 Update a payment link.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -309,14 +309,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        UpdatePaymentLinkResponse res = sdk.paymentLinks().updatePaymentLink()
+        UpdatePaymentLinkResponse res = sdk.paymentLinks().update()
                 .security(UpdatePaymentLinkSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202507)
+                .xMoovVersion(Versions.LATEST)
                 .accountID("94fe6aeb-a005-4850-b45d-bb0fa580425d")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .updatePaymentLink(UpdatePaymentLink.builder()
@@ -374,12 +374,12 @@ public class Application {
 | models/errors/UpdatePaymentLinkError | 422                                  | application/json                     |
 | models/errors/APIException           | 4XX, 5XX                             | \*/\*                                |
 
-## disablePaymentLink
+## disable
 
 Disable a payment link.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -400,14 +400,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        DisablePaymentLinkResponse res = sdk.paymentLinks().disablePaymentLink()
+        DisablePaymentLinkResponse res = sdk.paymentLinks().disable()
                 .security(DisablePaymentLinkSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202510)
                 .accountID("edc2775b-a4a3-4513-8870-3bdf4aaaed8e")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();
@@ -436,14 +436,14 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## getPaymentLinkQRCode
+## getQRCode
 
 Retrieve the payment link encoded in a QR code. 
 
 Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`.
 
-To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts/{accountID}/transfers.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
@@ -464,14 +464,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        GetPaymentLinkQRCodeResponse res = sdk.paymentLinks().getPaymentLinkQRCode()
+        GetPaymentLinkQRCodeResponse res = sdk.paymentLinks().getQRCode()
                 .security(GetPaymentLinkQRCodeSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.V202501)
+                .xMoovVersion(Versions.V202401)
                 .accountID("248ffcf9-c53a-4e8e-a8b8-8c5014496a79")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();

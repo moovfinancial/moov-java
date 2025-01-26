@@ -61,7 +61,7 @@ public class CompleteBankAccountVerificationRequestBuilder {
 
     public CompleteBankAccountVerificationResponse call() throws Exception {
 
-        return sdk.completeBankAccountVerification(
+        return sdk.completeVerification(
             security,
             xMoovVersion,
             accountID,

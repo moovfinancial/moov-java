@@ -60,7 +60,7 @@ public class CreateAccountRequestBuilder {
 
     public CreateAccountResponse call() throws Exception {
 
-        return sdk.createAccount(
+        return sdk.create(
             security,
             xMoovVersion,
             xWaitFor,

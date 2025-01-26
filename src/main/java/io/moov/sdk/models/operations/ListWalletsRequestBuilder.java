@@ -46,7 +46,7 @@ public class ListWalletsRequestBuilder {
 
     public ListWalletsResponse call() throws Exception {
 
-        return sdk.listWallets(
+        return sdk.list(
             security,
             xMoovVersion,
             accountID);

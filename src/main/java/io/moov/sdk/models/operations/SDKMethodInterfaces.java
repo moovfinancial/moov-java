@@ -54,7 +54,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallCreateAccount {
-        CreateAccountResponse createAccount(
+        CreateAccountResponse create(
             CreateAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             Optional<? extends AccountWaitFor> xWaitFor,
@@ -63,23 +63,23 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListAccounts {
-        ListAccountsResponse listAccounts(
+        ListAccountsResponse list(
             ListAccountsRequest request,
             ListAccountsSecurity security) throws Exception;
     }
 
 
     public interface MethodCallGetAccount {
-        GetAccountResponse getAccount(
+        GetAccountResponse get(
             GetAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
     }
 
 
-    public interface MethodCallPatchAccount {
-        PatchAccountResponse patchAccount(
-            PatchAccountSecurity security,
+    public interface MethodCallUpdateAccount {
+        UpdateAccountResponse update(
+            UpdateAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             CreateAccountUpdate createAccountUpdate) throws Exception;
@@ -87,7 +87,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallDisconnectAccount {
-        DisconnectAccountResponse disconnectAccount(
+        DisconnectAccountResponse disconnect(
             DisconnectAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -95,7 +95,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetAccountCountries {
-        GetAccountCountriesResponse getAccountCountries(
+        GetAccountCountriesResponse getCountries(
             GetAccountCountriesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -103,7 +103,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallAssignAccountCountries {
-        AssignAccountCountriesResponse assignAccountCountries(
+        AssignAccountCountriesResponse assignCountries(
             AssignAccountCountriesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -128,7 +128,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListAdjustments {
-        ListAdjustmentsResponse listAdjustments(
+        ListAdjustmentsResponse list(
             ListAdjustmentsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -137,7 +137,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetAdjustment {
-        GetAdjustmentResponse getAdjustment(
+        GetAdjustmentResponse get(
             GetAdjustmentSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -146,7 +146,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallRegisterApplePayMerchantDomains {
-        RegisterApplePayMerchantDomainsResponse registerApplePayMerchantDomains(
+        RegisterApplePayMerchantDomainsResponse registerMerchantDomains(
             RegisterApplePayMerchantDomainsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -155,7 +155,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUpdateApplePayMerchantDomains {
-        UpdateApplePayMerchantDomainsResponse updateApplePayMerchantDomains(
+        UpdateApplePayMerchantDomainsResponse updateMerchantDomains(
             UpdateApplePayMerchantDomainsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -164,7 +164,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetApplePayMerchantDomains {
-        GetApplePayMerchantDomainsResponse getApplePayMerchantDomains(
+        GetApplePayMerchantDomainsResponse getMerchantDomains(
             GetApplePayMerchantDomainsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -172,7 +172,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallCreateApplePaySession {
-        CreateApplePaySessionResponse createApplePaySession(
+        CreateApplePaySessionResponse createSession(
             CreateApplePaySessionSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -181,7 +181,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallLinkApplePayToken {
-        LinkApplePayTokenResponse linkApplePayToken(
+        LinkApplePayTokenResponse linkToken(
             LinkApplePayTokenSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -189,54 +189,8 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallLinkCard {
-        LinkCardResponse linkCard(
-            LinkCardSecurity security,
-            Optional<? extends Versions> xMoovVersion,
-            Optional<? extends LinkCardWaitFor> xWaitFor,
-            String accountID,
-            LinkCard linkCard) throws Exception;
-    }
-
-
-    public interface MethodCallListCards {
-        ListCardsResponse listCards(
-            ListCardsSecurity security,
-            Optional<? extends Versions> xMoovVersion,
-            String accountID) throws Exception;
-    }
-
-
-    public interface MethodCallGetCard {
-        GetCardResponse getCard(
-            GetCardSecurity security,
-            Optional<? extends Versions> xMoovVersion,
-            String accountID,
-            String cardID) throws Exception;
-    }
-
-
-    public interface MethodCallUpdateCard {
-        UpdateCardResponse updateCard(
-            UpdateCardSecurity security,
-            Optional<? extends Versions> xMoovVersion,
-            String accountID,
-            String cardID,
-            UpdateCard updateCard) throws Exception;
-    }
-
-
-    public interface MethodCallDisableCard {
-        DisableCardResponse disableCard(
-            DisableCardSecurity security,
-            Optional<? extends Versions> xMoovVersion,
-            String accountID,
-            String cardID) throws Exception;
-    }
-
-
     public interface MethodCallLinkBankAccount {
-        LinkBankAccountResponse linkBankAccount(
+        LinkBankAccountResponse link(
             LinkBankAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             Optional<? extends BankAccountWaitFor> xWaitFor,
@@ -246,7 +200,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListBankAccounts {
-        ListBankAccountsResponse listBankAccounts(
+        ListBankAccountsResponse list(
             ListBankAccountsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -254,7 +208,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetBankAccount {
-        GetBankAccountResponse getBankAccount(
+        GetBankAccountResponse get(
             GetBankAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -263,7 +217,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallDisableBankAccount {
-        DisableBankAccountResponse disableBankAccount(
+        DisableBankAccountResponse disable(
             DisableBankAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -291,7 +245,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetBankAccountVerification {
-        GetBankAccountVerificationResponse getBankAccountVerification(
+        GetBankAccountVerificationResponse getVerification(
             GetBankAccountVerificationSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -300,7 +254,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallInitiateBankAccountVerification {
-        InitiateBankAccountVerificationResponse initiateBankAccountVerification(
+        InitiateBankAccountVerificationResponse initiateVerification(
             InitiateBankAccountVerificationSecurity security,
             Optional<? extends Versions> xMoovVersion,
             BankAccountWaitFor xWaitFor,
@@ -310,7 +264,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallCompleteBankAccountVerification {
-        CompleteBankAccountVerificationResponse completeBankAccountVerification(
+        CompleteBankAccountVerificationResponse completeVerification(
             CompleteBankAccountVerificationSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -319,9 +273,9 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallPostBrand {
-        PostBrandResponse postBrand(
-            PostBrandSecurity security,
+    public interface MethodCallCreateBrand {
+        CreateBrandResponse create(
+            CreateBrandSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             Brand brand) throws Exception;
@@ -329,7 +283,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetBrand {
-        GetBrandResponse getBrand(
+        GetBrandResponse get(
             GetBrandSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -337,7 +291,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUpdateBrand {
-        UpdateBrandResponse updateBrand(
+        UpdateBrandResponse update(
             UpdateBrandSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -346,16 +300,16 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListCapabilities {
-        ListCapabilitiesResponse listCapabilities(
+        ListCapabilitiesResponse list(
             ListCapabilitiesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
     }
 
 
-    public interface MethodCallAddCapabilities {
-        AddCapabilitiesResponse addCapabilities(
-            AddCapabilitiesSecurity security,
+    public interface MethodCallRequestCapabilities {
+        RequestCapabilitiesResponse request(
+            RequestCapabilitiesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             AddCapabilities addCapabilities) throws Exception;
@@ -363,7 +317,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetCapability {
-        GetCapabilityResponse getCapability(
+        GetCapabilityResponse get(
             GetCapabilitySecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -372,7 +326,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallDisableCapability {
-        DisableCapabilityResponse disableCapability(
+        DisableCapabilityResponse disable(
             DisableCapabilitySecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -380,15 +334,61 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallLinkCard {
+        LinkCardResponse link(
+            LinkCardSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            Optional<? extends LinkCardWaitFor> xWaitFor,
+            String accountID,
+            LinkCard linkCard) throws Exception;
+    }
+
+
+    public interface MethodCallListCards {
+        ListCardsResponse list(
+            ListCardsSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID) throws Exception;
+    }
+
+
+    public interface MethodCallGetCard {
+        GetCardResponse get(
+            GetCardSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            String cardID) throws Exception;
+    }
+
+
+    public interface MethodCallUpdateCard {
+        UpdateCardResponse update(
+            UpdateCardSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            String cardID,
+            UpdateCard updateCard) throws Exception;
+    }
+
+
+    public interface MethodCallDisableCard {
+        DisableCardResponse disable(
+            DisableCardSecurity security,
+            Optional<? extends Versions> xMoovVersion,
+            String accountID,
+            String cardID) throws Exception;
+    }
+
+
     public interface MethodCallListDisputes {
-        ListDisputesResponse listDisputes(
+        ListDisputesResponse list(
             ListDisputesRequest request,
             ListDisputesSecurity security) throws Exception;
     }
 
 
     public interface MethodCallGetDispute {
-        GetDisputeResponse getDispute(
+        GetDisputeResponse get(
             GetDisputeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -397,7 +397,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallAcceptDispute {
-        AcceptDisputeResponse acceptDispute(
+        AcceptDisputeResponse accept(
             AcceptDisputeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -406,7 +406,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListDisputeEvidence {
-        ListDisputeEvidenceResponse listDisputeEvidence(
+        ListDisputeEvidenceResponse listEvidence(
             ListDisputeEvidenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -415,7 +415,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUploadDisputeEvidenceFile {
-        UploadDisputeEvidenceFileResponse uploadDisputeEvidenceFile(
+        UploadDisputeEvidenceFileResponse uploadEvidenceFile(
             UploadDisputeEvidenceFileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -425,7 +425,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUploadDisputeEvidenceText {
-        UploadDisputeEvidenceTextResponse uploadDisputeEvidenceText(
+        UploadDisputeEvidenceTextResponse uploadEvidenceText(
             UploadDisputeEvidenceTextSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -435,7 +435,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallSubmitDisputeEvidence {
-        SubmitDisputeEvidenceResponse submitDisputeEvidence(
+        SubmitDisputeEvidenceResponse submitEvidence(
             SubmitDisputeEvidenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -444,7 +444,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetDisputeEvidence {
-        GetDisputeEvidenceResponse getDisputeEvidence(
+        GetDisputeEvidenceResponse getEvidence(
             GetDisputeEvidenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -454,14 +454,14 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUpdateDisputeEvidence {
-        UpdateDisputeEvidenceResponse updateDisputeEvidence(
+        UpdateDisputeEvidenceResponse updateEvidence(
             UpdateDisputeEvidenceRequest request,
             UpdateDisputeEvidenceSecurity security) throws Exception;
     }
 
 
     public interface MethodCallDeleteDisputeEvidenceFile {
-        DeleteDisputeEvidenceFileResponse deleteDisputeEvidenceFile(
+        DeleteDisputeEvidenceFileResponse deleteEvidence(
             DeleteDisputeEvidenceFileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -471,7 +471,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetDisputeEvidenceData {
-        GetDisputeEvidenceDataResponse getDisputeEvidenceData(
+        GetDisputeEvidenceDataResponse getEvidenceData(
             GetDisputeEvidenceDataSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -528,7 +528,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUploadFile {
-        UploadFileResponse uploadFile(
+        UploadFileResponse upload(
             UploadFileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -537,7 +537,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListFiles {
-        ListFilesResponse listFiles(
+        ListFilesResponse list(
             ListFilesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -545,7 +545,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetFileDetails {
-        GetFileDetailsResponse getFileDetails(
+        GetFileDetailsResponse get(
             GetFileDetailsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -554,7 +554,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallCreatePaymentLink {
-        CreatePaymentLinkResponse createPaymentLink(
+        CreatePaymentLinkResponse create(
             CreatePaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -563,7 +563,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListPaymentLinks {
-        ListPaymentLinksResponse listPaymentLinks(
+        ListPaymentLinksResponse list(
             ListPaymentLinksSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -571,7 +571,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetPaymentLink {
-        GetPaymentLinkResponse getPaymentLink(
+        GetPaymentLinkResponse get(
             GetPaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -580,7 +580,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUpdatePaymentLink {
-        UpdatePaymentLinkResponse updatePaymentLink(
+        UpdatePaymentLinkResponse update(
             UpdatePaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -590,7 +590,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallDisablePaymentLink {
-        DisablePaymentLinkResponse disablePaymentLink(
+        DisablePaymentLinkResponse disable(
             DisablePaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -599,7 +599,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetPaymentLinkQRCode {
-        GetPaymentLinkQRCodeResponse getPaymentLinkQRCode(
+        GetPaymentLinkQRCodeResponse getQRCode(
             GetPaymentLinkQRCodeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -608,7 +608,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListPaymentMethods {
-        ListPaymentMethodsResponse listPaymentMethods(
+        ListPaymentMethodsResponse list(
             ListPaymentMethodsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -618,7 +618,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetPaymentMethod {
-        GetPaymentMethodResponse getPaymentMethod(
+        GetPaymentMethodResponse get(
             GetPaymentMethodSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -627,7 +627,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallCreateRepresentative {
-        CreateRepresentativeResponse createRepresentative(
+        CreateRepresentativeResponse create(
             CreateRepresentativeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -636,7 +636,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListRepresentatives {
-        ListRepresentativesResponse listRepresentatives(
+        ListRepresentativesResponse list(
             ListRepresentativesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -644,7 +644,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallDeleteRepresentative {
-        DeleteRepresentativeResponse deleteRepresentative(
+        DeleteRepresentativeResponse delete(
             DeleteRepresentativeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -653,7 +653,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetRepresentative {
-        GetRepresentativeResponse getRepresentative(
+        GetRepresentativeResponse get(
             GetRepresentativeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -662,7 +662,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUpdateRepresentative {
-        UpdateRepresentativeResponse updateRepresentative(
+        UpdateRepresentativeResponse update(
             UpdateRepresentativeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -672,7 +672,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallCreateSchedule {
-        CreateScheduleResponse createSchedule(
+        CreateScheduleResponse create(
             CreateScheduleSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -681,7 +681,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListSchedules {
-        ListSchedulesResponse listSchedules(
+        ListSchedulesResponse list(
             ListSchedulesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             Optional<Long> skip,
@@ -691,7 +691,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUpdateSchedule {
-        UpdateScheduleResponse updateSchedule(
+        UpdateScheduleResponse update(
             UpdateScheduleSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -701,7 +701,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetSchedules {
-        GetSchedulesResponse getSchedules(
+        GetSchedulesResponse get(
             GetSchedulesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -710,7 +710,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallCancelSchedule {
-        CancelScheduleResponse cancelSchedule(
+        CancelScheduleResponse cancel(
             CancelScheduleSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -719,7 +719,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetScheduledOccurrence {
-        GetScheduledOccurrenceResponse getScheduledOccurrence(
+        GetScheduledOccurrenceResponse getOccurrance(
             GetScheduledOccurrenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -729,7 +729,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallCreateSweepConfig {
-        CreateSweepConfigResponse createSweepConfig(
+        CreateSweepConfigResponse createConfig(
             CreateSweepConfigSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -738,7 +738,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListSweepConfigs {
-        ListSweepConfigsResponse listSweepConfigs(
+        ListSweepConfigsResponse listConfigs(
             ListSweepConfigsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -746,7 +746,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetSweepConfig {
-        GetSweepConfigResponse getSweepConfig(
+        GetSweepConfigResponse getConfig(
             GetSweepConfigSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -754,9 +754,9 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallPatchSweepConfig {
-        PatchSweepConfigResponse patchSweepConfig(
-            PatchSweepConfigSecurity security,
+    public interface MethodCallUpdateSweepConfig {
+        UpdateSweepConfigResponse updateConfig(
+            UpdateSweepConfigSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String sweepConfigID,
@@ -765,14 +765,14 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListSweeps {
-        ListSweepsResponse listSweeps(
+        ListSweepsResponse list(
             ListSweepsRequest request,
             ListSweepsSecurity security) throws Exception;
     }
 
 
     public interface MethodCallGetSweep {
-        GetSweepResponse getSweep(
+        GetSweepResponse get(
             GetSweepSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -782,21 +782,21 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallCreateTransfer {
-        CreateTransferResponse createTransfer(
+        CreateTransferResponse create(
             CreateTransferRequest request,
             CreateTransferSecurity security) throws Exception;
     }
 
 
     public interface MethodCallListTransfers {
-        ListTransfersResponse listTransfers(
+        ListTransfersResponse list(
             ListTransfersRequest request,
             ListTransfersSecurity security) throws Exception;
     }
 
 
     public interface MethodCallGetTransfer {
-        GetTransferResponse getTransfer(
+        GetTransferResponse get(
             GetTransferSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String transferID,
@@ -804,19 +804,19 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallPatchTransfer {
-        PatchTransferResponse patchTransfer(
-            PatchTransferSecurity security,
+    public interface MethodCallUpdateTransfer {
+        UpdateTransferResponse update(
+            UpdateTransferSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String transferID,
             String accountID) throws Exception;
     }
 
 
-    public interface MethodCallRefundTransfer {
-        RefundTransferResponse refundTransfer(
-            RefundTransferRequest request,
-            RefundTransferSecurity security) throws Exception;
+    public interface MethodCallInitiateRefund {
+        InitiateRefundResponse initiateRefund(
+            InitiateRefundRequest request,
+            InitiateRefundSecurity security) throws Exception;
     }
 
 
@@ -839,22 +839,22 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallReverseTransfer {
-        ReverseTransferResponse reverseTransfer(
-            ReverseTransferRequest request,
-            ReverseTransferSecurity security) throws Exception;
+    public interface MethodCallCreateReversal {
+        CreateReversalResponse createReversal(
+            CreateReversalRequest request,
+            CreateReversalSecurity security) throws Exception;
     }
 
 
     public interface MethodCallCreateTransferOptions {
-        CreateTransferOptionsResponse createTransferOptions(
+        CreateTransferOptionsResponse generateOptions(
             CreateTransferOptionsSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception;
     }
 
 
     public interface MethodCallGetUnderwriting {
-        GetUnderwritingResponse getUnderwriting(
+        GetUnderwritingResponse get(
             GetUnderwritingSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -862,7 +862,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUpdateUnderwriting {
-        UpdateUnderwritingResponse updateUnderwriting(
+        UpdateUnderwritingResponse update(
             UpdateUnderwritingSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -871,7 +871,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListWallets {
-        ListWalletsResponse listWallets(
+        ListWalletsResponse list(
             ListWalletsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception;
@@ -879,7 +879,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetWallet {
-        GetWalletResponse getWallet(
+        GetWalletResponse get(
             GetWalletSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -888,14 +888,14 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListWalletTransactions {
-        ListWalletTransactionsResponse listWalletTransactions(
+        ListWalletTransactionsResponse list(
             ListWalletTransactionsRequest request,
             ListWalletTransactionsSecurity security) throws Exception;
     }
 
 
     public interface MethodCallGetWalletTransaction {
-        GetWalletTransactionResponse getWalletTransaction(
+        GetWalletTransactionResponse get(
             GetWalletTransactionSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -905,7 +905,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetAvatar {
-        GetAvatarResponse getAvatar(
+        GetAvatarResponse get(
             GetAvatarSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String uniqueID) throws Exception;
@@ -913,7 +913,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallTestEndToEndToken {
-        TestEndToEndTokenResponse testEndToEndToken(
+        TestEndToEndTokenResponse testEncryptedToken(
             TestEndToEndTokenSecurity security,
             Optional<? extends Versions> xMoovVersion,
             E2EEToken e2EEToken) throws Exception;
@@ -921,20 +921,20 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGenerateEndToEndKey {
-        GenerateEndToEndKeyResponse generateEndToEndKey(
+        GenerateEndToEndKeyResponse generateKey(
             Optional<? extends Versions> xMoovVersion) throws Exception;
     }
 
 
     public interface MethodCallGetEnrichmentAddress {
-        GetEnrichmentAddressResponse getEnrichmentAddress(
+        GetEnrichmentAddressResponse get(
             GetEnrichmentAddressRequest request,
             GetEnrichmentAddressSecurity security) throws Exception;
     }
 
 
     public interface MethodCallGetEnrichmentProfile {
-        GetEnrichmentProfileResponse getEnrichmentProfile(
+        GetEnrichmentProfileResponse get(
             GetEnrichmentProfileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String email) throws Exception;
@@ -942,28 +942,28 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListIndustries {
-        ListIndustriesResponse listIndustries(
+        ListIndustriesResponse list(
             ListIndustriesSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception;
     }
 
 
     public interface MethodCallListInstitutions {
-        ListInstitutionsResponse listInstitutions(
+        ListInstitutionsResponse search(
             ListInstitutionsRequest request,
             ListInstitutionsSecurity security) throws Exception;
     }
 
 
     public interface MethodCallListIssuedCardAuthorizations {
-        ListIssuedCardAuthorizationsResponse listIssuedCardAuthorizations(
+        ListIssuedCardAuthorizationsResponse listAuthorizations(
             ListIssuedCardAuthorizationsRequest request,
             ListIssuedCardAuthorizationsSecurity security) throws Exception;
     }
 
 
     public interface MethodCallGetIssuedCardAuthorization {
-        GetIssuedCardAuthorizationResponse getIssuedCardAuthorization(
+        GetIssuedCardAuthorizationResponse getAuthorization(
             GetIssuedCardAuthorizationSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -972,21 +972,21 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListIssuedCardAuthorizationEvents {
-        ListIssuedCardAuthorizationEventsResponse listIssuedCardAuthorizationEvents(
+        ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(
             ListIssuedCardAuthorizationEventsRequest request,
             ListIssuedCardAuthorizationEventsSecurity security) throws Exception;
     }
 
 
     public interface MethodCallListIssuedCardTransactions {
-        ListIssuedCardTransactionsResponse listIssuedCardTransactions(
+        ListIssuedCardTransactionsResponse list(
             ListIssuedCardTransactionsRequest request,
             ListIssuedCardTransactionsSecurity security) throws Exception;
     }
 
 
     public interface MethodCallGetIssuedCardTransaction {
-        GetIssuedCardTransactionResponse getIssuedCardTransaction(
+        GetIssuedCardTransactionResponse get(
             GetIssuedCardTransactionSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -995,7 +995,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallRequestCard {
-        RequestCardResponse requestCard(
+        RequestCardResponse request(
             RequestCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -1004,14 +1004,14 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListIssuedCards {
-        ListIssuedCardsResponse listIssuedCards(
+        ListIssuedCardsResponse list(
             ListIssuedCardsRequest request,
             ListIssuedCardsSecurity security) throws Exception;
     }
 
 
     public interface MethodCallGetIssuedCard {
-        GetIssuedCardResponse getIssuedCard(
+        GetIssuedCardResponse get(
             GetIssuedCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -1020,7 +1020,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUpdateIssuedCard {
-        UpdateIssuedCardResponse updateIssuedCard(
+        UpdateIssuedCardResponse update(
             UpdateIssuedCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -1030,7 +1030,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetFullIssuedCard {
-        GetFullIssuedCardResponse getFullIssuedCard(
+        GetFullIssuedCardResponse getFull(
             GetFullIssuedCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -1038,22 +1038,22 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallRevokeAuthToken {
-        RevokeAuthTokenResponse revokeAuthToken(
+    public interface MethodCallRevokeAccessToken {
+        RevokeAccessTokenResponse revokeAccessToken(
             Optional<? extends Versions> xMoovVersion,
             RevokeTokenRequest revokeTokenRequest) throws Exception;
     }
 
 
-    public interface MethodCallCreateAuthToken {
-        CreateAuthTokenResponse createAuthToken(
+    public interface MethodCallCreateAccessToken {
+        CreateAccessTokenResponse createAccessToken(
             Optional<? extends Versions> xMoovVersion,
             AuthTokenRequest authTokenRequest) throws Exception;
     }
 
 
     public interface MethodCallCreateOnboardingInvite {
-        CreateOnboardingInviteResponse createOnboardingInvite(
+        CreateOnboardingInviteResponse createInvite(
             CreateOnboardingInviteSecurity security,
             Optional<? extends Versions> xMoovVersion,
             OnboardingInviteRequest onboardingInviteRequest) throws Exception;
@@ -1061,14 +1061,14 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallListOnboardingInvites {
-        ListOnboardingInvitesResponse listOnboardingInvites(
+        ListOnboardingInvitesResponse listInvites(
             ListOnboardingInvitesSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception;
     }
 
 
     public interface MethodCallGetOnboardingInvite {
-        GetOnboardingInviteResponse getOnboardingInvite(
+        GetOnboardingInviteResponse getInvite(
             GetOnboardingInviteSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String code) throws Exception;
@@ -1076,7 +1076,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallRevokeOnboardingInvite {
-        RevokeOnboardingInviteResponse revokeOnboardingInvite(
+        RevokeOnboardingInviteResponse revokeInvite(
             RevokeOnboardingInviteSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String code) throws Exception;

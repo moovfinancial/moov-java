@@ -53,7 +53,7 @@ public class GetBankAccountRequestBuilder {
 
     public GetBankAccountResponse call() throws Exception {
 
-        return sdk.getBankAccount(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

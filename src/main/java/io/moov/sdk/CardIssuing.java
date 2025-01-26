@@ -67,30 +67,30 @@ public class CardIssuing implements
 
 
     /**
-     * Request a virtual card be issued. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Request a virtual card be issued. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
      * @return The call builder
      */
-    public RequestCardRequestBuilder requestCard() {
+    public RequestCardRequestBuilder request() {
         return new RequestCardRequestBuilder(this);
     }
 
     /**
-     * Request a virtual card be issued. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Request a virtual card be issued. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which the card is to be issued.
      * @param requestCard
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RequestCardResponse requestCard(
+    public RequestCardResponse request(
             RequestCardSecurity security,
             String accountID,
             RequestCard requestCard) throws Exception {
-        return requestCard(security, Optional.empty(), accountID, requestCard);
+        return request(security, Optional.empty(), accountID, requestCard);
     }
     
     /**
-     * Request a virtual card be issued. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Request a virtual card be issued. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -106,7 +106,7 @@ public class CardIssuing implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RequestCardResponse requestCard(
+    public RequestCardResponse request(
             RequestCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -272,21 +272,21 @@ public class CardIssuing implements
 
 
     /**
-     * List Moov issued cards existing for the account. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * List Moov issued cards existing for the account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * @return The call builder
      */
-    public ListIssuedCardsRequestBuilder listIssuedCards() {
+    public ListIssuedCardsRequestBuilder list() {
         return new ListIssuedCardsRequestBuilder(this);
     }
 
     /**
-     * List Moov issued cards existing for the account. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * List Moov issued cards existing for the account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * @param request The request object containing all of the parameters for the API call.
      * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListIssuedCardsResponse listIssuedCards(
+    public ListIssuedCardsResponse list(
             ListIssuedCardsRequest request,
             ListIssuedCardsSecurity security) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -406,30 +406,30 @@ public class CardIssuing implements
 
 
     /**
-     * Retrieve a single issued card associated with a Moov account. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Retrieve a single issued card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * @return The call builder
      */
-    public GetIssuedCardRequestBuilder getIssuedCard() {
+    public GetIssuedCardRequestBuilder get() {
         return new GetIssuedCardRequestBuilder(this);
     }
 
     /**
-     * Retrieve a single issued card associated with a Moov account. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Retrieve a single issued card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which the card was issued.
      * @param issuedCardID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetIssuedCardResponse getIssuedCard(
+    public GetIssuedCardResponse get(
             GetIssuedCardSecurity security,
             String accountID,
             String issuedCardID) throws Exception {
-        return getIssuedCard(security, Optional.empty(), accountID, issuedCardID);
+        return get(security, Optional.empty(), accountID, issuedCardID);
     }
     
     /**
-     * Retrieve a single issued card associated with a Moov account. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Retrieve a single issued card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -445,7 +445,7 @@ public class CardIssuing implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetIssuedCardResponse getIssuedCard(
+    public GetIssuedCardResponse get(
             GetIssuedCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -570,15 +570,15 @@ public class CardIssuing implements
 
 
     /**
-     * Update a Moov issued card. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Update a Moov issued card. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
      * @return The call builder
      */
-    public UpdateIssuedCardRequestBuilder updateIssuedCard() {
+    public UpdateIssuedCardRequestBuilder update() {
         return new UpdateIssuedCardRequestBuilder(this);
     }
 
     /**
-     * Update a Moov issued card. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Update a Moov issued card. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
      * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which the card was issued.
      * @param issuedCardID
@@ -586,16 +586,16 @@ public class CardIssuing implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateIssuedCardResponse updateIssuedCard(
+    public UpdateIssuedCardResponse update(
             UpdateIssuedCardSecurity security,
             String accountID,
             String issuedCardID,
             UpdateIssuedCard updateIssuedCard) throws Exception {
-        return updateIssuedCard(security, Optional.empty(), accountID, issuedCardID, updateIssuedCard);
+        return update(security, Optional.empty(), accountID, issuedCardID, updateIssuedCard);
     }
     
     /**
-     * Update a Moov issued card. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Update a Moov issued card. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -612,7 +612,7 @@ public class CardIssuing implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateIssuedCardResponse updateIssuedCard(
+    public UpdateIssuedCardResponse update(
             UpdateIssuedCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
@@ -769,30 +769,30 @@ public class CardIssuing implements
 
 
     /**
-     * Get issued card with PAN, CVV, and expiration.  -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get issued card with PAN, CVV, and expiration.  -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
      * @return The call builder
      */
-    public GetFullIssuedCardRequestBuilder getFullIssuedCard() {
+    public GetFullIssuedCardRequestBuilder getFull() {
         return new GetFullIssuedCardRequestBuilder(this);
     }
 
     /**
-     * Get issued card with PAN, CVV, and expiration.  -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get issued card with PAN, CVV, and expiration.  -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
      * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which the card was issued.
      * @param issuedCardID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetFullIssuedCardResponse getFullIssuedCard(
+    public GetFullIssuedCardResponse getFull(
             GetFullIssuedCardSecurity security,
             String accountID,
             String issuedCardID) throws Exception {
-        return getFullIssuedCard(security, Optional.empty(), accountID, issuedCardID);
+        return getFull(security, Optional.empty(), accountID, issuedCardID);
     }
     
     /**
-     * Get issued card with PAN, CVV, and expiration.  -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. -  - To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope when generating  - a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get issued card with PAN, CVV, and expiration.  -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -808,7 +808,7 @@ public class CardIssuing implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetFullIssuedCardResponse getFullIssuedCard(
+    public GetFullIssuedCardResponse getFull(
             GetFullIssuedCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,

@@ -13,12 +13,12 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.AuthTokenRequestError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.RevokeTokenRequestError;
-import io.moov.sdk.models.operations.CreateAuthTokenRequest;
-import io.moov.sdk.models.operations.CreateAuthTokenRequestBuilder;
-import io.moov.sdk.models.operations.CreateAuthTokenResponse;
-import io.moov.sdk.models.operations.RevokeAuthTokenRequest;
-import io.moov.sdk.models.operations.RevokeAuthTokenRequestBuilder;
-import io.moov.sdk.models.operations.RevokeAuthTokenResponse;
+import io.moov.sdk.models.operations.CreateAccessTokenRequest;
+import io.moov.sdk.models.operations.CreateAccessTokenRequestBuilder;
+import io.moov.sdk.models.operations.CreateAccessTokenResponse;
+import io.moov.sdk.models.operations.RevokeAccessTokenRequest;
+import io.moov.sdk.models.operations.RevokeAccessTokenRequestBuilder;
+import io.moov.sdk.models.operations.RevokeAccessTokenResponse;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -38,8 +38,8 @@ import java.util.List;
 import java.util.Optional; 
 
 public class Authentication implements
-            MethodCallRevokeAuthToken,
-            MethodCallCreateAuthToken {
+            MethodCallRevokeAccessToken,
+            MethodCallCreateAccessToken {
 
     private final SDKConfiguration sdkConfiguration;
 
@@ -52,8 +52,8 @@ public class Authentication implements
      * Revoke an auth token. -  - Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed.
      * @return The call builder
      */
-    public RevokeAuthTokenRequestBuilder revokeAuthToken() {
-        return new RevokeAuthTokenRequestBuilder(this);
+    public RevokeAccessTokenRequestBuilder revokeAccessToken() {
+        return new RevokeAccessTokenRequestBuilder(this);
     }
 
     /**
@@ -62,9 +62,9 @@ public class Authentication implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RevokeAuthTokenResponse revokeAuthToken(
+    public RevokeAccessTokenResponse revokeAccessToken(
             RevokeTokenRequest revokeTokenRequest) throws Exception {
-        return revokeAuthToken(Optional.empty(), revokeTokenRequest);
+        return revokeAccessToken(Optional.empty(), revokeTokenRequest);
     }
     
     /**
@@ -82,11 +82,11 @@ public class Authentication implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RevokeAuthTokenResponse revokeAuthToken(
+    public RevokeAccessTokenResponse revokeAccessToken(
             Optional<? extends Versions> xMoovVersion,
             RevokeTokenRequest revokeTokenRequest) throws Exception {
-        RevokeAuthTokenRequest request =
-            RevokeAuthTokenRequest
+        RevokeAccessTokenRequest request =
+            RevokeAccessTokenRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
                 .revokeTokenRequest(revokeTokenRequest)
@@ -124,7 +124,7 @@ public class Authentication implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
-                      "revokeAuthToken", 
+                      "revokeAccessToken", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -135,7 +135,7 @@ public class Authentication implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "revokeAuthToken",
+                            "revokeAccessToken",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -144,7 +144,7 @@ public class Authentication implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
-                            "revokeAuthToken",
+                            "revokeAccessToken",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -153,7 +153,7 @@ public class Authentication implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "revokeAuthToken",
+                            "revokeAccessToken",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -163,14 +163,14 @@ public class Authentication implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        RevokeAuthTokenResponse.Builder _resBuilder = 
-            RevokeAuthTokenResponse
+        RevokeAccessTokenResponse.Builder _resBuilder = 
+            RevokeAccessTokenResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        RevokeAuthTokenResponse _res = _resBuilder.build();
+        RevokeAccessTokenResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "204")) {
             // no content 
@@ -233,8 +233,8 @@ public class Authentication implements
      * Create or refresh an access token.
      * @return The call builder
      */
-    public CreateAuthTokenRequestBuilder createAuthToken() {
-        return new CreateAuthTokenRequestBuilder(this);
+    public CreateAccessTokenRequestBuilder createAccessToken() {
+        return new CreateAccessTokenRequestBuilder(this);
     }
 
     /**
@@ -243,9 +243,9 @@ public class Authentication implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateAuthTokenResponse createAuthToken(
+    public CreateAccessTokenResponse createAccessToken(
             AuthTokenRequest authTokenRequest) throws Exception {
-        return createAuthToken(Optional.empty(), authTokenRequest);
+        return createAccessToken(Optional.empty(), authTokenRequest);
     }
     
     /**
@@ -263,11 +263,11 @@ public class Authentication implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateAuthTokenResponse createAuthToken(
+    public CreateAccessTokenResponse createAccessToken(
             Optional<? extends Versions> xMoovVersion,
             AuthTokenRequest authTokenRequest) throws Exception {
-        CreateAuthTokenRequest request =
-            CreateAuthTokenRequest
+        CreateAccessTokenRequest request =
+            CreateAccessTokenRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
                 .authTokenRequest(authTokenRequest)
@@ -305,7 +305,7 @@ public class Authentication implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
-                      "createAuthToken", 
+                      "createAccessToken", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -316,7 +316,7 @@ public class Authentication implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "createAuthToken",
+                            "createAccessToken",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -325,7 +325,7 @@ public class Authentication implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
-                            "createAuthToken",
+                            "createAccessToken",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -334,7 +334,7 @@ public class Authentication implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "createAuthToken",
+                            "createAccessToken",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -344,14 +344,14 @@ public class Authentication implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        CreateAuthTokenResponse.Builder _resBuilder = 
-            CreateAuthTokenResponse
+        CreateAccessTokenResponse.Builder _resBuilder = 
+            CreateAccessTokenResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        CreateAuthTokenResponse _res = _resBuilder.build();
+        CreateAccessTokenResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {

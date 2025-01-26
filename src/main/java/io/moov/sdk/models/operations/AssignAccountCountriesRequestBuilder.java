@@ -54,7 +54,7 @@ public class AssignAccountCountriesRequestBuilder {
 
     public AssignAccountCountriesResponse call() throws Exception {
 
-        return sdk.assignAccountCountries(
+        return sdk.assignCountries(
             security,
             xMoovVersion,
             accountID,

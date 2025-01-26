@@ -53,7 +53,7 @@ public class GetRepresentativeRequestBuilder {
 
     public GetRepresentativeResponse call() throws Exception {
 
-        return sdk.getRepresentative(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

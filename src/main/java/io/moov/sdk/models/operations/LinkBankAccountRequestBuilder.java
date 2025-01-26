@@ -68,7 +68,7 @@ public class LinkBankAccountRequestBuilder {
 
     public LinkBankAccountResponse call() throws Exception {
 
-        return sdk.linkBankAccount(
+        return sdk.link(
             security,
             xMoovVersion,
             xWaitFor,

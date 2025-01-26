@@ -61,7 +61,7 @@ public class UploadDisputeEvidenceFileRequestBuilder {
 
     public UploadDisputeEvidenceFileResponse call() throws Exception {
 
-        return sdk.uploadDisputeEvidenceFile(
+        return sdk.uploadEvidenceFile(
             security,
             xMoovVersion,
             accountID,

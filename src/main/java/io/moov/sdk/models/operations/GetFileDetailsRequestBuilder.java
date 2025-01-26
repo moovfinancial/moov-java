@@ -53,7 +53,7 @@ public class GetFileDetailsRequestBuilder {
 
     public GetFileDetailsResponse call() throws Exception {
 
-        return sdk.getFileDetails(
+        return sdk.get(
             security,
             xMoovVersion,
             accountID,

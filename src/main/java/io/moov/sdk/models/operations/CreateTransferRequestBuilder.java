@@ -30,7 +30,7 @@ public class CreateTransferRequestBuilder {
 
     public CreateTransferResponse call() throws Exception {
 
-        return sdk.createTransfer(
+        return sdk.create(
             request,
             security);
     }

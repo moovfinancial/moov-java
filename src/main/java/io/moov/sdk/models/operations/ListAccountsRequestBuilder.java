@@ -30,7 +30,7 @@ public class ListAccountsRequestBuilder {
 
     public ListAccountsResponse call() throws Exception {
 
-        return sdk.listAccounts(
+        return sdk.list(
             request,
             security);
     }

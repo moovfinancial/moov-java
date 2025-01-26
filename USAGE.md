@@ -23,14 +23,14 @@ public class Application {
         Moov sdk = Moov.builder()
             .build();
 
-        CreateAccountResponse res = sdk.accounts().createAccount()
+        CreateAccountResponse res = sdk.accounts().create()
                 .security(CreateAccountSecurity.builder()
                     .basicAuth(SchemeBasicAuth.builder()
                         .username("")
                         .password("")
                         .build())
                     .build())
-                .xMoovVersion(Versions.LATEST)
+                .xMoovVersion(Versions.V202504)
                 .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)

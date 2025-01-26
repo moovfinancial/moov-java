@@ -36,28 +36,28 @@ public class Avatars implements
 
 
     /**
-     * Get avatar image for an account using a unique ID.     -  - To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get avatar image for an account using a unique ID.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @return The call builder
      */
-    public GetAvatarRequestBuilder getAvatar() {
+    public GetAvatarRequestBuilder get() {
         return new GetAvatarRequestBuilder(this);
     }
 
     /**
-     * Get avatar image for an account using a unique ID.     -  - To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get avatar image for an account using a unique ID.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @param security The security details to use for authentication.
      * @param uniqueID Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAvatarResponse getAvatar(
+    public GetAvatarResponse get(
             GetAvatarSecurity security,
             String uniqueID) throws Exception {
-        return getAvatar(security, Optional.empty(), uniqueID);
+        return get(security, Optional.empty(), uniqueID);
     }
     
     /**
-     * Get avatar image for an account using a unique ID.     -  - To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+     * Get avatar image for an account using a unique ID.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
@@ -72,7 +72,7 @@ public class Avatars implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAvatarResponse getAvatar(
+    public GetAvatarResponse get(
             GetAvatarSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String uniqueID) throws Exception {

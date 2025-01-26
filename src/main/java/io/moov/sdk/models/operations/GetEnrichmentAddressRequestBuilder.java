@@ -30,7 +30,7 @@ public class GetEnrichmentAddressRequestBuilder {
 
     public GetEnrichmentAddressResponse call() throws Exception {
 
-        return sdk.getEnrichmentAddress(
+        return sdk.get(
             request,
             security);
     }

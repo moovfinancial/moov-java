@@ -61,7 +61,7 @@ public class UpdateIssuedCardRequestBuilder {
 
     public UpdateIssuedCardResponse call() throws Exception {
 
-        return sdk.updateIssuedCard(
+        return sdk.update(
             security,
             xMoovVersion,
             accountID,

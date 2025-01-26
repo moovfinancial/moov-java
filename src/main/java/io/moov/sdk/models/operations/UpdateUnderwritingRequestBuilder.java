@@ -54,7 +54,7 @@ public class UpdateUnderwritingRequestBuilder {
 
     public UpdateUnderwritingResponse call() throws Exception {
 
-        return sdk.updateUnderwriting(
+        return sdk.update(
             security,
             xMoovVersion,
             accountID,

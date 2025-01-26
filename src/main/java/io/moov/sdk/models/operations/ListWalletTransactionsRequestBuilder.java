@@ -30,7 +30,7 @@ public class ListWalletTransactionsRequestBuilder {
 
     public ListWalletTransactionsResponse call() throws Exception {
 
-        return sdk.listWalletTransactions(
+        return sdk.list(
             request,
             security);
     }

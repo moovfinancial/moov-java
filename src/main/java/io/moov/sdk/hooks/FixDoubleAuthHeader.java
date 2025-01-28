@@ -29,16 +29,12 @@ final class FixDoubleAuthHeader implements Hook.BeforeRequest {
      */
     public HttpRequest beforeRequest(BeforeRequestContext context, HttpRequest request) throws Exception {
 
-        // Create a copy of headers map
-        Map<String, List<String>> headersCopy = request.headers().map();
+        Optional<String> authHeader = request.headers().firstValue("Authorization");
         
-        // Get authorization header value
-        List<String> authHeader = headersCopy.get("Authorization");
-        if (authHeader != null && !authHeader.isEmpty()) {
-            // Create new request with modified authorization header
-            request = HttpRequest.newBuilder(request, (name, value) -> !name.equalsIgnoreCase("Authorization"))
-                    .header("Authorization", authHeader.get(0))
-                    .build();
+        if (authHeader.isPresent()) {
+            HttpRequest.Builder builder = Helpers.copy(request, (name, value) -> !name.equalsIgnoreCase("Authorization"));
+            builder.header("Authorization", authHeader.get());
+            request = builder.build();
         }
         return request;
     }

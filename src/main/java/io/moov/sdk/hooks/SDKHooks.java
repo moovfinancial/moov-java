@@ -14,9 +14,10 @@ public final class SDKHooks {
 
     public static final void initialize(io.moov.sdk.utils.Hooks hooks) {
         // register hooks here
+        FixDoubleAuthHeader exampleHook = new FixDoubleAuthHeader();
+        hooks.registerBeforeRequest(exampleHook);
         
         // for more information see
         // https://www.speakeasy.com/docs/additional-features/sdk-hooks
     }
-    
 }

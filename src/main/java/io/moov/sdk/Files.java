@@ -14,16 +14,13 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.GetFileDetailsRequest;
 import io.moov.sdk.models.operations.GetFileDetailsRequestBuilder;
 import io.moov.sdk.models.operations.GetFileDetailsResponse;
-import io.moov.sdk.models.operations.GetFileDetailsSecurity;
 import io.moov.sdk.models.operations.ListFilesRequest;
 import io.moov.sdk.models.operations.ListFilesRequestBuilder;
 import io.moov.sdk.models.operations.ListFilesResponse;
-import io.moov.sdk.models.operations.ListFilesSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UploadFileRequest;
 import io.moov.sdk.models.operations.UploadFileRequestBuilder;
 import io.moov.sdk.models.operations.UploadFileResponse;
-import io.moov.sdk.models.operations.UploadFileSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -63,22 +60,19 @@ public class Files implements
 
     /**
      * Upload a file and link it to the specified Moov account.  -  - The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf,  - and png.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param fileUploadRequestMultiPart Request to upload a file for an account.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UploadFileResponse upload(
-            UploadFileSecurity security,
             String accountID,
             FileUploadRequestMultiPart fileUploadRequestMultiPart) throws Exception {
-        return upload(security, Optional.empty(), accountID, fileUploadRequestMultiPart);
+        return upload(Optional.empty(), accountID, fileUploadRequestMultiPart);
     }
     
     /**
      * Upload a file and link it to the specified Moov account.  -  - The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf,  - and png.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -94,7 +88,6 @@ public class Files implements
      * @throws Exception if the API call fails
      */
     public UploadFileResponse upload(
-            UploadFileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             FileUploadRequestMultiPart fileUploadRequestMultiPart) throws Exception {
@@ -132,11 +125,9 @@ public class Files implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -268,20 +259,17 @@ public class Files implements
 
     /**
      * List all the files associated with a particular Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListFilesResponse list(
-            ListFilesSecurity security,
             String accountID) throws Exception {
-        return list(security, Optional.empty(), accountID);
+        return list(Optional.empty(), accountID);
     }
     
     /**
      * List all the files associated with a particular Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -296,7 +284,6 @@ public class Files implements
      * @throws Exception if the API call fails
      */
     public ListFilesResponse list(
-            ListFilesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         ListFilesRequest request =
@@ -319,11 +306,9 @@ public class Files implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -427,22 +412,19 @@ public class Files implements
 
     /**
      * Retrieve file details associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param fileID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetFileDetailsResponse get(
-            GetFileDetailsSecurity security,
             String accountID,
             String fileID) throws Exception {
-        return get(security, Optional.empty(), accountID, fileID);
+        return get(Optional.empty(), accountID, fileID);
     }
     
     /**
      * Retrieve file details associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/files.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -458,7 +440,6 @@ public class Files implements
      * @throws Exception if the API call fails
      */
     public GetFileDetailsResponse get(
-            GetFileDetailsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String fileID) throws Exception {
@@ -483,11 +464,9 @@ public class Files implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

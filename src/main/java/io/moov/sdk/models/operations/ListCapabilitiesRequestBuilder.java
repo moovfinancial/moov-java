@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class ListCapabilitiesRequestBuilder {
 
-    private ListCapabilitiesSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallListCapabilities sdk;
 
     public ListCapabilitiesRequestBuilder(SDKMethodInterfaces.MethodCallListCapabilities sdk) {
         this.sdk = sdk;
-    }
-
-    public ListCapabilitiesRequestBuilder security(ListCapabilitiesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListCapabilitiesRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class ListCapabilitiesRequestBuilder {
     public ListCapabilitiesResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             accountID);
     }

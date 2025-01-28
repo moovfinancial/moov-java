@@ -13,12 +13,10 @@ import io.moov.sdk.models.errors.UpdateUnderwritingError;
 import io.moov.sdk.models.operations.GetUnderwritingRequest;
 import io.moov.sdk.models.operations.GetUnderwritingRequestBuilder;
 import io.moov.sdk.models.operations.GetUnderwritingResponse;
-import io.moov.sdk.models.operations.GetUnderwritingSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateUnderwritingRequest;
 import io.moov.sdk.models.operations.UpdateUnderwritingRequestBuilder;
 import io.moov.sdk.models.operations.UpdateUnderwritingResponse;
-import io.moov.sdk.models.operations.UpdateUnderwritingSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -57,20 +55,17 @@ public class Underwriting implements
 
     /**
      * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetUnderwritingResponse get(
-            GetUnderwritingSecurity security,
             String accountID) throws Exception {
-        return get(security, Optional.empty(), accountID);
+        return get(Optional.empty(), accountID);
     }
     
     /**
      * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -85,7 +80,6 @@ public class Underwriting implements
      * @throws Exception if the API call fails
      */
     public GetUnderwritingResponse get(
-            GetUnderwritingSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         GetUnderwritingRequest request =
@@ -108,11 +102,9 @@ public class Underwriting implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -216,22 +208,19 @@ public class Underwriting implements
 
     /**
      * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param updateUnderwriting
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateUnderwritingResponse update(
-            UpdateUnderwritingSecurity security,
             String accountID,
             UpdateUnderwriting updateUnderwriting) throws Exception {
-        return update(security, Optional.empty(), accountID, updateUnderwriting);
+        return update(Optional.empty(), accountID, updateUnderwriting);
     }
     
     /**
      * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -247,7 +236,6 @@ public class Underwriting implements
      * @throws Exception if the API call fails
      */
     public UpdateUnderwritingResponse update(
-            UpdateUnderwritingSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             UpdateUnderwriting updateUnderwriting) throws Exception {
@@ -285,11 +273,9 @@ public class Underwriting implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

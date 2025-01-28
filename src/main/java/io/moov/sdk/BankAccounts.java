@@ -21,39 +21,30 @@ import io.moov.sdk.models.errors.MicroDepositValidationError;
 import io.moov.sdk.models.operations.CompleteBankAccountVerificationRequest;
 import io.moov.sdk.models.operations.CompleteBankAccountVerificationRequestBuilder;
 import io.moov.sdk.models.operations.CompleteBankAccountVerificationResponse;
-import io.moov.sdk.models.operations.CompleteBankAccountVerificationSecurity;
 import io.moov.sdk.models.operations.CompleteMicroDepositsRequest;
 import io.moov.sdk.models.operations.CompleteMicroDepositsRequestBuilder;
 import io.moov.sdk.models.operations.CompleteMicroDepositsResponse;
-import io.moov.sdk.models.operations.CompleteMicroDepositsSecurity;
 import io.moov.sdk.models.operations.DisableBankAccountRequest;
 import io.moov.sdk.models.operations.DisableBankAccountRequestBuilder;
 import io.moov.sdk.models.operations.DisableBankAccountResponse;
-import io.moov.sdk.models.operations.DisableBankAccountSecurity;
 import io.moov.sdk.models.operations.GetBankAccountRequest;
 import io.moov.sdk.models.operations.GetBankAccountRequestBuilder;
 import io.moov.sdk.models.operations.GetBankAccountResponse;
-import io.moov.sdk.models.operations.GetBankAccountSecurity;
 import io.moov.sdk.models.operations.GetBankAccountVerificationRequest;
 import io.moov.sdk.models.operations.GetBankAccountVerificationRequestBuilder;
 import io.moov.sdk.models.operations.GetBankAccountVerificationResponse;
-import io.moov.sdk.models.operations.GetBankAccountVerificationSecurity;
 import io.moov.sdk.models.operations.InitiateBankAccountVerificationRequest;
 import io.moov.sdk.models.operations.InitiateBankAccountVerificationRequestBuilder;
 import io.moov.sdk.models.operations.InitiateBankAccountVerificationResponse;
-import io.moov.sdk.models.operations.InitiateBankAccountVerificationSecurity;
 import io.moov.sdk.models.operations.InitiateMicroDepositsRequest;
 import io.moov.sdk.models.operations.InitiateMicroDepositsRequestBuilder;
 import io.moov.sdk.models.operations.InitiateMicroDepositsResponse;
-import io.moov.sdk.models.operations.InitiateMicroDepositsSecurity;
 import io.moov.sdk.models.operations.LinkBankAccountRequest;
 import io.moov.sdk.models.operations.LinkBankAccountRequestBuilder;
 import io.moov.sdk.models.operations.LinkBankAccountResponse;
-import io.moov.sdk.models.operations.LinkBankAccountSecurity;
 import io.moov.sdk.models.operations.ListBankAccountsRequest;
 import io.moov.sdk.models.operations.ListBankAccountsRequestBuilder;
 import io.moov.sdk.models.operations.ListBankAccountsResponse;
-import io.moov.sdk.models.operations.ListBankAccountsSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -100,22 +91,19 @@ public class BankAccounts implements
 
     /**
      * Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more. -  - It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked - bank-account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment - Methods](https://docs.moov.io/api/sources/payment-methods/list/) - endpoint to wait for the new payment methods to be available for use. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param linkBankAccount
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public LinkBankAccountResponse link(
-            LinkBankAccountSecurity security,
             String accountID,
             LinkBankAccount linkBankAccount) throws Exception {
-        return link(security, Optional.empty(), Optional.empty(), accountID, linkBankAccount);
+        return link(Optional.empty(), Optional.empty(), accountID, linkBankAccount);
     }
     
     /**
      * Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more. -  - It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked - bank-account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment - Methods](https://docs.moov.io/api/sources/payment-methods/list/) - endpoint to wait for the new payment methods to be available for use. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -132,7 +120,6 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public LinkBankAccountResponse link(
-            LinkBankAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             Optional<? extends BankAccountWaitFor> xWaitFor,
             String accountID,
@@ -172,11 +159,9 @@ public class BankAccounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -308,20 +293,17 @@ public class BankAccounts implements
 
     /**
      * List all the bank accounts associated with a particular Moov account.  -  - Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListBankAccountsResponse list(
-            ListBankAccountsSecurity security,
             String accountID) throws Exception {
-        return list(security, Optional.empty(), accountID);
+        return list(Optional.empty(), accountID);
     }
     
     /**
      * List all the bank accounts associated with a particular Moov account.  -  - Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -336,7 +318,6 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public ListBankAccountsResponse list(
-            ListBankAccountsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         ListBankAccountsRequest request =
@@ -359,11 +340,9 @@ public class BankAccounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -467,22 +446,19 @@ public class BankAccounts implements
 
     /**
      * Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov account.  -  - Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param bankAccountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetBankAccountResponse get(
-            GetBankAccountSecurity security,
             String accountID,
             String bankAccountID) throws Exception {
-        return get(security, Optional.empty(), accountID, bankAccountID);
+        return get(Optional.empty(), accountID, bankAccountID);
     }
     
     /**
      * Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov account.  -  - Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -498,7 +474,6 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public GetBankAccountResponse get(
-            GetBankAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String bankAccountID) throws Exception {
@@ -523,11 +498,9 @@ public class BankAccounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -631,22 +604,19 @@ public class BankAccounts implements
 
     /**
      * Discontinue using a specified bank account linked to a Moov account.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param bankAccountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public DisableBankAccountResponse disable(
-            DisableBankAccountSecurity security,
             String accountID,
             String bankAccountID) throws Exception {
-        return disable(security, Optional.empty(), accountID, bankAccountID);
+        return disable(Optional.empty(), accountID, bankAccountID);
     }
     
     /**
      * Discontinue using a specified bank account linked to a Moov account.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -662,7 +632,6 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public DisableBankAccountResponse disable(
-            DisableBankAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String bankAccountID) throws Exception {
@@ -687,11 +656,9 @@ public class BankAccounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -798,22 +765,19 @@ public class BankAccounts implements
 
     /**
      * Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity.  - Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account  - you want to confirm. -  - If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request micro-deposits any  - time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated, Moov simultaneously - initiates a debit to recoup the micro-deposits.  -  - Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly verifiable once initiated. -  - You can simulate micro-deposit verification in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#micro-deposits) - guide for more information. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param bankAccountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public InitiateMicroDepositsResponse initiateMicroDeposits(
-            InitiateMicroDepositsSecurity security,
             String accountID,
             String bankAccountID) throws Exception {
-        return initiateMicroDeposits(security, Optional.empty(), accountID, bankAccountID);
+        return initiateMicroDeposits(Optional.empty(), accountID, bankAccountID);
     }
     
     /**
      * Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity.  - Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account  - you want to confirm. -  - If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request micro-deposits any  - time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated, Moov simultaneously - initiates a debit to recoup the micro-deposits.  -  - Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly verifiable once initiated. -  - You can simulate micro-deposit verification in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#micro-deposits) - guide for more information. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -829,7 +793,6 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public InitiateMicroDepositsResponse initiateMicroDeposits(
-            InitiateMicroDepositsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String bankAccountID) throws Exception {
@@ -854,11 +817,9 @@ public class BankAccounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -965,7 +926,6 @@ public class BankAccounts implements
 
     /**
      * Complete the micro-deposit validation process by passing the amounts of the two transfers within three tries. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param bankAccountID
      * @param completeMicroDeposits Request to complete the micro-deposit verification workflow.
@@ -973,16 +933,14 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public CompleteMicroDepositsResponse completeMicroDeposits(
-            CompleteMicroDepositsSecurity security,
             String accountID,
             String bankAccountID,
             CompleteMicroDeposits completeMicroDeposits) throws Exception {
-        return completeMicroDeposits(security, Optional.empty(), accountID, bankAccountID, completeMicroDeposits);
+        return completeMicroDeposits(Optional.empty(), accountID, bankAccountID, completeMicroDeposits);
     }
     
     /**
      * Complete the micro-deposit validation process by passing the amounts of the two transfers within three tries. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -999,7 +957,6 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public CompleteMicroDepositsResponse completeMicroDeposits(
-            CompleteMicroDepositsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String bankAccountID,
@@ -1039,11 +996,9 @@ public class BankAccounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1175,22 +1130,19 @@ public class BankAccounts implements
 
     /**
      * Retrieve the current status and details of an instant verification, including whether the verification method was instant or same-day  - ACH. This helps track the verification process in real-time and provides details in case of exceptions. -  - The status will indicate the following: -  - - `new`: Verification initiated, credit pending to the payment network - - `sent-credit`: Credit sent, available for verification - - `failed`: Verification failed, description provided, user needs to add a new bank account - - `expired`: Verification expired after 14 days, initiate another verification - - `max-attempts-exceeded`: Five incorrect code attempts exhausted, initiate another verification -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param bankAccountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetBankAccountVerificationResponse getVerification(
-            GetBankAccountVerificationSecurity security,
             String accountID,
             String bankAccountID) throws Exception {
-        return getVerification(security, Optional.empty(), accountID, bankAccountID);
+        return getVerification(Optional.empty(), accountID, bankAccountID);
     }
     
     /**
      * Retrieve the current status and details of an instant verification, including whether the verification method was instant or same-day  - ACH. This helps track the verification process in real-time and provides details in case of exceptions. -  - The status will indicate the following: -  - - `new`: Verification initiated, credit pending to the payment network - - `sent-credit`: Credit sent, available for verification - - `failed`: Verification failed, description provided, user needs to add a new bank account - - `expired`: Verification expired after 14 days, initiate another verification - - `max-attempts-exceeded`: Five incorrect code attempts exhausted, initiate another verification -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1206,7 +1158,6 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public GetBankAccountVerificationResponse getVerification(
-            GetBankAccountVerificationSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String bankAccountID) throws Exception {
@@ -1231,11 +1182,9 @@ public class BankAccounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1339,7 +1288,6 @@ public class BankAccounts implements
 
     /**
      * Instant micro-deposit verification offers a quick and efficient way to verify bank account ownership.  -  - Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank's capabilities. This - feature provides a faster alternative to traditional methods, allowing verification in a single session. -  - It is recommended to use the `X-Wait-For: rail-response` header to synchronously receive the outcome of the instant credit in the -   response payload. -  - Possible verification methods: -   - `instant`: Real-time verification credit sent via RTP -   - `ach`: Verification credit sent via same-day ACH -  - Possible statuses: -   - `new`: Verification initiated, credit pending -   - `sent-credit`: Credit sent, available for verification in the external bank account -   - `failed`: Verification failed due to credit rejection/return, details in `exceptionDetails` -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xWaitFor
      * @param accountID
      * @param bankAccountID
@@ -1347,16 +1295,14 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public InitiateBankAccountVerificationResponse initiateVerification(
-            InitiateBankAccountVerificationSecurity security,
             BankAccountWaitFor xWaitFor,
             String accountID,
             String bankAccountID) throws Exception {
-        return initiateVerification(security, Optional.empty(), xWaitFor, accountID, bankAccountID);
+        return initiateVerification(Optional.empty(), xWaitFor, accountID, bankAccountID);
     }
     
     /**
      * Instant micro-deposit verification offers a quick and efficient way to verify bank account ownership.  -  - Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank's capabilities. This - feature provides a faster alternative to traditional methods, allowing verification in a single session. -  - It is recommended to use the `X-Wait-For: rail-response` header to synchronously receive the outcome of the instant credit in the -   response payload. -  - Possible verification methods: -   - `instant`: Real-time verification credit sent via RTP -   - `ach`: Verification credit sent via same-day ACH -  - Possible statuses: -   - `new`: Verification initiated, credit pending -   - `sent-credit`: Credit sent, available for verification in the external bank account -   - `failed`: Verification failed due to credit rejection/return, details in `exceptionDetails` -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1373,7 +1319,6 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public InitiateBankAccountVerificationResponse initiateVerification(
-            InitiateBankAccountVerificationSecurity security,
             Optional<? extends Versions> xMoovVersion,
             BankAccountWaitFor xWaitFor,
             String accountID,
@@ -1400,11 +1345,9 @@ public class BankAccounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1522,7 +1465,6 @@ public class BankAccounts implements
 
     /**
      * Finalize the instant micro-deposit verification by submitting the verification code displayed in the user's bank account.  -  - Upon successful verification, the bank account status will be updated to `verified` and eligible for ACH debit transactions. -  - The following formats are accepted: - - `MV0000` - - `mv0000` - - `0000` -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param bankAccountID
      * @param completeBankAccountVerification
@@ -1530,16 +1472,14 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public CompleteBankAccountVerificationResponse completeVerification(
-            CompleteBankAccountVerificationSecurity security,
             String accountID,
             String bankAccountID,
             CompleteBankAccountVerification completeBankAccountVerification) throws Exception {
-        return completeVerification(security, Optional.empty(), accountID, bankAccountID, completeBankAccountVerification);
+        return completeVerification(Optional.empty(), accountID, bankAccountID, completeBankAccountVerification);
     }
     
     /**
      * Finalize the instant micro-deposit verification by submitting the verification code displayed in the user's bank account.  -  - Upon successful verification, the bank account status will be updated to `verified` and eligible for ACH debit transactions. -  - The following formats are accepted: - - `MV0000` - - `mv0000` - - `0000` -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1556,7 +1496,6 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public CompleteBankAccountVerificationResponse completeVerification(
-            CompleteBankAccountVerificationSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String bankAccountID,
@@ -1596,11 +1535,9 @@ public class BankAccounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

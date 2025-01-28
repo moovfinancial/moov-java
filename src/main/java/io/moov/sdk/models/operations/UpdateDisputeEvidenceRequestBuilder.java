@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class UpdateDisputeEvidenceRequestBuilder {
 
     private UpdateDisputeEvidenceRequest request;
-    private UpdateDisputeEvidenceSecurity security;
     private final SDKMethodInterfaces.MethodCallUpdateDisputeEvidence sdk;
 
     public UpdateDisputeEvidenceRequestBuilder(SDKMethodInterfaces.MethodCallUpdateDisputeEvidence sdk) {
@@ -22,16 +21,9 @@ public class UpdateDisputeEvidenceRequestBuilder {
         return this;
     }
 
-    public UpdateDisputeEvidenceRequestBuilder security(UpdateDisputeEvidenceSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public UpdateDisputeEvidenceResponse call() throws Exception {
 
         return sdk.updateEvidence(
-            request,
-            security);
+            request);
     }
 }

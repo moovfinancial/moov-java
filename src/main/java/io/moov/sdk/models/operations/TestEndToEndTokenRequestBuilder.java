@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class TestEndToEndTokenRequestBuilder {
 
-    private TestEndToEndTokenSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private E2EEToken e2EEToken;
     private final SDKMethodInterfaces.MethodCallTestEndToEndToken sdk;
 
     public TestEndToEndTokenRequestBuilder(SDKMethodInterfaces.MethodCallTestEndToEndToken sdk) {
         this.sdk = sdk;
-    }
-
-    public TestEndToEndTokenRequestBuilder security(TestEndToEndTokenSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public TestEndToEndTokenRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class TestEndToEndTokenRequestBuilder {
     public TestEndToEndTokenResponse call() throws Exception {
 
         return sdk.testEncryptedToken(
-            security,
             xMoovVersion,
             e2EEToken);
     }

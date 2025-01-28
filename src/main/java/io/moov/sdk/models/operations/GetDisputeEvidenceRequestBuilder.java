@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetDisputeEvidenceRequestBuilder {
 
-    private GetDisputeEvidenceSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String disputeID;
@@ -20,12 +19,6 @@ public class GetDisputeEvidenceRequestBuilder {
 
     public GetDisputeEvidenceRequestBuilder(SDKMethodInterfaces.MethodCallGetDisputeEvidence sdk) {
         this.sdk = sdk;
-    }
-
-    public GetDisputeEvidenceRequestBuilder security(GetDisputeEvidenceSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetDisputeEvidenceRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -61,7 +54,6 @@ public class GetDisputeEvidenceRequestBuilder {
     public GetDisputeEvidenceResponse call() throws Exception {
 
         return sdk.getEvidence(
-            security,
             xMoovVersion,
             accountID,
             disputeID,

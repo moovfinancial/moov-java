@@ -41,10 +41,9 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.FeePlanAgreementStatus;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListFeePlanAgreementsResponse;
-import io.moov.sdk.models.operations.ListFeePlanAgreementsSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -53,15 +52,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListFeePlanAgreementsResponse res = sdk.billing().listFeePlanAgreements()
-                .security(ListFeePlanAgreementsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202501)
                 .accountID("4c49ae91-2b32-4a4d-91bf-f062f3c2f38d")
                 .agreementID(List.of(
@@ -79,13 +76,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.sdk.models.operations.ListFeePlanAgreementsSecurity](../../models/operations/ListFeePlanAgreementsSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
-| `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
-| `accountID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
-| `agreementID`                                                                                                           | List\<*String*>                                                                                                         | :heavy_minus_sign:                                                                                                      | A comma-separated list of agreement IDs to filter the results by.                                                       |
-| `status`                                                                                                                | List\<[FeePlanAgreementStatus](../../models/components/FeePlanAgreementStatus.md)>                                      | :heavy_minus_sign:                                                                                                      | A comma-separated list of statuses to filter the results by.                                                            |
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `xMoovVersion`                                                                     | [Optional\<Versions>](../../models/components/Versions.md)                         | :heavy_minus_sign:                                                                 | Specify an API version.                                                            |
+| `accountID`                                                                        | *String*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `agreementID`                                                                      | List\<*String*>                                                                    | :heavy_minus_sign:                                                                 | A comma-separated list of agreement IDs to filter the results by.                  |
+| `status`                                                                           | List\<[FeePlanAgreementStatus](../../models/components/FeePlanAgreementStatus.md)> | :heavy_minus_sign:                                                                 | A comma-separated list of statuses to filter the results by.                       |
 
 ### Response
 
@@ -111,12 +107,11 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.CreateFeePlanAgreement;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.FeePlanAgreementError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateFeePlanAgreementsResponse;
-import io.moov.sdk.models.operations.CreateFeePlanAgreementsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -124,15 +119,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, FeePlanAgreementError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreateFeePlanAgreementsResponse res = sdk.billing().createFeePlanAgreements()
-                .security(CreateFeePlanAgreementsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("19962eb8-00cd-44e5-8a66-a1ebaf88c2fe")
                 .createFeePlanAgreement(CreateFeePlanAgreement.builder()
@@ -149,12 +142,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
-| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                  | [io.moov.sdk.models.operations.CreateFeePlanAgreementsSecurity](../../models/operations/CreateFeePlanAgreementsSecurity.md) | :heavy_check_mark:                                                                                                          | The security requirements to use for the request.                                                                           |
-| `xMoovVersion`                                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                                  | :heavy_minus_sign:                                                                                                          | Specify an API version.                                                                                                     |
-| `accountID`                                                                                                                 | *String*                                                                                                                    | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
-| `createFeePlanAgreement`                                                                                                    | [CreateFeePlanAgreement](../../models/components/CreateFeePlanAgreement.md)                                                 | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `xMoovVersion`                                                              | [Optional\<Versions>](../../models/components/Versions.md)                  | :heavy_minus_sign:                                                          | Specify an API version.                                                     |
+| `accountID`                                                                 | *String*                                                                    | :heavy_check_mark:                                                          | N/A                                                                         |
+| `createFeePlanAgreement`                                                    | [CreateFeePlanAgreement](../../models/components/CreateFeePlanAgreement.md) | :heavy_check_mark:                                                          | N/A                                                                         |
 
 ### Response
 
@@ -182,10 +174,9 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListFeePlansResponse;
-import io.moov.sdk.models.operations.ListFeePlansSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -194,15 +185,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListFeePlansResponse res = sdk.billing().listFeePlans()
-                .security(ListFeePlansSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202507)
                 .accountID("ac8fa716-4b75-4902-b296-d734524ca45c")
                 .planIDs(List.of(
@@ -218,12 +207,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `security`                                                                                            | [io.moov.sdk.models.operations.ListFeePlansSecurity](../../models/operations/ListFeePlansSecurity.md) | :heavy_check_mark:                                                                                    | The security requirements to use for the request.                                                     |
-| `xMoovVersion`                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                            | :heavy_minus_sign:                                                                                    | Specify an API version.                                                                               |
-| `accountID`                                                                                           | *String*                                                                                              | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
-| `planIDs`                                                                                             | List\<*String*>                                                                                       | :heavy_minus_sign:                                                                                    | A comma-separated list of plan IDs to filter the results by.                                          |
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `xMoovVersion`                                               | [Optional\<Versions>](../../models/components/Versions.md)   | :heavy_minus_sign:                                           | Specify an API version.                                      |
+| `accountID`                                                  | *String*                                                     | :heavy_check_mark:                                           | N/A                                                          |
+| `planIDs`                                                    | List\<*String*>                                              | :heavy_minus_sign:                                           | A comma-separated list of plan IDs to filter the results by. |
 
 ### Response
 
@@ -248,10 +236,9 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListPartnerPricingResponse;
-import io.moov.sdk.models.operations.ListPartnerPricingSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -260,15 +247,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListPartnerPricingResponse res = sdk.billing().listPartnerPricing()
-                .security(ListPartnerPricingSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202507)
                 .accountID("85f15b07-5c44-4302-ab6f-d22f8d45b7f4")
                 .planIDs(List.of(
@@ -284,12 +269,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                        | [io.moov.sdk.models.operations.ListPartnerPricingSecurity](../../models/operations/ListPartnerPricingSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
-| `xMoovVersion`                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                        | :heavy_minus_sign:                                                                                                | Specify an API version.                                                                                           |
-| `accountID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
-| `planIDs`                                                                                                         | List\<*String*>                                                                                                   | :heavy_minus_sign:                                                                                                | A comma-separated list of plan IDs to filter the results by.                                                      |
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `xMoovVersion`                                               | [Optional\<Versions>](../../models/components/Versions.md)   | :heavy_minus_sign:                                           | Specify an API version.                                      |
+| `accountID`                                                  | *String*                                                     | :heavy_check_mark:                                           | N/A                                                          |
+| `planIDs`                                                    | List\<*String*>                                              | :heavy_minus_sign:                                           | A comma-separated list of plan IDs to filter the results by. |
 
 ### Response
 
@@ -315,10 +299,9 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.FeePlanAgreementStatus;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsResponse;
-import io.moov.sdk.models.operations.ListPartnerPricingAgreementsSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -327,15 +310,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListPartnerPricingAgreementsResponse res = sdk.billing().listPartnerPricingAgreements()
-                .security(ListPartnerPricingAgreementsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202507)
                 .accountID("9366921a-25de-4c52-8ec6-4cd4ef557223")
                 .agreementID(List.of(
@@ -353,13 +334,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                            | [io.moov.sdk.models.operations.ListPartnerPricingAgreementsSecurity](../../models/operations/ListPartnerPricingAgreementsSecurity.md) | :heavy_check_mark:                                                                                                                    | The security requirements to use for the request.                                                                                     |
-| `xMoovVersion`                                                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                                                            | :heavy_minus_sign:                                                                                                                    | Specify an API version.                                                                                                               |
-| `accountID`                                                                                                                           | *String*                                                                                                                              | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
-| `agreementID`                                                                                                                         | List\<*String*>                                                                                                                       | :heavy_minus_sign:                                                                                                                    | A comma-separated list of agreement IDs to filter the results by.                                                                     |
-| `status`                                                                                                                              | List\<[FeePlanAgreementStatus](../../models/components/FeePlanAgreementStatus.md)>                                                    | :heavy_minus_sign:                                                                                                                    | A comma-separated list of statuses to filter the results by.                                                                          |
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `xMoovVersion`                                                                     | [Optional\<Versions>](../../models/components/Versions.md)                         | :heavy_minus_sign:                                                                 | Specify an API version.                                                            |
+| `accountID`                                                                        | *String*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `agreementID`                                                                      | List\<*String*>                                                                    | :heavy_minus_sign:                                                                 | A comma-separated list of agreement IDs to filter the results by.                  |
+| `status`                                                                           | List\<[FeePlanAgreementStatus](../../models/components/FeePlanAgreementStatus.md)> | :heavy_minus_sign:                                                                 | A comma-separated list of statuses to filter the results by.                       |
 
 ### Response
 

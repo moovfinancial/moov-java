@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class ListSweepConfigsRequestBuilder {
 
-    private ListSweepConfigsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallListSweepConfigs sdk;
 
     public ListSweepConfigsRequestBuilder(SDKMethodInterfaces.MethodCallListSweepConfigs sdk) {
         this.sdk = sdk;
-    }
-
-    public ListSweepConfigsRequestBuilder security(ListSweepConfigsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListSweepConfigsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class ListSweepConfigsRequestBuilder {
     public ListSweepConfigsResponse call() throws Exception {
 
         return sdk.listConfigs(
-            security,
             xMoovVersion,
             accountID);
     }

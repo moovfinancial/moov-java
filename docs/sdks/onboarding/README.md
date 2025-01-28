@@ -42,12 +42,11 @@ import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.OnboardingInviteRequest;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.OnboardingInviteError;
 import io.moov.sdk.models.operations.CreateOnboardingInviteResponse;
-import io.moov.sdk.models.operations.CreateOnboardingInviteSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -56,15 +55,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, OnboardingInviteError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreateOnboardingInviteResponse res = sdk.onboarding().createInvite()
-                .security(CreateOnboardingInviteSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .onboardingInviteRequest(OnboardingInviteRequest.builder()
                     .scopes(List.of(
@@ -93,11 +90,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [io.moov.sdk.models.operations.CreateOnboardingInviteSecurity](../../models/operations/CreateOnboardingInviteSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |
-| `xMoovVersion`                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                | :heavy_minus_sign:                                                                                                        | Specify an API version.                                                                                                   |
-| `onboardingInviteRequest`                                                                                                 | [OnboardingInviteRequest](../../models/components/OnboardingInviteRequest.md)                                             | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `xMoovVersion`                                                                | [Optional\<Versions>](../../models/components/Versions.md)                    | :heavy_minus_sign:                                                            | Specify an API version.                                                       |
+| `onboardingInviteRequest`                                                     | [OnboardingInviteRequest](../../models/components/OnboardingInviteRequest.md) | :heavy_check_mark:                                                            | N/A                                                                           |
 
 ### Response
 
@@ -124,10 +120,9 @@ you'll need to specify the `/accounts.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListOnboardingInvitesResponse;
-import io.moov.sdk.models.operations.ListOnboardingInvitesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -135,15 +130,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListOnboardingInvitesResponse res = sdk.onboarding().listInvites()
-                .security(ListOnboardingInvitesSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .call();
 
@@ -156,10 +149,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.sdk.models.operations.ListOnboardingInvitesSecurity](../../models/operations/ListOnboardingInvitesSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
-| `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
 
 ### Response
 
@@ -184,10 +176,9 @@ you'll need to specify the `/accounts.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetOnboardingInviteResponse;
-import io.moov.sdk.models.operations.GetOnboardingInviteSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -195,15 +186,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetOnboardingInviteResponse res = sdk.onboarding().getInvite()
-                .security(GetOnboardingInviteSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .code("N1IA5eWYNh")
                 .call();
@@ -217,11 +206,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         | Example                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                          | [io.moov.sdk.models.operations.GetOnboardingInviteSecurity](../../models/operations/GetOnboardingInviteSecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |                                                                                                                     |
-| `xMoovVersion`                                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                                          | :heavy_minus_sign:                                                                                                  | Specify an API version.                                                                                             |                                                                                                                     |
-| `code`                                                                                                              | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 | N1IA5eWYNh                                                                                                          |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |                                                            |
+| `code`                                                     | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        | N1IA5eWYNh                                                 |
 
 ### Response
 
@@ -246,10 +234,9 @@ you'll need to specify the `/accounts.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.RevokeOnboardingInviteResponse;
-import io.moov.sdk.models.operations.RevokeOnboardingInviteSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -257,15 +244,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         RevokeOnboardingInviteResponse res = sdk.onboarding().revokeInvite()
-                .security(RevokeOnboardingInviteSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202401)
                 .code("N1IA5eWYNh")
                 .call();
@@ -277,11 +262,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               | Example                                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [io.moov.sdk.models.operations.RevokeOnboardingInviteSecurity](../../models/operations/RevokeOnboardingInviteSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |                                                                                                                           |
-| `xMoovVersion`                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                | :heavy_minus_sign:                                                                                                        | Specify an API version.                                                                                                   |                                                                                                                           |
-| `code`                                                                                                                    | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       | N1IA5eWYNh                                                                                                                |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |                                                            |
+| `code`                                                     | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        | N1IA5eWYNh                                                 |
 
 ### Response
 

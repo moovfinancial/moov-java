@@ -23,10 +23,9 @@ you'll need to specify the `/profile-enrichment.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetEnrichmentProfileResponse;
-import io.moov.sdk.models.operations.GetEnrichmentProfileSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -34,15 +33,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetEnrichmentProfileResponse res = sdk.enrichedProfile().get()
-                .security(GetEnrichmentProfileSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .email("Sheldon.Effertz@gmail.com")
                 .call();
@@ -56,11 +53,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                            | [io.moov.sdk.models.operations.GetEnrichmentProfileSecurity](../../models/operations/GetEnrichmentProfileSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |
-| `xMoovVersion`                                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                                            | :heavy_minus_sign:                                                                                                    | Specify an API version.                                                                                               |
-| `email`                                                                                                               | *String*                                                                                                              | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `email`                                                    | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 

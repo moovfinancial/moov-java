@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class DeleteRepresentativeRequestBuilder {
 
-    private DeleteRepresentativeSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String representativeID;
@@ -19,12 +18,6 @@ public class DeleteRepresentativeRequestBuilder {
 
     public DeleteRepresentativeRequestBuilder(SDKMethodInterfaces.MethodCallDeleteRepresentative sdk) {
         this.sdk = sdk;
-    }
-
-    public DeleteRepresentativeRequestBuilder security(DeleteRepresentativeSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public DeleteRepresentativeRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class DeleteRepresentativeRequestBuilder {
     public DeleteRepresentativeResponse call() throws Exception {
 
         return sdk.delete(
-            security,
             xMoovVersion,
             accountID,
             representativeID);

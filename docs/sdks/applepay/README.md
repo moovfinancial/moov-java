@@ -57,11 +57,10 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.RegisterApplePayMerchantDomains;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsResponse;
-import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -70,15 +69,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         RegisterApplePayMerchantDomainsResponse res = sdk.applePay().registerMerchantDomains()
-                .security(RegisterApplePayMerchantDomainsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("133fed79-519d-4b63-99ec-26b95076a45b")
                 .registerApplePayMerchantDomains(RegisterApplePayMerchantDomains.builder()
@@ -96,12 +93,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                  | [io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsSecurity](../../models/operations/RegisterApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                          | The security requirements to use for the request.                                                                                           |
-| `xMoovVersion`                                                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                                                  | :heavy_minus_sign:                                                                                                                          | Specify an API version.                                                                                                                     |
-| `accountID`                                                                                                                                 | *String*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | ID of the Moov account representing the merchant.                                                                                           |
-| `registerApplePayMerchantDomains`                                                                                                           | [RegisterApplePayMerchantDomains](../../models/components/RegisterApplePayMerchantDomains.md)                                               | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `xMoovVersion`                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                    | :heavy_minus_sign:                                                                            | Specify an API version.                                                                       |
+| `accountID`                                                                                   | *String*                                                                                      | :heavy_check_mark:                                                                            | ID of the Moov account representing the merchant.                                             |
+| `registerApplePayMerchantDomains`                                                             | [RegisterApplePayMerchantDomains](../../models/components/RegisterApplePayMerchantDomains.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 
 ### Response
 
@@ -130,12 +126,11 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpdateApplePayMerchantDomains;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsResponse;
-import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -144,15 +139,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UpdateApplePayMerchantDomainsResponse res = sdk.applePay().updateMerchantDomains()
-                .security(UpdateApplePayMerchantDomainsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202501)
                 .accountID("b7d68fce-1dbc-4562-93aa-d9ad030c78e6")
                 .updateApplePayMerchantDomains(UpdateApplePayMerchantDomains.builder()
@@ -170,12 +163,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                               | Type                                                                                                                                    | Required                                                                                                                                | Description                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                              | [io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsSecurity](../../models/operations/UpdateApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                      | The security requirements to use for the request.                                                                                       |
-| `xMoovVersion`                                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                                              | :heavy_minus_sign:                                                                                                                      | Specify an API version.                                                                                                                 |
-| `accountID`                                                                                                                             | *String*                                                                                                                                | :heavy_check_mark:                                                                                                                      | ID of the Moov account representing the merchant.                                                                                       |
-| `updateApplePayMerchantDomains`                                                                                                         | [UpdateApplePayMerchantDomains](../../models/components/UpdateApplePayMerchantDomains.md)                                               | :heavy_check_mark:                                                                                                                      | N/A                                                                                                                                     |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `xMoovVersion`                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                | :heavy_minus_sign:                                                                        | Specify an API version.                                                                   |
+| `accountID`                                                                               | *String*                                                                                  | :heavy_check_mark:                                                                        | ID of the Moov account representing the merchant.                                         |
+| `updateApplePayMerchantDomains`                                                           | [UpdateApplePayMerchantDomains](../../models/components/UpdateApplePayMerchantDomains.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |
 
 ### Response
 
@@ -203,10 +195,9 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetApplePayMerchantDomainsResponse;
-import io.moov.sdk.models.operations.GetApplePayMerchantDomainsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -214,15 +205,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetApplePayMerchantDomainsResponse res = sdk.applePay().getMerchantDomains()
-                .security(GetApplePayMerchantDomainsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .accountID("cd0931b0-e02f-47b3-87fc-0789a05479e9")
                 .call();
@@ -236,11 +225,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
-| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                        | [io.moov.sdk.models.operations.GetApplePayMerchantDomainsSecurity](../../models/operations/GetApplePayMerchantDomainsSecurity.md) | :heavy_check_mark:                                                                                                                | The security requirements to use for the request.                                                                                 |
-| `xMoovVersion`                                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                                        | :heavy_minus_sign:                                                                                                                | Specify an API version.                                                                                                           |
-| `accountID`                                                                                                                       | *String*                                                                                                                          | :heavy_check_mark:                                                                                                                | ID of the Moov account representing the merchant.                                                                                 |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | ID of the Moov account representing the merchant.          |
 
 ### Response
 
@@ -269,11 +257,10 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.CreateApplePaySession;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateApplePaySessionResponse;
-import io.moov.sdk.models.operations.CreateApplePaySessionSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -281,15 +268,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreateApplePaySessionResponse res = sdk.applePay().createSession()
-                .security(CreateApplePaySessionSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202507)
                 .accountID("1d911f27-36e5-4497-8e9e-c3ecff1a8ae0")
                 .createApplePaySession(CreateApplePaySession.builder()
@@ -307,12 +292,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.sdk.models.operations.CreateApplePaySessionSecurity](../../models/operations/CreateApplePaySessionSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
-| `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
-| `accountID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | ID of the Moov account representing the merchant.                                                                       |
-| `createApplePaySession`                                                                                                 | [CreateApplePaySession](../../models/components/CreateApplePaySession.md)                                               | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `xMoovVersion`                                                            | [Optional\<Versions>](../../models/components/Versions.md)                | :heavy_minus_sign:                                                        | Specify an API version.                                                   |
+| `accountID`                                                               | *String*                                                                  | :heavy_check_mark:                                                        | ID of the Moov account representing the merchant.                         |
+| `createApplePaySession`                                                   | [CreateApplePaySession](../../models/components/CreateApplePaySession.md) | :heavy_check_mark:                                                        | N/A                                                                       |
 
 ### Response
 
@@ -347,12 +331,11 @@ import io.moov.sdk.models.components.LinkApplePay;
 import io.moov.sdk.models.components.LinkApplePayToken;
 import io.moov.sdk.models.components.LinkApplePaymentData;
 import io.moov.sdk.models.components.LinkApplePaymentMethod;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.LinkApplePayError;
 import io.moov.sdk.models.operations.LinkApplePayTokenResponse;
-import io.moov.sdk.models.operations.LinkApplePayTokenSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -361,15 +344,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, LinkApplePayError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         LinkApplePayTokenResponse res = sdk.applePay().linkToken()
-                .security(LinkApplePayTokenSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202501)
                 .accountID("f4d3b593-6370-42f3-acf5-eab4393e2a01")
                 .linkApplePay(LinkApplePay.builder()
@@ -411,12 +392,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                      | [io.moov.sdk.models.operations.LinkApplePayTokenSecurity](../../models/operations/LinkApplePayTokenSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
-| `xMoovVersion`                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                      | :heavy_minus_sign:                                                                                              | Specify an API version.                                                                                         |
-| `accountID`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | ID of the Moov account representing the cardholder.                                                             |
-| `linkApplePay`                                                                                                  | [LinkApplePay](../../models/components/LinkApplePay.md)                                                         | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | ID of the Moov account representing the cardholder.        |
+| `linkApplePay`                                             | [LinkApplePay](../../models/components/LinkApplePay.md)    | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 

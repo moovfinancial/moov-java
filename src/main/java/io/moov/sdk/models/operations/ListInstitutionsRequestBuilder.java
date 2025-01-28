@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class ListInstitutionsRequestBuilder {
 
     private ListInstitutionsRequest request;
-    private ListInstitutionsSecurity security;
     private final SDKMethodInterfaces.MethodCallListInstitutions sdk;
 
     public ListInstitutionsRequestBuilder(SDKMethodInterfaces.MethodCallListInstitutions sdk) {
@@ -22,16 +21,9 @@ public class ListInstitutionsRequestBuilder {
         return this;
     }
 
-    public ListInstitutionsRequestBuilder security(ListInstitutionsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public ListInstitutionsResponse call() throws Exception {
 
         return sdk.search(
-            request,
-            security);
+            request);
     }
 }

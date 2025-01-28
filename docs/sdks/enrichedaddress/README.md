@@ -23,10 +23,9 @@ you'll need to specify the `/profile-enrichment.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.GetEnrichmentAddressRequest;
 import io.moov.sdk.models.operations.GetEnrichmentAddressResponse;
-import io.moov.sdk.models.operations.GetEnrichmentAddressSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -34,6 +33,10 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetEnrichmentAddressRequest req = GetEnrichmentAddressRequest.builder()
@@ -42,12 +45,6 @@ public class Application {
 
         GetEnrichmentAddressResponse res = sdk.enrichedAddress().get()
                 .request(req)
-                .security(GetEnrichmentAddressSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .call();
 
         if (res.enrichedAddressResponse().isPresent()) {
@@ -59,10 +56,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                             | [GetEnrichmentAddressRequest](../../models/operations/GetEnrichmentAddressRequest.md)                                 | :heavy_check_mark:                                                                                                    | The request object to use for the request.                                                                            |
-| `security`                                                                                                            | [io.moov.sdk.models.operations.GetEnrichmentAddressSecurity](../../models/operations/GetEnrichmentAddressSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `request`                                                                             | [GetEnrichmentAddressRequest](../../models/operations/GetEnrichmentAddressRequest.md) | :heavy_check_mark:                                                                    | The request object to use for the request.                                            |
 
 ### Response
 

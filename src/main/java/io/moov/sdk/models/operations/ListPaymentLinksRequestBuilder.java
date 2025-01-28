@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class ListPaymentLinksRequestBuilder {
 
-    private ListPaymentLinksSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallListPaymentLinks sdk;
 
     public ListPaymentLinksRequestBuilder(SDKMethodInterfaces.MethodCallListPaymentLinks sdk) {
         this.sdk = sdk;
-    }
-
-    public ListPaymentLinksRequestBuilder security(ListPaymentLinksSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListPaymentLinksRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class ListPaymentLinksRequestBuilder {
     public ListPaymentLinksResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             accountID);
     }

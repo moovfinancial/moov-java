@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class ListRepresentativesRequestBuilder {
 
-    private ListRepresentativesSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallListRepresentatives sdk;
 
     public ListRepresentativesRequestBuilder(SDKMethodInterfaces.MethodCallListRepresentatives sdk) {
         this.sdk = sdk;
-    }
-
-    public ListRepresentativesRequestBuilder security(ListRepresentativesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListRepresentativesRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class ListRepresentativesRequestBuilder {
     public ListRepresentativesResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             accountID);
     }

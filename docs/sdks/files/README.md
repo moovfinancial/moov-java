@@ -40,12 +40,11 @@ import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.FilePurpose;
 import io.moov.sdk.models.components.FileUploadRequestMultiPart;
 import io.moov.sdk.models.components.FileUploadRequestMultiPartFile;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.FileValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadFileResponse;
-import io.moov.sdk.models.operations.UploadFileSecurity;
 import java.lang.Exception;
 import java.nio.charset.StandardCharsets;
 
@@ -54,15 +53,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, FileValidationError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UploadFileResponse res = sdk.files().upload()
-                .security(UploadFileSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .accountID("68f95825-1ae3-4f3f-8af2-789dd2a59d6d")
                 .fileUploadRequestMultiPart(FileUploadRequestMultiPart.builder()
@@ -84,12 +81,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [io.moov.sdk.models.operations.UploadFileSecurity](../../models/operations/UploadFileSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |
-| `xMoovVersion`                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                        | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |
-| `accountID`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `fileUploadRequestMultiPart`                                                                      | [FileUploadRequestMultiPart](../../models/components/FileUploadRequestMultiPart.md)               | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `xMoovVersion`                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                          | :heavy_minus_sign:                                                                  | Specify an API version.                                                             |
+| `accountID`                                                                         | *String*                                                                            | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `fileUploadRequestMultiPart`                                                        | [FileUploadRequestMultiPart](../../models/components/FileUploadRequestMultiPart.md) | :heavy_check_mark:                                                                  | N/A                                                                                 |
 
 ### Response
 
@@ -116,10 +112,9 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListFilesResponse;
-import io.moov.sdk.models.operations.ListFilesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -127,15 +122,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListFilesResponse res = sdk.files().list()
-                .security(ListFilesSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("a3c35406-9eb6-4801-bbac-0649c31c058a")
                 .call();
@@ -149,11 +142,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `security`                                                                                      | [io.moov.sdk.models.operations.ListFilesSecurity](../../models/operations/ListFilesSecurity.md) | :heavy_check_mark:                                                                              | The security requirements to use for the request.                                               |
-| `xMoovVersion`                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                      | :heavy_minus_sign:                                                                              | Specify an API version.                                                                         |
-| `accountID`                                                                                     | *String*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -178,10 +170,9 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetFileDetailsResponse;
-import io.moov.sdk.models.operations.GetFileDetailsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -189,15 +180,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetFileDetailsResponse res = sdk.files().get()
-                .security(GetFileDetailsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("346add0a-4dae-4729-8e74-1a50d00d677a")
                 .fileID("bf657841-ba2d-4060-ad21-eb2b7372cf85")
@@ -212,12 +201,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                | [io.moov.sdk.models.operations.GetFileDetailsSecurity](../../models/operations/GetFileDetailsSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
-| `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |
-| `accountID`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
-| `fileID`                                                                                                  | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `fileID`                                                   | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 

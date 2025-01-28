@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class ListPaymentMethodsRequestBuilder {
 
-    private ListPaymentMethodsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private Optional<String> sourceID = Optional.empty();
@@ -21,12 +20,6 @@ public class ListPaymentMethodsRequestBuilder {
 
     public ListPaymentMethodsRequestBuilder(SDKMethodInterfaces.MethodCallListPaymentMethods sdk) {
         this.sdk = sdk;
-    }
-
-    public ListPaymentMethodsRequestBuilder security(ListPaymentMethodsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListPaymentMethodsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -74,7 +67,6 @@ public class ListPaymentMethodsRequestBuilder {
     public ListPaymentMethodsResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             accountID,
             sourceID,

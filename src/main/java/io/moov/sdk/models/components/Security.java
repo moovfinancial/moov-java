@@ -12,38 +12,33 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 
 public class Security {
 
     @SpeakeasyMetadata("security:scheme=true,type=http,subtype=basic,name=username")
-    private Optional<String> username;
+    private String username;
 
     @SpeakeasyMetadata("security:scheme=true,type=http,subtype=basic,name=password")
-    private Optional<String> password;
+    private String password;
 
     @JsonCreator
     public Security(
-            Optional<String> username,
-            Optional<String> password) {
+            String username,
+            String password) {
         Utils.checkNotNull(username, "username");
         Utils.checkNotNull(password, "password");
         this.username = username;
         this.password = password;
     }
-    
-    public Security() {
-        this(Optional.empty(), Optional.empty());
-    }
 
     @JsonIgnore
-    public Optional<String> username() {
+    public String username() {
         return username;
     }
 
     @JsonIgnore
-    public Optional<String> password() {
+    public String password() {
         return password;
     }
 
@@ -53,23 +48,11 @@ public class Security {
 
     public Security withUsername(String username) {
         Utils.checkNotNull(username, "username");
-        this.username = Optional.ofNullable(username);
-        return this;
-    }
-
-    public Security withUsername(Optional<String> username) {
-        Utils.checkNotNull(username, "username");
         this.username = username;
         return this;
     }
 
     public Security withPassword(String password) {
-        Utils.checkNotNull(password, "password");
-        this.password = Optional.ofNullable(password);
-        return this;
-    }
-
-    public Security withPassword(Optional<String> password) {
         Utils.checkNotNull(password, "password");
         this.password = password;
         return this;
@@ -105,9 +88,9 @@ public class Security {
     
     public final static class Builder {
  
-        private Optional<String> username = Optional.empty();
+        private String username;
  
-        private Optional<String> password = Optional.empty();  
+        private String password;  
         
         private Builder() {
           // force use of static builder() method
@@ -115,23 +98,11 @@ public class Security {
 
         public Builder username(String username) {
             Utils.checkNotNull(username, "username");
-            this.username = Optional.ofNullable(username);
-            return this;
-        }
-
-        public Builder username(Optional<String> username) {
-            Utils.checkNotNull(username, "username");
             this.username = username;
             return this;
         }
 
         public Builder password(String password) {
-            Utils.checkNotNull(password, "password");
-            this.password = Optional.ofNullable(password);
-            return this;
-        }
-
-        public Builder password(Optional<String> password) {
             Utils.checkNotNull(password, "password");
             this.password = password;
             return this;

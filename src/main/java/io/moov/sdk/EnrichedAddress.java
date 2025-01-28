@@ -10,7 +10,6 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetEnrichmentAddressRequest;
 import io.moov.sdk.models.operations.GetEnrichmentAddressRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentAddressResponse;
-import io.moov.sdk.models.operations.GetEnrichmentAddressSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -47,13 +46,11 @@ public class EnrichedAddress implements
     /**
      * Fetch enriched address suggestions. Requires a partial address.  -    - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetEnrichmentAddressResponse get(
-            GetEnrichmentAddressRequest request,
-            GetEnrichmentAddressSecurity security) throws Exception {
+            GetEnrichmentAddressRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 _baseUrl,
@@ -70,11 +67,9 @@ public class EnrichedAddress implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetScheduledOccurrenceRequestBuilder {
 
-    private GetScheduledOccurrenceSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String scheduleID;
@@ -20,12 +19,6 @@ public class GetScheduledOccurrenceRequestBuilder {
 
     public GetScheduledOccurrenceRequestBuilder(SDKMethodInterfaces.MethodCallGetScheduledOccurrence sdk) {
         this.sdk = sdk;
-    }
-
-    public GetScheduledOccurrenceRequestBuilder security(GetScheduledOccurrenceSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetScheduledOccurrenceRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -61,7 +54,6 @@ public class GetScheduledOccurrenceRequestBuilder {
     public GetScheduledOccurrenceResponse call() throws Exception {
 
         return sdk.getOccurrance(
-            security,
             xMoovVersion,
             accountID,
             scheduleID,

@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class ListWalletTransactionsRequestBuilder {
 
     private ListWalletTransactionsRequest request;
-    private ListWalletTransactionsSecurity security;
     private final SDKMethodInterfaces.MethodCallListWalletTransactions sdk;
 
     public ListWalletTransactionsRequestBuilder(SDKMethodInterfaces.MethodCallListWalletTransactions sdk) {
@@ -22,16 +21,9 @@ public class ListWalletTransactionsRequestBuilder {
         return this;
     }
 
-    public ListWalletTransactionsRequestBuilder security(ListWalletTransactionsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public ListWalletTransactionsResponse call() throws Exception {
 
         return sdk.list(
-            request,
-            security);
+            request);
     }
 }

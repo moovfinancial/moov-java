@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class GetCapabilityRequestBuilder {
 
-    private GetCapabilitySecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private CapabilityID capabilityID;
@@ -20,12 +19,6 @@ public class GetCapabilityRequestBuilder {
 
     public GetCapabilityRequestBuilder(SDKMethodInterfaces.MethodCallGetCapability sdk) {
         this.sdk = sdk;
-    }
-
-    public GetCapabilityRequestBuilder security(GetCapabilitySecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetCapabilityRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class GetCapabilityRequestBuilder {
     public GetCapabilityResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             capabilityID);

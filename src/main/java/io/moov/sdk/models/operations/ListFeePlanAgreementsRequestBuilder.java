@@ -13,7 +13,6 @@ import java.util.Optional;
 
 public class ListFeePlanAgreementsRequestBuilder {
 
-    private ListFeePlanAgreementsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private Optional<? extends List<String>> agreementID = Optional.empty();
@@ -22,12 +21,6 @@ public class ListFeePlanAgreementsRequestBuilder {
 
     public ListFeePlanAgreementsRequestBuilder(SDKMethodInterfaces.MethodCallListFeePlanAgreements sdk) {
         this.sdk = sdk;
-    }
-
-    public ListFeePlanAgreementsRequestBuilder security(ListFeePlanAgreementsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListFeePlanAgreementsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -75,7 +68,6 @@ public class ListFeePlanAgreementsRequestBuilder {
     public ListFeePlanAgreementsResponse call() throws Exception {
 
         return sdk.listFeePlanAgreements(
-            security,
             xMoovVersion,
             accountID,
             agreementID,

@@ -15,19 +15,15 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.DisableCapabilityRequest;
 import io.moov.sdk.models.operations.DisableCapabilityRequestBuilder;
 import io.moov.sdk.models.operations.DisableCapabilityResponse;
-import io.moov.sdk.models.operations.DisableCapabilitySecurity;
 import io.moov.sdk.models.operations.GetCapabilityRequest;
 import io.moov.sdk.models.operations.GetCapabilityRequestBuilder;
 import io.moov.sdk.models.operations.GetCapabilityResponse;
-import io.moov.sdk.models.operations.GetCapabilitySecurity;
 import io.moov.sdk.models.operations.ListCapabilitiesRequest;
 import io.moov.sdk.models.operations.ListCapabilitiesRequestBuilder;
 import io.moov.sdk.models.operations.ListCapabilitiesResponse;
-import io.moov.sdk.models.operations.ListCapabilitiesSecurity;
 import io.moov.sdk.models.operations.RequestCapabilitiesRequest;
 import io.moov.sdk.models.operations.RequestCapabilitiesRequestBuilder;
 import io.moov.sdk.models.operations.RequestCapabilitiesResponse;
-import io.moov.sdk.models.operations.RequestCapabilitiesSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -69,20 +65,17 @@ public class Capabilities implements
 
     /**
      * Retrieve all the capabilities an account has requested. -  - Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListCapabilitiesResponse list(
-            ListCapabilitiesSecurity security,
             String accountID) throws Exception {
-        return list(security, Optional.empty(), accountID);
+        return list(Optional.empty(), accountID);
     }
     
     /**
      * Retrieve all the capabilities an account has requested. -  - Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -97,7 +90,6 @@ public class Capabilities implements
      * @throws Exception if the API call fails
      */
     public ListCapabilitiesResponse list(
-            ListCapabilitiesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         ListCapabilitiesRequest request =
@@ -120,11 +112,9 @@ public class Capabilities implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -228,22 +218,19 @@ public class Capabilities implements
 
     /**
      * Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param addCapabilities
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public RequestCapabilitiesResponse request(
-            RequestCapabilitiesSecurity security,
             String accountID,
             AddCapabilities addCapabilities) throws Exception {
-        return request(security, Optional.empty(), accountID, addCapabilities);
+        return request(Optional.empty(), accountID, addCapabilities);
     }
     
     /**
      * Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -259,7 +246,6 @@ public class Capabilities implements
      * @throws Exception if the API call fails
      */
     public RequestCapabilitiesResponse request(
-            RequestCapabilitiesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             AddCapabilities addCapabilities) throws Exception {
@@ -297,11 +283,9 @@ public class Capabilities implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -433,22 +417,19 @@ public class Capabilities implements
 
     /**
      * Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param capabilityID Moov account capabilities.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetCapabilityResponse get(
-            GetCapabilitySecurity security,
             String accountID,
             CapabilityID capabilityID) throws Exception {
-        return get(security, Optional.empty(), accountID, capabilityID);
+        return get(Optional.empty(), accountID, capabilityID);
     }
     
     /**
      * Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -464,7 +445,6 @@ public class Capabilities implements
      * @throws Exception if the API call fails
      */
     public GetCapabilityResponse get(
-            GetCapabilitySecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             CapabilityID capabilityID) throws Exception {
@@ -489,11 +469,9 @@ public class Capabilities implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -597,22 +575,19 @@ public class Capabilities implements
 
     /**
      * Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  -   To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param capabilityID Moov account capabilities.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public DisableCapabilityResponse disable(
-            DisableCapabilitySecurity security,
             String accountID,
             CapabilityID capabilityID) throws Exception {
-        return disable(security, Optional.empty(), accountID, capabilityID);
+        return disable(Optional.empty(), accountID, capabilityID);
     }
     
     /**
      * Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  -   To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -628,7 +603,6 @@ public class Capabilities implements
      * @throws Exception if the API call fails
      */
     public DisableCapabilityResponse disable(
-            DisableCapabilitySecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             CapabilityID capabilityID) throws Exception {
@@ -653,11 +627,9 @@ public class Capabilities implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

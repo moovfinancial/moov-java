@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class CompleteBankAccountVerificationRequestBuilder {
 
-    private CompleteBankAccountVerificationSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String bankAccountID;
@@ -21,12 +20,6 @@ public class CompleteBankAccountVerificationRequestBuilder {
 
     public CompleteBankAccountVerificationRequestBuilder(SDKMethodInterfaces.MethodCallCompleteBankAccountVerification sdk) {
         this.sdk = sdk;
-    }
-
-    public CompleteBankAccountVerificationRequestBuilder security(CompleteBankAccountVerificationSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public CompleteBankAccountVerificationRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -62,7 +55,6 @@ public class CompleteBankAccountVerificationRequestBuilder {
     public CompleteBankAccountVerificationResponse call() throws Exception {
 
         return sdk.completeVerification(
-            security,
             xMoovVersion,
             accountID,
             bankAccountID,

@@ -9,7 +9,6 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.PingRequest;
 import io.moov.sdk.models.operations.PingRequestBuilder;
 import io.moov.sdk.models.operations.PingResponse;
-import io.moov.sdk.models.operations.PingSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -45,18 +44,15 @@ public class Ping implements
 
     /**
      * A simple endpoint to check auth. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public PingResponse ping(
-            PingSecurity security) throws Exception {
-        return ping(security, Optional.empty());
+    public PingResponse pingDirect() throws Exception {
+        return ping(Optional.empty());
     }
     
     /**
      * A simple endpoint to check auth. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -70,7 +66,6 @@ public class Ping implements
      * @throws Exception if the API call fails
      */
     public PingResponse ping(
-            PingSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception {
         PingRequest request =
             PingRequest
@@ -89,11 +84,9 @@ public class Ping implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

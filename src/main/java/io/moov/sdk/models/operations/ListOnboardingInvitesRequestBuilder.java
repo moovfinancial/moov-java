@@ -10,18 +10,11 @@ import java.util.Optional;
 
 public class ListOnboardingInvitesRequestBuilder {
 
-    private ListOnboardingInvitesSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private final SDKMethodInterfaces.MethodCallListOnboardingInvites sdk;
 
     public ListOnboardingInvitesRequestBuilder(SDKMethodInterfaces.MethodCallListOnboardingInvites sdk) {
         this.sdk = sdk;
-    }
-
-    public ListOnboardingInvitesRequestBuilder security(ListOnboardingInvitesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListOnboardingInvitesRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -39,7 +32,6 @@ public class ListOnboardingInvitesRequestBuilder {
     public ListOnboardingInvitesResponse call() throws Exception {
 
         return sdk.listInvites(
-            security,
             xMoovVersion);
     }
 }

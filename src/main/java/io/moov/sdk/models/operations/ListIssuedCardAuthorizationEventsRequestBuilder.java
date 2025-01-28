@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class ListIssuedCardAuthorizationEventsRequestBuilder {
 
     private ListIssuedCardAuthorizationEventsRequest request;
-    private ListIssuedCardAuthorizationEventsSecurity security;
     private final SDKMethodInterfaces.MethodCallListIssuedCardAuthorizationEvents sdk;
 
     public ListIssuedCardAuthorizationEventsRequestBuilder(SDKMethodInterfaces.MethodCallListIssuedCardAuthorizationEvents sdk) {
@@ -22,16 +21,9 @@ public class ListIssuedCardAuthorizationEventsRequestBuilder {
         return this;
     }
 
-    public ListIssuedCardAuthorizationEventsRequestBuilder security(ListIssuedCardAuthorizationEventsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public ListIssuedCardAuthorizationEventsResponse call() throws Exception {
 
         return sdk.listAuthorizationEvents(
-            request,
-            security);
+            request);
     }
 }

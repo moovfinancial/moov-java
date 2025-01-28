@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class GetUnderwritingRequestBuilder {
 
-    private GetUnderwritingSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallGetUnderwriting sdk;
 
     public GetUnderwritingRequestBuilder(SDKMethodInterfaces.MethodCallGetUnderwriting sdk) {
         this.sdk = sdk;
-    }
-
-    public GetUnderwritingRequestBuilder security(GetUnderwritingSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetUnderwritingRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class GetUnderwritingRequestBuilder {
     public GetUnderwritingResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID);
     }

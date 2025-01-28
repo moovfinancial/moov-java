@@ -18,24 +18,19 @@ import io.moov.sdk.models.errors.LinkApplePayError;
 import io.moov.sdk.models.operations.CreateApplePaySessionRequest;
 import io.moov.sdk.models.operations.CreateApplePaySessionRequestBuilder;
 import io.moov.sdk.models.operations.CreateApplePaySessionResponse;
-import io.moov.sdk.models.operations.CreateApplePaySessionSecurity;
 import io.moov.sdk.models.operations.GetApplePayMerchantDomainsRequest;
 import io.moov.sdk.models.operations.GetApplePayMerchantDomainsRequestBuilder;
 import io.moov.sdk.models.operations.GetApplePayMerchantDomainsResponse;
-import io.moov.sdk.models.operations.GetApplePayMerchantDomainsSecurity;
 import io.moov.sdk.models.operations.LinkApplePayTokenRequest;
 import io.moov.sdk.models.operations.LinkApplePayTokenRequestBuilder;
 import io.moov.sdk.models.operations.LinkApplePayTokenResponse;
-import io.moov.sdk.models.operations.LinkApplePayTokenSecurity;
 import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsRequest;
 import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsRequestBuilder;
 import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsResponse;
-import io.moov.sdk.models.operations.RegisterApplePayMerchantDomainsSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsRequest;
 import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsRequestBuilder;
 import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsResponse;
-import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -77,22 +72,19 @@ public class ApplePay implements
 
     /**
      * Add domains to be registered with Apple Pay. -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID ID of the Moov account representing the merchant.
      * @param registerApplePayMerchantDomains
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public RegisterApplePayMerchantDomainsResponse registerMerchantDomains(
-            RegisterApplePayMerchantDomainsSecurity security,
             String accountID,
             RegisterApplePayMerchantDomains registerApplePayMerchantDomains) throws Exception {
-        return registerMerchantDomains(security, Optional.empty(), accountID, registerApplePayMerchantDomains);
+        return registerMerchantDomains(Optional.empty(), accountID, registerApplePayMerchantDomains);
     }
     
     /**
      * Add domains to be registered with Apple Pay. -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -108,7 +100,6 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public RegisterApplePayMerchantDomainsResponse registerMerchantDomains(
-            RegisterApplePayMerchantDomainsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             RegisterApplePayMerchantDomains registerApplePayMerchantDomains) throws Exception {
@@ -146,11 +137,9 @@ public class ApplePay implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -268,22 +257,19 @@ public class ApplePay implements
 
     /**
      * Add or remove domains to be registered with Apple Pay.  -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID ID of the Moov account representing the merchant.
      * @param updateApplePayMerchantDomains
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateApplePayMerchantDomainsResponse updateMerchantDomains(
-            UpdateApplePayMerchantDomainsSecurity security,
             String accountID,
             UpdateApplePayMerchantDomains updateApplePayMerchantDomains) throws Exception {
-        return updateMerchantDomains(security, Optional.empty(), accountID, updateApplePayMerchantDomains);
+        return updateMerchantDomains(Optional.empty(), accountID, updateApplePayMerchantDomains);
     }
     
     /**
      * Add or remove domains to be registered with Apple Pay.  -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -299,7 +285,6 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public UpdateApplePayMerchantDomainsResponse updateMerchantDomains(
-            UpdateApplePayMerchantDomainsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             UpdateApplePayMerchantDomains updateApplePayMerchantDomains) throws Exception {
@@ -337,11 +322,9 @@ public class ApplePay implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -448,20 +431,17 @@ public class ApplePay implements
 
     /**
      * Get domains registered with Apple Pay.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID ID of the Moov account representing the merchant.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetApplePayMerchantDomainsResponse getMerchantDomains(
-            GetApplePayMerchantDomainsSecurity security,
             String accountID) throws Exception {
-        return getMerchantDomains(security, Optional.empty(), accountID);
+        return getMerchantDomains(Optional.empty(), accountID);
     }
     
     /**
      * Get domains registered with Apple Pay.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -476,7 +456,6 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public GetApplePayMerchantDomainsResponse getMerchantDomains(
-            GetApplePayMerchantDomainsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         GetApplePayMerchantDomainsRequest request =
@@ -499,11 +478,9 @@ public class ApplePay implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -607,22 +584,19 @@ public class ApplePay implements
 
     /**
      * Create a session with Apple Pay to facilitate a payment.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - A successful response from this endpoint should be passed through to Apple Pay unchanged.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID ID of the Moov account representing the merchant.
      * @param createApplePaySession
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateApplePaySessionResponse createSession(
-            CreateApplePaySessionSecurity security,
             String accountID,
             CreateApplePaySession createApplePaySession) throws Exception {
-        return createSession(security, Optional.empty(), accountID, createApplePaySession);
+        return createSession(Optional.empty(), accountID, createApplePaySession);
     }
     
     /**
      * Create a session with Apple Pay to facilitate a payment.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - A successful response from this endpoint should be passed through to Apple Pay unchanged.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -638,7 +612,6 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public CreateApplePaySessionResponse createSession(
-            CreateApplePaySessionSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             CreateApplePaySession createApplePaySession) throws Exception {
@@ -676,11 +649,9 @@ public class ApplePay implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -798,7 +769,6 @@ public class ApplePay implements
 
     /**
      * Connect an Apple Pay token to the specified account.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID ID of the Moov account representing the cardholder.
      * @param linkApplePay   The JSON structure returned from Apple Pay when authorizing a payment session.
 
@@ -808,15 +778,13 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public LinkApplePayTokenResponse linkToken(
-            LinkApplePayTokenSecurity security,
             String accountID,
             LinkApplePay linkApplePay) throws Exception {
-        return linkToken(security, Optional.empty(), accountID, linkApplePay);
+        return linkToken(Optional.empty(), accountID, linkApplePay);
     }
     
     /**
      * Connect an Apple Pay token to the specified account.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -835,7 +803,6 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public LinkApplePayTokenResponse linkToken(
-            LinkApplePayTokenSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             LinkApplePay linkApplePay) throws Exception {
@@ -873,11 +840,9 @@ public class ApplePay implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

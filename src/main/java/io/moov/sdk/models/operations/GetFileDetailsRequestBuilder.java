@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetFileDetailsRequestBuilder {
 
-    private GetFileDetailsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String fileID;
@@ -19,12 +18,6 @@ public class GetFileDetailsRequestBuilder {
 
     public GetFileDetailsRequestBuilder(SDKMethodInterfaces.MethodCallGetFileDetails sdk) {
         this.sdk = sdk;
-    }
-
-    public GetFileDetailsRequestBuilder security(GetFileDetailsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetFileDetailsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetFileDetailsRequestBuilder {
     public GetFileDetailsResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             fileID);

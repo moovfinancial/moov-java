@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class ListCardsRequestBuilder {
 
-    private ListCardsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallListCards sdk;
 
     public ListCardsRequestBuilder(SDKMethodInterfaces.MethodCallListCards sdk) {
         this.sdk = sdk;
-    }
-
-    public ListCardsRequestBuilder security(ListCardsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListCardsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class ListCardsRequestBuilder {
     public ListCardsResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             accountID);
     }

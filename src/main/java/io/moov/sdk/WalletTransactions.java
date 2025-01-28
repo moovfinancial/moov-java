@@ -11,11 +11,9 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetWalletTransactionRequest;
 import io.moov.sdk.models.operations.GetWalletTransactionRequestBuilder;
 import io.moov.sdk.models.operations.GetWalletTransactionResponse;
-import io.moov.sdk.models.operations.GetWalletTransactionSecurity;
 import io.moov.sdk.models.operations.ListWalletTransactionsRequest;
 import io.moov.sdk.models.operations.ListWalletTransactionsRequestBuilder;
 import io.moov.sdk.models.operations.ListWalletTransactionsResponse;
-import io.moov.sdk.models.operations.ListWalletTransactionsSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -53,13 +51,11 @@ public class WalletTransactions implements
     /**
      * List all the transactions associated with a particular Moov wallet.  -  - Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListWalletTransactionsResponse list(
-            ListWalletTransactionsRequest request,
-            ListWalletTransactionsSecurity security) throws Exception {
+            ListWalletTransactionsRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListWalletTransactionsRequest.class,
@@ -78,11 +74,9 @@ public class WalletTransactions implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -186,7 +180,6 @@ public class WalletTransactions implements
 
     /**
      * Get details on a specific wallet transaction.  -  - Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param walletID
      * @param transactionID
@@ -194,16 +187,14 @@ public class WalletTransactions implements
      * @throws Exception if the API call fails
      */
     public GetWalletTransactionResponse get(
-            GetWalletTransactionSecurity security,
             String accountID,
             String walletID,
             String transactionID) throws Exception {
-        return get(security, Optional.empty(), accountID, walletID, transactionID);
+        return get(Optional.empty(), accountID, walletID, transactionID);
     }
     
     /**
      * Get details on a specific wallet transaction.  -  - Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -220,7 +211,6 @@ public class WalletTransactions implements
      * @throws Exception if the API call fails
      */
     public GetWalletTransactionResponse get(
-            GetWalletTransactionSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String walletID,
@@ -247,11 +237,9 @@ public class WalletTransactions implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

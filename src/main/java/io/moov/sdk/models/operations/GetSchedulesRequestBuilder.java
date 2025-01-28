@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetSchedulesRequestBuilder {
 
-    private GetSchedulesSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String scheduleID;
@@ -19,12 +18,6 @@ public class GetSchedulesRequestBuilder {
 
     public GetSchedulesRequestBuilder(SDKMethodInterfaces.MethodCallGetSchedules sdk) {
         this.sdk = sdk;
-    }
-
-    public GetSchedulesRequestBuilder security(GetSchedulesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetSchedulesRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetSchedulesRequestBuilder {
     public GetSchedulesResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             scheduleID);

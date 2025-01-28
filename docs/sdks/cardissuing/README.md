@@ -49,12 +49,11 @@ import io.moov.sdk.models.components.IssuingControls;
 import io.moov.sdk.models.components.IssuingIntervalLimit;
 import io.moov.sdk.models.components.IssuingVelocityLimit;
 import io.moov.sdk.models.components.RequestCard;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.RequestCardError;
 import io.moov.sdk.models.operations.RequestCardResponse;
-import io.moov.sdk.models.operations.RequestCardSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -63,15 +62,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, RequestCardError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         RequestCardResponse res = sdk.cardIssuing().request()
-                .security(RequestCardSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202501)
                 .accountID("9c0ff49b-9aaf-4815-b4a4-3e412558f6bc")
                 .requestCard(RequestCard.builder()
@@ -113,12 +110,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `security`                                                                                          | [io.moov.sdk.models.operations.RequestCardSecurity](../../models/operations/RequestCardSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |
-| `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |
-| `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | The Moov business account for which the card is to be issued.                                       |
-| `requestCard`                                                                                       | [RequestCard](../../models/components/RequestCard.md)                                               | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| Parameter                                                     | Type                                                          | Required                                                      | Description                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `xMoovVersion`                                                | [Optional\<Versions>](../../models/components/Versions.md)    | :heavy_minus_sign:                                            | Specify an API version.                                       |
+| `accountID`                                                   | *String*                                                      | :heavy_check_mark:                                            | The Moov business account for which the card is to be issued. |
+| `requestCard`                                                 | [RequestCard](../../models/components/RequestCard.md)         | :heavy_check_mark:                                            | N/A                                                           |
 
 ### Response
 
@@ -145,10 +141,9 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListIssuedCardsRequest;
 import io.moov.sdk.models.operations.ListIssuedCardsResponse;
-import io.moov.sdk.models.operations.ListIssuedCardsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -156,6 +151,10 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListIssuedCardsRequest req = ListIssuedCardsRequest.builder()
@@ -166,12 +165,6 @@ public class Application {
 
         ListIssuedCardsResponse res = sdk.cardIssuing().list()
                 .request(req)
-                .security(ListIssuedCardsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .call();
 
         if (res.issuedCards().isPresent()) {
@@ -183,10 +176,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                   | [ListIssuedCardsRequest](../../models/operations/ListIssuedCardsRequest.md)                                 | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
-| `security`                                                                                                  | [io.moov.sdk.models.operations.ListIssuedCardsSecurity](../../models/operations/ListIssuedCardsSecurity.md) | :heavy_check_mark:                                                                                          | The security requirements to use for the request.                                                           |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [ListIssuedCardsRequest](../../models/operations/ListIssuedCardsRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
 
 ### Response
 
@@ -211,10 +203,9 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetIssuedCardResponse;
-import io.moov.sdk.models.operations.GetIssuedCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -222,15 +213,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetIssuedCardResponse res = sdk.cardIssuing().get()
-                .security(GetIssuedCardSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("c63d9bae-2097-4bfa-8ac7-e9e8dff6e9ae")
                 .issuedCardID("aa0c86df-7f7d-4200-9ee4-24ba8870a7d4")
@@ -245,12 +234,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                              | [io.moov.sdk.models.operations.GetIssuedCardSecurity](../../models/operations/GetIssuedCardSecurity.md) | :heavy_check_mark:                                                                                      | The security requirements to use for the request.                                                       |
-| `xMoovVersion`                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                              | :heavy_minus_sign:                                                                                      | Specify an API version.                                                                                 |
-| `accountID`                                                                                             | *String*                                                                                                | :heavy_check_mark:                                                                                      | The Moov business account for which the card was issued.                                                |
-| `issuedCardID`                                                                                          | *String*                                                                                                | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | The Moov business account for which the card was issued.   |
+| `issuedCardID`                                             | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -277,13 +265,12 @@ package hello.world;
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.BirthDateUpdate;
 import io.moov.sdk.models.components.CreateAuthorizedUserUpdate;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpdateIssuedCard;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateIssuedCardError;
 import io.moov.sdk.models.operations.UpdateIssuedCardResponse;
-import io.moov.sdk.models.operations.UpdateIssuedCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -291,15 +278,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, UpdateIssuedCardError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UpdateIssuedCardResponse res = sdk.cardIssuing().update()
-                .security(UpdateIssuedCardSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.LATEST)
                 .accountID("fc445a8c-5b64-4ab9-ba30-5bdb0ffc02b0")
                 .issuedCardID("064f9e03-fc5f-4a7d-83d2-2ec946f77ff2")
@@ -321,13 +306,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                    | [io.moov.sdk.models.operations.UpdateIssuedCardSecurity](../../models/operations/UpdateIssuedCardSecurity.md) | :heavy_check_mark:                                                                                            | The security requirements to use for the request.                                                             |
-| `xMoovVersion`                                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                                    | :heavy_minus_sign:                                                                                            | Specify an API version.                                                                                       |
-| `accountID`                                                                                                   | *String*                                                                                                      | :heavy_check_mark:                                                                                            | The Moov business account for which the card was issued.                                                      |
-| `issuedCardID`                                                                                                | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
-| `updateIssuedCard`                                                                                            | [UpdateIssuedCard](../../models/components/UpdateIssuedCard.md)                                               | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `xMoovVersion`                                                  | [Optional\<Versions>](../../models/components/Versions.md)      | :heavy_minus_sign:                                              | Specify an API version.                                         |
+| `accountID`                                                     | *String*                                                        | :heavy_check_mark:                                              | The Moov business account for which the card was issued.        |
+| `issuedCardID`                                                  | *String*                                                        | :heavy_check_mark:                                              | N/A                                                             |
+| `updateIssuedCard`                                              | [UpdateIssuedCard](../../models/components/UpdateIssuedCard.md) | :heavy_check_mark:                                              | N/A                                                             |
 
 ### Response
 
@@ -356,10 +340,9 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scop
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetFullIssuedCardResponse;
-import io.moov.sdk.models.operations.GetFullIssuedCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -367,15 +350,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetFullIssuedCardResponse res = sdk.cardIssuing().getFull()
-                .security(GetFullIssuedCardSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202401)
                 .accountID("f03c4c3e-2685-44e6-8d4b-0d5bd082a301")
                 .issuedCardID("1da6b593-679e-44ab-a9e4-6db6db4b8f46")
@@ -390,12 +371,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                      | [io.moov.sdk.models.operations.GetFullIssuedCardSecurity](../../models/operations/GetFullIssuedCardSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
-| `xMoovVersion`                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                      | :heavy_minus_sign:                                                                                              | Specify an API version.                                                                                         |
-| `accountID`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | The Moov business account for which the card was issued.                                                        |
-| `issuedCardID`                                                                                                  | *String*                                                                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | The Moov business account for which the card was issued.   |
+| `issuedCardID`                                             | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 

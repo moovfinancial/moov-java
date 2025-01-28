@@ -18,10 +18,7 @@ import java.util.Objects;
 public class AuthToken {
 
     /**
-     * Type of token returned.
-     * 
-     *   - `opaque`: A token following a proprietary format.
-     *   - `jwt`: A JSON Web Token (JWT), a self-contained token that contains claims about the user and is cryptographically signed.
+     * An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
      */
     @JsonProperty("token_type")
     private TokenType tokenType;
@@ -70,10 +67,7 @@ public class AuthToken {
     }
 
     /**
-     * Type of token returned.
-     * 
-     *   - `opaque`: A token following a proprietary format.
-     *   - `jwt`: A JSON Web Token (JWT), a self-contained token that contains claims about the user and is cryptographically signed.
+     * An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
      */
     @JsonIgnore
     public TokenType tokenType() {
@@ -117,10 +111,7 @@ public class AuthToken {
     }
 
     /**
-     * Type of token returned.
-     * 
-     *   - `opaque`: A token following a proprietary format.
-     *   - `jwt`: A JSON Web Token (JWT), a self-contained token that contains claims about the user and is cryptographically signed.
+     * An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
      */
     public AuthToken withTokenType(TokenType tokenType) {
         Utils.checkNotNull(tokenType, "tokenType");
@@ -218,10 +209,7 @@ public class AuthToken {
         }
 
         /**
-         * Type of token returned.
-         * 
-         *   - `opaque`: A token following a proprietary format.
-         *   - `jwt`: A JSON Web Token (JWT), a self-contained token that contains claims about the user and is cryptographically signed.
+         * An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
          */
         public Builder tokenType(TokenType tokenType) {
             Utils.checkNotNull(tokenType, "tokenType");

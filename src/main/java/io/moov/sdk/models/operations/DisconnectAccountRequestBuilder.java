@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class DisconnectAccountRequestBuilder {
 
-    private DisconnectAccountSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallDisconnectAccount sdk;
 
     public DisconnectAccountRequestBuilder(SDKMethodInterfaces.MethodCallDisconnectAccount sdk) {
         this.sdk = sdk;
-    }
-
-    public DisconnectAccountRequestBuilder security(DisconnectAccountSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public DisconnectAccountRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class DisconnectAccountRequestBuilder {
     public DisconnectAccountResponse call() throws Exception {
 
         return sdk.disconnect(
-            security,
             xMoovVersion,
             accountID);
     }

@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class ListDisputesRequestBuilder {
 
     private ListDisputesRequest request;
-    private ListDisputesSecurity security;
     private final SDKMethodInterfaces.MethodCallListDisputes sdk;
 
     public ListDisputesRequestBuilder(SDKMethodInterfaces.MethodCallListDisputes sdk) {
@@ -22,16 +21,9 @@ public class ListDisputesRequestBuilder {
         return this;
     }
 
-    public ListDisputesRequestBuilder security(ListDisputesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public ListDisputesResponse call() throws Exception {
 
         return sdk.list(
-            request,
-            security);
+            request);
     }
 }

@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class UpdateCardRequestBuilder {
 
-    private UpdateCardSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String cardID;
@@ -21,12 +20,6 @@ public class UpdateCardRequestBuilder {
 
     public UpdateCardRequestBuilder(SDKMethodInterfaces.MethodCallUpdateCard sdk) {
         this.sdk = sdk;
-    }
-
-    public UpdateCardRequestBuilder security(UpdateCardSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public UpdateCardRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -62,7 +55,6 @@ public class UpdateCardRequestBuilder {
     public UpdateCardResponse call() throws Exception {
 
         return sdk.update(
-            security,
             xMoovVersion,
             accountID,
             cardID,

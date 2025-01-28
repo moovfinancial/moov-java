@@ -18,23 +18,18 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateFeePlanAgreementsRequest;
 import io.moov.sdk.models.operations.CreateFeePlanAgreementsRequestBuilder;
 import io.moov.sdk.models.operations.CreateFeePlanAgreementsResponse;
-import io.moov.sdk.models.operations.CreateFeePlanAgreementsSecurity;
 import io.moov.sdk.models.operations.ListFeePlanAgreementsRequest;
 import io.moov.sdk.models.operations.ListFeePlanAgreementsRequestBuilder;
 import io.moov.sdk.models.operations.ListFeePlanAgreementsResponse;
-import io.moov.sdk.models.operations.ListFeePlanAgreementsSecurity;
 import io.moov.sdk.models.operations.ListFeePlansRequest;
 import io.moov.sdk.models.operations.ListFeePlansRequestBuilder;
 import io.moov.sdk.models.operations.ListFeePlansResponse;
-import io.moov.sdk.models.operations.ListFeePlansSecurity;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsRequest;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsRequestBuilder;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsResponse;
-import io.moov.sdk.models.operations.ListPartnerPricingAgreementsSecurity;
 import io.moov.sdk.models.operations.ListPartnerPricingRequest;
 import io.moov.sdk.models.operations.ListPartnerPricingRequestBuilder;
 import io.moov.sdk.models.operations.ListPartnerPricingResponse;
-import io.moov.sdk.models.operations.ListPartnerPricingSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -77,20 +72,17 @@ public class Billing implements
 
     /**
      * List all fee plan agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListFeePlanAgreementsResponse listFeePlanAgreements(
-            ListFeePlanAgreementsSecurity security,
             String accountID) throws Exception {
-        return listFeePlanAgreements(security, Optional.empty(), accountID, Optional.empty(), Optional.empty());
+        return listFeePlanAgreements(Optional.empty(), accountID, Optional.empty(), Optional.empty());
     }
     
     /**
      * List all fee plan agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -107,7 +99,6 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public ListFeePlanAgreementsResponse listFeePlanAgreements(
-            ListFeePlanAgreementsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             Optional<? extends List<String>> agreementID,
@@ -139,11 +130,9 @@ public class Billing implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -247,22 +236,19 @@ public class Billing implements
 
     /**
      * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param createFeePlanAgreement
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateFeePlanAgreementsResponse createFeePlanAgreements(
-            CreateFeePlanAgreementsSecurity security,
             String accountID,
             CreateFeePlanAgreement createFeePlanAgreement) throws Exception {
-        return createFeePlanAgreements(security, Optional.empty(), accountID, createFeePlanAgreement);
+        return createFeePlanAgreements(Optional.empty(), accountID, createFeePlanAgreement);
     }
     
     /**
      * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -278,7 +264,6 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public CreateFeePlanAgreementsResponse createFeePlanAgreements(
-            CreateFeePlanAgreementsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             CreateFeePlanAgreement createFeePlanAgreement) throws Exception {
@@ -316,11 +301,9 @@ public class Billing implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -452,20 +435,17 @@ public class Billing implements
 
     /**
      * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListFeePlansResponse listFeePlans(
-            ListFeePlansSecurity security,
             String accountID) throws Exception {
-        return listFeePlans(security, Optional.empty(), accountID, Optional.empty());
+        return listFeePlans(Optional.empty(), accountID, Optional.empty());
     }
     
     /**
      * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -481,7 +461,6 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public ListFeePlansResponse listFeePlans(
-            ListFeePlansSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             Optional<? extends List<String>> planIDs) throws Exception {
@@ -511,11 +490,9 @@ public class Billing implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -619,20 +596,17 @@ public class Billing implements
 
     /**
      * List all partner pricing plans available for use by an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListPartnerPricingResponse listPartnerPricing(
-            ListPartnerPricingSecurity security,
             String accountID) throws Exception {
-        return listPartnerPricing(security, Optional.empty(), accountID, Optional.empty());
+        return listPartnerPricing(Optional.empty(), accountID, Optional.empty());
     }
     
     /**
      * List all partner pricing plans available for use by an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -648,7 +622,6 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public ListPartnerPricingResponse listPartnerPricing(
-            ListPartnerPricingSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             Optional<? extends List<String>> planIDs) throws Exception {
@@ -678,11 +651,9 @@ public class Billing implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -786,20 +757,17 @@ public class Billing implements
 
     /**
      * List all partner pricing agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(
-            ListPartnerPricingAgreementsSecurity security,
             String accountID) throws Exception {
-        return listPartnerPricingAgreements(security, Optional.empty(), accountID, Optional.empty(), Optional.empty());
+        return listPartnerPricingAgreements(Optional.empty(), accountID, Optional.empty(), Optional.empty());
     }
     
     /**
      * List all partner pricing agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -816,7 +784,6 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(
-            ListPartnerPricingAgreementsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             Optional<? extends List<String>> agreementID,
@@ -848,11 +815,9 @@ public class Billing implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

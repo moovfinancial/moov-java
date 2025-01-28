@@ -17,24 +17,19 @@ import io.moov.sdk.models.errors.UpdateCardError;
 import io.moov.sdk.models.operations.DisableCardRequest;
 import io.moov.sdk.models.operations.DisableCardRequestBuilder;
 import io.moov.sdk.models.operations.DisableCardResponse;
-import io.moov.sdk.models.operations.DisableCardSecurity;
 import io.moov.sdk.models.operations.GetCardRequest;
 import io.moov.sdk.models.operations.GetCardRequestBuilder;
 import io.moov.sdk.models.operations.GetCardResponse;
-import io.moov.sdk.models.operations.GetCardSecurity;
 import io.moov.sdk.models.operations.LinkCardRequest;
 import io.moov.sdk.models.operations.LinkCardRequestBuilder;
 import io.moov.sdk.models.operations.LinkCardResponse;
-import io.moov.sdk.models.operations.LinkCardSecurity;
 import io.moov.sdk.models.operations.ListCardsRequest;
 import io.moov.sdk.models.operations.ListCardsRequestBuilder;
 import io.moov.sdk.models.operations.ListCardsResponse;
-import io.moov.sdk.models.operations.ListCardsSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateCardRequest;
 import io.moov.sdk.models.operations.UpdateCardRequestBuilder;
 import io.moov.sdk.models.operations.UpdateCardResponse;
-import io.moov.sdk.models.operations.UpdateCardSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -76,22 +71,19 @@ public class Cards implements
 
     /**
      * Link a card to an existing Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request.  - If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address.  - Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will  - use the account's name instead. -  - It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked  - card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment  - Methods](https://docs.moov.io/api/sources/payment-methods/list/) - endpoint to wait for the new payment methods to be available for use. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param linkCard
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public LinkCardResponse link(
-            LinkCardSecurity security,
             String accountID,
             LinkCard linkCard) throws Exception {
-        return link(security, Optional.empty(), Optional.empty(), accountID, linkCard);
+        return link(Optional.empty(), Optional.empty(), accountID, linkCard);
     }
     
     /**
      * Link a card to an existing Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request.  - If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address.  - Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will  - use the account's name instead. -  - It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked  - card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment  - Methods](https://docs.moov.io/api/sources/payment-methods/list/) - endpoint to wait for the new payment methods to be available for use. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -108,7 +100,6 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public LinkCardResponse link(
-            LinkCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             Optional<? extends LinkCardWaitFor> xWaitFor,
             String accountID,
@@ -148,11 +139,9 @@ public class Cards implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -284,20 +273,17 @@ public class Cards implements
 
     /**
      * List all the active cards associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListCardsResponse list(
-            ListCardsSecurity security,
             String accountID) throws Exception {
-        return list(security, Optional.empty(), accountID);
+        return list(Optional.empty(), accountID);
     }
     
     /**
      * List all the active cards associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -312,7 +298,6 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public ListCardsResponse list(
-            ListCardsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         ListCardsRequest request =
@@ -335,11 +320,9 @@ public class Cards implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -443,22 +426,19 @@ public class Cards implements
 
     /**
      * Fetch a specific card associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param cardID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetCardResponse get(
-            GetCardSecurity security,
             String accountID,
             String cardID) throws Exception {
-        return get(security, Optional.empty(), accountID, cardID);
+        return get(Optional.empty(), accountID, cardID);
     }
     
     /**
      * Fetch a specific card associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -474,7 +454,6 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public GetCardResponse get(
-            GetCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String cardID) throws Exception {
@@ -499,11 +478,9 @@ public class Cards implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -607,7 +584,6 @@ public class Cards implements
 
     /**
      * Update a linked card and/or resubmit it for verification.  -  - If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration  - date or  - address will update the information stored on file for the card but will not be verified. -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn  - more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param cardID
      * @param updateCard
@@ -615,16 +591,14 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public UpdateCardResponse update(
-            UpdateCardSecurity security,
             String accountID,
             String cardID,
             UpdateCard updateCard) throws Exception {
-        return update(security, Optional.empty(), accountID, cardID, updateCard);
+        return update(Optional.empty(), accountID, cardID, updateCard);
     }
     
     /**
      * Update a linked card and/or resubmit it for verification.  -  - If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration  - date or  - address will update the information stored on file for the card but will not be verified. -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn  - more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -641,7 +615,6 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public UpdateCardResponse update(
-            UpdateCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String cardID,
@@ -681,11 +654,9 @@ public class Cards implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -817,22 +788,19 @@ public class Cards implements
 
     /**
      * Disables a card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param cardID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public DisableCardResponse disable(
-            DisableCardSecurity security,
             String accountID,
             String cardID) throws Exception {
-        return disable(security, Optional.empty(), accountID, cardID);
+        return disable(Optional.empty(), accountID, cardID);
     }
     
     /**
      * Disables a card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -848,7 +816,6 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public DisableCardResponse disable(
-            DisableCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String cardID) throws Exception {
@@ -873,11 +840,9 @@ public class Cards implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

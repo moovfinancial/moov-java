@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class ListSweepsRequestBuilder {
 
     private ListSweepsRequest request;
-    private ListSweepsSecurity security;
     private final SDKMethodInterfaces.MethodCallListSweeps sdk;
 
     public ListSweepsRequestBuilder(SDKMethodInterfaces.MethodCallListSweeps sdk) {
@@ -22,16 +21,9 @@ public class ListSweepsRequestBuilder {
         return this;
     }
 
-    public ListSweepsRequestBuilder security(ListSweepsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public ListSweepsResponse call() throws Exception {
 
         return sdk.list(
-            request,
-            security);
+            request);
     }
 }

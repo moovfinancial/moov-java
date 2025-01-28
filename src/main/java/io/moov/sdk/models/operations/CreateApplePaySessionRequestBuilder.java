@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class CreateApplePaySessionRequestBuilder {
 
-    private CreateApplePaySessionSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private CreateApplePaySession createApplePaySession;
@@ -20,12 +19,6 @@ public class CreateApplePaySessionRequestBuilder {
 
     public CreateApplePaySessionRequestBuilder(SDKMethodInterfaces.MethodCallCreateApplePaySession sdk) {
         this.sdk = sdk;
-    }
-
-    public CreateApplePaySessionRequestBuilder security(CreateApplePaySessionSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public CreateApplePaySessionRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class CreateApplePaySessionRequestBuilder {
     public CreateApplePaySessionResponse call() throws Exception {
 
         return sdk.createSession(
-            security,
             xMoovVersion,
             accountID,
             createApplePaySession);

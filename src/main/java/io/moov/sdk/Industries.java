@@ -11,7 +11,6 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.ListIndustriesRequest;
 import io.moov.sdk.models.operations.ListIndustriesRequestBuilder;
 import io.moov.sdk.models.operations.ListIndustriesResponse;
-import io.moov.sdk.models.operations.ListIndustriesSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -47,18 +46,15 @@ public class Industries implements
 
     /**
      * Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListIndustriesResponse list(
-            ListIndustriesSecurity security) throws Exception {
-        return list(security, Optional.empty());
+    public ListIndustriesResponse listDirect() throws Exception {
+        return list(Optional.empty());
     }
     
     /**
      * Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -72,7 +68,6 @@ public class Industries implements
      * @throws Exception if the API call fails
      */
     public ListIndustriesResponse list(
-            ListIndustriesSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception {
         ListIndustriesRequest request =
             ListIndustriesRequest
@@ -91,11 +86,9 @@ public class Industries implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

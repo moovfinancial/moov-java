@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetSweepRequestBuilder {
 
-    private GetSweepSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String walletID;
@@ -20,12 +19,6 @@ public class GetSweepRequestBuilder {
 
     public GetSweepRequestBuilder(SDKMethodInterfaces.MethodCallGetSweep sdk) {
         this.sdk = sdk;
-    }
-
-    public GetSweepRequestBuilder security(GetSweepSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetSweepRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -61,7 +54,6 @@ public class GetSweepRequestBuilder {
     public GetSweepResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             walletID,

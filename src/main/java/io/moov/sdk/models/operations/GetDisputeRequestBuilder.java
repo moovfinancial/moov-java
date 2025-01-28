@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetDisputeRequestBuilder {
 
-    private GetDisputeSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String disputeID;
@@ -19,12 +18,6 @@ public class GetDisputeRequestBuilder {
 
     public GetDisputeRequestBuilder(SDKMethodInterfaces.MethodCallGetDispute sdk) {
         this.sdk = sdk;
-    }
-
-    public GetDisputeRequestBuilder security(GetDisputeSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetDisputeRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetDisputeRequestBuilder {
     public GetDisputeResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             disputeID);

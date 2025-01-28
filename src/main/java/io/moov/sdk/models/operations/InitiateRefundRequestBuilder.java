@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class InitiateRefundRequestBuilder {
 
     private InitiateRefundRequest request;
-    private InitiateRefundSecurity security;
     private final SDKMethodInterfaces.MethodCallInitiateRefund sdk;
 
     public InitiateRefundRequestBuilder(SDKMethodInterfaces.MethodCallInitiateRefund sdk) {
@@ -22,16 +21,9 @@ public class InitiateRefundRequestBuilder {
         return this;
     }
 
-    public InitiateRefundRequestBuilder security(InitiateRefundSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public InitiateRefundResponse call() throws Exception {
 
         return sdk.initiateRefund(
-            request,
-            security);
+            request);
     }
 }

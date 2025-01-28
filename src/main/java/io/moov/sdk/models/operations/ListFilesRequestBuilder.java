@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class ListFilesRequestBuilder {
 
-    private ListFilesSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallListFiles sdk;
 
     public ListFilesRequestBuilder(SDKMethodInterfaces.MethodCallListFiles sdk) {
         this.sdk = sdk;
-    }
-
-    public ListFilesRequestBuilder security(ListFilesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListFilesRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class ListFilesRequestBuilder {
     public ListFilesResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             accountID);
     }

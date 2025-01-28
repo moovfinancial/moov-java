@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class UpdatePaymentLinkRequestBuilder {
 
-    private UpdatePaymentLinkSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String paymentLinkCode;
@@ -21,12 +20,6 @@ public class UpdatePaymentLinkRequestBuilder {
 
     public UpdatePaymentLinkRequestBuilder(SDKMethodInterfaces.MethodCallUpdatePaymentLink sdk) {
         this.sdk = sdk;
-    }
-
-    public UpdatePaymentLinkRequestBuilder security(UpdatePaymentLinkSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public UpdatePaymentLinkRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -62,7 +55,6 @@ public class UpdatePaymentLinkRequestBuilder {
     public UpdatePaymentLinkResponse call() throws Exception {
 
         return sdk.update(
-            security,
             xMoovVersion,
             accountID,
             paymentLinkCode,

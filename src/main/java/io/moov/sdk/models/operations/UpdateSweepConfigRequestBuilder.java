@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class UpdateSweepConfigRequestBuilder {
 
-    private UpdateSweepConfigSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String sweepConfigID;
@@ -21,12 +20,6 @@ public class UpdateSweepConfigRequestBuilder {
 
     public UpdateSweepConfigRequestBuilder(SDKMethodInterfaces.MethodCallUpdateSweepConfig sdk) {
         this.sdk = sdk;
-    }
-
-    public UpdateSweepConfigRequestBuilder security(UpdateSweepConfigSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public UpdateSweepConfigRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -62,7 +55,6 @@ public class UpdateSweepConfigRequestBuilder {
     public UpdateSweepConfigResponse call() throws Exception {
 
         return sdk.updateConfig(
-            security,
             xMoovVersion,
             accountID,
             sweepConfigID,

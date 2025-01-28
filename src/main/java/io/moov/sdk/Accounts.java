@@ -20,39 +20,31 @@ import io.moov.sdk.models.errors.UpdateAccountResponseBody;
 import io.moov.sdk.models.operations.AssignAccountCountriesRequest;
 import io.moov.sdk.models.operations.AssignAccountCountriesRequestBuilder;
 import io.moov.sdk.models.operations.AssignAccountCountriesResponse;
-import io.moov.sdk.models.operations.AssignAccountCountriesSecurity;
 import io.moov.sdk.models.operations.CreateAccountRequest;
 import io.moov.sdk.models.operations.CreateAccountRequestBuilder;
 import io.moov.sdk.models.operations.CreateAccountResponse;
-import io.moov.sdk.models.operations.CreateAccountSecurity;
 import io.moov.sdk.models.operations.DisconnectAccountRequest;
 import io.moov.sdk.models.operations.DisconnectAccountRequestBuilder;
 import io.moov.sdk.models.operations.DisconnectAccountResponse;
-import io.moov.sdk.models.operations.DisconnectAccountSecurity;
 import io.moov.sdk.models.operations.GetAccountCountriesRequest;
 import io.moov.sdk.models.operations.GetAccountCountriesRequestBuilder;
 import io.moov.sdk.models.operations.GetAccountCountriesResponse;
-import io.moov.sdk.models.operations.GetAccountCountriesSecurity;
 import io.moov.sdk.models.operations.GetAccountRequest;
 import io.moov.sdk.models.operations.GetAccountRequestBuilder;
 import io.moov.sdk.models.operations.GetAccountResponse;
-import io.moov.sdk.models.operations.GetAccountSecurity;
 import io.moov.sdk.models.operations.GetMerchantProcessingAgreementRequest;
 import io.moov.sdk.models.operations.GetMerchantProcessingAgreementRequestBuilder;
 import io.moov.sdk.models.operations.GetMerchantProcessingAgreementResponse;
-import io.moov.sdk.models.operations.GetMerchantProcessingAgreementSecurity;
 import io.moov.sdk.models.operations.GetTermsOfServiceTokenRequest;
 import io.moov.sdk.models.operations.GetTermsOfServiceTokenRequestBuilder;
 import io.moov.sdk.models.operations.GetTermsOfServiceTokenResponse;
 import io.moov.sdk.models.operations.ListAccountsRequest;
 import io.moov.sdk.models.operations.ListAccountsRequestBuilder;
 import io.moov.sdk.models.operations.ListAccountsResponse;
-import io.moov.sdk.models.operations.ListAccountsSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateAccountRequest;
 import io.moov.sdk.models.operations.UpdateAccountRequestBuilder;
 import io.moov.sdk.models.operations.UpdateAccountResponse;
-import io.moov.sdk.models.operations.UpdateAccountSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -98,20 +90,17 @@ public class Accounts implements
 
     /**
      * You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required - information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/). -  - If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities, you'll need to: -   + Send Moov the user [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance. -     This can be done upon account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field. - If you're creating a business account with the business type `llc`, `partnership`, or `privateCorporation`, you'll need to: -   + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after creating the account. -   + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that business representative ownership information is complete. -  - Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/). - Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param createAccount
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateAccountResponse create(
-            CreateAccountSecurity security,
             CreateAccount createAccount) throws Exception {
-        return create(security, Optional.empty(), Optional.empty(), createAccount);
+        return create(Optional.empty(), Optional.empty(), createAccount);
     }
     
     /**
      * You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required - information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/). -  - If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities, you'll need to: -   + Send Moov the user [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance. -     This can be done upon account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field. - If you're creating a business account with the business type `llc`, `partnership`, or `privateCorporation`, you'll need to: -   + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after creating the account. -   + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that business representative ownership information is complete. -  - Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/). - Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -127,7 +116,6 @@ public class Accounts implements
      * @throws Exception if the API call fails
      */
     public CreateAccountResponse create(
-            CreateAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             Optional<? extends AccountWaitFor> xWaitFor,
             CreateAccount createAccount) throws Exception {
@@ -163,11 +151,9 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -302,13 +288,11 @@ public class Accounts implements
     /**
      * List or search accounts to which the caller is connected. -  - All supported query parameters are optional. If none are provided the response will include all connected accounts. - Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and  - return results based on relevance. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts.read` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListAccountsResponse list(
-            ListAccountsRequest request,
-            ListAccountsSecurity security) throws Exception {
+            ListAccountsRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 _baseUrl,
@@ -325,11 +309,9 @@ public class Accounts implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -433,20 +415,17 @@ public class Accounts implements
 
     /**
      * Retrieves details for the account with the specified ID. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetAccountResponse get(
-            GetAccountSecurity security,
             String accountID) throws Exception {
-        return get(security, Optional.empty(), accountID);
+        return get(Optional.empty(), accountID);
     }
     
     /**
      * Retrieves details for the account with the specified ID. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -461,7 +440,6 @@ public class Accounts implements
      * @throws Exception if the API call fails
      */
     public GetAccountResponse get(
-            GetAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         GetAccountRequest request =
@@ -484,11 +462,9 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -592,22 +568,19 @@ public class Accounts implements
 
     /**
      * When **can** profile data be updated: -   + For unverified accounts, all profile data can be edited. -   + During the verification process, missing or incomplete profile data can be edited. -   + Verified accounts can only add missing profile data. -  -   When **can't** profile data be updated: -   + Verified accounts cannot change any existing profile data. -  - If you need to update information in a locked state, please contact Moov support. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param createAccountUpdate
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateAccountResponse update(
-            UpdateAccountSecurity security,
             String accountID,
             CreateAccountUpdate createAccountUpdate) throws Exception {
-        return update(security, Optional.empty(), accountID, createAccountUpdate);
+        return update(Optional.empty(), accountID, createAccountUpdate);
     }
     
     /**
      * When **can** profile data be updated: -   + For unverified accounts, all profile data can be edited. -   + During the verification process, missing or incomplete profile data can be edited. -   + Verified accounts can only add missing profile data. -  -   When **can't** profile data be updated: -   + Verified accounts cannot change any existing profile data. -  - If you need to update information in a locked state, please contact Moov support. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -623,7 +596,6 @@ public class Accounts implements
      * @throws Exception if the API call fails
      */
     public UpdateAccountResponse update(
-            UpdateAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             CreateAccountUpdate createAccountUpdate) throws Exception {
@@ -661,11 +633,9 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -799,20 +769,17 @@ public class Accounts implements
 
     /**
      * This will sever the connection between you and the account specified and it will no longer be listed as  - active in the list of accounts. This also means you'll only have read-only access to the account going  - forward for reporting purposes. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public DisconnectAccountResponse disconnect(
-            DisconnectAccountSecurity security,
             String accountID) throws Exception {
-        return disconnect(security, Optional.empty(), accountID);
+        return disconnect(Optional.empty(), accountID);
     }
     
     /**
      * This will sever the connection between you and the account specified and it will no longer be listed as  - active in the list of accounts. This also means you'll only have read-only access to the account going  - forward for reporting purposes. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -827,7 +794,6 @@ public class Accounts implements
      * @throws Exception if the API call fails
      */
     public DisconnectAccountResponse disconnect(
-            DisconnectAccountSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         DisconnectAccountRequest request =
@@ -850,11 +816,9 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -961,20 +925,17 @@ public class Accounts implements
 
     /**
      * Retrieve the specified countries of operation for an account.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetAccountCountriesResponse getCountries(
-            GetAccountCountriesSecurity security,
             String accountID) throws Exception {
-        return getCountries(security, Optional.empty(), accountID);
+        return getCountries(Optional.empty(), accountID);
     }
     
     /**
      * Retrieve the specified countries of operation for an account.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -989,7 +950,6 @@ public class Accounts implements
      * @throws Exception if the API call fails
      */
     public GetAccountCountriesResponse getCountries(
-            GetAccountCountriesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         GetAccountCountriesRequest request =
@@ -1012,11 +972,9 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1120,22 +1078,19 @@ public class Accounts implements
 
     /**
      * Assign the countries of operation for an account. -  - This endpoint will always overwrite the previously assigned values.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param accountCountries The countries in which an account operates.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public AssignAccountCountriesResponse assignCountries(
-            AssignAccountCountriesSecurity security,
             String accountID,
             AccountCountries accountCountries) throws Exception {
-        return assignCountries(security, Optional.empty(), accountID, accountCountries);
+        return assignCountries(Optional.empty(), accountID, accountCountries);
     }
     
     /**
      * Assign the countries of operation for an account. -  - This endpoint will always overwrite the previously assigned values.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1151,7 +1106,6 @@ public class Accounts implements
      * @throws Exception if the API call fails
      */
     public AssignAccountCountriesResponse assignCountries(
-            AssignAccountCountriesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             AccountCountries accountCountries) throws Exception {
@@ -1189,11 +1143,9 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1325,20 +1277,17 @@ public class Accounts implements
 
     /**
      * Retrieve a merchant account's processing agreement. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetMerchantProcessingAgreementResponse getMerchantProcessingAgreement(
-            GetMerchantProcessingAgreementSecurity security,
             String accountID) throws Exception {
-        return getMerchantProcessingAgreement(security, Optional.empty(), accountID);
+        return getMerchantProcessingAgreement(Optional.empty(), accountID);
     }
     
     /**
      * Retrieve a merchant account's processing agreement. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1353,7 +1302,6 @@ public class Accounts implements
      * @throws Exception if the API call fails
      */
     public GetMerchantProcessingAgreementResponse getMerchantProcessingAgreement(
-            GetMerchantProcessingAgreementSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         GetMerchantProcessingAgreementRequest request =
@@ -1376,11 +1324,9 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

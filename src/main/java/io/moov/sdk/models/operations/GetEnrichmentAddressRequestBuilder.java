@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class GetEnrichmentAddressRequestBuilder {
 
     private GetEnrichmentAddressRequest request;
-    private GetEnrichmentAddressSecurity security;
     private final SDKMethodInterfaces.MethodCallGetEnrichmentAddress sdk;
 
     public GetEnrichmentAddressRequestBuilder(SDKMethodInterfaces.MethodCallGetEnrichmentAddress sdk) {
@@ -22,16 +21,9 @@ public class GetEnrichmentAddressRequestBuilder {
         return this;
     }
 
-    public GetEnrichmentAddressRequestBuilder security(GetEnrichmentAddressSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public GetEnrichmentAddressResponse call() throws Exception {
 
         return sdk.get(
-            request,
-            security);
+            request);
     }
 }

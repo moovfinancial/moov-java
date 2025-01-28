@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class RequestCardRequestBuilder {
 
-    private RequestCardSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private RequestCard requestCard;
@@ -20,12 +19,6 @@ public class RequestCardRequestBuilder {
 
     public RequestCardRequestBuilder(SDKMethodInterfaces.MethodCallRequestCard sdk) {
         this.sdk = sdk;
-    }
-
-    public RequestCardRequestBuilder security(RequestCardSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public RequestCardRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class RequestCardRequestBuilder {
     public RequestCardResponse call() throws Exception {
 
         return sdk.request(
-            security,
             xMoovVersion,
             accountID,
             requestCard);

@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class ListWalletsRequestBuilder {
 
-    private ListWalletsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallListWallets sdk;
 
     public ListWalletsRequestBuilder(SDKMethodInterfaces.MethodCallListWallets sdk) {
         this.sdk = sdk;
-    }
-
-    public ListWalletsRequestBuilder security(ListWalletsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListWalletsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class ListWalletsRequestBuilder {
     public ListWalletsResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             accountID);
     }

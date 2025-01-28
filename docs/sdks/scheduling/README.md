@@ -50,13 +50,12 @@ import io.moov.sdk.models.components.Occurrence;
 import io.moov.sdk.models.components.Recur;
 import io.moov.sdk.models.components.RunTransfer;
 import io.moov.sdk.models.components.SchedulePaymentMethod;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpsertSchedule;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ScheduleValidationError;
 import io.moov.sdk.models.operations.CreateScheduleResponse;
-import io.moov.sdk.models.operations.CreateScheduleSecurity;
 import java.lang.Exception;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -66,15 +65,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, ScheduleValidationError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreateScheduleResponse res = sdk.scheduling().create()
-                .security(CreateScheduleSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .accountID("4ee0c8f9-d96c-44a5-924b-28f02e5d05ca")
                 .upsertSchedule(UpsertSchedule.builder()
@@ -219,12 +216,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                | [io.moov.sdk.models.operations.CreateScheduleSecurity](../../models/operations/CreateScheduleSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
-| `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |
-| `accountID`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
-| `upsertSchedule`                                                                                          | [UpsertSchedule](../../models/components/UpsertSchedule.md)                                               | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `xMoovVersion`                                              | [Optional\<Versions>](../../models/components/Versions.md)  | :heavy_minus_sign:                                          | Specify an API version.                                     |
+| `accountID`                                                 | *String*                                                    | :heavy_check_mark:                                          | N/A                                                         |
+| `upsertSchedule`                                            | [UpsertSchedule](../../models/components/UpsertSchedule.md) | :heavy_check_mark:                                          | N/A                                                         |
 
 ### Response
 
@@ -251,10 +247,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListSchedulesResponse;
-import io.moov.sdk.models.operations.ListSchedulesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -262,15 +257,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListSchedulesResponse res = sdk.scheduling().list()
-                .security(ListSchedulesSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .skip(60L)
                 .count(20L)
@@ -286,13 +279,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             | Example                                                                                                 |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                              | [io.moov.sdk.models.operations.ListSchedulesSecurity](../../models/operations/ListSchedulesSecurity.md) | :heavy_check_mark:                                                                                      | The security requirements to use for the request.                                                       |                                                                                                         |
-| `xMoovVersion`                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                              | :heavy_minus_sign:                                                                                      | Specify an API version.                                                                                 |                                                                                                         |
-| `skip`                                                                                                  | *Optional\<Long>*                                                                                       | :heavy_minus_sign:                                                                                      | N/A                                                                                                     | 60                                                                                                      |
-| `count`                                                                                                 | *Optional\<Long>*                                                                                       | :heavy_minus_sign:                                                                                      | N/A                                                                                                     | 20                                                                                                      |
-| `accountID`                                                                                             | *String*                                                                                                | :heavy_check_mark:                                                                                      | N/A                                                                                                     |                                                                                                         |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |                                                            |
+| `skip`                                                     | *Optional\<Long>*                                          | :heavy_minus_sign:                                         | N/A                                                        | 60                                                         |
+| `count`                                                    | *Optional\<Long>*                                          | :heavy_minus_sign:                                         | N/A                                                        | 20                                                         |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |                                                            |
 
 ### Response
 
@@ -324,13 +316,12 @@ import io.moov.sdk.models.components.Occurrence;
 import io.moov.sdk.models.components.Recur;
 import io.moov.sdk.models.components.RunTransfer;
 import io.moov.sdk.models.components.SchedulePaymentMethod;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpsertSchedule;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ScheduleValidationError;
 import io.moov.sdk.models.operations.UpdateScheduleResponse;
-import io.moov.sdk.models.operations.UpdateScheduleSecurity;
 import java.lang.Exception;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -340,15 +331,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, ScheduleValidationError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UpdateScheduleResponse res = sdk.scheduling().update()
-                .security(UpdateScheduleSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.LATEST)
                 .accountID("c0aa3b4b-9122-4f67-8d60-fde10f180239")
                 .scheduleID("9ab32094-a459-49c7-9ce9-437b9e400834")
@@ -462,13 +451,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                | [io.moov.sdk.models.operations.UpdateScheduleSecurity](../../models/operations/UpdateScheduleSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
-| `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |
-| `accountID`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
-| `scheduleID`                                                                                              | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
-| `upsertSchedule`                                                                                          | [UpsertSchedule](../../models/components/UpsertSchedule.md)                                               | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `xMoovVersion`                                              | [Optional\<Versions>](../../models/components/Versions.md)  | :heavy_minus_sign:                                          | Specify an API version.                                     |
+| `accountID`                                                 | *String*                                                    | :heavy_check_mark:                                          | N/A                                                         |
+| `scheduleID`                                                | *String*                                                    | :heavy_check_mark:                                          | N/A                                                         |
+| `upsertSchedule`                                            | [UpsertSchedule](../../models/components/UpsertSchedule.md) | :heavy_check_mark:                                          | N/A                                                         |
 
 ### Response
 
@@ -495,10 +483,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetSchedulesResponse;
-import io.moov.sdk.models.operations.GetSchedulesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -506,15 +493,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetSchedulesResponse res = sdk.scheduling().get()
-                .security(GetSchedulesSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("aa7a59b8-5d59-4efd-99e7-b644e71e5f8c")
                 .scheduleID("605976e8-f3ff-4e64-9b41-7255577d6f44")
@@ -529,12 +514,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `security`                                                                                            | [io.moov.sdk.models.operations.GetSchedulesSecurity](../../models/operations/GetSchedulesSecurity.md) | :heavy_check_mark:                                                                                    | The security requirements to use for the request.                                                     |
-| `xMoovVersion`                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                            | :heavy_minus_sign:                                                                                    | Specify an API version.                                                                               |
-| `accountID`                                                                                           | *String*                                                                                              | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
-| `scheduleID`                                                                                          | *String*                                                                                              | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `scheduleID`                                               | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -559,11 +543,10 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CancelScheduleResponse;
-import io.moov.sdk.models.operations.CancelScheduleSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -571,15 +554,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CancelScheduleResponse res = sdk.scheduling().cancel()
-                .security(CancelScheduleSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202401)
                 .accountID("a1303a1c-8708-447e-a64b-5dba8417b641")
                 .scheduleID("ab5ca483-e27d-48f0-b596-09eed517874f")
@@ -592,12 +573,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                | [io.moov.sdk.models.operations.CancelScheduleSecurity](../../models/operations/CancelScheduleSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |
-| `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |
-| `accountID`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
-| `scheduleID`                                                                                              | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `scheduleID`                                               | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -623,10 +603,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetScheduledOccurrenceResponse;
-import io.moov.sdk.models.operations.GetScheduledOccurrenceSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -634,15 +613,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetScheduledOccurrenceResponse res = sdk.scheduling().getOccurrance()
-                .security(GetScheduledOccurrenceSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("7175f455-a6d6-4b87-8e24-cbd12c7dabe7")
                 .scheduleID("a4ffa63d-9228-4488-8f27-d2ff59d7760c")
@@ -660,7 +637,6 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                            |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                                                             | [io.moov.sdk.models.operations.GetScheduledOccurrenceSecurity](../../models/operations/GetScheduledOccurrenceSecurity.md)                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                                                     | The security requirements to use for the request.                                                                                                                                                                                                                                      |
 | `xMoovVersion`                                                                                                                                                                                                                                                                         | [Optional\<Versions>](../../models/components/Versions.md)                                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | Specify an API version.                                                                                                                                                                                                                                                                |
 | `accountID`                                                                                                                                                                                                                                                                            | *String*                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                                                    |
 | `scheduleID`                                                                                                                                                                                                                                                                           | *String*                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                                                    |

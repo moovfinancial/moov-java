@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetBankAccountVerificationRequestBuilder {
 
-    private GetBankAccountVerificationSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String bankAccountID;
@@ -19,12 +18,6 @@ public class GetBankAccountVerificationRequestBuilder {
 
     public GetBankAccountVerificationRequestBuilder(SDKMethodInterfaces.MethodCallGetBankAccountVerification sdk) {
         this.sdk = sdk;
-    }
-
-    public GetBankAccountVerificationRequestBuilder security(GetBankAccountVerificationSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetBankAccountVerificationRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetBankAccountVerificationRequestBuilder {
     public GetBankAccountVerificationResponse call() throws Exception {
 
         return sdk.getVerification(
-            security,
             xMoovVersion,
             accountID,
             bankAccountID);

@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class GetMerchantProcessingAgreementRequestBuilder {
 
-    private GetMerchantProcessingAgreementSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallGetMerchantProcessingAgreement sdk;
 
     public GetMerchantProcessingAgreementRequestBuilder(SDKMethodInterfaces.MethodCallGetMerchantProcessingAgreement sdk) {
         this.sdk = sdk;
-    }
-
-    public GetMerchantProcessingAgreementRequestBuilder security(GetMerchantProcessingAgreementSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetMerchantProcessingAgreementRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class GetMerchantProcessingAgreementRequestBuilder {
     public GetMerchantProcessingAgreementResponse call() throws Exception {
 
         return sdk.getMerchantProcessingAgreement(
-            security,
             xMoovVersion,
             accountID);
     }

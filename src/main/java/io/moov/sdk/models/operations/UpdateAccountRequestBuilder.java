@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class UpdateAccountRequestBuilder {
 
-    private UpdateAccountSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private CreateAccountUpdate createAccountUpdate;
@@ -20,12 +19,6 @@ public class UpdateAccountRequestBuilder {
 
     public UpdateAccountRequestBuilder(SDKMethodInterfaces.MethodCallUpdateAccount sdk) {
         this.sdk = sdk;
-    }
-
-    public UpdateAccountRequestBuilder security(UpdateAccountSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public UpdateAccountRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class UpdateAccountRequestBuilder {
     public UpdateAccountResponse call() throws Exception {
 
         return sdk.update(
-            security,
             xMoovVersion,
             accountID,
             createAccountUpdate);

@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class GetOnboardingInviteRequestBuilder {
 
-    private GetOnboardingInviteSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String code;
     private final SDKMethodInterfaces.MethodCallGetOnboardingInvite sdk;
 
     public GetOnboardingInviteRequestBuilder(SDKMethodInterfaces.MethodCallGetOnboardingInvite sdk) {
         this.sdk = sdk;
-    }
-
-    public GetOnboardingInviteRequestBuilder security(GetOnboardingInviteSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetOnboardingInviteRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class GetOnboardingInviteRequestBuilder {
     public GetOnboardingInviteResponse call() throws Exception {
 
         return sdk.getInvite(
-            security,
             xMoovVersion,
             code);
     }

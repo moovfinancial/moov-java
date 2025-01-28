@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetTransferRequestBuilder {
 
-    private GetTransferSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String transferID;
     private String accountID;
@@ -19,12 +18,6 @@ public class GetTransferRequestBuilder {
 
     public GetTransferRequestBuilder(SDKMethodInterfaces.MethodCallGetTransfer sdk) {
         this.sdk = sdk;
-    }
-
-    public GetTransferRequestBuilder security(GetTransferSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetTransferRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetTransferRequestBuilder {
     public GetTransferResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             transferID,
             accountID);

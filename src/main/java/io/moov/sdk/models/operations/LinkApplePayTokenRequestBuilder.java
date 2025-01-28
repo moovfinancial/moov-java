@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class LinkApplePayTokenRequestBuilder {
 
-    private LinkApplePayTokenSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private LinkApplePay linkApplePay;
@@ -20,12 +19,6 @@ public class LinkApplePayTokenRequestBuilder {
 
     public LinkApplePayTokenRequestBuilder(SDKMethodInterfaces.MethodCallLinkApplePayToken sdk) {
         this.sdk = sdk;
-    }
-
-    public LinkApplePayTokenRequestBuilder security(LinkApplePayTokenSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public LinkApplePayTokenRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class LinkApplePayTokenRequestBuilder {
     public LinkApplePayTokenResponse call() throws Exception {
 
         return sdk.linkToken(
-            security,
             xMoovVersion,
             accountID,
             linkApplePay);

@@ -11,7 +11,6 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetEnrichmentProfileRequest;
 import io.moov.sdk.models.operations.GetEnrichmentProfileRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentProfileResponse;
-import io.moov.sdk.models.operations.GetEnrichmentProfileSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -47,20 +46,17 @@ public class EnrichedProfile implements
 
     /**
      * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
-     * @param security The security details to use for authentication.
      * @param email
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetEnrichmentProfileResponse get(
-            GetEnrichmentProfileSecurity security,
             String email) throws Exception {
-        return get(security, Optional.empty(), email);
+        return get(Optional.empty(), email);
     }
     
     /**
      * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -75,7 +71,6 @@ public class EnrichedProfile implements
      * @throws Exception if the API call fails
      */
     public GetEnrichmentProfileResponse get(
-            GetEnrichmentProfileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String email) throws Exception {
         GetEnrichmentProfileRequest request =
@@ -101,11 +96,9 @@ public class EnrichedProfile implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetAdjustmentRequestBuilder {
 
-    private GetAdjustmentSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String adjustmentID;
@@ -19,12 +18,6 @@ public class GetAdjustmentRequestBuilder {
 
     public GetAdjustmentRequestBuilder(SDKMethodInterfaces.MethodCallGetAdjustment sdk) {
         this.sdk = sdk;
-    }
-
-    public GetAdjustmentRequestBuilder security(GetAdjustmentSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetAdjustmentRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetAdjustmentRequestBuilder {
     public GetAdjustmentResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             adjustmentID);

@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class DisableCapabilityRequestBuilder {
 
-    private DisableCapabilitySecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private CapabilityID capabilityID;
@@ -20,12 +19,6 @@ public class DisableCapabilityRequestBuilder {
 
     public DisableCapabilityRequestBuilder(SDKMethodInterfaces.MethodCallDisableCapability sdk) {
         this.sdk = sdk;
-    }
-
-    public DisableCapabilityRequestBuilder security(DisableCapabilitySecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public DisableCapabilityRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class DisableCapabilityRequestBuilder {
     public DisableCapabilityResponse call() throws Exception {
 
         return sdk.disable(
-            security,
             xMoovVersion,
             accountID,
             capabilityID);

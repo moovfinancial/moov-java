@@ -23,10 +23,9 @@ you'll need to specify the `/profile-enrichment.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetAvatarResponse;
-import io.moov.sdk.models.operations.GetAvatarSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -34,15 +33,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetAvatarResponse res = sdk.avatars().get()
-                .security(GetAvatarSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .uniqueID("<id>")
                 .call();
@@ -58,7 +55,6 @@ public class Application {
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
 | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                               | [io.moov.sdk.models.operations.GetAvatarSecurity](../../models/operations/GetAvatarSecurity.md)          | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
 | `xMoovVersion`                                                                                           | [Optional\<Versions>](../../models/components/Versions.md)                                               | :heavy_minus_sign:                                                                                       | Specify an API version.                                                                                  |
 | `uniqueID`                                                                                               | *String*                                                                                                 | :heavy_check_mark:                                                                                       | Any unique ID associated with an account such as accountID, representativeID, routing number, or userID. |
 

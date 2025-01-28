@@ -14,19 +14,15 @@ import io.moov.sdk.models.errors.OnboardingInviteError;
 import io.moov.sdk.models.operations.CreateOnboardingInviteRequest;
 import io.moov.sdk.models.operations.CreateOnboardingInviteRequestBuilder;
 import io.moov.sdk.models.operations.CreateOnboardingInviteResponse;
-import io.moov.sdk.models.operations.CreateOnboardingInviteSecurity;
 import io.moov.sdk.models.operations.GetOnboardingInviteRequest;
 import io.moov.sdk.models.operations.GetOnboardingInviteRequestBuilder;
 import io.moov.sdk.models.operations.GetOnboardingInviteResponse;
-import io.moov.sdk.models.operations.GetOnboardingInviteSecurity;
 import io.moov.sdk.models.operations.ListOnboardingInvitesRequest;
 import io.moov.sdk.models.operations.ListOnboardingInvitesRequestBuilder;
 import io.moov.sdk.models.operations.ListOnboardingInvitesResponse;
-import io.moov.sdk.models.operations.ListOnboardingInvitesSecurity;
 import io.moov.sdk.models.operations.RevokeOnboardingInviteRequest;
 import io.moov.sdk.models.operations.RevokeOnboardingInviteRequestBuilder;
 import io.moov.sdk.models.operations.RevokeOnboardingInviteResponse;
-import io.moov.sdk.models.operations.RevokeOnboardingInviteSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -68,20 +64,17 @@ public class Onboarding implements
 
     /**
      * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param onboardingInviteRequest Request to create an onboarding invite.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateOnboardingInviteResponse createInvite(
-            CreateOnboardingInviteSecurity security,
             OnboardingInviteRequest onboardingInviteRequest) throws Exception {
-        return createInvite(security, Optional.empty(), onboardingInviteRequest);
+        return createInvite(Optional.empty(), onboardingInviteRequest);
     }
     
     /**
      * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -96,7 +89,6 @@ public class Onboarding implements
      * @throws Exception if the API call fails
      */
     public CreateOnboardingInviteResponse createInvite(
-            CreateOnboardingInviteSecurity security,
             Optional<? extends Versions> xMoovVersion,
             OnboardingInviteRequest onboardingInviteRequest) throws Exception {
         CreateOnboardingInviteRequest request =
@@ -130,11 +122,9 @@ public class Onboarding implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -266,18 +256,15 @@ public class Onboarding implements
 
     /**
      * List all the onboarding invites created by the caller's account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListOnboardingInvitesResponse listInvites(
-            ListOnboardingInvitesSecurity security) throws Exception {
-        return listInvites(security, Optional.empty());
+    public ListOnboardingInvitesResponse listInvitesDirect() throws Exception {
+        return listInvites(Optional.empty());
     }
     
     /**
      * List all the onboarding invites created by the caller's account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -291,7 +278,6 @@ public class Onboarding implements
      * @throws Exception if the API call fails
      */
     public ListOnboardingInvitesResponse listInvites(
-            ListOnboardingInvitesSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception {
         ListOnboardingInvitesRequest request =
             ListOnboardingInvitesRequest
@@ -310,11 +296,9 @@ public class Onboarding implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -418,20 +402,17 @@ public class Onboarding implements
 
     /**
      * Retrieve details about an onboarding invite. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @param code
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetOnboardingInviteResponse getInvite(
-            GetOnboardingInviteSecurity security,
             String code) throws Exception {
-        return getInvite(security, Optional.empty(), code);
+        return getInvite(Optional.empty(), code);
     }
     
     /**
      * Retrieve details about an onboarding invite. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -446,7 +427,6 @@ public class Onboarding implements
      * @throws Exception if the API call fails
      */
     public GetOnboardingInviteResponse getInvite(
-            GetOnboardingInviteSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String code) throws Exception {
         GetOnboardingInviteRequest request =
@@ -469,11 +449,9 @@ public class Onboarding implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -577,20 +555,17 @@ public class Onboarding implements
 
     /**
      * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param code
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public RevokeOnboardingInviteResponse revokeInvite(
-            RevokeOnboardingInviteSecurity security,
             String code) throws Exception {
-        return revokeInvite(security, Optional.empty(), code);
+        return revokeInvite(Optional.empty(), code);
     }
     
     /**
      * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -605,7 +580,6 @@ public class Onboarding implements
      * @throws Exception if the API call fails
      */
     public RevokeOnboardingInviteResponse revokeInvite(
-            RevokeOnboardingInviteSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String code) throws Exception {
         RevokeOnboardingInviteRequest request =
@@ -628,11 +602,9 @@ public class Onboarding implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

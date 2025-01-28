@@ -84,12 +84,11 @@ import io.moov.sdk.models.components.CardAddress;
 import io.moov.sdk.models.components.CardExpiration;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.LinkCardError;
 import io.moov.sdk.models.operations.LinkCardResponse;
-import io.moov.sdk.models.operations.LinkCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -97,15 +96,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, LinkCardError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         LinkCardResponse res = sdk.cards().link()
-                .security(LinkCardSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .xWaitFor(LinkCardWaitFor.PAYMENT_METHOD)
                 .accountID("500c4473-7f7b-4a70-8a8c-d5cb2e08e0e4")
@@ -142,7 +139,6 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                                                                                                                                                                                                              | Required                                                                                                                                                                                                                                                                                                                                                                                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                       | Example                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                                                                                                                                                                                        | [io.moov.sdk.models.operations.LinkCardSecurity](../../models/operations/LinkCardSecurity.md)                                                                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                | The security requirements to use for the request.                                                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `xMoovVersion`                                                                                                                                                                                                                                                                                                                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                                                                                                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                | Specify an API version.                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `xWaitFor`                                                                                                                                                                                                                                                                                                                                                                                                        | [Optional\<LinkCardWaitFor>](../../models/components/LinkCardWaitFor.md)                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                | Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.<br/><br/>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly <br/>linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.                          | payment-method                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `accountID`                                                                                                                                                                                                                                                                                                                                                                                                       | *String*                                                                                                                                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                                                                                                                                                                                               |                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -175,10 +171,9 @@ you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListCardsResponse;
-import io.moov.sdk.models.operations.ListCardsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -186,15 +181,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListCardsResponse res = sdk.cards().list()
-                .security(ListCardsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("5881119b-63c7-492b-8c20-09d0fca99676")
                 .call();
@@ -208,11 +201,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `security`                                                                                      | [io.moov.sdk.models.operations.ListCardsSecurity](../../models/operations/ListCardsSecurity.md) | :heavy_check_mark:                                                                              | The security requirements to use for the request.                                               |
-| `xMoovVersion`                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                      | :heavy_minus_sign:                                                                              | Specify an API version.                                                                         |
-| `accountID`                                                                                     | *String*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -239,10 +231,9 @@ you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetCardResponse;
-import io.moov.sdk.models.operations.GetCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -250,15 +241,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetCardResponse res = sdk.cards().get()
-                .security(GetCardSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("21f0d82e-dc9b-4e80-ac2a-99b6babfebd7")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
@@ -273,12 +262,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `security`                                                                                  | [io.moov.sdk.models.operations.GetCardSecurity](../../models/operations/GetCardSecurity.md) | :heavy_check_mark:                                                                          | The security requirements to use for the request.                                           |                                                                                             |
-| `xMoovVersion`                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                  | :heavy_minus_sign:                                                                          | Specify an API version.                                                                     |                                                                                             |
-| `accountID`                                                                                 | *String*                                                                                    | :heavy_check_mark:                                                                          | N/A                                                                                         |                                                                                             |
-| `cardID`                                                                                    | *String*                                                                                    | :heavy_check_mark:                                                                          | N/A                                                                                         | 01234567-89ab-cdef-0123-456789abcdef                                                        |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |                                                            |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |                                                            |
+| `cardID`                                                   | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        | 01234567-89ab-cdef-0123-456789abcdef                       |
 
 ### Response
 
@@ -312,13 +300,12 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpdateCard;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateCardError;
 import io.moov.sdk.models.operations.UpdateCardResponse;
-import io.moov.sdk.models.operations.UpdateCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -326,15 +313,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, UpdateCardError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UpdateCardResponse res = sdk.cards().update()
-                .security(UpdateCardSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.LATEST)
                 .accountID("a960061d-fb6d-4929-99b5-c96c672840f6")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
@@ -352,13 +337,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [io.moov.sdk.models.operations.UpdateCardSecurity](../../models/operations/UpdateCardSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |                                                                                                   |
-| `xMoovVersion`                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                        | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |                                                                                                   |
-| `accountID`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
-| `cardID`                                                                                          | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               | 01234567-89ab-cdef-0123-456789abcdef                                                              |
-| `updateCard`                                                                                      | [UpdateCard](../../models/components/UpdateCard.md)                                               | :heavy_check_mark:                                                                                | N/A                                                                                               | {<br/>"cardCvv": "456"<br/>}                                                                      |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |                                                            |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |                                                            |
+| `cardID`                                                   | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        | 01234567-89ab-cdef-0123-456789abcdef                       |
+| `updateCard`                                               | [UpdateCard](../../models/components/UpdateCard.md)        | :heavy_check_mark:                                         | N/A                                                        | {<br/>"cardCvv": "456"<br/>}                               |
 
 ### Response
 
@@ -385,11 +369,10 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.DisableCardResponse;
-import io.moov.sdk.models.operations.DisableCardSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -397,15 +380,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         DisableCardResponse res = sdk.cards().disable()
-                .security(DisableCardSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("a6b47d56-0b54-4dd8-9692-efad0ab1ebb4")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
@@ -418,12 +399,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         | Example                                                                                             |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `security`                                                                                          | [io.moov.sdk.models.operations.DisableCardSecurity](../../models/operations/DisableCardSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |                                                                                                     |
-| `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |                                                                                                     |
-| `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |                                                                                                     |
-| `cardID`                                                                                            | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 | 01234567-89ab-cdef-0123-456789abcdef                                                                |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |                                                            |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |                                                            |
+| `cardID`                                                   | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        | 01234567-89ab-cdef-0123-456789abcdef                       |
 
 ### Response
 

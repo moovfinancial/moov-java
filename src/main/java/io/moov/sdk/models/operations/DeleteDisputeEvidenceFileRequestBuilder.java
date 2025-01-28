@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class DeleteDisputeEvidenceFileRequestBuilder {
 
-    private DeleteDisputeEvidenceFileSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String disputeID;
@@ -20,12 +19,6 @@ public class DeleteDisputeEvidenceFileRequestBuilder {
 
     public DeleteDisputeEvidenceFileRequestBuilder(SDKMethodInterfaces.MethodCallDeleteDisputeEvidenceFile sdk) {
         this.sdk = sdk;
-    }
-
-    public DeleteDisputeEvidenceFileRequestBuilder security(DeleteDisputeEvidenceFileSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public DeleteDisputeEvidenceFileRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -61,7 +54,6 @@ public class DeleteDisputeEvidenceFileRequestBuilder {
     public DeleteDisputeEvidenceFileResponse call() throws Exception {
 
         return sdk.deleteEvidence(
-            security,
             xMoovVersion,
             accountID,
             disputeID,

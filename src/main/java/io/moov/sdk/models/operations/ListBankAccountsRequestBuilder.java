@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class ListBankAccountsRequestBuilder {
 
-    private ListBankAccountsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallListBankAccounts sdk;
 
     public ListBankAccountsRequestBuilder(SDKMethodInterfaces.MethodCallListBankAccounts sdk) {
         this.sdk = sdk;
-    }
-
-    public ListBankAccountsRequestBuilder security(ListBankAccountsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListBankAccountsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class ListBankAccountsRequestBuilder {
     public ListBankAccountsResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             accountID);
     }

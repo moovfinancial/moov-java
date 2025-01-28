@@ -10,18 +10,11 @@ import java.util.Optional;
 
 public class ListIndustriesRequestBuilder {
 
-    private ListIndustriesSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private final SDKMethodInterfaces.MethodCallListIndustries sdk;
 
     public ListIndustriesRequestBuilder(SDKMethodInterfaces.MethodCallListIndustries sdk) {
         this.sdk = sdk;
-    }
-
-    public ListIndustriesRequestBuilder security(ListIndustriesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListIndustriesRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -39,7 +32,6 @@ public class ListIndustriesRequestBuilder {
     public ListIndustriesResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion);
     }
 }

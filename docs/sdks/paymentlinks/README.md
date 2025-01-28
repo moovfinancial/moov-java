@@ -57,12 +57,11 @@ import io.moov.sdk.models.components.PaymentLinkDisplayOptions;
 import io.moov.sdk.models.components.PaymentLinkPaymentDetails;
 import io.moov.sdk.models.components.PaymentLinkPayoutDetails;
 import io.moov.sdk.models.components.PayoutRecipient;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.CreatePaymentLinkError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreatePaymentLinkResponse;
-import io.moov.sdk.models.operations.CreatePaymentLinkSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -71,15 +70,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreatePaymentLinkError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreatePaymentLinkResponse res = sdk.paymentLinks().create()
-                .security(CreatePaymentLinkSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .accountID("831ce989-44b7-4d2f-8990-b0ab3c903956")
                 .createPaymentLink(CreatePaymentLink.builder()
@@ -130,7 +127,6 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                  | Example                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                                                                                                                                                                                                   | [io.moov.sdk.models.operations.CreatePaymentLinkSecurity](../../models/operations/CreatePaymentLinkSecurity.md)                                                                                                                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                           | The security requirements to use for the request.                                                                                                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | `xMoovVersion`                                                                                                                                                                                                                                                                                                                                                                                                               | [Optional\<Versions>](../../models/components/Versions.md)                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                           | Specify an API version.                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | `accountID`                                                                                                                                                                                                                                                                                                                                                                                                                  | *String*                                                                                                                                                                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                                                                                                                                                                                                                          |                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | `createPaymentLink`                                                                                                                                                                                                                                                                                                                                                                                                          | [CreatePaymentLink](../../models/components/CreatePaymentLink.md)                                                                                                                                                                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                                                                                                                                                                                                                          | {<br/>"partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851",<br/>"merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e",<br/>"amount": {<br/>"currency": "USD",<br/>"value": 10000<br/>},<br/>"display": {<br/>"title": "Example Payment Link",<br/>"description": "This is an example payment link.",<br/>"callToAction": "pay"<br/>},<br/>"customer": {<br/>"requirePhone": true<br/>},<br/>"payment": {<br/>"allowedMethods": [<br/>"card-payment",<br/>"ach-debit-collect"<br/>]<br/>}<br/>} |
@@ -160,10 +156,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListPaymentLinksResponse;
-import io.moov.sdk.models.operations.ListPaymentLinksSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -171,15 +166,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListPaymentLinksResponse res = sdk.paymentLinks().list()
-                .security(ListPaymentLinksSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("9f728868-b3c8-409c-9aa0-282a13d8ddc8")
                 .call();
@@ -193,11 +186,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                    | [io.moov.sdk.models.operations.ListPaymentLinksSecurity](../../models/operations/ListPaymentLinksSecurity.md) | :heavy_check_mark:                                                                                            | The security requirements to use for the request.                                                             |
-| `xMoovVersion`                                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                                    | :heavy_minus_sign:                                                                                            | Specify an API version.                                                                                       |
-| `accountID`                                                                                                   | *String*                                                                                                      | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -222,10 +214,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetPaymentLinkResponse;
-import io.moov.sdk.models.operations.GetPaymentLinkSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -233,15 +224,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetPaymentLinkResponse res = sdk.paymentLinks().get()
-                .security(GetPaymentLinkSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("34a1451d-384e-4fff-a7ce-e90c2bb61969")
                 .paymentLinkCode("uc7ZYKrMhi")
@@ -256,12 +245,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               | Example                                                                                                   |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                | [io.moov.sdk.models.operations.GetPaymentLinkSecurity](../../models/operations/GetPaymentLinkSecurity.md) | :heavy_check_mark:                                                                                        | The security requirements to use for the request.                                                         |                                                                                                           |
-| `xMoovVersion`                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |                                                                                                           |
-| `accountID`                                                                                               | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |                                                                                                           |
-| `paymentLinkCode`                                                                                         | *String*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       | uc7ZYKrMhi                                                                                                |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |                                                            |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |                                                            |
+| `paymentLinkCode`                                          | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        | uc7ZYKrMhi                                                 |
 
 ### Response
 
@@ -293,13 +281,12 @@ import io.moov.sdk.models.components.PaymentLinkCustomerOptions;
 import io.moov.sdk.models.components.PaymentLinkPaymentDetailsUpdate;
 import io.moov.sdk.models.components.PaymentLinkPayoutDetailsUpdate;
 import io.moov.sdk.models.components.PayoutRecipientUpdate;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpdatePaymentLink;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdatePaymentLinkError;
 import io.moov.sdk.models.operations.UpdatePaymentLinkResponse;
-import io.moov.sdk.models.operations.UpdatePaymentLinkSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -307,15 +294,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, UpdatePaymentLinkError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UpdatePaymentLinkResponse res = sdk.paymentLinks().update()
-                .security(UpdatePaymentLinkSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.LATEST)
                 .accountID("94fe6aeb-a005-4850-b45d-bb0fa580425d")
                 .paymentLinkCode("uc7ZYKrMhi")
@@ -356,7 +341,6 @@ public class Application {
 
 | Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       | Example                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                        | [io.moov.sdk.models.operations.UpdatePaymentLinkSecurity](../../models/operations/UpdatePaymentLinkSecurity.md)   | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |                                                                                                                   |
 | `xMoovVersion`                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                        | :heavy_minus_sign:                                                                                                | Specify an API version.                                                                                           |                                                                                                                   |
 | `accountID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |                                                                                                                   |
 | `paymentLinkCode`                                                                                                 | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               | uc7ZYKrMhi                                                                                                        |
@@ -387,10 +371,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.DisablePaymentLinkResponse;
-import io.moov.sdk.models.operations.DisablePaymentLinkSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -398,15 +381,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         DisablePaymentLinkResponse res = sdk.paymentLinks().disable()
-                .security(DisablePaymentLinkSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("edc2775b-a4a3-4513-8870-3bdf4aaaed8e")
                 .paymentLinkCode("uc7ZYKrMhi")
@@ -419,12 +400,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       | Example                                                                                                           |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                        | [io.moov.sdk.models.operations.DisablePaymentLinkSecurity](../../models/operations/DisablePaymentLinkSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |                                                                                                                   |
-| `xMoovVersion`                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                        | :heavy_minus_sign:                                                                                                | Specify an API version.                                                                                           |                                                                                                                   |
-| `accountID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |                                                                                                                   |
-| `paymentLinkCode`                                                                                                 | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               | uc7ZYKrMhi                                                                                                        |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |                                                            |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |                                                            |
+| `paymentLinkCode`                                          | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        | uc7ZYKrMhi                                                 |
 
 ### Response
 
@@ -451,10 +431,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetPaymentLinkQRCodeResponse;
-import io.moov.sdk.models.operations.GetPaymentLinkQRCodeSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -462,15 +441,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetPaymentLinkQRCodeResponse res = sdk.paymentLinks().getQRCode()
-                .security(GetPaymentLinkQRCodeSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202401)
                 .accountID("248ffcf9-c53a-4e8e-a8b8-8c5014496a79")
                 .paymentLinkCode("uc7ZYKrMhi")
@@ -485,12 +462,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           | Example                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                            | [io.moov.sdk.models.operations.GetPaymentLinkQRCodeSecurity](../../models/operations/GetPaymentLinkQRCodeSecurity.md) | :heavy_check_mark:                                                                                                    | The security requirements to use for the request.                                                                     |                                                                                                                       |
-| `xMoovVersion`                                                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                                                            | :heavy_minus_sign:                                                                                                    | Specify an API version.                                                                                               |                                                                                                                       |
-| `accountID`                                                                                                           | *String*                                                                                                              | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   |                                                                                                                       |
-| `paymentLinkCode`                                                                                                     | *String*                                                                                                              | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   | uc7ZYKrMhi                                                                                                            |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |                                                            |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |                                                            |
+| `paymentLinkCode`                                          | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        | uc7ZYKrMhi                                                 |
 
 ### Response
 

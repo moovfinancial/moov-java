@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class RequestCapabilitiesRequestBuilder {
 
-    private RequestCapabilitiesSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private AddCapabilities addCapabilities;
@@ -20,12 +19,6 @@ public class RequestCapabilitiesRequestBuilder {
 
     public RequestCapabilitiesRequestBuilder(SDKMethodInterfaces.MethodCallRequestCapabilities sdk) {
         this.sdk = sdk;
-    }
-
-    public RequestCapabilitiesRequestBuilder security(RequestCapabilitiesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public RequestCapabilitiesRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class RequestCapabilitiesRequestBuilder {
     public RequestCapabilitiesResponse call() throws Exception {
 
         return sdk.request(
-            security,
             xMoovVersion,
             accountID,
             addCapabilities);

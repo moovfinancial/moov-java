@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class AssignAccountCountriesRequestBuilder {
 
-    private AssignAccountCountriesSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private AccountCountries accountCountries;
@@ -20,12 +19,6 @@ public class AssignAccountCountriesRequestBuilder {
 
     public AssignAccountCountriesRequestBuilder(SDKMethodInterfaces.MethodCallAssignAccountCountries sdk) {
         this.sdk = sdk;
-    }
-
-    public AssignAccountCountriesRequestBuilder security(AssignAccountCountriesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public AssignAccountCountriesRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class AssignAccountCountriesRequestBuilder {
     public AssignAccountCountriesResponse call() throws Exception {
 
         return sdk.assignCountries(
-            security,
             xMoovVersion,
             accountID,
             accountCountries);

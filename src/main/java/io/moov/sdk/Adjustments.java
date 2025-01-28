@@ -11,11 +11,9 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetAdjustmentRequest;
 import io.moov.sdk.models.operations.GetAdjustmentRequestBuilder;
 import io.moov.sdk.models.operations.GetAdjustmentResponse;
-import io.moov.sdk.models.operations.GetAdjustmentSecurity;
 import io.moov.sdk.models.operations.ListAdjustmentsRequest;
 import io.moov.sdk.models.operations.ListAdjustmentsRequestBuilder;
 import io.moov.sdk.models.operations.ListAdjustmentsResponse;
-import io.moov.sdk.models.operations.ListAdjustmentsSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -52,20 +50,17 @@ public class Adjustments implements
 
     /**
      * List adjustments associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListAdjustmentsResponse list(
-            ListAdjustmentsSecurity security,
             String accountID) throws Exception {
-        return list(security, Optional.empty(), accountID, Optional.empty());
+        return list(Optional.empty(), accountID, Optional.empty());
     }
     
     /**
      * List adjustments associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -81,7 +76,6 @@ public class Adjustments implements
      * @throws Exception if the API call fails
      */
     public ListAdjustmentsResponse list(
-            ListAdjustmentsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             Optional<String> walletID) throws Exception {
@@ -111,11 +105,9 @@ public class Adjustments implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -219,22 +211,19 @@ public class Adjustments implements
 
     /**
      * Retrieve a specific adjustment associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param adjustmentID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetAdjustmentResponse get(
-            GetAdjustmentSecurity security,
             String accountID,
             String adjustmentID) throws Exception {
-        return get(security, Optional.empty(), accountID, adjustmentID);
+        return get(Optional.empty(), accountID, adjustmentID);
     }
     
     /**
      * Retrieve a specific adjustment associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -250,7 +239,6 @@ public class Adjustments implements
      * @throws Exception if the API call fails
      */
     public GetAdjustmentResponse get(
-            GetAdjustmentSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String adjustmentID) throws Exception {
@@ -275,11 +263,9 @@ public class Adjustments implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

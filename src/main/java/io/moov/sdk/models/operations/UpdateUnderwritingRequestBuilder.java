@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class UpdateUnderwritingRequestBuilder {
 
-    private UpdateUnderwritingSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private UpdateUnderwriting updateUnderwriting;
@@ -20,12 +19,6 @@ public class UpdateUnderwritingRequestBuilder {
 
     public UpdateUnderwritingRequestBuilder(SDKMethodInterfaces.MethodCallUpdateUnderwriting sdk) {
         this.sdk = sdk;
-    }
-
-    public UpdateUnderwritingRequestBuilder security(UpdateUnderwritingSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public UpdateUnderwritingRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class UpdateUnderwritingRequestBuilder {
     public UpdateUnderwritingResponse call() throws Exception {
 
         return sdk.update(
-            security,
             xMoovVersion,
             accountID,
             updateUnderwriting);

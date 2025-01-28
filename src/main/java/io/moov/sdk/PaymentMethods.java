@@ -12,11 +12,9 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetPaymentMethodRequest;
 import io.moov.sdk.models.operations.GetPaymentMethodRequestBuilder;
 import io.moov.sdk.models.operations.GetPaymentMethodResponse;
-import io.moov.sdk.models.operations.GetPaymentMethodSecurity;
 import io.moov.sdk.models.operations.ListPaymentMethodsRequest;
 import io.moov.sdk.models.operations.ListPaymentMethodsRequestBuilder;
 import io.moov.sdk.models.operations.ListPaymentMethodsResponse;
-import io.moov.sdk.models.operations.ListPaymentMethodsSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -53,20 +51,17 @@ public class PaymentMethods implements
 
     /**
      * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods  - guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListPaymentMethodsResponse list(
-            ListPaymentMethodsSecurity security,
             String accountID) throws Exception {
-        return list(security, Optional.empty(), accountID, Optional.empty(), Optional.empty());
+        return list(Optional.empty(), accountID, Optional.empty(), Optional.empty());
     }
     
     /**
      * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods  - guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -86,7 +81,6 @@ public class PaymentMethods implements
      * @throws Exception if the API call fails
      */
     public ListPaymentMethodsResponse list(
-            ListPaymentMethodsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             Optional<String> sourceID,
@@ -118,11 +112,9 @@ public class PaymentMethods implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -226,22 +218,19 @@ public class PaymentMethods implements
 
     /**
      * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentMethodID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetPaymentMethodResponse get(
-            GetPaymentMethodSecurity security,
             String accountID,
             String paymentMethodID) throws Exception {
-        return get(security, Optional.empty(), accountID, paymentMethodID);
+        return get(Optional.empty(), accountID, paymentMethodID);
     }
     
     /**
      * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -257,7 +246,6 @@ public class PaymentMethods implements
      * @throws Exception if the API call fails
      */
     public GetPaymentMethodResponse get(
-            GetPaymentMethodSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String paymentMethodID) throws Exception {
@@ -282,11 +270,9 @@ public class PaymentMethods implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class CreateRepresentativeRequestBuilder {
 
-    private CreateRepresentativeSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private CreateRepresentative createRepresentative;
@@ -20,12 +19,6 @@ public class CreateRepresentativeRequestBuilder {
 
     public CreateRepresentativeRequestBuilder(SDKMethodInterfaces.MethodCallCreateRepresentative sdk) {
         this.sdk = sdk;
-    }
-
-    public CreateRepresentativeRequestBuilder security(CreateRepresentativeSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public CreateRepresentativeRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class CreateRepresentativeRequestBuilder {
     public CreateRepresentativeResponse call() throws Exception {
 
         return sdk.create(
-            security,
             xMoovVersion,
             accountID,
             createRepresentative);

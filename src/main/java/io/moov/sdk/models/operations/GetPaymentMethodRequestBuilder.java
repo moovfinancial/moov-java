@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetPaymentMethodRequestBuilder {
 
-    private GetPaymentMethodSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String paymentMethodID;
@@ -19,12 +18,6 @@ public class GetPaymentMethodRequestBuilder {
 
     public GetPaymentMethodRequestBuilder(SDKMethodInterfaces.MethodCallGetPaymentMethod sdk) {
         this.sdk = sdk;
-    }
-
-    public GetPaymentMethodRequestBuilder security(GetPaymentMethodSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetPaymentMethodRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetPaymentMethodRequestBuilder {
     public GetPaymentMethodResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             paymentMethodID);

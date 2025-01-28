@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class UpdateBrandRequestBuilder {
 
-    private UpdateBrandSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private UpdateBrand updateBrand;
@@ -20,12 +19,6 @@ public class UpdateBrandRequestBuilder {
 
     public UpdateBrandRequestBuilder(SDKMethodInterfaces.MethodCallUpdateBrand sdk) {
         this.sdk = sdk;
-    }
-
-    public UpdateBrandRequestBuilder security(UpdateBrandSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public UpdateBrandRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class UpdateBrandRequestBuilder {
     public UpdateBrandResponse call() throws Exception {
 
         return sdk.update(
-            security,
             xMoovVersion,
             accountID,
             updateBrand);

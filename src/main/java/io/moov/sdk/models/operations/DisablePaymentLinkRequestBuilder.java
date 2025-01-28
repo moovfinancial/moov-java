@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class DisablePaymentLinkRequestBuilder {
 
-    private DisablePaymentLinkSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String paymentLinkCode;
@@ -19,12 +18,6 @@ public class DisablePaymentLinkRequestBuilder {
 
     public DisablePaymentLinkRequestBuilder(SDKMethodInterfaces.MethodCallDisablePaymentLink sdk) {
         this.sdk = sdk;
-    }
-
-    public DisablePaymentLinkRequestBuilder security(DisablePaymentLinkSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public DisablePaymentLinkRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class DisablePaymentLinkRequestBuilder {
     public DisablePaymentLinkResponse call() throws Exception {
 
         return sdk.disable(
-            security,
             xMoovVersion,
             accountID,
             paymentLinkCode);

@@ -34,12 +34,11 @@ import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Brand;
 import io.moov.sdk.models.components.BrandColor;
 import io.moov.sdk.models.components.Colors;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.BrandValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateBrandResponse;
-import io.moov.sdk.models.operations.CreateBrandSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -47,15 +46,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, BrandValidationError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreateBrandResponse res = sdk.branding().create()
-                .security(CreateBrandSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .accountID("7a621cf0-21cd-49cf-8540-3315211a509a")
                 .brand(Brand.builder()
@@ -79,12 +76,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `security`                                                                                          | [io.moov.sdk.models.operations.CreateBrandSecurity](../../models/operations/CreateBrandSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |
-| `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |
-| `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
-| `brand`                                                                                             | [Brand](../../models/components/Brand.md)                                                           | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `brand`                                                    | [Brand](../../models/components/Brand.md)                  | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -111,10 +107,9 @@ you'll need to specify the `/accounts/{accountID}/branding.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetBrandResponse;
-import io.moov.sdk.models.operations.GetBrandSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -122,15 +117,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetBrandResponse res = sdk.branding().get()
-                .security(GetBrandSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("07eb5173-1869-4649-9aa6-f399787a2751")
                 .call();
@@ -144,11 +137,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `security`                                                                                    | [io.moov.sdk.models.operations.GetBrandSecurity](../../models/operations/GetBrandSecurity.md) | :heavy_check_mark:                                                                            | The security requirements to use for the request.                                             |
-| `xMoovVersion`                                                                                | [Optional\<Versions>](../../models/components/Versions.md)                                    | :heavy_minus_sign:                                                                            | Specify an API version.                                                                       |
-| `accountID`                                                                                   | *String*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -173,13 +165,12 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpdateBrand;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.BrandValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UpdateBrandResponse;
-import io.moov.sdk.models.operations.UpdateBrandSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -187,15 +178,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, BrandValidationError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UpdateBrandResponse res = sdk.branding().update()
-                .security(UpdateBrandSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.LATEST)
                 .accountID("6c1f5632-7f37-4b3d-861e-10e31b8853de")
                 .updateBrand(UpdateBrand.builder()
@@ -211,12 +200,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `security`                                                                                          | [io.moov.sdk.models.operations.UpdateBrandSecurity](../../models/operations/UpdateBrandSecurity.md) | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |
-| `xMoovVersion`                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                          | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |
-| `accountID`                                                                                         | *String*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
-| `updateBrand`                                                                                       | [UpdateBrand](../../models/components/UpdateBrand.md)                                               | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `updateBrand`                                              | [UpdateBrand](../../models/components/UpdateBrand.md)      | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 

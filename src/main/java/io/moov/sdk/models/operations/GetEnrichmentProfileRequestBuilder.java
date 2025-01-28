@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class GetEnrichmentProfileRequestBuilder {
 
-    private GetEnrichmentProfileSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String email;
     private final SDKMethodInterfaces.MethodCallGetEnrichmentProfile sdk;
 
     public GetEnrichmentProfileRequestBuilder(SDKMethodInterfaces.MethodCallGetEnrichmentProfile sdk) {
         this.sdk = sdk;
-    }
-
-    public GetEnrichmentProfileRequestBuilder security(GetEnrichmentProfileSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetEnrichmentProfileRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class GetEnrichmentProfileRequestBuilder {
     public GetEnrichmentProfileResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             email);
     }

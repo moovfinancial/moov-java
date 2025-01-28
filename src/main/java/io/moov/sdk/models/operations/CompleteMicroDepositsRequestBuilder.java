@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class CompleteMicroDepositsRequestBuilder {
 
-    private CompleteMicroDepositsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String bankAccountID;
@@ -21,12 +20,6 @@ public class CompleteMicroDepositsRequestBuilder {
 
     public CompleteMicroDepositsRequestBuilder(SDKMethodInterfaces.MethodCallCompleteMicroDeposits sdk) {
         this.sdk = sdk;
-    }
-
-    public CompleteMicroDepositsRequestBuilder security(CompleteMicroDepositsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public CompleteMicroDepositsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -62,7 +55,6 @@ public class CompleteMicroDepositsRequestBuilder {
     public CompleteMicroDepositsResponse call() throws Exception {
 
         return sdk.completeMicroDeposits(
-            security,
             xMoovVersion,
             accountID,
             bankAccountID,

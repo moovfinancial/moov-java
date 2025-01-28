@@ -13,23 +13,18 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetIssuedCardAuthorizationRequest;
 import io.moov.sdk.models.operations.GetIssuedCardAuthorizationRequestBuilder;
 import io.moov.sdk.models.operations.GetIssuedCardAuthorizationResponse;
-import io.moov.sdk.models.operations.GetIssuedCardAuthorizationSecurity;
 import io.moov.sdk.models.operations.GetIssuedCardTransactionRequest;
 import io.moov.sdk.models.operations.GetIssuedCardTransactionRequestBuilder;
 import io.moov.sdk.models.operations.GetIssuedCardTransactionResponse;
-import io.moov.sdk.models.operations.GetIssuedCardTransactionSecurity;
 import io.moov.sdk.models.operations.ListIssuedCardAuthorizationEventsRequest;
 import io.moov.sdk.models.operations.ListIssuedCardAuthorizationEventsRequestBuilder;
 import io.moov.sdk.models.operations.ListIssuedCardAuthorizationEventsResponse;
-import io.moov.sdk.models.operations.ListIssuedCardAuthorizationEventsSecurity;
 import io.moov.sdk.models.operations.ListIssuedCardAuthorizationsRequest;
 import io.moov.sdk.models.operations.ListIssuedCardAuthorizationsRequestBuilder;
 import io.moov.sdk.models.operations.ListIssuedCardAuthorizationsResponse;
-import io.moov.sdk.models.operations.ListIssuedCardAuthorizationsSecurity;
 import io.moov.sdk.models.operations.ListIssuedCardTransactionsRequest;
 import io.moov.sdk.models.operations.ListIssuedCardTransactionsRequestBuilder;
 import io.moov.sdk.models.operations.ListIssuedCardTransactionsResponse;
-import io.moov.sdk.models.operations.ListIssuedCardTransactionsSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -70,13 +65,11 @@ public class IssuingTransactions implements
     /**
      * List issued card authorizations associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListIssuedCardAuthorizationsResponse listAuthorizations(
-            ListIssuedCardAuthorizationsRequest request,
-            ListIssuedCardAuthorizationsSecurity security) throws Exception {
+            ListIssuedCardAuthorizationsRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListIssuedCardAuthorizationsRequest.class,
@@ -95,11 +88,9 @@ public class IssuingTransactions implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -203,22 +194,19 @@ public class IssuingTransactions implements
 
     /**
      * Retrieves details of an authorization associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which cards have been issued.
      * @param authorizationID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetIssuedCardAuthorizationResponse getAuthorization(
-            GetIssuedCardAuthorizationSecurity security,
             String accountID,
             String authorizationID) throws Exception {
-        return getAuthorization(security, Optional.empty(), accountID, authorizationID);
+        return getAuthorization(Optional.empty(), accountID, authorizationID);
     }
     
     /**
      * Retrieves details of an authorization associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -234,7 +222,6 @@ public class IssuingTransactions implements
      * @throws Exception if the API call fails
      */
     public GetIssuedCardAuthorizationResponse getAuthorization(
-            GetIssuedCardAuthorizationSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String authorizationID) throws Exception {
@@ -259,11 +246,9 @@ public class IssuingTransactions implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -368,13 +353,11 @@ public class IssuingTransactions implements
     /**
      * List card network and Moov platform events that affect the authorization and its hold on a wallet balance. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(
-            ListIssuedCardAuthorizationEventsRequest request,
-            ListIssuedCardAuthorizationEventsSecurity security) throws Exception {
+            ListIssuedCardAuthorizationEventsRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListIssuedCardAuthorizationEventsRequest.class,
@@ -393,11 +376,9 @@ public class IssuingTransactions implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -502,13 +483,11 @@ public class IssuingTransactions implements
     /**
      * List issued card transactions associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListIssuedCardTransactionsResponse list(
-            ListIssuedCardTransactionsRequest request,
-            ListIssuedCardTransactionsSecurity security) throws Exception {
+            ListIssuedCardTransactionsRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListIssuedCardTransactionsRequest.class,
@@ -527,11 +506,9 @@ public class IssuingTransactions implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -635,22 +612,19 @@ public class IssuingTransactions implements
 
     /**
      * Retrieves details of an issued card transaction associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which cards have been issued.
      * @param cardTransactionID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetIssuedCardTransactionResponse get(
-            GetIssuedCardTransactionSecurity security,
             String accountID,
             String cardTransactionID) throws Exception {
-        return get(security, Optional.empty(), accountID, cardTransactionID);
+        return get(Optional.empty(), accountID, cardTransactionID);
     }
     
     /**
      * Retrieves details of an issued card transaction associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -666,7 +640,6 @@ public class IssuingTransactions implements
      * @throws Exception if the API call fails
      */
     public GetIssuedCardTransactionResponse get(
-            GetIssuedCardTransactionSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String cardTransactionID) throws Exception {
@@ -691,11 +664,9 @@ public class IssuingTransactions implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

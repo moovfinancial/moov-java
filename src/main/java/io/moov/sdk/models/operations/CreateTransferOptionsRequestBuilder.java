@@ -10,18 +10,11 @@ import java.util.Optional;
 
 public class CreateTransferOptionsRequestBuilder {
 
-    private CreateTransferOptionsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private final SDKMethodInterfaces.MethodCallCreateTransferOptions sdk;
 
     public CreateTransferOptionsRequestBuilder(SDKMethodInterfaces.MethodCallCreateTransferOptions sdk) {
         this.sdk = sdk;
-    }
-
-    public CreateTransferOptionsRequestBuilder security(CreateTransferOptionsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public CreateTransferOptionsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -39,7 +32,6 @@ public class CreateTransferOptionsRequestBuilder {
     public CreateTransferOptionsResponse call() throws Exception {
 
         return sdk.generateOptions(
-            security,
             xMoovVersion);
     }
 }

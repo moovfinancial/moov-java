@@ -17,7 +17,6 @@ import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.TestEndToEndTokenRequest;
 import io.moov.sdk.models.operations.TestEndToEndTokenRequestBuilder;
 import io.moov.sdk.models.operations.TestEndToEndTokenResponse;
-import io.moov.sdk.models.operations.TestEndToEndTokenSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -56,7 +55,6 @@ public class EndToEndEncryption implements
 
     /**
      * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
-     * @param security The security details to use for authentication.
      * @param e2EEToken Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
     This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
     [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
@@ -64,14 +62,12 @@ public class EndToEndEncryption implements
      * @throws Exception if the API call fails
      */
     public TestEndToEndTokenResponse testEncryptedToken(
-            TestEndToEndTokenSecurity security,
             E2EEToken e2EEToken) throws Exception {
-        return testEncryptedToken(security, Optional.empty(), e2EEToken);
+        return testEncryptedToken(Optional.empty(), e2EEToken);
     }
     
     /**
      * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -88,7 +84,6 @@ public class EndToEndEncryption implements
      * @throws Exception if the API call fails
      */
     public TestEndToEndTokenResponse testEncryptedToken(
-            TestEndToEndTokenSecurity security,
             Optional<? extends Versions> xMoovVersion,
             E2EEToken e2EEToken) throws Exception {
         TestEndToEndTokenRequest request =
@@ -122,11 +117,9 @@ public class EndToEndEncryption implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

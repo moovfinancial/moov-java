@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class GetApplePayMerchantDomainsRequestBuilder {
 
-    private GetApplePayMerchantDomainsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallGetApplePayMerchantDomains sdk;
 
     public GetApplePayMerchantDomainsRequestBuilder(SDKMethodInterfaces.MethodCallGetApplePayMerchantDomains sdk) {
         this.sdk = sdk;
-    }
-
-    public GetApplePayMerchantDomainsRequestBuilder security(GetApplePayMerchantDomainsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetApplePayMerchantDomainsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class GetApplePayMerchantDomainsRequestBuilder {
     public GetApplePayMerchantDomainsResponse call() throws Exception {
 
         return sdk.getMerchantDomains(
-            security,
             xMoovVersion,
             accountID);
     }

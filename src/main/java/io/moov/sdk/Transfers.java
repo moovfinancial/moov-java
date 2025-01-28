@@ -21,41 +21,32 @@ import io.moov.sdk.models.errors.TransferValidationError;
 import io.moov.sdk.models.operations.CreateReversalRequest;
 import io.moov.sdk.models.operations.CreateReversalRequestBuilder;
 import io.moov.sdk.models.operations.CreateReversalResponse;
-import io.moov.sdk.models.operations.CreateReversalSecurity;
 import io.moov.sdk.models.operations.CreateTransferOptionsRequest;
 import io.moov.sdk.models.operations.CreateTransferOptionsRequestBuilder;
 import io.moov.sdk.models.operations.CreateTransferOptionsResponse;
-import io.moov.sdk.models.operations.CreateTransferOptionsSecurity;
 import io.moov.sdk.models.operations.CreateTransferRequest;
 import io.moov.sdk.models.operations.CreateTransferRequestBuilder;
 import io.moov.sdk.models.operations.CreateTransferResponse;
 import io.moov.sdk.models.operations.CreateTransferResponseBody;
-import io.moov.sdk.models.operations.CreateTransferSecurity;
 import io.moov.sdk.models.operations.GetRefundRequest;
 import io.moov.sdk.models.operations.GetRefundRequestBuilder;
 import io.moov.sdk.models.operations.GetRefundResponse;
-import io.moov.sdk.models.operations.GetRefundSecurity;
 import io.moov.sdk.models.operations.GetTransferRequest;
 import io.moov.sdk.models.operations.GetTransferRequestBuilder;
 import io.moov.sdk.models.operations.GetTransferResponse;
-import io.moov.sdk.models.operations.GetTransferSecurity;
 import io.moov.sdk.models.operations.InitiateRefundRequest;
 import io.moov.sdk.models.operations.InitiateRefundRequestBuilder;
 import io.moov.sdk.models.operations.InitiateRefundResponse;
-import io.moov.sdk.models.operations.InitiateRefundSecurity;
 import io.moov.sdk.models.operations.ListRefundsRequest;
 import io.moov.sdk.models.operations.ListRefundsRequestBuilder;
 import io.moov.sdk.models.operations.ListRefundsResponse;
-import io.moov.sdk.models.operations.ListRefundsSecurity;
 import io.moov.sdk.models.operations.ListTransfersRequest;
 import io.moov.sdk.models.operations.ListTransfersRequestBuilder;
 import io.moov.sdk.models.operations.ListTransfersResponse;
-import io.moov.sdk.models.operations.ListTransfersSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateTransferRequest;
 import io.moov.sdk.models.operations.UpdateTransferRequestBuilder;
 import io.moov.sdk.models.operations.UpdateTransferResponse;
-import io.moov.sdk.models.operations.UpdateTransferSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -102,13 +93,11 @@ public class Transfers implements
     /**
      * Move money by providing the source, destination, and amount in the request body. -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateTransferResponse create(
-            CreateTransferRequest request,
-            CreateTransferSecurity security) throws Exception {
+            CreateTransferRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 CreateTransferRequest.class,
@@ -135,11 +124,9 @@ public class Transfers implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -316,13 +303,11 @@ public class Transfers implements
     /**
      * List all the transfers associated with a particular Moov account.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example,  - if you set `skip`= 10, you will see a results set of 200 transfers after the first 2000). If you are searching a high volume of transfers, the request will likely  - process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited  - period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListTransfersResponse list(
-            ListTransfersRequest request,
-            ListTransfersSecurity security) throws Exception {
+            ListTransfersRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListTransfersRequest.class,
@@ -341,11 +326,9 @@ public class Transfers implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -449,22 +432,19 @@ public class Transfers implements
 
     /**
      * Retrieve full transfer details for an individual transfer of a particular Moov account.  -  - Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/)  - to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param transferID Identifier for the transfer.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetTransferResponse get(
-            GetTransferSecurity security,
             String transferID,
             String accountID) throws Exception {
-        return get(security, Optional.empty(), transferID, accountID);
+        return get(Optional.empty(), transferID, accountID);
     }
     
     /**
      * Retrieve full transfer details for an individual transfer of a particular Moov account.  -  - Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/)  - to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -480,7 +460,6 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public GetTransferResponse get(
-            GetTransferSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String transferID,
             String accountID) throws Exception {
@@ -505,11 +484,9 @@ public class Transfers implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -613,22 +590,19 @@ public class Transfers implements
 
     /**
      * Update the metadata contained on a transfer.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param transferID Identifier for the transfer.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateTransferResponse update(
-            UpdateTransferSecurity security,
             String transferID,
             String accountID) throws Exception {
-        return update(security, Optional.empty(), transferID, accountID);
+        return update(Optional.empty(), transferID, accountID);
     }
     
     /**
      * Update the metadata contained on a transfer.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -644,7 +618,6 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public UpdateTransferResponse update(
-            UpdateTransferSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String transferID,
             String accountID) throws Exception {
@@ -669,11 +642,9 @@ public class Transfers implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -778,13 +749,11 @@ public class Transfers implements
     /**
      * Initiate a refund for a card transfer. -  - **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**     - See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public InitiateRefundResponse initiateRefund(
-            InitiateRefundRequest request,
-            InitiateRefundSecurity security) throws Exception {
+            InitiateRefundRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 InitiateRefundRequest.class,
@@ -808,11 +777,9 @@ public class Transfers implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -973,22 +940,19 @@ public class Transfers implements
 
     /**
      * Get a list of refunds for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param transferID Identifier for the transfer.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListRefundsResponse listRefunds(
-            ListRefundsSecurity security,
             String accountID,
             String transferID) throws Exception {
-        return listRefunds(security, Optional.empty(), accountID, transferID);
+        return listRefunds(Optional.empty(), accountID, transferID);
     }
     
     /**
      * Get a list of refunds for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1004,7 +968,6 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public ListRefundsResponse listRefunds(
-            ListRefundsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String transferID) throws Exception {
@@ -1029,11 +992,9 @@ public class Transfers implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1137,7 +1098,6 @@ public class Transfers implements
 
     /**
      * Get details of a refund for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param transferID Identifier for the transfer.
      * @param accountID
      * @param refundID Identifier for the refund.
@@ -1145,16 +1105,14 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public GetRefundResponse getRefund(
-            GetRefundSecurity security,
             String transferID,
             String accountID,
             String refundID) throws Exception {
-        return getRefund(security, Optional.empty(), transferID, accountID, refundID);
+        return getRefund(Optional.empty(), transferID, accountID, refundID);
     }
     
     /**
      * Get details of a refund for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1171,7 +1129,6 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public GetRefundResponse getRefund(
-            GetRefundSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String transferID,
             String accountID,
@@ -1198,11 +1155,9 @@ public class Transfers implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1307,13 +1262,11 @@ public class Transfers implements
     /**
      * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.  - Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)  - to learn more. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateReversalResponse createReversal(
-            CreateReversalRequest request,
-            CreateReversalSecurity security) throws Exception {
+            CreateReversalRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 CreateReversalRequest.class,
@@ -1337,11 +1290,9 @@ public class Transfers implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1473,18 +1424,15 @@ public class Transfers implements
 
     /**
      * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you  - supply in the request.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateTransferOptionsResponse generateOptions(
-            CreateTransferOptionsSecurity security) throws Exception {
-        return generateOptions(security, Optional.empty());
+    public CreateTransferOptionsResponse generateOptionsDirect() throws Exception {
+        return generateOptions(Optional.empty());
     }
     
     /**
      * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you  - supply in the request.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1498,7 +1446,6 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public CreateTransferOptionsResponse generateOptions(
-            CreateTransferOptionsSecurity security,
             Optional<? extends Versions> xMoovVersion) throws Exception {
         CreateTransferOptionsRequest request =
             CreateTransferOptionsRequest
@@ -1517,11 +1464,9 @@ public class Transfers implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

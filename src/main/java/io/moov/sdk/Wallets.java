@@ -11,11 +11,9 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetWalletRequest;
 import io.moov.sdk.models.operations.GetWalletRequestBuilder;
 import io.moov.sdk.models.operations.GetWalletResponse;
-import io.moov.sdk.models.operations.GetWalletSecurity;
 import io.moov.sdk.models.operations.ListWalletsRequest;
 import io.moov.sdk.models.operations.ListWalletsRequestBuilder;
 import io.moov.sdk.models.operations.ListWalletsResponse;
-import io.moov.sdk.models.operations.ListWalletsSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -52,20 +50,17 @@ public class Wallets implements
 
     /**
      * List the wallets associated with a Moov account.  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListWalletsResponse list(
-            ListWalletsSecurity security,
             String accountID) throws Exception {
-        return list(security, Optional.empty(), accountID);
+        return list(Optional.empty(), accountID);
     }
     
     /**
      * List the wallets associated with a Moov account.  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -80,7 +75,6 @@ public class Wallets implements
      * @throws Exception if the API call fails
      */
     public ListWalletsResponse list(
-            ListWalletsSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         ListWalletsRequest request =
@@ -103,11 +97,9 @@ public class Wallets implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -211,22 +203,19 @@ public class Wallets implements
 
     /**
      * Get information on a specific wallet (e.g., the available balance).  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param walletID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetWalletResponse get(
-            GetWalletSecurity security,
             String accountID,
             String walletID) throws Exception {
-        return get(security, Optional.empty(), accountID, walletID);
+        return get(Optional.empty(), accountID, walletID);
     }
     
     /**
      * Get information on a specific wallet (e.g., the available balance).  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -242,7 +231,6 @@ public class Wallets implements
      * @throws Exception if the API call fails
      */
     public GetWalletResponse get(
-            GetWalletSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String walletID) throws Exception {
@@ -267,11 +255,9 @@ public class Wallets implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

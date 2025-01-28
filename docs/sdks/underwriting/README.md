@@ -33,10 +33,9 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetUnderwritingResponse;
-import io.moov.sdk.models.operations.GetUnderwritingSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -44,15 +43,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetUnderwritingResponse res = sdk.underwriting().get()
-                .security(GetUnderwritingSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("32ccafba-5d99-40e5-a8af-d05cc5d73a4e")
                 .call();
@@ -66,11 +63,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                  | [io.moov.sdk.models.operations.GetUnderwritingSecurity](../../models/operations/GetUnderwritingSecurity.md) | :heavy_check_mark:                                                                                          | The security requirements to use for the request.                                                           |
-| `xMoovVersion`                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                  | :heavy_minus_sign:                                                                                          | Specify an API version.                                                                                     |
-| `accountID`                                                                                                 | *String*                                                                                                    | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -100,14 +96,13 @@ import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.CardVolumeDistribution;
 import io.moov.sdk.models.components.FulfillmentDetails;
 import io.moov.sdk.models.components.ReturnPolicyType;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpdateUnderwriting;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.components.VolumeByCustomerType;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateUnderwritingError;
 import io.moov.sdk.models.operations.UpdateUnderwritingResponse;
-import io.moov.sdk.models.operations.UpdateUnderwritingSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -115,15 +110,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, UpdateUnderwritingError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UpdateUnderwritingResponse res = sdk.underwriting().update()
-                .security(UpdateUnderwritingSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.LATEST)
                 .accountID("455b1698-1657-4c75-944b-57db42578d81")
                 .updateUnderwriting(UpdateUnderwriting.builder()
@@ -158,12 +151,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                        | [io.moov.sdk.models.operations.UpdateUnderwritingSecurity](../../models/operations/UpdateUnderwritingSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
-| `xMoovVersion`                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                        | :heavy_minus_sign:                                                                                                | Specify an API version.                                                                                           |
-| `accountID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
-| `updateUnderwriting`                                                                                              | [UpdateUnderwriting](../../models/components/UpdateUnderwriting.md)                                               | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `xMoovVersion`                                                      | [Optional\<Versions>](../../models/components/Versions.md)          | :heavy_minus_sign:                                                  | Specify an API version.                                             |
+| `accountID`                                                         | *String*                                                            | :heavy_check_mark:                                                  | N/A                                                                 |
+| `updateUnderwriting`                                                | [UpdateUnderwriting](../../models/components/UpdateUnderwriting.md) | :heavy_check_mark:                                                  | N/A                                                                 |
 
 ### Response
 

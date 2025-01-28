@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetIssuedCardAuthorizationRequestBuilder {
 
-    private GetIssuedCardAuthorizationSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String authorizationID;
@@ -19,12 +18,6 @@ public class GetIssuedCardAuthorizationRequestBuilder {
 
     public GetIssuedCardAuthorizationRequestBuilder(SDKMethodInterfaces.MethodCallGetIssuedCardAuthorization sdk) {
         this.sdk = sdk;
-    }
-
-    public GetIssuedCardAuthorizationRequestBuilder security(GetIssuedCardAuthorizationSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetIssuedCardAuthorizationRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetIssuedCardAuthorizationRequestBuilder {
     public GetIssuedCardAuthorizationResponse call() throws Exception {
 
         return sdk.getAuthorization(
-            security,
             xMoovVersion,
             accountID,
             authorizationID);

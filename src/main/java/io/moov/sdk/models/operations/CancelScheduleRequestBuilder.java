@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class CancelScheduleRequestBuilder {
 
-    private CancelScheduleSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String scheduleID;
@@ -19,12 +18,6 @@ public class CancelScheduleRequestBuilder {
 
     public CancelScheduleRequestBuilder(SDKMethodInterfaces.MethodCallCancelSchedule sdk) {
         this.sdk = sdk;
-    }
-
-    public CancelScheduleRequestBuilder security(CancelScheduleSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public CancelScheduleRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class CancelScheduleRequestBuilder {
     public CancelScheduleResponse call() throws Exception {
 
         return sdk.cancel(
-            security,
             xMoovVersion,
             accountID,
             scheduleID);

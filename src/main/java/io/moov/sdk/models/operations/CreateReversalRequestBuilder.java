@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class CreateReversalRequestBuilder {
 
     private CreateReversalRequest request;
-    private CreateReversalSecurity security;
     private final SDKMethodInterfaces.MethodCallCreateReversal sdk;
 
     public CreateReversalRequestBuilder(SDKMethodInterfaces.MethodCallCreateReversal sdk) {
@@ -22,16 +21,9 @@ public class CreateReversalRequestBuilder {
         return this;
     }
 
-    public CreateReversalRequestBuilder security(CreateReversalSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public CreateReversalResponse call() throws Exception {
 
         return sdk.createReversal(
-            request,
-            security);
+            request);
     }
 }

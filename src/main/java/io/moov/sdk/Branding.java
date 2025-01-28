@@ -14,16 +14,13 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateBrandRequest;
 import io.moov.sdk.models.operations.CreateBrandRequestBuilder;
 import io.moov.sdk.models.operations.CreateBrandResponse;
-import io.moov.sdk.models.operations.CreateBrandSecurity;
 import io.moov.sdk.models.operations.GetBrandRequest;
 import io.moov.sdk.models.operations.GetBrandRequestBuilder;
 import io.moov.sdk.models.operations.GetBrandResponse;
-import io.moov.sdk.models.operations.GetBrandSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateBrandRequest;
 import io.moov.sdk.models.operations.UpdateBrandRequestBuilder;
 import io.moov.sdk.models.operations.UpdateBrandResponse;
-import io.moov.sdk.models.operations.UpdateBrandSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -63,22 +60,19 @@ public class Branding implements
 
     /**
      * Create brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param brand
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateBrandResponse create(
-            CreateBrandSecurity security,
             String accountID,
             Brand brand) throws Exception {
-        return create(security, Optional.empty(), accountID, brand);
+        return create(Optional.empty(), accountID, brand);
     }
     
     /**
      * Create brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -94,7 +88,6 @@ public class Branding implements
      * @throws Exception if the API call fails
      */
     public CreateBrandResponse create(
-            CreateBrandSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             Brand brand) throws Exception {
@@ -132,11 +125,9 @@ public class Branding implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -268,20 +259,17 @@ public class Branding implements
 
     /**
      * Get brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetBrandResponse get(
-            GetBrandSecurity security,
             String accountID) throws Exception {
-        return get(security, Optional.empty(), accountID);
+        return get(Optional.empty(), accountID);
     }
     
     /**
      * Get brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -296,7 +284,6 @@ public class Branding implements
      * @throws Exception if the API call fails
      */
     public GetBrandResponse get(
-            GetBrandSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         GetBrandRequest request =
@@ -319,11 +306,9 @@ public class Branding implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -427,22 +412,19 @@ public class Branding implements
 
     /**
      * Updates the brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param updateBrand
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateBrandResponse update(
-            UpdateBrandSecurity security,
             String accountID,
             UpdateBrand updateBrand) throws Exception {
-        return update(security, Optional.empty(), accountID, updateBrand);
+        return update(Optional.empty(), accountID, updateBrand);
     }
     
     /**
      * Updates the brand properties for the specified account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/branding.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -458,7 +440,6 @@ public class Branding implements
      * @throws Exception if the API call fails
      */
     public UpdateBrandResponse update(
-            UpdateBrandSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             UpdateBrand updateBrand) throws Exception {
@@ -496,11 +477,9 @@ public class Branding implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

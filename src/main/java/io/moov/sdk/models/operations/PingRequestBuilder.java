@@ -10,18 +10,11 @@ import java.util.Optional;
 
 public class PingRequestBuilder {
 
-    private PingSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private final SDKMethodInterfaces.MethodCallPing sdk;
 
     public PingRequestBuilder(SDKMethodInterfaces.MethodCallPing sdk) {
         this.sdk = sdk;
-    }
-
-    public PingRequestBuilder security(PingSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public PingRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -39,7 +32,6 @@ public class PingRequestBuilder {
     public PingResponse call() throws Exception {
 
         return sdk.ping(
-            security,
             xMoovVersion);
     }
 }

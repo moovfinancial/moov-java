@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class CreateTransferRequestBuilder {
 
     private CreateTransferRequest request;
-    private CreateTransferSecurity security;
     private final SDKMethodInterfaces.MethodCallCreateTransfer sdk;
 
     public CreateTransferRequestBuilder(SDKMethodInterfaces.MethodCallCreateTransfer sdk) {
@@ -22,16 +21,9 @@ public class CreateTransferRequestBuilder {
         return this;
     }
 
-    public CreateTransferRequestBuilder security(CreateTransferSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public CreateTransferResponse call() throws Exception {
 
         return sdk.create(
-            request,
-            security);
+            request);
     }
 }

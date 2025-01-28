@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class GetBrandRequestBuilder {
 
-    private GetBrandSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private final SDKMethodInterfaces.MethodCallGetBrand sdk;
 
     public GetBrandRequestBuilder(SDKMethodInterfaces.MethodCallGetBrand sdk) {
         this.sdk = sdk;
-    }
-
-    public GetBrandRequestBuilder security(GetBrandSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetBrandRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class GetBrandRequestBuilder {
     public GetBrandResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID);
     }

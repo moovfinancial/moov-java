@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class ListAdjustmentsRequestBuilder {
 
-    private ListAdjustmentsSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private Optional<String> walletID = Optional.empty();
@@ -19,12 +18,6 @@ public class ListAdjustmentsRequestBuilder {
 
     public ListAdjustmentsRequestBuilder(SDKMethodInterfaces.MethodCallListAdjustments sdk) {
         this.sdk = sdk;
-    }
-
-    public ListAdjustmentsRequestBuilder security(ListAdjustmentsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListAdjustmentsRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -60,7 +53,6 @@ public class ListAdjustmentsRequestBuilder {
     public ListAdjustmentsResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             accountID,
             walletID);

@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class CreateScheduleRequestBuilder {
 
-    private CreateScheduleSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private UpsertSchedule upsertSchedule;
@@ -20,12 +19,6 @@ public class CreateScheduleRequestBuilder {
 
     public CreateScheduleRequestBuilder(SDKMethodInterfaces.MethodCallCreateSchedule sdk) {
         this.sdk = sdk;
-    }
-
-    public CreateScheduleRequestBuilder security(CreateScheduleSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public CreateScheduleRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class CreateScheduleRequestBuilder {
     public CreateScheduleResponse call() throws Exception {
 
         return sdk.create(
-            security,
             xMoovVersion,
             accountID,
             upsertSchedule);

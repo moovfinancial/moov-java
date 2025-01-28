@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class ListAccountsRequestBuilder {
 
     private ListAccountsRequest request;
-    private ListAccountsSecurity security;
     private final SDKMethodInterfaces.MethodCallListAccounts sdk;
 
     public ListAccountsRequestBuilder(SDKMethodInterfaces.MethodCallListAccounts sdk) {
@@ -22,16 +21,9 @@ public class ListAccountsRequestBuilder {
         return this;
     }
 
-    public ListAccountsRequestBuilder security(ListAccountsSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public ListAccountsResponse call() throws Exception {
 
         return sdk.list(
-            request,
-            security);
+            request);
     }
 }

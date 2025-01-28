@@ -17,28 +17,22 @@ import io.moov.sdk.models.errors.UpdatePaymentLinkError;
 import io.moov.sdk.models.operations.CreatePaymentLinkRequest;
 import io.moov.sdk.models.operations.CreatePaymentLinkRequestBuilder;
 import io.moov.sdk.models.operations.CreatePaymentLinkResponse;
-import io.moov.sdk.models.operations.CreatePaymentLinkSecurity;
 import io.moov.sdk.models.operations.DisablePaymentLinkRequest;
 import io.moov.sdk.models.operations.DisablePaymentLinkRequestBuilder;
 import io.moov.sdk.models.operations.DisablePaymentLinkResponse;
-import io.moov.sdk.models.operations.DisablePaymentLinkSecurity;
 import io.moov.sdk.models.operations.GetPaymentLinkQRCodeRequest;
 import io.moov.sdk.models.operations.GetPaymentLinkQRCodeRequestBuilder;
 import io.moov.sdk.models.operations.GetPaymentLinkQRCodeResponse;
-import io.moov.sdk.models.operations.GetPaymentLinkQRCodeSecurity;
 import io.moov.sdk.models.operations.GetPaymentLinkRequest;
 import io.moov.sdk.models.operations.GetPaymentLinkRequestBuilder;
 import io.moov.sdk.models.operations.GetPaymentLinkResponse;
-import io.moov.sdk.models.operations.GetPaymentLinkSecurity;
 import io.moov.sdk.models.operations.ListPaymentLinksRequest;
 import io.moov.sdk.models.operations.ListPaymentLinksRequestBuilder;
 import io.moov.sdk.models.operations.ListPaymentLinksResponse;
-import io.moov.sdk.models.operations.ListPaymentLinksSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdatePaymentLinkRequest;
 import io.moov.sdk.models.operations.UpdatePaymentLinkRequestBuilder;
 import io.moov.sdk.models.operations.UpdatePaymentLinkResponse;
-import io.moov.sdk.models.operations.UpdatePaymentLinkSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -81,7 +75,6 @@ public class PaymentLinks implements
 
     /**
      * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param createPaymentLink Request to create a new payment link.
 
@@ -94,15 +87,13 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public CreatePaymentLinkResponse create(
-            CreatePaymentLinkSecurity security,
             String accountID,
             CreatePaymentLink createPaymentLink) throws Exception {
-        return create(security, Optional.empty(), accountID, createPaymentLink);
+        return create(Optional.empty(), accountID, createPaymentLink);
     }
     
     /**
      * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -124,7 +115,6 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public CreatePaymentLinkResponse create(
-            CreatePaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             CreatePaymentLink createPaymentLink) throws Exception {
@@ -162,11 +152,9 @@ public class PaymentLinks implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -298,20 +286,17 @@ public class PaymentLinks implements
 
     /**
      * List all the payment links created under a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListPaymentLinksResponse list(
-            ListPaymentLinksSecurity security,
             String accountID) throws Exception {
-        return list(security, Optional.empty(), accountID);
+        return list(Optional.empty(), accountID);
     }
     
     /**
      * List all the payment links created under a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -326,7 +311,6 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public ListPaymentLinksResponse list(
-            ListPaymentLinksSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID) throws Exception {
         ListPaymentLinksRequest request =
@@ -349,11 +333,9 @@ public class PaymentLinks implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -457,22 +439,19 @@ public class PaymentLinks implements
 
     /**
      * Retrieve a payment link by code. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentLinkCode
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetPaymentLinkResponse get(
-            GetPaymentLinkSecurity security,
             String accountID,
             String paymentLinkCode) throws Exception {
-        return get(security, Optional.empty(), accountID, paymentLinkCode);
+        return get(Optional.empty(), accountID, paymentLinkCode);
     }
     
     /**
      * Retrieve a payment link by code. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -488,7 +467,6 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public GetPaymentLinkResponse get(
-            GetPaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String paymentLinkCode) throws Exception {
@@ -513,11 +491,9 @@ public class PaymentLinks implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -621,7 +597,6 @@ public class PaymentLinks implements
 
     /**
      * Update a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentLinkCode
      * @param updatePaymentLink
@@ -629,16 +604,14 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public UpdatePaymentLinkResponse update(
-            UpdatePaymentLinkSecurity security,
             String accountID,
             String paymentLinkCode,
             UpdatePaymentLink updatePaymentLink) throws Exception {
-        return update(security, Optional.empty(), accountID, paymentLinkCode, updatePaymentLink);
+        return update(Optional.empty(), accountID, paymentLinkCode, updatePaymentLink);
     }
     
     /**
      * Update a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -655,7 +628,6 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public UpdatePaymentLinkResponse update(
-            UpdatePaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String paymentLinkCode,
@@ -695,11 +667,9 @@ public class PaymentLinks implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -831,22 +801,19 @@ public class PaymentLinks implements
 
     /**
      * Disable a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentLinkCode
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public DisablePaymentLinkResponse disable(
-            DisablePaymentLinkSecurity security,
             String accountID,
             String paymentLinkCode) throws Exception {
-        return disable(security, Optional.empty(), accountID, paymentLinkCode);
+        return disable(Optional.empty(), accountID, paymentLinkCode);
     }
     
     /**
      * Disable a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -862,7 +829,6 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public DisablePaymentLinkResponse disable(
-            DisablePaymentLinkSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String paymentLinkCode) throws Exception {
@@ -887,11 +853,9 @@ public class PaymentLinks implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -984,22 +948,19 @@ public class PaymentLinks implements
 
     /**
      * Retrieve the payment link encoded in a QR code.  -  - Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param paymentLinkCode
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetPaymentLinkQRCodeResponse getQRCode(
-            GetPaymentLinkQRCodeSecurity security,
             String accountID,
             String paymentLinkCode) throws Exception {
-        return getQRCode(security, Optional.empty(), accountID, paymentLinkCode);
+        return getQRCode(Optional.empty(), accountID, paymentLinkCode);
     }
     
     /**
      * Retrieve the payment link encoded in a QR code.  -  - Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1015,7 +976,6 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public GetPaymentLinkQRCodeResponse getQRCode(
-            GetPaymentLinkQRCodeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String paymentLinkCode) throws Exception {
@@ -1040,11 +1000,9 @@ public class PaymentLinks implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

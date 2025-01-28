@@ -9,7 +9,6 @@ import io.moov.sdk.utils.Utils;
 public class ListTransfersRequestBuilder {
 
     private ListTransfersRequest request;
-    private ListTransfersSecurity security;
     private final SDKMethodInterfaces.MethodCallListTransfers sdk;
 
     public ListTransfersRequestBuilder(SDKMethodInterfaces.MethodCallListTransfers sdk) {
@@ -22,16 +21,9 @@ public class ListTransfersRequestBuilder {
         return this;
     }
 
-    public ListTransfersRequestBuilder security(ListTransfersSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
-    }
-
     public ListTransfersResponse call() throws Exception {
 
         return sdk.list(
-            request,
-            security);
+            request);
     }
 }

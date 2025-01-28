@@ -99,12 +99,11 @@ import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
-import io.moov.sdk.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -112,15 +111,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .security(CreateAccountSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
@@ -144,7 +141,6 @@ public class Application {
 
 | Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 | Example                                                                                                                     |
 | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                  | [io.moov.sdk.models.operations.CreateAccountSecurity](../../models/operations/CreateAccountSecurity.md)                     | :heavy_check_mark:                                                                                                          | The security requirements to use for the request.                                                                           |                                                                                                                             |
 | `xMoovVersion`                                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                                  | :heavy_minus_sign:                                                                                                          | Specify an API version.                                                                                                     |                                                                                                                             |
 | `xWaitFor`                                                                                                                  | [Optional\<AccountWaitFor>](../../models/components/AccountWaitFor.md)                                                      | :heavy_minus_sign:                                                                                                          | Optional header that indicates whether to wait for the connection to be created before returning from the account creation. |                                                                                                                             |
 | `createAccount`                                                                                                             | [CreateAccount](../../models/components/CreateAccount.md)                                                                   | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         | {<br/>"accountType": "business",<br/>"profile": {<br/>"business": {<br/>"legalBusinessName": "Whole Body Fitness LLC"<br/>}<br/>}<br/>} |
@@ -179,10 +175,9 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.AccountType;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListAccountsRequest;
 import io.moov.sdk.models.operations.ListAccountsResponse;
-import io.moov.sdk.models.operations.ListAccountsSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -190,6 +185,10 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListAccountsRequest req = ListAccountsRequest.builder()
@@ -200,12 +199,6 @@ public class Application {
 
         ListAccountsResponse res = sdk.accounts().list()
                 .request(req)
-                .security(ListAccountsSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .call();
 
         if (res.accounts().isPresent()) {
@@ -217,10 +210,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `request`                                                                                             | [ListAccountsRequest](../../models/operations/ListAccountsRequest.md)                                 | :heavy_check_mark:                                                                                    | The request object to use for the request.                                                            |
-| `security`                                                                                            | [io.moov.sdk.models.operations.ListAccountsSecurity](../../models/operations/ListAccountsSecurity.md) | :heavy_check_mark:                                                                                    | The security requirements to use for the request.                                                     |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [ListAccountsRequest](../../models/operations/ListAccountsRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -245,10 +237,9 @@ to specify the `/accounts/{accountID}/profile.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetAccountResponse;
-import io.moov.sdk.models.operations.GetAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -256,15 +247,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetAccountResponse res = sdk.accounts().get()
-                .security(GetAccountSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("45ce7519-7f28-40c8-94bf-6edae7a38315")
                 .call();
@@ -278,11 +267,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [io.moov.sdk.models.operations.GetAccountSecurity](../../models/operations/GetAccountSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |
-| `xMoovVersion`                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                        | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |
-| `accountID`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -319,12 +307,11 @@ import io.moov.sdk.models.components.AccountType;
 import io.moov.sdk.models.components.CreateAccountUpdate;
 import io.moov.sdk.models.components.CreateBusinessProfileUpdate;
 import io.moov.sdk.models.components.CreateProfileUpdate;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateAccountResponseBody;
 import io.moov.sdk.models.operations.UpdateAccountResponse;
-import io.moov.sdk.models.operations.UpdateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -332,15 +319,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, UpdateAccountResponseBody, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UpdateAccountResponse res = sdk.accounts().update()
-                .security(UpdateAccountSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.LATEST)
                 .accountID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
                 .createAccountUpdate(CreateAccountUpdate.builder()
@@ -364,7 +349,6 @@ public class Application {
 
 | Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 | Example                                                                                                     |
 | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                  | [io.moov.sdk.models.operations.UpdateAccountSecurity](../../models/operations/UpdateAccountSecurity.md)     | :heavy_check_mark:                                                                                          | The security requirements to use for the request.                                                           |                                                                                                             |
 | `xMoovVersion`                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                  | :heavy_minus_sign:                                                                                          | Specify an API version.                                                                                     |                                                                                                             |
 | `accountID`                                                                                                 | *String*                                                                                                    | :heavy_check_mark:                                                                                          | N/A                                                                                                         |                                                                                                             |
 | `createAccountUpdate`                                                                                       | [CreateAccountUpdate](../../models/components/CreateAccountUpdate.md)                                       | :heavy_check_mark:                                                                                          | N/A                                                                                                         | {<br/>"accountType": "business",<br/>"profile": {<br/>"business": {<br/>"legalBusinessName": "Whole Body Fitness LLC"<br/>}<br/>}<br/>} |
@@ -396,11 +380,10 @@ you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.DisconnectAccountResponse;
-import io.moov.sdk.models.operations.DisconnectAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -408,15 +391,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         DisconnectAccountResponse res = sdk.accounts().disconnect()
-                .security(DisconnectAccountSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202507)
                 .accountID("97814a93-ba26-470e-bb15-3cb32711e8ea")
                 .call();
@@ -428,11 +409,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                      | [io.moov.sdk.models.operations.DisconnectAccountSecurity](../../models/operations/DisconnectAccountSecurity.md) | :heavy_check_mark:                                                                                              | The security requirements to use for the request.                                                               |
-| `xMoovVersion`                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                      | :heavy_minus_sign:                                                                                              | Specify an API version.                                                                                         |
-| `accountID`                                                                                                     | *String*                                                                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -458,10 +438,9 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetAccountCountriesResponse;
-import io.moov.sdk.models.operations.GetAccountCountriesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -469,15 +448,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetAccountCountriesResponse res = sdk.accounts().getCountries()
-                .security(GetAccountCountriesSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("df471fd8-7bb3-4db3-bf74-52fe588b8d2b")
                 .call();
@@ -491,11 +468,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                          | [io.moov.sdk.models.operations.GetAccountCountriesSecurity](../../models/operations/GetAccountCountriesSecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |
-| `xMoovVersion`                                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                                          | :heavy_minus_sign:                                                                                                  | Specify an API version.                                                                                             |
-| `accountID`                                                                                                         | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -523,12 +499,11 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.AccountCountries;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.AssignCountriesError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.AssignAccountCountriesResponse;
-import io.moov.sdk.models.operations.AssignAccountCountriesSecurity;
 import java.lang.Exception;
 import java.util.List;
 
@@ -537,15 +512,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, AssignCountriesError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         AssignAccountCountriesResponse res = sdk.accounts().assignCountries()
-                .security(AssignAccountCountriesSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("9ba3f09c-c93c-4ca1-b68f-1dbb0841a40a")
                 .accountCountries(AccountCountries.builder()
@@ -563,12 +536,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [io.moov.sdk.models.operations.AssignAccountCountriesSecurity](../../models/operations/AssignAccountCountriesSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |
-| `xMoovVersion`                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                | :heavy_minus_sign:                                                                                                        | Specify an API version.                                                                                                   |
-| `accountID`                                                                                                               | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
-| `accountCountries`                                                                                                        | [AccountCountries](../../models/components/AccountCountries.md)                                                           | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `xMoovVersion`                                                  | [Optional\<Versions>](../../models/components/Versions.md)      | :heavy_minus_sign:                                              | Specify an API version.                                         |
+| `accountID`                                                     | *String*                                                        | :heavy_check_mark:                                              | N/A                                                             |
+| `accountCountries`                                              | [AccountCountries](../../models/components/AccountCountries.md) | :heavy_check_mark:                                              | N/A                                                             |
 
 ### Response
 
@@ -595,10 +567,9 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetMerchantProcessingAgreementResponse;
-import io.moov.sdk.models.operations.GetMerchantProcessingAgreementSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -606,15 +577,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetMerchantProcessingAgreementResponse res = sdk.accounts().getMerchantProcessingAgreement()
-                .security(GetMerchantProcessingAgreementSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("d2cfd0d3-6efb-4bc4-a193-53f35dd0d912")
                 .call();
@@ -628,11 +597,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                | [io.moov.sdk.models.operations.GetMerchantProcessingAgreementSecurity](../../models/operations/GetMerchantProcessingAgreementSecurity.md) | :heavy_check_mark:                                                                                                                        | The security requirements to use for the request.                                                                                         |
-| `xMoovVersion`                                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                                | :heavy_minus_sign:                                                                                                                        | Specify an API version.                                                                                                                   |
-| `accountID`                                                                                                                               | *String*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 

@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetWalletTransactionRequestBuilder {
 
-    private GetWalletTransactionSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String walletID;
@@ -20,12 +19,6 @@ public class GetWalletTransactionRequestBuilder {
 
     public GetWalletTransactionRequestBuilder(SDKMethodInterfaces.MethodCallGetWalletTransaction sdk) {
         this.sdk = sdk;
-    }
-
-    public GetWalletTransactionRequestBuilder security(GetWalletTransactionSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetWalletTransactionRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -61,7 +54,6 @@ public class GetWalletTransactionRequestBuilder {
     public GetWalletTransactionResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             walletID,

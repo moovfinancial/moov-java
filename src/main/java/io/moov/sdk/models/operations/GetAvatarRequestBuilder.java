@@ -11,19 +11,12 @@ import java.util.Optional;
 
 public class GetAvatarRequestBuilder {
 
-    private GetAvatarSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String uniqueID;
     private final SDKMethodInterfaces.MethodCallGetAvatar sdk;
 
     public GetAvatarRequestBuilder(SDKMethodInterfaces.MethodCallGetAvatar sdk) {
         this.sdk = sdk;
-    }
-
-    public GetAvatarRequestBuilder security(GetAvatarSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetAvatarRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -47,7 +40,6 @@ public class GetAvatarRequestBuilder {
     public GetAvatarResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             uniqueID);
     }

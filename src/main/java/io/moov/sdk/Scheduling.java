@@ -14,28 +14,22 @@ import io.moov.sdk.models.errors.ScheduleValidationError;
 import io.moov.sdk.models.operations.CancelScheduleRequest;
 import io.moov.sdk.models.operations.CancelScheduleRequestBuilder;
 import io.moov.sdk.models.operations.CancelScheduleResponse;
-import io.moov.sdk.models.operations.CancelScheduleSecurity;
 import io.moov.sdk.models.operations.CreateScheduleRequest;
 import io.moov.sdk.models.operations.CreateScheduleRequestBuilder;
 import io.moov.sdk.models.operations.CreateScheduleResponse;
-import io.moov.sdk.models.operations.CreateScheduleSecurity;
 import io.moov.sdk.models.operations.GetScheduledOccurrenceRequest;
 import io.moov.sdk.models.operations.GetScheduledOccurrenceRequestBuilder;
 import io.moov.sdk.models.operations.GetScheduledOccurrenceResponse;
-import io.moov.sdk.models.operations.GetScheduledOccurrenceSecurity;
 import io.moov.sdk.models.operations.GetSchedulesRequest;
 import io.moov.sdk.models.operations.GetSchedulesRequestBuilder;
 import io.moov.sdk.models.operations.GetSchedulesResponse;
-import io.moov.sdk.models.operations.GetSchedulesSecurity;
 import io.moov.sdk.models.operations.ListSchedulesRequest;
 import io.moov.sdk.models.operations.ListSchedulesRequestBuilder;
 import io.moov.sdk.models.operations.ListSchedulesResponse;
-import io.moov.sdk.models.operations.ListSchedulesSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateScheduleRequest;
 import io.moov.sdk.models.operations.UpdateScheduleRequestBuilder;
 import io.moov.sdk.models.operations.UpdateScheduleResponse;
-import io.moov.sdk.models.operations.UpdateScheduleSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -79,22 +73,19 @@ public class Scheduling implements
 
     /**
      * Describes the schedule to create or modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param upsertSchedule
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateScheduleResponse create(
-            CreateScheduleSecurity security,
             String accountID,
             UpsertSchedule upsertSchedule) throws Exception {
-        return create(security, Optional.empty(), accountID, upsertSchedule);
+        return create(Optional.empty(), accountID, upsertSchedule);
     }
     
     /**
      * Describes the schedule to create or modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -110,7 +101,6 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public CreateScheduleResponse create(
-            CreateScheduleSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             UpsertSchedule upsertSchedule) throws Exception {
@@ -148,11 +138,9 @@ public class Scheduling implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -284,20 +272,17 @@ public class Scheduling implements
 
     /**
      * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListSchedulesResponse list(
-            ListSchedulesSecurity security,
             String accountID) throws Exception {
-        return list(security, Optional.empty(), Optional.empty(), Optional.empty(), accountID);
+        return list(Optional.empty(), Optional.empty(), Optional.empty(), accountID);
     }
     
     /**
      * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -314,7 +299,6 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public ListSchedulesResponse list(
-            ListSchedulesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             Optional<Long> skip,
             Optional<Long> count,
@@ -346,11 +330,9 @@ public class Scheduling implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -454,7 +436,6 @@ public class Scheduling implements
 
     /**
      * Describes the schedule to modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param scheduleID
      * @param upsertSchedule
@@ -462,16 +443,14 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public UpdateScheduleResponse update(
-            UpdateScheduleSecurity security,
             String accountID,
             String scheduleID,
             UpsertSchedule upsertSchedule) throws Exception {
-        return update(security, Optional.empty(), accountID, scheduleID, upsertSchedule);
+        return update(Optional.empty(), accountID, scheduleID, upsertSchedule);
     }
     
     /**
      * Describes the schedule to modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -488,7 +467,6 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public UpdateScheduleResponse update(
-            UpdateScheduleSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String scheduleID,
@@ -528,11 +506,9 @@ public class Scheduling implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -664,22 +640,19 @@ public class Scheduling implements
 
     /**
      * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param scheduleID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetSchedulesResponse get(
-            GetSchedulesSecurity security,
             String accountID,
             String scheduleID) throws Exception {
-        return get(security, Optional.empty(), accountID, scheduleID);
+        return get(Optional.empty(), accountID, scheduleID);
     }
     
     /**
      * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -695,7 +668,6 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public GetSchedulesResponse get(
-            GetSchedulesSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String scheduleID) throws Exception {
@@ -720,11 +692,9 @@ public class Scheduling implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -828,22 +798,19 @@ public class Scheduling implements
 
     /**
      * Describes the schedule to cancel. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param scheduleID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CancelScheduleResponse cancel(
-            CancelScheduleSecurity security,
             String accountID,
             String scheduleID) throws Exception {
-        return cancel(security, Optional.empty(), accountID, scheduleID);
+        return cancel(Optional.empty(), accountID, scheduleID);
     }
     
     /**
      * Describes the schedule to cancel. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -859,7 +826,6 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public CancelScheduleResponse cancel(
-            CancelScheduleSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String scheduleID) throws Exception {
@@ -884,11 +850,9 @@ public class Scheduling implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -995,7 +959,6 @@ public class Scheduling implements
 
     /**
      * Defines an occurrence for when to run a transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param scheduleID
      * @param occurrenceFilter Allows the specification of additional filters beyond the UUID.
@@ -1007,16 +970,14 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public GetScheduledOccurrenceResponse getOccurrance(
-            GetScheduledOccurrenceSecurity security,
             String accountID,
             String scheduleID,
             String occurrenceFilter) throws Exception {
-        return getOccurrance(security, Optional.empty(), accountID, scheduleID, occurrenceFilter);
+        return getOccurrance(Optional.empty(), accountID, scheduleID, occurrenceFilter);
     }
     
     /**
      * Defines an occurrence for when to run a transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1037,7 +998,6 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public GetScheduledOccurrenceResponse getOccurrance(
-            GetScheduledOccurrenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String scheduleID,
@@ -1064,11 +1024,9 @@ public class Scheduling implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

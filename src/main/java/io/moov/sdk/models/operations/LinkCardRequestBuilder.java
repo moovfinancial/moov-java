@@ -13,7 +13,6 @@ import java.util.Optional;
 
 public class LinkCardRequestBuilder {
 
-    private LinkCardSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private Optional<? extends LinkCardWaitFor> xWaitFor = Optional.empty();
     private String accountID;
@@ -22,12 +21,6 @@ public class LinkCardRequestBuilder {
 
     public LinkCardRequestBuilder(SDKMethodInterfaces.MethodCallLinkCard sdk) {
         this.sdk = sdk;
-    }
-
-    public LinkCardRequestBuilder security(LinkCardSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public LinkCardRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -69,7 +62,6 @@ public class LinkCardRequestBuilder {
     public LinkCardResponse call() throws Exception {
 
         return sdk.link(
-            security,
             xMoovVersion,
             xWaitFor,
             accountID,

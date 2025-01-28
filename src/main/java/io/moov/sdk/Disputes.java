@@ -16,48 +16,37 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.AcceptDisputeRequest;
 import io.moov.sdk.models.operations.AcceptDisputeRequestBuilder;
 import io.moov.sdk.models.operations.AcceptDisputeResponse;
-import io.moov.sdk.models.operations.AcceptDisputeSecurity;
 import io.moov.sdk.models.operations.DeleteDisputeEvidenceFileRequest;
 import io.moov.sdk.models.operations.DeleteDisputeEvidenceFileRequestBuilder;
 import io.moov.sdk.models.operations.DeleteDisputeEvidenceFileResponse;
-import io.moov.sdk.models.operations.DeleteDisputeEvidenceFileSecurity;
 import io.moov.sdk.models.operations.GetDisputeEvidenceDataRequest;
 import io.moov.sdk.models.operations.GetDisputeEvidenceDataRequestBuilder;
 import io.moov.sdk.models.operations.GetDisputeEvidenceDataResponse;
-import io.moov.sdk.models.operations.GetDisputeEvidenceDataSecurity;
 import io.moov.sdk.models.operations.GetDisputeEvidenceRequest;
 import io.moov.sdk.models.operations.GetDisputeEvidenceRequestBuilder;
 import io.moov.sdk.models.operations.GetDisputeEvidenceResponse;
-import io.moov.sdk.models.operations.GetDisputeEvidenceSecurity;
 import io.moov.sdk.models.operations.GetDisputeRequest;
 import io.moov.sdk.models.operations.GetDisputeRequestBuilder;
 import io.moov.sdk.models.operations.GetDisputeResponse;
-import io.moov.sdk.models.operations.GetDisputeSecurity;
 import io.moov.sdk.models.operations.ListDisputeEvidenceRequest;
 import io.moov.sdk.models.operations.ListDisputeEvidenceRequestBuilder;
 import io.moov.sdk.models.operations.ListDisputeEvidenceResponse;
-import io.moov.sdk.models.operations.ListDisputeEvidenceSecurity;
 import io.moov.sdk.models.operations.ListDisputesRequest;
 import io.moov.sdk.models.operations.ListDisputesRequestBuilder;
 import io.moov.sdk.models.operations.ListDisputesResponse;
-import io.moov.sdk.models.operations.ListDisputesSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.SubmitDisputeEvidenceRequest;
 import io.moov.sdk.models.operations.SubmitDisputeEvidenceRequestBuilder;
 import io.moov.sdk.models.operations.SubmitDisputeEvidenceResponse;
-import io.moov.sdk.models.operations.SubmitDisputeEvidenceSecurity;
 import io.moov.sdk.models.operations.UpdateDisputeEvidenceRequest;
 import io.moov.sdk.models.operations.UpdateDisputeEvidenceRequestBuilder;
 import io.moov.sdk.models.operations.UpdateDisputeEvidenceResponse;
-import io.moov.sdk.models.operations.UpdateDisputeEvidenceSecurity;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceFileRequest;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceFileRequestBuilder;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceFileResponse;
-import io.moov.sdk.models.operations.UploadDisputeEvidenceFileSecurity;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceTextRequest;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceTextRequestBuilder;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceTextResponse;
-import io.moov.sdk.models.operations.UploadDisputeEvidenceTextSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -106,13 +95,11 @@ public class Disputes implements
     /**
      * Returns the list of disputes.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListDisputesResponse list(
-            ListDisputesRequest request,
-            ListDisputesSecurity security) throws Exception {
+            ListDisputesRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListDisputesRequest.class,
@@ -131,11 +118,9 @@ public class Disputes implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -239,22 +224,19 @@ public class Disputes implements
 
     /**
      * Get a dispute by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetDisputeResponse get(
-            GetDisputeSecurity security,
             String accountID,
             String disputeID) throws Exception {
-        return get(security, Optional.empty(), accountID, disputeID);
+        return get(Optional.empty(), accountID, disputeID);
     }
     
     /**
      * Get a dispute by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -270,7 +252,6 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public GetDisputeResponse get(
-            GetDisputeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String disputeID) throws Exception {
@@ -295,11 +276,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -403,22 +382,19 @@ public class Disputes implements
 
     /**
      * Accepts liability for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public AcceptDisputeResponse accept(
-            AcceptDisputeSecurity security,
             String accountID,
             String disputeID) throws Exception {
-        return accept(security, Optional.empty(), accountID, disputeID);
+        return accept(Optional.empty(), accountID, disputeID);
     }
     
     /**
      * Accepts liability for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -434,7 +410,6 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public AcceptDisputeResponse accept(
-            AcceptDisputeSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String disputeID) throws Exception {
@@ -459,11 +434,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -581,22 +554,19 @@ public class Disputes implements
 
     /**
      * Returns a dispute's public evidence by its ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListDisputeEvidenceResponse listEvidence(
-            ListDisputeEvidenceSecurity security,
             String accountID,
             String disputeID) throws Exception {
-        return listEvidence(security, Optional.empty(), accountID, disputeID);
+        return listEvidence(Optional.empty(), accountID, disputeID);
     }
     
     /**
      * Returns a dispute's public evidence by its ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -612,7 +582,6 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public ListDisputeEvidenceResponse listEvidence(
-            ListDisputeEvidenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String disputeID) throws Exception {
@@ -637,11 +606,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -745,7 +712,6 @@ public class Disputes implements
 
     /**
      * Uploads a file as evidence for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @param createEvidenceFileMultiPart
@@ -753,16 +719,14 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public UploadDisputeEvidenceFileResponse uploadEvidenceFile(
-            UploadDisputeEvidenceFileSecurity security,
             String accountID,
             String disputeID,
             CreateEvidenceFileMultiPart createEvidenceFileMultiPart) throws Exception {
-        return uploadEvidenceFile(security, Optional.empty(), accountID, disputeID, createEvidenceFileMultiPart);
+        return uploadEvidenceFile(Optional.empty(), accountID, disputeID, createEvidenceFileMultiPart);
     }
     
     /**
      * Uploads a file as evidence for a dispute.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -779,7 +743,6 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public UploadDisputeEvidenceFileResponse uploadEvidenceFile(
-            UploadDisputeEvidenceFileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String disputeID,
@@ -819,11 +782,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -930,7 +891,6 @@ public class Disputes implements
 
     /**
      * Uploads text as evidence for a dispute. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @param createEvidenceText
@@ -938,16 +898,14 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public UploadDisputeEvidenceTextResponse uploadEvidenceText(
-            UploadDisputeEvidenceTextSecurity security,
             String accountID,
             String disputeID,
             CreateEvidenceText createEvidenceText) throws Exception {
-        return uploadEvidenceText(security, Optional.empty(), accountID, disputeID, createEvidenceText);
+        return uploadEvidenceText(Optional.empty(), accountID, disputeID, createEvidenceText);
     }
     
     /**
      * Uploads text as evidence for a dispute. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -964,7 +922,6 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public UploadDisputeEvidenceTextResponse uploadEvidenceText(
-            UploadDisputeEvidenceTextSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String disputeID,
@@ -1004,11 +961,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1126,22 +1081,19 @@ public class Disputes implements
 
     /**
      * Submit the evidence associated with a dispute. -  - Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only - be submitted once per dispute.** -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public SubmitDisputeEvidenceResponse submitEvidence(
-            SubmitDisputeEvidenceSecurity security,
             String accountID,
             String disputeID) throws Exception {
-        return submitEvidence(security, Optional.empty(), accountID, disputeID);
+        return submitEvidence(Optional.empty(), accountID, disputeID);
     }
     
     /**
      * Submit the evidence associated with a dispute. -  - Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only - be submitted once per dispute.** -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1157,7 +1109,6 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public SubmitDisputeEvidenceResponse submitEvidence(
-            SubmitDisputeEvidenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String disputeID) throws Exception {
@@ -1182,11 +1133,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1304,7 +1253,6 @@ public class Disputes implements
 
     /**
      * Get dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @param evidenceID
@@ -1312,16 +1260,14 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public GetDisputeEvidenceResponse getEvidence(
-            GetDisputeEvidenceSecurity security,
             String accountID,
             String disputeID,
             String evidenceID) throws Exception {
-        return getEvidence(security, Optional.empty(), accountID, disputeID, evidenceID);
+        return getEvidence(Optional.empty(), accountID, disputeID, evidenceID);
     }
     
     /**
      * Get dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1338,7 +1284,6 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public GetDisputeEvidenceResponse getEvidence(
-            GetDisputeEvidenceSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String disputeID,
@@ -1365,11 +1310,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1474,13 +1417,11 @@ public class Disputes implements
     /**
      * Updates dispute evidence by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateDisputeEvidenceResponse updateEvidence(
-            UpdateDisputeEvidenceRequest request,
-            UpdateDisputeEvidenceSecurity security) throws Exception {
+            UpdateDisputeEvidenceRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 UpdateDisputeEvidenceRequest.class,
@@ -1507,11 +1448,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1629,7 +1568,6 @@ public class Disputes implements
 
     /**
      * Deletes dispute evidence by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @param evidenceID
@@ -1637,16 +1575,14 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public DeleteDisputeEvidenceFileResponse deleteEvidence(
-            DeleteDisputeEvidenceFileSecurity security,
             String accountID,
             String disputeID,
             String evidenceID) throws Exception {
-        return deleteEvidence(security, Optional.empty(), accountID, disputeID, evidenceID);
+        return deleteEvidence(Optional.empty(), accountID, disputeID, evidenceID);
     }
     
     /**
      * Deletes dispute evidence by ID.  -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1663,7 +1599,6 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public DeleteDisputeEvidenceFileResponse deleteEvidence(
-            DeleteDisputeEvidenceFileSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String disputeID,
@@ -1690,11 +1625,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1801,7 +1734,6 @@ public class Disputes implements
 
     /**
      * Downloads dispute evidence data by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID
      * @param disputeID
      * @param evidenceID
@@ -1809,16 +1741,14 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public GetDisputeEvidenceDataResponse getEvidenceData(
-            GetDisputeEvidenceDataSecurity security,
             String accountID,
             String disputeID,
             String evidenceID) throws Exception {
-        return getEvidenceData(security, Optional.empty(), accountID, disputeID, evidenceID);
+        return getEvidenceData(Optional.empty(), accountID, disputeID, evidenceID);
     }
     
     /**
      * Downloads dispute evidence data by ID. -  - Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1835,7 +1765,6 @@ public class Disputes implements
      * @throws Exception if the API call fails
      */
     public GetDisputeEvidenceDataResponse getEvidenceData(
-            GetDisputeEvidenceDataSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String disputeID,
@@ -1862,11 +1791,9 @@ public class Disputes implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

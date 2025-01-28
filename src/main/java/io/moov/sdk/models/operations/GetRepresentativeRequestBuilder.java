@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetRepresentativeRequestBuilder {
 
-    private GetRepresentativeSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String representativeID;
@@ -19,12 +18,6 @@ public class GetRepresentativeRequestBuilder {
 
     public GetRepresentativeRequestBuilder(SDKMethodInterfaces.MethodCallGetRepresentative sdk) {
         this.sdk = sdk;
-    }
-
-    public GetRepresentativeRequestBuilder security(GetRepresentativeSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetRepresentativeRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetRepresentativeRequestBuilder {
     public GetRepresentativeResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             representativeID);

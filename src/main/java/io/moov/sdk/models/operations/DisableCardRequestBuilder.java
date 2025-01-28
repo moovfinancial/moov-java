@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class DisableCardRequestBuilder {
 
-    private DisableCardSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String cardID;
@@ -19,12 +18,6 @@ public class DisableCardRequestBuilder {
 
     public DisableCardRequestBuilder(SDKMethodInterfaces.MethodCallDisableCard sdk) {
         this.sdk = sdk;
-    }
-
-    public DisableCardRequestBuilder security(DisableCardSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public DisableCardRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class DisableCardRequestBuilder {
     public DisableCardResponse call() throws Exception {
 
         return sdk.disable(
-            security,
             xMoovVersion,
             accountID,
             cardID);

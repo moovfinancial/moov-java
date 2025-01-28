@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetRefundRequestBuilder {
 
-    private GetRefundSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String transferID;
     private String accountID;
@@ -20,12 +19,6 @@ public class GetRefundRequestBuilder {
 
     public GetRefundRequestBuilder(SDKMethodInterfaces.MethodCallGetRefund sdk) {
         this.sdk = sdk;
-    }
-
-    public GetRefundRequestBuilder security(GetRefundSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetRefundRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -61,7 +54,6 @@ public class GetRefundRequestBuilder {
     public GetRefundResponse call() throws Exception {
 
         return sdk.getRefund(
-            security,
             xMoovVersion,
             transferID,
             accountID,

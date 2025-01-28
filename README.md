@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.4.0'
+implementation 'io.moov:sdk:0.6.0'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.4.0</version>
+    <version>0.6.0</version>
 </dependency>
 ```
 
@@ -91,12 +91,11 @@ import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
-import io.moov.sdk.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -104,15 +103,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .security(CreateAccountSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
@@ -149,14 +146,21 @@ You can set the security parameters through the `security` builder method when i
 package hello.world;
 
 import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.AccountType;
+import io.moov.sdk.models.components.AccountWaitFor;
+import io.moov.sdk.models.components.CreateAccount;
+import io.moov.sdk.models.components.CreateBusinessProfile;
+import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
-import io.moov.sdk.models.operations.GetTermsOfServiceTokenResponse;
+import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateAccountResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
 
         Moov sdk = Moov.builder()
                 .security(Security.builder()
@@ -165,53 +169,7 @@ public class Application {
                     .build())
             .build();
 
-        GetTermsOfServiceTokenResponse res = sdk.accounts().getTermsOfServiceToken()
-                .xMoovVersion(Versions.V202507)
-                .origin("<value>")
-                .referer("powerless-humidity.org")
-                .call();
-
-        if (res.termsOfServiceToken().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Per-Operation Security Schemes
-
-Some operations in this SDK require the security scheme to be specified at the request level. For example:
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.AccountType;
-import io.moov.sdk.models.components.AccountWaitFor;
-import io.moov.sdk.models.components.CreateAccount;
-import io.moov.sdk.models.components.CreateBusinessProfile;
-import io.moov.sdk.models.components.CreateProfile;
-import io.moov.sdk.models.components.SchemeBasicAuth;
-import io.moov.sdk.models.components.Versions;
-import io.moov.sdk.models.errors.CreateAccountResponseBody;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.operations.CreateAccountResponse;
-import io.moov.sdk.models.operations.CreateAccountSecurity;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
-
-        Moov sdk = Moov.builder()
-            .build();
-
         CreateAccountResponse res = sdk.accounts().create()
-                .security(CreateAccountSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
@@ -1037,12 +995,11 @@ import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
-import io.moov.sdk.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -1050,15 +1007,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .security(CreateAccountSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
@@ -1094,12 +1049,11 @@ import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
-import io.moov.sdk.models.operations.CreateAccountSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -1108,15 +1062,13 @@ public class Application {
 
         Moov sdk = Moov.builder()
                 .serverURL("https://api.moov.io")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .security(CreateAccountSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()

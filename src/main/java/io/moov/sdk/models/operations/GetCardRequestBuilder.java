@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetCardRequestBuilder {
 
-    private GetCardSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String cardID;
@@ -19,12 +18,6 @@ public class GetCardRequestBuilder {
 
     public GetCardRequestBuilder(SDKMethodInterfaces.MethodCallGetCard sdk) {
         this.sdk = sdk;
-    }
-
-    public GetCardRequestBuilder security(GetCardSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetCardRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetCardRequestBuilder {
     public GetCardResponse call() throws Exception {
 
         return sdk.get(
-            security,
             xMoovVersion,
             accountID,
             cardID);

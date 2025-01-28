@@ -90,10 +90,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListDisputesRequest;
 import io.moov.sdk.models.operations.ListDisputesResponse;
-import io.moov.sdk.models.operations.ListDisputesSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -101,6 +100,10 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListDisputesRequest req = ListDisputesRequest.builder()
@@ -111,12 +114,6 @@ public class Application {
 
         ListDisputesResponse res = sdk.disputes().list()
                 .request(req)
-                .security(ListDisputesSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .call();
 
         if (res.disputes().isPresent()) {
@@ -128,10 +125,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `request`                                                                                             | [ListDisputesRequest](../../models/operations/ListDisputesRequest.md)                                 | :heavy_check_mark:                                                                                    | The request object to use for the request.                                                            |
-| `security`                                                                                            | [io.moov.sdk.models.operations.ListDisputesSecurity](../../models/operations/ListDisputesSecurity.md) | :heavy_check_mark:                                                                                    | The security requirements to use for the request.                                                     |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [ListDisputesRequest](../../models/operations/ListDisputesRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
 
 ### Response
 
@@ -158,10 +154,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetDisputeResponse;
-import io.moov.sdk.models.operations.GetDisputeSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -169,15 +164,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetDisputeResponse res = sdk.disputes().get()
-                .security(GetDisputeSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("102df293-b524-4bb7-9b68-5610432a0b8d")
                 .disputeID("2efe55e9-61a0-4b3d-aab6-423bb7f8140b")
@@ -192,12 +185,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [io.moov.sdk.models.operations.GetDisputeSecurity](../../models/operations/GetDisputeSecurity.md) | :heavy_check_mark:                                                                                | The security requirements to use for the request.                                                 |
-| `xMoovVersion`                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                        | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |
-| `accountID`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `disputeID`                                                                                       | *String*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `disputeID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -224,11 +216,10 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.AcceptDisputeResponse;
-import io.moov.sdk.models.operations.AcceptDisputeSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -236,15 +227,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         AcceptDisputeResponse res = sdk.disputes().accept()
-                .security(AcceptDisputeSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202510)
                 .accountID("bfefe6f4-2658-4d3d-9be8-73ff29049dbe")
                 .disputeID("692e1a18-8314-4a5d-bcfd-0d5ada162cf8")
@@ -259,12 +248,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                              | [io.moov.sdk.models.operations.AcceptDisputeSecurity](../../models/operations/AcceptDisputeSecurity.md) | :heavy_check_mark:                                                                                      | The security requirements to use for the request.                                                       |
-| `xMoovVersion`                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                              | :heavy_minus_sign:                                                                                      | Specify an API version.                                                                                 |
-| `accountID`                                                                                             | *String*                                                                                                | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
-| `disputeID`                                                                                             | *String*                                                                                                | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `disputeID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -292,10 +280,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.ListDisputeEvidenceResponse;
-import io.moov.sdk.models.operations.ListDisputeEvidenceSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -303,15 +290,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         ListDisputeEvidenceResponse res = sdk.disputes().listEvidence()
-                .security(ListDisputeEvidenceSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .accountID("dcaaa24e-96d2-4b5b-997d-aa20f46c812a")
                 .disputeID("e0434916-3828-49bb-bfa4-30f3c039d5f0")
@@ -326,12 +311,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                          | [io.moov.sdk.models.operations.ListDisputeEvidenceSecurity](../../models/operations/ListDisputeEvidenceSecurity.md) | :heavy_check_mark:                                                                                                  | The security requirements to use for the request.                                                                   |
-| `xMoovVersion`                                                                                                      | [Optional\<Versions>](../../models/components/Versions.md)                                                          | :heavy_minus_sign:                                                                                                  | Specify an API version.                                                                                             |
-| `accountID`                                                                                                         | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
-| `disputeID`                                                                                                         | *String*                                                                                                            | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `disputeID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -361,11 +345,10 @@ import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.CreateEvidenceFileMultiPart;
 import io.moov.sdk.models.components.EvidenceType;
 import io.moov.sdk.models.components.File;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceFileResponse;
-import io.moov.sdk.models.operations.UploadDisputeEvidenceFileSecurity;
 import java.lang.Exception;
 import java.nio.charset.StandardCharsets;
 
@@ -374,15 +357,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UploadDisputeEvidenceFileResponse res = sdk.disputes().uploadEvidenceFile()
-                .security(UploadDisputeEvidenceFileSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202507)
                 .accountID("1ae7aa8f-dfc0-4d00-927a-c5349c04fa3f")
                 .disputeID("c3dddece-4b5f-4b6e-b8a0-719d5e192fc7")
@@ -402,13 +383,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                       | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     |
-| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                      | [io.moov.sdk.models.operations.UploadDisputeEvidenceFileSecurity](../../models/operations/UploadDisputeEvidenceFileSecurity.md) | :heavy_check_mark:                                                                                                              | The security requirements to use for the request.                                                                               |
-| `xMoovVersion`                                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                                      | :heavy_minus_sign:                                                                                                              | Specify an API version.                                                                                                         |
-| `accountID`                                                                                                                     | *String*                                                                                                                        | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
-| `disputeID`                                                                                                                     | *String*                                                                                                                        | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
-| `createEvidenceFileMultiPart`                                                                                                   | [CreateEvidenceFileMultiPart](../../models/components/CreateEvidenceFileMultiPart.md)                                           | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `xMoovVersion`                                                                        | [Optional\<Versions>](../../models/components/Versions.md)                            | :heavy_minus_sign:                                                                    | Specify an API version.                                                               |
+| `accountID`                                                                           | *String*                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `disputeID`                                                                           | *String*                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `createEvidenceFileMultiPart`                                                         | [CreateEvidenceFileMultiPart](../../models/components/CreateEvidenceFileMultiPart.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
 
 ### Response
 
@@ -438,11 +418,10 @@ package hello.world;
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.CreateEvidenceText;
 import io.moov.sdk.models.components.EvidenceType;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceTextResponse;
-import io.moov.sdk.models.operations.UploadDisputeEvidenceTextSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -450,15 +429,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UploadDisputeEvidenceTextResponse res = sdk.disputes().uploadEvidenceText()
-                .security(UploadDisputeEvidenceTextSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202507)
                 .accountID("d542736f-c9c3-491c-86c3-7303a97965ea")
                 .disputeID("9487cd25-501d-4a76-8c24-54328af8a4b6")
@@ -477,13 +454,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                       | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     |
-| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                      | [io.moov.sdk.models.operations.UploadDisputeEvidenceTextSecurity](../../models/operations/UploadDisputeEvidenceTextSecurity.md) | :heavy_check_mark:                                                                                                              | The security requirements to use for the request.                                                                               |
-| `xMoovVersion`                                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                                      | :heavy_minus_sign:                                                                                                              | Specify an API version.                                                                                                         |
-| `accountID`                                                                                                                     | *String*                                                                                                                        | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
-| `disputeID`                                                                                                                     | *String*                                                                                                                        | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
-| `createEvidenceText`                                                                                                            | [CreateEvidenceText](../../models/components/CreateEvidenceText.md)                                                             | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `xMoovVersion`                                                      | [Optional\<Versions>](../../models/components/Versions.md)          | :heavy_minus_sign:                                                  | Specify an API version.                                             |
+| `accountID`                                                         | *String*                                                            | :heavy_check_mark:                                                  | N/A                                                                 |
+| `disputeID`                                                         | *String*                                                            | :heavy_check_mark:                                                  | N/A                                                                 |
+| `createEvidenceText`                                                | [CreateEvidenceText](../../models/components/CreateEvidenceText.md) | :heavy_check_mark:                                                  | N/A                                                                 |
 
 ### Response
 
@@ -514,11 +490,10 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.SubmitDisputeEvidenceResponse;
-import io.moov.sdk.models.operations.SubmitDisputeEvidenceSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -526,15 +501,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         SubmitDisputeEvidenceResponse res = sdk.disputes().submitEvidence()
-                .security(SubmitDisputeEvidenceSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202504)
                 .accountID("aff4d2bf-fd2c-471e-a697-b2cc2c9f297e")
                 .disputeID("491e05b8-7adc-440b-af36-4d2229edd4f0")
@@ -549,12 +522,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                              | [io.moov.sdk.models.operations.SubmitDisputeEvidenceSecurity](../../models/operations/SubmitDisputeEvidenceSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
-| `xMoovVersion`                                                                                                          | [Optional\<Versions>](../../models/components/Versions.md)                                                              | :heavy_minus_sign:                                                                                                      | Specify an API version.                                                                                                 |
-| `accountID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
-| `disputeID`                                                                                                             | *String*                                                                                                                | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `disputeID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -582,10 +554,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetDisputeEvidenceResponse;
-import io.moov.sdk.models.operations.GetDisputeEvidenceSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -593,15 +564,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetDisputeEvidenceResponse res = sdk.disputes().getEvidence()
-                .security(GetDisputeEvidenceSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202501)
                 .accountID("8abb6e62-d012-4f06-8c83-d993dd3155f2")
                 .disputeID("ebf0479f-774e-4881-9e0b-2c791e0601fc")
@@ -617,13 +586,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                        | [io.moov.sdk.models.operations.GetDisputeEvidenceSecurity](../../models/operations/GetDisputeEvidenceSecurity.md) | :heavy_check_mark:                                                                                                | The security requirements to use for the request.                                                                 |
-| `xMoovVersion`                                                                                                    | [Optional\<Versions>](../../models/components/Versions.md)                                                        | :heavy_minus_sign:                                                                                                | Specify an API version.                                                                                           |
-| `accountID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
-| `disputeID`                                                                                                       | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
-| `evidenceID`                                                                                                      | *String*                                                                                                          | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `disputeID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `evidenceID`                                               | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -650,12 +618,11 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpdateEvidence;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UpdateDisputeEvidenceRequest;
 import io.moov.sdk.models.operations.UpdateDisputeEvidenceResponse;
-import io.moov.sdk.models.operations.UpdateDisputeEvidenceSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -663,6 +630,10 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         UpdateDisputeEvidenceRequest req = UpdateDisputeEvidenceRequest.builder()
@@ -675,12 +646,6 @@ public class Application {
 
         UpdateDisputeEvidenceResponse res = sdk.disputes().updateEvidence()
                 .request(req)
-                .security(UpdateDisputeEvidenceSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .call();
 
         if (res.disputeEvidenceMetadata().isPresent()) {
@@ -692,10 +657,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                               | [UpdateDisputeEvidenceRequest](../../models/operations/UpdateDisputeEvidenceRequest.md)                                 | :heavy_check_mark:                                                                                                      | The request object to use for the request.                                                                              |
-| `security`                                                                                                              | [io.moov.sdk.models.operations.UpdateDisputeEvidenceSecurity](../../models/operations/UpdateDisputeEvidenceSecurity.md) | :heavy_check_mark:                                                                                                      | The security requirements to use for the request.                                                                       |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [UpdateDisputeEvidenceRequest](../../models/operations/UpdateDisputeEvidenceRequest.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
 
 ### Response
 
@@ -723,11 +687,10 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.DeleteDisputeEvidenceFileResponse;
-import io.moov.sdk.models.operations.DeleteDisputeEvidenceFileSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -735,15 +698,13 @@ public class Application {
     public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         DeleteDisputeEvidenceFileResponse res = sdk.disputes().deleteEvidence()
-                .security(DeleteDisputeEvidenceFileSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202501)
                 .accountID("927e189d-273f-40ab-814f-1fa3ab1aa7dd")
                 .disputeID("94451c2e-a568-4800-a669-7f6190da461d")
@@ -757,13 +718,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                       | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     |
-| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                      | [io.moov.sdk.models.operations.DeleteDisputeEvidenceFileSecurity](../../models/operations/DeleteDisputeEvidenceFileSecurity.md) | :heavy_check_mark:                                                                                                              | The security requirements to use for the request.                                                                               |
-| `xMoovVersion`                                                                                                                  | [Optional\<Versions>](../../models/components/Versions.md)                                                                      | :heavy_minus_sign:                                                                                                              | Specify an API version.                                                                                                         |
-| `accountID`                                                                                                                     | *String*                                                                                                                        | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
-| `disputeID`                                                                                                                     | *String*                                                                                                                        | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
-| `evidenceID`                                                                                                                    | *String*                                                                                                                        | :heavy_check_mark:                                                                                                              | N/A                                                                                                                             |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `disputeID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `evidenceID`                                               | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 
@@ -791,10 +751,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.SchemeBasicAuth;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.operations.GetDisputeEvidenceDataResponse;
-import io.moov.sdk.models.operations.GetDisputeEvidenceDataSecurity;
 import java.lang.Exception;
 
 public class Application {
@@ -802,15 +761,13 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
             .build();
 
         GetDisputeEvidenceDataResponse res = sdk.disputes().getEvidenceData()
-                .security(GetDisputeEvidenceDataSecurity.builder()
-                    .basicAuth(SchemeBasicAuth.builder()
-                        .username("")
-                        .password("")
-                        .build())
-                    .build())
                 .xMoovVersion(Versions.V202501)
                 .accountID("38299899-8c4f-4a43-b73a-3cef9ba87c62")
                 .disputeID("22c477d1-525c-4c1b-b8a3-7dcec5c4da28")
@@ -826,13 +783,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                | [io.moov.sdk.models.operations.GetDisputeEvidenceDataSecurity](../../models/operations/GetDisputeEvidenceDataSecurity.md) | :heavy_check_mark:                                                                                                        | The security requirements to use for the request.                                                                         |
-| `xMoovVersion`                                                                                                            | [Optional\<Versions>](../../models/components/Versions.md)                                                                | :heavy_minus_sign:                                                                                                        | Specify an API version.                                                                                                   |
-| `accountID`                                                                                                               | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
-| `disputeID`                                                                                                               | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
-| `evidenceID`                                                                                                              | *String*                                                                                                                  | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `xMoovVersion`                                             | [Optional\<Versions>](../../models/components/Versions.md) | :heavy_minus_sign:                                         | Specify an API version.                                    |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `disputeID`                                                | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
+| `evidenceID`                                               | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 

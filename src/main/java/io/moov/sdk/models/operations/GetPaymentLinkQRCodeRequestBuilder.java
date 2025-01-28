@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class GetPaymentLinkQRCodeRequestBuilder {
 
-    private GetPaymentLinkQRCodeSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String paymentLinkCode;
@@ -19,12 +18,6 @@ public class GetPaymentLinkQRCodeRequestBuilder {
 
     public GetPaymentLinkQRCodeRequestBuilder(SDKMethodInterfaces.MethodCallGetPaymentLinkQRCode sdk) {
         this.sdk = sdk;
-    }
-
-    public GetPaymentLinkQRCodeRequestBuilder security(GetPaymentLinkQRCodeSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public GetPaymentLinkQRCodeRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class GetPaymentLinkQRCodeRequestBuilder {
     public GetPaymentLinkQRCodeResponse call() throws Exception {
 
         return sdk.getQRCode(
-            security,
             xMoovVersion,
             accountID,
             paymentLinkCode);

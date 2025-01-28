@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class ListSchedulesRequestBuilder {
 
-    private ListSchedulesSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private Optional<Long> skip = Optional.empty();
     private Optional<Long> count = Optional.empty();
@@ -21,12 +20,6 @@ public class ListSchedulesRequestBuilder {
 
     public ListSchedulesRequestBuilder(SDKMethodInterfaces.MethodCallListSchedules sdk) {
         this.sdk = sdk;
-    }
-
-    public ListSchedulesRequestBuilder security(ListSchedulesSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListSchedulesRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -74,7 +67,6 @@ public class ListSchedulesRequestBuilder {
     public ListSchedulesResponse call() throws Exception {
 
         return sdk.list(
-            security,
             xMoovVersion,
             skip,
             count,

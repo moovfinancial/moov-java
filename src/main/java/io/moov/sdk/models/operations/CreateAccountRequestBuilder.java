@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class CreateAccountRequestBuilder {
 
-    private CreateAccountSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private Optional<? extends AccountWaitFor> xWaitFor = Optional.empty();
     private CreateAccount createAccount;
@@ -20,12 +19,6 @@ public class CreateAccountRequestBuilder {
 
     public CreateAccountRequestBuilder(SDKMethodInterfaces.MethodCallCreateAccount sdk) {
         this.sdk = sdk;
-    }
-
-    public CreateAccountRequestBuilder security(CreateAccountSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public CreateAccountRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -61,7 +54,6 @@ public class CreateAccountRequestBuilder {
     public CreateAccountResponse call() throws Exception {
 
         return sdk.create(
-            security,
             xMoovVersion,
             xWaitFor,
             createAccount);

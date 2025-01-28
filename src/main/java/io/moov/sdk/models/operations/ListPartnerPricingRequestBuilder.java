@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class ListPartnerPricingRequestBuilder {
 
-    private ListPartnerPricingSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private Optional<? extends List<String>> planIDs = Optional.empty();
@@ -20,12 +19,6 @@ public class ListPartnerPricingRequestBuilder {
 
     public ListPartnerPricingRequestBuilder(SDKMethodInterfaces.MethodCallListPartnerPricing sdk) {
         this.sdk = sdk;
-    }
-
-    public ListPartnerPricingRequestBuilder security(ListPartnerPricingSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public ListPartnerPricingRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -61,7 +54,6 @@ public class ListPartnerPricingRequestBuilder {
     public ListPartnerPricingResponse call() throws Exception {
 
         return sdk.listPartnerPricing(
-            security,
             xMoovVersion,
             accountID,
             planIDs);

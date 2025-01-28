@@ -17,24 +17,19 @@ import io.moov.sdk.models.errors.UpdateIssuedCardError;
 import io.moov.sdk.models.operations.GetFullIssuedCardRequest;
 import io.moov.sdk.models.operations.GetFullIssuedCardRequestBuilder;
 import io.moov.sdk.models.operations.GetFullIssuedCardResponse;
-import io.moov.sdk.models.operations.GetFullIssuedCardSecurity;
 import io.moov.sdk.models.operations.GetIssuedCardRequest;
 import io.moov.sdk.models.operations.GetIssuedCardRequestBuilder;
 import io.moov.sdk.models.operations.GetIssuedCardResponse;
-import io.moov.sdk.models.operations.GetIssuedCardSecurity;
 import io.moov.sdk.models.operations.ListIssuedCardsRequest;
 import io.moov.sdk.models.operations.ListIssuedCardsRequestBuilder;
 import io.moov.sdk.models.operations.ListIssuedCardsResponse;
-import io.moov.sdk.models.operations.ListIssuedCardsSecurity;
 import io.moov.sdk.models.operations.RequestCardRequest;
 import io.moov.sdk.models.operations.RequestCardRequestBuilder;
 import io.moov.sdk.models.operations.RequestCardResponse;
-import io.moov.sdk.models.operations.RequestCardSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateIssuedCardRequest;
 import io.moov.sdk.models.operations.UpdateIssuedCardRequestBuilder;
 import io.moov.sdk.models.operations.UpdateIssuedCardResponse;
-import io.moov.sdk.models.operations.UpdateIssuedCardSecurity;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -76,22 +71,19 @@ public class CardIssuing implements
 
     /**
      * Request a virtual card be issued. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which the card is to be issued.
      * @param requestCard
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public RequestCardResponse request(
-            RequestCardSecurity security,
             String accountID,
             RequestCard requestCard) throws Exception {
-        return request(security, Optional.empty(), accountID, requestCard);
+        return request(Optional.empty(), accountID, requestCard);
     }
     
     /**
      * Request a virtual card be issued. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -107,7 +99,6 @@ public class CardIssuing implements
      * @throws Exception if the API call fails
      */
     public RequestCardResponse request(
-            RequestCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             RequestCard requestCard) throws Exception {
@@ -145,11 +136,9 @@ public class CardIssuing implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -282,13 +271,11 @@ public class CardIssuing implements
     /**
      * List Moov issued cards existing for the account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * @param request The request object containing all of the parameters for the API call.
-     * @param security The security details to use for authentication.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListIssuedCardsResponse list(
-            ListIssuedCardsRequest request,
-            ListIssuedCardsSecurity security) throws Exception {
+            ListIssuedCardsRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListIssuedCardsRequest.class,
@@ -307,11 +294,9 @@ public class CardIssuing implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -415,22 +400,19 @@ public class CardIssuing implements
 
     /**
      * Retrieve a single issued card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which the card was issued.
      * @param issuedCardID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetIssuedCardResponse get(
-            GetIssuedCardSecurity security,
             String accountID,
             String issuedCardID) throws Exception {
-        return get(security, Optional.empty(), accountID, issuedCardID);
+        return get(Optional.empty(), accountID, issuedCardID);
     }
     
     /**
      * Retrieve a single issued card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -446,7 +428,6 @@ public class CardIssuing implements
      * @throws Exception if the API call fails
      */
     public GetIssuedCardResponse get(
-            GetIssuedCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String issuedCardID) throws Exception {
@@ -471,11 +452,9 @@ public class CardIssuing implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -579,7 +558,6 @@ public class CardIssuing implements
 
     /**
      * Update a Moov issued card. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which the card was issued.
      * @param issuedCardID
      * @param updateIssuedCard
@@ -587,16 +565,14 @@ public class CardIssuing implements
      * @throws Exception if the API call fails
      */
     public UpdateIssuedCardResponse update(
-            UpdateIssuedCardSecurity security,
             String accountID,
             String issuedCardID,
             UpdateIssuedCard updateIssuedCard) throws Exception {
-        return update(security, Optional.empty(), accountID, issuedCardID, updateIssuedCard);
+        return update(Optional.empty(), accountID, issuedCardID, updateIssuedCard);
     }
     
     /**
      * Update a Moov issued card. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -613,7 +589,6 @@ public class CardIssuing implements
      * @throws Exception if the API call fails
      */
     public UpdateIssuedCardResponse update(
-            UpdateIssuedCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String issuedCardID,
@@ -653,11 +628,9 @@ public class CardIssuing implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -778,22 +751,19 @@ public class CardIssuing implements
 
     /**
      * Get issued card with PAN, CVV, and expiration.  -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
-     * @param security The security details to use for authentication.
      * @param accountID The Moov business account for which the card was issued.
      * @param issuedCardID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetFullIssuedCardResponse getFull(
-            GetFullIssuedCardSecurity security,
             String accountID,
             String issuedCardID) throws Exception {
-        return getFull(security, Optional.empty(), accountID, issuedCardID);
+        return getFull(Optional.empty(), accountID, issuedCardID);
     }
     
     /**
      * Get issued card with PAN, CVV, and expiration.  -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -809,7 +779,6 @@ public class CardIssuing implements
      * @throws Exception if the API call fails
      */
     public GetFullIssuedCardResponse getFull(
-            GetFullIssuedCardSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String accountID,
             String issuedCardID) throws Exception {
@@ -834,11 +803,9 @@ public class CardIssuing implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

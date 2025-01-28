@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class DisableBankAccountRequestBuilder {
 
-    private DisableBankAccountSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private String bankAccountID;
@@ -19,12 +18,6 @@ public class DisableBankAccountRequestBuilder {
 
     public DisableBankAccountRequestBuilder(SDKMethodInterfaces.MethodCallDisableBankAccount sdk) {
         this.sdk = sdk;
-    }
-
-    public DisableBankAccountRequestBuilder security(DisableBankAccountSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public DisableBankAccountRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -54,7 +47,6 @@ public class DisableBankAccountRequestBuilder {
     public DisableBankAccountResponse call() throws Exception {
 
         return sdk.disable(
-            security,
             xMoovVersion,
             accountID,
             bankAccountID);

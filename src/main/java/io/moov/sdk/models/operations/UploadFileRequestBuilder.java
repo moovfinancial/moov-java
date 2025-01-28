@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class UploadFileRequestBuilder {
 
-    private UploadFileSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private String accountID;
     private FileUploadRequestMultiPart fileUploadRequestMultiPart;
@@ -20,12 +19,6 @@ public class UploadFileRequestBuilder {
 
     public UploadFileRequestBuilder(SDKMethodInterfaces.MethodCallUploadFile sdk) {
         this.sdk = sdk;
-    }
-
-    public UploadFileRequestBuilder security(UploadFileSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public UploadFileRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -55,7 +48,6 @@ public class UploadFileRequestBuilder {
     public UploadFileResponse call() throws Exception {
 
         return sdk.upload(
-            security,
             xMoovVersion,
             accountID,
             fileUploadRequestMultiPart);

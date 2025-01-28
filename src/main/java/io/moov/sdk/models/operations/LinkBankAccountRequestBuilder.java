@@ -13,7 +13,6 @@ import java.util.Optional;
 
 public class LinkBankAccountRequestBuilder {
 
-    private LinkBankAccountSecurity security;
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
     private Optional<? extends BankAccountWaitFor> xWaitFor = Optional.empty();
     private String accountID;
@@ -22,12 +21,6 @@ public class LinkBankAccountRequestBuilder {
 
     public LinkBankAccountRequestBuilder(SDKMethodInterfaces.MethodCallLinkBankAccount sdk) {
         this.sdk = sdk;
-    }
-
-    public LinkBankAccountRequestBuilder security(LinkBankAccountSecurity security) {
-        Utils.checkNotNull(security, "security");
-        this.security = security;
-        return this;
     }
                 
     public LinkBankAccountRequestBuilder xMoovVersion(Versions xMoovVersion) {
@@ -69,7 +62,6 @@ public class LinkBankAccountRequestBuilder {
     public LinkBankAccountResponse call() throws Exception {
 
         return sdk.link(
-            security,
             xMoovVersion,
             xWaitFor,
             accountID,

@@ -9,7 +9,6 @@ import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetAvatarRequest;
 import io.moov.sdk.models.operations.GetAvatarRequestBuilder;
 import io.moov.sdk.models.operations.GetAvatarResponse;
-import io.moov.sdk.models.operations.GetAvatarSecurity;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -45,20 +44,17 @@ public class Avatars implements
 
     /**
      * Get avatar image for an account using a unique ID.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
-     * @param security The security details to use for authentication.
      * @param uniqueID Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetAvatarResponse get(
-            GetAvatarSecurity security,
             String uniqueID) throws Exception {
-        return get(security, Optional.empty(), uniqueID);
+        return get(Optional.empty(), uniqueID);
     }
     
     /**
      * Get avatar image for an account using a unique ID.     -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
-     * @param security The security details to use for authentication.
      * @param xMoovVersion Moov API versions. 
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -73,7 +69,6 @@ public class Avatars implements
      * @throws Exception if the API call fails
      */
     public GetAvatarResponse get(
-            GetAvatarSecurity security,
             Optional<? extends Versions> xMoovVersion,
             String uniqueID) throws Exception {
         GetAvatarRequest request =
@@ -96,11 +91,9 @@ public class Avatars implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        // hooks will have access to global security options
-        // TODO pass the method level security object to hooks (type system doesn't allow 
-        // it, would require some reflection work)
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req, security);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()

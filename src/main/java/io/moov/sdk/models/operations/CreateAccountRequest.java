@@ -7,7 +7,6 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.utils.SpeakeasyMetadata;
@@ -27,31 +26,22 @@ public class CreateAccountRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
     private Optional<? extends Versions> xMoovVersion;
 
-    /**
-     * Optional header that indicates whether to wait for the connection to be created before returning from the account creation.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
-    private Optional<? extends AccountWaitFor> xWaitFor;
-
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreateAccount createAccount;
 
     @JsonCreator
     public CreateAccountRequest(
             Optional<? extends Versions> xMoovVersion,
-            Optional<? extends AccountWaitFor> xWaitFor,
             CreateAccount createAccount) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        Utils.checkNotNull(xWaitFor, "xWaitFor");
         Utils.checkNotNull(createAccount, "createAccount");
         this.xMoovVersion = xMoovVersion;
-        this.xWaitFor = xWaitFor;
         this.createAccount = createAccount;
     }
     
     public CreateAccountRequest(
             CreateAccount createAccount) {
-        this(Optional.empty(), Optional.empty(), createAccount);
+        this(Optional.empty(), createAccount);
     }
 
     /**
@@ -61,15 +51,6 @@ public class CreateAccountRequest {
     @JsonIgnore
     public Optional<Versions> xMoovVersion() {
         return (Optional<Versions>) xMoovVersion;
-    }
-
-    /**
-     * Optional header that indicates whether to wait for the connection to be created before returning from the account creation.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<AccountWaitFor> xWaitFor() {
-        return (Optional<AccountWaitFor>) xWaitFor;
     }
 
     @JsonIgnore
@@ -99,24 +80,6 @@ public class CreateAccountRequest {
         return this;
     }
 
-    /**
-     * Optional header that indicates whether to wait for the connection to be created before returning from the account creation.
-     */
-    public CreateAccountRequest withXWaitFor(AccountWaitFor xWaitFor) {
-        Utils.checkNotNull(xWaitFor, "xWaitFor");
-        this.xWaitFor = Optional.ofNullable(xWaitFor);
-        return this;
-    }
-
-    /**
-     * Optional header that indicates whether to wait for the connection to be created before returning from the account creation.
-     */
-    public CreateAccountRequest withXWaitFor(Optional<? extends AccountWaitFor> xWaitFor) {
-        Utils.checkNotNull(xWaitFor, "xWaitFor");
-        this.xWaitFor = xWaitFor;
-        return this;
-    }
-
     public CreateAccountRequest withCreateAccount(CreateAccount createAccount) {
         Utils.checkNotNull(createAccount, "createAccount");
         this.createAccount = createAccount;
@@ -134,7 +97,6 @@ public class CreateAccountRequest {
         CreateAccountRequest other = (CreateAccountRequest) o;
         return 
             Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
-            Objects.deepEquals(this.xWaitFor, other.xWaitFor) &&
             Objects.deepEquals(this.createAccount, other.createAccount);
     }
     
@@ -142,7 +104,6 @@ public class CreateAccountRequest {
     public int hashCode() {
         return Objects.hash(
             xMoovVersion,
-            xWaitFor,
             createAccount);
     }
     
@@ -150,15 +111,12 @@ public class CreateAccountRequest {
     public String toString() {
         return Utils.toString(CreateAccountRequest.class,
                 "xMoovVersion", xMoovVersion,
-                "xWaitFor", xWaitFor,
                 "createAccount", createAccount);
     }
     
     public final static class Builder {
  
         private Optional<? extends Versions> xMoovVersion = Optional.empty();
- 
-        private Optional<? extends AccountWaitFor> xWaitFor = Optional.empty();
  
         private CreateAccount createAccount;  
         
@@ -184,24 +142,6 @@ public class CreateAccountRequest {
             return this;
         }
 
-        /**
-         * Optional header that indicates whether to wait for the connection to be created before returning from the account creation.
-         */
-        public Builder xWaitFor(AccountWaitFor xWaitFor) {
-            Utils.checkNotNull(xWaitFor, "xWaitFor");
-            this.xWaitFor = Optional.ofNullable(xWaitFor);
-            return this;
-        }
-
-        /**
-         * Optional header that indicates whether to wait for the connection to be created before returning from the account creation.
-         */
-        public Builder xWaitFor(Optional<? extends AccountWaitFor> xWaitFor) {
-            Utils.checkNotNull(xWaitFor, "xWaitFor");
-            this.xWaitFor = xWaitFor;
-            return this;
-        }
-
         public Builder createAccount(CreateAccount createAccount) {
             Utils.checkNotNull(createAccount, "createAccount");
             this.createAccount = createAccount;
@@ -211,7 +151,6 @@ public class CreateAccountRequest {
         public CreateAccountRequest build() {
             return new CreateAccountRequest(
                 xMoovVersion,
-                xWaitFor,
                 createAccount);
         }
     }

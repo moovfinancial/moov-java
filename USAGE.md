@@ -4,7 +4,6 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.AccountType;
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
@@ -28,7 +27,6 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .xMoovVersion(Versions.V202504)
-                .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()

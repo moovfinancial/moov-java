@@ -5,7 +5,6 @@
 package io.moov.sdk.models.operations;
 
 import io.moov.sdk.models.components.AccountCountries;
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.AddCapabilities;
 import io.moov.sdk.models.components.AuthTokenRequest;
 import io.moov.sdk.models.components.BankAccountWaitFor;
@@ -56,7 +55,6 @@ public class SDKMethodInterfaces {
     public interface MethodCallCreateAccount {
         CreateAccountResponse create(
             Optional<? extends Versions> xMoovVersion,
-            Optional<? extends AccountWaitFor> xWaitFor,
             CreateAccount createAccount) throws Exception;
     }
 

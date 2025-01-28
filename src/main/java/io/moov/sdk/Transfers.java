@@ -11,6 +11,7 @@ import io.moov.sdk.models.components.CreateRefundResponse;
 import io.moov.sdk.models.components.Reversal;
 import io.moov.sdk.models.components.Transfer;
 import io.moov.sdk.models.components.TransferOptions;
+import io.moov.sdk.models.components.TransferResponse;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
@@ -27,7 +28,6 @@ import io.moov.sdk.models.operations.CreateTransferOptionsResponse;
 import io.moov.sdk.models.operations.CreateTransferRequest;
 import io.moov.sdk.models.operations.CreateTransferRequestBuilder;
 import io.moov.sdk.models.operations.CreateTransferResponse;
-import io.moov.sdk.models.operations.CreateTransferResponseBody;
 import io.moov.sdk.models.operations.GetRefundRequest;
 import io.moov.sdk.models.operations.GetRefundRequestBuilder;
 import io.moov.sdk.models.operations.GetRefundResponse;
@@ -182,10 +182,10 @@ public class Transfers implements
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                CreateTransferResponseBody _out = Utils.mapper().readValue(
+                TransferResponse _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<CreateTransferResponseBody>() {});
-                _res.withOneOf(Optional.ofNullable(_out));
+                    new TypeReference<TransferResponse>() {});
+                _res.withTransferResponse(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(

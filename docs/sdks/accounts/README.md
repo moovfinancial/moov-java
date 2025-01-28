@@ -95,7 +95,6 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.AccountType;
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
@@ -119,7 +118,6 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .xMoovVersion(Versions.V202504)
-                .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -139,11 +137,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 | Example                                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `xMoovVersion`                                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                                  | :heavy_minus_sign:                                                                                                          | Specify an API version.                                                                                                     |                                                                                                                             |
-| `xWaitFor`                                                                                                                  | [Optional\<AccountWaitFor>](../../models/components/AccountWaitFor.md)                                                      | :heavy_minus_sign:                                                                                                          | Optional header that indicates whether to wait for the connection to be created before returning from the account creation. |                                                                                                                             |
-| `createAccount`                                                                                                             | [CreateAccount](../../models/components/CreateAccount.md)                                                                   | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         | {<br/>"accountType": "business",<br/>"profile": {<br/>"business": {<br/>"legalBusinessName": "Whole Body Fitness LLC"<br/>}<br/>}<br/>} |
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 | Example                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `xMoovVersion`                                                                                              | [Optional\<Versions>](../../models/components/Versions.md)                                                  | :heavy_minus_sign:                                                                                          | Specify an API version.                                                                                     |                                                                                                             |
+| `createAccount`                                                                                             | [CreateAccount](../../models/components/CreateAccount.md)                                                   | :heavy_check_mark:                                                                                          | N/A                                                                                                         | {<br/>"accountType": "business",<br/>"profile": {<br/>"business": {<br/>"legalBusinessName": "Whole Body Fitness LLC"<br/>}<br/>}<br/>} |
 
 ### Response
 

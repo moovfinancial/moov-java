@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.moov.sdk.models.components.AsyncTransfer;
 import io.moov.sdk.models.components.Transfer;
+import io.moov.sdk.models.components.TransferResponse;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -41,7 +42,7 @@ public class CreateTransferResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends CreateTransferResponseBody> oneOf;
+    private Optional<? extends TransferResponse> transferResponse;
 
     /**
      * A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
@@ -58,19 +59,19 @@ public class CreateTransferResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends CreateTransferResponseBody> oneOf,
+            Optional<? extends TransferResponse> transferResponse,
             Optional<? extends AsyncTransfer> asyncTransfer,
             Optional<? extends Transfer> transfer) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(oneOf, "oneOf");
+        Utils.checkNotNull(transferResponse, "transferResponse");
         Utils.checkNotNull(asyncTransfer, "asyncTransfer");
         Utils.checkNotNull(transfer, "transfer");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.oneOf = oneOf;
+        this.transferResponse = transferResponse;
         this.asyncTransfer = asyncTransfer;
         this.transfer = transfer;
     }
@@ -111,8 +112,8 @@ public class CreateTransferResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreateTransferResponseBody> oneOf() {
-        return (Optional<CreateTransferResponseBody>) oneOf;
+    public Optional<TransferResponse> transferResponse() {
+        return (Optional<TransferResponse>) transferResponse;
     }
 
     /**
@@ -167,18 +168,18 @@ public class CreateTransferResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public CreateTransferResponse withOneOf(CreateTransferResponseBody oneOf) {
-        Utils.checkNotNull(oneOf, "oneOf");
-        this.oneOf = Optional.ofNullable(oneOf);
+    public CreateTransferResponse withTransferResponse(TransferResponse transferResponse) {
+        Utils.checkNotNull(transferResponse, "transferResponse");
+        this.transferResponse = Optional.ofNullable(transferResponse);
         return this;
     }
 
     /**
      * The request completed successfully.
      */
-    public CreateTransferResponse withOneOf(Optional<? extends CreateTransferResponseBody> oneOf) {
-        Utils.checkNotNull(oneOf, "oneOf");
-        this.oneOf = oneOf;
+    public CreateTransferResponse withTransferResponse(Optional<? extends TransferResponse> transferResponse) {
+        Utils.checkNotNull(transferResponse, "transferResponse");
+        this.transferResponse = transferResponse;
         return this;
     }
 
@@ -231,7 +232,7 @@ public class CreateTransferResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.oneOf, other.oneOf) &&
+            Objects.deepEquals(this.transferResponse, other.transferResponse) &&
             Objects.deepEquals(this.asyncTransfer, other.asyncTransfer) &&
             Objects.deepEquals(this.transfer, other.transfer);
     }
@@ -242,7 +243,7 @@ public class CreateTransferResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            oneOf,
+            transferResponse,
             asyncTransfer,
             transfer);
     }
@@ -253,7 +254,7 @@ public class CreateTransferResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "oneOf", oneOf,
+                "transferResponse", transferResponse,
                 "asyncTransfer", asyncTransfer,
                 "transfer", transfer);
     }
@@ -266,7 +267,7 @@ public class CreateTransferResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends CreateTransferResponseBody> oneOf = Optional.empty();
+        private Optional<? extends TransferResponse> transferResponse = Optional.empty();
  
         private Optional<? extends AsyncTransfer> asyncTransfer = Optional.empty();
  
@@ -306,18 +307,18 @@ public class CreateTransferResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder oneOf(CreateTransferResponseBody oneOf) {
-            Utils.checkNotNull(oneOf, "oneOf");
-            this.oneOf = Optional.ofNullable(oneOf);
+        public Builder transferResponse(TransferResponse transferResponse) {
+            Utils.checkNotNull(transferResponse, "transferResponse");
+            this.transferResponse = Optional.ofNullable(transferResponse);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder oneOf(Optional<? extends CreateTransferResponseBody> oneOf) {
-            Utils.checkNotNull(oneOf, "oneOf");
-            this.oneOf = oneOf;
+        public Builder transferResponse(Optional<? extends TransferResponse> transferResponse) {
+            Utils.checkNotNull(transferResponse, "transferResponse");
+            this.transferResponse = transferResponse;
             return this;
         }
 
@@ -362,7 +363,7 @@ public class CreateTransferResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                oneOf,
+                transferResponse,
                 asyncTransfer,
                 transfer);
         }

@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.6.3'
+implementation 'io.moov:sdk:0.6.4'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.6.3</version>
+    <version>0.6.4</version>
 </dependency>
 ```
 
@@ -87,7 +87,6 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.AccountType;
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
@@ -111,7 +110,6 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .xMoovVersion(Versions.V202504)
-                .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -147,7 +145,6 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.AccountType;
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
@@ -171,7 +168,6 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .xMoovVersion(Versions.V202504)
-                .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -991,7 +987,6 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.AccountType;
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
@@ -1015,7 +1010,6 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .xMoovVersion(Versions.V202504)
-                .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -1045,7 +1039,6 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.AccountType;
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
@@ -1070,7 +1063,6 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .xMoovVersion(Versions.V202504)
-                .xWaitFor(AccountWaitFor.CONNECTION)
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()

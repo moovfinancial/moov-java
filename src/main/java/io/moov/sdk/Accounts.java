@@ -7,7 +7,6 @@ package io.moov.sdk;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.Account;
 import io.moov.sdk.models.components.AccountCountries;
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateAccountUpdate;
 import io.moov.sdk.models.components.TermsOfServiceToken;
@@ -96,7 +95,7 @@ public class Accounts implements
      */
     public CreateAccountResponse create(
             CreateAccount createAccount) throws Exception {
-        return create(Optional.empty(), Optional.empty(), createAccount);
+        return create(Optional.empty(), createAccount);
     }
     
     /**
@@ -110,20 +109,17 @@ public class Accounts implements
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param xWaitFor
      * @param createAccount
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateAccountResponse create(
             Optional<? extends Versions> xMoovVersion,
-            Optional<? extends AccountWaitFor> xWaitFor,
             CreateAccount createAccount) throws Exception {
         CreateAccountRequest request =
             CreateAccountRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
-                .xWaitFor(xWaitFor)
                 .createAccount(createAccount)
                 .build();
         

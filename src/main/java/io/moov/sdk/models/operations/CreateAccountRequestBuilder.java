@@ -4,7 +4,6 @@
 
 package io.moov.sdk.models.operations;
 
-import io.moov.sdk.models.components.AccountWaitFor;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.utils.Utils;
@@ -13,7 +12,6 @@ import java.util.Optional;
 public class CreateAccountRequestBuilder {
 
     private Optional<? extends Versions> xMoovVersion = Optional.empty();
-    private Optional<? extends AccountWaitFor> xWaitFor = Optional.empty();
     private CreateAccount createAccount;
     private final SDKMethodInterfaces.MethodCallCreateAccount sdk;
 
@@ -32,18 +30,6 @@ public class CreateAccountRequestBuilder {
         this.xMoovVersion = xMoovVersion;
         return this;
     }
-                
-    public CreateAccountRequestBuilder xWaitFor(AccountWaitFor xWaitFor) {
-        Utils.checkNotNull(xWaitFor, "xWaitFor");
-        this.xWaitFor = Optional.of(xWaitFor);
-        return this;
-    }
-
-    public CreateAccountRequestBuilder xWaitFor(Optional<? extends AccountWaitFor> xWaitFor) {
-        Utils.checkNotNull(xWaitFor, "xWaitFor");
-        this.xWaitFor = xWaitFor;
-        return this;
-    }
 
     public CreateAccountRequestBuilder createAccount(CreateAccount createAccount) {
         Utils.checkNotNull(createAccount, "createAccount");
@@ -55,7 +41,6 @@ public class CreateAccountRequestBuilder {
 
         return sdk.create(
             xMoovVersion,
-            xWaitFor,
             createAccount);
     }
 }

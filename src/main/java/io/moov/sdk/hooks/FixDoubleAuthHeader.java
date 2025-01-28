@@ -3,6 +3,8 @@ package io.moov.sdk.hooks;
 import java.io.InputStream;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import io.moov.sdk.utils.Helpers;
@@ -26,8 +28,17 @@ final class FixDoubleAuthHeader implements Hook.BeforeRequest {
      * @throws Exception on error
      */
     public HttpRequest beforeRequest(BeforeRequestContext context, HttpRequest request) throws Exception {
-        if (request.headers().allValues("Authorization").size() > 1) {
-            return request.newBuilder().header("Authorization", request.headers().firstValue("Authorization").get()).build();
+
+        // Create a copy of headers map
+        Map<String, List<String>> headersCopy = request.headers().map();
+        
+        // Get authorization header value
+        List<String> authHeader = headersCopy.get("Authorization");
+        if (authHeader != null && !authHeader.isEmpty()) {
+            // Create new request with modified authorization header
+            request = HttpRequest.newBuilder(request, (name, value) -> !name.equalsIgnoreCase("Authorization"))
+                    .header("Authorization", authHeader.get(0))
+                    .build();
         }
         return request;
     }

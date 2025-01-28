@@ -1,15 +1,5 @@
 package io.moov.sdk.hooks;
 
-// import dev.speakeasyapi.speakeasy.utils.Utils;
-// import dev.speakeasyapi.speakeasy.utils.Hook.AfterError;
-// import dev.speakeasyapi.speakeasy.utils.Hook.AfterErrorContext;
-// import dev.speakeasyapi.speakeasy.utils.Hook.AfterSuccess;
-// import dev.speakeasyapi.speakeasy.utils.Hook.AfterSuccessContext;
-// import dev.speakeasyapi.speakeasy.utils.Hook.BeforeRequest;
-// import dev.speakeasyapi.speakeasy.utils.Hook.BeforeRequestContext;
-// import dev.speakeasyapi.speakeasy.utils.Hook.SdkInit;
-// import dev.speakeasyapi.speakeasy.utils.Hook.SdkInitData;
-
 import java.io.InputStream;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;

@@ -15,6 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -41,27 +43,33 @@ public class GetMerchantProcessingAgreementResponse implements Response {
      */
     private Optional<? extends InputStream> responseStream;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public GetMerchantProcessingAgreementResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends InputStream> responseStream) {
+            Optional<? extends InputStream> responseStream,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(responseStream, "responseStream");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.responseStream = responseStream;
+        this.headers = headers;
     }
     
     public GetMerchantProcessingAgreementResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -95,6 +103,11 @@ public class GetMerchantProcessingAgreementResponse implements Response {
     @JsonIgnore
     public Optional<InputStream> responseStream() {
         return (Optional<InputStream>) responseStream;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -145,6 +158,12 @@ public class GetMerchantProcessingAgreementResponse implements Response {
         this.responseStream = responseStream;
         return this;
     }
+
+    public GetMerchantProcessingAgreementResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -159,7 +178,8 @@ public class GetMerchantProcessingAgreementResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.responseStream, other.responseStream);
+            Objects.deepEquals(this.responseStream, other.responseStream) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -168,7 +188,8 @@ public class GetMerchantProcessingAgreementResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            responseStream);
+            responseStream,
+            headers);
     }
     
     @Override
@@ -177,7 +198,8 @@ public class GetMerchantProcessingAgreementResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "responseStream", responseStream);
+                "responseStream", responseStream,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -188,7 +210,9 @@ public class GetMerchantProcessingAgreementResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends InputStream> responseStream = Optional.empty();  
+        private Optional<? extends InputStream> responseStream = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -238,13 +262,20 @@ public class GetMerchantProcessingAgreementResponse implements Response {
             this.responseStream = responseStream;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public GetMerchantProcessingAgreementResponse build() {
             return new GetMerchantProcessingAgreementResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                responseStream);
+                responseStream,
+                headers);
         }
     }
 }

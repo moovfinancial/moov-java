@@ -173,10 +173,12 @@ public class Authentication implements
         RevokeAccessTokenResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "204")) {
+            _res.withHeaders(_httpRes.headers().map());
             // no content 
             return _res;
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 GenericError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -191,6 +193,7 @@ public class Authentication implements
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+            _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 RevokeTokenRequestError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -204,7 +207,8 @@ public class Authentication implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "429", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "429")) {
+            _res.withHeaders(_httpRes.headers().map());
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -212,7 +216,24 @@ public class Authentication implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -354,6 +375,7 @@ public class Authentication implements
         CreateAccessTokenResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 AuthToken _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -369,6 +391,7 @@ public class Authentication implements
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 GenericError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -383,6 +406,7 @@ public class Authentication implements
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+            _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 AuthTokenRequestError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -396,7 +420,8 @@ public class Authentication implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "429", "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "429")) {
+            _res.withHeaders(_httpRes.headers().map());
             // no content 
             throw new APIException(
                     _httpRes, 
@@ -404,7 +429,24 @@ public class Authentication implements
                     "API error occurred", 
                     Utils.extractByteArrayFromBody(_httpRes));
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new APIException(
                     _httpRes, 

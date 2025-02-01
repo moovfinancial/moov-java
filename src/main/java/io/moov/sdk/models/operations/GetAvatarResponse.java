@@ -15,6 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -46,30 +48,36 @@ public class GetAvatarResponse implements Response {
      */
     private Optional<? extends InputStream> twoHundredImageJpegResponseStream;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public GetAvatarResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Optional<? extends InputStream> twoHundredImagePngResponseStream,
-            Optional<? extends InputStream> twoHundredImageJpegResponseStream) {
+            Optional<? extends InputStream> twoHundredImageJpegResponseStream,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(twoHundredImagePngResponseStream, "twoHundredImagePngResponseStream");
         Utils.checkNotNull(twoHundredImageJpegResponseStream, "twoHundredImageJpegResponseStream");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.twoHundredImagePngResponseStream = twoHundredImagePngResponseStream;
         this.twoHundredImageJpegResponseStream = twoHundredImageJpegResponseStream;
+        this.headers = headers;
     }
     
     public GetAvatarResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), headers);
     }
 
     /**
@@ -112,6 +120,11 @@ public class GetAvatarResponse implements Response {
     @JsonIgnore
     public Optional<InputStream> twoHundredImageJpegResponseStream() {
         return (Optional<InputStream>) twoHundredImageJpegResponseStream;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -180,6 +193,12 @@ public class GetAvatarResponse implements Response {
         this.twoHundredImageJpegResponseStream = twoHundredImageJpegResponseStream;
         return this;
     }
+
+    public GetAvatarResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -195,7 +214,8 @@ public class GetAvatarResponse implements Response {
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
             Objects.deepEquals(this.twoHundredImagePngResponseStream, other.twoHundredImagePngResponseStream) &&
-            Objects.deepEquals(this.twoHundredImageJpegResponseStream, other.twoHundredImageJpegResponseStream);
+            Objects.deepEquals(this.twoHundredImageJpegResponseStream, other.twoHundredImageJpegResponseStream) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -205,7 +225,8 @@ public class GetAvatarResponse implements Response {
             statusCode,
             rawResponse,
             twoHundredImagePngResponseStream,
-            twoHundredImageJpegResponseStream);
+            twoHundredImageJpegResponseStream,
+            headers);
     }
     
     @Override
@@ -215,7 +236,8 @@ public class GetAvatarResponse implements Response {
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
                 "twoHundredImagePngResponseStream", twoHundredImagePngResponseStream,
-                "twoHundredImageJpegResponseStream", twoHundredImageJpegResponseStream);
+                "twoHundredImageJpegResponseStream", twoHundredImageJpegResponseStream,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -228,7 +250,9 @@ public class GetAvatarResponse implements Response {
  
         private Optional<? extends InputStream> twoHundredImagePngResponseStream = Optional.empty();
  
-        private Optional<? extends InputStream> twoHundredImageJpegResponseStream = Optional.empty();  
+        private Optional<? extends InputStream> twoHundredImageJpegResponseStream = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -296,6 +320,12 @@ public class GetAvatarResponse implements Response {
             this.twoHundredImageJpegResponseStream = twoHundredImageJpegResponseStream;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public GetAvatarResponse build() {
             return new GetAvatarResponse(
@@ -303,7 +333,8 @@ public class GetAvatarResponse implements Response {
                 statusCode,
                 rawResponse,
                 twoHundredImagePngResponseStream,
-                twoHundredImageJpegResponseStream);
+                twoHundredImageJpegResponseStream,
+                headers);
         }
     }
 }

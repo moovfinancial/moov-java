@@ -16,6 +16,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -42,27 +44,33 @@ public class GetRepresentativeResponse implements Response {
      */
     private Optional<? extends Representative> representative;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public GetRepresentativeResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends Representative> representative) {
+            Optional<? extends Representative> representative,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(representative, "representative");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.representative = representative;
+        this.headers = headers;
     }
     
     public GetRepresentativeResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -96,6 +104,11 @@ public class GetRepresentativeResponse implements Response {
     @JsonIgnore
     public Optional<Representative> representative() {
         return (Optional<Representative>) representative;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -146,6 +159,12 @@ public class GetRepresentativeResponse implements Response {
         this.representative = representative;
         return this;
     }
+
+    public GetRepresentativeResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -160,7 +179,8 @@ public class GetRepresentativeResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.representative, other.representative);
+            Objects.deepEquals(this.representative, other.representative) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -169,7 +189,8 @@ public class GetRepresentativeResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            representative);
+            representative,
+            headers);
     }
     
     @Override
@@ -178,7 +199,8 @@ public class GetRepresentativeResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "representative", representative);
+                "representative", representative,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -189,7 +211,9 @@ public class GetRepresentativeResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends Representative> representative = Optional.empty();  
+        private Optional<? extends Representative> representative = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -239,13 +263,20 @@ public class GetRepresentativeResponse implements Response {
             this.representative = representative;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public GetRepresentativeResponse build() {
             return new GetRepresentativeResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                representative);
+                representative,
+                headers);
         }
     }
 }

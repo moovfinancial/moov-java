@@ -17,6 +17,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -43,27 +44,33 @@ public class ListBankAccountsResponse implements Response {
      */
     private Optional<? extends List<BankAccount>> bankAccounts;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public ListBankAccountsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<BankAccount>> bankAccounts) {
+            Optional<? extends List<BankAccount>> bankAccounts,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(bankAccounts, "bankAccounts");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.bankAccounts = bankAccounts;
+        this.headers = headers;
     }
     
     public ListBankAccountsResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -97,6 +104,11 @@ public class ListBankAccountsResponse implements Response {
     @JsonIgnore
     public Optional<List<BankAccount>> bankAccounts() {
         return (Optional<List<BankAccount>>) bankAccounts;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -147,6 +159,12 @@ public class ListBankAccountsResponse implements Response {
         this.bankAccounts = bankAccounts;
         return this;
     }
+
+    public ListBankAccountsResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -161,7 +179,8 @@ public class ListBankAccountsResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.bankAccounts, other.bankAccounts);
+            Objects.deepEquals(this.bankAccounts, other.bankAccounts) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -170,7 +189,8 @@ public class ListBankAccountsResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            bankAccounts);
+            bankAccounts,
+            headers);
     }
     
     @Override
@@ -179,7 +199,8 @@ public class ListBankAccountsResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "bankAccounts", bankAccounts);
+                "bankAccounts", bankAccounts,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -190,7 +211,9 @@ public class ListBankAccountsResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends List<BankAccount>> bankAccounts = Optional.empty();  
+        private Optional<? extends List<BankAccount>> bankAccounts = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -240,13 +263,20 @@ public class ListBankAccountsResponse implements Response {
             this.bankAccounts = bankAccounts;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public ListBankAccountsResponse build() {
             return new ListBankAccountsResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                bankAccounts);
+                bankAccounts,
+                headers);
         }
     }
 }

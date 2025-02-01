@@ -18,6 +18,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -54,6 +56,8 @@ public class CreateTransferResponse implements Response {
      */
     private Optional<? extends Transfer> transfer;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public CreateTransferResponse(
             String contentType,
@@ -61,26 +65,30 @@ public class CreateTransferResponse implements Response {
             HttpResponse<InputStream> rawResponse,
             Optional<? extends TransferResponse> transferResponse,
             Optional<? extends AsyncTransfer> asyncTransfer,
-            Optional<? extends Transfer> transfer) {
+            Optional<? extends Transfer> transfer,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(transferResponse, "transferResponse");
         Utils.checkNotNull(asyncTransfer, "asyncTransfer");
         Utils.checkNotNull(transfer, "transfer");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.transferResponse = transferResponse;
         this.asyncTransfer = asyncTransfer;
         this.transfer = transfer;
+        this.headers = headers;
     }
     
     public CreateTransferResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), Optional.empty(), headers);
     }
 
     /**
@@ -132,6 +140,11 @@ public class CreateTransferResponse implements Response {
     @JsonIgnore
     public Optional<Transfer> transfer() {
         return (Optional<Transfer>) transfer;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -218,6 +231,12 @@ public class CreateTransferResponse implements Response {
         this.transfer = transfer;
         return this;
     }
+
+    public CreateTransferResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -234,7 +253,8 @@ public class CreateTransferResponse implements Response {
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
             Objects.deepEquals(this.transferResponse, other.transferResponse) &&
             Objects.deepEquals(this.asyncTransfer, other.asyncTransfer) &&
-            Objects.deepEquals(this.transfer, other.transfer);
+            Objects.deepEquals(this.transfer, other.transfer) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -245,7 +265,8 @@ public class CreateTransferResponse implements Response {
             rawResponse,
             transferResponse,
             asyncTransfer,
-            transfer);
+            transfer,
+            headers);
     }
     
     @Override
@@ -256,7 +277,8 @@ public class CreateTransferResponse implements Response {
                 "rawResponse", rawResponse,
                 "transferResponse", transferResponse,
                 "asyncTransfer", asyncTransfer,
-                "transfer", transfer);
+                "transfer", transfer,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -271,7 +293,9 @@ public class CreateTransferResponse implements Response {
  
         private Optional<? extends AsyncTransfer> asyncTransfer = Optional.empty();
  
-        private Optional<? extends Transfer> transfer = Optional.empty();  
+        private Optional<? extends Transfer> transfer = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -357,6 +381,12 @@ public class CreateTransferResponse implements Response {
             this.transfer = transfer;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public CreateTransferResponse build() {
             return new CreateTransferResponse(
@@ -365,7 +395,8 @@ public class CreateTransferResponse implements Response {
                 rawResponse,
                 transferResponse,
                 asyncTransfer,
-                transfer);
+                transfer,
+                headers);
         }
     }
 }

@@ -16,6 +16,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -42,27 +44,33 @@ public class GetIssuedCardResponse implements Response {
      */
     private Optional<? extends IssuedCard> issuedCard;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public GetIssuedCardResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends IssuedCard> issuedCard) {
+            Optional<? extends IssuedCard> issuedCard,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(issuedCard, "issuedCard");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.issuedCard = issuedCard;
+        this.headers = headers;
     }
     
     public GetIssuedCardResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -96,6 +104,11 @@ public class GetIssuedCardResponse implements Response {
     @JsonIgnore
     public Optional<IssuedCard> issuedCard() {
         return (Optional<IssuedCard>) issuedCard;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -146,6 +159,12 @@ public class GetIssuedCardResponse implements Response {
         this.issuedCard = issuedCard;
         return this;
     }
+
+    public GetIssuedCardResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -160,7 +179,8 @@ public class GetIssuedCardResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.issuedCard, other.issuedCard);
+            Objects.deepEquals(this.issuedCard, other.issuedCard) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -169,7 +189,8 @@ public class GetIssuedCardResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            issuedCard);
+            issuedCard,
+            headers);
     }
     
     @Override
@@ -178,7 +199,8 @@ public class GetIssuedCardResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "issuedCard", issuedCard);
+                "issuedCard", issuedCard,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -189,7 +211,9 @@ public class GetIssuedCardResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends IssuedCard> issuedCard = Optional.empty();  
+        private Optional<? extends IssuedCard> issuedCard = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -239,13 +263,20 @@ public class GetIssuedCardResponse implements Response {
             this.issuedCard = issuedCard;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public GetIssuedCardResponse build() {
             return new GetIssuedCardResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                issuedCard);
+                issuedCard,
+                headers);
         }
     }
 }

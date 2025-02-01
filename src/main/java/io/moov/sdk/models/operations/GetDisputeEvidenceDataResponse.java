@@ -15,6 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -51,6 +53,8 @@ public class GetDisputeEvidenceDataResponse implements Response {
      */
     private Optional<? extends InputStream> twoHundredImageTiffResponseStream;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public GetDisputeEvidenceDataResponse(
             String contentType,
@@ -58,26 +62,30 @@ public class GetDisputeEvidenceDataResponse implements Response {
             HttpResponse<InputStream> rawResponse,
             Optional<? extends InputStream> twoHundredApplicationPdfResponseStream,
             Optional<? extends InputStream> twoHundredImageJpegResponseStream,
-            Optional<? extends InputStream> twoHundredImageTiffResponseStream) {
+            Optional<? extends InputStream> twoHundredImageTiffResponseStream,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(twoHundredApplicationPdfResponseStream, "twoHundredApplicationPdfResponseStream");
         Utils.checkNotNull(twoHundredImageJpegResponseStream, "twoHundredImageJpegResponseStream");
         Utils.checkNotNull(twoHundredImageTiffResponseStream, "twoHundredImageTiffResponseStream");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.twoHundredApplicationPdfResponseStream = twoHundredApplicationPdfResponseStream;
         this.twoHundredImageJpegResponseStream = twoHundredImageJpegResponseStream;
         this.twoHundredImageTiffResponseStream = twoHundredImageTiffResponseStream;
+        this.headers = headers;
     }
     
     public GetDisputeEvidenceDataResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), Optional.empty(), headers);
     }
 
     /**
@@ -129,6 +137,11 @@ public class GetDisputeEvidenceDataResponse implements Response {
     @JsonIgnore
     public Optional<InputStream> twoHundredImageTiffResponseStream() {
         return (Optional<InputStream>) twoHundredImageTiffResponseStream;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -215,6 +228,12 @@ public class GetDisputeEvidenceDataResponse implements Response {
         this.twoHundredImageTiffResponseStream = twoHundredImageTiffResponseStream;
         return this;
     }
+
+    public GetDisputeEvidenceDataResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -231,7 +250,8 @@ public class GetDisputeEvidenceDataResponse implements Response {
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
             Objects.deepEquals(this.twoHundredApplicationPdfResponseStream, other.twoHundredApplicationPdfResponseStream) &&
             Objects.deepEquals(this.twoHundredImageJpegResponseStream, other.twoHundredImageJpegResponseStream) &&
-            Objects.deepEquals(this.twoHundredImageTiffResponseStream, other.twoHundredImageTiffResponseStream);
+            Objects.deepEquals(this.twoHundredImageTiffResponseStream, other.twoHundredImageTiffResponseStream) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -242,7 +262,8 @@ public class GetDisputeEvidenceDataResponse implements Response {
             rawResponse,
             twoHundredApplicationPdfResponseStream,
             twoHundredImageJpegResponseStream,
-            twoHundredImageTiffResponseStream);
+            twoHundredImageTiffResponseStream,
+            headers);
     }
     
     @Override
@@ -253,7 +274,8 @@ public class GetDisputeEvidenceDataResponse implements Response {
                 "rawResponse", rawResponse,
                 "twoHundredApplicationPdfResponseStream", twoHundredApplicationPdfResponseStream,
                 "twoHundredImageJpegResponseStream", twoHundredImageJpegResponseStream,
-                "twoHundredImageTiffResponseStream", twoHundredImageTiffResponseStream);
+                "twoHundredImageTiffResponseStream", twoHundredImageTiffResponseStream,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -268,7 +290,9 @@ public class GetDisputeEvidenceDataResponse implements Response {
  
         private Optional<? extends InputStream> twoHundredImageJpegResponseStream = Optional.empty();
  
-        private Optional<? extends InputStream> twoHundredImageTiffResponseStream = Optional.empty();  
+        private Optional<? extends InputStream> twoHundredImageTiffResponseStream = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -354,6 +378,12 @@ public class GetDisputeEvidenceDataResponse implements Response {
             this.twoHundredImageTiffResponseStream = twoHundredImageTiffResponseStream;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public GetDisputeEvidenceDataResponse build() {
             return new GetDisputeEvidenceDataResponse(
@@ -362,7 +392,8 @@ public class GetDisputeEvidenceDataResponse implements Response {
                 rawResponse,
                 twoHundredApplicationPdfResponseStream,
                 twoHundredImageJpegResponseStream,
-                twoHundredImageTiffResponseStream);
+                twoHundredImageTiffResponseStream,
+                headers);
         }
     }
 }

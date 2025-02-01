@@ -17,6 +17,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -43,27 +44,33 @@ public class RequestCapabilitiesResponse implements Response {
      */
     private Optional<? extends List<Capability>> capabilities;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public RequestCapabilitiesResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<Capability>> capabilities) {
+            Optional<? extends List<Capability>> capabilities,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(capabilities, "capabilities");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.capabilities = capabilities;
+        this.headers = headers;
     }
     
     public RequestCapabilitiesResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -97,6 +104,11 @@ public class RequestCapabilitiesResponse implements Response {
     @JsonIgnore
     public Optional<List<Capability>> capabilities() {
         return (Optional<List<Capability>>) capabilities;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -147,6 +159,12 @@ public class RequestCapabilitiesResponse implements Response {
         this.capabilities = capabilities;
         return this;
     }
+
+    public RequestCapabilitiesResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -161,7 +179,8 @@ public class RequestCapabilitiesResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.capabilities, other.capabilities);
+            Objects.deepEquals(this.capabilities, other.capabilities) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -170,7 +189,8 @@ public class RequestCapabilitiesResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            capabilities);
+            capabilities,
+            headers);
     }
     
     @Override
@@ -179,7 +199,8 @@ public class RequestCapabilitiesResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "capabilities", capabilities);
+                "capabilities", capabilities,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -190,7 +211,9 @@ public class RequestCapabilitiesResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends List<Capability>> capabilities = Optional.empty();  
+        private Optional<? extends List<Capability>> capabilities = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -240,13 +263,20 @@ public class RequestCapabilitiesResponse implements Response {
             this.capabilities = capabilities;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public RequestCapabilitiesResponse build() {
             return new RequestCapabilitiesResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                capabilities);
+                capabilities,
+                headers);
         }
     }
 }

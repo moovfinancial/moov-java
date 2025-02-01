@@ -16,6 +16,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -42,27 +44,33 @@ public class GetPaymentLinkResponse implements Response {
      */
     private Optional<? extends PaymentLink> paymentLink;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public GetPaymentLinkResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends PaymentLink> paymentLink) {
+            Optional<? extends PaymentLink> paymentLink,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(paymentLink, "paymentLink");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.paymentLink = paymentLink;
+        this.headers = headers;
     }
     
     public GetPaymentLinkResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -96,6 +104,11 @@ public class GetPaymentLinkResponse implements Response {
     @JsonIgnore
     public Optional<PaymentLink> paymentLink() {
         return (Optional<PaymentLink>) paymentLink;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -146,6 +159,12 @@ public class GetPaymentLinkResponse implements Response {
         this.paymentLink = paymentLink;
         return this;
     }
+
+    public GetPaymentLinkResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -160,7 +179,8 @@ public class GetPaymentLinkResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.paymentLink, other.paymentLink);
+            Objects.deepEquals(this.paymentLink, other.paymentLink) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -169,7 +189,8 @@ public class GetPaymentLinkResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            paymentLink);
+            paymentLink,
+            headers);
     }
     
     @Override
@@ -178,7 +199,8 @@ public class GetPaymentLinkResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "paymentLink", paymentLink);
+                "paymentLink", paymentLink,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -189,7 +211,9 @@ public class GetPaymentLinkResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends PaymentLink> paymentLink = Optional.empty();  
+        private Optional<? extends PaymentLink> paymentLink = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -239,13 +263,20 @@ public class GetPaymentLinkResponse implements Response {
             this.paymentLink = paymentLink;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public GetPaymentLinkResponse build() {
             return new GetPaymentLinkResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                paymentLink);
+                paymentLink,
+                headers);
         }
     }
 }

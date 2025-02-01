@@ -17,6 +17,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -48,30 +50,36 @@ public class InitiateRefundResponse implements Response {
      */
     private Optional<? extends CardAcquiringRefund> cardAcquiringRefund;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public InitiateRefundResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Optional<? extends CreateRefundResponse> createRefundResponse,
-            Optional<? extends CardAcquiringRefund> cardAcquiringRefund) {
+            Optional<? extends CardAcquiringRefund> cardAcquiringRefund,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(createRefundResponse, "createRefundResponse");
         Utils.checkNotNull(cardAcquiringRefund, "cardAcquiringRefund");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.createRefundResponse = createRefundResponse;
         this.cardAcquiringRefund = cardAcquiringRefund;
+        this.headers = headers;
     }
     
     public InitiateRefundResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), headers);
     }
 
     /**
@@ -114,6 +122,11 @@ public class InitiateRefundResponse implements Response {
     @JsonIgnore
     public Optional<CardAcquiringRefund> cardAcquiringRefund() {
         return (Optional<CardAcquiringRefund>) cardAcquiringRefund;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -182,6 +195,12 @@ public class InitiateRefundResponse implements Response {
         this.cardAcquiringRefund = cardAcquiringRefund;
         return this;
     }
+
+    public InitiateRefundResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -197,7 +216,8 @@ public class InitiateRefundResponse implements Response {
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
             Objects.deepEquals(this.createRefundResponse, other.createRefundResponse) &&
-            Objects.deepEquals(this.cardAcquiringRefund, other.cardAcquiringRefund);
+            Objects.deepEquals(this.cardAcquiringRefund, other.cardAcquiringRefund) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -207,7 +227,8 @@ public class InitiateRefundResponse implements Response {
             statusCode,
             rawResponse,
             createRefundResponse,
-            cardAcquiringRefund);
+            cardAcquiringRefund,
+            headers);
     }
     
     @Override
@@ -217,7 +238,8 @@ public class InitiateRefundResponse implements Response {
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
                 "createRefundResponse", createRefundResponse,
-                "cardAcquiringRefund", cardAcquiringRefund);
+                "cardAcquiringRefund", cardAcquiringRefund,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -230,7 +252,9 @@ public class InitiateRefundResponse implements Response {
  
         private Optional<? extends CreateRefundResponse> createRefundResponse = Optional.empty();
  
-        private Optional<? extends CardAcquiringRefund> cardAcquiringRefund = Optional.empty();  
+        private Optional<? extends CardAcquiringRefund> cardAcquiringRefund = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -298,6 +322,12 @@ public class InitiateRefundResponse implements Response {
             this.cardAcquiringRefund = cardAcquiringRefund;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public InitiateRefundResponse build() {
             return new InitiateRefundResponse(
@@ -305,7 +335,8 @@ public class InitiateRefundResponse implements Response {
                 statusCode,
                 rawResponse,
                 createRefundResponse,
-                cardAcquiringRefund);
+                cardAcquiringRefund,
+                headers);
         }
     }
 }

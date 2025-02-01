@@ -134,8 +134,9 @@ public class Card {
     /**
      * Indicates cardholder has authorized card to be stored for future payments.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardOnFile")
-    private boolean cardOnFile;
+    private Optional<Boolean> cardOnFile;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantAccountID")
@@ -183,7 +184,7 @@ public class Card {
             @JsonProperty("issuerPhone") String issuerPhone,
             @JsonProperty("commercial") Optional<Boolean> commercial,
             @JsonProperty("regulated") Optional<Boolean> regulated,
-            @JsonProperty("cardOnFile") boolean cardOnFile,
+            @JsonProperty("cardOnFile") Optional<Boolean> cardOnFile,
             @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
             @JsonProperty("cardAccountUpdater") Optional<? extends CardAccountUpdater> cardAccountUpdater,
             @JsonProperty("domesticPushToCard") DomesticPushToCard domesticPushToCard,
@@ -253,10 +254,9 @@ public class Card {
             String issuerCountry,
             String issuerURL,
             String issuerPhone,
-            boolean cardOnFile,
             DomesticPushToCard domesticPushToCard,
             DomesticPullFromCard domesticPullFromCard) {
-        this(cardID, fingerprint, brand, cardType, cardCategory, lastFourCardNumber, bin, expiration, holderName, billingAddress, cardVerification, issuer, issuerCountry, issuerURL, issuerPhone, Optional.empty(), Optional.empty(), cardOnFile, Optional.empty(), Optional.empty(), domesticPushToCard, domesticPullFromCard, Optional.empty());
+        this(cardID, fingerprint, brand, cardType, cardCategory, lastFourCardNumber, bin, expiration, holderName, billingAddress, cardVerification, issuer, issuerCountry, issuerURL, issuerPhone, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), domesticPushToCard, domesticPullFromCard, Optional.empty());
     }
 
     /**
@@ -401,7 +401,7 @@ public class Card {
      * Indicates cardholder has authorized card to be stored for future payments.
      */
     @JsonIgnore
-    public boolean cardOnFile() {
+    public Optional<Boolean> cardOnFile() {
         return cardOnFile;
     }
 
@@ -625,6 +625,15 @@ public class Card {
      */
     public Card withCardOnFile(boolean cardOnFile) {
         Utils.checkNotNull(cardOnFile, "cardOnFile");
+        this.cardOnFile = Optional.ofNullable(cardOnFile);
+        return this;
+    }
+
+    /**
+     * Indicates cardholder has authorized card to be stored for future payments.
+     */
+    public Card withCardOnFile(Optional<Boolean> cardOnFile) {
+        Utils.checkNotNull(cardOnFile, "cardOnFile");
         this.cardOnFile = cardOnFile;
         return this;
     }
@@ -816,7 +825,7 @@ public class Card {
  
         private Optional<Boolean> regulated = Optional.empty();
  
-        private Boolean cardOnFile;
+        private Optional<Boolean> cardOnFile = Optional.empty();
  
         private Optional<String> merchantAccountID = Optional.empty();
  
@@ -1011,6 +1020,15 @@ public class Card {
          * Indicates cardholder has authorized card to be stored for future payments.
          */
         public Builder cardOnFile(boolean cardOnFile) {
+            Utils.checkNotNull(cardOnFile, "cardOnFile");
+            this.cardOnFile = Optional.ofNullable(cardOnFile);
+            return this;
+        }
+
+        /**
+         * Indicates cardholder has authorized card to be stored for future payments.
+         */
+        public Builder cardOnFile(Optional<Boolean> cardOnFile) {
             Utils.checkNotNull(cardOnFile, "cardOnFile");
             this.cardOnFile = cardOnFile;
             return this;

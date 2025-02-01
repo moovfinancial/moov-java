@@ -14,6 +14,8 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -40,27 +42,33 @@ public class CreateApplePaySessionResponse implements Response {
      */
     private Optional<String> applePaySession;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public CreateApplePaySessionResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<String> applePaySession) {
+            Optional<String> applePaySession,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(applePaySession, "applePaySession");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.applePaySession = applePaySession;
+        this.headers = headers;
     }
     
     public CreateApplePaySessionResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -93,6 +101,11 @@ public class CreateApplePaySessionResponse implements Response {
     @JsonIgnore
     public Optional<String> applePaySession() {
         return applePaySession;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -143,6 +156,12 @@ public class CreateApplePaySessionResponse implements Response {
         this.applePaySession = applePaySession;
         return this;
     }
+
+    public CreateApplePaySessionResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -157,7 +176,8 @@ public class CreateApplePaySessionResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.applePaySession, other.applePaySession);
+            Objects.deepEquals(this.applePaySession, other.applePaySession) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -166,7 +186,8 @@ public class CreateApplePaySessionResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            applePaySession);
+            applePaySession,
+            headers);
     }
     
     @Override
@@ -175,7 +196,8 @@ public class CreateApplePaySessionResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "applePaySession", applePaySession);
+                "applePaySession", applePaySession,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -186,7 +208,9 @@ public class CreateApplePaySessionResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<String> applePaySession = Optional.empty();  
+        private Optional<String> applePaySession = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -236,13 +260,20 @@ public class CreateApplePaySessionResponse implements Response {
             this.applePaySession = applePaySession;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public CreateApplePaySessionResponse build() {
             return new CreateApplePaySessionResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                applePaySession);
+                applePaySession,
+                headers);
         }
     }
 }

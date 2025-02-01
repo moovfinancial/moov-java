@@ -16,6 +16,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -42,27 +44,33 @@ public class GetFullIssuedCardResponse implements Response {
      */
     private Optional<? extends FullIssuedCard> fullIssuedCard;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public GetFullIssuedCardResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends FullIssuedCard> fullIssuedCard) {
+            Optional<? extends FullIssuedCard> fullIssuedCard,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(fullIssuedCard, "fullIssuedCard");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.fullIssuedCard = fullIssuedCard;
+        this.headers = headers;
     }
     
     public GetFullIssuedCardResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -96,6 +104,11 @@ public class GetFullIssuedCardResponse implements Response {
     @JsonIgnore
     public Optional<FullIssuedCard> fullIssuedCard() {
         return (Optional<FullIssuedCard>) fullIssuedCard;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -146,6 +159,12 @@ public class GetFullIssuedCardResponse implements Response {
         this.fullIssuedCard = fullIssuedCard;
         return this;
     }
+
+    public GetFullIssuedCardResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -160,7 +179,8 @@ public class GetFullIssuedCardResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.fullIssuedCard, other.fullIssuedCard);
+            Objects.deepEquals(this.fullIssuedCard, other.fullIssuedCard) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -169,7 +189,8 @@ public class GetFullIssuedCardResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            fullIssuedCard);
+            fullIssuedCard,
+            headers);
     }
     
     @Override
@@ -178,7 +199,8 @@ public class GetFullIssuedCardResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "fullIssuedCard", fullIssuedCard);
+                "fullIssuedCard", fullIssuedCard,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -189,7 +211,9 @@ public class GetFullIssuedCardResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends FullIssuedCard> fullIssuedCard = Optional.empty();  
+        private Optional<? extends FullIssuedCard> fullIssuedCard = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -239,13 +263,20 @@ public class GetFullIssuedCardResponse implements Response {
             this.fullIssuedCard = fullIssuedCard;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public GetFullIssuedCardResponse build() {
             return new GetFullIssuedCardResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                fullIssuedCard);
+                fullIssuedCard,
+                headers);
         }
     }
 }

@@ -14,6 +14,8 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -34,17 +36,22 @@ public class DeleteDisputeEvidenceFileResponse implements Response {
      */
     private HttpResponse<InputStream> rawResponse;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public DeleteDisputeEvidenceFileResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
+        this.headers = headers;
     }
 
     /**
@@ -69,6 +76,11 @@ public class DeleteDisputeEvidenceFileResponse implements Response {
     @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -101,6 +113,12 @@ public class DeleteDisputeEvidenceFileResponse implements Response {
         this.rawResponse = rawResponse;
         return this;
     }
+
+    public DeleteDisputeEvidenceFileResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -114,7 +132,8 @@ public class DeleteDisputeEvidenceFileResponse implements Response {
         return 
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse);
+            Objects.deepEquals(this.rawResponse, other.rawResponse) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -122,7 +141,8 @@ public class DeleteDisputeEvidenceFileResponse implements Response {
         return Objects.hash(
             contentType,
             statusCode,
-            rawResponse);
+            rawResponse,
+            headers);
     }
     
     @Override
@@ -130,7 +150,8 @@ public class DeleteDisputeEvidenceFileResponse implements Response {
         return Utils.toString(DeleteDisputeEvidenceFileResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse);
+                "rawResponse", rawResponse,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -139,7 +160,9 @@ public class DeleteDisputeEvidenceFileResponse implements Response {
  
         private Integer statusCode;
  
-        private HttpResponse<InputStream> rawResponse;  
+        private HttpResponse<InputStream> rawResponse;
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -171,12 +194,19 @@ public class DeleteDisputeEvidenceFileResponse implements Response {
             this.rawResponse = rawResponse;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public DeleteDisputeEvidenceFileResponse build() {
             return new DeleteDisputeEvidenceFileResponse(
                 contentType,
                 statusCode,
-                rawResponse);
+                rawResponse,
+                headers);
         }
     }
 }

@@ -16,6 +16,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -42,27 +44,33 @@ public class UploadDisputeEvidenceTextResponse implements Response {
      */
     private Optional<? extends EvidenceText> evidenceText;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public UploadDisputeEvidenceTextResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends EvidenceText> evidenceText) {
+            Optional<? extends EvidenceText> evidenceText,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(evidenceText, "evidenceText");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.evidenceText = evidenceText;
+        this.headers = headers;
     }
     
     public UploadDisputeEvidenceTextResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -96,6 +104,11 @@ public class UploadDisputeEvidenceTextResponse implements Response {
     @JsonIgnore
     public Optional<EvidenceText> evidenceText() {
         return (Optional<EvidenceText>) evidenceText;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -146,6 +159,12 @@ public class UploadDisputeEvidenceTextResponse implements Response {
         this.evidenceText = evidenceText;
         return this;
     }
+
+    public UploadDisputeEvidenceTextResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -160,7 +179,8 @@ public class UploadDisputeEvidenceTextResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.evidenceText, other.evidenceText);
+            Objects.deepEquals(this.evidenceText, other.evidenceText) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -169,7 +189,8 @@ public class UploadDisputeEvidenceTextResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            evidenceText);
+            evidenceText,
+            headers);
     }
     
     @Override
@@ -178,7 +199,8 @@ public class UploadDisputeEvidenceTextResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "evidenceText", evidenceText);
+                "evidenceText", evidenceText,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -189,7 +211,9 @@ public class UploadDisputeEvidenceTextResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends EvidenceText> evidenceText = Optional.empty();  
+        private Optional<? extends EvidenceText> evidenceText = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -239,13 +263,20 @@ public class UploadDisputeEvidenceTextResponse implements Response {
             this.evidenceText = evidenceText;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public UploadDisputeEvidenceTextResponse build() {
             return new UploadDisputeEvidenceTextResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                evidenceText);
+                evidenceText,
+                headers);
         }
     }
 }

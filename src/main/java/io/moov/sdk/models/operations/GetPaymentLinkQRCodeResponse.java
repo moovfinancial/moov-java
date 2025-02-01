@@ -16,6 +16,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -47,30 +49,36 @@ public class GetPaymentLinkQRCodeResponse implements Response {
      */
     private Optional<? extends InputStream> responseStream;
 
+    private Map<String, List<String>> headers;
+
     @JsonCreator
     public GetPaymentLinkQRCodeResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Optional<? extends QRCode> qrCode,
-            Optional<? extends InputStream> responseStream) {
+            Optional<? extends InputStream> responseStream,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(qrCode, "qrCode");
         Utils.checkNotNull(responseStream, "responseStream");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.qrCode = qrCode;
         this.responseStream = responseStream;
+        this.headers = headers;
     }
     
     public GetPaymentLinkQRCodeResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), headers);
     }
 
     /**
@@ -113,6 +121,11 @@ public class GetPaymentLinkQRCodeResponse implements Response {
     @JsonIgnore
     public Optional<InputStream> responseStream() {
         return (Optional<InputStream>) responseStream;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -181,6 +194,12 @@ public class GetPaymentLinkQRCodeResponse implements Response {
         this.responseStream = responseStream;
         return this;
     }
+
+    public GetPaymentLinkQRCodeResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -196,7 +215,8 @@ public class GetPaymentLinkQRCodeResponse implements Response {
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
             Objects.deepEquals(this.qrCode, other.qrCode) &&
-            Objects.deepEquals(this.responseStream, other.responseStream);
+            Objects.deepEquals(this.responseStream, other.responseStream) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -206,7 +226,8 @@ public class GetPaymentLinkQRCodeResponse implements Response {
             statusCode,
             rawResponse,
             qrCode,
-            responseStream);
+            responseStream,
+            headers);
     }
     
     @Override
@@ -216,7 +237,8 @@ public class GetPaymentLinkQRCodeResponse implements Response {
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
                 "qrCode", qrCode,
-                "responseStream", responseStream);
+                "responseStream", responseStream,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -229,7 +251,9 @@ public class GetPaymentLinkQRCodeResponse implements Response {
  
         private Optional<? extends QRCode> qrCode = Optional.empty();
  
-        private Optional<? extends InputStream> responseStream = Optional.empty();  
+        private Optional<? extends InputStream> responseStream = Optional.empty();
+ 
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -297,6 +321,12 @@ public class GetPaymentLinkQRCodeResponse implements Response {
             this.responseStream = responseStream;
             return this;
         }
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
+            return this;
+        }
         
         public GetPaymentLinkQRCodeResponse build() {
             return new GetPaymentLinkQRCodeResponse(
@@ -304,7 +334,8 @@ public class GetPaymentLinkQRCodeResponse implements Response {
                 statusCode,
                 rawResponse,
                 qrCode,
-                responseStream);
+                responseStream,
+                headers);
         }
     }
 }

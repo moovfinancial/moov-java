@@ -7,12 +7,12 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.Versions;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -21,9 +21,17 @@ public class DisableCardRequest {
 
     /**
      * Specify an API version.
+     * 
+     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     *   - `YYYY` is the year
+     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     * 
+     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
-    private Optional<? extends Versions> xMoovVersion;
+    private Optional<String> xMoovVersion;
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -33,7 +41,7 @@ public class DisableCardRequest {
 
     @JsonCreator
     public DisableCardRequest(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String cardID) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -52,11 +60,18 @@ public class DisableCardRequest {
 
     /**
      * Specify an API version.
+     * 
+     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     *   - `YYYY` is the year
+     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     * 
+     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Versions> xMoovVersion() {
-        return (Optional<Versions>) xMoovVersion;
+    public Optional<String> xMoovVersion() {
+        return xMoovVersion;
     }
 
     @JsonIgnore
@@ -75,8 +90,16 @@ public class DisableCardRequest {
 
     /**
      * Specify an API version.
+     * 
+     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     *   - `YYYY` is the year
+     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     * 
+     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public DisableCardRequest withXMoovVersion(Versions xMoovVersion) {
+    public DisableCardRequest withXMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.ofNullable(xMoovVersion);
         return this;
@@ -84,8 +107,16 @@ public class DisableCardRequest {
 
     /**
      * Specify an API version.
+     * 
+     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     *   - `YYYY` is the year
+     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     * 
+     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public DisableCardRequest withXMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public DisableCardRequest withXMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -136,7 +167,7 @@ public class DisableCardRequest {
     
     public final static class Builder {
  
-        private Optional<? extends Versions> xMoovVersion = Optional.empty();
+        private Optional<String> xMoovVersion;
  
         private String accountID;
  
@@ -148,8 +179,16 @@ public class DisableCardRequest {
 
         /**
          * Specify an API version.
+         * 
+         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         *   - `YYYY` is the year
+         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+         *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+         *     - If no build number is specified, the version refers to the initial release of the quarter.
+         * 
+         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
-        public Builder xMoovVersion(Versions xMoovVersion) {
+        public Builder xMoovVersion(String xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
             this.xMoovVersion = Optional.ofNullable(xMoovVersion);
             return this;
@@ -157,8 +196,16 @@ public class DisableCardRequest {
 
         /**
          * Specify an API version.
+         * 
+         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         *   - `YYYY` is the year
+         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+         *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+         *     - If no build number is specified, the version refers to the initial release of the quarter.
+         * 
+         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
-        public Builder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+        public Builder xMoovVersion(Optional<String> xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
             this.xMoovVersion = xMoovVersion;
             return this;
@@ -177,11 +224,19 @@ public class DisableCardRequest {
         }
         
         public DisableCardRequest build() {
-            return new DisableCardRequest(
+            if (xMoovVersion == null) {
+                xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+            }            return new DisableCardRequest(
                 xMoovVersion,
                 accountID,
                 cardID);
         }
+
+        private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+                new LazySingletonValue<>(
+                        "x-moov-version",
+                        "\"v2024.01\"",
+                        new TypeReference<Optional<String>>() {});
     }
 }
 

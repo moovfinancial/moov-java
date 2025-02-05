@@ -7,7 +7,8 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.Versions;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
@@ -22,9 +23,17 @@ public class ListPartnerPricingRequest {
 
     /**
      * Specify an API version.
+     * 
+     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     *   - `YYYY` is the year
+     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     * 
+     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
-    private Optional<? extends Versions> xMoovVersion;
+    private Optional<String> xMoovVersion;
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -37,7 +46,7 @@ public class ListPartnerPricingRequest {
 
     @JsonCreator
     public ListPartnerPricingRequest(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             Optional<? extends List<String>> planIDs) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -55,11 +64,18 @@ public class ListPartnerPricingRequest {
 
     /**
      * Specify an API version.
+     * 
+     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     *   - `YYYY` is the year
+     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     * 
+     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Versions> xMoovVersion() {
-        return (Optional<Versions>) xMoovVersion;
+    public Optional<String> xMoovVersion() {
+        return xMoovVersion;
     }
 
     @JsonIgnore
@@ -82,8 +98,16 @@ public class ListPartnerPricingRequest {
 
     /**
      * Specify an API version.
+     * 
+     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     *   - `YYYY` is the year
+     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     * 
+     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public ListPartnerPricingRequest withXMoovVersion(Versions xMoovVersion) {
+    public ListPartnerPricingRequest withXMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.ofNullable(xMoovVersion);
         return this;
@@ -91,8 +115,16 @@ public class ListPartnerPricingRequest {
 
     /**
      * Specify an API version.
+     * 
+     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     *   - `YYYY` is the year
+     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     * 
+     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public ListPartnerPricingRequest withXMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public ListPartnerPricingRequest withXMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -155,7 +187,7 @@ public class ListPartnerPricingRequest {
     
     public final static class Builder {
  
-        private Optional<? extends Versions> xMoovVersion = Optional.empty();
+        private Optional<String> xMoovVersion;
  
         private String accountID;
  
@@ -167,8 +199,16 @@ public class ListPartnerPricingRequest {
 
         /**
          * Specify an API version.
+         * 
+         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         *   - `YYYY` is the year
+         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+         *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+         *     - If no build number is specified, the version refers to the initial release of the quarter.
+         * 
+         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
-        public Builder xMoovVersion(Versions xMoovVersion) {
+        public Builder xMoovVersion(String xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
             this.xMoovVersion = Optional.ofNullable(xMoovVersion);
             return this;
@@ -176,8 +216,16 @@ public class ListPartnerPricingRequest {
 
         /**
          * Specify an API version.
+         * 
+         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         *   - `YYYY` is the year
+         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+         *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
+         *     - If no build number is specified, the version refers to the initial release of the quarter.
+         * 
+         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
-        public Builder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+        public Builder xMoovVersion(Optional<String> xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
             this.xMoovVersion = xMoovVersion;
             return this;
@@ -208,11 +256,19 @@ public class ListPartnerPricingRequest {
         }
         
         public ListPartnerPricingRequest build() {
-            return new ListPartnerPricingRequest(
+            if (xMoovVersion == null) {
+                xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+            }            return new ListPartnerPricingRequest(
                 xMoovVersion,
                 accountID,
                 planIDs);
         }
+
+        private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+                new LazySingletonValue<>(
+                        "x-moov-version",
+                        "\"v2024.01\"",
+                        new TypeReference<Optional<String>>() {});
     }
 }
 

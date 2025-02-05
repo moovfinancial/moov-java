@@ -7,7 +7,6 @@ package io.moov.sdk;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.ScheduleResponse;
 import io.moov.sdk.models.components.UpsertSchedule;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ScheduleValidationError;
@@ -86,12 +85,12 @@ public class Scheduling implements
     
     /**
      * Describes the schedule to create or modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -101,7 +100,7 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public CreateScheduleResponse create(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             UpsertSchedule upsertSchedule) throws Exception {
         CreateScheduleRequest request =
@@ -304,12 +303,12 @@ public class Scheduling implements
     
     /**
      * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -320,7 +319,7 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public ListSchedulesResponse list(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             Optional<Long> skip,
             Optional<Long> count,
             String accountID) throws Exception {
@@ -491,12 +490,12 @@ public class Scheduling implements
     
     /**
      * Describes the schedule to modify. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -507,7 +506,7 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public UpdateScheduleResponse update(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String scheduleID,
             UpsertSchedule upsertSchedule) throws Exception {
@@ -714,12 +713,12 @@ public class Scheduling implements
     
     /**
      * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -729,7 +728,7 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public GetSchedulesResponse get(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String scheduleID) throws Exception {
         GetSchedulesRequest request =
@@ -891,12 +890,12 @@ public class Scheduling implements
     
     /**
      * Describes the schedule to cancel. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -906,7 +905,7 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public CancelScheduleResponse cancel(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String scheduleID) throws Exception {
         CancelScheduleRequest request =
@@ -1078,12 +1077,12 @@ public class Scheduling implements
     
     /**
      * Defines an occurrence for when to run a transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -1098,7 +1097,7 @@ public class Scheduling implements
      * @throws Exception if the API call fails
      */
     public GetScheduledOccurrenceResponse getOccurrance(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String scheduleID,
             String occurrenceFilter) throws Exception {

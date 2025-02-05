@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.AuthToken;
 import io.moov.sdk.models.components.AuthTokenRequest;
 import io.moov.sdk.models.components.RevokeTokenRequest;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.AuthTokenRequestError;
 import io.moov.sdk.models.errors.GenericError;
@@ -69,12 +68,12 @@ public class Authentication implements
     
     /**
      * Revoke an auth token. -  - Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -83,7 +82,7 @@ public class Authentication implements
      * @throws Exception if the API call fails
      */
     public RevokeAccessTokenResponse revokeAccessToken(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             RevokeTokenRequest revokeTokenRequest) throws Exception {
         RevokeAccessTokenRequest request =
             RevokeAccessTokenRequest
@@ -271,12 +270,12 @@ public class Authentication implements
     
     /**
      * Create or refresh an access token.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -285,7 +284,7 @@ public class Authentication implements
      * @throws Exception if the API call fails
      */
     public CreateAccessTokenResponse createAccessToken(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             AuthTokenRequest authTokenRequest) throws Exception {
         CreateAccessTokenRequest request =
             CreateAccessTokenRequest

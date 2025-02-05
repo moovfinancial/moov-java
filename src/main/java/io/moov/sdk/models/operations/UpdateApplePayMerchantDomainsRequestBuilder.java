@@ -4,15 +4,19 @@
 
 package io.moov.sdk.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.UpdateApplePayMerchantDomains;
-import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
 
 public class UpdateApplePayMerchantDomainsRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private UpdateApplePayMerchantDomains updateApplePayMerchantDomains;
     private final SDKMethodInterfaces.MethodCallUpdateApplePayMerchantDomains sdk;
@@ -21,13 +25,13 @@ public class UpdateApplePayMerchantDomainsRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public UpdateApplePayMerchantDomainsRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public UpdateApplePayMerchantDomainsRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public UpdateApplePayMerchantDomainsRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public UpdateApplePayMerchantDomainsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -46,10 +50,18 @@ public class UpdateApplePayMerchantDomainsRequestBuilder {
     }
 
     public UpdateApplePayMerchantDomainsResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.updateMerchantDomains(
             xMoovVersion,
             accountID,
             updateApplePayMerchantDomains);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

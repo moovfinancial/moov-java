@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.AddCapabilities;
 import io.moov.sdk.models.components.Capability;
 import io.moov.sdk.models.components.CapabilityID;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.AddCapabilitiesError;
 import io.moov.sdk.models.errors.GenericError;
@@ -76,12 +75,12 @@ public class Capabilities implements
     
     /**
      * Retrieve all the capabilities an account has requested. -  - Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -90,7 +89,7 @@ public class Capabilities implements
      * @throws Exception if the API call fails
      */
     public ListCapabilitiesResponse list(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID) throws Exception {
         ListCapabilitiesRequest request =
             ListCapabilitiesRequest
@@ -250,12 +249,12 @@ public class Capabilities implements
     
     /**
      * Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -265,7 +264,7 @@ public class Capabilities implements
      * @throws Exception if the API call fails
      */
     public RequestCapabilitiesResponse request(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             AddCapabilities addCapabilities) throws Exception {
         RequestCapabilitiesRequest request =
@@ -470,12 +469,12 @@ public class Capabilities implements
     
     /**
      * Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -485,7 +484,7 @@ public class Capabilities implements
      * @throws Exception if the API call fails
      */
     public GetCapabilityResponse get(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             CapabilityID capabilityID) throws Exception {
         GetCapabilityRequest request =
@@ -647,12 +646,12 @@ public class Capabilities implements
     
     /**
      * Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  -   To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -662,7 +661,7 @@ public class Capabilities implements
      * @throws Exception if the API call fails
      */
     public DisableCapabilityResponse disable(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             CapabilityID capabilityID) throws Exception {
         DisableCapabilityRequest request =

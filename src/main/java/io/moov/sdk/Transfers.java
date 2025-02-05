@@ -12,7 +12,6 @@ import io.moov.sdk.models.components.Reversal;
 import io.moov.sdk.models.components.Transfer;
 import io.moov.sdk.models.components.TransferOptions;
 import io.moov.sdk.models.components.TransferResponse;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.RefundValidationError;
@@ -488,12 +487,12 @@ public class Transfers implements
     
     /**
      * Retrieve full transfer details for an individual transfer of a particular Moov account.  -  - Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/)  - to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -503,7 +502,7 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public GetTransferResponse get(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String transferID,
             String accountID) throws Exception {
         GetTransferRequest request =
@@ -665,12 +664,12 @@ public class Transfers implements
     
     /**
      * Update the metadata contained on a transfer.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -680,7 +679,7 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public UpdateTransferResponse update(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String transferID,
             String accountID) throws Exception {
         UpdateTransferRequest request =
@@ -1057,12 +1056,12 @@ public class Transfers implements
     
     /**
      * Get a list of refunds for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -1072,7 +1071,7 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public ListRefundsResponse listRefunds(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String transferID) throws Exception {
         ListRefundsRequest request =
@@ -1236,12 +1235,12 @@ public class Transfers implements
     
     /**
      * Get details of a refund for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -1252,7 +1251,7 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public GetRefundResponse getRefund(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String transferID,
             String accountID,
             String refundID) throws Exception {
@@ -1596,12 +1595,12 @@ public class Transfers implements
     
     /**
      * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you  - supply in the request.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -1609,7 +1608,7 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public CreateTransferOptionsResponse generateOptions(
-            Optional<? extends Versions> xMoovVersion) throws Exception {
+            Optional<String> xMoovVersion) throws Exception {
         CreateTransferOptionsRequest request =
             CreateTransferOptionsRequest
                 .builder()

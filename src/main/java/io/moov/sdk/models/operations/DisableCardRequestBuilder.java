@@ -4,14 +4,18 @@
 
 package io.moov.sdk.models.operations;
 
-import io.moov.sdk.models.components.Versions;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
 
 public class DisableCardRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String cardID;
     private final SDKMethodInterfaces.MethodCallDisableCard sdk;
@@ -20,13 +24,13 @@ public class DisableCardRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public DisableCardRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public DisableCardRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public DisableCardRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public DisableCardRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -45,10 +49,18 @@ public class DisableCardRequestBuilder {
     }
 
     public DisableCardResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.disable(
             xMoovVersion,
             accountID,
             cardID);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

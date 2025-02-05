@@ -4,7 +4,6 @@
 
 package io.moov.sdk;
 
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.RetryConfig;
 import io.moov.sdk.utils.SpeakeasyHTTPClient;
@@ -309,7 +308,7 @@ public class Moov {
          * @param xMoovVersion The value to set.
          * @return The builder instance.
          */
-        public Builder xMoovVersion(Versions xMoovVersion) {
+        public Builder xMoovVersion(String xMoovVersion) {
             if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
                 this.sdkConfiguration.globals.get("parameters").put("header", new HashMap<>());
             }

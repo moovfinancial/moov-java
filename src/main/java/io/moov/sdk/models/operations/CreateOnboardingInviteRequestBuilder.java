@@ -4,14 +4,19 @@
 
 package io.moov.sdk.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.OnboardingInviteRequest;
-import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
+import java.lang.String;
 import java.util.Optional;
 
 public class CreateOnboardingInviteRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private OnboardingInviteRequest onboardingInviteRequest;
     private final SDKMethodInterfaces.MethodCallCreateOnboardingInvite sdk;
 
@@ -19,13 +24,13 @@ public class CreateOnboardingInviteRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public CreateOnboardingInviteRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public CreateOnboardingInviteRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public CreateOnboardingInviteRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public CreateOnboardingInviteRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -38,9 +43,17 @@ public class CreateOnboardingInviteRequestBuilder {
     }
 
     public CreateOnboardingInviteResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.createInvite(
             xMoovVersion,
             onboardingInviteRequest);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

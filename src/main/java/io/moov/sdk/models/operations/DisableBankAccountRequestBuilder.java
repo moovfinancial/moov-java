@@ -4,14 +4,18 @@
 
 package io.moov.sdk.models.operations;
 
-import io.moov.sdk.models.components.Versions;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
 
 public class DisableBankAccountRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String bankAccountID;
     private final SDKMethodInterfaces.MethodCallDisableBankAccount sdk;
@@ -20,13 +24,13 @@ public class DisableBankAccountRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public DisableBankAccountRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public DisableBankAccountRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public DisableBankAccountRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public DisableBankAccountRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -45,10 +49,18 @@ public class DisableBankAccountRequestBuilder {
     }
 
     public DisableBankAccountResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.disable(
             xMoovVersion,
             accountID,
             bankAccountID);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

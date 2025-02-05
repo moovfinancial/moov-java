@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.6.5'
+implementation 'io.moov:sdk:0.7.0'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.6.5</version>
+    <version>0.7.0</version>
 </dependency>
 ```
 
@@ -91,7 +91,6 @@ import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
@@ -109,7 +108,7 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion("v2024.01")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -149,7 +148,6 @@ import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
@@ -167,7 +165,7 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion("v2024.01")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -991,7 +989,6 @@ import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
@@ -1009,7 +1006,7 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion("v2024.01")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -1043,7 +1040,6 @@ import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
@@ -1062,7 +1058,7 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion(Versions.V202504)
+                .xMoovVersion("v2024.01")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()

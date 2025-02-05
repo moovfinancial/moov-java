@@ -9,7 +9,6 @@ import io.moov.sdk.models.components.CreatePaymentLink;
 import io.moov.sdk.models.components.PaymentLink;
 import io.moov.sdk.models.components.QRCode;
 import io.moov.sdk.models.components.UpdatePaymentLink;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.CreatePaymentLinkError;
 import io.moov.sdk.models.errors.GenericError;
@@ -94,12 +93,12 @@ public class PaymentLinks implements
     
     /**
      * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -115,7 +114,7 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public CreatePaymentLinkResponse create(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             CreatePaymentLink createPaymentLink) throws Exception {
         CreatePaymentLinkRequest request =
@@ -318,12 +317,12 @@ public class PaymentLinks implements
     
     /**
      * List all the payment links created under a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -332,7 +331,7 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public ListPaymentLinksResponse list(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID) throws Exception {
         ListPaymentLinksRequest request =
             ListPaymentLinksRequest
@@ -492,12 +491,12 @@ public class PaymentLinks implements
     
     /**
      * Retrieve a payment link by code. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -507,7 +506,7 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public GetPaymentLinkResponse get(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String paymentLinkCode) throws Exception {
         GetPaymentLinkRequest request =
@@ -671,12 +670,12 @@ public class PaymentLinks implements
     
     /**
      * Update a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -687,7 +686,7 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public UpdatePaymentLinkResponse update(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String paymentLinkCode,
             UpdatePaymentLink updatePaymentLink) throws Exception {
@@ -894,12 +893,12 @@ public class PaymentLinks implements
     
     /**
      * Disable a payment link. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -909,7 +908,7 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public DisablePaymentLinkResponse disable(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String paymentLinkCode) throws Exception {
         DisablePaymentLinkRequest request =
@@ -1042,12 +1041,12 @@ public class PaymentLinks implements
     
     /**
      * Retrieve the payment link encoded in a QR code.  -  - Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -1057,7 +1056,7 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public GetPaymentLinkQRCodeResponse getQRCode(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String paymentLinkCode) throws Exception {
         GetPaymentLinkQRCodeRequest request =

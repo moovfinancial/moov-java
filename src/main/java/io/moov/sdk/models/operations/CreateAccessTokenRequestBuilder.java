@@ -4,14 +4,19 @@
 
 package io.moov.sdk.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.AuthTokenRequest;
-import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
+import java.lang.String;
 import java.util.Optional;
 
 public class CreateAccessTokenRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private AuthTokenRequest authTokenRequest;
     private final SDKMethodInterfaces.MethodCallCreateAccessToken sdk;
 
@@ -19,13 +24,13 @@ public class CreateAccessTokenRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public CreateAccessTokenRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public CreateAccessTokenRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public CreateAccessTokenRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public CreateAccessTokenRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -38,9 +43,17 @@ public class CreateAccessTokenRequestBuilder {
     }
 
     public CreateAccessTokenResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.createAccessToken(
             xMoovVersion,
             authTokenRequest);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

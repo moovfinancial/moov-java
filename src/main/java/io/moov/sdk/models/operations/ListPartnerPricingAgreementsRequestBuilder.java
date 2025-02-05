@@ -4,8 +4,9 @@
 
 package io.moov.sdk.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.FeePlanAgreementStatus;
-import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.List;
@@ -13,7 +14,10 @@ import java.util.Optional;
 
 public class ListPartnerPricingAgreementsRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private Optional<? extends List<String>> agreementID = Optional.empty();
     private Optional<? extends List<FeePlanAgreementStatus>> status = Optional.empty();
@@ -23,13 +27,13 @@ public class ListPartnerPricingAgreementsRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public ListPartnerPricingAgreementsRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public ListPartnerPricingAgreementsRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public ListPartnerPricingAgreementsRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public ListPartnerPricingAgreementsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -66,11 +70,19 @@ public class ListPartnerPricingAgreementsRequestBuilder {
     }
 
     public ListPartnerPricingAgreementsResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.listPartnerPricingAgreements(
             xMoovVersion,
             accountID,
             agreementID,
             status);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

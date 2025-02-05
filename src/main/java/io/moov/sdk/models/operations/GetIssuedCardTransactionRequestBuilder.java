@@ -4,14 +4,18 @@
 
 package io.moov.sdk.models.operations;
 
-import io.moov.sdk.models.components.Versions;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
 
 public class GetIssuedCardTransactionRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String cardTransactionID;
     private final SDKMethodInterfaces.MethodCallGetIssuedCardTransaction sdk;
@@ -20,13 +24,13 @@ public class GetIssuedCardTransactionRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetIssuedCardTransactionRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public GetIssuedCardTransactionRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public GetIssuedCardTransactionRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public GetIssuedCardTransactionRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -45,10 +49,18 @@ public class GetIssuedCardTransactionRequestBuilder {
     }
 
     public GetIssuedCardTransactionResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.get(
             xMoovVersion,
             accountID,
             cardTransactionID);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

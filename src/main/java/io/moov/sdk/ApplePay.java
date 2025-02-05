@@ -11,7 +11,6 @@ import io.moov.sdk.models.components.LinkApplePay;
 import io.moov.sdk.models.components.LinkedApplePayPaymentMethod;
 import io.moov.sdk.models.components.RegisterApplePayMerchantDomains;
 import io.moov.sdk.models.components.UpdateApplePayMerchantDomains;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.LinkApplePayError;
@@ -85,12 +84,12 @@ public class ApplePay implements
     
     /**
      * Add domains to be registered with Apple Pay. -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -100,7 +99,7 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public RegisterApplePayMerchantDomainsResponse registerMerchantDomains(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             RegisterApplePayMerchantDomains registerApplePayMerchantDomains) throws Exception {
         RegisterApplePayMerchantDomainsRequest request =
@@ -290,12 +289,12 @@ public class ApplePay implements
     
     /**
      * Add or remove domains to be registered with Apple Pay.  -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -305,7 +304,7 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public UpdateApplePayMerchantDomainsResponse updateMerchantDomains(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             UpdateApplePayMerchantDomains updateApplePayMerchantDomains) throws Exception {
         UpdateApplePayMerchantDomainsRequest request =
@@ -482,12 +481,12 @@ public class ApplePay implements
     
     /**
      * Get domains registered with Apple Pay.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -496,7 +495,7 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public GetApplePayMerchantDomainsResponse getMerchantDomains(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID) throws Exception {
         GetApplePayMerchantDomainsRequest request =
             GetApplePayMerchantDomainsRequest
@@ -656,12 +655,12 @@ public class ApplePay implements
     
     /**
      * Create a session with Apple Pay to facilitate a payment.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - A successful response from this endpoint should be passed through to Apple Pay unchanged.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -671,7 +670,7 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public CreateApplePaySessionResponse createSession(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             CreateApplePaySession createApplePaySession) throws Exception {
         CreateApplePaySessionRequest request =
@@ -864,12 +863,12 @@ public class ApplePay implements
     
     /**
      * Connect an Apple Pay token to the specified account.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -882,7 +881,7 @@ public class ApplePay implements
      * @throws Exception if the API call fails
      */
     public LinkApplePayTokenResponse linkToken(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             LinkApplePay linkApplePay) throws Exception {
         LinkApplePayTokenRequest request =

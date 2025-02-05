@@ -1,19 +1,20 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 1c5c6c2698f229c9e34d23b367971bf6
+  docChecksum: f556249e67aba6f6878df2141974b495
   docVersion: latest
-  speakeasyVersion: 1.481.1
-  generationVersion: 2.500.5
-  releaseVersion: 0.6.5
-  configChecksum: b84406f785f0b4283e4f9bd5b54fa1a5
+  speakeasyVersion: 1.484.1
+  generationVersion: 2.503.2
+  releaseVersion: 0.7.0
+  configChecksum: 0d95bff4e68329d2eb41c0ff1a1a285d
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
   java:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    core: 3.33.7
+    constsAndDefaults: 0.1.1
+    core: 3.33.8
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     flattening: 2.81.1
@@ -398,7 +399,6 @@ generatedFiles:
   - docs/models/components/Verification.md
   - docs/models/components/VerificationStatus.md
   - docs/models/components/VerificationStatusDetail.md
-  - docs/models/components/Versions.md
   - docs/models/components/VolumeByCustomerType.md
   - docs/models/components/VolumeByCustomerTypeError.md
   - docs/models/components/Wallet.md
@@ -1118,7 +1118,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/Verification.java
   - src/main/java/io/moov/sdk/models/components/VerificationStatus.java
   - src/main/java/io/moov/sdk/models/components/VerificationStatusDetail.java
-  - src/main/java/io/moov/sdk/models/components/Versions.java
   - src/main/java/io/moov/sdk/models/components/VolumeByCustomerType.java
   - src/main/java/io/moov/sdk/models/components/VolumeByCustomerTypeError.java
   - src/main/java/io/moov/sdk/models/components/Wallet.java
@@ -1548,6 +1547,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/utils/QueryParameter.java
   - src/main/java/io/moov/sdk/utils/QueryParameters.java
   - src/main/java/io/moov/sdk/utils/QueryParamsMetadata.java
+  - src/main/java/io/moov/sdk/utils/RecordingClient.java
   - src/main/java/io/moov/sdk/utils/RequestBody.java
   - src/main/java/io/moov/sdk/utils/RequestMetadata.java
   - src/main/java/io/moov/sdk/utils/Response.java

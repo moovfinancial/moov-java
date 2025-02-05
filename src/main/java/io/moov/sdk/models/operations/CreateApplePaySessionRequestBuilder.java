@@ -4,15 +4,19 @@
 
 package io.moov.sdk.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.CreateApplePaySession;
-import io.moov.sdk.models.components.Versions;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
 
 public class CreateApplePaySessionRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private CreateApplePaySession createApplePaySession;
     private final SDKMethodInterfaces.MethodCallCreateApplePaySession sdk;
@@ -21,13 +25,13 @@ public class CreateApplePaySessionRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public CreateApplePaySessionRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public CreateApplePaySessionRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public CreateApplePaySessionRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public CreateApplePaySessionRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -46,10 +50,18 @@ public class CreateApplePaySessionRequestBuilder {
     }
 
     public CreateApplePaySessionResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.createSession(
             xMoovVersion,
             accountID,
             createApplePaySession);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

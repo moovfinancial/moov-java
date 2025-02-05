@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.IssuedCardAuthorization;
 import io.moov.sdk.models.components.IssuedCardAuthorizationEvent;
 import io.moov.sdk.models.components.IssuedCardTransaction;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetIssuedCardAuthorizationRequest;
 import io.moov.sdk.models.operations.GetIssuedCardAuthorizationRequestBuilder;
@@ -226,12 +225,12 @@ public class IssuingTransactions implements
     
     /**
      * Retrieves details of an authorization associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -241,7 +240,7 @@ public class IssuingTransactions implements
      * @throws Exception if the API call fails
      */
     public GetIssuedCardAuthorizationResponse getAuthorization(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String authorizationID) throws Exception {
         GetIssuedCardAuthorizationRequest request =
@@ -701,12 +700,12 @@ public class IssuingTransactions implements
     
     /**
      * Retrieves details of an issued card transaction associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -716,7 +715,7 @@ public class IssuingTransactions implements
      * @throws Exception if the API call fails
      */
     public GetIssuedCardTransactionResponse get(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String cardTransactionID) throws Exception {
         GetIssuedCardTransactionRequest request =

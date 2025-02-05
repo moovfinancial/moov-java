@@ -7,7 +7,6 @@ package io.moov.sdk;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.E2EEToken;
 import io.moov.sdk.models.components.JSONWebKey;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.GenerateEndToEndKeyRequest;
@@ -68,12 +67,12 @@ public class EndToEndEncryption implements
     
     /**
      * Allows for testing a JWE token to ensure it's acceptable by Moov.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/ping.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -84,7 +83,7 @@ public class EndToEndEncryption implements
      * @throws Exception if the API call fails
      */
     public TestEndToEndTokenResponse testEncryptedToken(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             E2EEToken e2EEToken) throws Exception {
         TestEndToEndTokenRequest request =
             TestEndToEndTokenRequest
@@ -255,12 +254,12 @@ public class EndToEndEncryption implements
     
     /**
      * Generates a public key used to create a JWE token for passing secure authentication data through non-PCI compliant intermediaries.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -268,7 +267,7 @@ public class EndToEndEncryption implements
      * @throws Exception if the API call fails
      */
     public GenerateEndToEndKeyResponse generateKey(
-            Optional<? extends Versions> xMoovVersion) throws Exception {
+            Optional<String> xMoovVersion) throws Exception {
         GenerateEndToEndKeyRequest request =
             GenerateEndToEndKeyRequest
                 .builder()

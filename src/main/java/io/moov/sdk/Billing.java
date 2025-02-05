@@ -11,7 +11,6 @@ import io.moov.sdk.models.components.FeePlanAgreement;
 import io.moov.sdk.models.components.FeePlanAgreementStatus;
 import io.moov.sdk.models.components.PartnerPricing;
 import io.moov.sdk.models.components.PartnerPricingAgreement;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.FeePlanAgreementError;
 import io.moov.sdk.models.errors.GenericError;
@@ -83,12 +82,12 @@ public class Billing implements
     
     /**
      * List all fee plan agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -99,7 +98,7 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public ListFeePlanAgreementsResponse listFeePlanAgreements(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             Optional<? extends List<String>> agreementID,
             Optional<? extends List<FeePlanAgreementStatus>> status) throws Exception {
@@ -268,12 +267,12 @@ public class Billing implements
     
     /**
      * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -283,7 +282,7 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public CreateFeePlanAgreementsResponse createFeePlanAgreements(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             CreateFeePlanAgreement createFeePlanAgreement) throws Exception {
         CreateFeePlanAgreementsRequest request =
@@ -486,12 +485,12 @@ public class Billing implements
     
     /**
      * List all fee plans available for use by an account. This is intended to be used by an account when  - selecting a fee plan to apply to a connected account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -501,7 +500,7 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public ListFeePlansResponse listFeePlans(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             Optional<? extends List<String>> planIDs) throws Exception {
         ListFeePlansRequest request =
@@ -666,12 +665,12 @@ public class Billing implements
     
     /**
      * List all partner pricing plans available for use by an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -681,7 +680,7 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public ListPartnerPricingResponse listPartnerPricing(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             Optional<? extends List<String>> planIDs) throws Exception {
         ListPartnerPricingRequest request =
@@ -846,12 +845,12 @@ public class Billing implements
     
     /**
      * List all partner pricing agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -862,7 +861,7 @@ public class Billing implements
      * @throws Exception if the API call fails
      */
     public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             Optional<? extends List<String>> agreementID,
             Optional<? extends List<FeePlanAgreementStatus>> status) throws Exception {

@@ -4,34 +4,47 @@
 
 package io.moov.sdk.models.operations;
 
-import io.moov.sdk.models.components.Versions;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
+import java.lang.String;
 import java.util.Optional;
 
 public class GenerateEndToEndKeyRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private final SDKMethodInterfaces.MethodCallGenerateEndToEndKey sdk;
 
     public GenerateEndToEndKeyRequestBuilder(SDKMethodInterfaces.MethodCallGenerateEndToEndKey sdk) {
         this.sdk = sdk;
     }
                 
-    public GenerateEndToEndKeyRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public GenerateEndToEndKeyRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public GenerateEndToEndKeyRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public GenerateEndToEndKeyRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
     }
 
     public GenerateEndToEndKeyResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.generateKey(
             xMoovVersion);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

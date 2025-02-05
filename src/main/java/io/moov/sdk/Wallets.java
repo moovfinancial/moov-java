@@ -5,7 +5,6 @@
 package io.moov.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.components.Wallet;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetWalletRequest;
@@ -61,12 +60,12 @@ public class Wallets implements
     
     /**
      * List the wallets associated with a Moov account.  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -75,7 +74,7 @@ public class Wallets implements
      * @throws Exception if the API call fails
      */
     public ListWalletsResponse list(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID) throws Exception {
         ListWalletsRequest request =
             ListWalletsRequest
@@ -235,12 +234,12 @@ public class Wallets implements
     
     /**
      * Get information on a specific wallet (e.g., the available balance).  -  - Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -250,7 +249,7 @@ public class Wallets implements
      * @throws Exception if the API call fails
      */
     public GetWalletResponse get(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String walletID) throws Exception {
         GetWalletRequest request =

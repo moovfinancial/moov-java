@@ -13,7 +13,6 @@ import io.moov.sdk.models.components.CompleteBankAccountVerification;
 import io.moov.sdk.models.components.CompleteMicroDeposits;
 import io.moov.sdk.models.components.CompletedMicroDeposits;
 import io.moov.sdk.models.components.LinkBankAccount;
-import io.moov.sdk.models.components.Versions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.BankAccountValidationError;
 import io.moov.sdk.models.errors.GenericError;
@@ -104,12 +103,12 @@ public class BankAccounts implements
     
     /**
      * Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more. -  - It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked - bank-account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment - Methods](https://docs.moov.io/api/sources/payment-methods/list/) - endpoint to wait for the new payment methods to be available for use. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -120,7 +119,7 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public LinkBankAccountResponse link(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             Optional<? extends BankAccountWaitFor> xWaitFor,
             String accountID,
             LinkBankAccount linkBankAccount) throws Exception {
@@ -325,12 +324,12 @@ public class BankAccounts implements
     
     /**
      * List all the bank accounts associated with a particular Moov account.  -  - Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -339,7 +338,7 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public ListBankAccountsResponse list(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID) throws Exception {
         ListBankAccountsRequest request =
             ListBankAccountsRequest
@@ -499,12 +498,12 @@ public class BankAccounts implements
     
     /**
      * Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov account.  -  - Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -514,7 +513,7 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public GetBankAccountResponse get(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String bankAccountID) throws Exception {
         GetBankAccountRequest request =
@@ -676,12 +675,12 @@ public class BankAccounts implements
     
     /**
      * Discontinue using a specified bank account linked to a Moov account.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -691,7 +690,7 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public DisableBankAccountResponse disable(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String bankAccountID) throws Exception {
         DisableBankAccountRequest request =
@@ -857,12 +856,12 @@ public class BankAccounts implements
     
     /**
      * Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity.  - Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account  - you want to confirm. -  - If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request micro-deposits any  - time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated, Moov simultaneously - initiates a debit to recoup the micro-deposits.  -  - Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly verifiable once initiated. -  - You can simulate micro-deposit verification in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#micro-deposits) - guide for more information. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -872,7 +871,7 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public InitiateMicroDepositsResponse initiateMicroDeposits(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String bankAccountID) throws Exception {
         InitiateMicroDepositsRequest request =
@@ -1040,12 +1039,12 @@ public class BankAccounts implements
     
     /**
      * Complete the micro-deposit validation process by passing the amounts of the two transfers within three tries. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -1056,7 +1055,7 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public CompleteMicroDepositsResponse completeMicroDeposits(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String bankAccountID,
             CompleteMicroDeposits completeMicroDeposits) throws Exception {
@@ -1263,12 +1262,12 @@ public class BankAccounts implements
     
     /**
      * Retrieve the current status and details of an instant verification, including whether the verification method was instant or same-day  - ACH. This helps track the verification process in real-time and provides details in case of exceptions. -  - The status will indicate the following: -  - - `new`: Verification initiated, credit pending to the payment network - - `sent-credit`: Credit sent, available for verification - - `failed`: Verification failed, description provided, user needs to add a new bank account - - `expired`: Verification expired after 14 days, initiate another verification - - `max-attempts-exceeded`: Five incorrect code attempts exhausted, initiate another verification -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -1278,7 +1277,7 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public GetBankAccountVerificationResponse getVerification(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String bankAccountID) throws Exception {
         GetBankAccountVerificationRequest request =
@@ -1442,12 +1441,12 @@ public class BankAccounts implements
     
     /**
      * Instant micro-deposit verification offers a quick and efficient way to verify bank account ownership.  -  - Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank's capabilities. This - feature provides a faster alternative to traditional methods, allowing verification in a single session. -  - It is recommended to use the `X-Wait-For: rail-response` header to synchronously receive the outcome of the instant credit in the -   response payload. -  - Possible verification methods: -   - `instant`: Real-time verification credit sent via RTP -   - `ach`: Verification credit sent via same-day ACH -  - Possible statuses: -   - `new`: Verification initiated, credit pending -   - `sent-credit`: Credit sent, available for verification in the external bank account -   - `failed`: Verification failed due to credit rejection/return, details in `exceptionDetails` -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -1458,7 +1457,7 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public InitiateBankAccountVerificationResponse initiateVerification(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             BankAccountWaitFor xWaitFor,
             String accountID,
             String bankAccountID) throws Exception {
@@ -1639,12 +1638,12 @@ public class BankAccounts implements
     
     /**
      * Finalize the instant micro-deposit verification by submitting the verification code displayed in the user's bank account.  -  - Upon successful verification, the bank account status will be updated to `verified` and eligible for ACH debit transactions. -  - The following formats are accepted: - - `MV0000` - - `mv0000` - - `0000` -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param xMoovVersion Moov API versions. 
+     * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an optional build number starting at `.01` for subsequent builds in the same quarter. 
+      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
         - If no build number is specified, the version refers to the initial release of the quarter.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
@@ -1655,7 +1654,7 @@ public class BankAccounts implements
      * @throws Exception if the API call fails
      */
     public CompleteBankAccountVerificationResponse completeVerification(
-            Optional<? extends Versions> xMoovVersion,
+            Optional<String> xMoovVersion,
             String accountID,
             String bankAccountID,
             CompleteBankAccountVerification completeBankAccountVerification) throws Exception {

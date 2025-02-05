@@ -4,14 +4,18 @@
 
 package io.moov.sdk.models.operations;
 
-import io.moov.sdk.models.components.Versions;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
 
 public class GetFileDetailsRequestBuilder {
 
-    private Optional<? extends Versions> xMoovVersion = Optional.empty();
+    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
+                            "xMoovVersion",
+                            "\"v2024.01\"",
+                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String fileID;
     private final SDKMethodInterfaces.MethodCallGetFileDetails sdk;
@@ -20,13 +24,13 @@ public class GetFileDetailsRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetFileDetailsRequestBuilder xMoovVersion(Versions xMoovVersion) {
+    public GetFileDetailsRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public GetFileDetailsRequestBuilder xMoovVersion(Optional<? extends Versions> xMoovVersion) {
+    public GetFileDetailsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
@@ -45,10 +49,18 @@ public class GetFileDetailsRequestBuilder {
     }
 
     public GetFileDetailsResponse call() throws Exception {
-
+        if (xMoovVersion == null) {
+            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
+        }
         return sdk.get(
             xMoovVersion,
             accountID,
             fileID);
     }
+
+    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
+            new LazySingletonValue<>(
+                    "xMoovVersion",
+                    "\"v2024.01\"",
+                    new TypeReference<Optional<String>>() {});
 }

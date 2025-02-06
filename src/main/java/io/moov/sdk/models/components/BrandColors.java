@@ -13,8 +13,11 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 
+/**
+ * BrandColors - Brand colors for light and dark modes.
+ */
 
-public class Colors {
+public class BrandColors {
 
     @JsonProperty("dark")
     private BrandColor dark;
@@ -23,7 +26,7 @@ public class Colors {
     private BrandColor light;
 
     @JsonCreator
-    public Colors(
+    public BrandColors(
             @JsonProperty("dark") BrandColor dark,
             @JsonProperty("light") BrandColor light) {
         Utils.checkNotNull(dark, "dark");
@@ -46,13 +49,13 @@ public class Colors {
         return new Builder();
     }
 
-    public Colors withDark(BrandColor dark) {
+    public BrandColors withDark(BrandColor dark) {
         Utils.checkNotNull(dark, "dark");
         this.dark = dark;
         return this;
     }
 
-    public Colors withLight(BrandColor light) {
+    public BrandColors withLight(BrandColor light) {
         Utils.checkNotNull(light, "light");
         this.light = light;
         return this;
@@ -66,7 +69,7 @@ public class Colors {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Colors other = (Colors) o;
+        BrandColors other = (BrandColors) o;
         return 
             Objects.deepEquals(this.dark, other.dark) &&
             Objects.deepEquals(this.light, other.light);
@@ -81,7 +84,7 @@ public class Colors {
     
     @Override
     public String toString() {
-        return Utils.toString(Colors.class,
+        return Utils.toString(BrandColors.class,
                 "dark", dark,
                 "light", light);
     }
@@ -108,8 +111,8 @@ public class Colors {
             return this;
         }
         
-        public Colors build() {
-            return new Colors(
+        public BrandColors build() {
+            return new BrandColors(
                 dark,
                 light);
         }

@@ -69,7 +69,7 @@ public class Representatives implements
     /**
      * Moov accounts associated with businesses require information regarding individuals who represent the business.  - You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
      * @param accountID ID of the account.
-     * @param createRepresentative The template for omitting properties.
+     * @param createRepresentative Describes a business representative to create.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -91,7 +91,7 @@ public class Representatives implements
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the account.
-     * @param createRepresentative The template for omitting properties.
+     * @param createRepresentative Describes a business representative to create.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */

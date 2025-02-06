@@ -22,26 +22,26 @@ public class PushToCardPaymentMethod implements PaymentMethod {
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
 
+    @JsonProperty("paymentMethodType")
+    private PushToCardPaymentMethodPaymentMethodType paymentMethodType;
+
     /**
      * Describes a card on a Moov account.
      */
     @JsonProperty("card")
     private Card card;
 
-    @JsonProperty("paymentMethodType")
-    private PushToCardPaymentMethodPaymentMethodType paymentMethodType;
-
     @JsonCreator
     public PushToCardPaymentMethod(
             @JsonProperty("paymentMethodID") String paymentMethodID,
-            @JsonProperty("card") Card card,
-            @JsonProperty("paymentMethodType") PushToCardPaymentMethodPaymentMethodType paymentMethodType) {
+            @JsonProperty("paymentMethodType") PushToCardPaymentMethodPaymentMethodType paymentMethodType,
+            @JsonProperty("card") Card card) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
-        Utils.checkNotNull(card, "card");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
+        Utils.checkNotNull(card, "card");
         this.paymentMethodID = paymentMethodID;
-        this.card = card;
         this.paymentMethodType = paymentMethodType;
+        this.card = card;
     }
 
     /**
@@ -52,18 +52,18 @@ public class PushToCardPaymentMethod implements PaymentMethod {
         return paymentMethodID;
     }
 
+    @JsonIgnore
+    @Override
+    public String paymentMethodType() {
+        return Utils.discriminatorToString(paymentMethodType);
+    }
+
     /**
      * Describes a card on a Moov account.
      */
     @JsonIgnore
     public Card card() {
         return card;
-    }
-
-    @JsonIgnore
-    @Override
-    public String paymentMethodType() {
-        return Utils.discriminatorToString(paymentMethodType);
     }
 
     public final static Builder builder() {
@@ -79,18 +79,18 @@ public class PushToCardPaymentMethod implements PaymentMethod {
         return this;
     }
 
+    public PushToCardPaymentMethod withPaymentMethodType(PushToCardPaymentMethodPaymentMethodType paymentMethodType) {
+        Utils.checkNotNull(paymentMethodType, "paymentMethodType");
+        this.paymentMethodType = paymentMethodType;
+        return this;
+    }
+
     /**
      * Describes a card on a Moov account.
      */
     public PushToCardPaymentMethod withCard(Card card) {
         Utils.checkNotNull(card, "card");
         this.card = card;
-        return this;
-    }
-
-    public PushToCardPaymentMethod withPaymentMethodType(PushToCardPaymentMethodPaymentMethodType paymentMethodType) {
-        Utils.checkNotNull(paymentMethodType, "paymentMethodType");
-        this.paymentMethodType = paymentMethodType;
         return this;
     }
     
@@ -105,33 +105,33 @@ public class PushToCardPaymentMethod implements PaymentMethod {
         PushToCardPaymentMethod other = (PushToCardPaymentMethod) o;
         return 
             Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Objects.deepEquals(this.card, other.card) &&
-            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType);
+            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType) &&
+            Objects.deepEquals(this.card, other.card);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             paymentMethodID,
-            card,
-            paymentMethodType);
+            paymentMethodType,
+            card);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PushToCardPaymentMethod.class,
                 "paymentMethodID", paymentMethodID,
-                "card", card,
-                "paymentMethodType", paymentMethodType);
+                "paymentMethodType", paymentMethodType,
+                "card", card);
     }
     
     public final static class Builder {
  
         private String paymentMethodID;
  
-        private Card card;
+        private PushToCardPaymentMethodPaymentMethodType paymentMethodType;
  
-        private PushToCardPaymentMethodPaymentMethodType paymentMethodType;  
+        private Card card;  
         
         private Builder() {
           // force use of static builder() method
@@ -146,6 +146,12 @@ public class PushToCardPaymentMethod implements PaymentMethod {
             return this;
         }
 
+        public Builder paymentMethodType(PushToCardPaymentMethodPaymentMethodType paymentMethodType) {
+            Utils.checkNotNull(paymentMethodType, "paymentMethodType");
+            this.paymentMethodType = paymentMethodType;
+            return this;
+        }
+
         /**
          * Describes a card on a Moov account.
          */
@@ -154,18 +160,12 @@ public class PushToCardPaymentMethod implements PaymentMethod {
             this.card = card;
             return this;
         }
-
-        public Builder paymentMethodType(PushToCardPaymentMethodPaymentMethodType paymentMethodType) {
-            Utils.checkNotNull(paymentMethodType, "paymentMethodType");
-            this.paymentMethodType = paymentMethodType;
-            return this;
-        }
         
         public PushToCardPaymentMethod build() {
             return new PushToCardPaymentMethod(
                 paymentMethodID,
-                card,
-                paymentMethodType);
+                paymentMethodType,
+                card);
         }
     }
 }

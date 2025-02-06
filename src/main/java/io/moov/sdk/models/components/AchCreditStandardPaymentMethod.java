@@ -22,26 +22,26 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
 
-    /**
-     * Describes a bank account linked to a Moov account.
-     */
-    @JsonProperty("bankAccount")
-    private BankAccount bankAccount;
-
     @JsonProperty("paymentMethodType")
     private AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType;
+
+    /**
+     * A bank account as contained within a payment method.
+     */
+    @JsonProperty("bankAccount")
+    private PaymentMethodsBankAccount bankAccount;
 
     @JsonCreator
     public AchCreditStandardPaymentMethod(
             @JsonProperty("paymentMethodID") String paymentMethodID,
-            @JsonProperty("bankAccount") BankAccount bankAccount,
-            @JsonProperty("paymentMethodType") AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType) {
+            @JsonProperty("paymentMethodType") AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType,
+            @JsonProperty("bankAccount") PaymentMethodsBankAccount bankAccount) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
-        Utils.checkNotNull(bankAccount, "bankAccount");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
+        Utils.checkNotNull(bankAccount, "bankAccount");
         this.paymentMethodID = paymentMethodID;
-        this.bankAccount = bankAccount;
         this.paymentMethodType = paymentMethodType;
+        this.bankAccount = bankAccount;
     }
 
     /**
@@ -52,18 +52,18 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
         return paymentMethodID;
     }
 
-    /**
-     * Describes a bank account linked to a Moov account.
-     */
-    @JsonIgnore
-    public BankAccount bankAccount() {
-        return bankAccount;
-    }
-
     @JsonIgnore
     @Override
     public String paymentMethodType() {
         return Utils.discriminatorToString(paymentMethodType);
+    }
+
+    /**
+     * A bank account as contained within a payment method.
+     */
+    @JsonIgnore
+    public PaymentMethodsBankAccount bankAccount() {
+        return bankAccount;
     }
 
     public final static Builder builder() {
@@ -79,18 +79,18 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
         return this;
     }
 
-    /**
-     * Describes a bank account linked to a Moov account.
-     */
-    public AchCreditStandardPaymentMethod withBankAccount(BankAccount bankAccount) {
-        Utils.checkNotNull(bankAccount, "bankAccount");
-        this.bankAccount = bankAccount;
-        return this;
-    }
-
     public AchCreditStandardPaymentMethod withPaymentMethodType(AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType) {
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         this.paymentMethodType = paymentMethodType;
+        return this;
+    }
+
+    /**
+     * A bank account as contained within a payment method.
+     */
+    public AchCreditStandardPaymentMethod withBankAccount(PaymentMethodsBankAccount bankAccount) {
+        Utils.checkNotNull(bankAccount, "bankAccount");
+        this.bankAccount = bankAccount;
         return this;
     }
     
@@ -105,33 +105,33 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
         AchCreditStandardPaymentMethod other = (AchCreditStandardPaymentMethod) o;
         return 
             Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Objects.deepEquals(this.bankAccount, other.bankAccount) &&
-            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType);
+            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType) &&
+            Objects.deepEquals(this.bankAccount, other.bankAccount);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             paymentMethodID,
-            bankAccount,
-            paymentMethodType);
+            paymentMethodType,
+            bankAccount);
     }
     
     @Override
     public String toString() {
         return Utils.toString(AchCreditStandardPaymentMethod.class,
                 "paymentMethodID", paymentMethodID,
-                "bankAccount", bankAccount,
-                "paymentMethodType", paymentMethodType);
+                "paymentMethodType", paymentMethodType,
+                "bankAccount", bankAccount);
     }
     
     public final static class Builder {
  
         private String paymentMethodID;
  
-        private BankAccount bankAccount;
+        private AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType;
  
-        private AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType;  
+        private PaymentMethodsBankAccount bankAccount;  
         
         private Builder() {
           // force use of static builder() method
@@ -146,26 +146,26 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
             return this;
         }
 
-        /**
-         * Describes a bank account linked to a Moov account.
-         */
-        public Builder bankAccount(BankAccount bankAccount) {
-            Utils.checkNotNull(bankAccount, "bankAccount");
-            this.bankAccount = bankAccount;
-            return this;
-        }
-
         public Builder paymentMethodType(AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
+            return this;
+        }
+
+        /**
+         * A bank account as contained within a payment method.
+         */
+        public Builder bankAccount(PaymentMethodsBankAccount bankAccount) {
+            Utils.checkNotNull(bankAccount, "bankAccount");
+            this.bankAccount = bankAccount;
             return this;
         }
         
         public AchCreditStandardPaymentMethod build() {
             return new AchCreditStandardPaymentMethod(
                 paymentMethodID,
-                bankAccount,
-                paymentMethodType);
+                paymentMethodType,
+                bankAccount);
         }
     }
 }

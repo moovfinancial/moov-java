@@ -22,26 +22,26 @@ public class RtpCreditPaymentMethod implements PaymentMethod {
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
 
-    /**
-     * Describes a bank account linked to a Moov account.
-     */
-    @JsonProperty("bankAccount")
-    private BankAccount bankAccount;
-
     @JsonProperty("paymentMethodType")
     private RtpCreditPaymentMethodPaymentMethodType paymentMethodType;
+
+    /**
+     * A bank account as contained within a payment method.
+     */
+    @JsonProperty("bankAccount")
+    private PaymentMethodsBankAccount bankAccount;
 
     @JsonCreator
     public RtpCreditPaymentMethod(
             @JsonProperty("paymentMethodID") String paymentMethodID,
-            @JsonProperty("bankAccount") BankAccount bankAccount,
-            @JsonProperty("paymentMethodType") RtpCreditPaymentMethodPaymentMethodType paymentMethodType) {
+            @JsonProperty("paymentMethodType") RtpCreditPaymentMethodPaymentMethodType paymentMethodType,
+            @JsonProperty("bankAccount") PaymentMethodsBankAccount bankAccount) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
-        Utils.checkNotNull(bankAccount, "bankAccount");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
+        Utils.checkNotNull(bankAccount, "bankAccount");
         this.paymentMethodID = paymentMethodID;
-        this.bankAccount = bankAccount;
         this.paymentMethodType = paymentMethodType;
+        this.bankAccount = bankAccount;
     }
 
     /**
@@ -52,18 +52,18 @@ public class RtpCreditPaymentMethod implements PaymentMethod {
         return paymentMethodID;
     }
 
-    /**
-     * Describes a bank account linked to a Moov account.
-     */
-    @JsonIgnore
-    public BankAccount bankAccount() {
-        return bankAccount;
-    }
-
     @JsonIgnore
     @Override
     public String paymentMethodType() {
         return Utils.discriminatorToString(paymentMethodType);
+    }
+
+    /**
+     * A bank account as contained within a payment method.
+     */
+    @JsonIgnore
+    public PaymentMethodsBankAccount bankAccount() {
+        return bankAccount;
     }
 
     public final static Builder builder() {
@@ -79,18 +79,18 @@ public class RtpCreditPaymentMethod implements PaymentMethod {
         return this;
     }
 
-    /**
-     * Describes a bank account linked to a Moov account.
-     */
-    public RtpCreditPaymentMethod withBankAccount(BankAccount bankAccount) {
-        Utils.checkNotNull(bankAccount, "bankAccount");
-        this.bankAccount = bankAccount;
-        return this;
-    }
-
     public RtpCreditPaymentMethod withPaymentMethodType(RtpCreditPaymentMethodPaymentMethodType paymentMethodType) {
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         this.paymentMethodType = paymentMethodType;
+        return this;
+    }
+
+    /**
+     * A bank account as contained within a payment method.
+     */
+    public RtpCreditPaymentMethod withBankAccount(PaymentMethodsBankAccount bankAccount) {
+        Utils.checkNotNull(bankAccount, "bankAccount");
+        this.bankAccount = bankAccount;
         return this;
     }
     
@@ -105,33 +105,33 @@ public class RtpCreditPaymentMethod implements PaymentMethod {
         RtpCreditPaymentMethod other = (RtpCreditPaymentMethod) o;
         return 
             Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Objects.deepEquals(this.bankAccount, other.bankAccount) &&
-            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType);
+            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType) &&
+            Objects.deepEquals(this.bankAccount, other.bankAccount);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             paymentMethodID,
-            bankAccount,
-            paymentMethodType);
+            paymentMethodType,
+            bankAccount);
     }
     
     @Override
     public String toString() {
         return Utils.toString(RtpCreditPaymentMethod.class,
                 "paymentMethodID", paymentMethodID,
-                "bankAccount", bankAccount,
-                "paymentMethodType", paymentMethodType);
+                "paymentMethodType", paymentMethodType,
+                "bankAccount", bankAccount);
     }
     
     public final static class Builder {
  
         private String paymentMethodID;
  
-        private BankAccount bankAccount;
+        private RtpCreditPaymentMethodPaymentMethodType paymentMethodType;
  
-        private RtpCreditPaymentMethodPaymentMethodType paymentMethodType;  
+        private PaymentMethodsBankAccount bankAccount;  
         
         private Builder() {
           // force use of static builder() method
@@ -146,26 +146,26 @@ public class RtpCreditPaymentMethod implements PaymentMethod {
             return this;
         }
 
-        /**
-         * Describes a bank account linked to a Moov account.
-         */
-        public Builder bankAccount(BankAccount bankAccount) {
-            Utils.checkNotNull(bankAccount, "bankAccount");
-            this.bankAccount = bankAccount;
-            return this;
-        }
-
         public Builder paymentMethodType(RtpCreditPaymentMethodPaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
+            return this;
+        }
+
+        /**
+         * A bank account as contained within a payment method.
+         */
+        public Builder bankAccount(PaymentMethodsBankAccount bankAccount) {
+            Utils.checkNotNull(bankAccount, "bankAccount");
+            this.bankAccount = bankAccount;
             return this;
         }
         
         public RtpCreditPaymentMethod build() {
             return new RtpCreditPaymentMethod(
                 paymentMethodID,
-                bankAccount,
-                paymentMethodType);
+                paymentMethodType,
+                bankAccount);
         }
     }
 }

@@ -8,7 +8,7 @@ import io.moov.sdk.models.components.AccountCountries;
 import io.moov.sdk.models.components.AddCapabilities;
 import io.moov.sdk.models.components.AuthTokenRequest;
 import io.moov.sdk.models.components.BankAccountWaitFor;
-import io.moov.sdk.models.components.Brand;
+import io.moov.sdk.models.components.BrandProperties;
 import io.moov.sdk.models.components.CapabilityID;
 import io.moov.sdk.models.components.CompleteBankAccountVerification;
 import io.moov.sdk.models.components.CompleteMicroDeposits;
@@ -250,7 +250,15 @@ public class SDKMethodInterfaces {
         CreateBrandResponse create(
             Optional<String> xMoovVersion,
             String accountID,
-            Brand brand) throws Exception;
+            BrandProperties brandProperties) throws Exception;
+    }
+
+
+    public interface MethodCallUpsertBrand {
+        UpsertBrandResponse upsert(
+            Optional<String> xMoovVersion,
+            String accountID,
+            BrandProperties brandProperties) throws Exception;
     }
 
 

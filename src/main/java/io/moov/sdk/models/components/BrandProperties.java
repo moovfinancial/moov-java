@@ -14,26 +14,26 @@ import java.lang.String;
 import java.util.Objects;
 
 
-public class Brand {
+public class BrandProperties {
 
     /**
-     * Set brand accent colors for light and dark modes.
+     * Brand colors for light and dark modes.
      */
     @JsonProperty("colors")
-    private Colors colors;
+    private BrandColors colors;
 
     @JsonCreator
-    public Brand(
-            @JsonProperty("colors") Colors colors) {
+    public BrandProperties(
+            @JsonProperty("colors") BrandColors colors) {
         Utils.checkNotNull(colors, "colors");
         this.colors = colors;
     }
 
     /**
-     * Set brand accent colors for light and dark modes.
+     * Brand colors for light and dark modes.
      */
     @JsonIgnore
-    public Colors colors() {
+    public BrandColors colors() {
         return colors;
     }
 
@@ -42,9 +42,9 @@ public class Brand {
     }
 
     /**
-     * Set brand accent colors for light and dark modes.
+     * Brand colors for light and dark modes.
      */
-    public Brand withColors(Colors colors) {
+    public BrandProperties withColors(BrandColors colors) {
         Utils.checkNotNull(colors, "colors");
         this.colors = colors;
         return this;
@@ -58,7 +58,7 @@ public class Brand {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Brand other = (Brand) o;
+        BrandProperties other = (BrandProperties) o;
         return 
             Objects.deepEquals(this.colors, other.colors);
     }
@@ -71,29 +71,29 @@ public class Brand {
     
     @Override
     public String toString() {
-        return Utils.toString(Brand.class,
+        return Utils.toString(BrandProperties.class,
                 "colors", colors);
     }
     
     public final static class Builder {
  
-        private Colors colors;  
+        private BrandColors colors;  
         
         private Builder() {
           // force use of static builder() method
         }
 
         /**
-         * Set brand accent colors for light and dark modes.
+         * Brand colors for light and dark modes.
          */
-        public Builder colors(Colors colors) {
+        public Builder colors(BrandColors colors) {
             Utils.checkNotNull(colors, "colors");
             this.colors = colors;
             return this;
         }
         
-        public Brand build() {
-            return new Brand(
+        public BrandProperties build() {
+            return new BrandProperties(
                 colors);
         }
     }

@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class CreateBrandResponse implements Response {
+public class UpsertBrandResponse implements Response {
 
     /**
      * HTTP response content type for this operation
@@ -47,7 +47,7 @@ public class CreateBrandResponse implements Response {
     private Map<String, List<String>> headers;
 
     @JsonCreator
-    public CreateBrandResponse(
+    public UpsertBrandResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
@@ -65,7 +65,7 @@ public class CreateBrandResponse implements Response {
         this.headers = headers;
     }
     
-    public CreateBrandResponse(
+    public UpsertBrandResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
@@ -118,7 +118,7 @@ public class CreateBrandResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
-    public CreateBrandResponse withContentType(String contentType) {
+    public UpsertBrandResponse withContentType(String contentType) {
         Utils.checkNotNull(contentType, "contentType");
         this.contentType = contentType;
         return this;
@@ -127,7 +127,7 @@ public class CreateBrandResponse implements Response {
     /**
      * HTTP response status code for this operation
      */
-    public CreateBrandResponse withStatusCode(int statusCode) {
+    public UpsertBrandResponse withStatusCode(int statusCode) {
         Utils.checkNotNull(statusCode, "statusCode");
         this.statusCode = statusCode;
         return this;
@@ -136,7 +136,7 @@ public class CreateBrandResponse implements Response {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public CreateBrandResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
+    public UpsertBrandResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = rawResponse;
         return this;
@@ -145,7 +145,7 @@ public class CreateBrandResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public CreateBrandResponse withBrandProperties(BrandProperties brandProperties) {
+    public UpsertBrandResponse withBrandProperties(BrandProperties brandProperties) {
         Utils.checkNotNull(brandProperties, "brandProperties");
         this.brandProperties = Optional.ofNullable(brandProperties);
         return this;
@@ -154,13 +154,13 @@ public class CreateBrandResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public CreateBrandResponse withBrandProperties(Optional<? extends BrandProperties> brandProperties) {
+    public UpsertBrandResponse withBrandProperties(Optional<? extends BrandProperties> brandProperties) {
         Utils.checkNotNull(brandProperties, "brandProperties");
         this.brandProperties = brandProperties;
         return this;
     }
 
-    public CreateBrandResponse withHeaders(Map<String, List<String>> headers) {
+    public UpsertBrandResponse withHeaders(Map<String, List<String>> headers) {
         Utils.checkNotNull(headers, "headers");
         this.headers = headers;
         return this;
@@ -174,7 +174,7 @@ public class CreateBrandResponse implements Response {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateBrandResponse other = (CreateBrandResponse) o;
+        UpsertBrandResponse other = (UpsertBrandResponse) o;
         return 
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
@@ -195,7 +195,7 @@ public class CreateBrandResponse implements Response {
     
     @Override
     public String toString() {
-        return Utils.toString(CreateBrandResponse.class,
+        return Utils.toString(UpsertBrandResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
@@ -270,8 +270,8 @@ public class CreateBrandResponse implements Response {
             return this;
         }
         
-        public CreateBrandResponse build() {
-            return new CreateBrandResponse(
+        public UpsertBrandResponse build() {
+            return new UpsertBrandResponse(
                 contentType,
                 statusCode,
                 rawResponse,

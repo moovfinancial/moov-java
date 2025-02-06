@@ -11,7 +11,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
 
-public class CreateBrandRequestBuilder {
+public class UpsertBrandRequestBuilder {
 
     private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
                             "xMoovVersion",
@@ -19,41 +19,41 @@ public class CreateBrandRequestBuilder {
                             new TypeReference<Optional<String>>() {});
     private String accountID;
     private BrandProperties brandProperties;
-    private final SDKMethodInterfaces.MethodCallCreateBrand sdk;
+    private final SDKMethodInterfaces.MethodCallUpsertBrand sdk;
 
-    public CreateBrandRequestBuilder(SDKMethodInterfaces.MethodCallCreateBrand sdk) {
+    public UpsertBrandRequestBuilder(SDKMethodInterfaces.MethodCallUpsertBrand sdk) {
         this.sdk = sdk;
     }
                 
-    public CreateBrandRequestBuilder xMoovVersion(String xMoovVersion) {
+    public UpsertBrandRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public CreateBrandRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
+    public UpsertBrandRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
     }
 
-    public CreateBrandRequestBuilder accountID(String accountID) {
+    public UpsertBrandRequestBuilder accountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
-    public CreateBrandRequestBuilder brandProperties(BrandProperties brandProperties) {
+    public UpsertBrandRequestBuilder brandProperties(BrandProperties brandProperties) {
         Utils.checkNotNull(brandProperties, "brandProperties");
         this.brandProperties = brandProperties;
         return this;
     }
 
-    public CreateBrandResponse call() throws Exception {
+    public UpsertBrandResponse call() throws Exception {
         if (xMoovVersion == null) {
             xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
         }
-        return sdk.create(
+        return sdk.upsert(
             xMoovVersion,
             accountID,
             brandProperties);

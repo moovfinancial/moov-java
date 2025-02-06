@@ -1,4 +1,6 @@
-# Colors
+# BrandColors
+
+Brand colors for light and dark modes.
 
 
 ## Fields

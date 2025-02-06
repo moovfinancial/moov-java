@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -26,14 +25,17 @@ public class ApplePayPaymentMethod implements PaymentMethod {
     @JsonProperty("paymentMethodType")
     private ApplePayPaymentMethodPaymentMethodType paymentMethodType;
 
+    /**
+     * Describes an Apple Pay token on a Moov account.
+     */
     @JsonProperty("applePay")
-    private Object applePay;
+    private ApplePayResponse applePay;
 
     @JsonCreator
     public ApplePayPaymentMethod(
             @JsonProperty("paymentMethodID") String paymentMethodID,
             @JsonProperty("paymentMethodType") ApplePayPaymentMethodPaymentMethodType paymentMethodType,
-            @JsonProperty("applePay") Object applePay) {
+            @JsonProperty("applePay") ApplePayResponse applePay) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         Utils.checkNotNull(applePay, "applePay");
@@ -56,8 +58,11 @@ public class ApplePayPaymentMethod implements PaymentMethod {
         return Utils.discriminatorToString(paymentMethodType);
     }
 
+    /**
+     * Describes an Apple Pay token on a Moov account.
+     */
     @JsonIgnore
-    public Object applePay() {
+    public ApplePayResponse applePay() {
         return applePay;
     }
 
@@ -80,7 +85,10 @@ public class ApplePayPaymentMethod implements PaymentMethod {
         return this;
     }
 
-    public ApplePayPaymentMethod withApplePay(Object applePay) {
+    /**
+     * Describes an Apple Pay token on a Moov account.
+     */
+    public ApplePayPaymentMethod withApplePay(ApplePayResponse applePay) {
         Utils.checkNotNull(applePay, "applePay");
         this.applePay = applePay;
         return this;
@@ -123,7 +131,7 @@ public class ApplePayPaymentMethod implements PaymentMethod {
  
         private ApplePayPaymentMethodPaymentMethodType paymentMethodType;
  
-        private Object applePay;  
+        private ApplePayResponse applePay;  
         
         private Builder() {
           // force use of static builder() method
@@ -144,7 +152,10 @@ public class ApplePayPaymentMethod implements PaymentMethod {
             return this;
         }
 
-        public Builder applePay(Object applePay) {
+        /**
+         * Describes an Apple Pay token on a Moov account.
+         */
+        public Builder applePay(ApplePayResponse applePay) {
             Utils.checkNotNull(applePay, "applePay");
             this.applePay = applePay;
             return this;

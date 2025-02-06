@@ -7,7 +7,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.Brand;
+import io.moov.sdk.models.components.BrandProperties;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -42,7 +42,7 @@ public class UpdateBrandResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends Brand> brand;
+    private Optional<? extends BrandProperties> brandProperties;
 
     private Map<String, List<String>> headers;
 
@@ -51,17 +51,17 @@ public class UpdateBrandResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends Brand> brand,
+            Optional<? extends BrandProperties> brandProperties,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(brand, "brand");
+        Utils.checkNotNull(brandProperties, "brandProperties");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.brand = brand;
+        this.brandProperties = brandProperties;
         this.headers = headers;
     }
     
@@ -102,8 +102,8 @@ public class UpdateBrandResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Brand> brand() {
-        return (Optional<Brand>) brand;
+    public Optional<BrandProperties> brandProperties() {
+        return (Optional<BrandProperties>) brandProperties;
     }
 
     @JsonIgnore
@@ -145,18 +145,18 @@ public class UpdateBrandResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public UpdateBrandResponse withBrand(Brand brand) {
-        Utils.checkNotNull(brand, "brand");
-        this.brand = Optional.ofNullable(brand);
+    public UpdateBrandResponse withBrandProperties(BrandProperties brandProperties) {
+        Utils.checkNotNull(brandProperties, "brandProperties");
+        this.brandProperties = Optional.ofNullable(brandProperties);
         return this;
     }
 
     /**
      * The request completed successfully.
      */
-    public UpdateBrandResponse withBrand(Optional<? extends Brand> brand) {
-        Utils.checkNotNull(brand, "brand");
-        this.brand = brand;
+    public UpdateBrandResponse withBrandProperties(Optional<? extends BrandProperties> brandProperties) {
+        Utils.checkNotNull(brandProperties, "brandProperties");
+        this.brandProperties = brandProperties;
         return this;
     }
 
@@ -179,7 +179,7 @@ public class UpdateBrandResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.brand, other.brand) &&
+            Objects.deepEquals(this.brandProperties, other.brandProperties) &&
             Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -189,7 +189,7 @@ public class UpdateBrandResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            brand,
+            brandProperties,
             headers);
     }
     
@@ -199,7 +199,7 @@ public class UpdateBrandResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "brand", brand,
+                "brandProperties", brandProperties,
                 "headers", headers);
     }
     
@@ -211,7 +211,7 @@ public class UpdateBrandResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends Brand> brand = Optional.empty();
+        private Optional<? extends BrandProperties> brandProperties = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -249,18 +249,18 @@ public class UpdateBrandResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder brand(Brand brand) {
-            Utils.checkNotNull(brand, "brand");
-            this.brand = Optional.ofNullable(brand);
+        public Builder brandProperties(BrandProperties brandProperties) {
+            Utils.checkNotNull(brandProperties, "brandProperties");
+            this.brandProperties = Optional.ofNullable(brandProperties);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder brand(Optional<? extends Brand> brand) {
-            Utils.checkNotNull(brand, "brand");
-            this.brand = brand;
+        public Builder brandProperties(Optional<? extends BrandProperties> brandProperties) {
+            Utils.checkNotNull(brandProperties, "brandProperties");
+            this.brandProperties = brandProperties;
             return this;
         }
 
@@ -275,7 +275,7 @@ public class UpdateBrandResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                brand,
+                brandProperties,
                 headers);
         }
     }

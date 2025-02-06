@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class CreateBrandRequest {
+public class UpsertBrandRequest {
 
     /**
      * Specify an API version.
@@ -41,7 +41,7 @@ public class CreateBrandRequest {
     private BrandProperties brandProperties;
 
     @JsonCreator
-    public CreateBrandRequest(
+    public UpsertBrandRequest(
             Optional<String> xMoovVersion,
             String accountID,
             BrandProperties brandProperties) {
@@ -53,7 +53,7 @@ public class CreateBrandRequest {
         this.brandProperties = brandProperties;
     }
     
-    public CreateBrandRequest(
+    public UpsertBrandRequest(
             String accountID,
             BrandProperties brandProperties) {
         this(Optional.empty(), accountID, brandProperties);
@@ -100,7 +100,7 @@ public class CreateBrandRequest {
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public CreateBrandRequest withXMoovVersion(String xMoovVersion) {
+    public UpsertBrandRequest withXMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.ofNullable(xMoovVersion);
         return this;
@@ -117,19 +117,19 @@ public class CreateBrandRequest {
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public CreateBrandRequest withXMoovVersion(Optional<String> xMoovVersion) {
+    public UpsertBrandRequest withXMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
     }
 
-    public CreateBrandRequest withAccountID(String accountID) {
+    public UpsertBrandRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
-    public CreateBrandRequest withBrandProperties(BrandProperties brandProperties) {
+    public UpsertBrandRequest withBrandProperties(BrandProperties brandProperties) {
         Utils.checkNotNull(brandProperties, "brandProperties");
         this.brandProperties = brandProperties;
         return this;
@@ -143,7 +143,7 @@ public class CreateBrandRequest {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateBrandRequest other = (CreateBrandRequest) o;
+        UpsertBrandRequest other = (UpsertBrandRequest) o;
         return 
             Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.accountID, other.accountID) &&
@@ -160,7 +160,7 @@ public class CreateBrandRequest {
     
     @Override
     public String toString() {
-        return Utils.toString(CreateBrandRequest.class,
+        return Utils.toString(UpsertBrandRequest.class,
                 "xMoovVersion", xMoovVersion,
                 "accountID", accountID,
                 "brandProperties", brandProperties);
@@ -224,10 +224,10 @@ public class CreateBrandRequest {
             return this;
         }
         
-        public CreateBrandRequest build() {
+        public UpsertBrandRequest build() {
             if (xMoovVersion == null) {
                 xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-            }            return new CreateBrandRequest(
+            }            return new UpsertBrandRequest(
                 xMoovVersion,
                 accountID,
                 brandProperties);

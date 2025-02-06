@@ -1,4 +1,4 @@
-# GetBrandResponse
+# UpsertBrandResponse
 
 
 ## Fields

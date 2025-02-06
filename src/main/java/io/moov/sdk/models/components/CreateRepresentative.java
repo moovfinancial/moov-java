@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * CreateRepresentative - The template for omitting properties.
+ * CreateRepresentative - Describes a business representative to create.
  */
 
 public class CreateRepresentative {

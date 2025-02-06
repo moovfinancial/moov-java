@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -27,13 +26,13 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
     private MoovWalletPaymentMethodPaymentMethodType paymentMethodType;
 
     @JsonProperty("wallet")
-    private Object wallet;
+    private PaymentMethodsWallet wallet;
 
     @JsonCreator
     public MoovWalletPaymentMethod(
             @JsonProperty("paymentMethodID") String paymentMethodID,
             @JsonProperty("paymentMethodType") MoovWalletPaymentMethodPaymentMethodType paymentMethodType,
-            @JsonProperty("wallet") Object wallet) {
+            @JsonProperty("wallet") PaymentMethodsWallet wallet) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         Utils.checkNotNull(wallet, "wallet");
@@ -57,7 +56,7 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
     }
 
     @JsonIgnore
-    public Object wallet() {
+    public PaymentMethodsWallet wallet() {
         return wallet;
     }
 
@@ -80,7 +79,7 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
         return this;
     }
 
-    public MoovWalletPaymentMethod withWallet(Object wallet) {
+    public MoovWalletPaymentMethod withWallet(PaymentMethodsWallet wallet) {
         Utils.checkNotNull(wallet, "wallet");
         this.wallet = wallet;
         return this;
@@ -123,7 +122,7 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
  
         private MoovWalletPaymentMethodPaymentMethodType paymentMethodType;
  
-        private Object wallet;  
+        private PaymentMethodsWallet wallet;  
         
         private Builder() {
           // force use of static builder() method
@@ -144,7 +143,7 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
             return this;
         }
 
-        public Builder wallet(Object wallet) {
+        public Builder wallet(PaymentMethodsWallet wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = wallet;
             return this;

@@ -26,16 +26,16 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
     private PullFromCardPaymentMethodPaymentMethodType paymentMethodType;
 
     /**
-     * Describes a card on a Moov account.
+     * A card as contained within a payment method.
      */
     @JsonProperty("card")
-    private Card card;
+    private PaymentMethodsCard card;
 
     @JsonCreator
     public PullFromCardPaymentMethod(
             @JsonProperty("paymentMethodID") String paymentMethodID,
             @JsonProperty("paymentMethodType") PullFromCardPaymentMethodPaymentMethodType paymentMethodType,
-            @JsonProperty("card") Card card) {
+            @JsonProperty("card") PaymentMethodsCard card) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         Utils.checkNotNull(card, "card");
@@ -59,10 +59,10 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
     }
 
     /**
-     * Describes a card on a Moov account.
+     * A card as contained within a payment method.
      */
     @JsonIgnore
-    public Card card() {
+    public PaymentMethodsCard card() {
         return card;
     }
 
@@ -86,9 +86,9 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
     }
 
     /**
-     * Describes a card on a Moov account.
+     * A card as contained within a payment method.
      */
-    public PullFromCardPaymentMethod withCard(Card card) {
+    public PullFromCardPaymentMethod withCard(PaymentMethodsCard card) {
         Utils.checkNotNull(card, "card");
         this.card = card;
         return this;
@@ -131,7 +131,7 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
  
         private PullFromCardPaymentMethodPaymentMethodType paymentMethodType;
  
-        private Card card;  
+        private PaymentMethodsCard card;  
         
         private Builder() {
           // force use of static builder() method
@@ -153,9 +153,9 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
         }
 
         /**
-         * Describes a card on a Moov account.
+         * A card as contained within a payment method.
          */
-        public Builder card(Card card) {
+        public Builder card(PaymentMethodsCard card) {
             Utils.checkNotNull(card, "card");
             this.card = card;
             return this;

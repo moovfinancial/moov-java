@@ -91,13 +91,14 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.ListDisputesRequest;
 import io.moov.sdk.models.operations.ListDisputesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws GenericError, Exception {
 
         Moov sdk = Moov.builder()
                 .security(Security.builder()
@@ -137,6 +138,7 @@ public class Application {
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
+| models/errors/GenericError | 400, 409                   | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
 ## get

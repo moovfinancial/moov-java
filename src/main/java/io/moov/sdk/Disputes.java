@@ -132,7 +132,7 @@ public class Disputes implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "409", "429", "4XX", "500", "504", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -181,6 +181,21 @@ public class Disputes implements
                     new TypeReference<List<Dispute>>() {});
                 _res.withDisputes(Optional.ofNullable(_out));
                 return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GenericError _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GenericError>() {});
+                throw _out;
             } else {
                 throw new APIException(
                     _httpRes, 

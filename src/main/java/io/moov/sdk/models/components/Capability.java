@@ -15,7 +15,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -37,9 +36,12 @@ public class Capability {
     @JsonProperty("status")
     private CapabilityStatus status;
 
+    /**
+     * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("requirements")
-    private Optional<? extends List<CapabilityRequirement>> requirements;
+    private Optional<? extends CapabilityRequirement> requirements;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disabledReason")
@@ -60,7 +62,7 @@ public class Capability {
             @JsonProperty("capability") CapabilityID capability,
             @JsonProperty("accountID") String accountID,
             @JsonProperty("status") CapabilityStatus status,
-            @JsonProperty("requirements") Optional<? extends List<CapabilityRequirement>> requirements,
+            @JsonProperty("requirements") Optional<? extends CapabilityRequirement> requirements,
             @JsonProperty("disabledReason") Optional<String> disabledReason,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
@@ -113,10 +115,13 @@ public class Capability {
         return status;
     }
 
+    /**
+     * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<CapabilityRequirement>> requirements() {
-        return (Optional<List<CapabilityRequirement>>) requirements;
+    public Optional<CapabilityRequirement> requirements() {
+        return (Optional<CapabilityRequirement>) requirements;
     }
 
     @JsonIgnore
@@ -167,13 +172,19 @@ public class Capability {
         return this;
     }
 
-    public Capability withRequirements(List<CapabilityRequirement> requirements) {
+    /**
+     * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+     */
+    public Capability withRequirements(CapabilityRequirement requirements) {
         Utils.checkNotNull(requirements, "requirements");
         this.requirements = Optional.ofNullable(requirements);
         return this;
     }
 
-    public Capability withRequirements(Optional<? extends List<CapabilityRequirement>> requirements) {
+    /**
+     * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+     */
+    public Capability withRequirements(Optional<? extends CapabilityRequirement> requirements) {
         Utils.checkNotNull(requirements, "requirements");
         this.requirements = requirements;
         return this;
@@ -269,7 +280,7 @@ public class Capability {
  
         private CapabilityStatus status;
  
-        private Optional<? extends List<CapabilityRequirement>> requirements = Optional.empty();
+        private Optional<? extends CapabilityRequirement> requirements = Optional.empty();
  
         private Optional<String> disabledReason = Optional.empty();
  
@@ -307,13 +318,19 @@ public class Capability {
             return this;
         }
 
-        public Builder requirements(List<CapabilityRequirement> requirements) {
+        /**
+         * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+         */
+        public Builder requirements(CapabilityRequirement requirements) {
             Utils.checkNotNull(requirements, "requirements");
             this.requirements = Optional.ofNullable(requirements);
             return this;
         }
 
-        public Builder requirements(Optional<? extends List<CapabilityRequirement>> requirements) {
+        /**
+         * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+         */
+        public Builder requirements(Optional<? extends CapabilityRequirement> requirements) {
             Utils.checkNotNull(requirements, "requirements");
             this.requirements = requirements;
             return this;

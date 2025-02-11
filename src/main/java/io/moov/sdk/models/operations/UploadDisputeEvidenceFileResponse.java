@@ -7,16 +7,19 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.moov.sdk.models.components.EvidenceUploadResponse;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class UploadDisputeEvidenceFileResponse implements Response {
@@ -36,6 +39,11 @@ public class UploadDisputeEvidenceFileResponse implements Response {
      */
     private HttpResponse<InputStream> rawResponse;
 
+    /**
+     * The resource was successfully created.
+     */
+    private Optional<? extends EvidenceUploadResponse> evidenceUploadResponse;
+
     private Map<String, List<String>> headers;
 
     @JsonCreator
@@ -43,15 +51,26 @@ public class UploadDisputeEvidenceFileResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
+            Optional<? extends EvidenceUploadResponse> evidenceUploadResponse,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
+        Utils.checkNotNull(evidenceUploadResponse, "evidenceUploadResponse");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
+        this.evidenceUploadResponse = evidenceUploadResponse;
         this.headers = headers;
+    }
+    
+    public UploadDisputeEvidenceFileResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -76,6 +95,15 @@ public class UploadDisputeEvidenceFileResponse implements Response {
     @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
+    }
+
+    /**
+     * The resource was successfully created.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<EvidenceUploadResponse> evidenceUploadResponse() {
+        return (Optional<EvidenceUploadResponse>) evidenceUploadResponse;
     }
 
     @JsonIgnore
@@ -114,6 +142,24 @@ public class UploadDisputeEvidenceFileResponse implements Response {
         return this;
     }
 
+    /**
+     * The resource was successfully created.
+     */
+    public UploadDisputeEvidenceFileResponse withEvidenceUploadResponse(EvidenceUploadResponse evidenceUploadResponse) {
+        Utils.checkNotNull(evidenceUploadResponse, "evidenceUploadResponse");
+        this.evidenceUploadResponse = Optional.ofNullable(evidenceUploadResponse);
+        return this;
+    }
+
+    /**
+     * The resource was successfully created.
+     */
+    public UploadDisputeEvidenceFileResponse withEvidenceUploadResponse(Optional<? extends EvidenceUploadResponse> evidenceUploadResponse) {
+        Utils.checkNotNull(evidenceUploadResponse, "evidenceUploadResponse");
+        this.evidenceUploadResponse = evidenceUploadResponse;
+        return this;
+    }
+
     public UploadDisputeEvidenceFileResponse withHeaders(Map<String, List<String>> headers) {
         Utils.checkNotNull(headers, "headers");
         this.headers = headers;
@@ -133,6 +179,7 @@ public class UploadDisputeEvidenceFileResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
+            Objects.deepEquals(this.evidenceUploadResponse, other.evidenceUploadResponse) &&
             Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -142,6 +189,7 @@ public class UploadDisputeEvidenceFileResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
+            evidenceUploadResponse,
             headers);
     }
     
@@ -151,6 +199,7 @@ public class UploadDisputeEvidenceFileResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
+                "evidenceUploadResponse", evidenceUploadResponse,
                 "headers", headers);
     }
     
@@ -161,6 +210,8 @@ public class UploadDisputeEvidenceFileResponse implements Response {
         private Integer statusCode;
  
         private HttpResponse<InputStream> rawResponse;
+ 
+        private Optional<? extends EvidenceUploadResponse> evidenceUploadResponse = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -195,6 +246,24 @@ public class UploadDisputeEvidenceFileResponse implements Response {
             return this;
         }
 
+        /**
+         * The resource was successfully created.
+         */
+        public Builder evidenceUploadResponse(EvidenceUploadResponse evidenceUploadResponse) {
+            Utils.checkNotNull(evidenceUploadResponse, "evidenceUploadResponse");
+            this.evidenceUploadResponse = Optional.ofNullable(evidenceUploadResponse);
+            return this;
+        }
+
+        /**
+         * The resource was successfully created.
+         */
+        public Builder evidenceUploadResponse(Optional<? extends EvidenceUploadResponse> evidenceUploadResponse) {
+            Utils.checkNotNull(evidenceUploadResponse, "evidenceUploadResponse");
+            this.evidenceUploadResponse = evidenceUploadResponse;
+            return this;
+        }
+
         public Builder headers(Map<String, List<String>> headers) {
             Utils.checkNotNull(headers, "headers");
             this.headers = headers;
@@ -206,6 +275,7 @@ public class UploadDisputeEvidenceFileResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
+                evidenceUploadResponse,
                 headers);
         }
     }

@@ -345,6 +345,7 @@ import io.moov.sdk.models.components.CreateEvidenceFileMultiPart;
 import io.moov.sdk.models.components.EvidenceType;
 import io.moov.sdk.models.components.File;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.FileUploadValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceFileResponse;
 import java.lang.Exception;
@@ -352,7 +353,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, Exception {
+    public static void main(String[] args) throws GenericError, FileUploadValidationError, Exception {
 
         Moov sdk = Moov.builder()
                 .security(Security.builder()
@@ -374,7 +375,9 @@ public class Application {
                     .build())
                 .call();
 
-        // handle response
+        if (res.evidenceUploadResponse().isPresent()) {
+            // handle response
+        }
     }
 }
 ```
@@ -394,10 +397,11 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/GenericError | 400, 409                   | application/json           |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| models/errors/GenericError              | 400, 409                                | application/json                        |
+| models/errors/FileUploadValidationError | 422                                     | application/json                        |
+| models/errors/APIException              | 4XX, 5XX                                | \*/\*                                   |
 
 ## uploadEvidenceText
 

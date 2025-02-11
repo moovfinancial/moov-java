@@ -7,6 +7,8 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
@@ -14,6 +16,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * FileDetails - Describes a file linked to a Moov account.
@@ -45,8 +48,9 @@ public class FileDetails {
     @JsonProperty("metadata")
     private String metadata;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("decisionReason")
-    private String decisionReason;
+    private Optional<String> decisionReason;
 
     @JsonProperty("fileSizeBytes")
     private long fileSizeBytes;
@@ -65,7 +69,7 @@ public class FileDetails {
             @JsonProperty("filePurpose") FilePurpose filePurpose,
             @JsonProperty("fileStatus") FileStatus fileStatus,
             @JsonProperty("metadata") String metadata,
-            @JsonProperty("decisionReason") String decisionReason,
+            @JsonProperty("decisionReason") Optional<String> decisionReason,
             @JsonProperty("fileSizeBytes") long fileSizeBytes,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
@@ -89,6 +93,19 @@ public class FileDetails {
         this.fileSizeBytes = fileSizeBytes;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
+    }
+    
+    public FileDetails(
+            String fileID,
+            String fileName,
+            String accountID,
+            FilePurpose filePurpose,
+            FileStatus fileStatus,
+            String metadata,
+            long fileSizeBytes,
+            OffsetDateTime createdOn,
+            OffsetDateTime updatedOn) {
+        this(fileID, fileName, accountID, filePurpose, fileStatus, metadata, Optional.empty(), fileSizeBytes, createdOn, updatedOn);
     }
 
     @JsonIgnore
@@ -128,7 +145,7 @@ public class FileDetails {
     }
 
     @JsonIgnore
-    public String decisionReason() {
+    public Optional<String> decisionReason() {
         return decisionReason;
     }
 
@@ -194,6 +211,12 @@ public class FileDetails {
     }
 
     public FileDetails withDecisionReason(String decisionReason) {
+        Utils.checkNotNull(decisionReason, "decisionReason");
+        this.decisionReason = Optional.ofNullable(decisionReason);
+        return this;
+    }
+
+    public FileDetails withDecisionReason(Optional<String> decisionReason) {
         Utils.checkNotNull(decisionReason, "decisionReason");
         this.decisionReason = decisionReason;
         return this;
@@ -283,7 +306,7 @@ public class FileDetails {
  
         private String metadata;
  
-        private String decisionReason;
+        private Optional<String> decisionReason = Optional.empty();
  
         private Long fileSizeBytes;
  
@@ -338,6 +361,12 @@ public class FileDetails {
         }
 
         public Builder decisionReason(String decisionReason) {
+            Utils.checkNotNull(decisionReason, "decisionReason");
+            this.decisionReason = Optional.ofNullable(decisionReason);
+            return this;
+        }
+
+        public Builder decisionReason(Optional<String> decisionReason) {
             Utils.checkNotNull(decisionReason, "decisionReason");
             this.decisionReason = decisionReason;
             return this;

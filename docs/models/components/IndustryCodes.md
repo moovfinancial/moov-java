@@ -3,8 +3,8 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `naics`            | *String*           | :heavy_check_mark: | N/A                | 713940             |
-| `sic`              | *String*           | :heavy_check_mark: | N/A                | 7991               |
-| `mcc`              | *String*           | :heavy_check_mark: | N/A                | 7997               |
+| Field               | Type                | Required            | Description         | Example             |
+| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `naics`             | *Optional\<String>* | :heavy_minus_sign:  | N/A                 | 713940              |
+| `sic`               | *Optional\<String>* | :heavy_minus_sign:  | N/A                 | 7991                |
+| `mcc`               | *Optional\<String>* | :heavy_minus_sign:  | N/A                 | 7997                |

@@ -458,6 +458,8 @@ public class Capabilities implements
      * Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
      * @param accountID
      * @param capabilityID Moov account capabilities.
+
+    The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -480,6 +482,8 @@ public class Capabilities implements
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param capabilityID Moov account capabilities.
+
+    The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -635,6 +639,8 @@ public class Capabilities implements
      * Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more. -  -   To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
      * @param accountID
      * @param capabilityID Moov account capabilities.
+
+    The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -657,6 +663,8 @@ public class Capabilities implements
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
      * @param capabilityID Moov account capabilities.
+
+    The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */

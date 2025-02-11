@@ -14,6 +14,7 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -40,7 +41,7 @@ public class InitiateBankAccountVerificationRequest {
      * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
-    private BankAccountWaitFor xWaitFor;
+    private Optional<? extends BankAccountWaitFor> xWaitFor;
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -51,7 +52,7 @@ public class InitiateBankAccountVerificationRequest {
     @JsonCreator
     public InitiateBankAccountVerificationRequest(
             Optional<String> xMoovVersion,
-            BankAccountWaitFor xWaitFor,
+            Optional<? extends BankAccountWaitFor> xWaitFor,
             String accountID,
             String bankAccountID) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -65,10 +66,9 @@ public class InitiateBankAccountVerificationRequest {
     }
     
     public InitiateBankAccountVerificationRequest(
-            BankAccountWaitFor xWaitFor,
             String accountID,
             String bankAccountID) {
-        this(Optional.empty(), xWaitFor, accountID, bankAccountID);
+        this(Optional.empty(), Optional.empty(), accountID, bankAccountID);
     }
 
     /**
@@ -92,9 +92,10 @@ public class InitiateBankAccountVerificationRequest {
      * 
      * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public BankAccountWaitFor xWaitFor() {
-        return xWaitFor;
+    public Optional<BankAccountWaitFor> xWaitFor() {
+        return (Optional<BankAccountWaitFor>) xWaitFor;
     }
 
     @JsonIgnore
@@ -152,6 +153,17 @@ public class InitiateBankAccountVerificationRequest {
      */
     public InitiateBankAccountVerificationRequest withXWaitFor(BankAccountWaitFor xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
+        this.xWaitFor = Optional.ofNullable(xWaitFor);
+        return this;
+    }
+
+    /**
+     * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+     * 
+     * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+     */
+    public InitiateBankAccountVerificationRequest withXWaitFor(Optional<? extends BankAccountWaitFor> xWaitFor) {
+        Utils.checkNotNull(xWaitFor, "xWaitFor");
         this.xWaitFor = xWaitFor;
         return this;
     }
@@ -206,7 +218,7 @@ public class InitiateBankAccountVerificationRequest {
  
         private Optional<String> xMoovVersion;
  
-        private BankAccountWaitFor xWaitFor;
+        private Optional<? extends BankAccountWaitFor> xWaitFor = Optional.empty();
  
         private String accountID;
  
@@ -256,6 +268,17 @@ public class InitiateBankAccountVerificationRequest {
          * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
          */
         public Builder xWaitFor(BankAccountWaitFor xWaitFor) {
+            Utils.checkNotNull(xWaitFor, "xWaitFor");
+            this.xWaitFor = Optional.ofNullable(xWaitFor);
+            return this;
+        }
+
+        /**
+         * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+         * 
+         * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+         */
+        public Builder xWaitFor(Optional<? extends BankAccountWaitFor> xWaitFor) {
             Utils.checkNotNull(xWaitFor, "xWaitFor");
             this.xWaitFor = xWaitFor;
             return this;

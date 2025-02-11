@@ -10,7 +10,9 @@ import io.moov.sdk.models.components.CreateEvidenceText;
 import io.moov.sdk.models.components.Dispute;
 import io.moov.sdk.models.components.DisputeEvidenceMetadata;
 import io.moov.sdk.models.components.EvidenceText;
+import io.moov.sdk.models.components.EvidenceUploadResponse;
 import io.moov.sdk.models.errors.APIException;
+import io.moov.sdk.models.errors.FileUploadValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.AcceptDisputeRequest;
 import io.moov.sdk.models.operations.AcceptDisputeRequestBuilder;
@@ -888,7 +890,7 @@ public class Disputes implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -929,10 +931,21 @@ public class Disputes implements
 
         UploadDisputeEvidenceFileResponse _res = _resBuilder.build();
         
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "204")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
             _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            return _res;
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                EvidenceUploadResponse _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<EvidenceUploadResponse>() {});
+                _res.withEvidenceUploadResponse(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
             _res.withHeaders(_httpRes.headers().map());
@@ -940,6 +953,21 @@ public class Disputes implements
                 GenericError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<GenericError>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                FileUploadValidationError _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<FileUploadValidationError>() {});
                 throw _out;
             } else {
                 throw new APIException(

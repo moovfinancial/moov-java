@@ -231,7 +231,7 @@ public class SDKMethodInterfaces {
     public interface MethodCallInitiateBankAccountVerification {
         InitiateBankAccountVerificationResponse initiateVerification(
             Optional<String> xMoovVersion,
-            BankAccountWaitFor xWaitFor,
+            Optional<? extends BankAccountWaitFor> xWaitFor,
             String accountID,
             String bankAccountID) throws Exception;
     }
@@ -776,8 +776,8 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallUpdateUnderwriting {
-        UpdateUnderwritingResponse update(
+    public interface MethodCallUpsertUnderwriting {
+        UpsertUnderwritingResponse upsert(
             Optional<String> xMoovVersion,
             String accountID,
             UpdateUnderwriting updateUnderwriting) throws Exception;

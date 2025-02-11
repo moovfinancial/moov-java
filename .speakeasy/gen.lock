@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 5eabb480b77000a8259ac6a43ae5a751
+  docChecksum: 6846219714717ef4ae90f1f0d59fb712
   docVersion: latest
-  speakeasyVersion: 1.487.0
+  speakeasyVersion: 1.488.0
   generationVersion: 2.506.0
-  releaseVersion: 0.7.3
-  configChecksum: 0e2d1043ba427066039181fe1b65ca98
+  releaseVersion: 0.7.4
+  configChecksum: 7ae4e713b1d7e0a23e75600e70904933
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -211,6 +211,7 @@ generatedFiles:
   - docs/models/components/Error.md
   - docs/models/components/EvidenceText.md
   - docs/models/components/EvidenceType.md
+  - docs/models/components/EvidenceUploadResponse.md
   - docs/models/components/FacilitatorFee.md
   - docs/models/components/FeeCategory.md
   - docs/models/components/FeeModel.md
@@ -239,7 +240,6 @@ generatedFiles:
   - docs/models/components/IndividualNameUpdate.md
   - docs/models/components/IndividualProfile.md
   - docs/models/components/IndustryCodes.md
-  - docs/models/components/IndustryCodesUpdate.md
   - docs/models/components/IssuedCard.md
   - docs/models/components/IssuedCardAuthorization.md
   - docs/models/components/IssuedCardAuthorizationEvent.md
@@ -421,6 +421,8 @@ generatedFiles:
   - docs/models/errors/CreateSweepConfigError.md
   - docs/models/errors/Error.md
   - docs/models/errors/FeePlanAgreementError.md
+  - docs/models/errors/File.md
+  - docs/models/errors/FileUploadValidationError.md
   - docs/models/errors/FileValidationError.md
   - docs/models/errors/GenericError.md
   - docs/models/errors/LinkApplePayError.md
@@ -675,8 +677,6 @@ generatedFiles:
   - docs/models/operations/UpdateSweepConfigResponse.md
   - docs/models/operations/UpdateTransferRequest.md
   - docs/models/operations/UpdateTransferResponse.md
-  - docs/models/operations/UpdateUnderwritingRequest.md
-  - docs/models/operations/UpdateUnderwritingResponse.md
   - docs/models/operations/UploadDisputeEvidenceFileRequest.md
   - docs/models/operations/UploadDisputeEvidenceFileResponse.md
   - docs/models/operations/UploadDisputeEvidenceTextRequest.md
@@ -685,6 +685,8 @@ generatedFiles:
   - docs/models/operations/UploadFileResponse.md
   - docs/models/operations/UpsertBrandRequest.md
   - docs/models/operations/UpsertBrandResponse.md
+  - docs/models/operations/UpsertUnderwritingRequest.md
+  - docs/models/operations/UpsertUnderwritingResponse.md
   - docs/sdks/accounts/README.md
   - docs/sdks/adjustments/README.md
   - docs/sdks/applepay/README.md
@@ -935,6 +937,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/Error.java
   - src/main/java/io/moov/sdk/models/components/EvidenceText.java
   - src/main/java/io/moov/sdk/models/components/EvidenceType.java
+  - src/main/java/io/moov/sdk/models/components/EvidenceUploadResponse.java
   - src/main/java/io/moov/sdk/models/components/FacilitatorFee.java
   - src/main/java/io/moov/sdk/models/components/FeeCategory.java
   - src/main/java/io/moov/sdk/models/components/FeeModel.java
@@ -963,7 +966,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/IndividualNameUpdate.java
   - src/main/java/io/moov/sdk/models/components/IndividualProfile.java
   - src/main/java/io/moov/sdk/models/components/IndustryCodes.java
-  - src/main/java/io/moov/sdk/models/components/IndustryCodesUpdate.java
   - src/main/java/io/moov/sdk/models/components/IssuedCard.java
   - src/main/java/io/moov/sdk/models/components/IssuedCardAuthorization.java
   - src/main/java/io/moov/sdk/models/components/IssuedCardAuthorizationEvent.java
@@ -1147,6 +1149,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/CreateSweepConfigError.java
   - src/main/java/io/moov/sdk/models/errors/Error.java
   - src/main/java/io/moov/sdk/models/errors/FeePlanAgreementError.java
+  - src/main/java/io/moov/sdk/models/errors/File.java
+  - src/main/java/io/moov/sdk/models/errors/FileUploadValidationError.java
   - src/main/java/io/moov/sdk/models/errors/FileValidationError.java
   - src/main/java/io/moov/sdk/models/errors/GenericError.java
   - src/main/java/io/moov/sdk/models/errors/LinkApplePayError.java
@@ -1518,9 +1522,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/UpdateTransferRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpdateTransferRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpdateTransferResponse.java
-  - src/main/java/io/moov/sdk/models/operations/UpdateUnderwritingRequest.java
-  - src/main/java/io/moov/sdk/models/operations/UpdateUnderwritingRequestBuilder.java
-  - src/main/java/io/moov/sdk/models/operations/UpdateUnderwritingResponse.java
   - src/main/java/io/moov/sdk/models/operations/UploadDisputeEvidenceFileRequest.java
   - src/main/java/io/moov/sdk/models/operations/UploadDisputeEvidenceFileRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UploadDisputeEvidenceFileResponse.java
@@ -1533,6 +1534,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/UpsertBrandRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpsertBrandRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpsertBrandResponse.java
+  - src/main/java/io/moov/sdk/models/operations/UpsertUnderwritingRequest.java
+  - src/main/java/io/moov/sdk/models/operations/UpsertUnderwritingRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/UpsertUnderwritingResponse.java
   - src/main/java/io/moov/sdk/utils/BackoffStrategy.java
   - src/main/java/io/moov/sdk/utils/BigDecimalString.java
   - src/main/java/io/moov/sdk/utils/BigIntegerString.java
@@ -2030,6 +2034,10 @@ examples:
       responses:
         "400":
           application/json: {"error": "<value>"}
+        "201":
+          application/json: {"evidenceID": "a7723193-9ba8-49cb-b7df-82b494aabddc", "disputeID": "8550e6b0-a1e5-447e-90dc-c9daa38417ce", "filename": "example.file", "mimeType": "<value>", "size": 450219, "evidenceType": "terms-of-service", "createdOn": "2024-03-18T07:07:53.317Z"}
+        "422":
+          application/json: {}
   uploadDisputeEvidenceText:
     speakeasy-default-upload-dispute-evidence-text:
       parameters:
@@ -3076,5 +3084,20 @@ examples:
           application/json: {"error": "<value>"}
         "422":
           application/json: {}
+  upsertUnderwriting:
+    speakeasy-default-upsert-underwriting:
+      parameters:
+        path:
+          accountID: "695bbe92-af8d-4cce-802f-ca871830906f"
+        header: {}
+      requestBody:
+        application/json: {"averageTransactionSize": 543422, "maxTransactionSize": 470183, "averageMonthlyTransactionVolume": 390496, "volumeByCustomerType": {"businessToBusinessPercentage": 478438, "consumerToBusinessPercentage": 232067}, "cardVolumeDistribution": {"ecommercePercentage": 766938, "cardPresentPercentage": 138671, "mailOrPhonePercentage": 146928, "debtRepaymentPercentage": 114639}, "fulfillment": {"hasPhysicalGoods": false, "isShippingProduct": false, "shipmentDurationDays": 5009, "returnPolicy": "withinThirtyDays"}}
+      responses:
+        "200":
+          application/json: {"averageTransactionSize": 733071, "maxTransactionSize": 9626, "averageMonthlyTransactionVolume": 18086, "status": "rejected", "volumeByCustomerType": {"businessToBusinessPercentage": 371041, "consumerToBusinessPercentage": 342018}, "cardVolumeDistribution": {"ecommercePercentage": 273856, "cardPresentPercentage": 808923, "mailOrPhonePercentage": 594354, "debtRepaymentPercentage": 822559}, "fulfillment": {"hasPhysicalGoods": false, "isShippingProduct": true, "shipmentDurationDays": 774983, "returnPolicy": "withinThirtyDays"}}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {"error": {}}
 examplesVersion: 1.0.0
 generatedTests: {}

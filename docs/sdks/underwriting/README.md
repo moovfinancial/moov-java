@@ -11,7 +11,7 @@ Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-* [update](#update) - Update the account's underwriting by passing new values for one or more of the fields. 
+* [upsert](#upsert) - Create or update the account's underwriting.
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
 
@@ -77,9 +77,9 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
-## update
+## upsert
 
-Update the account's underwriting by passing new values for one or more of the fields. 
+Create or update the account's underwriting.
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
 
@@ -100,7 +100,7 @@ import io.moov.sdk.models.components.UpdateUnderwriting;
 import io.moov.sdk.models.components.VolumeByCustomerType;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateUnderwritingError;
-import io.moov.sdk.models.operations.UpdateUnderwritingResponse;
+import io.moov.sdk.models.operations.UpsertUnderwritingResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -114,28 +114,28 @@ public class Application {
                     .build())
             .build();
 
-        UpdateUnderwritingResponse res = sdk.underwriting().update()
+        UpsertUnderwritingResponse res = sdk.underwriting().upsert()
                 .xMoovVersion("v2024.01")
-                .accountID("455b1698-1657-4c75-944b-57db42578d81")
+                .accountID("695bbe92-af8d-4cce-802f-ca871830906f")
                 .updateUnderwriting(UpdateUnderwriting.builder()
-                    .averageTransactionSize(686L)
-                    .maxTransactionSize(927778L)
-                    .averageMonthlyTransactionVolume(363635L)
+                    .averageTransactionSize(543422L)
+                    .maxTransactionSize(470183L)
+                    .averageMonthlyTransactionVolume(390496L)
                     .volumeByCustomerType(VolumeByCustomerType.builder()
-                        .businessToBusinessPercentage(103054)
-                        .consumerToBusinessPercentage(891201)
+                        .businessToBusinessPercentage(478438)
+                        .consumerToBusinessPercentage(232067)
                         .build())
                     .cardVolumeDistribution(CardVolumeDistribution.builder()
-                        .ecommercePercentage(139066)
-                        .cardPresentPercentage(457019)
-                        .mailOrPhonePercentage(477438)
-                        .debtRepaymentPercentage(372012)
+                        .ecommercePercentage(766938)
+                        .cardPresentPercentage(138671)
+                        .mailOrPhonePercentage(146928)
+                        .debtRepaymentPercentage(114639)
                         .build())
                     .fulfillment(FulfillmentDetails.builder()
                         .hasPhysicalGoods(false)
-                        .isShippingProduct(true)
-                        .shipmentDurationDays(571329L)
-                        .returnPolicy(ReturnPolicyType.OTHER)
+                        .isShippingProduct(false)
+                        .shipmentDurationDays(5009L)
+                        .returnPolicy(ReturnPolicyType.WITHIN_THIRTY_DAYS)
                         .build())
                     .build())
                 .call();
@@ -157,7 +157,7 @@ public class Application {
 
 ### Response
 
-**[UpdateUnderwritingResponse](../../models/operations/UpdateUnderwritingResponse.md)**
+**[UpsertUnderwritingResponse](../../models/operations/UpsertUnderwritingResponse.md)**
 
 ### Errors
 

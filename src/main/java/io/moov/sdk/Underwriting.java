@@ -13,9 +13,9 @@ import io.moov.sdk.models.operations.GetUnderwritingRequest;
 import io.moov.sdk.models.operations.GetUnderwritingRequestBuilder;
 import io.moov.sdk.models.operations.GetUnderwritingResponse;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
-import io.moov.sdk.models.operations.UpdateUnderwritingRequest;
-import io.moov.sdk.models.operations.UpdateUnderwritingRequestBuilder;
-import io.moov.sdk.models.operations.UpdateUnderwritingResponse;
+import io.moov.sdk.models.operations.UpsertUnderwritingRequest;
+import io.moov.sdk.models.operations.UpsertUnderwritingRequestBuilder;
+import io.moov.sdk.models.operations.UpsertUnderwritingResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -35,7 +35,7 @@ import java.util.Optional;
 
 public class Underwriting implements
             MethodCallGetUnderwriting,
-            MethodCallUpdateUnderwriting {
+            MethodCallUpsertUnderwriting {
 
     private final SDKConfiguration sdkConfiguration;
 
@@ -217,28 +217,28 @@ public class Underwriting implements
 
 
     /**
-     * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * Create or update the account's underwriting. -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * @return The call builder
      */
-    public UpdateUnderwritingRequestBuilder update() {
-        return new UpdateUnderwritingRequestBuilder(this);
+    public UpsertUnderwritingRequestBuilder upsert() {
+        return new UpsertUnderwritingRequestBuilder(this);
     }
 
     /**
-     * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * Create or update the account's underwriting. -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * @param accountID
      * @param updateUnderwriting
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateUnderwritingResponse update(
+    public UpsertUnderwritingResponse upsert(
             String accountID,
             UpdateUnderwriting updateUnderwriting) throws Exception {
-        return update(Optional.empty(), accountID, updateUnderwriting);
+        return upsert(Optional.empty(), accountID, updateUnderwriting);
     }
     
     /**
-     * Update the account's underwriting by passing new values for one or more of the fields.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * Create or update the account's underwriting. -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -253,12 +253,12 @@ public class Underwriting implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateUnderwritingResponse update(
+    public UpsertUnderwritingResponse upsert(
             Optional<String> xMoovVersion,
             String accountID,
             UpdateUnderwriting updateUnderwriting) throws Exception {
-        UpdateUnderwritingRequest request =
-            UpdateUnderwritingRequest
+        UpsertUnderwritingRequest request =
+            UpsertUnderwritingRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
@@ -267,7 +267,7 @@ public class Underwriting implements
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
-                UpdateUnderwritingRequest.class,
+                UpsertUnderwritingRequest.class,
                 _baseUrl,
                 "/accounts/{accountID}/underwriting",
                 request, this.sdkConfiguration.globals);
@@ -299,7 +299,7 @@ public class Underwriting implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
-                      "updateUnderwriting", 
+                      "upsertUnderwriting", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -310,7 +310,7 @@ public class Underwriting implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "updateUnderwriting",
+                            "upsertUnderwriting",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -319,7 +319,7 @@ public class Underwriting implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
-                            "updateUnderwriting",
+                            "upsertUnderwriting",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -328,7 +328,7 @@ public class Underwriting implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "updateUnderwriting",
+                            "upsertUnderwriting",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -338,14 +338,14 @@ public class Underwriting implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        UpdateUnderwritingResponse.Builder _resBuilder = 
-            UpdateUnderwritingResponse
+        UpsertUnderwritingResponse.Builder _resBuilder = 
+            UpsertUnderwritingResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        UpdateUnderwritingResponse _res = _resBuilder.build();
+        UpsertUnderwritingResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());

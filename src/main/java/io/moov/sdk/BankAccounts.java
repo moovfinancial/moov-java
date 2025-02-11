@@ -1426,17 +1426,15 @@ public class BankAccounts implements
 
     /**
      * Instant micro-deposit verification offers a quick and efficient way to verify bank account ownership.  -  - Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank's capabilities. This - feature provides a faster alternative to traditional methods, allowing verification in a single session. -  - It is recommended to use the `X-Wait-For: rail-response` header to synchronously receive the outcome of the instant credit in the -   response payload. -  - Possible verification methods: -   - `instant`: Real-time verification credit sent via RTP -   - `ach`: Verification credit sent via same-day ACH -  - Possible statuses: -   - `new`: Verification initiated, credit pending -   - `sent-credit`: Credit sent, available for verification in the external bank account -   - `failed`: Verification failed due to credit rejection/return, details in `exceptionDetails` -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-     * @param xWaitFor
      * @param accountID
      * @param bankAccountID
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public InitiateBankAccountVerificationResponse initiateVerification(
-            BankAccountWaitFor xWaitFor,
             String accountID,
             String bankAccountID) throws Exception {
-        return initiateVerification(Optional.empty(), xWaitFor, accountID, bankAccountID);
+        return initiateVerification(Optional.empty(), Optional.empty(), accountID, bankAccountID);
     }
     
     /**
@@ -1458,7 +1456,7 @@ public class BankAccounts implements
      */
     public InitiateBankAccountVerificationResponse initiateVerification(
             Optional<String> xMoovVersion,
-            BankAccountWaitFor xWaitFor,
+            Optional<? extends BankAccountWaitFor> xWaitFor,
             String accountID,
             String bankAccountID) throws Exception {
         InitiateBankAccountVerificationRequest request =

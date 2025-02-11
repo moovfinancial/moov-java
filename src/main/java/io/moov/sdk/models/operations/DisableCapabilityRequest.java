@@ -39,6 +39,8 @@ public class DisableCapabilityRequest {
 
     /**
      * Moov account capabilities.
+     * 
+     * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=capabilityID")
     private CapabilityID capabilityID;
@@ -85,6 +87,8 @@ public class DisableCapabilityRequest {
 
     /**
      * Moov account capabilities.
+     * 
+     * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      */
     @JsonIgnore
     public CapabilityID capabilityID() {
@@ -137,6 +141,8 @@ public class DisableCapabilityRequest {
 
     /**
      * Moov account capabilities.
+     * 
+     * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      */
     public DisableCapabilityRequest withCapabilityID(CapabilityID capabilityID) {
         Utils.checkNotNull(capabilityID, "capabilityID");
@@ -229,6 +235,8 @@ public class DisableCapabilityRequest {
 
         /**
          * Moov account capabilities.
+         * 
+         * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
          */
         public Builder capabilityID(CapabilityID capabilityID) {
             Utils.checkNotNull(capabilityID, "capabilityID");

@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class UpdateUnderwritingResponse implements Response {
+public class UpsertUnderwritingResponse implements Response {
 
     /**
      * HTTP response content type for this operation
@@ -47,7 +47,7 @@ public class UpdateUnderwritingResponse implements Response {
     private Map<String, List<String>> headers;
 
     @JsonCreator
-    public UpdateUnderwritingResponse(
+    public UpsertUnderwritingResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
@@ -65,7 +65,7 @@ public class UpdateUnderwritingResponse implements Response {
         this.headers = headers;
     }
     
-    public UpdateUnderwritingResponse(
+    public UpsertUnderwritingResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
@@ -118,7 +118,7 @@ public class UpdateUnderwritingResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
-    public UpdateUnderwritingResponse withContentType(String contentType) {
+    public UpsertUnderwritingResponse withContentType(String contentType) {
         Utils.checkNotNull(contentType, "contentType");
         this.contentType = contentType;
         return this;
@@ -127,7 +127,7 @@ public class UpdateUnderwritingResponse implements Response {
     /**
      * HTTP response status code for this operation
      */
-    public UpdateUnderwritingResponse withStatusCode(int statusCode) {
+    public UpsertUnderwritingResponse withStatusCode(int statusCode) {
         Utils.checkNotNull(statusCode, "statusCode");
         this.statusCode = statusCode;
         return this;
@@ -136,7 +136,7 @@ public class UpdateUnderwritingResponse implements Response {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public UpdateUnderwritingResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
+    public UpsertUnderwritingResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = rawResponse;
         return this;
@@ -145,7 +145,7 @@ public class UpdateUnderwritingResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public UpdateUnderwritingResponse withUnderwriting(Underwriting underwriting) {
+    public UpsertUnderwritingResponse withUnderwriting(Underwriting underwriting) {
         Utils.checkNotNull(underwriting, "underwriting");
         this.underwriting = Optional.ofNullable(underwriting);
         return this;
@@ -154,13 +154,13 @@ public class UpdateUnderwritingResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public UpdateUnderwritingResponse withUnderwriting(Optional<? extends Underwriting> underwriting) {
+    public UpsertUnderwritingResponse withUnderwriting(Optional<? extends Underwriting> underwriting) {
         Utils.checkNotNull(underwriting, "underwriting");
         this.underwriting = underwriting;
         return this;
     }
 
-    public UpdateUnderwritingResponse withHeaders(Map<String, List<String>> headers) {
+    public UpsertUnderwritingResponse withHeaders(Map<String, List<String>> headers) {
         Utils.checkNotNull(headers, "headers");
         this.headers = headers;
         return this;
@@ -174,7 +174,7 @@ public class UpdateUnderwritingResponse implements Response {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UpdateUnderwritingResponse other = (UpdateUnderwritingResponse) o;
+        UpsertUnderwritingResponse other = (UpsertUnderwritingResponse) o;
         return 
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
@@ -195,7 +195,7 @@ public class UpdateUnderwritingResponse implements Response {
     
     @Override
     public String toString() {
-        return Utils.toString(UpdateUnderwritingResponse.class,
+        return Utils.toString(UpsertUnderwritingResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
@@ -270,8 +270,8 @@ public class UpdateUnderwritingResponse implements Response {
             return this;
         }
         
-        public UpdateUnderwritingResponse build() {
-            return new UpdateUnderwritingResponse(
+        public UpsertUnderwritingResponse build() {
+            return new UpsertUnderwritingResponse(
                 contentType,
                 statusCode,
                 rawResponse,

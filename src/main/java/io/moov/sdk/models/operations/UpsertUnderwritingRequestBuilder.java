@@ -11,7 +11,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
 
-public class UpdateUnderwritingRequestBuilder {
+public class UpsertUnderwritingRequestBuilder {
 
     private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
                             "xMoovVersion",
@@ -19,41 +19,41 @@ public class UpdateUnderwritingRequestBuilder {
                             new TypeReference<Optional<String>>() {});
     private String accountID;
     private UpdateUnderwriting updateUnderwriting;
-    private final SDKMethodInterfaces.MethodCallUpdateUnderwriting sdk;
+    private final SDKMethodInterfaces.MethodCallUpsertUnderwriting sdk;
 
-    public UpdateUnderwritingRequestBuilder(SDKMethodInterfaces.MethodCallUpdateUnderwriting sdk) {
+    public UpsertUnderwritingRequestBuilder(SDKMethodInterfaces.MethodCallUpsertUnderwriting sdk) {
         this.sdk = sdk;
     }
                 
-    public UpdateUnderwritingRequestBuilder xMoovVersion(String xMoovVersion) {
+    public UpsertUnderwritingRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public UpdateUnderwritingRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
+    public UpsertUnderwritingRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
     }
 
-    public UpdateUnderwritingRequestBuilder accountID(String accountID) {
+    public UpsertUnderwritingRequestBuilder accountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
-    public UpdateUnderwritingRequestBuilder updateUnderwriting(UpdateUnderwriting updateUnderwriting) {
+    public UpsertUnderwritingRequestBuilder updateUnderwriting(UpdateUnderwriting updateUnderwriting) {
         Utils.checkNotNull(updateUnderwriting, "updateUnderwriting");
         this.updateUnderwriting = updateUnderwriting;
         return this;
     }
 
-    public UpdateUnderwritingResponse call() throws Exception {
+    public UpsertUnderwritingResponse call() throws Exception {
         if (xMoovVersion == null) {
             xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
         }
-        return sdk.update(
+        return sdk.upsert(
             xMoovVersion,
             accountID,
             updateUnderwriting);

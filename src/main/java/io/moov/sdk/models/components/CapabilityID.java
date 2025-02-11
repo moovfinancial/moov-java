@@ -11,13 +11,16 @@ import java.util.Optional;
 
 /**
  * CapabilityID - Moov account capabilities.
+ * 
+ * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
  */
 public enum CapabilityID {
     TRANSFERS("transfers"),
     SEND_FUNDS("send-funds"),
     COLLECT_FUNDS("collect-funds"),
     WALLET("wallet"),
-    CARD_ISSUING("card-issuing");
+    CARD_ISSUING("card-issuing"),
+    PRODUCTION_APP("production-app");
 
     @JsonValue
     private final String value;

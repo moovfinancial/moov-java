@@ -17,7 +17,7 @@ public class InitiateBankAccountVerificationRequestBuilder {
                             "xMoovVersion",
                             "\"v2024.01\"",
                             new TypeReference<Optional<String>>() {});
-    private BankAccountWaitFor xWaitFor;
+    private Optional<? extends BankAccountWaitFor> xWaitFor = Optional.empty();
     private String accountID;
     private String bankAccountID;
     private final SDKMethodInterfaces.MethodCallInitiateBankAccountVerification sdk;
@@ -37,8 +37,14 @@ public class InitiateBankAccountVerificationRequestBuilder {
         this.xMoovVersion = xMoovVersion;
         return this;
     }
-
+                
     public InitiateBankAccountVerificationRequestBuilder xWaitFor(BankAccountWaitFor xWaitFor) {
+        Utils.checkNotNull(xWaitFor, "xWaitFor");
+        this.xWaitFor = Optional.of(xWaitFor);
+        return this;
+    }
+
+    public InitiateBankAccountVerificationRequestBuilder xWaitFor(Optional<? extends BankAccountWaitFor> xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
         this.xWaitFor = xWaitFor;
         return this;

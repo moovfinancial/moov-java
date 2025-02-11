@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class UpdateUnderwritingRequest {
+public class UpsertUnderwritingRequest {
 
     /**
      * Specify an API version.
@@ -41,7 +41,7 @@ public class UpdateUnderwritingRequest {
     private UpdateUnderwriting updateUnderwriting;
 
     @JsonCreator
-    public UpdateUnderwritingRequest(
+    public UpsertUnderwritingRequest(
             Optional<String> xMoovVersion,
             String accountID,
             UpdateUnderwriting updateUnderwriting) {
@@ -53,7 +53,7 @@ public class UpdateUnderwritingRequest {
         this.updateUnderwriting = updateUnderwriting;
     }
     
-    public UpdateUnderwritingRequest(
+    public UpsertUnderwritingRequest(
             String accountID,
             UpdateUnderwriting updateUnderwriting) {
         this(Optional.empty(), accountID, updateUnderwriting);
@@ -100,7 +100,7 @@ public class UpdateUnderwritingRequest {
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public UpdateUnderwritingRequest withXMoovVersion(String xMoovVersion) {
+    public UpsertUnderwritingRequest withXMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.ofNullable(xMoovVersion);
         return this;
@@ -117,19 +117,19 @@ public class UpdateUnderwritingRequest {
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public UpdateUnderwritingRequest withXMoovVersion(Optional<String> xMoovVersion) {
+    public UpsertUnderwritingRequest withXMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
     }
 
-    public UpdateUnderwritingRequest withAccountID(String accountID) {
+    public UpsertUnderwritingRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
-    public UpdateUnderwritingRequest withUpdateUnderwriting(UpdateUnderwriting updateUnderwriting) {
+    public UpsertUnderwritingRequest withUpdateUnderwriting(UpdateUnderwriting updateUnderwriting) {
         Utils.checkNotNull(updateUnderwriting, "updateUnderwriting");
         this.updateUnderwriting = updateUnderwriting;
         return this;
@@ -143,7 +143,7 @@ public class UpdateUnderwritingRequest {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UpdateUnderwritingRequest other = (UpdateUnderwritingRequest) o;
+        UpsertUnderwritingRequest other = (UpsertUnderwritingRequest) o;
         return 
             Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.accountID, other.accountID) &&
@@ -160,7 +160,7 @@ public class UpdateUnderwritingRequest {
     
     @Override
     public String toString() {
-        return Utils.toString(UpdateUnderwritingRequest.class,
+        return Utils.toString(UpsertUnderwritingRequest.class,
                 "xMoovVersion", xMoovVersion,
                 "accountID", accountID,
                 "updateUnderwriting", updateUnderwriting);
@@ -224,10 +224,10 @@ public class UpdateUnderwritingRequest {
             return this;
         }
         
-        public UpdateUnderwritingRequest build() {
+        public UpsertUnderwritingRequest build() {
             if (xMoovVersion == null) {
                 xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-            }            return new UpdateUnderwritingRequest(
+            }            return new UpsertUnderwritingRequest(
                 xMoovVersion,
                 accountID,
                 updateUnderwriting);

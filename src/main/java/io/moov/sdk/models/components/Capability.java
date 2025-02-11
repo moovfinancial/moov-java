@@ -23,6 +23,8 @@ public class Capability {
 
     /**
      * Moov account capabilities.
+     * 
+     * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      */
     @JsonProperty("capability")
     private CapabilityID capability;
@@ -96,6 +98,8 @@ public class Capability {
 
     /**
      * Moov account capabilities.
+     * 
+     * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      */
     @JsonIgnore
     public CapabilityID capability() {
@@ -150,6 +154,8 @@ public class Capability {
 
     /**
      * Moov account capabilities.
+     * 
+     * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
      */
     public Capability withCapability(CapabilityID capability) {
         Utils.checkNotNull(capability, "capability");
@@ -296,6 +302,8 @@ public class Capability {
 
         /**
          * Moov account capabilities.
+         * 
+         * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
          */
         public Builder capability(CapabilityID capability) {
             Utils.checkNotNull(capability, "capability");

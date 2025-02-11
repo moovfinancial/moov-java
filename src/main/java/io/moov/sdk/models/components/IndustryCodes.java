@@ -7,29 +7,35 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class IndustryCodes {
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("naics")
-    private String naics;
+    private Optional<String> naics;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sic")
-    private String sic;
+    private Optional<String> sic;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mcc")
-    private String mcc;
+    private Optional<String> mcc;
 
     @JsonCreator
     public IndustryCodes(
-            @JsonProperty("naics") String naics,
-            @JsonProperty("sic") String sic,
-            @JsonProperty("mcc") String mcc) {
+            @JsonProperty("naics") Optional<String> naics,
+            @JsonProperty("sic") Optional<String> sic,
+            @JsonProperty("mcc") Optional<String> mcc) {
         Utils.checkNotNull(naics, "naics");
         Utils.checkNotNull(sic, "sic");
         Utils.checkNotNull(mcc, "mcc");
@@ -37,19 +43,23 @@ public class IndustryCodes {
         this.sic = sic;
         this.mcc = mcc;
     }
+    
+    public IndustryCodes() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
+    }
 
     @JsonIgnore
-    public String naics() {
+    public Optional<String> naics() {
         return naics;
     }
 
     @JsonIgnore
-    public String sic() {
+    public Optional<String> sic() {
         return sic;
     }
 
     @JsonIgnore
-    public String mcc() {
+    public Optional<String> mcc() {
         return mcc;
     }
 
@@ -59,17 +69,35 @@ public class IndustryCodes {
 
     public IndustryCodes withNaics(String naics) {
         Utils.checkNotNull(naics, "naics");
+        this.naics = Optional.ofNullable(naics);
+        return this;
+    }
+
+    public IndustryCodes withNaics(Optional<String> naics) {
+        Utils.checkNotNull(naics, "naics");
         this.naics = naics;
         return this;
     }
 
     public IndustryCodes withSic(String sic) {
         Utils.checkNotNull(sic, "sic");
+        this.sic = Optional.ofNullable(sic);
+        return this;
+    }
+
+    public IndustryCodes withSic(Optional<String> sic) {
+        Utils.checkNotNull(sic, "sic");
         this.sic = sic;
         return this;
     }
 
     public IndustryCodes withMcc(String mcc) {
+        Utils.checkNotNull(mcc, "mcc");
+        this.mcc = Optional.ofNullable(mcc);
+        return this;
+    }
+
+    public IndustryCodes withMcc(Optional<String> mcc) {
         Utils.checkNotNull(mcc, "mcc");
         this.mcc = mcc;
         return this;
@@ -108,11 +136,11 @@ public class IndustryCodes {
     
     public final static class Builder {
  
-        private String naics;
+        private Optional<String> naics = Optional.empty();
  
-        private String sic;
+        private Optional<String> sic = Optional.empty();
  
-        private String mcc;  
+        private Optional<String> mcc = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -120,17 +148,35 @@ public class IndustryCodes {
 
         public Builder naics(String naics) {
             Utils.checkNotNull(naics, "naics");
+            this.naics = Optional.ofNullable(naics);
+            return this;
+        }
+
+        public Builder naics(Optional<String> naics) {
+            Utils.checkNotNull(naics, "naics");
             this.naics = naics;
             return this;
         }
 
         public Builder sic(String sic) {
             Utils.checkNotNull(sic, "sic");
+            this.sic = Optional.ofNullable(sic);
+            return this;
+        }
+
+        public Builder sic(Optional<String> sic) {
+            Utils.checkNotNull(sic, "sic");
             this.sic = sic;
             return this;
         }
 
         public Builder mcc(String mcc) {
+            Utils.checkNotNull(mcc, "mcc");
+            this.mcc = Optional.ofNullable(mcc);
+            return this;
+        }
+
+        public Builder mcc(Optional<String> mcc) {
             Utils.checkNotNull(mcc, "mcc");
             this.mcc = mcc;
             return this;

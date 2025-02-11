@@ -70,7 +70,7 @@ public class CreateBusinessProfileUpdate {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("industryCodes")
-    private Optional<? extends IndustryCodesUpdate> industryCodes;
+    private Optional<? extends IndustryCodes> industryCodes;
 
     /**
      * If the business is a financial institution, this field describes its primary regulator.
@@ -90,7 +90,7 @@ public class CreateBusinessProfileUpdate {
             @JsonProperty("website") Optional<String> website,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("taxID") Optional<? extends TaxIDUpdate> taxID,
-            @JsonProperty("industryCodes") Optional<? extends IndustryCodesUpdate> industryCodes,
+            @JsonProperty("industryCodes") Optional<? extends IndustryCodes> industryCodes,
             @JsonProperty("primaryRegulator") Optional<? extends PrimaryRegulator> primaryRegulator) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
         Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
@@ -183,8 +183,8 @@ public class CreateBusinessProfileUpdate {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<IndustryCodesUpdate> industryCodes() {
-        return (Optional<IndustryCodesUpdate>) industryCodes;
+    public Optional<IndustryCodes> industryCodes() {
+        return (Optional<IndustryCodes>) industryCodes;
     }
 
     /**
@@ -332,13 +332,13 @@ public class CreateBusinessProfileUpdate {
         return this;
     }
 
-    public CreateBusinessProfileUpdate withIndustryCodes(IndustryCodesUpdate industryCodes) {
+    public CreateBusinessProfileUpdate withIndustryCodes(IndustryCodes industryCodes) {
         Utils.checkNotNull(industryCodes, "industryCodes");
         this.industryCodes = Optional.ofNullable(industryCodes);
         return this;
     }
 
-    public CreateBusinessProfileUpdate withIndustryCodes(Optional<? extends IndustryCodesUpdate> industryCodes) {
+    public CreateBusinessProfileUpdate withIndustryCodes(Optional<? extends IndustryCodes> industryCodes) {
         Utils.checkNotNull(industryCodes, "industryCodes");
         this.industryCodes = industryCodes;
         return this;
@@ -437,7 +437,7 @@ public class CreateBusinessProfileUpdate {
  
         private Optional<? extends TaxIDUpdate> taxID = Optional.empty();
  
-        private Optional<? extends IndustryCodesUpdate> industryCodes = Optional.empty();
+        private Optional<? extends IndustryCodes> industryCodes = Optional.empty();
  
         private Optional<? extends PrimaryRegulator> primaryRegulator = Optional.empty();  
         
@@ -577,13 +577,13 @@ public class CreateBusinessProfileUpdate {
             return this;
         }
 
-        public Builder industryCodes(IndustryCodesUpdate industryCodes) {
+        public Builder industryCodes(IndustryCodes industryCodes) {
             Utils.checkNotNull(industryCodes, "industryCodes");
             this.industryCodes = Optional.ofNullable(industryCodes);
             return this;
         }
 
-        public Builder industryCodes(Optional<? extends IndustryCodesUpdate> industryCodes) {
+        public Builder industryCodes(Optional<? extends IndustryCodes> industryCodes) {
             Utils.checkNotNull(industryCodes, "industryCodes");
             this.industryCodes = industryCodes;
             return this;

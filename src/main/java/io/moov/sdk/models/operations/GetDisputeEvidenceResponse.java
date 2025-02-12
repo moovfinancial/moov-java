@@ -7,7 +7,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.DisputeEvidenceMetadata;
+import io.moov.sdk.models.components.DisputeEvidenceResponse;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -42,7 +42,7 @@ public class GetDisputeEvidenceResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends DisputeEvidenceMetadata> disputeEvidenceMetadata;
+    private Optional<? extends DisputeEvidenceResponse> disputeEvidenceResponse;
 
     private Map<String, List<String>> headers;
 
@@ -51,17 +51,17 @@ public class GetDisputeEvidenceResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends DisputeEvidenceMetadata> disputeEvidenceMetadata,
+            Optional<? extends DisputeEvidenceResponse> disputeEvidenceResponse,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(disputeEvidenceMetadata, "disputeEvidenceMetadata");
+        Utils.checkNotNull(disputeEvidenceResponse, "disputeEvidenceResponse");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.disputeEvidenceMetadata = disputeEvidenceMetadata;
+        this.disputeEvidenceResponse = disputeEvidenceResponse;
         this.headers = headers;
     }
     
@@ -102,8 +102,8 @@ public class GetDisputeEvidenceResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<DisputeEvidenceMetadata> disputeEvidenceMetadata() {
-        return (Optional<DisputeEvidenceMetadata>) disputeEvidenceMetadata;
+    public Optional<DisputeEvidenceResponse> disputeEvidenceResponse() {
+        return (Optional<DisputeEvidenceResponse>) disputeEvidenceResponse;
     }
 
     @JsonIgnore
@@ -145,18 +145,18 @@ public class GetDisputeEvidenceResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public GetDisputeEvidenceResponse withDisputeEvidenceMetadata(DisputeEvidenceMetadata disputeEvidenceMetadata) {
-        Utils.checkNotNull(disputeEvidenceMetadata, "disputeEvidenceMetadata");
-        this.disputeEvidenceMetadata = Optional.ofNullable(disputeEvidenceMetadata);
+    public GetDisputeEvidenceResponse withDisputeEvidenceResponse(DisputeEvidenceResponse disputeEvidenceResponse) {
+        Utils.checkNotNull(disputeEvidenceResponse, "disputeEvidenceResponse");
+        this.disputeEvidenceResponse = Optional.ofNullable(disputeEvidenceResponse);
         return this;
     }
 
     /**
      * The request completed successfully.
      */
-    public GetDisputeEvidenceResponse withDisputeEvidenceMetadata(Optional<? extends DisputeEvidenceMetadata> disputeEvidenceMetadata) {
-        Utils.checkNotNull(disputeEvidenceMetadata, "disputeEvidenceMetadata");
-        this.disputeEvidenceMetadata = disputeEvidenceMetadata;
+    public GetDisputeEvidenceResponse withDisputeEvidenceResponse(Optional<? extends DisputeEvidenceResponse> disputeEvidenceResponse) {
+        Utils.checkNotNull(disputeEvidenceResponse, "disputeEvidenceResponse");
+        this.disputeEvidenceResponse = disputeEvidenceResponse;
         return this;
     }
 
@@ -179,7 +179,7 @@ public class GetDisputeEvidenceResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.disputeEvidenceMetadata, other.disputeEvidenceMetadata) &&
+            Objects.deepEquals(this.disputeEvidenceResponse, other.disputeEvidenceResponse) &&
             Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -189,7 +189,7 @@ public class GetDisputeEvidenceResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            disputeEvidenceMetadata,
+            disputeEvidenceResponse,
             headers);
     }
     
@@ -199,7 +199,7 @@ public class GetDisputeEvidenceResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "disputeEvidenceMetadata", disputeEvidenceMetadata,
+                "disputeEvidenceResponse", disputeEvidenceResponse,
                 "headers", headers);
     }
     
@@ -211,7 +211,7 @@ public class GetDisputeEvidenceResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends DisputeEvidenceMetadata> disputeEvidenceMetadata = Optional.empty();
+        private Optional<? extends DisputeEvidenceResponse> disputeEvidenceResponse = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -249,18 +249,18 @@ public class GetDisputeEvidenceResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder disputeEvidenceMetadata(DisputeEvidenceMetadata disputeEvidenceMetadata) {
-            Utils.checkNotNull(disputeEvidenceMetadata, "disputeEvidenceMetadata");
-            this.disputeEvidenceMetadata = Optional.ofNullable(disputeEvidenceMetadata);
+        public Builder disputeEvidenceResponse(DisputeEvidenceResponse disputeEvidenceResponse) {
+            Utils.checkNotNull(disputeEvidenceResponse, "disputeEvidenceResponse");
+            this.disputeEvidenceResponse = Optional.ofNullable(disputeEvidenceResponse);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder disputeEvidenceMetadata(Optional<? extends DisputeEvidenceMetadata> disputeEvidenceMetadata) {
-            Utils.checkNotNull(disputeEvidenceMetadata, "disputeEvidenceMetadata");
-            this.disputeEvidenceMetadata = disputeEvidenceMetadata;
+        public Builder disputeEvidenceResponse(Optional<? extends DisputeEvidenceResponse> disputeEvidenceResponse) {
+            Utils.checkNotNull(disputeEvidenceResponse, "disputeEvidenceResponse");
+            this.disputeEvidenceResponse = disputeEvidenceResponse;
             return this;
         }
 
@@ -275,7 +275,7 @@ public class GetDisputeEvidenceResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                disputeEvidenceMetadata,
+                disputeEvidenceResponse,
                 headers);
         }
     }

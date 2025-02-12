@@ -25,8 +25,8 @@ public class GenerateEndToEndKeyRequest {
      * API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
@@ -50,8 +50,8 @@ public class GenerateEndToEndKeyRequest {
      * API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
@@ -70,8 +70,8 @@ public class GenerateEndToEndKeyRequest {
      * API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
@@ -87,8 +87,8 @@ public class GenerateEndToEndKeyRequest {
      * API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-     *     - If no build number is specified, the version refers to the initial release of the quarter.
+     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
@@ -137,8 +137,8 @@ public class GenerateEndToEndKeyRequest {
          * API versioning follows the format `vYYYY.QQ.BB`, where 
          *   - `YYYY` is the year
          *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-         *     - If no build number is specified, the version refers to the initial release of the quarter.
+         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
          * 
          * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
@@ -154,8 +154,8 @@ public class GenerateEndToEndKeyRequest {
          * API versioning follows the format `vYYYY.QQ.BB`, where 
          *   - `YYYY` is the year
          *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-         *     - If no build number is specified, the version refers to the initial release of the quarter.
+         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
          * 
          * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
@@ -175,7 +175,7 @@ public class GenerateEndToEndKeyRequest {
         private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
                 new LazySingletonValue<>(
                         "x-moov-version",
-                        "\"v2024.01\"",
+                        "\"v2024.01.00\"",
                         new TypeReference<Optional<String>>() {});
     }
 }

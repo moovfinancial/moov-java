@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.7.4'
+implementation 'io.moov:sdk:0.7.5'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.7.4</version>
+    <version>0.7.5</version>
 </dependency>
 ```
 
@@ -108,7 +108,7 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01")
+                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -165,7 +165,7 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01")
+                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -1010,7 +1010,7 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01")
+                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -1062,7 +1062,7 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01")
+                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()

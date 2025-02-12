@@ -16,7 +16,7 @@ public class ListPartnerPricingAgreementsRequestBuilder {
 
     private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
                             "xMoovVersion",
-                            "\"v2024.01\"",
+                            "\"v2024.01.00\"",
                             new TypeReference<Optional<String>>() {});
     private String accountID;
     private Optional<? extends List<String>> agreementID = Optional.empty();
@@ -83,6 +83,6 @@ public class ListPartnerPricingAgreementsRequestBuilder {
     private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
             new LazySingletonValue<>(
                     "xMoovVersion",
-                    "\"v2024.01\"",
+                    "\"v2024.01.00\"",
                     new TypeReference<Optional<String>>() {});
 }

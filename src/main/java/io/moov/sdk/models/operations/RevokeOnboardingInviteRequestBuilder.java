@@ -14,7 +14,7 @@ public class RevokeOnboardingInviteRequestBuilder {
 
     private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
                             "xMoovVersion",
-                            "\"v2024.01\"",
+                            "\"v2024.01.00\"",
                             new TypeReference<Optional<String>>() {});
     private String code;
     private final SDKMethodInterfaces.MethodCallRevokeOnboardingInvite sdk;
@@ -53,6 +53,6 @@ public class RevokeOnboardingInviteRequestBuilder {
     private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
             new LazySingletonValue<>(
                     "xMoovVersion",
-                    "\"v2024.01\"",
+                    "\"v2024.01.00\"",
                     new TypeReference<Optional<String>>() {});
 }

@@ -17,43 +17,32 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * UpdateEvidence - The template for adding optional properties.
- */
 
 public class UpdateEvidence {
-
-    /**
-     * The text to associate with the dispute as evidence.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("text")
-    private Optional<String> text;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("evidenceType")
     private Optional<? extends EvidenceType> evidenceType;
 
+    /**
+     * If updating text evidence, the new text to associate with the dispute.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("text")
+    private Optional<String> text;
+
     @JsonCreator
     public UpdateEvidence(
-            @JsonProperty("text") Optional<String> text,
-            @JsonProperty("evidenceType") Optional<? extends EvidenceType> evidenceType) {
-        Utils.checkNotNull(text, "text");
+            @JsonProperty("evidenceType") Optional<? extends EvidenceType> evidenceType,
+            @JsonProperty("text") Optional<String> text) {
         Utils.checkNotNull(evidenceType, "evidenceType");
-        this.text = text;
+        Utils.checkNotNull(text, "text");
         this.evidenceType = evidenceType;
+        this.text = text;
     }
     
     public UpdateEvidence() {
         this(Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * The text to associate with the dispute as evidence.
-     */
-    @JsonIgnore
-    public Optional<String> text() {
-        return text;
     }
 
     @SuppressWarnings("unchecked")
@@ -62,26 +51,16 @@ public class UpdateEvidence {
         return (Optional<EvidenceType>) evidenceType;
     }
 
+    /**
+     * If updating text evidence, the new text to associate with the dispute.
+     */
+    @JsonIgnore
+    public Optional<String> text() {
+        return text;
+    }
+
     public final static Builder builder() {
         return new Builder();
-    }
-
-    /**
-     * The text to associate with the dispute as evidence.
-     */
-    public UpdateEvidence withText(String text) {
-        Utils.checkNotNull(text, "text");
-        this.text = Optional.ofNullable(text);
-        return this;
-    }
-
-    /**
-     * The text to associate with the dispute as evidence.
-     */
-    public UpdateEvidence withText(Optional<String> text) {
-        Utils.checkNotNull(text, "text");
-        this.text = text;
-        return this;
     }
 
     public UpdateEvidence withEvidenceType(EvidenceType evidenceType) {
@@ -95,6 +74,24 @@ public class UpdateEvidence {
         this.evidenceType = evidenceType;
         return this;
     }
+
+    /**
+     * If updating text evidence, the new text to associate with the dispute.
+     */
+    public UpdateEvidence withText(String text) {
+        Utils.checkNotNull(text, "text");
+        this.text = Optional.ofNullable(text);
+        return this;
+    }
+
+    /**
+     * If updating text evidence, the new text to associate with the dispute.
+     */
+    public UpdateEvidence withText(Optional<String> text) {
+        Utils.checkNotNull(text, "text");
+        this.text = text;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -106,50 +103,32 @@ public class UpdateEvidence {
         }
         UpdateEvidence other = (UpdateEvidence) o;
         return 
-            Objects.deepEquals(this.text, other.text) &&
-            Objects.deepEquals(this.evidenceType, other.evidenceType);
+            Objects.deepEquals(this.evidenceType, other.evidenceType) &&
+            Objects.deepEquals(this.text, other.text);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            text,
-            evidenceType);
+            evidenceType,
+            text);
     }
     
     @Override
     public String toString() {
         return Utils.toString(UpdateEvidence.class,
-                "text", text,
-                "evidenceType", evidenceType);
+                "evidenceType", evidenceType,
+                "text", text);
     }
     
     public final static class Builder {
  
-        private Optional<String> text = Optional.empty();
+        private Optional<? extends EvidenceType> evidenceType = Optional.empty();
  
-        private Optional<? extends EvidenceType> evidenceType = Optional.empty();  
+        private Optional<String> text = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * The text to associate with the dispute as evidence.
-         */
-        public Builder text(String text) {
-            Utils.checkNotNull(text, "text");
-            this.text = Optional.ofNullable(text);
-            return this;
-        }
-
-        /**
-         * The text to associate with the dispute as evidence.
-         */
-        public Builder text(Optional<String> text) {
-            Utils.checkNotNull(text, "text");
-            this.text = text;
-            return this;
         }
 
         public Builder evidenceType(EvidenceType evidenceType) {
@@ -163,11 +142,29 @@ public class UpdateEvidence {
             this.evidenceType = evidenceType;
             return this;
         }
+
+        /**
+         * If updating text evidence, the new text to associate with the dispute.
+         */
+        public Builder text(String text) {
+            Utils.checkNotNull(text, "text");
+            this.text = Optional.ofNullable(text);
+            return this;
+        }
+
+        /**
+         * If updating text evidence, the new text to associate with the dispute.
+         */
+        public Builder text(Optional<String> text) {
+            Utils.checkNotNull(text, "text");
+            this.text = text;
+            return this;
+        }
         
         public UpdateEvidence build() {
             return new UpdateEvidence(
-                text,
-                evidenceType);
+                evidenceType,
+                text);
         }
     }
 }

@@ -25,7 +25,7 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01")
+                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()

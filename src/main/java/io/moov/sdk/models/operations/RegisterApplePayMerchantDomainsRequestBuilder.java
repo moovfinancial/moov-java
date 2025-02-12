@@ -15,7 +15,7 @@ public class RegisterApplePayMerchantDomainsRequestBuilder {
 
     private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
                             "xMoovVersion",
-                            "\"v2024.01\"",
+                            "\"v2024.01.00\"",
                             new TypeReference<Optional<String>>() {});
     private String accountID;
     private RegisterApplePayMerchantDomains registerApplePayMerchantDomains;
@@ -62,6 +62,6 @@ public class RegisterApplePayMerchantDomainsRequestBuilder {
     private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
             new LazySingletonValue<>(
                     "xMoovVersion",
-                    "\"v2024.01\"",
+                    "\"v2024.01.00\"",
                     new TypeReference<Optional<String>>() {});
 }

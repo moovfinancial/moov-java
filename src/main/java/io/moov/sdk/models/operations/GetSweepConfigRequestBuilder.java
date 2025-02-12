@@ -14,7 +14,7 @@ public class GetSweepConfigRequestBuilder {
 
     private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
                             "xMoovVersion",
-                            "\"v2024.01\"",
+                            "\"v2024.01.00\"",
                             new TypeReference<Optional<String>>() {});
     private String accountID;
     private String sweepConfigID;
@@ -61,6 +61,6 @@ public class GetSweepConfigRequestBuilder {
     private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
             new LazySingletonValue<>(
                     "xMoovVersion",
-                    "\"v2024.01\"",
+                    "\"v2024.01.00\"",
                     new TypeReference<Optional<String>>() {});
 }

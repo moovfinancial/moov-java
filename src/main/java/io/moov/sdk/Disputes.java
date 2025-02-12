@@ -8,8 +8,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.CreateEvidenceFileMultiPart;
 import io.moov.sdk.models.components.CreateEvidenceText;
 import io.moov.sdk.models.components.Dispute;
-import io.moov.sdk.models.components.DisputeEvidenceMetadata;
-import io.moov.sdk.models.components.EvidenceText;
+import io.moov.sdk.models.components.DisputeEvidenceResponse;
+import io.moov.sdk.models.components.EvidenceTextResponse;
 import io.moov.sdk.models.components.EvidenceUploadResponse;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.FileUploadValidationError;
@@ -277,8 +277,8 @@ public class Disputes implements
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-        - If no build number is specified, the version refers to the initial release of the quarter.
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
@@ -454,8 +454,8 @@ public class Disputes implements
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-        - If no build number is specified, the version refers to the initial release of the quarter.
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
@@ -646,8 +646,8 @@ public class Disputes implements
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-        - If no build number is specified, the version refers to the initial release of the quarter.
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
@@ -739,10 +739,10 @@ public class Disputes implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<DisputeEvidenceMetadata> _out = Utils.mapper().readValue(
+                List<DisputeEvidenceResponse> _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<DisputeEvidenceMetadata>>() {});
-                _res.withDisputeEvidenceMetadata(Optional.ofNullable(_out));
+                    new TypeReference<List<DisputeEvidenceResponse>>() {});
+                _res.withDisputeEvidenceResponses(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(
@@ -825,8 +825,8 @@ public class Disputes implements
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-        - If no build number is specified, the version refers to the initial release of the quarter.
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
@@ -1050,8 +1050,8 @@ public class Disputes implements
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-        - If no build number is specified, the version refers to the initial release of the quarter.
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
@@ -1159,10 +1159,10 @@ public class Disputes implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                EvidenceText _out = Utils.mapper().readValue(
+                EvidenceTextResponse _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<EvidenceText>() {});
-                _res.withEvidenceText(Optional.ofNullable(_out));
+                    new TypeReference<EvidenceTextResponse>() {});
+                _res.withEvidenceTextResponse(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(
@@ -1258,8 +1258,8 @@ public class Disputes implements
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-        - If no build number is specified, the version refers to the initial release of the quarter.
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
@@ -1452,8 +1452,8 @@ public class Disputes implements
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-        - If no build number is specified, the version refers to the initial release of the quarter.
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
@@ -1548,10 +1548,10 @@ public class Disputes implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                DisputeEvidenceMetadata _out = Utils.mapper().readValue(
+                DisputeEvidenceResponse _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<DisputeEvidenceMetadata>() {});
-                _res.withDisputeEvidenceMetadata(Optional.ofNullable(_out));
+                    new TypeReference<DisputeEvidenceResponse>() {});
+                _res.withDisputeEvidenceResponse(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(
@@ -1705,10 +1705,10 @@ public class Disputes implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                DisputeEvidenceMetadata _out = Utils.mapper().readValue(
+                DisputeEvidenceResponse _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<DisputeEvidenceMetadata>() {});
-                _res.withDisputeEvidenceMetadata(Optional.ofNullable(_out));
+                    new TypeReference<DisputeEvidenceResponse>() {});
+                _res.withDisputeEvidenceResponse(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(
@@ -1806,8 +1806,8 @@ public class Disputes implements
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-        - If no build number is specified, the version refers to the initial release of the quarter.
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
@@ -1992,8 +1992,8 @@ public class Disputes implements
     API versioning follows the format `vYYYY.QQ.BB`, where 
       - `YYYY` is the year
       - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is an **optional** build number starting at `.01` for subsequent builds in the same quarter. 
-        - If no build number is specified, the version refers to the initial release of the quarter.
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID

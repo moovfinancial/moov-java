@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 
-public class EvidenceText {
+public class EvidenceTextResponse {
 
     @JsonProperty("evidenceID")
     private String evidenceID;
@@ -33,7 +33,7 @@ public class EvidenceText {
     private OffsetDateTime createdOn;
 
     @JsonCreator
-    public EvidenceText(
+    public EvidenceTextResponse(
             @JsonProperty("evidenceID") String evidenceID,
             @JsonProperty("disputeID") String disputeID,
             @JsonProperty("evidenceType") EvidenceType evidenceType,
@@ -80,31 +80,31 @@ public class EvidenceText {
         return new Builder();
     }
 
-    public EvidenceText withEvidenceID(String evidenceID) {
+    public EvidenceTextResponse withEvidenceID(String evidenceID) {
         Utils.checkNotNull(evidenceID, "evidenceID");
         this.evidenceID = evidenceID;
         return this;
     }
 
-    public EvidenceText withDisputeID(String disputeID) {
+    public EvidenceTextResponse withDisputeID(String disputeID) {
         Utils.checkNotNull(disputeID, "disputeID");
         this.disputeID = disputeID;
         return this;
     }
 
-    public EvidenceText withEvidenceType(EvidenceType evidenceType) {
+    public EvidenceTextResponse withEvidenceType(EvidenceType evidenceType) {
         Utils.checkNotNull(evidenceType, "evidenceType");
         this.evidenceType = evidenceType;
         return this;
     }
 
-    public EvidenceText withText(String text) {
+    public EvidenceTextResponse withText(String text) {
         Utils.checkNotNull(text, "text");
         this.text = text;
         return this;
     }
 
-    public EvidenceText withCreatedOn(OffsetDateTime createdOn) {
+    public EvidenceTextResponse withCreatedOn(OffsetDateTime createdOn) {
         Utils.checkNotNull(createdOn, "createdOn");
         this.createdOn = createdOn;
         return this;
@@ -118,7 +118,7 @@ public class EvidenceText {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        EvidenceText other = (EvidenceText) o;
+        EvidenceTextResponse other = (EvidenceTextResponse) o;
         return 
             Objects.deepEquals(this.evidenceID, other.evidenceID) &&
             Objects.deepEquals(this.disputeID, other.disputeID) &&
@@ -139,7 +139,7 @@ public class EvidenceText {
     
     @Override
     public String toString() {
-        return Utils.toString(EvidenceText.class,
+        return Utils.toString(EvidenceTextResponse.class,
                 "evidenceID", evidenceID,
                 "disputeID", disputeID,
                 "evidenceType", evidenceType,
@@ -193,8 +193,8 @@ public class EvidenceText {
             return this;
         }
         
-        public EvidenceText build() {
-            return new EvidenceText(
+        public EvidenceTextResponse build() {
+            return new EvidenceTextResponse(
                 evidenceID,
                 disputeID,
                 evidenceType,

@@ -7,7 +7,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.EvidenceText;
+import io.moov.sdk.models.components.EvidenceTextResponse;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -42,7 +42,7 @@ public class UploadDisputeEvidenceTextResponse implements Response {
     /**
      * The resource was successfully created.
      */
-    private Optional<? extends EvidenceText> evidenceText;
+    private Optional<? extends EvidenceTextResponse> evidenceTextResponse;
 
     private Map<String, List<String>> headers;
 
@@ -51,17 +51,17 @@ public class UploadDisputeEvidenceTextResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends EvidenceText> evidenceText,
+            Optional<? extends EvidenceTextResponse> evidenceTextResponse,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(evidenceText, "evidenceText");
+        Utils.checkNotNull(evidenceTextResponse, "evidenceTextResponse");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.evidenceText = evidenceText;
+        this.evidenceTextResponse = evidenceTextResponse;
         this.headers = headers;
     }
     
@@ -102,8 +102,8 @@ public class UploadDisputeEvidenceTextResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<EvidenceText> evidenceText() {
-        return (Optional<EvidenceText>) evidenceText;
+    public Optional<EvidenceTextResponse> evidenceTextResponse() {
+        return (Optional<EvidenceTextResponse>) evidenceTextResponse;
     }
 
     @JsonIgnore
@@ -145,18 +145,18 @@ public class UploadDisputeEvidenceTextResponse implements Response {
     /**
      * The resource was successfully created.
      */
-    public UploadDisputeEvidenceTextResponse withEvidenceText(EvidenceText evidenceText) {
-        Utils.checkNotNull(evidenceText, "evidenceText");
-        this.evidenceText = Optional.ofNullable(evidenceText);
+    public UploadDisputeEvidenceTextResponse withEvidenceTextResponse(EvidenceTextResponse evidenceTextResponse) {
+        Utils.checkNotNull(evidenceTextResponse, "evidenceTextResponse");
+        this.evidenceTextResponse = Optional.ofNullable(evidenceTextResponse);
         return this;
     }
 
     /**
      * The resource was successfully created.
      */
-    public UploadDisputeEvidenceTextResponse withEvidenceText(Optional<? extends EvidenceText> evidenceText) {
-        Utils.checkNotNull(evidenceText, "evidenceText");
-        this.evidenceText = evidenceText;
+    public UploadDisputeEvidenceTextResponse withEvidenceTextResponse(Optional<? extends EvidenceTextResponse> evidenceTextResponse) {
+        Utils.checkNotNull(evidenceTextResponse, "evidenceTextResponse");
+        this.evidenceTextResponse = evidenceTextResponse;
         return this;
     }
 
@@ -179,7 +179,7 @@ public class UploadDisputeEvidenceTextResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.evidenceText, other.evidenceText) &&
+            Objects.deepEquals(this.evidenceTextResponse, other.evidenceTextResponse) &&
             Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -189,7 +189,7 @@ public class UploadDisputeEvidenceTextResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            evidenceText,
+            evidenceTextResponse,
             headers);
     }
     
@@ -199,7 +199,7 @@ public class UploadDisputeEvidenceTextResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "evidenceText", evidenceText,
+                "evidenceTextResponse", evidenceTextResponse,
                 "headers", headers);
     }
     
@@ -211,7 +211,7 @@ public class UploadDisputeEvidenceTextResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends EvidenceText> evidenceText = Optional.empty();
+        private Optional<? extends EvidenceTextResponse> evidenceTextResponse = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -249,18 +249,18 @@ public class UploadDisputeEvidenceTextResponse implements Response {
         /**
          * The resource was successfully created.
          */
-        public Builder evidenceText(EvidenceText evidenceText) {
-            Utils.checkNotNull(evidenceText, "evidenceText");
-            this.evidenceText = Optional.ofNullable(evidenceText);
+        public Builder evidenceTextResponse(EvidenceTextResponse evidenceTextResponse) {
+            Utils.checkNotNull(evidenceTextResponse, "evidenceTextResponse");
+            this.evidenceTextResponse = Optional.ofNullable(evidenceTextResponse);
             return this;
         }
 
         /**
          * The resource was successfully created.
          */
-        public Builder evidenceText(Optional<? extends EvidenceText> evidenceText) {
-            Utils.checkNotNull(evidenceText, "evidenceText");
-            this.evidenceText = evidenceText;
+        public Builder evidenceTextResponse(Optional<? extends EvidenceTextResponse> evidenceTextResponse) {
+            Utils.checkNotNull(evidenceTextResponse, "evidenceTextResponse");
+            this.evidenceTextResponse = evidenceTextResponse;
             return this;
         }
 
@@ -275,7 +275,7 @@ public class UploadDisputeEvidenceTextResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                evidenceText,
+                evidenceTextResponse,
                 headers);
         }
     }

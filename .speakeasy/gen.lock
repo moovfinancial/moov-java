@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 6846219714717ef4ae90f1f0d59fb712
+  docChecksum: 6e4078e5d0c4d3c350f505818ea7c411
   docVersion: latest
   speakeasyVersion: 1.488.0
   generationVersion: 2.506.0
-  releaseVersion: 0.7.4
-  configChecksum: 7ae4e713b1d7e0a23e75600e70904933
+  releaseVersion: 0.7.5
+  configChecksum: b54a5769ebb1ed507dfa29bf90fd191b
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -191,7 +191,7 @@ generatedFiles:
   - docs/models/components/DisbursementPaymentMethodType.md
   - docs/models/components/DisplayOptionsError.md
   - docs/models/components/Dispute.md
-  - docs/models/components/DisputeEvidenceMetadata.md
+  - docs/models/components/DisputeEvidenceResponse.md
   - docs/models/components/DisputePhase.md
   - docs/models/components/DisputeStatus.md
   - docs/models/components/DisputeTransferDetails.md
@@ -209,7 +209,7 @@ generatedFiles:
   - docs/models/components/EnrichedIndustry.md
   - docs/models/components/EnrichedIndustryCodes.md
   - docs/models/components/Error.md
-  - docs/models/components/EvidenceText.md
+  - docs/models/components/EvidenceTextResponse.md
   - docs/models/components/EvidenceType.md
   - docs/models/components/EvidenceUploadResponse.md
   - docs/models/components/FacilitatorFee.md
@@ -917,7 +917,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/DisbursementPaymentMethodType.java
   - src/main/java/io/moov/sdk/models/components/DisplayOptionsError.java
   - src/main/java/io/moov/sdk/models/components/Dispute.java
-  - src/main/java/io/moov/sdk/models/components/DisputeEvidenceMetadata.java
+  - src/main/java/io/moov/sdk/models/components/DisputeEvidenceResponse.java
   - src/main/java/io/moov/sdk/models/components/DisputePhase.java
   - src/main/java/io/moov/sdk/models/components/DisputeStatus.java
   - src/main/java/io/moov/sdk/models/components/DisputeTransferDetails.java
@@ -935,7 +935,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/EnrichedIndustry.java
   - src/main/java/io/moov/sdk/models/components/EnrichedIndustryCodes.java
   - src/main/java/io/moov/sdk/models/components/Error.java
-  - src/main/java/io/moov/sdk/models/components/EvidenceText.java
+  - src/main/java/io/moov/sdk/models/components/EvidenceTextResponse.java
   - src/main/java/io/moov/sdk/models/components/EvidenceType.java
   - src/main/java/io/moov/sdk/models/components/EvidenceUploadResponse.java
   - src/main/java/io/moov/sdk/models/components/FacilitatorFee.java
@@ -2021,7 +2021,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"evidenceID": "1c5d6ad6-86a6-4c30-bf89-aaac0b54d257", "disputeID": "5404ac92-089c-4869-9fa4-33bbe6a8fd1e", "mimeType": "<value>", "filename": "example.file", "size": 856505, "evidenceType": "customer-communication", "text": "<value>", "createdOn": "2025-06-06T18:01:11.290Z", "updatedOn": "2023-09-07T17:28:17.156Z"}]
+          application/json: [{"evidenceID": "1c5d6ad6-86a6-4c30-bf89-aaac0b54d257", "disputeID": "5404ac92-089c-4869-9fa4-33bbe6a8fd1e", "evidenceType": "customer-communication", "text": "<value>", "mimeType": "<value>", "filename": "example.file", "size": 856505, "createdOn": "2025-06-06T18:01:11.290Z", "updatedOn": "2023-09-07T17:28:17.156Z"}]
   uploadDisputeEvidenceFile:
     speakeasy-default-upload-dispute-evidence-file:
       parameters:
@@ -2074,7 +2074,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"evidenceID": "f3e03f09-eb9a-4332-b8c4-0426b9153bd4", "disputeID": "17dc2a18-de12-46a4-b2c6-0b50b9f2f917", "mimeType": "<value>", "filename": "example.file", "size": 448188, "evidenceType": "generic-evidence", "text": "<value>", "createdOn": "2023-09-28T12:38:55.240Z", "updatedOn": "2024-09-04T12:02:49.591Z"}
+          application/json: {"evidenceID": "f3e03f09-eb9a-4332-b8c4-0426b9153bd4", "disputeID": "17dc2a18-de12-46a4-b2c6-0b50b9f2f917", "evidenceType": "generic-evidence", "text": "<value>", "mimeType": "<value>", "filename": "example.file", "size": 448188, "createdOn": "2023-09-28T12:38:55.240Z", "updatedOn": "2024-09-04T12:02:49.591Z"}
   updateDisputeEvidence:
     speakeasy-default-update-dispute-evidence:
       parameters:
@@ -2087,7 +2087,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"evidenceID": "f127344b-a643-49e3-bbad-907665d4d13d", "disputeID": "8f62940b-352e-440a-bf85-282320f5eae3", "mimeType": "<value>", "filename": "example.file", "size": 405538, "evidenceType": "customer-communication", "text": "<value>", "createdOn": "2024-04-15T21:52:12.161Z", "updatedOn": "2023-08-01T10:26:27.328Z"}
+          application/json: {"evidenceID": "f127344b-a643-49e3-bbad-907665d4d13d", "disputeID": "8f62940b-352e-440a-bf85-282320f5eae3", "evidenceType": "customer-communication", "text": "<value>", "mimeType": "<value>", "filename": "example.file", "size": 405538, "createdOn": "2024-04-15T21:52:12.161Z", "updatedOn": "2023-08-01T10:26:27.328Z"}
         "400":
           application/json: {"error": "<value>"}
   deleteDisputeEvidenceFile:

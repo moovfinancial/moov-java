@@ -14,7 +14,7 @@ public class GetTermsOfServiceTokenRequestBuilder {
 
     private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
                             "xMoovVersion",
-                            "\"v2024.01\"",
+                            "\"v2024.01.00\"",
                             new TypeReference<Optional<String>>() {});
     private Optional<String> origin = Optional.empty();
     private Optional<String> referer = Optional.empty();
@@ -73,6 +73,6 @@ public class GetTermsOfServiceTokenRequestBuilder {
     private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
             new LazySingletonValue<>(
                     "xMoovVersion",
-                    "\"v2024.01\"",
+                    "\"v2024.01.00\"",
                     new TypeReference<Optional<String>>() {});
 }

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.AsyncTransfer;
 import io.moov.sdk.models.components.CardAcquiringRefund;
 import io.moov.sdk.models.components.CreateRefundResponse;
+import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.models.components.Reversal;
 import io.moov.sdk.models.components.Transfer;
 import io.moov.sdk.models.components.TransferOptions;
@@ -653,13 +654,15 @@ public class Transfers implements
      * Update the metadata contained on a transfer.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * @param transferID Identifier for the transfer.
      * @param accountID
+     * @param patchTransfer
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateTransferResponse update(
             String transferID,
-            String accountID) throws Exception {
-        return update(Optional.empty(), transferID, accountID);
+            String accountID,
+            PatchTransfer patchTransfer) throws Exception {
+        return update(Optional.empty(), transferID, accountID, patchTransfer);
     }
     
     /**
@@ -675,19 +678,22 @@ public class Transfers implements
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param transferID Identifier for the transfer.
      * @param accountID
+     * @param patchTransfer
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateTransferResponse update(
             Optional<String> xMoovVersion,
             String transferID,
-            String accountID) throws Exception {
+            String accountID,
+            PatchTransfer patchTransfer) throws Exception {
         UpdateTransferRequest request =
             UpdateTransferRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
                 .transferID(transferID)
                 .accountID(accountID)
+                .patchTransfer(patchTransfer)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -698,6 +704,19 @@ public class Transfers implements
                 request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "PATCH");
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
+        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
+                _convertedRequest, 
+                "patchTransfer",
+                "json",
+                false);
+        if (_serializedRequestBody == null) {
+            throw new Exception("Request body is required");
+        }
+        _req.setBody(Optional.ofNullable(_serializedRequestBody));
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);

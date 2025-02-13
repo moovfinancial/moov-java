@@ -8,6 +8,7 @@ package io.moov.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
@@ -42,23 +43,30 @@ public class UpdateTransferRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+    @SpeakeasyMetadata("request:mediaType=application/json")
+    private PatchTransfer patchTransfer;
+
     @JsonCreator
     public UpdateTransferRequest(
             Optional<String> xMoovVersion,
             String transferID,
-            String accountID) {
+            String accountID,
+            PatchTransfer patchTransfer) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(accountID, "accountID");
+        Utils.checkNotNull(patchTransfer, "patchTransfer");
         this.xMoovVersion = xMoovVersion;
         this.transferID = transferID;
         this.accountID = accountID;
+        this.patchTransfer = patchTransfer;
     }
     
     public UpdateTransferRequest(
             String transferID,
-            String accountID) {
-        this(Optional.empty(), transferID, accountID);
+            String accountID,
+            PatchTransfer patchTransfer) {
+        this(Optional.empty(), transferID, accountID, patchTransfer);
     }
 
     /**
@@ -88,6 +96,11 @@ public class UpdateTransferRequest {
     @JsonIgnore
     public String accountID() {
         return accountID;
+    }
+
+    @JsonIgnore
+    public PatchTransfer patchTransfer() {
+        return patchTransfer;
     }
 
     public final static Builder builder() {
@@ -142,6 +155,12 @@ public class UpdateTransferRequest {
         this.accountID = accountID;
         return this;
     }
+
+    public UpdateTransferRequest withPatchTransfer(PatchTransfer patchTransfer) {
+        Utils.checkNotNull(patchTransfer, "patchTransfer");
+        this.patchTransfer = patchTransfer;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -155,7 +174,8 @@ public class UpdateTransferRequest {
         return 
             Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.accountID, other.accountID);
+            Objects.deepEquals(this.accountID, other.accountID) &&
+            Objects.deepEquals(this.patchTransfer, other.patchTransfer);
     }
     
     @Override
@@ -163,7 +183,8 @@ public class UpdateTransferRequest {
         return Objects.hash(
             xMoovVersion,
             transferID,
-            accountID);
+            accountID,
+            patchTransfer);
     }
     
     @Override
@@ -171,7 +192,8 @@ public class UpdateTransferRequest {
         return Utils.toString(UpdateTransferRequest.class,
                 "xMoovVersion", xMoovVersion,
                 "transferID", transferID,
-                "accountID", accountID);
+                "accountID", accountID,
+                "patchTransfer", patchTransfer);
     }
     
     public final static class Builder {
@@ -180,7 +202,9 @@ public class UpdateTransferRequest {
  
         private String transferID;
  
-        private String accountID;  
+        private String accountID;
+ 
+        private PatchTransfer patchTransfer;  
         
         private Builder() {
           // force use of static builder() method
@@ -234,6 +258,12 @@ public class UpdateTransferRequest {
             this.accountID = accountID;
             return this;
         }
+
+        public Builder patchTransfer(PatchTransfer patchTransfer) {
+            Utils.checkNotNull(patchTransfer, "patchTransfer");
+            this.patchTransfer = patchTransfer;
+            return this;
+        }
         
         public UpdateTransferRequest build() {
             if (xMoovVersion == null) {
@@ -241,7 +271,8 @@ public class UpdateTransferRequest {
             }            return new UpdateTransferRequest(
                 xMoovVersion,
                 transferID,
-                accountID);
+                accountID,
+                patchTransfer);
         }
 
         private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =

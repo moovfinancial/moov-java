@@ -30,6 +30,7 @@ import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
 import io.moov.sdk.models.components.OnboardingInviteRequest;
 import io.moov.sdk.models.components.PatchSweepConfig;
+import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.models.components.PaymentMethodType;
 import io.moov.sdk.models.components.RegisterApplePayMerchantDomains;
 import io.moov.sdk.models.components.RequestCard;
@@ -730,7 +731,8 @@ public class SDKMethodInterfaces {
         UpdateTransferResponse update(
             Optional<String> xMoovVersion,
             String transferID,
-            String accountID) throws Exception;
+            String accountID,
+            PatchTransfer patchTransfer) throws Exception;
     }
 
 

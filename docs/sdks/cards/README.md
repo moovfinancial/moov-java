@@ -82,6 +82,7 @@ package hello.world;
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.CardAddress;
 import io.moov.sdk.models.components.CardExpiration;
+import io.moov.sdk.models.components.E2EEToken;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
 import io.moov.sdk.models.components.Security;
@@ -119,6 +120,9 @@ public class Application {
                         .city("Boulder")
                         .stateOrProvince("CO")
                         .country("US")
+                        .build())
+                    .e2ee(E2EEToken.builder()
+                        .token("eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTUyMSIsIngiOiJBS0NYVDM1WVdvTm8wbzExNy1SU0dqUGg3alN1NjFmLUhnYkx1dW0xVG1ueTRlcW5yX2hyU0hpY0w1d3gwODRCWDBRZjVTdEtkRUoydzY2ZUJqWHprRV9OIiwieSI6IkFIMEJfT2RaYTQtbG43dGJ4M3VBdlc1NDNQRE9HUXBCTDloRFFNWjlTQXNfOW05UWN3dnhRd1hrb1VrM3VzT1FnVV9ySVFrNFRoZ1NTUzV4UlhKcm5ZaTkifSwia2lkIjoiYmRvV3pLekpKUGw0TVFIaENDa05WYTZlZ1dmYi02V1haSjZKTFZqQ0hWMD0ifQ.HalyoHsfufBJEODd2lD9ThQvvVWw3b2kgWDLHGxmHhMv8rODyLL_Ug.rpQP178t8Ed_pUU2.Sn9UFeVoegAxiMUv11q7l3M0y9YHSLYi2n_JB7n7Pc777_47-icfaxstJemT0IC81w.akkq1EBxzWkBr4vEomSpWA")
                         .build())
                     .holderName("Jules Jackson")
                     .cardOnFile(true)
@@ -297,8 +301,11 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.E2EETokenUpdate;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.UpdateCard;
+import io.moov.sdk.models.components.UpdateCardAddress;
+import io.moov.sdk.models.components.UpdateCardExpiration;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateCardError;
 import io.moov.sdk.models.operations.UpdateCardResponse;
@@ -320,6 +327,21 @@ public class Application {
                 .accountID("a960061d-fb6d-4929-99b5-c96c672840f6")
                 .cardID("01234567-89ab-cdef-0123-456789abcdef")
                 .updateCard(UpdateCard.builder()
+                    .e2ee(E2EETokenUpdate.builder()
+                        .token("eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTUyMSIsIngiOiJBS0NYVDM1WVdvTm8wbzExNy1SU0dqUGg3alN1NjFmLUhnYkx1dW0xVG1ueTRlcW5yX2hyU0hpY0w1d3gwODRCWDBRZjVTdEtkRUoydzY2ZUJqWHprRV9OIiwieSI6IkFIMEJfT2RaYTQtbG43dGJ4M3VBdlc1NDNQRE9HUXBCTDloRFFNWjlTQXNfOW05UWN3dnhRd1hrb1VrM3VzT1FnVV9ySVFrNFRoZ1NTUzV4UlhKcm5ZaTkifSwia2lkIjoiYmRvV3pLekpKUGw0TVFIaENDa05WYTZlZ1dmYi02V1haSjZKTFZqQ0hWMD0ifQ.HalyoHsfufBJEODd2lD9ThQvvVWw3b2kgWDLHGxmHhMv8rODyLL_Ug.rpQP178t8Ed_pUU2.Sn9UFeVoegAxiMUv11q7l3M0y9YHSLYi2n_JB7n7Pc777_47-icfaxstJemT0IC81w.akkq1EBxzWkBr4vEomSpWA")
+                        .build())
+                    .billingAddress(UpdateCardAddress.builder()
+                        .addressLine1("123 Main Street")
+                        .addressLine2("Apt 302")
+                        .city("Boulder")
+                        .stateOrProvince("CO")
+                        .postalCode("80301")
+                        .country("US")
+                        .build())
+                    .expiration(UpdateCardExpiration.builder()
+                        .month("01")
+                        .year("21")
+                        .build())
                     .cardCvv("456")
                     .build())
                 .call();

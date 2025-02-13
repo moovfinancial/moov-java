@@ -5,6 +5,7 @@
 package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
@@ -18,6 +19,7 @@ public class UpdateTransferRequestBuilder {
                             new TypeReference<Optional<String>>() {});
     private String transferID;
     private String accountID;
+    private PatchTransfer patchTransfer;
     private final SDKMethodInterfaces.MethodCallUpdateTransfer sdk;
 
     public UpdateTransferRequestBuilder(SDKMethodInterfaces.MethodCallUpdateTransfer sdk) {
@@ -48,6 +50,12 @@ public class UpdateTransferRequestBuilder {
         return this;
     }
 
+    public UpdateTransferRequestBuilder patchTransfer(PatchTransfer patchTransfer) {
+        Utils.checkNotNull(patchTransfer, "patchTransfer");
+        this.patchTransfer = patchTransfer;
+        return this;
+    }
+
     public UpdateTransferResponse call() throws Exception {
         if (xMoovVersion == null) {
             xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
@@ -55,7 +63,8 @@ public class UpdateTransferRequestBuilder {
         return sdk.update(
             xMoovVersion,
             transferID,
-            accountID);
+            accountID,
+            patchTransfer);
     }
 
     private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =

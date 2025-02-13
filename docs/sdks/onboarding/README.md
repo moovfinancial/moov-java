@@ -35,19 +35,36 @@ you'll need to specify the `/accounts.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.ACHPaymentSettings;
 import io.moov.sdk.models.components.AccountType;
+import io.moov.sdk.models.components.Address;
 import io.moov.sdk.models.components.ApplicationScope;
+import io.moov.sdk.models.components.BirthDate;
+import io.moov.sdk.models.components.BusinessType;
 import io.moov.sdk.models.components.CapabilityID;
+import io.moov.sdk.models.components.CardPaymentSettings;
 import io.moov.sdk.models.components.CreateAccount;
+import io.moov.sdk.models.components.CreateAccountTermsOfService;
 import io.moov.sdk.models.components.CreateBusinessProfile;
+import io.moov.sdk.models.components.CreateIndividualProfile;
 import io.moov.sdk.models.components.CreateProfile;
+import io.moov.sdk.models.components.CustomerSupport;
+import io.moov.sdk.models.components.Ein;
+import io.moov.sdk.models.components.IndividualName;
+import io.moov.sdk.models.components.IndustryCodes;
+import io.moov.sdk.models.components.ManualTermsOfService;
 import io.moov.sdk.models.components.OnboardingInviteRequest;
+import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.Settings;
+import io.moov.sdk.models.components.TaxID;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.OnboardingInviteError;
 import io.moov.sdk.models.operations.CreateOnboardingInviteResponse;
 import java.lang.Exception;
+import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class Application {
 
@@ -72,8 +89,90 @@ public class Application {
                     .prefill(CreateAccount.builder()
                         .accountType(AccountType.BUSINESS)
                         .profile(CreateProfile.builder()
+                            .individual(CreateIndividualProfile.builder()
+                                .name(IndividualName.builder()
+                                    .firstName("Jordan")
+                                    .lastName("Lee")
+                                    .middleName("Reese")
+                                    .suffix("Jr")
+                                    .build())
+                                .phone(PhoneNumber.builder()
+                                    .number("8185551212")
+                                    .countryCode("1")
+                                    .build())
+                                .email("jordan.lee@classbooker.dev")
+                                .address(Address.builder()
+                                    .addressLine1("123 Main Street")
+                                    .city("Boulder")
+                                    .stateOrProvince("CO")
+                                    .postalCode("80301")
+                                    .country("US")
+                                    .addressLine2("Apt 302")
+                                    .build())
+                                .birthDate(BirthDate.builder()
+                                    .day(9L)
+                                    .month(11L)
+                                    .year(1989L)
+                                    .build())
+                                .build())
                             .business(CreateBusinessProfile.builder()
                                 .legalBusinessName("Classbooker, LLC")
+                                .businessType(BusinessType.LLC)
+                                .address(Address.builder()
+                                    .addressLine1("123 Main Street")
+                                    .city("Boulder")
+                                    .stateOrProvince("CO")
+                                    .postalCode("80301")
+                                    .country("US")
+                                    .addressLine2("Apt 302")
+                                    .build())
+                                .phone(PhoneNumber.builder()
+                                    .number("8185551212")
+                                    .countryCode("1")
+                                    .build())
+                                .email("jordan.lee@classbooker.dev")
+                                .description("Local fitness gym paying out instructors")
+                                .taxID(TaxID.builder()
+                                    .ein(Ein.builder()
+                                        .number("12-3456789")
+                                        .build())
+                                    .build())
+                                .industryCodes(IndustryCodes.builder()
+                                    .naics("713940")
+                                    .sic("7991")
+                                    .mcc("7997")
+                                    .build())
+                                .build())
+                            .build())
+                        .metadata(Map.ofEntries(
+                            Map.entry("optional", "metadata")))
+                        .termsOfService(CreateAccountTermsOfService.of(ManualTermsOfService.builder()
+                            .acceptedDate(OffsetDateTime.parse("2024-12-17T23:29:29.246Z"))
+                            .acceptedIP("172.217.2.46")
+                            .acceptedUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36")
+                            .acceptedDomain("https://odd-brace.biz/")
+                            .build()))
+                        .customerSupport(CustomerSupport.builder()
+                            .phone(PhoneNumber.builder()
+                                .number("8185551212")
+                                .countryCode("1")
+                                .build())
+                            .email("jordan.lee@classbooker.dev")
+                            .address(Address.builder()
+                                .addressLine1("123 Main Street")
+                                .city("Boulder")
+                                .stateOrProvince("CO")
+                                .postalCode("80301")
+                                .country("US")
+                                .addressLine2("Apt 302")
+                                .build())
+                            .build())
+                        .settings(Settings.builder()
+                            .cardPayment(CardPaymentSettings.builder()
+                                .statementDescriptor("Whole Body Fitness")
+                                .build())
+                            .achPayment(ACHPaymentSettings.builder()
+                                .companyName("WholeBodyFitness")
                                 .build())
                             .build())
                         .build())

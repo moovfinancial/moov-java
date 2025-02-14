@@ -11,13 +11,14 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
 
-public class CardAddressError {
+public class AddressSuggestion {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addressLine1")
@@ -31,41 +32,44 @@ public class CardAddressError {
     @JsonProperty("city")
     private Optional<String> city;
 
+    /**
+     * The number of units at an address. For example the number of apartments or businesses in a building.
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("stateOrProvince")
-    private Optional<String> stateOrProvince;
+    @JsonProperty("entries")
+    private Optional<Long> entries;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("postalCode")
     private Optional<String> postalCode;
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("country")
-    private Optional<String> country;
+    @JsonProperty("stateOrProvince")
+    private Optional<String> stateOrProvince;
 
     @JsonCreator
-    public CardAddressError(
+    public AddressSuggestion(
             @JsonProperty("addressLine1") Optional<String> addressLine1,
             @JsonProperty("addressLine2") Optional<String> addressLine2,
             @JsonProperty("city") Optional<String> city,
-            @JsonProperty("stateOrProvince") Optional<String> stateOrProvince,
+            @JsonProperty("entries") Optional<Long> entries,
             @JsonProperty("postalCode") Optional<String> postalCode,
-            @JsonProperty("country") Optional<String> country) {
+            @JsonProperty("stateOrProvince") Optional<String> stateOrProvince) {
         Utils.checkNotNull(addressLine1, "addressLine1");
         Utils.checkNotNull(addressLine2, "addressLine2");
         Utils.checkNotNull(city, "city");
-        Utils.checkNotNull(stateOrProvince, "stateOrProvince");
+        Utils.checkNotNull(entries, "entries");
         Utils.checkNotNull(postalCode, "postalCode");
-        Utils.checkNotNull(country, "country");
+        Utils.checkNotNull(stateOrProvince, "stateOrProvince");
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.city = city;
-        this.stateOrProvince = stateOrProvince;
+        this.entries = entries;
         this.postalCode = postalCode;
-        this.country = country;
+        this.stateOrProvince = stateOrProvince;
     }
     
-    public CardAddressError() {
+    public AddressSuggestion() {
         this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -84,9 +88,12 @@ public class CardAddressError {
         return city;
     }
 
+    /**
+     * The number of units at an address. For example the number of apartments or businesses in a building.
+     */
     @JsonIgnore
-    public Optional<String> stateOrProvince() {
-        return stateOrProvince;
+    public Optional<Long> entries() {
+        return entries;
     }
 
     @JsonIgnore
@@ -95,83 +102,89 @@ public class CardAddressError {
     }
 
     @JsonIgnore
-    public Optional<String> country() {
-        return country;
+    public Optional<String> stateOrProvince() {
+        return stateOrProvince;
     }
 
     public final static Builder builder() {
         return new Builder();
     }
 
-    public CardAddressError withAddressLine1(String addressLine1) {
+    public AddressSuggestion withAddressLine1(String addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
         this.addressLine1 = Optional.ofNullable(addressLine1);
         return this;
     }
 
-    public CardAddressError withAddressLine1(Optional<String> addressLine1) {
+    public AddressSuggestion withAddressLine1(Optional<String> addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
         this.addressLine1 = addressLine1;
         return this;
     }
 
-    public CardAddressError withAddressLine2(String addressLine2) {
+    public AddressSuggestion withAddressLine2(String addressLine2) {
         Utils.checkNotNull(addressLine2, "addressLine2");
         this.addressLine2 = Optional.ofNullable(addressLine2);
         return this;
     }
 
-    public CardAddressError withAddressLine2(Optional<String> addressLine2) {
+    public AddressSuggestion withAddressLine2(Optional<String> addressLine2) {
         Utils.checkNotNull(addressLine2, "addressLine2");
         this.addressLine2 = addressLine2;
         return this;
     }
 
-    public CardAddressError withCity(String city) {
+    public AddressSuggestion withCity(String city) {
         Utils.checkNotNull(city, "city");
         this.city = Optional.ofNullable(city);
         return this;
     }
 
-    public CardAddressError withCity(Optional<String> city) {
+    public AddressSuggestion withCity(Optional<String> city) {
         Utils.checkNotNull(city, "city");
         this.city = city;
         return this;
     }
 
-    public CardAddressError withStateOrProvince(String stateOrProvince) {
-        Utils.checkNotNull(stateOrProvince, "stateOrProvince");
-        this.stateOrProvince = Optional.ofNullable(stateOrProvince);
+    /**
+     * The number of units at an address. For example the number of apartments or businesses in a building.
+     */
+    public AddressSuggestion withEntries(long entries) {
+        Utils.checkNotNull(entries, "entries");
+        this.entries = Optional.ofNullable(entries);
         return this;
     }
 
-    public CardAddressError withStateOrProvince(Optional<String> stateOrProvince) {
-        Utils.checkNotNull(stateOrProvince, "stateOrProvince");
-        this.stateOrProvince = stateOrProvince;
+    /**
+     * The number of units at an address. For example the number of apartments or businesses in a building.
+     */
+    public AddressSuggestion withEntries(Optional<Long> entries) {
+        Utils.checkNotNull(entries, "entries");
+        this.entries = entries;
         return this;
     }
 
-    public CardAddressError withPostalCode(String postalCode) {
+    public AddressSuggestion withPostalCode(String postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
         this.postalCode = Optional.ofNullable(postalCode);
         return this;
     }
 
-    public CardAddressError withPostalCode(Optional<String> postalCode) {
+    public AddressSuggestion withPostalCode(Optional<String> postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
         this.postalCode = postalCode;
         return this;
     }
 
-    public CardAddressError withCountry(String country) {
-        Utils.checkNotNull(country, "country");
-        this.country = Optional.ofNullable(country);
+    public AddressSuggestion withStateOrProvince(String stateOrProvince) {
+        Utils.checkNotNull(stateOrProvince, "stateOrProvince");
+        this.stateOrProvince = Optional.ofNullable(stateOrProvince);
         return this;
     }
 
-    public CardAddressError withCountry(Optional<String> country) {
-        Utils.checkNotNull(country, "country");
-        this.country = country;
+    public AddressSuggestion withStateOrProvince(Optional<String> stateOrProvince) {
+        Utils.checkNotNull(stateOrProvince, "stateOrProvince");
+        this.stateOrProvince = stateOrProvince;
         return this;
     }
     
@@ -183,14 +196,14 @@ public class CardAddressError {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CardAddressError other = (CardAddressError) o;
+        AddressSuggestion other = (AddressSuggestion) o;
         return 
             Objects.deepEquals(this.addressLine1, other.addressLine1) &&
             Objects.deepEquals(this.addressLine2, other.addressLine2) &&
             Objects.deepEquals(this.city, other.city) &&
-            Objects.deepEquals(this.stateOrProvince, other.stateOrProvince) &&
+            Objects.deepEquals(this.entries, other.entries) &&
             Objects.deepEquals(this.postalCode, other.postalCode) &&
-            Objects.deepEquals(this.country, other.country);
+            Objects.deepEquals(this.stateOrProvince, other.stateOrProvince);
     }
     
     @Override
@@ -199,20 +212,20 @@ public class CardAddressError {
             addressLine1,
             addressLine2,
             city,
-            stateOrProvince,
+            entries,
             postalCode,
-            country);
+            stateOrProvince);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(CardAddressError.class,
+        return Utils.toString(AddressSuggestion.class,
                 "addressLine1", addressLine1,
                 "addressLine2", addressLine2,
                 "city", city,
-                "stateOrProvince", stateOrProvince,
+                "entries", entries,
                 "postalCode", postalCode,
-                "country", country);
+                "stateOrProvince", stateOrProvince);
     }
     
     public final static class Builder {
@@ -223,11 +236,11 @@ public class CardAddressError {
  
         private Optional<String> city = Optional.empty();
  
-        private Optional<String> stateOrProvince = Optional.empty();
+        private Optional<Long> entries = Optional.empty();
  
         private Optional<String> postalCode = Optional.empty();
  
-        private Optional<String> country = Optional.empty();  
+        private Optional<String> stateOrProvince = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -269,15 +282,21 @@ public class CardAddressError {
             return this;
         }
 
-        public Builder stateOrProvince(String stateOrProvince) {
-            Utils.checkNotNull(stateOrProvince, "stateOrProvince");
-            this.stateOrProvince = Optional.ofNullable(stateOrProvince);
+        /**
+         * The number of units at an address. For example the number of apartments or businesses in a building.
+         */
+        public Builder entries(long entries) {
+            Utils.checkNotNull(entries, "entries");
+            this.entries = Optional.ofNullable(entries);
             return this;
         }
 
-        public Builder stateOrProvince(Optional<String> stateOrProvince) {
-            Utils.checkNotNull(stateOrProvince, "stateOrProvince");
-            this.stateOrProvince = stateOrProvince;
+        /**
+         * The number of units at an address. For example the number of apartments or businesses in a building.
+         */
+        public Builder entries(Optional<Long> entries) {
+            Utils.checkNotNull(entries, "entries");
+            this.entries = entries;
             return this;
         }
 
@@ -293,26 +312,26 @@ public class CardAddressError {
             return this;
         }
 
-        public Builder country(String country) {
-            Utils.checkNotNull(country, "country");
-            this.country = Optional.ofNullable(country);
+        public Builder stateOrProvince(String stateOrProvince) {
+            Utils.checkNotNull(stateOrProvince, "stateOrProvince");
+            this.stateOrProvince = Optional.ofNullable(stateOrProvince);
             return this;
         }
 
-        public Builder country(Optional<String> country) {
-            Utils.checkNotNull(country, "country");
-            this.country = country;
+        public Builder stateOrProvince(Optional<String> stateOrProvince) {
+            Utils.checkNotNull(stateOrProvince, "stateOrProvince");
+            this.stateOrProvince = stateOrProvince;
             return this;
         }
         
-        public CardAddressError build() {
-            return new CardAddressError(
+        public AddressSuggestion build() {
+            return new AddressSuggestion(
                 addressLine1,
                 addressLine2,
                 city,
-                stateOrProvince,
+                entries,
                 postalCode,
-                country);
+                stateOrProvince);
         }
     }
 }

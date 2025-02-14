@@ -5,6 +5,7 @@
 package io.moov.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.models.components.OccurrencesResponse;
 import io.moov.sdk.models.components.ScheduleResponse;
 import io.moov.sdk.models.components.UpsertSchedule;
 import io.moov.sdk.models.errors.APIException;
@@ -1049,7 +1050,7 @@ public class Scheduling implements
 
 
     /**
-     * Defines an occurrence for when to run a transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Gets a specific occurrence. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
     public GetScheduledOccurrenceRequestBuilder getOccurrance() {
@@ -1057,7 +1058,7 @@ public class Scheduling implements
     }
 
     /**
-     * Defines an occurrence for when to run a transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Gets a specific occurrence. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param accountID
      * @param scheduleID
      * @param occurrenceFilter Allows the specification of additional filters beyond the UUID.
@@ -1076,7 +1077,7 @@ public class Scheduling implements
     }
     
     /**
-     * Defines an occurrence for when to run a transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Gets a specific occurrence. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @param xMoovVersion Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where 
@@ -1182,10 +1183,10 @@ public class Scheduling implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ScheduleResponse _out = Utils.mapper().readValue(
+                OccurrencesResponse _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<ScheduleResponse>() {});
-                _res.withScheduleResponse(Optional.ofNullable(_out));
+                    new TypeReference<OccurrencesResponse>() {});
+                _res.withOccurrencesResponse(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(

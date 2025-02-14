@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.CardAddressError;
-import io.moov.sdk.models.components.CardExpirationError;
 import io.moov.sdk.models.components.End2EndEncryptionError;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
@@ -39,7 +37,7 @@ public class LinkCardError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiration")
-    private Optional<? extends CardExpirationError> expiration;
+    private Optional<String> expiration;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("holderName")
@@ -47,7 +45,7 @@ public class LinkCardError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("billingAddress")
-    private Optional<? extends CardAddressError> billingAddress;
+    private Optional<String> billingAddress;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardOnFile")
@@ -67,9 +65,9 @@ public class LinkCardError extends RuntimeException {
             @JsonProperty("e2ee") Optional<? extends End2EndEncryptionError> e2ee,
             @JsonProperty("cardNumber") Optional<String> cardNumber,
             @JsonProperty("cardCvv") Optional<String> cardCvv,
-            @JsonProperty("expiration") Optional<? extends CardExpirationError> expiration,
+            @JsonProperty("expiration") Optional<String> expiration,
             @JsonProperty("holderName") Optional<String> holderName,
-            @JsonProperty("billingAddress") Optional<? extends CardAddressError> billingAddress,
+            @JsonProperty("billingAddress") Optional<String> billingAddress,
             @JsonProperty("cardOnFile") Optional<String> cardOnFile,
             @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
             @JsonProperty("verifyName") Optional<String> verifyName) {
@@ -116,18 +114,16 @@ public class LinkCardError extends RuntimeException {
         return cardCvv;
     }
 
-    @SuppressWarnings("unchecked")
-    public Optional<CardExpirationError> expiration(){
-        return (Optional<CardExpirationError>) expiration;
+    public Optional<String> expiration(){
+        return expiration;
     }
 
     public Optional<String> holderName(){
         return holderName;
     }
 
-    @SuppressWarnings("unchecked")
-    public Optional<CardAddressError> billingAddress(){
-        return (Optional<CardAddressError>) billingAddress;
+    public Optional<String> billingAddress(){
+        return billingAddress;
     }
 
     public Optional<String> cardOnFile(){
@@ -194,13 +190,13 @@ public class LinkCardError extends RuntimeException {
         return this;
     }
 
-    public LinkCardError withExpiration(CardExpirationError expiration) {
+    public LinkCardError withExpiration(String expiration) {
         Utils.checkNotNull(expiration, "expiration");
         this.expiration = Optional.ofNullable(expiration);
         return this;
     }
     
-    public LinkCardError withExpiration(Optional<? extends CardExpirationError> expiration) {
+    public LinkCardError withExpiration(Optional<String> expiration) {
         Utils.checkNotNull(expiration, "expiration");
         this.expiration = expiration;
         return this;
@@ -218,13 +214,13 @@ public class LinkCardError extends RuntimeException {
         return this;
     }
 
-    public LinkCardError withBillingAddress(CardAddressError billingAddress) {
+    public LinkCardError withBillingAddress(String billingAddress) {
         Utils.checkNotNull(billingAddress, "billingAddress");
         this.billingAddress = Optional.ofNullable(billingAddress);
         return this;
     }
     
-    public LinkCardError withBillingAddress(Optional<? extends CardAddressError> billingAddress) {
+    public LinkCardError withBillingAddress(Optional<String> billingAddress) {
         Utils.checkNotNull(billingAddress, "billingAddress");
         this.billingAddress = billingAddress;
         return this;
@@ -328,11 +324,11 @@ public class LinkCardError extends RuntimeException {
 
         private Optional<String> cardCvv = Optional.empty();
 
-        private Optional<? extends CardExpirationError> expiration = Optional.empty();
+        private Optional<String> expiration = Optional.empty();
 
         private Optional<String> holderName = Optional.empty();
 
-        private Optional<? extends CardAddressError> billingAddress = Optional.empty();
+        private Optional<String> billingAddress = Optional.empty();
 
         private Optional<String> cardOnFile = Optional.empty();
 
@@ -392,13 +388,13 @@ public class LinkCardError extends RuntimeException {
             return this;
         }
 
-        public Builder expiration(CardExpirationError expiration) {
+        public Builder expiration(String expiration) {
             Utils.checkNotNull(expiration, "expiration");
             this.expiration = Optional.ofNullable(expiration);
             return this;
         }
         
-        public Builder expiration(Optional<? extends CardExpirationError> expiration) {
+        public Builder expiration(Optional<String> expiration) {
             Utils.checkNotNull(expiration, "expiration");
             this.expiration = expiration;
             return this;
@@ -416,13 +412,13 @@ public class LinkCardError extends RuntimeException {
             return this;
         }
 
-        public Builder billingAddress(CardAddressError billingAddress) {
+        public Builder billingAddress(String billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = Optional.ofNullable(billingAddress);
             return this;
         }
         
-        public Builder billingAddress(Optional<? extends CardAddressError> billingAddress) {
+        public Builder billingAddress(Optional<String> billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = billingAddress;
             return this;

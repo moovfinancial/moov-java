@@ -25,7 +25,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-* [getOccurrance](#getoccurrance) - Defines an occurrence for when to run a transfer.
+* [getOccurrance](#getoccurrance) - Gets a specific occurrence.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -587,7 +587,7 @@ public class Application {
 
 ## getOccurrance
 
-Defines an occurrence for when to run a transfer.
+Gets a specific occurrence.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -620,7 +620,7 @@ public class Application {
                 .occurrenceFilter("<value>")
                 .call();
 
-        if (res.scheduleResponse().isPresent()) {
+        if (res.occurrencesResponse().isPresent()) {
             // handle response
         }
     }

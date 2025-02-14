@@ -12,6 +12,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class ScheduleValidationError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("occurrences")
-    private Optional<String> occurrences;
+    private Optional<? extends Map<String, String>> occurrences;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("recur")
@@ -32,7 +33,7 @@ public class ScheduleValidationError extends RuntimeException {
 
     @JsonCreator
     public ScheduleValidationError(
-            @JsonProperty("occurrences") Optional<String> occurrences,
+            @JsonProperty("occurrences") Optional<? extends Map<String, String>> occurrences,
             @JsonProperty("recur") Optional<String> recur,
             @JsonProperty("description") Optional<String> description) {
         Utils.checkNotNull(occurrences, "occurrences");
@@ -47,8 +48,9 @@ public class ScheduleValidationError extends RuntimeException {
         this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<String> occurrences(){
-        return occurrences;
+    @SuppressWarnings("unchecked")
+    public Optional<Map<String, String>> occurrences(){
+        return (Optional<Map<String, String>>) occurrences;
     }
 
     public Optional<String> recur(){
@@ -63,13 +65,13 @@ public class ScheduleValidationError extends RuntimeException {
         return new Builder();
     }
 
-    public ScheduleValidationError withOccurrences(String occurrences) {
+    public ScheduleValidationError withOccurrences(Map<String, String> occurrences) {
         Utils.checkNotNull(occurrences, "occurrences");
         this.occurrences = Optional.ofNullable(occurrences);
         return this;
     }
     
-    public ScheduleValidationError withOccurrences(Optional<String> occurrences) {
+    public ScheduleValidationError withOccurrences(Optional<? extends Map<String, String>> occurrences) {
         Utils.checkNotNull(occurrences, "occurrences");
         this.occurrences = occurrences;
         return this;
@@ -132,7 +134,7 @@ public class ScheduleValidationError extends RuntimeException {
 
     public final static class Builder {
 
-        private Optional<String> occurrences = Optional.empty();
+        private Optional<? extends Map<String, String>> occurrences = Optional.empty();
 
         private Optional<String> recur = Optional.empty();
 
@@ -142,13 +144,13 @@ public class ScheduleValidationError extends RuntimeException {
           // force use of static builder() method
         }
 
-        public Builder occurrences(String occurrences) {
+        public Builder occurrences(Map<String, String> occurrences) {
             Utils.checkNotNull(occurrences, "occurrences");
             this.occurrences = Optional.ofNullable(occurrences);
             return this;
         }
         
-        public Builder occurrences(Optional<String> occurrences) {
+        public Builder occurrences(Optional<? extends Map<String, String>> occurrences) {
             Utils.checkNotNull(occurrences, "occurrences");
             this.occurrences = occurrences;
             return this;

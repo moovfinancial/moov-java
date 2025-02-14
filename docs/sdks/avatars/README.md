@@ -43,7 +43,7 @@ public class Application {
                 .uniqueID("<id>")
                 .call();
 
-        if (res.twoHundredImagePngResponseStream().isPresent()) {
+        if (res.responseStream().isPresent()) {
             // handle response
         }
     }

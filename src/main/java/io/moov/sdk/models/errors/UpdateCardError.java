@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.CardAddressError;
-import io.moov.sdk.models.components.CardExpirationError;
 import io.moov.sdk.models.components.End2EndEncryptionError;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
@@ -27,11 +25,11 @@ public class UpdateCardError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("billingAddress")
-    private Optional<? extends CardAddressError> billingAddress;
+    private Optional<String> billingAddress;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiration")
-    private Optional<? extends CardExpirationError> expiration;
+    private Optional<String> expiration;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardCvv")
@@ -56,8 +54,8 @@ public class UpdateCardError extends RuntimeException {
     @JsonCreator
     public UpdateCardError(
             @JsonProperty("e2ee") Optional<? extends End2EndEncryptionError> e2ee,
-            @JsonProperty("billingAddress") Optional<? extends CardAddressError> billingAddress,
-            @JsonProperty("expiration") Optional<? extends CardExpirationError> expiration,
+            @JsonProperty("billingAddress") Optional<String> billingAddress,
+            @JsonProperty("expiration") Optional<String> expiration,
             @JsonProperty("cardCvv") Optional<String> cardCvv,
             @JsonProperty("cardOnFile") Optional<String> cardOnFile,
             @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
@@ -90,14 +88,12 @@ public class UpdateCardError extends RuntimeException {
         return (Optional<End2EndEncryptionError>) e2ee;
     }
 
-    @SuppressWarnings("unchecked")
-    public Optional<CardAddressError> billingAddress(){
-        return (Optional<CardAddressError>) billingAddress;
+    public Optional<String> billingAddress(){
+        return billingAddress;
     }
 
-    @SuppressWarnings("unchecked")
-    public Optional<CardExpirationError> expiration(){
-        return (Optional<CardExpirationError>) expiration;
+    public Optional<String> expiration(){
+        return expiration;
     }
 
     public Optional<String> cardCvv(){
@@ -136,25 +132,25 @@ public class UpdateCardError extends RuntimeException {
         return this;
     }
 
-    public UpdateCardError withBillingAddress(CardAddressError billingAddress) {
+    public UpdateCardError withBillingAddress(String billingAddress) {
         Utils.checkNotNull(billingAddress, "billingAddress");
         this.billingAddress = Optional.ofNullable(billingAddress);
         return this;
     }
     
-    public UpdateCardError withBillingAddress(Optional<? extends CardAddressError> billingAddress) {
+    public UpdateCardError withBillingAddress(Optional<String> billingAddress) {
         Utils.checkNotNull(billingAddress, "billingAddress");
         this.billingAddress = billingAddress;
         return this;
     }
 
-    public UpdateCardError withExpiration(CardExpirationError expiration) {
+    public UpdateCardError withExpiration(String expiration) {
         Utils.checkNotNull(expiration, "expiration");
         this.expiration = Optional.ofNullable(expiration);
         return this;
     }
     
-    public UpdateCardError withExpiration(Optional<? extends CardExpirationError> expiration) {
+    public UpdateCardError withExpiration(Optional<String> expiration) {
         Utils.checkNotNull(expiration, "expiration");
         this.expiration = expiration;
         return this;
@@ -270,9 +266,9 @@ public class UpdateCardError extends RuntimeException {
 
         private Optional<? extends End2EndEncryptionError> e2ee = Optional.empty();
 
-        private Optional<? extends CardAddressError> billingAddress = Optional.empty();
+        private Optional<String> billingAddress = Optional.empty();
 
-        private Optional<? extends CardExpirationError> expiration = Optional.empty();
+        private Optional<String> expiration = Optional.empty();
 
         private Optional<String> cardCvv = Optional.empty();
 
@@ -300,25 +296,25 @@ public class UpdateCardError extends RuntimeException {
             return this;
         }
 
-        public Builder billingAddress(CardAddressError billingAddress) {
+        public Builder billingAddress(String billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = Optional.ofNullable(billingAddress);
             return this;
         }
         
-        public Builder billingAddress(Optional<? extends CardAddressError> billingAddress) {
+        public Builder billingAddress(Optional<String> billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = billingAddress;
             return this;
         }
 
-        public Builder expiration(CardExpirationError expiration) {
+        public Builder expiration(String expiration) {
             Utils.checkNotNull(expiration, "expiration");
             this.expiration = Optional.ofNullable(expiration);
             return this;
         }
         
-        public Builder expiration(Optional<? extends CardExpirationError> expiration) {
+        public Builder expiration(Optional<String> expiration) {
             Utils.checkNotNull(expiration, "expiration");
             this.expiration = expiration;
             return this;

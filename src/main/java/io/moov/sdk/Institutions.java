@@ -127,9 +127,9 @@ public class Institutions implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<FinancialInstitutions> _out = Utils.mapper().readValue(
+                FinancialInstitutions _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<FinancialInstitutions>>() {});
+                    new TypeReference<FinancialInstitutions>() {});
                 _res.withFinancialInstitutions(Optional.ofNullable(_out));
                 return _res;
             } else {

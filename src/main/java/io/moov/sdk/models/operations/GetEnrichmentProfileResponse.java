@@ -7,7 +7,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.EnrichedBusinessProfile;
+import io.moov.sdk.models.components.EnrichedBusinessResponse;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -42,7 +42,7 @@ public class GetEnrichmentProfileResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends EnrichedBusinessProfile> enrichedBusinessProfile;
+    private Optional<? extends EnrichedBusinessResponse> enrichedBusinessResponse;
 
     private Map<String, List<String>> headers;
 
@@ -51,17 +51,17 @@ public class GetEnrichmentProfileResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends EnrichedBusinessProfile> enrichedBusinessProfile,
+            Optional<? extends EnrichedBusinessResponse> enrichedBusinessResponse,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(enrichedBusinessProfile, "enrichedBusinessProfile");
+        Utils.checkNotNull(enrichedBusinessResponse, "enrichedBusinessResponse");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.enrichedBusinessProfile = enrichedBusinessProfile;
+        this.enrichedBusinessResponse = enrichedBusinessResponse;
         this.headers = headers;
     }
     
@@ -102,8 +102,8 @@ public class GetEnrichmentProfileResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<EnrichedBusinessProfile> enrichedBusinessProfile() {
-        return (Optional<EnrichedBusinessProfile>) enrichedBusinessProfile;
+    public Optional<EnrichedBusinessResponse> enrichedBusinessResponse() {
+        return (Optional<EnrichedBusinessResponse>) enrichedBusinessResponse;
     }
 
     @JsonIgnore
@@ -145,18 +145,18 @@ public class GetEnrichmentProfileResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public GetEnrichmentProfileResponse withEnrichedBusinessProfile(EnrichedBusinessProfile enrichedBusinessProfile) {
-        Utils.checkNotNull(enrichedBusinessProfile, "enrichedBusinessProfile");
-        this.enrichedBusinessProfile = Optional.ofNullable(enrichedBusinessProfile);
+    public GetEnrichmentProfileResponse withEnrichedBusinessResponse(EnrichedBusinessResponse enrichedBusinessResponse) {
+        Utils.checkNotNull(enrichedBusinessResponse, "enrichedBusinessResponse");
+        this.enrichedBusinessResponse = Optional.ofNullable(enrichedBusinessResponse);
         return this;
     }
 
     /**
      * The request completed successfully.
      */
-    public GetEnrichmentProfileResponse withEnrichedBusinessProfile(Optional<? extends EnrichedBusinessProfile> enrichedBusinessProfile) {
-        Utils.checkNotNull(enrichedBusinessProfile, "enrichedBusinessProfile");
-        this.enrichedBusinessProfile = enrichedBusinessProfile;
+    public GetEnrichmentProfileResponse withEnrichedBusinessResponse(Optional<? extends EnrichedBusinessResponse> enrichedBusinessResponse) {
+        Utils.checkNotNull(enrichedBusinessResponse, "enrichedBusinessResponse");
+        this.enrichedBusinessResponse = enrichedBusinessResponse;
         return this;
     }
 
@@ -179,7 +179,7 @@ public class GetEnrichmentProfileResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.enrichedBusinessProfile, other.enrichedBusinessProfile) &&
+            Objects.deepEquals(this.enrichedBusinessResponse, other.enrichedBusinessResponse) &&
             Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -189,7 +189,7 @@ public class GetEnrichmentProfileResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            enrichedBusinessProfile,
+            enrichedBusinessResponse,
             headers);
     }
     
@@ -199,7 +199,7 @@ public class GetEnrichmentProfileResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "enrichedBusinessProfile", enrichedBusinessProfile,
+                "enrichedBusinessResponse", enrichedBusinessResponse,
                 "headers", headers);
     }
     
@@ -211,7 +211,7 @@ public class GetEnrichmentProfileResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends EnrichedBusinessProfile> enrichedBusinessProfile = Optional.empty();
+        private Optional<? extends EnrichedBusinessResponse> enrichedBusinessResponse = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -249,18 +249,18 @@ public class GetEnrichmentProfileResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder enrichedBusinessProfile(EnrichedBusinessProfile enrichedBusinessProfile) {
-            Utils.checkNotNull(enrichedBusinessProfile, "enrichedBusinessProfile");
-            this.enrichedBusinessProfile = Optional.ofNullable(enrichedBusinessProfile);
+        public Builder enrichedBusinessResponse(EnrichedBusinessResponse enrichedBusinessResponse) {
+            Utils.checkNotNull(enrichedBusinessResponse, "enrichedBusinessResponse");
+            this.enrichedBusinessResponse = Optional.ofNullable(enrichedBusinessResponse);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder enrichedBusinessProfile(Optional<? extends EnrichedBusinessProfile> enrichedBusinessProfile) {
-            Utils.checkNotNull(enrichedBusinessProfile, "enrichedBusinessProfile");
-            this.enrichedBusinessProfile = enrichedBusinessProfile;
+        public Builder enrichedBusinessResponse(Optional<? extends EnrichedBusinessResponse> enrichedBusinessResponse) {
+            Utils.checkNotNull(enrichedBusinessResponse, "enrichedBusinessResponse");
+            this.enrichedBusinessResponse = enrichedBusinessResponse;
             return this;
         }
 
@@ -275,7 +275,7 @@ public class GetEnrichmentProfileResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                enrichedBusinessProfile,
+                enrichedBusinessResponse,
                 headers);
         }
     }

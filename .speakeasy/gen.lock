@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: bad7ea66927a88c8ebbab6cb8b573b39
+  docChecksum: cc2583485ef45acd0ba0422160127576
   docVersion: latest
-  speakeasyVersion: 1.490.0
-  generationVersion: 2.512.0
-  releaseVersion: 0.8.0
-  configChecksum: d1d4eadff4e40708ab21c25f8ca97013
+  speakeasyVersion: 1.492.0
+  generationVersion: 2.512.4
+  releaseVersion: 0.8.1
+  configChecksum: e477e3cee9c79e0bbe0d1ef9732ecc07
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -59,6 +59,7 @@ generatedFiles:
   - docs/models/components/AddCapabilities.md
   - docs/models/components/Address.md
   - docs/models/components/AddressError.md
+  - docs/models/components/AddressSuggestion.md
   - docs/models/components/AddressUpdate.md
   - docs/models/components/Adjustment.md
   - docs/models/components/Amount.md
@@ -116,7 +117,6 @@ generatedFiles:
   - docs/models/components/CardAcquiringRefund.md
   - docs/models/components/CardAcquringModel.md
   - docs/models/components/CardAddress.md
-  - docs/models/components/CardAddressError.md
   - docs/models/components/CardBrand.md
   - docs/models/components/CardDetails.md
   - docs/models/components/CardExpiration.md
@@ -206,6 +206,8 @@ generatedFiles:
   - docs/models/components/End2EndEncryptionError.md
   - docs/models/components/EnrichedAddressResponse.md
   - docs/models/components/EnrichedBusinessProfile.md
+  - docs/models/components/EnrichedBusinessResponse.md
+  - docs/models/components/EnrichedIndustries.md
   - docs/models/components/EnrichedIndustry.md
   - docs/models/components/EnrichedIndustryCodes.md
   - docs/models/components/Error.md
@@ -786,6 +788,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/AddCapabilities.java
   - src/main/java/io/moov/sdk/models/components/Address.java
   - src/main/java/io/moov/sdk/models/components/AddressError.java
+  - src/main/java/io/moov/sdk/models/components/AddressSuggestion.java
   - src/main/java/io/moov/sdk/models/components/AddressUpdate.java
   - src/main/java/io/moov/sdk/models/components/Adjustment.java
   - src/main/java/io/moov/sdk/models/components/Amount.java
@@ -843,7 +846,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/CardAcquiringRefund.java
   - src/main/java/io/moov/sdk/models/components/CardAcquringModel.java
   - src/main/java/io/moov/sdk/models/components/CardAddress.java
-  - src/main/java/io/moov/sdk/models/components/CardAddressError.java
   - src/main/java/io/moov/sdk/models/components/CardBrand.java
   - src/main/java/io/moov/sdk/models/components/CardDetails.java
   - src/main/java/io/moov/sdk/models/components/CardExpiration.java
@@ -933,6 +935,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/End2EndEncryptionError.java
   - src/main/java/io/moov/sdk/models/components/EnrichedAddressResponse.java
   - src/main/java/io/moov/sdk/models/components/EnrichedBusinessProfile.java
+  - src/main/java/io/moov/sdk/models/components/EnrichedBusinessResponse.java
+  - src/main/java/io/moov/sdk/models/components/EnrichedIndustries.java
   - src/main/java/io/moov/sdk/models/components/EnrichedIndustry.java
   - src/main/java/io/moov/sdk/models/components/EnrichedIndustryCodes.java
   - src/main/java/io/moov/sdk/models/components/Error.java
@@ -2427,7 +2431,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"destinationAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "occurrences": {"mode": "production", "runOn": "2024-10-20T06:17:50.529Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "circa or shore within barring lest"}}, "ownerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "that atop grumpy"}, "start": "2009-11-10T23:00:00Z"}, "scheduleID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "sourceAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "createdOn": "2024-06-21T02:30:00.896Z", "updatedOn": "2025-10-20T07:55:10.582Z"}
+          application/json: {"scheduleID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "runOn": "2025-05-07T19:54:17.798Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "bleakly humor order snow profane and bidet please icebreaker"}}
   createSweepConfig:
     "":
       parameters:
@@ -2734,17 +2738,17 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "email": "jordan.lee@classbooker.dev", "industryCodes": {"naics": "713940", "sic": "7991"}, "phone": {"number": "8185551212", "countryCode": "1"}}
+          application/json: {"business": {"address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "email": "jordan.lee@classbooker.dev", "industryCodes": {"naics": "713940", "sic": "7991"}, "phone": {"number": "8185551212", "countryCode": "1"}}}
   listIndustries:
     speakeasy-default-list-industries:
       responses:
         "200":
-          application/json: [{"title": "AC, Refrigeration Repair", "naics": "811412", "sic": "7623", "mcc": "7623"}, {"title": "AC, Refrigeration Repair", "naics": "811412", "sic": "7623", "mcc": "7623"}]
+          application/json: {"industries": [{"title": "AC, Refrigeration Repair", "naics": "811412", "sic": "7623", "mcc": "7623"}, {"title": "AC, Refrigeration Repair", "naics": "811412", "sic": "7623", "mcc": "7623"}, {"title": "AC, Refrigeration Repair", "naics": "811412", "sic": "7623", "mcc": "7623"}]}
   listInstitutions:
     speakeasy-default-list-institutions:
       responses:
         "200":
-          application/json: [{"achParticipants": [{"achLocation": {"address": "123 Main Street", "city": "Boulder", "postalCode": "80301", "postalCodeExtension": "0000", "state": "Colorado"}, "customerName": "Main Street Bank", "newRoutingNumber": "987654321", "officeCode": "0", "phoneNumber": "1234567789", "recordTypeCode": "1", "revised": "041921", "routingNumber": "123456789", "servicingFRBNumber": "123456789", "statusCode": "1", "viewCode": "1", "cleanName": "Main Street Bank", "logo": null}, {"achLocation": {"address": "123 Main Street", "city": "Boulder", "postalCode": "80301", "postalCodeExtension": "0000", "state": "Colorado"}, "customerName": "Main Street Bank", "newRoutingNumber": "987654321", "officeCode": "0", "phoneNumber": "1234567789", "recordTypeCode": "1", "revised": "041921", "routingNumber": "123456789", "servicingFRBNumber": "123456789", "statusCode": "1", "viewCode": "1", "cleanName": "Main Street Bank", "logo": null}]}, {"achParticipants": [{"achLocation": {"address": "123 Main Street", "city": "Boulder", "postalCode": "80301", "postalCodeExtension": "0000", "state": "Colorado"}, "customerName": "Main Street Bank", "newRoutingNumber": "987654321", "officeCode": "0", "phoneNumber": "1234567789", "recordTypeCode": "1", "revised": "041921", "routingNumber": "123456789", "servicingFRBNumber": "123456789", "statusCode": "1", "viewCode": "1", "cleanName": "Main Street Bank", "logo": null}]}]
+          application/json: {"achParticipants": [{"achLocation": {"address": "123 Main Street", "city": "Boulder", "postalCode": "80301", "postalCodeExtension": "0000", "state": "Colorado"}, "customerName": "Main Street Bank", "newRoutingNumber": "987654321", "officeCode": "0", "phoneNumber": "1234567789", "recordTypeCode": "1", "revised": "041921", "routingNumber": "123456789", "servicingFRBNumber": "123456789", "statusCode": "1", "viewCode": "1", "cleanName": "Main Street Bank", "logo": null}]}
         "400":
           application/json: {"error": "<value>"}
   listIssuedCardAuthorizations:

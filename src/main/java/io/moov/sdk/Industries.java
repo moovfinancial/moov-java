@@ -5,7 +5,7 @@
 package io.moov.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.EnrichedIndustry;
+import io.moov.sdk.models.components.EnrichedIndustries;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.ListIndustriesRequest;
 import io.moov.sdk.models.operations.ListIndustriesRequestBuilder;
@@ -144,9 +144,9 @@ public class Industries implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<EnrichedIndustry> _out = Utils.mapper().readValue(
+                EnrichedIndustries _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<EnrichedIndustry>>() {});
+                    new TypeReference<EnrichedIndustries>() {});
                 _res.withEnrichedIndustries(Optional.ofNullable(_out));
                 return _res;
             } else {

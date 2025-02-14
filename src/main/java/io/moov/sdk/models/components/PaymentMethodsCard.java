@@ -71,8 +71,9 @@ public class PaymentMethodsCard {
     /**
      * The name of the cardholder as it appears on the card.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("holderName")
-    private String holderName;
+    private Optional<String> holderName;
 
     @JsonProperty("billingAddress")
     private CardAddress billingAddress;
@@ -134,7 +135,7 @@ public class PaymentMethodsCard {
             @JsonProperty("lastFourCardNumber") String lastFourCardNumber,
             @JsonProperty("bin") String bin,
             @JsonProperty("expiration") CardExpiration expiration,
-            @JsonProperty("holderName") String holderName,
+            @JsonProperty("holderName") Optional<String> holderName,
             @JsonProperty("billingAddress") CardAddress billingAddress,
             @JsonProperty("cardVerification") CardVerification cardVerification,
             @JsonProperty("issuer") String issuer,
@@ -188,14 +189,13 @@ public class PaymentMethodsCard {
             String lastFourCardNumber,
             String bin,
             CardExpiration expiration,
-            String holderName,
             CardAddress billingAddress,
             CardVerification cardVerification,
             String issuer,
             String issuerCountry,
             DomesticPushToCard domesticPushToCard,
             DomesticPullFromCard domesticPullFromCard) {
-        this(cardID, fingerprint, brand, cardType, lastFourCardNumber, bin, expiration, holderName, billingAddress, cardVerification, issuer, issuerCountry, Optional.empty(), Optional.empty(), Optional.empty(), domesticPushToCard, domesticPullFromCard);
+        this(cardID, fingerprint, brand, cardType, lastFourCardNumber, bin, expiration, Optional.empty(), billingAddress, cardVerification, issuer, issuerCountry, Optional.empty(), Optional.empty(), Optional.empty(), domesticPushToCard, domesticPullFromCard);
     }
 
     /**
@@ -260,7 +260,7 @@ public class PaymentMethodsCard {
      * The name of the cardholder as it appears on the card.
      */
     @JsonIgnore
-    public String holderName() {
+    public Optional<String> holderName() {
         return holderName;
     }
 
@@ -404,6 +404,15 @@ public class PaymentMethodsCard {
      * The name of the cardholder as it appears on the card.
      */
     public PaymentMethodsCard withHolderName(String holderName) {
+        Utils.checkNotNull(holderName, "holderName");
+        this.holderName = Optional.ofNullable(holderName);
+        return this;
+    }
+
+    /**
+     * The name of the cardholder as it appears on the card.
+     */
+    public PaymentMethodsCard withHolderName(Optional<String> holderName) {
         Utils.checkNotNull(holderName, "holderName");
         this.holderName = holderName;
         return this;
@@ -597,7 +606,7 @@ public class PaymentMethodsCard {
  
         private CardExpiration expiration;
  
-        private String holderName;
+        private Optional<String> holderName = Optional.empty();
  
         private CardAddress billingAddress;
  
@@ -690,6 +699,15 @@ public class PaymentMethodsCard {
          * The name of the cardholder as it appears on the card.
          */
         public Builder holderName(String holderName) {
+            Utils.checkNotNull(holderName, "holderName");
+            this.holderName = Optional.ofNullable(holderName);
+            return this;
+        }
+
+        /**
+         * The name of the cardholder as it appears on the card.
+         */
+        public Builder holderName(Optional<String> holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = holderName;
             return this;

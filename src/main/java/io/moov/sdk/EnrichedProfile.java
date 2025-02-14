@@ -5,7 +5,7 @@
 package io.moov.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.EnrichedBusinessProfile;
+import io.moov.sdk.models.components.EnrichedBusinessResponse;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.GetEnrichmentProfileRequest;
 import io.moov.sdk.models.operations.GetEnrichmentProfileRequestBuilder;
@@ -154,10 +154,10 @@ public class EnrichedProfile implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                EnrichedBusinessProfile _out = Utils.mapper().readValue(
+                EnrichedBusinessResponse _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<EnrichedBusinessProfile>() {});
-                _res.withEnrichedBusinessProfile(Optional.ofNullable(_out));
+                    new TypeReference<EnrichedBusinessResponse>() {});
+                _res.withEnrichedBusinessResponse(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(

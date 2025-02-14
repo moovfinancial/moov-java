@@ -7,7 +7,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.EnrichedIndustry;
+import io.moov.sdk.models.components.EnrichedIndustries;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -42,7 +42,7 @@ public class ListIndustriesResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends List<EnrichedIndustry>> enrichedIndustries;
+    private Optional<? extends EnrichedIndustries> enrichedIndustries;
 
     private Map<String, List<String>> headers;
 
@@ -51,7 +51,7 @@ public class ListIndustriesResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<EnrichedIndustry>> enrichedIndustries,
+            Optional<? extends EnrichedIndustries> enrichedIndustries,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
@@ -102,8 +102,8 @@ public class ListIndustriesResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<EnrichedIndustry>> enrichedIndustries() {
-        return (Optional<List<EnrichedIndustry>>) enrichedIndustries;
+    public Optional<EnrichedIndustries> enrichedIndustries() {
+        return (Optional<EnrichedIndustries>) enrichedIndustries;
     }
 
     @JsonIgnore
@@ -145,7 +145,7 @@ public class ListIndustriesResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public ListIndustriesResponse withEnrichedIndustries(List<EnrichedIndustry> enrichedIndustries) {
+    public ListIndustriesResponse withEnrichedIndustries(EnrichedIndustries enrichedIndustries) {
         Utils.checkNotNull(enrichedIndustries, "enrichedIndustries");
         this.enrichedIndustries = Optional.ofNullable(enrichedIndustries);
         return this;
@@ -154,7 +154,7 @@ public class ListIndustriesResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public ListIndustriesResponse withEnrichedIndustries(Optional<? extends List<EnrichedIndustry>> enrichedIndustries) {
+    public ListIndustriesResponse withEnrichedIndustries(Optional<? extends EnrichedIndustries> enrichedIndustries) {
         Utils.checkNotNull(enrichedIndustries, "enrichedIndustries");
         this.enrichedIndustries = enrichedIndustries;
         return this;
@@ -211,7 +211,7 @@ public class ListIndustriesResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends List<EnrichedIndustry>> enrichedIndustries = Optional.empty();
+        private Optional<? extends EnrichedIndustries> enrichedIndustries = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -249,7 +249,7 @@ public class ListIndustriesResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder enrichedIndustries(List<EnrichedIndustry> enrichedIndustries) {
+        public Builder enrichedIndustries(EnrichedIndustries enrichedIndustries) {
             Utils.checkNotNull(enrichedIndustries, "enrichedIndustries");
             this.enrichedIndustries = Optional.ofNullable(enrichedIndustries);
             return this;
@@ -258,7 +258,7 @@ public class ListIndustriesResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder enrichedIndustries(Optional<? extends List<EnrichedIndustry>> enrichedIndustries) {
+        public Builder enrichedIndustries(Optional<? extends EnrichedIndustries> enrichedIndustries) {
             Utils.checkNotNull(enrichedIndustries, "enrichedIndustries");
             this.enrichedIndustries = enrichedIndustries;
             return this;

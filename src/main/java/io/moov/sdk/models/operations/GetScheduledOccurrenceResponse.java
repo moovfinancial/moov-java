@@ -7,7 +7,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.ScheduleResponse;
+import io.moov.sdk.models.components.OccurrencesResponse;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -42,7 +42,7 @@ public class GetScheduledOccurrenceResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends ScheduleResponse> scheduleResponse;
+    private Optional<? extends OccurrencesResponse> occurrencesResponse;
 
     private Map<String, List<String>> headers;
 
@@ -51,17 +51,17 @@ public class GetScheduledOccurrenceResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends ScheduleResponse> scheduleResponse,
+            Optional<? extends OccurrencesResponse> occurrencesResponse,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(scheduleResponse, "scheduleResponse");
+        Utils.checkNotNull(occurrencesResponse, "occurrencesResponse");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.scheduleResponse = scheduleResponse;
+        this.occurrencesResponse = occurrencesResponse;
         this.headers = headers;
     }
     
@@ -102,8 +102,8 @@ public class GetScheduledOccurrenceResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ScheduleResponse> scheduleResponse() {
-        return (Optional<ScheduleResponse>) scheduleResponse;
+    public Optional<OccurrencesResponse> occurrencesResponse() {
+        return (Optional<OccurrencesResponse>) occurrencesResponse;
     }
 
     @JsonIgnore
@@ -145,18 +145,18 @@ public class GetScheduledOccurrenceResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public GetScheduledOccurrenceResponse withScheduleResponse(ScheduleResponse scheduleResponse) {
-        Utils.checkNotNull(scheduleResponse, "scheduleResponse");
-        this.scheduleResponse = Optional.ofNullable(scheduleResponse);
+    public GetScheduledOccurrenceResponse withOccurrencesResponse(OccurrencesResponse occurrencesResponse) {
+        Utils.checkNotNull(occurrencesResponse, "occurrencesResponse");
+        this.occurrencesResponse = Optional.ofNullable(occurrencesResponse);
         return this;
     }
 
     /**
      * The request completed successfully.
      */
-    public GetScheduledOccurrenceResponse withScheduleResponse(Optional<? extends ScheduleResponse> scheduleResponse) {
-        Utils.checkNotNull(scheduleResponse, "scheduleResponse");
-        this.scheduleResponse = scheduleResponse;
+    public GetScheduledOccurrenceResponse withOccurrencesResponse(Optional<? extends OccurrencesResponse> occurrencesResponse) {
+        Utils.checkNotNull(occurrencesResponse, "occurrencesResponse");
+        this.occurrencesResponse = occurrencesResponse;
         return this;
     }
 
@@ -179,7 +179,7 @@ public class GetScheduledOccurrenceResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.scheduleResponse, other.scheduleResponse) &&
+            Objects.deepEquals(this.occurrencesResponse, other.occurrencesResponse) &&
             Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -189,7 +189,7 @@ public class GetScheduledOccurrenceResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            scheduleResponse,
+            occurrencesResponse,
             headers);
     }
     
@@ -199,7 +199,7 @@ public class GetScheduledOccurrenceResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "scheduleResponse", scheduleResponse,
+                "occurrencesResponse", occurrencesResponse,
                 "headers", headers);
     }
     
@@ -211,7 +211,7 @@ public class GetScheduledOccurrenceResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends ScheduleResponse> scheduleResponse = Optional.empty();
+        private Optional<? extends OccurrencesResponse> occurrencesResponse = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -249,18 +249,18 @@ public class GetScheduledOccurrenceResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder scheduleResponse(ScheduleResponse scheduleResponse) {
-            Utils.checkNotNull(scheduleResponse, "scheduleResponse");
-            this.scheduleResponse = Optional.ofNullable(scheduleResponse);
+        public Builder occurrencesResponse(OccurrencesResponse occurrencesResponse) {
+            Utils.checkNotNull(occurrencesResponse, "occurrencesResponse");
+            this.occurrencesResponse = Optional.ofNullable(occurrencesResponse);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder scheduleResponse(Optional<? extends ScheduleResponse> scheduleResponse) {
-            Utils.checkNotNull(scheduleResponse, "scheduleResponse");
-            this.scheduleResponse = scheduleResponse;
+        public Builder occurrencesResponse(Optional<? extends OccurrencesResponse> occurrencesResponse) {
+            Utils.checkNotNull(occurrencesResponse, "occurrencesResponse");
+            this.occurrencesResponse = occurrencesResponse;
             return this;
         }
 
@@ -275,7 +275,7 @@ public class GetScheduledOccurrenceResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                scheduleResponse,
+                occurrencesResponse,
                 headers);
         }
     }

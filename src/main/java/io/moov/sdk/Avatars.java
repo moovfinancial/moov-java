@@ -85,7 +85,7 @@ public class Avatars implements
                 request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "image/jpeg;q=1, image/png;q=0")
+        _req.addHeader("Accept", "image/*")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -143,20 +143,15 @@ public class Avatars implements
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200") && Utils.contentTypeMatches(_contentType, "image/png")) {
-            _resBuilder.twoHundredImagePngResponseStream(_httpRes.body());
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200") && Utils.contentTypeMatches(_contentType, "image/jpeg")) {
-            _resBuilder.twoHundredImageJpegResponseStream(_httpRes.body());
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200") && Utils.contentTypeMatches(_contentType, "image/*")) {
+            _resBuilder.responseStream(_httpRes.body());
         }
 
         GetAvatarResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "image/png")) {
-                return _res;
-            } else if (Utils.contentTypeMatches(_contentType, "image/jpeg")) {
+            if (Utils.contentTypeMatches(_contentType, "image/*")) {
                 return _res;
             } else {
                 throw new APIException(

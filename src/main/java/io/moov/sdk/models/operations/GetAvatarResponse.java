@@ -41,12 +41,7 @@ public class GetAvatarResponse implements Response {
     /**
      * The request has succeeded.
      */
-    private Optional<? extends InputStream> twoHundredImagePngResponseStream;
-
-    /**
-     * The request has succeeded.
-     */
-    private Optional<? extends InputStream> twoHundredImageJpegResponseStream;
+    private Optional<? extends InputStream> responseStream;
 
     private Map<String, List<String>> headers;
 
@@ -55,20 +50,17 @@ public class GetAvatarResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends InputStream> twoHundredImagePngResponseStream,
-            Optional<? extends InputStream> twoHundredImageJpegResponseStream,
+            Optional<? extends InputStream> responseStream,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(twoHundredImagePngResponseStream, "twoHundredImagePngResponseStream");
-        Utils.checkNotNull(twoHundredImageJpegResponseStream, "twoHundredImageJpegResponseStream");
+        Utils.checkNotNull(responseStream, "responseStream");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.twoHundredImagePngResponseStream = twoHundredImagePngResponseStream;
-        this.twoHundredImageJpegResponseStream = twoHundredImageJpegResponseStream;
+        this.responseStream = responseStream;
         this.headers = headers;
     }
     
@@ -77,7 +69,7 @@ public class GetAvatarResponse implements Response {
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Map<String, List<String>> headers) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), headers);
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -109,17 +101,8 @@ public class GetAvatarResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<InputStream> twoHundredImagePngResponseStream() {
-        return (Optional<InputStream>) twoHundredImagePngResponseStream;
-    }
-
-    /**
-     * The request has succeeded.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<InputStream> twoHundredImageJpegResponseStream() {
-        return (Optional<InputStream>) twoHundredImageJpegResponseStream;
+    public Optional<InputStream> responseStream() {
+        return (Optional<InputStream>) responseStream;
     }
 
     @JsonIgnore
@@ -161,36 +144,18 @@ public class GetAvatarResponse implements Response {
     /**
      * The request has succeeded.
      */
-    public GetAvatarResponse withTwoHundredImagePngResponseStream(InputStream twoHundredImagePngResponseStream) {
-        Utils.checkNotNull(twoHundredImagePngResponseStream, "twoHundredImagePngResponseStream");
-        this.twoHundredImagePngResponseStream = Optional.ofNullable(twoHundredImagePngResponseStream);
+    public GetAvatarResponse withResponseStream(InputStream responseStream) {
+        Utils.checkNotNull(responseStream, "responseStream");
+        this.responseStream = Optional.ofNullable(responseStream);
         return this;
     }
 
     /**
      * The request has succeeded.
      */
-    public GetAvatarResponse withTwoHundredImagePngResponseStream(Optional<? extends InputStream> twoHundredImagePngResponseStream) {
-        Utils.checkNotNull(twoHundredImagePngResponseStream, "twoHundredImagePngResponseStream");
-        this.twoHundredImagePngResponseStream = twoHundredImagePngResponseStream;
-        return this;
-    }
-
-    /**
-     * The request has succeeded.
-     */
-    public GetAvatarResponse withTwoHundredImageJpegResponseStream(InputStream twoHundredImageJpegResponseStream) {
-        Utils.checkNotNull(twoHundredImageJpegResponseStream, "twoHundredImageJpegResponseStream");
-        this.twoHundredImageJpegResponseStream = Optional.ofNullable(twoHundredImageJpegResponseStream);
-        return this;
-    }
-
-    /**
-     * The request has succeeded.
-     */
-    public GetAvatarResponse withTwoHundredImageJpegResponseStream(Optional<? extends InputStream> twoHundredImageJpegResponseStream) {
-        Utils.checkNotNull(twoHundredImageJpegResponseStream, "twoHundredImageJpegResponseStream");
-        this.twoHundredImageJpegResponseStream = twoHundredImageJpegResponseStream;
+    public GetAvatarResponse withResponseStream(Optional<? extends InputStream> responseStream) {
+        Utils.checkNotNull(responseStream, "responseStream");
+        this.responseStream = responseStream;
         return this;
     }
 
@@ -213,8 +178,7 @@ public class GetAvatarResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.twoHundredImagePngResponseStream, other.twoHundredImagePngResponseStream) &&
-            Objects.deepEquals(this.twoHundredImageJpegResponseStream, other.twoHundredImageJpegResponseStream) &&
+            Objects.deepEquals(this.responseStream, other.responseStream) &&
             Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -224,8 +188,7 @@ public class GetAvatarResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            twoHundredImagePngResponseStream,
-            twoHundredImageJpegResponseStream,
+            responseStream,
             headers);
     }
     
@@ -235,8 +198,7 @@ public class GetAvatarResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "twoHundredImagePngResponseStream", twoHundredImagePngResponseStream,
-                "twoHundredImageJpegResponseStream", twoHundredImageJpegResponseStream,
+                "responseStream", responseStream,
                 "headers", headers);
     }
     
@@ -248,9 +210,7 @@ public class GetAvatarResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends InputStream> twoHundredImagePngResponseStream = Optional.empty();
- 
-        private Optional<? extends InputStream> twoHundredImageJpegResponseStream = Optional.empty();
+        private Optional<? extends InputStream> responseStream = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -288,36 +248,18 @@ public class GetAvatarResponse implements Response {
         /**
          * The request has succeeded.
          */
-        public Builder twoHundredImagePngResponseStream(InputStream twoHundredImagePngResponseStream) {
-            Utils.checkNotNull(twoHundredImagePngResponseStream, "twoHundredImagePngResponseStream");
-            this.twoHundredImagePngResponseStream = Optional.ofNullable(twoHundredImagePngResponseStream);
+        public Builder responseStream(InputStream responseStream) {
+            Utils.checkNotNull(responseStream, "responseStream");
+            this.responseStream = Optional.ofNullable(responseStream);
             return this;
         }
 
         /**
          * The request has succeeded.
          */
-        public Builder twoHundredImagePngResponseStream(Optional<? extends InputStream> twoHundredImagePngResponseStream) {
-            Utils.checkNotNull(twoHundredImagePngResponseStream, "twoHundredImagePngResponseStream");
-            this.twoHundredImagePngResponseStream = twoHundredImagePngResponseStream;
-            return this;
-        }
-
-        /**
-         * The request has succeeded.
-         */
-        public Builder twoHundredImageJpegResponseStream(InputStream twoHundredImageJpegResponseStream) {
-            Utils.checkNotNull(twoHundredImageJpegResponseStream, "twoHundredImageJpegResponseStream");
-            this.twoHundredImageJpegResponseStream = Optional.ofNullable(twoHundredImageJpegResponseStream);
-            return this;
-        }
-
-        /**
-         * The request has succeeded.
-         */
-        public Builder twoHundredImageJpegResponseStream(Optional<? extends InputStream> twoHundredImageJpegResponseStream) {
-            Utils.checkNotNull(twoHundredImageJpegResponseStream, "twoHundredImageJpegResponseStream");
-            this.twoHundredImageJpegResponseStream = twoHundredImageJpegResponseStream;
+        public Builder responseStream(Optional<? extends InputStream> responseStream) {
+            Utils.checkNotNull(responseStream, "responseStream");
+            this.responseStream = responseStream;
             return this;
         }
 
@@ -332,8 +274,7 @@ public class GetAvatarResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                twoHundredImagePngResponseStream,
-                twoHundredImageJpegResponseStream,
+                responseStream,
                 headers);
         }
     }

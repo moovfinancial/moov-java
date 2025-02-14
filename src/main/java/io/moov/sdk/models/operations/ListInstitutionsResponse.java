@@ -42,7 +42,7 @@ public class ListInstitutionsResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends List<FinancialInstitutions>> financialInstitutions;
+    private Optional<? extends FinancialInstitutions> financialInstitutions;
 
     private Map<String, List<String>> headers;
 
@@ -51,7 +51,7 @@ public class ListInstitutionsResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<FinancialInstitutions>> financialInstitutions,
+            Optional<? extends FinancialInstitutions> financialInstitutions,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
@@ -102,8 +102,8 @@ public class ListInstitutionsResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<FinancialInstitutions>> financialInstitutions() {
-        return (Optional<List<FinancialInstitutions>>) financialInstitutions;
+    public Optional<FinancialInstitutions> financialInstitutions() {
+        return (Optional<FinancialInstitutions>) financialInstitutions;
     }
 
     @JsonIgnore
@@ -145,7 +145,7 @@ public class ListInstitutionsResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public ListInstitutionsResponse withFinancialInstitutions(List<FinancialInstitutions> financialInstitutions) {
+    public ListInstitutionsResponse withFinancialInstitutions(FinancialInstitutions financialInstitutions) {
         Utils.checkNotNull(financialInstitutions, "financialInstitutions");
         this.financialInstitutions = Optional.ofNullable(financialInstitutions);
         return this;
@@ -154,7 +154,7 @@ public class ListInstitutionsResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public ListInstitutionsResponse withFinancialInstitutions(Optional<? extends List<FinancialInstitutions>> financialInstitutions) {
+    public ListInstitutionsResponse withFinancialInstitutions(Optional<? extends FinancialInstitutions> financialInstitutions) {
         Utils.checkNotNull(financialInstitutions, "financialInstitutions");
         this.financialInstitutions = financialInstitutions;
         return this;
@@ -211,7 +211,7 @@ public class ListInstitutionsResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends List<FinancialInstitutions>> financialInstitutions = Optional.empty();
+        private Optional<? extends FinancialInstitutions> financialInstitutions = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -249,7 +249,7 @@ public class ListInstitutionsResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder financialInstitutions(List<FinancialInstitutions> financialInstitutions) {
+        public Builder financialInstitutions(FinancialInstitutions financialInstitutions) {
             Utils.checkNotNull(financialInstitutions, "financialInstitutions");
             this.financialInstitutions = Optional.ofNullable(financialInstitutions);
             return this;
@@ -258,7 +258,7 @@ public class ListInstitutionsResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder financialInstitutions(Optional<? extends List<FinancialInstitutions>> financialInstitutions) {
+        public Builder financialInstitutions(Optional<? extends FinancialInstitutions> financialInstitutions) {
             Utils.checkNotNull(financialInstitutions, "financialInstitutions");
             this.financialInstitutions = financialInstitutions;
             return this;

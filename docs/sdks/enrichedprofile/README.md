@@ -43,7 +43,7 @@ public class Application {
                 .email("Sheldon.Effertz@gmail.com")
                 .call();
 
-        if (res.enrichedBusinessProfile().isPresent()) {
+        if (res.enrichedBusinessResponse().isPresent()) {
             // handle response
         }
     }

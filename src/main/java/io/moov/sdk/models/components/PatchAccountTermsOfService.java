@@ -19,24 +19,24 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 
 
-@JsonDeserialize(using = CreateAccountUpdateTermsOfService._Deserializer.class)
-public class CreateAccountUpdateTermsOfService {
+@JsonDeserialize(using = PatchAccountTermsOfService._Deserializer.class)
+public class PatchAccountTermsOfService {
 
     @JsonValue
     private TypedObject value;
     
-    private CreateAccountUpdateTermsOfService(TypedObject value) {
+    private PatchAccountTermsOfService(TypedObject value) {
         this.value = value;
     }
 
-    public static CreateAccountUpdateTermsOfService of(TermsOfServiceTokenUpdate value) {
+    public static PatchAccountTermsOfService of(TermsOfServiceTokenUpdate value) {
         Utils.checkNotNull(value, "value");
-        return new CreateAccountUpdateTermsOfService(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<TermsOfServiceTokenUpdate>(){}));
+        return new PatchAccountTermsOfService(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<TermsOfServiceTokenUpdate>(){}));
     }
 
-    public static CreateAccountUpdateTermsOfService of(ManualTermsOfServiceUpdate value) {
+    public static PatchAccountTermsOfService of(ManualTermsOfServiceUpdate value) {
         Utils.checkNotNull(value, "value");
-        return new CreateAccountUpdateTermsOfService(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<ManualTermsOfServiceUpdate>(){}));
+        return new PatchAccountTermsOfService(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<ManualTermsOfServiceUpdate>(){}));
     }
     
     /**
@@ -69,7 +69,7 @@ public class CreateAccountUpdateTermsOfService {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateAccountUpdateTermsOfService other = (CreateAccountUpdateTermsOfService) o;
+        PatchAccountTermsOfService other = (PatchAccountTermsOfService) o;
         return Objects.deepEquals(this.value.value(), other.value.value()); 
     }
     
@@ -79,10 +79,10 @@ public class CreateAccountUpdateTermsOfService {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<CreateAccountUpdateTermsOfService> {
+    public static final class _Deserializer extends OneOfDeserializer<PatchAccountTermsOfService> {
 
         public _Deserializer() {
-            super(CreateAccountUpdateTermsOfService.class, false,
+            super(PatchAccountTermsOfService.class, false,
                   TypeReferenceWithShape.of(new TypeReference<ManualTermsOfServiceUpdate>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<TermsOfServiceTokenUpdate>() {}, JsonShape.DEFAULT));
         }
@@ -90,7 +90,7 @@ public class CreateAccountUpdateTermsOfService {
     
     @Override
     public String toString() {
-        return Utils.toString(CreateAccountUpdateTermsOfService.class,
+        return Utils.toString(PatchAccountTermsOfService.class,
                 "value", value);
     }
  

@@ -18,11 +18,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * CustomerSupportUpdate - User-provided information that can be displayed on credit card transactions for customers to use when
+ * PatchAccountCustomerSupport - User-provided information that can be displayed on credit card transactions for customers to use when
  * contacting a customer support team. This data is only allowed on a business account.
  */
 
-public class CustomerSupportUpdate {
+public class PatchAccountCustomerSupport {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
@@ -41,7 +41,7 @@ public class CustomerSupportUpdate {
     private Optional<String> website;
 
     @JsonCreator
-    public CustomerSupportUpdate(
+    public PatchAccountCustomerSupport(
             @JsonProperty("phone") Optional<? extends PhoneNumber> phone,
             @JsonProperty("email") Optional<String> email,
             @JsonProperty("address") Optional<? extends AddressUpdate> address,
@@ -56,7 +56,7 @@ public class CustomerSupportUpdate {
         this.website = website;
     }
     
-    public CustomerSupportUpdate() {
+    public PatchAccountCustomerSupport() {
         this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -86,49 +86,49 @@ public class CustomerSupportUpdate {
         return new Builder();
     }
 
-    public CustomerSupportUpdate withPhone(PhoneNumber phone) {
+    public PatchAccountCustomerSupport withPhone(PhoneNumber phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = Optional.ofNullable(phone);
         return this;
     }
 
-    public CustomerSupportUpdate withPhone(Optional<? extends PhoneNumber> phone) {
+    public PatchAccountCustomerSupport withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
         return this;
     }
 
-    public CustomerSupportUpdate withEmail(String email) {
+    public PatchAccountCustomerSupport withEmail(String email) {
         Utils.checkNotNull(email, "email");
         this.email = Optional.ofNullable(email);
         return this;
     }
 
-    public CustomerSupportUpdate withEmail(Optional<String> email) {
+    public PatchAccountCustomerSupport withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
     }
 
-    public CustomerSupportUpdate withAddress(AddressUpdate address) {
+    public PatchAccountCustomerSupport withAddress(AddressUpdate address) {
         Utils.checkNotNull(address, "address");
         this.address = Optional.ofNullable(address);
         return this;
     }
 
-    public CustomerSupportUpdate withAddress(Optional<? extends AddressUpdate> address) {
+    public PatchAccountCustomerSupport withAddress(Optional<? extends AddressUpdate> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
         return this;
     }
 
-    public CustomerSupportUpdate withWebsite(String website) {
+    public PatchAccountCustomerSupport withWebsite(String website) {
         Utils.checkNotNull(website, "website");
         this.website = Optional.ofNullable(website);
         return this;
     }
 
-    public CustomerSupportUpdate withWebsite(Optional<String> website) {
+    public PatchAccountCustomerSupport withWebsite(Optional<String> website) {
         Utils.checkNotNull(website, "website");
         this.website = website;
         return this;
@@ -142,7 +142,7 @@ public class CustomerSupportUpdate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CustomerSupportUpdate other = (CustomerSupportUpdate) o;
+        PatchAccountCustomerSupport other = (PatchAccountCustomerSupport) o;
         return 
             Objects.deepEquals(this.phone, other.phone) &&
             Objects.deepEquals(this.email, other.email) &&
@@ -161,7 +161,7 @@ public class CustomerSupportUpdate {
     
     @Override
     public String toString() {
-        return Utils.toString(CustomerSupportUpdate.class,
+        return Utils.toString(PatchAccountCustomerSupport.class,
                 "phone", phone,
                 "email", email,
                 "address", address,
@@ -230,8 +230,8 @@ public class CustomerSupportUpdate {
             return this;
         }
         
-        public CustomerSupportUpdate build() {
-            return new CustomerSupportUpdate(
+        public PatchAccountCustomerSupport build() {
+            return new PatchAccountCustomerSupport(
                 phone,
                 email,
                 address,

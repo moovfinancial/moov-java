@@ -17,66 +17,82 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * PatchProfile - Describes the fields available when patching a profile.
+ * Each object can be patched independent of patching the other fields.
+ */
 
-public class CreateProfileUpdate {
+public class PatchProfile {
 
+    /**
+     * Describes the fields available when patching an individual.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("individual")
-    private Optional<? extends CreateIndividualProfileUpdate> individual;
+    private Optional<? extends PatchIndividual> individual;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("business")
-    private Optional<? extends CreateBusinessProfileUpdate> business;
+    private Optional<? extends PatchBusiness> business;
 
     @JsonCreator
-    public CreateProfileUpdate(
-            @JsonProperty("individual") Optional<? extends CreateIndividualProfileUpdate> individual,
-            @JsonProperty("business") Optional<? extends CreateBusinessProfileUpdate> business) {
+    public PatchProfile(
+            @JsonProperty("individual") Optional<? extends PatchIndividual> individual,
+            @JsonProperty("business") Optional<? extends PatchBusiness> business) {
         Utils.checkNotNull(individual, "individual");
         Utils.checkNotNull(business, "business");
         this.individual = individual;
         this.business = business;
     }
     
-    public CreateProfileUpdate() {
+    public PatchProfile() {
         this(Optional.empty(), Optional.empty());
     }
 
+    /**
+     * Describes the fields available when patching an individual.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreateIndividualProfileUpdate> individual() {
-        return (Optional<CreateIndividualProfileUpdate>) individual;
+    public Optional<PatchIndividual> individual() {
+        return (Optional<PatchIndividual>) individual;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreateBusinessProfileUpdate> business() {
-        return (Optional<CreateBusinessProfileUpdate>) business;
+    public Optional<PatchBusiness> business() {
+        return (Optional<PatchBusiness>) business;
     }
 
     public final static Builder builder() {
         return new Builder();
     }
 
-    public CreateProfileUpdate withIndividual(CreateIndividualProfileUpdate individual) {
+    /**
+     * Describes the fields available when patching an individual.
+     */
+    public PatchProfile withIndividual(PatchIndividual individual) {
         Utils.checkNotNull(individual, "individual");
         this.individual = Optional.ofNullable(individual);
         return this;
     }
 
-    public CreateProfileUpdate withIndividual(Optional<? extends CreateIndividualProfileUpdate> individual) {
+    /**
+     * Describes the fields available when patching an individual.
+     */
+    public PatchProfile withIndividual(Optional<? extends PatchIndividual> individual) {
         Utils.checkNotNull(individual, "individual");
         this.individual = individual;
         return this;
     }
 
-    public CreateProfileUpdate withBusiness(CreateBusinessProfileUpdate business) {
+    public PatchProfile withBusiness(PatchBusiness business) {
         Utils.checkNotNull(business, "business");
         this.business = Optional.ofNullable(business);
         return this;
     }
 
-    public CreateProfileUpdate withBusiness(Optional<? extends CreateBusinessProfileUpdate> business) {
+    public PatchProfile withBusiness(Optional<? extends PatchBusiness> business) {
         Utils.checkNotNull(business, "business");
         this.business = business;
         return this;
@@ -90,7 +106,7 @@ public class CreateProfileUpdate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateProfileUpdate other = (CreateProfileUpdate) o;
+        PatchProfile other = (PatchProfile) o;
         return 
             Objects.deepEquals(this.individual, other.individual) &&
             Objects.deepEquals(this.business, other.business);
@@ -105,47 +121,53 @@ public class CreateProfileUpdate {
     
     @Override
     public String toString() {
-        return Utils.toString(CreateProfileUpdate.class,
+        return Utils.toString(PatchProfile.class,
                 "individual", individual,
                 "business", business);
     }
     
     public final static class Builder {
  
-        private Optional<? extends CreateIndividualProfileUpdate> individual = Optional.empty();
+        private Optional<? extends PatchIndividual> individual = Optional.empty();
  
-        private Optional<? extends CreateBusinessProfileUpdate> business = Optional.empty();  
+        private Optional<? extends PatchBusiness> business = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder individual(CreateIndividualProfileUpdate individual) {
+        /**
+         * Describes the fields available when patching an individual.
+         */
+        public Builder individual(PatchIndividual individual) {
             Utils.checkNotNull(individual, "individual");
             this.individual = Optional.ofNullable(individual);
             return this;
         }
 
-        public Builder individual(Optional<? extends CreateIndividualProfileUpdate> individual) {
+        /**
+         * Describes the fields available when patching an individual.
+         */
+        public Builder individual(Optional<? extends PatchIndividual> individual) {
             Utils.checkNotNull(individual, "individual");
             this.individual = individual;
             return this;
         }
 
-        public Builder business(CreateBusinessProfileUpdate business) {
+        public Builder business(PatchBusiness business) {
             Utils.checkNotNull(business, "business");
             this.business = Optional.ofNullable(business);
             return this;
         }
 
-        public Builder business(Optional<? extends CreateBusinessProfileUpdate> business) {
+        public Builder business(Optional<? extends PatchBusiness> business) {
             Utils.checkNotNull(business, "business");
             this.business = business;
             return this;
         }
         
-        public CreateProfileUpdate build() {
-            return new CreateProfileUpdate(
+        public PatchProfile build() {
+            return new PatchProfile(
                 individual,
                 business);
         }

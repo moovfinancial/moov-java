@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -18,18 +19,12 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class CreateBusinessProfileUpdate {
+public class PatchBusiness {
 
-    /**
-     * The legal name under which the entity is registered.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("legalBusinessName")
     private Optional<String> legalBusinessName;
 
-    /**
-     * A registered trade name under which the business operates, if different from its legal name.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("doingBusinessAs")
     private Optional<String> doingBusinessAs;
@@ -69,6 +64,10 @@ public class CreateBusinessProfileUpdate {
     private Optional<? extends TaxIDUpdate> taxID;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("ownersProvided")
+    private Optional<Boolean> ownersProvided;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("industryCodes")
     private Optional<? extends IndustryCodes> industryCodes;
 
@@ -80,7 +79,7 @@ public class CreateBusinessProfileUpdate {
     private Optional<? extends PrimaryRegulator> primaryRegulator;
 
     @JsonCreator
-    public CreateBusinessProfileUpdate(
+    public PatchBusiness(
             @JsonProperty("legalBusinessName") Optional<String> legalBusinessName,
             @JsonProperty("doingBusinessAs") Optional<String> doingBusinessAs,
             @JsonProperty("businessType") Optional<? extends BusinessType> businessType,
@@ -90,6 +89,7 @@ public class CreateBusinessProfileUpdate {
             @JsonProperty("website") Optional<String> website,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("taxID") Optional<? extends TaxIDUpdate> taxID,
+            @JsonProperty("ownersProvided") Optional<Boolean> ownersProvided,
             @JsonProperty("industryCodes") Optional<? extends IndustryCodes> industryCodes,
             @JsonProperty("primaryRegulator") Optional<? extends PrimaryRegulator> primaryRegulator) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
@@ -101,6 +101,7 @@ public class CreateBusinessProfileUpdate {
         Utils.checkNotNull(website, "website");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(taxID, "taxID");
+        Utils.checkNotNull(ownersProvided, "ownersProvided");
         Utils.checkNotNull(industryCodes, "industryCodes");
         Utils.checkNotNull(primaryRegulator, "primaryRegulator");
         this.legalBusinessName = legalBusinessName;
@@ -112,25 +113,20 @@ public class CreateBusinessProfileUpdate {
         this.website = website;
         this.description = description;
         this.taxID = taxID;
+        this.ownersProvided = ownersProvided;
         this.industryCodes = industryCodes;
         this.primaryRegulator = primaryRegulator;
     }
     
-    public CreateBusinessProfileUpdate() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public PatchBusiness() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    /**
-     * The legal name under which the entity is registered.
-     */
     @JsonIgnore
     public Optional<String> legalBusinessName() {
         return legalBusinessName;
     }
 
-    /**
-     * A registered trade name under which the business operates, if different from its legal name.
-     */
     @JsonIgnore
     public Optional<String> doingBusinessAs() {
         return doingBusinessAs;
@@ -181,6 +177,11 @@ public class CreateBusinessProfileUpdate {
         return (Optional<TaxIDUpdate>) taxID;
     }
 
+    @JsonIgnore
+    public Optional<Boolean> ownersProvided() {
+        return ownersProvided;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<IndustryCodes> industryCodes() {
@@ -200,37 +201,25 @@ public class CreateBusinessProfileUpdate {
         return new Builder();
     }
 
-    /**
-     * The legal name under which the entity is registered.
-     */
-    public CreateBusinessProfileUpdate withLegalBusinessName(String legalBusinessName) {
+    public PatchBusiness withLegalBusinessName(String legalBusinessName) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
         this.legalBusinessName = Optional.ofNullable(legalBusinessName);
         return this;
     }
 
-    /**
-     * The legal name under which the entity is registered.
-     */
-    public CreateBusinessProfileUpdate withLegalBusinessName(Optional<String> legalBusinessName) {
+    public PatchBusiness withLegalBusinessName(Optional<String> legalBusinessName) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
         this.legalBusinessName = legalBusinessName;
         return this;
     }
 
-    /**
-     * A registered trade name under which the business operates, if different from its legal name.
-     */
-    public CreateBusinessProfileUpdate withDoingBusinessAs(String doingBusinessAs) {
+    public PatchBusiness withDoingBusinessAs(String doingBusinessAs) {
         Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
         this.doingBusinessAs = Optional.ofNullable(doingBusinessAs);
         return this;
     }
 
-    /**
-     * A registered trade name under which the business operates, if different from its legal name.
-     */
-    public CreateBusinessProfileUpdate withDoingBusinessAs(Optional<String> doingBusinessAs) {
+    public PatchBusiness withDoingBusinessAs(Optional<String> doingBusinessAs) {
         Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
         this.doingBusinessAs = doingBusinessAs;
         return this;
@@ -239,7 +228,7 @@ public class CreateBusinessProfileUpdate {
     /**
      * The type of entity represented by this business.
      */
-    public CreateBusinessProfileUpdate withBusinessType(BusinessType businessType) {
+    public PatchBusiness withBusinessType(BusinessType businessType) {
         Utils.checkNotNull(businessType, "businessType");
         this.businessType = Optional.ofNullable(businessType);
         return this;
@@ -248,67 +237,67 @@ public class CreateBusinessProfileUpdate {
     /**
      * The type of entity represented by this business.
      */
-    public CreateBusinessProfileUpdate withBusinessType(Optional<? extends BusinessType> businessType) {
+    public PatchBusiness withBusinessType(Optional<? extends BusinessType> businessType) {
         Utils.checkNotNull(businessType, "businessType");
         this.businessType = businessType;
         return this;
     }
 
-    public CreateBusinessProfileUpdate withAddress(AddressUpdate address) {
+    public PatchBusiness withAddress(AddressUpdate address) {
         Utils.checkNotNull(address, "address");
         this.address = Optional.ofNullable(address);
         return this;
     }
 
-    public CreateBusinessProfileUpdate withAddress(Optional<? extends AddressUpdate> address) {
+    public PatchBusiness withAddress(Optional<? extends AddressUpdate> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
         return this;
     }
 
-    public CreateBusinessProfileUpdate withPhone(PhoneNumber phone) {
+    public PatchBusiness withPhone(PhoneNumber phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = Optional.ofNullable(phone);
         return this;
     }
 
-    public CreateBusinessProfileUpdate withPhone(Optional<? extends PhoneNumber> phone) {
+    public PatchBusiness withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
         return this;
     }
 
-    public CreateBusinessProfileUpdate withEmail(String email) {
+    public PatchBusiness withEmail(String email) {
         Utils.checkNotNull(email, "email");
         this.email = Optional.ofNullable(email);
         return this;
     }
 
-    public CreateBusinessProfileUpdate withEmail(Optional<String> email) {
+    public PatchBusiness withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
     }
 
-    public CreateBusinessProfileUpdate withWebsite(String website) {
+    public PatchBusiness withWebsite(String website) {
         Utils.checkNotNull(website, "website");
         this.website = Optional.ofNullable(website);
         return this;
     }
 
-    public CreateBusinessProfileUpdate withWebsite(Optional<String> website) {
+    public PatchBusiness withWebsite(Optional<String> website) {
         Utils.checkNotNull(website, "website");
         this.website = website;
         return this;
     }
 
-    public CreateBusinessProfileUpdate withDescription(String description) {
+    public PatchBusiness withDescription(String description) {
         Utils.checkNotNull(description, "description");
         this.description = Optional.ofNullable(description);
         return this;
     }
 
-    public CreateBusinessProfileUpdate withDescription(Optional<String> description) {
+    public PatchBusiness withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
@@ -317,7 +306,7 @@ public class CreateBusinessProfileUpdate {
     /**
      * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
      */
-    public CreateBusinessProfileUpdate withTaxID(TaxIDUpdate taxID) {
+    public PatchBusiness withTaxID(TaxIDUpdate taxID) {
         Utils.checkNotNull(taxID, "taxID");
         this.taxID = Optional.ofNullable(taxID);
         return this;
@@ -326,19 +315,31 @@ public class CreateBusinessProfileUpdate {
     /**
      * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
      */
-    public CreateBusinessProfileUpdate withTaxID(Optional<? extends TaxIDUpdate> taxID) {
+    public PatchBusiness withTaxID(Optional<? extends TaxIDUpdate> taxID) {
         Utils.checkNotNull(taxID, "taxID");
         this.taxID = taxID;
         return this;
     }
 
-    public CreateBusinessProfileUpdate withIndustryCodes(IndustryCodes industryCodes) {
+    public PatchBusiness withOwnersProvided(boolean ownersProvided) {
+        Utils.checkNotNull(ownersProvided, "ownersProvided");
+        this.ownersProvided = Optional.ofNullable(ownersProvided);
+        return this;
+    }
+
+    public PatchBusiness withOwnersProvided(Optional<Boolean> ownersProvided) {
+        Utils.checkNotNull(ownersProvided, "ownersProvided");
+        this.ownersProvided = ownersProvided;
+        return this;
+    }
+
+    public PatchBusiness withIndustryCodes(IndustryCodes industryCodes) {
         Utils.checkNotNull(industryCodes, "industryCodes");
         this.industryCodes = Optional.ofNullable(industryCodes);
         return this;
     }
 
-    public CreateBusinessProfileUpdate withIndustryCodes(Optional<? extends IndustryCodes> industryCodes) {
+    public PatchBusiness withIndustryCodes(Optional<? extends IndustryCodes> industryCodes) {
         Utils.checkNotNull(industryCodes, "industryCodes");
         this.industryCodes = industryCodes;
         return this;
@@ -347,7 +348,7 @@ public class CreateBusinessProfileUpdate {
     /**
      * If the business is a financial institution, this field describes its primary regulator.
      */
-    public CreateBusinessProfileUpdate withPrimaryRegulator(PrimaryRegulator primaryRegulator) {
+    public PatchBusiness withPrimaryRegulator(PrimaryRegulator primaryRegulator) {
         Utils.checkNotNull(primaryRegulator, "primaryRegulator");
         this.primaryRegulator = Optional.ofNullable(primaryRegulator);
         return this;
@@ -356,7 +357,7 @@ public class CreateBusinessProfileUpdate {
     /**
      * If the business is a financial institution, this field describes its primary regulator.
      */
-    public CreateBusinessProfileUpdate withPrimaryRegulator(Optional<? extends PrimaryRegulator> primaryRegulator) {
+    public PatchBusiness withPrimaryRegulator(Optional<? extends PrimaryRegulator> primaryRegulator) {
         Utils.checkNotNull(primaryRegulator, "primaryRegulator");
         this.primaryRegulator = primaryRegulator;
         return this;
@@ -370,7 +371,7 @@ public class CreateBusinessProfileUpdate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateBusinessProfileUpdate other = (CreateBusinessProfileUpdate) o;
+        PatchBusiness other = (PatchBusiness) o;
         return 
             Objects.deepEquals(this.legalBusinessName, other.legalBusinessName) &&
             Objects.deepEquals(this.doingBusinessAs, other.doingBusinessAs) &&
@@ -381,6 +382,7 @@ public class CreateBusinessProfileUpdate {
             Objects.deepEquals(this.website, other.website) &&
             Objects.deepEquals(this.description, other.description) &&
             Objects.deepEquals(this.taxID, other.taxID) &&
+            Objects.deepEquals(this.ownersProvided, other.ownersProvided) &&
             Objects.deepEquals(this.industryCodes, other.industryCodes) &&
             Objects.deepEquals(this.primaryRegulator, other.primaryRegulator);
     }
@@ -397,13 +399,14 @@ public class CreateBusinessProfileUpdate {
             website,
             description,
             taxID,
+            ownersProvided,
             industryCodes,
             primaryRegulator);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(CreateBusinessProfileUpdate.class,
+        return Utils.toString(PatchBusiness.class,
                 "legalBusinessName", legalBusinessName,
                 "doingBusinessAs", doingBusinessAs,
                 "businessType", businessType,
@@ -413,6 +416,7 @@ public class CreateBusinessProfileUpdate {
                 "website", website,
                 "description", description,
                 "taxID", taxID,
+                "ownersProvided", ownersProvided,
                 "industryCodes", industryCodes,
                 "primaryRegulator", primaryRegulator);
     }
@@ -437,6 +441,8 @@ public class CreateBusinessProfileUpdate {
  
         private Optional<? extends TaxIDUpdate> taxID = Optional.empty();
  
+        private Optional<Boolean> ownersProvided = Optional.empty();
+ 
         private Optional<? extends IndustryCodes> industryCodes = Optional.empty();
  
         private Optional<? extends PrimaryRegulator> primaryRegulator = Optional.empty();  
@@ -445,36 +451,24 @@ public class CreateBusinessProfileUpdate {
           // force use of static builder() method
         }
 
-        /**
-         * The legal name under which the entity is registered.
-         */
         public Builder legalBusinessName(String legalBusinessName) {
             Utils.checkNotNull(legalBusinessName, "legalBusinessName");
             this.legalBusinessName = Optional.ofNullable(legalBusinessName);
             return this;
         }
 
-        /**
-         * The legal name under which the entity is registered.
-         */
         public Builder legalBusinessName(Optional<String> legalBusinessName) {
             Utils.checkNotNull(legalBusinessName, "legalBusinessName");
             this.legalBusinessName = legalBusinessName;
             return this;
         }
 
-        /**
-         * A registered trade name under which the business operates, if different from its legal name.
-         */
         public Builder doingBusinessAs(String doingBusinessAs) {
             Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
             this.doingBusinessAs = Optional.ofNullable(doingBusinessAs);
             return this;
         }
 
-        /**
-         * A registered trade name under which the business operates, if different from its legal name.
-         */
         public Builder doingBusinessAs(Optional<String> doingBusinessAs) {
             Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
             this.doingBusinessAs = doingBusinessAs;
@@ -577,6 +571,18 @@ public class CreateBusinessProfileUpdate {
             return this;
         }
 
+        public Builder ownersProvided(boolean ownersProvided) {
+            Utils.checkNotNull(ownersProvided, "ownersProvided");
+            this.ownersProvided = Optional.ofNullable(ownersProvided);
+            return this;
+        }
+
+        public Builder ownersProvided(Optional<Boolean> ownersProvided) {
+            Utils.checkNotNull(ownersProvided, "ownersProvided");
+            this.ownersProvided = ownersProvided;
+            return this;
+        }
+
         public Builder industryCodes(IndustryCodes industryCodes) {
             Utils.checkNotNull(industryCodes, "industryCodes");
             this.industryCodes = Optional.ofNullable(industryCodes);
@@ -607,8 +613,8 @@ public class CreateBusinessProfileUpdate {
             return this;
         }
         
-        public CreateBusinessProfileUpdate build() {
-            return new CreateBusinessProfileUpdate(
+        public PatchBusiness build() {
+            return new PatchBusiness(
                 legalBusinessName,
                 doingBusinessAs,
                 businessType,
@@ -618,6 +624,7 @@ public class CreateBusinessProfileUpdate {
                 website,
                 description,
                 taxID,
+                ownersProvided,
                 industryCodes,
                 primaryRegulator);
         }

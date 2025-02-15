@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.Account;
 import io.moov.sdk.models.components.AccountCountries;
 import io.moov.sdk.models.components.CreateAccount;
-import io.moov.sdk.models.components.CreateAccountUpdate;
+import io.moov.sdk.models.components.PatchAccount;
 import io.moov.sdk.models.components.TermsOfServiceToken;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.AssignCountriesError;
@@ -623,14 +623,14 @@ public class Accounts implements
     /**
      * When **can** profile data be updated: -   + For unverified accounts, all profile data can be edited. -   + During the verification process, missing or incomplete profile data can be edited. -   + Verified accounts can only add missing profile data. -  -   When **can't** profile data be updated: -   + Verified accounts cannot change any existing profile data. -  - If you need to update information in a locked state, please contact Moov support. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/profile.write` scope.
      * @param accountID
-     * @param createAccountUpdate
+     * @param patchAccount Describes the fields available when patching a Moov account.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateAccountResponse update(
             String accountID,
-            CreateAccountUpdate createAccountUpdate) throws Exception {
-        return update(Optional.empty(), accountID, createAccountUpdate);
+            PatchAccount patchAccount) throws Exception {
+        return update(Optional.empty(), accountID, patchAccount);
     }
     
     /**
@@ -645,20 +645,20 @@ public class Accounts implements
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID
-     * @param createAccountUpdate
+     * @param patchAccount Describes the fields available when patching a Moov account.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdateAccountResponse update(
             Optional<String> xMoovVersion,
             String accountID,
-            CreateAccountUpdate createAccountUpdate) throws Exception {
+            PatchAccount patchAccount) throws Exception {
         UpdateAccountRequest request =
             UpdateAccountRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
-                .createAccountUpdate(createAccountUpdate)
+                .patchAccount(patchAccount)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -675,7 +675,7 @@ public class Accounts implements
                 new TypeReference<Object>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
                 _convertedRequest, 
-                "createAccountUpdate",
+                "patchAccount",
                 "json",
                 false);
         if (_serializedRequestBody == null) {

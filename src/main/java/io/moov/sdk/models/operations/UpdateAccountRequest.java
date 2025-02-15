@@ -8,7 +8,7 @@ package io.moov.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.CreateAccountUpdate;
+import io.moov.sdk.models.components.PatchAccount;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
@@ -38,25 +38,25 @@ public class UpdateAccountRequest {
     private String accountID;
 
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private CreateAccountUpdate createAccountUpdate;
+    private PatchAccount patchAccount;
 
     @JsonCreator
     public UpdateAccountRequest(
             Optional<String> xMoovVersion,
             String accountID,
-            CreateAccountUpdate createAccountUpdate) {
+            PatchAccount patchAccount) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(accountID, "accountID");
-        Utils.checkNotNull(createAccountUpdate, "createAccountUpdate");
+        Utils.checkNotNull(patchAccount, "patchAccount");
         this.xMoovVersion = xMoovVersion;
         this.accountID = accountID;
-        this.createAccountUpdate = createAccountUpdate;
+        this.patchAccount = patchAccount;
     }
     
     public UpdateAccountRequest(
             String accountID,
-            CreateAccountUpdate createAccountUpdate) {
-        this(Optional.empty(), accountID, createAccountUpdate);
+            PatchAccount patchAccount) {
+        this(Optional.empty(), accountID, patchAccount);
     }
 
     /**
@@ -81,8 +81,8 @@ public class UpdateAccountRequest {
     }
 
     @JsonIgnore
-    public CreateAccountUpdate createAccountUpdate() {
-        return createAccountUpdate;
+    public PatchAccount patchAccount() {
+        return patchAccount;
     }
 
     public final static Builder builder() {
@@ -129,9 +129,9 @@ public class UpdateAccountRequest {
         return this;
     }
 
-    public UpdateAccountRequest withCreateAccountUpdate(CreateAccountUpdate createAccountUpdate) {
-        Utils.checkNotNull(createAccountUpdate, "createAccountUpdate");
-        this.createAccountUpdate = createAccountUpdate;
+    public UpdateAccountRequest withPatchAccount(PatchAccount patchAccount) {
+        Utils.checkNotNull(patchAccount, "patchAccount");
+        this.patchAccount = patchAccount;
         return this;
     }
     
@@ -147,7 +147,7 @@ public class UpdateAccountRequest {
         return 
             Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.createAccountUpdate, other.createAccountUpdate);
+            Objects.deepEquals(this.patchAccount, other.patchAccount);
     }
     
     @Override
@@ -155,7 +155,7 @@ public class UpdateAccountRequest {
         return Objects.hash(
             xMoovVersion,
             accountID,
-            createAccountUpdate);
+            patchAccount);
     }
     
     @Override
@@ -163,7 +163,7 @@ public class UpdateAccountRequest {
         return Utils.toString(UpdateAccountRequest.class,
                 "xMoovVersion", xMoovVersion,
                 "accountID", accountID,
-                "createAccountUpdate", createAccountUpdate);
+                "patchAccount", patchAccount);
     }
     
     public final static class Builder {
@@ -172,7 +172,7 @@ public class UpdateAccountRequest {
  
         private String accountID;
  
-        private CreateAccountUpdate createAccountUpdate;  
+        private PatchAccount patchAccount;  
         
         private Builder() {
           // force use of static builder() method
@@ -218,9 +218,9 @@ public class UpdateAccountRequest {
             return this;
         }
 
-        public Builder createAccountUpdate(CreateAccountUpdate createAccountUpdate) {
-            Utils.checkNotNull(createAccountUpdate, "createAccountUpdate");
-            this.createAccountUpdate = createAccountUpdate;
+        public Builder patchAccount(PatchAccount patchAccount) {
+            Utils.checkNotNull(patchAccount, "patchAccount");
+            this.patchAccount = patchAccount;
             return this;
         }
         
@@ -230,7 +230,7 @@ public class UpdateAccountRequest {
             }            return new UpdateAccountRequest(
                 xMoovVersion,
                 accountID,
-                createAccountUpdate);
+                patchAccount);
         }
 
         private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =

@@ -5,7 +5,7 @@
 package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.CreateAccountUpdate;
+import io.moov.sdk.models.components.PatchAccount;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
@@ -18,7 +18,7 @@ public class UpdateAccountRequestBuilder {
                             "\"v2024.01.00\"",
                             new TypeReference<Optional<String>>() {});
     private String accountID;
-    private CreateAccountUpdate createAccountUpdate;
+    private PatchAccount patchAccount;
     private final SDKMethodInterfaces.MethodCallUpdateAccount sdk;
 
     public UpdateAccountRequestBuilder(SDKMethodInterfaces.MethodCallUpdateAccount sdk) {
@@ -43,9 +43,9 @@ public class UpdateAccountRequestBuilder {
         return this;
     }
 
-    public UpdateAccountRequestBuilder createAccountUpdate(CreateAccountUpdate createAccountUpdate) {
-        Utils.checkNotNull(createAccountUpdate, "createAccountUpdate");
-        this.createAccountUpdate = createAccountUpdate;
+    public UpdateAccountRequestBuilder patchAccount(PatchAccount patchAccount) {
+        Utils.checkNotNull(patchAccount, "patchAccount");
+        this.patchAccount = patchAccount;
         return this;
     }
 
@@ -56,7 +56,7 @@ public class UpdateAccountRequestBuilder {
         return sdk.update(
             xMoovVersion,
             accountID,
-            createAccountUpdate);
+            patchAccount);
     }
 
     private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =

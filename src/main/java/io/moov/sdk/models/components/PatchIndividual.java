@@ -17,8 +17,11 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * PatchIndividual - Describes the fields available when patching an individual.
+ */
 
-public class CreateIndividualProfileUpdate {
+public class PatchIndividual {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
@@ -45,7 +48,7 @@ public class CreateIndividualProfileUpdate {
     private Optional<? extends GovernmentID> governmentID;
 
     @JsonCreator
-    public CreateIndividualProfileUpdate(
+    public PatchIndividual(
             @JsonProperty("name") Optional<? extends IndividualNameUpdate> name,
             @JsonProperty("phone") Optional<? extends PhoneNumber> phone,
             @JsonProperty("email") Optional<String> email,
@@ -66,7 +69,7 @@ public class CreateIndividualProfileUpdate {
         this.governmentID = governmentID;
     }
     
-    public CreateIndividualProfileUpdate() {
+    public PatchIndividual() {
         this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -109,73 +112,73 @@ public class CreateIndividualProfileUpdate {
         return new Builder();
     }
 
-    public CreateIndividualProfileUpdate withName(IndividualNameUpdate name) {
+    public PatchIndividual withName(IndividualNameUpdate name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
 
-    public CreateIndividualProfileUpdate withName(Optional<? extends IndividualNameUpdate> name) {
+    public PatchIndividual withName(Optional<? extends IndividualNameUpdate> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
-    public CreateIndividualProfileUpdate withPhone(PhoneNumber phone) {
+    public PatchIndividual withPhone(PhoneNumber phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = Optional.ofNullable(phone);
         return this;
     }
 
-    public CreateIndividualProfileUpdate withPhone(Optional<? extends PhoneNumber> phone) {
+    public PatchIndividual withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
         return this;
     }
 
-    public CreateIndividualProfileUpdate withEmail(String email) {
+    public PatchIndividual withEmail(String email) {
         Utils.checkNotNull(email, "email");
         this.email = Optional.ofNullable(email);
         return this;
     }
 
-    public CreateIndividualProfileUpdate withEmail(Optional<String> email) {
+    public PatchIndividual withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
     }
 
-    public CreateIndividualProfileUpdate withAddress(AddressUpdate address) {
+    public PatchIndividual withAddress(AddressUpdate address) {
         Utils.checkNotNull(address, "address");
         this.address = Optional.ofNullable(address);
         return this;
     }
 
-    public CreateIndividualProfileUpdate withAddress(Optional<? extends AddressUpdate> address) {
+    public PatchIndividual withAddress(Optional<? extends AddressUpdate> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
         return this;
     }
 
-    public CreateIndividualProfileUpdate withBirthDate(BirthDateUpdate birthDate) {
+    public PatchIndividual withBirthDate(BirthDateUpdate birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
         this.birthDate = Optional.ofNullable(birthDate);
         return this;
     }
 
-    public CreateIndividualProfileUpdate withBirthDate(Optional<? extends BirthDateUpdate> birthDate) {
+    public PatchIndividual withBirthDate(Optional<? extends BirthDateUpdate> birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
         this.birthDate = birthDate;
         return this;
     }
 
-    public CreateIndividualProfileUpdate withGovernmentID(GovernmentID governmentID) {
+    public PatchIndividual withGovernmentID(GovernmentID governmentID) {
         Utils.checkNotNull(governmentID, "governmentID");
         this.governmentID = Optional.ofNullable(governmentID);
         return this;
     }
 
-    public CreateIndividualProfileUpdate withGovernmentID(Optional<? extends GovernmentID> governmentID) {
+    public PatchIndividual withGovernmentID(Optional<? extends GovernmentID> governmentID) {
         Utils.checkNotNull(governmentID, "governmentID");
         this.governmentID = governmentID;
         return this;
@@ -189,7 +192,7 @@ public class CreateIndividualProfileUpdate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateIndividualProfileUpdate other = (CreateIndividualProfileUpdate) o;
+        PatchIndividual other = (PatchIndividual) o;
         return 
             Objects.deepEquals(this.name, other.name) &&
             Objects.deepEquals(this.phone, other.phone) &&
@@ -212,7 +215,7 @@ public class CreateIndividualProfileUpdate {
     
     @Override
     public String toString() {
-        return Utils.toString(CreateIndividualProfileUpdate.class,
+        return Utils.toString(PatchIndividual.class,
                 "name", name,
                 "phone", phone,
                 "email", email,
@@ -311,8 +314,8 @@ public class CreateIndividualProfileUpdate {
             return this;
         }
         
-        public CreateIndividualProfileUpdate build() {
-            return new CreateIndividualProfileUpdate(
+        public PatchIndividual build() {
+            return new PatchIndividual(
                 name,
                 phone,
                 email,

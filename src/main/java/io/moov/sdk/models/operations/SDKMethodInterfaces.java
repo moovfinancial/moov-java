@@ -13,7 +13,6 @@ import io.moov.sdk.models.components.CapabilityID;
 import io.moov.sdk.models.components.CompleteBankAccountVerification;
 import io.moov.sdk.models.components.CompleteMicroDeposits;
 import io.moov.sdk.models.components.CreateAccount;
-import io.moov.sdk.models.components.CreateAccountUpdate;
 import io.moov.sdk.models.components.CreateApplePaySession;
 import io.moov.sdk.models.components.CreateEvidenceFileMultiPart;
 import io.moov.sdk.models.components.CreateEvidenceText;
@@ -29,6 +28,7 @@ import io.moov.sdk.models.components.LinkBankAccount;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
 import io.moov.sdk.models.components.OnboardingInviteRequest;
+import io.moov.sdk.models.components.PatchAccount;
 import io.moov.sdk.models.components.PatchSweepConfig;
 import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.models.components.PaymentMethodType;
@@ -76,7 +76,7 @@ public class SDKMethodInterfaces {
         UpdateAccountResponse update(
             Optional<String> xMoovVersion,
             String accountID,
-            CreateAccountUpdate createAccountUpdate) throws Exception;
+            PatchAccount patchAccount) throws Exception;
     }
 
 

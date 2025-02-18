@@ -101,7 +101,7 @@ public class Transfer extends RuntimeException {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("moovFeeDecimal")
-    private Optional<Long> moovFeeDecimal;
+    private Optional<String> moovFeeDecimal;
 
     /**
      * Processing and pass-through costs that add up to the moovFee.
@@ -156,7 +156,7 @@ public class Transfer extends RuntimeException {
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
             @JsonProperty("facilitatorFee") Optional<? extends FacilitatorFee> facilitatorFee,
             @JsonProperty("moovFee") Optional<Long> moovFee,
-            @JsonProperty("moovFeeDecimal") Optional<Long> moovFeeDecimal,
+            @JsonProperty("moovFeeDecimal") Optional<String> moovFeeDecimal,
             @JsonProperty("moovFeeDetails") Optional<? extends MoovFeeDetails> moovFeeDetails,
             @JsonProperty("groupID") Optional<String> groupID,
             @JsonProperty("refundedAmount") Optional<? extends Amount> refundedAmount,
@@ -294,7 +294,7 @@ public class Transfer extends RuntimeException {
     /**
      * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
      */
-    public Optional<Long> moovFeeDecimal(){
+    public Optional<String> moovFeeDecimal(){
         return moovFeeDecimal;
     }
 
@@ -502,7 +502,7 @@ public class Transfer extends RuntimeException {
     /**
      * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
      */
-    public Transfer withMoovFeeDecimal(long moovFeeDecimal) {
+    public Transfer withMoovFeeDecimal(String moovFeeDecimal) {
         Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
         this.moovFeeDecimal = Optional.ofNullable(moovFeeDecimal);
         return this;
@@ -511,7 +511,7 @@ public class Transfer extends RuntimeException {
     /**
      * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
      */
-    public Transfer withMoovFeeDecimal(Optional<Long> moovFeeDecimal) {
+    public Transfer withMoovFeeDecimal(Optional<String> moovFeeDecimal) {
         Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
         this.moovFeeDecimal = moovFeeDecimal;
         return this;
@@ -745,7 +745,7 @@ public class Transfer extends RuntimeException {
 
         private Optional<Long> moovFee = Optional.empty();
 
-        private Optional<Long> moovFeeDecimal = Optional.empty();
+        private Optional<String> moovFeeDecimal = Optional.empty();
 
         private Optional<? extends MoovFeeDetails> moovFeeDetails = Optional.empty();
 
@@ -925,7 +925,7 @@ public class Transfer extends RuntimeException {
         /**
          * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
          */
-        public Builder moovFeeDecimal(long moovFeeDecimal) {
+        public Builder moovFeeDecimal(String moovFeeDecimal) {
             Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
             this.moovFeeDecimal = Optional.ofNullable(moovFeeDecimal);
             return this;
@@ -934,7 +934,7 @@ public class Transfer extends RuntimeException {
         /**
          * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
          */
-        public Builder moovFeeDecimal(Optional<Long> moovFeeDecimal) {
+        public Builder moovFeeDecimal(Optional<String> moovFeeDecimal) {
             Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
             this.moovFeeDecimal = moovFeeDecimal;
             return this;

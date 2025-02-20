@@ -5,6 +5,7 @@
 package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class CreateTransferOptionsRequestBuilder {
                             "xMoovVersion",
                             "\"v2024.01.00\"",
                             new TypeReference<Optional<String>>() {});
+    private CreateTransferOptions createTransferOptions;
     private final SDKMethodInterfaces.MethodCallCreateTransferOptions sdk;
 
     public CreateTransferOptionsRequestBuilder(SDKMethodInterfaces.MethodCallCreateTransferOptions sdk) {
@@ -34,12 +36,19 @@ public class CreateTransferOptionsRequestBuilder {
         return this;
     }
 
+    public CreateTransferOptionsRequestBuilder createTransferOptions(CreateTransferOptions createTransferOptions) {
+        Utils.checkNotNull(createTransferOptions, "createTransferOptions");
+        this.createTransferOptions = createTransferOptions;
+        return this;
+    }
+
     public CreateTransferOptionsResponse call() throws Exception {
         if (xMoovVersion == null) {
             xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
         }
         return sdk.generateOptions(
-            xMoovVersion);
+            xMoovVersion,
+            createTransferOptions);
     }
 
     private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =

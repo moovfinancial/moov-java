@@ -8,17 +8,17 @@ package io.moov.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
 
-public class CreateTransferOptionsRequest {
+public class ListFeesFetchRequest {
 
     /**
      * Specify an API version.
@@ -34,22 +34,28 @@ public class CreateTransferOptionsRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
     private Optional<String> xMoovVersion;
 
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
+    private String accountID;
+
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private CreateTransferOptions createTransferOptions;
+    private Optional<? extends io.moov.sdk.models.components.ListFeesFetchRequest> listFeesFetchRequest;
 
     @JsonCreator
-    public CreateTransferOptionsRequest(
+    public ListFeesFetchRequest(
             Optional<String> xMoovVersion,
-            CreateTransferOptions createTransferOptions) {
+            String accountID,
+            Optional<? extends io.moov.sdk.models.components.ListFeesFetchRequest> listFeesFetchRequest) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        Utils.checkNotNull(createTransferOptions, "createTransferOptions");
+        Utils.checkNotNull(accountID, "accountID");
+        Utils.checkNotNull(listFeesFetchRequest, "listFeesFetchRequest");
         this.xMoovVersion = xMoovVersion;
-        this.createTransferOptions = createTransferOptions;
+        this.accountID = accountID;
+        this.listFeesFetchRequest = listFeesFetchRequest;
     }
     
-    public CreateTransferOptionsRequest(
-            CreateTransferOptions createTransferOptions) {
-        this(Optional.empty(), createTransferOptions);
+    public ListFeesFetchRequest(
+            String accountID) {
+        this(Optional.empty(), accountID, Optional.empty());
     }
 
     /**
@@ -69,8 +75,14 @@ public class CreateTransferOptionsRequest {
     }
 
     @JsonIgnore
-    public CreateTransferOptions createTransferOptions() {
-        return createTransferOptions;
+    public String accountID() {
+        return accountID;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<io.moov.sdk.models.components.ListFeesFetchRequest> listFeesFetchRequest() {
+        return (Optional<io.moov.sdk.models.components.ListFeesFetchRequest>) listFeesFetchRequest;
     }
 
     public final static Builder builder() {
@@ -88,7 +100,7 @@ public class CreateTransferOptionsRequest {
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public CreateTransferOptionsRequest withXMoovVersion(String xMoovVersion) {
+    public ListFeesFetchRequest withXMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.ofNullable(xMoovVersion);
         return this;
@@ -105,15 +117,27 @@ public class CreateTransferOptionsRequest {
      * 
      * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
-    public CreateTransferOptionsRequest withXMoovVersion(Optional<String> xMoovVersion) {
+    public ListFeesFetchRequest withXMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
     }
 
-    public CreateTransferOptionsRequest withCreateTransferOptions(CreateTransferOptions createTransferOptions) {
-        Utils.checkNotNull(createTransferOptions, "createTransferOptions");
-        this.createTransferOptions = createTransferOptions;
+    public ListFeesFetchRequest withAccountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
+
+    public ListFeesFetchRequest withListFeesFetchRequest(io.moov.sdk.models.components.ListFeesFetchRequest listFeesFetchRequest) {
+        Utils.checkNotNull(listFeesFetchRequest, "listFeesFetchRequest");
+        this.listFeesFetchRequest = Optional.ofNullable(listFeesFetchRequest);
+        return this;
+    }
+
+    public ListFeesFetchRequest withListFeesFetchRequest(Optional<? extends io.moov.sdk.models.components.ListFeesFetchRequest> listFeesFetchRequest) {
+        Utils.checkNotNull(listFeesFetchRequest, "listFeesFetchRequest");
+        this.listFeesFetchRequest = listFeesFetchRequest;
         return this;
     }
     
@@ -125,31 +149,36 @@ public class CreateTransferOptionsRequest {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateTransferOptionsRequest other = (CreateTransferOptionsRequest) o;
+        ListFeesFetchRequest other = (ListFeesFetchRequest) o;
         return 
             Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
-            Objects.deepEquals(this.createTransferOptions, other.createTransferOptions);
+            Objects.deepEquals(this.accountID, other.accountID) &&
+            Objects.deepEquals(this.listFeesFetchRequest, other.listFeesFetchRequest);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             xMoovVersion,
-            createTransferOptions);
+            accountID,
+            listFeesFetchRequest);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(CreateTransferOptionsRequest.class,
+        return Utils.toString(ListFeesFetchRequest.class,
                 "xMoovVersion", xMoovVersion,
-                "createTransferOptions", createTransferOptions);
+                "accountID", accountID,
+                "listFeesFetchRequest", listFeesFetchRequest);
     }
     
     public final static class Builder {
  
         private Optional<String> xMoovVersion;
  
-        private CreateTransferOptions createTransferOptions;  
+        private String accountID;
+ 
+        private Optional<? extends io.moov.sdk.models.components.ListFeesFetchRequest> listFeesFetchRequest = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -189,18 +218,31 @@ public class CreateTransferOptionsRequest {
             return this;
         }
 
-        public Builder createTransferOptions(CreateTransferOptions createTransferOptions) {
-            Utils.checkNotNull(createTransferOptions, "createTransferOptions");
-            this.createTransferOptions = createTransferOptions;
+        public Builder accountID(String accountID) {
+            Utils.checkNotNull(accountID, "accountID");
+            this.accountID = accountID;
+            return this;
+        }
+
+        public Builder listFeesFetchRequest(io.moov.sdk.models.components.ListFeesFetchRequest listFeesFetchRequest) {
+            Utils.checkNotNull(listFeesFetchRequest, "listFeesFetchRequest");
+            this.listFeesFetchRequest = Optional.ofNullable(listFeesFetchRequest);
+            return this;
+        }
+
+        public Builder listFeesFetchRequest(Optional<? extends io.moov.sdk.models.components.ListFeesFetchRequest> listFeesFetchRequest) {
+            Utils.checkNotNull(listFeesFetchRequest, "listFeesFetchRequest");
+            this.listFeesFetchRequest = listFeesFetchRequest;
             return this;
         }
         
-        public CreateTransferOptionsRequest build() {
+        public ListFeesFetchRequest build() {
             if (xMoovVersion == null) {
                 xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-            }            return new CreateTransferOptionsRequest(
+            }            return new ListFeesFetchRequest(
                 xMoovVersion,
-                createTransferOptions);
+                accountID,
+                listFeesFetchRequest);
         }
 
         private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =

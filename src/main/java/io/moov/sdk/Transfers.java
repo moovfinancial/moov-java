@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.AsyncTransfer;
 import io.moov.sdk.models.components.CardAcquiringRefund;
 import io.moov.sdk.models.components.CreateRefundResponse;
+import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.models.components.Reversal;
 import io.moov.sdk.models.components.Transfer;
@@ -1605,11 +1606,13 @@ public class Transfers implements
 
     /**
      * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you  - supply in the request.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @param createTransferOptions
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateTransferOptionsResponse generateOptionsDirect() throws Exception {
-        return generateOptions(Optional.empty());
+    public CreateTransferOptionsResponse generateOptions(
+            CreateTransferOptions createTransferOptions) throws Exception {
+        return generateOptions(Optional.empty(), createTransferOptions);
     }
     
     /**
@@ -1623,15 +1626,18 @@ public class Transfers implements
         - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param createTransferOptions
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateTransferOptionsResponse generateOptions(
-            Optional<String> xMoovVersion) throws Exception {
+            Optional<String> xMoovVersion,
+            CreateTransferOptions createTransferOptions) throws Exception {
         CreateTransferOptionsRequest request =
             CreateTransferOptionsRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
+                .createTransferOptions(createTransferOptions)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
@@ -1640,6 +1646,19 @@ public class Transfers implements
                 "/transfer-options");
         
         HTTPRequest _req = new HTTPRequest(_url, "POST");
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
+        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
+                _convertedRequest, 
+                "createTransferOptions",
+                "json",
+                false);
+        if (_serializedRequestBody == null) {
+            throw new Exception("Request body is required");
+        }
+        _req.setBody(Optional.ofNullable(_serializedRequestBody));
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);

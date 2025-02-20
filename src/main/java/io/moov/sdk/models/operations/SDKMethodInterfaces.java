@@ -20,6 +20,7 @@ import io.moov.sdk.models.components.CreateFeePlanAgreement;
 import io.moov.sdk.models.components.CreatePaymentLink;
 import io.moov.sdk.models.components.CreateRepresentative;
 import io.moov.sdk.models.components.CreateSweepConfig;
+import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.models.components.E2EEToken;
 import io.moov.sdk.models.components.FeePlanAgreementStatus;
 import io.moov.sdk.models.components.FileUploadRequestMultiPart;
@@ -27,6 +28,7 @@ import io.moov.sdk.models.components.LinkApplePay;
 import io.moov.sdk.models.components.LinkBankAccount;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
+import io.moov.sdk.models.components.ListFeesFetchRequest;
 import io.moov.sdk.models.components.OnboardingInviteRequest;
 import io.moov.sdk.models.components.PatchAccount;
 import io.moov.sdk.models.components.PatchSweepConfig;
@@ -464,6 +466,20 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallRetrieveFees {
+        RetrieveFeesResponse retrieveFees(
+            RetrieveFeesRequest request) throws Exception;
+    }
+
+
+    public interface MethodCallListFeesFetch {
+        ListFeesFetchResponse listFeesFetch(
+            Optional<String> xMoovVersion,
+            String accountID,
+            Optional<? extends ListFeesFetchRequest> listFeesFetchRequest) throws Exception;
+    }
+
+
     public interface MethodCallListPartnerPricing {
         ListPartnerPricingResponse listPartnerPricing(
             Optional<String> xMoovVersion,
@@ -767,7 +783,8 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallCreateTransferOptions {
         CreateTransferOptionsResponse generateOptions(
-            Optional<String> xMoovVersion) throws Exception;
+            Optional<String> xMoovVersion,
+            CreateTransferOptions createTransferOptions) throws Exception;
     }
 
 

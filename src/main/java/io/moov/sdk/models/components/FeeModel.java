@@ -14,7 +14,8 @@ import java.util.Optional;
  */
 public enum FeeModel {
     FIXED("fixed"),
-    BLENDED("blended");
+    BLENDED("blended"),
+    VARIABLE("variable");
 
     @JsonValue
     private final String value;

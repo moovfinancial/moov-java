@@ -9,6 +9,8 @@ import io.moov.sdk.models.components.CreateFeePlanAgreement;
 import io.moov.sdk.models.components.FeePlan;
 import io.moov.sdk.models.components.FeePlanAgreement;
 import io.moov.sdk.models.components.FeePlanAgreementStatus;
+import io.moov.sdk.models.components.IncurredFee;
+import io.moov.sdk.models.components.ListFeesFetchRequest;
 import io.moov.sdk.models.components.PartnerPricing;
 import io.moov.sdk.models.components.PartnerPricingAgreement;
 import io.moov.sdk.models.errors.APIException;
@@ -23,12 +25,17 @@ import io.moov.sdk.models.operations.ListFeePlanAgreementsResponse;
 import io.moov.sdk.models.operations.ListFeePlansRequest;
 import io.moov.sdk.models.operations.ListFeePlansRequestBuilder;
 import io.moov.sdk.models.operations.ListFeePlansResponse;
+import io.moov.sdk.models.operations.ListFeesFetchRequestBuilder;
+import io.moov.sdk.models.operations.ListFeesFetchResponse;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsRequest;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsRequestBuilder;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsResponse;
 import io.moov.sdk.models.operations.ListPartnerPricingRequest;
 import io.moov.sdk.models.operations.ListPartnerPricingRequestBuilder;
 import io.moov.sdk.models.operations.ListPartnerPricingResponse;
+import io.moov.sdk.models.operations.RetrieveFeesRequest;
+import io.moov.sdk.models.operations.RetrieveFeesRequestBuilder;
+import io.moov.sdk.models.operations.RetrieveFeesResponse;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -47,16 +54,18 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional; 
 
-public class Billing implements
+public class FeePlans implements
             MethodCallListFeePlanAgreements,
             MethodCallCreateFeePlanAgreements,
             MethodCallListFeePlans,
+            MethodCallRetrieveFees,
+            MethodCallListFeesFetch,
             MethodCallListPartnerPricing,
             MethodCallListPartnerPricingAgreements {
 
     private final SDKConfiguration sdkConfiguration;
 
-    Billing(SDKConfiguration sdkConfiguration) {
+    FeePlans(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
@@ -592,6 +601,340 @@ public class Billing implements
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<List<FeePlan>>() {});
                 _res.withFeePlans(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new APIException(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Retrieve fees associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @return The call builder
+     */
+    public RetrieveFeesRequestBuilder retrieveFees() {
+        return new RetrieveFeesRequestBuilder(this);
+    }
+
+    /**
+     * Retrieve fees associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @param request The request object containing all of the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public RetrieveFeesResponse retrieveFees(
+            RetrieveFeesRequest request) throws Exception {
+        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _url = Utils.generateURL(
+                RetrieveFeesRequest.class,
+                _baseUrl,
+                "/accounts/{accountID}/fees",
+                request, this.sdkConfiguration.globals);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                RetrieveFeesRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "retrieveFees", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "retrieveFees",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "retrieveFees",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "retrieveFees",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        RetrieveFeesResponse.Builder _resBuilder = 
+            RetrieveFeesResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        RetrieveFeesResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                List<IncurredFee> _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<List<IncurredFee>>() {});
+                _res.withIncurredFees(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new APIException(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * List fees associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @return The call builder
+     */
+    public ListFeesFetchRequestBuilder listFeesFetch() {
+        return new ListFeesFetchRequestBuilder(this);
+    }
+
+    /**
+     * List fees associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @param accountID
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public ListFeesFetchResponse listFeesFetch(
+            String accountID) throws Exception {
+        return listFeesFetch(Optional.empty(), accountID, Optional.empty());
+    }
+    
+    /**
+     * List fees associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @param xMoovVersion Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID
+     * @param listFeesFetchRequest Array of fee IDs to fetch.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public ListFeesFetchResponse listFeesFetch(
+            Optional<String> xMoovVersion,
+            String accountID,
+            Optional<? extends ListFeesFetchRequest> listFeesFetchRequest) throws Exception {
+        io.moov.sdk.models.operations.ListFeesFetchRequest request =
+            io.moov.sdk.models.operations.ListFeesFetchRequest
+                .builder()
+                .xMoovVersion(xMoovVersion)
+                .accountID(accountID)
+                .listFeesFetchRequest(listFeesFetchRequest)
+                .build();
+        
+        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _url = Utils.generateURL(
+                io.moov.sdk.models.operations.ListFeesFetchRequest.class,
+                _baseUrl,
+                "/accounts/{accountID}/fees/.fetch",
+                request, this.sdkConfiguration.globals);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "POST");
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
+        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
+                _convertedRequest, 
+                "listFeesFetchRequest",
+                "json",
+                false);
+        _req.setBody(Optional.ofNullable(_serializedRequestBody));
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "listFeesFetch", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "listFeesFetch",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "listFeesFetch",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "listFeesFetch",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        ListFeesFetchResponse.Builder _resBuilder = 
+            ListFeesFetchResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        ListFeesFetchResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                List<IncurredFee> _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<List<IncurredFee>>() {});
+                _res.withIncurredFees(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(

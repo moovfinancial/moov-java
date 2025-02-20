@@ -49,7 +49,7 @@ public class Moov {
 
     private final Disputes disputes;
 
-    private final Billing billing;
+    private final FeePlans feePlans;
 
     private final Files files;
 
@@ -125,8 +125,8 @@ public class Moov {
         return disputes;
     }
 
-    public Billing billing() {
-        return billing;
+    public FeePlans feePlans() {
+        return feePlans;
     }
 
     public Files files() {
@@ -370,7 +370,7 @@ public class Moov {
         this.capabilities = new Capabilities(sdkConfiguration);
         this.cards = new Cards(sdkConfiguration);
         this.disputes = new Disputes(sdkConfiguration);
-        this.billing = new Billing(sdkConfiguration);
+        this.feePlans = new FeePlans(sdkConfiguration);
         this.files = new Files(sdkConfiguration);
         this.paymentLinks = new PaymentLinks(sdkConfiguration);
         this.paymentMethods = new PaymentMethods(sdkConfiguration);

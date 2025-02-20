@@ -1,5 +1,5 @@
-# Billing
-(*billing()*)
+# FeePlans
+(*feePlans()*)
 
 ## Overview
 
@@ -18,6 +18,14 @@ selecting a fee plan to apply to a connected account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [retrieveFees](#retrievefees) - Retrieve fees associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [listFeesFetch](#listfeesfetch) - List fees associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 * [listPartnerPricing](#listpartnerpricing) - List all partner pricing plans available for use by an account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -57,7 +65,7 @@ public class Application {
                     .build())
             .build();
 
-        ListFeePlanAgreementsResponse res = sdk.billing().listFeePlanAgreements()
+        ListFeePlanAgreementsResponse res = sdk.feePlans().listFeePlanAgreements()
                 .xMoovVersion("v2024.01.00")
                 .accountID("4c49ae91-2b32-4a4d-91bf-f062f3c2f38d")
                 .agreementID(List.of(
@@ -123,7 +131,7 @@ public class Application {
                     .build())
             .build();
 
-        CreateFeePlanAgreementsResponse res = sdk.billing().createFeePlanAgreements()
+        CreateFeePlanAgreementsResponse res = sdk.feePlans().createFeePlanAgreements()
                 .xMoovVersion("v2024.01.00")
                 .accountID("19962eb8-00cd-44e5-8a66-a1ebaf88c2fe")
                 .createFeePlanAgreement(CreateFeePlanAgreement.builder()
@@ -188,11 +196,11 @@ public class Application {
                     .build())
             .build();
 
-        ListFeePlansResponse res = sdk.billing().listFeePlans()
+        ListFeePlansResponse res = sdk.feePlans().listFeePlans()
                 .xMoovVersion("v2024.01.00")
                 .accountID("ac8fa716-4b75-4902-b296-d734524ca45c")
                 .planIDs(List.of(
-                    "<value>"))
+                    "ac8fa716-4b75-4902-b296-d734524ca45c"))
                 .call();
 
         if (res.feePlans().isPresent()) {
@@ -213,6 +221,129 @@ public class Application {
 ### Response
 
 **[ListFeePlansResponse](../../models/operations/ListFeePlansResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## retrieveFees
+
+Retrieve fees associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.RetrieveFeesRequest;
+import io.moov.sdk.models.operations.RetrieveFeesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        RetrieveFeesRequest req = RetrieveFeesRequest.builder()
+                .accountID("45954656-ded3-4bbc-9ef3-d42c2b99db12")
+                .skip(60L)
+                .count(20L)
+                .build();
+
+        RetrieveFeesResponse res = sdk.feePlans().retrieveFees()
+                .request(req)
+                .call();
+
+        if (res.incurredFees().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [RetrieveFeesRequest](../../models/operations/RetrieveFeesRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
+
+### Response
+
+**[RetrieveFeesResponse](../../models/operations/RetrieveFeesResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## listFeesFetch
+
+List fees associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.ListFeesFetchRequest;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListFeesFetchResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListFeesFetchResponse res = sdk.feePlans().listFeesFetch()
+                .xMoovVersion("v2024.01.00")
+                .accountID("7b85e951-a6d9-4e67-a155-4d18e9d1ac58")
+                .listFeesFetchRequest(ListFeesFetchRequest.builder()
+                    .build())
+                .call();
+
+        if (res.incurredFees().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xMoovVersion`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | *Optional\<String>*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Specify an API version.<br/><br/>API versioning follows the format `vYYYY.QQ.BB`, where <br/>  - `YYYY` is the year<br/>  - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)<br/>  - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. <br/>    - For example, `v2024.01.00` is the initial release of the first quarter of 2024.<br/><br/>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release. |
+| `accountID`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | *String*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `listFeesFetchRequest`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | [Optional\<ListFeesFetchRequest>](../../models/components/ListFeesFetchRequest.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+
+### Response
+
+**[ListFeesFetchResponse](../../models/operations/ListFeesFetchResponse.md)**
 
 ### Errors
 
@@ -249,7 +380,7 @@ public class Application {
                     .build())
             .build();
 
-        ListPartnerPricingResponse res = sdk.billing().listPartnerPricing()
+        ListPartnerPricingResponse res = sdk.feePlans().listPartnerPricing()
                 .xMoovVersion("v2024.01.00")
                 .accountID("85f15b07-5c44-4302-ab6f-d22f8d45b7f4")
                 .planIDs(List.of(
@@ -311,7 +442,7 @@ public class Application {
                     .build())
             .build();
 
-        ListPartnerPricingAgreementsResponse res = sdk.billing().listPartnerPricingAgreements()
+        ListPartnerPricingAgreementsResponse res = sdk.feePlans().listPartnerPricingAgreements()
                 .xMoovVersion("v2024.01.00")
                 .accountID("9366921a-25de-4c52-8ec6-4cd4ef557223")
                 .agreementID(List.of(

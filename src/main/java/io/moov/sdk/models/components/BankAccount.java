@@ -69,8 +69,9 @@ public class BankAccount {
     /**
      * The reason the bank account status changed to the current value.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("statusReason")
-    private BankAccountStatusReason statusReason;
+    private Optional<? extends BankAccountStatusReason> statusReason;
 
     /**
      * Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
@@ -101,7 +102,7 @@ public class BankAccount {
             @JsonProperty("routingNumber") String routingNumber,
             @JsonProperty("lastFourAccountNumber") String lastFourAccountNumber,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
-            @JsonProperty("statusReason") BankAccountStatusReason statusReason,
+            @JsonProperty("statusReason") Optional<? extends BankAccountStatusReason> statusReason,
             @JsonProperty("exceptionDetails") Optional<? extends BankAccountException> exceptionDetails,
             @JsonProperty("paymentMethods") Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
@@ -142,9 +143,8 @@ public class BankAccount {
             BankAccountType bankAccountType,
             String routingNumber,
             String lastFourAccountNumber,
-            OffsetDateTime updatedOn,
-            BankAccountStatusReason statusReason) {
-        this(bankAccountID, fingerprint, status, holderName, holderType, bankName, bankAccountType, routingNumber, lastFourAccountNumber, updatedOn, statusReason, Optional.empty(), Optional.empty());
+            OffsetDateTime updatedOn) {
+        this(bankAccountID, fingerprint, status, holderName, holderType, bankName, bankAccountType, routingNumber, lastFourAccountNumber, updatedOn, Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -211,9 +211,10 @@ public class BankAccount {
     /**
      * The reason the bank account status changed to the current value.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public BankAccountStatusReason statusReason() {
-        return statusReason;
+    public Optional<BankAccountStatusReason> statusReason() {
+        return (Optional<BankAccountStatusReason>) statusReason;
     }
 
     /**
@@ -316,6 +317,15 @@ public class BankAccount {
      * The reason the bank account status changed to the current value.
      */
     public BankAccount withStatusReason(BankAccountStatusReason statusReason) {
+        Utils.checkNotNull(statusReason, "statusReason");
+        this.statusReason = Optional.ofNullable(statusReason);
+        return this;
+    }
+
+    /**
+     * The reason the bank account status changed to the current value.
+     */
+    public BankAccount withStatusReason(Optional<? extends BankAccountStatusReason> statusReason) {
         Utils.checkNotNull(statusReason, "statusReason");
         this.statusReason = statusReason;
         return this;
@@ -446,7 +456,7 @@ public class BankAccount {
  
         private OffsetDateTime updatedOn;
  
-        private BankAccountStatusReason statusReason;
+        private Optional<? extends BankAccountStatusReason> statusReason = Optional.empty();
  
         private Optional<? extends BankAccountException> exceptionDetails = Optional.empty();
  
@@ -531,6 +541,15 @@ public class BankAccount {
          * The reason the bank account status changed to the current value.
          */
         public Builder statusReason(BankAccountStatusReason statusReason) {
+            Utils.checkNotNull(statusReason, "statusReason");
+            this.statusReason = Optional.ofNullable(statusReason);
+            return this;
+        }
+
+        /**
+         * The reason the bank account status changed to the current value.
+         */
+        public Builder statusReason(Optional<? extends BankAccountStatusReason> statusReason) {
             Utils.checkNotNull(statusReason, "statusReason");
             this.statusReason = statusReason;
             return this;

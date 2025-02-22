@@ -20,6 +20,7 @@ import io.moov.sdk.models.components.CreateFeePlanAgreement;
 import io.moov.sdk.models.components.CreatePaymentLink;
 import io.moov.sdk.models.components.CreateRepresentative;
 import io.moov.sdk.models.components.CreateSweepConfig;
+import io.moov.sdk.models.components.CreateTerminalApplication;
 import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.models.components.E2EEToken;
 import io.moov.sdk.models.components.FeePlanAgreementStatus;
@@ -995,6 +996,33 @@ public class SDKMethodInterfaces {
     public interface MethodCallPing {
         PingResponse ping(
             Optional<String> xMoovVersion) throws Exception;
+    }
+
+
+    public interface MethodCallCreateTerminalApplication {
+        CreateTerminalApplicationResponse create(
+            Optional<String> xMoovVersion,
+            CreateTerminalApplication createTerminalApplication) throws Exception;
+    }
+
+
+    public interface MethodCallListTerminalApplications {
+        ListTerminalApplicationsResponse list(
+            Optional<String> xMoovVersion) throws Exception;
+    }
+
+
+    public interface MethodCallGetTerminalApplication {
+        GetTerminalApplicationResponse get(
+            Optional<String> xMoovVersion,
+            String terminalApplicationID) throws Exception;
+    }
+
+
+    public interface MethodCallDeleteTerminalApplication {
+        DeleteTerminalApplicationResponse delete(
+            Optional<String> xMoovVersion,
+            String terminalApplicationID) throws Exception;
     }
 
 

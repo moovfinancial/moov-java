@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: ad9e0c274a187107458a68e9aa753d18
+  docChecksum: f73b978daef12a9be239bec4a59b1f82
   docVersion: latest
-  speakeasyVersion: 1.497.0
-  generationVersion: 2.517.3
-  releaseVersion: 0.8.4
-  configChecksum: 4d726fd0152e9d385a2e0dd5f6d9b092
+  speakeasyVersion: 1.501.0
+  generationVersion: 2.522.1
+  releaseVersion: 0.8.5
+  configChecksum: 7fe1958ee30c74c0679186deffad5940
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -171,6 +171,7 @@ generatedFiles:
   - docs/models/components/CreateRepresentative.md
   - docs/models/components/CreateReversal.md
   - docs/models/components/CreateSweepConfig.md
+  - docs/models/components/CreateTerminalApplication.md
   - docs/models/components/CreateTransfer.md
   - docs/models/components/CreateTransferDestination.md
   - docs/models/components/CreateTransferDestinationACH.md
@@ -372,6 +373,9 @@ generatedFiles:
   - docs/models/components/TaxID.md
   - docs/models/components/TaxIDUpdate.md
   - docs/models/components/TaxIDUpdateEin.md
+  - docs/models/components/TerminalApplication.md
+  - docs/models/components/TerminalApplicationPlatform.md
+  - docs/models/components/TerminalApplicationStatus.md
   - docs/models/components/TermsOfService.md
   - docs/models/components/TermsOfServiceError.md
   - docs/models/components/TermsOfServiceToken.md
@@ -447,6 +451,7 @@ generatedFiles:
   - docs/models/errors/ReversalValidationError.md
   - docs/models/errors/RevokeTokenRequestError.md
   - docs/models/errors/ScheduleValidationError.md
+  - docs/models/errors/TerminalApplicationError.md
   - docs/models/errors/Transfer.md
   - docs/models/errors/TransferOptionsValidationError.md
   - docs/models/errors/TransferValidationError.md
@@ -488,6 +493,8 @@ generatedFiles:
   - docs/models/operations/CreateScheduleResponse.md
   - docs/models/operations/CreateSweepConfigRequest.md
   - docs/models/operations/CreateSweepConfigResponse.md
+  - docs/models/operations/CreateTerminalApplicationRequest.md
+  - docs/models/operations/CreateTerminalApplicationResponse.md
   - docs/models/operations/CreateTransferOptionsRequest.md
   - docs/models/operations/CreateTransferOptionsResponse.md
   - docs/models/operations/CreateTransferRequest.md
@@ -496,6 +503,8 @@ generatedFiles:
   - docs/models/operations/DeleteDisputeEvidenceFileResponse.md
   - docs/models/operations/DeleteRepresentativeRequest.md
   - docs/models/operations/DeleteRepresentativeResponse.md
+  - docs/models/operations/DeleteTerminalApplicationRequest.md
+  - docs/models/operations/DeleteTerminalApplicationResponse.md
   - docs/models/operations/DisableBankAccountRequest.md
   - docs/models/operations/DisableBankAccountResponse.md
   - docs/models/operations/DisableCapabilityRequest.md
@@ -570,6 +579,8 @@ generatedFiles:
   - docs/models/operations/GetSweepConfigResponse.md
   - docs/models/operations/GetSweepRequest.md
   - docs/models/operations/GetSweepResponse.md
+  - docs/models/operations/GetTerminalApplicationRequest.md
+  - docs/models/operations/GetTerminalApplicationResponse.md
   - docs/models/operations/GetTermsOfServiceTokenRequest.md
   - docs/models/operations/GetTermsOfServiceTokenResponse.md
   - docs/models/operations/GetTransferRequest.md
@@ -646,6 +657,8 @@ generatedFiles:
   - docs/models/operations/ListSweepConfigsResponse.md
   - docs/models/operations/ListSweepsRequest.md
   - docs/models/operations/ListSweepsResponse.md
+  - docs/models/operations/ListTerminalApplicationsRequest.md
+  - docs/models/operations/ListTerminalApplicationsResponse.md
   - docs/models/operations/ListTransfersRequest.md
   - docs/models/operations/ListTransfersResponse.md
   - docs/models/operations/ListWalletTransactionsRequest.md
@@ -729,6 +742,7 @@ generatedFiles:
   - docs/sdks/representatives/README.md
   - docs/sdks/scheduling/README.md
   - docs/sdks/sweeps/README.md
+  - docs/sdks/terminalapplications/README.md
   - docs/sdks/transfers/README.md
   - docs/sdks/underwriting/README.md
   - docs/sdks/wallets/README.md
@@ -767,6 +781,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/Scheduling.java
   - src/main/java/io/moov/sdk/SecuritySource.java
   - src/main/java/io/moov/sdk/Sweeps.java
+  - src/main/java/io/moov/sdk/TerminalApplications.java
   - src/main/java/io/moov/sdk/Transfers.java
   - src/main/java/io/moov/sdk/Underwriting.java
   - src/main/java/io/moov/sdk/WalletTransactions.java
@@ -912,6 +927,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/CreateRepresentative.java
   - src/main/java/io/moov/sdk/models/components/CreateReversal.java
   - src/main/java/io/moov/sdk/models/components/CreateSweepConfig.java
+  - src/main/java/io/moov/sdk/models/components/CreateTerminalApplication.java
   - src/main/java/io/moov/sdk/models/components/CreateTransfer.java
   - src/main/java/io/moov/sdk/models/components/CreateTransferDestination.java
   - src/main/java/io/moov/sdk/models/components/CreateTransferDestinationACH.java
@@ -1113,6 +1129,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/TaxID.java
   - src/main/java/io/moov/sdk/models/components/TaxIDUpdate.java
   - src/main/java/io/moov/sdk/models/components/TaxIDUpdateEin.java
+  - src/main/java/io/moov/sdk/models/components/TerminalApplication.java
+  - src/main/java/io/moov/sdk/models/components/TerminalApplicationPlatform.java
+  - src/main/java/io/moov/sdk/models/components/TerminalApplicationStatus.java
   - src/main/java/io/moov/sdk/models/components/TermsOfService.java
   - src/main/java/io/moov/sdk/models/components/TermsOfServiceError.java
   - src/main/java/io/moov/sdk/models/components/TermsOfServiceToken.java
@@ -1190,6 +1209,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/ReversalValidationError.java
   - src/main/java/io/moov/sdk/models/errors/RevokeTokenRequestError.java
   - src/main/java/io/moov/sdk/models/errors/ScheduleValidationError.java
+  - src/main/java/io/moov/sdk/models/errors/TerminalApplicationError.java
   - src/main/java/io/moov/sdk/models/errors/Transfer.java
   - src/main/java/io/moov/sdk/models/errors/TransferOptionsValidationError.java
   - src/main/java/io/moov/sdk/models/errors/TransferValidationError.java
@@ -1247,6 +1267,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/CreateSweepConfigRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreateSweepConfigRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateSweepConfigResponse.java
+  - src/main/java/io/moov/sdk/models/operations/CreateTerminalApplicationRequest.java
+  - src/main/java/io/moov/sdk/models/operations/CreateTerminalApplicationRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/CreateTerminalApplicationResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsResponse.java
@@ -1259,6 +1282,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/DeleteRepresentativeRequest.java
   - src/main/java/io/moov/sdk/models/operations/DeleteRepresentativeRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/DeleteRepresentativeResponse.java
+  - src/main/java/io/moov/sdk/models/operations/DeleteTerminalApplicationRequest.java
+  - src/main/java/io/moov/sdk/models/operations/DeleteTerminalApplicationRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/DeleteTerminalApplicationResponse.java
   - src/main/java/io/moov/sdk/models/operations/DisableBankAccountRequest.java
   - src/main/java/io/moov/sdk/models/operations/DisableBankAccountRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/DisableBankAccountResponse.java
@@ -1370,6 +1396,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/GetSweepRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetSweepRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetSweepResponse.java
+  - src/main/java/io/moov/sdk/models/operations/GetTerminalApplicationRequest.java
+  - src/main/java/io/moov/sdk/models/operations/GetTerminalApplicationRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/GetTerminalApplicationResponse.java
   - src/main/java/io/moov/sdk/models/operations/GetTermsOfServiceTokenRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetTermsOfServiceTokenRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetTermsOfServiceTokenResponse.java
@@ -1484,6 +1513,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/ListSweepsRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListSweepsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListSweepsResponse.java
+  - src/main/java/io/moov/sdk/models/operations/ListTerminalApplicationsRequest.java
+  - src/main/java/io/moov/sdk/models/operations/ListTerminalApplicationsRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/ListTerminalApplicationsResponse.java
   - src/main/java/io/moov/sdk/models/operations/ListTransfersRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListTransfersRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListTransfersResponse.java
@@ -2158,7 +2190,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"aggreementID": "e326d153-ca61-4e3e-a86a-3e450e955fd6", "planID": "7a6c5eb4-879b-4c21-b9fa-71eb2181b3ad", "acceptedOn": "2024-03-10T19:49:08.718Z", "status": "terminated", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}, {"aggreementID": "0c6542c4-837f-4de6-bbbf-3a11a1ba31f2", "planID": "50844514-ef1f-40ee-adc6-d314e85a7739", "acceptedOn": "2024-02-27T23:25:25.370Z", "status": "terminated", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}]
+          application/json: [{"aggreementID": "e326d153-ca61-4e3e-a86a-3e450e955fd6", "planID": "7a6c5eb4-879b-4c21-b9fa-71eb2181b3ad", "name": "<value>", "acceptedOn": "2024-03-10T19:49:08.718Z", "status": "terminated", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}, {"aggreementID": "0c6542c4-837f-4de6-bbbf-3a11a1ba31f2", "planID": "50844514-ef1f-40ee-adc6-d314e85a7739", "name": "<value>", "acceptedOn": "2024-02-27T23:25:25.370Z", "status": "terminated", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}]
   createFeePlanAgreements:
     speakeasy-default-create-fee-plan-agreements:
       parameters:
@@ -2169,7 +2201,7 @@ examples:
         application/json: {"planID": "b97c2d59-80c5-49ac-b1fc-40e3a81d8daf"}
       responses:
         "201":
-          application/json: {"aggreementID": "0e7fb8cc-5d6a-4a0e-8955-4d9f85c03fa6", "planID": "10fadd5b-11fb-4499-ae95-794da03fdea6", "acceptedOn": "2024-03-30T02:16:07.411Z", "status": "active", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}
+          application/json: {"aggreementID": "0e7fb8cc-5d6a-4a0e-8955-4d9f85c03fa6", "planID": "10fadd5b-11fb-4499-ae95-794da03fdea6", "name": "<value>", "acceptedOn": "2024-03-30T02:16:07.411Z", "status": "active", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -2203,7 +2235,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"aggreementID": "2e58b719-fcad-47dc-8484-21ac31dce8dd", "planID": "3f51f992-c3cc-4fd2-b0b7-17c682c67267", "acceptedOn": "2025-10-11T07:38:13.898Z", "status": "active", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "revenueShare": 10}]
+          application/json: [{"aggreementID": "2e58b719-fcad-47dc-8484-21ac31dce8dd", "planID": "3f51f992-c3cc-4fd2-b0b7-17c682c67267", "name": "<value>", "acceptedOn": "2025-10-11T07:38:13.898Z", "status": "active", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "revenueShare": 10}]
   uploadFile:
     speakeasy-default-upload-file:
       parameters:
@@ -3159,5 +3191,34 @@ examples:
       responses:
         "200":
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, {"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
+  createTerminalApplication:
+    speakeasy-default-create-terminal-application:
+      requestBody:
+        application/json: {"platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
+      responses:
+        "200":
+          application/json: {"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
+        "400": {}
+        "422": {}
+  listTerminalApplications:
+    speakeasy-default-list-terminal-applications:
+      responses:
+        "200":
+          application/json: [{"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}]
+  getTerminalApplication:
+    speakeasy-default-get-terminal-application:
+      parameters:
+        path:
+          terminalApplicationID: "01234567-89ab-cdef-0123-456789abcdef"
+        header: {}
+      responses:
+        "200":
+          application/json: {"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
+  deleteTerminalApplication:
+    speakeasy-default-delete-terminal-application:
+      parameters:
+        path:
+          terminalApplicationID: "01234567-89ab-cdef-0123-456789abcdef"
+        header: {}
 examplesVersion: 1.0.0
 generatedTests: {}

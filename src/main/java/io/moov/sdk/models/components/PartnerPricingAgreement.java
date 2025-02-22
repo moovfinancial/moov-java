@@ -32,6 +32,19 @@ public class PartnerPricingAgreement {
     @JsonProperty("accountID")
     private Optional<String> accountID;
 
+    /**
+     * The name of the agreement.
+     */
+    @JsonProperty("name")
+    private String name;
+
+    /**
+     * The description of the agreement.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("description")
+    private Optional<String> description;
+
     @JsonProperty("acceptedOn")
     private OffsetDateTime acceptedOn;
 
@@ -58,6 +71,8 @@ public class PartnerPricingAgreement {
             @JsonProperty("aggreementID") String aggreementID,
             @JsonProperty("planID") String planID,
             @JsonProperty("accountID") Optional<String> accountID,
+            @JsonProperty("name") String name,
+            @JsonProperty("description") Optional<String> description,
             @JsonProperty("acceptedOn") OffsetDateTime acceptedOn,
             @JsonProperty("status") FeePlanAgreementStatus status,
             @JsonProperty("cardAcquringModel") CardAcquringModel cardAcquringModel,
@@ -66,6 +81,8 @@ public class PartnerPricingAgreement {
         Utils.checkNotNull(aggreementID, "aggreementID");
         Utils.checkNotNull(planID, "planID");
         Utils.checkNotNull(accountID, "accountID");
+        Utils.checkNotNull(name, "name");
+        Utils.checkNotNull(description, "description");
         Utils.checkNotNull(acceptedOn, "acceptedOn");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
@@ -74,6 +91,8 @@ public class PartnerPricingAgreement {
         this.aggreementID = aggreementID;
         this.planID = planID;
         this.accountID = accountID;
+        this.name = name;
+        this.description = description;
         this.acceptedOn = acceptedOn;
         this.status = status;
         this.cardAcquringModel = cardAcquringModel;
@@ -84,12 +103,13 @@ public class PartnerPricingAgreement {
     public PartnerPricingAgreement(
             String aggreementID,
             String planID,
+            String name,
             OffsetDateTime acceptedOn,
             FeePlanAgreementStatus status,
             CardAcquringModel cardAcquringModel,
             List<BillableFee> billableFees,
             long revenueShare) {
-        this(aggreementID, planID, Optional.empty(), acceptedOn, status, cardAcquringModel, billableFees, revenueShare);
+        this(aggreementID, planID, Optional.empty(), name, Optional.empty(), acceptedOn, status, cardAcquringModel, billableFees, revenueShare);
     }
 
     @JsonIgnore
@@ -105,6 +125,22 @@ public class PartnerPricingAgreement {
     @JsonIgnore
     public Optional<String> accountID() {
         return accountID;
+    }
+
+    /**
+     * The name of the agreement.
+     */
+    @JsonIgnore
+    public String name() {
+        return name;
+    }
+
+    /**
+     * The description of the agreement.
+     */
+    @JsonIgnore
+    public Optional<String> description() {
+        return description;
     }
 
     @JsonIgnore
@@ -166,6 +202,33 @@ public class PartnerPricingAgreement {
         return this;
     }
 
+    /**
+     * The name of the agreement.
+     */
+    public PartnerPricingAgreement withName(String name) {
+        Utils.checkNotNull(name, "name");
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * The description of the agreement.
+     */
+    public PartnerPricingAgreement withDescription(String description) {
+        Utils.checkNotNull(description, "description");
+        this.description = Optional.ofNullable(description);
+        return this;
+    }
+
+    /**
+     * The description of the agreement.
+     */
+    public PartnerPricingAgreement withDescription(Optional<String> description) {
+        Utils.checkNotNull(description, "description");
+        this.description = description;
+        return this;
+    }
+
     public PartnerPricingAgreement withAcceptedOn(OffsetDateTime acceptedOn) {
         Utils.checkNotNull(acceptedOn, "acceptedOn");
         this.acceptedOn = acceptedOn;
@@ -215,6 +278,8 @@ public class PartnerPricingAgreement {
             Objects.deepEquals(this.aggreementID, other.aggreementID) &&
             Objects.deepEquals(this.planID, other.planID) &&
             Objects.deepEquals(this.accountID, other.accountID) &&
+            Objects.deepEquals(this.name, other.name) &&
+            Objects.deepEquals(this.description, other.description) &&
             Objects.deepEquals(this.acceptedOn, other.acceptedOn) &&
             Objects.deepEquals(this.status, other.status) &&
             Objects.deepEquals(this.cardAcquringModel, other.cardAcquringModel) &&
@@ -228,6 +293,8 @@ public class PartnerPricingAgreement {
             aggreementID,
             planID,
             accountID,
+            name,
+            description,
             acceptedOn,
             status,
             cardAcquringModel,
@@ -241,6 +308,8 @@ public class PartnerPricingAgreement {
                 "aggreementID", aggreementID,
                 "planID", planID,
                 "accountID", accountID,
+                "name", name,
+                "description", description,
                 "acceptedOn", acceptedOn,
                 "status", status,
                 "cardAcquringModel", cardAcquringModel,
@@ -255,6 +324,10 @@ public class PartnerPricingAgreement {
         private String planID;
  
         private Optional<String> accountID = Optional.empty();
+ 
+        private String name;
+ 
+        private Optional<String> description = Optional.empty();
  
         private OffsetDateTime acceptedOn;
  
@@ -291,6 +364,33 @@ public class PartnerPricingAgreement {
         public Builder accountID(Optional<String> accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
+            return this;
+        }
+
+        /**
+         * The name of the agreement.
+         */
+        public Builder name(String name) {
+            Utils.checkNotNull(name, "name");
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * The description of the agreement.
+         */
+        public Builder description(String description) {
+            Utils.checkNotNull(description, "description");
+            this.description = Optional.ofNullable(description);
+            return this;
+        }
+
+        /**
+         * The description of the agreement.
+         */
+        public Builder description(Optional<String> description) {
+            Utils.checkNotNull(description, "description");
+            this.description = description;
             return this;
         }
 
@@ -335,6 +435,8 @@ public class PartnerPricingAgreement {
                 aggreementID,
                 planID,
                 accountID,
+                name,
+                description,
                 acceptedOn,
                 status,
                 cardAcquringModel,

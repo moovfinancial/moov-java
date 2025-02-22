@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.8.4'
+implementation 'io.moov:sdk:0.8.5'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.8.4</version>
+    <version>0.8.5</version>
 </dependency>
 ```
 
@@ -1057,6 +1057,25 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
+### [terminalApplications()](docs/sdks/terminalapplications/README.md)
+
+* [create](docs/sdks/terminalapplications/README.md#create) - Create a new terminal application.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/terminalApplications.write` scope.
+* [list](docs/sdks/terminalapplications/README.md#list) - List all the terminal applications for a Moov Account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/terminalApplications.read` scope.
+* [get](docs/sdks/terminalapplications/README.md#get) - Fetch a specific terminal application.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/terminalApplications.read` scope.
+* [delete](docs/sdks/terminalapplications/README.md#delete) - Delete a specific terminal application.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/terminalApplications.write` scope.
 
 ### [transfers()](docs/sdks/transfers/README.md)
 

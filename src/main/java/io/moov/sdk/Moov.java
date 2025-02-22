@@ -93,6 +93,8 @@ public class Moov {
 
     private final Ping ping;
 
+    private final TerminalApplications terminalApplications;
+
     public Accounts accounts() {
         return accounts;
     }
@@ -211,6 +213,10 @@ public class Moov {
 
     public Ping ping() {
         return ping;
+    }
+
+    public TerminalApplications terminalApplications() {
+        return terminalApplications;
     }
 
     private final SDKConfiguration sdkConfiguration;
@@ -392,5 +398,6 @@ public class Moov {
         this.authentication = new Authentication(sdkConfiguration);
         this.onboarding = new Onboarding(sdkConfiguration);
         this.ping = new Ping(sdkConfiguration);
+        this.terminalApplications = new TerminalApplications(sdkConfiguration);
         this.sdkConfiguration.initialize();
     }}

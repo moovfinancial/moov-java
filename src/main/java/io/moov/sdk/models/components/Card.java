@@ -55,8 +55,9 @@ public class Card {
      * The category or level of the card defined by the issuer.
      * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardCategory")
-    private String cardCategory;
+    private Optional<String> cardCategory;
 
     /**
      * Last four digits of the card number
@@ -172,7 +173,7 @@ public class Card {
             @JsonProperty("fingerprint") String fingerprint,
             @JsonProperty("brand") CardBrand brand,
             @JsonProperty("cardType") CardType cardType,
-            @JsonProperty("cardCategory") String cardCategory,
+            @JsonProperty("cardCategory") Optional<String> cardCategory,
             @JsonProperty("lastFourCardNumber") String lastFourCardNumber,
             @JsonProperty("bin") String bin,
             @JsonProperty("expiration") CardExpiration expiration,
@@ -244,7 +245,6 @@ public class Card {
             String fingerprint,
             CardBrand brand,
             CardType cardType,
-            String cardCategory,
             String lastFourCardNumber,
             String bin,
             CardExpiration expiration,
@@ -256,7 +256,7 @@ public class Card {
             String issuerPhone,
             DomesticPushToCard domesticPushToCard,
             DomesticPullFromCard domesticPullFromCard) {
-        this(cardID, fingerprint, brand, cardType, cardCategory, lastFourCardNumber, bin, expiration, Optional.empty(), billingAddress, cardVerification, issuer, issuerCountry, issuerURL, issuerPhone, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), domesticPushToCard, domesticPullFromCard, Optional.empty());
+        this(cardID, fingerprint, brand, cardType, Optional.empty(), lastFourCardNumber, bin, expiration, Optional.empty(), billingAddress, cardVerification, issuer, issuerCountry, issuerURL, issuerPhone, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), domesticPushToCard, domesticPullFromCard, Optional.empty());
     }
 
     /**
@@ -298,7 +298,7 @@ public class Card {
      * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
      */
     @JsonIgnore
-    public String cardCategory() {
+    public Optional<String> cardCategory() {
         return cardCategory;
     }
 
@@ -488,6 +488,16 @@ public class Card {
      * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
      */
     public Card withCardCategory(String cardCategory) {
+        Utils.checkNotNull(cardCategory, "cardCategory");
+        this.cardCategory = Optional.ofNullable(cardCategory);
+        return this;
+    }
+
+    /**
+     * The category or level of the card defined by the issuer.
+     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
+     */
+    public Card withCardCategory(Optional<String> cardCategory) {
         Utils.checkNotNull(cardCategory, "cardCategory");
         this.cardCategory = cardCategory;
         return this;
@@ -808,7 +818,7 @@ public class Card {
  
         private CardType cardType;
  
-        private String cardCategory;
+        private Optional<String> cardCategory = Optional.empty();
  
         private String lastFourCardNumber;
  
@@ -893,6 +903,16 @@ public class Card {
          * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
          */
         public Builder cardCategory(String cardCategory) {
+            Utils.checkNotNull(cardCategory, "cardCategory");
+            this.cardCategory = Optional.ofNullable(cardCategory);
+            return this;
+        }
+
+        /**
+         * The category or level of the card defined by the issuer.
+         * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
+         */
+        public Builder cardCategory(Optional<String> cardCategory) {
             Utils.checkNotNull(cardCategory, "cardCategory");
             this.cardCategory = cardCategory;
             return this;

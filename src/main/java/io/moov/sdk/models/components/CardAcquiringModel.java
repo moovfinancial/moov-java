@@ -10,16 +10,16 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * CardAcquringModel - Specifies the card processing pricing model
+ * CardAcquiringModel - Specifies the card processing pricing model
  */
-public enum CardAcquringModel {
+public enum CardAcquiringModel {
     COST_PLUS("cost-plus"),
     FLAT_RATE("flat-rate");
 
     @JsonValue
     private final String value;
 
-    private CardAcquringModel(String value) {
+    private CardAcquiringModel(String value) {
         this.value = value;
     }
     
@@ -27,8 +27,8 @@ public enum CardAcquringModel {
         return value;
     }
     
-    public static Optional<CardAcquringModel> fromValue(String value) {
-        for (CardAcquringModel o: CardAcquringModel.values()) {
+    public static Optional<CardAcquiringModel> fromValue(String value) {
+        for (CardAcquiringModel o: CardAcquiringModel.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

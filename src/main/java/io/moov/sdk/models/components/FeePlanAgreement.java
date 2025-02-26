@@ -21,8 +21,8 @@ import java.util.Optional;
 
 public class FeePlanAgreement {
 
-    @JsonProperty("aggreementID")
-    private String aggreementID;
+    @JsonProperty("agreementID")
+    private String agreementID;
 
     @JsonProperty("planID")
     private String planID;
@@ -53,57 +53,57 @@ public class FeePlanAgreement {
     /**
      * Specifies the card processing pricing model
      */
-    @JsonProperty("cardAcquringModel")
-    private CardAcquringModel cardAcquringModel;
+    @JsonProperty("cardAcquiringModel")
+    private CardAcquiringModel cardAcquiringModel;
 
     @JsonProperty("billableFees")
     private List<BillableFee> billableFees;
 
     @JsonCreator
     public FeePlanAgreement(
-            @JsonProperty("aggreementID") String aggreementID,
+            @JsonProperty("agreementID") String agreementID,
             @JsonProperty("planID") String planID,
             @JsonProperty("accountID") Optional<String> accountID,
             @JsonProperty("name") String name,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("acceptedOn") OffsetDateTime acceptedOn,
             @JsonProperty("status") FeePlanAgreementStatus status,
-            @JsonProperty("cardAcquringModel") CardAcquringModel cardAcquringModel,
+            @JsonProperty("cardAcquiringModel") CardAcquiringModel cardAcquiringModel,
             @JsonProperty("billableFees") List<BillableFee> billableFees) {
-        Utils.checkNotNull(aggreementID, "aggreementID");
+        Utils.checkNotNull(agreementID, "agreementID");
         Utils.checkNotNull(planID, "planID");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(acceptedOn, "acceptedOn");
         Utils.checkNotNull(status, "status");
-        Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
+        Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
         Utils.checkNotNull(billableFees, "billableFees");
-        this.aggreementID = aggreementID;
+        this.agreementID = agreementID;
         this.planID = planID;
         this.accountID = accountID;
         this.name = name;
         this.description = description;
         this.acceptedOn = acceptedOn;
         this.status = status;
-        this.cardAcquringModel = cardAcquringModel;
+        this.cardAcquiringModel = cardAcquiringModel;
         this.billableFees = billableFees;
     }
     
     public FeePlanAgreement(
-            String aggreementID,
+            String agreementID,
             String planID,
             String name,
             OffsetDateTime acceptedOn,
             FeePlanAgreementStatus status,
-            CardAcquringModel cardAcquringModel,
+            CardAcquiringModel cardAcquiringModel,
             List<BillableFee> billableFees) {
-        this(aggreementID, planID, Optional.empty(), name, Optional.empty(), acceptedOn, status, cardAcquringModel, billableFees);
+        this(agreementID, planID, Optional.empty(), name, Optional.empty(), acceptedOn, status, cardAcquiringModel, billableFees);
     }
 
     @JsonIgnore
-    public String aggreementID() {
-        return aggreementID;
+    public String agreementID() {
+        return agreementID;
     }
 
     @JsonIgnore
@@ -146,8 +146,8 @@ public class FeePlanAgreement {
      * Specifies the card processing pricing model
      */
     @JsonIgnore
-    public CardAcquringModel cardAcquringModel() {
-        return cardAcquringModel;
+    public CardAcquiringModel cardAcquiringModel() {
+        return cardAcquiringModel;
     }
 
     @JsonIgnore
@@ -159,9 +159,9 @@ public class FeePlanAgreement {
         return new Builder();
     }
 
-    public FeePlanAgreement withAggreementID(String aggreementID) {
-        Utils.checkNotNull(aggreementID, "aggreementID");
-        this.aggreementID = aggreementID;
+    public FeePlanAgreement withAgreementID(String agreementID) {
+        Utils.checkNotNull(agreementID, "agreementID");
+        this.agreementID = agreementID;
         return this;
     }
 
@@ -225,9 +225,9 @@ public class FeePlanAgreement {
     /**
      * Specifies the card processing pricing model
      */
-    public FeePlanAgreement withCardAcquringModel(CardAcquringModel cardAcquringModel) {
-        Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
-        this.cardAcquringModel = cardAcquringModel;
+    public FeePlanAgreement withCardAcquiringModel(CardAcquiringModel cardAcquiringModel) {
+        Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
+        this.cardAcquiringModel = cardAcquiringModel;
         return this;
     }
 
@@ -247,48 +247,48 @@ public class FeePlanAgreement {
         }
         FeePlanAgreement other = (FeePlanAgreement) o;
         return 
-            Objects.deepEquals(this.aggreementID, other.aggreementID) &&
+            Objects.deepEquals(this.agreementID, other.agreementID) &&
             Objects.deepEquals(this.planID, other.planID) &&
             Objects.deepEquals(this.accountID, other.accountID) &&
             Objects.deepEquals(this.name, other.name) &&
             Objects.deepEquals(this.description, other.description) &&
             Objects.deepEquals(this.acceptedOn, other.acceptedOn) &&
             Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.cardAcquringModel, other.cardAcquringModel) &&
+            Objects.deepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
             Objects.deepEquals(this.billableFees, other.billableFees);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            aggreementID,
+            agreementID,
             planID,
             accountID,
             name,
             description,
             acceptedOn,
             status,
-            cardAcquringModel,
+            cardAcquiringModel,
             billableFees);
     }
     
     @Override
     public String toString() {
         return Utils.toString(FeePlanAgreement.class,
-                "aggreementID", aggreementID,
+                "agreementID", agreementID,
                 "planID", planID,
                 "accountID", accountID,
                 "name", name,
                 "description", description,
                 "acceptedOn", acceptedOn,
                 "status", status,
-                "cardAcquringModel", cardAcquringModel,
+                "cardAcquiringModel", cardAcquiringModel,
                 "billableFees", billableFees);
     }
     
     public final static class Builder {
  
-        private String aggreementID;
+        private String agreementID;
  
         private String planID;
  
@@ -302,7 +302,7 @@ public class FeePlanAgreement {
  
         private FeePlanAgreementStatus status;
  
-        private CardAcquringModel cardAcquringModel;
+        private CardAcquiringModel cardAcquiringModel;
  
         private List<BillableFee> billableFees;  
         
@@ -310,9 +310,9 @@ public class FeePlanAgreement {
           // force use of static builder() method
         }
 
-        public Builder aggreementID(String aggreementID) {
-            Utils.checkNotNull(aggreementID, "aggreementID");
-            this.aggreementID = aggreementID;
+        public Builder agreementID(String agreementID) {
+            Utils.checkNotNull(agreementID, "agreementID");
+            this.agreementID = agreementID;
             return this;
         }
 
@@ -376,9 +376,9 @@ public class FeePlanAgreement {
         /**
          * Specifies the card processing pricing model
          */
-        public Builder cardAcquringModel(CardAcquringModel cardAcquringModel) {
-            Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
-            this.cardAcquringModel = cardAcquringModel;
+        public Builder cardAcquiringModel(CardAcquiringModel cardAcquiringModel) {
+            Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
+            this.cardAcquiringModel = cardAcquiringModel;
             return this;
         }
 
@@ -390,14 +390,14 @@ public class FeePlanAgreement {
         
         public FeePlanAgreement build() {
             return new FeePlanAgreement(
-                aggreementID,
+                agreementID,
                 planID,
                 accountID,
                 name,
                 description,
                 acceptedOn,
                 status,
-                cardAcquringModel,
+                cardAcquiringModel,
                 billableFees);
         }
     }

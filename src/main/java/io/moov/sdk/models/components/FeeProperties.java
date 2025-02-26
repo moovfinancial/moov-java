@@ -16,7 +16,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * FeeProperties - Defines the specific parameters used for fee calculation.
@@ -29,7 +28,7 @@ public class FeeProperties {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fixedAmount")
-    private JsonNullable<? extends FixedAmount> fixedAmount;
+    private Optional<? extends AmountDecimal> fixedAmount;
 
     /**
      * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
@@ -45,21 +44,21 @@ public class FeeProperties {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minPerTransaction")
-    private JsonNullable<? extends MinPerTransaction> minPerTransaction;
+    private Optional<? extends AmountDecimal> minPerTransaction;
 
     /**
      * Specifies the maximum allowable spending for a single transaction, working as a transaction ceiling.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maxPerTransaction")
-    private JsonNullable<? extends MaxPerTransaction> maxPerTransaction;
+    private Optional<? extends AmountDecimal> maxPerTransaction;
 
     @JsonCreator
     public FeeProperties(
-            @JsonProperty("fixedAmount") JsonNullable<? extends FixedAmount> fixedAmount,
+            @JsonProperty("fixedAmount") Optional<? extends AmountDecimal> fixedAmount,
             @JsonProperty("variableRate") Optional<String> variableRate,
-            @JsonProperty("minPerTransaction") JsonNullable<? extends MinPerTransaction> minPerTransaction,
-            @JsonProperty("maxPerTransaction") JsonNullable<? extends MaxPerTransaction> maxPerTransaction) {
+            @JsonProperty("minPerTransaction") Optional<? extends AmountDecimal> minPerTransaction,
+            @JsonProperty("maxPerTransaction") Optional<? extends AmountDecimal> maxPerTransaction) {
         Utils.checkNotNull(fixedAmount, "fixedAmount");
         Utils.checkNotNull(variableRate, "variableRate");
         Utils.checkNotNull(minPerTransaction, "minPerTransaction");
@@ -71,7 +70,7 @@ public class FeeProperties {
     }
     
     public FeeProperties() {
-        this(JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -79,8 +78,8 @@ public class FeeProperties {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<FixedAmount> fixedAmount() {
-        return (JsonNullable<FixedAmount>) fixedAmount;
+    public Optional<AmountDecimal> fixedAmount() {
+        return (Optional<AmountDecimal>) fixedAmount;
     }
 
     /**
@@ -98,8 +97,8 @@ public class FeeProperties {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<MinPerTransaction> minPerTransaction() {
-        return (JsonNullable<MinPerTransaction>) minPerTransaction;
+    public Optional<AmountDecimal> minPerTransaction() {
+        return (Optional<AmountDecimal>) minPerTransaction;
     }
 
     /**
@@ -107,8 +106,8 @@ public class FeeProperties {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<MaxPerTransaction> maxPerTransaction() {
-        return (JsonNullable<MaxPerTransaction>) maxPerTransaction;
+    public Optional<AmountDecimal> maxPerTransaction() {
+        return (Optional<AmountDecimal>) maxPerTransaction;
     }
 
     public final static Builder builder() {
@@ -118,16 +117,16 @@ public class FeeProperties {
     /**
      * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
      */
-    public FeeProperties withFixedAmount(FixedAmount fixedAmount) {
+    public FeeProperties withFixedAmount(AmountDecimal fixedAmount) {
         Utils.checkNotNull(fixedAmount, "fixedAmount");
-        this.fixedAmount = JsonNullable.of(fixedAmount);
+        this.fixedAmount = Optional.ofNullable(fixedAmount);
         return this;
     }
 
     /**
      * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
      */
-    public FeeProperties withFixedAmount(JsonNullable<? extends FixedAmount> fixedAmount) {
+    public FeeProperties withFixedAmount(Optional<? extends AmountDecimal> fixedAmount) {
         Utils.checkNotNull(fixedAmount, "fixedAmount");
         this.fixedAmount = fixedAmount;
         return this;
@@ -158,16 +157,16 @@ public class FeeProperties {
     /**
      * Specifies the minimum allowable spending for a single transaction, working as a transaction floor.
      */
-    public FeeProperties withMinPerTransaction(MinPerTransaction minPerTransaction) {
+    public FeeProperties withMinPerTransaction(AmountDecimal minPerTransaction) {
         Utils.checkNotNull(minPerTransaction, "minPerTransaction");
-        this.minPerTransaction = JsonNullable.of(minPerTransaction);
+        this.minPerTransaction = Optional.ofNullable(minPerTransaction);
         return this;
     }
 
     /**
      * Specifies the minimum allowable spending for a single transaction, working as a transaction floor.
      */
-    public FeeProperties withMinPerTransaction(JsonNullable<? extends MinPerTransaction> minPerTransaction) {
+    public FeeProperties withMinPerTransaction(Optional<? extends AmountDecimal> minPerTransaction) {
         Utils.checkNotNull(minPerTransaction, "minPerTransaction");
         this.minPerTransaction = minPerTransaction;
         return this;
@@ -176,16 +175,16 @@ public class FeeProperties {
     /**
      * Specifies the maximum allowable spending for a single transaction, working as a transaction ceiling.
      */
-    public FeeProperties withMaxPerTransaction(MaxPerTransaction maxPerTransaction) {
+    public FeeProperties withMaxPerTransaction(AmountDecimal maxPerTransaction) {
         Utils.checkNotNull(maxPerTransaction, "maxPerTransaction");
-        this.maxPerTransaction = JsonNullable.of(maxPerTransaction);
+        this.maxPerTransaction = Optional.ofNullable(maxPerTransaction);
         return this;
     }
 
     /**
      * Specifies the maximum allowable spending for a single transaction, working as a transaction ceiling.
      */
-    public FeeProperties withMaxPerTransaction(JsonNullable<? extends MaxPerTransaction> maxPerTransaction) {
+    public FeeProperties withMaxPerTransaction(Optional<? extends AmountDecimal> maxPerTransaction) {
         Utils.checkNotNull(maxPerTransaction, "maxPerTransaction");
         this.maxPerTransaction = maxPerTransaction;
         return this;
@@ -227,13 +226,13 @@ public class FeeProperties {
     
     public final static class Builder {
  
-        private JsonNullable<? extends FixedAmount> fixedAmount = JsonNullable.undefined();
+        private Optional<? extends AmountDecimal> fixedAmount = Optional.empty();
  
         private Optional<String> variableRate = Optional.empty();
  
-        private JsonNullable<? extends MinPerTransaction> minPerTransaction = JsonNullable.undefined();
+        private Optional<? extends AmountDecimal> minPerTransaction = Optional.empty();
  
-        private JsonNullable<? extends MaxPerTransaction> maxPerTransaction = JsonNullable.undefined();  
+        private Optional<? extends AmountDecimal> maxPerTransaction = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -242,16 +241,16 @@ public class FeeProperties {
         /**
          * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
          */
-        public Builder fixedAmount(FixedAmount fixedAmount) {
+        public Builder fixedAmount(AmountDecimal fixedAmount) {
             Utils.checkNotNull(fixedAmount, "fixedAmount");
-            this.fixedAmount = JsonNullable.of(fixedAmount);
+            this.fixedAmount = Optional.ofNullable(fixedAmount);
             return this;
         }
 
         /**
          * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
          */
-        public Builder fixedAmount(JsonNullable<? extends FixedAmount> fixedAmount) {
+        public Builder fixedAmount(Optional<? extends AmountDecimal> fixedAmount) {
             Utils.checkNotNull(fixedAmount, "fixedAmount");
             this.fixedAmount = fixedAmount;
             return this;
@@ -282,16 +281,16 @@ public class FeeProperties {
         /**
          * Specifies the minimum allowable spending for a single transaction, working as a transaction floor.
          */
-        public Builder minPerTransaction(MinPerTransaction minPerTransaction) {
+        public Builder minPerTransaction(AmountDecimal minPerTransaction) {
             Utils.checkNotNull(minPerTransaction, "minPerTransaction");
-            this.minPerTransaction = JsonNullable.of(minPerTransaction);
+            this.minPerTransaction = Optional.ofNullable(minPerTransaction);
             return this;
         }
 
         /**
          * Specifies the minimum allowable spending for a single transaction, working as a transaction floor.
          */
-        public Builder minPerTransaction(JsonNullable<? extends MinPerTransaction> minPerTransaction) {
+        public Builder minPerTransaction(Optional<? extends AmountDecimal> minPerTransaction) {
             Utils.checkNotNull(minPerTransaction, "minPerTransaction");
             this.minPerTransaction = minPerTransaction;
             return this;
@@ -300,16 +299,16 @@ public class FeeProperties {
         /**
          * Specifies the maximum allowable spending for a single transaction, working as a transaction ceiling.
          */
-        public Builder maxPerTransaction(MaxPerTransaction maxPerTransaction) {
+        public Builder maxPerTransaction(AmountDecimal maxPerTransaction) {
             Utils.checkNotNull(maxPerTransaction, "maxPerTransaction");
-            this.maxPerTransaction = JsonNullable.of(maxPerTransaction);
+            this.maxPerTransaction = Optional.ofNullable(maxPerTransaction);
             return this;
         }
 
         /**
          * Specifies the maximum allowable spending for a single transaction, working as a transaction ceiling.
          */
-        public Builder maxPerTransaction(JsonNullable<? extends MaxPerTransaction> maxPerTransaction) {
+        public Builder maxPerTransaction(Optional<? extends AmountDecimal> maxPerTransaction) {
             Utils.checkNotNull(maxPerTransaction, "maxPerTransaction");
             this.maxPerTransaction = maxPerTransaction;
             return this;

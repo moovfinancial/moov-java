@@ -14,7 +14,9 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -83,6 +85,13 @@ public class WalletTransaction {
     private long fee;
 
     /**
+     * The IDs of the fees paid for the transaction.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("feeIDs")
+    private Optional<? extends List<String>> feeIDs;
+
+    /**
      * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
     @JsonProperty("feeDecimal")
@@ -133,6 +142,7 @@ public class WalletTransaction {
             @JsonProperty("grossAmount") long grossAmount,
             @JsonProperty("grossAmountDecimal") String grossAmountDecimal,
             @JsonProperty("fee") long fee,
+            @JsonProperty("feeIDs") Optional<? extends List<String>> feeIDs,
             @JsonProperty("feeDecimal") String feeDecimal,
             @JsonProperty("netAmount") long netAmount,
             @JsonProperty("netAmountDecimal") String netAmountDecimal,
@@ -152,6 +162,7 @@ public class WalletTransaction {
         Utils.checkNotNull(grossAmount, "grossAmount");
         Utils.checkNotNull(grossAmountDecimal, "grossAmountDecimal");
         Utils.checkNotNull(fee, "fee");
+        Utils.checkNotNull(feeIDs, "feeIDs");
         Utils.checkNotNull(feeDecimal, "feeDecimal");
         Utils.checkNotNull(netAmount, "netAmount");
         Utils.checkNotNull(netAmountDecimal, "netAmountDecimal");
@@ -171,6 +182,7 @@ public class WalletTransaction {
         this.grossAmount = grossAmount;
         this.grossAmountDecimal = grossAmountDecimal;
         this.fee = fee;
+        this.feeIDs = feeIDs;
         this.feeDecimal = feeDecimal;
         this.netAmount = netAmount;
         this.netAmountDecimal = netAmountDecimal;
@@ -195,7 +207,7 @@ public class WalletTransaction {
             String feeDecimal,
             long netAmount,
             String netAmountDecimal) {
-        this(walletID, transactionID, transactionType, sourceType, sourceID, status, memo, createdOn, Optional.empty(), currency, grossAmount, grossAmountDecimal, fee, feeDecimal, netAmount, netAmountDecimal, Optional.empty(), Optional.empty(), Optional.empty());
+        this(walletID, transactionID, transactionType, sourceType, sourceID, status, memo, createdOn, Optional.empty(), currency, grossAmount, grossAmountDecimal, fee, Optional.empty(), feeDecimal, netAmount, netAmountDecimal, Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -279,6 +291,15 @@ public class WalletTransaction {
     @JsonIgnore
     public long fee() {
         return fee;
+    }
+
+    /**
+     * The IDs of the fees paid for the transaction.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<String>> feeIDs() {
+        return (Optional<List<String>>) feeIDs;
     }
 
     /**
@@ -433,6 +454,24 @@ public class WalletTransaction {
     }
 
     /**
+     * The IDs of the fees paid for the transaction.
+     */
+    public WalletTransaction withFeeIDs(List<String> feeIDs) {
+        Utils.checkNotNull(feeIDs, "feeIDs");
+        this.feeIDs = Optional.ofNullable(feeIDs);
+        return this;
+    }
+
+    /**
+     * The IDs of the fees paid for the transaction.
+     */
+    public WalletTransaction withFeeIDs(Optional<? extends List<String>> feeIDs) {
+        Utils.checkNotNull(feeIDs, "feeIDs");
+        this.feeIDs = feeIDs;
+        return this;
+    }
+
+    /**
      * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
     public WalletTransaction withFeeDecimal(String feeDecimal) {
@@ -530,6 +569,7 @@ public class WalletTransaction {
             Objects.deepEquals(this.grossAmount, other.grossAmount) &&
             Objects.deepEquals(this.grossAmountDecimal, other.grossAmountDecimal) &&
             Objects.deepEquals(this.fee, other.fee) &&
+            Objects.deepEquals(this.feeIDs, other.feeIDs) &&
             Objects.deepEquals(this.feeDecimal, other.feeDecimal) &&
             Objects.deepEquals(this.netAmount, other.netAmount) &&
             Objects.deepEquals(this.netAmountDecimal, other.netAmountDecimal) &&
@@ -554,6 +594,7 @@ public class WalletTransaction {
             grossAmount,
             grossAmountDecimal,
             fee,
+            feeIDs,
             feeDecimal,
             netAmount,
             netAmountDecimal,
@@ -578,6 +619,7 @@ public class WalletTransaction {
                 "grossAmount", grossAmount,
                 "grossAmountDecimal", grossAmountDecimal,
                 "fee", fee,
+                "feeIDs", feeIDs,
                 "feeDecimal", feeDecimal,
                 "netAmount", netAmount,
                 "netAmountDecimal", netAmountDecimal,
@@ -613,6 +655,8 @@ public class WalletTransaction {
         private String grossAmountDecimal;
  
         private Long fee;
+ 
+        private Optional<? extends List<String>> feeIDs = Optional.empty();
  
         private String feeDecimal;
  
@@ -733,6 +777,24 @@ public class WalletTransaction {
         }
 
         /**
+         * The IDs of the fees paid for the transaction.
+         */
+        public Builder feeIDs(List<String> feeIDs) {
+            Utils.checkNotNull(feeIDs, "feeIDs");
+            this.feeIDs = Optional.ofNullable(feeIDs);
+            return this;
+        }
+
+        /**
+         * The IDs of the fees paid for the transaction.
+         */
+        public Builder feeIDs(Optional<? extends List<String>> feeIDs) {
+            Utils.checkNotNull(feeIDs, "feeIDs");
+            this.feeIDs = feeIDs;
+            return this;
+        }
+
+        /**
          * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
          */
         public Builder feeDecimal(String feeDecimal) {
@@ -822,6 +884,7 @@ public class WalletTransaction {
                 grossAmount,
                 grossAmountDecimal,
                 fee,
+                feeIDs,
                 feeDecimal,
                 netAmount,
                 netAmountDecimal,

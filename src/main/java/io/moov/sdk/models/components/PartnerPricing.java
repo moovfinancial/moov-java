@@ -47,8 +47,8 @@ public class PartnerPricing {
     /**
      * Specifies the card processing pricing model
      */
-    @JsonProperty("cardAcquringModel")
-    private CardAcquringModel cardAcquringModel;
+    @JsonProperty("cardAcquiringModel")
+    private CardAcquiringModel cardAcquiringModel;
 
     @JsonProperty("billableFees")
     private List<BillableFee> billableFees;
@@ -62,21 +62,21 @@ public class PartnerPricing {
             @JsonProperty("name") String name,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("revenueShare") long revenueShare,
-            @JsonProperty("cardAcquringModel") CardAcquringModel cardAcquringModel,
+            @JsonProperty("cardAcquiringModel") CardAcquiringModel cardAcquiringModel,
             @JsonProperty("billableFees") List<BillableFee> billableFees,
             @JsonProperty("createdAt") OffsetDateTime createdAt) {
         Utils.checkNotNull(planID, "planID");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(revenueShare, "revenueShare");
-        Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
+        Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
         Utils.checkNotNull(billableFees, "billableFees");
         Utils.checkNotNull(createdAt, "createdAt");
         this.planID = planID;
         this.name = name;
         this.description = description;
         this.revenueShare = revenueShare;
-        this.cardAcquringModel = cardAcquringModel;
+        this.cardAcquiringModel = cardAcquiringModel;
         this.billableFees = billableFees;
         this.createdAt = createdAt;
     }
@@ -85,10 +85,10 @@ public class PartnerPricing {
             String planID,
             String name,
             long revenueShare,
-            CardAcquringModel cardAcquringModel,
+            CardAcquiringModel cardAcquiringModel,
             List<BillableFee> billableFees,
             OffsetDateTime createdAt) {
-        this(planID, name, Optional.empty(), revenueShare, cardAcquringModel, billableFees, createdAt);
+        this(planID, name, Optional.empty(), revenueShare, cardAcquiringModel, billableFees, createdAt);
     }
 
     @JsonIgnore
@@ -124,8 +124,8 @@ public class PartnerPricing {
      * Specifies the card processing pricing model
      */
     @JsonIgnore
-    public CardAcquringModel cardAcquringModel() {
-        return cardAcquringModel;
+    public CardAcquiringModel cardAcquiringModel() {
+        return cardAcquiringModel;
     }
 
     @JsonIgnore
@@ -187,9 +187,9 @@ public class PartnerPricing {
     /**
      * Specifies the card processing pricing model
      */
-    public PartnerPricing withCardAcquringModel(CardAcquringModel cardAcquringModel) {
-        Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
-        this.cardAcquringModel = cardAcquringModel;
+    public PartnerPricing withCardAcquiringModel(CardAcquiringModel cardAcquiringModel) {
+        Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
+        this.cardAcquiringModel = cardAcquiringModel;
         return this;
     }
 
@@ -219,7 +219,7 @@ public class PartnerPricing {
             Objects.deepEquals(this.name, other.name) &&
             Objects.deepEquals(this.description, other.description) &&
             Objects.deepEquals(this.revenueShare, other.revenueShare) &&
-            Objects.deepEquals(this.cardAcquringModel, other.cardAcquringModel) &&
+            Objects.deepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
             Objects.deepEquals(this.billableFees, other.billableFees) &&
             Objects.deepEquals(this.createdAt, other.createdAt);
     }
@@ -231,7 +231,7 @@ public class PartnerPricing {
             name,
             description,
             revenueShare,
-            cardAcquringModel,
+            cardAcquiringModel,
             billableFees,
             createdAt);
     }
@@ -243,7 +243,7 @@ public class PartnerPricing {
                 "name", name,
                 "description", description,
                 "revenueShare", revenueShare,
-                "cardAcquringModel", cardAcquringModel,
+                "cardAcquiringModel", cardAcquiringModel,
                 "billableFees", billableFees,
                 "createdAt", createdAt);
     }
@@ -258,7 +258,7 @@ public class PartnerPricing {
  
         private Long revenueShare;
  
-        private CardAcquringModel cardAcquringModel;
+        private CardAcquiringModel cardAcquiringModel;
  
         private List<BillableFee> billableFees;
  
@@ -313,9 +313,9 @@ public class PartnerPricing {
         /**
          * Specifies the card processing pricing model
          */
-        public Builder cardAcquringModel(CardAcquringModel cardAcquringModel) {
-            Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
-            this.cardAcquringModel = cardAcquringModel;
+        public Builder cardAcquiringModel(CardAcquiringModel cardAcquiringModel) {
+            Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
+            this.cardAcquiringModel = cardAcquiringModel;
             return this;
         }
 
@@ -337,7 +337,7 @@ public class PartnerPricing {
                 name,
                 description,
                 revenueShare,
-                cardAcquringModel,
+                cardAcquiringModel,
                 billableFees,
                 createdAt);
         }

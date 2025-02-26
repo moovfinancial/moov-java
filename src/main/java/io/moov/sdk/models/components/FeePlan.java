@@ -40,8 +40,8 @@ public class FeePlan {
     /**
      * Specifies the card processing pricing model
      */
-    @JsonProperty("cardAcquringModel")
-    private CardAcquringModel cardAcquringModel;
+    @JsonProperty("cardAcquiringModel")
+    private CardAcquiringModel cardAcquiringModel;
 
     /**
      * Additional usage-based fees for this plan.
@@ -57,19 +57,19 @@ public class FeePlan {
             @JsonProperty("planID") String planID,
             @JsonProperty("name") String name,
             @JsonProperty("description") Optional<String> description,
-            @JsonProperty("cardAcquringModel") CardAcquringModel cardAcquringModel,
+            @JsonProperty("cardAcquiringModel") CardAcquiringModel cardAcquiringModel,
             @JsonProperty("billableFees") List<BillableFee> billableFees,
             @JsonProperty("createdAt") OffsetDateTime createdAt) {
         Utils.checkNotNull(planID, "planID");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(description, "description");
-        Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
+        Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
         Utils.checkNotNull(billableFees, "billableFees");
         Utils.checkNotNull(createdAt, "createdAt");
         this.planID = planID;
         this.name = name;
         this.description = description;
-        this.cardAcquringModel = cardAcquringModel;
+        this.cardAcquiringModel = cardAcquiringModel;
         this.billableFees = billableFees;
         this.createdAt = createdAt;
     }
@@ -77,10 +77,10 @@ public class FeePlan {
     public FeePlan(
             String planID,
             String name,
-            CardAcquringModel cardAcquringModel,
+            CardAcquiringModel cardAcquiringModel,
             List<BillableFee> billableFees,
             OffsetDateTime createdAt) {
-        this(planID, name, Optional.empty(), cardAcquringModel, billableFees, createdAt);
+        this(planID, name, Optional.empty(), cardAcquiringModel, billableFees, createdAt);
     }
 
     @JsonIgnore
@@ -108,8 +108,8 @@ public class FeePlan {
      * Specifies the card processing pricing model
      */
     @JsonIgnore
-    public CardAcquringModel cardAcquringModel() {
-        return cardAcquringModel;
+    public CardAcquiringModel cardAcquiringModel() {
+        return cardAcquiringModel;
     }
 
     /**
@@ -165,9 +165,9 @@ public class FeePlan {
     /**
      * Specifies the card processing pricing model
      */
-    public FeePlan withCardAcquringModel(CardAcquringModel cardAcquringModel) {
-        Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
-        this.cardAcquringModel = cardAcquringModel;
+    public FeePlan withCardAcquiringModel(CardAcquiringModel cardAcquiringModel) {
+        Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
+        this.cardAcquiringModel = cardAcquiringModel;
         return this;
     }
 
@@ -199,7 +199,7 @@ public class FeePlan {
             Objects.deepEquals(this.planID, other.planID) &&
             Objects.deepEquals(this.name, other.name) &&
             Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.cardAcquringModel, other.cardAcquringModel) &&
+            Objects.deepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
             Objects.deepEquals(this.billableFees, other.billableFees) &&
             Objects.deepEquals(this.createdAt, other.createdAt);
     }
@@ -210,7 +210,7 @@ public class FeePlan {
             planID,
             name,
             description,
-            cardAcquringModel,
+            cardAcquiringModel,
             billableFees,
             createdAt);
     }
@@ -221,7 +221,7 @@ public class FeePlan {
                 "planID", planID,
                 "name", name,
                 "description", description,
-                "cardAcquringModel", cardAcquringModel,
+                "cardAcquiringModel", cardAcquiringModel,
                 "billableFees", billableFees,
                 "createdAt", createdAt);
     }
@@ -234,7 +234,7 @@ public class FeePlan {
  
         private Optional<String> description = Optional.empty();
  
-        private CardAcquringModel cardAcquringModel;
+        private CardAcquiringModel cardAcquiringModel;
  
         private List<BillableFee> billableFees;
  
@@ -280,9 +280,9 @@ public class FeePlan {
         /**
          * Specifies the card processing pricing model
          */
-        public Builder cardAcquringModel(CardAcquringModel cardAcquringModel) {
-            Utils.checkNotNull(cardAcquringModel, "cardAcquringModel");
-            this.cardAcquringModel = cardAcquringModel;
+        public Builder cardAcquiringModel(CardAcquiringModel cardAcquiringModel) {
+            Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
+            this.cardAcquiringModel = cardAcquiringModel;
             return this;
         }
 
@@ -306,7 +306,7 @@ public class FeePlan {
                 planID,
                 name,
                 description,
-                cardAcquringModel,
+                cardAcquiringModel,
                 billableFees,
                 createdAt);
         }

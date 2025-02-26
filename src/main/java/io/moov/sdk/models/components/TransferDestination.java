@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -31,19 +30,22 @@ public class TransferDestination {
     private TransferAccount account;
 
     /**
-     * Describes a bank account linked to a Moov account.
+     * A bank account as contained within a payment method.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bankAccount")
-    private Optional<? extends BankAccount> bankAccount;
+    private Optional<? extends PaymentMethodsBankAccount> bankAccount;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wallet")
-    private Optional<? extends Object> wallet;
+    private Optional<? extends PaymentMethodsWallet> wallet;
 
+    /**
+     * A card as contained within a payment method.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("card")
-    private Optional<? extends Object> card;
+    private Optional<? extends PaymentMethodsCard> card;
 
     /**
      * ACH specific details about the transaction.
@@ -52,9 +54,12 @@ public class TransferDestination {
     @JsonProperty("achDetails")
     private Optional<? extends ACHTransactionDetails> achDetails;
 
+    /**
+     * Describes an Apple Pay token on a Moov account.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("applePay")
-    private Optional<? extends Object> applePay;
+    private Optional<? extends ApplePayResponse> applePay;
 
     /**
      * Card-specific details about the transaction.
@@ -75,11 +80,11 @@ public class TransferDestination {
             @JsonProperty("paymentMethodID") String paymentMethodID,
             @JsonProperty("paymentMethodType") String paymentMethodType,
             @JsonProperty("account") TransferAccount account,
-            @JsonProperty("bankAccount") Optional<? extends BankAccount> bankAccount,
-            @JsonProperty("wallet") Optional<? extends Object> wallet,
-            @JsonProperty("card") Optional<? extends Object> card,
+            @JsonProperty("bankAccount") Optional<? extends PaymentMethodsBankAccount> bankAccount,
+            @JsonProperty("wallet") Optional<? extends PaymentMethodsWallet> wallet,
+            @JsonProperty("card") Optional<? extends PaymentMethodsCard> card,
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails,
-            @JsonProperty("applePay") Optional<? extends Object> applePay,
+            @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
             @JsonProperty("rtpDetails") Optional<? extends RTPTransactionDetails> rtpDetails) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
@@ -127,24 +132,27 @@ public class TransferDestination {
     }
 
     /**
-     * Describes a bank account linked to a Moov account.
+     * A bank account as contained within a payment method.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<BankAccount> bankAccount() {
-        return (Optional<BankAccount>) bankAccount;
+    public Optional<PaymentMethodsBankAccount> bankAccount() {
+        return (Optional<PaymentMethodsBankAccount>) bankAccount;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> wallet() {
-        return (Optional<Object>) wallet;
+    public Optional<PaymentMethodsWallet> wallet() {
+        return (Optional<PaymentMethodsWallet>) wallet;
     }
 
+    /**
+     * A card as contained within a payment method.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> card() {
-        return (Optional<Object>) card;
+    public Optional<PaymentMethodsCard> card() {
+        return (Optional<PaymentMethodsCard>) card;
     }
 
     /**
@@ -156,10 +164,13 @@ public class TransferDestination {
         return (Optional<ACHTransactionDetails>) achDetails;
     }
 
+    /**
+     * Describes an Apple Pay token on a Moov account.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> applePay() {
-        return (Optional<Object>) applePay;
+    public Optional<ApplePayResponse> applePay() {
+        return (Optional<ApplePayResponse>) applePay;
     }
 
     /**
@@ -203,42 +214,48 @@ public class TransferDestination {
     }
 
     /**
-     * Describes a bank account linked to a Moov account.
+     * A bank account as contained within a payment method.
      */
-    public TransferDestination withBankAccount(BankAccount bankAccount) {
+    public TransferDestination withBankAccount(PaymentMethodsBankAccount bankAccount) {
         Utils.checkNotNull(bankAccount, "bankAccount");
         this.bankAccount = Optional.ofNullable(bankAccount);
         return this;
     }
 
     /**
-     * Describes a bank account linked to a Moov account.
+     * A bank account as contained within a payment method.
      */
-    public TransferDestination withBankAccount(Optional<? extends BankAccount> bankAccount) {
+    public TransferDestination withBankAccount(Optional<? extends PaymentMethodsBankAccount> bankAccount) {
         Utils.checkNotNull(bankAccount, "bankAccount");
         this.bankAccount = bankAccount;
         return this;
     }
 
-    public TransferDestination withWallet(Object wallet) {
+    public TransferDestination withWallet(PaymentMethodsWallet wallet) {
         Utils.checkNotNull(wallet, "wallet");
         this.wallet = Optional.ofNullable(wallet);
         return this;
     }
 
-    public TransferDestination withWallet(Optional<? extends Object> wallet) {
+    public TransferDestination withWallet(Optional<? extends PaymentMethodsWallet> wallet) {
         Utils.checkNotNull(wallet, "wallet");
         this.wallet = wallet;
         return this;
     }
 
-    public TransferDestination withCard(Object card) {
+    /**
+     * A card as contained within a payment method.
+     */
+    public TransferDestination withCard(PaymentMethodsCard card) {
         Utils.checkNotNull(card, "card");
         this.card = Optional.ofNullable(card);
         return this;
     }
 
-    public TransferDestination withCard(Optional<? extends Object> card) {
+    /**
+     * A card as contained within a payment method.
+     */
+    public TransferDestination withCard(Optional<? extends PaymentMethodsCard> card) {
         Utils.checkNotNull(card, "card");
         this.card = card;
         return this;
@@ -262,13 +279,19 @@ public class TransferDestination {
         return this;
     }
 
-    public TransferDestination withApplePay(Object applePay) {
+    /**
+     * Describes an Apple Pay token on a Moov account.
+     */
+    public TransferDestination withApplePay(ApplePayResponse applePay) {
         Utils.checkNotNull(applePay, "applePay");
         this.applePay = Optional.ofNullable(applePay);
         return this;
     }
 
-    public TransferDestination withApplePay(Optional<? extends Object> applePay) {
+    /**
+     * Describes an Apple Pay token on a Moov account.
+     */
+    public TransferDestination withApplePay(Optional<? extends ApplePayResponse> applePay) {
         Utils.checkNotNull(applePay, "applePay");
         this.applePay = applePay;
         return this;
@@ -370,15 +393,15 @@ public class TransferDestination {
  
         private TransferAccount account;
  
-        private Optional<? extends BankAccount> bankAccount = Optional.empty();
+        private Optional<? extends PaymentMethodsBankAccount> bankAccount = Optional.empty();
  
-        private Optional<? extends Object> wallet = Optional.empty();
+        private Optional<? extends PaymentMethodsWallet> wallet = Optional.empty();
  
-        private Optional<? extends Object> card = Optional.empty();
+        private Optional<? extends PaymentMethodsCard> card = Optional.empty();
  
         private Optional<? extends ACHTransactionDetails> achDetails = Optional.empty();
  
-        private Optional<? extends Object> applePay = Optional.empty();
+        private Optional<? extends ApplePayResponse> applePay = Optional.empty();
  
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
  
@@ -407,42 +430,48 @@ public class TransferDestination {
         }
 
         /**
-         * Describes a bank account linked to a Moov account.
+         * A bank account as contained within a payment method.
          */
-        public Builder bankAccount(BankAccount bankAccount) {
+        public Builder bankAccount(PaymentMethodsBankAccount bankAccount) {
             Utils.checkNotNull(bankAccount, "bankAccount");
             this.bankAccount = Optional.ofNullable(bankAccount);
             return this;
         }
 
         /**
-         * Describes a bank account linked to a Moov account.
+         * A bank account as contained within a payment method.
          */
-        public Builder bankAccount(Optional<? extends BankAccount> bankAccount) {
+        public Builder bankAccount(Optional<? extends PaymentMethodsBankAccount> bankAccount) {
             Utils.checkNotNull(bankAccount, "bankAccount");
             this.bankAccount = bankAccount;
             return this;
         }
 
-        public Builder wallet(Object wallet) {
+        public Builder wallet(PaymentMethodsWallet wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = Optional.ofNullable(wallet);
             return this;
         }
 
-        public Builder wallet(Optional<? extends Object> wallet) {
+        public Builder wallet(Optional<? extends PaymentMethodsWallet> wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = wallet;
             return this;
         }
 
-        public Builder card(Object card) {
+        /**
+         * A card as contained within a payment method.
+         */
+        public Builder card(PaymentMethodsCard card) {
             Utils.checkNotNull(card, "card");
             this.card = Optional.ofNullable(card);
             return this;
         }
 
-        public Builder card(Optional<? extends Object> card) {
+        /**
+         * A card as contained within a payment method.
+         */
+        public Builder card(Optional<? extends PaymentMethodsCard> card) {
             Utils.checkNotNull(card, "card");
             this.card = card;
             return this;
@@ -466,13 +495,19 @@ public class TransferDestination {
             return this;
         }
 
-        public Builder applePay(Object applePay) {
+        /**
+         * Describes an Apple Pay token on a Moov account.
+         */
+        public Builder applePay(ApplePayResponse applePay) {
             Utils.checkNotNull(applePay, "applePay");
             this.applePay = Optional.ofNullable(applePay);
             return this;
         }
 
-        public Builder applePay(Optional<? extends Object> applePay) {
+        /**
+         * Describes an Apple Pay token on a Moov account.
+         */
+        public Builder applePay(Optional<? extends ApplePayResponse> applePay) {
             Utils.checkNotNull(applePay, "applePay");
             this.applePay = applePay;
             return this;

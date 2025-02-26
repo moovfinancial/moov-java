@@ -17,6 +17,9 @@ import java.util.Objects;
 
 public class Cancellation {
 
+    @JsonProperty("cancellationID")
+    private String cancellationID;
+
     @JsonProperty("status")
     private CancellationStatus status;
 
@@ -25,12 +28,20 @@ public class Cancellation {
 
     @JsonCreator
     public Cancellation(
+            @JsonProperty("cancellationID") String cancellationID,
             @JsonProperty("status") CancellationStatus status,
             @JsonProperty("createdOn") OffsetDateTime createdOn) {
+        Utils.checkNotNull(cancellationID, "cancellationID");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(createdOn, "createdOn");
+        this.cancellationID = cancellationID;
         this.status = status;
         this.createdOn = createdOn;
+    }
+
+    @JsonIgnore
+    public String cancellationID() {
+        return cancellationID;
     }
 
     @JsonIgnore
@@ -45,6 +56,12 @@ public class Cancellation {
 
     public final static Builder builder() {
         return new Builder();
+    }
+
+    public Cancellation withCancellationID(String cancellationID) {
+        Utils.checkNotNull(cancellationID, "cancellationID");
+        this.cancellationID = cancellationID;
+        return this;
     }
 
     public Cancellation withStatus(CancellationStatus status) {
@@ -69,6 +86,7 @@ public class Cancellation {
         }
         Cancellation other = (Cancellation) o;
         return 
+            Objects.deepEquals(this.cancellationID, other.cancellationID) &&
             Objects.deepEquals(this.status, other.status) &&
             Objects.deepEquals(this.createdOn, other.createdOn);
     }
@@ -76,6 +94,7 @@ public class Cancellation {
     @Override
     public int hashCode() {
         return Objects.hash(
+            cancellationID,
             status,
             createdOn);
     }
@@ -83,11 +102,14 @@ public class Cancellation {
     @Override
     public String toString() {
         return Utils.toString(Cancellation.class,
+                "cancellationID", cancellationID,
                 "status", status,
                 "createdOn", createdOn);
     }
     
     public final static class Builder {
+ 
+        private String cancellationID;
  
         private CancellationStatus status;
  
@@ -95,6 +117,12 @@ public class Cancellation {
         
         private Builder() {
           // force use of static builder() method
+        }
+
+        public Builder cancellationID(String cancellationID) {
+            Utils.checkNotNull(cancellationID, "cancellationID");
+            this.cancellationID = cancellationID;
+            return this;
         }
 
         public Builder status(CancellationStatus status) {
@@ -111,6 +139,7 @@ public class Cancellation {
         
         public Cancellation build() {
             return new Cancellation(
+                cancellationID,
                 status,
                 createdOn);
         }

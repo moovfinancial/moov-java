@@ -231,7 +231,7 @@ package hello.world;
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.PatchSweepConfig;
 import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.SweepConfigStatus;
+import io.moov.sdk.models.components.Status;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.PatchSweepConfigError;
 import io.moov.sdk.models.operations.UpdateSweepConfigResponse;
@@ -253,7 +253,7 @@ public class Application {
                 .accountID("7573cb48-6325-4d3d-841d-81108fcfe6f2")
                 .sweepConfigID("49e8f3b1-259f-458e-9367-adb3b938f8c8")
                 .patchSweepConfig(PatchSweepConfig.builder()
-                    .status(SweepConfigStatus.DISABLED)
+                    .status(Status.DISABLED)
                     .build())
                 .call();
 

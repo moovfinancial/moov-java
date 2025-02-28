@@ -63,7 +63,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "io.moov"
-version = "0.8.7"
+version = "0.8.8"
 
 sourcesJar {
     archiveBaseName = "sdk"
@@ -101,7 +101,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'io.moov'
             artifactId = 'sdk'
-            version = '0.8.7'
+            version = '0.8.8'
 
             from components.java
 

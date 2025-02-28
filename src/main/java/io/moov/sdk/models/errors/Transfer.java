@@ -39,13 +39,11 @@ public class Transfer extends RuntimeException {
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("source")
-    private Optional<? extends TransferSource> source;
+    private TransferSource source;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("destination")
-    private Optional<? extends TransferDestination> destination;
+    private TransferDestination destination;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("completedOn")
@@ -145,8 +143,8 @@ public class Transfer extends RuntimeException {
     public Transfer(
             @JsonProperty("transferID") String transferID,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
-            @JsonProperty("source") Optional<? extends TransferSource> source,
-            @JsonProperty("destination") Optional<? extends TransferDestination> destination,
+            @JsonProperty("source") TransferSource source,
+            @JsonProperty("destination") TransferDestination destination,
             @JsonProperty("completedOn") Optional<OffsetDateTime> completedOn,
             @JsonProperty("status") TransferStatus status,
             @JsonProperty("failureReason") Optional<? extends TransferFailureReason> failureReason,
@@ -214,9 +212,11 @@ public class Transfer extends RuntimeException {
     public Transfer(
             String transferID,
             OffsetDateTime createdOn,
+            TransferSource source,
+            TransferDestination destination,
             TransferStatus status,
             Amount amount) {
-        this(transferID, createdOn, Optional.empty(), Optional.empty(), Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     public String transferID(){
@@ -227,14 +227,12 @@ public class Transfer extends RuntimeException {
         return createdOn;
     }
 
-    @SuppressWarnings("unchecked")
-    public Optional<TransferSource> source(){
-        return (Optional<TransferSource>) source;
+    public TransferSource source(){
+        return source;
     }
 
-    @SuppressWarnings("unchecked")
-    public Optional<TransferDestination> destination(){
-        return (Optional<TransferDestination>) destination;
+    public TransferDestination destination(){
+        return destination;
     }
 
     public Optional<OffsetDateTime> completedOn(){
@@ -359,23 +357,11 @@ public class Transfer extends RuntimeException {
 
     public Transfer withSource(TransferSource source) {
         Utils.checkNotNull(source, "source");
-        this.source = Optional.ofNullable(source);
-        return this;
-    }
-    
-    public Transfer withSource(Optional<? extends TransferSource> source) {
-        Utils.checkNotNull(source, "source");
         this.source = source;
         return this;
     }
 
     public Transfer withDestination(TransferDestination destination) {
-        Utils.checkNotNull(destination, "destination");
-        this.destination = Optional.ofNullable(destination);
-        return this;
-    }
-    
-    public Transfer withDestination(Optional<? extends TransferDestination> destination) {
         Utils.checkNotNull(destination, "destination");
         this.destination = destination;
         return this;
@@ -724,9 +710,9 @@ public class Transfer extends RuntimeException {
 
         private OffsetDateTime createdOn;
 
-        private Optional<? extends TransferSource> source = Optional.empty();
+        private TransferSource source;
 
-        private Optional<? extends TransferDestination> destination = Optional.empty();
+        private TransferDestination destination;
 
         private Optional<OffsetDateTime> completedOn = Optional.empty();
 
@@ -782,23 +768,11 @@ public class Transfer extends RuntimeException {
 
         public Builder source(TransferSource source) {
             Utils.checkNotNull(source, "source");
-            this.source = Optional.ofNullable(source);
-            return this;
-        }
-        
-        public Builder source(Optional<? extends TransferSource> source) {
-            Utils.checkNotNull(source, "source");
             this.source = source;
             return this;
         }
 
         public Builder destination(TransferDestination destination) {
-            Utils.checkNotNull(destination, "destination");
-            this.destination = Optional.ofNullable(destination);
-            return this;
-        }
-        
-        public Builder destination(Optional<? extends TransferDestination> destination) {
             Utils.checkNotNull(destination, "destination");
             this.destination = destination;
             return this;

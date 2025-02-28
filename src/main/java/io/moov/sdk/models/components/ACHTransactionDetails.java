@@ -77,6 +77,10 @@ public class ACHTransactionDetails {
     private Optional<OffsetDateTime> returnedOn;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("failedOn")
+    private Optional<OffsetDateTime> failedOn;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("completedOn")
     private Optional<OffsetDateTime> completedOn;
 
@@ -100,6 +104,7 @@ public class ACHTransactionDetails {
             @JsonProperty("originatedOn") Optional<OffsetDateTime> originatedOn,
             @JsonProperty("correctedOn") Optional<OffsetDateTime> correctedOn,
             @JsonProperty("returnedOn") Optional<OffsetDateTime> returnedOn,
+            @JsonProperty("failedOn") Optional<OffsetDateTime> failedOn,
             @JsonProperty("completedOn") Optional<OffsetDateTime> completedOn,
             @JsonProperty("debitHoldPeriod") Optional<? extends DebitHoldPeriod> debitHoldPeriod) {
         Utils.checkNotNull(status, "status");
@@ -113,6 +118,7 @@ public class ACHTransactionDetails {
         Utils.checkNotNull(originatedOn, "originatedOn");
         Utils.checkNotNull(correctedOn, "correctedOn");
         Utils.checkNotNull(returnedOn, "returnedOn");
+        Utils.checkNotNull(failedOn, "failedOn");
         Utils.checkNotNull(completedOn, "completedOn");
         Utils.checkNotNull(debitHoldPeriod, "debitHoldPeriod");
         this.status = status;
@@ -126,6 +132,7 @@ public class ACHTransactionDetails {
         this.originatedOn = originatedOn;
         this.correctedOn = correctedOn;
         this.returnedOn = returnedOn;
+        this.failedOn = failedOn;
         this.completedOn = completedOn;
         this.debitHoldPeriod = debitHoldPeriod;
     }
@@ -133,7 +140,7 @@ public class ACHTransactionDetails {
     public ACHTransactionDetails(
             ACHTransactionStatus status,
             String traceNumber) {
-        this(status, traceNumber, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(status, traceNumber, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -204,6 +211,11 @@ public class ACHTransactionDetails {
     @JsonIgnore
     public Optional<OffsetDateTime> returnedOn() {
         return returnedOn;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> failedOn() {
+        return failedOn;
     }
 
     @JsonIgnore
@@ -365,6 +377,18 @@ public class ACHTransactionDetails {
         return this;
     }
 
+    public ACHTransactionDetails withFailedOn(OffsetDateTime failedOn) {
+        Utils.checkNotNull(failedOn, "failedOn");
+        this.failedOn = Optional.ofNullable(failedOn);
+        return this;
+    }
+
+    public ACHTransactionDetails withFailedOn(Optional<OffsetDateTime> failedOn) {
+        Utils.checkNotNull(failedOn, "failedOn");
+        this.failedOn = failedOn;
+        return this;
+    }
+
     public ACHTransactionDetails withCompletedOn(OffsetDateTime completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
         this.completedOn = Optional.ofNullable(completedOn);
@@ -416,6 +440,7 @@ public class ACHTransactionDetails {
             Objects.deepEquals(this.originatedOn, other.originatedOn) &&
             Objects.deepEquals(this.correctedOn, other.correctedOn) &&
             Objects.deepEquals(this.returnedOn, other.returnedOn) &&
+            Objects.deepEquals(this.failedOn, other.failedOn) &&
             Objects.deepEquals(this.completedOn, other.completedOn) &&
             Objects.deepEquals(this.debitHoldPeriod, other.debitHoldPeriod);
     }
@@ -434,6 +459,7 @@ public class ACHTransactionDetails {
             originatedOn,
             correctedOn,
             returnedOn,
+            failedOn,
             completedOn,
             debitHoldPeriod);
     }
@@ -452,6 +478,7 @@ public class ACHTransactionDetails {
                 "originatedOn", originatedOn,
                 "correctedOn", correctedOn,
                 "returnedOn", returnedOn,
+                "failedOn", failedOn,
                 "completedOn", completedOn,
                 "debitHoldPeriod", debitHoldPeriod);
     }
@@ -479,6 +506,8 @@ public class ACHTransactionDetails {
         private Optional<OffsetDateTime> correctedOn = Optional.empty();
  
         private Optional<OffsetDateTime> returnedOn = Optional.empty();
+ 
+        private Optional<OffsetDateTime> failedOn = Optional.empty();
  
         private Optional<OffsetDateTime> completedOn = Optional.empty();
  
@@ -629,6 +658,18 @@ public class ACHTransactionDetails {
             return this;
         }
 
+        public Builder failedOn(OffsetDateTime failedOn) {
+            Utils.checkNotNull(failedOn, "failedOn");
+            this.failedOn = Optional.ofNullable(failedOn);
+            return this;
+        }
+
+        public Builder failedOn(Optional<OffsetDateTime> failedOn) {
+            Utils.checkNotNull(failedOn, "failedOn");
+            this.failedOn = failedOn;
+            return this;
+        }
+
         public Builder completedOn(OffsetDateTime completedOn) {
             Utils.checkNotNull(completedOn, "completedOn");
             this.completedOn = Optional.ofNullable(completedOn);
@@ -672,6 +713,7 @@ public class ACHTransactionDetails {
                 originatedOn,
                 correctedOn,
                 returnedOn,
+                failedOn,
                 completedOn,
                 debitHoldPeriod);
         }

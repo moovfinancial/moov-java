@@ -18,6 +18,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -56,6 +57,12 @@ public class ListWalletTransactionsRequest {
     private Optional<? extends WalletTransactionType> transactionType;
 
     /**
+     * Optional, comma-separated parameter to filter by transaction types.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=transactionTypes")
+    private Optional<? extends List<WalletTransactionType>> transactionTypes;
+
+    /**
      * Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=sourceType")
@@ -74,7 +81,7 @@ public class ListWalletTransactionsRequest {
     private Optional<? extends WalletTransactionStatus> status;
 
     /**
-     * Optional date-time which inclusively filters all transactions created after this date-time.  
+     * Optional date-time which inclusively filters all transactions created after this date-time.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=createdStartDateTime")
     private Optional<OffsetDateTime> createdStartDateTime;
@@ -111,6 +118,7 @@ public class ListWalletTransactionsRequest {
             Optional<Long> count,
             String walletID,
             Optional<? extends WalletTransactionType> transactionType,
+            Optional<? extends List<WalletTransactionType>> transactionTypes,
             Optional<? extends WalletTransactionSourceType> sourceType,
             Optional<String> sourceID,
             Optional<? extends WalletTransactionStatus> status,
@@ -125,6 +133,7 @@ public class ListWalletTransactionsRequest {
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(transactionType, "transactionType");
+        Utils.checkNotNull(transactionTypes, "transactionTypes");
         Utils.checkNotNull(sourceType, "sourceType");
         Utils.checkNotNull(sourceID, "sourceID");
         Utils.checkNotNull(status, "status");
@@ -139,6 +148,7 @@ public class ListWalletTransactionsRequest {
         this.count = count;
         this.walletID = walletID;
         this.transactionType = transactionType;
+        this.transactionTypes = transactionTypes;
         this.sourceType = sourceType;
         this.sourceID = sourceID;
         this.status = status;
@@ -152,7 +162,7 @@ public class ListWalletTransactionsRequest {
     public ListWalletTransactionsRequest(
             String accountID,
             String walletID) {
-        this(Optional.empty(), accountID, Optional.empty(), Optional.empty(), walletID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), accountID, Optional.empty(), Optional.empty(), walletID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -201,6 +211,15 @@ public class ListWalletTransactionsRequest {
     }
 
     /**
+     * Optional, comma-separated parameter to filter by transaction types.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<WalletTransactionType>> transactionTypes() {
+        return (Optional<List<WalletTransactionType>>) transactionTypes;
+    }
+
+    /**
      * Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
      */
     @SuppressWarnings("unchecked")
@@ -227,7 +246,7 @@ public class ListWalletTransactionsRequest {
     }
 
     /**
-     * Optional date-time which inclusively filters all transactions created after this date-time.  
+     * Optional date-time which inclusively filters all transactions created after this date-time.
      */
     @JsonIgnore
     public Optional<OffsetDateTime> createdStartDateTime() {
@@ -359,6 +378,24 @@ public class ListWalletTransactionsRequest {
     }
 
     /**
+     * Optional, comma-separated parameter to filter by transaction types.
+     */
+    public ListWalletTransactionsRequest withTransactionTypes(List<WalletTransactionType> transactionTypes) {
+        Utils.checkNotNull(transactionTypes, "transactionTypes");
+        this.transactionTypes = Optional.ofNullable(transactionTypes);
+        return this;
+    }
+
+    /**
+     * Optional, comma-separated parameter to filter by transaction types.
+     */
+    public ListWalletTransactionsRequest withTransactionTypes(Optional<? extends List<WalletTransactionType>> transactionTypes) {
+        Utils.checkNotNull(transactionTypes, "transactionTypes");
+        this.transactionTypes = transactionTypes;
+        return this;
+    }
+
+    /**
      * Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
      */
     public ListWalletTransactionsRequest withSourceType(WalletTransactionSourceType sourceType) {
@@ -413,7 +450,7 @@ public class ListWalletTransactionsRequest {
     }
 
     /**
-     * Optional date-time which inclusively filters all transactions created after this date-time.  
+     * Optional date-time which inclusively filters all transactions created after this date-time.
      */
     public ListWalletTransactionsRequest withCreatedStartDateTime(OffsetDateTime createdStartDateTime) {
         Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
@@ -422,7 +459,7 @@ public class ListWalletTransactionsRequest {
     }
 
     /**
-     * Optional date-time which inclusively filters all transactions created after this date-time.  
+     * Optional date-time which inclusively filters all transactions created after this date-time.
      */
     public ListWalletTransactionsRequest withCreatedStartDateTime(Optional<OffsetDateTime> createdStartDateTime) {
         Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
@@ -518,6 +555,7 @@ public class ListWalletTransactionsRequest {
             Objects.deepEquals(this.count, other.count) &&
             Objects.deepEquals(this.walletID, other.walletID) &&
             Objects.deepEquals(this.transactionType, other.transactionType) &&
+            Objects.deepEquals(this.transactionTypes, other.transactionTypes) &&
             Objects.deepEquals(this.sourceType, other.sourceType) &&
             Objects.deepEquals(this.sourceID, other.sourceID) &&
             Objects.deepEquals(this.status, other.status) &&
@@ -537,6 +575,7 @@ public class ListWalletTransactionsRequest {
             count,
             walletID,
             transactionType,
+            transactionTypes,
             sourceType,
             sourceID,
             status,
@@ -556,6 +595,7 @@ public class ListWalletTransactionsRequest {
                 "count", count,
                 "walletID", walletID,
                 "transactionType", transactionType,
+                "transactionTypes", transactionTypes,
                 "sourceType", sourceType,
                 "sourceID", sourceID,
                 "status", status,
@@ -579,6 +619,8 @@ public class ListWalletTransactionsRequest {
         private String walletID;
  
         private Optional<? extends WalletTransactionType> transactionType = Optional.empty();
+ 
+        private Optional<? extends List<WalletTransactionType>> transactionTypes = Optional.empty();
  
         private Optional<? extends WalletTransactionSourceType> sourceType = Optional.empty();
  
@@ -689,6 +731,24 @@ public class ListWalletTransactionsRequest {
         }
 
         /**
+         * Optional, comma-separated parameter to filter by transaction types.
+         */
+        public Builder transactionTypes(List<WalletTransactionType> transactionTypes) {
+            Utils.checkNotNull(transactionTypes, "transactionTypes");
+            this.transactionTypes = Optional.ofNullable(transactionTypes);
+            return this;
+        }
+
+        /**
+         * Optional, comma-separated parameter to filter by transaction types.
+         */
+        public Builder transactionTypes(Optional<? extends List<WalletTransactionType>> transactionTypes) {
+            Utils.checkNotNull(transactionTypes, "transactionTypes");
+            this.transactionTypes = transactionTypes;
+            return this;
+        }
+
+        /**
          * Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
          */
         public Builder sourceType(WalletTransactionSourceType sourceType) {
@@ -743,7 +803,7 @@ public class ListWalletTransactionsRequest {
         }
 
         /**
-         * Optional date-time which inclusively filters all transactions created after this date-time.  
+         * Optional date-time which inclusively filters all transactions created after this date-time.
          */
         public Builder createdStartDateTime(OffsetDateTime createdStartDateTime) {
             Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
@@ -752,7 +812,7 @@ public class ListWalletTransactionsRequest {
         }
 
         /**
-         * Optional date-time which inclusively filters all transactions created after this date-time.  
+         * Optional date-time which inclusively filters all transactions created after this date-time.
          */
         public Builder createdStartDateTime(Optional<OffsetDateTime> createdStartDateTime) {
             Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
@@ -842,6 +902,7 @@ public class ListWalletTransactionsRequest {
                 count,
                 walletID,
                 transactionType,
+                transactionTypes,
                 sourceType,
                 sourceID,
                 status,

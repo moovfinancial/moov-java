@@ -18,11 +18,21 @@ import java.util.Optional;
 
 public class TransferSource {
 
+    /**
+     * UUID present only if the transfer is part of a transfer group.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("transferID")
+    private Optional<String> transferID;
+
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
 
+    /**
+     * The payment method type that represents a payment rail and directionality
+     */
     @JsonProperty("paymentMethodType")
-    private String paymentMethodType;
+    private PaymentMethodType paymentMethodType;
 
     @JsonProperty("account")
     private TransferAccount account;
@@ -68,8 +78,9 @@ public class TransferSource {
 
     @JsonCreator
     public TransferSource(
+            @JsonProperty("transferID") Optional<String> transferID,
             @JsonProperty("paymentMethodID") String paymentMethodID,
-            @JsonProperty("paymentMethodType") String paymentMethodType,
+            @JsonProperty("paymentMethodType") PaymentMethodType paymentMethodType,
             @JsonProperty("account") TransferAccount account,
             @JsonProperty("bankAccount") Optional<? extends PaymentMethodsBankAccount> bankAccount,
             @JsonProperty("wallet") Optional<? extends PaymentMethodsWallet> wallet,
@@ -77,6 +88,7 @@ public class TransferSource {
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails) {
+        Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         Utils.checkNotNull(account, "account");
@@ -86,6 +98,7 @@ public class TransferSource {
         Utils.checkNotNull(applePay, "applePay");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(achDetails, "achDetails");
+        this.transferID = transferID;
         this.paymentMethodID = paymentMethodID;
         this.paymentMethodType = paymentMethodType;
         this.account = account;
@@ -99,9 +112,17 @@ public class TransferSource {
     
     public TransferSource(
             String paymentMethodID,
-            String paymentMethodType,
+            PaymentMethodType paymentMethodType,
             TransferAccount account) {
-        this(paymentMethodID, paymentMethodType, account, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), paymentMethodID, paymentMethodType, account, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * UUID present only if the transfer is part of a transfer group.
+     */
+    @JsonIgnore
+    public Optional<String> transferID() {
+        return transferID;
     }
 
     @JsonIgnore
@@ -109,8 +130,11 @@ public class TransferSource {
         return paymentMethodID;
     }
 
+    /**
+     * The payment method type that represents a payment rail and directionality
+     */
     @JsonIgnore
-    public String paymentMethodType() {
+    public PaymentMethodType paymentMethodType() {
         return paymentMethodType;
     }
 
@@ -174,13 +198,34 @@ public class TransferSource {
         return new Builder();
     }
 
+    /**
+     * UUID present only if the transfer is part of a transfer group.
+     */
+    public TransferSource withTransferID(String transferID) {
+        Utils.checkNotNull(transferID, "transferID");
+        this.transferID = Optional.ofNullable(transferID);
+        return this;
+    }
+
+    /**
+     * UUID present only if the transfer is part of a transfer group.
+     */
+    public TransferSource withTransferID(Optional<String> transferID) {
+        Utils.checkNotNull(transferID, "transferID");
+        this.transferID = transferID;
+        return this;
+    }
+
     public TransferSource withPaymentMethodID(String paymentMethodID) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         this.paymentMethodID = paymentMethodID;
         return this;
     }
 
-    public TransferSource withPaymentMethodType(String paymentMethodType) {
+    /**
+     * The payment method type that represents a payment rail and directionality
+     */
+    public TransferSource withPaymentMethodType(PaymentMethodType paymentMethodType) {
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         this.paymentMethodType = paymentMethodType;
         return this;
@@ -304,6 +349,7 @@ public class TransferSource {
         }
         TransferSource other = (TransferSource) o;
         return 
+            Objects.deepEquals(this.transferID, other.transferID) &&
             Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
             Objects.deepEquals(this.paymentMethodType, other.paymentMethodType) &&
             Objects.deepEquals(this.account, other.account) &&
@@ -318,6 +364,7 @@ public class TransferSource {
     @Override
     public int hashCode() {
         return Objects.hash(
+            transferID,
             paymentMethodID,
             paymentMethodType,
             account,
@@ -332,6 +379,7 @@ public class TransferSource {
     @Override
     public String toString() {
         return Utils.toString(TransferSource.class,
+                "transferID", transferID,
                 "paymentMethodID", paymentMethodID,
                 "paymentMethodType", paymentMethodType,
                 "account", account,
@@ -345,9 +393,11 @@ public class TransferSource {
     
     public final static class Builder {
  
+        private Optional<String> transferID = Optional.empty();
+ 
         private String paymentMethodID;
  
-        private String paymentMethodType;
+        private PaymentMethodType paymentMethodType;
  
         private TransferAccount account;
  
@@ -367,13 +417,34 @@ public class TransferSource {
           // force use of static builder() method
         }
 
+        /**
+         * UUID present only if the transfer is part of a transfer group.
+         */
+        public Builder transferID(String transferID) {
+            Utils.checkNotNull(transferID, "transferID");
+            this.transferID = Optional.ofNullable(transferID);
+            return this;
+        }
+
+        /**
+         * UUID present only if the transfer is part of a transfer group.
+         */
+        public Builder transferID(Optional<String> transferID) {
+            Utils.checkNotNull(transferID, "transferID");
+            this.transferID = transferID;
+            return this;
+        }
+
         public Builder paymentMethodID(String paymentMethodID) {
             Utils.checkNotNull(paymentMethodID, "paymentMethodID");
             this.paymentMethodID = paymentMethodID;
             return this;
         }
 
-        public Builder paymentMethodType(String paymentMethodType) {
+        /**
+         * The payment method type that represents a payment rail and directionality
+         */
+        public Builder paymentMethodType(PaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;
@@ -489,6 +560,7 @@ public class TransferSource {
         
         public TransferSource build() {
             return new TransferSource(
+                transferID,
                 paymentMethodID,
                 paymentMethodType,
                 account,

@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
-import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 public class PatchSweepConfig {
@@ -37,7 +36,7 @@ public class PatchSweepConfig {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minimumBalance")
-    private Optional<String> minimumBalance;
+    private JsonNullable<String> minimumBalance;
 
     @JsonCreator
     public PatchSweepConfig(
@@ -45,7 +44,7 @@ public class PatchSweepConfig {
             @JsonProperty("pushPaymentMethodID") JsonNullable<? extends PushPaymentMethodID> pushPaymentMethodID,
             @JsonProperty("pullPaymentMethodID") JsonNullable<? extends PullPaymentMethodID> pullPaymentMethodID,
             @JsonProperty("statementDescriptor") JsonNullable<? extends StatementDescriptor> statementDescriptor,
-            @JsonProperty("minimumBalance") Optional<String> minimumBalance) {
+            @JsonProperty("minimumBalance") JsonNullable<String> minimumBalance) {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
         Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
@@ -59,7 +58,7 @@ public class PatchSweepConfig {
     }
     
     public PatchSweepConfig() {
-        this(JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty());
+        this(JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     @SuppressWarnings("unchecked")
@@ -87,7 +86,7 @@ public class PatchSweepConfig {
     }
 
     @JsonIgnore
-    public Optional<String> minimumBalance() {
+    public JsonNullable<String> minimumBalance() {
         return minimumBalance;
     }
 
@@ -145,11 +144,11 @@ public class PatchSweepConfig {
 
     public PatchSweepConfig withMinimumBalance(String minimumBalance) {
         Utils.checkNotNull(minimumBalance, "minimumBalance");
-        this.minimumBalance = Optional.ofNullable(minimumBalance);
+        this.minimumBalance = JsonNullable.of(minimumBalance);
         return this;
     }
 
-    public PatchSweepConfig withMinimumBalance(Optional<String> minimumBalance) {
+    public PatchSweepConfig withMinimumBalance(JsonNullable<String> minimumBalance) {
         Utils.checkNotNull(minimumBalance, "minimumBalance");
         this.minimumBalance = minimumBalance;
         return this;
@@ -202,7 +201,7 @@ public class PatchSweepConfig {
  
         private JsonNullable<? extends StatementDescriptor> statementDescriptor = JsonNullable.undefined();
  
-        private Optional<String> minimumBalance = Optional.empty();  
+        private JsonNullable<String> minimumBalance = JsonNullable.undefined();  
         
         private Builder() {
           // force use of static builder() method
@@ -258,11 +257,11 @@ public class PatchSweepConfig {
 
         public Builder minimumBalance(String minimumBalance) {
             Utils.checkNotNull(minimumBalance, "minimumBalance");
-            this.minimumBalance = Optional.ofNullable(minimumBalance);
+            this.minimumBalance = JsonNullable.of(minimumBalance);
             return this;
         }
 
-        public Builder minimumBalance(Optional<String> minimumBalance) {
+        public Builder minimumBalance(JsonNullable<String> minimumBalance) {
             Utils.checkNotNull(minimumBalance, "minimumBalance");
             this.minimumBalance = minimumBalance;
             return this;

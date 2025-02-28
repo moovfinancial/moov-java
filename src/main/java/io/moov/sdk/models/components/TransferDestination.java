@@ -21,8 +21,11 @@ public class TransferDestination {
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
 
+    /**
+     * The payment method type that represents a payment rail and directionality
+     */
     @JsonProperty("paymentMethodType")
-    private String paymentMethodType;
+    private PaymentMethodType paymentMethodType;
 
     @JsonProperty("account")
     private TransferAccount account;
@@ -76,7 +79,7 @@ public class TransferDestination {
     @JsonCreator
     public TransferDestination(
             @JsonProperty("paymentMethodID") String paymentMethodID,
-            @JsonProperty("paymentMethodType") String paymentMethodType,
+            @JsonProperty("paymentMethodType") PaymentMethodType paymentMethodType,
             @JsonProperty("account") TransferAccount account,
             @JsonProperty("bankAccount") Optional<? extends PaymentMethodsBankAccount> bankAccount,
             @JsonProperty("wallet") Optional<? extends PaymentMethodsWallet> wallet,
@@ -109,7 +112,7 @@ public class TransferDestination {
     
     public TransferDestination(
             String paymentMethodID,
-            String paymentMethodType,
+            PaymentMethodType paymentMethodType,
             TransferAccount account) {
         this(paymentMethodID, paymentMethodType, account, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
@@ -119,8 +122,11 @@ public class TransferDestination {
         return paymentMethodID;
     }
 
+    /**
+     * The payment method type that represents a payment rail and directionality
+     */
     @JsonIgnore
-    public String paymentMethodType() {
+    public PaymentMethodType paymentMethodType() {
         return paymentMethodType;
     }
 
@@ -199,7 +205,10 @@ public class TransferDestination {
         return this;
     }
 
-    public TransferDestination withPaymentMethodType(String paymentMethodType) {
+    /**
+     * The payment method type that represents a payment rail and directionality
+     */
+    public TransferDestination withPaymentMethodType(PaymentMethodType paymentMethodType) {
         Utils.checkNotNull(paymentMethodType, "paymentMethodType");
         this.paymentMethodType = paymentMethodType;
         return this;
@@ -387,7 +396,7 @@ public class TransferDestination {
  
         private String paymentMethodID;
  
-        private String paymentMethodType;
+        private PaymentMethodType paymentMethodType;
  
         private TransferAccount account;
  
@@ -415,7 +424,10 @@ public class TransferDestination {
             return this;
         }
 
-        public Builder paymentMethodType(String paymentMethodType) {
+        /**
+         * The payment method type that represents a payment rail and directionality
+         */
+        public Builder paymentMethodType(PaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;

@@ -3,6 +3,6 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `number`           | *String*           | :heavy_check_mark: | N/A                | 12-3456789         |
+| Field               | Type                | Required            | Description         | Example             |
+| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `number`            | *Optional\<String>* | :heavy_minus_sign:  | N/A                 | 12-3456789          |

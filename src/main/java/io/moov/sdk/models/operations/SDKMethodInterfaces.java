@@ -23,7 +23,6 @@ import io.moov.sdk.models.components.CreateSweepConfig;
 import io.moov.sdk.models.components.CreateTerminalApplication;
 import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.models.components.E2EEToken;
-import io.moov.sdk.models.components.FeePlanAgreementStatus;
 import io.moov.sdk.models.components.FileUploadRequestMultiPart;
 import io.moov.sdk.models.components.LinkApplePay;
 import io.moov.sdk.models.components.LinkBankAccount;
@@ -444,10 +443,7 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallListFeePlanAgreements {
         ListFeePlanAgreementsResponse listFeePlanAgreements(
-            Optional<String> xMoovVersion,
-            String accountID,
-            Optional<? extends List<String>> agreementID,
-            Optional<? extends List<FeePlanAgreementStatus>> status) throws Exception;
+            ListFeePlanAgreementsRequest request) throws Exception;
     }
 
 
@@ -491,10 +487,7 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallListPartnerPricingAgreements {
         ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(
-            Optional<String> xMoovVersion,
-            String accountID,
-            Optional<? extends List<String>> agreementID,
-            Optional<? extends List<FeePlanAgreementStatus>> status) throws Exception;
+            ListPartnerPricingAgreementsRequest request) throws Exception;
     }
 
 

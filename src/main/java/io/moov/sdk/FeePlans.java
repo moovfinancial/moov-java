@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.CreateFeePlanAgreement;
 import io.moov.sdk.models.components.FeePlan;
 import io.moov.sdk.models.components.FeePlanAgreement;
-import io.moov.sdk.models.components.FeePlanAgreementStatus;
 import io.moov.sdk.models.components.IncurredFee;
 import io.moov.sdk.models.components.ListFeesFetchRequest;
 import io.moov.sdk.models.components.PartnerPricing;
@@ -80,46 +79,12 @@ public class FeePlans implements
 
     /**
      * List all fee plan agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param accountID
+     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListFeePlanAgreementsResponse listFeePlanAgreements(
-            String accountID) throws Exception {
-        return listFeePlanAgreements(Optional.empty(), accountID, Optional.empty(), Optional.empty());
-    }
-    
-    /**
-     * List all fee plan agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param agreementID A comma-separated list of agreement IDs to filter the results by.
-     * @param status A comma-separated list of statuses to filter the results by.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ListFeePlanAgreementsResponse listFeePlanAgreements(
-            Optional<String> xMoovVersion,
-            String accountID,
-            Optional<? extends List<String>> agreementID,
-            Optional<? extends List<FeePlanAgreementStatus>> status) throws Exception {
-        ListFeePlanAgreementsRequest request =
-            ListFeePlanAgreementsRequest
-                .builder()
-                .xMoovVersion(xMoovVersion)
-                .accountID(accountID)
-                .agreementID(agreementID)
-                .status(status)
-                .build();
-        
+            ListFeePlanAgreementsRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListFeePlanAgreementsRequest.class,
@@ -1177,46 +1142,12 @@ public class FeePlans implements
 
     /**
      * List all partner pricing agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param accountID
+     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(
-            String accountID) throws Exception {
-        return listPartnerPricingAgreements(Optional.empty(), accountID, Optional.empty(), Optional.empty());
-    }
-    
-    /**
-     * List all partner pricing agreements associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param agreementID A comma-separated list of agreement IDs to filter the results by.
-     * @param status A comma-separated list of statuses to filter the results by.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(
-            Optional<String> xMoovVersion,
-            String accountID,
-            Optional<? extends List<String>> agreementID,
-            Optional<? extends List<FeePlanAgreementStatus>> status) throws Exception {
-        ListPartnerPricingAgreementsRequest request =
-            ListPartnerPricingAgreementsRequest
-                .builder()
-                .xMoovVersion(xMoovVersion)
-                .accountID(accountID)
-                .agreementID(agreementID)
-                .status(status)
-                .build();
-        
+            ListPartnerPricingAgreementsRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListPartnerPricingAgreementsRequest.class,

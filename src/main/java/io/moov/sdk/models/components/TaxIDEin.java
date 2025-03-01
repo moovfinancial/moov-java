@@ -6,34 +6,26 @@
 package io.moov.sdk.models.components;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
-public class TaxIDUpdateEin {
+public class TaxIDEin {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("number")
-    private Optional<String> number;
+    private String number;
 
     @JsonCreator
-    public TaxIDUpdateEin(
-            @JsonProperty("number") Optional<String> number) {
+    public TaxIDEin(
+            @JsonProperty("number") String number) {
         Utils.checkNotNull(number, "number");
         this.number = number;
     }
-    
-    public TaxIDUpdateEin() {
-        this(Optional.empty());
-    }
 
     @JsonIgnore
-    public Optional<String> number() {
+    public String number() {
         return number;
     }
 
@@ -41,13 +33,7 @@ public class TaxIDUpdateEin {
         return new Builder();
     }
 
-    public TaxIDUpdateEin withNumber(String number) {
-        Utils.checkNotNull(number, "number");
-        this.number = Optional.ofNullable(number);
-        return this;
-    }
-
-    public TaxIDUpdateEin withNumber(Optional<String> number) {
+    public TaxIDEin withNumber(String number) {
         Utils.checkNotNull(number, "number");
         this.number = number;
         return this;
@@ -61,7 +47,7 @@ public class TaxIDUpdateEin {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        TaxIDUpdateEin other = (TaxIDUpdateEin) o;
+        TaxIDEin other = (TaxIDEin) o;
         return 
             Objects.deepEquals(this.number, other.number);
     }
@@ -74,13 +60,13 @@ public class TaxIDUpdateEin {
     
     @Override
     public String toString() {
-        return Utils.toString(TaxIDUpdateEin.class,
+        return Utils.toString(TaxIDEin.class,
                 "number", number);
     }
     
     public final static class Builder {
  
-        private Optional<String> number = Optional.empty();  
+        private String number;  
         
         private Builder() {
           // force use of static builder() method
@@ -88,18 +74,12 @@ public class TaxIDUpdateEin {
 
         public Builder number(String number) {
             Utils.checkNotNull(number, "number");
-            this.number = Optional.ofNullable(number);
-            return this;
-        }
-
-        public Builder number(Optional<String> number) {
-            Utils.checkNotNull(number, "number");
             this.number = number;
             return this;
         }
         
-        public TaxIDUpdateEin build() {
-            return new TaxIDUpdateEin(
+        public TaxIDEin build() {
+            return new TaxIDEin(
                 number);
         }
     }

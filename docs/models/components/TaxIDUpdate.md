@@ -5,6 +5,6 @@ An EIN (employer identification number) for the business. For sole proprietors, 
 
 ## Fields
 
-| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `ein`                                                                  | [Optional\<TaxIDUpdateEin>](../../models/components/TaxIDUpdateEin.md) | :heavy_minus_sign:                                                     | N/A                                                                    |
+| Field                                            | Type                                             | Required                                         | Description                                      |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| `ein`                                            | [Optional\<Ein>](../../models/components/Ein.md) | :heavy_minus_sign:                               | N/A                                              |

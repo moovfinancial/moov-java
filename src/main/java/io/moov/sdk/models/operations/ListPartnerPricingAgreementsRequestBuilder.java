@@ -4,85 +4,26 @@
 
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.FeePlanAgreementStatus;
-import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
-import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 public class ListPartnerPricingAgreementsRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private String accountID;
-    private Optional<? extends List<String>> agreementID = Optional.empty();
-    private Optional<? extends List<FeePlanAgreementStatus>> status = Optional.empty();
+    private ListPartnerPricingAgreementsRequest request;
     private final SDKMethodInterfaces.MethodCallListPartnerPricingAgreements sdk;
 
     public ListPartnerPricingAgreementsRequestBuilder(SDKMethodInterfaces.MethodCallListPartnerPricingAgreements sdk) {
         this.sdk = sdk;
     }
-                
-    public ListPartnerPricingAgreementsRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
 
-    public ListPartnerPricingAgreementsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
-
-    public ListPartnerPricingAgreementsRequestBuilder accountID(String accountID) {
-        Utils.checkNotNull(accountID, "accountID");
-        this.accountID = accountID;
-        return this;
-    }
-                
-    public ListPartnerPricingAgreementsRequestBuilder agreementID(List<String> agreementID) {
-        Utils.checkNotNull(agreementID, "agreementID");
-        this.agreementID = Optional.of(agreementID);
-        return this;
-    }
-
-    public ListPartnerPricingAgreementsRequestBuilder agreementID(Optional<? extends List<String>> agreementID) {
-        Utils.checkNotNull(agreementID, "agreementID");
-        this.agreementID = agreementID;
-        return this;
-    }
-                
-    public ListPartnerPricingAgreementsRequestBuilder status(List<FeePlanAgreementStatus> status) {
-        Utils.checkNotNull(status, "status");
-        this.status = Optional.of(status);
-        return this;
-    }
-
-    public ListPartnerPricingAgreementsRequestBuilder status(Optional<? extends List<FeePlanAgreementStatus>> status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
+    public ListPartnerPricingAgreementsRequestBuilder request(ListPartnerPricingAgreementsRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
 
     public ListPartnerPricingAgreementsResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.listPartnerPricingAgreements(
-            xMoovVersion,
-            accountID,
-            agreementID,
-            status);
-    }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return sdk.listPartnerPricingAgreements(
+            request);
+    }
 }

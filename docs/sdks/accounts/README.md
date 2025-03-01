@@ -106,13 +106,13 @@ import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateIndividualProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
-import io.moov.sdk.models.components.Ein;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
 import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
 import io.moov.sdk.models.components.TaxID;
+import io.moov.sdk.models.components.TaxIDEin;
 import io.moov.sdk.models.components.TermsOfServiceToken;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
@@ -180,7 +180,7 @@ public class Application {
                             .email("jordan.lee@classbooker.dev")
                             .description("Local fitness gym paying out instructors")
                             .taxID(TaxID.builder()
-                                .ein(Ein.builder()
+                                .ein(TaxIDEin.builder()
                                     .number("12-3456789")
                                     .build())
                                 .build())
@@ -399,6 +399,7 @@ import io.moov.sdk.models.components.BirthDateUpdate;
 import io.moov.sdk.models.components.BusinessType;
 import io.moov.sdk.models.components.CardPayment;
 import io.moov.sdk.models.components.CreateAccountSettings;
+import io.moov.sdk.models.components.Ein;
 import io.moov.sdk.models.components.IndividualNameUpdate;
 import io.moov.sdk.models.components.IndustryCodes;
 import io.moov.sdk.models.components.ManualTermsOfServiceUpdate;
@@ -411,7 +412,6 @@ import io.moov.sdk.models.components.PatchProfile;
 import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.TaxIDUpdate;
-import io.moov.sdk.models.components.TaxIDUpdateEin;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateAccountResponseBody;
 import io.moov.sdk.models.operations.UpdateAccountResponse;
@@ -478,7 +478,7 @@ public class Application {
                             .email("jordan.lee@classbooker.dev")
                             .description("Local fitness gym paying out instructors")
                             .taxID(TaxIDUpdate.builder()
-                                .ein(TaxIDUpdateEin.builder()
+                                .ein(Ein.builder()
                                     .number("12-3456789")
                                     .build())
                                 .build())

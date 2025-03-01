@@ -11,6 +11,7 @@ import io.moov.sdk.models.components.FeePlanAgreementStatus;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -34,6 +35,12 @@ public class ListPartnerPricingAgreementsRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
     private Optional<String> xMoovVersion;
 
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
+    private Optional<Long> skip;
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
+    private Optional<Long> count;
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
@@ -52,14 +59,20 @@ public class ListPartnerPricingAgreementsRequest {
     @JsonCreator
     public ListPartnerPricingAgreementsRequest(
             Optional<String> xMoovVersion,
+            Optional<Long> skip,
+            Optional<Long> count,
             String accountID,
             Optional<? extends List<String>> agreementID,
             Optional<? extends List<FeePlanAgreementStatus>> status) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
+        Utils.checkNotNull(skip, "skip");
+        Utils.checkNotNull(count, "count");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(agreementID, "agreementID");
         Utils.checkNotNull(status, "status");
         this.xMoovVersion = xMoovVersion;
+        this.skip = skip;
+        this.count = count;
         this.accountID = accountID;
         this.agreementID = agreementID;
         this.status = status;
@@ -67,7 +80,7 @@ public class ListPartnerPricingAgreementsRequest {
     
     public ListPartnerPricingAgreementsRequest(
             String accountID) {
-        this(Optional.empty(), accountID, Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), accountID, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -84,6 +97,16 @@ public class ListPartnerPricingAgreementsRequest {
     @JsonIgnore
     public Optional<String> xMoovVersion() {
         return xMoovVersion;
+    }
+
+    @JsonIgnore
+    public Optional<Long> skip() {
+        return skip;
+    }
+
+    @JsonIgnore
+    public Optional<Long> count() {
+        return count;
     }
 
     @JsonIgnore
@@ -147,6 +170,30 @@ public class ListPartnerPricingAgreementsRequest {
         return this;
     }
 
+    public ListPartnerPricingAgreementsRequest withSkip(long skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = Optional.ofNullable(skip);
+        return this;
+    }
+
+    public ListPartnerPricingAgreementsRequest withSkip(Optional<Long> skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = skip;
+        return this;
+    }
+
+    public ListPartnerPricingAgreementsRequest withCount(long count) {
+        Utils.checkNotNull(count, "count");
+        this.count = Optional.ofNullable(count);
+        return this;
+    }
+
+    public ListPartnerPricingAgreementsRequest withCount(Optional<Long> count) {
+        Utils.checkNotNull(count, "count");
+        this.count = count;
+        return this;
+    }
+
     public ListPartnerPricingAgreementsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -200,6 +247,8 @@ public class ListPartnerPricingAgreementsRequest {
         ListPartnerPricingAgreementsRequest other = (ListPartnerPricingAgreementsRequest) o;
         return 
             Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
+            Objects.deepEquals(this.skip, other.skip) &&
+            Objects.deepEquals(this.count, other.count) &&
             Objects.deepEquals(this.accountID, other.accountID) &&
             Objects.deepEquals(this.agreementID, other.agreementID) &&
             Objects.deepEquals(this.status, other.status);
@@ -209,6 +258,8 @@ public class ListPartnerPricingAgreementsRequest {
     public int hashCode() {
         return Objects.hash(
             xMoovVersion,
+            skip,
+            count,
             accountID,
             agreementID,
             status);
@@ -218,6 +269,8 @@ public class ListPartnerPricingAgreementsRequest {
     public String toString() {
         return Utils.toString(ListPartnerPricingAgreementsRequest.class,
                 "xMoovVersion", xMoovVersion,
+                "skip", skip,
+                "count", count,
                 "accountID", accountID,
                 "agreementID", agreementID,
                 "status", status);
@@ -226,6 +279,10 @@ public class ListPartnerPricingAgreementsRequest {
     public final static class Builder {
  
         private Optional<String> xMoovVersion;
+ 
+        private Optional<Long> skip = Optional.empty();
+ 
+        private Optional<Long> count = Optional.empty();
  
         private String accountID;
  
@@ -268,6 +325,30 @@ public class ListPartnerPricingAgreementsRequest {
         public Builder xMoovVersion(Optional<String> xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
             this.xMoovVersion = xMoovVersion;
+            return this;
+        }
+
+        public Builder skip(long skip) {
+            Utils.checkNotNull(skip, "skip");
+            this.skip = Optional.ofNullable(skip);
+            return this;
+        }
+
+        public Builder skip(Optional<Long> skip) {
+            Utils.checkNotNull(skip, "skip");
+            this.skip = skip;
+            return this;
+        }
+
+        public Builder count(long count) {
+            Utils.checkNotNull(count, "count");
+            this.count = Optional.ofNullable(count);
+            return this;
+        }
+
+        public Builder count(Optional<Long> count) {
+            Utils.checkNotNull(count, "count");
+            this.count = count;
             return this;
         }
 
@@ -318,6 +399,8 @@ public class ListPartnerPricingAgreementsRequest {
                 xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
             }            return new ListPartnerPricingAgreementsRequest(
                 xMoovVersion,
+                skip,
+                count,
                 accountID,
                 agreementID,
                 status);

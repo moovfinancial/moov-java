@@ -43,7 +43,7 @@ public class OnboardingInvite {
      * The terms of service URL set by the inviter.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("TermsOfServiceURL")
+    @JsonProperty("termsOfServiceURL")
     private Optional<String> termsOfServiceURL;
 
     /**
@@ -65,6 +65,13 @@ public class OnboardingInvite {
      */
     @JsonProperty("feePlanCodes")
     private List<String> feePlanCodes;
+
+    /**
+     * The account ID of the account that redeemed the invite.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("redeemedAccountID")
+    private Optional<String> redeemedAccountID;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("prefill")
@@ -93,10 +100,11 @@ public class OnboardingInvite {
             @JsonProperty("code") String code,
             @JsonProperty("link") String link,
             @JsonProperty("returnURL") Optional<String> returnURL,
-            @JsonProperty("TermsOfServiceURL") Optional<String> termsOfServiceURL,
+            @JsonProperty("termsOfServiceURL") Optional<String> termsOfServiceURL,
             @JsonProperty("scopes") List<ApplicationScope> scopes,
             @JsonProperty("capabilities") List<CapabilityID> capabilities,
             @JsonProperty("feePlanCodes") List<String> feePlanCodes,
+            @JsonProperty("redeemedAccountID") Optional<String> redeemedAccountID,
             @JsonProperty("prefill") Optional<? extends CreateAccount> prefill,
             @JsonProperty("partner") Optional<? extends OnboardingPartnerAccount> partner,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
@@ -109,6 +117,7 @@ public class OnboardingInvite {
         Utils.checkNotNull(scopes, "scopes");
         Utils.checkNotNull(capabilities, "capabilities");
         Utils.checkNotNull(feePlanCodes, "feePlanCodes");
+        Utils.checkNotNull(redeemedAccountID, "redeemedAccountID");
         Utils.checkNotNull(prefill, "prefill");
         Utils.checkNotNull(partner, "partner");
         Utils.checkNotNull(createdOn, "createdOn");
@@ -121,6 +130,7 @@ public class OnboardingInvite {
         this.scopes = scopes;
         this.capabilities = capabilities;
         this.feePlanCodes = feePlanCodes;
+        this.redeemedAccountID = redeemedAccountID;
         this.prefill = prefill;
         this.partner = partner;
         this.createdOn = createdOn;
@@ -135,7 +145,7 @@ public class OnboardingInvite {
             List<CapabilityID> capabilities,
             List<String> feePlanCodes,
             OffsetDateTime createdOn) {
-        this(code, link, Optional.empty(), Optional.empty(), scopes, capabilities, feePlanCodes, Optional.empty(), Optional.empty(), createdOn, Optional.empty(), Optional.empty());
+        this(code, link, Optional.empty(), Optional.empty(), scopes, capabilities, feePlanCodes, Optional.empty(), Optional.empty(), Optional.empty(), createdOn, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -194,6 +204,14 @@ public class OnboardingInvite {
     @JsonIgnore
     public List<String> feePlanCodes() {
         return feePlanCodes;
+    }
+
+    /**
+     * The account ID of the account that redeemed the invite.
+     */
+    @JsonIgnore
+    public Optional<String> redeemedAccountID() {
+        return redeemedAccountID;
     }
 
     @SuppressWarnings("unchecked")
@@ -313,6 +331,24 @@ public class OnboardingInvite {
         return this;
     }
 
+    /**
+     * The account ID of the account that redeemed the invite.
+     */
+    public OnboardingInvite withRedeemedAccountID(String redeemedAccountID) {
+        Utils.checkNotNull(redeemedAccountID, "redeemedAccountID");
+        this.redeemedAccountID = Optional.ofNullable(redeemedAccountID);
+        return this;
+    }
+
+    /**
+     * The account ID of the account that redeemed the invite.
+     */
+    public OnboardingInvite withRedeemedAccountID(Optional<String> redeemedAccountID) {
+        Utils.checkNotNull(redeemedAccountID, "redeemedAccountID");
+        this.redeemedAccountID = redeemedAccountID;
+        return this;
+    }
+
     public OnboardingInvite withPrefill(CreateAccount prefill) {
         Utils.checkNotNull(prefill, "prefill");
         this.prefill = Optional.ofNullable(prefill);
@@ -390,6 +426,7 @@ public class OnboardingInvite {
             Objects.deepEquals(this.scopes, other.scopes) &&
             Objects.deepEquals(this.capabilities, other.capabilities) &&
             Objects.deepEquals(this.feePlanCodes, other.feePlanCodes) &&
+            Objects.deepEquals(this.redeemedAccountID, other.redeemedAccountID) &&
             Objects.deepEquals(this.prefill, other.prefill) &&
             Objects.deepEquals(this.partner, other.partner) &&
             Objects.deepEquals(this.createdOn, other.createdOn) &&
@@ -407,6 +444,7 @@ public class OnboardingInvite {
             scopes,
             capabilities,
             feePlanCodes,
+            redeemedAccountID,
             prefill,
             partner,
             createdOn,
@@ -424,6 +462,7 @@ public class OnboardingInvite {
                 "scopes", scopes,
                 "capabilities", capabilities,
                 "feePlanCodes", feePlanCodes,
+                "redeemedAccountID", redeemedAccountID,
                 "prefill", prefill,
                 "partner", partner,
                 "createdOn", createdOn,
@@ -446,6 +485,8 @@ public class OnboardingInvite {
         private List<CapabilityID> capabilities;
  
         private List<String> feePlanCodes;
+ 
+        private Optional<String> redeemedAccountID = Optional.empty();
  
         private Optional<? extends CreateAccount> prefill = Optional.empty();
  
@@ -544,6 +585,24 @@ public class OnboardingInvite {
             return this;
         }
 
+        /**
+         * The account ID of the account that redeemed the invite.
+         */
+        public Builder redeemedAccountID(String redeemedAccountID) {
+            Utils.checkNotNull(redeemedAccountID, "redeemedAccountID");
+            this.redeemedAccountID = Optional.ofNullable(redeemedAccountID);
+            return this;
+        }
+
+        /**
+         * The account ID of the account that redeemed the invite.
+         */
+        public Builder redeemedAccountID(Optional<String> redeemedAccountID) {
+            Utils.checkNotNull(redeemedAccountID, "redeemedAccountID");
+            this.redeemedAccountID = redeemedAccountID;
+            return this;
+        }
+
         public Builder prefill(CreateAccount prefill) {
             Utils.checkNotNull(prefill, "prefill");
             this.prefill = Optional.ofNullable(prefill);
@@ -613,6 +672,7 @@ public class OnboardingInvite {
                 scopes,
                 capabilities,
                 feePlanCodes,
+                redeemedAccountID,
                 prefill,
                 partner,
                 createdOn,

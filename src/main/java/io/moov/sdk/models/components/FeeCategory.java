@@ -9,14 +9,15 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 public enum FeeCategory {
-    CARD_ACQUIRING("card-acquiring"),
-    CARD_PUSH("card-push"),
-    CARD_PULL("card-pull"),
     ACH("ach"),
-    RTP("rtp"),
+    CARD_ACQUIRING("card-acquiring"),
     CARD_OTHER("card-other"),
+    CARD_PULL("card-pull"),
+    CARD_PUSH("card-push"),
+    MONTHLY_PLATFORM("monthly-platform"),
     NETWORK_PASSTHROUGH("network-passthrough"),
-    OTHER("other");
+    OTHER("other"),
+    RTP("rtp");
 
     @JsonValue
     private final String value;

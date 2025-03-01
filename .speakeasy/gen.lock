@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: a7e28ac7ea2dc59298d66942cca5bcc5
+  docChecksum: 203a4ce2fad90a1ff07e6efd8f15a974
   docVersion: latest
-  speakeasyVersion: 1.507.0
-  generationVersion: 2.533.0
-  releaseVersion: 0.8.8
-  configChecksum: 900dd883a45dd58b0e6d8b1d1d3c7517
+  speakeasyVersion: 1.508.0
+  generationVersion: 2.536.0
+  releaseVersion: 0.8.9
+  configChecksum: 89b47032f5fdf4e05d3ac459e12db27e
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -234,8 +234,8 @@ generatedFiles:
   - docs/models/components/GeneratedByTransferID.md
   - docs/models/components/GovernmentID.md
   - docs/models/components/GovernmentIDError.md
-  - docs/models/components/GovernmentIDErrorItin.md
-  - docs/models/components/GovernmentIDErrorSsn.md
+  - docs/models/components/GovernmentIDItin.md
+  - docs/models/components/GovernmentIDSsn.md
   - docs/models/components/GrantType.md
   - docs/models/components/IncurredFee.md
   - docs/models/components/IndividualName.md
@@ -375,8 +375,8 @@ generatedFiles:
   - docs/models/components/SweepConfigStatus.md
   - docs/models/components/SweepStatus.md
   - docs/models/components/TaxID.md
+  - docs/models/components/TaxIDEin.md
   - docs/models/components/TaxIDUpdate.md
-  - docs/models/components/TaxIDUpdateEin.md
   - docs/models/components/TerminalApplication.md
   - docs/models/components/TerminalApplicationPlatform.md
   - docs/models/components/TerminalApplicationStatus.md
@@ -994,8 +994,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/GeneratedByTransferID.java
   - src/main/java/io/moov/sdk/models/components/GovernmentID.java
   - src/main/java/io/moov/sdk/models/components/GovernmentIDError.java
-  - src/main/java/io/moov/sdk/models/components/GovernmentIDErrorItin.java
-  - src/main/java/io/moov/sdk/models/components/GovernmentIDErrorSsn.java
+  - src/main/java/io/moov/sdk/models/components/GovernmentIDItin.java
+  - src/main/java/io/moov/sdk/models/components/GovernmentIDSsn.java
   - src/main/java/io/moov/sdk/models/components/GrantType.java
   - src/main/java/io/moov/sdk/models/components/IncurredFee.java
   - src/main/java/io/moov/sdk/models/components/IndividualName.java
@@ -1135,8 +1135,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/SweepConfigStatus.java
   - src/main/java/io/moov/sdk/models/components/SweepStatus.java
   - src/main/java/io/moov/sdk/models/components/TaxID.java
+  - src/main/java/io/moov/sdk/models/components/TaxIDEin.java
   - src/main/java/io/moov/sdk/models/components/TaxIDUpdate.java
-  - src/main/java/io/moov/sdk/models/components/TaxIDUpdateEin.java
   - src/main/java/io/moov/sdk/models/components/TerminalApplication.java
   - src/main/java/io/moov/sdk/models/components/TerminalApplicationPlatform.java
   - src/main/java/io/moov/sdk/models/components/TerminalApplicationStatus.java
@@ -2194,7 +2194,9 @@ examples:
       parameters:
         path:
           accountID: "4c49ae91-2b32-4a4d-91bf-f062f3c2f38d"
-        query: {}
+        query:
+          skip: 60
+          count: 20
         header: {}
       responses:
         "200":
@@ -2239,7 +2241,9 @@ examples:
       parameters:
         path:
           accountID: "9366921a-25de-4c52-8ec6-4cd4ef557223"
-        query: {}
+        query:
+          skip: 60
+          count: 20
         header: {}
       responses:
         "200":

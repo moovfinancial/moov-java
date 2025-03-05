@@ -746,6 +746,23 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallCreateCancellation {
+        CreateCancellationResponse createCancellation(
+            Optional<String> xMoovVersion,
+            String accountID,
+            String transferID) throws Exception;
+    }
+
+
+    public interface MethodCallGetCancellation {
+        GetCancellationResponse getCancellation(
+            Optional<String> xMoovVersion,
+            String accountID,
+            String transferID,
+            String cancellationID) throws Exception;
+    }
+
+
     public interface MethodCallInitiateRefund {
         InitiateRefundResponse initiateRefund(
             InitiateRefundRequest request) throws Exception;

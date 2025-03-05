@@ -104,6 +104,10 @@ public class Transfer {
     private Optional<String> groupID;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("cancellations")
+    private Optional<? extends List<Cancellation>> cancellations;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refundedAmount")
     private Optional<? extends Amount> refundedAmount;
 
@@ -148,6 +152,7 @@ public class Transfer {
             @JsonProperty("moovFeeDecimal") Optional<String> moovFeeDecimal,
             @JsonProperty("moovFeeDetails") Optional<? extends MoovFeeDetails> moovFeeDetails,
             @JsonProperty("groupID") Optional<String> groupID,
+            @JsonProperty("cancellations") Optional<? extends List<Cancellation>> cancellations,
             @JsonProperty("refundedAmount") Optional<? extends Amount> refundedAmount,
             @JsonProperty("refunds") Optional<? extends List<CardAcquiringRefund>> refunds,
             @JsonProperty("disputedAmount") Optional<? extends Amount> disputedAmount,
@@ -170,6 +175,7 @@ public class Transfer {
         Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
         Utils.checkNotNull(moovFeeDetails, "moovFeeDetails");
         Utils.checkNotNull(groupID, "groupID");
+        Utils.checkNotNull(cancellations, "cancellations");
         Utils.checkNotNull(refundedAmount, "refundedAmount");
         Utils.checkNotNull(refunds, "refunds");
         Utils.checkNotNull(disputedAmount, "disputedAmount");
@@ -192,6 +198,7 @@ public class Transfer {
         this.moovFeeDecimal = moovFeeDecimal;
         this.moovFeeDetails = moovFeeDetails;
         this.groupID = groupID;
+        this.cancellations = cancellations;
         this.refundedAmount = refundedAmount;
         this.refunds = refunds;
         this.disputedAmount = disputedAmount;
@@ -208,7 +215,7 @@ public class Transfer {
             TransferDestination destination,
             TransferStatus status,
             Amount amount) {
-        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -312,6 +319,12 @@ public class Transfer {
     @JsonIgnore
     public Optional<String> groupID() {
         return groupID;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Cancellation>> cancellations() {
+        return (Optional<List<Cancellation>>) cancellations;
     }
 
     @SuppressWarnings("unchecked")
@@ -546,6 +559,18 @@ public class Transfer {
         return this;
     }
 
+    public Transfer withCancellations(List<Cancellation> cancellations) {
+        Utils.checkNotNull(cancellations, "cancellations");
+        this.cancellations = Optional.ofNullable(cancellations);
+        return this;
+    }
+
+    public Transfer withCancellations(Optional<? extends List<Cancellation>> cancellations) {
+        Utils.checkNotNull(cancellations, "cancellations");
+        this.cancellations = cancellations;
+        return this;
+    }
+
     public Transfer withRefundedAmount(Amount refundedAmount) {
         Utils.checkNotNull(refundedAmount, "refundedAmount");
         this.refundedAmount = Optional.ofNullable(refundedAmount);
@@ -655,6 +680,7 @@ public class Transfer {
             Objects.deepEquals(this.moovFeeDecimal, other.moovFeeDecimal) &&
             Objects.deepEquals(this.moovFeeDetails, other.moovFeeDetails) &&
             Objects.deepEquals(this.groupID, other.groupID) &&
+            Objects.deepEquals(this.cancellations, other.cancellations) &&
             Objects.deepEquals(this.refundedAmount, other.refundedAmount) &&
             Objects.deepEquals(this.refunds, other.refunds) &&
             Objects.deepEquals(this.disputedAmount, other.disputedAmount) &&
@@ -682,6 +708,7 @@ public class Transfer {
             moovFeeDecimal,
             moovFeeDetails,
             groupID,
+            cancellations,
             refundedAmount,
             refunds,
             disputedAmount,
@@ -709,6 +736,7 @@ public class Transfer {
                 "moovFeeDecimal", moovFeeDecimal,
                 "moovFeeDetails", moovFeeDetails,
                 "groupID", groupID,
+                "cancellations", cancellations,
                 "refundedAmount", refundedAmount,
                 "refunds", refunds,
                 "disputedAmount", disputedAmount,
@@ -749,6 +777,8 @@ public class Transfer {
         private Optional<? extends MoovFeeDetails> moovFeeDetails = Optional.empty();
  
         private Optional<String> groupID = Optional.empty();
+ 
+        private Optional<? extends List<Cancellation>> cancellations = Optional.empty();
  
         private Optional<? extends Amount> refundedAmount = Optional.empty();
  
@@ -957,6 +987,18 @@ public class Transfer {
             return this;
         }
 
+        public Builder cancellations(List<Cancellation> cancellations) {
+            Utils.checkNotNull(cancellations, "cancellations");
+            this.cancellations = Optional.ofNullable(cancellations);
+            return this;
+        }
+
+        public Builder cancellations(Optional<? extends List<Cancellation>> cancellations) {
+            Utils.checkNotNull(cancellations, "cancellations");
+            this.cancellations = cancellations;
+            return this;
+        }
+
         public Builder refundedAmount(Amount refundedAmount) {
             Utils.checkNotNull(refundedAmount, "refundedAmount");
             this.refundedAmount = Optional.ofNullable(refundedAmount);
@@ -1058,6 +1100,7 @@ public class Transfer {
                 moovFeeDecimal,
                 moovFeeDetails,
                 groupID,
+                cancellations,
                 refundedAmount,
                 refunds,
                 disputedAmount,

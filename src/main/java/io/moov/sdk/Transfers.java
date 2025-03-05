@@ -6,6 +6,7 @@ package io.moov.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.AsyncTransfer;
+import io.moov.sdk.models.components.Cancellation;
 import io.moov.sdk.models.components.CardAcquiringRefund;
 import io.moov.sdk.models.components.CreateRefundResponse;
 import io.moov.sdk.models.components.CreateTransferOptions;
@@ -20,6 +21,9 @@ import io.moov.sdk.models.errors.RefundValidationError;
 import io.moov.sdk.models.errors.ReversalValidationError;
 import io.moov.sdk.models.errors.TransferOptionsValidationError;
 import io.moov.sdk.models.errors.TransferValidationError;
+import io.moov.sdk.models.operations.CreateCancellationRequest;
+import io.moov.sdk.models.operations.CreateCancellationRequestBuilder;
+import io.moov.sdk.models.operations.CreateCancellationResponse;
 import io.moov.sdk.models.operations.CreateReversalRequest;
 import io.moov.sdk.models.operations.CreateReversalRequestBuilder;
 import io.moov.sdk.models.operations.CreateReversalResponse;
@@ -29,6 +33,9 @@ import io.moov.sdk.models.operations.CreateTransferOptionsResponse;
 import io.moov.sdk.models.operations.CreateTransferRequest;
 import io.moov.sdk.models.operations.CreateTransferRequestBuilder;
 import io.moov.sdk.models.operations.CreateTransferResponse;
+import io.moov.sdk.models.operations.GetCancellationRequest;
+import io.moov.sdk.models.operations.GetCancellationRequestBuilder;
+import io.moov.sdk.models.operations.GetCancellationResponse;
 import io.moov.sdk.models.operations.GetRefundRequest;
 import io.moov.sdk.models.operations.GetRefundRequestBuilder;
 import io.moov.sdk.models.operations.GetRefundResponse;
@@ -70,6 +77,8 @@ public class Transfers implements
             MethodCallListTransfers,
             MethodCallGetTransfer,
             MethodCallUpdateTransfer,
+            MethodCallCreateCancellation,
+            MethodCallGetCancellation,
             MethodCallInitiateRefund,
             MethodCallListRefunds,
             MethodCallGetRefund,
@@ -786,6 +795,380 @@ public class Transfers implements
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<Transfer>() {});
                 _res.withTransfer(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new APIException(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     *   Initiate a cancellation for a card, ACH, or queued transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * @return The call builder
+     */
+    public CreateCancellationRequestBuilder createCancellation() {
+        return new CreateCancellationRequestBuilder(this);
+    }
+
+    /**
+     *   Initiate a cancellation for a card, ACH, or queued transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * @param accountID The partner's Moov account ID.
+     * @param transferID The transfer ID to cancel.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CreateCancellationResponse createCancellation(
+            String accountID,
+            String transferID) throws Exception {
+        return createCancellation(Optional.empty(), accountID, transferID);
+    }
+    
+    /**
+     *   Initiate a cancellation for a card, ACH, or queued transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * @param xMoovVersion Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID The partner's Moov account ID.
+     * @param transferID The transfer ID to cancel.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CreateCancellationResponse createCancellation(
+            Optional<String> xMoovVersion,
+            String accountID,
+            String transferID) throws Exception {
+        CreateCancellationRequest request =
+            CreateCancellationRequest
+                .builder()
+                .xMoovVersion(xMoovVersion)
+                .accountID(accountID)
+                .transferID(transferID)
+                .build();
+        
+        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _url = Utils.generateURL(
+                CreateCancellationRequest.class,
+                _baseUrl,
+                "/accounts/{accountID}/transfers/{transferID}/cancellations",
+                request, this.sdkConfiguration.globals);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "POST");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "createCancellation", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "createCancellation",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "createCancellation",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "createCancellation",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        CreateCancellationResponse.Builder _resBuilder = 
+            CreateCancellationResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        CreateCancellationResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200", "202")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                Cancellation _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<Cancellation>() {});
+                _res.withCancellation(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GenericError _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GenericError>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new APIException(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     *   Get details of a cancellation for a transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @return The call builder
+     */
+    public GetCancellationRequestBuilder getCancellation() {
+        return new GetCancellationRequestBuilder(this);
+    }
+
+    /**
+     *   Get details of a cancellation for a transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @param accountID Moov account ID of the partner or transfer's source or destination.
+     * @param transferID Identifier for the transfer.
+     * @param cancellationID Identifier for the cancellation.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetCancellationResponse getCancellation(
+            String accountID,
+            String transferID,
+            String cancellationID) throws Exception {
+        return getCancellation(Optional.empty(), accountID, transferID, cancellationID);
+    }
+    
+    /**
+     *   Get details of a cancellation for a transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @param xMoovVersion Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where 
+      - `YYYY` is the year
+      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID Moov account ID of the partner or transfer's source or destination.
+     * @param transferID Identifier for the transfer.
+     * @param cancellationID Identifier for the cancellation.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetCancellationResponse getCancellation(
+            Optional<String> xMoovVersion,
+            String accountID,
+            String transferID,
+            String cancellationID) throws Exception {
+        GetCancellationRequest request =
+            GetCancellationRequest
+                .builder()
+                .xMoovVersion(xMoovVersion)
+                .accountID(accountID)
+                .transferID(transferID)
+                .cancellationID(cancellationID)
+                .build();
+        
+        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _url = Utils.generateURL(
+                GetCancellationRequest.class,
+                _baseUrl,
+                "/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}",
+                request, this.sdkConfiguration.globals);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "getCancellation", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getCancellation",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "getCancellation",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getCancellation",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        GetCancellationResponse.Builder _resBuilder = 
+            GetCancellationResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        GetCancellationResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                Cancellation _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<Cancellation>() {});
+                _res.withCancellation(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(

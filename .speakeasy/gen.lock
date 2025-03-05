@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: b858780b7a03b27e62824696681fa77d
+  docChecksum: 4c4eed7ecb23a068943b689e778dc96b
   docVersion: latest
-  speakeasyVersion: 1.509.0
-  generationVersion: 2.539.0
-  releaseVersion: 0.8.10
-  configChecksum: f082938afca46daa97595db1b4c54e2a
+  speakeasyVersion: 1.509.1
+  generationVersion: 2.539.1
+  releaseVersion: 0.8.11
+  configChecksum: 7f97d4ddbf7b52e17e2dbd7d54b7a5a6
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -483,6 +483,8 @@ generatedFiles:
   - docs/models/operations/CreateApplePaySessionResponse.md
   - docs/models/operations/CreateBrandRequest.md
   - docs/models/operations/CreateBrandResponse.md
+  - docs/models/operations/CreateCancellationRequest.md
+  - docs/models/operations/CreateCancellationResponse.md
   - docs/models/operations/CreateFeePlanAgreementsRequest.md
   - docs/models/operations/CreateFeePlanAgreementsResponse.md
   - docs/models/operations/CreateOnboardingInviteRequest.md
@@ -537,6 +539,8 @@ generatedFiles:
   - docs/models/operations/GetBankAccountVerificationResponse.md
   - docs/models/operations/GetBrandRequest.md
   - docs/models/operations/GetBrandResponse.md
+  - docs/models/operations/GetCancellationRequest.md
+  - docs/models/operations/GetCancellationResponse.md
   - docs/models/operations/GetCapabilityRequest.md
   - docs/models/operations/GetCapabilityResponse.md
   - docs/models/operations/GetCardRequest.md
@@ -1254,6 +1258,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/CreateBrandRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreateBrandRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateBrandResponse.java
+  - src/main/java/io/moov/sdk/models/operations/CreateCancellationRequest.java
+  - src/main/java/io/moov/sdk/models/operations/CreateCancellationRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/CreateCancellationResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreateFeePlanAgreementsRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreateFeePlanAgreementsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateFeePlanAgreementsResponse.java
@@ -1335,6 +1342,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/GetBrandRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetBrandRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetBrandResponse.java
+  - src/main/java/io/moov/sdk/models/operations/GetCancellationRequest.java
+  - src/main/java/io/moov/sdk/models/operations/GetCancellationRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/GetCancellationResponse.java
   - src/main/java/io/moov/sdk/models/operations/GetCapabilityRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetCapabilityRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetCapabilityResponse.java
@@ -3258,5 +3268,26 @@ examples:
       responses:
         "400":
           application/json: {"error": "<value>"}
+  createCancellation:
+    Created cancellation:
+      parameters:
+        path:
+          accountID: "12dbe811-b86d-497b-ae0f-fb7cfda35251"
+          transferID: "6bb9450c-10a9-4c8d-a8d2-d3fa18648706"
+        header: {}
+      responses:
+        "200":
+          application/json: {"cancellationID": "89ca7f54-13ba-4714-b9af-17163eae2057", "status": "completed", "createdOn": "2025-01-19T03:02:43.255309588Z"}
+  getCancellation:
+    Got cancellation:
+      parameters:
+        path:
+          accountID: "fe098575-0376-4404-9a9c-6fe55e3766af"
+          transferID: "b3b49c6a-9b74-4a85-9d49-864ada05cbf2"
+          cancellationID: "5848c1db-18ac-41eb-b107-b6499987902c"
+        header: {}
+      responses:
+        "200":
+          application/json: {"cancellationID": "89ca7f54-13ba-4714-b9af-17163eae2057", "status": "completed", "createdOn": "2025-01-19T03:02:43.255309588Z"}
 examplesVersion: 1.0.0
 generatedTests: {}

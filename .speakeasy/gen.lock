@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 4c4eed7ecb23a068943b689e778dc96b
+  docChecksum: 58b862a0045aec6d8e7b40ce16dabc08
   docVersion: latest
-  speakeasyVersion: 1.509.1
-  generationVersion: 2.539.1
-  releaseVersion: 0.8.11
-  configChecksum: 7f97d4ddbf7b52e17e2dbd7d54b7a5a6
+  speakeasyVersion: 1.510.0
+  generationVersion: 2.541.0
+  releaseVersion: 0.8.12
+  configChecksum: 844ccac54c66871ebd2c35ad21872354
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -338,6 +338,9 @@ generatedFiles:
   - docs/models/components/RTPRejectionCode.md
   - docs/models/components/RTPTransactionDetails.md
   - docs/models/components/RTPTransactionStatus.md
+  - docs/models/components/ReceiptKind.md
+  - docs/models/components/ReceiptRequest.md
+  - docs/models/components/ReceiptResponse.md
   - docs/models/components/Recur.md
   - docs/models/components/RefundCardDetails.md
   - docs/models/components/RefundCardStatus.md
@@ -363,6 +366,7 @@ generatedFiles:
   - docs/models/components/SchedulePaymentMethod.md
   - docs/models/components/ScheduleResponse.md
   - docs/models/components/Security.md
+  - docs/models/components/SentReceipt.md
   - docs/models/components/Settings.md
   - docs/models/components/SourceDestinationOptions.md
   - docs/models/components/Ssn.md
@@ -449,6 +453,7 @@ generatedFiles:
   - docs/models/errors/MicroDepositValidationError.md
   - docs/models/errors/OnboardingInviteError.md
   - docs/models/errors/PatchSweepConfigError.md
+  - docs/models/errors/ReceiptValidationError.md
   - docs/models/errors/RefundValidationError.md
   - docs/models/errors/RepresentativeValidationError.md
   - docs/models/errors/RequestCardError.md
@@ -491,6 +496,8 @@ generatedFiles:
   - docs/models/operations/CreateOnboardingInviteResponse.md
   - docs/models/operations/CreatePaymentLinkRequest.md
   - docs/models/operations/CreatePaymentLinkResponse.md
+  - docs/models/operations/CreateReceiptsRequest.md
+  - docs/models/operations/CreateReceiptsResponse.md
   - docs/models/operations/CreateRepresentativeRequest.md
   - docs/models/operations/CreateRepresentativeResponse.md
   - docs/models/operations/CreateReversalRequest.md
@@ -655,6 +662,8 @@ generatedFiles:
   - docs/models/operations/ListPaymentLinksResponse.md
   - docs/models/operations/ListPaymentMethodsRequest.md
   - docs/models/operations/ListPaymentMethodsResponse.md
+  - docs/models/operations/ListReceiptsRequest.md
+  - docs/models/operations/ListReceiptsResponse.md
   - docs/models/operations/ListRefundsRequest.md
   - docs/models/operations/ListRefundsResponse.md
   - docs/models/operations/ListRepresentativesRequest.md
@@ -747,6 +756,7 @@ generatedFiles:
   - docs/sdks/paymentlinks/README.md
   - docs/sdks/paymentmethods/README.md
   - docs/sdks/ping/README.md
+  - docs/sdks/receipts/README.md
   - docs/sdks/representatives/README.md
   - docs/sdks/scheduling/README.md
   - docs/sdks/sweeps/README.md
@@ -784,6 +794,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/PaymentLinks.java
   - src/main/java/io/moov/sdk/PaymentMethods.java
   - src/main/java/io/moov/sdk/Ping.java
+  - src/main/java/io/moov/sdk/Receipts.java
   - src/main/java/io/moov/sdk/Representatives.java
   - src/main/java/io/moov/sdk/SDKConfiguration.java
   - src/main/java/io/moov/sdk/Scheduling.java
@@ -1102,6 +1113,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/RTPRejectionCode.java
   - src/main/java/io/moov/sdk/models/components/RTPTransactionDetails.java
   - src/main/java/io/moov/sdk/models/components/RTPTransactionStatus.java
+  - src/main/java/io/moov/sdk/models/components/ReceiptKind.java
+  - src/main/java/io/moov/sdk/models/components/ReceiptRequest.java
+  - src/main/java/io/moov/sdk/models/components/ReceiptResponse.java
   - src/main/java/io/moov/sdk/models/components/Recur.java
   - src/main/java/io/moov/sdk/models/components/RefundCardDetails.java
   - src/main/java/io/moov/sdk/models/components/RefundCardStatus.java
@@ -1127,6 +1141,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/SchedulePaymentMethod.java
   - src/main/java/io/moov/sdk/models/components/ScheduleResponse.java
   - src/main/java/io/moov/sdk/models/components/Security.java
+  - src/main/java/io/moov/sdk/models/components/SentReceipt.java
   - src/main/java/io/moov/sdk/models/components/Settings.java
   - src/main/java/io/moov/sdk/models/components/SourceDestinationOptions.java
   - src/main/java/io/moov/sdk/models/components/Ssn.java
@@ -1215,6 +1230,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/MicroDepositValidationError.java
   - src/main/java/io/moov/sdk/models/errors/OnboardingInviteError.java
   - src/main/java/io/moov/sdk/models/errors/PatchSweepConfigError.java
+  - src/main/java/io/moov/sdk/models/errors/ReceiptValidationError.java
   - src/main/java/io/moov/sdk/models/errors/RefundValidationError.java
   - src/main/java/io/moov/sdk/models/errors/RepresentativeValidationError.java
   - src/main/java/io/moov/sdk/models/errors/RequestCardError.java
@@ -1270,6 +1286,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/CreatePaymentLinkRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreatePaymentLinkRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreatePaymentLinkResponse.java
+  - src/main/java/io/moov/sdk/models/operations/CreateReceiptsRequest.java
+  - src/main/java/io/moov/sdk/models/operations/CreateReceiptsRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/CreateReceiptsResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreateRepresentativeRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreateRepresentativeRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateRepresentativeResponse.java
@@ -1516,6 +1535,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/ListPaymentMethodsRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListPaymentMethodsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListPaymentMethodsResponse.java
+  - src/main/java/io/moov/sdk/models/operations/ListReceiptsRequest.java
+  - src/main/java/io/moov/sdk/models/operations/ListReceiptsRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/ListReceiptsResponse.java
   - src/main/java/io/moov/sdk/models/operations/ListRefundsRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListRefundsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListRefundsResponse.java
@@ -3289,5 +3311,21 @@ examples:
       responses:
         "200":
           application/json: {"cancellationID": "89ca7f54-13ba-4714-b9af-17163eae2057", "status": "completed", "createdOn": "2025-01-19T03:02:43.255309588Z"}
+  createReceipts:
+    speakeasy-default-create-receipts:
+      requestBody:
+        application/json: [{"kind": "sale.customer.v1", "email": "jordan.lee@classbooker.dev"}]
+      responses:
+        "200":
+          application/json: {"receiptID": "a621cf02-1cd9-4cf5-8403-315211a509a3", "createdBy": "80a8e774-c2be-4cc3-8769-1775e0249856", "disabledOn": "2009-11-10T23:00:00Z", "kind": "sale.customer.v1", "email": "jordan.lee@classbooker.dev", "sentFor": []}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  listReceipts:
+    speakeasy-default-list-receipts:
+      responses:
+        "200":
+          application/json: [{"receiptID": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "createdBy": "1e276671-8d6d-4461-b2e0-aee1b9ddf121", "disabledOn": "2009-11-10T23:00:00Z", "kind": "sale.customer.v1", "email": "jordan.lee@classbooker.dev", "sentFor": [{"receiptID": "2a4c8104-fb45-41a7-a0cf-c8fe07fbc60a", "idempotencyKey": "960d5611-ff65-473e-90a6-2331ad7c07cc", "sentOn": "2009-11-10T23:00:00Z"}, {"receiptID": "81991696-ebd8-434b-b7d8-c2236e085944", "idempotencyKey": "bceb27bd-4753-4d0a-917c-478e329a9ec9", "sentOn": "2009-11-10T23:00:00Z"}, {"receiptID": "938e1a63-0f5f-4e36-a808-2fa02e0874e7", "idempotencyKey": "307648ec-2ed7-4f30-939d-ec6f45d97b2c", "sentOn": "2009-11-10T23:00:00Z"}]}, {"receiptID": "d7f7bcfa-269a-4f21-b94d-5861b3fe5754", "createdBy": "0c551a92-c743-41dd-8f19-3e2177ab4c4d", "disabledOn": "2009-11-10T23:00:00Z", "kind": "sale.customer.v1", "email": "jordan.lee@classbooker.dev", "sentFor": []}, {"receiptID": "cedb55c7-155b-40db-ba7a-30fd263f0cce", "createdBy": "19e17aef-2e28-4695-bca4-33b1104d1efa", "disabledOn": "2009-11-10T23:00:00Z", "kind": "sale.customer.v1", "email": "jordan.lee@classbooker.dev", "sentFor": [{"receiptID": "ad1494b3-d276-4b63-9f80-6d94b843a1ce", "idempotencyKey": "23bc77dd-5bb4-42fc-8fa6-f3f7b3d58ee6", "sentOn": "2009-11-10T23:00:00Z"}, {"receiptID": "458f7304-a0a3-4715-ae54-f642e86b7c60", "idempotencyKey": "73f56981-2ed5-452f-9f7f-fa2f9aacddda", "sentOn": "2009-11-10T23:00:00Z"}]}]
 examplesVersion: 1.0.0
 generatedTests: {}

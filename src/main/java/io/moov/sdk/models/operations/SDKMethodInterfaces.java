@@ -34,6 +34,7 @@ import io.moov.sdk.models.components.PatchAccount;
 import io.moov.sdk.models.components.PatchSweepConfig;
 import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.models.components.PaymentMethodType;
+import io.moov.sdk.models.components.ReceiptRequest;
 import io.moov.sdk.models.components.RegisterApplePayMerchantDomains;
 import io.moov.sdk.models.components.RequestCard;
 import io.moov.sdk.models.components.RevokeTokenRequest;
@@ -1006,6 +1007,20 @@ public class SDKMethodInterfaces {
     public interface MethodCallPing {
         PingResponse ping(
             Optional<String> xMoovVersion) throws Exception;
+    }
+
+
+    public interface MethodCallCreateReceipts {
+        CreateReceiptsResponse create(
+            Optional<String> xMoovVersion,
+            List<ReceiptRequest> requestBody) throws Exception;
+    }
+
+
+    public interface MethodCallListReceipts {
+        ListReceiptsResponse list(
+            Optional<String> xMoovVersion,
+            Optional<String> id) throws Exception;
     }
 
 

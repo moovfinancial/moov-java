@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.8.11'
+implementation 'io.moov:sdk:0.8.12'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.8.11</version>
+    <version>0.8.12</version>
 </dependency>
 ```
 
@@ -962,6 +962,17 @@ you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/ping.read` scope.
+
+### [receipts()](docs/sdks/receipts/README.md)
+
+* [create](docs/sdks/receipts/README.md#create) -  Create receipts for transfers and scheduled transfers.
+
+ To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [list](docs/sdks/receipts/README.md#list) - List receipts by trasnferID, scheduleID, or occurrenceID.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### [representatives()](docs/sdks/representatives/README.md)
 

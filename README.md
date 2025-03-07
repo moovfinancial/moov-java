@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.8.12'
+implementation 'io.moov:sdk:0.8.13'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.8.12</version>
+    <version>0.8.13</version>
 </dependency>
 ```
 
@@ -100,6 +100,7 @@ import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
+import io.moov.sdk.models.components.Mode;
 import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
@@ -211,6 +212,7 @@ public class Application {
                             .companyName("WholeBodyFitness")
                             .build())
                         .build())
+                    .mode(Mode.PRODUCTION)
                     .build())
                 .call();
 
@@ -252,6 +254,7 @@ import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
+import io.moov.sdk.models.components.Mode;
 import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
@@ -363,6 +366,7 @@ public class Application {
                             .companyName("WholeBodyFitness")
                             .build())
                         .build())
+                    .mode(Mode.PRODUCTION)
                     .build())
                 .call();
 
@@ -1238,6 +1242,7 @@ import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
+import io.moov.sdk.models.components.Mode;
 import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
@@ -1349,6 +1354,7 @@ public class Application {
                             .companyName("WholeBodyFitness")
                             .build())
                         .build())
+                    .mode(Mode.PRODUCTION)
                     .build())
                 .call();
 
@@ -1384,6 +1390,7 @@ import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
+import io.moov.sdk.models.components.Mode;
 import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
@@ -1496,6 +1503,7 @@ public class Application {
                             .companyName("WholeBodyFitness")
                             .build())
                         .build())
+                    .mode(Mode.PRODUCTION)
                     .build())
                 .call();
 

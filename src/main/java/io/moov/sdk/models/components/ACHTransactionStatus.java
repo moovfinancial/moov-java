@@ -16,7 +16,8 @@ public enum ACHTransactionStatus {
     ORIGINATED("originated"),
     CORRECTED("corrected"),
     RETURNED("returned"),
-    COMPLETED("completed");
+    COMPLETED("completed"),
+    CANCELED("canceled");
 
     @JsonValue
     private final String value;

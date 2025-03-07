@@ -52,6 +52,7 @@ import io.moov.sdk.models.components.CustomerSupport;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
 import io.moov.sdk.models.components.ManualTermsOfService;
+import io.moov.sdk.models.components.Mode;
 import io.moov.sdk.models.components.OnboardingInviteRequest;
 import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
@@ -175,6 +176,7 @@ public class Application {
                                 .companyName("WholeBodyFitness")
                                 .build())
                             .build())
+                        .mode(Mode.PRODUCTION)
                         .build())
                     .build())
                 .call();

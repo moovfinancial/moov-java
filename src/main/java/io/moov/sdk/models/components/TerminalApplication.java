@@ -39,28 +39,28 @@ public class TerminalApplication {
     private TerminalApplicationPlatform platform;
 
     /**
-     * The app bundle identifier of the terminal application. Will be returned if platform is ios.
+     * The app bundle identifier of the terminal application. Will be returned if platform is `ios`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("appBundleID")
     private Optional<String> appBundleID;
 
     /**
-     * The app package name of the terminal application. Will be returned if platform is android.
+     * The app package name of the terminal application. Will be returned if platform is `android`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("packageName")
     private Optional<String> packageName;
 
     /**
-     * The app version of the terminal application Will be returned if platform is android.
+     * The app version of the terminal application Will be returned if platform is `android`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sha256Digest")
     private Optional<String> sha256Digest;
 
     /**
-     * The app version of the terminal application Will be returned if platform is android.
+     * The app version of the terminal application Will be returned if platform is `android`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("versionCode")
@@ -123,7 +123,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app bundle identifier of the terminal application. Will be returned if platform is ios.
+     * The app bundle identifier of the terminal application. Will be returned if platform is `ios`.
      */
     @JsonIgnore
     public Optional<String> appBundleID() {
@@ -131,7 +131,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app package name of the terminal application. Will be returned if platform is android.
+     * The app package name of the terminal application. Will be returned if platform is `android`.
      */
     @JsonIgnore
     public Optional<String> packageName() {
@@ -139,7 +139,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app version of the terminal application Will be returned if platform is android.
+     * The app version of the terminal application Will be returned if platform is `android`.
      */
     @JsonIgnore
     public Optional<String> sha256Digest() {
@@ -147,7 +147,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app version of the terminal application Will be returned if platform is android.
+     * The app version of the terminal application Will be returned if platform is `android`.
      */
     @JsonIgnore
     public Optional<String> versionCode() {
@@ -186,7 +186,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app bundle identifier of the terminal application. Will be returned if platform is ios.
+     * The app bundle identifier of the terminal application. Will be returned if platform is `ios`.
      */
     public TerminalApplication withAppBundleID(String appBundleID) {
         Utils.checkNotNull(appBundleID, "appBundleID");
@@ -195,7 +195,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app bundle identifier of the terminal application. Will be returned if platform is ios.
+     * The app bundle identifier of the terminal application. Will be returned if platform is `ios`.
      */
     public TerminalApplication withAppBundleID(Optional<String> appBundleID) {
         Utils.checkNotNull(appBundleID, "appBundleID");
@@ -204,7 +204,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app package name of the terminal application. Will be returned if platform is android.
+     * The app package name of the terminal application. Will be returned if platform is `android`.
      */
     public TerminalApplication withPackageName(String packageName) {
         Utils.checkNotNull(packageName, "packageName");
@@ -213,7 +213,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app package name of the terminal application. Will be returned if platform is android.
+     * The app package name of the terminal application. Will be returned if platform is `android`.
      */
     public TerminalApplication withPackageName(Optional<String> packageName) {
         Utils.checkNotNull(packageName, "packageName");
@@ -222,7 +222,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app version of the terminal application Will be returned if platform is android.
+     * The app version of the terminal application Will be returned if platform is `android`.
      */
     public TerminalApplication withSha256Digest(String sha256Digest) {
         Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -231,7 +231,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app version of the terminal application Will be returned if platform is android.
+     * The app version of the terminal application Will be returned if platform is `android`.
      */
     public TerminalApplication withSha256Digest(Optional<String> sha256Digest) {
         Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -240,7 +240,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app version of the terminal application Will be returned if platform is android.
+     * The app version of the terminal application Will be returned if platform is `android`.
      */
     public TerminalApplication withVersionCode(String versionCode) {
         Utils.checkNotNull(versionCode, "versionCode");
@@ -249,7 +249,7 @@ public class TerminalApplication {
     }
 
     /**
-     * The app version of the terminal application Will be returned if platform is android.
+     * The app version of the terminal application Will be returned if platform is `android`.
      */
     public TerminalApplication withVersionCode(Optional<String> versionCode) {
         Utils.checkNotNull(versionCode, "versionCode");
@@ -348,7 +348,7 @@ public class TerminalApplication {
         }
 
         /**
-         * The app bundle identifier of the terminal application. Will be returned if platform is ios.
+         * The app bundle identifier of the terminal application. Will be returned if platform is `ios`.
          */
         public Builder appBundleID(String appBundleID) {
             Utils.checkNotNull(appBundleID, "appBundleID");
@@ -357,7 +357,7 @@ public class TerminalApplication {
         }
 
         /**
-         * The app bundle identifier of the terminal application. Will be returned if platform is ios.
+         * The app bundle identifier of the terminal application. Will be returned if platform is `ios`.
          */
         public Builder appBundleID(Optional<String> appBundleID) {
             Utils.checkNotNull(appBundleID, "appBundleID");
@@ -366,7 +366,7 @@ public class TerminalApplication {
         }
 
         /**
-         * The app package name of the terminal application. Will be returned if platform is android.
+         * The app package name of the terminal application. Will be returned if platform is `android`.
          */
         public Builder packageName(String packageName) {
             Utils.checkNotNull(packageName, "packageName");
@@ -375,7 +375,7 @@ public class TerminalApplication {
         }
 
         /**
-         * The app package name of the terminal application. Will be returned if platform is android.
+         * The app package name of the terminal application. Will be returned if platform is `android`.
          */
         public Builder packageName(Optional<String> packageName) {
             Utils.checkNotNull(packageName, "packageName");
@@ -384,7 +384,7 @@ public class TerminalApplication {
         }
 
         /**
-         * The app version of the terminal application Will be returned if platform is android.
+         * The app version of the terminal application Will be returned if platform is `android`.
          */
         public Builder sha256Digest(String sha256Digest) {
             Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -393,7 +393,7 @@ public class TerminalApplication {
         }
 
         /**
-         * The app version of the terminal application Will be returned if platform is android.
+         * The app version of the terminal application Will be returned if platform is `android`.
          */
         public Builder sha256Digest(Optional<String> sha256Digest) {
             Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -402,7 +402,7 @@ public class TerminalApplication {
         }
 
         /**
-         * The app version of the terminal application Will be returned if platform is android.
+         * The app version of the terminal application Will be returned if platform is `android`.
          */
         public Builder versionCode(String versionCode) {
             Utils.checkNotNull(versionCode, "versionCode");
@@ -411,7 +411,7 @@ public class TerminalApplication {
         }
 
         /**
-         * The app version of the terminal application Will be returned if platform is android.
+         * The app version of the terminal application Will be returned if platform is `android`.
          */
         public Builder versionCode(Optional<String> versionCode) {
             Utils.checkNotNull(versionCode, "versionCode");

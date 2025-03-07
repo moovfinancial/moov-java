@@ -27,28 +27,28 @@ public class CreateTerminalApplication {
     private TerminalApplicationPlatform platform;
 
     /**
-     * The app bundle identifier of the terminal application. Required if platform is ios.
+     * The app bundle identifier of the terminal application. Required if platform is `ios`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("appBundleID")
     private Optional<String> appBundleID;
 
     /**
-     * The app package name of the terminal application. Required if platform is android.
+     * The app package name of the terminal application. Required if platform is `android`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("packageName")
     private Optional<String> packageName;
 
     /**
-     * The app version of the terminal application. Required if paltform is android.
+     * The app version of the terminal application. Required if paltform is `android`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sha256Digest")
     private Optional<String> sha256Digest;
 
     /**
-     * The app version of the terminal application. Required if platform is android.
+     * The app version of the terminal application. Required if platform is `android`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("versionCode")
@@ -87,7 +87,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app bundle identifier of the terminal application. Required if platform is ios.
+     * The app bundle identifier of the terminal application. Required if platform is `ios`.
      */
     @JsonIgnore
     public Optional<String> appBundleID() {
@@ -95,7 +95,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app package name of the terminal application. Required if platform is android.
+     * The app package name of the terminal application. Required if platform is `android`.
      */
     @JsonIgnore
     public Optional<String> packageName() {
@@ -103,7 +103,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if paltform is android.
+     * The app version of the terminal application. Required if paltform is `android`.
      */
     @JsonIgnore
     public Optional<String> sha256Digest() {
@@ -111,7 +111,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if platform is android.
+     * The app version of the terminal application. Required if platform is `android`.
      */
     @JsonIgnore
     public Optional<String> versionCode() {
@@ -132,7 +132,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app bundle identifier of the terminal application. Required if platform is ios.
+     * The app bundle identifier of the terminal application. Required if platform is `ios`.
      */
     public CreateTerminalApplication withAppBundleID(String appBundleID) {
         Utils.checkNotNull(appBundleID, "appBundleID");
@@ -141,7 +141,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app bundle identifier of the terminal application. Required if platform is ios.
+     * The app bundle identifier of the terminal application. Required if platform is `ios`.
      */
     public CreateTerminalApplication withAppBundleID(Optional<String> appBundleID) {
         Utils.checkNotNull(appBundleID, "appBundleID");
@@ -150,7 +150,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app package name of the terminal application. Required if platform is android.
+     * The app package name of the terminal application. Required if platform is `android`.
      */
     public CreateTerminalApplication withPackageName(String packageName) {
         Utils.checkNotNull(packageName, "packageName");
@@ -159,7 +159,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app package name of the terminal application. Required if platform is android.
+     * The app package name of the terminal application. Required if platform is `android`.
      */
     public CreateTerminalApplication withPackageName(Optional<String> packageName) {
         Utils.checkNotNull(packageName, "packageName");
@@ -168,7 +168,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if paltform is android.
+     * The app version of the terminal application. Required if paltform is `android`.
      */
     public CreateTerminalApplication withSha256Digest(String sha256Digest) {
         Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -177,7 +177,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if paltform is android.
+     * The app version of the terminal application. Required if paltform is `android`.
      */
     public CreateTerminalApplication withSha256Digest(Optional<String> sha256Digest) {
         Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -186,7 +186,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if platform is android.
+     * The app version of the terminal application. Required if platform is `android`.
      */
     public CreateTerminalApplication withVersionCode(String versionCode) {
         Utils.checkNotNull(versionCode, "versionCode");
@@ -195,7 +195,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if platform is android.
+     * The app version of the terminal application. Required if platform is `android`.
      */
     public CreateTerminalApplication withVersionCode(Optional<String> versionCode) {
         Utils.checkNotNull(versionCode, "versionCode");
@@ -266,7 +266,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app bundle identifier of the terminal application. Required if platform is ios.
+         * The app bundle identifier of the terminal application. Required if platform is `ios`.
          */
         public Builder appBundleID(String appBundleID) {
             Utils.checkNotNull(appBundleID, "appBundleID");
@@ -275,7 +275,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app bundle identifier of the terminal application. Required if platform is ios.
+         * The app bundle identifier of the terminal application. Required if platform is `ios`.
          */
         public Builder appBundleID(Optional<String> appBundleID) {
             Utils.checkNotNull(appBundleID, "appBundleID");
@@ -284,7 +284,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app package name of the terminal application. Required if platform is android.
+         * The app package name of the terminal application. Required if platform is `android`.
          */
         public Builder packageName(String packageName) {
             Utils.checkNotNull(packageName, "packageName");
@@ -293,7 +293,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app package name of the terminal application. Required if platform is android.
+         * The app package name of the terminal application. Required if platform is `android`.
          */
         public Builder packageName(Optional<String> packageName) {
             Utils.checkNotNull(packageName, "packageName");
@@ -302,7 +302,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app version of the terminal application. Required if paltform is android.
+         * The app version of the terminal application. Required if paltform is `android`.
          */
         public Builder sha256Digest(String sha256Digest) {
             Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -311,7 +311,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app version of the terminal application. Required if paltform is android.
+         * The app version of the terminal application. Required if paltform is `android`.
          */
         public Builder sha256Digest(Optional<String> sha256Digest) {
             Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -320,7 +320,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app version of the terminal application. Required if platform is android.
+         * The app version of the terminal application. Required if platform is `android`.
          */
         public Builder versionCode(String versionCode) {
             Utils.checkNotNull(versionCode, "versionCode");
@@ -329,7 +329,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app version of the terminal application. Required if platform is android.
+         * The app version of the terminal application. Required if platform is `android`.
          */
         public Builder versionCode(Optional<String> versionCode) {
             Utils.checkNotNull(versionCode, "versionCode");

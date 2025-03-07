@@ -17,6 +17,7 @@ import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
+import io.moov.sdk.models.components.Mode;
 import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
@@ -128,6 +129,7 @@ public class Application {
                             .companyName("WholeBodyFitness")
                             .build())
                         .build())
+                    .mode(Mode.PRODUCTION)
                     .build())
                 .call();
 

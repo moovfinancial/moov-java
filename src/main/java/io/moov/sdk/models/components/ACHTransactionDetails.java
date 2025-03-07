@@ -61,6 +61,10 @@ public class ACHTransactionDetails {
     private Optional<? extends SECCode> secCode;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("canceledOn")
+    private Optional<OffsetDateTime> canceledOn;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("initiatedOn")
     private Optional<OffsetDateTime> initiatedOn;
 
@@ -100,6 +104,7 @@ public class ACHTransactionDetails {
             @JsonProperty("companyEntryDescription") Optional<String> companyEntryDescription,
             @JsonProperty("originatingCompanyName") Optional<String> originatingCompanyName,
             @JsonProperty("secCode") Optional<? extends SECCode> secCode,
+            @JsonProperty("canceledOn") Optional<OffsetDateTime> canceledOn,
             @JsonProperty("initiatedOn") Optional<OffsetDateTime> initiatedOn,
             @JsonProperty("originatedOn") Optional<OffsetDateTime> originatedOn,
             @JsonProperty("correctedOn") Optional<OffsetDateTime> correctedOn,
@@ -114,6 +119,7 @@ public class ACHTransactionDetails {
         Utils.checkNotNull(companyEntryDescription, "companyEntryDescription");
         Utils.checkNotNull(originatingCompanyName, "originatingCompanyName");
         Utils.checkNotNull(secCode, "secCode");
+        Utils.checkNotNull(canceledOn, "canceledOn");
         Utils.checkNotNull(initiatedOn, "initiatedOn");
         Utils.checkNotNull(originatedOn, "originatedOn");
         Utils.checkNotNull(correctedOn, "correctedOn");
@@ -128,6 +134,7 @@ public class ACHTransactionDetails {
         this.companyEntryDescription = companyEntryDescription;
         this.originatingCompanyName = originatingCompanyName;
         this.secCode = secCode;
+        this.canceledOn = canceledOn;
         this.initiatedOn = initiatedOn;
         this.originatedOn = originatedOn;
         this.correctedOn = correctedOn;
@@ -140,7 +147,7 @@ public class ACHTransactionDetails {
     public ACHTransactionDetails(
             ACHTransactionStatus status,
             String traceNumber) {
-        this(status, traceNumber, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(status, traceNumber, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -191,6 +198,11 @@ public class ACHTransactionDetails {
     @JsonIgnore
     public Optional<SECCode> secCode() {
         return (Optional<SECCode>) secCode;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> canceledOn() {
+        return canceledOn;
     }
 
     @JsonIgnore
@@ -329,6 +341,18 @@ public class ACHTransactionDetails {
         return this;
     }
 
+    public ACHTransactionDetails withCanceledOn(OffsetDateTime canceledOn) {
+        Utils.checkNotNull(canceledOn, "canceledOn");
+        this.canceledOn = Optional.ofNullable(canceledOn);
+        return this;
+    }
+
+    public ACHTransactionDetails withCanceledOn(Optional<OffsetDateTime> canceledOn) {
+        Utils.checkNotNull(canceledOn, "canceledOn");
+        this.canceledOn = canceledOn;
+        return this;
+    }
+
     public ACHTransactionDetails withInitiatedOn(OffsetDateTime initiatedOn) {
         Utils.checkNotNull(initiatedOn, "initiatedOn");
         this.initiatedOn = Optional.ofNullable(initiatedOn);
@@ -436,6 +460,7 @@ public class ACHTransactionDetails {
             Objects.deepEquals(this.companyEntryDescription, other.companyEntryDescription) &&
             Objects.deepEquals(this.originatingCompanyName, other.originatingCompanyName) &&
             Objects.deepEquals(this.secCode, other.secCode) &&
+            Objects.deepEquals(this.canceledOn, other.canceledOn) &&
             Objects.deepEquals(this.initiatedOn, other.initiatedOn) &&
             Objects.deepEquals(this.originatedOn, other.originatedOn) &&
             Objects.deepEquals(this.correctedOn, other.correctedOn) &&
@@ -455,6 +480,7 @@ public class ACHTransactionDetails {
             companyEntryDescription,
             originatingCompanyName,
             secCode,
+            canceledOn,
             initiatedOn,
             originatedOn,
             correctedOn,
@@ -474,6 +500,7 @@ public class ACHTransactionDetails {
                 "companyEntryDescription", companyEntryDescription,
                 "originatingCompanyName", originatingCompanyName,
                 "secCode", secCode,
+                "canceledOn", canceledOn,
                 "initiatedOn", initiatedOn,
                 "originatedOn", originatedOn,
                 "correctedOn", correctedOn,
@@ -498,6 +525,8 @@ public class ACHTransactionDetails {
         private Optional<String> originatingCompanyName = Optional.empty();
  
         private Optional<? extends SECCode> secCode = Optional.empty();
+ 
+        private Optional<OffsetDateTime> canceledOn = Optional.empty();
  
         private Optional<OffsetDateTime> initiatedOn = Optional.empty();
  
@@ -610,6 +639,18 @@ public class ACHTransactionDetails {
             return this;
         }
 
+        public Builder canceledOn(OffsetDateTime canceledOn) {
+            Utils.checkNotNull(canceledOn, "canceledOn");
+            this.canceledOn = Optional.ofNullable(canceledOn);
+            return this;
+        }
+
+        public Builder canceledOn(Optional<OffsetDateTime> canceledOn) {
+            Utils.checkNotNull(canceledOn, "canceledOn");
+            this.canceledOn = canceledOn;
+            return this;
+        }
+
         public Builder initiatedOn(OffsetDateTime initiatedOn) {
             Utils.checkNotNull(initiatedOn, "initiatedOn");
             this.initiatedOn = Optional.ofNullable(initiatedOn);
@@ -709,6 +750,7 @@ public class ACHTransactionDetails {
                 companyEntryDescription,
                 originatingCompanyName,
                 secCode,
+                canceledOn,
                 initiatedOn,
                 originatedOn,
                 correctedOn,

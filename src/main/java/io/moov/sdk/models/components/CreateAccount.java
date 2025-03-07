@@ -66,6 +66,13 @@ public class CreateAccount {
     @JsonProperty("capabilities")
     private Optional<? extends List<CapabilityID>> capabilities;
 
+    /**
+     * The operating mode for an account.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("mode")
+    private Optional<? extends Mode> mode;
+
     @JsonCreator
     public CreateAccount(
             @JsonProperty("accountType") AccountType accountType,
@@ -75,7 +82,8 @@ public class CreateAccount {
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("customerSupport") Optional<? extends CustomerSupport> customerSupport,
             @JsonProperty("settings") Optional<? extends Settings> settings,
-            @JsonProperty("capabilities") Optional<? extends List<CapabilityID>> capabilities) {
+            @JsonProperty("capabilities") Optional<? extends List<CapabilityID>> capabilities,
+            @JsonProperty("mode") Optional<? extends Mode> mode) {
         Utils.checkNotNull(accountType, "accountType");
         Utils.checkNotNull(profile, "profile");
         Utils.checkNotNull(metadata, "metadata");
@@ -84,6 +92,7 @@ public class CreateAccount {
         Utils.checkNotNull(customerSupport, "customerSupport");
         Utils.checkNotNull(settings, "settings");
         Utils.checkNotNull(capabilities, "capabilities");
+        Utils.checkNotNull(mode, "mode");
         this.accountType = accountType;
         this.profile = profile;
         this.metadata = metadata;
@@ -92,12 +101,13 @@ public class CreateAccount {
         this.customerSupport = customerSupport;
         this.settings = settings;
         this.capabilities = capabilities;
+        this.mode = mode;
     }
     
     public CreateAccount(
             AccountType accountType,
             CreateProfile profile) {
-        this(accountType, profile, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountType, profile, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -159,6 +169,15 @@ public class CreateAccount {
     @JsonIgnore
     public Optional<List<CapabilityID>> capabilities() {
         return (Optional<List<CapabilityID>>) capabilities;
+    }
+
+    /**
+     * The operating mode for an account.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Mode> mode() {
+        return (Optional<Mode>) mode;
     }
 
     public final static Builder builder() {
@@ -277,6 +296,24 @@ public class CreateAccount {
         this.capabilities = capabilities;
         return this;
     }
+
+    /**
+     * The operating mode for an account.
+     */
+    public CreateAccount withMode(Mode mode) {
+        Utils.checkNotNull(mode, "mode");
+        this.mode = Optional.ofNullable(mode);
+        return this;
+    }
+
+    /**
+     * The operating mode for an account.
+     */
+    public CreateAccount withMode(Optional<? extends Mode> mode) {
+        Utils.checkNotNull(mode, "mode");
+        this.mode = mode;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -295,7 +332,8 @@ public class CreateAccount {
             Objects.deepEquals(this.foreignID, other.foreignID) &&
             Objects.deepEquals(this.customerSupport, other.customerSupport) &&
             Objects.deepEquals(this.settings, other.settings) &&
-            Objects.deepEquals(this.capabilities, other.capabilities);
+            Objects.deepEquals(this.capabilities, other.capabilities) &&
+            Objects.deepEquals(this.mode, other.mode);
     }
     
     @Override
@@ -308,7 +346,8 @@ public class CreateAccount {
             foreignID,
             customerSupport,
             settings,
-            capabilities);
+            capabilities,
+            mode);
     }
     
     @Override
@@ -321,7 +360,8 @@ public class CreateAccount {
                 "foreignID", foreignID,
                 "customerSupport", customerSupport,
                 "settings", settings,
-                "capabilities", capabilities);
+                "capabilities", capabilities,
+                "mode", mode);
     }
     
     public final static class Builder {
@@ -340,7 +380,9 @@ public class CreateAccount {
  
         private Optional<? extends Settings> settings = Optional.empty();
  
-        private Optional<? extends List<CapabilityID>> capabilities = Optional.empty();  
+        private Optional<? extends List<CapabilityID>> capabilities = Optional.empty();
+ 
+        private Optional<? extends Mode> mode = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -458,6 +500,24 @@ public class CreateAccount {
             this.capabilities = capabilities;
             return this;
         }
+
+        /**
+         * The operating mode for an account.
+         */
+        public Builder mode(Mode mode) {
+            Utils.checkNotNull(mode, "mode");
+            this.mode = Optional.ofNullable(mode);
+            return this;
+        }
+
+        /**
+         * The operating mode for an account.
+         */
+        public Builder mode(Optional<? extends Mode> mode) {
+            Utils.checkNotNull(mode, "mode");
+            this.mode = mode;
+            return this;
+        }
         
         public CreateAccount build() {
             return new CreateAccount(
@@ -468,7 +528,8 @@ public class CreateAccount {
                 foreignID,
                 customerSupport,
                 settings,
-                capabilities);
+                capabilities,
+                mode);
         }
     }
 }

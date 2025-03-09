@@ -14,6 +14,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class ScheduleResponse {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("occurrences")
-    private Optional<? extends OccurrencesResponse> occurrences;
+    private Optional<? extends List<OccurrencesResponse>> occurrences;
 
     @JsonProperty("ownerAccountID")
     private String ownerAccountID;
@@ -73,7 +74,7 @@ public class ScheduleResponse {
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("destinationAccountID") String destinationAccountID,
             @JsonProperty("mode") Mode mode,
-            @JsonProperty("occurrences") Optional<? extends OccurrencesResponse> occurrences,
+            @JsonProperty("occurrences") Optional<? extends List<OccurrencesResponse>> occurrences,
             @JsonProperty("ownerAccountID") String ownerAccountID,
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("recur") Optional<? extends Recur> recur,
@@ -143,8 +144,8 @@ public class ScheduleResponse {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<OccurrencesResponse> occurrences() {
-        return (Optional<OccurrencesResponse>) occurrences;
+    public Optional<List<OccurrencesResponse>> occurrences() {
+        return (Optional<List<OccurrencesResponse>>) occurrences;
     }
 
     @JsonIgnore
@@ -228,13 +229,13 @@ public class ScheduleResponse {
         return this;
     }
 
-    public ScheduleResponse withOccurrences(OccurrencesResponse occurrences) {
+    public ScheduleResponse withOccurrences(List<OccurrencesResponse> occurrences) {
         Utils.checkNotNull(occurrences, "occurrences");
         this.occurrences = Optional.ofNullable(occurrences);
         return this;
     }
 
-    public ScheduleResponse withOccurrences(Optional<? extends OccurrencesResponse> occurrences) {
+    public ScheduleResponse withOccurrences(Optional<? extends List<OccurrencesResponse>> occurrences) {
         Utils.checkNotNull(occurrences, "occurrences");
         this.occurrences = occurrences;
         return this;
@@ -372,7 +373,7 @@ public class ScheduleResponse {
  
         private Mode mode;
  
-        private Optional<? extends OccurrencesResponse> occurrences = Optional.empty();
+        private Optional<? extends List<OccurrencesResponse>> occurrences = Optional.empty();
  
         private String ownerAccountID;
  
@@ -427,13 +428,13 @@ public class ScheduleResponse {
             return this;
         }
 
-        public Builder occurrences(OccurrencesResponse occurrences) {
+        public Builder occurrences(List<OccurrencesResponse> occurrences) {
             Utils.checkNotNull(occurrences, "occurrences");
             this.occurrences = Optional.ofNullable(occurrences);
             return this;
         }
 
-        public Builder occurrences(Optional<? extends OccurrencesResponse> occurrences) {
+        public Builder occurrences(Optional<? extends List<OccurrencesResponse>> occurrences) {
             Utils.checkNotNull(occurrences, "occurrences");
             this.occurrences = occurrences;
             return this;

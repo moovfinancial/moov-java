@@ -6,7 +6,7 @@
 package io.moov.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.ScheduleResponse;
+import io.moov.sdk.models.components.ScheduleListResponse;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -40,7 +40,7 @@ public class ListSchedulesResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends List<ScheduleResponse>> scheduleResponses;
+    private Optional<? extends List<ScheduleListResponse>> scheduleListResponses;
 
     private Map<String, List<String>> headers;
 
@@ -49,17 +49,17 @@ public class ListSchedulesResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<ScheduleResponse>> scheduleResponses,
+            Optional<? extends List<ScheduleListResponse>> scheduleListResponses,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(scheduleResponses, "scheduleResponses");
+        Utils.checkNotNull(scheduleListResponses, "scheduleListResponses");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.scheduleResponses = scheduleResponses;
+        this.scheduleListResponses = scheduleListResponses;
         this.headers = headers;
     }
     
@@ -100,8 +100,8 @@ public class ListSchedulesResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<ScheduleResponse>> scheduleResponses() {
-        return (Optional<List<ScheduleResponse>>) scheduleResponses;
+    public Optional<List<ScheduleListResponse>> scheduleListResponses() {
+        return (Optional<List<ScheduleListResponse>>) scheduleListResponses;
     }
 
     @JsonIgnore
@@ -143,18 +143,18 @@ public class ListSchedulesResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public ListSchedulesResponse withScheduleResponses(List<ScheduleResponse> scheduleResponses) {
-        Utils.checkNotNull(scheduleResponses, "scheduleResponses");
-        this.scheduleResponses = Optional.ofNullable(scheduleResponses);
+    public ListSchedulesResponse withScheduleListResponses(List<ScheduleListResponse> scheduleListResponses) {
+        Utils.checkNotNull(scheduleListResponses, "scheduleListResponses");
+        this.scheduleListResponses = Optional.ofNullable(scheduleListResponses);
         return this;
     }
 
     /**
      * The request completed successfully.
      */
-    public ListSchedulesResponse withScheduleResponses(Optional<? extends List<ScheduleResponse>> scheduleResponses) {
-        Utils.checkNotNull(scheduleResponses, "scheduleResponses");
-        this.scheduleResponses = scheduleResponses;
+    public ListSchedulesResponse withScheduleListResponses(Optional<? extends List<ScheduleListResponse>> scheduleListResponses) {
+        Utils.checkNotNull(scheduleListResponses, "scheduleListResponses");
+        this.scheduleListResponses = scheduleListResponses;
         return this;
     }
 
@@ -177,7 +177,7 @@ public class ListSchedulesResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.scheduleResponses, other.scheduleResponses) &&
+            Objects.deepEquals(this.scheduleListResponses, other.scheduleListResponses) &&
             Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -187,7 +187,7 @@ public class ListSchedulesResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            scheduleResponses,
+            scheduleListResponses,
             headers);
     }
     
@@ -197,7 +197,7 @@ public class ListSchedulesResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "scheduleResponses", scheduleResponses,
+                "scheduleListResponses", scheduleListResponses,
                 "headers", headers);
     }
     
@@ -209,7 +209,7 @@ public class ListSchedulesResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends List<ScheduleResponse>> scheduleResponses = Optional.empty();
+        private Optional<? extends List<ScheduleListResponse>> scheduleListResponses = Optional.empty();
  
         private Map<String, List<String>> headers;  
         
@@ -247,18 +247,18 @@ public class ListSchedulesResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder scheduleResponses(List<ScheduleResponse> scheduleResponses) {
-            Utils.checkNotNull(scheduleResponses, "scheduleResponses");
-            this.scheduleResponses = Optional.ofNullable(scheduleResponses);
+        public Builder scheduleListResponses(List<ScheduleListResponse> scheduleListResponses) {
+            Utils.checkNotNull(scheduleListResponses, "scheduleListResponses");
+            this.scheduleListResponses = Optional.ofNullable(scheduleListResponses);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder scheduleResponses(Optional<? extends List<ScheduleResponse>> scheduleResponses) {
-            Utils.checkNotNull(scheduleResponses, "scheduleResponses");
-            this.scheduleResponses = scheduleResponses;
+        public Builder scheduleListResponses(Optional<? extends List<ScheduleListResponse>> scheduleListResponses) {
+            Utils.checkNotNull(scheduleListResponses, "scheduleListResponses");
+            this.scheduleListResponses = scheduleListResponses;
             return this;
         }
 
@@ -273,7 +273,7 @@ public class ListSchedulesResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                scheduleResponses,
+                scheduleListResponses,
                 headers);
         }
     }

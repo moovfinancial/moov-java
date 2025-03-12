@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 8c6152cc1bf1ff155c810601ea38cabe
+  docChecksum: f9505e7a2416146dc504211f35de71d6
   docVersion: latest
-  speakeasyVersion: 1.513.4
-  generationVersion: 2.545.4
-  releaseVersion: 0.8.14
-  configChecksum: 37466979ca4086613bd5c3ea26429838
+  speakeasyVersion: 1.517.0
+  generationVersion: 2.548.1
+  releaseVersion: 0.8.15
+  configChecksum: 4c63ed59a775cc8ed1ea551c25178e58
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -286,6 +286,7 @@ generatedFiles:
   - docs/models/components/OnboardingInvite.md
   - docs/models/components/OnboardingInviteRequest.md
   - docs/models/components/OnboardingPartnerAccount.md
+  - docs/models/components/PartialScheduleAccount.md
   - docs/models/components/PartnerPricing.md
   - docs/models/components/PartnerPricingAgreement.md
   - docs/models/components/PatchAccount.md
@@ -363,6 +364,7 @@ generatedFiles:
   - docs/models/components/RtpCreditPaymentMethodPaymentMethodType.md
   - docs/models/components/RunTransfer.md
   - docs/models/components/SECCode.md
+  - docs/models/components/ScheduleListResponse.md
   - docs/models/components/SchedulePaymentMethod.md
   - docs/models/components/ScheduleResponse.md
   - docs/models/components/Security.md
@@ -606,6 +608,7 @@ generatedFiles:
   - docs/models/operations/GetWalletResponse.md
   - docs/models/operations/GetWalletTransactionRequest.md
   - docs/models/operations/GetWalletTransactionResponse.md
+  - docs/models/operations/Hydrate.md
   - docs/models/operations/InitiateBankAccountVerificationRequest.md
   - docs/models/operations/InitiateBankAccountVerificationResponse.md
   - docs/models/operations/InitiateMicroDepositsRequest.md
@@ -1061,6 +1064,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/OnboardingInvite.java
   - src/main/java/io/moov/sdk/models/components/OnboardingInviteRequest.java
   - src/main/java/io/moov/sdk/models/components/OnboardingPartnerAccount.java
+  - src/main/java/io/moov/sdk/models/components/PartialScheduleAccount.java
   - src/main/java/io/moov/sdk/models/components/PartnerPricing.java
   - src/main/java/io/moov/sdk/models/components/PartnerPricingAgreement.java
   - src/main/java/io/moov/sdk/models/components/PatchAccount.java
@@ -1138,6 +1142,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/RtpCreditPaymentMethodPaymentMethodType.java
   - src/main/java/io/moov/sdk/models/components/RunTransfer.java
   - src/main/java/io/moov/sdk/models/components/SECCode.java
+  - src/main/java/io/moov/sdk/models/components/ScheduleListResponse.java
   - src/main/java/io/moov/sdk/models/components/SchedulePaymentMethod.java
   - src/main/java/io/moov/sdk/models/components/ScheduleResponse.java
   - src/main/java/io/moov/sdk/models/components/Security.java
@@ -1451,6 +1456,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/GetWalletTransactionRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetWalletTransactionRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetWalletTransactionResponse.java
+  - src/main/java/io/moov/sdk/models/operations/Hydrate.java
   - src/main/java/io/moov/sdk/models/operations/InitiateBankAccountVerificationRequest.java
   - src/main/java/io/moov/sdk/models/operations/InitiateBankAccountVerificationRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/InitiateBankAccountVerificationResponse.java

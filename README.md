@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.8.14'
+implementation 'io.moov:sdk:0.8.15'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.8.14</version>
+    <version>0.8.15</version>
 </dependency>
 ```
 
@@ -1025,7 +1025,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-* [list](docs/sdks/scheduling/README.md#list) - Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+* [list](docs/sdks/scheduling/README.md#list) - Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.

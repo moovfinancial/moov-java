@@ -3,23 +3,21 @@
  */
 
 
-package io.moov.sdk.models.components;
+package io.moov.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DebitHoldPeriod - An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
+ * Hydrate
  */
-public enum DebitHoldPeriod {
-    NO_HOLD("no-hold"),
-    ONE_MINUS_DAY("1-day"),
-    TWO_MINUS_DAYS("2-days");
+public enum Hydrate {
+    ACCOUNTS("accounts");
 
     @JsonValue
     private final String value;
 
-    private DebitHoldPeriod(String value) {
+    private Hydrate(String value) {
         this.value = value;
     }
     
@@ -27,8 +25,8 @@ public enum DebitHoldPeriod {
         return value;
     }
     
-    public static Optional<DebitHoldPeriod> fromValue(String value) {
-        for (DebitHoldPeriod o: DebitHoldPeriod.values()) {
+    public static Optional<Hydrate> fromValue(String value) {
+        for (Hydrate o: Hydrate.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

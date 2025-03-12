@@ -13,6 +13,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -38,6 +39,9 @@ public class ListSchedulesRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=hydrate")
+    private Optional<? extends Hydrate> hydrate;
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
@@ -46,20 +50,23 @@ public class ListSchedulesRequest {
             Optional<String> xMoovVersion,
             Optional<Long> skip,
             Optional<Long> count,
+            Optional<? extends Hydrate> hydrate,
             String accountID) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
+        Utils.checkNotNull(hydrate, "hydrate");
         Utils.checkNotNull(accountID, "accountID");
         this.xMoovVersion = xMoovVersion;
         this.skip = skip;
         this.count = count;
+        this.hydrate = hydrate;
         this.accountID = accountID;
     }
     
     public ListSchedulesRequest(
             String accountID) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), accountID);
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), accountID);
     }
 
     /**
@@ -86,6 +93,12 @@ public class ListSchedulesRequest {
     @JsonIgnore
     public Optional<Long> count() {
         return count;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Hydrate> hydrate() {
+        return (Optional<Hydrate>) hydrate;
     }
 
     @JsonIgnore
@@ -155,6 +168,18 @@ public class ListSchedulesRequest {
         return this;
     }
 
+    public ListSchedulesRequest withHydrate(Hydrate hydrate) {
+        Utils.checkNotNull(hydrate, "hydrate");
+        this.hydrate = Optional.ofNullable(hydrate);
+        return this;
+    }
+
+    public ListSchedulesRequest withHydrate(Optional<? extends Hydrate> hydrate) {
+        Utils.checkNotNull(hydrate, "hydrate");
+        this.hydrate = hydrate;
+        return this;
+    }
+
     public ListSchedulesRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -174,6 +199,7 @@ public class ListSchedulesRequest {
             Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.skip, other.skip) &&
             Objects.deepEquals(this.count, other.count) &&
+            Objects.deepEquals(this.hydrate, other.hydrate) &&
             Objects.deepEquals(this.accountID, other.accountID);
     }
     
@@ -183,6 +209,7 @@ public class ListSchedulesRequest {
             xMoovVersion,
             skip,
             count,
+            hydrate,
             accountID);
     }
     
@@ -192,6 +219,7 @@ public class ListSchedulesRequest {
                 "xMoovVersion", xMoovVersion,
                 "skip", skip,
                 "count", count,
+                "hydrate", hydrate,
                 "accountID", accountID);
     }
     
@@ -202,6 +230,8 @@ public class ListSchedulesRequest {
         private Optional<Long> skip = Optional.empty();
  
         private Optional<Long> count = Optional.empty();
+ 
+        private Optional<? extends Hydrate> hydrate = Optional.empty();
  
         private String accountID;  
         
@@ -267,6 +297,18 @@ public class ListSchedulesRequest {
             return this;
         }
 
+        public Builder hydrate(Hydrate hydrate) {
+            Utils.checkNotNull(hydrate, "hydrate");
+            this.hydrate = Optional.ofNullable(hydrate);
+            return this;
+        }
+
+        public Builder hydrate(Optional<? extends Hydrate> hydrate) {
+            Utils.checkNotNull(hydrate, "hydrate");
+            this.hydrate = hydrate;
+            return this;
+        }
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
@@ -280,6 +322,7 @@ public class ListSchedulesRequest {
                 xMoovVersion,
                 skip,
                 count,
+                hydrate,
                 accountID);
         }
 

@@ -6,6 +6,7 @@ package io.moov.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.OccurrencesResponse;
+import io.moov.sdk.models.components.ScheduleListResponse;
 import io.moov.sdk.models.components.ScheduleResponse;
 import io.moov.sdk.models.components.UpsertSchedule;
 import io.moov.sdk.models.errors.APIException;
@@ -40,7 +41,6 @@ import io.moov.sdk.utils.Utils.JsonShape;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
-import java.lang.Long;
 import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
@@ -284,7 +284,7 @@ public class Scheduling implements
 
 
     /**
-     * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * @return The call builder
      */
     public ListSchedulesRequestBuilder list() {
@@ -292,47 +292,13 @@ public class Scheduling implements
     }
 
     /**
-     * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param accountID
+     * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListSchedulesResponse list(
-            String accountID) throws Exception {
-        return list(Optional.empty(), Optional.empty(), Optional.empty(), accountID);
-    }
-    
-    /**
-     * Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param skip
-     * @param count
-     * @param accountID
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ListSchedulesResponse list(
-            Optional<String> xMoovVersion,
-            Optional<Long> skip,
-            Optional<Long> count,
-            String accountID) throws Exception {
-        ListSchedulesRequest request =
-            ListSchedulesRequest
-                .builder()
-                .xMoovVersion(xMoovVersion)
-                .skip(skip)
-                .count(count)
-                .accountID(accountID)
-                .build();
-        
+            ListSchedulesRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 ListSchedulesRequest.class,
@@ -410,10 +376,10 @@ public class Scheduling implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<ScheduleResponse> _out = Utils.mapper().readValue(
+                List<ScheduleListResponse> _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<ScheduleResponse>>() {});
-                _res.withScheduleResponses(Optional.ofNullable(_out));
+                    new TypeReference<List<ScheduleListResponse>>() {});
+                _res.withScheduleListResponses(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(

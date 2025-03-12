@@ -47,7 +47,6 @@ import io.moov.sdk.models.components.UpdateRepresentative;
 import io.moov.sdk.models.components.UpdateUnderwriting;
 import io.moov.sdk.models.components.UpsertSchedule;
 import java.lang.Exception;
-import java.lang.Long;
 import java.lang.String;
 import java.util.List;
 import java.util.Optional;
@@ -630,10 +629,7 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallListSchedules {
         ListSchedulesResponse list(
-            Optional<String> xMoovVersion,
-            Optional<Long> skip,
-            Optional<Long> count,
-            String accountID) throws Exception;
+            ListSchedulesRequest request) throws Exception;
     }
 
 

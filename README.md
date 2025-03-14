@@ -50,7 +50,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.8.15'
+implementation 'io.moov:sdk:0.8.16'
 ```
 
 Maven:
@@ -58,7 +58,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.8.15</version>
+    <version>0.8.16</version>
 </dependency>
 ```
 
@@ -98,6 +98,7 @@ import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateIndividualProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
+import io.moov.sdk.models.components.Ein;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
 import io.moov.sdk.models.components.Mode;
@@ -105,7 +106,6 @@ import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
 import io.moov.sdk.models.components.TaxID;
-import io.moov.sdk.models.components.TaxIDEin;
 import io.moov.sdk.models.components.TermsOfServiceToken;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
@@ -173,7 +173,7 @@ public class Application {
                             .email("jordan.lee@classbooker.dev")
                             .description("Local fitness gym paying out instructors")
                             .taxID(TaxID.builder()
-                                .ein(TaxIDEin.builder()
+                                .ein(Ein.builder()
                                     .number("12-3456789")
                                     .build())
                                 .build())
@@ -252,6 +252,7 @@ import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateIndividualProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
+import io.moov.sdk.models.components.Ein;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
 import io.moov.sdk.models.components.Mode;
@@ -259,7 +260,6 @@ import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
 import io.moov.sdk.models.components.TaxID;
-import io.moov.sdk.models.components.TaxIDEin;
 import io.moov.sdk.models.components.TermsOfServiceToken;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
@@ -327,7 +327,7 @@ public class Application {
                             .email("jordan.lee@classbooker.dev")
                             .description("Local fitness gym paying out instructors")
                             .taxID(TaxID.builder()
-                                .ein(TaxIDEin.builder()
+                                .ein(Ein.builder()
                                     .number("12-3456789")
                                     .build())
                                 .build())
@@ -1240,6 +1240,7 @@ import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateIndividualProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
+import io.moov.sdk.models.components.Ein;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
 import io.moov.sdk.models.components.Mode;
@@ -1247,7 +1248,6 @@ import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
 import io.moov.sdk.models.components.TaxID;
-import io.moov.sdk.models.components.TaxIDEin;
 import io.moov.sdk.models.components.TermsOfServiceToken;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
@@ -1315,7 +1315,7 @@ public class Application {
                             .email("jordan.lee@classbooker.dev")
                             .description("Local fitness gym paying out instructors")
                             .taxID(TaxID.builder()
-                                .ein(TaxIDEin.builder()
+                                .ein(Ein.builder()
                                     .number("12-3456789")
                                     .build())
                                 .build())
@@ -1388,6 +1388,7 @@ import io.moov.sdk.models.components.CreateBusinessProfile;
 import io.moov.sdk.models.components.CreateIndividualProfile;
 import io.moov.sdk.models.components.CreateProfile;
 import io.moov.sdk.models.components.CustomerSupport;
+import io.moov.sdk.models.components.Ein;
 import io.moov.sdk.models.components.IndividualName;
 import io.moov.sdk.models.components.IndustryCodes;
 import io.moov.sdk.models.components.Mode;
@@ -1395,7 +1396,6 @@ import io.moov.sdk.models.components.PhoneNumber;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.components.Settings;
 import io.moov.sdk.models.components.TaxID;
-import io.moov.sdk.models.components.TaxIDEin;
 import io.moov.sdk.models.components.TermsOfServiceToken;
 import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
@@ -1464,7 +1464,7 @@ public class Application {
                             .email("jordan.lee@classbooker.dev")
                             .description("Local fitness gym paying out instructors")
                             .taxID(TaxID.builder()
-                                .ein(TaxIDEin.builder()
+                                .ein(Ein.builder()
                                     .number("12-3456789")
                                     .build())
                                 .build())

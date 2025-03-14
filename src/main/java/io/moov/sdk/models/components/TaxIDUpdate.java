@@ -23,11 +23,11 @@ public class TaxIDUpdate {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ein")
-    private Optional<? extends Ein> ein;
+    private Optional<? extends TaxIDUpdateEin> ein;
 
     @JsonCreator
     public TaxIDUpdate(
-            @JsonProperty("ein") Optional<? extends Ein> ein) {
+            @JsonProperty("ein") Optional<? extends TaxIDUpdateEin> ein) {
         Utils.checkNotNull(ein, "ein");
         this.ein = ein;
     }
@@ -38,21 +38,21 @@ public class TaxIDUpdate {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Ein> ein() {
-        return (Optional<Ein>) ein;
+    public Optional<TaxIDUpdateEin> ein() {
+        return (Optional<TaxIDUpdateEin>) ein;
     }
 
     public final static Builder builder() {
         return new Builder();
     }
 
-    public TaxIDUpdate withEin(Ein ein) {
+    public TaxIDUpdate withEin(TaxIDUpdateEin ein) {
         Utils.checkNotNull(ein, "ein");
         this.ein = Optional.ofNullable(ein);
         return this;
     }
 
-    public TaxIDUpdate withEin(Optional<? extends Ein> ein) {
+    public TaxIDUpdate withEin(Optional<? extends TaxIDUpdateEin> ein) {
         Utils.checkNotNull(ein, "ein");
         this.ein = ein;
         return this;
@@ -85,19 +85,19 @@ public class TaxIDUpdate {
     
     public final static class Builder {
  
-        private Optional<? extends Ein> ein = Optional.empty();  
+        private Optional<? extends TaxIDUpdateEin> ein = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder ein(Ein ein) {
+        public Builder ein(TaxIDUpdateEin ein) {
             Utils.checkNotNull(ein, "ein");
             this.ein = Optional.ofNullable(ein);
             return this;
         }
 
-        public Builder ein(Optional<? extends Ein> ein) {
+        public Builder ein(Optional<? extends TaxIDUpdateEin> ein) {
             Utils.checkNotNull(ein, "ein");
             this.ein = ein;
             return this;

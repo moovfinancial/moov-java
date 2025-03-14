@@ -15,7 +15,7 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-public class GovernmentIDSsn {
+public class GovernmentIDErrorItin {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("full")
@@ -26,7 +26,7 @@ public class GovernmentIDSsn {
     private Optional<String> lastFour;
 
     @JsonCreator
-    public GovernmentIDSsn(
+    public GovernmentIDErrorItin(
             @JsonProperty("full") Optional<String> full,
             @JsonProperty("lastFour") Optional<String> lastFour) {
         Utils.checkNotNull(full, "full");
@@ -35,7 +35,7 @@ public class GovernmentIDSsn {
         this.lastFour = lastFour;
     }
     
-    public GovernmentIDSsn() {
+    public GovernmentIDErrorItin() {
         this(Optional.empty(), Optional.empty());
     }
 
@@ -53,25 +53,25 @@ public class GovernmentIDSsn {
         return new Builder();
     }
 
-    public GovernmentIDSsn withFull(String full) {
+    public GovernmentIDErrorItin withFull(String full) {
         Utils.checkNotNull(full, "full");
         this.full = Optional.ofNullable(full);
         return this;
     }
 
-    public GovernmentIDSsn withFull(Optional<String> full) {
+    public GovernmentIDErrorItin withFull(Optional<String> full) {
         Utils.checkNotNull(full, "full");
         this.full = full;
         return this;
     }
 
-    public GovernmentIDSsn withLastFour(String lastFour) {
+    public GovernmentIDErrorItin withLastFour(String lastFour) {
         Utils.checkNotNull(lastFour, "lastFour");
         this.lastFour = Optional.ofNullable(lastFour);
         return this;
     }
 
-    public GovernmentIDSsn withLastFour(Optional<String> lastFour) {
+    public GovernmentIDErrorItin withLastFour(Optional<String> lastFour) {
         Utils.checkNotNull(lastFour, "lastFour");
         this.lastFour = lastFour;
         return this;
@@ -85,7 +85,7 @@ public class GovernmentIDSsn {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GovernmentIDSsn other = (GovernmentIDSsn) o;
+        GovernmentIDErrorItin other = (GovernmentIDErrorItin) o;
         return 
             Objects.deepEquals(this.full, other.full) &&
             Objects.deepEquals(this.lastFour, other.lastFour);
@@ -100,7 +100,7 @@ public class GovernmentIDSsn {
     
     @Override
     public String toString() {
-        return Utils.toString(GovernmentIDSsn.class,
+        return Utils.toString(GovernmentIDErrorItin.class,
                 "full", full,
                 "lastFour", lastFour);
     }
@@ -139,8 +139,8 @@ public class GovernmentIDSsn {
             return this;
         }
         
-        public GovernmentIDSsn build() {
-            return new GovernmentIDSsn(
+        public GovernmentIDErrorItin build() {
+            return new GovernmentIDErrorItin(
                 full,
                 lastFour);
         }

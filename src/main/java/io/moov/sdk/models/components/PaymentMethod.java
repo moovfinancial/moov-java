@@ -25,7 +25,8 @@ import java.lang.String;
     @Type(value = CardPaymentPaymentMethod.class, name="card-payment"),
     @Type(value = PushToCardPaymentMethod.class, name="push-to-card"),
     @Type(value = PullFromCardPaymentMethod.class, name="pull-from-card"),
-    @Type(value = ApplePayPaymentMethod.class, name="apple-pay")})
+    @Type(value = ApplePayPaymentMethod.class, name="apple-pay"),
+    @Type(value = CardPresentPaymentPaymentMethod.class, name="card-present-payment")})
 public interface PaymentMethod {
 
     String paymentMethodType();

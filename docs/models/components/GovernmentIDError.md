@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `ssn`                                              | [Optional\<Ssn>](../../models/components/Ssn.md)   | :heavy_minus_sign:                                 | N/A                                                |
-| `itin`                                             | [Optional\<Itin>](../../models/components/Itin.md) | :heavy_minus_sign:                                 | N/A                                                |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ssn`                                                                                | [Optional\<GovernmentIDErrorSsn>](../../models/components/GovernmentIDErrorSsn.md)   | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `itin`                                                                               | [Optional\<GovernmentIDErrorItin>](../../models/components/GovernmentIDErrorItin.md) | :heavy_minus_sign:                                                                   | N/A                                                                                  |

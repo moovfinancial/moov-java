@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: f9505e7a2416146dc504211f35de71d6
+  docChecksum: 37260ca5a9a4954d13bd8b9f1887eca6
   docVersion: latest
-  speakeasyVersion: 1.517.0
-  generationVersion: 2.548.1
-  releaseVersion: 0.8.15
-  configChecksum: 4c63ed59a775cc8ed1ea551c25178e58
+  speakeasyVersion: 1.517.3
+  generationVersion: 2.548.6
+  releaseVersion: 0.8.16
+  configChecksum: a4ab45d7bf006aaee2ddbe0a49b5090b
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -127,6 +127,8 @@ generatedFiles:
   - docs/models/components/CardPaymentPaymentMethod.md
   - docs/models/components/CardPaymentPaymentMethodPaymentMethodType.md
   - docs/models/components/CardPaymentSettings.md
+  - docs/models/components/CardPresentPaymentPaymentMethod.md
+  - docs/models/components/CardPresentPaymentPaymentMethodPaymentMethodType.md
   - docs/models/components/CardTransactionDetails.md
   - docs/models/components/CardTransactionFailureCode.md
   - docs/models/components/CardTransactionStatus.md
@@ -205,6 +207,7 @@ generatedFiles:
   - docs/models/components/EnrichedIndustries.md
   - docs/models/components/EnrichedIndustry.md
   - docs/models/components/EnrichedIndustryCodes.md
+  - docs/models/components/EntryMode.md
   - docs/models/components/Error.md
   - docs/models/components/EvidenceTextResponse.md
   - docs/models/components/EvidenceType.md
@@ -234,8 +237,8 @@ generatedFiles:
   - docs/models/components/GeneratedByTransferID.md
   - docs/models/components/GovernmentID.md
   - docs/models/components/GovernmentIDError.md
-  - docs/models/components/GovernmentIDItin.md
-  - docs/models/components/GovernmentIDSsn.md
+  - docs/models/components/GovernmentIDErrorItin.md
+  - docs/models/components/GovernmentIDErrorSsn.md
   - docs/models/components/GrantType.md
   - docs/models/components/IncurredFee.md
   - docs/models/components/IndividualName.md
@@ -381,11 +384,12 @@ generatedFiles:
   - docs/models/components/SweepConfigStatus.md
   - docs/models/components/SweepStatus.md
   - docs/models/components/TaxID.md
-  - docs/models/components/TaxIDEin.md
   - docs/models/components/TaxIDUpdate.md
+  - docs/models/components/TaxIDUpdateEin.md
   - docs/models/components/TerminalApplication.md
   - docs/models/components/TerminalApplicationPlatform.md
   - docs/models/components/TerminalApplicationStatus.md
+  - docs/models/components/TerminalCard.md
   - docs/models/components/TermsOfService.md
   - docs/models/components/TermsOfServiceError.md
   - docs/models/components/TermsOfServiceToken.md
@@ -905,6 +909,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/CardPaymentPaymentMethod.java
   - src/main/java/io/moov/sdk/models/components/CardPaymentPaymentMethodPaymentMethodType.java
   - src/main/java/io/moov/sdk/models/components/CardPaymentSettings.java
+  - src/main/java/io/moov/sdk/models/components/CardPresentPaymentPaymentMethod.java
+  - src/main/java/io/moov/sdk/models/components/CardPresentPaymentPaymentMethodPaymentMethodType.java
   - src/main/java/io/moov/sdk/models/components/CardTransactionDetails.java
   - src/main/java/io/moov/sdk/models/components/CardTransactionFailureCode.java
   - src/main/java/io/moov/sdk/models/components/CardTransactionStatus.java
@@ -983,6 +989,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/EnrichedIndustries.java
   - src/main/java/io/moov/sdk/models/components/EnrichedIndustry.java
   - src/main/java/io/moov/sdk/models/components/EnrichedIndustryCodes.java
+  - src/main/java/io/moov/sdk/models/components/EntryMode.java
   - src/main/java/io/moov/sdk/models/components/Error.java
   - src/main/java/io/moov/sdk/models/components/EvidenceTextResponse.java
   - src/main/java/io/moov/sdk/models/components/EvidenceType.java
@@ -1012,8 +1019,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/GeneratedByTransferID.java
   - src/main/java/io/moov/sdk/models/components/GovernmentID.java
   - src/main/java/io/moov/sdk/models/components/GovernmentIDError.java
-  - src/main/java/io/moov/sdk/models/components/GovernmentIDItin.java
-  - src/main/java/io/moov/sdk/models/components/GovernmentIDSsn.java
+  - src/main/java/io/moov/sdk/models/components/GovernmentIDErrorItin.java
+  - src/main/java/io/moov/sdk/models/components/GovernmentIDErrorSsn.java
   - src/main/java/io/moov/sdk/models/components/GrantType.java
   - src/main/java/io/moov/sdk/models/components/IncurredFee.java
   - src/main/java/io/moov/sdk/models/components/IndividualName.java
@@ -1159,11 +1166,12 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/SweepConfigStatus.java
   - src/main/java/io/moov/sdk/models/components/SweepStatus.java
   - src/main/java/io/moov/sdk/models/components/TaxID.java
-  - src/main/java/io/moov/sdk/models/components/TaxIDEin.java
   - src/main/java/io/moov/sdk/models/components/TaxIDUpdate.java
+  - src/main/java/io/moov/sdk/models/components/TaxIDUpdateEin.java
   - src/main/java/io/moov/sdk/models/components/TerminalApplication.java
   - src/main/java/io/moov/sdk/models/components/TerminalApplicationPlatform.java
   - src/main/java/io/moov/sdk/models/components/TerminalApplicationStatus.java
+  - src/main/java/io/moov/sdk/models/components/TerminalCard.java
   - src/main/java/io/moov/sdk/models/components/TermsOfService.java
   - src/main/java/io/moov/sdk/models/components/TermsOfServiceError.java
   - src/main/java/io/moov/sdk/models/components/TermsOfServiceToken.java

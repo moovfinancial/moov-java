@@ -18,17 +18,17 @@ import java.util.Objects;
 public class TaxID {
 
     @JsonProperty("ein")
-    private TaxIDEin ein;
+    private Ein ein;
 
     @JsonCreator
     public TaxID(
-            @JsonProperty("ein") TaxIDEin ein) {
+            @JsonProperty("ein") Ein ein) {
         Utils.checkNotNull(ein, "ein");
         this.ein = ein;
     }
 
     @JsonIgnore
-    public TaxIDEin ein() {
+    public Ein ein() {
         return ein;
     }
 
@@ -36,7 +36,7 @@ public class TaxID {
         return new Builder();
     }
 
-    public TaxID withEin(TaxIDEin ein) {
+    public TaxID withEin(Ein ein) {
         Utils.checkNotNull(ein, "ein");
         this.ein = ein;
         return this;
@@ -69,13 +69,13 @@ public class TaxID {
     
     public final static class Builder {
  
-        private TaxIDEin ein;  
+        private Ein ein;  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder ein(TaxIDEin ein) {
+        public Builder ein(Ein ein) {
             Utils.checkNotNull(ein, "ein");
             this.ein = ein;
             return this;

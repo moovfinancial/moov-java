@@ -20,16 +20,16 @@ public class GovernmentID {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ssn")
-    private Optional<? extends GovernmentIDSsn> ssn;
+    private Optional<? extends Ssn> ssn;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("itin")
-    private Optional<? extends GovernmentIDItin> itin;
+    private Optional<? extends Itin> itin;
 
     @JsonCreator
     public GovernmentID(
-            @JsonProperty("ssn") Optional<? extends GovernmentIDSsn> ssn,
-            @JsonProperty("itin") Optional<? extends GovernmentIDItin> itin) {
+            @JsonProperty("ssn") Optional<? extends Ssn> ssn,
+            @JsonProperty("itin") Optional<? extends Itin> itin) {
         Utils.checkNotNull(ssn, "ssn");
         Utils.checkNotNull(itin, "itin");
         this.ssn = ssn;
@@ -42,39 +42,39 @@ public class GovernmentID {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GovernmentIDSsn> ssn() {
-        return (Optional<GovernmentIDSsn>) ssn;
+    public Optional<Ssn> ssn() {
+        return (Optional<Ssn>) ssn;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GovernmentIDItin> itin() {
-        return (Optional<GovernmentIDItin>) itin;
+    public Optional<Itin> itin() {
+        return (Optional<Itin>) itin;
     }
 
     public final static Builder builder() {
         return new Builder();
     }
 
-    public GovernmentID withSsn(GovernmentIDSsn ssn) {
+    public GovernmentID withSsn(Ssn ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = Optional.ofNullable(ssn);
         return this;
     }
 
-    public GovernmentID withSsn(Optional<? extends GovernmentIDSsn> ssn) {
+    public GovernmentID withSsn(Optional<? extends Ssn> ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = ssn;
         return this;
     }
 
-    public GovernmentID withItin(GovernmentIDItin itin) {
+    public GovernmentID withItin(Itin itin) {
         Utils.checkNotNull(itin, "itin");
         this.itin = Optional.ofNullable(itin);
         return this;
     }
 
-    public GovernmentID withItin(Optional<? extends GovernmentIDItin> itin) {
+    public GovernmentID withItin(Optional<? extends Itin> itin) {
         Utils.checkNotNull(itin, "itin");
         this.itin = itin;
         return this;
@@ -110,33 +110,33 @@ public class GovernmentID {
     
     public final static class Builder {
  
-        private Optional<? extends GovernmentIDSsn> ssn = Optional.empty();
+        private Optional<? extends Ssn> ssn = Optional.empty();
  
-        private Optional<? extends GovernmentIDItin> itin = Optional.empty();  
+        private Optional<? extends Itin> itin = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder ssn(GovernmentIDSsn ssn) {
+        public Builder ssn(Ssn ssn) {
             Utils.checkNotNull(ssn, "ssn");
             this.ssn = Optional.ofNullable(ssn);
             return this;
         }
 
-        public Builder ssn(Optional<? extends GovernmentIDSsn> ssn) {
+        public Builder ssn(Optional<? extends Ssn> ssn) {
             Utils.checkNotNull(ssn, "ssn");
             this.ssn = ssn;
             return this;
         }
 
-        public Builder itin(GovernmentIDItin itin) {
+        public Builder itin(Itin itin) {
             Utils.checkNotNull(itin, "itin");
             this.itin = Optional.ofNullable(itin);
             return this;
         }
 
-        public Builder itin(Optional<? extends GovernmentIDItin> itin) {
+        public Builder itin(Optional<? extends Itin> itin) {
             Utils.checkNotNull(itin, "itin");
             this.itin = itin;
             return this;

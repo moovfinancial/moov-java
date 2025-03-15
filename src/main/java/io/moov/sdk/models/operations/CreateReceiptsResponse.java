@@ -38,7 +38,7 @@ public class CreateReceiptsResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * The request completed successfully.
+     * The resource was successfully created.
      */
     private Optional<? extends ReceiptResponse> receiptResponse;
 
@@ -96,7 +96,7 @@ public class CreateReceiptsResponse implements Response {
     }
 
     /**
-     * The request completed successfully.
+     * The resource was successfully created.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -141,7 +141,7 @@ public class CreateReceiptsResponse implements Response {
     }
 
     /**
-     * The request completed successfully.
+     * The resource was successfully created.
      */
     public CreateReceiptsResponse withReceiptResponse(ReceiptResponse receiptResponse) {
         Utils.checkNotNull(receiptResponse, "receiptResponse");
@@ -150,7 +150,7 @@ public class CreateReceiptsResponse implements Response {
     }
 
     /**
-     * The request completed successfully.
+     * The resource was successfully created.
      */
     public CreateReceiptsResponse withReceiptResponse(Optional<? extends ReceiptResponse> receiptResponse) {
         Utils.checkNotNull(receiptResponse, "receiptResponse");
@@ -245,7 +245,7 @@ public class CreateReceiptsResponse implements Response {
         }
 
         /**
-         * The request completed successfully.
+         * The resource was successfully created.
          */
         public Builder receiptResponse(ReceiptResponse receiptResponse) {
             Utils.checkNotNull(receiptResponse, "receiptResponse");
@@ -254,7 +254,7 @@ public class CreateReceiptsResponse implements Response {
         }
 
         /**
-         * The request completed successfully.
+         * The resource was successfully created.
          */
         public Builder receiptResponse(Optional<? extends ReceiptResponse> receiptResponse) {
             Utils.checkNotNull(receiptResponse, "receiptResponse");

@@ -169,7 +169,7 @@ public class Receipts implements
 
         CreateReceiptsResponse _res = _resBuilder.build();
         
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 ReceiptResponse _out = Utils.mapper().readValue(

@@ -57,6 +57,12 @@ public class FeePlanAgreement {
     @JsonProperty("billableFees")
     private List<BillableFee> billableFees;
 
+    /**
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     */
+    @JsonProperty("minimumCommitment")
+    private MinimumCommitment minimumCommitment;
+
     @JsonCreator
     public FeePlanAgreement(
             @JsonProperty("agreementID") String agreementID,
@@ -67,7 +73,8 @@ public class FeePlanAgreement {
             @JsonProperty("acceptedOn") OffsetDateTime acceptedOn,
             @JsonProperty("status") FeePlanAgreementStatus status,
             @JsonProperty("cardAcquiringModel") CardAcquiringModel cardAcquiringModel,
-            @JsonProperty("billableFees") List<BillableFee> billableFees) {
+            @JsonProperty("billableFees") List<BillableFee> billableFees,
+            @JsonProperty("minimumCommitment") MinimumCommitment minimumCommitment) {
         Utils.checkNotNull(agreementID, "agreementID");
         Utils.checkNotNull(planID, "planID");
         Utils.checkNotNull(accountID, "accountID");
@@ -77,6 +84,7 @@ public class FeePlanAgreement {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
         Utils.checkNotNull(billableFees, "billableFees");
+        Utils.checkNotNull(minimumCommitment, "minimumCommitment");
         this.agreementID = agreementID;
         this.planID = planID;
         this.accountID = accountID;
@@ -86,6 +94,7 @@ public class FeePlanAgreement {
         this.status = status;
         this.cardAcquiringModel = cardAcquiringModel;
         this.billableFees = billableFees;
+        this.minimumCommitment = minimumCommitment;
     }
     
     public FeePlanAgreement(
@@ -95,8 +104,9 @@ public class FeePlanAgreement {
             OffsetDateTime acceptedOn,
             FeePlanAgreementStatus status,
             CardAcquiringModel cardAcquiringModel,
-            List<BillableFee> billableFees) {
-        this(agreementID, planID, Optional.empty(), name, Optional.empty(), acceptedOn, status, cardAcquiringModel, billableFees);
+            List<BillableFee> billableFees,
+            MinimumCommitment minimumCommitment) {
+        this(agreementID, planID, Optional.empty(), name, Optional.empty(), acceptedOn, status, cardAcquiringModel, billableFees, minimumCommitment);
     }
 
     @JsonIgnore
@@ -151,6 +161,14 @@ public class FeePlanAgreement {
     @JsonIgnore
     public List<BillableFee> billableFees() {
         return billableFees;
+    }
+
+    /**
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     */
+    @JsonIgnore
+    public MinimumCommitment minimumCommitment() {
+        return minimumCommitment;
     }
 
     public final static Builder builder() {
@@ -234,6 +252,15 @@ public class FeePlanAgreement {
         this.billableFees = billableFees;
         return this;
     }
+
+    /**
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     */
+    public FeePlanAgreement withMinimumCommitment(MinimumCommitment minimumCommitment) {
+        Utils.checkNotNull(minimumCommitment, "minimumCommitment");
+        this.minimumCommitment = minimumCommitment;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -253,7 +280,8 @@ public class FeePlanAgreement {
             Objects.deepEquals(this.acceptedOn, other.acceptedOn) &&
             Objects.deepEquals(this.status, other.status) &&
             Objects.deepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
-            Objects.deepEquals(this.billableFees, other.billableFees);
+            Objects.deepEquals(this.billableFees, other.billableFees) &&
+            Objects.deepEquals(this.minimumCommitment, other.minimumCommitment);
     }
     
     @Override
@@ -267,7 +295,8 @@ public class FeePlanAgreement {
             acceptedOn,
             status,
             cardAcquiringModel,
-            billableFees);
+            billableFees,
+            minimumCommitment);
     }
     
     @Override
@@ -281,7 +310,8 @@ public class FeePlanAgreement {
                 "acceptedOn", acceptedOn,
                 "status", status,
                 "cardAcquiringModel", cardAcquiringModel,
-                "billableFees", billableFees);
+                "billableFees", billableFees,
+                "minimumCommitment", minimumCommitment);
     }
     
     public final static class Builder {
@@ -302,7 +332,9 @@ public class FeePlanAgreement {
  
         private CardAcquiringModel cardAcquiringModel;
  
-        private List<BillableFee> billableFees;  
+        private List<BillableFee> billableFees;
+ 
+        private MinimumCommitment minimumCommitment;  
         
         private Builder() {
           // force use of static builder() method
@@ -385,6 +417,15 @@ public class FeePlanAgreement {
             this.billableFees = billableFees;
             return this;
         }
+
+        /**
+         * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+         */
+        public Builder minimumCommitment(MinimumCommitment minimumCommitment) {
+            Utils.checkNotNull(minimumCommitment, "minimumCommitment");
+            this.minimumCommitment = minimumCommitment;
+            return this;
+        }
         
         public FeePlanAgreement build() {
             return new FeePlanAgreement(
@@ -396,7 +437,8 @@ public class FeePlanAgreement {
                 acceptedOn,
                 status,
                 cardAcquiringModel,
-                billableFees);
+                billableFees,
+                minimumCommitment);
         }
     }
 }

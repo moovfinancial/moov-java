@@ -59,6 +59,12 @@ public class PartnerPricingAgreement {
     private List<BillableFee> billableFees;
 
     /**
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     */
+    @JsonProperty("minimumCommitment")
+    private MinimumCommitment minimumCommitment;
+
+    /**
      * The integer percentage value of the revenue split for partner.
      */
     @JsonProperty("revenueShare")
@@ -75,6 +81,7 @@ public class PartnerPricingAgreement {
             @JsonProperty("status") FeePlanAgreementStatus status,
             @JsonProperty("cardAcquiringModel") CardAcquiringModel cardAcquiringModel,
             @JsonProperty("billableFees") List<BillableFee> billableFees,
+            @JsonProperty("minimumCommitment") MinimumCommitment minimumCommitment,
             @JsonProperty("revenueShare") long revenueShare) {
         Utils.checkNotNull(agreementID, "agreementID");
         Utils.checkNotNull(planID, "planID");
@@ -85,6 +92,7 @@ public class PartnerPricingAgreement {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
         Utils.checkNotNull(billableFees, "billableFees");
+        Utils.checkNotNull(minimumCommitment, "minimumCommitment");
         Utils.checkNotNull(revenueShare, "revenueShare");
         this.agreementID = agreementID;
         this.planID = planID;
@@ -95,6 +103,7 @@ public class PartnerPricingAgreement {
         this.status = status;
         this.cardAcquiringModel = cardAcquiringModel;
         this.billableFees = billableFees;
+        this.minimumCommitment = minimumCommitment;
         this.revenueShare = revenueShare;
     }
     
@@ -106,8 +115,9 @@ public class PartnerPricingAgreement {
             FeePlanAgreementStatus status,
             CardAcquiringModel cardAcquiringModel,
             List<BillableFee> billableFees,
+            MinimumCommitment minimumCommitment,
             long revenueShare) {
-        this(agreementID, planID, Optional.empty(), name, Optional.empty(), acceptedOn, status, cardAcquiringModel, billableFees, revenueShare);
+        this(agreementID, planID, Optional.empty(), name, Optional.empty(), acceptedOn, status, cardAcquiringModel, billableFees, minimumCommitment, revenueShare);
     }
 
     @JsonIgnore
@@ -162,6 +172,14 @@ public class PartnerPricingAgreement {
     @JsonIgnore
     public List<BillableFee> billableFees() {
         return billableFees;
+    }
+
+    /**
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     */
+    @JsonIgnore
+    public MinimumCommitment minimumCommitment() {
+        return minimumCommitment;
     }
 
     /**
@@ -255,6 +273,15 @@ public class PartnerPricingAgreement {
     }
 
     /**
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     */
+    public PartnerPricingAgreement withMinimumCommitment(MinimumCommitment minimumCommitment) {
+        Utils.checkNotNull(minimumCommitment, "minimumCommitment");
+        this.minimumCommitment = minimumCommitment;
+        return this;
+    }
+
+    /**
      * The integer percentage value of the revenue split for partner.
      */
     public PartnerPricingAgreement withRevenueShare(long revenueShare) {
@@ -282,6 +309,7 @@ public class PartnerPricingAgreement {
             Objects.deepEquals(this.status, other.status) &&
             Objects.deepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
             Objects.deepEquals(this.billableFees, other.billableFees) &&
+            Objects.deepEquals(this.minimumCommitment, other.minimumCommitment) &&
             Objects.deepEquals(this.revenueShare, other.revenueShare);
     }
     
@@ -297,6 +325,7 @@ public class PartnerPricingAgreement {
             status,
             cardAcquiringModel,
             billableFees,
+            minimumCommitment,
             revenueShare);
     }
     
@@ -312,6 +341,7 @@ public class PartnerPricingAgreement {
                 "status", status,
                 "cardAcquiringModel", cardAcquiringModel,
                 "billableFees", billableFees,
+                "minimumCommitment", minimumCommitment,
                 "revenueShare", revenueShare);
     }
     
@@ -334,6 +364,8 @@ public class PartnerPricingAgreement {
         private CardAcquiringModel cardAcquiringModel;
  
         private List<BillableFee> billableFees;
+ 
+        private MinimumCommitment minimumCommitment;
  
         private Long revenueShare;  
         
@@ -420,6 +452,15 @@ public class PartnerPricingAgreement {
         }
 
         /**
+         * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+         */
+        public Builder minimumCommitment(MinimumCommitment minimumCommitment) {
+            Utils.checkNotNull(minimumCommitment, "minimumCommitment");
+            this.minimumCommitment = minimumCommitment;
+            return this;
+        }
+
+        /**
          * The integer percentage value of the revenue split for partner.
          */
         public Builder revenueShare(long revenueShare) {
@@ -439,6 +480,7 @@ public class PartnerPricingAgreement {
                 status,
                 cardAcquiringModel,
                 billableFees,
+                minimumCommitment,
                 revenueShare);
         }
     }

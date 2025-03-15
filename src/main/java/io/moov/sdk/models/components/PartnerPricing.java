@@ -51,6 +51,12 @@ public class PartnerPricing {
     @JsonProperty("billableFees")
     private List<BillableFee> billableFees;
 
+    /**
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     */
+    @JsonProperty("minimumCommitment")
+    private MinimumCommitment minimumCommitment;
+
     @JsonProperty("createdAt")
     private OffsetDateTime createdAt;
 
@@ -62,6 +68,7 @@ public class PartnerPricing {
             @JsonProperty("revenueShare") long revenueShare,
             @JsonProperty("cardAcquiringModel") CardAcquiringModel cardAcquiringModel,
             @JsonProperty("billableFees") List<BillableFee> billableFees,
+            @JsonProperty("minimumCommitment") MinimumCommitment minimumCommitment,
             @JsonProperty("createdAt") OffsetDateTime createdAt) {
         Utils.checkNotNull(planID, "planID");
         Utils.checkNotNull(name, "name");
@@ -69,6 +76,7 @@ public class PartnerPricing {
         Utils.checkNotNull(revenueShare, "revenueShare");
         Utils.checkNotNull(cardAcquiringModel, "cardAcquiringModel");
         Utils.checkNotNull(billableFees, "billableFees");
+        Utils.checkNotNull(minimumCommitment, "minimumCommitment");
         Utils.checkNotNull(createdAt, "createdAt");
         this.planID = planID;
         this.name = name;
@@ -76,6 +84,7 @@ public class PartnerPricing {
         this.revenueShare = revenueShare;
         this.cardAcquiringModel = cardAcquiringModel;
         this.billableFees = billableFees;
+        this.minimumCommitment = minimumCommitment;
         this.createdAt = createdAt;
     }
     
@@ -85,8 +94,9 @@ public class PartnerPricing {
             long revenueShare,
             CardAcquiringModel cardAcquiringModel,
             List<BillableFee> billableFees,
+            MinimumCommitment minimumCommitment,
             OffsetDateTime createdAt) {
-        this(planID, name, Optional.empty(), revenueShare, cardAcquiringModel, billableFees, createdAt);
+        this(planID, name, Optional.empty(), revenueShare, cardAcquiringModel, billableFees, minimumCommitment, createdAt);
     }
 
     @JsonIgnore
@@ -129,6 +139,14 @@ public class PartnerPricing {
     @JsonIgnore
     public List<BillableFee> billableFees() {
         return billableFees;
+    }
+
+    /**
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     */
+    @JsonIgnore
+    public MinimumCommitment minimumCommitment() {
+        return minimumCommitment;
     }
 
     @JsonIgnore
@@ -197,6 +215,15 @@ public class PartnerPricing {
         return this;
     }
 
+    /**
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     */
+    public PartnerPricing withMinimumCommitment(MinimumCommitment minimumCommitment) {
+        Utils.checkNotNull(minimumCommitment, "minimumCommitment");
+        this.minimumCommitment = minimumCommitment;
+        return this;
+    }
+
     public PartnerPricing withCreatedAt(OffsetDateTime createdAt) {
         Utils.checkNotNull(createdAt, "createdAt");
         this.createdAt = createdAt;
@@ -219,6 +246,7 @@ public class PartnerPricing {
             Objects.deepEquals(this.revenueShare, other.revenueShare) &&
             Objects.deepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
             Objects.deepEquals(this.billableFees, other.billableFees) &&
+            Objects.deepEquals(this.minimumCommitment, other.minimumCommitment) &&
             Objects.deepEquals(this.createdAt, other.createdAt);
     }
     
@@ -231,6 +259,7 @@ public class PartnerPricing {
             revenueShare,
             cardAcquiringModel,
             billableFees,
+            minimumCommitment,
             createdAt);
     }
     
@@ -243,6 +272,7 @@ public class PartnerPricing {
                 "revenueShare", revenueShare,
                 "cardAcquiringModel", cardAcquiringModel,
                 "billableFees", billableFees,
+                "minimumCommitment", minimumCommitment,
                 "createdAt", createdAt);
     }
     
@@ -259,6 +289,8 @@ public class PartnerPricing {
         private CardAcquiringModel cardAcquiringModel;
  
         private List<BillableFee> billableFees;
+ 
+        private MinimumCommitment minimumCommitment;
  
         private OffsetDateTime createdAt;  
         
@@ -323,6 +355,15 @@ public class PartnerPricing {
             return this;
         }
 
+        /**
+         * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+         */
+        public Builder minimumCommitment(MinimumCommitment minimumCommitment) {
+            Utils.checkNotNull(minimumCommitment, "minimumCommitment");
+            this.minimumCommitment = minimumCommitment;
+            return this;
+        }
+
         public Builder createdAt(OffsetDateTime createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = createdAt;
@@ -337,6 +378,7 @@ public class PartnerPricing {
                 revenueShare,
                 cardAcquiringModel,
                 billableFees,
+                minimumCommitment,
                 createdAt);
         }
     }

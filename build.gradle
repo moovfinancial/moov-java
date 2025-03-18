@@ -63,7 +63,7 @@ tasks.withType(Javadoc) {
 }
 
 sourcesJar {
-    archiveBaseName = "${groupId}"
+    archiveBaseName = "${artifactId}"
 }
 
 javadocJar {
@@ -100,7 +100,7 @@ publishing {
             // https://github.com/gradle/gradle/issues/18619
             groupId = "io.moov"
             artifactId = "sdk"
-            version = "0.9.0"
+            version = "0.9.1"
 
             from components.java
 

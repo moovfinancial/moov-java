@@ -34,6 +34,10 @@ public class CreateTransferSource {
     private Optional<String> paymentMethodID;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("paymentToken")
+    private Optional<String> paymentToken;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardDetails")
     private Optional<? extends CreateTransferSourceCard> cardDetails;
 
@@ -45,20 +49,23 @@ public class CreateTransferSource {
     public CreateTransferSource(
             @JsonProperty("transferID") Optional<String> transferID,
             @JsonProperty("paymentMethodID") Optional<String> paymentMethodID,
+            @JsonProperty("paymentToken") Optional<String> paymentToken,
             @JsonProperty("cardDetails") Optional<? extends CreateTransferSourceCard> cardDetails,
             @JsonProperty("achDetails") Optional<? extends CreateTransferSourceACH> achDetails) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
+        Utils.checkNotNull(paymentToken, "paymentToken");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(achDetails, "achDetails");
         this.transferID = transferID;
         this.paymentMethodID = paymentMethodID;
+        this.paymentToken = paymentToken;
         this.cardDetails = cardDetails;
         this.achDetails = achDetails;
     }
     
     public CreateTransferSource() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -73,6 +80,11 @@ public class CreateTransferSource {
     @JsonIgnore
     public Optional<String> paymentMethodID() {
         return paymentMethodID;
+    }
+
+    @JsonIgnore
+    public Optional<String> paymentToken() {
+        return paymentToken;
     }
 
     @SuppressWarnings("unchecked")
@@ -123,6 +135,18 @@ public class CreateTransferSource {
         return this;
     }
 
+    public CreateTransferSource withPaymentToken(String paymentToken) {
+        Utils.checkNotNull(paymentToken, "paymentToken");
+        this.paymentToken = Optional.ofNullable(paymentToken);
+        return this;
+    }
+
+    public CreateTransferSource withPaymentToken(Optional<String> paymentToken) {
+        Utils.checkNotNull(paymentToken, "paymentToken");
+        this.paymentToken = paymentToken;
+        return this;
+    }
+
     public CreateTransferSource withCardDetails(CreateTransferSourceCard cardDetails) {
         Utils.checkNotNull(cardDetails, "cardDetails");
         this.cardDetails = Optional.ofNullable(cardDetails);
@@ -159,6 +183,7 @@ public class CreateTransferSource {
         return 
             Objects.deepEquals(this.transferID, other.transferID) &&
             Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
+            Objects.deepEquals(this.paymentToken, other.paymentToken) &&
             Objects.deepEquals(this.cardDetails, other.cardDetails) &&
             Objects.deepEquals(this.achDetails, other.achDetails);
     }
@@ -168,6 +193,7 @@ public class CreateTransferSource {
         return Objects.hash(
             transferID,
             paymentMethodID,
+            paymentToken,
             cardDetails,
             achDetails);
     }
@@ -177,6 +203,7 @@ public class CreateTransferSource {
         return Utils.toString(CreateTransferSource.class,
                 "transferID", transferID,
                 "paymentMethodID", paymentMethodID,
+                "paymentToken", paymentToken,
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
     }
@@ -186,6 +213,8 @@ public class CreateTransferSource {
         private Optional<String> transferID = Optional.empty();
  
         private Optional<String> paymentMethodID = Optional.empty();
+ 
+        private Optional<String> paymentToken = Optional.empty();
  
         private Optional<? extends CreateTransferSourceCard> cardDetails = Optional.empty();
  
@@ -227,6 +256,18 @@ public class CreateTransferSource {
             return this;
         }
 
+        public Builder paymentToken(String paymentToken) {
+            Utils.checkNotNull(paymentToken, "paymentToken");
+            this.paymentToken = Optional.ofNullable(paymentToken);
+            return this;
+        }
+
+        public Builder paymentToken(Optional<String> paymentToken) {
+            Utils.checkNotNull(paymentToken, "paymentToken");
+            this.paymentToken = paymentToken;
+            return this;
+        }
+
         public Builder cardDetails(CreateTransferSourceCard cardDetails) {
             Utils.checkNotNull(cardDetails, "cardDetails");
             this.cardDetails = Optional.ofNullable(cardDetails);
@@ -255,6 +296,7 @@ public class CreateTransferSource {
             return new CreateTransferSource(
                 transferID,
                 paymentMethodID,
+                paymentToken,
                 cardDetails,
                 achDetails);
         }

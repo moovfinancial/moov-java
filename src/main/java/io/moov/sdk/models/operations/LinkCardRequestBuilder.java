@@ -9,6 +9,7 @@ import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
+import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 

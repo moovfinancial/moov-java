@@ -63,6 +63,13 @@ public class TransferSource {
     private Optional<? extends ApplePayResponse> applePay;
 
     /**
+     * Describes payment card details captured with tap or in-person payment.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("terminalCard")
+    private Optional<? extends TerminalCard> terminalCard;
+
+    /**
      * Card-specific details about the transaction.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -86,6 +93,7 @@ public class TransferSource {
             @JsonProperty("wallet") Optional<? extends PaymentMethodsWallet> wallet,
             @JsonProperty("card") Optional<? extends PaymentMethodsCard> card,
             @JsonProperty("applePay") Optional<? extends ApplePayResponse> applePay,
+            @JsonProperty("terminalCard") Optional<? extends TerminalCard> terminalCard,
             @JsonProperty("cardDetails") Optional<? extends CardTransactionDetails> cardDetails,
             @JsonProperty("achDetails") Optional<? extends ACHTransactionDetails> achDetails) {
         Utils.checkNotNull(transferID, "transferID");
@@ -96,6 +104,7 @@ public class TransferSource {
         Utils.checkNotNull(wallet, "wallet");
         Utils.checkNotNull(card, "card");
         Utils.checkNotNull(applePay, "applePay");
+        Utils.checkNotNull(terminalCard, "terminalCard");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(achDetails, "achDetails");
         this.transferID = transferID;
@@ -106,6 +115,7 @@ public class TransferSource {
         this.wallet = wallet;
         this.card = card;
         this.applePay = applePay;
+        this.terminalCard = terminalCard;
         this.cardDetails = cardDetails;
         this.achDetails = achDetails;
     }
@@ -114,7 +124,7 @@ public class TransferSource {
             String paymentMethodID,
             PaymentMethodType paymentMethodType,
             TransferAccount account) {
-        this(Optional.empty(), paymentMethodID, paymentMethodType, account, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), paymentMethodID, paymentMethodType, account, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -174,6 +184,15 @@ public class TransferSource {
     @JsonIgnore
     public Optional<ApplePayResponse> applePay() {
         return (Optional<ApplePayResponse>) applePay;
+    }
+
+    /**
+     * Describes payment card details captured with tap or in-person payment.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TerminalCard> terminalCard() {
+        return (Optional<TerminalCard>) terminalCard;
     }
 
     /**
@@ -304,6 +323,24 @@ public class TransferSource {
     }
 
     /**
+     * Describes payment card details captured with tap or in-person payment.
+     */
+    public TransferSource withTerminalCard(TerminalCard terminalCard) {
+        Utils.checkNotNull(terminalCard, "terminalCard");
+        this.terminalCard = Optional.ofNullable(terminalCard);
+        return this;
+    }
+
+    /**
+     * Describes payment card details captured with tap or in-person payment.
+     */
+    public TransferSource withTerminalCard(Optional<? extends TerminalCard> terminalCard) {
+        Utils.checkNotNull(terminalCard, "terminalCard");
+        this.terminalCard = terminalCard;
+        return this;
+    }
+
+    /**
      * Card-specific details about the transaction.
      */
     public TransferSource withCardDetails(CardTransactionDetails cardDetails) {
@@ -357,6 +394,7 @@ public class TransferSource {
             Objects.deepEquals(this.wallet, other.wallet) &&
             Objects.deepEquals(this.card, other.card) &&
             Objects.deepEquals(this.applePay, other.applePay) &&
+            Objects.deepEquals(this.terminalCard, other.terminalCard) &&
             Objects.deepEquals(this.cardDetails, other.cardDetails) &&
             Objects.deepEquals(this.achDetails, other.achDetails);
     }
@@ -372,6 +410,7 @@ public class TransferSource {
             wallet,
             card,
             applePay,
+            terminalCard,
             cardDetails,
             achDetails);
     }
@@ -387,6 +426,7 @@ public class TransferSource {
                 "wallet", wallet,
                 "card", card,
                 "applePay", applePay,
+                "terminalCard", terminalCard,
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
     }
@@ -408,6 +448,8 @@ public class TransferSource {
         private Optional<? extends PaymentMethodsCard> card = Optional.empty();
  
         private Optional<? extends ApplePayResponse> applePay = Optional.empty();
+ 
+        private Optional<? extends TerminalCard> terminalCard = Optional.empty();
  
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
  
@@ -523,6 +565,24 @@ public class TransferSource {
         }
 
         /**
+         * Describes payment card details captured with tap or in-person payment.
+         */
+        public Builder terminalCard(TerminalCard terminalCard) {
+            Utils.checkNotNull(terminalCard, "terminalCard");
+            this.terminalCard = Optional.ofNullable(terminalCard);
+            return this;
+        }
+
+        /**
+         * Describes payment card details captured with tap or in-person payment.
+         */
+        public Builder terminalCard(Optional<? extends TerminalCard> terminalCard) {
+            Utils.checkNotNull(terminalCard, "terminalCard");
+            this.terminalCard = terminalCard;
+            return this;
+        }
+
+        /**
          * Card-specific details about the transaction.
          */
         public Builder cardDetails(CardTransactionDetails cardDetails) {
@@ -568,6 +628,7 @@ public class TransferSource {
                 wallet,
                 card,
                 applePay,
+                terminalCard,
                 cardDetails,
                 achDetails);
         }

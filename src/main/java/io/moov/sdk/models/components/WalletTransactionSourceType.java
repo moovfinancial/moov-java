@@ -14,7 +14,8 @@ public enum WalletTransactionSourceType {
     ISSUING_CARD_TRANSACTION("issuing-card-transaction"),
     ISSUING_AUTHORIZATION("issuing-authorization"),
     SWEEP("sweep"),
-    ADJUSTMENT("adjustment");
+    ADJUSTMENT("adjustment"),
+    FEE("fee");
 
     @JsonValue
     private final String value;

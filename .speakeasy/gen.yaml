@@ -15,7 +15,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 java:
-  version: 0.9.1
+  version: 0.9.2
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk

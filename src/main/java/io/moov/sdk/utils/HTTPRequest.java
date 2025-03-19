@@ -46,9 +46,7 @@ public class HTTPRequest {
             headerValues = new ArrayList<>();
             headers.put(key, headerValues);
         }
-        if (!headerValues.contains(value)) {
-            headerValues.add(value);
-        }
+        headerValues.add(value);
         return this;
     }
     

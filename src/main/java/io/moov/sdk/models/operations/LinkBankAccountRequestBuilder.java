@@ -9,7 +9,6 @@ import io.moov.sdk.models.components.BankAccountWaitFor;
 import io.moov.sdk.models.components.LinkBankAccount;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 

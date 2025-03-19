@@ -7,7 +7,6 @@ package io.moov.sdk.models.operations;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.List;
 import java.util.Optional;

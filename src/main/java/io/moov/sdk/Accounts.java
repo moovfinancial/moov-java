@@ -233,6 +233,15 @@ public class Accounts implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
@@ -249,15 +258,6 @@ public class Accounts implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
             _res.withHeaders(_httpRes.headers().map());
@@ -774,6 +774,15 @@ public class Accounts implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
@@ -790,15 +799,6 @@ public class Accounts implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
             _res.withHeaders(_httpRes.headers().map());
@@ -1344,6 +1344,15 @@ public class Accounts implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
@@ -1358,15 +1367,6 @@ public class Accounts implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
             _res.withHeaders(_httpRes.headers().map());

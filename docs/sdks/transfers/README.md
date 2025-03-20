@@ -129,7 +129,7 @@ public class Application {
                         .achDetails(CreateTransferSourceACH.builder()
                             .companyEntryDescription("Gym dues")
                             .originatingCompanyName("Whole Body Fit")
-                            .debitHoldPeriod(DebitHoldPeriod.TWO_DAYS)
+                            .debitHoldPeriod(DebitHoldPeriod.TWO_MINUS_DAYS)
                             .build())
                         .build())
                     .destination(CreateTransferDestination.builder()

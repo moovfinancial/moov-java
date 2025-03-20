@@ -5,6 +5,7 @@
 package io.moov.sdk.models.operations;
 
 import io.moov.sdk.utils.Utils;
+import java.lang.Exception;
 
 public class ListIssuedCardTransactionsRequestBuilder {
 

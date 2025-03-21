@@ -45,7 +45,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.10.0'
+implementation 'io.moov:sdk:0.10.1'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.10.0</version>
+    <version>0.10.1</version>
 </dependency>
 ```
 
@@ -1086,6 +1086,13 @@ you'll need to specify the `/terminalApplications.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/terminalApplications.write` scope.
+
+### [terminalConfigurations()](docs/sdks/terminalconfigurations/README.md)
+
+* [get](docs/sdks/terminalconfigurations/README.md#get) - Fetch the configuration for a given Terminal Application
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
 
 ### [transfers()](docs/sdks/transfers/README.md)
 

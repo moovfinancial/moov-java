@@ -714,6 +714,14 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallGetTerminalConfiguration {
+        GetTerminalConfigurationResponse get(
+            Optional<String> xMoovVersion,
+            String accountID,
+            String terminalApplicationID) throws Exception;
+    }
+
+
     public interface MethodCallCreateTransfer {
         CreateTransferResponse create(
             CreateTransferRequest request) throws Exception;

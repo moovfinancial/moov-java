@@ -6,35 +6,43 @@
 package io.moov.sdk.models.components;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
+import java.util.Optional;
 /**
  * AccountNameVerification - The results of submitting cardholder name to a card network for verification.
  */
 
 public class AccountNameVerification {
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("firstName")
-    private CardVerificationResult firstName;
+    private Optional<? extends CardVerificationResult> firstName;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastName")
-    private CardVerificationResult lastName;
+    private Optional<? extends CardVerificationResult> lastName;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("middleName")
-    private CardVerificationResult middleName;
+    private Optional<? extends CardVerificationResult> middleName;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fullName")
-    private CardVerificationResult fullName;
+    private Optional<? extends CardVerificationResult> fullName;
 
     @JsonCreator
     public AccountNameVerification(
-            @JsonProperty("firstName") CardVerificationResult firstName,
-            @JsonProperty("lastName") CardVerificationResult lastName,
-            @JsonProperty("middleName") CardVerificationResult middleName,
-            @JsonProperty("fullName") CardVerificationResult fullName) {
+            @JsonProperty("firstName") Optional<? extends CardVerificationResult> firstName,
+            @JsonProperty("lastName") Optional<? extends CardVerificationResult> lastName,
+            @JsonProperty("middleName") Optional<? extends CardVerificationResult> middleName,
+            @JsonProperty("fullName") Optional<? extends CardVerificationResult> fullName) {
         Utils.checkNotNull(firstName, "firstName");
         Utils.checkNotNull(lastName, "lastName");
         Utils.checkNotNull(middleName, "middleName");
@@ -44,25 +52,33 @@ public class AccountNameVerification {
         this.middleName = middleName;
         this.fullName = fullName;
     }
-
-    @JsonIgnore
-    public CardVerificationResult firstName() {
-        return firstName;
+    
+    public AccountNameVerification() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public CardVerificationResult lastName() {
-        return lastName;
+    public Optional<CardVerificationResult> firstName() {
+        return (Optional<CardVerificationResult>) firstName;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public CardVerificationResult middleName() {
-        return middleName;
+    public Optional<CardVerificationResult> lastName() {
+        return (Optional<CardVerificationResult>) lastName;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public CardVerificationResult fullName() {
-        return fullName;
+    public Optional<CardVerificationResult> middleName() {
+        return (Optional<CardVerificationResult>) middleName;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<CardVerificationResult> fullName() {
+        return (Optional<CardVerificationResult>) fullName;
     }
 
     public final static Builder builder() {
@@ -71,11 +87,23 @@ public class AccountNameVerification {
 
     public AccountNameVerification withFirstName(CardVerificationResult firstName) {
         Utils.checkNotNull(firstName, "firstName");
+        this.firstName = Optional.ofNullable(firstName);
+        return this;
+    }
+
+    public AccountNameVerification withFirstName(Optional<? extends CardVerificationResult> firstName) {
+        Utils.checkNotNull(firstName, "firstName");
         this.firstName = firstName;
         return this;
     }
 
     public AccountNameVerification withLastName(CardVerificationResult lastName) {
+        Utils.checkNotNull(lastName, "lastName");
+        this.lastName = Optional.ofNullable(lastName);
+        return this;
+    }
+
+    public AccountNameVerification withLastName(Optional<? extends CardVerificationResult> lastName) {
         Utils.checkNotNull(lastName, "lastName");
         this.lastName = lastName;
         return this;
@@ -83,11 +111,23 @@ public class AccountNameVerification {
 
     public AccountNameVerification withMiddleName(CardVerificationResult middleName) {
         Utils.checkNotNull(middleName, "middleName");
+        this.middleName = Optional.ofNullable(middleName);
+        return this;
+    }
+
+    public AccountNameVerification withMiddleName(Optional<? extends CardVerificationResult> middleName) {
+        Utils.checkNotNull(middleName, "middleName");
         this.middleName = middleName;
         return this;
     }
 
     public AccountNameVerification withFullName(CardVerificationResult fullName) {
+        Utils.checkNotNull(fullName, "fullName");
+        this.fullName = Optional.ofNullable(fullName);
+        return this;
+    }
+
+    public AccountNameVerification withFullName(Optional<? extends CardVerificationResult> fullName) {
         Utils.checkNotNull(fullName, "fullName");
         this.fullName = fullName;
         return this;
@@ -129,13 +169,13 @@ public class AccountNameVerification {
     
     public final static class Builder {
  
-        private CardVerificationResult firstName;
+        private Optional<? extends CardVerificationResult> firstName = Optional.empty();
  
-        private CardVerificationResult lastName;
+        private Optional<? extends CardVerificationResult> lastName = Optional.empty();
  
-        private CardVerificationResult middleName;
+        private Optional<? extends CardVerificationResult> middleName = Optional.empty();
  
-        private CardVerificationResult fullName;  
+        private Optional<? extends CardVerificationResult> fullName = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -143,11 +183,23 @@ public class AccountNameVerification {
 
         public Builder firstName(CardVerificationResult firstName) {
             Utils.checkNotNull(firstName, "firstName");
+            this.firstName = Optional.ofNullable(firstName);
+            return this;
+        }
+
+        public Builder firstName(Optional<? extends CardVerificationResult> firstName) {
+            Utils.checkNotNull(firstName, "firstName");
             this.firstName = firstName;
             return this;
         }
 
         public Builder lastName(CardVerificationResult lastName) {
+            Utils.checkNotNull(lastName, "lastName");
+            this.lastName = Optional.ofNullable(lastName);
+            return this;
+        }
+
+        public Builder lastName(Optional<? extends CardVerificationResult> lastName) {
             Utils.checkNotNull(lastName, "lastName");
             this.lastName = lastName;
             return this;
@@ -155,11 +207,23 @@ public class AccountNameVerification {
 
         public Builder middleName(CardVerificationResult middleName) {
             Utils.checkNotNull(middleName, "middleName");
+            this.middleName = Optional.ofNullable(middleName);
+            return this;
+        }
+
+        public Builder middleName(Optional<? extends CardVerificationResult> middleName) {
+            Utils.checkNotNull(middleName, "middleName");
             this.middleName = middleName;
             return this;
         }
 
         public Builder fullName(CardVerificationResult fullName) {
+            Utils.checkNotNull(fullName, "fullName");
+            this.fullName = Optional.ofNullable(fullName);
+            return this;
+        }
+
+        public Builder fullName(Optional<? extends CardVerificationResult> fullName) {
             Utils.checkNotNull(fullName, "fullName");
             this.fullName = fullName;
             return this;

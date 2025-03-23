@@ -6,11 +6,15 @@
 package io.moov.sdk.models.components;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
+import java.util.Optional;
 /**
  * CardVerification - The results of submitting cardholder data to a card network for verification.
  */
@@ -29,15 +33,16 @@ public class CardVerification {
     /**
      * The results of submitting cardholder name to a card network for verification.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accountName")
-    private AccountNameVerification accountName;
+    private Optional<? extends AccountNameVerification> accountName;
 
     @JsonCreator
     public CardVerification(
             @JsonProperty("cvv") CardVerificationResult cvv,
             @JsonProperty("addressLine1") CardVerificationResult addressLine1,
             @JsonProperty("postalCode") CardVerificationResult postalCode,
-            @JsonProperty("accountName") AccountNameVerification accountName) {
+            @JsonProperty("accountName") Optional<? extends AccountNameVerification> accountName) {
         Utils.checkNotNull(cvv, "cvv");
         Utils.checkNotNull(addressLine1, "addressLine1");
         Utils.checkNotNull(postalCode, "postalCode");
@@ -46,6 +51,13 @@ public class CardVerification {
         this.addressLine1 = addressLine1;
         this.postalCode = postalCode;
         this.accountName = accountName;
+    }
+    
+    public CardVerification(
+            CardVerificationResult cvv,
+            CardVerificationResult addressLine1,
+            CardVerificationResult postalCode) {
+        this(cvv, addressLine1, postalCode, Optional.empty());
     }
 
     @JsonIgnore
@@ -66,9 +78,10 @@ public class CardVerification {
     /**
      * The results of submitting cardholder name to a card network for verification.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public AccountNameVerification accountName() {
-        return accountName;
+    public Optional<AccountNameVerification> accountName() {
+        return (Optional<AccountNameVerification>) accountName;
     }
 
     public final static Builder builder() {
@@ -97,6 +110,15 @@ public class CardVerification {
      * The results of submitting cardholder name to a card network for verification.
      */
     public CardVerification withAccountName(AccountNameVerification accountName) {
+        Utils.checkNotNull(accountName, "accountName");
+        this.accountName = Optional.ofNullable(accountName);
+        return this;
+    }
+
+    /**
+     * The results of submitting cardholder name to a card network for verification.
+     */
+    public CardVerification withAccountName(Optional<? extends AccountNameVerification> accountName) {
         Utils.checkNotNull(accountName, "accountName");
         this.accountName = accountName;
         return this;
@@ -144,7 +166,7 @@ public class CardVerification {
  
         private CardVerificationResult postalCode;
  
-        private AccountNameVerification accountName;  
+        private Optional<? extends AccountNameVerification> accountName = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -172,6 +194,15 @@ public class CardVerification {
          * The results of submitting cardholder name to a card network for verification.
          */
         public Builder accountName(AccountNameVerification accountName) {
+            Utils.checkNotNull(accountName, "accountName");
+            this.accountName = Optional.ofNullable(accountName);
+            return this;
+        }
+
+        /**
+         * The results of submitting cardholder name to a card network for verification.
+         */
+        public Builder accountName(Optional<? extends AccountNameVerification> accountName) {
             Utils.checkNotNull(accountName, "accountName");
             this.accountName = accountName;
             return this;

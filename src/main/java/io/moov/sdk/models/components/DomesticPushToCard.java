@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DomesticPushToCard - Indicates which level of domestic push-to-card transfer is supported by the card, if any.
+ * DomesticPushToCard
+ * 
+ * <p>Indicates which level of domestic push-to-card transfer is supported by the card, if any.
  */
 public enum DomesticPushToCard {
     NOT_SUPPORTED("not-supported"),

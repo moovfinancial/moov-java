@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * AccountType - The type of entity represented by this account.
+ * AccountType
+ * 
+ * <p>The type of entity represented by this account.
  */
 public enum AccountType {
     INDIVIDUAL("individual"),

@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CreateTerminalApplication - Describes a create terminal application request.
+ * CreateTerminalApplication
+ * 
+ * <p>Describes a create terminal application request.
  */
 
 public class CreateTerminalApplication {

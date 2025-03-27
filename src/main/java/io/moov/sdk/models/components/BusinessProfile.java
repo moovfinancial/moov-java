@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * BusinessProfile - Describes a business.
+ * BusinessProfile
+ * 
+ * <p>Describes a business.
  */
 
 public class BusinessProfile {

@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CapabilityRequirement - Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+ * CapabilityRequirement
+ * 
+ * <p>Represents individual and business data necessary to facilitate the enabling of a capability for an account.
  */
 
 public class CapabilityRequirement {

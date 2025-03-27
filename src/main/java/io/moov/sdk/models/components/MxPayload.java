@@ -12,12 +12,14 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * MxPayload - Describes the account to link to the Moov account using a MX processor token. 
+ * MxPayload
  * 
- * `sandbox` - When linking a bank account to a `sandbox` account using an MX authorization token a default bank account routing number will
+ * <p>Describes the account to link to the Moov account using a MX processor token. 
+ * 
+ * <p>`sandbox` - When linking a bank account to a `sandbox` account using an MX authorization token a default bank account routing number will
  * be used. The following default data will be used to generate the bank account in this flow:
  * 
- * ```
+ * <p>```
  *   RoutingNumber: "123456780",
  *   BankName: "Gringotts Bank"
  * ```
@@ -28,7 +30,7 @@ public class MxPayload {
     /**
      * The authorization code of a MX account which allows a processor to retrieve a linked payment account. 
      * 
-     * `sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
+     * <p>`sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
      * The MX authorization code provided must be generated from MX's sandbox environment.
      */
     @JsonProperty("mx")
@@ -44,7 +46,7 @@ public class MxPayload {
     /**
      * The authorization code of a MX account which allows a processor to retrieve a linked payment account. 
      * 
-     * `sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
+     * <p>`sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
      * The MX authorization code provided must be generated from MX's sandbox environment.
      */
     @JsonIgnore
@@ -59,7 +61,7 @@ public class MxPayload {
     /**
      * The authorization code of a MX account which allows a processor to retrieve a linked payment account. 
      * 
-     * `sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
+     * <p>`sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
      * The MX authorization code provided must be generated from MX's sandbox environment.
      */
     public MxPayload withMx(MXAuthorizationCode mx) {
@@ -104,7 +106,7 @@ public class MxPayload {
         /**
          * The authorization code of a MX account which allows a processor to retrieve a linked payment account. 
          * 
-         * `sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
+         * <p>`sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
          * The MX authorization code provided must be generated from MX's sandbox environment.
          */
         public Builder mx(MXAuthorizationCode mx) {

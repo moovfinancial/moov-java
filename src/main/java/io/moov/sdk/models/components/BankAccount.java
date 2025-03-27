@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * BankAccount - Describes a bank account linked to a Moov account.
+ * BankAccount
+ * 
+ * <p>Describes a bank account linked to a Moov account.
  */
 
 public class BankAccount {
@@ -29,7 +31,7 @@ public class BankAccount {
     /**
      * Once the bank account is linked, we don't reveal the full bank account number. 
      * 
-     * The fingerprint acts as a way to identify whether two linked bank accounts are the same.
+     * <p>The fingerprint acts as a way to identify whether two linked bank accounts are the same.
      */
     @JsonProperty("fingerprint")
     private String fingerprint;
@@ -82,7 +84,7 @@ public class BankAccount {
      * Includes any payment methods generated for a newly created bank account, removing the need to
      * call the List Payment Methods endpoint following a successful Create BankAccount request.
      * 
-     * **NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentMethods")
@@ -153,7 +155,7 @@ public class BankAccount {
     /**
      * Once the bank account is linked, we don't reveal the full bank account number. 
      * 
-     * The fingerprint acts as a way to identify whether two linked bank accounts are the same.
+     * <p>The fingerprint acts as a way to identify whether two linked bank accounts are the same.
      */
     @JsonIgnore
     public String fingerprint() {
@@ -228,7 +230,7 @@ public class BankAccount {
      * Includes any payment methods generated for a newly created bank account, removing the need to
      * call the List Payment Methods endpoint following a successful Create BankAccount request.
      * 
-     * **NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -249,7 +251,7 @@ public class BankAccount {
     /**
      * Once the bank account is linked, we don't reveal the full bank account number. 
      * 
-     * The fingerprint acts as a way to identify whether two linked bank accounts are the same.
+     * <p>The fingerprint acts as a way to identify whether two linked bank accounts are the same.
      */
     public BankAccount withFingerprint(String fingerprint) {
         Utils.checkNotNull(fingerprint, "fingerprint");
@@ -351,7 +353,7 @@ public class BankAccount {
      * Includes any payment methods generated for a newly created bank account, removing the need to
      * call the List Payment Methods endpoint following a successful Create BankAccount request.
      * 
-     * **NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
      */
     public BankAccount withPaymentMethods(List<BasicPaymentMethod> paymentMethods) {
         Utils.checkNotNull(paymentMethods, "paymentMethods");
@@ -363,7 +365,7 @@ public class BankAccount {
      * Includes any payment methods generated for a newly created bank account, removing the need to
      * call the List Payment Methods endpoint following a successful Create BankAccount request.
      * 
-     * **NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
      */
     public BankAccount withPaymentMethods(Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
         Utils.checkNotNull(paymentMethods, "paymentMethods");
@@ -473,7 +475,7 @@ public class BankAccount {
         /**
          * Once the bank account is linked, we don't reveal the full bank account number. 
          * 
-         * The fingerprint acts as a way to identify whether two linked bank accounts are the same.
+         * <p>The fingerprint acts as a way to identify whether two linked bank accounts are the same.
          */
         public Builder fingerprint(String fingerprint) {
             Utils.checkNotNull(fingerprint, "fingerprint");
@@ -575,7 +577,7 @@ public class BankAccount {
          * Includes any payment methods generated for a newly created bank account, removing the need to
          * call the List Payment Methods endpoint following a successful Create BankAccount request.
          * 
-         * **NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+         * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
          */
         public Builder paymentMethods(List<BasicPaymentMethod> paymentMethods) {
             Utils.checkNotNull(paymentMethods, "paymentMethods");
@@ -587,7 +589,7 @@ public class BankAccount {
          * Includes any payment methods generated for a newly created bank account, removing the need to
          * call the List Payment Methods endpoint following a successful Create BankAccount request.
          * 
-         * **NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+         * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
          */
         public Builder paymentMethods(Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
             Utils.checkNotNull(paymentMethods, "paymentMethods");

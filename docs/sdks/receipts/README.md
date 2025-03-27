@@ -27,9 +27,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.ReceiptKind;
-import io.moov.sdk.models.components.ReceiptRequest;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ReceiptValidationError;
 import io.moov.sdk.models.operations.CreateReceiptsResponse;

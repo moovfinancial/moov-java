@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * BankAccountException - Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
+ * BankAccountException
+ * 
+ * <p>Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
  */
 
 public class BankAccountException {
@@ -20,7 +22,7 @@ public class BankAccountException {
     /**
      * The return code of an ACH transaction that caused the bank account status to change.
      * 
-     * - R02: Account Closed
+     * <p>- R02: Account Closed
      * - R03: No Account/Unable to Locate Account
      * - R04: Invalid Account Number
      * - R05: Improper Debit to Consumer Account
@@ -47,7 +49,7 @@ public class BankAccountException {
     /**
      * The rejection code of an RTP transaction that caused the bank account status to change.
      * 
-     * - AC03: Account Invalid
+     * <p>- AC03: Account Invalid
      * - AC04: Account Closed
      * - AC06: Account Blocked
      * - AC14: Creditor Account Type Invalid
@@ -80,7 +82,7 @@ public class BankAccountException {
     /**
      * The return code of an ACH transaction that caused the bank account status to change.
      * 
-     * - R02: Account Closed
+     * <p>- R02: Account Closed
      * - R03: No Account/Unable to Locate Account
      * - R04: Invalid Account Number
      * - R05: Improper Debit to Consumer Account
@@ -109,7 +111,7 @@ public class BankAccountException {
     /**
      * The rejection code of an RTP transaction that caused the bank account status to change.
      * 
-     * - AC03: Account Invalid
+     * <p>- AC03: Account Invalid
      * - AC04: Account Closed
      * - AC06: Account Blocked
      * - AC14: Creditor Account Type Invalid
@@ -137,7 +139,7 @@ public class BankAccountException {
     /**
      * The return code of an ACH transaction that caused the bank account status to change.
      * 
-     * - R02: Account Closed
+     * <p>- R02: Account Closed
      * - R03: No Account/Unable to Locate Account
      * - R04: Invalid Account Number
      * - R05: Improper Debit to Consumer Account
@@ -167,7 +169,7 @@ public class BankAccountException {
     /**
      * The rejection code of an RTP transaction that caused the bank account status to change.
      * 
-     * - AC03: Account Invalid
+     * <p>- AC03: Account Invalid
      * - AC04: Account Closed
      * - AC06: Account Blocked
      * - AC14: Creditor Account Type Invalid
@@ -236,7 +238,7 @@ public class BankAccountException {
         /**
          * The return code of an ACH transaction that caused the bank account status to change.
          * 
-         * - R02: Account Closed
+         * <p>- R02: Account Closed
          * - R03: No Account/Unable to Locate Account
          * - R04: Invalid Account Number
          * - R05: Improper Debit to Consumer Account
@@ -266,7 +268,7 @@ public class BankAccountException {
         /**
          * The rejection code of an RTP transaction that caused the bank account status to change.
          * 
-         * - AC03: Account Invalid
+         * <p>- AC03: Account Invalid
          * - AC04: Account Closed
          * - AC06: Account Blocked
          * - AC14: Creditor Account Type Invalid

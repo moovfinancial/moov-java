@@ -17,7 +17,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * IncurredFee - A fee incurred by a user.
+ * IncurredFee
+ * 
+ * <p>A fee incurred by a user.
  */
 
 public class IncurredFee {

@@ -35,10 +35,7 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.BrandColor;
-import io.moov.sdk.models.components.BrandColors;
-import io.moov.sdk.models.components.BrandProperties;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.BrandValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateBrandResponse;
@@ -110,10 +107,7 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.BrandColor;
-import io.moov.sdk.models.components.BrandColors;
-import io.moov.sdk.models.components.BrandProperties;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.BrandValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UpsertBrandResponse;

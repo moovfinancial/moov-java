@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DocumentType - Types of documents that can be uploaded.
+ * DocumentType
+ * 
+ * <p>Types of documents that can be uploaded.
  */
 public enum DocumentType {
     DRIVERS_LICENSE("driversLicense"),

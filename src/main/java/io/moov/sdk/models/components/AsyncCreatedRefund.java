@@ -13,7 +13,9 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 /**
- * AsyncCreatedRefund - Asynchronous refund response
+ * AsyncCreatedRefund
+ * 
+ * <p>Asynchronous refund response
  */
 
 public class AsyncCreatedRefund {

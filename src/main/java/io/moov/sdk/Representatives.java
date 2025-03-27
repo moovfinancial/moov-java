@@ -59,7 +59,13 @@ public class Representatives implements
 
 
     /**
-     * Moov accounts associated with businesses require information regarding individuals who represent the business.  - You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * Moov accounts associated with businesses require information regarding individuals who represent the business. 
+     * You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
+     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
      * @return The call builder
      */
     public CreateRepresentativeRequestBuilder create() {
@@ -67,7 +73,13 @@ public class Representatives implements
     }
 
     /**
-     * Moov accounts associated with businesses require information regarding individuals who represent the business.  - You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * Moov accounts associated with businesses require information regarding individuals who represent the business. 
+     * You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
+     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
      * @param accountID ID of the account.
      * @param createRepresentative Describes a business representative to create.
      * @return The response from the API call
@@ -80,16 +92,22 @@ public class Representatives implements
     }
     
     /**
-     * Moov accounts associated with businesses require information regarding individuals who represent the business.  - You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * Moov accounts associated with businesses require information regarding individuals who represent the business. 
+     * You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
+     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the account.
      * @param createRepresentative Describes a business representative to create.
      * @return The response from the API call
@@ -141,8 +159,9 @@ public class Representatives implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "createRepresentative", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -152,8 +171,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createRepresentative",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -161,8 +181,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "createRepresentative",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -170,8 +191,9 @@ public class Representatives implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createRepresentative",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -279,7 +301,14 @@ public class Representatives implements
 
 
     /**
-     * A Moov account may have multiple representatives depending on the associated business's ownership and management structure.  - You can use this method to list all the representatives for a given Moov account.  - Note that Moov accounts associated with an individual do not have representatives.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
+     * You can use this method to list all the representatives for a given Moov account. 
+     * Note that Moov accounts associated with an individual do not have representatives. 
+     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * 
      * @return The call builder
      */
     public ListRepresentativesRequestBuilder list() {
@@ -287,7 +316,14 @@ public class Representatives implements
     }
 
     /**
-     * A Moov account may have multiple representatives depending on the associated business's ownership and management structure.  - You can use this method to list all the representatives for a given Moov account.  - Note that Moov accounts associated with an individual do not have representatives.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
+     * You can use this method to list all the representatives for a given Moov account. 
+     * Note that Moov accounts associated with an individual do not have representatives. 
+     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * 
      * @param accountID ID of the account.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -298,16 +334,23 @@ public class Representatives implements
     }
     
     /**
-     * A Moov account may have multiple representatives depending on the associated business's ownership and management structure.  - You can use this method to list all the representatives for a given Moov account.  - Note that Moov accounts associated with an individual do not have representatives.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
+     * You can use this method to list all the representatives for a given Moov account. 
+     * Note that Moov accounts associated with an individual do not have representatives. 
+     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the account.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -343,8 +386,9 @@ public class Representatives implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listRepresentatives", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -354,8 +398,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listRepresentatives",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -363,8 +408,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listRepresentatives",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -372,8 +418,9 @@ public class Representatives implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listRepresentatives",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -451,7 +498,11 @@ public class Representatives implements
 
 
     /**
-     * Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
      * @return The call builder
      */
     public DeleteRepresentativeRequestBuilder delete() {
@@ -459,7 +510,11 @@ public class Representatives implements
     }
 
     /**
-     * Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
      * @param accountID ID of the account.
      * @param representativeID ID of the representative.
      * @return The response from the API call
@@ -472,16 +527,20 @@ public class Representatives implements
     }
     
     /**
-     * Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the account.
      * @param representativeID ID of the representative.
      * @return The response from the API call
@@ -520,8 +579,9 @@ public class Representatives implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "deleteRepresentative", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -531,8 +591,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "deleteRepresentative",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -540,8 +601,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "deleteRepresentative",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -549,8 +611,9 @@ public class Representatives implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "deleteRepresentative",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -632,7 +695,11 @@ public class Representatives implements
 
 
     /**
-     * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * 
      * @return The call builder
      */
     public GetRepresentativeRequestBuilder get() {
@@ -640,7 +707,11 @@ public class Representatives implements
     }
 
     /**
-     * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * 
      * @param accountID ID of the account.
      * @param representativeID ID of the representative.
      * @return The response from the API call
@@ -653,16 +724,20 @@ public class Representatives implements
     }
     
     /**
-     * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the account.
      * @param representativeID ID of the representative.
      * @return The response from the API call
@@ -701,8 +776,9 @@ public class Representatives implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getRepresentative", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -712,8 +788,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getRepresentative",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -721,8 +798,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getRepresentative",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -730,8 +808,9 @@ public class Representatives implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getRepresentative",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -809,7 +888,24 @@ public class Representatives implements
 
 
     /**
-     * If a representative's information has changed you can patch the information associated with a specific representative ID.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - When **can** profile data be updated: -  - - For unverified representatives, all profile data can be edited. - - During the verification process, missing or incomplete profile data can be edited. - - Verified representatives can only add missing profile data. -  - When **can't** profile data be updated: -  - - Verified representatives cannot change any existing profile data. -  - If you need to update information in a locked state, please contact Moov support. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * If a representative's information has changed you can patch the information associated with a specific representative ID. 
+     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>When **can** profile data be updated:
+     * 
+     * <p>- For unverified representatives, all profile data can be edited.
+     * - During the verification process, missing or incomplete profile data can be edited.
+     * - Verified representatives can only add missing profile data.
+     * 
+     * <p>When **can't** profile data be updated:
+     * 
+     * <p>- Verified representatives cannot change any existing profile data.
+     * 
+     * <p>If you need to update information in a locked state, please contact Moov support.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
      * @return The call builder
      */
     public UpdateRepresentativeRequestBuilder update() {
@@ -817,10 +913,27 @@ public class Representatives implements
     }
 
     /**
-     * If a representative's information has changed you can patch the information associated with a specific representative ID.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - When **can** profile data be updated: -  - - For unverified representatives, all profile data can be edited. - - During the verification process, missing or incomplete profile data can be edited. - - Verified representatives can only add missing profile data. -  - When **can't** profile data be updated: -  - - Verified representatives cannot change any existing profile data. -  - If you need to update information in a locked state, please contact Moov support. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * If a representative's information has changed you can patch the information associated with a specific representative ID. 
+     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>When **can** profile data be updated:
+     * 
+     * <p>- For unverified representatives, all profile data can be edited.
+     * - During the verification process, missing or incomplete profile data can be edited.
+     * - Verified representatives can only add missing profile data.
+     * 
+     * <p>When **can't** profile data be updated:
+     * 
+     * <p>- Verified representatives cannot change any existing profile data.
+     * 
+     * <p>If you need to update information in a locked state, please contact Moov support.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
      * @param accountID ID of the account.
      * @param representativeID ID of the representative.
-     * @param updateRepresentative
+     * @param updateRepresentative 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -832,19 +945,36 @@ public class Representatives implements
     }
     
     /**
-     * If a representative's information has changed you can patch the information associated with a specific representative ID.  - Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more. -  - When **can** profile data be updated: -  - - For unverified representatives, all profile data can be edited. - - During the verification process, missing or incomplete profile data can be edited. - - Verified representatives can only add missing profile data. -  - When **can't** profile data be updated: -  - - Verified representatives cannot change any existing profile data. -  - If you need to update information in a locked state, please contact Moov support. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * If a representative's information has changed you can patch the information associated with a specific representative ID. 
+     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * 
+     * <p>When **can** profile data be updated:
+     * 
+     * <p>- For unverified representatives, all profile data can be edited.
+     * - During the verification process, missing or incomplete profile data can be edited.
+     * - Verified representatives can only add missing profile data.
+     * 
+     * <p>When **can't** profile data be updated:
+     * 
+     * <p>- Verified representatives cannot change any existing profile data.
+     * 
+     * <p>If you need to update information in a locked state, please contact Moov support.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the account.
      * @param representativeID ID of the representative.
-     * @param updateRepresentative
+     * @param updateRepresentative 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -896,8 +1026,9 @@ public class Representatives implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "updateRepresentative", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -907,8 +1038,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateRepresentative",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -916,8 +1048,9 @@ public class Representatives implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "updateRepresentative",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -925,8 +1058,9 @@ public class Representatives implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateRepresentative",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

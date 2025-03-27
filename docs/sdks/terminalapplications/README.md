@@ -35,9 +35,7 @@ you'll need to specify the `/terminalApplications.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateTerminalApplication;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.TerminalApplicationPlatform;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.TerminalApplicationError;
 import io.moov.sdk.models.operations.CreateTerminalApplicationResponse;

@@ -17,7 +17,9 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * GeneratedBy - The entity that generated the fee.
+ * GeneratedBy
+ * 
+ * <p>The entity that generated the fee.
  */
 
 @JsonDeserialize(using = GeneratedBy._Deserializer.class)

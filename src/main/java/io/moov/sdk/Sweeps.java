@@ -65,7 +65,11 @@ public class Sweeps implements
 
 
     /**
-     * Create a sweep config for a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * Create a sweep config for a wallet.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
      * @return The call builder
      */
     public CreateSweepConfigRequestBuilder createConfig() {
@@ -73,9 +77,13 @@ public class Sweeps implements
     }
 
     /**
-     * Create a sweep config for a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
-     * @param accountID
-     * @param createSweepConfig
+     * Create a sweep config for a wallet.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
+     * @param accountID 
+     * @param createSweepConfig 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -86,18 +94,22 @@ public class Sweeps implements
     }
     
     /**
-     * Create a sweep config for a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * Create a sweep config for a wallet.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param createSweepConfig
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
+     * @param createSweepConfig 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -147,8 +159,9 @@ public class Sweeps implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "createSweepConfig", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -158,8 +171,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createSweepConfig",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -167,8 +181,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "createSweepConfig",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -176,8 +191,9 @@ public class Sweeps implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createSweepConfig",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -285,7 +301,11 @@ public class Sweeps implements
 
 
     /**
-     * List sweep configs associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * List sweep configs associated with an account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
      * @return The call builder
      */
     public ListSweepConfigsRequestBuilder listConfigs() {
@@ -293,8 +313,12 @@ public class Sweeps implements
     }
 
     /**
-     * List sweep configs associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param accountID
+     * List sweep configs associated with an account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -304,17 +328,21 @@ public class Sweeps implements
     }
     
     /**
-     * List sweep configs associated with an account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * List sweep configs associated with an account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -349,8 +377,9 @@ public class Sweeps implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listSweepConfigs", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -360,8 +389,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listSweepConfigs",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -369,8 +399,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listSweepConfigs",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -378,8 +409,9 @@ public class Sweeps implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listSweepConfigs",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -457,7 +489,11 @@ public class Sweeps implements
 
 
     /**
-     * Get a sweep config associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * Get a sweep config associated with a wallet.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
      * @return The call builder
      */
     public GetSweepConfigRequestBuilder getConfig() {
@@ -465,9 +501,13 @@ public class Sweeps implements
     }
 
     /**
-     * Get a sweep config associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param accountID
-     * @param sweepConfigID
+     * Get a sweep config associated with a wallet.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
+     * @param sweepConfigID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -478,18 +518,22 @@ public class Sweeps implements
     }
     
     /**
-     * Get a sweep config associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * Get a sweep config associated with a wallet.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param sweepConfigID
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
+     * @param sweepConfigID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -526,8 +570,9 @@ public class Sweeps implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getSweepConfig", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -537,8 +582,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getSweepConfig",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -546,8 +592,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getSweepConfig",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -555,8 +602,9 @@ public class Sweeps implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getSweepConfig",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -634,7 +682,11 @@ public class Sweeps implements
 
 
     /**
-     * Update settings on a sweep config. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * Update settings on a sweep config.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
      * @return The call builder
      */
     public UpdateSweepConfigRequestBuilder updateConfig() {
@@ -642,10 +694,14 @@ public class Sweeps implements
     }
 
     /**
-     * Update settings on a sweep config. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
-     * @param accountID
-     * @param sweepConfigID
-     * @param patchSweepConfig
+     * Update settings on a sweep config.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
+     * @param accountID 
+     * @param sweepConfigID 
+     * @param patchSweepConfig 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -657,19 +713,23 @@ public class Sweeps implements
     }
     
     /**
-     * Update settings on a sweep config. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * Update settings on a sweep config.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param sweepConfigID
-     * @param patchSweepConfig
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
+     * @param sweepConfigID 
+     * @param patchSweepConfig 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -721,8 +781,9 @@ public class Sweeps implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "updateSweepConfig", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -732,8 +793,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateSweepConfig",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -741,8 +803,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "updateSweepConfig",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -750,8 +813,9 @@ public class Sweeps implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateSweepConfig",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -859,7 +923,11 @@ public class Sweeps implements
 
 
     /**
-     * List sweeps associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * List sweeps associated with a wallet.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
      * @return The call builder
      */
     public ListSweepsRequestBuilder list() {
@@ -867,7 +935,11 @@ public class Sweeps implements
     }
 
     /**
-     * List sweeps associated with a wallet. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * List sweeps associated with a wallet.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -900,8 +972,9 @@ public class Sweeps implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listSweeps", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -911,8 +984,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listSweeps",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -920,8 +994,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listSweeps",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -929,8 +1004,9 @@ public class Sweeps implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listSweeps",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -1008,7 +1084,11 @@ public class Sweeps implements
 
 
     /**
-     * Get details on a specific sweep. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * Get details on a specific sweep.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
      * @return The call builder
      */
     public GetSweepRequestBuilder get() {
@@ -1016,10 +1096,14 @@ public class Sweeps implements
     }
 
     /**
-     * Get details on a specific sweep. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * @param accountID
-     * @param walletID
-     * @param sweepID
+     * Get details on a specific sweep.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
+     * @param accountID 
+     * @param walletID 
+     * @param sweepID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1031,19 +1115,23 @@ public class Sweeps implements
     }
     
     /**
-     * Get details on a specific sweep. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * Get details on a specific sweep.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param walletID
-     * @param sweepID
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
+     * @param walletID 
+     * @param sweepID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1082,8 +1170,9 @@ public class Sweeps implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getSweep", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -1093,8 +1182,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getSweep",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -1102,8 +1192,9 @@ public class Sweeps implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getSweep",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -1111,8 +1202,9 @@ public class Sweeps implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getSweep",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

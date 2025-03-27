@@ -13,7 +13,9 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 /**
- * Adjustment - An adjustment to a wallet.
+ * Adjustment
+ * 
+ * <p>An adjustment to a wallet.
  */
 
 public class Adjustment {

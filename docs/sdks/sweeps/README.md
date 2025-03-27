@@ -43,9 +43,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateSweepConfig;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.SweepConfigStatus;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.CreateSweepConfigError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateSweepConfigResponse;
@@ -229,9 +227,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.PatchSweepConfig;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.Status;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.PatchSweepConfigError;
 import io.moov.sdk.models.operations.UpdateSweepConfigResponse;

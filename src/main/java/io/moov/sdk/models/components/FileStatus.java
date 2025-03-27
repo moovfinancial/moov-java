@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FileStatus - The file's status.
+ * FileStatus
+ * 
+ * <p>The file's status.
  */
 public enum FileStatus {
     PENDING("pending"),

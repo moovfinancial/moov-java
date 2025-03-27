@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FeeProperties - Defines the specific parameters used for fee calculation.
+ * FeeProperties
+ * 
+ * <p>Defines the specific parameters used for fee calculation.
  */
 
 public class FeeProperties {
@@ -31,7 +33,7 @@ public class FeeProperties {
     /**
      * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
      * 
-     * For example, 0.05% is '0.05'.
+     * <p>For example, 0.05% is '0.05'.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("variableRate")
@@ -83,7 +85,7 @@ public class FeeProperties {
     /**
      * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
      * 
-     * For example, 0.05% is '0.05'.
+     * <p>For example, 0.05% is '0.05'.
      */
     @JsonIgnore
     public Optional<String> variableRate() {
@@ -133,7 +135,7 @@ public class FeeProperties {
     /**
      * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
      * 
-     * For example, 0.05% is '0.05'.
+     * <p>For example, 0.05% is '0.05'.
      */
     public FeeProperties withVariableRate(String variableRate) {
         Utils.checkNotNull(variableRate, "variableRate");
@@ -144,7 +146,7 @@ public class FeeProperties {
     /**
      * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
      * 
-     * For example, 0.05% is '0.05'.
+     * <p>For example, 0.05% is '0.05'.
      */
     public FeeProperties withVariableRate(Optional<String> variableRate) {
         Utils.checkNotNull(variableRate, "variableRate");
@@ -257,7 +259,7 @@ public class FeeProperties {
         /**
          * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
          * 
-         * For example, 0.05% is '0.05'.
+         * <p>For example, 0.05% is '0.05'.
          */
         public Builder variableRate(String variableRate) {
             Utils.checkNotNull(variableRate, "variableRate");
@@ -268,7 +270,7 @@ public class FeeProperties {
         /**
          * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
          * 
-         * For example, 0.05% is '0.05'.
+         * <p>For example, 0.05% is '0.05'.
          */
         public Builder variableRate(Optional<String> variableRate) {
             Utils.checkNotNull(variableRate, "variableRate");

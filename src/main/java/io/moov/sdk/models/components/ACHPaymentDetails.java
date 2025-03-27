@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ACHPaymentDetails - Options for payment links used to collect an ACH payment.
+ * ACHPaymentDetails
+ * 
+ * <p>Options for payment links used to collect an ACH payment.
  */
 
 public class ACHPaymentDetails {

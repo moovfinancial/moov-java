@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * SECCode - Code used to identify the ACH authorization method.
+ * SECCode
+ * 
+ * <p>Code used to identify the ACH authorization method.
  */
 public enum SECCode {
     WEB("WEB"),

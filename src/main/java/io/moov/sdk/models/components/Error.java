@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Error - Contains details on why the occurrence errored.
+ * Error
+ * 
+ * <p>Contains details on why the occurrence errored.
  */
 
 public class Error {

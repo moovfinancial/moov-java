@@ -10,7 +10,10 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * AccountVerificationStatus - Possible states an account verification can be in.
+ * AccountVerificationStatus
+ * 
+ * <p>Possible states an account verification can be in.
+ * 
  * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 @Deprecated

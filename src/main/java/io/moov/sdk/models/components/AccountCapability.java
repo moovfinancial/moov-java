@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * AccountCapability - Describes an action or set of actions that an account is permitted to perform.
+ * AccountCapability
+ * 
+ * <p>Describes an action or set of actions that an account is permitted to perform.
  */
 
 public class AccountCapability {

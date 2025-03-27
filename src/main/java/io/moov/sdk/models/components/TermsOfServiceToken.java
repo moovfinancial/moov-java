@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * TermsOfServiceToken - An encrypted value used to record acceptance of Moov's Terms of Service.
+ * TermsOfServiceToken
+ * 
+ * <p>An encrypted value used to record acceptance of Moov's Terms of Service.
  */
 
 public class TermsOfServiceToken {

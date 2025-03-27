@@ -59,13 +59,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.Address;
-import io.moov.sdk.models.components.BirthDate;
-import io.moov.sdk.models.components.CreateRepresentative;
-import io.moov.sdk.models.components.IndividualName;
-import io.moov.sdk.models.components.PhoneNumber;
-import io.moov.sdk.models.components.RepresentativeResponsibilities;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.RepresentativeValidationError;
 import io.moov.sdk.models.operations.CreateRepresentativeResponse;
@@ -348,13 +342,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.IndividualNameUpdate;
-import io.moov.sdk.models.components.Phone;
-import io.moov.sdk.models.components.Responsibilities;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.UpdateRepresentative;
-import io.moov.sdk.models.components.UpdateRepresentativeAddress;
-import io.moov.sdk.models.components.UpdateRepresentativeBirthDate;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UpdateRepresentativeResponse;
 import java.lang.Exception;

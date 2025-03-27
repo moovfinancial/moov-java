@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TaxIDUpdate - An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+ * TaxIDUpdate
+ * 
+ * <p>An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
  */
 
 public class TaxIDUpdate {

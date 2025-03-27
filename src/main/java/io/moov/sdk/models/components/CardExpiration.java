@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * CardExpiration - The expiration date of the card or token.
+ * CardExpiration
+ * 
+ * <p>The expiration date of the card or token.
  */
 
 public class CardExpiration {

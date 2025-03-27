@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PatchProfile - Describes the fields available when patching a profile.
+ * PatchProfile
+ * 
+ * <p>Describes the fields available when patching a profile.
  * Each object can be patched independent of patching the other fields.
  */
 

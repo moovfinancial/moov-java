@@ -93,7 +93,13 @@ public class Transfers implements
 
 
     /**
-     * Move money by providing the source, destination, and amount in the request body. -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Move money by providing the source, destination, and amount in the request body.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @return The call builder
      */
     public CreateTransferRequestBuilder create() {
@@ -101,7 +107,13 @@ public class Transfers implements
     }
 
     /**
-     * Move money by providing the source, destination, and amount in the request body. -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Move money by providing the source, destination, and amount in the request body.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -142,8 +154,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "createTransfer", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -153,8 +166,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createTransfer",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -162,8 +176,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "createTransfer",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -171,8 +186,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createTransfer",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -327,7 +343,18 @@ public class Transfers implements
 
 
     /**
-     * List all the transfers associated with a particular Moov account.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example,  - if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely  - process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited  - period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * List all the transfers associated with a particular Moov account. 
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * 
+     * <p>When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example, 
+     * if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely 
+     * process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited 
+     * period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @return The call builder
      */
     public ListTransfersRequestBuilder list() {
@@ -335,7 +362,18 @@ public class Transfers implements
     }
 
     /**
-     * List all the transfers associated with a particular Moov account.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example,  - if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely  - process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited  - period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * List all the transfers associated with a particular Moov account. 
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * 
+     * <p>When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example, 
+     * if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely 
+     * process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited 
+     * period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -368,8 +406,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listTransfers", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -379,8 +418,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listTransfers",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -388,8 +428,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listTransfers",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -397,8 +438,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listTransfers",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -476,7 +518,14 @@ public class Transfers implements
 
 
     /**
-     * Retrieve full transfer details for an individual transfer of a particular Moov account.  -  - Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/)  - to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Retrieve full transfer details for an individual transfer of a particular Moov account. 
+     * 
+     * <p>Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) 
+     * to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @return The call builder
      */
     public GetTransferRequestBuilder get() {
@@ -484,9 +533,16 @@ public class Transfers implements
     }
 
     /**
-     * Retrieve full transfer details for an individual transfer of a particular Moov account.  -  - Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/)  - to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Retrieve full transfer details for an individual transfer of a particular Moov account. 
+     * 
+     * <p>Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) 
+     * to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @param transferID Identifier for the transfer.
-     * @param accountID
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -497,18 +553,25 @@ public class Transfers implements
     }
     
     /**
-     * Retrieve full transfer details for an individual transfer of a particular Moov account.  -  - Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/)  - to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Retrieve full transfer details for an individual transfer of a particular Moov account. 
+     * 
+     * <p>Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) 
+     * to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param transferID Identifier for the transfer.
-     * @param accountID
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -545,8 +608,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getTransfer", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -556,8 +620,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getTransfer",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -565,8 +630,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getTransfer",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -574,8 +640,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getTransfer",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -653,7 +720,13 @@ public class Transfers implements
 
 
     /**
-     * Update the metadata contained on a transfer.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Update the metadata contained on a transfer. 
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @return The call builder
      */
     public UpdateTransferRequestBuilder update() {
@@ -661,10 +734,16 @@ public class Transfers implements
     }
 
     /**
-     * Update the metadata contained on a transfer.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Update the metadata contained on a transfer. 
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @param transferID Identifier for the transfer.
-     * @param accountID
-     * @param patchTransfer
+     * @param accountID 
+     * @param patchTransfer 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -676,19 +755,25 @@ public class Transfers implements
     }
     
     /**
-     * Update the metadata contained on a transfer.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Update the metadata contained on a transfer. 
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param transferID Identifier for the transfer.
-     * @param accountID
-     * @param patchTransfer
+     * @param accountID 
+     * @param patchTransfer 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -740,8 +825,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "updateTransfer", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -751,8 +837,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateTransfer",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -760,8 +847,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "updateTransfer",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -769,8 +857,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateTransfer",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -848,7 +937,11 @@ public class Transfers implements
 
 
     /**
-     *   Initiate a cancellation for a card, ACH, or queued transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Initiate a cancellation for a card, ACH, or queued transfer.
+     * 
+     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     *   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @return The call builder
      */
     public CreateCancellationRequestBuilder createCancellation() {
@@ -856,7 +949,11 @@ public class Transfers implements
     }
 
     /**
-     *   Initiate a cancellation for a card, ACH, or queued transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Initiate a cancellation for a card, ACH, or queued transfer.
+     * 
+     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     *   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @param accountID The partner's Moov account ID.
      * @param transferID The transfer ID to cancel.
      * @return The response from the API call
@@ -869,16 +966,20 @@ public class Transfers implements
     }
     
     /**
-     *   Initiate a cancellation for a card, ACH, or queued transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Initiate a cancellation for a card, ACH, or queued transfer.
+     * 
+     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     *   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID The partner's Moov account ID.
      * @param transferID The transfer ID to cancel.
      * @return The response from the API call
@@ -917,8 +1018,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "createCancellation", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -928,8 +1030,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createCancellation",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -937,8 +1040,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "createCancellation",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -946,8 +1050,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createCancellation",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -1040,7 +1145,11 @@ public class Transfers implements
 
 
     /**
-     *   Get details of a cancellation for a transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Get details of a cancellation for a transfer.
+     * 
+     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     *   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @return The call builder
      */
     public GetCancellationRequestBuilder getCancellation() {
@@ -1048,7 +1157,11 @@ public class Transfers implements
     }
 
     /**
-     *   Get details of a cancellation for a transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Get details of a cancellation for a transfer.
+     * 
+     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     *   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @param accountID Moov account ID of the partner or transfer's source or destination.
      * @param transferID Identifier for the transfer.
      * @param cancellationID Identifier for the cancellation.
@@ -1063,16 +1176,20 @@ public class Transfers implements
     }
     
     /**
-     *   Get details of a cancellation for a transfer. -    -   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  -   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Get details of a cancellation for a transfer.
+     * 
+     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     *   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID Moov account ID of the partner or transfer's source or destination.
      * @param transferID Identifier for the transfer.
      * @param cancellationID Identifier for the cancellation.
@@ -1114,8 +1231,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getCancellation", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -1125,8 +1243,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getCancellation",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -1134,8 +1253,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getCancellation",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -1143,8 +1263,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getCancellation",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -1222,7 +1343,14 @@ public class Transfers implements
 
 
     /**
-     * Initiate a refund for a card transfer. -  - **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**     - See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Initiate a refund for a card transfer.
+     * 
+     * <p>**Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
+     * See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @return The call builder
      */
     public InitiateRefundRequestBuilder initiateRefund() {
@@ -1230,7 +1358,14 @@ public class Transfers implements
     }
 
     /**
-     * Initiate a refund for a card transfer. -  - **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**     - See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Initiate a refund for a card transfer.
+     * 
+     * <p>**Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
+     * See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1268,8 +1403,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "initiateRefund", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -1279,8 +1415,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "initiateRefund",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -1288,8 +1425,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "initiateRefund",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -1297,8 +1435,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "initiateRefund",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -1437,7 +1576,11 @@ public class Transfers implements
 
 
     /**
-     * Get a list of refunds for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Get a list of refunds for a card transfer.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @return The call builder
      */
     public ListRefundsRequestBuilder listRefunds() {
@@ -1445,8 +1588,12 @@ public class Transfers implements
     }
 
     /**
-     * Get a list of refunds for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param accountID
+     * Get a list of refunds for a card transfer.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param accountID 
      * @param transferID Identifier for the transfer.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1458,17 +1605,21 @@ public class Transfers implements
     }
     
     /**
-     * Get a list of refunds for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Get a list of refunds for a card transfer.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
      * @param transferID Identifier for the transfer.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1506,8 +1657,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listRefunds", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -1517,8 +1669,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listRefunds",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -1526,8 +1679,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listRefunds",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -1535,8 +1689,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listRefunds",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -1614,7 +1769,11 @@ public class Transfers implements
 
 
     /**
-     * Get details of a refund for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Get details of a refund for a card transfer.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @return The call builder
      */
     public GetRefundRequestBuilder getRefund() {
@@ -1622,9 +1781,13 @@ public class Transfers implements
     }
 
     /**
-     * Get details of a refund for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Get details of a refund for a card transfer.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @param transferID Identifier for the transfer.
-     * @param accountID
+     * @param accountID 
      * @param refundID Identifier for the refund.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1637,18 +1800,22 @@ public class Transfers implements
     }
     
     /**
-     * Get details of a refund for a card transfer. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Get details of a refund for a card transfer.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param transferID Identifier for the transfer.
-     * @param accountID
+     * @param accountID 
      * @param refundID Identifier for the refund.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1688,8 +1855,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getRefund", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -1699,8 +1867,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getRefund",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -1708,8 +1877,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getRefund",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -1717,8 +1887,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getRefund",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -1796,7 +1967,13 @@ public class Transfers implements
 
 
     /**
-     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.  - Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)  - to learn more. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
+     * Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
+     * to learn more.
+     * 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @return The call builder
      */
     public CreateReversalRequestBuilder createReversal() {
@@ -1804,7 +1981,13 @@ public class Transfers implements
     }
 
     /**
-     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.  - Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)  - to learn more. -  - To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need  - to specify the `/accounts/{accountID}/transfers.write` scope.
+     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
+     * Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
+     * to learn more.
+     * 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -1842,8 +2025,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "createReversal", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -1853,8 +2037,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createReversal",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -1862,8 +2047,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "createReversal",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -1871,8 +2057,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createReversal",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -1980,7 +2167,14 @@ public class Transfers implements
 
 
     /**
-     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you  - supply in the request.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+     * supply in the request. 
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @return The call builder
      */
     public CreateTransferOptionsRequestBuilder generateOptions() {
@@ -1988,8 +2182,15 @@ public class Transfers implements
     }
 
     /**
-     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you  - supply in the request.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * @param createTransferOptions
+     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+     * supply in the request. 
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
+     * @param createTransferOptions 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -1999,17 +2200,24 @@ public class Transfers implements
     }
     
     /**
-     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you  - supply in the request.  -  - Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+     * supply in the request. 
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param createTransferOptions
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param createTransferOptions 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -2055,8 +2263,9 @@ public class Transfers implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "createTransferOptions", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -2066,8 +2275,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createTransferOptions",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -2075,8 +2285,9 @@ public class Transfers implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "createTransferOptions",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -2084,8 +2295,9 @@ public class Transfers implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createTransferOptions",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

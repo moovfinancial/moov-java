@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CreateTransferDestination - The final stage of a transfer and the ultimate recipient of the funds.
+ * CreateTransferDestination
+ * 
+ * <p>The final stage of a transfer and the ultimate recipient of the funds.
  */
 
 public class CreateTransferDestination {

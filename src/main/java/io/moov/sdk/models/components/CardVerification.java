@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardVerification - The results of submitting cardholder data to a card network for verification.
+ * CardVerification
+ * 
+ * <p>The results of submitting cardholder data to a card network for verification.
  */
 
 public class CardVerification {

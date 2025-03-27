@@ -9,9 +9,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ACHReturnCode - The return code of an ACH transaction that caused the bank account status to change.
+ * ACHReturnCode
  * 
- * - R02: Account Closed
+ * <p>The return code of an ACH transaction that caused the bank account status to change.
+ * 
+ * <p>- R02: Account Closed
  * - R03: No Account/Unable to Locate Account
  * - R04: Invalid Account Number
  * - R05: Improper Debit to Consumer Account

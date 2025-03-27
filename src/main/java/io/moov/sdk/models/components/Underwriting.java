@@ -14,7 +14,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * Underwriting - Describes underwriting values (in USD) used for card payment acceptance.
+ * Underwriting
+ * 
+ * <p>Describes underwriting values (in USD) used for card payment acceptance.
  */
 
 public class Underwriting {
@@ -29,6 +31,7 @@ public class Underwriting {
     private long averageMonthlyTransactionVolume;
 
     /**
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonProperty("status")
@@ -85,6 +88,7 @@ public class Underwriting {
     }
 
     /**
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -131,6 +135,7 @@ public class Underwriting {
     }
 
     /**
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -241,6 +246,7 @@ public class Underwriting {
         }
 
         /**
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated

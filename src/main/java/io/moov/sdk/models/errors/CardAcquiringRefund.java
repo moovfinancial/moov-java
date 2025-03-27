@@ -19,7 +19,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardAcquiringRefund - Details of a card refund.
+ * CardAcquiringRefund
+ * 
+ * <p>Details of a card refund.
  */
 @SuppressWarnings("serial")
 public class CardAcquiringRefund extends RuntimeException {

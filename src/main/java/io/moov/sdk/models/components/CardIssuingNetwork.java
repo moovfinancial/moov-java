@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardIssuingNetwork - The name of the network a card transaction is routed through.
+ * CardIssuingNetwork
+ * 
+ * <p>The name of the network a card transaction is routed through.
  */
 public enum CardIssuingNetwork {
     DISCOVER("discover"),

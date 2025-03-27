@@ -22,7 +22,6 @@ import java.lang.Exception;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
 import java.util.Optional; 
 
 public class TerminalConfigurations implements
@@ -36,7 +35,11 @@ public class TerminalConfigurations implements
 
 
     /**
-     * Fetch the configuration for a given Terminal Application -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+     * Fetch the configuration for a given Terminal Application
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+     * 
      * @return The call builder
      */
     public GetTerminalConfigurationRequestBuilder get() {
@@ -44,9 +47,13 @@ public class TerminalConfigurations implements
     }
 
     /**
-     * Fetch the configuration for a given Terminal Application -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
-     * @param accountID
-     * @param terminalApplicationID
+     * Fetch the configuration for a given Terminal Application
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+     * 
+     * @param accountID 
+     * @param terminalApplicationID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -57,18 +64,22 @@ public class TerminalConfigurations implements
     }
     
     /**
-     * Fetch the configuration for a given Terminal Application -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+     * Fetch the configuration for a given Terminal Application
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param terminalApplicationID
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
+     * @param terminalApplicationID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -105,8 +116,9 @@ public class TerminalConfigurations implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getTerminalConfiguration", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -116,8 +128,9 @@ public class TerminalConfigurations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getTerminalConfiguration",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -125,8 +138,9 @@ public class TerminalConfigurations implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getTerminalConfiguration",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -134,8 +148,9 @@ public class TerminalConfigurations implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getTerminalConfiguration",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * OnboardingPartnerAccount - The account that created the onboarding invite.
+ * OnboardingPartnerAccount
+ * 
+ * <p>The account that created the onboarding invite.
  */
 
 public class OnboardingPartnerAccount {

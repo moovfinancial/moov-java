@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardBrand - The card brand.
+ * CardBrand
+ * 
+ * <p>The card brand.
  */
 public enum CardBrand {
     AMERICAN_EXPRESS("American Express"),

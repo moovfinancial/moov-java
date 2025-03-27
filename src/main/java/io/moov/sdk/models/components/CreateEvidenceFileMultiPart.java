@@ -17,7 +17,7 @@ public class CreateEvidenceFileMultiPart {
     /**
      * The file to upload as evidence. Valid types are [jpeg, tiff, pdf].
      * 
-     * The `Content-Type` header for this form part must be one of the following:
+     * <p>The `Content-Type` header for this form part must be one of the following:
      *   - `image/jpeg`
      *   - `image/tiff`
      *   - `application/pdf`
@@ -41,7 +41,7 @@ public class CreateEvidenceFileMultiPart {
     /**
      * The file to upload as evidence. Valid types are [jpeg, tiff, pdf].
      * 
-     * The `Content-Type` header for this form part must be one of the following:
+     * <p>The `Content-Type` header for this form part must be one of the following:
      *   - `image/jpeg`
      *   - `image/tiff`
      *   - `application/pdf`
@@ -63,7 +63,7 @@ public class CreateEvidenceFileMultiPart {
     /**
      * The file to upload as evidence. Valid types are [jpeg, tiff, pdf].
      * 
-     * The `Content-Type` header for this form part must be one of the following:
+     * <p>The `Content-Type` header for this form part must be one of the following:
      *   - `image/jpeg`
      *   - `image/tiff`
      *   - `application/pdf`
@@ -121,7 +121,7 @@ public class CreateEvidenceFileMultiPart {
         /**
          * The file to upload as evidence. Valid types are [jpeg, tiff, pdf].
          * 
-         * The `Content-Type` header for this form part must be one of the following:
+         * <p>The `Content-Type` header for this form part must be one of the following:
          *   - `image/jpeg`
          *   - `image/tiff`
          *   - `application/pdf`

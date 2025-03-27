@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CollectionPaymentMethodType - Payment methods allowed for collecting a payment.
+ * CollectionPaymentMethodType
+ * 
+ * <p>Payment methods allowed for collecting a payment.
  */
 public enum CollectionPaymentMethodType {
     APPLE_PAY("apple-pay"),

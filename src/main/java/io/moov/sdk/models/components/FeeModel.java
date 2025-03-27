@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FeeModel - Specifies the pricing model used for the calculation of the final fee.
+ * FeeModel
+ * 
+ * <p>Specifies the pricing model used for the calculation of the final fee.
  */
 public enum FeeModel {
     FIXED("fixed"),

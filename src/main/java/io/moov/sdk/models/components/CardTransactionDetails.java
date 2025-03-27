@@ -18,7 +18,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardTransactionDetails - Card-specific details about the transaction.
+ * CardTransactionDetails
+ * 
+ * <p>Card-specific details about the transaction.
  */
 
 public class CardTransactionDetails {
@@ -43,7 +45,7 @@ public class CardTransactionDetails {
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
-     * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
      * Omit for customer-initiated e-commerce transactions.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -76,6 +78,7 @@ public class CardTransactionDetails {
 
     /**
      * The program assigned by the card network that determines the interchange rate for the transfer.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -160,7 +163,7 @@ public class CardTransactionDetails {
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
-     * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
      * Omit for customer-initiated e-commerce transactions.
      */
     @SuppressWarnings("unchecked")
@@ -201,6 +204,7 @@ public class CardTransactionDetails {
 
     /**
      * The program assigned by the card network that determines the interchange rate for the transfer.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -263,7 +267,7 @@ public class CardTransactionDetails {
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
-     * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
      * Omit for customer-initiated e-commerce transactions.
      */
     public CardTransactionDetails withTransactionSource(TransactionSource transactionSource) {
@@ -275,7 +279,7 @@ public class CardTransactionDetails {
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
-     * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
      * Omit for customer-initiated e-commerce transactions.
      */
     public CardTransactionDetails withTransactionSource(Optional<? extends TransactionSource> transactionSource) {
@@ -358,6 +362,7 @@ public class CardTransactionDetails {
 
     /**
      * The program assigned by the card network that determines the interchange rate for the transfer.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -369,6 +374,7 @@ public class CardTransactionDetails {
 
     /**
      * The program assigned by the card network that determines the interchange rate for the transfer.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -527,7 +533,7 @@ public class CardTransactionDetails {
         /**
          * Specifies the nature and initiator of a transaction. 
          * 
-         * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+         * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
          * Omit for customer-initiated e-commerce transactions.
          */
         public Builder transactionSource(TransactionSource transactionSource) {
@@ -539,7 +545,7 @@ public class CardTransactionDetails {
         /**
          * Specifies the nature and initiator of a transaction. 
          * 
-         * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+         * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
          * Omit for customer-initiated e-commerce transactions.
          */
         public Builder transactionSource(Optional<? extends TransactionSource> transactionSource) {
@@ -622,6 +628,7 @@ public class CardTransactionDetails {
 
         /**
          * The program assigned by the card network that determines the interchange rate for the transfer.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -633,6 +640,7 @@ public class CardTransactionDetails {
 
         /**
          * The program assigned by the card network that determines the interchange rate for the transfer.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated

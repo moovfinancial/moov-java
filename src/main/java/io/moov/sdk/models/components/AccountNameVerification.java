@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * AccountNameVerification - The results of submitting cardholder name to a card network for verification.
+ * AccountNameVerification
+ * 
+ * <p>The results of submitting cardholder name to a card network for verification.
  */
 
 public class AccountNameVerification {

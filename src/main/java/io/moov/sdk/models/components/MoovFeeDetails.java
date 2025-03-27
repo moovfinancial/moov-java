@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * MoovFeeDetails - Processing and pass-through costs that add up to the moovFee.
+ * MoovFeeDetails
+ * 
+ * <p>Processing and pass-through costs that add up to the moovFee.
  */
 
 public class MoovFeeDetails {

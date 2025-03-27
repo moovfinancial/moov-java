@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * BankAccountHolderType - The type of holder on a funding source.
+ * BankAccountHolderType
+ * 
+ * <p>The type of holder on a funding source.
  */
 public enum BankAccountHolderType {
     INDIVIDUAL("individual"),

@@ -54,7 +54,11 @@ public class Onboarding implements
 
 
     /**
-     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
+     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.write` scope.
+     * 
      * @return The call builder
      */
     public CreateOnboardingInviteRequestBuilder createInvite() {
@@ -62,7 +66,11 @@ public class Onboarding implements
     }
 
     /**
-     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
+     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.write` scope.
+     * 
      * @param onboardingInviteRequest Request to create an onboarding invite.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -73,16 +81,20 @@ public class Onboarding implements
     }
     
     /**
-     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
+     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param onboardingInviteRequest Request to create an onboarding invite.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -129,8 +141,9 @@ public class Onboarding implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "createOnboardingInvite", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -140,8 +153,9 @@ public class Onboarding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createOnboardingInvite",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -149,8 +163,9 @@ public class Onboarding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "createOnboardingInvite",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -158,8 +173,9 @@ public class Onboarding implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createOnboardingInvite",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -267,7 +283,11 @@ public class Onboarding implements
 
 
     /**
-     * List all the onboarding invites created by the caller's account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
+     * List all the onboarding invites created by the caller's account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.read` scope.
+     * 
      * @return The call builder
      */
     public ListOnboardingInvitesRequestBuilder listInvites() {
@@ -275,7 +295,11 @@ public class Onboarding implements
     }
 
     /**
-     * List all the onboarding invites created by the caller's account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
+     * List all the onboarding invites created by the caller's account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.read` scope.
+     * 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -284,16 +308,20 @@ public class Onboarding implements
     }
     
     /**
-     * List all the onboarding invites created by the caller's account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
+     * List all the onboarding invites created by the caller's account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -324,8 +352,9 @@ public class Onboarding implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listOnboardingInvites", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -335,8 +364,9 @@ public class Onboarding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listOnboardingInvites",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -344,8 +374,9 @@ public class Onboarding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listOnboardingInvites",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -353,8 +384,9 @@ public class Onboarding implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listOnboardingInvites",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -432,7 +464,11 @@ public class Onboarding implements
 
 
     /**
-     * Retrieve details about an onboarding invite. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
+     * Retrieve details about an onboarding invite.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.read` scope.
+     * 
      * @return The call builder
      */
     public GetOnboardingInviteRequestBuilder getInvite() {
@@ -440,8 +476,12 @@ public class Onboarding implements
     }
 
     /**
-     * Retrieve details about an onboarding invite. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
-     * @param code
+     * Retrieve details about an onboarding invite.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.read` scope.
+     * 
+     * @param code 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -451,17 +491,21 @@ public class Onboarding implements
     }
     
     /**
-     * Retrieve details about an onboarding invite. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.read` scope.
+     * Retrieve details about an onboarding invite.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param code
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param code 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -496,8 +540,9 @@ public class Onboarding implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getOnboardingInvite", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -507,8 +552,9 @@ public class Onboarding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getOnboardingInvite",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -516,8 +562,9 @@ public class Onboarding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getOnboardingInvite",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -525,8 +572,9 @@ public class Onboarding implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getOnboardingInvite",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -604,7 +652,11 @@ public class Onboarding implements
 
 
     /**
-     * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
+     * Revoke an onboarding invite, rendering the invitation link unusable.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.write` scope.
+     * 
      * @return The call builder
      */
     public RevokeOnboardingInviteRequestBuilder revokeInvite() {
@@ -612,8 +664,12 @@ public class Onboarding implements
     }
 
     /**
-     * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
-     * @param code
+     * Revoke an onboarding invite, rendering the invitation link unusable.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.write` scope.
+     * 
+     * @param code 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -623,17 +679,21 @@ public class Onboarding implements
     }
     
     /**
-     * Revoke an onboarding invite, rendering the invitation link unusable. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts.write` scope.
+     * Revoke an onboarding invite, rendering the invitation link unusable.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param code
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param code 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -668,8 +728,9 @@ public class Onboarding implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "revokeOnboardingInvite", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -679,8 +740,9 @@ public class Onboarding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "revokeOnboardingInvite",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -688,8 +750,9 @@ public class Onboarding implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "revokeOnboardingInvite",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -697,8 +760,9 @@ public class Onboarding implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "revokeOnboardingInvite",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

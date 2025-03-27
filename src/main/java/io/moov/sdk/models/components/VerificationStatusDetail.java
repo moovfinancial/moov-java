@@ -10,7 +10,10 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * VerificationStatusDetail - Additional detail for a verification status.
+ * VerificationStatusDetail
+ * 
+ * <p>Additional detail for a verification status.
+ * 
  * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 @Deprecated

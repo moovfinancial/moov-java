@@ -24,7 +24,7 @@ public class PaymentLinkPayoutDetails {
     /**
      * Specify the intended recipient of the payout.
      * 
-     * This information will be used to authenticate the end user when they follow the payment link.
+     * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
     @JsonProperty("recipient")
     private PayoutRecipient recipient;
@@ -50,7 +50,7 @@ public class PaymentLinkPayoutDetails {
     /**
      * Specify the intended recipient of the payout.
      * 
-     * This information will be used to authenticate the end user when they follow the payment link.
+     * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
     @JsonIgnore
     public PayoutRecipient recipient() {
@@ -73,7 +73,7 @@ public class PaymentLinkPayoutDetails {
     /**
      * Specify the intended recipient of the payout.
      * 
-     * This information will be used to authenticate the end user when they follow the payment link.
+     * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
     public PaymentLinkPayoutDetails withRecipient(PayoutRecipient recipient) {
         Utils.checkNotNull(recipient, "recipient");
@@ -131,7 +131,7 @@ public class PaymentLinkPayoutDetails {
         /**
          * Specify the intended recipient of the payout.
          * 
-         * This information will be used to authenticate the end user when they follow the payment link.
+         * <p>This information will be used to authenticate the end user when they follow the payment link.
          */
         public Builder recipient(PayoutRecipient recipient) {
             Utils.checkNotNull(recipient, "recipient");

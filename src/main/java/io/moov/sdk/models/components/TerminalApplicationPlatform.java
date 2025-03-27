@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TerminalApplicationPlatform - Platform of the terminal application.
+ * TerminalApplicationPlatform
+ * 
+ * <p>Platform of the terminal application.
  */
 public enum TerminalApplicationPlatform {
     UNDEFINED("undefined"),

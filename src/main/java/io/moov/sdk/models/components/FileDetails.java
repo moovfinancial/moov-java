@@ -17,7 +17,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FileDetails - Describes a file linked to a Moov account.
+ * FileDetails
+ * 
+ * <p>Describes a file linked to a Moov account.
  */
 
 public class FileDetails {

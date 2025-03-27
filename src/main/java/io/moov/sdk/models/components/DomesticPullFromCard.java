@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DomesticPullFromCard - Indicates if the card supports domestic pull-from-card transfer.
+ * DomesticPullFromCard
+ * 
+ * <p>Indicates if the card supports domestic pull-from-card transfer.
  */
 public enum DomesticPullFromCard {
     NOT_SUPPORTED("not-supported"),

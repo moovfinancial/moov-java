@@ -17,7 +17,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * IndividualProfile - Describes an individual.
+ * IndividualProfile
+ * 
+ * <p>Describes an individual.
  */
 
 public class IndividualProfile {

@@ -341,10 +341,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateEvidenceFileMultiPart;
-import io.moov.sdk.models.components.EvidenceType;
-import io.moov.sdk.models.components.File;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.FileUploadValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceFileResponse;
@@ -418,9 +415,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateEvidenceText;
-import io.moov.sdk.models.components.EvidenceType;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceTextResponse;
 import java.lang.Exception;

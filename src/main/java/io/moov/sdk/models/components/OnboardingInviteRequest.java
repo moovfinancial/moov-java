@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * OnboardingInviteRequest - Request to create an onboarding invite.
+ * OnboardingInviteRequest
+ * 
+ * <p>Request to create an onboarding invite.
  */
 
 public class OnboardingInviteRequest {
@@ -37,14 +39,14 @@ public class OnboardingInviteRequest {
     private Optional<String> termsOfServiceURL;
 
     /**
-     *   List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
      *   account. These values are used to determine what can be done with the account onboarded.
      */
     @JsonProperty("scopes")
     private List<ApplicationScope> scopes;
 
     /**
-     *   List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
      *   account. These values are used to determine what information to collect from the user during onboarding.
      */
     @JsonProperty("capabilities")
@@ -106,7 +108,7 @@ public class OnboardingInviteRequest {
     }
 
     /**
-     *   List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
      *   account. These values are used to determine what can be done with the account onboarded.
      */
     @JsonIgnore
@@ -115,7 +117,7 @@ public class OnboardingInviteRequest {
     }
 
     /**
-     *   List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
      *   account. These values are used to determine what information to collect from the user during onboarding.
      */
     @JsonIgnore
@@ -178,7 +180,7 @@ public class OnboardingInviteRequest {
     }
 
     /**
-     *   List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
+     * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
      *   account. These values are used to determine what can be done with the account onboarded.
      */
     public OnboardingInviteRequest withScopes(List<ApplicationScope> scopes) {
@@ -188,7 +190,7 @@ public class OnboardingInviteRequest {
     }
 
     /**
-     *   List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
      *   account. These values are used to determine what information to collect from the user during onboarding.
      */
     public OnboardingInviteRequest withCapabilities(List<CapabilityID> capabilities) {
@@ -313,7 +315,7 @@ public class OnboardingInviteRequest {
         }
 
         /**
-         *   List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
+         * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
          *   account. These values are used to determine what can be done with the account onboarded.
          */
         public Builder scopes(List<ApplicationScope> scopes) {
@@ -323,7 +325,7 @@ public class OnboardingInviteRequest {
         }
 
         /**
-         *   List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+         * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
          *   account. These values are used to determine what information to collect from the user during onboarding.
          */
         public Builder capabilities(List<CapabilityID> capabilities) {

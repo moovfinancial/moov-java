@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * WalletTransaction - A transaction that funds or deducts from the wallet.
+ * WalletTransaction
+ * 
+ * <p>A transaction that funds or deducts from the wallet.
  */
 
 public class WalletTransaction {

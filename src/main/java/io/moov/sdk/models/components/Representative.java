@@ -18,7 +18,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Representative - Describes a business representative.
+ * Representative
+ * 
+ * <p>Describes a business representative.
  */
 
 public class Representative {

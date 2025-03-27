@@ -29,7 +29,7 @@ public class PaymentLinkPayoutDetailsUpdate {
     /**
      * Specify the intended recipient of the payout.
      * 
-     * This information will be used to authenticate the end user when they follow the payment link.
+     * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("recipient")
@@ -61,7 +61,7 @@ public class PaymentLinkPayoutDetailsUpdate {
     /**
      * Specify the intended recipient of the payout.
      * 
-     * This information will be used to authenticate the end user when they follow the payment link.
+     * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -94,7 +94,7 @@ public class PaymentLinkPayoutDetailsUpdate {
     /**
      * Specify the intended recipient of the payout.
      * 
-     * This information will be used to authenticate the end user when they follow the payment link.
+     * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
     public PaymentLinkPayoutDetailsUpdate withRecipient(PayoutRecipientUpdate recipient) {
         Utils.checkNotNull(recipient, "recipient");
@@ -105,7 +105,7 @@ public class PaymentLinkPayoutDetailsUpdate {
     /**
      * Specify the intended recipient of the payout.
      * 
-     * This information will be used to authenticate the end user when they follow the payment link.
+     * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
     public PaymentLinkPayoutDetailsUpdate withRecipient(Optional<? extends PayoutRecipientUpdate> recipient) {
         Utils.checkNotNull(recipient, "recipient");
@@ -172,7 +172,7 @@ public class PaymentLinkPayoutDetailsUpdate {
         /**
          * Specify the intended recipient of the payout.
          * 
-         * This information will be used to authenticate the end user when they follow the payment link.
+         * <p>This information will be used to authenticate the end user when they follow the payment link.
          */
         public Builder recipient(PayoutRecipientUpdate recipient) {
             Utils.checkNotNull(recipient, "recipient");
@@ -183,7 +183,7 @@ public class PaymentLinkPayoutDetailsUpdate {
         /**
          * Specify the intended recipient of the payout.
          * 
-         * This information will be used to authenticate the end user when they follow the payment link.
+         * <p>This information will be used to authenticate the end user when they follow the payment link.
          */
         public Builder recipient(Optional<? extends PayoutRecipientUpdate> recipient) {
             Utils.checkNotNull(recipient, "recipient");

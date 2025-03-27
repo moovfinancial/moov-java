@@ -9,9 +9,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * GrantType - The type of grant being requested.
+ * GrantType
  * 
- *   - `client_credentials`: A grant type used by clients to obtain an access token
+ * <p>The type of grant being requested.
+ * 
+ * <p>  - `client_credentials`: A grant type used by clients to obtain an access token
  *   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
  */
 public enum GrantType {

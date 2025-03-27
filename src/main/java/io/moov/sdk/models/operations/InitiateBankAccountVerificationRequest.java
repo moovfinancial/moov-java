@@ -22,13 +22,13 @@ public class InitiateBankAccountVerificationRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
     private Optional<String> xMoovVersion;
@@ -36,7 +36,7 @@ public class InitiateBankAccountVerificationRequest {
     /**
      * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
      * 
-     * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
     private Optional<? extends BankAccountWaitFor> xWaitFor;
@@ -72,13 +72,13 @@ public class InitiateBankAccountVerificationRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     @JsonIgnore
     public Optional<String> xMoovVersion() {
@@ -88,7 +88,7 @@ public class InitiateBankAccountVerificationRequest {
     /**
      * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
      * 
-     * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -113,13 +113,13 @@ public class InitiateBankAccountVerificationRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     public InitiateBankAccountVerificationRequest withXMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -130,13 +130,13 @@ public class InitiateBankAccountVerificationRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     public InitiateBankAccountVerificationRequest withXMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -147,7 +147,7 @@ public class InitiateBankAccountVerificationRequest {
     /**
      * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
      * 
-     * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
      */
     public InitiateBankAccountVerificationRequest withXWaitFor(BankAccountWaitFor xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -158,7 +158,7 @@ public class InitiateBankAccountVerificationRequest {
     /**
      * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
      * 
-     * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
      */
     public InitiateBankAccountVerificationRequest withXWaitFor(Optional<? extends BankAccountWaitFor> xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -229,13 +229,13 @@ public class InitiateBankAccountVerificationRequest {
         /**
          * Specify an API version.
          * 
-         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
          *   - `YYYY` is the year
          *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
          *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
          *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
          * 
-         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
         public Builder xMoovVersion(String xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -246,13 +246,13 @@ public class InitiateBankAccountVerificationRequest {
         /**
          * Specify an API version.
          * 
-         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
          *   - `YYYY` is the year
          *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
          *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
          *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
          * 
-         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
         public Builder xMoovVersion(Optional<String> xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -263,7 +263,7 @@ public class InitiateBankAccountVerificationRequest {
         /**
          * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
          * 
-         * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+         * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
          */
         public Builder xWaitFor(BankAccountWaitFor xWaitFor) {
             Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -274,7 +274,7 @@ public class InitiateBankAccountVerificationRequest {
         /**
          * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
          * 
-         * When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+         * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
          */
         public Builder xWaitFor(Optional<? extends BankAccountWaitFor> xWaitFor) {
             Utils.checkNotNull(xWaitFor, "xWaitFor");

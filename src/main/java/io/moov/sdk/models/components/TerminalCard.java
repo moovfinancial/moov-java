@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TerminalCard - Describes payment card details captured with tap or in-person payment.
+ * TerminalCard
+ * 
+ * <p>Describes payment card details captured with tap or in-person payment.
  */
 
 public class TerminalCard {

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ApplicationScope - A permission that the application requests on another account.
+ * ApplicationScope
+ * 
+ * <p>A permission that the application requests on another account.
  */
 public enum ApplicationScope {
     ACCOUNTS_READ("accounts.read"),

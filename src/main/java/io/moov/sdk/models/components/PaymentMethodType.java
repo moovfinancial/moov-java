@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentMethodType - The payment method type that represents a payment rail and directionality
+ * PaymentMethodType
+ * 
+ * <p>The payment method type that represents a payment rail and directionality
  */
 public enum PaymentMethodType {
     MOOV_WALLET("moov-wallet"),

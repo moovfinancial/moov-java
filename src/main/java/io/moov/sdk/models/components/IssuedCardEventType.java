@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * IssuedCardEventType - The type of event that occurred on the card.
+ * IssuedCardEventType
+ * 
+ * <p>The type of event that occurred on the card.
  */
 public enum IssuedCardEventType {
     AUTHORIZATION("authorization"),

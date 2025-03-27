@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TokenType - An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
+ * TokenType
+ * 
+ * <p>An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
  */
 public enum TokenType {
     BEARER("Bearer");

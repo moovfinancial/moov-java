@@ -17,9 +17,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * AppleBillingContact -   Billing contact information as returned from Apple Pay.
- *   
- *   Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) 
+ * AppleBillingContact
+ * 
+ * <p>Billing contact information as returned from Apple Pay.
+ * 
+ * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) 
  *   for more information.
  */
 

@@ -30,7 +30,6 @@ import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
 import java.util.Optional; 
 
 public class Underwriting implements
@@ -45,7 +44,13 @@ public class Underwriting implements
 
 
     /**
-     * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * Retrieve underwriting associated with a given Moov account. 
+     * 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
      * @return The call builder
      */
     public GetUnderwritingRequestBuilder get() {
@@ -53,8 +58,14 @@ public class Underwriting implements
     }
 
     /**
-     * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-     * @param accountID
+     * Retrieve underwriting associated with a given Moov account. 
+     * 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -64,17 +75,23 @@ public class Underwriting implements
     }
     
     /**
-     * Retrieve underwriting associated with a given Moov account.  -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * Retrieve underwriting associated with a given Moov account. 
+     * 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -109,8 +126,9 @@ public class Underwriting implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getUnderwriting", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -120,8 +138,9 @@ public class Underwriting implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getUnderwriting",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -129,8 +148,9 @@ public class Underwriting implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getUnderwriting",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -138,8 +158,9 @@ public class Underwriting implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getUnderwriting",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -217,7 +238,13 @@ public class Underwriting implements
 
 
     /**
-     * Create or update the account's underwriting. -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * Create or update the account's underwriting.
+     * 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
      * @return The call builder
      */
     public UpsertUnderwritingRequestBuilder upsert() {
@@ -225,9 +252,15 @@ public class Underwriting implements
     }
 
     /**
-     * Create or update the account's underwriting. -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-     * @param accountID
-     * @param updateUnderwriting
+     * Create or update the account's underwriting.
+     * 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
+     * @param accountID 
+     * @param updateUnderwriting 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -238,18 +271,24 @@ public class Underwriting implements
     }
     
     /**
-     * Create or update the account's underwriting. -  - Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * Create or update the account's underwriting.
+     * 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param updateUnderwriting
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
+     * @param updateUnderwriting 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -299,8 +338,9 @@ public class Underwriting implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "upsertUnderwriting", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -310,8 +350,9 @@ public class Underwriting implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "upsertUnderwriting",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -319,8 +360,9 @@ public class Underwriting implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "upsertUnderwriting",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -328,8 +370,9 @@ public class Underwriting implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "upsertUnderwriting",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

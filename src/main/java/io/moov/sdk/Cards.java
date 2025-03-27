@@ -61,7 +61,25 @@ public class Cards implements
 
 
     /**
-     * Link a card to an existing Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request.  - If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address.  - Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will  - use the account's name instead. -  - It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked  - card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment  - Methods](https://docs.moov.io/api/sources/payment-methods/list/) - endpoint to wait for the new payment methods to be available for use. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * Link a card to an existing Moov account. 
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * 
+     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request. 
+     * If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address. 
+     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will 
+     * use the account's name instead.
+     * 
+     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked 
+     * card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment 
+     * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
+     * endpoint to wait for the new payment methods to be available for use.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
      * @return The call builder
      */
     public LinkCardRequestBuilder link() {
@@ -69,9 +87,27 @@ public class Cards implements
     }
 
     /**
-     * Link a card to an existing Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request.  - If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address.  - Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will  - use the account's name instead. -  - It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked  - card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment  - Methods](https://docs.moov.io/api/sources/payment-methods/list/) - endpoint to wait for the new payment methods to be available for use. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param accountID
-     * @param linkCard
+     * Link a card to an existing Moov account. 
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * 
+     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request. 
+     * If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address. 
+     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will 
+     * use the account's name instead.
+     * 
+     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked 
+     * card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment 
+     * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
+     * endpoint to wait for the new payment methods to be available for use.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
+     * @param accountID 
+     * @param linkCard 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -82,19 +118,37 @@ public class Cards implements
     }
     
     /**
-     * Link a card to an existing Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request.  - If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address.  - Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will  - use the account's name instead. -  - It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked  - card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment  - Methods](https://docs.moov.io/api/sources/payment-methods/list/) - endpoint to wait for the new payment methods to be available for use. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * Link a card to an existing Moov account. 
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * 
+     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request. 
+     * If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address. 
+     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will 
+     * use the account's name instead.
+     * 
+     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked 
+     * card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment 
+     * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
+     * endpoint to wait for the new payment methods to be available for use.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param xWaitFor
-     * @param accountID
-     * @param linkCard
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param xWaitFor 
+     * @param accountID 
+     * @param linkCard 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -146,8 +200,9 @@ public class Cards implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "linkCard", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -157,8 +212,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "linkCard",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -166,8 +222,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "linkCard",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -175,8 +232,9 @@ public class Cards implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "linkCard",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -284,7 +342,13 @@ public class Cards implements
 
 
     /**
-     * List all the active cards associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * List all the active cards associated with a Moov account. 
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * 
      * @return The call builder
      */
     public ListCardsRequestBuilder list() {
@@ -292,8 +356,14 @@ public class Cards implements
     }
 
     /**
-     * List all the active cards associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
-     * @param accountID
+     * List all the active cards associated with a Moov account. 
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * 
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -303,17 +373,23 @@ public class Cards implements
     }
     
     /**
-     * List all the active cards associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * List all the active cards associated with a Moov account. 
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -348,8 +424,9 @@ public class Cards implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listCards", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -359,8 +436,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listCards",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -368,8 +446,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listCards",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -377,8 +456,9 @@ public class Cards implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listCards",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -456,7 +536,13 @@ public class Cards implements
 
 
     /**
-     * Fetch a specific card associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * Fetch a specific card associated with a Moov account. 
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * 
      * @return The call builder
      */
     public GetCardRequestBuilder get() {
@@ -464,9 +550,15 @@ public class Cards implements
     }
 
     /**
-     * Fetch a specific card associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
-     * @param accountID
-     * @param cardID
+     * Fetch a specific card associated with a Moov account. 
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * 
+     * @param accountID 
+     * @param cardID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -477,18 +569,24 @@ public class Cards implements
     }
     
     /**
-     * Fetch a specific card associated with a Moov account.  -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * Fetch a specific card associated with a Moov account. 
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param cardID
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
+     * @param cardID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -525,8 +623,9 @@ public class Cards implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getCard", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -536,8 +635,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getCard",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -545,8 +645,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getCard",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -554,8 +655,9 @@ public class Cards implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getCard",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -633,7 +735,20 @@ public class Cards implements
 
 
     /**
-     * Update a linked card and/or resubmit it for verification.  -  - If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration  - date or  - address will update the information stored on file for the card but will not be verified. -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn  - more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * Update a linked card and/or resubmit it for verification. 
+     * 
+     * <p>If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration 
+     * date or 
+     * address will update the information stored on file for the card but will not be verified.
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn 
+     * more.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
      * @return The call builder
      */
     public UpdateCardRequestBuilder update() {
@@ -641,10 +756,23 @@ public class Cards implements
     }
 
     /**
-     * Update a linked card and/or resubmit it for verification.  -  - If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration  - date or  - address will update the information stored on file for the card but will not be verified. -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn  - more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param accountID
-     * @param cardID
-     * @param updateCard
+     * Update a linked card and/or resubmit it for verification. 
+     * 
+     * <p>If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration 
+     * date or 
+     * address will update the information stored on file for the card but will not be verified.
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn 
+     * more.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
+     * @param accountID 
+     * @param cardID 
+     * @param updateCard 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -656,19 +784,32 @@ public class Cards implements
     }
     
     /**
-     * Update a linked card and/or resubmit it for verification.  -  - If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration  - date or  - address will update the information stored on file for the card but will not be verified. -  - Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn  - more. -  - Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * Update a linked card and/or resubmit it for verification. 
+     * 
+     * <p>If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration 
+     * date or 
+     * address will update the information stored on file for the card but will not be verified.
+     * 
+     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn 
+     * more.
+     * 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param cardID
-     * @param updateCard
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
+     * @param cardID 
+     * @param updateCard 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -720,8 +861,9 @@ public class Cards implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "updateCard", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -731,8 +873,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateCard",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -740,8 +883,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "updateCard",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -749,8 +893,9 @@ public class Cards implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateCard",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -858,7 +1003,11 @@ public class Cards implements
 
 
     /**
-     * Disables a card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * Disables a card associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
      * @return The call builder
      */
     public DisableCardRequestBuilder disable() {
@@ -866,9 +1015,13 @@ public class Cards implements
     }
 
     /**
-     * Disables a card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * @param accountID
-     * @param cardID
+     * Disables a card associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
+     * @param accountID 
+     * @param cardID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -879,18 +1032,22 @@ public class Cards implements
     }
     
     /**
-     * Disables a card associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * Disables a card associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID
-     * @param cardID
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
+     * @param cardID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -927,8 +1084,9 @@ public class Cards implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "disableCard", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -938,8 +1096,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "disableCard",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -947,8 +1106,9 @@ public class Cards implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "disableCard",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -956,8 +1116,9 @@ public class Cards implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "disableCard",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

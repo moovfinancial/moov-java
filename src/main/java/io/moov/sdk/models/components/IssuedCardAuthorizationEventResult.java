@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * IssuedCardAuthorizationEventResult - The result of an event.
+ * IssuedCardAuthorizationEventResult
+ * 
+ * <p>The result of an event.
  */
 public enum IssuedCardAuthorizationEventResult {
     APPROVED("approved"),

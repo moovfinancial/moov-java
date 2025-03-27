@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardAcquiringModel - Specifies the card processing pricing model
+ * CardAcquiringModel
+ * 
+ * <p>Specifies the card processing pricing model
  */
 public enum CardAcquiringModel {
     COST_PLUS("cost-plus"),

@@ -321,13 +321,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.AppleBillingContact;
-import io.moov.sdk.models.components.ApplePayHeader;
-import io.moov.sdk.models.components.LinkApplePay;
-import io.moov.sdk.models.components.LinkApplePayToken;
-import io.moov.sdk.models.components.LinkApplePaymentData;
-import io.moov.sdk.models.components.LinkApplePaymentMethod;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.LinkApplePayError;
 import io.moov.sdk.models.operations.LinkApplePayTokenResponse;

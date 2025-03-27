@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * IssuingIntervalLimit - Specifies the time frame for the velocity limit. Currently supports only per-transaction limits.
+ * IssuingIntervalLimit
+ * 
+ * <p>Specifies the time frame for the velocity limit. Currently supports only per-transaction limits.
  */
 public enum IssuingIntervalLimit {
     PER_TRANSACTION("per-transaction");

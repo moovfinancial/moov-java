@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DisputePhase - The phase of a dispute within the dispute lifecycle.
+ * DisputePhase
+ * 
+ * <p>The phase of a dispute within the dispute lifecycle.
  */
 public enum DisputePhase {
     PRE_DISPUTE("pre-dispute"),

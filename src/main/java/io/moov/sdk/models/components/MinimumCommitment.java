@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * MinimumCommitment - The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+ * MinimumCommitment
+ * 
+ * <p>The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
  */
 
 public class MinimumCommitment {
@@ -26,7 +28,7 @@ public class MinimumCommitment {
     /**
      * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
      * 
-     * For example, $12.987654321 is '12.987654321'.
+     * <p>For example, $12.987654321 is '12.987654321'.
      */
     @JsonProperty("valueDecimal")
     private String valueDecimal;
@@ -52,7 +54,7 @@ public class MinimumCommitment {
     /**
      * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
      * 
-     * For example, $12.987654321 is '12.987654321'.
+     * <p>For example, $12.987654321 is '12.987654321'.
      */
     @JsonIgnore
     public String valueDecimal() {
@@ -75,7 +77,7 @@ public class MinimumCommitment {
     /**
      * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
      * 
-     * For example, $12.987654321 is '12.987654321'.
+     * <p>For example, $12.987654321 is '12.987654321'.
      */
     public MinimumCommitment withValueDecimal(String valueDecimal) {
         Utils.checkNotNull(valueDecimal, "valueDecimal");
@@ -133,7 +135,7 @@ public class MinimumCommitment {
         /**
          * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
          * 
-         * For example, $12.987654321 is '12.987654321'.
+         * <p>For example, $12.987654321 is '12.987654321'.
          */
         public Builder valueDecimal(String valueDecimal) {
             Utils.checkNotNull(valueDecimal, "valueDecimal");

@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardPaymentSettings - User provided settings to manage card payments. This data is only allowed on a business account.
+ * CardPaymentSettings
+ * 
+ * <p>User provided settings to manage card payments. This data is only allowed on a business account.
  */
 
 public class CardPaymentSettings {

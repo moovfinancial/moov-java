@@ -17,7 +17,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * RTPTransactionDetails - RTP specific details about the transaction.
+ * RTPTransactionDetails
+ * 
+ * <p>RTP specific details about the transaction.
  */
 
 public class RTPTransactionDetails {

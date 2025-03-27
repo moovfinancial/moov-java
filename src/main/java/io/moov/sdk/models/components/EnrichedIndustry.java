@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * EnrichedIndustry - An industry's MCC/SIC/NAICS codes, along with descriptive title.
+ * EnrichedIndustry
+ * 
+ * <p>An industry's MCC/SIC/NAICS codes, along with descriptive title.
  */
 
 public class EnrichedIndustry {

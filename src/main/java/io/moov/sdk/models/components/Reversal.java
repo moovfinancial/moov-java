@@ -17,7 +17,9 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * Reversal - Contains either a cancellation or refund, depending on the method used to reverse the transfer.
+ * Reversal
+ * 
+ * <p>Contains either a cancellation or refund, depending on the method used to reverse the transfer.
  */
 
 @JsonDeserialize(using = Reversal._Deserializer.class)

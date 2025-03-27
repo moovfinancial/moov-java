@@ -22,7 +22,6 @@ import java.lang.Exception;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
 import java.util.Optional; 
 
 public class EnrichedAddress implements
@@ -36,7 +35,11 @@ public class EnrichedAddress implements
 
 
     /**
-     * Fetch enriched address suggestions. Requires a partial address.  -    - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
+     * Fetch enriched address suggestions. Requires a partial address. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/profile-enrichment.read` scope.
+     * 
      * @return The call builder
      */
     public GetEnrichmentAddressRequestBuilder get() {
@@ -44,7 +47,11 @@ public class EnrichedAddress implements
     }
 
     /**
-     * Fetch enriched address suggestions. Requires a partial address.  -    - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/profile-enrichment.read` scope.
+     * Fetch enriched address suggestions. Requires a partial address. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/profile-enrichment.read` scope.
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -75,8 +82,9 @@ public class EnrichedAddress implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getEnrichmentAddress", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -86,8 +94,9 @@ public class EnrichedAddress implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getEnrichmentAddress",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -95,8 +104,9 @@ public class EnrichedAddress implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getEnrichmentAddress",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -104,8 +114,9 @@ public class EnrichedAddress implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getEnrichmentAddress",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

@@ -13,7 +13,9 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 /**
- * TermsOfService - Describes the acceptance of the Terms of Service.
+ * TermsOfService
+ * 
+ * <p>Describes the acceptance of the Terms of Service.
  */
 
 public class TermsOfService {

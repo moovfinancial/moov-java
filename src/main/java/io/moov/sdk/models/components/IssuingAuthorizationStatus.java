@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * IssuingAuthorizationStatus - Status of a card issuing authorization.
+ * IssuingAuthorizationStatus
+ * 
+ * <p>Status of a card issuing authorization.
  */
 public enum IssuingAuthorizationStatus {
     PENDING("pending"),

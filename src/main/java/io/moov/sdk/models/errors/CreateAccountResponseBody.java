@@ -18,7 +18,9 @@ import java.net.http.HttpResponse;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CreateAccountResponseBody - The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
+ * CreateAccountResponseBody
+ * 
+ * <p>The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields.
  */
 @SuppressWarnings("serial")
 public class CreateAccountResponseBody extends RuntimeException {

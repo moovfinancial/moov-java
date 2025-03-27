@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * OccurrenceStatus - Status of the completed occurrence.
+ * OccurrenceStatus
+ * 
+ * <p>Status of the completed occurrence.
  */
 public enum OccurrenceStatus {
     PENDING("pending"),

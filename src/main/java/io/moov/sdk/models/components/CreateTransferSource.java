@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CreateTransferSource - Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
+ * CreateTransferSource
+ * 
+ * <p>Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
  */
 
 public class CreateTransferSource {

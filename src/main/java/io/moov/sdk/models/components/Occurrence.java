@@ -18,7 +18,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Occurrence - Occurrences to either create or modify.
+ * Occurrence
+ * 
+ * <p>Occurrences to either create or modify.
  */
 
 public class Occurrence {
@@ -31,7 +33,7 @@ public class Occurrence {
     private Optional<Boolean> canceled;
 
     /**
-     *   If set this defines what occurrence to modify, if invalid will fail the request. 
+     * If set this defines what occurrence to modify, if invalid will fail the request. 
      *   If null or "" it defines to add a new occurrence.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -81,7 +83,7 @@ public class Occurrence {
     }
 
     /**
-     *   If set this defines what occurrence to modify, if invalid will fail the request. 
+     * If set this defines what occurrence to modify, if invalid will fail the request. 
      *   If null or "" it defines to add a new occurrence.
      */
     @JsonIgnore
@@ -129,7 +131,7 @@ public class Occurrence {
     }
 
     /**
-     *   If set this defines what occurrence to modify, if invalid will fail the request. 
+     * If set this defines what occurrence to modify, if invalid will fail the request. 
      *   If null or "" it defines to add a new occurrence.
      */
     public Occurrence withOccurrenceID(String occurrenceID) {
@@ -139,7 +141,7 @@ public class Occurrence {
     }
 
     /**
-     *   If set this defines what occurrence to modify, if invalid will fail the request. 
+     * If set this defines what occurrence to modify, if invalid will fail the request. 
      *   If null or "" it defines to add a new occurrence.
      */
     public Occurrence withOccurrenceID(Optional<String> occurrenceID) {
@@ -251,7 +253,7 @@ public class Occurrence {
         }
 
         /**
-         *   If set this defines what occurrence to modify, if invalid will fail the request. 
+         * If set this defines what occurrence to modify, if invalid will fail the request. 
          *   If null or "" it defines to add a new occurrence.
          */
         public Builder occurrenceID(String occurrenceID) {
@@ -261,7 +263,7 @@ public class Occurrence {
         }
 
         /**
-         *   If set this defines what occurrence to modify, if invalid will fail the request. 
+         * If set this defines what occurrence to modify, if invalid will fail the request. 
          *   If null or "" it defines to add a new occurrence.
          */
         public Builder occurrenceID(Optional<String> occurrenceID) {

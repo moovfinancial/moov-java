@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * RTPFailureCode - Status codes for RTP failures.
+ * RTPFailureCode
+ * 
+ * <p>Status codes for RTP failures.
  */
 public enum RTPFailureCode {
     PROCESSING_ERROR("processing-error"),

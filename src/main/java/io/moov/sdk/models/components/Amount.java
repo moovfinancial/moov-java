@@ -24,7 +24,7 @@ public class Amount {
     /**
      * Quantity in the smallest unit of the specified currency. 
      * 
-     * In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * <p>In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
     @JsonProperty("value")
     private long value;
@@ -50,7 +50,7 @@ public class Amount {
     /**
      * Quantity in the smallest unit of the specified currency. 
      * 
-     * In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * <p>In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
     @JsonIgnore
     public long value() {
@@ -73,7 +73,7 @@ public class Amount {
     /**
      * Quantity in the smallest unit of the specified currency. 
      * 
-     * In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * <p>In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
     public Amount withValue(long value) {
         Utils.checkNotNull(value, "value");
@@ -131,7 +131,7 @@ public class Amount {
         /**
          * Quantity in the smallest unit of the specified currency. 
          * 
-         * In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+         * <p>In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
          */
         public Builder value(long value) {
             Utils.checkNotNull(value, "value");

@@ -44,7 +44,6 @@ import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
 import java.util.Optional; 
 
 public class ApplePay implements
@@ -62,7 +61,14 @@ public class ApplePay implements
 
 
     /**
-     * Add domains to be registered with Apple Pay. -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * Add domains to be registered with Apple Pay.
+     * 
+     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * with Apple.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
      * @return The call builder
      */
     public RegisterApplePayMerchantDomainsRequestBuilder registerMerchantDomains() {
@@ -70,9 +76,16 @@ public class ApplePay implements
     }
 
     /**
-     * Add domains to be registered with Apple Pay. -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * Add domains to be registered with Apple Pay.
+     * 
+     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * with Apple.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
      * @param accountID ID of the Moov account representing the merchant.
-     * @param registerApplePayMerchantDomains
+     * @param registerApplePayMerchantDomains 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -83,18 +96,25 @@ public class ApplePay implements
     }
     
     /**
-     * Add domains to be registered with Apple Pay. -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * Add domains to be registered with Apple Pay.
+     * 
+     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * with Apple.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the merchant.
-     * @param registerApplePayMerchantDomains
+     * @param registerApplePayMerchantDomains 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -144,8 +164,9 @@ public class ApplePay implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "registerApplePayMerchantDomains", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -155,8 +176,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "registerApplePayMerchantDomains",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -164,8 +186,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "registerApplePayMerchantDomains",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -173,8 +196,9 @@ public class ApplePay implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "registerApplePayMerchantDomains",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -267,7 +291,14 @@ public class ApplePay implements
 
 
     /**
-     * Add or remove domains to be registered with Apple Pay.  -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * Add or remove domains to be registered with Apple Pay. 
+     * 
+     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * with Apple.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
      * @return The call builder
      */
     public UpdateApplePayMerchantDomainsRequestBuilder updateMerchantDomains() {
@@ -275,9 +306,16 @@ public class ApplePay implements
     }
 
     /**
-     * Add or remove domains to be registered with Apple Pay.  -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * Add or remove domains to be registered with Apple Pay. 
+     * 
+     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * with Apple.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
      * @param accountID ID of the Moov account representing the merchant.
-     * @param updateApplePayMerchantDomains
+     * @param updateApplePayMerchantDomains 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -288,18 +326,25 @@ public class ApplePay implements
     }
     
     /**
-     * Add or remove domains to be registered with Apple Pay.  -  - Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)  - with Apple. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * Add or remove domains to be registered with Apple Pay. 
+     * 
+     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * with Apple.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the merchant.
-     * @param updateApplePayMerchantDomains
+     * @param updateApplePayMerchantDomains 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -349,8 +394,9 @@ public class ApplePay implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "updateApplePayMerchantDomains", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -360,8 +406,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateApplePayMerchantDomains",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -369,8 +416,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "updateApplePayMerchantDomains",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -378,8 +426,9 @@ public class ApplePay implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "updateApplePayMerchantDomains",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -461,7 +510,13 @@ public class ApplePay implements
 
 
     /**
-     * Get domains registered with Apple Pay.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
+     * Get domains registered with Apple Pay. 
+     * 
+     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
+     * 
      * @return The call builder
      */
     public GetApplePayMerchantDomainsRequestBuilder getMerchantDomains() {
@@ -469,7 +524,13 @@ public class ApplePay implements
     }
 
     /**
-     * Get domains registered with Apple Pay.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
+     * Get domains registered with Apple Pay. 
+     * 
+     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
+     * 
      * @param accountID ID of the Moov account representing the merchant.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -480,16 +541,22 @@ public class ApplePay implements
     }
     
     /**
-     * Get domains registered with Apple Pay.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
+     * Get domains registered with Apple Pay. 
+     * 
+     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the merchant.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -525,8 +592,9 @@ public class ApplePay implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getApplePayMerchantDomains", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -536,8 +604,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getApplePayMerchantDomains",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -545,8 +614,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getApplePayMerchantDomains",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -554,8 +624,9 @@ public class ApplePay implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getApplePayMerchantDomains",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -633,7 +704,14 @@ public class ApplePay implements
 
 
     /**
-     * Create a session with Apple Pay to facilitate a payment.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - A successful response from this endpoint should be passed through to Apple Pay unchanged.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * Create a session with Apple Pay to facilitate a payment. 
+     * 
+     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * A successful response from this endpoint should be passed through to Apple Pay unchanged. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
      * @return The call builder
      */
     public CreateApplePaySessionRequestBuilder createSession() {
@@ -641,9 +719,16 @@ public class ApplePay implements
     }
 
     /**
-     * Create a session with Apple Pay to facilitate a payment.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - A successful response from this endpoint should be passed through to Apple Pay unchanged.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * Create a session with Apple Pay to facilitate a payment. 
+     * 
+     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * A successful response from this endpoint should be passed through to Apple Pay unchanged. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
      * @param accountID ID of the Moov account representing the merchant.
-     * @param createApplePaySession
+     * @param createApplePaySession 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -654,18 +739,25 @@ public class ApplePay implements
     }
     
     /**
-     * Create a session with Apple Pay to facilitate a payment.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - A successful response from this endpoint should be passed through to Apple Pay unchanged.  -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * Create a session with Apple Pay to facilitate a payment. 
+     * 
+     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * A successful response from this endpoint should be passed through to Apple Pay unchanged. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the merchant.
-     * @param createApplePaySession
+     * @param createApplePaySession 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -715,8 +807,9 @@ public class ApplePay implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "createApplePaySession", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -726,8 +819,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createApplePaySession",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -735,8 +829,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "createApplePaySession",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -744,8 +839,9 @@ public class ApplePay implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "createApplePaySession",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -838,7 +934,14 @@ public class ApplePay implements
 
 
     /**
-     * Connect an Apple Pay token to the specified account.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * Connect an Apple Pay token to the specified account. 
+     * 
+     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
      * @return The call builder
      */
     public LinkApplePayTokenRequestBuilder linkToken() {
@@ -846,12 +949,19 @@ public class ApplePay implements
     }
 
     /**
-     * Connect an Apple Pay token to the specified account.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * Connect an Apple Pay token to the specified account. 
+     * 
+     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
      * @param accountID ID of the Moov account representing the cardholder.
      * @param linkApplePay   The JSON structure returned from Apple Pay when authorizing a payment session.
-
-      Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment) 
-      for more information.
+     *         
+     *           Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment) 
+     *           for more information.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -862,21 +972,28 @@ public class ApplePay implements
     }
     
     /**
-     * Connect an Apple Pay token to the specified account.  -  - Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.  - The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * Connect an Apple Pay token to the specified account. 
+     * 
+     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID ID of the Moov account representing the cardholder.
      * @param linkApplePay   The JSON structure returned from Apple Pay when authorizing a payment session.
-
-      Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment) 
-      for more information.
+     *         
+     *           Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment) 
+     *           for more information.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -926,8 +1043,9 @@ public class ApplePay implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "linkApplePayToken", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -937,8 +1055,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "linkApplePayToken",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -946,8 +1065,9 @@ public class ApplePay implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "linkApplePayToken",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -955,8 +1075,9 @@ public class ApplePay implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "linkApplePayToken",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

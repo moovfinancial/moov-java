@@ -96,9 +96,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.AddCapabilities;
-import io.moov.sdk.models.components.CapabilityID;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.AddCapabilitiesError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.RequestCapabilitiesResponse;

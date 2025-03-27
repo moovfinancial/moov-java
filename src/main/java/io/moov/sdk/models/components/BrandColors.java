@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * BrandColors - Brand colors for light and dark modes.
+ * BrandColors
+ * 
+ * <p>Brand colors for light and dark modes.
  */
 
 public class BrandColors {

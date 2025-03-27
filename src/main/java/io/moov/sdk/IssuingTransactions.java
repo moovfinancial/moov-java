@@ -54,7 +54,11 @@ public class IssuingTransactions implements
 
 
     /**
-     * List issued card authorizations associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * List issued card authorizations associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @return The call builder
      */
     public ListIssuedCardAuthorizationsRequestBuilder listAuthorizations() {
@@ -62,7 +66,11 @@ public class IssuingTransactions implements
     }
 
     /**
-     * List issued card authorizations associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * List issued card authorizations associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -95,8 +103,9 @@ public class IssuingTransactions implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listIssuedCardAuthorizations", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -106,8 +115,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listIssuedCardAuthorizations",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -115,8 +125,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listIssuedCardAuthorizations",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -124,8 +135,9 @@ public class IssuingTransactions implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listIssuedCardAuthorizations",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -203,7 +215,11 @@ public class IssuingTransactions implements
 
 
     /**
-     * Retrieves details of an authorization associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * Retrieves details of an authorization associated with a specific Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @return The call builder
      */
     public GetIssuedCardAuthorizationRequestBuilder getAuthorization() {
@@ -211,9 +227,13 @@ public class IssuingTransactions implements
     }
 
     /**
-     * Retrieves details of an authorization associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * Retrieves details of an authorization associated with a specific Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @param accountID The Moov business account for which cards have been issued.
-     * @param authorizationID
+     * @param authorizationID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -224,18 +244,22 @@ public class IssuingTransactions implements
     }
     
     /**
-     * Retrieves details of an authorization associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * Retrieves details of an authorization associated with a specific Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID The Moov business account for which cards have been issued.
-     * @param authorizationID
+     * @param authorizationID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -272,8 +296,9 @@ public class IssuingTransactions implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getIssuedCardAuthorization", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -283,8 +308,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getIssuedCardAuthorization",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -292,8 +318,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getIssuedCardAuthorization",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -301,8 +328,9 @@ public class IssuingTransactions implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getIssuedCardAuthorization",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -380,7 +408,11 @@ public class IssuingTransactions implements
 
 
     /**
-     * List card network and Moov platform events that affect the authorization and its hold on a wallet balance. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @return The call builder
      */
     public ListIssuedCardAuthorizationEventsRequestBuilder listAuthorizationEvents() {
@@ -388,7 +420,11 @@ public class IssuingTransactions implements
     }
 
     /**
-     * List card network and Moov platform events that affect the authorization and its hold on a wallet balance. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -421,8 +457,9 @@ public class IssuingTransactions implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listIssuedCardAuthorizationEvents", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -432,8 +469,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listIssuedCardAuthorizationEvents",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -441,8 +479,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listIssuedCardAuthorizationEvents",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -450,8 +489,9 @@ public class IssuingTransactions implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listIssuedCardAuthorizationEvents",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -529,7 +569,11 @@ public class IssuingTransactions implements
 
 
     /**
-     * List issued card transactions associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * List issued card transactions associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @return The call builder
      */
     public ListIssuedCardTransactionsRequestBuilder list() {
@@ -537,7 +581,11 @@ public class IssuingTransactions implements
     }
 
     /**
-     * List issued card transactions associated with a Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * List issued card transactions associated with a Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -570,8 +618,9 @@ public class IssuingTransactions implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "listIssuedCardTransactions", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -581,8 +630,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listIssuedCardTransactions",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -590,8 +640,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "listIssuedCardTransactions",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -599,8 +650,9 @@ public class IssuingTransactions implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "listIssuedCardTransactions",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
@@ -678,7 +730,11 @@ public class IssuingTransactions implements
 
 
     /**
-     * Retrieves details of an issued card transaction associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * Retrieves details of an issued card transaction associated with a specific Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @return The call builder
      */
     public GetIssuedCardTransactionRequestBuilder get() {
@@ -686,9 +742,13 @@ public class IssuingTransactions implements
     }
 
     /**
-     * Retrieves details of an issued card transaction associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * Retrieves details of an issued card transaction associated with a specific Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @param accountID The Moov business account for which cards have been issued.
-     * @param cardTransactionID
+     * @param cardTransactionID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -699,18 +759,22 @@ public class IssuingTransactions implements
     }
     
     /**
-     * Retrieves details of an issued card transaction associated with a specific Moov account. -  - To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)  - you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * Retrieves details of an issued card transaction associated with a specific Moov account.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+     * 
      * @param xMoovVersion Specify an API version.
-
-    API versioning follows the format `vYYYY.QQ.BB`, where 
-      - `YYYY` is the year
-      - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-      - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-        - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param accountID The Moov business account for which cards have been issued.
-     * @param cardTransactionID
+     * @param cardTransactionID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
@@ -747,8 +811,9 @@ public class IssuingTransactions implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      _baseUrl,
                       "getIssuedCardTransaction", 
-                      Optional.of(List.of()), 
+                      Optional.empty(), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
@@ -758,8 +823,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getIssuedCardTransaction",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
@@ -767,8 +833,9 @@ public class IssuingTransactions implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            _baseUrl,
                             "getIssuedCardTransaction",
-                            Optional.of(List.of()), 
+                            Optional.empty(), 
                             _hookSecuritySource),
                          _httpRes);
             }
@@ -776,8 +843,9 @@ public class IssuingTransactions implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            _baseUrl,
                             "getIssuedCardTransaction",
-                            Optional.of(List.of()),
+                            Optional.empty(),
                             _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));

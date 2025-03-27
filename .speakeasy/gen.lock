@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 2a2fafc743d395eb7f031d0aaf58968b
+  docChecksum: eb2419a3b7e29e59421e716ed47cf02d
   docVersion: latest
-  speakeasyVersion: 1.523.0
-  generationVersion: 2.559.0
-  releaseVersion: 0.10.2
-  configChecksum: bc2d4cf48b45d3c8cbaaec4a6c1bab60
+  speakeasyVersion: 1.524.0
+  generationVersion: 2.562.2
+  releaseVersion: 0.11.0
+  configChecksum: 33ff76ca7bf22489c9e6c73854bb5d4a
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.35.2
+    core: 3.36.0
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     flattening: 2.81.1
@@ -2902,7 +2902,7 @@ examples:
     speakeasy-default-list-institutions:
       responses:
         "200":
-          application/json: {"achParticipants": [{"achLocation": {"address": "123 Main Street", "city": "Boulder", "postalCode": "80301", "postalCodeExtension": "0000", "state": "Colorado"}, "customerName": "Main Street Bank", "newRoutingNumber": "987654321", "officeCode": "0", "phoneNumber": "1234567789", "recordTypeCode": "1", "revised": "041921", "routingNumber": "123456789", "servicingFRBNumber": "123456789", "statusCode": "1", "viewCode": "1", "cleanName": "Main Street Bank", "logo": null}]}
+          application/json: {"achParticipants": [{"achLocation": {"address": "123 Main Street", "city": "Boulder", "postalCode": "80301", "postalCodeExtension": "0000", "state": "Colorado"}, "customerName": "Main Street Bank", "newRoutingNumber": "987654321", "officeCode": "0", "phoneNumber": "1234567789", "recordTypeCode": "1", "revised": "041921", "routingNumber": "123456789", "servicingFRBNumber": "123456789", "statusCode": "1", "viewCode": "1", "cleanName": "Main Street Bank", "logo": {"name": "Main Street Bank", "url": "https://www.mainstreetbank.com/logo.png"}}]}
         "400":
           application/json: {"error": "<value>"}
   listIssuedCardAuthorizations:

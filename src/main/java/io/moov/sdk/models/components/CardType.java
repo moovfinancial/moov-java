@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardType - The type of the card.
+ * CardType
+ * 
+ * <p>The type of the card.
  */
 public enum CardType {
     DEBIT("debit"),

@@ -23,13 +23,13 @@ public class LinkCardRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
     private Optional<String> xMoovVersion;
@@ -37,7 +37,7 @@ public class LinkCardRequest {
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
      * 
-     * When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
+     * <p>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
      * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
@@ -74,13 +74,13 @@ public class LinkCardRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     @JsonIgnore
     public Optional<String> xMoovVersion() {
@@ -90,7 +90,7 @@ public class LinkCardRequest {
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
      * 
-     * When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
+     * <p>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
      * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
      */
     @SuppressWarnings("unchecked")
@@ -116,13 +116,13 @@ public class LinkCardRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     public LinkCardRequest withXMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -133,13 +133,13 @@ public class LinkCardRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     public LinkCardRequest withXMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -150,7 +150,7 @@ public class LinkCardRequest {
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
      * 
-     * When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
+     * <p>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
      * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
      */
     public LinkCardRequest withXWaitFor(LinkCardWaitFor xWaitFor) {
@@ -162,7 +162,7 @@ public class LinkCardRequest {
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
      * 
-     * When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
+     * <p>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
      * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
      */
     public LinkCardRequest withXWaitFor(Optional<? extends LinkCardWaitFor> xWaitFor) {
@@ -234,13 +234,13 @@ public class LinkCardRequest {
         /**
          * Specify an API version.
          * 
-         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
          *   - `YYYY` is the year
          *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
          *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
          *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
          * 
-         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
         public Builder xMoovVersion(String xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -251,13 +251,13 @@ public class LinkCardRequest {
         /**
          * Specify an API version.
          * 
-         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
          *   - `YYYY` is the year
          *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
          *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
          *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
          * 
-         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
         public Builder xMoovVersion(Optional<String> xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -268,7 +268,7 @@ public class LinkCardRequest {
         /**
          * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
          * 
-         * When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
+         * <p>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
          * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
          */
         public Builder xWaitFor(LinkCardWaitFor xWaitFor) {
@@ -280,7 +280,7 @@ public class LinkCardRequest {
         /**
          * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
          * 
-         * When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
+         * <p>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly 
          * linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
          */
         public Builder xWaitFor(Optional<? extends LinkCardWaitFor> xWaitFor) {

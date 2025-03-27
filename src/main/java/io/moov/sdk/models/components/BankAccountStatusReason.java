@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * BankAccountStatusReason - The reason the bank account status changed to the current value.
+ * BankAccountStatusReason
+ * 
+ * <p>The reason the bank account status changed to the current value.
  */
 public enum BankAccountStatusReason {
     BANK_ACCOUNT_CREATED("bank-account-created"),

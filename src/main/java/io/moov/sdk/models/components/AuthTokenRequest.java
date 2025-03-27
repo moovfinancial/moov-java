@@ -21,7 +21,7 @@ public class AuthTokenRequest {
     /**
      * The type of grant being requested.
      * 
-     *   - `client_credentials`: A grant type used by clients to obtain an access token
+     * <p>  - `client_credentials`: A grant type used by clients to obtain an access token
      *   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
      */
     @JsonProperty("grant_type")
@@ -87,7 +87,7 @@ public class AuthTokenRequest {
     /**
      * The type of grant being requested.
      * 
-     *   - `client_credentials`: A grant type used by clients to obtain an access token
+     * <p>  - `client_credentials`: A grant type used by clients to obtain an access token
      *   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
      */
     @JsonIgnore
@@ -134,7 +134,7 @@ public class AuthTokenRequest {
     /**
      * The type of grant being requested.
      * 
-     *   - `client_credentials`: A grant type used by clients to obtain an access token
+     * <p>  - `client_credentials`: A grant type used by clients to obtain an access token
      *   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
      */
     public AuthTokenRequest withGrantType(GrantType grantType) {
@@ -271,7 +271,7 @@ public class AuthTokenRequest {
         /**
          * The type of grant being requested.
          * 
-         *   - `client_credentials`: A grant type used by clients to obtain an access token
+         * <p>  - `client_credentials`: A grant type used by clients to obtain an access token
          *   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
          */
         public Builder grantType(GrantType grantType) {

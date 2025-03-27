@@ -45,19 +45,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.ACHPaymentDetails;
-import io.moov.sdk.models.components.Amount;
-import io.moov.sdk.models.components.CallToAction;
-import io.moov.sdk.models.components.CardPaymentDetails;
-import io.moov.sdk.models.components.CollectionPaymentMethodType;
-import io.moov.sdk.models.components.CreatePaymentLink;
-import io.moov.sdk.models.components.DisbursementPaymentMethodType;
-import io.moov.sdk.models.components.PaymentLinkCustomerOptions;
-import io.moov.sdk.models.components.PaymentLinkDisplayOptions;
-import io.moov.sdk.models.components.PaymentLinkPaymentDetails;
-import io.moov.sdk.models.components.PaymentLinkPayoutDetails;
-import io.moov.sdk.models.components.PayoutRecipient;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.CreatePaymentLinkError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreatePaymentLinkResponse;
@@ -271,15 +259,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.ACHPaymentDetails;
-import io.moov.sdk.models.components.AmountUpdate;
-import io.moov.sdk.models.components.CardPaymentDetails;
-import io.moov.sdk.models.components.PaymentLinkCustomerOptions;
-import io.moov.sdk.models.components.PaymentLinkPaymentDetailsUpdate;
-import io.moov.sdk.models.components.PaymentLinkPayoutDetailsUpdate;
-import io.moov.sdk.models.components.PayoutRecipientUpdate;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.UpdatePaymentLink;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdatePaymentLinkError;
 import io.moov.sdk.models.operations.UpdatePaymentLinkResponse;

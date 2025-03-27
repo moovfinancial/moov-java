@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TermsOfServiceTokenUpdate - An encrypted value used to record acceptance of Moov's Terms of Service.
+ * TermsOfServiceTokenUpdate
+ * 
+ * <p>An encrypted value used to record acceptance of Moov's Terms of Service.
  */
 
 public class TermsOfServiceTokenUpdate {

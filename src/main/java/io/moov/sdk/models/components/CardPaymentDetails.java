@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardPaymentDetails - Options for payment links used to collect a card payment.
+ * CardPaymentDetails
+ * 
+ * <p>Options for payment links used to collect a card payment.
  */
 
 public class CardPaymentDetails {

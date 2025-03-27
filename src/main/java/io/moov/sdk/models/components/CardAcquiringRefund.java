@@ -17,7 +17,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardAcquiringRefund - Details of a card refund.
+ * CardAcquiringRefund
+ * 
+ * <p>Details of a card refund.
  */
 
 public class CardAcquiringRefund {

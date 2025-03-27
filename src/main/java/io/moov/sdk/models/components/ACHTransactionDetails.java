@@ -17,7 +17,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ACHTransactionDetails - ACH specific details about the transaction.
+ * ACHTransactionDetails
+ * 
+ * <p>ACH specific details about the transaction.
  */
 
 public class ACHTransactionDetails {

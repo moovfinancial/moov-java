@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FilePurpose - The file's purpose.
+ * FilePurpose
+ * 
+ * <p>The file's purpose.
  */
 public enum FilePurpose {
     BUSINESS_VERIFICATION("business_verification"),

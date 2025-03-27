@@ -111,11 +111,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.BankAccountWaitFor;
-import io.moov.sdk.models.components.LinkBankAccount;
-import io.moov.sdk.models.components.PlaidIntegration;
-import io.moov.sdk.models.components.PlaidPayload;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.BankAccountValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.LinkBankAccountResponse;

@@ -9,9 +9,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CapabilityID - Moov account capabilities.
+ * CapabilityID
  * 
- * The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+ * <p>Moov account capabilities.
+ * 
+ * <p>The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
  */
 public enum CapabilityID {
     TRANSFERS("transfers"),

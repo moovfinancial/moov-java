@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CreateRepresentative - Describes a business representative to create.
+ * CreateRepresentative
+ * 
+ * <p>Describes a business representative to create.
  */
 
 public class CreateRepresentative {

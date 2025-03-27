@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PrimaryRegulator - If the business is a financial institution, this field describes its primary regulator.
+ * PrimaryRegulator
+ * 
+ * <p>If the business is a financial institution, this field describes its primary regulator.
  */
 public enum PrimaryRegulator {
     OCC("OCC"),

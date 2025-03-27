@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * PaymentLinkDisplayOptions - Customizable display options for a payment link.
+ * PaymentLinkDisplayOptions
+ * 
+ * <p>Customizable display options for a payment link.
  */
 
 public class PaymentLinkDisplayOptions {
@@ -32,7 +34,7 @@ public class PaymentLinkDisplayOptions {
     /**
      * The text to be displayed on web form's submit button.
      * 
-     * If set to "auto" the UI will automatically select between 
+     * <p>If set to "auto" the UI will automatically select between 
      * "pay" and "confirm" for payments and payouts respectively.
      */
     @JsonProperty("callToAction")
@@ -70,7 +72,7 @@ public class PaymentLinkDisplayOptions {
     /**
      * The text to be displayed on web form's submit button.
      * 
-     * If set to "auto" the UI will automatically select between 
+     * <p>If set to "auto" the UI will automatically select between 
      * "pay" and "confirm" for payments and payouts respectively.
      */
     @JsonIgnore
@@ -103,7 +105,7 @@ public class PaymentLinkDisplayOptions {
     /**
      * The text to be displayed on web form's submit button.
      * 
-     * If set to "auto" the UI will automatically select between 
+     * <p>If set to "auto" the UI will automatically select between 
      * "pay" and "confirm" for payments and payouts respectively.
      */
     public PaymentLinkDisplayOptions withCallToAction(CallToAction callToAction) {
@@ -176,7 +178,7 @@ public class PaymentLinkDisplayOptions {
         /**
          * The text to be displayed on web form's submit button.
          * 
-         * If set to "auto" the UI will automatically select between 
+         * <p>If set to "auto" the UI will automatically select between 
          * "pay" and "confirm" for payments and payouts respectively.
          */
         public Builder callToAction(CallToAction callToAction) {

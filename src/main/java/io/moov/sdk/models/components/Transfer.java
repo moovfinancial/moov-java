@@ -20,7 +20,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Transfer - Details of a Transfer.
+ * Transfer
+ * 
+ * <p>Details of a Transfer.
  */
 
 public class Transfer {

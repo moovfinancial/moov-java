@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * RTPTransactionStatus - Status of a transaction within the RTP lifecycle.
+ * RTPTransactionStatus
+ * 
+ * <p>Status of a transaction within the RTP lifecycle.
  */
 public enum RTPTransactionStatus {
     INITIATED("initiated"),

@@ -12,9 +12,11 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * LinkApplePaymentData -   Contains the encrypted payment data.
+ * LinkApplePaymentData
  * 
- *   Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata) 
+ * <p>Contains the encrypted payment data.
+ * 
+ * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata) 
  *   for more information.
  */
 
@@ -41,7 +43,7 @@ public class LinkApplePaymentData {
     /**
      * Information needed to decrypt Apple Pay payment data.
      * 
-     * Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
+     * <p>Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
      * for more information.
      */
     @JsonProperty("header")
@@ -90,7 +92,7 @@ public class LinkApplePaymentData {
     /**
      * Information needed to decrypt Apple Pay payment data.
      * 
-     * Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
+     * <p>Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
      * for more information.
      */
     @JsonIgnore
@@ -132,7 +134,7 @@ public class LinkApplePaymentData {
     /**
      * Information needed to decrypt Apple Pay payment data.
      * 
-     * Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
+     * <p>Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
      * for more information.
      */
     public LinkApplePaymentData withHeader(ApplePayHeader header) {
@@ -219,7 +221,7 @@ public class LinkApplePaymentData {
         /**
          * Information needed to decrypt Apple Pay payment data.
          * 
-         * Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
+         * <p>Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
          * for more information.
          */
         public Builder header(ApplePayHeader header) {

@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * DisbursementPaymentMethodType - Payment methods allowed for disbursing funds.
+ * DisbursementPaymentMethodType
+ * 
+ * <p>Payment methods allowed for disbursing funds.
  */
 public enum DisbursementPaymentMethodType {
     PUSH_TO_CARD("push-to-card"),

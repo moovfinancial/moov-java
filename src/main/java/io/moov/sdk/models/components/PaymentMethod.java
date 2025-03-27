@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.lang.String;
 /**
- * PaymentMethod - A method of moving money
+ * PaymentMethod
+ * 
+ * <p>A method of moving money
  */
 
 @JsonTypeInfo(use = Id.NAME, property = "paymentMethodType", include = As.EXISTING_PROPERTY, visible = true)

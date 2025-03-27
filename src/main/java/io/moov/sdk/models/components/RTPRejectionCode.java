@@ -9,9 +9,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * RTPRejectionCode - The rejection code of an RTP transaction that caused the bank account status to change.
+ * RTPRejectionCode
  * 
- * - AC03: Account Invalid
+ * <p>The rejection code of an RTP transaction that caused the bank account status to change.
+ * 
+ * <p>- AC03: Account Invalid
  * - AC04: Account Closed
  * - AC06: Account Blocked
  * - AC14: Creditor Account Type Invalid

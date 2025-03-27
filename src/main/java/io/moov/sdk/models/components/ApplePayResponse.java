@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ApplePayResponse - Describes an Apple Pay token on a Moov account.
+ * ApplePayResponse
+ * 
+ * <p>Describes an Apple Pay token on a Moov account.
  */
 
 public class ApplePayResponse {
@@ -33,9 +35,9 @@ public class ApplePayResponse {
     private CardType cardType;
 
     /**
-     *   User-friendly name of the tokenized card returned by Apple.
-     *   
-     *   It usually contains the brand and the last four digits of the underlying card.
+     * User-friendly name of the tokenized card returned by Apple.
+     * 
+     * <p>  It usually contains the brand and the last four digits of the underlying card.
      *   There is no standard format.
      */
     @JsonProperty("cardDisplayName")
@@ -120,9 +122,9 @@ public class ApplePayResponse {
     }
 
     /**
-     *   User-friendly name of the tokenized card returned by Apple.
-     *   
-     *   It usually contains the brand and the last four digits of the underlying card.
+     * User-friendly name of the tokenized card returned by Apple.
+     * 
+     * <p>  It usually contains the brand and the last four digits of the underlying card.
      *   There is no standard format.
      */
     @JsonIgnore
@@ -187,9 +189,9 @@ public class ApplePayResponse {
     }
 
     /**
-     *   User-friendly name of the tokenized card returned by Apple.
-     *   
-     *   It usually contains the brand and the last four digits of the underlying card.
+     * User-friendly name of the tokenized card returned by Apple.
+     * 
+     * <p>  It usually contains the brand and the last four digits of the underlying card.
      *   There is no standard format.
      */
     public ApplePayResponse withCardDisplayName(String cardDisplayName) {
@@ -327,9 +329,9 @@ public class ApplePayResponse {
         }
 
         /**
-         *   User-friendly name of the tokenized card returned by Apple.
-         *   
-         *   It usually contains the brand and the last four digits of the underlying card.
+         * User-friendly name of the tokenized card returned by Apple.
+         * 
+         * <p>  It usually contains the brand and the last four digits of the underlying card.
          *   There is no standard format.
          */
         public Builder cardDisplayName(String cardDisplayName) {

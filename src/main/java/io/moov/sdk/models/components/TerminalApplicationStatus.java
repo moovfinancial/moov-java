@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TerminalApplicationStatus - Status of the terminal application.
+ * TerminalApplicationStatus
+ * 
+ * <p>Status of the terminal application.
  */
 public enum TerminalApplicationStatus {
     UNDEFINED("undefined"),

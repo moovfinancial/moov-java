@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardPresentPaymentPaymentMethod - A card used at point of sale terminal for a card present transaction as contained within a payment method.
+ * CardPresentPaymentPaymentMethod
+ * 
+ * <p>A card used at point of sale terminal for a card present transaction as contained within a payment method.
  */
 
 public class CardPresentPaymentPaymentMethod implements PaymentMethod {

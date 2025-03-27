@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * AuthorizedUser - Fields for identifying an authorized individual.
+ * AuthorizedUser
+ * 
+ * <p>Fields for identifying an authorized individual.
  */
 
 public class AuthorizedUser {

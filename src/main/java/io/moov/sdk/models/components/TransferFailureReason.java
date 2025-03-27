@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TransferFailureReason - Reason for a transfer's failure.
+ * TransferFailureReason
+ * 
+ * <p>Reason for a transfer's failure.
  */
 public enum TransferFailureReason {
     SOURCE_PAYMENT_ERROR("source-payment-error"),

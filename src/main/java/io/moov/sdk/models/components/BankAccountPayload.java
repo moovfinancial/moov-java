@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * BankAccountPayload - Describes the bank account to link to the Moov account.
+ * BankAccountPayload
+ * 
+ * <p>Describes the bank account to link to the Moov account.
  */
 
 public class BankAccountPayload {

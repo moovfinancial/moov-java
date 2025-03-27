@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Card - Describes a card on a Moov account.
+ * Card
+ * 
+ * <p>Describes a card on a Moov account.
  */
 
 public class Card {
@@ -94,26 +96,30 @@ public class Card {
     /**
      * Financial institution that issued the card.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("issuer")
-    private String issuer;
+    private Optional<String> issuer;
 
     /**
      * Country where the card was issued.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("issuerCountry")
-    private String issuerCountry;
+    private Optional<String> issuerCountry;
 
     /**
      * URL of the issuer.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("issuerURL")
-    private String issuerURL;
+    private Optional<String> issuerURL;
 
     /**
      * Phone number of the issuer.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("issuerPhone")
-    private String issuerPhone;
+    private Optional<String> issuerPhone;
 
     /**
      * If true, the card is for commercial use, or associated with a business.
@@ -152,14 +158,16 @@ public class Card {
     /**
      * Indicates which level of domestic push-to-card transfer is supported by the card, if any.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("domesticPushToCard")
-    private DomesticPushToCard domesticPushToCard;
+    private Optional<? extends DomesticPushToCard> domesticPushToCard;
 
     /**
      * Indicates if the card supports domestic pull-from-card transfer.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("domesticPullFromCard")
-    private DomesticPullFromCard domesticPullFromCard;
+    private Optional<? extends DomesticPullFromCard> domesticPullFromCard;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentMethods")
@@ -178,17 +186,17 @@ public class Card {
             @JsonProperty("holderName") Optional<String> holderName,
             @JsonProperty("billingAddress") CardAddress billingAddress,
             @JsonProperty("cardVerification") CardVerification cardVerification,
-            @JsonProperty("issuer") String issuer,
-            @JsonProperty("issuerCountry") String issuerCountry,
-            @JsonProperty("issuerURL") String issuerURL,
-            @JsonProperty("issuerPhone") String issuerPhone,
+            @JsonProperty("issuer") Optional<String> issuer,
+            @JsonProperty("issuerCountry") Optional<String> issuerCountry,
+            @JsonProperty("issuerURL") Optional<String> issuerURL,
+            @JsonProperty("issuerPhone") Optional<String> issuerPhone,
             @JsonProperty("commercial") Optional<Boolean> commercial,
             @JsonProperty("regulated") Optional<Boolean> regulated,
             @JsonProperty("cardOnFile") Optional<Boolean> cardOnFile,
             @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
             @JsonProperty("cardAccountUpdater") Optional<? extends CardAccountUpdater> cardAccountUpdater,
-            @JsonProperty("domesticPushToCard") DomesticPushToCard domesticPushToCard,
-            @JsonProperty("domesticPullFromCard") DomesticPullFromCard domesticPullFromCard,
+            @JsonProperty("domesticPushToCard") Optional<? extends DomesticPushToCard> domesticPushToCard,
+            @JsonProperty("domesticPullFromCard") Optional<? extends DomesticPullFromCard> domesticPullFromCard,
             @JsonProperty("paymentMethods") Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
         Utils.checkNotNull(cardID, "cardID");
         Utils.checkNotNull(fingerprint, "fingerprint");
@@ -247,14 +255,8 @@ public class Card {
             String bin,
             CardExpiration expiration,
             CardAddress billingAddress,
-            CardVerification cardVerification,
-            String issuer,
-            String issuerCountry,
-            String issuerURL,
-            String issuerPhone,
-            DomesticPushToCard domesticPushToCard,
-            DomesticPullFromCard domesticPullFromCard) {
-        this(cardID, fingerprint, brand, cardType, Optional.empty(), lastFourCardNumber, bin, expiration, Optional.empty(), billingAddress, cardVerification, issuer, issuerCountry, issuerURL, issuerPhone, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), domesticPushToCard, domesticPullFromCard, Optional.empty());
+            CardVerification cardVerification) {
+        this(cardID, fingerprint, brand, cardType, Optional.empty(), lastFourCardNumber, bin, expiration, Optional.empty(), billingAddress, cardVerification, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -349,7 +351,7 @@ public class Card {
      * Financial institution that issued the card.
      */
     @JsonIgnore
-    public String issuer() {
+    public Optional<String> issuer() {
         return issuer;
     }
 
@@ -357,7 +359,7 @@ public class Card {
      * Country where the card was issued.
      */
     @JsonIgnore
-    public String issuerCountry() {
+    public Optional<String> issuerCountry() {
         return issuerCountry;
     }
 
@@ -365,7 +367,7 @@ public class Card {
      * URL of the issuer.
      */
     @JsonIgnore
-    public String issuerURL() {
+    public Optional<String> issuerURL() {
         return issuerURL;
     }
 
@@ -373,7 +375,7 @@ public class Card {
      * Phone number of the issuer.
      */
     @JsonIgnore
-    public String issuerPhone() {
+    public Optional<String> issuerPhone() {
         return issuerPhone;
     }
 
@@ -420,17 +422,19 @@ public class Card {
     /**
      * Indicates which level of domestic push-to-card transfer is supported by the card, if any.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public DomesticPushToCard domesticPushToCard() {
-        return domesticPushToCard;
+    public Optional<DomesticPushToCard> domesticPushToCard() {
+        return (Optional<DomesticPushToCard>) domesticPushToCard;
     }
 
     /**
      * Indicates if the card supports domestic pull-from-card transfer.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public DomesticPullFromCard domesticPullFromCard() {
-        return domesticPullFromCard;
+    public Optional<DomesticPullFromCard> domesticPullFromCard() {
+        return (Optional<DomesticPullFromCard>) domesticPullFromCard;
     }
 
     @SuppressWarnings("unchecked")
@@ -566,6 +570,15 @@ public class Card {
      */
     public Card withIssuer(String issuer) {
         Utils.checkNotNull(issuer, "issuer");
+        this.issuer = Optional.ofNullable(issuer);
+        return this;
+    }
+
+    /**
+     * Financial institution that issued the card.
+     */
+    public Card withIssuer(Optional<String> issuer) {
+        Utils.checkNotNull(issuer, "issuer");
         this.issuer = issuer;
         return this;
     }
@@ -574,6 +587,15 @@ public class Card {
      * Country where the card was issued.
      */
     public Card withIssuerCountry(String issuerCountry) {
+        Utils.checkNotNull(issuerCountry, "issuerCountry");
+        this.issuerCountry = Optional.ofNullable(issuerCountry);
+        return this;
+    }
+
+    /**
+     * Country where the card was issued.
+     */
+    public Card withIssuerCountry(Optional<String> issuerCountry) {
         Utils.checkNotNull(issuerCountry, "issuerCountry");
         this.issuerCountry = issuerCountry;
         return this;
@@ -584,6 +606,15 @@ public class Card {
      */
     public Card withIssuerURL(String issuerURL) {
         Utils.checkNotNull(issuerURL, "issuerURL");
+        this.issuerURL = Optional.ofNullable(issuerURL);
+        return this;
+    }
+
+    /**
+     * URL of the issuer.
+     */
+    public Card withIssuerURL(Optional<String> issuerURL) {
+        Utils.checkNotNull(issuerURL, "issuerURL");
         this.issuerURL = issuerURL;
         return this;
     }
@@ -592,6 +623,15 @@ public class Card {
      * Phone number of the issuer.
      */
     public Card withIssuerPhone(String issuerPhone) {
+        Utils.checkNotNull(issuerPhone, "issuerPhone");
+        this.issuerPhone = Optional.ofNullable(issuerPhone);
+        return this;
+    }
+
+    /**
+     * Phone number of the issuer.
+     */
+    public Card withIssuerPhone(Optional<String> issuerPhone) {
         Utils.checkNotNull(issuerPhone, "issuerPhone");
         this.issuerPhone = issuerPhone;
         return this;
@@ -690,6 +730,15 @@ public class Card {
      */
     public Card withDomesticPushToCard(DomesticPushToCard domesticPushToCard) {
         Utils.checkNotNull(domesticPushToCard, "domesticPushToCard");
+        this.domesticPushToCard = Optional.ofNullable(domesticPushToCard);
+        return this;
+    }
+
+    /**
+     * Indicates which level of domestic push-to-card transfer is supported by the card, if any.
+     */
+    public Card withDomesticPushToCard(Optional<? extends DomesticPushToCard> domesticPushToCard) {
+        Utils.checkNotNull(domesticPushToCard, "domesticPushToCard");
         this.domesticPushToCard = domesticPushToCard;
         return this;
     }
@@ -698,6 +747,15 @@ public class Card {
      * Indicates if the card supports domestic pull-from-card transfer.
      */
     public Card withDomesticPullFromCard(DomesticPullFromCard domesticPullFromCard) {
+        Utils.checkNotNull(domesticPullFromCard, "domesticPullFromCard");
+        this.domesticPullFromCard = Optional.ofNullable(domesticPullFromCard);
+        return this;
+    }
+
+    /**
+     * Indicates if the card supports domestic pull-from-card transfer.
+     */
+    public Card withDomesticPullFromCard(Optional<? extends DomesticPullFromCard> domesticPullFromCard) {
         Utils.checkNotNull(domesticPullFromCard, "domesticPullFromCard");
         this.domesticPullFromCard = domesticPullFromCard;
         return this;
@@ -830,13 +888,13 @@ public class Card {
  
         private CardVerification cardVerification;
  
-        private String issuer;
+        private Optional<String> issuer = Optional.empty();
  
-        private String issuerCountry;
+        private Optional<String> issuerCountry = Optional.empty();
  
-        private String issuerURL;
+        private Optional<String> issuerURL = Optional.empty();
  
-        private String issuerPhone;
+        private Optional<String> issuerPhone = Optional.empty();
  
         private Optional<Boolean> commercial = Optional.empty();
  
@@ -848,9 +906,9 @@ public class Card {
  
         private Optional<? extends CardAccountUpdater> cardAccountUpdater = Optional.empty();
  
-        private DomesticPushToCard domesticPushToCard;
+        private Optional<? extends DomesticPushToCard> domesticPushToCard = Optional.empty();
  
-        private DomesticPullFromCard domesticPullFromCard;
+        private Optional<? extends DomesticPullFromCard> domesticPullFromCard = Optional.empty();
  
         private Optional<? extends List<BasicPaymentMethod>> paymentMethods = Optional.empty();  
         
@@ -981,6 +1039,15 @@ public class Card {
          */
         public Builder issuer(String issuer) {
             Utils.checkNotNull(issuer, "issuer");
+            this.issuer = Optional.ofNullable(issuer);
+            return this;
+        }
+
+        /**
+         * Financial institution that issued the card.
+         */
+        public Builder issuer(Optional<String> issuer) {
+            Utils.checkNotNull(issuer, "issuer");
             this.issuer = issuer;
             return this;
         }
@@ -989,6 +1056,15 @@ public class Card {
          * Country where the card was issued.
          */
         public Builder issuerCountry(String issuerCountry) {
+            Utils.checkNotNull(issuerCountry, "issuerCountry");
+            this.issuerCountry = Optional.ofNullable(issuerCountry);
+            return this;
+        }
+
+        /**
+         * Country where the card was issued.
+         */
+        public Builder issuerCountry(Optional<String> issuerCountry) {
             Utils.checkNotNull(issuerCountry, "issuerCountry");
             this.issuerCountry = issuerCountry;
             return this;
@@ -999,6 +1075,15 @@ public class Card {
          */
         public Builder issuerURL(String issuerURL) {
             Utils.checkNotNull(issuerURL, "issuerURL");
+            this.issuerURL = Optional.ofNullable(issuerURL);
+            return this;
+        }
+
+        /**
+         * URL of the issuer.
+         */
+        public Builder issuerURL(Optional<String> issuerURL) {
+            Utils.checkNotNull(issuerURL, "issuerURL");
             this.issuerURL = issuerURL;
             return this;
         }
@@ -1007,6 +1092,15 @@ public class Card {
          * Phone number of the issuer.
          */
         public Builder issuerPhone(String issuerPhone) {
+            Utils.checkNotNull(issuerPhone, "issuerPhone");
+            this.issuerPhone = Optional.ofNullable(issuerPhone);
+            return this;
+        }
+
+        /**
+         * Phone number of the issuer.
+         */
+        public Builder issuerPhone(Optional<String> issuerPhone) {
             Utils.checkNotNull(issuerPhone, "issuerPhone");
             this.issuerPhone = issuerPhone;
             return this;
@@ -1105,6 +1199,15 @@ public class Card {
          */
         public Builder domesticPushToCard(DomesticPushToCard domesticPushToCard) {
             Utils.checkNotNull(domesticPushToCard, "domesticPushToCard");
+            this.domesticPushToCard = Optional.ofNullable(domesticPushToCard);
+            return this;
+        }
+
+        /**
+         * Indicates which level of domestic push-to-card transfer is supported by the card, if any.
+         */
+        public Builder domesticPushToCard(Optional<? extends DomesticPushToCard> domesticPushToCard) {
+            Utils.checkNotNull(domesticPushToCard, "domesticPushToCard");
             this.domesticPushToCard = domesticPushToCard;
             return this;
         }
@@ -1113,6 +1216,15 @@ public class Card {
          * Indicates if the card supports domestic pull-from-card transfer.
          */
         public Builder domesticPullFromCard(DomesticPullFromCard domesticPullFromCard) {
+            Utils.checkNotNull(domesticPullFromCard, "domesticPullFromCard");
+            this.domesticPullFromCard = Optional.ofNullable(domesticPullFromCard);
+            return this;
+        }
+
+        /**
+         * Indicates if the card supports domestic pull-from-card transfer.
+         */
+        public Builder domesticPullFromCard(Optional<? extends DomesticPullFromCard> domesticPullFromCard) {
             Utils.checkNotNull(domesticPullFromCard, "domesticPullFromCard");
             this.domesticPullFromCard = domesticPullFromCard;
             return this;

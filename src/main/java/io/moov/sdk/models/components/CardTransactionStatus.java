@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardTransactionStatus - Status of a transaction within the card payment lifecycle.
+ * CardTransactionStatus
+ * 
+ * <p>Status of a transaction within the card payment lifecycle.
  */
 public enum CardTransactionStatus {
     INITIATED("initiated"),

@@ -18,7 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 /**
- * PatchAccount - Describes the fields available when patching a Moov account.
+ * PatchAccount
+ * 
+ * <p>Describes the fields available when patching a Moov account.
  */
 
 public class PatchAccount {

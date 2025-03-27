@@ -18,13 +18,15 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CreatePaymentLink - Request to create a new payment link.
+ * CreatePaymentLink
  * 
- * A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
+ * <p>Request to create a new payment link.
+ * 
+ * <p>A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
  * `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
  * to a specific recipient.
  * 
- * **Note:** The `payout` option is currently under development and is not yet available for general use.
+ * <p>**Note:** The `payout` option is currently under development and is not yet available for general use.
  */
 
 public class CreatePaymentLink {
@@ -47,7 +49,7 @@ public class CreatePaymentLink {
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
-     * **For payouts, `maxUses` is always 1.**
+     * <p>**For payouts, `maxUses` is always 1.**
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maxUses")
@@ -144,7 +146,7 @@ public class CreatePaymentLink {
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
-     * **For payouts, `maxUses` is always 1.**
+     * <p>**For payouts, `maxUses` is always 1.**
      */
     @JsonIgnore
     public Optional<Long> maxUses() {
@@ -219,7 +221,7 @@ public class CreatePaymentLink {
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
-     * **For payouts, `maxUses` is always 1.**
+     * <p>**For payouts, `maxUses` is always 1.**
      */
     public CreatePaymentLink withMaxUses(long maxUses) {
         Utils.checkNotNull(maxUses, "maxUses");
@@ -230,7 +232,7 @@ public class CreatePaymentLink {
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
-     * **For payouts, `maxUses` is always 1.**
+     * <p>**For payouts, `maxUses` is always 1.**
      */
     public CreatePaymentLink withMaxUses(Optional<Long> maxUses) {
         Utils.checkNotNull(maxUses, "maxUses");
@@ -407,7 +409,7 @@ public class CreatePaymentLink {
         /**
          * An optional limit on the number of times this payment link can be used. 
          * 
-         * **For payouts, `maxUses` is always 1.**
+         * <p>**For payouts, `maxUses` is always 1.**
          */
         public Builder maxUses(long maxUses) {
             Utils.checkNotNull(maxUses, "maxUses");
@@ -418,7 +420,7 @@ public class CreatePaymentLink {
         /**
          * An optional limit on the number of times this payment link can be used. 
          * 
-         * **For payouts, `maxUses` is always 1.**
+         * <p>**For payouts, `maxUses` is always 1.**
          */
         public Builder maxUses(Optional<Long> maxUses) {
             Utils.checkNotNull(maxUses, "maxUses");

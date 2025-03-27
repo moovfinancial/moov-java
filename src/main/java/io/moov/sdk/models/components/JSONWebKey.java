@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * JSONWebKey - Describes an [RFC7517](https://datatracker.ietf.org/doc/html/rfc7517) web key.
+ * JSONWebKey
+ * 
+ * <p>Describes an [RFC7517](https://datatracker.ietf.org/doc/html/rfc7517) web key.
  */
 
 public class JSONWebKey {
@@ -59,7 +61,7 @@ public class JSONWebKey {
     /**
      * The curve for Elliptic Curve keys, e.g., 'P-256', 'P-384', or 'P-521'.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("crv")
@@ -68,7 +70,7 @@ public class JSONWebKey {
     /**
      * The x coordinate for Elliptic Curve keys.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("x")
@@ -77,7 +79,7 @@ public class JSONWebKey {
     /**
      * The y coordinate for Elliptic Curve keys.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("y")
@@ -86,7 +88,7 @@ public class JSONWebKey {
     /**
      * The modulus value for RSA keys.
      * 
-     * This field is required when `kty` is 'RSA'.
+     * <p>This field is required when `kty` is 'RSA'.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("n")
@@ -95,7 +97,7 @@ public class JSONWebKey {
     /**
      * The exponent value for RSA keys.
      * 
-     * This field is required when `kty` is 'RSA'.
+     * <p>This field is required when `kty` is 'RSA'.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("e")
@@ -185,7 +187,7 @@ public class JSONWebKey {
     /**
      * The curve for Elliptic Curve keys, e.g., 'P-256', 'P-384', or 'P-521'.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     @JsonIgnore
     public Optional<String> crv() {
@@ -195,7 +197,7 @@ public class JSONWebKey {
     /**
      * The x coordinate for Elliptic Curve keys.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     @JsonIgnore
     public Optional<String> x() {
@@ -205,7 +207,7 @@ public class JSONWebKey {
     /**
      * The y coordinate for Elliptic Curve keys.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     @JsonIgnore
     public Optional<String> y() {
@@ -215,7 +217,7 @@ public class JSONWebKey {
     /**
      * The modulus value for RSA keys.
      * 
-     * This field is required when `kty` is 'RSA'.
+     * <p>This field is required when `kty` is 'RSA'.
      */
     @JsonIgnore
     public Optional<String> n() {
@@ -225,7 +227,7 @@ public class JSONWebKey {
     /**
      * The exponent value for RSA keys.
      * 
-     * This field is required when `kty` is 'RSA'.
+     * <p>This field is required when `kty` is 'RSA'.
      */
     @JsonIgnore
     public Optional<String> e() {
@@ -320,7 +322,7 @@ public class JSONWebKey {
     /**
      * The curve for Elliptic Curve keys, e.g., 'P-256', 'P-384', or 'P-521'.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     public JSONWebKey withCrv(String crv) {
         Utils.checkNotNull(crv, "crv");
@@ -331,7 +333,7 @@ public class JSONWebKey {
     /**
      * The curve for Elliptic Curve keys, e.g., 'P-256', 'P-384', or 'P-521'.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     public JSONWebKey withCrv(Optional<String> crv) {
         Utils.checkNotNull(crv, "crv");
@@ -342,7 +344,7 @@ public class JSONWebKey {
     /**
      * The x coordinate for Elliptic Curve keys.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     public JSONWebKey withX(String x) {
         Utils.checkNotNull(x, "x");
@@ -353,7 +355,7 @@ public class JSONWebKey {
     /**
      * The x coordinate for Elliptic Curve keys.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     public JSONWebKey withX(Optional<String> x) {
         Utils.checkNotNull(x, "x");
@@ -364,7 +366,7 @@ public class JSONWebKey {
     /**
      * The y coordinate for Elliptic Curve keys.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     public JSONWebKey withY(String y) {
         Utils.checkNotNull(y, "y");
@@ -375,7 +377,7 @@ public class JSONWebKey {
     /**
      * The y coordinate for Elliptic Curve keys.
      * 
-     * This field is required when `kty` is 'EC'.
+     * <p>This field is required when `kty` is 'EC'.
      */
     public JSONWebKey withY(Optional<String> y) {
         Utils.checkNotNull(y, "y");
@@ -386,7 +388,7 @@ public class JSONWebKey {
     /**
      * The modulus value for RSA keys.
      * 
-     * This field is required when `kty` is 'RSA'.
+     * <p>This field is required when `kty` is 'RSA'.
      */
     public JSONWebKey withN(String n) {
         Utils.checkNotNull(n, "n");
@@ -397,7 +399,7 @@ public class JSONWebKey {
     /**
      * The modulus value for RSA keys.
      * 
-     * This field is required when `kty` is 'RSA'.
+     * <p>This field is required when `kty` is 'RSA'.
      */
     public JSONWebKey withN(Optional<String> n) {
         Utils.checkNotNull(n, "n");
@@ -408,7 +410,7 @@ public class JSONWebKey {
     /**
      * The exponent value for RSA keys.
      * 
-     * This field is required when `kty` is 'RSA'.
+     * <p>This field is required when `kty` is 'RSA'.
      */
     public JSONWebKey withE(String e) {
         Utils.checkNotNull(e, "e");
@@ -419,7 +421,7 @@ public class JSONWebKey {
     /**
      * The exponent value for RSA keys.
      * 
-     * This field is required when `kty` is 'RSA'.
+     * <p>This field is required when `kty` is 'RSA'.
      */
     public JSONWebKey withE(Optional<String> e) {
         Utils.checkNotNull(e, "e");
@@ -589,7 +591,7 @@ public class JSONWebKey {
         /**
          * The curve for Elliptic Curve keys, e.g., 'P-256', 'P-384', or 'P-521'.
          * 
-         * This field is required when `kty` is 'EC'.
+         * <p>This field is required when `kty` is 'EC'.
          */
         public Builder crv(String crv) {
             Utils.checkNotNull(crv, "crv");
@@ -600,7 +602,7 @@ public class JSONWebKey {
         /**
          * The curve for Elliptic Curve keys, e.g., 'P-256', 'P-384', or 'P-521'.
          * 
-         * This field is required when `kty` is 'EC'.
+         * <p>This field is required when `kty` is 'EC'.
          */
         public Builder crv(Optional<String> crv) {
             Utils.checkNotNull(crv, "crv");
@@ -611,7 +613,7 @@ public class JSONWebKey {
         /**
          * The x coordinate for Elliptic Curve keys.
          * 
-         * This field is required when `kty` is 'EC'.
+         * <p>This field is required when `kty` is 'EC'.
          */
         public Builder x(String x) {
             Utils.checkNotNull(x, "x");
@@ -622,7 +624,7 @@ public class JSONWebKey {
         /**
          * The x coordinate for Elliptic Curve keys.
          * 
-         * This field is required when `kty` is 'EC'.
+         * <p>This field is required when `kty` is 'EC'.
          */
         public Builder x(Optional<String> x) {
             Utils.checkNotNull(x, "x");
@@ -633,7 +635,7 @@ public class JSONWebKey {
         /**
          * The y coordinate for Elliptic Curve keys.
          * 
-         * This field is required when `kty` is 'EC'.
+         * <p>This field is required when `kty` is 'EC'.
          */
         public Builder y(String y) {
             Utils.checkNotNull(y, "y");
@@ -644,7 +646,7 @@ public class JSONWebKey {
         /**
          * The y coordinate for Elliptic Curve keys.
          * 
-         * This field is required when `kty` is 'EC'.
+         * <p>This field is required when `kty` is 'EC'.
          */
         public Builder y(Optional<String> y) {
             Utils.checkNotNull(y, "y");
@@ -655,7 +657,7 @@ public class JSONWebKey {
         /**
          * The modulus value for RSA keys.
          * 
-         * This field is required when `kty` is 'RSA'.
+         * <p>This field is required when `kty` is 'RSA'.
          */
         public Builder n(String n) {
             Utils.checkNotNull(n, "n");
@@ -666,7 +668,7 @@ public class JSONWebKey {
         /**
          * The modulus value for RSA keys.
          * 
-         * This field is required when `kty` is 'RSA'.
+         * <p>This field is required when `kty` is 'RSA'.
          */
         public Builder n(Optional<String> n) {
             Utils.checkNotNull(n, "n");
@@ -677,7 +679,7 @@ public class JSONWebKey {
         /**
          * The exponent value for RSA keys.
          * 
-         * This field is required when `kty` is 'RSA'.
+         * <p>This field is required when `kty` is 'RSA'.
          */
         public Builder e(String e) {
             Utils.checkNotNull(e, "e");
@@ -688,7 +690,7 @@ public class JSONWebKey {
         /**
          * The exponent value for RSA keys.
          * 
-         * This field is required when `kty` is 'RSA'.
+         * <p>This field is required when `kty` is 'RSA'.
          */
         public Builder e(Optional<String> e) {
             Utils.checkNotNull(e, "e");

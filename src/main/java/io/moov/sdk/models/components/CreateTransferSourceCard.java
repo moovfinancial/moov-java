@@ -28,7 +28,7 @@ public class CreateTransferSourceCard {
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
-     * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
      * Omit for customer-initiated e-commerce transactions.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -60,7 +60,7 @@ public class CreateTransferSourceCard {
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
-     * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
      * Omit for customer-initiated e-commerce transactions.
      */
     @SuppressWarnings("unchecked")
@@ -94,7 +94,7 @@ public class CreateTransferSourceCard {
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
-     * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
      * Omit for customer-initiated e-commerce transactions.
      */
     public CreateTransferSourceCard withTransactionSource(TransactionSource transactionSource) {
@@ -106,7 +106,7 @@ public class CreateTransferSourceCard {
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
-     * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
      * Omit for customer-initiated e-commerce transactions.
      */
     public CreateTransferSourceCard withTransactionSource(Optional<? extends TransactionSource> transactionSource) {
@@ -174,7 +174,7 @@ public class CreateTransferSourceCard {
         /**
          * Specifies the nature and initiator of a transaction. 
          * 
-         * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+         * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
          * Omit for customer-initiated e-commerce transactions.
          */
         public Builder transactionSource(TransactionSource transactionSource) {
@@ -186,7 +186,7 @@ public class CreateTransferSourceCard {
         /**
          * Specifies the nature and initiator of a transaction. 
          * 
-         * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+         * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
          * Omit for customer-initiated e-commerce transactions.
          */
         public Builder transactionSource(Optional<? extends TransactionSource> transactionSource) {

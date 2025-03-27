@@ -18,13 +18,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Verification - Describes identity verification status and relevant identity verification documents.
+ * Verification
+ * 
+ * <p>Describes identity verification status and relevant identity verification documents.
  */
 
 public class Verification {
 
     /**
      * Possible states an account verification can be in.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -34,6 +37,7 @@ public class Verification {
 
     /**
      * Possible states an account verification can be in.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonProperty("status")
@@ -42,6 +46,7 @@ public class Verification {
 
     /**
      * Additional detail for a verification status.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -76,6 +81,7 @@ public class Verification {
 
     /**
      * Possible states an account verification can be in.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -87,6 +93,7 @@ public class Verification {
 
     /**
      * Possible states an account verification can be in.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -97,6 +104,7 @@ public class Verification {
 
     /**
      * Additional detail for a verification status.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -118,6 +126,7 @@ public class Verification {
 
     /**
      * Possible states an account verification can be in.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -129,6 +138,7 @@ public class Verification {
 
     /**
      * Possible states an account verification can be in.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -140,6 +150,7 @@ public class Verification {
 
     /**
      * Possible states an account verification can be in.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -151,6 +162,7 @@ public class Verification {
 
     /**
      * Additional detail for a verification status.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -162,6 +174,7 @@ public class Verification {
 
     /**
      * Additional detail for a verification status.
+     * 
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @Deprecated
@@ -236,6 +249,7 @@ public class Verification {
 
         /**
          * Possible states an account verification can be in.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -247,6 +261,7 @@ public class Verification {
 
         /**
          * Possible states an account verification can be in.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -258,6 +273,7 @@ public class Verification {
 
         /**
          * Possible states an account verification can be in.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -269,6 +285,7 @@ public class Verification {
 
         /**
          * Additional detail for a verification status.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated
@@ -280,6 +297,7 @@ public class Verification {
 
         /**
          * Additional detail for a verification status.
+         * 
          * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
         @Deprecated

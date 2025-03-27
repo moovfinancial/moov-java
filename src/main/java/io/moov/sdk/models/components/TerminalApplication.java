@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TerminalApplication - Describes a terminal application.
+ * TerminalApplication
+ * 
+ * <p>Describes a terminal application.
  */
 
 public class TerminalApplication {

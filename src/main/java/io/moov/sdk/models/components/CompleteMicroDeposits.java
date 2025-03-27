@@ -14,7 +14,9 @@ import java.lang.String;
 import java.util.List;
 import java.util.Objects;
 /**
- * CompleteMicroDeposits - Request to complete the micro-deposit verification workflow.
+ * CompleteMicroDeposits
+ * 
+ * <p>Request to complete the micro-deposit verification workflow.
  */
 
 public class CompleteMicroDeposits {

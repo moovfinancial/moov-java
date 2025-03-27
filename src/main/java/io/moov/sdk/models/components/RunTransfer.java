@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * RunTransfer - Defines the attributes of a transfer.
+ * RunTransfer
+ * 
+ * <p>Defines the attributes of a transfer.
  */
 
 public class RunTransfer {

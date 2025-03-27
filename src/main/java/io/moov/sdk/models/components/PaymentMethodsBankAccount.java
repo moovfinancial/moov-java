@@ -13,7 +13,9 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 /**
- * PaymentMethodsBankAccount - A bank account as contained within a payment method.
+ * PaymentMethodsBankAccount
+ * 
+ * <p>A bank account as contained within a payment method.
  */
 
 public class PaymentMethodsBankAccount {
@@ -24,7 +26,7 @@ public class PaymentMethodsBankAccount {
     /**
      * Once the bank account is linked, we don't reveal the full bank account number. 
      * 
-     * The fingerprint acts as a way to identify whether two linked bank accounts are the same.
+     * <p>The fingerprint acts as a way to identify whether two linked bank accounts are the same.
      */
     @JsonProperty("fingerprint")
     private String fingerprint;
@@ -101,7 +103,7 @@ public class PaymentMethodsBankAccount {
     /**
      * Once the bank account is linked, we don't reveal the full bank account number. 
      * 
-     * The fingerprint acts as a way to identify whether two linked bank accounts are the same.
+     * <p>The fingerprint acts as a way to identify whether two linked bank accounts are the same.
      */
     @JsonIgnore
     public String fingerprint() {
@@ -167,7 +169,7 @@ public class PaymentMethodsBankAccount {
     /**
      * Once the bank account is linked, we don't reveal the full bank account number. 
      * 
-     * The fingerprint acts as a way to identify whether two linked bank accounts are the same.
+     * <p>The fingerprint acts as a way to identify whether two linked bank accounts are the same.
      */
     public PaymentMethodsBankAccount withFingerprint(String fingerprint) {
         Utils.checkNotNull(fingerprint, "fingerprint");
@@ -316,7 +318,7 @@ public class PaymentMethodsBankAccount {
         /**
          * Once the bank account is linked, we don't reveal the full bank account number. 
          * 
-         * The fingerprint acts as a way to identify whether two linked bank accounts are the same.
+         * <p>The fingerprint acts as a way to identify whether two linked bank accounts are the same.
          */
         public Builder fingerprint(String fingerprint) {
             Utils.checkNotNull(fingerprint, "fingerprint");

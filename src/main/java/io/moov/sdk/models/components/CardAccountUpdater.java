@@ -17,7 +17,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardAccountUpdater - The results of the most recent card update request.
+ * CardAccountUpdater
+ * 
+ * <p>The results of the most recent card update request.
  */
 
 public class CardAccountUpdater {

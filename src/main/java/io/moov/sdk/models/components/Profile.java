@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Profile - Describes a Moov account profile. A profile will have a business or an individual, depending on the account's type.
+ * Profile
+ * 
+ * <p>Describes a Moov account profile. A profile will have a business or an individual, depending on the account's type.
  */
 
 public class Profile {

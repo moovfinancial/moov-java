@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ReceiptKind - The type of receipt being requested.
+ * ReceiptKind
+ * 
+ * <p>The type of receipt being requested.
  */
 public enum ReceiptKind {
     SALE_CUSTOMER_V1("sale.customer.v1");

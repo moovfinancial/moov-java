@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TransferStatus - Status of a transfer.
+ * TransferStatus
+ * 
+ * <p>Status of a transfer.
  */
 public enum TransferStatus {
     CREATED("created"),

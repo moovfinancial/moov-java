@@ -37,10 +37,7 @@ you'll need to specify the `/accounts/{accountID}/files.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.FilePurpose;
-import io.moov.sdk.models.components.FileUploadRequestMultiPart;
-import io.moov.sdk.models.components.FileUploadRequestMultiPartFile;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.FileValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadFileResponse;

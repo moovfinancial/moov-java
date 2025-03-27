@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ACHTransactionStatus - Status of a transaction within the ACH lifecycle.
+ * ACHTransactionStatus
+ * 
+ * <p>Status of a transaction within the ACH lifecycle.
  */
 public enum ACHTransactionStatus {
     INITIATED("initiated"),

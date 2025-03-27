@@ -16,7 +16,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * SweepConfigPaymentMethod - The payment method used to push or pull funds to a bank account.
+ * SweepConfigPaymentMethod
+ * 
+ * <p>The payment method used to push or pull funds to a bank account.
  * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
  */
 

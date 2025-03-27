@@ -13,7 +13,9 @@ import java.lang.String;
 import java.util.List;
 import java.util.Objects;
 /**
- * AccountCountries - The countries in which an account operates.
+ * AccountCountries
+ * 
+ * <p>The countries in which an account operates.
  */
 
 public class AccountCountries {

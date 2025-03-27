@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * BusinessType - The type of entity represented by this business.
+ * BusinessType
+ * 
+ * <p>The type of entity represented by this business.
  */
 public enum BusinessType {
     SOLE_PROPRIETORSHIP("soleProprietorship"),

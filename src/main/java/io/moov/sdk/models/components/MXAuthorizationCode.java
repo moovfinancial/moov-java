@@ -12,9 +12,11 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * MXAuthorizationCode - The authorization code of a MX account which allows a processor to retrieve a linked payment account. 
+ * MXAuthorizationCode
  * 
- * `sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
+ * <p>The authorization code of a MX account which allows a processor to retrieve a linked payment account. 
+ * 
+ * <p>`sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. 
  * The MX authorization code provided must be generated from MX's sandbox environment.
  */
 

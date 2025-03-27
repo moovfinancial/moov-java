@@ -12,9 +12,11 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * PayoutRecipient - Specify the intended recipient of the payout.
+ * PayoutRecipient
  * 
- * This information will be used to authenticate the end user when they follow the payment link.
+ * <p>Specify the intended recipient of the payout.
+ * 
+ * <p>This information will be used to authenticate the end user when they follow the payment link.
  */
 
 public class PayoutRecipient {

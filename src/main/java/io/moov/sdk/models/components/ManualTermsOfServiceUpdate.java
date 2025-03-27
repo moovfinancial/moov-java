@@ -16,7 +16,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ManualTermsOfServiceUpdate - Describes the acceptance of the Terms of Service. All data is required, and must be from the user.
+ * ManualTermsOfServiceUpdate
+ * 
+ * <p>Describes the acceptance of the Terms of Service. All data is required, and must be from the user.
  */
 
 public class ManualTermsOfServiceUpdate {

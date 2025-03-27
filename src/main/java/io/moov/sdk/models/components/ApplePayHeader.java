@@ -15,9 +15,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ApplePayHeader - Information needed to decrypt Apple Pay payment data.
+ * ApplePayHeader
  * 
- * Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
+ * <p>Information needed to decrypt Apple Pay payment data.
+ * 
+ * <p>Refer to [Apple's documentation](https://developer.apple.com/documentation/passkit/payment-token-format-reference#Header-keys-and-values) 
  * for more information.
  */
 

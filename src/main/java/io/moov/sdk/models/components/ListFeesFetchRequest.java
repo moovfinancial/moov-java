@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ListFeesFetchRequest - Array of fee IDs to fetch.
+ * ListFeesFetchRequest
+ * 
+ * <p>Array of fee IDs to fetch.
  */
 
 public class ListFeesFetchRequest {

@@ -15,9 +15,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PayoutRecipientUpdate - Specify the intended recipient of the payout.
+ * PayoutRecipientUpdate
  * 
- * This information will be used to authenticate the end user when they follow the payment link.
+ * <p>Specify the intended recipient of the payout.
+ * 
+ * <p>This information will be used to authenticate the end user when they follow the payment link.
  */
 
 public class PayoutRecipientUpdate {

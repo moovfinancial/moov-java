@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * IssuedCardFormFactor - Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+ * IssuedCardFormFactor
+ * 
+ * <p>Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
  */
 public enum IssuedCardFormFactor {
     VIRTUAL("virtual");

@@ -43,15 +43,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.AchDetails;
-import io.moov.sdk.models.components.Amount;
-import io.moov.sdk.models.components.CardDetails;
-import io.moov.sdk.models.components.Occurrence;
-import io.moov.sdk.models.components.Recur;
-import io.moov.sdk.models.components.RunTransfer;
-import io.moov.sdk.models.components.SchedulePaymentMethod;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.UpsertSchedule;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ScheduleValidationError;
 import io.moov.sdk.models.operations.CreateScheduleResponse;
@@ -308,15 +300,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.AchDetails;
-import io.moov.sdk.models.components.Amount;
-import io.moov.sdk.models.components.CardDetails;
-import io.moov.sdk.models.components.Occurrence;
-import io.moov.sdk.models.components.Recur;
-import io.moov.sdk.models.components.RunTransfer;
-import io.moov.sdk.models.components.SchedulePaymentMethod;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.UpsertSchedule;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ScheduleValidationError;
 import io.moov.sdk.models.operations.UpdateScheduleResponse;

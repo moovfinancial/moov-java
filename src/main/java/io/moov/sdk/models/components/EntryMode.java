@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * EntryMode - How the card information was entered into the point of sale terminal.
+ * EntryMode
+ * 
+ * <p>How the card information was entered into the point of sale terminal.
  */
 public enum EntryMode {
     CONTACTLESS("contactless");

@@ -9,9 +9,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TransactionSource - Specifies the nature and initiator of a transaction. 
+ * TransactionSource
  * 
- * Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+ * <p>Specifies the nature and initiator of a transaction. 
+ * 
+ * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
  * Omit for customer-initiated e-commerce transactions.
  */
 public enum TransactionSource {

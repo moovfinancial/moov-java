@@ -29,7 +29,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Transfer - Details of a Transfer.
+ * Transfer
+ * 
+ * <p>Details of a Transfer.
  */
 @SuppressWarnings("serial")
 public class Transfer extends RuntimeException {

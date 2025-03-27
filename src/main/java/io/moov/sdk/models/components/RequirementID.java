@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * RequirementID - The unique ID of what the requirement is asking to be filled out.
+ * RequirementID
+ * 
+ * <p>The unique ID of what the requirement is asking to be filled out.
  */
 public enum RequirementID {
     ACCOUNT_TOS_ACCEPTANCE("account.tos-acceptance"),

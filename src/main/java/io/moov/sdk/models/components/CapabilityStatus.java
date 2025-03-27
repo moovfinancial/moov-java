@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CapabilityStatus - The status of the capability requested for an account.
+ * CapabilityStatus
+ * 
+ * <p>The status of the capability requested for an account.
  */
 public enum CapabilityStatus {
     ENABLED("enabled"),

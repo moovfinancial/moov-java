@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PatchIndividual - Describes the fields available when patching an individual.
+ * PatchIndividual
+ * 
+ * <p>Describes the fields available when patching an individual.
  */
 
 public class PatchIndividual {

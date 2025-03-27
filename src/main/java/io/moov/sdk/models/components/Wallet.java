@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * Wallet - A Moov wallet to store funds for transfers.
+ * Wallet
+ * 
+ * <p>A Moov wallet to store funds for transfers.
  */
 
 public class Wallet {

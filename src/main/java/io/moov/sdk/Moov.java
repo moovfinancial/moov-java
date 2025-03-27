@@ -267,6 +267,7 @@ public class Moov {
 
         /**
          * Configures the SDK to use a custom security source.
+         *
          * @param securitySource The security source to use for all requests.
          * @return The builder instance.
          */
@@ -350,6 +351,7 @@ public class Moov {
         
         /**
          * Builds a new instance of the SDK.
+         *
          * @return The SDK instance.
          */
         public Moov build() {
@@ -372,6 +374,7 @@ public class Moov {
     
     /**
      * Get a new instance of the SDK builder to configure a new instance of the SDK.
+     *
      * @return The SDK builder instance.
      */
     public static Builder builder() {

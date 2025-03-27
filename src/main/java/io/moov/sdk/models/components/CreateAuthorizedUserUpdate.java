@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CreateAuthorizedUserUpdate - Fields for identifying an authorized individual.
+ * CreateAuthorizedUserUpdate
+ * 
+ * <p>Fields for identifying an authorized individual.
  */
 
 public class CreateAuthorizedUserUpdate {

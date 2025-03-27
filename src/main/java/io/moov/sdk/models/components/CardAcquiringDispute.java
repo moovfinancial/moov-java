@@ -13,7 +13,9 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 /**
- * CardAcquiringDispute - Details of a card dispute.
+ * CardAcquiringDispute
+ * 
+ * <p>Details of a card dispute.
  */
 
 public class CardAcquiringDispute {

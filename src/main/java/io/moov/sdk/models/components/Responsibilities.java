@@ -17,7 +17,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Responsibilities - Describes the job responsibilities of a business representative.
+ * Responsibilities
+ * 
+ * <p>Describes the job responsibilities of a business representative.
  */
 
 public class Responsibilities {

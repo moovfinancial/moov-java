@@ -12,7 +12,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 /**
- * TerminalConfiguration - Describes a terminal configuration.
+ * TerminalConfiguration
+ * 
+ * <p>Describes a terminal configuration.
  */
 
 public class TerminalConfiguration {

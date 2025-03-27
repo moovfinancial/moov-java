@@ -16,7 +16,9 @@ import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Settings - User provided settings to manage an account.
+ * Settings
+ * 
+ * <p>User provided settings to manage an account.
  */
 
 public class Settings {

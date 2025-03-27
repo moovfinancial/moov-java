@@ -26,13 +26,13 @@ public class ListAccountsRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
     private Optional<String> xMoovVersion;
@@ -40,7 +40,7 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by name.
      * 
-     * If provided, this query will attempt to find matches against the following Account and Profile fields:
+     * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
      * &lt;ul&gt;
      *   &lt;li&gt;Account `displayName`&lt;/li&gt;
      *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
@@ -51,17 +51,17 @@ public class ListAccountsRequest {
     private Optional<String> name;
 
     /**
-     *   Filter connected accounts by email address.
+     * Filter connected accounts by email address.
      * 
-     *   Provide the full email address to filter by email.
+     * <p>  Provide the full email address to filter by email.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=email")
     private Optional<String> email;
 
     /**
-     *   Filter connected accounts by AccountType.
+     * Filter connected accounts by AccountType.
      * 
-     *   If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+     * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
      *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
      *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
      */
@@ -69,7 +69,7 @@ public class ListAccountsRequest {
     private Optional<? extends AccountType> type;
 
     /**
-     *   Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+     * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=foreignID")
     private Optional<String> foreignID;
@@ -77,19 +77,19 @@ public class ListAccountsRequest {
     /**
      * Filter disconnected accounts.
      * 
-     * If true, the response will include disconnected accounts.
+     * <p>If true, the response will include disconnected accounts.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=includeDisconnected")
     private Optional<Boolean> includeDisconnected;
 
     /**
-     *   Filter connected accounts by the capability.
+     * Filter connected accounts by the capability.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=capability")
     private Optional<? extends CapabilityID> capability;
 
     /**
-     *   Filter connected accounts by the capability.
+     * Filter connected accounts by the capability.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=capabilityStatus")
     private Optional<? extends CapabilityStatus> capabilityStatus;
@@ -141,13 +141,13 @@ public class ListAccountsRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     @JsonIgnore
     public Optional<String> xMoovVersion() {
@@ -157,7 +157,7 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by name.
      * 
-     * If provided, this query will attempt to find matches against the following Account and Profile fields:
+     * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
      * &lt;ul&gt;
      *   &lt;li&gt;Account `displayName`&lt;/li&gt;
      *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
@@ -170,9 +170,9 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by email address.
+     * Filter connected accounts by email address.
      * 
-     *   Provide the full email address to filter by email.
+     * <p>  Provide the full email address to filter by email.
      */
     @JsonIgnore
     public Optional<String> email() {
@@ -180,9 +180,9 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by AccountType.
+     * Filter connected accounts by AccountType.
      * 
-     *   If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+     * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
      *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
      *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
      */
@@ -193,7 +193,7 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+     * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
      */
     @JsonIgnore
     public Optional<String> foreignID() {
@@ -203,7 +203,7 @@ public class ListAccountsRequest {
     /**
      * Filter disconnected accounts.
      * 
-     * If true, the response will include disconnected accounts.
+     * <p>If true, the response will include disconnected accounts.
      */
     @JsonIgnore
     public Optional<Boolean> includeDisconnected() {
@@ -211,7 +211,7 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by the capability.
+     * Filter connected accounts by the capability.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -220,7 +220,7 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by the capability.
+     * Filter connected accounts by the capability.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -245,13 +245,13 @@ public class ListAccountsRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     public ListAccountsRequest withXMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -262,13 +262,13 @@ public class ListAccountsRequest {
     /**
      * Specify an API version.
      * 
-     * API versioning follows the format `vYYYY.QQ.BB`, where 
+     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
      *   - `YYYY` is the year
      *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
      *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
      *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      * 
-     * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      */
     public ListAccountsRequest withXMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -279,7 +279,7 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by name.
      * 
-     * If provided, this query will attempt to find matches against the following Account and Profile fields:
+     * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
      * &lt;ul&gt;
      *   &lt;li&gt;Account `displayName`&lt;/li&gt;
      *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
@@ -295,7 +295,7 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by name.
      * 
-     * If provided, this query will attempt to find matches against the following Account and Profile fields:
+     * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
      * &lt;ul&gt;
      *   &lt;li&gt;Account `displayName`&lt;/li&gt;
      *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
@@ -309,9 +309,9 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by email address.
+     * Filter connected accounts by email address.
      * 
-     *   Provide the full email address to filter by email.
+     * <p>  Provide the full email address to filter by email.
      */
     public ListAccountsRequest withEmail(String email) {
         Utils.checkNotNull(email, "email");
@@ -320,9 +320,9 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by email address.
+     * Filter connected accounts by email address.
      * 
-     *   Provide the full email address to filter by email.
+     * <p>  Provide the full email address to filter by email.
      */
     public ListAccountsRequest withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
@@ -331,9 +331,9 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by AccountType.
+     * Filter connected accounts by AccountType.
      * 
-     *   If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+     * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
      *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
      *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
      */
@@ -344,9 +344,9 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by AccountType.
+     * Filter connected accounts by AccountType.
      * 
-     *   If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+     * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
      *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
      *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
      */
@@ -357,7 +357,7 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+     * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
      */
     public ListAccountsRequest withForeignID(String foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
@@ -366,7 +366,7 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+     * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
      */
     public ListAccountsRequest withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
@@ -377,7 +377,7 @@ public class ListAccountsRequest {
     /**
      * Filter disconnected accounts.
      * 
-     * If true, the response will include disconnected accounts.
+     * <p>If true, the response will include disconnected accounts.
      */
     public ListAccountsRequest withIncludeDisconnected(boolean includeDisconnected) {
         Utils.checkNotNull(includeDisconnected, "includeDisconnected");
@@ -388,7 +388,7 @@ public class ListAccountsRequest {
     /**
      * Filter disconnected accounts.
      * 
-     * If true, the response will include disconnected accounts.
+     * <p>If true, the response will include disconnected accounts.
      */
     public ListAccountsRequest withIncludeDisconnected(Optional<Boolean> includeDisconnected) {
         Utils.checkNotNull(includeDisconnected, "includeDisconnected");
@@ -397,7 +397,7 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by the capability.
+     * Filter connected accounts by the capability.
      */
     public ListAccountsRequest withCapability(CapabilityID capability) {
         Utils.checkNotNull(capability, "capability");
@@ -406,7 +406,7 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by the capability.
+     * Filter connected accounts by the capability.
      */
     public ListAccountsRequest withCapability(Optional<? extends CapabilityID> capability) {
         Utils.checkNotNull(capability, "capability");
@@ -415,7 +415,7 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by the capability.
+     * Filter connected accounts by the capability.
      */
     public ListAccountsRequest withCapabilityStatus(CapabilityStatus capabilityStatus) {
         Utils.checkNotNull(capabilityStatus, "capabilityStatus");
@@ -424,7 +424,7 @@ public class ListAccountsRequest {
     }
 
     /**
-     *   Filter connected accounts by the capability.
+     * Filter connected accounts by the capability.
      */
     public ListAccountsRequest withCapabilityStatus(Optional<? extends CapabilityStatus> capabilityStatus) {
         Utils.checkNotNull(capabilityStatus, "capabilityStatus");
@@ -537,13 +537,13 @@ public class ListAccountsRequest {
         /**
          * Specify an API version.
          * 
-         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
          *   - `YYYY` is the year
          *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
          *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
          *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
          * 
-         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
         public Builder xMoovVersion(String xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -554,13 +554,13 @@ public class ListAccountsRequest {
         /**
          * Specify an API version.
          * 
-         * API versioning follows the format `vYYYY.QQ.BB`, where 
+         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
          *   - `YYYY` is the year
          *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
          *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
          *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
          * 
-         * The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
          */
         public Builder xMoovVersion(Optional<String> xMoovVersion) {
             Utils.checkNotNull(xMoovVersion, "xMoovVersion");
@@ -571,7 +571,7 @@ public class ListAccountsRequest {
         /**
          * Filter connected accounts by name.
          * 
-         * If provided, this query will attempt to find matches against the following Account and Profile fields:
+         * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
          * &lt;ul&gt;
          *   &lt;li&gt;Account `displayName`&lt;/li&gt;
          *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
@@ -587,7 +587,7 @@ public class ListAccountsRequest {
         /**
          * Filter connected accounts by name.
          * 
-         * If provided, this query will attempt to find matches against the following Account and Profile fields:
+         * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
          * &lt;ul&gt;
          *   &lt;li&gt;Account `displayName`&lt;/li&gt;
          *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
@@ -601,9 +601,9 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Filter connected accounts by email address.
+         * Filter connected accounts by email address.
          * 
-         *   Provide the full email address to filter by email.
+         * <p>  Provide the full email address to filter by email.
          */
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -612,9 +612,9 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Filter connected accounts by email address.
+         * Filter connected accounts by email address.
          * 
-         *   Provide the full email address to filter by email.
+         * <p>  Provide the full email address to filter by email.
          */
         public Builder email(Optional<String> email) {
             Utils.checkNotNull(email, "email");
@@ -623,9 +623,9 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Filter connected accounts by AccountType.
+         * Filter connected accounts by AccountType.
          * 
-         *   If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+         * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
          *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
          *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
          */
@@ -636,9 +636,9 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Filter connected accounts by AccountType.
+         * Filter connected accounts by AccountType.
          * 
-         *   If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+         * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
          *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
          *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
          */
@@ -649,7 +649,7 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+         * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
          */
         public Builder foreignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
@@ -658,7 +658,7 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+         * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
          */
         public Builder foreignID(Optional<String> foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
@@ -669,7 +669,7 @@ public class ListAccountsRequest {
         /**
          * Filter disconnected accounts.
          * 
-         * If true, the response will include disconnected accounts.
+         * <p>If true, the response will include disconnected accounts.
          */
         public Builder includeDisconnected(boolean includeDisconnected) {
             Utils.checkNotNull(includeDisconnected, "includeDisconnected");
@@ -680,7 +680,7 @@ public class ListAccountsRequest {
         /**
          * Filter disconnected accounts.
          * 
-         * If true, the response will include disconnected accounts.
+         * <p>If true, the response will include disconnected accounts.
          */
         public Builder includeDisconnected(Optional<Boolean> includeDisconnected) {
             Utils.checkNotNull(includeDisconnected, "includeDisconnected");
@@ -689,7 +689,7 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Filter connected accounts by the capability.
+         * Filter connected accounts by the capability.
          */
         public Builder capability(CapabilityID capability) {
             Utils.checkNotNull(capability, "capability");
@@ -698,7 +698,7 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Filter connected accounts by the capability.
+         * Filter connected accounts by the capability.
          */
         public Builder capability(Optional<? extends CapabilityID> capability) {
             Utils.checkNotNull(capability, "capability");
@@ -707,7 +707,7 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Filter connected accounts by the capability.
+         * Filter connected accounts by the capability.
          */
         public Builder capabilityStatus(CapabilityStatus capabilityStatus) {
             Utils.checkNotNull(capabilityStatus, "capabilityStatus");
@@ -716,7 +716,7 @@ public class ListAccountsRequest {
         }
 
         /**
-         *   Filter connected accounts by the capability.
+         * Filter connected accounts by the capability.
          */
         public Builder capabilityStatus(Optional<? extends CapabilityStatus> capabilityStatus) {
             Utils.checkNotNull(capabilityStatus, "capabilityStatus");

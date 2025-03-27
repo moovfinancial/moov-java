@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * CardUpdateReason - The results of the card update request.
+ * CardUpdateReason
+ * 
+ * <p>The results of the card update request.
  */
 public enum CardUpdateReason {
     UNSPECIFIED("unspecified"),

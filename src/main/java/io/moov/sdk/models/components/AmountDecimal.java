@@ -23,7 +23,7 @@ public class AmountDecimal {
     /**
      * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
      * 
-     * For example, $12.987654321 is '12.987654321'.
+     * <p>For example, $12.987654321 is '12.987654321'.
      */
     @JsonProperty("valueDecimal")
     private String valueDecimal;
@@ -49,7 +49,7 @@ public class AmountDecimal {
     /**
      * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
      * 
-     * For example, $12.987654321 is '12.987654321'.
+     * <p>For example, $12.987654321 is '12.987654321'.
      */
     @JsonIgnore
     public String valueDecimal() {
@@ -72,7 +72,7 @@ public class AmountDecimal {
     /**
      * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
      * 
-     * For example, $12.987654321 is '12.987654321'.
+     * <p>For example, $12.987654321 is '12.987654321'.
      */
     public AmountDecimal withValueDecimal(String valueDecimal) {
         Utils.checkNotNull(valueDecimal, "valueDecimal");
@@ -130,7 +130,7 @@ public class AmountDecimal {
         /**
          * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
          * 
-         * For example, $12.987654321 is '12.987654321'.
+         * <p>For example, $12.987654321 is '12.987654321'.
          */
         public Builder valueDecimal(String valueDecimal) {
             Utils.checkNotNull(valueDecimal, "valueDecimal");

@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * PaymentLinkPaymentDetailsUpdate - Options for payment links used to collect payment.
+ * PaymentLinkPaymentDetailsUpdate
+ * 
+ * <p>Options for payment links used to collect payment.
  */
 
 public class PaymentLinkPaymentDetailsUpdate {

@@ -14,7 +14,9 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 /**
- * EvidenceUploadResponse - Details of a successfully uploaded evidence file.
+ * EvidenceUploadResponse
+ * 
+ * <p>Details of a successfully uploaded evidence file.
  */
 
 public class EvidenceUploadResponse {

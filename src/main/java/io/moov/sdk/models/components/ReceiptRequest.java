@@ -15,7 +15,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * ReceiptRequest - A receipt request for a specific transfer, schedule, or schedule occurrence.
+ * ReceiptRequest
+ * 
+ * <p>A receipt request for a specific transfer, schedule, or schedule occurrence.
  */
 
 public class ReceiptRequest {

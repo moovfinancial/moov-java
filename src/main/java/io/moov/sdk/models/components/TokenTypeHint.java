@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * TokenTypeHint - The type of token being revoked.
+ * TokenTypeHint
+ * 
+ * <p>The type of token being revoked.
  */
 public enum TokenTypeHint {
     ACCESS_TOKEN("access_token"),

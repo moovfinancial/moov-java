@@ -9,7 +9,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * Mode - The operating mode for an account.
+ * Mode
+ * 
+ * <p>The operating mode for an account.
  */
 public enum Mode {
     SANDBOX("sandbox"),

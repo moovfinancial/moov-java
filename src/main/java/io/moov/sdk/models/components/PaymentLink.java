@@ -71,7 +71,7 @@ public class PaymentLink {
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
-     * **For payouts, `maxUses` is always 1.**
+     * <p>**For payouts, `maxUses` is always 1.**
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maxUses")
@@ -268,7 +268,7 @@ public class PaymentLink {
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
-     * **For payouts, `maxUses` is always 1.**
+     * <p>**For payouts, `maxUses` is always 1.**
      */
     @JsonIgnore
     public Optional<Long> maxUses() {
@@ -416,7 +416,7 @@ public class PaymentLink {
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
-     * **For payouts, `maxUses` is always 1.**
+     * <p>**For payouts, `maxUses` is always 1.**
      */
     public PaymentLink withMaxUses(long maxUses) {
         Utils.checkNotNull(maxUses, "maxUses");
@@ -427,7 +427,7 @@ public class PaymentLink {
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
-     * **For payouts, `maxUses` is always 1.**
+     * <p>**For payouts, `maxUses` is always 1.**
      */
     public PaymentLink withMaxUses(Optional<Long> maxUses) {
         Utils.checkNotNull(maxUses, "maxUses");
@@ -741,7 +741,7 @@ public class PaymentLink {
         /**
          * An optional limit on the number of times this payment link can be used. 
          * 
-         * **For payouts, `maxUses` is always 1.**
+         * <p>**For payouts, `maxUses` is always 1.**
          */
         public Builder maxUses(long maxUses) {
             Utils.checkNotNull(maxUses, "maxUses");
@@ -752,7 +752,7 @@ public class PaymentLink {
         /**
          * An optional limit on the number of times this payment link can be used. 
          * 
-         * **For payouts, `maxUses` is always 1.**
+         * <p>**For payouts, `maxUses` is always 1.**
          */
         public Builder maxUses(Optional<Long> maxUses) {
             Utils.checkNotNull(maxUses, "maxUses");

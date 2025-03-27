@@ -80,12 +80,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CardAddress;
-import io.moov.sdk.models.components.CardExpiration;
-import io.moov.sdk.models.components.E2EEToken;
-import io.moov.sdk.models.components.LinkCard;
-import io.moov.sdk.models.components.LinkCardWaitFor;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.LinkCardError;
 import io.moov.sdk.models.operations.LinkCardResponse;
@@ -301,11 +296,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.E2EETokenUpdate;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.UpdateCard;
-import io.moov.sdk.models.components.UpdateCardAddress;
-import io.moov.sdk.models.components.UpdateCardExpiration;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateCardError;
 import io.moov.sdk.models.operations.UpdateCardResponse;

@@ -13,7 +13,9 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 /**
- * FileUploadRequestMultiPart - Request to upload a file for an account.
+ * FileUploadRequestMultiPart
+ * 
+ * <p>Request to upload a file for an account.
  */
 
 public class FileUploadRequestMultiPart {
@@ -33,7 +35,7 @@ public class FileUploadRequestMultiPart {
     /**
      * Additional metadata to be stored with the file, formatted as a JSON string.
      * 
-     * Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+     * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
      */
     @SpeakeasyMetadata("multipartForm:name=metadata")
     private Optional<String> metadata;
@@ -76,7 +78,7 @@ public class FileUploadRequestMultiPart {
     /**
      * Additional metadata to be stored with the file, formatted as a JSON string.
      * 
-     * Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+     * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
      */
     @JsonIgnore
     public Optional<String> metadata() {
@@ -108,7 +110,7 @@ public class FileUploadRequestMultiPart {
     /**
      * Additional metadata to be stored with the file, formatted as a JSON string.
      * 
-     * Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+     * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
      */
     public FileUploadRequestMultiPart withMetadata(String metadata) {
         Utils.checkNotNull(metadata, "metadata");
@@ -119,7 +121,7 @@ public class FileUploadRequestMultiPart {
     /**
      * Additional metadata to be stored with the file, formatted as a JSON string.
      * 
-     * Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+     * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
      */
     public FileUploadRequestMultiPart withMetadata(Optional<String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
@@ -191,7 +193,7 @@ public class FileUploadRequestMultiPart {
         /**
          * Additional metadata to be stored with the file, formatted as a JSON string.
          * 
-         * Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+         * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
          */
         public Builder metadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
@@ -202,7 +204,7 @@ public class FileUploadRequestMultiPart {
         /**
          * Additional metadata to be stored with the file, formatted as a JSON string.
          * 
-         * Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+         * <p>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
          */
         public Builder metadata(Optional<String> metadata) {
             Utils.checkNotNull(metadata, "metadata");

@@ -141,6 +141,10 @@ public class Application {
                     .description("Pay Instructor for May 15 Class")
                     .metadata(Map.ofEntries(
                         Map.entry("optional", "metadata")))
+                    .salesTaxAmount(Amount.builder()
+                        .currency("USD")
+                        .value(1204L)
+                        .build())
                     .build())
                 .build();
 

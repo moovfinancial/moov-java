@@ -71,7 +71,7 @@ public class Transfer extends RuntimeException {
     private Amount amount;
 
     /**
-     * An optional description of the transfer for your own internal use.
+     * An optional description of the transfer that is used on receipts and for your own internal use.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
@@ -289,7 +289,7 @@ public class Transfer extends RuntimeException {
     }
 
     /**
-     * An optional description of the transfer for your own internal use.
+     * An optional description of the transfer that is used on receipts and for your own internal use.
      */
     @JsonIgnore
     public Optional<String> description() {
@@ -472,7 +472,7 @@ public class Transfer extends RuntimeException {
     }
 
     /**
-     * An optional description of the transfer for your own internal use.
+     * An optional description of the transfer that is used on receipts and for your own internal use.
      */
     public Transfer withDescription(String description) {
         Utils.checkNotNull(description, "description");
@@ -481,7 +481,7 @@ public class Transfer extends RuntimeException {
     }
 
     /**
-     * An optional description of the transfer for your own internal use.
+     * An optional description of the transfer that is used on receipts and for your own internal use.
      */
     public Transfer withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
@@ -924,7 +924,7 @@ public class Transfer extends RuntimeException {
         }
 
         /**
-         * An optional description of the transfer for your own internal use.
+         * An optional description of the transfer that is used on receipts and for your own internal use.
          */
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
@@ -933,7 +933,7 @@ public class Transfer extends RuntimeException {
         }
 
         /**
-         * An optional description of the transfer for your own internal use.
+         * An optional description of the transfer that is used on receipts and for your own internal use.
          */
         public Builder description(Optional<String> description) {
             Utils.checkNotNull(description, "description");

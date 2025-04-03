@@ -27,8 +27,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 public class WalletTransactions implements
             MethodCallListWalletTransactions,
             MethodCallGetWalletTransaction {

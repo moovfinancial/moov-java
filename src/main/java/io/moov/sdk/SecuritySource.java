@@ -5,8 +5,6 @@ package io.moov.sdk;
 
 import io.moov.sdk.utils.HasSecurity;
 
-
-
 public interface SecuritySource {
 
     HasSecurity getSecurity();

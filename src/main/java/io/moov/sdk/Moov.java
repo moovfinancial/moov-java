@@ -13,8 +13,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-
-
 /**
  * Moov API: Moov is a platform that enables developers to integrate all aspects of money movement with ease and speed.
  * The Moov API makes it simple for platforms to send, receive, and store money. Our API is based upon REST

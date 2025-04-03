@@ -41,7 +41,7 @@ public class CreateTransfer {
     private Optional<? extends FacilitatorFee> facilitatorFee;
 
     /**
-     * An optional description of the transfer for your own internal use.
+     * An optional description of the transfer that is used on receipts and for your own internal use.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
@@ -124,7 +124,7 @@ public class CreateTransfer {
     }
 
     /**
-     * An optional description of the transfer for your own internal use.
+     * An optional description of the transfer that is used on receipts and for your own internal use.
      */
     @JsonIgnore
     public Optional<String> description() {
@@ -196,7 +196,7 @@ public class CreateTransfer {
     }
 
     /**
-     * An optional description of the transfer for your own internal use.
+     * An optional description of the transfer that is used on receipts and for your own internal use.
      */
     public CreateTransfer withDescription(String description) {
         Utils.checkNotNull(description, "description");
@@ -205,7 +205,7 @@ public class CreateTransfer {
     }
 
     /**
-     * An optional description of the transfer for your own internal use.
+     * An optional description of the transfer that is used on receipts and for your own internal use.
      */
     public CreateTransfer withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
@@ -356,7 +356,7 @@ public class CreateTransfer {
         }
 
         /**
-         * An optional description of the transfer for your own internal use.
+         * An optional description of the transfer that is used on receipts and for your own internal use.
          */
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
@@ -365,7 +365,7 @@ public class CreateTransfer {
         }
 
         /**
-         * An optional description of the transfer for your own internal use.
+         * An optional description of the transfer that is used on receipts and for your own internal use.
          */
         public Builder description(Optional<String> description) {
             Utils.checkNotNull(description, "description");

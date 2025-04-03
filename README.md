@@ -45,7 +45,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.11.1'
+implementation 'io.moov:sdk:0.11.2'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.11.1</version>
+    <version>0.11.2</version>
 </dependency>
 ```
 
@@ -803,7 +803,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 * [upload](docs/sdks/files/README.md#upload) - Upload a file and link it to the specified Moov account. 
 
-The maximum file size is 10MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf, 
+The maximum file size is 20MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf, 
 and png. 
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 

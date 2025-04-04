@@ -23,7 +23,7 @@ import java.util.Optional;
 public class CreateTransferSource {
 
     /**
-     * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/), 
+     * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
      * associating the new transfer with a parent transfer.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -70,7 +70,7 @@ public class CreateTransferSource {
     }
 
     /**
-     * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/), 
+     * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
      * associating the new transfer with a parent transfer.
      */
     @JsonIgnore
@@ -105,7 +105,7 @@ public class CreateTransferSource {
     }    
 
     /**
-     * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/), 
+     * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
      * associating the new transfer with a parent transfer.
      */
     public CreateTransferSource withTransferID(String transferID) {
@@ -115,7 +115,7 @@ public class CreateTransferSource {
     }
 
     /**
-     * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/), 
+     * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
      * associating the new transfer with a parent transfer.
      */
     public CreateTransferSource withTransferID(Optional<String> transferID) {
@@ -227,7 +227,7 @@ public class CreateTransferSource {
         }
 
         /**
-         * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/), 
+         * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
          * associating the new transfer with a parent transfer.
          */
         public Builder transferID(String transferID) {
@@ -237,7 +237,7 @@ public class CreateTransferSource {
         }
 
         /**
-         * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/), 
+         * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
          * associating the new transfer with a parent transfer.
          */
         public Builder transferID(Optional<String> transferID) {

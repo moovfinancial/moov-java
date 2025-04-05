@@ -45,7 +45,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.11.3'
+implementation 'io.moov:sdk:0.11.4'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.11.3</version>
+    <version>0.11.4</version>
 </dependency>
 ```
 
@@ -100,7 +100,6 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -234,7 +233,6 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -928,7 +926,7 @@ you'll need to specify the `/ping.read` scope.
 
  To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
  you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-* [list](docs/sdks/receipts/README.md#list) - List receipts by trasnferID, scheduleID, or occurrenceID.
+* [list](docs/sdks/receipts/README.md#list) - List receipts by transferID, scheduleID, or occurrenceID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -1209,7 +1207,6 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -1338,7 +1335,6 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()

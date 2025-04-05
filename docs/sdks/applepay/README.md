@@ -75,8 +75,7 @@ public class Application {
             .build();
 
         RegisterApplePayMerchantDomainsResponse res = sdk.applePay().registerMerchantDomains()
-                .xMoovVersion("v2024.01.00")
-                .accountID("133fed79-519d-4b63-99ec-26b95076a45b")
+                .accountID("c62b8770-bdbc-406f-8160-fddb553f5b33")
                 .registerApplePayMerchantDomains(RegisterApplePayMerchantDomains.builder()
                     .domains(List.of(
                         "checkout.classbooker.dev"))
@@ -144,8 +143,7 @@ public class Application {
             .build();
 
         UpdateApplePayMerchantDomainsResponse res = sdk.applePay().updateMerchantDomains()
-                .xMoovVersion("v2024.01.00")
-                .accountID("b7d68fce-1dbc-4562-93aa-d9ad030c78e6")
+                .accountID("4dfea880-7ff8-42f8-bc8d-392cba179113")
                 .updateApplePayMerchantDomains(UpdateApplePayMerchantDomains.builder()
                     .addDomains(List.of(
                         "pay.classbooker.dev"))
@@ -209,8 +207,7 @@ public class Application {
             .build();
 
         GetApplePayMerchantDomainsResponse res = sdk.applePay().getMerchantDomains()
-                .xMoovVersion("v2024.01.00")
-                .accountID("cd0931b0-e02f-47b3-87fc-0789a05479e9")
+                .accountID("5f873241-11ec-45e4-929d-00a704a9b582")
                 .call();
 
         if (res.applePayMerchantDomains().isPresent()) {
@@ -271,11 +268,10 @@ public class Application {
             .build();
 
         CreateApplePaySessionResponse res = sdk.applePay().createSession()
-                .xMoovVersion("v2024.01.00")
-                .accountID("1d911f27-36e5-4497-8e9e-c3ecff1a8ae0")
+                .accountID("7f4bef45-927c-48cf-9312-d337467ac9fb")
                 .createApplePaySession(CreateApplePaySession.builder()
                     .domain("checkout.classbooker.dev")
-                    .displayName("Lillie.Abbott74")
+                    .displayName("Kaylee40")
                     .build())
                 .call();
 
@@ -340,8 +336,7 @@ public class Application {
             .build();
 
         LinkApplePayTokenResponse res = sdk.applePay().linkToken()
-                .xMoovVersion("v2024.01.00")
-                .accountID("f4d3b593-6370-42f3-acf5-eab4393e2a01")
+                .accountID("3f415d64-c57f-409e-80d0-cb8bd8246ace")
                 .linkApplePay(LinkApplePay.builder()
                     .token(LinkApplePayToken.builder()
                         .paymentData(LinkApplePaymentData.builder()

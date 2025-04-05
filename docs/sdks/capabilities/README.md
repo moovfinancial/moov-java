@@ -55,8 +55,7 @@ public class Application {
             .build();
 
         ListCapabilitiesResponse res = sdk.capabilities().list()
-                .xMoovVersion("v2024.01.00")
-                .accountID("c236a258-0a99-455d-9fbb-2312bc028cd2")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .call();
 
         if (res.capabilities().isPresent()) {
@@ -115,7 +114,6 @@ public class Application {
             .build();
 
         RequestCapabilitiesResponse res = sdk.capabilities().request()
-                .xMoovVersion("v2024.01.00")
                 .accountID("32613610-de25-446e-8662-ec2709ffea9d")
                 .addCapabilities(AddCapabilities.builder()
                     .capabilities(List.of(
@@ -180,9 +178,8 @@ public class Application {
             .build();
 
         GetCapabilityResponse res = sdk.capabilities().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("15fbc94d-721f-44a3-b5fb-77f58657305f")
-                .capabilityID(CapabilityID.TRANSFERS)
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .capabilityID(CapabilityID.PRODUCTION_APP)
                 .call();
 
         if (res.capability().isPresent()) {
@@ -241,9 +238,8 @@ public class Application {
             .build();
 
         DisableCapabilityResponse res = sdk.capabilities().disable()
-                .xMoovVersion("v2024.01.00")
-                .accountID("c57b48d7-4182-4632-a345-eeed5a742b0d")
-                .capabilityID(CapabilityID.CARD_ISSUING)
+                .accountID("cd7cd1ce-90cc-444b-ac3e-badb79be277f")
+                .capabilityID(CapabilityID.TRANSFERS)
                 .call();
 
         // handle response

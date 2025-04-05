@@ -39,8 +39,7 @@ public class Application {
             .build();
 
         GetEnrichmentProfileResponse res = sdk.enrichedProfile().get()
-                .xMoovVersion("v2024.01.00")
-                .email("Sheldon.Effertz@gmail.com")
+                .email("Keeley_Lebsack@hotmail.com")
                 .call();
 
         if (res.enrichedBusinessResponse().isPresent()) {

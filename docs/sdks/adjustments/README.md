@@ -43,9 +43,7 @@ public class Application {
             .build();
 
         ListAdjustmentsResponse res = sdk.adjustments().list()
-                .xMoovVersion("v2024.01.00")
-                .accountID("27396e19-5d2d-4fba-876d-423579b4f37e")
-                .walletID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .call();
 
         if (res.adjustments().isPresent()) {
@@ -102,9 +100,8 @@ public class Application {
             .build();
 
         GetAdjustmentResponse res = sdk.adjustments().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("7c43cb4c-5944-40f9-9bef-7925774b06b4")
-                .adjustmentID("244e9b18-1d97-4344-8a69-abf3c48078bc")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .adjustmentID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.adjustment().isPresent()) {

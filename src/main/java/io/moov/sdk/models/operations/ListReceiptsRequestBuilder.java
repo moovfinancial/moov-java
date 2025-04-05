@@ -16,7 +16,7 @@ public class ListReceiptsRequestBuilder {
                             "xMoovVersion",
                             "\"v2024.01.00\"",
                             new TypeReference<Optional<String>>() {});
-    private Optional<String> id = Optional.empty();
+    private String id;
     private final SDKMethodInterfaces.MethodCallListReceipts sdk;
 
     public ListReceiptsRequestBuilder(SDKMethodInterfaces.MethodCallListReceipts sdk) {
@@ -34,14 +34,8 @@ public class ListReceiptsRequestBuilder {
         this.xMoovVersion = xMoovVersion;
         return this;
     }
-                
-    public ListReceiptsRequestBuilder id(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = Optional.of(id);
-        return this;
-    }
 
-    public ListReceiptsRequestBuilder id(Optional<String> id) {
+    public ListReceiptsRequestBuilder id(String id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;

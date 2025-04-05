@@ -113,7 +113,6 @@ public class Application {
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
-                .xMoovVersion("v2024.01.00")
                 .createAccount(CreateAccount.builder()
                     .accountType(AccountType.BUSINESS)
                     .profile(CreateProfile.builder()
@@ -326,8 +325,7 @@ public class Application {
             .build();
 
         GetAccountResponse res = sdk.accounts().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("45ce7519-7f28-40c8-94bf-6edae7a38315")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
                 .call();
 
         if (res.account().isPresent()) {
@@ -394,8 +392,7 @@ public class Application {
             .build();
 
         UpdateAccountResponse res = sdk.accounts().update()
-                .xMoovVersion("v2024.01.00")
-                .accountID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
+                .accountID("95fa7f0e-7432-4ce4-a7cb-60cc78135dde")
                 .patchAccount(PatchAccount.builder()
                     .profile(PatchProfile.builder()
                         .individual(PatchIndividual.builder()
@@ -425,7 +422,6 @@ public class Application {
                                 .build())
                             .build())
                         .business(PatchBusiness.builder()
-                            .legalBusinessName("Classbooker, LLC")
                             .businessType(BusinessType.LLC)
                             .address(AddressUpdate.builder()
                                 .addressLine1("123 Main Street")
@@ -440,7 +436,6 @@ public class Application {
                                 .countryCode("1")
                                 .build())
                             .email("jordan.lee@classbooker.dev")
-                            .description("Local fitness gym paying out instructors")
                             .taxID(TaxIDUpdate.builder()
                                 .ein(TaxIDUpdateEin.builder()
                                     .number("12-3456789")
@@ -472,14 +467,6 @@ public class Application {
                             .stateOrProvince("CO")
                             .postalCode("80301")
                             .country("US")
-                            .build())
-                        .build())
-                    .settings(CreateAccountSettings.builder()
-                        .cardPayment(CardPayment.builder()
-                            .statementDescriptor("Whole Body Fitness")
-                            .build())
-                        .achPayment(AchPayment.builder()
-                            .companyName("WholeBodyFitness")
                             .build())
                         .build())
                     .build())
@@ -544,8 +531,7 @@ public class Application {
             .build();
 
         DisconnectAccountResponse res = sdk.accounts().disconnect()
-                .xMoovVersion("v2024.01.00")
-                .accountID("97814a93-ba26-470e-bb15-3cb32711e8ea")
+                .accountID("ac3cbe09-fcd4-4c5e-ada2-89eaaa9c149e")
                 .call();
 
         // handle response
@@ -600,8 +586,7 @@ public class Application {
             .build();
 
         GetAccountCountriesResponse res = sdk.accounts().getCountries()
-                .xMoovVersion("v2024.01.00")
-                .accountID("df471fd8-7bb3-4db3-bf74-52fe588b8d2b")
+                .accountID("b49c57bf-7b36-4308-8206-c1f5ce8067ac")
                 .call();
 
         if (res.accountCountries().isPresent()) {
@@ -663,8 +648,7 @@ public class Application {
             .build();
 
         AssignAccountCountriesResponse res = sdk.accounts().assignCountries()
-                .xMoovVersion("v2024.01.00")
-                .accountID("9ba3f09c-c93c-4ca1-b68f-1dbb0841a40a")
+                .accountID("aa2dc19b-77dd-481f-a0a8-c76f2cfc1372")
                 .accountCountries(AccountCountries.builder()
                     .countries(List.of(
                         "United States"))
@@ -727,7 +711,6 @@ public class Application {
             .build();
 
         GetMerchantProcessingAgreementResponse res = sdk.accounts().getMerchantProcessingAgreement()
-                .xMoovVersion("v2024.01.00")
                 .accountID("d2cfd0d3-6efb-4bc4-a193-53f35dd0d912")
                 .call();
 
@@ -785,9 +768,6 @@ public class Application {
             .build();
 
         GetTermsOfServiceTokenResponse res = sdk.accounts().getTermsOfServiceToken()
-                .xMoovVersion("v2024.01.00")
-                .origin("<value>")
-                .referer("productive-order.info")
                 .call();
 
         if (res.termsOfServiceToken().isPresent()) {

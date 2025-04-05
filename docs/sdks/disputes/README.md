@@ -108,7 +108,7 @@ public class Application {
             .build();
 
         ListDisputesRequest req = ListDisputesRequest.builder()
-                .accountID("2cb8fed5-9089-45a7-88aa-5468adeaaddb")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -172,9 +172,8 @@ public class Application {
             .build();
 
         GetDisputeResponse res = sdk.disputes().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("102df293-b524-4bb7-9b68-5610432a0b8d")
-                .disputeID("2efe55e9-61a0-4b3d-aab6-423bb7f8140b")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .disputeID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.dispute().isPresent()) {
@@ -234,9 +233,8 @@ public class Application {
             .build();
 
         AcceptDisputeResponse res = sdk.disputes().accept()
-                .xMoovVersion("v2024.01.00")
-                .accountID("bfefe6f4-2658-4d3d-9be8-73ff29049dbe")
-                .disputeID("692e1a18-8314-4a5d-bcfd-0d5ada162cf8")
+                .accountID("a155a634-52c8-4ade-b619-6958b5f88a84")
+                .disputeID("e67dcdcf-56b8-44e6-b2b0-a9297f858656")
                 .call();
 
         if (res.dispute().isPresent()) {
@@ -296,9 +294,8 @@ public class Application {
             .build();
 
         ListDisputeEvidenceResponse res = sdk.disputes().listEvidence()
-                .xMoovVersion("v2024.01.00")
-                .accountID("dcaaa24e-96d2-4b5b-997d-aa20f46c812a")
-                .disputeID("e0434916-3828-49bb-bfa4-30f3c039d5f0")
+                .accountID("613e59d0-0cb8-462c-be9c-7f2b955ec234")
+                .disputeID("1bb71474-4bf0-40b8-899f-01914b8ad7e5")
                 .call();
 
         if (res.disputeEvidenceResponses().isPresent()) {
@@ -360,15 +357,14 @@ public class Application {
             .build();
 
         UploadDisputeEvidenceFileResponse res = sdk.disputes().uploadEvidenceFile()
-                .xMoovVersion("v2024.01.00")
-                .accountID("1ae7aa8f-dfc0-4d00-927a-c5349c04fa3f")
-                .disputeID("c3dddece-4b5f-4b6e-b8a0-719d5e192fc7")
+                .accountID("77231939-ba89-4cb7-adf8-2b494aabddcd")
+                .disputeID("550e6b0a-1e54-47e0-9dcc-9daa38417ce5")
                 .createEvidenceFileMultiPart(CreateEvidenceFileMultiPart.builder()
                     .file(File.builder()
                         .fileName("example.file")
                         .content("0xd1d0C399fD".getBytes(StandardCharsets.UTF_8))
                         .build())
-                    .evidenceType(EvidenceType.COVER_LETTER)
+                    .evidenceType(EvidenceType.GENERIC_EVIDENCE)
                     .build())
                 .call();
 
@@ -432,12 +428,11 @@ public class Application {
             .build();
 
         UploadDisputeEvidenceTextResponse res = sdk.disputes().uploadEvidenceText()
-                .xMoovVersion("v2024.01.00")
-                .accountID("d542736f-c9c3-491c-86c3-7303a97965ea")
-                .disputeID("9487cd25-501d-4a76-8c24-54328af8a4b6")
+                .accountID("a4f06189-7f74-4b7e-b76a-f3c7af17b8d9")
+                .disputeID("fb79f20c-b948-445c-a145-3e20ce4f769c")
                 .createEvidenceText(CreateEvidenceText.builder()
                     .text("<value>")
-                    .evidenceType(EvidenceType.COVER_LETTER)
+                    .evidenceType(EvidenceType.CUSTOMER_COMMUNICATION)
                     .build())
                 .call();
 
@@ -503,9 +498,8 @@ public class Application {
             .build();
 
         SubmitDisputeEvidenceResponse res = sdk.disputes().submitEvidence()
-                .xMoovVersion("v2024.01.00")
-                .accountID("aff4d2bf-fd2c-471e-a697-b2cc2c9f297e")
-                .disputeID("491e05b8-7adc-440b-af36-4d2229edd4f0")
+                .accountID("7cf55b42-45bd-49ff-883c-0017334607a6")
+                .disputeID("f6e86188-8533-46e8-a184-ec17f223c86b")
                 .call();
 
         if (res.dispute().isPresent()) {
@@ -565,10 +559,9 @@ public class Application {
             .build();
 
         GetDisputeEvidenceResponse res = sdk.disputes().getEvidence()
-                .xMoovVersion("v2024.01.00")
-                .accountID("8abb6e62-d012-4f06-8c83-d993dd3155f2")
-                .disputeID("ebf0479f-774e-4881-9e0b-2c791e0601fc")
-                .evidenceID("37534a23-990f-4bdd-b2c7-1653336983f0")
+                .accountID("3a49ec36-8a92-4fae-81e6-868bfc90b4c9")
+                .disputeID("7128e90f-9089-47d5-92b9-87bbfe6bd9b3")
+                .evidenceID("614a5588-4d0f-4d00-b8d9-2ae60f6124bf")
                 .call();
 
         if (res.disputeEvidenceResponse().isPresent()) {
@@ -631,9 +624,9 @@ public class Application {
             .build();
 
         UpdateDisputeEvidenceRequest req = UpdateDisputeEvidenceRequest.builder()
-                .accountID("51c8da31-2c44-4bdf-a86e-26169242ffe0")
-                .disputeID("584a4c46-9412-4622-8ac9-001d7ececcd4")
-                .evidenceID("743d351d-f194-45e4-8628-700f3b327c51")
+                .accountID("f19d220a-55c9-476d-9cfa-d9a536b8065f")
+                .disputeID("da248348-9f0d-4df8-a9c6-66cc2492e87a")
+                .evidenceID("a204faa9-3cce-4628-b833-5b0694ac47bb")
                 .updateEvidence(UpdateEvidence.builder()
                     .build())
                 .build();
@@ -698,10 +691,9 @@ public class Application {
             .build();
 
         DeleteDisputeEvidenceFileResponse res = sdk.disputes().deleteEvidence()
-                .xMoovVersion("v2024.01.00")
-                .accountID("927e189d-273f-40ab-814f-1fa3ab1aa7dd")
-                .disputeID("94451c2e-a568-4800-a669-7f6190da461d")
-                .evidenceID("1bfaf385-47fb-4da3-8072-d54e354a9910")
+                .accountID("21999434-0e9c-4cd1-890a-4af813ad91ae")
+                .disputeID("41954292-f363-4ea3-9b4b-bc417e55f6be")
+                .evidenceID("ac7b6eef-7513-4ff4-996b-a85b1f62d499")
                 .call();
 
         // handle response
@@ -760,10 +752,9 @@ public class Application {
             .build();
 
         GetDisputeEvidenceDataResponse res = sdk.disputes().getEvidenceData()
-                .xMoovVersion("v2024.01.00")
-                .accountID("38299899-8c4f-4a43-b73a-3cef9ba87c62")
-                .disputeID("22c477d1-525c-4c1b-b8a3-7dcec5c4da28")
-                .evidenceID("fb1c15fd-675b-4f82-861e-f3092ed39462")
+                .accountID("4ebc37c5-a566-452b-8b54-ef280fcb888b")
+                .disputeID("4bd05222-78bc-49a7-92a8-f1e5ee0edd6b")
+                .evidenceID("01098426-242d-4693-8716-ec08cd8da86e")
                 .call();
 
         if (res.twoHundredApplicationPdfResponseStream().isPresent()) {

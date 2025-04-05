@@ -61,8 +61,7 @@ public class Application {
             .build();
 
         CreateSweepConfigResponse res = sdk.sweeps().createConfig()
-                .xMoovVersion("v2024.01.00")
-                .accountID("3a373e85-2777-40fe-aacd-52d6fc641d76")
+                .accountID("2c0dfb65-d7ef-4c8e-8c74-e6c7773550bc")
                 .createSweepConfig(CreateSweepConfig.builder()
                     .walletID("01234567-89ab-cdef-0123-456789abcdef")
                     .status(SweepConfigStatus.ENABLED)
@@ -127,8 +126,7 @@ public class Application {
             .build();
 
         ListSweepConfigsResponse res = sdk.sweeps().listConfigs()
-                .xMoovVersion("v2024.01.00")
-                .accountID("b06d7726-4020-4fef-9035-75779c0fc48c")
+                .accountID("5d9d568d-fb5d-478b-a301-d495422f1c35")
                 .call();
 
         if (res.sweepConfigs().isPresent()) {
@@ -184,9 +182,8 @@ public class Application {
             .build();
 
         GetSweepConfigResponse res = sdk.sweeps().getConfig()
-                .xMoovVersion("v2024.01.00")
-                .accountID("1f4428ca-3d11-441b-93d5-3fada6a5db01")
-                .sweepConfigID("acef9550-4b7b-4675-807b-71755d182b2f")
+                .accountID("12f68c4e-1e8d-483b-9f62-b5d6458d538c")
+                .sweepConfigID("ce92235d-dd84-4e14-9895-3b98a0003522")
                 .call();
 
         if (res.sweepConfig().isPresent()) {
@@ -245,7 +242,6 @@ public class Application {
             .build();
 
         UpdateSweepConfigResponse res = sdk.sweeps().updateConfig()
-                .xMoovVersion("v2024.01.00")
                 .accountID("7573cb48-6325-4d3d-841d-81108fcfe6f2")
                 .sweepConfigID("49e8f3b1-259f-458e-9367-adb3b938f8c8")
                 .patchSweepConfig(PatchSweepConfig.builder()
@@ -311,8 +307,8 @@ public class Application {
             .build();
 
         ListSweepsRequest req = ListSweepsRequest.builder()
-                .accountID("0fe45272-ee0d-401f-a10e-21e396676598")
-                .walletID("5f738f67-1989-4589-beb1-3d2f5c53a821")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+                .walletID("21e27667-18d6-4d46-812e-0aee1b9ddf12")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -373,10 +369,9 @@ public class Application {
             .build();
 
         GetSweepResponse res = sdk.sweeps().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("adb697e6-2888-48b9-b2c5-f2c3d487add5")
-                .walletID("9f00e2b3-9dfb-48a3-9a25-a08e80f9cf36")
-                .sweepID("a5324f55-fbec-4323-94e4-c512608bb175")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .walletID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
+                .sweepID("ecd62b8f-7112-4aaf-90ab-4e43b4cca371")
                 .call();
 
         if (res.sweep().isPresent()) {

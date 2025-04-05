@@ -29,7 +29,6 @@ you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.PaymentMethodType;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListPaymentMethodsResponse;
 import java.lang.Exception;
@@ -46,10 +45,7 @@ public class Application {
             .build();
 
         ListPaymentMethodsResponse res = sdk.paymentMethods().list()
-                .xMoovVersion("v2024.01.00")
-                .accountID("062d9768-0375-4e19-a48f-00ae75251086")
-                .sourceID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
-                .paymentMethodType(PaymentMethodType.ACH_DEBIT_FUND)
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .call();
 
         if (res.paymentMethods().isPresent()) {
@@ -107,9 +103,8 @@ public class Application {
             .build();
 
         GetPaymentMethodResponse res = sdk.paymentMethods().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("dec1e9d0-b795-4449-824a-127444ae0d75")
-                .paymentMethodID("e4f6d969-b108-405e-b95a-d71e917fb15e")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .paymentMethodID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.paymentMethod().isPresent()) {

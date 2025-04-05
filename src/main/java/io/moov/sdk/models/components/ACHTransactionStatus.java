@@ -14,6 +14,7 @@ import java.util.Optional;
  * <p>Status of a transaction within the ACH lifecycle.
  */
 public enum ACHTransactionStatus {
+    UNKNOWN(""),
     INITIATED("initiated"),
     ORIGINATED("originated"),
     CORRECTED("corrected"),

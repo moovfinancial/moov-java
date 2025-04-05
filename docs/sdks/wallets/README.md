@@ -49,8 +49,7 @@ public class Application {
             .build();
 
         ListWalletsResponse res = sdk.wallets().list()
-                .xMoovVersion("v2024.01.00")
-                .accountID("60acf390-dc7f-4510-9b9b-ec968d375f0c")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .call();
 
         if (res.wallets().isPresent()) {
@@ -108,9 +107,8 @@ public class Application {
             .build();
 
         GetWalletResponse res = sdk.wallets().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("499bec36-0099-43cb-884f-620887342259")
-                .walletID("bc779af6-b7d5-464a-ad1f-f6476fa72706")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .walletID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.wallet().isPresent()) {

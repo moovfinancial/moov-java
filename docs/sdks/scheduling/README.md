@@ -63,8 +63,7 @@ public class Application {
             .build();
 
         CreateScheduleResponse res = sdk.scheduling().create()
-                .xMoovVersion("v2024.01.00")
-                .accountID("4ee0c8f9-d96c-44a5-924b-28f02e5d05ca")
+                .accountID("9ab418fe-7b54-4964-a372-69b08e55ee8a")
                 .upsertSchedule(UpsertSchedule.builder()
                     .occurrences(List.of(
                         Occurrence.builder()
@@ -96,7 +95,7 @@ public class Application {
                                         .dynamicDescriptor("WhlBdy *Yoga 11-12")
                                         .build())
                                     .build())
-                                .description("quarrel last chilly storyboard after which")
+                                .description("delightfully fumigate convection though zowie up bulky electronics")
                                 .build())
                             .build(),
                         Occurrence.builder()
@@ -128,39 +127,7 @@ public class Application {
                                         .dynamicDescriptor("WhlBdy *Yoga 11-12")
                                         .build())
                                     .build())
-                                .description("huddle monthly boo curry official deadly")
-                                .build())
-                            .build(),
-                        Occurrence.builder()
-                            .occurrenceID("c520f1b9-0ba7-42f5-b977-248cdbe41c69")
-                            .runOn(OffsetDateTime.parse("2009-11-10T23:00:00Z"))
-                            .runTransfer(RunTransfer.builder()
-                                .amount(Amount.builder()
-                                    .currency("USD")
-                                    .value(1204L)
-                                    .build())
-                                .destination(SchedulePaymentMethod.builder()
-                                    .paymentMethodID("c520f1b9-0ba7-42f5-b977-248cdbe41c69")
-                                    .achDetails(AchDetails.builder()
-                                        .companyEntryDescription("Gym dues")
-                                        .originatingCompanyName("Whole Body Fit")
-                                        .build())
-                                    .cardDetails(CardDetails.builder()
-                                        .dynamicDescriptor("WhlBdy *Yoga 11-12")
-                                        .build())
-                                    .build())
-                                .partnerAccountID("c520f1b9-0ba7-42f5-b977-248cdbe41c69")
-                                .source(SchedulePaymentMethod.builder()
-                                    .paymentMethodID("c520f1b9-0ba7-42f5-b977-248cdbe41c69")
-                                    .achDetails(AchDetails.builder()
-                                        .companyEntryDescription("Gym dues")
-                                        .originatingCompanyName("Whole Body Fit")
-                                        .build())
-                                    .cardDetails(CardDetails.builder()
-                                        .dynamicDescriptor("WhlBdy *Yoga 11-12")
-                                        .build())
-                                    .build())
-                                .description("following eek adventurously gosh alongside shakily down")
+                                .description("tackle unabashedly mentor early miserly stealthily without")
                                 .build())
                             .build()))
                     .recur(Recur.builder()
@@ -191,7 +158,7 @@ public class Application {
                                     .dynamicDescriptor("WhlBdy *Yoga 11-12")
                                     .build())
                                 .build())
-                            .description("astride idle until mainstream not inure")
+                            .description("via deeply writ amid pupil yawningly wasabi when excepting councilman")
                             .build())
                         .start(OffsetDateTime.parse("2009-11-10T23:00:00Z"))
                         .build())
@@ -255,7 +222,7 @@ public class Application {
             .build();
 
         ListSchedulesRequest req = ListSchedulesRequest.builder()
-                .accountID("f5b39da1-b677-43d6-b114-65cbbea83ad5")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -320,9 +287,8 @@ public class Application {
             .build();
 
         UpdateScheduleResponse res = sdk.scheduling().update()
-                .xMoovVersion("v2024.01.00")
-                .accountID("c0aa3b4b-9122-4f67-8d60-fde10f180239")
-                .scheduleID("9ab32094-a459-49c7-9ce9-437b9e400834")
+                .accountID("916f66c9-4a48-4a10-94fb-c5837b3ed84e")
+                .scheduleID("ce88be33-c224-42c1-ae8b-3533cc7b3742")
                 .upsertSchedule(UpsertSchedule.builder()
                     .occurrences(List.of(
                         Occurrence.builder()
@@ -354,7 +320,7 @@ public class Application {
                                         .dynamicDescriptor("WhlBdy *Yoga 11-12")
                                         .build())
                                     .build())
-                                .description("suckle violently comparison during rosemary unusual though meh fen inside")
+                                .description("technician eulogise whereas till mild than during")
                                 .build())
                             .build(),
                         Occurrence.builder()
@@ -386,7 +352,39 @@ public class Application {
                                         .dynamicDescriptor("WhlBdy *Yoga 11-12")
                                         .build())
                                     .build())
-                                .description("a both vice meaningfully pish")
+                                .description("gosh frantically belabor past")
+                                .build())
+                            .build(),
+                        Occurrence.builder()
+                            .occurrenceID("c520f1b9-0ba7-42f5-b977-248cdbe41c69")
+                            .runOn(OffsetDateTime.parse("2009-11-10T23:00:00Z"))
+                            .runTransfer(RunTransfer.builder()
+                                .amount(Amount.builder()
+                                    .currency("USD")
+                                    .value(1204L)
+                                    .build())
+                                .destination(SchedulePaymentMethod.builder()
+                                    .paymentMethodID("c520f1b9-0ba7-42f5-b977-248cdbe41c69")
+                                    .achDetails(AchDetails.builder()
+                                        .companyEntryDescription("Gym dues")
+                                        .originatingCompanyName("Whole Body Fit")
+                                        .build())
+                                    .cardDetails(CardDetails.builder()
+                                        .dynamicDescriptor("WhlBdy *Yoga 11-12")
+                                        .build())
+                                    .build())
+                                .partnerAccountID("c520f1b9-0ba7-42f5-b977-248cdbe41c69")
+                                .source(SchedulePaymentMethod.builder()
+                                    .paymentMethodID("c520f1b9-0ba7-42f5-b977-248cdbe41c69")
+                                    .achDetails(AchDetails.builder()
+                                        .companyEntryDescription("Gym dues")
+                                        .originatingCompanyName("Whole Body Fit")
+                                        .build())
+                                    .cardDetails(CardDetails.builder()
+                                        .dynamicDescriptor("WhlBdy *Yoga 11-12")
+                                        .build())
+                                    .build())
+                                .description("perfumed fisherman with")
                                 .build())
                             .build()))
                     .recur(Recur.builder()
@@ -417,7 +415,7 @@ public class Application {
                                     .dynamicDescriptor("WhlBdy *Yoga 11-12")
                                     .build())
                                 .build())
-                            .description("arrange fooey consequently parody however")
+                            .description("hydrolyze lazily whenever how what")
                             .build())
                         .start(OffsetDateTime.parse("2009-11-10T23:00:00Z"))
                         .build())
@@ -481,9 +479,8 @@ public class Application {
             .build();
 
         GetSchedulesResponse res = sdk.scheduling().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("aa7a59b8-5d59-4efd-99e7-b644e71e5f8c")
-                .scheduleID("605976e8-f3ff-4e64-9b41-7255577d6f44")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .scheduleID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.scheduleResponse().isPresent()) {
@@ -541,9 +538,8 @@ public class Application {
             .build();
 
         CancelScheduleResponse res = sdk.scheduling().cancel()
-                .xMoovVersion("v2024.01.00")
-                .accountID("a1303a1c-8708-447e-a64b-5dba8417b641")
-                .scheduleID("ab5ca483-e27d-48f0-b596-09eed517874f")
+                .accountID("0f713502-9233-41c6-9ebd-c570b7edb496")
+                .scheduleID("d50fbe4e-3e32-4613-8574-4d82f3fd6b3c")
                 .call();
 
         // handle response
@@ -599,9 +595,8 @@ public class Application {
             .build();
 
         GetScheduledOccurrenceResponse res = sdk.scheduling().getOccurrance()
-                .xMoovVersion("v2024.01.00")
-                .accountID("7175f455-a6d6-4b87-8e24-cbd12c7dabe7")
-                .scheduleID("a4ffa63d-9228-4488-8f27-d2ff59d7760c")
+                .accountID("cdeb0c02-04f9-4e60-9768-3c10a2b2201d")
+                .scheduleID("47a51a3b-df1e-40c5-8048-918f18949779")
                 .occurrenceFilter("<value>")
                 .call();
 

@@ -39,7 +39,6 @@ public class Application {
             .build();
 
         GetAvatarResponse res = sdk.avatars().get()
-                .xMoovVersion("v2024.01.00")
                 .uniqueID("<id>")
                 .call();
 

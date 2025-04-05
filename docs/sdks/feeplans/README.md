@@ -129,7 +129,6 @@ public class Application {
             .build();
 
         CreateFeePlanAgreementsResponse res = sdk.feePlans().createFeePlanAgreements()
-                .xMoovVersion("v2024.01.00")
                 .accountID("19962eb8-00cd-44e5-8a66-a1ebaf88c2fe")
                 .createFeePlanAgreement(CreateFeePlanAgreement.builder()
                     .planID("b97c2d59-80c5-49ac-b1fc-40e3a81d8daf")
@@ -180,7 +179,6 @@ import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListFeePlansResponse;
 import java.lang.Exception;
-import java.util.List;
 
 public class Application {
 
@@ -194,10 +192,7 @@ public class Application {
             .build();
 
         ListFeePlansResponse res = sdk.feePlans().listFeePlans()
-                .xMoovVersion("v2024.01.00")
                 .accountID("ac8fa716-4b75-4902-b296-d734524ca45c")
-                .planIDs(List.of(
-                    "ac8fa716-4b75-4902-b296-d734524ca45c"))
                 .call();
 
         if (res.feePlans().isPresent()) {
@@ -300,7 +295,6 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.ListFeesFetchRequest;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListFeesFetchResponse;
 import java.lang.Exception;
@@ -317,10 +311,7 @@ public class Application {
             .build();
 
         ListFeesFetchResponse res = sdk.feePlans().listFeesFetch()
-                .xMoovVersion("v2024.01.00")
                 .accountID("7b85e951-a6d9-4e67-a155-4d18e9d1ac58")
-                .listFeesFetchRequest(ListFeesFetchRequest.builder()
-                    .build())
                 .call();
 
         if (res.incurredFees().isPresent()) {
@@ -364,7 +355,6 @@ import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListPartnerPricingResponse;
 import java.lang.Exception;
-import java.util.List;
 
 public class Application {
 
@@ -378,10 +368,7 @@ public class Application {
             .build();
 
         ListPartnerPricingResponse res = sdk.feePlans().listPartnerPricing()
-                .xMoovVersion("v2024.01.00")
                 .accountID("85f15b07-5c44-4302-ab6f-d22f8d45b7f4")
-                .planIDs(List.of(
-                    "<value>"))
                 .call();
 
         if (res.partnerPricings().isPresent()) {

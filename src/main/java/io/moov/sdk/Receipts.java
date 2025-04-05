@@ -8,7 +8,6 @@ import io.moov.sdk.models.components.ReceiptRequest;
 import io.moov.sdk.models.components.ReceiptResponse;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.ReceiptValidationError;
 import io.moov.sdk.models.operations.CreateReceiptsRequest;
 import io.moov.sdk.models.operations.CreateReceiptsRequestBuilder;
 import io.moov.sdk.models.operations.CreateReceiptsResponse;
@@ -187,10 +186,10 @@ public class Receipts implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ReceiptResponse _out = Utils.mapper().readValue(
+                List<ReceiptResponse> _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<ReceiptResponse>() {});
-                _res.withReceiptResponse(Optional.ofNullable(_out));
+                    new TypeReference<List<ReceiptResponse>>() {});
+                _res.withReceiptResponses(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(
@@ -215,22 +214,7 @@ public class Receipts implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ReceiptValidationError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<ReceiptValidationError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "422", "429")) {
             _res.withHeaders(_httpRes.headers().map());
             // no content 
             throw new APIException(
@@ -274,7 +258,7 @@ public class Receipts implements
 
 
     /**
-     * List receipts by trasnferID, scheduleID, or occurrenceID.
+     * List receipts by transferID, scheduleID, or occurrenceID.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -286,20 +270,22 @@ public class Receipts implements
     }
 
     /**
-     * List receipts by trasnferID, scheduleID, or occurrenceID.
+     * List receipts by transferID, scheduleID, or occurrenceID.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
+     * @param id The transfer, schedule, or transfer occurrence ID to filter receipts by.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListReceiptsResponse listDirect() throws Exception {
-        return list(Optional.empty(), Optional.empty());
+    public ListReceiptsResponse list(
+            String id) throws Exception {
+        return list(Optional.empty(), id);
     }
     
     /**
-     * List receipts by trasnferID, scheduleID, or occurrenceID.
+     * List receipts by transferID, scheduleID, or occurrenceID.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -313,13 +299,13 @@ public class Receipts implements
      *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      *         
      *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param id The unique identifier to filter receipts by.
+     * @param id The transfer, schedule, or transfer occurrence ID to filter receipts by.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListReceiptsResponse list(
             Optional<String> xMoovVersion,
-            Optional<String> id) throws Exception {
+            String id) throws Exception {
         ListReceiptsRequest request =
             ListReceiptsRequest
                 .builder()

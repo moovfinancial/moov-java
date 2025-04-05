@@ -53,7 +53,6 @@ public class Application {
             .build();
 
         CreateTerminalApplicationResponse res = sdk.terminalApplications().create()
-                .xMoovVersion("v2024.01.00")
                 .createTerminalApplication(CreateTerminalApplication.builder()
                     .platform(TerminalApplicationPlatform.IOS)
                     .appBundleID("com.example.app")
@@ -118,7 +117,6 @@ public class Application {
             .build();
 
         ListTerminalApplicationsResponse res = sdk.terminalApplications().list()
-                .xMoovVersion("v2024.01.00")
                 .call();
 
         if (res.terminalApplications().isPresent()) {
@@ -173,7 +171,6 @@ public class Application {
             .build();
 
         GetTerminalApplicationResponse res = sdk.terminalApplications().get()
-                .xMoovVersion("v2024.01.00")
                 .terminalApplicationID("01234567-89ab-cdef-0123-456789abcdef")
                 .call();
 
@@ -231,7 +228,6 @@ public class Application {
             .build();
 
         DeleteTerminalApplicationResponse res = sdk.terminalApplications().delete()
-                .xMoovVersion("v2024.01.00")
                 .terminalApplicationID("01234567-89ab-cdef-0123-456789abcdef")
                 .call();
 

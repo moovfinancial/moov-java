@@ -56,7 +56,7 @@ public class Application {
             .build();
 
         ListIssuedCardAuthorizationsRequest req = ListIssuedCardAuthorizationsRequest.builder()
-                .accountID("8b15de20-a7c4-4720-a646-88309ab5093d")
+                .accountID("c2c85e2d-634b-4cc0-8c5b-763c22a727b6")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -117,9 +117,8 @@ public class Application {
             .build();
 
         GetIssuedCardAuthorizationResponse res = sdk.issuingTransactions().getAuthorization()
-                .xMoovVersion("v2024.01.00")
-                .accountID("8c490d50-8951-4810-9506-ecd5648c2a39")
-                .authorizationID("f037a459-fbd3-47b9-8181-09847ea9f557")
+                .accountID("7fe28e4d-1e30-4ebb-8d22-aae768170b82")
+                .authorizationID("8db4b0c4-d99d-4878-bcde-c2700f82e331")
                 .call();
 
         if (res.issuedCardAuthorization().isPresent()) {
@@ -177,8 +176,8 @@ public class Application {
             .build();
 
         ListIssuedCardAuthorizationEventsRequest req = ListIssuedCardAuthorizationEventsRequest.builder()
-                .accountID("78666549-e9e4-4769-8bd4-1456f277ddce")
-                .authorizationID("fcc21f8e-61f5-4554-a253-362fd57052bb")
+                .accountID("e52b1b82-54cb-42aa-911b-6359b8490650")
+                .authorizationID("f1a90d72-3787-49c4-a11d-9e7efe0b3763")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -240,7 +239,7 @@ public class Application {
             .build();
 
         ListIssuedCardTransactionsRequest req = ListIssuedCardTransactionsRequest.builder()
-                .accountID("b137f097-2f49-4fc7-afb4-b59a6fe762cd")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -301,9 +300,8 @@ public class Application {
             .build();
 
         GetIssuedCardTransactionResponse res = sdk.issuingTransactions().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("4bebfda4-7627-4fb8-9945-5ef57c25a867")
-                .cardTransactionID("33615eaf-e358-4f62-ac49-f7cca27d44ba")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .cardTransactionID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.issuedCardTransaction().isPresent()) {

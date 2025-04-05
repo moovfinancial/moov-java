@@ -31,23 +31,24 @@ public class ListReceiptsRequest {
     private Optional<String> xMoovVersion;
 
     /**
-     * The unique identifier to filter receipts by.
+     * The transfer, schedule, or transfer occurrence ID to filter receipts by.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=id")
-    private Optional<String> id;
+    private String id;
 
     @JsonCreator
     public ListReceiptsRequest(
             Optional<String> xMoovVersion,
-            Optional<String> id) {
+            String id) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(id, "id");
         this.xMoovVersion = xMoovVersion;
         this.id = id;
     }
     
-    public ListReceiptsRequest() {
-        this(Optional.empty(), Optional.empty());
+    public ListReceiptsRequest(
+            String id) {
+        this(Optional.empty(), id);
     }
 
     /**
@@ -67,10 +68,10 @@ public class ListReceiptsRequest {
     }
 
     /**
-     * The unique identifier to filter receipts by.
+     * The transfer, schedule, or transfer occurrence ID to filter receipts by.
      */
     @JsonIgnore
-    public Optional<String> id() {
+    public String id() {
         return id;
     }
 
@@ -113,18 +114,9 @@ public class ListReceiptsRequest {
     }
 
     /**
-     * The unique identifier to filter receipts by.
+     * The transfer, schedule, or transfer occurrence ID to filter receipts by.
      */
     public ListReceiptsRequest withId(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
-        return this;
-    }
-
-    /**
-     * The unique identifier to filter receipts by.
-     */
-    public ListReceiptsRequest withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -163,7 +155,7 @@ public class ListReceiptsRequest {
  
         private Optional<String> xMoovVersion;
  
-        private Optional<String> id = Optional.empty();
+        private String id;
         
         private Builder() {
           // force use of static builder() method
@@ -204,18 +196,9 @@ public class ListReceiptsRequest {
         }
 
         /**
-         * The unique identifier to filter receipts by.
+         * The transfer, schedule, or transfer occurrence ID to filter receipts by.
          */
         public Builder id(String id) {
-            Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
-            return this;
-        }
-
-        /**
-         * The unique identifier to filter receipts by.
-         */
-        public Builder id(Optional<String> id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;

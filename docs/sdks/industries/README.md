@@ -39,7 +39,6 @@ public class Application {
             .build();
 
         ListIndustriesResponse res = sdk.industries().list()
-                .xMoovVersion("v2024.01.00")
                 .call();
 
         if (res.enrichedIndustries().isPresent()) {

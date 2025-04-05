@@ -129,9 +129,7 @@ public class Application {
             .build();
 
         LinkBankAccountResponse res = sdk.bankAccounts().link()
-                .xMoovVersion("v2024.01.00")
-                .xWaitFor(BankAccountWaitFor.PAYMENT_METHOD)
-                .accountID("5049418d-b6dc-4a6f-a285-091c0e15dc6a")
+                .accountID("0ffc839a-9198-4ea1-98a2-6cccee057439")
                 .linkBankAccount(LinkBankAccount.of(PlaidPayload.builder()
                     .plaid(PlaidIntegration.builder()
                         .token("<value>")
@@ -198,8 +196,7 @@ public class Application {
             .build();
 
         ListBankAccountsResponse res = sdk.bankAccounts().list()
-                .xMoovVersion("v2024.01.00")
-                .accountID("91095bec-ade2-4a8c-9f46-ae7f07234fee")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .call();
 
         if (res.bankAccounts().isPresent()) {
@@ -257,9 +254,8 @@ public class Application {
             .build();
 
         GetBankAccountResponse res = sdk.bankAccounts().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("30085225-d87e-47cd-8f08-001465f8cd22")
-                .bankAccountID("6c5a7be6-792b-4628-af28-a852f8c9de5b")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .bankAccountID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.bankAccount().isPresent()) {
@@ -317,9 +313,8 @@ public class Application {
             .build();
 
         DisableBankAccountResponse res = sdk.bankAccounts().disable()
-                .xMoovVersion("v2024.01.00")
-                .accountID("d01209e7-2701-46cc-b0ba-56eabf4e1ec7")
-                .bankAccountID("0ae3f56a-e391-4a80-962d-9fe4c7a45b97")
+                .accountID("cd7cd1ce-90cc-444b-ac3e-badb79be277f")
+                .bankAccountID("0f131553-3a08-4820-a7ac-ba935765809c")
                 .call();
 
         // handle response
@@ -387,7 +382,6 @@ public class Application {
             .build();
 
         InitiateMicroDepositsResponse res = sdk.bankAccounts().initiateMicroDeposits()
-                .xMoovVersion("v2024.01.00")
                 .accountID("ff04d5ff-8ad2-4d87-baf2-0c9dcb6d3e2a")
                 .bankAccountID("10ed8688-d7e2-4a70-827d-af795759945d")
                 .call();
@@ -449,7 +443,6 @@ public class Application {
             .build();
 
         CompleteMicroDepositsResponse res = sdk.bankAccounts().completeMicroDeposits()
-                .xMoovVersion("v2024.01.00")
                 .accountID("ebfc273d-980b-4a92-8dd9-bf9996f2a16e")
                 .bankAccountID("3e6af61e-a5cb-4281-b0e6-e7e3d39edf65")
                 .completeMicroDeposits(CompleteMicroDeposits.builder()
@@ -525,9 +518,8 @@ public class Application {
             .build();
 
         GetBankAccountVerificationResponse res = sdk.bankAccounts().getVerification()
-                .xMoovVersion("v2024.01.00")
-                .accountID("0102058c-a936-482a-a3ca-2355850903d7")
-                .bankAccountID("ee6888ef-544e-4146-bab7-ea04e31b2274")
+                .accountID("eb35bc20-d74d-4acc-b152-c4db94d9355b")
+                .bankAccountID("2572c1db-032d-464b-b55d-1fd7052232be")
                 .call();
 
         if (res.bankAccountVerification().isPresent()) {
@@ -583,7 +575,6 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.BankAccountWaitFor;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.InitiateBankAccountVerificationResponse;
@@ -601,10 +592,8 @@ public class Application {
             .build();
 
         InitiateBankAccountVerificationResponse res = sdk.bankAccounts().initiateVerification()
-                .xMoovVersion("v2024.01.00")
-                .xWaitFor(BankAccountWaitFor.PAYMENT_METHOD)
-                .accountID("c2b4967e-86a5-474e-a78e-f013315f7dcc")
-                .bankAccountID("d648f8f3-7641-4e40-8a99-c08de14889c8")
+                .accountID("96925880-1f29-484d-9ce4-a55f78c3d5fc")
+                .bankAccountID("c9cadc5c-d322-467d-bc62-d133abcc5ec1")
                 .call();
 
         if (res.bankAccountVerificationCreated().isPresent()) {
@@ -672,9 +661,8 @@ public class Application {
             .build();
 
         CompleteBankAccountVerificationResponse res = sdk.bankAccounts().completeVerification()
-                .xMoovVersion("v2024.01.00")
-                .accountID("88cf5aa5-bf76-406e-a986-eb33cd8890e3")
-                .bankAccountID("0157260f-ae3c-496c-a9d8-24de5fbc6b31")
+                .accountID("3b83f70f-82ce-4e0f-8a75-e4717ad684e4")
+                .bankAccountID("c4c7442d-4aa1-4dfe-9ab1-5206164dce64")
                 .completeBankAccountVerification(CompleteBankAccountVerification.builder()
                     .code("MV1234")
                     .build())

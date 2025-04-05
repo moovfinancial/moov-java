@@ -56,8 +56,7 @@ public class Application {
             .build();
 
         UploadFileResponse res = sdk.files().upload()
-                .xMoovVersion("v2024.01.00")
-                .accountID("68f95825-1ae3-4f3f-8af2-789dd2a59d6d")
+                .accountID("10a2b98a-ab61-4ec6-a5fc-41d969747bc6")
                 .fileUploadRequestMultiPart(FileUploadRequestMultiPart.builder()
                     .file(FileUploadRequestMultiPartFile.builder()
                         .fileName("example.file")
@@ -124,8 +123,7 @@ public class Application {
             .build();
 
         ListFilesResponse res = sdk.files().list()
-                .xMoovVersion("v2024.01.00")
-                .accountID("a3c35406-9eb6-4801-bbac-0649c31c058a")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .call();
 
         if (res.fileDetails().isPresent()) {
@@ -181,9 +179,8 @@ public class Application {
             .build();
 
         GetFileDetailsResponse res = sdk.files().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("346add0a-4dae-4729-8e74-1a50d00d677a")
-                .fileID("bf657841-ba2d-4060-ad21-eb2b7372cf85")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .fileID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.fileDetails().isPresent()) {

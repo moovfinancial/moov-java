@@ -53,7 +53,6 @@ public class Application {
             .build();
 
         CreateBrandResponse res = sdk.branding().create()
-                .xMoovVersion("v2024.01.00")
                 .accountID("7a621cf0-21cd-49cf-8540-3315211a509a")
                 .brandProperties(BrandProperties.builder()
                     .colors(BrandColors.builder()
@@ -125,7 +124,6 @@ public class Application {
             .build();
 
         UpsertBrandResponse res = sdk.branding().upsert()
-                .xMoovVersion("v2024.01.00")
                 .accountID("87673c22-1b80-4b69-b5bb-e92af8dcce02")
                 .brandProperties(BrandProperties.builder()
                     .colors(BrandColors.builder()
@@ -195,8 +193,7 @@ public class Application {
             .build();
 
         GetBrandResponse res = sdk.branding().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("07eb5173-1869-4649-9aa6-f399787a2751")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
                 .call();
 
         if (res.brandProperties().isPresent()) {
@@ -255,8 +252,7 @@ public class Application {
             .build();
 
         UpdateBrandResponse res = sdk.branding().update()
-                .xMoovVersion("v2024.01.00")
-                .accountID("6c1f5632-7f37-4b3d-861e-10e31b8853de")
+                .accountID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
                 .updateBrand(UpdateBrand.builder()
                     .build())
                 .call();

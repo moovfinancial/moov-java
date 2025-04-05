@@ -39,7 +39,6 @@ public class Application {
             .build();
 
         GetTerminalConfigurationResponse res = sdk.terminalConfigurations().get()
-                .xMoovVersion("v2024.01.00")
                 .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
                 .terminalApplicationID("01234567-89ab-cdef-0123-456789abcdef")
                 .call();

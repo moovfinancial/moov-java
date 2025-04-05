@@ -49,8 +49,7 @@ public class Application {
             .build();
 
         GetUnderwritingResponse res = sdk.underwriting().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("32ccafba-5d99-40e5-a8af-d05cc5d73a4e")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
                 .call();
 
         if (res.underwriting().isPresent()) {
@@ -110,7 +109,6 @@ public class Application {
             .build();
 
         UpsertUnderwritingResponse res = sdk.underwriting().upsert()
-                .xMoovVersion("v2024.01.00")
                 .accountID("695bbe92-af8d-4cce-802f-ca871830906f")
                 .updateUnderwriting(UpdateUnderwriting.builder()
                     .averageTransactionSize(543422L)

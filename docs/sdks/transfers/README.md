@@ -106,8 +106,8 @@ public class Application {
             .build();
 
         CreateTransferRequest req = CreateTransferRequest.builder()
-                .xIdempotencyKey("f9d459c6-642b-4b0f-a642-2a074eb6b54d")
-                .accountID("0bdee4f2-70df-485e-8104-60745a118ebb")
+                .xIdempotencyKey("080a8e77-4c2b-4ecc-9376-91775e024985")
+                .accountID("7a621cf0-21cd-49cf-8540-3315211a509a")
                 .createTransfer(CreateTransfer.builder()
                     .source(CreateTransferSource.builder()
                         .paymentMethodID("9506dbf6-4208-44c3-ad8a-e4431660e1f2")
@@ -215,7 +215,7 @@ public class Application {
             .build();
 
         ListTransfersRequest req = ListTransfersRequest.builder()
-                .accountID("a7b433e5-531c-406b-bf40-4cde3c83fab5")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -279,9 +279,8 @@ public class Application {
             .build();
 
         GetTransferResponse res = sdk.transfers().get()
-                .xMoovVersion("v2024.01.00")
-                .transferID("64607ba5-82d4-4278-93b5-c5c5ca5c9cd8")
-                .accountID("cb1b48c3-1c11-4648-aa00-691b74c9ea1b")
+                .transferID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .accountID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.transfer().isPresent()) {
@@ -342,7 +341,6 @@ public class Application {
             .build();
 
         UpdateTransferResponse res = sdk.transfers().update()
-                .xMoovVersion("v2024.01.00")
                 .transferID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
                 .accountID("b85898c1-25a1-4907-a1c5-562af6646dad")
                 .patchTransfer(PatchTransfer.builder()
@@ -407,7 +405,6 @@ public class Application {
             .build();
 
         CreateCancellationResponse res = sdk.transfers().createCancellation()
-                .xMoovVersion("v2024.01.00")
                 .accountID("12dbe811-b86d-497b-ae0f-fb7cfda35251")
                 .transferID("6bb9450c-10a9-4c8d-a8d2-d3fa18648706")
                 .call();
@@ -467,7 +464,6 @@ public class Application {
             .build();
 
         GetCancellationResponse res = sdk.transfers().getCancellation()
-                .xMoovVersion("v2024.01.00")
                 .accountID("fe098575-0376-4404-9a9c-6fe55e3766af")
                 .transferID("b3b49c6a-9b74-4a85-9d49-864ada05cbf2")
                 .cancellationID("5848c1db-18ac-41eb-b107-b6499987902c")
@@ -601,7 +597,6 @@ public class Application {
             .build();
 
         ListRefundsResponse res = sdk.transfers().listRefunds()
-                .xMoovVersion("v2024.01.00")
                 .accountID("7d74a845-fe17-4ebe-a05e-71847ef8c510")
                 .transferID("d081988f-448f-492c-8c60-836126fa0dfb")
                 .call();
@@ -660,7 +655,6 @@ public class Application {
             .build();
 
         GetRefundResponse res = sdk.transfers().getRefund()
-                .xMoovVersion("v2024.01.00")
                 .transferID("dbc09cb2-ef99-4553-8501-94323f377dbf")
                 .accountID("7f90bf73-6fb7-41e7-90aa-a9133e7d92c2")
                 .refundID("0f86fa43-1a9b-4a5d-8227-f253063f7fb1")
@@ -798,7 +792,6 @@ public class Application {
             .build();
 
         CreateTransferOptionsResponse res = sdk.transfers().generateOptions()
-                .xMoovVersion("v2024.01.00")
                 .createTransferOptions(CreateTransferOptions.builder()
                     .source(SourceDestinationOptions.builder()
                         .build())

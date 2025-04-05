@@ -895,7 +895,7 @@ public class SDKMethodInterfaces {
     public interface MethodCallListReceipts {
         ListReceiptsResponse list(
             Optional<String> xMoovVersion,
-            Optional<String> id) throws Exception;
+            String id) throws Exception;
     }
 
     public interface MethodCallCreateTerminalApplication {

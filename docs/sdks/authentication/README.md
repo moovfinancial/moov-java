@@ -41,7 +41,6 @@ public class Application {
             .build();
 
         RevokeAccessTokenResponse res = sdk.authentication().revokeAccessToken()
-                .xMoovVersion("v2024.01.00")
                 .revokeTokenRequest(RevokeTokenRequest.builder()
                     .token("<value>")
                     .clientId("5clTR_MdVrrkgxw2")
@@ -101,7 +100,6 @@ public class Application {
             .build();
 
         CreateAccessTokenResponse res = sdk.authentication().createAccessToken()
-                .xMoovVersion("v2024.01.00")
                 .authTokenRequest(AuthTokenRequest.builder()
                     .grantType(GrantType.CLIENT_CREDENTIALS)
                     .clientId("5clTR_MdVrrkgxw2")

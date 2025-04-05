@@ -39,7 +39,7 @@ public class CreateReceiptsResponse implements Response {
     /**
      * The resource was successfully created.
      */
-    private Optional<? extends ReceiptResponse> receiptResponse;
+    private Optional<? extends List<ReceiptResponse>> receiptResponses;
 
     private Map<String, List<String>> headers;
 
@@ -48,17 +48,17 @@ public class CreateReceiptsResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends ReceiptResponse> receiptResponse,
+            Optional<? extends List<ReceiptResponse>> receiptResponses,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(receiptResponse, "receiptResponse");
+        Utils.checkNotNull(receiptResponses, "receiptResponses");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.receiptResponse = receiptResponse;
+        this.receiptResponses = receiptResponses;
         this.headers = headers;
     }
     
@@ -99,8 +99,8 @@ public class CreateReceiptsResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ReceiptResponse> receiptResponse() {
-        return (Optional<ReceiptResponse>) receiptResponse;
+    public Optional<List<ReceiptResponse>> receiptResponses() {
+        return (Optional<List<ReceiptResponse>>) receiptResponses;
     }
 
     @JsonIgnore
@@ -142,18 +142,18 @@ public class CreateReceiptsResponse implements Response {
     /**
      * The resource was successfully created.
      */
-    public CreateReceiptsResponse withReceiptResponse(ReceiptResponse receiptResponse) {
-        Utils.checkNotNull(receiptResponse, "receiptResponse");
-        this.receiptResponse = Optional.ofNullable(receiptResponse);
+    public CreateReceiptsResponse withReceiptResponses(List<ReceiptResponse> receiptResponses) {
+        Utils.checkNotNull(receiptResponses, "receiptResponses");
+        this.receiptResponses = Optional.ofNullable(receiptResponses);
         return this;
     }
 
     /**
      * The resource was successfully created.
      */
-    public CreateReceiptsResponse withReceiptResponse(Optional<? extends ReceiptResponse> receiptResponse) {
-        Utils.checkNotNull(receiptResponse, "receiptResponse");
-        this.receiptResponse = receiptResponse;
+    public CreateReceiptsResponse withReceiptResponses(Optional<? extends List<ReceiptResponse>> receiptResponses) {
+        Utils.checkNotNull(receiptResponses, "receiptResponses");
+        this.receiptResponses = receiptResponses;
         return this;
     }
 
@@ -177,7 +177,7 @@ public class CreateReceiptsResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.receiptResponse, other.receiptResponse) &&
+            Objects.deepEquals(this.receiptResponses, other.receiptResponses) &&
             Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -187,7 +187,7 @@ public class CreateReceiptsResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            receiptResponse,
+            receiptResponses,
             headers);
     }
     
@@ -197,7 +197,7 @@ public class CreateReceiptsResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "receiptResponse", receiptResponse,
+                "receiptResponses", receiptResponses,
                 "headers", headers);
     }
     
@@ -209,7 +209,7 @@ public class CreateReceiptsResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends ReceiptResponse> receiptResponse = Optional.empty();
+        private Optional<? extends List<ReceiptResponse>> receiptResponses = Optional.empty();
  
         private Map<String, List<String>> headers;
         
@@ -247,18 +247,18 @@ public class CreateReceiptsResponse implements Response {
         /**
          * The resource was successfully created.
          */
-        public Builder receiptResponse(ReceiptResponse receiptResponse) {
-            Utils.checkNotNull(receiptResponse, "receiptResponse");
-            this.receiptResponse = Optional.ofNullable(receiptResponse);
+        public Builder receiptResponses(List<ReceiptResponse> receiptResponses) {
+            Utils.checkNotNull(receiptResponses, "receiptResponses");
+            this.receiptResponses = Optional.ofNullable(receiptResponses);
             return this;
         }
 
         /**
          * The resource was successfully created.
          */
-        public Builder receiptResponse(Optional<? extends ReceiptResponse> receiptResponse) {
-            Utils.checkNotNull(receiptResponse, "receiptResponse");
-            this.receiptResponse = receiptResponse;
+        public Builder receiptResponses(Optional<? extends List<ReceiptResponse>> receiptResponses) {
+            Utils.checkNotNull(receiptResponses, "receiptResponses");
+            this.receiptResponses = receiptResponses;
             return this;
         }
 
@@ -273,7 +273,7 @@ public class CreateReceiptsResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                receiptResponse,
+                receiptResponses,
                 headers);
         }
     }

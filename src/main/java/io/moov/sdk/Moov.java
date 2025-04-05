@@ -416,4 +416,5 @@ public class Moov {
         this.receipts = new Receipts(sdkConfiguration);
         this.terminalApplications = new TerminalApplications(sdkConfiguration);
         this.sdkConfiguration.initialize();
-    }}
+    }
+}

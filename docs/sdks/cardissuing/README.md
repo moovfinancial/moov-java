@@ -60,13 +60,12 @@ public class Application {
             .build();
 
         RequestCardResponse res = sdk.cardIssuing().request()
-                .xMoovVersion("v2024.01.00")
-                .accountID("9c0ff49b-9aaf-4815-b4a4-3e412558f6bc")
+                .accountID("bd26796d-dd52-401c-9686-e370e79ebc50")
                 .requestCard(RequestCard.builder()
-                    .fundingWalletID("df7610a6-b14e-4eee-9a55-1890b6b3207c")
+                    .fundingWalletID("32613610-de25-446e-8662-ec2709ffea9d")
                     .authorizedUser(CreateAuthorizedUser.builder()
-                        .firstName("Tanya")
-                        .lastName("Flatley")
+                        .firstName("Leta")
+                        .lastName("Satterfield")
                         .birthDate(BirthDate.builder()
                             .day(9L)
                             .month(11L)
@@ -80,6 +79,10 @@ public class Application {
                         .build())
                     .controls(IssuingControls.builder()
                         .velocityLimits(List.of(
+                            IssuingVelocityLimit.builder()
+                                .amount(10000L)
+                                .interval(IssuingIntervalLimit.PER_TRANSACTION)
+                                .build(),
                             IssuingVelocityLimit.builder()
                                 .amount(10000L)
                                 .interval(IssuingIntervalLimit.PER_TRANSACTION)
@@ -149,7 +152,7 @@ public class Application {
             .build();
 
         ListIssuedCardsRequest req = ListIssuedCardsRequest.builder()
-                .accountID("33bbd03b-931d-4e6d-b831-8698f4aee791")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -210,9 +213,8 @@ public class Application {
             .build();
 
         GetIssuedCardResponse res = sdk.cardIssuing().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("c63d9bae-2097-4bfa-8ac7-e9e8dff6e9ae")
-                .issuedCardID("aa0c86df-7f7d-4200-9ee4-24ba8870a7d4")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .issuedCardID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
                 .call();
 
         if (res.issuedCard().isPresent()) {
@@ -271,9 +273,8 @@ public class Application {
             .build();
 
         UpdateIssuedCardResponse res = sdk.cardIssuing().update()
-                .xMoovVersion("v2024.01.00")
-                .accountID("fc445a8c-5b64-4ab9-ba30-5bdb0ffc02b0")
-                .issuedCardID("064f9e03-fc5f-4a7d-83d2-2ec946f77ff2")
+                .accountID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
+                .issuedCardID("b85898c1-25a1-4907-a1c5-562af6646dad")
                 .updateIssuedCard(UpdateIssuedCard.builder()
                     .authorizedUser(CreateAuthorizedUserUpdate.builder()
                         .birthDate(BirthDateUpdate.builder()
@@ -342,9 +343,8 @@ public class Application {
             .build();
 
         GetFullIssuedCardResponse res = sdk.cardIssuing().getFull()
-                .xMoovVersion("v2024.01.00")
-                .accountID("f03c4c3e-2685-44e6-8d4b-0d5bd082a301")
-                .issuedCardID("1da6b593-679e-44ab-a9e4-6db6db4b8f46")
+                .accountID("04e9a1b9-0751-4f2d-b0d4-51e47b62623c")
+                .issuedCardID("13ddb970-c10a-44bb-a2e6-73beac428022")
                 .call();
 
         if (res.fullIssuedCard().isPresent()) {

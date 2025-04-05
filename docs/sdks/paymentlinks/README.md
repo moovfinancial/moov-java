@@ -64,8 +64,7 @@ public class Application {
             .build();
 
         CreatePaymentLinkResponse res = sdk.paymentLinks().create()
-                .xMoovVersion("v2024.01.00")
-                .accountID("831ce989-44b7-4d2f-8990-b0ab3c903956")
+                .accountID("621cf021-cd9c-4f54-a033-15211a509a30")
                 .createPaymentLink(CreatePaymentLink.builder()
                     .partnerAccountID("d290f1ee-6c54-4b01-90e6-d701748f0851")
                     .merchantPaymentMethodID("4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e")
@@ -95,7 +94,7 @@ public class Application {
                         .build())
                     .payout(PaymentLinkPayoutDetails.builder()
                         .allowedMethods(List.of(
-                            DisbursementPaymentMethodType.PUSH_TO_CARD))
+                            DisbursementPaymentMethodType.ACH_CREDIT_SAME_DAY))
                         .recipient(PayoutRecipient.builder()
                             .email("jordan.lee@classbooker.dev")
                             .build())
@@ -159,8 +158,7 @@ public class Application {
             .build();
 
         ListPaymentLinksResponse res = sdk.paymentLinks().list()
-                .xMoovVersion("v2024.01.00")
-                .accountID("9f728868-b3c8-409c-9aa0-282a13d8ddc8")
+                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
                 .call();
 
         if (res.paymentLinks().isPresent()) {
@@ -216,8 +214,7 @@ public class Application {
             .build();
 
         GetPaymentLinkResponse res = sdk.paymentLinks().get()
-                .xMoovVersion("v2024.01.00")
-                .accountID("34a1451d-384e-4fff-a7ce-e90c2bb61969")
+                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();
 
@@ -277,8 +274,7 @@ public class Application {
             .build();
 
         UpdatePaymentLinkResponse res = sdk.paymentLinks().update()
-                .xMoovVersion("v2024.01.00")
-                .accountID("94fe6aeb-a005-4850-b45d-bb0fa580425d")
+                .accountID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .updatePaymentLink(UpdatePaymentLink.builder()
                     .amount(AmountUpdate.builder()
@@ -363,8 +359,7 @@ public class Application {
             .build();
 
         DisablePaymentLinkResponse res = sdk.paymentLinks().disable()
-                .xMoovVersion("v2024.01.00")
-                .accountID("edc2775b-a4a3-4513-8870-3bdf4aaaed8e")
+                .accountID("cd7cd1ce-90cc-444b-ac3e-badb79be277f")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();
 
@@ -422,8 +417,7 @@ public class Application {
             .build();
 
         GetPaymentLinkQRCodeResponse res = sdk.paymentLinks().getQRCode()
-                .xMoovVersion("v2024.01.00")
-                .accountID("248ffcf9-c53a-4e8e-a8b8-8c5014496a79")
+                .accountID("2014a1ff-9924-40b3-ac01-f4ed64dac1b8")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();
 

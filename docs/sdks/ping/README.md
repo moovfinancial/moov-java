@@ -39,7 +39,6 @@ public class Application {
             .build();
 
         PingResponse res = sdk.ping().ping()
-                .xMoovVersion("v2024.01.00")
                 .call();
 
         // handle response

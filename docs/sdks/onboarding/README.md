@@ -56,7 +56,6 @@ public class Application {
             .build();
 
         CreateOnboardingInviteResponse res = sdk.onboarding().createInvite()
-                .xMoovVersion("v2024.01.00")
                 .onboardingInviteRequest(OnboardingInviteRequest.builder()
                     .scopes(List.of(
                         ApplicationScope.ACCOUNTS_READ))
@@ -213,7 +212,6 @@ public class Application {
             .build();
 
         ListOnboardingInvitesResponse res = sdk.onboarding().listInvites()
-                .xMoovVersion("v2024.01.00")
                 .call();
 
         if (res.onboardingInvites().isPresent()) {
@@ -268,7 +266,6 @@ public class Application {
             .build();
 
         GetOnboardingInviteResponse res = sdk.onboarding().getInvite()
-                .xMoovVersion("v2024.01.00")
                 .code("N1IA5eWYNh")
                 .call();
 
@@ -325,7 +322,6 @@ public class Application {
             .build();
 
         RevokeOnboardingInviteResponse res = sdk.onboarding().revokeInvite()
-                .xMoovVersion("v2024.01.00")
                 .code("N1IA5eWYNh")
                 .call();
 

@@ -6,8 +6,8 @@ package io.moov.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.moov.sdk.models.components.AsyncTransfer;
+import io.moov.sdk.models.components.CreatedTransfer;
 import io.moov.sdk.models.components.Transfer;
-import io.moov.sdk.models.components.TransferResponse;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -41,7 +41,7 @@ public class CreateTransferResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends TransferResponse> transferResponse;
+    private Optional<? extends CreatedTransfer> createdTransfer;
 
     /**
      * A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
@@ -60,21 +60,21 @@ public class CreateTransferResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends TransferResponse> transferResponse,
+            Optional<? extends CreatedTransfer> createdTransfer,
             Optional<? extends AsyncTransfer> asyncTransfer,
             Optional<? extends Transfer> transfer,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(transferResponse, "transferResponse");
+        Utils.checkNotNull(createdTransfer, "createdTransfer");
         Utils.checkNotNull(asyncTransfer, "asyncTransfer");
         Utils.checkNotNull(transfer, "transfer");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.transferResponse = transferResponse;
+        this.createdTransfer = createdTransfer;
         this.asyncTransfer = asyncTransfer;
         this.transfer = transfer;
         this.headers = headers;
@@ -117,8 +117,8 @@ public class CreateTransferResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<TransferResponse> transferResponse() {
-        return (Optional<TransferResponse>) transferResponse;
+    public Optional<CreatedTransfer> createdTransfer() {
+        return (Optional<CreatedTransfer>) createdTransfer;
     }
 
     /**
@@ -178,18 +178,18 @@ public class CreateTransferResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public CreateTransferResponse withTransferResponse(TransferResponse transferResponse) {
-        Utils.checkNotNull(transferResponse, "transferResponse");
-        this.transferResponse = Optional.ofNullable(transferResponse);
+    public CreateTransferResponse withCreatedTransfer(CreatedTransfer createdTransfer) {
+        Utils.checkNotNull(createdTransfer, "createdTransfer");
+        this.createdTransfer = Optional.ofNullable(createdTransfer);
         return this;
     }
 
     /**
      * The request completed successfully.
      */
-    public CreateTransferResponse withTransferResponse(Optional<? extends TransferResponse> transferResponse) {
-        Utils.checkNotNull(transferResponse, "transferResponse");
-        this.transferResponse = transferResponse;
+    public CreateTransferResponse withCreatedTransfer(Optional<? extends CreatedTransfer> createdTransfer) {
+        Utils.checkNotNull(createdTransfer, "createdTransfer");
+        this.createdTransfer = createdTransfer;
         return this;
     }
 
@@ -249,7 +249,7 @@ public class CreateTransferResponse implements Response {
             Objects.deepEquals(this.contentType, other.contentType) &&
             Objects.deepEquals(this.statusCode, other.statusCode) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.transferResponse, other.transferResponse) &&
+            Objects.deepEquals(this.createdTransfer, other.createdTransfer) &&
             Objects.deepEquals(this.asyncTransfer, other.asyncTransfer) &&
             Objects.deepEquals(this.transfer, other.transfer) &&
             Objects.deepEquals(this.headers, other.headers);
@@ -261,7 +261,7 @@ public class CreateTransferResponse implements Response {
             contentType,
             statusCode,
             rawResponse,
-            transferResponse,
+            createdTransfer,
             asyncTransfer,
             transfer,
             headers);
@@ -273,7 +273,7 @@ public class CreateTransferResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "transferResponse", transferResponse,
+                "createdTransfer", createdTransfer,
                 "asyncTransfer", asyncTransfer,
                 "transfer", transfer,
                 "headers", headers);
@@ -287,7 +287,7 @@ public class CreateTransferResponse implements Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends TransferResponse> transferResponse = Optional.empty();
+        private Optional<? extends CreatedTransfer> createdTransfer = Optional.empty();
  
         private Optional<? extends AsyncTransfer> asyncTransfer = Optional.empty();
  
@@ -329,18 +329,18 @@ public class CreateTransferResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder transferResponse(TransferResponse transferResponse) {
-            Utils.checkNotNull(transferResponse, "transferResponse");
-            this.transferResponse = Optional.ofNullable(transferResponse);
+        public Builder createdTransfer(CreatedTransfer createdTransfer) {
+            Utils.checkNotNull(createdTransfer, "createdTransfer");
+            this.createdTransfer = Optional.ofNullable(createdTransfer);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder transferResponse(Optional<? extends TransferResponse> transferResponse) {
-            Utils.checkNotNull(transferResponse, "transferResponse");
-            this.transferResponse = transferResponse;
+        public Builder createdTransfer(Optional<? extends CreatedTransfer> createdTransfer) {
+            Utils.checkNotNull(createdTransfer, "createdTransfer");
+            this.createdTransfer = createdTransfer;
             return this;
         }
 
@@ -391,7 +391,7 @@ public class CreateTransferResponse implements Response {
                 contentType,
                 statusCode,
                 rawResponse,
-                transferResponse,
+                createdTransfer,
                 asyncTransfer,
                 transfer,
                 headers);

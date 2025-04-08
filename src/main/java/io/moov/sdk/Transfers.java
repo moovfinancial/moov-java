@@ -9,11 +9,11 @@ import io.moov.sdk.models.components.Cancellation;
 import io.moov.sdk.models.components.CardAcquiringRefund;
 import io.moov.sdk.models.components.CreateRefundResponse;
 import io.moov.sdk.models.components.CreateTransferOptions;
+import io.moov.sdk.models.components.CreatedTransfer;
 import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.models.components.Reversal;
 import io.moov.sdk.models.components.Transfer;
 import io.moov.sdk.models.components.TransferOptions;
-import io.moov.sdk.models.components.TransferResponse;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.RefundValidationError;
@@ -208,10 +208,10 @@ public class Transfers implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                TransferResponse _out = Utils.mapper().readValue(
+                CreatedTransfer _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<TransferResponse>() {});
-                _res.withTransferResponse(Optional.ofNullable(_out));
+                    new TypeReference<CreatedTransfer>() {});
+                _res.withCreatedTransfer(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new APIException(

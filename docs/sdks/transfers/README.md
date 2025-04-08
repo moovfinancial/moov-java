@@ -152,7 +152,7 @@ public class Application {
                 .request(req)
                 .call();
 
-        if (res.transferResponse().isPresent()) {
+        if (res.createdTransfer().isPresent()) {
             // handle response
         }
     }

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -86,8 +87,9 @@ public class ReceiptResponse {
     /**
      * The list of receipts that have been sent.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sentFor")
-    private List<SentReceipt> sentFor;
+    private Optional<? extends List<SentReceipt>> sentFor;
 
     @JsonCreator
     public ReceiptResponse(
@@ -100,7 +102,7 @@ public class ReceiptResponse {
             @JsonProperty("forTransferID") Optional<String> forTransferID,
             @JsonProperty("forScheduleID") Optional<String> forScheduleID,
             @JsonProperty("forOccurrenceID") Optional<String> forOccurrenceID,
-            @JsonProperty("sentFor") List<SentReceipt> sentFor) {
+            @JsonProperty("sentFor") Optional<? extends List<SentReceipt>> sentFor) {
         Utils.checkNotNull(receiptID, "receiptID");
         Utils.checkNotNull(createdBy, "createdBy");
         Utils.checkNotNull(disabledOn, "disabledOn");
@@ -126,9 +128,8 @@ public class ReceiptResponse {
     public ReceiptResponse(
             String receiptID,
             String createdBy,
-            ReceiptKind kind,
-            List<SentReceipt> sentFor) {
-        this(receiptID, createdBy, Optional.empty(), kind, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), sentFor);
+            ReceiptKind kind) {
+        this(receiptID, createdBy, Optional.empty(), kind, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -211,9 +212,10 @@ public class ReceiptResponse {
     /**
      * The list of receipts that have been sent.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<SentReceipt> sentFor() {
-        return sentFor;
+    public Optional<List<SentReceipt>> sentFor() {
+        return (Optional<List<SentReceipt>>) sentFor;
     }
 
     public final static Builder builder() {
@@ -370,6 +372,15 @@ public class ReceiptResponse {
      */
     public ReceiptResponse withSentFor(List<SentReceipt> sentFor) {
         Utils.checkNotNull(sentFor, "sentFor");
+        this.sentFor = Optional.ofNullable(sentFor);
+        return this;
+    }
+
+    /**
+     * The list of receipts that have been sent.
+     */
+    public ReceiptResponse withSentFor(Optional<? extends List<SentReceipt>> sentFor) {
+        Utils.checkNotNull(sentFor, "sentFor");
         this.sentFor = sentFor;
         return this;
     }
@@ -447,7 +458,7 @@ public class ReceiptResponse {
  
         private Optional<String> forOccurrenceID = Optional.empty();
  
-        private List<SentReceipt> sentFor;
+        private Optional<? extends List<SentReceipt>> sentFor = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -602,6 +613,15 @@ public class ReceiptResponse {
          * The list of receipts that have been sent.
          */
         public Builder sentFor(List<SentReceipt> sentFor) {
+            Utils.checkNotNull(sentFor, "sentFor");
+            this.sentFor = Optional.ofNullable(sentFor);
+            return this;
+        }
+
+        /**
+         * The list of receipts that have been sent.
+         */
+        public Builder sentFor(Optional<? extends List<SentReceipt>> sentFor) {
             Utils.checkNotNull(sentFor, "sentFor");
             this.sentFor = sentFor;
             return this;

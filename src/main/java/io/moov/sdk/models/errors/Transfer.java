@@ -13,6 +13,7 @@ import io.moov.sdk.models.components.Cancellation;
 import io.moov.sdk.models.components.CardAcquiringDispute;
 import io.moov.sdk.models.components.CardAcquiringRefund;
 import io.moov.sdk.models.components.FacilitatorFee;
+import io.moov.sdk.models.components.MoovFee;
 import io.moov.sdk.models.components.MoovFeeDetails;
 import io.moov.sdk.models.components.TransferDestination;
 import io.moov.sdk.models.components.TransferFailureReason;
@@ -112,6 +113,13 @@ public class Transfer extends RuntimeException {
     @JsonProperty("moovFeeDetails")
     private Optional<? extends MoovFeeDetails> moovFeeDetails;
 
+    /**
+     * Fees charged to accounts involved in the transfer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("moovFees")
+    private Optional<? extends List<MoovFee>> moovFees;
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("groupID")
     private Optional<String> groupID;
@@ -171,6 +179,7 @@ public class Transfer extends RuntimeException {
             @JsonProperty("moovFee") Optional<Long> moovFee,
             @JsonProperty("moovFeeDecimal") Optional<String> moovFeeDecimal,
             @JsonProperty("moovFeeDetails") Optional<? extends MoovFeeDetails> moovFeeDetails,
+            @JsonProperty("moovFees") Optional<? extends List<MoovFee>> moovFees,
             @JsonProperty("groupID") Optional<String> groupID,
             @JsonProperty("cancellations") Optional<? extends List<Cancellation>> cancellations,
             @JsonProperty("refundedAmount") Optional<? extends Amount> refundedAmount,
@@ -195,6 +204,7 @@ public class Transfer extends RuntimeException {
         Utils.checkNotNull(moovFee, "moovFee");
         Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
         Utils.checkNotNull(moovFeeDetails, "moovFeeDetails");
+        Utils.checkNotNull(moovFees, "moovFees");
         Utils.checkNotNull(groupID, "groupID");
         Utils.checkNotNull(cancellations, "cancellations");
         Utils.checkNotNull(refundedAmount, "refundedAmount");
@@ -219,6 +229,7 @@ public class Transfer extends RuntimeException {
         this.moovFee = moovFee;
         this.moovFeeDecimal = moovFeeDecimal;
         this.moovFeeDetails = moovFeeDetails;
+        this.moovFees = moovFees;
         this.groupID = groupID;
         this.cancellations = cancellations;
         this.refundedAmount = refundedAmount;
@@ -238,7 +249,7 @@ public class Transfer extends RuntimeException {
             TransferDestination destination,
             TransferStatus status,
             Amount amount) {
-        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -337,6 +348,15 @@ public class Transfer extends RuntimeException {
     @JsonIgnore
     public Optional<MoovFeeDetails> moovFeeDetails() {
         return (Optional<MoovFeeDetails>) moovFeeDetails;
+    }
+
+    /**
+     * Fees charged to accounts involved in the transfer.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<MoovFee>> moovFees() {
+        return (Optional<List<MoovFee>>) moovFees;
     }
 
     @JsonIgnore
@@ -579,6 +599,24 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+    /**
+     * Fees charged to accounts involved in the transfer.
+     */
+    public Transfer withMoovFees(List<MoovFee> moovFees) {
+        Utils.checkNotNull(moovFees, "moovFees");
+        this.moovFees = Optional.ofNullable(moovFees);
+        return this;
+    }
+
+    /**
+     * Fees charged to accounts involved in the transfer.
+     */
+    public Transfer withMoovFees(Optional<? extends List<MoovFee>> moovFees) {
+        Utils.checkNotNull(moovFees, "moovFees");
+        this.moovFees = moovFees;
+        return this;
+    }
+
     public Transfer withGroupID(String groupID) {
         Utils.checkNotNull(groupID, "groupID");
         this.groupID = Optional.ofNullable(groupID);
@@ -730,6 +768,7 @@ public class Transfer extends RuntimeException {
             Objects.deepEquals(this.moovFee, other.moovFee) &&
             Objects.deepEquals(this.moovFeeDecimal, other.moovFeeDecimal) &&
             Objects.deepEquals(this.moovFeeDetails, other.moovFeeDetails) &&
+            Objects.deepEquals(this.moovFees, other.moovFees) &&
             Objects.deepEquals(this.groupID, other.groupID) &&
             Objects.deepEquals(this.cancellations, other.cancellations) &&
             Objects.deepEquals(this.refundedAmount, other.refundedAmount) &&
@@ -759,6 +798,7 @@ public class Transfer extends RuntimeException {
             moovFee,
             moovFeeDecimal,
             moovFeeDetails,
+            moovFees,
             groupID,
             cancellations,
             refundedAmount,
@@ -788,6 +828,7 @@ public class Transfer extends RuntimeException {
                 "moovFee", moovFee,
                 "moovFeeDecimal", moovFeeDecimal,
                 "moovFeeDetails", moovFeeDetails,
+                "moovFees", moovFees,
                 "groupID", groupID,
                 "cancellations", cancellations,
                 "refundedAmount", refundedAmount,
@@ -829,6 +870,8 @@ public class Transfer extends RuntimeException {
         private Optional<String> moovFeeDecimal = Optional.empty();
  
         private Optional<? extends MoovFeeDetails> moovFeeDetails = Optional.empty();
+ 
+        private Optional<? extends List<MoovFee>> moovFees = Optional.empty();
  
         private Optional<String> groupID = Optional.empty();
  
@@ -1031,6 +1074,24 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+        /**
+         * Fees charged to accounts involved in the transfer.
+         */
+        public Builder moovFees(List<MoovFee> moovFees) {
+            Utils.checkNotNull(moovFees, "moovFees");
+            this.moovFees = Optional.ofNullable(moovFees);
+            return this;
+        }
+
+        /**
+         * Fees charged to accounts involved in the transfer.
+         */
+        public Builder moovFees(Optional<? extends List<MoovFee>> moovFees) {
+            Utils.checkNotNull(moovFees, "moovFees");
+            this.moovFees = moovFees;
+            return this;
+        }
+
         public Builder groupID(String groupID) {
             Utils.checkNotNull(groupID, "groupID");
             this.groupID = Optional.ofNullable(groupID);
@@ -1173,6 +1234,7 @@ public class Transfer extends RuntimeException {
                 moovFee,
                 moovFeeDecimal,
                 moovFeeDetails,
+                moovFees,
                 groupID,
                 cancellations,
                 refundedAmount,

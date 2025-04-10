@@ -69,10 +69,6 @@ public class SweepConfig {
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("disabledOn")
-    private Optional<OffsetDateTime> disabledOn;
-
     @JsonCreator
     public SweepConfig(
             @JsonProperty("sweepConfigID") String sweepConfigID,
@@ -84,8 +80,7 @@ public class SweepConfig {
             @JsonProperty("statementDescriptor") Optional<String> statementDescriptor,
             @JsonProperty("lockedFields") Optional<? extends List<String>> lockedFields,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
-            @JsonProperty("updatedOn") OffsetDateTime updatedOn,
-            @JsonProperty("disabledOn") Optional<OffsetDateTime> disabledOn) {
+            @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
         Utils.checkNotNull(sweepConfigID, "sweepConfigID");
         Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(status, "status");
@@ -96,7 +91,6 @@ public class SweepConfig {
         Utils.checkNotNull(lockedFields, "lockedFields");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
-        Utils.checkNotNull(disabledOn, "disabledOn");
         this.sweepConfigID = sweepConfigID;
         this.walletID = walletID;
         this.status = status;
@@ -107,7 +101,6 @@ public class SweepConfig {
         this.lockedFields = lockedFields;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
-        this.disabledOn = disabledOn;
     }
     
     public SweepConfig(
@@ -118,7 +111,7 @@ public class SweepConfig {
             SweepConfigPaymentMethod pullPaymentMethod,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(sweepConfigID, walletID, status, pushPaymentMethod, pullPaymentMethod, Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn, Optional.empty());
+        this(sweepConfigID, walletID, status, pushPaymentMethod, pullPaymentMethod, Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn);
     }
 
     @JsonIgnore
@@ -187,11 +180,6 @@ public class SweepConfig {
     @JsonIgnore
     public OffsetDateTime updatedOn() {
         return updatedOn;
-    }
-
-    @JsonIgnore
-    public Optional<OffsetDateTime> disabledOn() {
-        return disabledOn;
     }
 
     public final static Builder builder() {
@@ -302,18 +290,6 @@ public class SweepConfig {
         return this;
     }
 
-    public SweepConfig withDisabledOn(OffsetDateTime disabledOn) {
-        Utils.checkNotNull(disabledOn, "disabledOn");
-        this.disabledOn = Optional.ofNullable(disabledOn);
-        return this;
-    }
-
-    public SweepConfig withDisabledOn(Optional<OffsetDateTime> disabledOn) {
-        Utils.checkNotNull(disabledOn, "disabledOn");
-        this.disabledOn = disabledOn;
-        return this;
-    }
-
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -334,8 +310,7 @@ public class SweepConfig {
             Objects.deepEquals(this.statementDescriptor, other.statementDescriptor) &&
             Objects.deepEquals(this.lockedFields, other.lockedFields) &&
             Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.disabledOn, other.disabledOn);
+            Objects.deepEquals(this.updatedOn, other.updatedOn);
     }
     
     @Override
@@ -350,8 +325,7 @@ public class SweepConfig {
             statementDescriptor,
             lockedFields,
             createdOn,
-            updatedOn,
-            disabledOn);
+            updatedOn);
     }
     
     @Override
@@ -366,8 +340,7 @@ public class SweepConfig {
                 "statementDescriptor", statementDescriptor,
                 "lockedFields", lockedFields,
                 "createdOn", createdOn,
-                "updatedOn", updatedOn,
-                "disabledOn", disabledOn);
+                "updatedOn", updatedOn);
     }
     
     public final static class Builder {
@@ -391,8 +364,6 @@ public class SweepConfig {
         private OffsetDateTime createdOn;
  
         private OffsetDateTime updatedOn;
- 
-        private Optional<OffsetDateTime> disabledOn = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -501,18 +472,6 @@ public class SweepConfig {
             this.updatedOn = updatedOn;
             return this;
         }
-
-        public Builder disabledOn(OffsetDateTime disabledOn) {
-            Utils.checkNotNull(disabledOn, "disabledOn");
-            this.disabledOn = Optional.ofNullable(disabledOn);
-            return this;
-        }
-
-        public Builder disabledOn(Optional<OffsetDateTime> disabledOn) {
-            Utils.checkNotNull(disabledOn, "disabledOn");
-            this.disabledOn = disabledOn;
-            return this;
-        }
         
         public SweepConfig build() {
             return new SweepConfig(
@@ -525,8 +484,7 @@ public class SweepConfig {
                 statementDescriptor,
                 lockedFields,
                 createdOn,
-                updatedOn,
-                disabledOn);
+                updatedOn);
         }
     }
 }

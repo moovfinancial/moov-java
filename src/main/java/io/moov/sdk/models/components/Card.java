@@ -168,6 +168,11 @@ public class Card {
     @JsonProperty("domesticPullFromCard")
     private Optional<? extends DomesticPullFromCard> domesticPullFromCard;
 
+    /**
+     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+     * 
+     * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentMethods")
     private Optional<? extends List<BasicPaymentMethod>> paymentMethods;
@@ -436,6 +441,11 @@ public class Card {
         return (Optional<DomesticPullFromCard>) domesticPullFromCard;
     }
 
+    /**
+     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+     * 
+     * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<BasicPaymentMethod>> paymentMethods() {
@@ -760,12 +770,22 @@ public class Card {
         return this;
     }
 
+    /**
+     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+     * 
+     * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+     */
     public Card withPaymentMethods(List<BasicPaymentMethod> paymentMethods) {
         Utils.checkNotNull(paymentMethods, "paymentMethods");
         this.paymentMethods = Optional.ofNullable(paymentMethods);
         return this;
     }
 
+    /**
+     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+     * 
+     * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+     */
     public Card withPaymentMethods(Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
         Utils.checkNotNull(paymentMethods, "paymentMethods");
         this.paymentMethods = paymentMethods;
@@ -1230,12 +1250,22 @@ public class Card {
             return this;
         }
 
+        /**
+         * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+         * 
+         * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+         */
         public Builder paymentMethods(List<BasicPaymentMethod> paymentMethods) {
             Utils.checkNotNull(paymentMethods, "paymentMethods");
             this.paymentMethods = Optional.ofNullable(paymentMethods);
             return this;
         }
 
+        /**
+         * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+         * 
+         * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+         */
         public Builder paymentMethods(Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
             Utils.checkNotNull(paymentMethods, "paymentMethods");
             this.paymentMethods = paymentMethods;

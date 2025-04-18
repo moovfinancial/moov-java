@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 68a8f836eb04da91df8ac588edb5d80e
+  docChecksum: 40f919d4ab074ec073901202164e54d1
   docVersion: latest
-  speakeasyVersion: 1.533.0
-  generationVersion: 2.578.0
-  releaseVersion: 0.12.0
-  configChecksum: 7f7f1e225a3744430f950c6f03a056d1
+  speakeasyVersion: 1.535.1
+  generationVersion: 2.585.2
+  releaseVersion: 0.12.1
+  configChecksum: 392174ddb568332970ff0d19f344f00a
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:

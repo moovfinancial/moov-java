@@ -49,7 +49,7 @@ public class CreateTransferResponse implements Response {
     private Optional<? extends AsyncTransfer> asyncTransfer;
 
     /**
-     * A transfer was successfully created but a timeout occurred while waiting for a synchronous response. Rail-specific details may be missing from the response object.
+     * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
      */
     private Optional<? extends Transfer> transfer;
 
@@ -131,7 +131,7 @@ public class CreateTransferResponse implements Response {
     }
 
     /**
-     * A transfer was successfully created but a timeout occurred while waiting for a synchronous response. Rail-specific details may be missing from the response object.
+     * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -212,7 +212,7 @@ public class CreateTransferResponse implements Response {
     }
 
     /**
-     * A transfer was successfully created but a timeout occurred while waiting for a synchronous response. Rail-specific details may be missing from the response object.
+     * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
      */
     public CreateTransferResponse withTransfer(Transfer transfer) {
         Utils.checkNotNull(transfer, "transfer");
@@ -221,7 +221,7 @@ public class CreateTransferResponse implements Response {
     }
 
     /**
-     * A transfer was successfully created but a timeout occurred while waiting for a synchronous response. Rail-specific details may be missing from the response object.
+     * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
      */
     public CreateTransferResponse withTransfer(Optional<? extends Transfer> transfer) {
         Utils.checkNotNull(transfer, "transfer");
@@ -363,7 +363,7 @@ public class CreateTransferResponse implements Response {
         }
 
         /**
-         * A transfer was successfully created but a timeout occurred while waiting for a synchronous response. Rail-specific details may be missing from the response object.
+         * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
          */
         public Builder transfer(Transfer transfer) {
             Utils.checkNotNull(transfer, "transfer");
@@ -372,7 +372,7 @@ public class CreateTransferResponse implements Response {
         }
 
         /**
-         * A transfer was successfully created but a timeout occurred while waiting for a synchronous response. Rail-specific details may be missing from the response object.
+         * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
          */
         public Builder transfer(Optional<? extends Transfer> transfer) {
             Utils.checkNotNull(transfer, "transfer");

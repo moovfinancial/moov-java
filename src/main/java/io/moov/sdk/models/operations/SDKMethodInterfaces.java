@@ -23,6 +23,7 @@ import io.moov.sdk.models.components.CreateTerminalApplication;
 import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.models.components.E2EEToken;
 import io.moov.sdk.models.components.FileUploadRequestMultiPart;
+import io.moov.sdk.models.components.LinkAccountTerminalApplication;
 import io.moov.sdk.models.components.LinkApplePay;
 import io.moov.sdk.models.components.LinkBankAccount;
 import io.moov.sdk.models.components.LinkCard;
@@ -628,8 +629,28 @@ public class SDKMethodInterfaces {
             String sweepID) throws Exception;
     }
 
+    public interface MethodCallLinkAccountTerminalApplication {
+        LinkAccountTerminalApplicationResponse link(
+            Optional<String> xMoovVersion,
+            String accountID,
+            LinkAccountTerminalApplication linkAccountTerminalApplication) throws Exception;
+    }
+
+    public interface MethodCallListAccountTerminalApplications {
+        ListAccountTerminalApplicationsResponse list(
+            Optional<String> xMoovVersion,
+            String accountID) throws Exception;
+    }
+
+    public interface MethodCallGetAccountTerminalApplication {
+        GetAccountTerminalApplicationResponse get(
+            Optional<String> xMoovVersion,
+            String accountID,
+            String terminalApplicationID) throws Exception;
+    }
+
     public interface MethodCallGetTerminalConfiguration {
-        GetTerminalConfigurationResponse get(
+        GetTerminalConfigurationResponse getConfiguration(
             Optional<String> xMoovVersion,
             String accountID,
             String terminalApplicationID) throws Exception;

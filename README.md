@@ -45,7 +45,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.12.1'
+implementation 'io.moov:sdk:0.12.2'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.12.1</version>
+    <version>0.12.2</version>
 </dependency>
 ```
 
@@ -426,6 +426,25 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 This token can only be generated via API. Any Moov account requesting the collect funds, send funds, wallet, 
 or card issuing capabilities must accept Moov's terms of service, then have the generated terms of service 
 token patched to the account. Read more in our [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
+
+### [accountTerminalApplications()](docs/sdks/accountterminalapplications/README.md)
+
+* [link](docs/sdks/accountterminalapplications/README.md#link) - Link an account with a terminal application.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
+* [list](docs/sdks/accountterminalapplications/README.md#list) - Retrieve all terminal applications linked to a specific account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
+* [get](docs/sdks/accountterminalapplications/README.md#get) - Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
+* [getConfiguration](docs/sdks/accountterminalapplications/README.md#getconfiguration) - Fetch the configuration for a given Terminal Application linked to a specific Account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
 
 ### [adjustments()](docs/sdks/adjustments/README.md)
 
@@ -1054,26 +1073,19 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 * [create](docs/sdks/terminalapplications/README.md#create) - Create a new terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.write` scope.
+you'll need to specify the `/terminal-applications.write` scope.
 * [list](docs/sdks/terminalapplications/README.md#list) - List all the terminal applications for a Moov Account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.read` scope.
+you'll need to specify the `/terminal-applications.read` scope.
 * [get](docs/sdks/terminalapplications/README.md#get) - Fetch a specific terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.read` scope.
+you'll need to specify the `/terminal-applications.read` scope.
 * [delete](docs/sdks/terminalapplications/README.md#delete) - Delete a specific terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.write` scope.
-
-### [terminalConfigurations()](docs/sdks/terminalconfigurations/README.md)
-
-* [get](docs/sdks/terminalconfigurations/README.md#get) - Fetch the configuration for a given Terminal Application
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+you'll need to specify the `/terminal-applications.write` scope.
 
 ### [transfers()](docs/sdks/transfers/README.md)
 

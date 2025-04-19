@@ -10,52 +10,44 @@ import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
-public class GetTerminalConfigurationRequestBuilder {
+public class ListAccountTerminalApplicationsRequestBuilder {
 
     private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
                             "xMoovVersion",
                             "\"v2024.01.00\"",
                             new TypeReference<Optional<String>>() {});
     private String accountID;
-    private String terminalApplicationID;
-    private final SDKMethodInterfaces.MethodCallGetTerminalConfiguration sdk;
+    private final SDKMethodInterfaces.MethodCallListAccountTerminalApplications sdk;
 
-    public GetTerminalConfigurationRequestBuilder(SDKMethodInterfaces.MethodCallGetTerminalConfiguration sdk) {
+    public ListAccountTerminalApplicationsRequestBuilder(SDKMethodInterfaces.MethodCallListAccountTerminalApplications sdk) {
         this.sdk = sdk;
     }
                 
-    public GetTerminalConfigurationRequestBuilder xMoovVersion(String xMoovVersion) {
+    public ListAccountTerminalApplicationsRequestBuilder xMoovVersion(String xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = Optional.of(xMoovVersion);
         return this;
     }
 
-    public GetTerminalConfigurationRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
+    public ListAccountTerminalApplicationsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
         Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         this.xMoovVersion = xMoovVersion;
         return this;
     }
 
-    public GetTerminalConfigurationRequestBuilder accountID(String accountID) {
+    public ListAccountTerminalApplicationsRequestBuilder accountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
-    public GetTerminalConfigurationRequestBuilder terminalApplicationID(String terminalApplicationID) {
-        Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
-        this.terminalApplicationID = terminalApplicationID;
-        return this;
-    }
-
-    public GetTerminalConfigurationResponse call() throws Exception {
+    public ListAccountTerminalApplicationsResponse call() throws Exception {
         if (xMoovVersion == null) {
             xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
         }
-        return sdk.getConfiguration(
+        return sdk.list(
             xMoovVersion,
-            accountID,
-            terminalApplicationID);
+            accountID);
     }
 
     private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =

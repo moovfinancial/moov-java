@@ -62,7 +62,7 @@ public class Moov {
 
     private final Sweeps sweeps;
 
-    private final TerminalConfigurations terminalConfigurations;
+    private final AccountTerminalApplications accountTerminalApplications;
 
     private final Transfers transfers;
 
@@ -158,8 +158,8 @@ public class Moov {
         return sweeps;
     }
 
-    public TerminalConfigurations terminalConfigurations() {
-        return terminalConfigurations;
+    public AccountTerminalApplications accountTerminalApplications() {
+        return accountTerminalApplications;
     }
 
     public Transfers transfers() {
@@ -397,7 +397,7 @@ public class Moov {
         this.representatives = new Representatives(sdkConfiguration);
         this.scheduling = new Scheduling(sdkConfiguration);
         this.sweeps = new Sweeps(sdkConfiguration);
-        this.terminalConfigurations = new TerminalConfigurations(sdkConfiguration);
+        this.accountTerminalApplications = new AccountTerminalApplications(sdkConfiguration);
         this.transfers = new Transfers(sdkConfiguration);
         this.underwriting = new Underwriting(sdkConfiguration);
         this.wallets = new Wallets(sdkConfiguration);

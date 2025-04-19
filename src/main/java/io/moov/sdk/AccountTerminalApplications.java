@@ -4,23 +4,24 @@
 package io.moov.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.CreateTerminalApplication;
+import io.moov.sdk.models.components.LinkAccountTerminalApplication;
 import io.moov.sdk.models.components.TerminalApplication;
+import io.moov.sdk.models.components.TerminalConfiguration;
 import io.moov.sdk.models.errors.APIException;
+import io.moov.sdk.models.errors.AccountTerminalApplicationError;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.TerminalApplicationError;
-import io.moov.sdk.models.operations.CreateTerminalApplicationRequest;
-import io.moov.sdk.models.operations.CreateTerminalApplicationRequestBuilder;
-import io.moov.sdk.models.operations.CreateTerminalApplicationResponse;
-import io.moov.sdk.models.operations.DeleteTerminalApplicationRequest;
-import io.moov.sdk.models.operations.DeleteTerminalApplicationRequestBuilder;
-import io.moov.sdk.models.operations.DeleteTerminalApplicationResponse;
-import io.moov.sdk.models.operations.GetTerminalApplicationRequest;
-import io.moov.sdk.models.operations.GetTerminalApplicationRequestBuilder;
-import io.moov.sdk.models.operations.GetTerminalApplicationResponse;
-import io.moov.sdk.models.operations.ListTerminalApplicationsRequest;
-import io.moov.sdk.models.operations.ListTerminalApplicationsRequestBuilder;
-import io.moov.sdk.models.operations.ListTerminalApplicationsResponse;
+import io.moov.sdk.models.operations.GetAccountTerminalApplicationRequest;
+import io.moov.sdk.models.operations.GetAccountTerminalApplicationRequestBuilder;
+import io.moov.sdk.models.operations.GetAccountTerminalApplicationResponse;
+import io.moov.sdk.models.operations.GetTerminalConfigurationRequest;
+import io.moov.sdk.models.operations.GetTerminalConfigurationRequestBuilder;
+import io.moov.sdk.models.operations.GetTerminalConfigurationResponse;
+import io.moov.sdk.models.operations.LinkAccountTerminalApplicationRequest;
+import io.moov.sdk.models.operations.LinkAccountTerminalApplicationRequestBuilder;
+import io.moov.sdk.models.operations.LinkAccountTerminalApplicationResponse;
+import io.moov.sdk.models.operations.ListAccountTerminalApplicationsRequest;
+import io.moov.sdk.models.operations.ListAccountTerminalApplicationsRequestBuilder;
+import io.moov.sdk.models.operations.ListAccountTerminalApplicationsResponse;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -39,51 +40,53 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
-public class TerminalApplications implements
-            MethodCallCreateTerminalApplication,
-            MethodCallListTerminalApplications,
-            MethodCallGetTerminalApplication,
-            MethodCallDeleteTerminalApplication {
+public class AccountTerminalApplications implements
+            MethodCallLinkAccountTerminalApplication,
+            MethodCallListAccountTerminalApplications,
+            MethodCallGetAccountTerminalApplication,
+            MethodCallGetTerminalConfiguration {
 
     private final SDKConfiguration sdkConfiguration;
 
-    TerminalApplications(SDKConfiguration sdkConfiguration) {
+    AccountTerminalApplications(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
 
     /**
-     * Create a new terminal application.
+     * Link an account with a terminal application.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
      * 
      * @return The call builder
      */
-    public CreateTerminalApplicationRequestBuilder create() {
-        return new CreateTerminalApplicationRequestBuilder(this);
+    public LinkAccountTerminalApplicationRequestBuilder link() {
+        return new LinkAccountTerminalApplicationRequestBuilder(this);
     }
 
     /**
-     * Create a new terminal application.
+     * Link an account with a terminal application.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
      * 
-     * @param createTerminalApplication Describes a create terminal application request.
+     * @param accountID 
+     * @param linkAccountTerminalApplication Describes a request to link an account with a terminal application.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateTerminalApplicationResponse create(
-            CreateTerminalApplication createTerminalApplication) throws Exception {
-        return create(Optional.empty(), createTerminalApplication);
+    public LinkAccountTerminalApplicationResponse link(
+            String accountID,
+            LinkAccountTerminalApplication linkAccountTerminalApplication) throws Exception {
+        return link(Optional.empty(), accountID, linkAccountTerminalApplication);
     }
     
     /**
-     * Create a new terminal application.
+     * Link an account with a terminal application.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
      * 
      * @param xMoovVersion Specify an API version.
      *         
@@ -94,24 +97,29 @@ public class TerminalApplications implements
      *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      *         
      *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param createTerminalApplication Describes a create terminal application request.
+     * @param accountID 
+     * @param linkAccountTerminalApplication Describes a request to link an account with a terminal application.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateTerminalApplicationResponse create(
+    public LinkAccountTerminalApplicationResponse link(
             Optional<String> xMoovVersion,
-            CreateTerminalApplication createTerminalApplication) throws Exception {
-        CreateTerminalApplicationRequest request =
-            CreateTerminalApplicationRequest
+            String accountID,
+            LinkAccountTerminalApplication linkAccountTerminalApplication) throws Exception {
+        LinkAccountTerminalApplicationRequest request =
+            LinkAccountTerminalApplicationRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
-                .createTerminalApplication(createTerminalApplication)
+                .accountID(accountID)
+                .linkAccountTerminalApplication(linkAccountTerminalApplication)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
+                LinkAccountTerminalApplicationRequest.class,
                 _baseUrl,
-                "/terminal-applications");
+                "/accounts/{accountID}/terminal-applications",
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "POST");
         Object _convertedRequest = Utils.convertToShape(
@@ -120,7 +128,7 @@ public class TerminalApplications implements
                 new TypeReference<Object>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
                 _convertedRequest, 
-                "createTerminalApplication",
+                "linkAccountTerminalApplication",
                 "json",
                 false);
         if (_serializedRequestBody == null) {
@@ -141,7 +149,7 @@ public class TerminalApplications implements
                .beforeRequest(
                   new BeforeRequestContextImpl(
                       _baseUrl,
-                      "createTerminalApplication", 
+                      "linkAccountTerminalApplication", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -153,7 +161,7 @@ public class TerminalApplications implements
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "createTerminalApplication",
+                            "linkAccountTerminalApplication",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -163,7 +171,7 @@ public class TerminalApplications implements
                     .afterSuccess(
                         new AfterSuccessContextImpl(
                             _baseUrl,
-                            "createTerminalApplication",
+                            "linkAccountTerminalApplication",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -173,7 +181,7 @@ public class TerminalApplications implements
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "createTerminalApplication",
+                            "linkAccountTerminalApplication",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -183,14 +191,14 @@ public class TerminalApplications implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        CreateTerminalApplicationResponse.Builder _resBuilder = 
-            CreateTerminalApplicationResponse
+        LinkAccountTerminalApplicationResponse.Builder _resBuilder = 
+            LinkAccountTerminalApplicationResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        CreateTerminalApplicationResponse _res = _resBuilder.build();
+        LinkAccountTerminalApplicationResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
@@ -226,9 +234,9 @@ public class TerminalApplications implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                TerminalApplicationError _out = Utils.mapper().readValue(
+                AccountTerminalApplicationError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<TerminalApplicationError>() {});
+                    new TypeReference<AccountTerminalApplicationError>() {});
                 throw _out;
             } else {
                 throw new APIException(
@@ -282,35 +290,37 @@ public class TerminalApplications implements
 
 
     /**
-     * List all the terminal applications for a Moov Account.
+     * Retrieve all terminal applications linked to a specific account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
      * @return The call builder
      */
-    public ListTerminalApplicationsRequestBuilder list() {
-        return new ListTerminalApplicationsRequestBuilder(this);
+    public ListAccountTerminalApplicationsRequestBuilder list() {
+        return new ListAccountTerminalApplicationsRequestBuilder(this);
     }
 
     /**
-     * List all the terminal applications for a Moov Account.
+     * Retrieve all terminal applications linked to a specific account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListTerminalApplicationsResponse listDirect() throws Exception {
-        return list(Optional.empty());
+    public ListAccountTerminalApplicationsResponse list(
+            String accountID) throws Exception {
+        return list(Optional.empty(), accountID);
     }
     
     /**
-     * List all the terminal applications for a Moov Account.
+     * Retrieve all terminal applications linked to a specific account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
      * @param xMoovVersion Specify an API version.
      *         
@@ -321,21 +331,26 @@ public class TerminalApplications implements
      *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      *         
      *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListTerminalApplicationsResponse list(
-            Optional<String> xMoovVersion) throws Exception {
-        ListTerminalApplicationsRequest request =
-            ListTerminalApplicationsRequest
+    public ListAccountTerminalApplicationsResponse list(
+            Optional<String> xMoovVersion,
+            String accountID) throws Exception {
+        ListAccountTerminalApplicationsRequest request =
+            ListAccountTerminalApplicationsRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
+                .accountID(accountID)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
+                ListAccountTerminalApplicationsRequest.class,
                 _baseUrl,
-                "/terminal-applications");
+                "/accounts/{accountID}/terminal-applications",
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -352,7 +367,7 @@ public class TerminalApplications implements
                .beforeRequest(
                   new BeforeRequestContextImpl(
                       _baseUrl,
-                      "listTerminalApplications", 
+                      "listAccountTerminalApplications", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -364,7 +379,7 @@ public class TerminalApplications implements
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "listTerminalApplications",
+                            "listAccountTerminalApplications",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -374,7 +389,7 @@ public class TerminalApplications implements
                     .afterSuccess(
                         new AfterSuccessContextImpl(
                             _baseUrl,
-                            "listTerminalApplications",
+                            "listAccountTerminalApplications",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -384,7 +399,7 @@ public class TerminalApplications implements
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "listTerminalApplications",
+                            "listAccountTerminalApplications",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -394,14 +409,14 @@ public class TerminalApplications implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        ListTerminalApplicationsResponse.Builder _resBuilder = 
-            ListTerminalApplicationsResponse
+        ListAccountTerminalApplicationsResponse.Builder _resBuilder = 
+            ListAccountTerminalApplicationsResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        ListTerminalApplicationsResponse _res = _resBuilder.build();
+        ListAccountTerminalApplicationsResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
@@ -463,37 +478,39 @@ public class TerminalApplications implements
 
 
     /**
-     * Fetch a specific terminal application.
+     * Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
      * @return The call builder
      */
-    public GetTerminalApplicationRequestBuilder get() {
-        return new GetTerminalApplicationRequestBuilder(this);
+    public GetAccountTerminalApplicationRequestBuilder get() {
+        return new GetAccountTerminalApplicationRequestBuilder(this);
     }
 
     /**
-     * Fetch a specific terminal application.
+     * Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
+     * @param accountID 
      * @param terminalApplicationID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTerminalApplicationResponse get(
+    public GetAccountTerminalApplicationResponse get(
+            String accountID,
             String terminalApplicationID) throws Exception {
-        return get(Optional.empty(), terminalApplicationID);
+        return get(Optional.empty(), accountID, terminalApplicationID);
     }
     
     /**
-     * Fetch a specific terminal application.
+     * Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
      * @param xMoovVersion Specify an API version.
      *         
@@ -504,25 +521,28 @@ public class TerminalApplications implements
      *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      *         
      *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
      * @param terminalApplicationID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTerminalApplicationResponse get(
+    public GetAccountTerminalApplicationResponse get(
             Optional<String> xMoovVersion,
+            String accountID,
             String terminalApplicationID) throws Exception {
-        GetTerminalApplicationRequest request =
-            GetTerminalApplicationRequest
+        GetAccountTerminalApplicationRequest request =
+            GetAccountTerminalApplicationRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
+                .accountID(accountID)
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
-                GetTerminalApplicationRequest.class,
+                GetAccountTerminalApplicationRequest.class,
                 _baseUrl,
-                "/terminal-applications/{terminalApplicationID}",
+                "/accounts/{accountID}/terminal-applications/{terminalApplicationID}",
                 request, this.sdkConfiguration.globals);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
@@ -540,7 +560,7 @@ public class TerminalApplications implements
                .beforeRequest(
                   new BeforeRequestContextImpl(
                       _baseUrl,
-                      "getTerminalApplication", 
+                      "getAccountTerminalApplication", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -552,7 +572,7 @@ public class TerminalApplications implements
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "getTerminalApplication",
+                            "getAccountTerminalApplication",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -562,7 +582,7 @@ public class TerminalApplications implements
                     .afterSuccess(
                         new AfterSuccessContextImpl(
                             _baseUrl,
-                            "getTerminalApplication",
+                            "getAccountTerminalApplication",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -572,7 +592,7 @@ public class TerminalApplications implements
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "getTerminalApplication",
+                            "getAccountTerminalApplication",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -582,14 +602,14 @@ public class TerminalApplications implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        GetTerminalApplicationResponse.Builder _resBuilder = 
-            GetTerminalApplicationResponse
+        GetAccountTerminalApplicationResponse.Builder _resBuilder = 
+            GetAccountTerminalApplicationResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        GetTerminalApplicationResponse _res = _resBuilder.build();
+        GetAccountTerminalApplicationResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
@@ -651,37 +671,39 @@ public class TerminalApplications implements
 
 
     /**
-     * Delete a specific terminal application.
+     * Fetch the configuration for a given Terminal Application linked to a specific Account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
      * 
      * @return The call builder
      */
-    public DeleteTerminalApplicationRequestBuilder delete() {
-        return new DeleteTerminalApplicationRequestBuilder(this);
+    public GetTerminalConfigurationRequestBuilder getConfiguration() {
+        return new GetTerminalConfigurationRequestBuilder(this);
     }
 
     /**
-     * Delete a specific terminal application.
+     * Fetch the configuration for a given Terminal Application linked to a specific Account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
      * 
+     * @param accountID 
      * @param terminalApplicationID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DeleteTerminalApplicationResponse delete(
+    public GetTerminalConfigurationResponse getConfiguration(
+            String accountID,
             String terminalApplicationID) throws Exception {
-        return delete(Optional.empty(), terminalApplicationID);
+        return getConfiguration(Optional.empty(), accountID, terminalApplicationID);
     }
     
     /**
-     * Delete a specific terminal application.
+     * Fetch the configuration for a given Terminal Application linked to a specific Account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/terminal-applications.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
      * 
      * @param xMoovVersion Specify an API version.
      *         
@@ -692,28 +714,31 @@ public class TerminalApplications implements
      *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
      *         
      *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID 
      * @param terminalApplicationID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DeleteTerminalApplicationResponse delete(
+    public GetTerminalConfigurationResponse getConfiguration(
             Optional<String> xMoovVersion,
+            String accountID,
             String terminalApplicationID) throws Exception {
-        DeleteTerminalApplicationRequest request =
-            DeleteTerminalApplicationRequest
+        GetTerminalConfigurationRequest request =
+            GetTerminalConfigurationRequest
                 .builder()
                 .xMoovVersion(xMoovVersion)
+                .accountID(accountID)
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
-                DeleteTerminalApplicationRequest.class,
+                GetTerminalConfigurationRequest.class,
                 _baseUrl,
-                "/terminal-applications/{terminalApplicationID}",
+                "/accounts/{accountID}/terminal-applications/{terminalApplicationID}/configuration",
                 request, this.sdkConfiguration.globals);
         
-        HTTPRequest _req = new HTTPRequest(_url, "DELETE");
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
@@ -728,19 +753,19 @@ public class TerminalApplications implements
                .beforeRequest(
                   new BeforeRequestContextImpl(
                       _baseUrl,
-                      "deleteTerminalApplication", 
+                      "getTerminalConfiguration", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "deleteTerminalApplication",
+                            "getTerminalConfiguration",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -750,7 +775,7 @@ public class TerminalApplications implements
                     .afterSuccess(
                         new AfterSuccessContextImpl(
                             _baseUrl,
-                            "deleteTerminalApplication",
+                            "getTerminalConfiguration",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -760,7 +785,7 @@ public class TerminalApplications implements
                     .afterError(
                         new AfterErrorContextImpl(
                             _baseUrl,
-                            "deleteTerminalApplication",
+                            "getTerminalConfiguration",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -770,27 +795,23 @@ public class TerminalApplications implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        DeleteTerminalApplicationResponse.Builder _resBuilder = 
-            DeleteTerminalApplicationResponse
+        GetTerminalConfigurationResponse.Builder _resBuilder = 
+            GetTerminalConfigurationResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        DeleteTerminalApplicationResponse _res = _resBuilder.build();
+        GetTerminalConfigurationResponse _res = _resBuilder.build();
         
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "204")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            return _res;
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
+                TerminalConfiguration _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
+                    new TypeReference<TerminalConfiguration>() {});
+                _res.withTerminalConfiguration(Optional.ofNullable(_out));
+                return _res;
             } else {
                 throw new APIException(
                     _httpRes, 

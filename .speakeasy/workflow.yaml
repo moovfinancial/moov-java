@@ -4,6 +4,8 @@ sources:
     latest:
         inputs:
             - location: registry.speakeasyapi.dev/moov/moov/api-latest
+        registry:
+            location: registry.speakeasyapi.dev/moov/moov/latest
 targets:
     latest:
         target: java
@@ -14,3 +16,9 @@ targets:
                 ossrhPassword: $ossrh_password
                 gpgSecretKey: $java_gpg_secret_key
                 gpgPassPhrase: $java_gpg_passphrase
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/moov/moov/latest-java-code-samples
+            labelOverride:
+                fixedValue: Java (SDK)
+            blocking: false

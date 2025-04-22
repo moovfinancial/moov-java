@@ -5,8 +5,8 @@ management:
   docVersion: latest
   speakeasyVersion: 1.537.0
   generationVersion: 2.588.0
-  releaseVersion: 0.12.4
-  configChecksum: fda678ae7d7045b0e2b0abf588841e60
+  releaseVersion: 0.12.5
+  configChecksum: b2b8079157abd7ce9da067a470504181
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:

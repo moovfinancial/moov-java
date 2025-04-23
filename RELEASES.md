@@ -489,3 +489,13 @@ Based on:
 - [java v0.12.5] .
 ### Releases
 - [Maven Central v0.12.5] https://central.sonatype.com/artifact/io.moov/sdk/0.12.5 - .
+
+## 2025-04-23 00:29:25
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.537.1 (2.588.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.12.6] .
+### Releases
+- [Maven Central v0.12.6] https://central.sonatype.com/artifact/io.moov/sdk/0.12.6 - .

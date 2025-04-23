@@ -61,6 +61,13 @@ public class DisputeEvidenceResponse {
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
 
+    /**
+     * When the evidence was submitted for review.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("submittedOn")
+    private Optional<OffsetDateTime> submittedOn;
+
     @JsonCreator
     public DisputeEvidenceResponse(
             @JsonProperty("evidenceID") String evidenceID,
@@ -71,7 +78,8 @@ public class DisputeEvidenceResponse {
             @JsonProperty("filename") Optional<String> filename,
             @JsonProperty("size") Optional<Long> size,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
-            @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
+            @JsonProperty("updatedOn") OffsetDateTime updatedOn,
+            @JsonProperty("submittedOn") Optional<OffsetDateTime> submittedOn) {
         Utils.checkNotNull(evidenceID, "evidenceID");
         Utils.checkNotNull(disputeID, "disputeID");
         Utils.checkNotNull(evidenceType, "evidenceType");
@@ -81,6 +89,7 @@ public class DisputeEvidenceResponse {
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
+        Utils.checkNotNull(submittedOn, "submittedOn");
         this.evidenceID = evidenceID;
         this.disputeID = disputeID;
         this.evidenceType = evidenceType;
@@ -90,6 +99,7 @@ public class DisputeEvidenceResponse {
         this.size = size;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
+        this.submittedOn = submittedOn;
     }
     
     public DisputeEvidenceResponse(
@@ -98,7 +108,7 @@ public class DisputeEvidenceResponse {
             EvidenceType evidenceType,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(evidenceID, disputeID, evidenceType, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn);
+        this(evidenceID, disputeID, evidenceType, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn, Optional.empty());
     }
 
     @JsonIgnore
@@ -156,6 +166,14 @@ public class DisputeEvidenceResponse {
     @JsonIgnore
     public OffsetDateTime updatedOn() {
         return updatedOn;
+    }
+
+    /**
+     * When the evidence was submitted for review.
+     */
+    @JsonIgnore
+    public Optional<OffsetDateTime> submittedOn() {
+        return submittedOn;
     }
 
     public final static Builder builder() {
@@ -264,6 +282,24 @@ public class DisputeEvidenceResponse {
         return this;
     }
 
+    /**
+     * When the evidence was submitted for review.
+     */
+    public DisputeEvidenceResponse withSubmittedOn(OffsetDateTime submittedOn) {
+        Utils.checkNotNull(submittedOn, "submittedOn");
+        this.submittedOn = Optional.ofNullable(submittedOn);
+        return this;
+    }
+
+    /**
+     * When the evidence was submitted for review.
+     */
+    public DisputeEvidenceResponse withSubmittedOn(Optional<OffsetDateTime> submittedOn) {
+        Utils.checkNotNull(submittedOn, "submittedOn");
+        this.submittedOn = submittedOn;
+        return this;
+    }
+
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -283,7 +319,8 @@ public class DisputeEvidenceResponse {
             Objects.deepEquals(this.filename, other.filename) &&
             Objects.deepEquals(this.size, other.size) &&
             Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn);
+            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
+            Objects.deepEquals(this.submittedOn, other.submittedOn);
     }
     
     @Override
@@ -297,7 +334,8 @@ public class DisputeEvidenceResponse {
             filename,
             size,
             createdOn,
-            updatedOn);
+            updatedOn,
+            submittedOn);
     }
     
     @Override
@@ -311,7 +349,8 @@ public class DisputeEvidenceResponse {
                 "filename", filename,
                 "size", size,
                 "createdOn", createdOn,
-                "updatedOn", updatedOn);
+                "updatedOn", updatedOn,
+                "submittedOn", submittedOn);
     }
     
     public final static class Builder {
@@ -333,6 +372,8 @@ public class DisputeEvidenceResponse {
         private OffsetDateTime createdOn;
  
         private OffsetDateTime updatedOn;
+ 
+        private Optional<OffsetDateTime> submittedOn = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -439,6 +480,24 @@ public class DisputeEvidenceResponse {
             this.updatedOn = updatedOn;
             return this;
         }
+
+        /**
+         * When the evidence was submitted for review.
+         */
+        public Builder submittedOn(OffsetDateTime submittedOn) {
+            Utils.checkNotNull(submittedOn, "submittedOn");
+            this.submittedOn = Optional.ofNullable(submittedOn);
+            return this;
+        }
+
+        /**
+         * When the evidence was submitted for review.
+         */
+        public Builder submittedOn(Optional<OffsetDateTime> submittedOn) {
+            Utils.checkNotNull(submittedOn, "submittedOn");
+            this.submittedOn = submittedOn;
+            return this;
+        }
         
         public DisputeEvidenceResponse build() {
             return new DisputeEvidenceResponse(
@@ -450,7 +509,8 @@ public class DisputeEvidenceResponse {
                 filename,
                 size,
                 createdOn,
-                updatedOn);
+                updatedOn,
+                submittedOn);
         }
     }
 }

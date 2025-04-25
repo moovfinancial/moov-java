@@ -69,6 +69,10 @@ public class Dispute {
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("submittedOn")
+    private Optional<OffsetDateTime> submittedOn;
+
     @JsonCreator
     public Dispute(
             @JsonProperty("disputeID") String disputeID,
@@ -80,7 +84,8 @@ public class Dispute {
             @JsonProperty("respondBy") OffsetDateTime respondBy,
             @JsonProperty("status") DisputeStatus status,
             @JsonProperty("phase") DisputePhase phase,
-            @JsonProperty("createdOn") OffsetDateTime createdOn) {
+            @JsonProperty("createdOn") OffsetDateTime createdOn,
+            @JsonProperty("submittedOn") Optional<OffsetDateTime> submittedOn) {
         Utils.checkNotNull(disputeID, "disputeID");
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
         Utils.checkNotNull(amount, "amount");
@@ -91,6 +96,7 @@ public class Dispute {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(phase, "phase");
         Utils.checkNotNull(createdOn, "createdOn");
+        Utils.checkNotNull(submittedOn, "submittedOn");
         this.disputeID = disputeID;
         this.merchantAccountID = merchantAccountID;
         this.amount = amount;
@@ -101,6 +107,7 @@ public class Dispute {
         this.status = status;
         this.phase = phase;
         this.createdOn = createdOn;
+        this.submittedOn = submittedOn;
     }
     
     public Dispute(
@@ -113,7 +120,7 @@ public class Dispute {
             DisputeStatus status,
             DisputePhase phase,
             OffsetDateTime createdOn) {
-        this(disputeID, merchantAccountID, amount, networkReasonCode, Optional.empty(), transfer, respondBy, status, phase, createdOn);
+        this(disputeID, merchantAccountID, amount, networkReasonCode, Optional.empty(), transfer, respondBy, status, phase, createdOn, Optional.empty());
     }
 
     @JsonIgnore
@@ -180,6 +187,11 @@ public class Dispute {
     @JsonIgnore
     public OffsetDateTime createdOn() {
         return createdOn;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> submittedOn() {
+        return submittedOn;
     }
 
     public final static Builder builder() {
@@ -271,6 +283,18 @@ public class Dispute {
         return this;
     }
 
+    public Dispute withSubmittedOn(OffsetDateTime submittedOn) {
+        Utils.checkNotNull(submittedOn, "submittedOn");
+        this.submittedOn = Optional.ofNullable(submittedOn);
+        return this;
+    }
+
+    public Dispute withSubmittedOn(Optional<OffsetDateTime> submittedOn) {
+        Utils.checkNotNull(submittedOn, "submittedOn");
+        this.submittedOn = submittedOn;
+        return this;
+    }
+
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -291,7 +315,8 @@ public class Dispute {
             Objects.deepEquals(this.respondBy, other.respondBy) &&
             Objects.deepEquals(this.status, other.status) &&
             Objects.deepEquals(this.phase, other.phase) &&
-            Objects.deepEquals(this.createdOn, other.createdOn);
+            Objects.deepEquals(this.createdOn, other.createdOn) &&
+            Objects.deepEquals(this.submittedOn, other.submittedOn);
     }
     
     @Override
@@ -306,7 +331,8 @@ public class Dispute {
             respondBy,
             status,
             phase,
-            createdOn);
+            createdOn,
+            submittedOn);
     }
     
     @Override
@@ -321,7 +347,8 @@ public class Dispute {
                 "respondBy", respondBy,
                 "status", status,
                 "phase", phase,
-                "createdOn", createdOn);
+                "createdOn", createdOn,
+                "submittedOn", submittedOn);
     }
     
     public final static class Builder {
@@ -345,6 +372,8 @@ public class Dispute {
         private DisputePhase phase;
  
         private OffsetDateTime createdOn;
+ 
+        private Optional<OffsetDateTime> submittedOn = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -434,6 +463,18 @@ public class Dispute {
             this.createdOn = createdOn;
             return this;
         }
+
+        public Builder submittedOn(OffsetDateTime submittedOn) {
+            Utils.checkNotNull(submittedOn, "submittedOn");
+            this.submittedOn = Optional.ofNullable(submittedOn);
+            return this;
+        }
+
+        public Builder submittedOn(Optional<OffsetDateTime> submittedOn) {
+            Utils.checkNotNull(submittedOn, "submittedOn");
+            this.submittedOn = submittedOn;
+            return this;
+        }
         
         public Dispute build() {
             return new Dispute(
@@ -446,7 +487,8 @@ public class Dispute {
                 respondBy,
                 status,
                 phase,
-                createdOn);
+                createdOn,
+                submittedOn);
         }
     }
 }

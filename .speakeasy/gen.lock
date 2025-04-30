@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 0746c99852bac52fdb03b1ae7e9b7fee
+  docChecksum: 78c10d358888202b7e267d0a8d8f9fc7
   docVersion: latest
-  speakeasyVersion: 1.539.2
-  generationVersion: 2.591.1
-  releaseVersion: 0.12.7
-  configChecksum: e7fb7037e0609ce7eb4fdaa45ea3b041
+  speakeasyVersion: 1.540.1
+  generationVersion: 2.593.4
+  releaseVersion: 0.13.0
+  configChecksum: 3df5be535d77b6e7346b7979e7ab762a
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -22,6 +22,7 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.1
     globals: 2.82.1
+    includes: 2.81.1
     nameOverrides: 2.81.3
     nullables: 0.1.0
     sdkHooks: 1.0.0
@@ -445,6 +446,40 @@ generatedFiles:
   - docs/models/components/WalletTransactionSourceType.md
   - docs/models/components/WalletTransactionStatus.md
   - docs/models/components/WalletTransactionType.md
+  - docs/models/components/WebhookData.md
+  - docs/models/components/WebhookDataAccountCreated.md
+  - docs/models/components/WebhookDataAccountDeleted.md
+  - docs/models/components/WebhookDataAccountUpdated.md
+  - docs/models/components/WebhookDataBalanceUpdated.md
+  - docs/models/components/WebhookDataBankAccountCreated.md
+  - docs/models/components/WebhookDataBankAccountDeleted.md
+  - docs/models/components/WebhookDataBankAccountUpdated.md
+  - docs/models/components/WebhookDataCancellationCreated.md
+  - docs/models/components/WebhookDataCancellationUpdated.md
+  - docs/models/components/WebhookDataCapabilityRequested.md
+  - docs/models/components/WebhookDataCapabilityUpdated.md
+  - docs/models/components/WebhookDataCardAutoUpdated.md
+  - docs/models/components/WebhookDataDisputeCreated.md
+  - docs/models/components/WebhookDataDisputeUpdated.md
+  - docs/models/components/WebhookDataNetworkIDUpdated.md
+  - docs/models/components/WebhookDataPaymentMethodDisabled.md
+  - docs/models/components/WebhookDataPaymentMethodEnabled.md
+  - docs/models/components/WebhookDataRefundCreated.md
+  - docs/models/components/WebhookDataRefundUpdated.md
+  - docs/models/components/WebhookDataRepresentativeCreated.md
+  - docs/models/components/WebhookDataRepresentativeDisabled.md
+  - docs/models/components/WebhookDataRepresentativeUpdated.md
+  - docs/models/components/WebhookDataSweepCreated.md
+  - docs/models/components/WebhookDataSweepUpdated.md
+  - docs/models/components/WebhookDataTerminalApplicationCreated.md
+  - docs/models/components/WebhookDataTerminalApplicationUpdated.md
+  - docs/models/components/WebhookDataTransferCreated.md
+  - docs/models/components/WebhookDataTransferUpdated.md
+  - docs/models/components/WebhookDataWalletTransactionUpdated.md
+  - docs/models/components/WebhookEvent.md
+  - docs/models/components/WebhookEventType.md
+  - docs/models/components/WebhookTransferPaymentMethodDetails.md
+  - docs/models/components/WebhookWalletAvailableBalance.md
   - docs/models/errors/AccountTerminalApplicationError.md
   - docs/models/errors/AddCapabilitiesError.md
   - docs/models/errors/AssignCountriesError.md
@@ -1244,6 +1279,40 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/WalletTransactionSourceType.java
   - src/main/java/io/moov/sdk/models/components/WalletTransactionStatus.java
   - src/main/java/io/moov/sdk/models/components/WalletTransactionType.java
+  - src/main/java/io/moov/sdk/models/components/WebhookData.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataAccountCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataAccountDeleted.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataAccountUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataBalanceUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountDeleted.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataCancellationCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataCancellationUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataCapabilityRequested.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataCapabilityUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataCardAutoUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataDisputeCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataDisputeUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataNetworkIDUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataPaymentMethodDisabled.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataPaymentMethodEnabled.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataRefundCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataRefundUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataRepresentativeCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataRepresentativeDisabled.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataRepresentativeUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataSweepCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataSweepUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataTerminalApplicationCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataTerminalApplicationUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataTransferCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataTransferUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataWalletTransactionUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookEvent.java
+  - src/main/java/io/moov/sdk/models/components/WebhookEventType.java
+  - src/main/java/io/moov/sdk/models/components/WebhookTransferPaymentMethodDetails.java
+  - src/main/java/io/moov/sdk/models/components/WebhookWalletAvailableBalance.java
   - src/main/java/io/moov/sdk/models/errors/APIException.java
   - src/main/java/io/moov/sdk/models/errors/AccountTerminalApplicationError.java
   - src/main/java/io/moov/sdk/models/errors/AddCapabilitiesError.java

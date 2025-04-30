@@ -1,0 +1,9 @@
+# WebhookDataTerminalApplicationCreated
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `terminalApplicationID`                                                           | *String*                                                                          | :heavy_check_mark:                                                                | N/A                                                                               |                                                                                   |
+| `status`                                                                          | [TerminalApplicationStatus](../../models/components/TerminalApplicationStatus.md) | :heavy_check_mark:                                                                | Status of the terminal application.                                               | enabled                                                                           |

@@ -1,0 +1,13 @@
+# WebhookEvent
+
+Webhook events are sent to your webhook URL when certain actions occur in the Moov API. You can subscribe to these events to receive real-time notifications.
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `eventID`                                                                                 | *String*                                                                                  | :heavy_check_mark:                                                                        | Unique identifier for the webhook event.                                                  |
+| `type`                                                                                    | [WebhookEventType](../../models/components/WebhookEventType.md)                           | :heavy_check_mark:                                                                        | The type of event that occurred.                                                          |
+| `data`                                                                                    | [WebhookData](../../models/components/WebhookData.md)                                     | :heavy_check_mark:                                                                        | The data for the webhook event. The contents are based on the event type.                 |
+| `createdOn`                                                                               | [OffsetDateTime](https://docs.oracle.com/javase/8/docs/api/java/time/OffsetDateTime.html) | :heavy_check_mark:                                                                        | N/A                                                                                       |

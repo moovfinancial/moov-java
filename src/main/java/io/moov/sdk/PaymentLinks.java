@@ -1023,7 +1023,7 @@ public class PaymentLinks implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
@@ -1071,6 +1071,24 @@ public class PaymentLinks implements
             _res.withHeaders(_httpRes.headers().map());
             // no content 
             return _res;
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 

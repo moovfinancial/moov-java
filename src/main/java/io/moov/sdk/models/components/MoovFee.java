@@ -26,7 +26,7 @@ public class MoovFee {
     private String accountID;
 
     /**
-     * Indicates whether the account charged is the source, destination, or partner account.
+     * Indicates whether the account charged was the partner, source, or destination of the transfer.
      */
     @JsonProperty("transferParty")
     private TransferParty transferParty;
@@ -68,7 +68,7 @@ public class MoovFee {
     }
 
     /**
-     * Indicates whether the account charged is the source, destination, or partner account.
+     * Indicates whether the account charged was the partner, source, or destination of the transfer.
      */
     @JsonIgnore
     public TransferParty transferParty() {
@@ -105,7 +105,7 @@ public class MoovFee {
     }
 
     /**
-     * Indicates whether the account charged is the source, destination, or partner account.
+     * Indicates whether the account charged was the partner, source, or destination of the transfer.
      */
     public MoovFee withTransferParty(TransferParty transferParty) {
         Utils.checkNotNull(transferParty, "transferParty");
@@ -190,7 +190,7 @@ public class MoovFee {
         }
 
         /**
-         * Indicates whether the account charged is the source, destination, or partner account.
+         * Indicates whether the account charged was the partner, source, or destination of the transfer.
          */
         public Builder transferParty(TransferParty transferParty) {
             Utils.checkNotNull(transferParty, "transferParty");

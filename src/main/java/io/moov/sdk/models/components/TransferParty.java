@@ -8,11 +8,6 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * TransferParty
- * 
- * <p>Indicates whether an account was the source or destination of a transfer.
- */
 public enum TransferParty {
     SOURCE("source"),
     DESTINATION("destination"),

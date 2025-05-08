@@ -36,18 +36,28 @@ public class Profile {
     @JsonProperty("business")
     private Optional<? extends BusinessProfile> business;
 
+    /**
+     * Describes a guest account profile.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("guest")
+    private Optional<? extends GuestProfile> guest;
+
     @JsonCreator
     public Profile(
             @JsonProperty("individual") Optional<? extends IndividualProfile> individual,
-            @JsonProperty("business") Optional<? extends BusinessProfile> business) {
+            @JsonProperty("business") Optional<? extends BusinessProfile> business,
+            @JsonProperty("guest") Optional<? extends GuestProfile> guest) {
         Utils.checkNotNull(individual, "individual");
         Utils.checkNotNull(business, "business");
+        Utils.checkNotNull(guest, "guest");
         this.individual = individual;
         this.business = business;
+        this.guest = guest;
     }
     
     public Profile() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -66,6 +76,15 @@ public class Profile {
     @JsonIgnore
     public Optional<BusinessProfile> business() {
         return (Optional<BusinessProfile>) business;
+    }
+
+    /**
+     * Describes a guest account profile.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GuestProfile> guest() {
+        return (Optional<GuestProfile>) guest;
     }
 
     public final static Builder builder() {
@@ -108,6 +127,24 @@ public class Profile {
         return this;
     }
 
+    /**
+     * Describes a guest account profile.
+     */
+    public Profile withGuest(GuestProfile guest) {
+        Utils.checkNotNull(guest, "guest");
+        this.guest = Optional.ofNullable(guest);
+        return this;
+    }
+
+    /**
+     * Describes a guest account profile.
+     */
+    public Profile withGuest(Optional<? extends GuestProfile> guest) {
+        Utils.checkNotNull(guest, "guest");
+        this.guest = guest;
+        return this;
+    }
+
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -120,21 +157,24 @@ public class Profile {
         Profile other = (Profile) o;
         return 
             Objects.deepEquals(this.individual, other.individual) &&
-            Objects.deepEquals(this.business, other.business);
+            Objects.deepEquals(this.business, other.business) &&
+            Objects.deepEquals(this.guest, other.guest);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             individual,
-            business);
+            business,
+            guest);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Profile.class,
                 "individual", individual,
-                "business", business);
+                "business", business,
+                "guest", guest);
     }
     
     public final static class Builder {
@@ -142,6 +182,8 @@ public class Profile {
         private Optional<? extends IndividualProfile> individual = Optional.empty();
  
         private Optional<? extends BusinessProfile> business = Optional.empty();
+ 
+        private Optional<? extends GuestProfile> guest = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -182,11 +224,30 @@ public class Profile {
             this.business = business;
             return this;
         }
+
+        /**
+         * Describes a guest account profile.
+         */
+        public Builder guest(GuestProfile guest) {
+            Utils.checkNotNull(guest, "guest");
+            this.guest = Optional.ofNullable(guest);
+            return this;
+        }
+
+        /**
+         * Describes a guest account profile.
+         */
+        public Builder guest(Optional<? extends GuestProfile> guest) {
+            Utils.checkNotNull(guest, "guest");
+            this.guest = guest;
+            return this;
+        }
         
         public Profile build() {
             return new Profile(
                 individual,
-                business);
+                business,
+                guest);
         }
     }
 }

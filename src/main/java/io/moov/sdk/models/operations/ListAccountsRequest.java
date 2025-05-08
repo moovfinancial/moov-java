@@ -68,6 +68,14 @@ public class ListAccountsRequest {
     private Optional<? extends AccountType> type;
 
     /**
+     * Filter accounts with AccountType guest.
+     * 
+     * <p>  If true, the response will include guest accounts.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=includeGuest")
+    private Optional<Boolean> includeGuest;
+
+    /**
      * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=foreignID")
@@ -105,6 +113,7 @@ public class ListAccountsRequest {
             Optional<String> name,
             Optional<String> email,
             Optional<? extends AccountType> type,
+            Optional<Boolean> includeGuest,
             Optional<String> foreignID,
             Optional<Boolean> includeDisconnected,
             Optional<? extends CapabilityID> capability,
@@ -115,6 +124,7 @@ public class ListAccountsRequest {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(email, "email");
         Utils.checkNotNull(type, "type");
+        Utils.checkNotNull(includeGuest, "includeGuest");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(includeDisconnected, "includeDisconnected");
         Utils.checkNotNull(capability, "capability");
@@ -125,6 +135,7 @@ public class ListAccountsRequest {
         this.name = name;
         this.email = email;
         this.type = type;
+        this.includeGuest = includeGuest;
         this.foreignID = foreignID;
         this.includeDisconnected = includeDisconnected;
         this.capability = capability;
@@ -134,7 +145,7 @@ public class ListAccountsRequest {
     }
     
     public ListAccountsRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -189,6 +200,16 @@ public class ListAccountsRequest {
     @JsonIgnore
     public Optional<AccountType> type() {
         return (Optional<AccountType>) type;
+    }
+
+    /**
+     * Filter accounts with AccountType guest.
+     * 
+     * <p>  If true, the response will include guest accounts.
+     */
+    @JsonIgnore
+    public Optional<Boolean> includeGuest() {
+        return includeGuest;
     }
 
     /**
@@ -356,6 +377,28 @@ public class ListAccountsRequest {
     }
 
     /**
+     * Filter accounts with AccountType guest.
+     * 
+     * <p>  If true, the response will include guest accounts.
+     */
+    public ListAccountsRequest withIncludeGuest(boolean includeGuest) {
+        Utils.checkNotNull(includeGuest, "includeGuest");
+        this.includeGuest = Optional.ofNullable(includeGuest);
+        return this;
+    }
+
+    /**
+     * Filter accounts with AccountType guest.
+     * 
+     * <p>  If true, the response will include guest accounts.
+     */
+    public ListAccountsRequest withIncludeGuest(Optional<Boolean> includeGuest) {
+        Utils.checkNotNull(includeGuest, "includeGuest");
+        this.includeGuest = includeGuest;
+        return this;
+    }
+
+    /**
      * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
      */
     public ListAccountsRequest withForeignID(String foreignID) {
@@ -470,6 +513,7 @@ public class ListAccountsRequest {
             Objects.deepEquals(this.name, other.name) &&
             Objects.deepEquals(this.email, other.email) &&
             Objects.deepEquals(this.type, other.type) &&
+            Objects.deepEquals(this.includeGuest, other.includeGuest) &&
             Objects.deepEquals(this.foreignID, other.foreignID) &&
             Objects.deepEquals(this.includeDisconnected, other.includeDisconnected) &&
             Objects.deepEquals(this.capability, other.capability) &&
@@ -485,6 +529,7 @@ public class ListAccountsRequest {
             name,
             email,
             type,
+            includeGuest,
             foreignID,
             includeDisconnected,
             capability,
@@ -500,6 +545,7 @@ public class ListAccountsRequest {
                 "name", name,
                 "email", email,
                 "type", type,
+                "includeGuest", includeGuest,
                 "foreignID", foreignID,
                 "includeDisconnected", includeDisconnected,
                 "capability", capability,
@@ -517,6 +563,8 @@ public class ListAccountsRequest {
         private Optional<String> email = Optional.empty();
  
         private Optional<? extends AccountType> type = Optional.empty();
+ 
+        private Optional<Boolean> includeGuest = Optional.empty();
  
         private Optional<String> foreignID = Optional.empty();
  
@@ -649,6 +697,28 @@ public class ListAccountsRequest {
         }
 
         /**
+         * Filter accounts with AccountType guest.
+         * 
+         * <p>  If true, the response will include guest accounts.
+         */
+        public Builder includeGuest(boolean includeGuest) {
+            Utils.checkNotNull(includeGuest, "includeGuest");
+            this.includeGuest = Optional.ofNullable(includeGuest);
+            return this;
+        }
+
+        /**
+         * Filter accounts with AccountType guest.
+         * 
+         * <p>  If true, the response will include guest accounts.
+         */
+        public Builder includeGuest(Optional<Boolean> includeGuest) {
+            Utils.checkNotNull(includeGuest, "includeGuest");
+            this.includeGuest = includeGuest;
+            return this;
+        }
+
+        /**
          * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
          */
         public Builder foreignID(String foreignID) {
@@ -757,6 +827,7 @@ public class ListAccountsRequest {
                 name,
                 email,
                 type,
+                includeGuest,
                 foreignID,
                 includeDisconnected,
                 capability,

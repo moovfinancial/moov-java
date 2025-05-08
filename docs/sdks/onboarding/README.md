@@ -64,7 +64,7 @@ public class Application {
                     .feePlanCodes(List.of(
                         "merchant-direct"))
                     .prefill(CreateAccount.builder()
-                        .accountType(AccountType.BUSINESS)
+                        .accountType(CreateAccountType.BUSINESS)
                         .profile(CreateProfile.builder()
                             .individual(CreateIndividualProfile.builder()
                                 .name(IndividualName.builder()

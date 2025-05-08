@@ -8,20 +8,14 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * AccountType
- * 
- * <p>The type of entity represented by this account.
- */
-public enum AccountType {
+public enum CreateAccountType {
     INDIVIDUAL("individual"),
-    BUSINESS("business"),
-    GUEST("guest");
+    BUSINESS("business");
 
     @JsonValue
     private final String value;
 
-    private AccountType(String value) {
+    private CreateAccountType(String value) {
         this.value = value;
     }
     
@@ -29,8 +23,8 @@ public enum AccountType {
         return value;
     }
     
-    public static Optional<AccountType> fromValue(String value) {
-        for (AccountType o: AccountType.values()) {
+    public static Optional<CreateAccountType> fromValue(String value) {
+        for (CreateAccountType o: CreateAccountType.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

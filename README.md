@@ -45,7 +45,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.13.3'
+implementation 'io.moov:sdk:0.13.4'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.13.3</version>
+    <version>0.13.4</version>
 </dependency>
 ```
 
@@ -124,7 +124,7 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .createAccount(CreateAccount.builder()
-                    .accountType(AccountType.BUSINESS)
+                    .accountType(CreateAccountType.BUSINESS)
                     .profile(CreateProfile.builder()
                         .individual(CreateIndividualProfile.builder()
                             .name(IndividualName.builder()
@@ -257,7 +257,7 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .createAccount(CreateAccount.builder()
-                    .accountType(AccountType.BUSINESS)
+                    .accountType(CreateAccountType.BUSINESS)
                     .profile(CreateProfile.builder()
                         .individual(CreateIndividualProfile.builder()
                             .name(IndividualName.builder()
@@ -1243,7 +1243,7 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .createAccount(CreateAccount.builder()
-                    .accountType(AccountType.BUSINESS)
+                    .accountType(CreateAccountType.BUSINESS)
                     .profile(CreateProfile.builder()
                         .individual(CreateIndividualProfile.builder()
                             .name(IndividualName.builder()
@@ -1371,7 +1371,7 @@ public class Application {
 
         CreateAccountResponse res = sdk.accounts().create()
                 .createAccount(CreateAccount.builder()
-                    .accountType(AccountType.BUSINESS)
+                    .accountType(CreateAccountType.BUSINESS)
                     .profile(CreateProfile.builder()
                         .individual(CreateIndividualProfile.builder()
                             .name(IndividualName.builder()

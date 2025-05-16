@@ -47,7 +47,7 @@ public class CreateTransferRequest {
     private Optional<? extends TransferWaitFor> xWaitFor;
 
     /**
-     * The merchant's Moov account ID.
+     * Your Moov account ID.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -116,7 +116,7 @@ public class CreateTransferRequest {
     }
 
     /**
-     * The merchant's Moov account ID.
+     * Your Moov account ID.
      */
     @JsonIgnore
     public String accountID() {
@@ -196,7 +196,7 @@ public class CreateTransferRequest {
     }
 
     /**
-     * The merchant's Moov account ID.
+     * Your Moov account ID.
      */
     public CreateTransferRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -328,7 +328,7 @@ public class CreateTransferRequest {
         }
 
         /**
-         * The merchant's Moov account ID.
+         * Your Moov account ID.
          */
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");

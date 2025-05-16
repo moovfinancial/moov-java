@@ -138,7 +138,7 @@ public class Application {
 
 | Error Type                  | Status Code                 | Content Type                |
 | --------------------------- | --------------------------- | --------------------------- |
-| models/errors/GenericError  | 400, 409                    | application/json            |
+| models/errors/GenericError  | 400                         | application/json            |
 | models/errors/LinkCardError | 422                         | application/json            |
 | models/errors/APIException  | 4XX, 5XX                    | \*/\*                       |
 

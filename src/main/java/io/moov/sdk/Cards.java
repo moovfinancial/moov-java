@@ -267,7 +267,7 @@ public class Cards implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 GenericError _out = Utils.mapper().readValue(
@@ -297,7 +297,7 @@ public class Cards implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "409", "429")) {
             _res.withHeaders(_httpRes.headers().map());
             // no content 
             throw new APIException(

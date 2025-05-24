@@ -65,7 +65,7 @@ public class Application {
             .build();
 
         ListFeePlanAgreementsRequest req = ListFeePlanAgreementsRequest.builder()
-                .accountID("4c49ae91-2b32-4a4d-91bf-f062f3c2f38d")
+                .accountID("93c43634-5477-42a7-972d-01fa76a09e17")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -129,9 +129,9 @@ public class Application {
             .build();
 
         CreateFeePlanAgreementsResponse res = sdk.feePlans().createFeePlanAgreements()
-                .accountID("19962eb8-00cd-44e5-8a66-a1ebaf88c2fe")
+                .accountID("409c6b4b-e622-40c2-9dc4-fb494e555723")
                 .createFeePlanAgreement(CreateFeePlanAgreement.builder()
-                    .planID("b97c2d59-80c5-49ac-b1fc-40e3a81d8daf")
+                    .planID("19801f96-ea27-4610-b4d1-8c6b46f37928")
                     .build())
                 .call();
 
@@ -192,7 +192,7 @@ public class Application {
             .build();
 
         ListFeePlansResponse res = sdk.feePlans().listFeePlans()
-                .accountID("ac8fa716-4b75-4902-b296-d734524ca45c")
+                .accountID("b3d59179-f74e-4ee8-b123-33220b3c7d4b")
                 .call();
 
         if (res.feePlans().isPresent()) {
@@ -250,7 +250,7 @@ public class Application {
             .build();
 
         RetrieveFeesRequest req = RetrieveFeesRequest.builder()
-                .accountID("45954656-ded3-4bbc-9ef3-d42c2b99db12")
+                .accountID("89daf02d-b6b3-4fbf-b20d-5bf967324682")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -311,7 +311,7 @@ public class Application {
             .build();
 
         ListFeesFetchResponse res = sdk.feePlans().listFeesFetch()
-                .accountID("7b85e951-a6d9-4e67-a155-4d18e9d1ac58")
+                .accountID("55c34e26-269d-4872-8e42-0fa83e3f4b10")
                 .call();
 
         if (res.incurredFees().isPresent()) {
@@ -368,7 +368,7 @@ public class Application {
             .build();
 
         ListPartnerPricingResponse res = sdk.feePlans().listPartnerPricing()
-                .accountID("85f15b07-5c44-4302-ab6f-d22f8d45b7f4")
+                .accountID("600637f9-c38a-473f-b909-0d5ac537b8a5")
                 .call();
 
         if (res.partnerPricings().isPresent()) {
@@ -426,7 +426,7 @@ public class Application {
             .build();
 
         ListPartnerPricingAgreementsRequest req = ListPartnerPricingAgreementsRequest.builder()
-                .accountID("9366921a-25de-4c52-8ec6-4cd4ef557223")
+                .accountID("123bfe5e-2288-4146-9d8a-4c07264c3758")
                 .skip(60L)
                 .count(20L)
                 .build();

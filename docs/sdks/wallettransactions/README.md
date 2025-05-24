@@ -50,8 +50,8 @@ public class Application {
             .build();
 
         ListWalletTransactionsRequest req = ListWalletTransactionsRequest.builder()
-                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
-                .walletID("21e27667-18d6-4d46-812e-0aee1b9ddf12")
+                .accountID("69e4529b-baf0-4f00-877b-123cfd9d6116")
+                .walletID("4f971587-62fe-42c9-bc61-7409d9c8660c")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -114,9 +114,9 @@ public class Application {
             .build();
 
         GetWalletTransactionResponse res = sdk.walletTransactions().get()
-                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
-                .walletID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
-                .transactionID("ecd62b8f-7112-4aaf-90ab-4e43b4cca371")
+                .accountID("f0b02d73-10dc-42e6-8030-fd78fcbc114f")
+                .walletID("03db97f6-c308-4595-8f43-fd247f1bd3f2")
+                .transactionID("e0a32cf5-5758-49ba-83da-75bf02c9c6d7")
                 .call();
 
         if (res.walletTransaction().isPresent()) {

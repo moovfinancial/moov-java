@@ -45,7 +45,7 @@ public class Application {
             .build();
 
         ListPaymentMethodsResponse res = sdk.paymentMethods().list()
-                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+                .accountID("f5503781-dfe4-4bcd-9487-5b5fe2b4d53b")
                 .call();
 
         if (res.paymentMethods().isPresent()) {
@@ -103,8 +103,8 @@ public class Application {
             .build();
 
         GetPaymentMethodResponse res = sdk.paymentMethods().get()
-                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
-                .paymentMethodID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
+                .accountID("56878537-30b0-48ee-9c54-07ab3a8b243d")
+                .paymentMethodID("aa740bf3-4c5f-459b-9370-4f7d4bea382b")
                 .call();
 
         if (res.paymentMethod().isPresent()) {

@@ -60,12 +60,12 @@ public class Application {
             .build();
 
         RequestCardResponse res = sdk.cardIssuing().request()
-                .accountID("bd26796d-dd52-401c-9686-e370e79ebc50")
+                .accountID("d9ac71ae-fccb-4dfc-9fed-710ca654e3ed")
                 .requestCard(RequestCard.builder()
-                    .fundingWalletID("32613610-de25-446e-8662-ec2709ffea9d")
+                    .fundingWalletID("fd98e3b2-696f-4f67-9250-17b3474ababf")
                     .authorizedUser(CreateAuthorizedUser.builder()
-                        .firstName("Leta")
-                        .lastName("Satterfield")
+                        .firstName("Milton")
+                        .lastName("Stiedemann")
                         .birthDate(BirthDate.builder()
                             .day(9L)
                             .month(11L)
@@ -79,14 +79,6 @@ public class Application {
                         .build())
                     .controls(IssuingControls.builder()
                         .velocityLimits(List.of(
-                            IssuingVelocityLimit.builder()
-                                .amount(10000L)
-                                .interval(IssuingIntervalLimit.PER_TRANSACTION)
-                                .build(),
-                            IssuingVelocityLimit.builder()
-                                .amount(10000L)
-                                .interval(IssuingIntervalLimit.PER_TRANSACTION)
-                                .build(),
                             IssuingVelocityLimit.builder()
                                 .amount(10000L)
                                 .interval(IssuingIntervalLimit.PER_TRANSACTION)
@@ -152,7 +144,7 @@ public class Application {
             .build();
 
         ListIssuedCardsRequest req = ListIssuedCardsRequest.builder()
-                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+                .accountID("17c958e0-3abe-46e5-8afb-98742f1fb8ac")
                 .skip(60L)
                 .count(20L)
                 .build();
@@ -213,8 +205,8 @@ public class Application {
             .build();
 
         GetIssuedCardResponse res = sdk.cardIssuing().get()
-                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
-                .issuedCardID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
+                .accountID("4fde8da4-b6c5-4379-82a2-4ff6a742e41a")
+                .issuedCardID("d04885c9-ea6b-43a7-9186-63d9fbd57716")
                 .call();
 
         if (res.issuedCard().isPresent()) {
@@ -273,8 +265,8 @@ public class Application {
             .build();
 
         UpdateIssuedCardResponse res = sdk.cardIssuing().update()
-                .accountID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
-                .issuedCardID("b85898c1-25a1-4907-a1c5-562af6646dad")
+                .accountID("44db31bc-2813-424b-9b8c-2d3f5f1300e3")
+                .issuedCardID("69ca2a7e-7bbc-4176-9d0c-2a1aa7143006")
                 .updateIssuedCard(UpdateIssuedCard.builder()
                     .authorizedUser(CreateAuthorizedUserUpdate.builder()
                         .birthDate(BirthDateUpdate.builder()
@@ -343,8 +335,8 @@ public class Application {
             .build();
 
         GetFullIssuedCardResponse res = sdk.cardIssuing().getFull()
-                .accountID("04e9a1b9-0751-4f2d-b0d4-51e47b62623c")
-                .issuedCardID("13ddb970-c10a-44bb-a2e6-73beac428022")
+                .accountID("512052fb-5e2c-4d24-98dd-fa893c9d8a03")
+                .issuedCardID("087ecc51-11fe-4471-a3bb-44f20c1e87a9")
                 .call();
 
         if (res.fullIssuedCard().isPresent()) {

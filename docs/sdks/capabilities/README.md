@@ -55,7 +55,7 @@ public class Application {
             .build();
 
         ListCapabilitiesResponse res = sdk.capabilities().list()
-                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+                .accountID("1a50ab1c-1714-49e7-a016-cea17b33511a")
                 .call();
 
         if (res.capabilities().isPresent()) {
@@ -114,7 +114,7 @@ public class Application {
             .build();
 
         RequestCapabilitiesResponse res = sdk.capabilities().request()
-                .accountID("32613610-de25-446e-8662-ec2709ffea9d")
+                .accountID("0de140d5-cc78-4eeb-ab00-1f51aaf6c814")
                 .addCapabilities(AddCapabilities.builder()
                     .capabilities(List.of(
                         CapabilityID.COLLECT_FUNDS))
@@ -178,8 +178,8 @@ public class Application {
             .build();
 
         GetCapabilityResponse res = sdk.capabilities().get()
-                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
-                .capabilityID(CapabilityID.PRODUCTION_APP)
+                .accountID("c1697ea6-c984-4ba1-9b81-93e5e18660af")
+                .capabilityID(CapabilityID.SEND_FUNDS)
                 .call();
 
         if (res.capability().isPresent()) {
@@ -238,7 +238,7 @@ public class Application {
             .build();
 
         DisableCapabilityResponse res = sdk.capabilities().disable()
-                .accountID("cd7cd1ce-90cc-444b-ac3e-badb79be277f")
+                .accountID("2be80c4e-d409-49ea-8a8a-76dfa4006d69")
                 .capabilityID(CapabilityID.TRANSFERS)
                 .call();
 

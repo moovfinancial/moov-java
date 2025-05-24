@@ -64,13 +64,13 @@ public class Application {
             .build();
 
         CreatePaymentLinkResponse res = sdk.paymentLinks().create()
-                .accountID("621cf021-cd9c-4f54-a033-15211a509a30")
+                .accountID("cc1d04a8-03b1-4600-b675-e6180d574074")
                 .createPaymentLink(CreatePaymentLink.builder()
                     .partnerAccountID("d290f1ee-6c54-4b01-90e6-d701748f0851")
                     .merchantPaymentMethodID("4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e")
                     .amount(Amount.builder()
                         .currency("USD")
-                        .value(1204L)
+                        .value(10000L)
                         .build())
                     .display(PaymentLinkDisplayOptions.builder()
                         .title("Example Payment Link")
@@ -84,20 +84,6 @@ public class Application {
                         .allowedMethods(List.of(
                             CollectionPaymentMethodType.CARD_PAYMENT,
                             CollectionPaymentMethodType.ACH_DEBIT_COLLECT))
-                        .cardDetails(CardPaymentDetails.builder()
-                            .dynamicDescriptor("WhlBdy *Yoga 11-12")
-                            .build())
-                        .achDetails(ACHPaymentDetails.builder()
-                            .companyEntryDescription("Gym dues")
-                            .originatingCompanyName("Whole Body Fit")
-                            .build())
-                        .build())
-                    .payout(PaymentLinkPayoutDetails.builder()
-                        .allowedMethods(List.of(
-                            DisbursementPaymentMethodType.ACH_CREDIT_SAME_DAY))
-                        .recipient(PayoutRecipient.builder()
-                            .email("jordan.lee@classbooker.dev")
-                            .build())
                         .build())
                     .build())
                 .call();
@@ -158,7 +144,7 @@ public class Application {
             .build();
 
         ListPaymentLinksResponse res = sdk.paymentLinks().list()
-                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+                .accountID("d1039e6d-21ee-4a29-8adf-1dd2a6625a0d")
                 .call();
 
         if (res.paymentLinks().isPresent()) {
@@ -214,7 +200,7 @@ public class Application {
             .build();
 
         GetPaymentLinkResponse res = sdk.paymentLinks().get()
-                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .accountID("323f95b1-3798-4203-8a73-5c8668a9226e")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();
 
@@ -274,30 +260,16 @@ public class Application {
             .build();
 
         UpdatePaymentLinkResponse res = sdk.paymentLinks().update()
-                .accountID("d95fa7f0-e743-42ce-b47c-b60cc78135dd")
+                .accountID("ddad6613-2350-446a-883b-f76abb2cd4ea")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .updatePaymentLink(UpdatePaymentLink.builder()
                     .amount(AmountUpdate.builder()
                         .currency("USD")
-                        .value(1204L)
+                        .value(12099L)
                         .build())
                     .customer(PaymentLinkCustomerOptions.builder()
                         .requireAddress(true)
                         .requirePhone(true)
-                        .build())
-                    .payment(PaymentLinkPaymentDetailsUpdate.builder()
-                        .cardDetails(CardPaymentDetails.builder()
-                            .dynamicDescriptor("WhlBdy *Yoga 11-12")
-                            .build())
-                        .achDetails(ACHPaymentDetails.builder()
-                            .companyEntryDescription("Gym dues")
-                            .originatingCompanyName("Whole Body Fit")
-                            .build())
-                        .build())
-                    .payout(PaymentLinkPayoutDetailsUpdate.builder()
-                        .recipient(PayoutRecipientUpdate.builder()
-                            .email("jordan.lee@classbooker.dev")
-                            .build())
                         .build())
                     .build())
                 .call();
@@ -359,7 +331,7 @@ public class Application {
             .build();
 
         DisablePaymentLinkResponse res = sdk.paymentLinks().disable()
-                .accountID("cd7cd1ce-90cc-444b-ac3e-badb79be277f")
+                .accountID("c1cf000d-0dd9-4dec-bd5e-a88e135adf82")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();
 
@@ -417,7 +389,7 @@ public class Application {
             .build();
 
         GetPaymentLinkQRCodeResponse res = sdk.paymentLinks().getQRCode()
-                .accountID("2014a1ff-9924-40b3-ac01-f4ed64dac1b8")
+                .accountID("2f01a42a-aa5a-424f-9f47-6f8999ed05dc")
                 .paymentLinkCode("uc7ZYKrMhi")
                 .call();
 

@@ -75,7 +75,7 @@ public class Application {
             .build();
 
         RegisterApplePayMerchantDomainsResponse res = sdk.applePay().registerMerchantDomains()
-                .accountID("c62b8770-bdbc-406f-8160-fddb553f5b33")
+                .accountID("60825531-8c7e-421c-8014-019c6603250c")
                 .registerApplePayMerchantDomains(RegisterApplePayMerchantDomains.builder()
                     .domains(List.of(
                         "checkout.classbooker.dev"))
@@ -143,7 +143,7 @@ public class Application {
             .build();
 
         UpdateApplePayMerchantDomainsResponse res = sdk.applePay().updateMerchantDomains()
-                .accountID("4dfea880-7ff8-42f8-bc8d-392cba179113")
+                .accountID("34b1c132-91d4-4676-9864-87e1d961d56d")
                 .updateApplePayMerchantDomains(UpdateApplePayMerchantDomains.builder()
                     .addDomains(List.of(
                         "pay.classbooker.dev"))
@@ -207,7 +207,7 @@ public class Application {
             .build();
 
         GetApplePayMerchantDomainsResponse res = sdk.applePay().getMerchantDomains()
-                .accountID("5f873241-11ec-45e4-929d-00a704a9b582")
+                .accountID("28704d00-d07b-47db-9e54-016a9713d697")
                 .call();
 
         if (res.applePayMerchantDomains().isPresent()) {
@@ -268,10 +268,10 @@ public class Application {
             .build();
 
         CreateApplePaySessionResponse res = sdk.applePay().createSession()
-                .accountID("7f4bef45-927c-48cf-9312-d337467ac9fb")
+                .accountID("32ab62ca-7afd-4f49-89cb-0bb237258f23")
                 .createApplePaySession(CreateApplePaySession.builder()
                     .domain("checkout.classbooker.dev")
-                    .displayName("Kaylee40")
+                    .displayName("Fay11")
                     .build())
                 .call();
 
@@ -336,7 +336,7 @@ public class Application {
             .build();
 
         LinkApplePayTokenResponse res = sdk.applePay().linkToken()
-                .accountID("3f415d64-c57f-409e-80d0-cb8bd8246ace")
+                .accountID("bf498c07-3852-4060-b561-bf992e26a851")
                 .linkApplePay(LinkApplePay.builder()
                     .token(LinkApplePayToken.builder()
                         .paymentData(LinkApplePaymentData.builder()

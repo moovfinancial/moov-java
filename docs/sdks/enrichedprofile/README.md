@@ -39,7 +39,7 @@ public class Application {
             .build();
 
         GetEnrichmentProfileResponse res = sdk.enrichedProfile().get()
-                .email("Keeley_Lebsack@hotmail.com")
+                .email("Thaddeus.Welch@gmail.com")
                 .call();
 
         if (res.enrichedBusinessResponse().isPresent()) {

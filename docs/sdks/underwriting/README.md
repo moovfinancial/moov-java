@@ -49,7 +49,7 @@ public class Application {
             .build();
 
         GetUnderwritingResponse res = sdk.underwriting().get()
-                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .accountID("efe07546-f697-4da5-bf73-d9987efd4cdd")
                 .call();
 
         if (res.underwriting().isPresent()) {
@@ -109,26 +109,26 @@ public class Application {
             .build();
 
         UpsertUnderwritingResponse res = sdk.underwriting().upsert()
-                .accountID("695bbe92-af8d-4cce-802f-ca871830906f")
+                .accountID("371bf394-45df-4ba8-a615-ad5483b1f963")
                 .updateUnderwriting(UpdateUnderwriting.builder()
-                    .averageTransactionSize(543422L)
-                    .maxTransactionSize(470183L)
-                    .averageMonthlyTransactionVolume(390496L)
+                    .averageTransactionSize(622191L)
+                    .maxTransactionSize(123692L)
+                    .averageMonthlyTransactionVolume(438164L)
                     .volumeByCustomerType(VolumeByCustomerType.builder()
-                        .businessToBusinessPercentage(478438)
-                        .consumerToBusinessPercentage(232067)
+                        .businessToBusinessPercentage(671399)
+                        .consumerToBusinessPercentage(482010)
                         .build())
                     .cardVolumeDistribution(CardVolumeDistribution.builder()
-                        .ecommercePercentage(766938)
-                        .cardPresentPercentage(138671)
-                        .mailOrPhonePercentage(146928)
-                        .debtRepaymentPercentage(114639)
+                        .ecommercePercentage(47450)
+                        .cardPresentPercentage(146275)
+                        .mailOrPhonePercentage(309315)
+                        .debtRepaymentPercentage(990303)
                         .build())
                     .fulfillment(FulfillmentDetails.builder()
-                        .hasPhysicalGoods(false)
-                        .isShippingProduct(false)
-                        .shipmentDurationDays(5009L)
-                        .returnPolicy(ReturnPolicyType.WITHIN_THIRTY_DAYS)
+                        .hasPhysicalGoods(true)
+                        .isShippingProduct(true)
+                        .shipmentDurationDays(388451L)
+                        .returnPolicy(ReturnPolicyType.OTHER)
                         .build())
                     .build())
                 .call();

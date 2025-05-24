@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -87,6 +89,13 @@ public class Sweep {
     @JsonProperty("statementDescriptor")
     private Optional<String> statementDescriptor;
 
+    /**
+     * The subtotal of each transaction type contributing to the sweep's accrued amount.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("subtotals")
+    private Optional<? extends List<SweepSubtotal>> subtotals;
+
     @JsonCreator
     public Sweep(
             @JsonProperty("sweepID") String sweepID,
@@ -100,7 +109,8 @@ public class Sweep {
             @JsonProperty("pullPaymentMethodID") Optional<String> pullPaymentMethodID,
             @JsonProperty("transferID") Optional<String> transferID,
             @JsonProperty("transferAmount") Optional<String> transferAmount,
-            @JsonProperty("statementDescriptor") Optional<String> statementDescriptor) {
+            @JsonProperty("statementDescriptor") Optional<String> statementDescriptor,
+            @JsonProperty("subtotals") Optional<? extends List<SweepSubtotal>> subtotals) {
         Utils.checkNotNull(sweepID, "sweepID");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(accruedAmount, "accruedAmount");
@@ -113,6 +123,7 @@ public class Sweep {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(transferAmount, "transferAmount");
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
+        Utils.checkNotNull(subtotals, "subtotals");
         this.sweepID = sweepID;
         this.status = status;
         this.accruedAmount = accruedAmount;
@@ -125,6 +136,7 @@ public class Sweep {
         this.transferID = transferID;
         this.transferAmount = transferAmount;
         this.statementDescriptor = statementDescriptor;
+        this.subtotals = subtotals;
     }
     
     public Sweep(
@@ -133,7 +145,7 @@ public class Sweep {
             String accruedAmount,
             String currency,
             OffsetDateTime accrualStartedOn) {
-        this(sweepID, status, accruedAmount, Optional.empty(), currency, accrualStartedOn, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(sweepID, status, accruedAmount, Optional.empty(), currency, accrualStartedOn, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -221,6 +233,15 @@ public class Sweep {
     @JsonIgnore
     public Optional<String> statementDescriptor() {
         return statementDescriptor;
+    }
+
+    /**
+     * The subtotal of each transaction type contributing to the sweep's accrued amount.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<SweepSubtotal>> subtotals() {
+        return (Optional<List<SweepSubtotal>>) subtotals;
     }
 
     public final static Builder builder() {
@@ -386,6 +407,24 @@ public class Sweep {
         return this;
     }
 
+    /**
+     * The subtotal of each transaction type contributing to the sweep's accrued amount.
+     */
+    public Sweep withSubtotals(List<SweepSubtotal> subtotals) {
+        Utils.checkNotNull(subtotals, "subtotals");
+        this.subtotals = Optional.ofNullable(subtotals);
+        return this;
+    }
+
+    /**
+     * The subtotal of each transaction type contributing to the sweep's accrued amount.
+     */
+    public Sweep withSubtotals(Optional<? extends List<SweepSubtotal>> subtotals) {
+        Utils.checkNotNull(subtotals, "subtotals");
+        this.subtotals = subtotals;
+        return this;
+    }
+
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -408,7 +447,8 @@ public class Sweep {
             Objects.deepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
             Objects.deepEquals(this.transferID, other.transferID) &&
             Objects.deepEquals(this.transferAmount, other.transferAmount) &&
-            Objects.deepEquals(this.statementDescriptor, other.statementDescriptor);
+            Objects.deepEquals(this.statementDescriptor, other.statementDescriptor) &&
+            Objects.deepEquals(this.subtotals, other.subtotals);
     }
     
     @Override
@@ -425,7 +465,8 @@ public class Sweep {
             pullPaymentMethodID,
             transferID,
             transferAmount,
-            statementDescriptor);
+            statementDescriptor,
+            subtotals);
     }
     
     @Override
@@ -442,7 +483,8 @@ public class Sweep {
                 "pullPaymentMethodID", pullPaymentMethodID,
                 "transferID", transferID,
                 "transferAmount", transferAmount,
-                "statementDescriptor", statementDescriptor);
+                "statementDescriptor", statementDescriptor,
+                "subtotals", subtotals);
     }
     
     public final static class Builder {
@@ -470,6 +512,8 @@ public class Sweep {
         private Optional<String> transferAmount = Optional.empty();
  
         private Optional<String> statementDescriptor = Optional.empty();
+ 
+        private Optional<? extends List<SweepSubtotal>> subtotals = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -633,6 +677,24 @@ public class Sweep {
             this.statementDescriptor = statementDescriptor;
             return this;
         }
+
+        /**
+         * The subtotal of each transaction type contributing to the sweep's accrued amount.
+         */
+        public Builder subtotals(List<SweepSubtotal> subtotals) {
+            Utils.checkNotNull(subtotals, "subtotals");
+            this.subtotals = Optional.ofNullable(subtotals);
+            return this;
+        }
+
+        /**
+         * The subtotal of each transaction type contributing to the sweep's accrued amount.
+         */
+        public Builder subtotals(Optional<? extends List<SweepSubtotal>> subtotals) {
+            Utils.checkNotNull(subtotals, "subtotals");
+            this.subtotals = subtotals;
+            return this;
+        }
         
         public Sweep build() {
             return new Sweep(
@@ -647,7 +709,8 @@ public class Sweep {
                 pullPaymentMethodID,
                 transferID,
                 transferAmount,
-                statementDescriptor);
+                statementDescriptor,
+                subtotals);
         }
     }
 }

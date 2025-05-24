@@ -56,11 +56,11 @@ public class Application {
             .build();
 
         UploadFileResponse res = sdk.files().upload()
-                .accountID("10a2b98a-ab61-4ec6-a5fc-41d969747bc6")
+                .accountID("51ae4a14-07bf-4659-b9b7-285439b7a22e")
                 .fileUploadRequestMultiPart(FileUploadRequestMultiPart.builder()
                     .file(FileUploadRequestMultiPartFile.builder()
                         .fileName("example.file")
-                        .content("0x8cc9e675ad".getBytes(StandardCharsets.UTF_8))
+                        .content("0x331A41fC37".getBytes(StandardCharsets.UTF_8))
                         .build())
                     .filePurpose(FilePurpose.REPRESENTATIVE_VERIFICATION)
                     .metadata("{\"requirement_id\": \"document.individual.verification\"}")
@@ -123,7 +123,7 @@ public class Application {
             .build();
 
         ListFilesResponse res = sdk.files().list()
-                .accountID("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+                .accountID("d1133bf2-4853-4436-9a03-23739895ab98")
                 .call();
 
         if (res.fileDetails().isPresent()) {
@@ -179,8 +179,8 @@ public class Application {
             .build();
 
         GetFileDetailsResponse res = sdk.files().get()
-                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
-                .fileID("e50f7622-81da-484b-9c66-1c8a99c6b71b")
+                .accountID("7f888113-d35a-4536-b9bc-c55076736ab6")
+                .fileID("af170db9-0d17-4a9f-ade6-5dd2f1b3412d")
                 .call();
 
         if (res.fileDetails().isPresent()) {

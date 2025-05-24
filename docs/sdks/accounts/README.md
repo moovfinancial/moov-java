@@ -99,7 +99,6 @@ import io.moov.sdk.models.errors.CreateAccountResponseBody;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
 import java.lang.Exception;
-import java.util.Map;
 
 public class Application {
 
@@ -116,90 +115,10 @@ public class Application {
                 .createAccount(CreateAccount.builder()
                     .accountType(CreateAccountType.BUSINESS)
                     .profile(CreateProfile.builder()
-                        .individual(CreateIndividualProfile.builder()
-                            .name(IndividualName.builder()
-                                .firstName("Jordan")
-                                .lastName("Lee")
-                                .middleName("Reese")
-                                .suffix("Jr")
-                                .build())
-                            .phone(PhoneNumber.builder()
-                                .number("8185551212")
-                                .countryCode("1")
-                                .build())
-                            .email("jordan.lee@classbooker.dev")
-                            .address(Address.builder()
-                                .addressLine1("123 Main Street")
-                                .city("Boulder")
-                                .stateOrProvince("CO")
-                                .postalCode("80301")
-                                .country("US")
-                                .addressLine2("Apt 302")
-                                .build())
-                            .birthDate(BirthDate.builder()
-                                .day(9L)
-                                .month(11L)
-                                .year(1989L)
-                                .build())
-                            .build())
                         .business(CreateBusinessProfile.builder()
-                            .legalBusinessName("Classbooker, LLC")
-                            .businessType(BusinessType.LLC)
-                            .address(Address.builder()
-                                .addressLine1("123 Main Street")
-                                .city("Boulder")
-                                .stateOrProvince("CO")
-                                .postalCode("80301")
-                                .country("US")
-                                .addressLine2("Apt 302")
-                                .build())
-                            .phone(PhoneNumber.builder()
-                                .number("8185551212")
-                                .countryCode("1")
-                                .build())
-                            .email("jordan.lee@classbooker.dev")
-                            .description("Local fitness gym paying out instructors")
-                            .taxID(TaxID.builder()
-                                .ein(Ein.builder()
-                                    .number("12-3456789")
-                                    .build())
-                                .build())
-                            .industryCodes(IndustryCodes.builder()
-                                .naics("713940")
-                                .sic("7991")
-                                .mcc("7997")
-                                .build())
+                            .legalBusinessName("Whole Body Fitness LLC")
                             .build())
                         .build())
-                    .metadata(Map.ofEntries(
-                        Map.entry("optional", "metadata")))
-                    .termsOfService(CreateAccountTermsOfService.of(TermsOfServiceToken.builder()
-                        .token("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4")
-                        .build()))
-                    .customerSupport(CustomerSupport.builder()
-                        .phone(PhoneNumber.builder()
-                            .number("8185551212")
-                            .countryCode("1")
-                            .build())
-                        .email("jordan.lee@classbooker.dev")
-                        .address(Address.builder()
-                            .addressLine1("123 Main Street")
-                            .city("Boulder")
-                            .stateOrProvince("CO")
-                            .postalCode("80301")
-                            .country("US")
-                            .addressLine2("Apt 302")
-                            .build())
-                        .build())
-                    .settings(Settings.builder()
-                        .cardPayment(CardPaymentSettings.builder()
-                            .statementDescriptor("Whole Body Fitness")
-                            .build())
-                        .achPayment(ACHPaymentSettings.builder()
-                            .companyName("WholeBodyFitness")
-                            .build())
-                        .build())
-                    .mode(Mode.PRODUCTION)
                     .build())
                 .call();
 
@@ -325,7 +244,7 @@ public class Application {
             .build();
 
         GetAccountResponse res = sdk.accounts().get()
-                .accountID("b888f774-3e7c-4135-a18c-6b985523c4bc")
+                .accountID("2f93a6cf-3b3b-4c17-8d3b-110dfadccea4")
                 .call();
 
         if (res.account().isPresent()) {
@@ -392,7 +311,7 @@ public class Application {
             .build();
 
         UpdateAccountResponse res = sdk.accounts().update()
-                .accountID("95fa7f0e-7432-4ce4-a7cb-60cc78135dde")
+                .accountID("433cb9d1-5943-4fd5-91b4-2aef5b30e2e7")
                 .patchAccount(PatchAccount.builder()
                     .profile(PatchProfile.builder()
                         .individual(PatchIndividual.builder()
@@ -450,9 +369,8 @@ public class Application {
                         .build())
                     .metadata(Map.ofEntries(
                         Map.entry("optional", "metadata")))
-                    .termsOfService(PatchAccountTermsOfService.of(ManualTermsOfServiceUpdate.builder()
-                        .acceptedIP("172.217.2.46")
-                        .acceptedUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36")
+                    .termsOfService(PatchAccountTermsOfService.of(TermsOfServiceTokenUpdate.builder()
+                        .token("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4")
                         .build()))
                     .customerSupport(PatchAccountCustomerSupport.builder()
                         .phone(PhoneNumber.builder()
@@ -531,7 +449,7 @@ public class Application {
             .build();
 
         DisconnectAccountResponse res = sdk.accounts().disconnect()
-                .accountID("ac3cbe09-fcd4-4c5e-ada2-89eaaa9c149e")
+                .accountID("cfdfea7d-f185-4de5-ba90-b09f14fe6683")
                 .call();
 
         // handle response
@@ -586,7 +504,7 @@ public class Application {
             .build();
 
         GetAccountCountriesResponse res = sdk.accounts().getCountries()
-                .accountID("b49c57bf-7b36-4308-8206-c1f5ce8067ac")
+                .accountID("a2026036-cc26-42c1-beef-950662d13b5d")
                 .call();
 
         if (res.accountCountries().isPresent()) {
@@ -648,7 +566,7 @@ public class Application {
             .build();
 
         AssignAccountCountriesResponse res = sdk.accounts().assignCountries()
-                .accountID("aa2dc19b-77dd-481f-a0a8-c76f2cfc1372")
+                .accountID("46736fa8-4bf7-4144-8e0e-dbea1eb0805b")
                 .accountCountries(AccountCountries.builder()
                     .countries(List.of(
                         "United States"))
@@ -711,7 +629,7 @@ public class Application {
             .build();
 
         GetMerchantProcessingAgreementResponse res = sdk.accounts().getMerchantProcessingAgreement()
-                .accountID("d2cfd0d3-6efb-4bc4-a193-53f35dd0d912")
+                .accountID("6180d9b9-2377-4190-8530-70a99d31a578")
                 .call();
 
         if (res.responseStream().isPresent()) {

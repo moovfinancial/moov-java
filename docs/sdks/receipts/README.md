@@ -27,7 +27,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.*;
+import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateReceiptsResponse;
 import java.lang.Exception;
@@ -45,11 +45,7 @@ public class Application {
             .build();
 
         CreateReceiptsResponse res = sdk.receipts().create()
-                .requestBody(List.of(
-                    ReceiptRequest.builder()
-                        .kind(ReceiptKind.SALE_CUSTOMER_V1)
-                        .email("jordan.lee@classbooker.dev")
-                        .build()))
+                .requestBody(List.of())
                 .call();
 
         if (res.receiptResponses().isPresent()) {
@@ -106,7 +102,7 @@ public class Application {
             .build();
 
         ListReceiptsResponse res = sdk.receipts().list()
-                .id("c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+                .id("8508cf6c-9ce4-4e35-84c1-4b77320a620b")
                 .call();
 
         if (res.receiptResponses().isPresent()) {

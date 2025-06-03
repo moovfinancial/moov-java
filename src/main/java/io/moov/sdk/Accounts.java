@@ -166,7 +166,7 @@ public class Accounts implements
                 .createAccount(createAccount)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 _baseUrl,
                 "/accounts");
@@ -190,14 +190,15 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "createAccount", 
                       Optional.of(List.of()), 
@@ -210,6 +211,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "createAccount",
                             Optional.of(List.of()),
@@ -220,6 +222,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "createAccount",
                             Optional.of(List.of()), 
@@ -230,6 +233,7 @@ public class Accounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "createAccount",
                             Optional.of(List.of()),
@@ -373,7 +377,7 @@ public class Accounts implements
      */
     public ListAccountsResponse list(
             ListAccountsRequest request) throws Exception {
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 _baseUrl,
                 "/accounts");
@@ -389,14 +393,15 @@ public class Accounts implements
                 this.sdkConfiguration.globals));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "listAccounts", 
                       Optional.of(List.of()), 
@@ -409,6 +414,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "listAccounts",
                             Optional.of(List.of()),
@@ -419,6 +425,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "listAccounts",
                             Optional.of(List.of()), 
@@ -429,6 +436,7 @@ public class Accounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "listAccounts",
                             Optional.of(List.of()),
@@ -564,7 +572,7 @@ public class Accounts implements
                 .accountID(accountID)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 GetAccountRequest.class,
                 _baseUrl,
@@ -577,14 +585,15 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "getAccount", 
                       Optional.of(List.of()), 
@@ -597,6 +606,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getAccount",
                             Optional.of(List.of()),
@@ -607,6 +617,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getAccount",
                             Optional.of(List.of()), 
@@ -617,6 +628,7 @@ public class Accounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getAccount",
                             Optional.of(List.of()),
@@ -781,7 +793,7 @@ public class Accounts implements
                 .patchAccount(patchAccount)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 UpdateAccountRequest.class,
                 _baseUrl,
@@ -807,14 +819,15 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "updateAccount", 
                       Optional.of(List.of()), 
@@ -827,6 +840,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "updateAccount",
                             Optional.of(List.of()),
@@ -837,6 +851,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "updateAccount",
                             Optional.of(List.of()), 
@@ -847,6 +862,7 @@ public class Accounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "updateAccount",
                             Optional.of(List.of()),
@@ -1020,7 +1036,7 @@ public class Accounts implements
                 .accountID(accountID)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 DisconnectAccountRequest.class,
                 _baseUrl,
@@ -1033,14 +1049,15 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "disconnectAccount", 
                       Optional.of(List.of()), 
@@ -1053,6 +1070,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "disconnectAccount",
                             Optional.of(List.of()),
@@ -1063,6 +1081,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "disconnectAccount",
                             Optional.of(List.of()), 
@@ -1073,6 +1092,7 @@ public class Accounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "disconnectAccount",
                             Optional.of(List.of()),
@@ -1212,7 +1232,7 @@ public class Accounts implements
                 .accountID(accountID)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 GetAccountCountriesRequest.class,
                 _baseUrl,
@@ -1225,14 +1245,15 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "getAccountCountries", 
                       Optional.of(List.of()), 
@@ -1245,6 +1266,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getAccountCountries",
                             Optional.of(List.of()),
@@ -1255,6 +1277,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getAccountCountries",
                             Optional.of(List.of()), 
@@ -1265,6 +1288,7 @@ public class Accounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getAccountCountries",
                             Optional.of(List.of()),
@@ -1411,7 +1435,7 @@ public class Accounts implements
                 .accountCountries(accountCountries)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 AssignAccountCountriesRequest.class,
                 _baseUrl,
@@ -1437,14 +1461,15 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "assignAccountCountries", 
                       Optional.of(List.of()), 
@@ -1457,6 +1482,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "assignAccountCountries",
                             Optional.of(List.of()),
@@ -1467,6 +1493,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "assignAccountCountries",
                             Optional.of(List.of()), 
@@ -1477,6 +1504,7 @@ public class Accounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "assignAccountCountries",
                             Optional.of(List.of()),
@@ -1642,7 +1670,7 @@ public class Accounts implements
                 .accountID(accountID)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 GetMerchantProcessingAgreementRequest.class,
                 _baseUrl,
@@ -1655,14 +1683,15 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "getMerchantProcessingAgreement", 
                       Optional.of(List.of()), 
@@ -1675,6 +1704,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getMerchantProcessingAgreement",
                             Optional.of(List.of()),
@@ -1685,6 +1715,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getMerchantProcessingAgreement",
                             Optional.of(List.of()), 
@@ -1695,6 +1726,7 @@ public class Accounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getMerchantProcessingAgreement",
                             Optional.of(List.of()),
@@ -1833,7 +1865,7 @@ public class Accounts implements
                 .referer(referer)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 _baseUrl,
                 "/tos-token");
@@ -1844,14 +1876,15 @@ public class Accounts implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "getTermsOfServiceToken", 
                       Optional.of(List.of()), 
@@ -1864,6 +1897,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getTermsOfServiceToken",
                             Optional.of(List.of()),
@@ -1874,6 +1908,7 @@ public class Accounts implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getTermsOfServiceToken",
                             Optional.of(List.of()), 
@@ -1884,6 +1919,7 @@ public class Accounts implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getTermsOfServiceToken",
                             Optional.of(List.of()),

@@ -35,9 +35,9 @@ public class Industries implements
 
 
     /**
-     * Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
+     * Returns a list of industries relevant to merchant profile enrichment.  Results are ordered by industry name.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @return The call builder
@@ -47,9 +47,9 @@ public class Industries implements
     }
 
     /**
-     * Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
+     * Returns a list of industries relevant to merchant profile enrichment.  Results are ordered by industry name.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @return The response from the API call
@@ -60,9 +60,9 @@ public class Industries implements
     }
     
     /**
-     * Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
+     * Returns a list of industries relevant to merchant profile enrichment.  Results are ordered by industry name.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @param xMoovVersion Specify an API version.
@@ -85,7 +85,7 @@ public class Industries implements
                 .xMoovVersion(xMoovVersion)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 _baseUrl,
                 "/industries");
@@ -96,14 +96,15 @@ public class Industries implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "listIndustries", 
                       Optional.of(List.of()), 
@@ -116,6 +117,7 @@ public class Industries implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "listIndustries",
                             Optional.of(List.of()),
@@ -126,6 +128,7 @@ public class Industries implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "listIndustries",
                             Optional.of(List.of()), 
@@ -136,6 +139,7 @@ public class Industries implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "listIndustries",
                             Optional.of(List.of()),

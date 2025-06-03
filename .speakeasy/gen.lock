@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: e6fb0c93d5cb170dbe2b093ce468930f
+  docChecksum: 9c49204b798bde23002e5729d0227d21
   docVersion: latest
-  speakeasyVersion: 1.551.0
-  generationVersion: 2.610.0
-  releaseVersion: 0.13.6
-  configChecksum: 62918602333c111e8f563481aa5e3619
+  speakeasyVersion: 1.555.0
+  generationVersion: 2.618.0
+  releaseVersion: 0.14.0
+  configChecksum: f94f6e4506e08696caa1600c57abd5fc
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -25,7 +25,7 @@ features:
     includes: 2.81.1
     nameOverrides: 2.81.3
     nullables: 0.1.0
-    sdkHooks: 1.0.0
+    sdkHooks: 1.1.0
     unions: 0.0.6
 generatedFiles:
   - .gitattributes
@@ -208,7 +208,6 @@ generatedFiles:
   - docs/models/components/EnrichedBusinessProfile.md
   - docs/models/components/EnrichedBusinessResponse.md
   - docs/models/components/EnrichedIndustries.md
-  - docs/models/components/EnrichedIndustry.md
   - docs/models/components/EnrichedIndustryCodes.md
   - docs/models/components/EntryMode.md
   - docs/models/components/Error.md
@@ -250,6 +249,7 @@ generatedFiles:
   - docs/models/components/IndividualNameUpdate.md
   - docs/models/components/IndividualProfile.md
   - docs/models/components/IndustryCodes.md
+  - docs/models/components/IndustryTaxonomy.md
   - docs/models/components/IssuedCard.md
   - docs/models/components/IssuedCardAuthorization.md
   - docs/models/components/IssuedCardAuthorizationEvent.md
@@ -1044,7 +1044,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/EnrichedBusinessProfile.java
   - src/main/java/io/moov/sdk/models/components/EnrichedBusinessResponse.java
   - src/main/java/io/moov/sdk/models/components/EnrichedIndustries.java
-  - src/main/java/io/moov/sdk/models/components/EnrichedIndustry.java
   - src/main/java/io/moov/sdk/models/components/EnrichedIndustryCodes.java
   - src/main/java/io/moov/sdk/models/components/EntryMode.java
   - src/main/java/io/moov/sdk/models/components/Error.java
@@ -1086,6 +1085,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/IndividualNameUpdate.java
   - src/main/java/io/moov/sdk/models/components/IndividualProfile.java
   - src/main/java/io/moov/sdk/models/components/IndustryCodes.java
+  - src/main/java/io/moov/sdk/models/components/IndustryTaxonomy.java
   - src/main/java/io/moov/sdk/models/components/IssuedCard.java
   - src/main/java/io/moov/sdk/models/components/IssuedCardAuthorization.java
   - src/main/java/io/moov/sdk/models/components/IssuedCardAuthorizationEvent.java

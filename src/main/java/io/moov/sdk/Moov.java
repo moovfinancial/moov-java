@@ -4,8 +4,8 @@
 package io.moov.sdk;
 
 import io.moov.sdk.utils.HTTPClient;
+import io.moov.sdk.utils.Hook.SdkInitData;
 import io.moov.sdk.utils.RetryConfig;
-import io.moov.sdk.utils.SpeakeasyHTTPClient;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
 import java.util.HashMap;
@@ -230,7 +230,7 @@ public class Moov {
         return terminalApplications;
     }
 
-    private final SDKConfiguration sdkConfiguration;
+    private SDKConfiguration sdkConfiguration;
 
     /**
      * The Builder class allows the configuration of a new instance of the SDK.
@@ -238,6 +238,9 @@ public class Moov {
     public static class Builder {
 
         private final SDKConfiguration sdkConfiguration = new SDKConfiguration();
+        private String serverUrl;
+        private String server;
+        
 
         private Builder() {
         }
@@ -249,18 +252,18 @@ public class Moov {
          * @return The builder instance.
          */
         public Builder client(HTTPClient client) {
-            this.sdkConfiguration.defaultClient = client;
+            this.sdkConfiguration.setClient(client);
             return this;
         }
         
         /**
          * Configures the SDK to use the provided security details.
          *
-         * @param security The security details to use for all requests.
+         * @param security The security details to use for all requests. Can be {@code null}.
          * @return The builder instance.
          */
         public Builder security(io.moov.sdk.models.components.Security security) {
-            this.sdkConfiguration.securitySource = SecuritySource.of(security);
+            this.sdkConfiguration.setSecuritySource(SecuritySource.of(security));
             return this;
         }
 
@@ -271,7 +274,8 @@ public class Moov {
          * @return The builder instance.
          */
         public Builder securitySource(SecuritySource securitySource) {
-            this.sdkConfiguration.securitySource = securitySource;
+            Utils.checkNotNull(securitySource, "securitySource");
+            this.sdkConfiguration.setSecuritySource(securitySource);
             return this;
         }
         
@@ -282,7 +286,7 @@ public class Moov {
          * @return The builder instance.
          */
         public Builder serverURL(String serverUrl) {
-            this.sdkConfiguration.serverUrl = serverUrl;
+            this.serverUrl = serverUrl;
             return this;
         }
 
@@ -294,7 +298,7 @@ public class Moov {
          * @return The builder instance.
          */
         public Builder serverURL(String serverUrl, Map<String, String> params) {
-            this.sdkConfiguration.serverUrl = Utils.templateUrl(serverUrl, params);
+            this.serverUrl = Utils.templateUrl(serverUrl, params);
             return this;
         }
         
@@ -305,8 +309,8 @@ public class Moov {
          * @return The builder instance.
          */
         public Builder serverIndex(int serverIdx) {
-            this.sdkConfiguration.serverIdx = serverIdx;
-            this.sdkConfiguration.serverUrl = SERVERS[serverIdx];
+            this.sdkConfiguration.setServerIdx(serverIdx);
+            this.serverUrl= SERVERS[serverIdx];
             return this;
         }
         
@@ -317,7 +321,7 @@ public class Moov {
          * @return The builder instance.
          */
         public Builder retryConfig(RetryConfig retryConfig) {
-            this.sdkConfiguration.retryConfig = Optional.of(retryConfig);
+            this.sdkConfiguration.setRetryConfig(Optional.of(retryConfig));
             return this;
         }
         /**
@@ -354,19 +358,11 @@ public class Moov {
          * @return The SDK instance.
          */
         public Moov build() {
-            if (sdkConfiguration.defaultClient == null) {
-                sdkConfiguration.defaultClient = new SpeakeasyHTTPClient();
+            if (serverUrl == null || serverUrl.isBlank()) {
+                serverUrl = SERVERS[0];
+                sdkConfiguration.setServerIdx(0);
             }
-	        if (sdkConfiguration.securitySource == null) {
-	    	    sdkConfiguration.securitySource = SecuritySource.of(null);
-	        }
-            if (sdkConfiguration.serverUrl == null || sdkConfiguration.serverUrl.isBlank()) {
-                sdkConfiguration.serverUrl = SERVERS[0];
-                sdkConfiguration.serverIdx = 0;
-            }
-            if (sdkConfiguration.serverUrl.endsWith("/")) {
-                sdkConfiguration.serverUrl = sdkConfiguration.serverUrl.substring(0, sdkConfiguration.serverUrl.length() - 1);
-            }
+            sdkConfiguration.setServerUrl(serverUrl);
             return new Moov(sdkConfiguration);
         }
     }
@@ -382,6 +378,7 @@ public class Moov {
 
     private Moov(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+        this.sdkConfiguration.initialize();
         this.accounts = new Accounts(sdkConfiguration);
         this.adjustments = new Adjustments(sdkConfiguration);
         this.applePay = new ApplePay(sdkConfiguration);
@@ -415,6 +412,9 @@ public class Moov {
         this.ping = new Ping(sdkConfiguration);
         this.receipts = new Receipts(sdkConfiguration);
         this.terminalApplications = new TerminalApplications(sdkConfiguration);
-        this.sdkConfiguration.initialize();
+        
+        SdkInitData data = this.sdkConfiguration.hooks().sdkInit(new SdkInitData(this.sdkConfiguration.resolvedServerUrl(), this.sdkConfiguration.client()));
+        this.sdkConfiguration.setServerUrl(data.baseUrl());
+        this.sdkConfiguration.setClient(data.client());
     }
 }

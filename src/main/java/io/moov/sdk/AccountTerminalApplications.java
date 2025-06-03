@@ -114,7 +114,7 @@ public class AccountTerminalApplications implements
                 .linkAccountTerminalApplication(linkAccountTerminalApplication)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 LinkAccountTerminalApplicationRequest.class,
                 _baseUrl,
@@ -140,14 +140,15 @@ public class AccountTerminalApplications implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "linkAccountTerminalApplication", 
                       Optional.of(List.of()), 
@@ -160,6 +161,7 @@ public class AccountTerminalApplications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "linkAccountTerminalApplication",
                             Optional.of(List.of()),
@@ -170,6 +172,7 @@ public class AccountTerminalApplications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "linkAccountTerminalApplication",
                             Optional.of(List.of()), 
@@ -180,6 +183,7 @@ public class AccountTerminalApplications implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "linkAccountTerminalApplication",
                             Optional.of(List.of()),
@@ -345,7 +349,7 @@ public class AccountTerminalApplications implements
                 .accountID(accountID)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 ListAccountTerminalApplicationsRequest.class,
                 _baseUrl,
@@ -358,14 +362,15 @@ public class AccountTerminalApplications implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "listAccountTerminalApplications", 
                       Optional.of(List.of()), 
@@ -378,6 +383,7 @@ public class AccountTerminalApplications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "listAccountTerminalApplications",
                             Optional.of(List.of()),
@@ -388,6 +394,7 @@ public class AccountTerminalApplications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "listAccountTerminalApplications",
                             Optional.of(List.of()), 
@@ -398,6 +405,7 @@ public class AccountTerminalApplications implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "listAccountTerminalApplications",
                             Optional.of(List.of()),
@@ -538,7 +546,7 @@ public class AccountTerminalApplications implements
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 GetAccountTerminalApplicationRequest.class,
                 _baseUrl,
@@ -551,14 +559,15 @@ public class AccountTerminalApplications implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "getAccountTerminalApplication", 
                       Optional.of(List.of()), 
@@ -571,6 +580,7 @@ public class AccountTerminalApplications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getAccountTerminalApplication",
                             Optional.of(List.of()),
@@ -581,6 +591,7 @@ public class AccountTerminalApplications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getAccountTerminalApplication",
                             Optional.of(List.of()), 
@@ -591,6 +602,7 @@ public class AccountTerminalApplications implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getAccountTerminalApplication",
                             Optional.of(List.of()),
@@ -731,7 +743,7 @@ public class AccountTerminalApplications implements
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         
-        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _baseUrl = this.sdkConfiguration.serverUrl();
         String _url = Utils.generateURL(
                 GetTerminalConfigurationRequest.class,
                 _baseUrl,
@@ -744,14 +756,15 @@ public class AccountTerminalApplications implements
                 SDKConfiguration.USER_AGENT);
         _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "getTerminalConfiguration", 
                       Optional.of(List.of()), 
@@ -764,6 +777,7 @@ public class AccountTerminalApplications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getTerminalConfiguration",
                             Optional.of(List.of()),
@@ -774,6 +788,7 @@ public class AccountTerminalApplications implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getTerminalConfiguration",
                             Optional.of(List.of()), 
@@ -784,6 +799,7 @@ public class AccountTerminalApplications implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getTerminalConfiguration",
                             Optional.of(List.of()),

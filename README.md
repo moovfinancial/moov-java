@@ -45,7 +45,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.13.6'
+implementation 'io.moov:sdk:0.14.0'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.13.6</version>
+    <version>0.14.0</version>
 </dependency>
 ```
 
@@ -697,9 +697,9 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 ### [industries()](docs/sdks/industries/README.md)
 
-* [list](docs/sdks/industries/README.md#list) - Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
+* [list](docs/sdks/industries/README.md#list) - Returns a list of industries relevant to merchant profile enrichment.  Results are ordered by industry name.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
 you'll need to specify the `/profile-enrichment.read` scope.
 
 ### [institutions()](docs/sdks/institutions/README.md)

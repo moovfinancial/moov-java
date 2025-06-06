@@ -45,7 +45,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.14.0'
+implementation 'io.moov:sdk:0.14.1'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.14.0</version>
+    <version>0.14.1</version>
 </dependency>
 ```
 
@@ -115,6 +115,7 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
 
         Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -171,6 +172,7 @@ public class Application {
                     .username("")
                     .password("")
                     .build())
+                .xMoovVersion("v2024.01.00")
             .build();
 
         CreateAccountResponse res = sdk.accounts().create()
@@ -704,6 +706,14 @@ you'll need to specify the `/profile-enrichment.read` scope.
 
 ### [institutions()](docs/sdks/institutions/README.md)
 
+* [searchInstitutions](docs/sdks/institutions/README.md#searchinstitutions) - Search for financial institutions by name or routing number.
+
+This endpoint returns metadata about each matched institution, including basic identifying details (such as name, routing number, and address) and information about which payment services they support (e.g., ACH, RTP, and Wire).
+
+This can be used to validate a financial institution before initiating payment activity, or to check which payment rails are available for a given routing number.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/institutions.read` scope.
 * [search](docs/sdks/institutions/README.md#search) - Search for institutions by either their name or routing number.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -1072,6 +1082,7 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
 
         Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -1119,6 +1130,7 @@ public class Application {
 
         Moov sdk = Moov.builder()
                 .serverURL("https://api.moov.io")
+                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")

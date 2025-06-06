@@ -14,6 +14,7 @@ public class Application {
     public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
 
         Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")

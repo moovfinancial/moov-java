@@ -47,6 +47,7 @@ import io.moov.sdk.models.components.UpdateRepresentative;
 import io.moov.sdk.models.components.UpdateUnderwriting;
 import io.moov.sdk.models.components.UpsertSchedule;
 import java.lang.Exception;
+import java.lang.Long;
 import java.lang.String;
 import java.util.List;
 import java.util.Optional;
@@ -797,6 +798,14 @@ public class SDKMethodInterfaces {
     public interface MethodCallListIndustries {
         ListIndustriesResponse list(
             Optional<String> xMoovVersion) throws Exception;
+    }
+
+    public interface MethodCallSearchInstitutions {
+        SearchInstitutionsResponse searchInstitutions(
+            Optional<String> xMoovVersion,
+            Optional<String> name,
+            Optional<String> routingNumber,
+            Optional<Long> limit) throws Exception;
     }
 
     public interface MethodCallListInstitutions {

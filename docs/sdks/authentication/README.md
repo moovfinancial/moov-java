@@ -34,6 +34,7 @@ public class Application {
     public static void main(String[] args) throws GenericError, RevokeTokenRequestError, Exception {
 
         Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")
@@ -93,6 +94,7 @@ public class Application {
     public static void main(String[] args) throws GenericError, AuthTokenRequestError, Exception {
 
         Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
                     .username("")
                     .password("")

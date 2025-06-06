@@ -5,12 +5,16 @@ package io.moov.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.FinancialInstitutions;
+import io.moov.sdk.models.components.InstitutionsSearchResponse;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.ListInstitutionsRequest;
 import io.moov.sdk.models.operations.ListInstitutionsRequestBuilder;
 import io.moov.sdk.models.operations.ListInstitutionsResponse;
 import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
+import io.moov.sdk.models.operations.SearchInstitutionsRequest;
+import io.moov.sdk.models.operations.SearchInstitutionsRequestBuilder;
+import io.moov.sdk.models.operations.SearchInstitutionsResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -19,6 +23,7 @@ import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
+import java.lang.Long;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -26,6 +31,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Institutions implements
+            MethodCallSearchInstitutions,
             MethodCallListInstitutions {
 
     private final SDKConfiguration sdkConfiguration;
@@ -33,6 +39,217 @@ public class Institutions implements
     Institutions(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
+
+    /**
+     * Search for financial institutions by name or routing number.
+     * 
+     * <p>This endpoint returns metadata about each matched institution, including basic identifying details (such as name, routing number, and address) and information about which payment services they support (e.g., ACH, RTP, and Wire).
+     * 
+     * <p>This can be used to validate a financial institution before initiating payment activity, or to check which payment rails are available for a given routing number.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/institutions.read` scope.
+     * 
+     * @return The call builder
+     */
+    public SearchInstitutionsRequestBuilder searchInstitutions() {
+        return new SearchInstitutionsRequestBuilder(this);
+    }
+
+    /**
+     * Search for financial institutions by name or routing number.
+     * 
+     * <p>This endpoint returns metadata about each matched institution, including basic identifying details (such as name, routing number, and address) and information about which payment services they support (e.g., ACH, RTP, and Wire).
+     * 
+     * <p>This can be used to validate a financial institution before initiating payment activity, or to check which payment rails are available for a given routing number.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/institutions.read` scope.
+     * 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public SearchInstitutionsResponse searchInstitutionsDirect() throws Exception {
+        return searchInstitutions(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    }
+    
+    /**
+     * Search for financial institutions by name or routing number.
+     * 
+     * <p>This endpoint returns metadata about each matched institution, including basic identifying details (such as name, routing number, and address) and information about which payment services they support (e.g., ACH, RTP, and Wire).
+     * 
+     * <p>This can be used to validate a financial institution before initiating payment activity, or to check which payment rails are available for a given routing number.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/institutions.read` scope.
+     * 
+     * @param xMoovVersion Specify an API version.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param name Name of the financial institution. Either `name` or `routingNumber` is required.
+     * @param routingNumber Routing number for a financial institution. Either `routingNumber` or `name` is required.
+     * @param limit Maximum results returned by a search.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public SearchInstitutionsResponse searchInstitutions(
+            Optional<String> xMoovVersion,
+            Optional<String> name,
+            Optional<String> routingNumber,
+            Optional<Long> limit) throws Exception {
+        SearchInstitutionsRequest request =
+            SearchInstitutionsRequest
+                .builder()
+                .xMoovVersion(xMoovVersion)
+                .name(name)
+                .routingNumber(routingNumber)
+                .limit(limit)
+                .build();
+        
+        String _baseUrl = this.sdkConfiguration.serverUrl();
+        String _url = Utils.generateURL(
+                _baseUrl,
+                "/institutions");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                SearchInstitutionsRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+        
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
+                      _baseUrl,
+                      "searchInstitutions", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            this.sdkConfiguration,
+                            _baseUrl,
+                            "searchInstitutions",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
+                            _baseUrl,
+                            "searchInstitutions",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            this.sdkConfiguration,
+                            _baseUrl,
+                            "searchInstitutions",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        SearchInstitutionsResponse.Builder _resBuilder = 
+            SearchInstitutionsResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        SearchInstitutionsResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                InstitutionsSearchResponse _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<InstitutionsSearchResponse>() {});
+                _res.withInstitutionsSearchResponse(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new APIException(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
 
 
     /**

@@ -73,6 +73,12 @@ public class ListTransfersRequest {
     private Optional<String> scheduleID;
 
     /**
+     * Optional ID to filter for transfers associated with the payment link.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=paymentLinkID")
+    private Optional<String> paymentLinkID;
+
+    /**
      * Optional parameter to only return refunded transfers.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=refunded")
@@ -102,6 +108,7 @@ public class ListTransfersRequest {
             Optional<OffsetDateTime> endDateTime,
             Optional<String> groupID,
             Optional<String> scheduleID,
+            Optional<String> paymentLinkID,
             Optional<Boolean> refunded,
             Optional<Boolean> disputed,
             Optional<Long> skip,
@@ -114,6 +121,7 @@ public class ListTransfersRequest {
         Utils.checkNotNull(endDateTime, "endDateTime");
         Utils.checkNotNull(groupID, "groupID");
         Utils.checkNotNull(scheduleID, "scheduleID");
+        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
         Utils.checkNotNull(refunded, "refunded");
         Utils.checkNotNull(disputed, "disputed");
         Utils.checkNotNull(skip, "skip");
@@ -126,6 +134,7 @@ public class ListTransfersRequest {
         this.endDateTime = endDateTime;
         this.groupID = groupID;
         this.scheduleID = scheduleID;
+        this.paymentLinkID = paymentLinkID;
         this.refunded = refunded;
         this.disputed = disputed;
         this.skip = skip;
@@ -135,7 +144,7 @@ public class ListTransfersRequest {
     
     public ListTransfersRequest(
             String accountID) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), accountID);
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), accountID);
     }
 
     /**
@@ -202,6 +211,14 @@ public class ListTransfersRequest {
     @JsonIgnore
     public Optional<String> scheduleID() {
         return scheduleID;
+    }
+
+    /**
+     * Optional ID to filter for transfers associated with the payment link.
+     */
+    @JsonIgnore
+    public Optional<String> paymentLinkID() {
+        return paymentLinkID;
     }
 
     /**
@@ -382,6 +399,24 @@ public class ListTransfersRequest {
     }
 
     /**
+     * Optional ID to filter for transfers associated with the payment link.
+     */
+    public ListTransfersRequest withPaymentLinkID(String paymentLinkID) {
+        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+        this.paymentLinkID = Optional.ofNullable(paymentLinkID);
+        return this;
+    }
+
+    /**
+     * Optional ID to filter for transfers associated with the payment link.
+     */
+    public ListTransfersRequest withPaymentLinkID(Optional<String> paymentLinkID) {
+        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+        this.paymentLinkID = paymentLinkID;
+        return this;
+    }
+
+    /**
      * Optional parameter to only return refunded transfers.
      */
     public ListTransfersRequest withRefunded(boolean refunded) {
@@ -465,6 +500,7 @@ public class ListTransfersRequest {
             Objects.deepEquals(this.endDateTime, other.endDateTime) &&
             Objects.deepEquals(this.groupID, other.groupID) &&
             Objects.deepEquals(this.scheduleID, other.scheduleID) &&
+            Objects.deepEquals(this.paymentLinkID, other.paymentLinkID) &&
             Objects.deepEquals(this.refunded, other.refunded) &&
             Objects.deepEquals(this.disputed, other.disputed) &&
             Objects.deepEquals(this.skip, other.skip) &&
@@ -482,6 +518,7 @@ public class ListTransfersRequest {
             endDateTime,
             groupID,
             scheduleID,
+            paymentLinkID,
             refunded,
             disputed,
             skip,
@@ -499,6 +536,7 @@ public class ListTransfersRequest {
                 "endDateTime", endDateTime,
                 "groupID", groupID,
                 "scheduleID", scheduleID,
+                "paymentLinkID", paymentLinkID,
                 "refunded", refunded,
                 "disputed", disputed,
                 "skip", skip,
@@ -521,6 +559,8 @@ public class ListTransfersRequest {
         private Optional<String> groupID = Optional.empty();
  
         private Optional<String> scheduleID = Optional.empty();
+ 
+        private Optional<String> paymentLinkID = Optional.empty();
  
         private Optional<Boolean> refunded = Optional.empty();
  
@@ -679,6 +719,24 @@ public class ListTransfersRequest {
         }
 
         /**
+         * Optional ID to filter for transfers associated with the payment link.
+         */
+        public Builder paymentLinkID(String paymentLinkID) {
+            Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+            this.paymentLinkID = Optional.ofNullable(paymentLinkID);
+            return this;
+        }
+
+        /**
+         * Optional ID to filter for transfers associated with the payment link.
+         */
+        public Builder paymentLinkID(Optional<String> paymentLinkID) {
+            Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+            this.paymentLinkID = paymentLinkID;
+            return this;
+        }
+
+        /**
          * Optional parameter to only return refunded transfers.
          */
         public Builder refunded(boolean refunded) {
@@ -756,6 +814,7 @@ public class ListTransfersRequest {
                 endDateTime,
                 groupID,
                 scheduleID,
+                paymentLinkID,
                 refunded,
                 disputed,
                 skip,

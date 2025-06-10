@@ -143,6 +143,10 @@ public class Transfer {
     @JsonProperty("occurrenceID")
     private Optional<String> occurrenceID;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("paymentLinkID")
+    private Optional<String> paymentLinkID;
+
     /**
      * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
      */
@@ -176,6 +180,7 @@ public class Transfer {
             @JsonProperty("sweepID") Optional<String> sweepID,
             @JsonProperty("scheduleID") Optional<String> scheduleID,
             @JsonProperty("occurrenceID") Optional<String> occurrenceID,
+            @JsonProperty("paymentLinkID") Optional<String> paymentLinkID,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(createdOn, "createdOn");
@@ -201,6 +206,7 @@ public class Transfer {
         Utils.checkNotNull(sweepID, "sweepID");
         Utils.checkNotNull(scheduleID, "scheduleID");
         Utils.checkNotNull(occurrenceID, "occurrenceID");
+        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.transferID = transferID;
         this.createdOn = createdOn;
@@ -226,6 +232,7 @@ public class Transfer {
         this.sweepID = sweepID;
         this.scheduleID = scheduleID;
         this.occurrenceID = occurrenceID;
+        this.paymentLinkID = paymentLinkID;
         this.salesTaxAmount = salesTaxAmount;
     }
     
@@ -236,7 +243,7 @@ public class Transfer {
             TransferDestination destination,
             TransferStatus status,
             Amount amount) {
-        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -394,6 +401,11 @@ public class Transfer {
     @JsonIgnore
     public Optional<String> occurrenceID() {
         return occurrenceID;
+    }
+
+    @JsonIgnore
+    public Optional<String> paymentLinkID() {
+        return paymentLinkID;
     }
 
     /**
@@ -712,6 +724,18 @@ public class Transfer {
         return this;
     }
 
+    public Transfer withPaymentLinkID(String paymentLinkID) {
+        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+        this.paymentLinkID = Optional.ofNullable(paymentLinkID);
+        return this;
+    }
+
+    public Transfer withPaymentLinkID(Optional<String> paymentLinkID) {
+        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+        this.paymentLinkID = paymentLinkID;
+        return this;
+    }
+
     /**
      * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
      */
@@ -765,6 +789,7 @@ public class Transfer {
             Objects.deepEquals(this.sweepID, other.sweepID) &&
             Objects.deepEquals(this.scheduleID, other.scheduleID) &&
             Objects.deepEquals(this.occurrenceID, other.occurrenceID) &&
+            Objects.deepEquals(this.paymentLinkID, other.paymentLinkID) &&
             Objects.deepEquals(this.salesTaxAmount, other.salesTaxAmount);
     }
     
@@ -795,6 +820,7 @@ public class Transfer {
             sweepID,
             scheduleID,
             occurrenceID,
+            paymentLinkID,
             salesTaxAmount);
     }
     
@@ -825,6 +851,7 @@ public class Transfer {
                 "sweepID", sweepID,
                 "scheduleID", scheduleID,
                 "occurrenceID", occurrenceID,
+                "paymentLinkID", paymentLinkID,
                 "salesTaxAmount", salesTaxAmount);
     }
     
@@ -877,6 +904,8 @@ public class Transfer {
         private Optional<String> scheduleID = Optional.empty();
  
         private Optional<String> occurrenceID = Optional.empty();
+ 
+        private Optional<String> paymentLinkID = Optional.empty();
  
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
         
@@ -1187,6 +1216,18 @@ public class Transfer {
             return this;
         }
 
+        public Builder paymentLinkID(String paymentLinkID) {
+            Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+            this.paymentLinkID = Optional.ofNullable(paymentLinkID);
+            return this;
+        }
+
+        public Builder paymentLinkID(Optional<String> paymentLinkID) {
+            Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+            this.paymentLinkID = paymentLinkID;
+            return this;
+        }
+
         /**
          * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
          */
@@ -1231,6 +1272,7 @@ public class Transfer {
                 sweepID,
                 scheduleID,
                 occurrenceID,
+                paymentLinkID,
                 salesTaxAmount);
         }
     }

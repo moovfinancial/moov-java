@@ -5,11 +5,15 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * BankAccountException
@@ -42,8 +46,9 @@ public class BankAccountException {
      * - R38: Stop Payment on Source Document (Adjustment Entry)
      * - R39: Improper Source Document
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("achReturnCode")
-    private ACHReturnCode achReturnCode;
+    private Optional<? extends ACHReturnCode> achReturnCode;
 
     /**
      * The rejection code of an RTP transaction that caused the bank account status to change.
@@ -56,8 +61,9 @@ public class BankAccountException {
      * - AG03: Transaction Type Not Supported
      * - MD07: Customer Deceased
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rtpRejectionCode")
-    private RTPRejectionCode rtpRejectionCode;
+    private Optional<? extends RTPRejectionCode> rtpRejectionCode;
 
     /**
      * Details related to an `errored` or `verificationFailed` bank account status.
@@ -67,8 +73,8 @@ public class BankAccountException {
 
     @JsonCreator
     public BankAccountException(
-            @JsonProperty("achReturnCode") ACHReturnCode achReturnCode,
-            @JsonProperty("rtpRejectionCode") RTPRejectionCode rtpRejectionCode,
+            @JsonProperty("achReturnCode") Optional<? extends ACHReturnCode> achReturnCode,
+            @JsonProperty("rtpRejectionCode") Optional<? extends RTPRejectionCode> rtpRejectionCode,
             @JsonProperty("description") String description) {
         Utils.checkNotNull(achReturnCode, "achReturnCode");
         Utils.checkNotNull(rtpRejectionCode, "rtpRejectionCode");
@@ -76,6 +82,11 @@ public class BankAccountException {
         this.achReturnCode = achReturnCode;
         this.rtpRejectionCode = rtpRejectionCode;
         this.description = description;
+    }
+    
+    public BankAccountException(
+            String description) {
+        this(Optional.empty(), Optional.empty(), description);
     }
 
     /**
@@ -102,9 +113,10 @@ public class BankAccountException {
      * - R38: Stop Payment on Source Document (Adjustment Entry)
      * - R39: Improper Source Document
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public ACHReturnCode achReturnCode() {
-        return achReturnCode;
+    public Optional<ACHReturnCode> achReturnCode() {
+        return (Optional<ACHReturnCode>) achReturnCode;
     }
 
     /**
@@ -118,9 +130,10 @@ public class BankAccountException {
      * - AG03: Transaction Type Not Supported
      * - MD07: Customer Deceased
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public RTPRejectionCode rtpRejectionCode() {
-        return rtpRejectionCode;
+    public Optional<RTPRejectionCode> rtpRejectionCode() {
+        return (Optional<RTPRejectionCode>) rtpRejectionCode;
     }
 
     /**
@@ -161,6 +174,36 @@ public class BankAccountException {
      */
     public BankAccountException withAchReturnCode(ACHReturnCode achReturnCode) {
         Utils.checkNotNull(achReturnCode, "achReturnCode");
+        this.achReturnCode = Optional.ofNullable(achReturnCode);
+        return this;
+    }
+
+    /**
+     * The return code of an ACH transaction that caused the bank account status to change.
+     * 
+     * <p>- R02: Account Closed
+     * - R03: No Account/Unable to Locate Account
+     * - R04: Invalid Account Number
+     * - R05: Improper Debit to Consumer Account
+     * - R07: Authorization Revoked by Customer
+     * - R08: Payment Stopped
+     * - R10: Customer Advises Originator is Not Known or Authorized to Receiver
+     * - R11: Customer Advises Entry Not in Accordance with the Terms of the Authorization
+     * - R12: Branch Sold to Another DFI
+     * - R13: RDFI not qualified to participate
+     * - R14: Representative payee deceased or unable to continue in that capacity
+     * - R15: Beneficiary or bank account holder
+     * - R16: Bank account frozen
+     * - R17: Entry with Invalid Account Number Initiated Under Questionable Circumstances
+     * - R20: Non-payment bank account
+     * - R23: Credit entry refused by receiver
+     * - R29: Corporate customer advises not authorized
+     * - R34: Limited participation RDFI
+     * - R38: Stop Payment on Source Document (Adjustment Entry)
+     * - R39: Improper Source Document
+     */
+    public BankAccountException withAchReturnCode(Optional<? extends ACHReturnCode> achReturnCode) {
+        Utils.checkNotNull(achReturnCode, "achReturnCode");
         this.achReturnCode = achReturnCode;
         return this;
     }
@@ -177,6 +220,23 @@ public class BankAccountException {
      * - MD07: Customer Deceased
      */
     public BankAccountException withRtpRejectionCode(RTPRejectionCode rtpRejectionCode) {
+        Utils.checkNotNull(rtpRejectionCode, "rtpRejectionCode");
+        this.rtpRejectionCode = Optional.ofNullable(rtpRejectionCode);
+        return this;
+    }
+
+    /**
+     * The rejection code of an RTP transaction that caused the bank account status to change.
+     * 
+     * <p>- AC03: Account Invalid
+     * - AC04: Account Closed
+     * - AC06: Account Blocked
+     * - AC14: Creditor Account Type Invalid
+     * - AG01: Transactions Forbidden On Account
+     * - AG03: Transaction Type Not Supported
+     * - MD07: Customer Deceased
+     */
+    public BankAccountException withRtpRejectionCode(Optional<? extends RTPRejectionCode> rtpRejectionCode) {
         Utils.checkNotNull(rtpRejectionCode, "rtpRejectionCode");
         this.rtpRejectionCode = rtpRejectionCode;
         return this;
@@ -225,9 +285,9 @@ public class BankAccountException {
     
     public final static class Builder {
  
-        private ACHReturnCode achReturnCode;
+        private Optional<? extends ACHReturnCode> achReturnCode = Optional.empty();
  
-        private RTPRejectionCode rtpRejectionCode;
+        private Optional<? extends RTPRejectionCode> rtpRejectionCode = Optional.empty();
  
         private String description;
         
@@ -261,6 +321,36 @@ public class BankAccountException {
          */
         public Builder achReturnCode(ACHReturnCode achReturnCode) {
             Utils.checkNotNull(achReturnCode, "achReturnCode");
+            this.achReturnCode = Optional.ofNullable(achReturnCode);
+            return this;
+        }
+
+        /**
+         * The return code of an ACH transaction that caused the bank account status to change.
+         * 
+         * <p>- R02: Account Closed
+         * - R03: No Account/Unable to Locate Account
+         * - R04: Invalid Account Number
+         * - R05: Improper Debit to Consumer Account
+         * - R07: Authorization Revoked by Customer
+         * - R08: Payment Stopped
+         * - R10: Customer Advises Originator is Not Known or Authorized to Receiver
+         * - R11: Customer Advises Entry Not in Accordance with the Terms of the Authorization
+         * - R12: Branch Sold to Another DFI
+         * - R13: RDFI not qualified to participate
+         * - R14: Representative payee deceased or unable to continue in that capacity
+         * - R15: Beneficiary or bank account holder
+         * - R16: Bank account frozen
+         * - R17: Entry with Invalid Account Number Initiated Under Questionable Circumstances
+         * - R20: Non-payment bank account
+         * - R23: Credit entry refused by receiver
+         * - R29: Corporate customer advises not authorized
+         * - R34: Limited participation RDFI
+         * - R38: Stop Payment on Source Document (Adjustment Entry)
+         * - R39: Improper Source Document
+         */
+        public Builder achReturnCode(Optional<? extends ACHReturnCode> achReturnCode) {
+            Utils.checkNotNull(achReturnCode, "achReturnCode");
             this.achReturnCode = achReturnCode;
             return this;
         }
@@ -277,6 +367,23 @@ public class BankAccountException {
          * - MD07: Customer Deceased
          */
         public Builder rtpRejectionCode(RTPRejectionCode rtpRejectionCode) {
+            Utils.checkNotNull(rtpRejectionCode, "rtpRejectionCode");
+            this.rtpRejectionCode = Optional.ofNullable(rtpRejectionCode);
+            return this;
+        }
+
+        /**
+         * The rejection code of an RTP transaction that caused the bank account status to change.
+         * 
+         * <p>- AC03: Account Invalid
+         * - AC04: Account Closed
+         * - AC06: Account Blocked
+         * - AC14: Creditor Account Type Invalid
+         * - AG01: Transactions Forbidden On Account
+         * - AG03: Transaction Type Not Supported
+         * - MD07: Customer Deceased
+         */
+        public Builder rtpRejectionCode(Optional<? extends RTPRejectionCode> rtpRejectionCode) {
             Utils.checkNotNull(rtpRejectionCode, "rtpRejectionCode");
             this.rtpRejectionCode = rtpRejectionCode;
             return this;

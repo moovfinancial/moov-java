@@ -22,17 +22,14 @@ public class WebhookDataTransferCreated {
     @JsonProperty("transferID")
     private String transferID;
 
-    /**
-     * Status of a transfer.
-     */
     @JsonProperty("status")
-    private TransferStatus status;
+    private WebhookDataTransferStatus status;
 
     @JsonCreator
     public WebhookDataTransferCreated(
             @JsonProperty("accountID") String accountID,
             @JsonProperty("transferID") String transferID,
-            @JsonProperty("status") TransferStatus status) {
+            @JsonProperty("status") WebhookDataTransferStatus status) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(status, "status");
@@ -54,11 +51,8 @@ public class WebhookDataTransferCreated {
         return transferID;
     }
 
-    /**
-     * Status of a transfer.
-     */
     @JsonIgnore
-    public TransferStatus status() {
+    public WebhookDataTransferStatus status() {
         return status;
     }
 
@@ -81,10 +75,7 @@ public class WebhookDataTransferCreated {
         return this;
     }
 
-    /**
-     * Status of a transfer.
-     */
-    public WebhookDataTransferCreated withStatus(TransferStatus status) {
+    public WebhookDataTransferCreated withStatus(WebhookDataTransferStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -128,7 +119,7 @@ public class WebhookDataTransferCreated {
  
         private String transferID;
  
-        private TransferStatus status;
+        private WebhookDataTransferStatus status;
         
         private Builder() {
           // force use of static builder() method
@@ -149,10 +140,7 @@ public class WebhookDataTransferCreated {
             return this;
         }
 
-        /**
-         * Status of a transfer.
-         */
-        public Builder status(TransferStatus status) {
+        public Builder status(WebhookDataTransferStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

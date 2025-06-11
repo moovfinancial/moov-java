@@ -29,12 +29,9 @@ public class WebhookDataWalletTransactionUpdated {
     @JsonProperty("status")
     private WalletTransactionStatus status;
 
-    /**
-     * The available balance of a wallet.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("availableBalance")
-    private Optional<? extends WebhookWalletAvailableBalance> availableBalance;
+    private Optional<? extends WalletAvailableBalance> availableBalance;
 
     @JsonCreator
     public WebhookDataWalletTransactionUpdated(
@@ -42,7 +39,7 @@ public class WebhookDataWalletTransactionUpdated {
             @JsonProperty("walletID") String walletID,
             @JsonProperty("transactionID") String transactionID,
             @JsonProperty("status") WalletTransactionStatus status,
-            @JsonProperty("availableBalance") Optional<? extends WebhookWalletAvailableBalance> availableBalance) {
+            @JsonProperty("availableBalance") Optional<? extends WalletAvailableBalance> availableBalance) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(transactionID, "transactionID");
@@ -83,13 +80,10 @@ public class WebhookDataWalletTransactionUpdated {
         return status;
     }
 
-    /**
-     * The available balance of a wallet.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<WebhookWalletAvailableBalance> availableBalance() {
-        return (Optional<WebhookWalletAvailableBalance>) availableBalance;
+    public Optional<WalletAvailableBalance> availableBalance() {
+        return (Optional<WalletAvailableBalance>) availableBalance;
     }
 
     public final static Builder builder() {
@@ -120,19 +114,13 @@ public class WebhookDataWalletTransactionUpdated {
         return this;
     }
 
-    /**
-     * The available balance of a wallet.
-     */
-    public WebhookDataWalletTransactionUpdated withAvailableBalance(WebhookWalletAvailableBalance availableBalance) {
+    public WebhookDataWalletTransactionUpdated withAvailableBalance(WalletAvailableBalance availableBalance) {
         Utils.checkNotNull(availableBalance, "availableBalance");
         this.availableBalance = Optional.ofNullable(availableBalance);
         return this;
     }
 
-    /**
-     * The available balance of a wallet.
-     */
-    public WebhookDataWalletTransactionUpdated withAvailableBalance(Optional<? extends WebhookWalletAvailableBalance> availableBalance) {
+    public WebhookDataWalletTransactionUpdated withAvailableBalance(Optional<? extends WalletAvailableBalance> availableBalance) {
         Utils.checkNotNull(availableBalance, "availableBalance");
         this.availableBalance = availableBalance;
         return this;
@@ -186,7 +174,7 @@ public class WebhookDataWalletTransactionUpdated {
  
         private WalletTransactionStatus status;
  
-        private Optional<? extends WebhookWalletAvailableBalance> availableBalance = Optional.empty();
+        private Optional<? extends WalletAvailableBalance> availableBalance = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -216,19 +204,13 @@ public class WebhookDataWalletTransactionUpdated {
             return this;
         }
 
-        /**
-         * The available balance of a wallet.
-         */
-        public Builder availableBalance(WebhookWalletAvailableBalance availableBalance) {
+        public Builder availableBalance(WalletAvailableBalance availableBalance) {
             Utils.checkNotNull(availableBalance, "availableBalance");
             this.availableBalance = Optional.ofNullable(availableBalance);
             return this;
         }
 
-        /**
-         * The available balance of a wallet.
-         */
-        public Builder availableBalance(Optional<? extends WebhookWalletAvailableBalance> availableBalance) {
+        public Builder availableBalance(Optional<? extends WalletAvailableBalance> availableBalance) {
             Utils.checkNotNull(availableBalance, "availableBalance");
             this.availableBalance = availableBalance;
             return this;

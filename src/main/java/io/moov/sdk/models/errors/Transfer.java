@@ -157,8 +157,8 @@ public class Transfer extends RuntimeException {
     private Optional<String> occurrenceID;
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("paymentLinkID")
-    private Optional<String> paymentLinkID;
+    @JsonProperty("paymentLinkCode")
+    private Optional<String> paymentLinkCode;
 
     /**
      * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
@@ -193,7 +193,7 @@ public class Transfer extends RuntimeException {
             @JsonProperty("sweepID") Optional<String> sweepID,
             @JsonProperty("scheduleID") Optional<String> scheduleID,
             @JsonProperty("occurrenceID") Optional<String> occurrenceID,
-            @JsonProperty("paymentLinkID") Optional<String> paymentLinkID,
+            @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(createdOn, "createdOn");
@@ -219,7 +219,7 @@ public class Transfer extends RuntimeException {
         Utils.checkNotNull(sweepID, "sweepID");
         Utils.checkNotNull(scheduleID, "scheduleID");
         Utils.checkNotNull(occurrenceID, "occurrenceID");
-        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+        Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.transferID = transferID;
         this.createdOn = createdOn;
@@ -245,7 +245,7 @@ public class Transfer extends RuntimeException {
         this.sweepID = sweepID;
         this.scheduleID = scheduleID;
         this.occurrenceID = occurrenceID;
-        this.paymentLinkID = paymentLinkID;
+        this.paymentLinkCode = paymentLinkCode;
         this.salesTaxAmount = salesTaxAmount;
     }
     
@@ -417,8 +417,8 @@ public class Transfer extends RuntimeException {
     }
 
     @JsonIgnore
-    public Optional<String> paymentLinkID() {
-        return paymentLinkID;
+    public Optional<String> paymentLinkCode() {
+        return paymentLinkCode;
     }
 
     /**
@@ -737,15 +737,15 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
-    public Transfer withPaymentLinkID(String paymentLinkID) {
-        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
-        this.paymentLinkID = Optional.ofNullable(paymentLinkID);
+    public Transfer withPaymentLinkCode(String paymentLinkCode) {
+        Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+        this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
         return this;
     }
 
-    public Transfer withPaymentLinkID(Optional<String> paymentLinkID) {
-        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
-        this.paymentLinkID = paymentLinkID;
+    public Transfer withPaymentLinkCode(Optional<String> paymentLinkCode) {
+        Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+        this.paymentLinkCode = paymentLinkCode;
         return this;
     }
 
@@ -802,7 +802,7 @@ public class Transfer extends RuntimeException {
             Objects.deepEquals(this.sweepID, other.sweepID) &&
             Objects.deepEquals(this.scheduleID, other.scheduleID) &&
             Objects.deepEquals(this.occurrenceID, other.occurrenceID) &&
-            Objects.deepEquals(this.paymentLinkID, other.paymentLinkID) &&
+            Objects.deepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
             Objects.deepEquals(this.salesTaxAmount, other.salesTaxAmount);
     }
     
@@ -833,7 +833,7 @@ public class Transfer extends RuntimeException {
             sweepID,
             scheduleID,
             occurrenceID,
-            paymentLinkID,
+            paymentLinkCode,
             salesTaxAmount);
     }
     
@@ -864,7 +864,7 @@ public class Transfer extends RuntimeException {
                 "sweepID", sweepID,
                 "scheduleID", scheduleID,
                 "occurrenceID", occurrenceID,
-                "paymentLinkID", paymentLinkID,
+                "paymentLinkCode", paymentLinkCode,
                 "salesTaxAmount", salesTaxAmount);
     }
     
@@ -918,7 +918,7 @@ public class Transfer extends RuntimeException {
  
         private Optional<String> occurrenceID = Optional.empty();
  
-        private Optional<String> paymentLinkID = Optional.empty();
+        private Optional<String> paymentLinkCode = Optional.empty();
  
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
         
@@ -1229,15 +1229,15 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
-        public Builder paymentLinkID(String paymentLinkID) {
-            Utils.checkNotNull(paymentLinkID, "paymentLinkID");
-            this.paymentLinkID = Optional.ofNullable(paymentLinkID);
+        public Builder paymentLinkCode(String paymentLinkCode) {
+            Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+            this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
             return this;
         }
 
-        public Builder paymentLinkID(Optional<String> paymentLinkID) {
-            Utils.checkNotNull(paymentLinkID, "paymentLinkID");
-            this.paymentLinkID = paymentLinkID;
+        public Builder paymentLinkCode(Optional<String> paymentLinkCode) {
+            Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+            this.paymentLinkCode = paymentLinkCode;
             return this;
         }
 
@@ -1285,7 +1285,7 @@ public class Transfer extends RuntimeException {
                 sweepID,
                 scheduleID,
                 occurrenceID,
-                paymentLinkID,
+                paymentLinkCode,
                 salesTaxAmount);
         }
     }

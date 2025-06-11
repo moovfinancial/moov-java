@@ -14,6 +14,7 @@ import java.util.Optional;
  * <p>The type of event that occurred.
  */
 public enum WebhookEventType {
+    WILDCARD("*"),
     ACCOUNT_CREATED("account.created"),
     ACCOUNT_UPDATED("account.updated"),
     ACCOUNT_DELETED("account.deleted"),

@@ -73,10 +73,10 @@ public class ListTransfersRequest {
     private Optional<String> scheduleID;
 
     /**
-     * Optional ID to filter for transfers associated with the payment link.
+     * Optional code to filter for transfers associated with the payment link.
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=paymentLinkID")
-    private Optional<String> paymentLinkID;
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=paymentLinkCode")
+    private Optional<String> paymentLinkCode;
 
     /**
      * Optional parameter to only return refunded transfers.
@@ -108,7 +108,7 @@ public class ListTransfersRequest {
             Optional<OffsetDateTime> endDateTime,
             Optional<String> groupID,
             Optional<String> scheduleID,
-            Optional<String> paymentLinkID,
+            Optional<String> paymentLinkCode,
             Optional<Boolean> refunded,
             Optional<Boolean> disputed,
             Optional<Long> skip,
@@ -121,7 +121,7 @@ public class ListTransfersRequest {
         Utils.checkNotNull(endDateTime, "endDateTime");
         Utils.checkNotNull(groupID, "groupID");
         Utils.checkNotNull(scheduleID, "scheduleID");
-        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
+        Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
         Utils.checkNotNull(refunded, "refunded");
         Utils.checkNotNull(disputed, "disputed");
         Utils.checkNotNull(skip, "skip");
@@ -134,7 +134,7 @@ public class ListTransfersRequest {
         this.endDateTime = endDateTime;
         this.groupID = groupID;
         this.scheduleID = scheduleID;
-        this.paymentLinkID = paymentLinkID;
+        this.paymentLinkCode = paymentLinkCode;
         this.refunded = refunded;
         this.disputed = disputed;
         this.skip = skip;
@@ -214,11 +214,11 @@ public class ListTransfersRequest {
     }
 
     /**
-     * Optional ID to filter for transfers associated with the payment link.
+     * Optional code to filter for transfers associated with the payment link.
      */
     @JsonIgnore
-    public Optional<String> paymentLinkID() {
-        return paymentLinkID;
+    public Optional<String> paymentLinkCode() {
+        return paymentLinkCode;
     }
 
     /**
@@ -399,20 +399,20 @@ public class ListTransfersRequest {
     }
 
     /**
-     * Optional ID to filter for transfers associated with the payment link.
+     * Optional code to filter for transfers associated with the payment link.
      */
-    public ListTransfersRequest withPaymentLinkID(String paymentLinkID) {
-        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
-        this.paymentLinkID = Optional.ofNullable(paymentLinkID);
+    public ListTransfersRequest withPaymentLinkCode(String paymentLinkCode) {
+        Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+        this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
         return this;
     }
 
     /**
-     * Optional ID to filter for transfers associated with the payment link.
+     * Optional code to filter for transfers associated with the payment link.
      */
-    public ListTransfersRequest withPaymentLinkID(Optional<String> paymentLinkID) {
-        Utils.checkNotNull(paymentLinkID, "paymentLinkID");
-        this.paymentLinkID = paymentLinkID;
+    public ListTransfersRequest withPaymentLinkCode(Optional<String> paymentLinkCode) {
+        Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+        this.paymentLinkCode = paymentLinkCode;
         return this;
     }
 
@@ -500,7 +500,7 @@ public class ListTransfersRequest {
             Objects.deepEquals(this.endDateTime, other.endDateTime) &&
             Objects.deepEquals(this.groupID, other.groupID) &&
             Objects.deepEquals(this.scheduleID, other.scheduleID) &&
-            Objects.deepEquals(this.paymentLinkID, other.paymentLinkID) &&
+            Objects.deepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
             Objects.deepEquals(this.refunded, other.refunded) &&
             Objects.deepEquals(this.disputed, other.disputed) &&
             Objects.deepEquals(this.skip, other.skip) &&
@@ -518,7 +518,7 @@ public class ListTransfersRequest {
             endDateTime,
             groupID,
             scheduleID,
-            paymentLinkID,
+            paymentLinkCode,
             refunded,
             disputed,
             skip,
@@ -536,7 +536,7 @@ public class ListTransfersRequest {
                 "endDateTime", endDateTime,
                 "groupID", groupID,
                 "scheduleID", scheduleID,
-                "paymentLinkID", paymentLinkID,
+                "paymentLinkCode", paymentLinkCode,
                 "refunded", refunded,
                 "disputed", disputed,
                 "skip", skip,
@@ -560,7 +560,7 @@ public class ListTransfersRequest {
  
         private Optional<String> scheduleID = Optional.empty();
  
-        private Optional<String> paymentLinkID = Optional.empty();
+        private Optional<String> paymentLinkCode = Optional.empty();
  
         private Optional<Boolean> refunded = Optional.empty();
  
@@ -719,20 +719,20 @@ public class ListTransfersRequest {
         }
 
         /**
-         * Optional ID to filter for transfers associated with the payment link.
+         * Optional code to filter for transfers associated with the payment link.
          */
-        public Builder paymentLinkID(String paymentLinkID) {
-            Utils.checkNotNull(paymentLinkID, "paymentLinkID");
-            this.paymentLinkID = Optional.ofNullable(paymentLinkID);
+        public Builder paymentLinkCode(String paymentLinkCode) {
+            Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+            this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
             return this;
         }
 
         /**
-         * Optional ID to filter for transfers associated with the payment link.
+         * Optional code to filter for transfers associated with the payment link.
          */
-        public Builder paymentLinkID(Optional<String> paymentLinkID) {
-            Utils.checkNotNull(paymentLinkID, "paymentLinkID");
-            this.paymentLinkID = paymentLinkID;
+        public Builder paymentLinkCode(Optional<String> paymentLinkCode) {
+            Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+            this.paymentLinkCode = paymentLinkCode;
             return this;
         }
 
@@ -814,7 +814,7 @@ public class ListTransfersRequest {
                 endDateTime,
                 groupID,
                 scheduleID,
-                paymentLinkID,
+                paymentLinkCode,
                 refunded,
                 disputed,
                 skip,

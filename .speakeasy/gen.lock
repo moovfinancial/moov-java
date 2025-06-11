@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 91d8e74309c0f4481831f1402e482c97
+  docChecksum: 7ff28a795edc333e9c49366f5590d78c
   docVersion: latest
-  speakeasyVersion: 1.558.1
-  generationVersion: 2.623.4
-  releaseVersion: 0.14.2
-  configChecksum: 8a5996ead1ec69b3f950629ac8b570b1
+  speakeasyVersion: 1.559.0
+  generationVersion: 2.624.0
+  releaseVersion: 0.14.3
+  configChecksum: f26eeee381f95f82c8cfa01843607f33
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -482,12 +482,12 @@ generatedFiles:
   - docs/models/components/WebhookDataTerminalApplicationCreated.md
   - docs/models/components/WebhookDataTerminalApplicationUpdated.md
   - docs/models/components/WebhookDataTransferCreated.md
+  - docs/models/components/WebhookDataTransferStatus.md
   - docs/models/components/WebhookDataTransferUpdated.md
   - docs/models/components/WebhookDataWalletTransactionUpdated.md
   - docs/models/components/WebhookEvent.md
   - docs/models/components/WebhookEventType.md
   - docs/models/components/WebhookTransferPaymentMethodDetails.md
-  - docs/models/components/WebhookWalletAvailableBalance.md
   - docs/models/components/WireInstitution.md
   - docs/models/components/WireServices.md
   - docs/models/errors/AccountTerminalApplicationError.md
@@ -1327,12 +1327,12 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/WebhookDataTerminalApplicationCreated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataTerminalApplicationUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataTransferCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataTransferStatus.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataTransferUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataWalletTransactionUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookEvent.java
   - src/main/java/io/moov/sdk/models/components/WebhookEventType.java
   - src/main/java/io/moov/sdk/models/components/WebhookTransferPaymentMethodDetails.java
-  - src/main/java/io/moov/sdk/models/components/WebhookWalletAvailableBalance.java
   - src/main/java/io/moov/sdk/models/components/WireInstitution.java
   - src/main/java/io/moov/sdk/models/components/WireServices.java
   - src/main/java/io/moov/sdk/models/errors/APIException.java

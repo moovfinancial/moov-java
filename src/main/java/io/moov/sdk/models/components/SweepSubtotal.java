@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -24,7 +24,7 @@ public class SweepSubtotal {
      * The number of transactions of this type accrued in the sweep.
      */
     @JsonProperty("count")
-    private int count;
+    private long count;
 
     /**
      * The value of transactions of this type accrued in the sweep.
@@ -35,7 +35,7 @@ public class SweepSubtotal {
     @JsonCreator
     public SweepSubtotal(
             @JsonProperty("type") WalletTransactionType type,
-            @JsonProperty("count") int count,
+            @JsonProperty("count") long count,
             @JsonProperty("amount") AmountDecimal amount) {
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(count, "count");
@@ -57,7 +57,7 @@ public class SweepSubtotal {
      * The number of transactions of this type accrued in the sweep.
      */
     @JsonIgnore
-    public int count() {
+    public long count() {
         return count;
     }
 
@@ -85,7 +85,7 @@ public class SweepSubtotal {
     /**
      * The number of transactions of this type accrued in the sweep.
      */
-    public SweepSubtotal withCount(int count) {
+    public SweepSubtotal withCount(long count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
         return this;
@@ -136,7 +136,7 @@ public class SweepSubtotal {
  
         private WalletTransactionType type;
  
-        private Integer count;
+        private Long count;
  
         private AmountDecimal amount;
         
@@ -156,7 +156,7 @@ public class SweepSubtotal {
         /**
          * The number of transactions of this type accrued in the sweep.
          */
-        public Builder count(int count) {
+        public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = count;
             return this;

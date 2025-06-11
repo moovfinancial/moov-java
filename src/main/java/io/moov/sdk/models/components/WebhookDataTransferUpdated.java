@@ -22,11 +22,8 @@ public class WebhookDataTransferUpdated {
     @JsonProperty("transferID")
     private String transferID;
 
-    /**
-     * Status of a transfer.
-     */
     @JsonProperty("status")
-    private TransferStatus status;
+    private WebhookDataTransferStatus status;
 
     /**
      * Payment method details for the source or destination of a transfer.
@@ -44,7 +41,7 @@ public class WebhookDataTransferUpdated {
     public WebhookDataTransferUpdated(
             @JsonProperty("accountID") String accountID,
             @JsonProperty("transferID") String transferID,
-            @JsonProperty("status") TransferStatus status,
+            @JsonProperty("status") WebhookDataTransferStatus status,
             @JsonProperty("source") WebhookTransferPaymentMethodDetails source,
             @JsonProperty("destination") WebhookTransferPaymentMethodDetails destination) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,11 +69,8 @@ public class WebhookDataTransferUpdated {
         return transferID;
     }
 
-    /**
-     * Status of a transfer.
-     */
     @JsonIgnore
-    public TransferStatus status() {
+    public WebhookDataTransferStatus status() {
         return status;
     }
 
@@ -115,10 +109,7 @@ public class WebhookDataTransferUpdated {
         return this;
     }
 
-    /**
-     * Status of a transfer.
-     */
-    public WebhookDataTransferUpdated withStatus(TransferStatus status) {
+    public WebhookDataTransferUpdated withStatus(WebhookDataTransferStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -186,7 +177,7 @@ public class WebhookDataTransferUpdated {
  
         private String transferID;
  
-        private TransferStatus status;
+        private WebhookDataTransferStatus status;
  
         private WebhookTransferPaymentMethodDetails source;
  
@@ -211,10 +202,7 @@ public class WebhookDataTransferUpdated {
             return this;
         }
 
-        /**
-         * Status of a transfer.
-         */
-        public Builder status(TransferStatus status) {
+        public Builder status(WebhookDataTransferStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

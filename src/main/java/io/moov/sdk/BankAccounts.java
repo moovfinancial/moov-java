@@ -78,7 +78,6 @@ public class BankAccounts implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
      * 
@@ -336,7 +335,6 @@ public class BankAccounts implements
     }
 
 
-
     /**
      * List all the bank accounts associated with a particular Moov account. 
      * 
@@ -532,7 +530,6 @@ public class BankAccounts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -737,7 +734,6 @@ public class BankAccounts implements
     }
 
 
-
     /**
      * Discontinue using a specified bank account linked to a Moov account. 
      * 
@@ -936,7 +932,6 @@ public class BankAccounts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1170,7 +1165,6 @@ public class BankAccounts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1417,7 +1411,6 @@ public class BankAccounts implements
     }
 
 
-
     /**
      * Retrieve the current status and details of an instant verification, including whether the verification method was instant or same-day 
      * ACH. This helps track the verification process in real-time and provides details in case of exceptions.
@@ -1639,7 +1632,6 @@ public class BankAccounts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1899,7 +1891,6 @@ public class BankAccounts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

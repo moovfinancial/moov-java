@@ -37,7 +37,6 @@ public class Wallets implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * List the wallets associated with a Moov account. 
      * 
@@ -233,7 +232,6 @@ public class Wallets implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

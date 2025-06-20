@@ -33,7 +33,6 @@ public class EnrichedProfile implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
      * 

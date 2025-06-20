@@ -58,7 +58,6 @@ public class CardIssuing implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Request a virtual card be issued.
      * 
@@ -298,7 +297,6 @@ public class CardIssuing implements
     }
 
 
-
     /**
      * List Moov issued cards existing for the account.
      * 
@@ -461,7 +459,6 @@ public class CardIssuing implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -658,7 +655,6 @@ public class CardIssuing implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -892,7 +888,6 @@ public class CardIssuing implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

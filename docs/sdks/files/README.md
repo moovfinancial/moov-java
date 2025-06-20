@@ -41,8 +41,8 @@ import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.FileValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadFileResponse;
+import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.nio.charset.StandardCharsets;
 
 public class Application {
 
@@ -61,7 +61,7 @@ public class Application {
                 .fileUploadRequestMultiPart(FileUploadRequestMultiPart.builder()
                     .file(FileUploadRequestMultiPartFile.builder()
                         .fileName("example.file")
-                        .content("0x331A41fC37".getBytes(StandardCharsets.UTF_8))
+                        .content(Utils.readBytes("example.file"))
                         .build())
                     .filePurpose(FilePurpose.REPRESENTATIVE_VERIFICATION)
                     .metadata("{\"requirement_id\": \"document.individual.verification\"}")

@@ -51,7 +51,6 @@ public class TerminalApplications implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Create a new terminal application.
      * 
@@ -284,7 +283,6 @@ public class TerminalApplications implements
     }
 
 
-
     /**
      * List all the terminal applications for a Moov Account.
      * 
@@ -467,7 +465,6 @@ public class TerminalApplications implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -659,7 +656,6 @@ public class TerminalApplications implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

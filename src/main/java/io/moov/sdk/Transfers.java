@@ -26,6 +26,9 @@ import io.moov.sdk.models.operations.CreateCancellationResponse;
 import io.moov.sdk.models.operations.CreateReversalRequest;
 import io.moov.sdk.models.operations.CreateReversalRequestBuilder;
 import io.moov.sdk.models.operations.CreateReversalResponse;
+import io.moov.sdk.models.operations.CreateTransferOptionsForAccountRequest;
+import io.moov.sdk.models.operations.CreateTransferOptionsForAccountRequestBuilder;
+import io.moov.sdk.models.operations.CreateTransferOptionsForAccountResponse;
 import io.moov.sdk.models.operations.CreateTransferOptionsRequest;
 import io.moov.sdk.models.operations.CreateTransferOptionsRequestBuilder;
 import io.moov.sdk.models.operations.CreateTransferOptionsResponse;
@@ -72,6 +75,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Transfers implements
+            MethodCallCreateTransferOptionsForAccount,
             MethodCallCreateTransfer,
             MethodCallListTransfers,
             MethodCallGetTransfer,
@@ -88,6 +92,259 @@ public class Transfers implements
 
     Transfers(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+    }
+
+    /**
+     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+     * supply in the request body.
+     * 
+     * <p>The accountID in the route should the partner's accountID.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @return The call builder
+     */
+    public CreateTransferOptionsForAccountRequestBuilder generateOptionsForAccount() {
+        return new CreateTransferOptionsForAccountRequestBuilder(this);
+    }
+
+    /**
+     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+     * supply in the request body.
+     * 
+     * <p>The accountID in the route should the partner's accountID.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param accountID The partner's Moov account ID.
+     * @param createTransferOptions 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CreateTransferOptionsForAccountResponse generateOptionsForAccount(
+            String accountID,
+            CreateTransferOptions createTransferOptions) throws Exception {
+        return generateOptionsForAccount(Optional.empty(), accountID, createTransferOptions);
+    }
+    
+    /**
+     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+     * supply in the request body.
+     * 
+     * <p>The accountID in the route should the partner's accountID.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param xMoovVersion Specify an API version.
+     *         
+     *         API versioning follows the format `vYYYY.QQ.BB`, where 
+     *           - `YYYY` is the year
+     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
+     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+     *         
+     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+     * @param accountID The partner's Moov account ID.
+     * @param createTransferOptions 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CreateTransferOptionsForAccountResponse generateOptionsForAccount(
+            Optional<String> xMoovVersion,
+            String accountID,
+            CreateTransferOptions createTransferOptions) throws Exception {
+        CreateTransferOptionsForAccountRequest request =
+            CreateTransferOptionsForAccountRequest
+                .builder()
+                .xMoovVersion(xMoovVersion)
+                .accountID(accountID)
+                .createTransferOptions(createTransferOptions)
+                .build();
+        
+        String _baseUrl = this.sdkConfiguration.serverUrl();
+        String _url = Utils.generateURL(
+                CreateTransferOptionsForAccountRequest.class,
+                _baseUrl,
+                "/accounts/{accountID}/transfer-options",
+                request, this.sdkConfiguration.globals);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "POST");
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
+        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
+                _convertedRequest, 
+                "createTransferOptions",
+                "json",
+                false);
+        if (_serializedRequestBody == null) {
+            throw new Exception("Request body is required");
+        }
+        _req.setBody(Optional.ofNullable(_serializedRequestBody));
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+        
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
+                      _baseUrl,
+                      "createTransferOptionsForAccount", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "422", "429", "4XX", "500", "504", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            this.sdkConfiguration,
+                            _baseUrl,
+                            "createTransferOptionsForAccount",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
+                            _baseUrl,
+                            "createTransferOptionsForAccount",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            this.sdkConfiguration,
+                            _baseUrl,
+                            "createTransferOptionsForAccount",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        CreateTransferOptionsForAccountResponse.Builder _resBuilder = 
+            CreateTransferOptionsForAccountResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        CreateTransferOptionsForAccountResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                TransferOptions _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<TransferOptions>() {});
+                _res.withTransferOptions(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GenericError _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GenericError>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                TransferOptionsValidationError _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<TransferOptionsValidationError>() {});
+                throw _out;
+            } else {
+                throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
+            _res.withHeaders(_httpRes.headers().map());
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new APIException(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new APIException(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
     }
 
 
@@ -344,7 +601,6 @@ public class Transfers implements
     }
 
 
-
     /**
      * List all the transfers associated with a particular Moov account. 
      * 
@@ -521,7 +777,6 @@ public class Transfers implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -727,7 +982,6 @@ public class Transfers implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -950,7 +1204,6 @@ public class Transfers implements
     }
 
 
-
     /**
      * Initiate a cancellation for a card, ACH, or queued transfer.
      * 
@@ -1162,7 +1415,6 @@ public class Transfers implements
     }
 
 
-
     /**
      * Get details of a cancellation for a transfer.
      * 
@@ -1362,7 +1614,6 @@ public class Transfers implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1601,7 +1852,6 @@ public class Transfers implements
     }
 
 
-
     /**
      * Get a list of refunds for a card transfer.
      * 
@@ -1796,7 +2046,6 @@ public class Transfers implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1998,7 +2247,6 @@ public class Transfers implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -2204,7 +2452,6 @@ public class Transfers implements
     }
 
 
-
     /**
      * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
      * supply in the request. 
@@ -2212,7 +2459,7 @@ public class Transfers implements
      * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
      */
@@ -2227,7 +2474,7 @@ public class Transfers implements
      * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param createTransferOptions 
      * @return The response from the API call
@@ -2245,7 +2492,7 @@ public class Transfers implements
      * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param xMoovVersion Specify an API version.
      *         

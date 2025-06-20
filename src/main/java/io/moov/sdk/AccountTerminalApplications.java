@@ -52,7 +52,6 @@ public class AccountTerminalApplications implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Link an account with a terminal application.
      * 
@@ -292,7 +291,6 @@ public class AccountTerminalApplications implements
     }
 
 
-
     /**
      * Retrieve all terminal applications linked to a specific account.
      * 
@@ -482,7 +480,6 @@ public class AccountTerminalApplications implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -679,7 +676,6 @@ public class AccountTerminalApplications implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

@@ -42,7 +42,6 @@ public class Receipts implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Create receipts for transfers and scheduled transfers.
      * 
@@ -258,7 +257,6 @@ public class Receipts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

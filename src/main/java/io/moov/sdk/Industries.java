@@ -33,7 +33,6 @@ public class Industries implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Returns a list of industries relevant to merchant profile enrichment.  Results are ordered by industry name.
      * 

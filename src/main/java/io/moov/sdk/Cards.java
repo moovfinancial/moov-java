@@ -58,7 +58,6 @@ public class Cards implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Link a card to an existing Moov account. 
      * 
@@ -343,7 +342,6 @@ public class Cards implements
     }
 
 
-
     /**
      * List all the active cards associated with a Moov account. 
      * 
@@ -539,7 +537,6 @@ public class Cards implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -742,7 +739,6 @@ public class Cards implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1014,7 +1010,6 @@ public class Cards implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

@@ -62,7 +62,6 @@ public class Sweeps implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Create a sweep config for a wallet.
      * 
@@ -302,7 +301,6 @@ public class Sweeps implements
     }
 
 
-
     /**
      * List sweep configs associated with an account.
      * 
@@ -492,7 +490,6 @@ public class Sweeps implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -689,7 +686,6 @@ public class Sweeps implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -936,7 +932,6 @@ public class Sweeps implements
     }
 
 
-
     /**
      * List sweeps associated with a wallet.
      * 
@@ -1099,7 +1094,6 @@ public class Sweeps implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

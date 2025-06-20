@@ -40,7 +40,6 @@ public class Institutions implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Search for financial institutions by name or routing number.
      * 
@@ -249,7 +248,6 @@ public class Institutions implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

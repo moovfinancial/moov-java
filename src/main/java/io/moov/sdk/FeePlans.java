@@ -67,7 +67,6 @@ public class FeePlans implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * List all fee plan agreements associated with an account.
      * 
@@ -230,7 +229,6 @@ public class FeePlans implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -472,7 +470,6 @@ public class FeePlans implements
     }
 
 
-
     /**
      * List all fee plans available for use by an account. This is intended to be used by an account when 
      * selecting a fee plan to apply to a connected account.
@@ -675,7 +672,6 @@ public class FeePlans implements
     }
 
 
-
     /**
      * Retrieve fees associated with an account.
      * 
@@ -838,7 +834,6 @@ public class FeePlans implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1045,7 +1040,6 @@ public class FeePlans implements
     }
 
 
-
     /**
      * List all partner pricing plans available for use by an account.
      * 
@@ -1243,7 +1237,6 @@ public class FeePlans implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

@@ -52,7 +52,6 @@ public class Capabilities implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Retrieve all the capabilities an account has requested.
      * 
@@ -248,7 +247,6 @@ public class Capabilities implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -490,7 +488,6 @@ public class Capabilities implements
     }
 
 
-
     /**
      * Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
      * 
@@ -689,7 +686,6 @@ public class Capabilities implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

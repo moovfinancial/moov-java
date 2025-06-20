@@ -42,7 +42,6 @@ public class EndToEndEncryption implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Allows for testing a JWE token to ensure it's acceptable by Moov. 
      * 
@@ -251,7 +250,6 @@ public class EndToEndEncryption implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

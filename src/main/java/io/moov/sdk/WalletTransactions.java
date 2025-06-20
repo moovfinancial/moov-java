@@ -37,7 +37,6 @@ public class WalletTransactions implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * List all the transactions associated with a particular Moov wallet. 
      * 
@@ -204,7 +203,6 @@ public class WalletTransactions implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

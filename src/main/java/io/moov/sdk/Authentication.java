@@ -45,7 +45,6 @@ public class Authentication implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Revoke an auth token.
      * 
@@ -262,7 +261,6 @@ public class Authentication implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

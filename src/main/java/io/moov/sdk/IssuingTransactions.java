@@ -51,7 +51,6 @@ public class IssuingTransactions implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * List issued card authorizations associated with a Moov account.
      * 
@@ -214,7 +213,6 @@ public class IssuingTransactions implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -413,7 +411,6 @@ public class IssuingTransactions implements
     }
 
 
-
     /**
      * List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
      * 
@@ -578,7 +575,6 @@ public class IssuingTransactions implements
     }
 
 
-
     /**
      * List issued card transactions associated with a Moov account.
      * 
@@ -741,7 +737,6 @@ public class IssuingTransactions implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

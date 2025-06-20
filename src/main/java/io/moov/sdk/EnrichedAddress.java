@@ -33,7 +33,6 @@ public class EnrichedAddress implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Fetch enriched address suggestions. Requires a partial address. 
      * 

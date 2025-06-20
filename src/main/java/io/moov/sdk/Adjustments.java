@@ -37,7 +37,6 @@ public class Adjustments implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * List adjustments associated with a Moov account.
      * 
@@ -235,7 +234,6 @@ public class Adjustments implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

@@ -83,7 +83,6 @@ public class Disputes implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Returns the list of disputes. 
      * 
@@ -265,7 +264,6 @@ public class Disputes implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -468,7 +466,6 @@ public class Disputes implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -688,7 +685,6 @@ public class Disputes implements
     }
 
 
-
     /**
      * Returns a dispute's public evidence by its ID. 
      * 
@@ -889,7 +885,6 @@ public class Disputes implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1142,7 +1137,6 @@ public class Disputes implements
     }
 
 
-
     /**
      * Uploads text as evidence for a dispute.
      * 
@@ -1378,7 +1372,6 @@ public class Disputes implements
     }
 
 
-
     /**
      * Submit the evidence associated with a dispute.
      * 
@@ -1605,7 +1598,6 @@ public class Disputes implements
     }
 
 
-
     /**
      * Get dispute evidence by ID.
      * 
@@ -1813,7 +1805,6 @@ public class Disputes implements
     }
 
 
-
     /**
      * Updates dispute evidence by ID.
      * 
@@ -2003,7 +1994,6 @@ public class Disputes implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -2215,7 +2205,6 @@ public class Disputes implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

@@ -59,7 +59,6 @@ public class ApplePay implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Add domains to be registered with Apple Pay.
      * 
@@ -293,7 +292,6 @@ public class ApplePay implements
     }
 
 
-
     /**
      * Add or remove domains to be registered with Apple Pay. 
      * 
@@ -516,7 +514,6 @@ public class ApplePay implements
     }
 
 
-
     /**
      * Get domains registered with Apple Pay. 
      * 
@@ -712,7 +709,6 @@ public class ApplePay implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -946,7 +942,6 @@ public class ApplePay implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

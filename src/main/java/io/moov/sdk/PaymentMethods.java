@@ -38,7 +38,6 @@ public class PaymentMethods implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods 
      * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
@@ -245,7 +244,6 @@ public class PaymentMethods implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

@@ -76,7 +76,6 @@ public class Accounts implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
      * information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
@@ -344,7 +343,6 @@ public class Accounts implements
     }
 
 
-
     /**
      * List or search accounts to which the caller is connected.
      * 
@@ -513,7 +511,6 @@ public class Accounts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -705,7 +702,6 @@ public class Accounts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -973,7 +969,6 @@ public class Accounts implements
     }
 
 
-
     /**
      * This will sever the connection between you and the account specified and it will no longer be listed as 
      * active in the list of accounts. This also means you'll only have read-only access to the account going 
@@ -1175,7 +1170,6 @@ public class Accounts implements
     }
 
 
-
     /**
      * Retrieve the specified countries of operation for an account. 
      * 
@@ -1365,7 +1359,6 @@ public class Accounts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1613,7 +1606,6 @@ public class Accounts implements
     }
 
 
-
     /**
      * Retrieve a merchant account's processing agreement.
      * 
@@ -1802,7 +1794,6 @@ public class Accounts implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

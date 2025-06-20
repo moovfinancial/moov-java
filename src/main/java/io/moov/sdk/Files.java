@@ -47,7 +47,6 @@ public class Files implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Upload a file and link it to the specified Moov account. 
      * 
@@ -296,7 +295,6 @@ public class Files implements
     }
 
 
-
     /**
      * List all the files associated with a particular Moov account.
      * 
@@ -486,7 +484,6 @@ public class Files implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

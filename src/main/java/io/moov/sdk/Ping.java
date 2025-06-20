@@ -31,7 +31,6 @@ public class Ping implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * A simple endpoint to check auth.
      * 

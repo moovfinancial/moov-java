@@ -61,7 +61,6 @@ public class Scheduling implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Describes the schedule to create or modify.
      * 
@@ -301,7 +300,6 @@ public class Scheduling implements
     }
 
 
-
     /**
      * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response.
      * 
@@ -464,7 +462,6 @@ public class Scheduling implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -711,7 +708,6 @@ public class Scheduling implements
     }
 
 
-
     /**
      * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
      * 
@@ -906,7 +902,6 @@ public class Scheduling implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -1107,7 +1102,6 @@ public class Scheduling implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

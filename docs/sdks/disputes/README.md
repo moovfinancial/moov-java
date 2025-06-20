@@ -346,8 +346,8 @@ import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.FileUploadValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceFileResponse;
+import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.nio.charset.StandardCharsets;
 
 public class Application {
 
@@ -367,7 +367,7 @@ public class Application {
                 .createEvidenceFileMultiPart(CreateEvidenceFileMultiPart.builder()
                     .file(File.builder()
                         .fileName("example.file")
-                        .content("0x6B0cFC3Eba".getBytes(StandardCharsets.UTF_8))
+                        .content(Utils.readBytes("example.file"))
                         .build())
                     .evidenceType(EvidenceType.CANCELATION_POLICY)
                     .build())

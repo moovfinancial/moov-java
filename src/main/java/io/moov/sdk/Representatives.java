@@ -56,7 +56,6 @@ public class Representatives implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Moov accounts associated with businesses require information regarding individuals who represent the business. 
      * You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
@@ -302,7 +301,6 @@ public class Representatives implements
     }
 
 
-
     /**
      * A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
      * You can use this method to list all the representatives for a given Moov account. 
@@ -501,7 +499,6 @@ public class Representatives implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -704,7 +701,6 @@ public class Representatives implements
     }
 
 
-
     /**
      * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
      * 
@@ -899,7 +895,6 @@ public class Representatives implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

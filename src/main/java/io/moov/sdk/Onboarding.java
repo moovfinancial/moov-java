@@ -51,7 +51,6 @@ public class Onboarding implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
      * 
@@ -284,7 +283,6 @@ public class Onboarding implements
     }
 
 
-
     /**
      * List all the onboarding invites created by the caller's account.
      * 
@@ -467,7 +465,6 @@ public class Onboarding implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -659,7 +656,6 @@ public class Onboarding implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

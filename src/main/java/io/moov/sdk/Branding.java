@@ -51,7 +51,6 @@ public class Branding implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Create brand properties for the specified account.
      * 
@@ -289,7 +288,6 @@ public class Branding implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -531,7 +529,6 @@ public class Branding implements
     }
 
 
-
     /**
      * Get brand properties for the specified account.
      * 
@@ -721,7 +718,6 @@ public class Branding implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

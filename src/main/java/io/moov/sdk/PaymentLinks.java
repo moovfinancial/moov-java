@@ -62,7 +62,6 @@ public class PaymentLinks implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
      * 
@@ -314,7 +313,6 @@ public class PaymentLinks implements
     }
 
 
-
     /**
      * List all the payment links created under a Moov account.
      * 
@@ -504,7 +502,6 @@ public class PaymentLinks implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -701,7 +698,6 @@ public class PaymentLinks implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**
@@ -948,7 +944,6 @@ public class PaymentLinks implements
     }
 
 
-
     /**
      * Disable a payment link.
      * 
@@ -1132,7 +1127,6 @@ public class PaymentLinks implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

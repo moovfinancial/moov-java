@@ -31,7 +31,6 @@ public class Avatars implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Get avatar image for an account using a unique ID.    
      * 

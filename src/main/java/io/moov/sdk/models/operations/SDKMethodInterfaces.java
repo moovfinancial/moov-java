@@ -657,6 +657,13 @@ public class SDKMethodInterfaces {
             String terminalApplicationID) throws Exception;
     }
 
+    public interface MethodCallCreateTransferOptionsForAccount {
+        CreateTransferOptionsForAccountResponse generateOptionsForAccount(
+            Optional<String> xMoovVersion,
+            String accountID,
+            CreateTransferOptions createTransferOptions) throws Exception;
+    }
+
     public interface MethodCallCreateTransfer {
         CreateTransferResponse create(
             CreateTransferRequest request) throws Exception;

@@ -42,7 +42,6 @@ public class Underwriting implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
-
     /**
      * Retrieve underwriting associated with a given Moov account. 
      * 
@@ -238,7 +237,6 @@ public class Underwriting implements
             "Unexpected status code received: " + _httpRes.statusCode(), 
             Utils.extractByteArrayFromBody(_httpRes));
     }
-
 
 
     /**

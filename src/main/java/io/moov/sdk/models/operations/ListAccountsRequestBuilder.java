@@ -3,16 +3,20 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListAccountsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class ListAccountsRequestBuilder {
 
     private ListAccountsRequest request;
-    private final SDKMethodInterfaces.MethodCallListAccounts sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListAccountsRequestBuilder(SDKMethodInterfaces.MethodCallListAccounts sdk) {
-        this.sdk = sdk;
+    public ListAccountsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListAccountsRequestBuilder request(ListAccountsRequest request) {
@@ -22,8 +26,10 @@ public class ListAccountsRequestBuilder {
     }
 
     public ListAccountsResponse call() throws Exception {
+        
+        RequestOperation<ListAccountsRequest, ListAccountsResponse> operation
+              = new ListAccountsOperation( sdkConfiguration);
 
-        return sdk.list(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

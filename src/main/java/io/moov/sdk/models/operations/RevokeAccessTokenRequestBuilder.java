@@ -3,9 +3,12 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.RevokeTokenRequest;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.models.components.TokenTypeHint;
+import io.moov.sdk.operations.RevokeAccessTokenOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -13,47 +16,75 @@ import java.util.Optional;
 
 public class RevokeAccessTokenRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private RevokeTokenRequest revokeTokenRequest;
-    private final SDKMethodInterfaces.MethodCallRevokeAccessToken sdk;
+    private String token;
+    private Optional<? extends TokenTypeHint> tokenTypeHint = Optional.empty();
+    private Optional<String> clientId = Optional.empty();
+    private Optional<String> clientSecret = Optional.empty();
+    private final SDKConfiguration sdkConfiguration;
 
-    public RevokeAccessTokenRequestBuilder(SDKMethodInterfaces.MethodCallRevokeAccessToken sdk) {
-        this.sdk = sdk;
+    public RevokeAccessTokenRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
+    }
+
+    public RevokeAccessTokenRequestBuilder token(String token) {
+        Utils.checkNotNull(token, "token");
+        this.token = token;
+        return this;
     }
                 
-    public RevokeAccessTokenRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
+    public RevokeAccessTokenRequestBuilder tokenTypeHint(TokenTypeHint tokenTypeHint) {
+        Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
+        this.tokenTypeHint = Optional.of(tokenTypeHint);
         return this;
     }
 
-    public RevokeAccessTokenRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
+    public RevokeAccessTokenRequestBuilder tokenTypeHint(Optional<? extends TokenTypeHint> tokenTypeHint) {
+        Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
+        this.tokenTypeHint = tokenTypeHint;
+        return this;
+    }
+                
+    public RevokeAccessTokenRequestBuilder clientId(String clientId) {
+        Utils.checkNotNull(clientId, "clientId");
+        this.clientId = Optional.of(clientId);
         return this;
     }
 
-    public RevokeAccessTokenRequestBuilder revokeTokenRequest(RevokeTokenRequest revokeTokenRequest) {
-        Utils.checkNotNull(revokeTokenRequest, "revokeTokenRequest");
-        this.revokeTokenRequest = revokeTokenRequest;
+    public RevokeAccessTokenRequestBuilder clientId(Optional<String> clientId) {
+        Utils.checkNotNull(clientId, "clientId");
+        this.clientId = clientId;
         return this;
+    }
+                
+    public RevokeAccessTokenRequestBuilder clientSecret(String clientSecret) {
+        Utils.checkNotNull(clientSecret, "clientSecret");
+        this.clientSecret = Optional.of(clientSecret);
+        return this;
+    }
+
+    public RevokeAccessTokenRequestBuilder clientSecret(Optional<String> clientSecret) {
+        Utils.checkNotNull(clientSecret, "clientSecret");
+        this.clientSecret = clientSecret;
+        return this;
+    }
+
+
+    private RevokeTokenRequest buildRequest() {
+
+        RevokeTokenRequest request = new RevokeTokenRequest(token,
+            tokenTypeHint,
+            clientId,
+            clientSecret);
+
+        return request;
     }
 
     public RevokeAccessTokenResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.revokeAccessToken(
-            xMoovVersion,
-            revokeTokenRequest);
-    }
+        
+        RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
+              = new RevokeAccessTokenOperation( sdkConfiguration);
+        RevokeTokenRequest request = buildRequest();
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

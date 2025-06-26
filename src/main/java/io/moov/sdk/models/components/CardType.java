@@ -22,7 +22,7 @@ public enum CardType {
     @JsonValue
     private final String value;
 
-    private CardType(String value) {
+    CardType(String value) {
         this.value = value;
     }
     

@@ -14,7 +14,7 @@ public enum MicroDepositStatus {
     @JsonValue
     private final String value;
 
-    private MicroDepositStatus(String value) {
+    MicroDepositStatus(String value) {
         this.value = value;
     }
     

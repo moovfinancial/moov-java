@@ -15,7 +15,7 @@ public enum FeePlanAgreementStatus {
     @JsonValue
     private final String value;
 
-    private FeePlanAgreementStatus(String value) {
+    FeePlanAgreementStatus(String value) {
         this.value = value;
     }
     

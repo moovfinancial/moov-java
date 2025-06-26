@@ -3,27 +3,89 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.models.components.IssuedCardState;
+import io.moov.sdk.operations.ListIssuedCardsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
+import java.lang.Long;
+import java.lang.String;
+import java.util.List;
+import java.util.Optional;
 
 public class ListIssuedCardsRequestBuilder {
 
-    private ListIssuedCardsRequest request;
-    private final SDKMethodInterfaces.MethodCallListIssuedCards sdk;
+    private String accountID;
+    private Optional<Long> skip = Optional.empty();
+    private Optional<Long> count = Optional.empty();
+    private Optional<? extends List<IssuedCardState>> states = Optional.empty();
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListIssuedCardsRequestBuilder(SDKMethodInterfaces.MethodCallListIssuedCards sdk) {
-        this.sdk = sdk;
+    public ListIssuedCardsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public ListIssuedCardsRequestBuilder request(ListIssuedCardsRequest request) {
-        Utils.checkNotNull(request, "request");
-        this.request = request;
+    public ListIssuedCardsRequestBuilder accountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
+                
+    public ListIssuedCardsRequestBuilder skip(long skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = Optional.of(skip);
         return this;
     }
 
-    public ListIssuedCardsResponse call() throws Exception {
+    public ListIssuedCardsRequestBuilder skip(Optional<Long> skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = skip;
+        return this;
+    }
+                
+    public ListIssuedCardsRequestBuilder count(long count) {
+        Utils.checkNotNull(count, "count");
+        this.count = Optional.of(count);
+        return this;
+    }
 
-        return sdk.list(
-            request);
+    public ListIssuedCardsRequestBuilder count(Optional<Long> count) {
+        Utils.checkNotNull(count, "count");
+        this.count = count;
+        return this;
+    }
+                
+    public ListIssuedCardsRequestBuilder states(List<IssuedCardState> states) {
+        Utils.checkNotNull(states, "states");
+        this.states = Optional.of(states);
+        return this;
+    }
+
+    public ListIssuedCardsRequestBuilder states(Optional<? extends List<IssuedCardState>> states) {
+        Utils.checkNotNull(states, "states");
+        this.states = states;
+        return this;
+    }
+
+
+    private ListIssuedCardsRequest buildRequest() {
+
+        ListIssuedCardsRequest request = new ListIssuedCardsRequest(accountID,
+            skip,
+            count,
+            states);
+
+        return request;
+    }
+
+    public ListIssuedCardsResponse call() throws Exception {
+        
+        RequestOperation<ListIssuedCardsRequest, ListIssuedCardsResponse> operation
+              = new ListIssuedCardsOperation( sdkConfiguration);
+        ListIssuedCardsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

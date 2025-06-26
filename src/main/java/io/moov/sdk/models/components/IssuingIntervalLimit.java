@@ -19,7 +19,7 @@ public enum IssuingIntervalLimit {
     @JsonValue
     private final String value;
 
-    private IssuingIntervalLimit(String value) {
+    IssuingIntervalLimit(String value) {
         this.value = value;
     }
     

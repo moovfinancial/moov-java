@@ -25,7 +25,7 @@ public enum UnderwritingStatus {
     @JsonValue
     private final String value;
 
-    private UnderwritingStatus(String value) {
+    UnderwritingStatus(String value) {
         this.value = value;
     }
     

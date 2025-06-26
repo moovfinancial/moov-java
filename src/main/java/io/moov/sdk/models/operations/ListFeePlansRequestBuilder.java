@@ -3,8 +3,10 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListFeePlansOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -13,28 +15,12 @@ import java.util.Optional;
 
 public class ListFeePlansRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private Optional<? extends List<String>> planIDs = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallListFeePlans sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListFeePlansRequestBuilder(SDKMethodInterfaces.MethodCallListFeePlans sdk) {
-        this.sdk = sdk;
-    }
-                
-    public ListFeePlansRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public ListFeePlansRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public ListFeePlansRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListFeePlansRequestBuilder accountID(String accountID) {
@@ -55,19 +41,21 @@ public class ListFeePlansRequestBuilder {
         return this;
     }
 
-    public ListFeePlansResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.listFeePlans(
-            xMoovVersion,
-            accountID,
+
+    private ListFeePlansRequest buildRequest() {
+
+        ListFeePlansRequest request = new ListFeePlansRequest(accountID,
             planIDs);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public ListFeePlansResponse call() throws Exception {
+        
+        RequestOperation<ListFeePlansRequest, ListFeePlansResponse> operation
+              = new ListFeePlansOperation( sdkConfiguration);
+        ListFeePlansRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

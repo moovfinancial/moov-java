@@ -48,7 +48,7 @@ public enum WebhookEventType {
     @JsonValue
     private final String value;
 
-    private WebhookEventType(String value) {
+    WebhookEventType(String value) {
         this.value = value;
     }
     

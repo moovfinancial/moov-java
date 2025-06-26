@@ -3,27 +3,87 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListSchedulesOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
+import java.lang.Long;
+import java.lang.String;
+import java.util.Optional;
 
 public class ListSchedulesRequestBuilder {
 
-    private ListSchedulesRequest request;
-    private final SDKMethodInterfaces.MethodCallListSchedules sdk;
+    private Optional<Long> skip = Optional.empty();
+    private Optional<Long> count = Optional.empty();
+    private Optional<? extends Hydrate> hydrate = Optional.empty();
+    private String accountID;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListSchedulesRequestBuilder(SDKMethodInterfaces.MethodCallListSchedules sdk) {
-        this.sdk = sdk;
+    public ListSchedulesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
-
-    public ListSchedulesRequestBuilder request(ListSchedulesRequest request) {
-        Utils.checkNotNull(request, "request");
-        this.request = request;
+                
+    public ListSchedulesRequestBuilder skip(long skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = Optional.of(skip);
         return this;
     }
 
-    public ListSchedulesResponse call() throws Exception {
+    public ListSchedulesRequestBuilder skip(Optional<Long> skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = skip;
+        return this;
+    }
+                
+    public ListSchedulesRequestBuilder count(long count) {
+        Utils.checkNotNull(count, "count");
+        this.count = Optional.of(count);
+        return this;
+    }
 
-        return sdk.list(
-            request);
+    public ListSchedulesRequestBuilder count(Optional<Long> count) {
+        Utils.checkNotNull(count, "count");
+        this.count = count;
+        return this;
+    }
+                
+    public ListSchedulesRequestBuilder hydrate(Hydrate hydrate) {
+        Utils.checkNotNull(hydrate, "hydrate");
+        this.hydrate = Optional.of(hydrate);
+        return this;
+    }
+
+    public ListSchedulesRequestBuilder hydrate(Optional<? extends Hydrate> hydrate) {
+        Utils.checkNotNull(hydrate, "hydrate");
+        this.hydrate = hydrate;
+        return this;
+    }
+
+    public ListSchedulesRequestBuilder accountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
+
+
+    private ListSchedulesRequest buildRequest() {
+
+        ListSchedulesRequest request = new ListSchedulesRequest(skip,
+            count,
+            hydrate,
+            accountID);
+
+        return request;
+    }
+
+    public ListSchedulesResponse call() throws Exception {
+        
+        RequestOperation<ListSchedulesRequest, ListSchedulesResponse> operation
+              = new ListSchedulesOperation( sdkConfiguration);
+        ListSchedulesRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

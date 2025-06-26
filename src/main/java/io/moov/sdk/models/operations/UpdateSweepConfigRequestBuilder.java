@@ -3,39 +3,24 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PatchSweepConfig;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.UpdateSweepConfigOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class UpdateSweepConfigRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String sweepConfigID;
     private PatchSweepConfig patchSweepConfig;
-    private final SDKMethodInterfaces.MethodCallUpdateSweepConfig sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public UpdateSweepConfigRequestBuilder(SDKMethodInterfaces.MethodCallUpdateSweepConfig sdk) {
-        this.sdk = sdk;
-    }
-                
-    public UpdateSweepConfigRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public UpdateSweepConfigRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public UpdateSweepConfigRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public UpdateSweepConfigRequestBuilder accountID(String accountID) {
@@ -56,20 +41,22 @@ public class UpdateSweepConfigRequestBuilder {
         return this;
     }
 
-    public UpdateSweepConfigResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.updateConfig(
-            xMoovVersion,
-            accountID,
+
+    private UpdateSweepConfigRequest buildRequest() {
+
+        UpdateSweepConfigRequest request = new UpdateSweepConfigRequest(accountID,
             sweepConfigID,
             patchSweepConfig);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public UpdateSweepConfigResponse call() throws Exception {
+        
+        RequestOperation<UpdateSweepConfigRequest, UpdateSweepConfigResponse> operation
+              = new UpdateSweepConfigOperation( sdkConfiguration);
+        UpdateSweepConfigRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

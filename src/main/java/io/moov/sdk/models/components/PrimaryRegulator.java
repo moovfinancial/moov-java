@@ -22,7 +22,7 @@ public enum PrimaryRegulator {
     @JsonValue
     private final String value;
 
-    private PrimaryRegulator(String value) {
+    PrimaryRegulator(String value) {
         this.value = value;
     }
     

@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreatePaymentLink;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.CreatePaymentLinkOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class CreatePaymentLinkRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private CreatePaymentLink createPaymentLink;
-    private final SDKMethodInterfaces.MethodCallCreatePaymentLink sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreatePaymentLinkRequestBuilder(SDKMethodInterfaces.MethodCallCreatePaymentLink sdk) {
-        this.sdk = sdk;
-    }
-                
-    public CreatePaymentLinkRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public CreatePaymentLinkRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public CreatePaymentLinkRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public CreatePaymentLinkRequestBuilder accountID(String accountID) {
@@ -49,19 +34,21 @@ public class CreatePaymentLinkRequestBuilder {
         return this;
     }
 
-    public CreatePaymentLinkResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.create(
-            xMoovVersion,
-            accountID,
+
+    private CreatePaymentLinkRequest buildRequest() {
+
+        CreatePaymentLinkRequest request = new CreatePaymentLinkRequest(accountID,
             createPaymentLink);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public CreatePaymentLinkResponse call() throws Exception {
+        
+        RequestOperation<CreatePaymentLinkRequest, CreatePaymentLinkResponse> operation
+              = new CreatePaymentLinkOperation( sdkConfiguration);
+        CreatePaymentLinkRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

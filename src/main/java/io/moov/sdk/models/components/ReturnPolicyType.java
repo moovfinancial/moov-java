@@ -17,7 +17,7 @@ public enum ReturnPolicyType {
     @JsonValue
     private final String value;
 
-    private ReturnPolicyType(String value) {
+    ReturnPolicyType(String value) {
         this.value = value;
     }
     

@@ -24,7 +24,7 @@ public enum TransactionSource {
     @JsonValue
     private final String value;
 
-    private TransactionSource(String value) {
+    TransactionSource(String value) {
         this.value = value;
     }
     

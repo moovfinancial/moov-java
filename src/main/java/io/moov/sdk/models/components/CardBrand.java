@@ -23,7 +23,7 @@ public enum CardBrand {
     @JsonValue
     private final String value;
 
-    private CardBrand(String value) {
+    CardBrand(String value) {
         this.value = value;
     }
     

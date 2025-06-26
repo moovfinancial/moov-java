@@ -15,7 +15,7 @@ public enum BankAccountVerificationMethod {
     @JsonValue
     private final String value;
 
-    private BankAccountVerificationMethod(String value) {
+    BankAccountVerificationMethod(String value) {
         this.value = value;
     }
     

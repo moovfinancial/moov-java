@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetIssuedCardTransactionOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetIssuedCardTransactionRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String cardTransactionID;
-    private final SDKMethodInterfaces.MethodCallGetIssuedCardTransaction sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetIssuedCardTransactionRequestBuilder(SDKMethodInterfaces.MethodCallGetIssuedCardTransaction sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetIssuedCardTransactionRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetIssuedCardTransactionRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetIssuedCardTransactionRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetIssuedCardTransactionRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class GetIssuedCardTransactionRequestBuilder {
         return this;
     }
 
-    public GetIssuedCardTransactionResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            accountID,
+
+    private GetIssuedCardTransactionRequest buildRequest() {
+
+        GetIssuedCardTransactionRequest request = new GetIssuedCardTransactionRequest(accountID,
             cardTransactionID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetIssuedCardTransactionResponse call() throws Exception {
+        
+        RequestOperation<GetIssuedCardTransactionRequest, GetIssuedCardTransactionResponse> operation
+              = new GetIssuedCardTransactionOperation( sdkConfiguration);
+        GetIssuedCardTransactionRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

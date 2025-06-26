@@ -3,16 +3,20 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListWalletTransactionsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class ListWalletTransactionsRequestBuilder {
 
     private ListWalletTransactionsRequest request;
-    private final SDKMethodInterfaces.MethodCallListWalletTransactions sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListWalletTransactionsRequestBuilder(SDKMethodInterfaces.MethodCallListWalletTransactions sdk) {
-        this.sdk = sdk;
+    public ListWalletTransactionsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListWalletTransactionsRequestBuilder request(ListWalletTransactionsRequest request) {
@@ -22,8 +26,10 @@ public class ListWalletTransactionsRequestBuilder {
     }
 
     public ListWalletTransactionsResponse call() throws Exception {
+        
+        RequestOperation<ListWalletTransactionsRequest, ListWalletTransactionsResponse> operation
+              = new ListWalletTransactionsOperation( sdkConfiguration);
 
-        return sdk.list(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

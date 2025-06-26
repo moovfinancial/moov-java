@@ -3,58 +3,35 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.ReceiptRequest;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.CreateReceiptsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.String;
 import java.util.List;
-import java.util.Optional;
 
 public class CreateReceiptsRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private List<ReceiptRequest> requestBody;
-    private final SDKMethodInterfaces.MethodCallCreateReceipts sdk;
+    private List<ReceiptRequest> request;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreateReceiptsRequestBuilder(SDKMethodInterfaces.MethodCallCreateReceipts sdk) {
-        this.sdk = sdk;
-    }
-                
-    public CreateReceiptsRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
+    public CreateReceiptsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public CreateReceiptsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
-
-    public CreateReceiptsRequestBuilder requestBody(List<ReceiptRequest> requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public CreateReceiptsRequestBuilder request(List<ReceiptRequest> request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
 
     public CreateReceiptsResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.create(
-            xMoovVersion,
-            requestBody);
-    }
+        
+        RequestOperation<List<ReceiptRequest>, CreateReceiptsResponse> operation
+              = new CreateReceiptsOperation( sdkConfiguration);
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

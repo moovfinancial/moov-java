@@ -3,8 +3,10 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.SearchInstitutionsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -13,29 +15,13 @@ import java.util.Optional;
 
 public class SearchInstitutionsRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private Optional<String> name = Optional.empty();
     private Optional<String> routingNumber = Optional.empty();
     private Optional<Long> limit = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallSearchInstitutions sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public SearchInstitutionsRequestBuilder(SDKMethodInterfaces.MethodCallSearchInstitutions sdk) {
-        this.sdk = sdk;
-    }
-                
-    public SearchInstitutionsRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public SearchInstitutionsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public SearchInstitutionsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public SearchInstitutionsRequestBuilder name(String name) {
@@ -74,20 +60,22 @@ public class SearchInstitutionsRequestBuilder {
         return this;
     }
 
-    public SearchInstitutionsResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.searchInstitutions(
-            xMoovVersion,
-            name,
+
+    private SearchInstitutionsRequest buildRequest() {
+
+        SearchInstitutionsRequest request = new SearchInstitutionsRequest(name,
             routingNumber,
             limit);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public SearchInstitutionsResponse call() throws Exception {
+        
+        RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
+              = new SearchInstitutionsOperation( sdkConfiguration);
+        SearchInstitutionsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

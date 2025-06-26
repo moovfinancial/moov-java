@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetAdjustmentOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetAdjustmentRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String adjustmentID;
-    private final SDKMethodInterfaces.MethodCallGetAdjustment sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetAdjustmentRequestBuilder(SDKMethodInterfaces.MethodCallGetAdjustment sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetAdjustmentRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetAdjustmentRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetAdjustmentRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetAdjustmentRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class GetAdjustmentRequestBuilder {
         return this;
     }
 
-    public GetAdjustmentResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            accountID,
+
+    private GetAdjustmentRequest buildRequest() {
+
+        GetAdjustmentRequest request = new GetAdjustmentRequest(accountID,
             adjustmentID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetAdjustmentResponse call() throws Exception {
+        
+        RequestOperation<GetAdjustmentRequest, GetAdjustmentResponse> operation
+              = new GetAdjustmentOperation( sdkConfiguration);
+        GetAdjustmentRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

@@ -22,7 +22,7 @@ public enum DisbursementPaymentMethodType {
     @JsonValue
     private final String value;
 
-    private DisbursementPaymentMethodType(String value) {
+    DisbursementPaymentMethodType(String value) {
         this.value = value;
     }
     

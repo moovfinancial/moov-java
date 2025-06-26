@@ -28,7 +28,7 @@ public enum RTPFailureCode {
     @JsonValue
     private final String value;
 
-    private RTPFailureCode(String value) {
+    RTPFailureCode(String value) {
         this.value = value;
     }
     

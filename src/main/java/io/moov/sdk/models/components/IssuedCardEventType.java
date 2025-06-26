@@ -24,7 +24,7 @@ public enum IssuedCardEventType {
     @JsonValue
     private final String value;
 
-    private IssuedCardEventType(String value) {
+    IssuedCardEventType(String value) {
         this.value = value;
     }
     

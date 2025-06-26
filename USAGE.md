@@ -21,15 +21,17 @@ public class Application {
                     .build())
             .build();
 
-        CreateAccountResponse res = sdk.accounts().create()
-                .createAccount(CreateAccount.builder()
-                    .accountType(CreateAccountType.BUSINESS)
-                    .profile(CreateProfile.builder()
-                        .business(CreateBusinessProfile.builder()
-                            .legalBusinessName("Whole Body Fitness LLC")
-                            .build())
+        CreateAccount req = CreateAccount.builder()
+                .accountType(CreateAccountType.BUSINESS)
+                .profile(CreateProfile.builder()
+                    .business(CreateBusinessProfile.builder()
+                        .legalBusinessName("Whole Body Fitness LLC")
                         .build())
                     .build())
+                .build();
+
+        CreateAccountResponse res = sdk.accounts().create()
+                .request(req)
                 .call();
 
         if (res.account().isPresent()) {

@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.DeleteDisputeEvidenceFileOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class DeleteDisputeEvidenceFileRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String disputeID;
     private String evidenceID;
-    private final SDKMethodInterfaces.MethodCallDeleteDisputeEvidenceFile sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public DeleteDisputeEvidenceFileRequestBuilder(SDKMethodInterfaces.MethodCallDeleteDisputeEvidenceFile sdk) {
-        this.sdk = sdk;
-    }
-                
-    public DeleteDisputeEvidenceFileRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public DeleteDisputeEvidenceFileRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public DeleteDisputeEvidenceFileRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public DeleteDisputeEvidenceFileRequestBuilder accountID(String accountID) {
@@ -55,20 +40,22 @@ public class DeleteDisputeEvidenceFileRequestBuilder {
         return this;
     }
 
-    public DeleteDisputeEvidenceFileResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.deleteEvidence(
-            xMoovVersion,
-            accountID,
+
+    private DeleteDisputeEvidenceFileRequest buildRequest() {
+
+        DeleteDisputeEvidenceFileRequest request = new DeleteDisputeEvidenceFileRequest(accountID,
             disputeID,
             evidenceID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public DeleteDisputeEvidenceFileResponse call() throws Exception {
+        
+        RequestOperation<DeleteDisputeEvidenceFileRequest, DeleteDisputeEvidenceFileResponse> operation
+              = new DeleteDisputeEvidenceFileOperation( sdkConfiguration);
+        DeleteDisputeEvidenceFileRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

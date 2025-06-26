@@ -15,7 +15,7 @@ public enum SweepConfigStatus {
     @JsonValue
     private final String value;
 
-    private SweepConfigStatus(String value) {
+    SweepConfigStatus(String value) {
         this.value = value;
     }
     

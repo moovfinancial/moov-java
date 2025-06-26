@@ -21,7 +21,7 @@ public enum DebitHoldPeriod {
     @JsonValue
     private final String value;
 
-    private DebitHoldPeriod(String value) {
+    DebitHoldPeriod(String value) {
         this.value = value;
     }
     

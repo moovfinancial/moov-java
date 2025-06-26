@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.DeleteRepresentativeOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class DeleteRepresentativeRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String representativeID;
-    private final SDKMethodInterfaces.MethodCallDeleteRepresentative sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public DeleteRepresentativeRequestBuilder(SDKMethodInterfaces.MethodCallDeleteRepresentative sdk) {
-        this.sdk = sdk;
-    }
-                
-    public DeleteRepresentativeRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public DeleteRepresentativeRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public DeleteRepresentativeRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public DeleteRepresentativeRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class DeleteRepresentativeRequestBuilder {
         return this;
     }
 
-    public DeleteRepresentativeResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.delete(
-            xMoovVersion,
-            accountID,
+
+    private DeleteRepresentativeRequest buildRequest() {
+
+        DeleteRepresentativeRequest request = new DeleteRepresentativeRequest(accountID,
             representativeID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public DeleteRepresentativeResponse call() throws Exception {
+        
+        RequestOperation<DeleteRepresentativeRequest, DeleteRepresentativeResponse> operation
+              = new DeleteRepresentativeOperation( sdkConfiguration);
+        DeleteRepresentativeRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

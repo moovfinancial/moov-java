@@ -19,7 +19,7 @@ public enum IssuedCardFormFactor {
     @JsonValue
     private final String value;
 
-    private IssuedCardFormFactor(String value) {
+    IssuedCardFormFactor(String value) {
         this.value = value;
     }
     

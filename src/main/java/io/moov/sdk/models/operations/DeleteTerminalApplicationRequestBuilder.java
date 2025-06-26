@@ -3,36 +3,21 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.DeleteTerminalApplicationOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class DeleteTerminalApplicationRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String terminalApplicationID;
-    private final SDKMethodInterfaces.MethodCallDeleteTerminalApplication sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public DeleteTerminalApplicationRequestBuilder(SDKMethodInterfaces.MethodCallDeleteTerminalApplication sdk) {
-        this.sdk = sdk;
-    }
-                
-    public DeleteTerminalApplicationRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public DeleteTerminalApplicationRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public DeleteTerminalApplicationRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public DeleteTerminalApplicationRequestBuilder terminalApplicationID(String terminalApplicationID) {
@@ -41,18 +26,20 @@ public class DeleteTerminalApplicationRequestBuilder {
         return this;
     }
 
-    public DeleteTerminalApplicationResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.delete(
-            xMoovVersion,
-            terminalApplicationID);
+
+    private DeleteTerminalApplicationRequest buildRequest() {
+
+        DeleteTerminalApplicationRequest request = new DeleteTerminalApplicationRequest(terminalApplicationID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public DeleteTerminalApplicationResponse call() throws Exception {
+        
+        RequestOperation<DeleteTerminalApplicationRequest, DeleteTerminalApplicationResponse> operation
+              = new DeleteTerminalApplicationOperation( sdkConfiguration);
+        DeleteTerminalApplicationRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

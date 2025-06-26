@@ -19,7 +19,7 @@ public enum TokenType {
     @JsonValue
     private final String value;
 
-    private TokenType(String value) {
+    TokenType(String value) {
         this.value = value;
     }
     

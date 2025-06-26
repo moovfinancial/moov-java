@@ -21,7 +21,7 @@ public enum EvidenceType {
     @JsonValue
     private final String value;
 
-    private EvidenceType(String value) {
+    EvidenceType(String value) {
         this.value = value;
     }
     

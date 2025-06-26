@@ -3,36 +3,21 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.RevokeOnboardingInviteOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class RevokeOnboardingInviteRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String code;
-    private final SDKMethodInterfaces.MethodCallRevokeOnboardingInvite sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public RevokeOnboardingInviteRequestBuilder(SDKMethodInterfaces.MethodCallRevokeOnboardingInvite sdk) {
-        this.sdk = sdk;
-    }
-                
-    public RevokeOnboardingInviteRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public RevokeOnboardingInviteRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public RevokeOnboardingInviteRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public RevokeOnboardingInviteRequestBuilder code(String code) {
@@ -41,18 +26,20 @@ public class RevokeOnboardingInviteRequestBuilder {
         return this;
     }
 
-    public RevokeOnboardingInviteResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.revokeInvite(
-            xMoovVersion,
-            code);
+
+    private RevokeOnboardingInviteRequest buildRequest() {
+
+        RevokeOnboardingInviteRequest request = new RevokeOnboardingInviteRequest(code);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public RevokeOnboardingInviteResponse call() throws Exception {
+        
+        RequestOperation<RevokeOnboardingInviteRequest, RevokeOnboardingInviteResponse> operation
+              = new RevokeOnboardingInviteOperation( sdkConfiguration);
+        RevokeOnboardingInviteRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

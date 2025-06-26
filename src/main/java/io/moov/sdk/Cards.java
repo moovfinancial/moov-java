@@ -3,15 +3,11 @@
  */
 package io.moov.sdk;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.Card;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
 import io.moov.sdk.models.components.UpdateCard;
-import io.moov.sdk.models.errors.APIException;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.LinkCardError;
-import io.moov.sdk.models.errors.UpdateCardError;
 import io.moov.sdk.models.operations.DisableCardRequest;
 import io.moov.sdk.models.operations.DisableCardRequestBuilder;
 import io.moov.sdk.models.operations.DisableCardResponse;
@@ -24,34 +20,21 @@ import io.moov.sdk.models.operations.LinkCardResponse;
 import io.moov.sdk.models.operations.ListCardsRequest;
 import io.moov.sdk.models.operations.ListCardsRequestBuilder;
 import io.moov.sdk.models.operations.ListCardsResponse;
-import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateCardRequest;
 import io.moov.sdk.models.operations.UpdateCardRequestBuilder;
 import io.moov.sdk.models.operations.UpdateCardResponse;
-import io.moov.sdk.utils.HTTPClient;
-import io.moov.sdk.utils.HTTPRequest;
-import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
-import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
-import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
-import io.moov.sdk.utils.SerializedBody;
-import io.moov.sdk.utils.Utils.JsonShape;
-import io.moov.sdk.utils.Utils;
-import java.io.InputStream;
+import io.moov.sdk.operations.DisableCardOperation;
+import io.moov.sdk.operations.GetCardOperation;
+import io.moov.sdk.operations.LinkCardOperation;
+import io.moov.sdk.operations.ListCardsOperation;
+import io.moov.sdk.operations.UpdateCardOperation;
 import java.lang.Exception;
-import java.lang.Object;
 import java.lang.String;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
-public class Cards implements
-            MethodCallLinkCard,
-            MethodCallListCards,
-            MethodCallGetCard,
-            MethodCallUpdateCard,
-            MethodCallDisableCard {
 
+public class Cards {
     private final SDKConfiguration sdkConfiguration;
 
     Cards(SDKConfiguration sdkConfiguration) {
@@ -81,7 +64,7 @@ public class Cards implements
      * @return The call builder
      */
     public LinkCardRequestBuilder link() {
-        return new LinkCardRequestBuilder(this);
+        return new LinkCardRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -112,9 +95,9 @@ public class Cards implements
     public LinkCardResponse link(
             String accountID,
             LinkCard linkCard) throws Exception {
-        return link(Optional.empty(), Optional.empty(), accountID, linkCard);
+        return link(Optional.empty(), accountID, linkCard);
     }
-    
+
     /**
      * Link a card to an existing Moov account. 
      * 
@@ -135,15 +118,6 @@ public class Cards implements
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
      * @param xWaitFor 
      * @param accountID 
      * @param linkCard 
@@ -151,194 +125,19 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public LinkCardResponse link(
-            Optional<String> xMoovVersion,
             Optional<? extends LinkCardWaitFor> xWaitFor,
             String accountID,
             LinkCard linkCard) throws Exception {
         LinkCardRequest request =
             LinkCardRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .xWaitFor(xWaitFor)
                 .accountID(accountID)
                 .linkCard(linkCard)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                LinkCardRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/cards",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "linkCard",
-                "json",
-                false);
-        if (_serializedRequestBody == null) {
-            throw new Exception("Request body is required");
-        }
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "linkCard", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "linkCard",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "linkCard",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "linkCard",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        LinkCardResponse.Builder _resBuilder = 
-            LinkCardResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        LinkCardResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Card _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Card>() {});
-                _res.withCard(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                LinkCardError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<LinkCardError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "409", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<LinkCardRequest, LinkCardResponse> operation
+              = new LinkCardOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -353,7 +152,7 @@ public class Cards implements
      * @return The call builder
      */
     public ListCardsRequestBuilder list() {
-        return new ListCardsRequestBuilder(this);
+        return new ListCardsRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -369,173 +168,15 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public ListCardsResponse list(
-            String accountID) throws Exception {
-        return list(Optional.empty(), accountID);
-    }
-    
-    /**
-     * List all the active cards associated with a Moov account. 
-     * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ListCardsResponse list(
-            Optional<String> xMoovVersion,
             String accountID) throws Exception {
         ListCardsRequest request =
             ListCardsRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                ListCardsRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/cards",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "listCards", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listCards",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listCards",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listCards",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        ListCardsResponse.Builder _resBuilder = 
-            ListCardsResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        ListCardsResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<Card> _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<Card>>() {});
-                _res.withCards(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<ListCardsRequest, ListCardsResponse> operation
+              = new ListCardsOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -550,7 +191,7 @@ public class Cards implements
      * @return The call builder
      */
     public GetCardRequestBuilder get() {
-        return new GetCardRequestBuilder(this);
+        return new GetCardRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -567,177 +208,17 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public GetCardResponse get(
-            String accountID,
-            String cardID) throws Exception {
-        return get(Optional.empty(), accountID, cardID);
-    }
-    
-    /**
-     * Fetch a specific card associated with a Moov account. 
-     * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param cardID 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetCardResponse get(
-            Optional<String> xMoovVersion,
             String accountID,
             String cardID) throws Exception {
         GetCardRequest request =
             GetCardRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .cardID(cardID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                GetCardRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/cards/{cardID}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getCard", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getCard",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getCard",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getCard",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetCardResponse.Builder _resBuilder = 
-            GetCardResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetCardResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Card _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Card>() {});
-                _res.withCard(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<GetCardRequest, GetCardResponse> operation
+              = new GetCardOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -759,7 +240,7 @@ public class Cards implements
      * @return The call builder
      */
     public UpdateCardRequestBuilder update() {
-        return new UpdateCardRequestBuilder(this);
+        return new UpdateCardRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -784,231 +265,19 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public UpdateCardResponse update(
-            String accountID,
-            String cardID,
-            UpdateCard updateCard) throws Exception {
-        return update(Optional.empty(), accountID, cardID, updateCard);
-    }
-    
-    /**
-     * Update a linked card and/or resubmit it for verification. 
-     * 
-     * <p>If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration 
-     * date or 
-     * address will update the information stored on file for the card but will not be verified.
-     * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn 
-     * more.
-     * 
-     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param cardID 
-     * @param updateCard 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public UpdateCardResponse update(
-            Optional<String> xMoovVersion,
             String accountID,
             String cardID,
             UpdateCard updateCard) throws Exception {
         UpdateCardRequest request =
             UpdateCardRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .cardID(cardID)
                 .updateCard(updateCard)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                UpdateCardRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/cards/{cardID}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "PATCH");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "updateCard",
-                "json",
-                false);
-        if (_serializedRequestBody == null) {
-            throw new Exception("Request body is required");
-        }
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "updateCard", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "updateCard",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "updateCard",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "updateCard",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        UpdateCardResponse.Builder _resBuilder = 
-            UpdateCardResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        UpdateCardResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Card _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Card>() {});
-                _res.withCard(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                UpdateCardError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<UpdateCardError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<UpdateCardRequest, UpdateCardResponse> operation
+              = new UpdateCardOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -1021,7 +290,7 @@ public class Cards implements
      * @return The call builder
      */
     public DisableCardRequestBuilder disable() {
-        return new DisableCardRequestBuilder(this);
+        return new DisableCardRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -1036,179 +305,17 @@ public class Cards implements
      * @throws Exception if the API call fails
      */
     public DisableCardResponse disable(
-            String accountID,
-            String cardID) throws Exception {
-        return disable(Optional.empty(), accountID, cardID);
-    }
-    
-    /**
-     * Disables a card associated with a Moov account.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param cardID 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public DisableCardResponse disable(
-            Optional<String> xMoovVersion,
             String accountID,
             String cardID) throws Exception {
         DisableCardRequest request =
             DisableCardRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .cardID(cardID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                DisableCardRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/cards/{cardID}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "DELETE");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "disableCard", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "disableCard",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "disableCard",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "disableCard",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        DisableCardResponse.Builder _resBuilder = 
-            DisableCardResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        DisableCardResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "204")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            return _res;
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<DisableCardRequest, DisableCardResponse> operation
+              = new DisableCardOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 }

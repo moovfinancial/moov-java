@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.LinkApplePay;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.LinkApplePayTokenOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class LinkApplePayTokenRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private LinkApplePay linkApplePay;
-    private final SDKMethodInterfaces.MethodCallLinkApplePayToken sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public LinkApplePayTokenRequestBuilder(SDKMethodInterfaces.MethodCallLinkApplePayToken sdk) {
-        this.sdk = sdk;
-    }
-                
-    public LinkApplePayTokenRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public LinkApplePayTokenRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public LinkApplePayTokenRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public LinkApplePayTokenRequestBuilder accountID(String accountID) {
@@ -49,19 +34,21 @@ public class LinkApplePayTokenRequestBuilder {
         return this;
     }
 
-    public LinkApplePayTokenResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.linkToken(
-            xMoovVersion,
-            accountID,
+
+    private LinkApplePayTokenRequest buildRequest() {
+
+        LinkApplePayTokenRequest request = new LinkApplePayTokenRequest(accountID,
             linkApplePay);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public LinkApplePayTokenResponse call() throws Exception {
+        
+        RequestOperation<LinkApplePayTokenRequest, LinkApplePayTokenResponse> operation
+              = new LinkApplePayTokenOperation( sdkConfiguration);
+        LinkApplePayTokenRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

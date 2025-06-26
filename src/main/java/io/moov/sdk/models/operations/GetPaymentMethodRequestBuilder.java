@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetPaymentMethodOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetPaymentMethodRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String paymentMethodID;
-    private final SDKMethodInterfaces.MethodCallGetPaymentMethod sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetPaymentMethodRequestBuilder(SDKMethodInterfaces.MethodCallGetPaymentMethod sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetPaymentMethodRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetPaymentMethodRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetPaymentMethodRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetPaymentMethodRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class GetPaymentMethodRequestBuilder {
         return this;
     }
 
-    public GetPaymentMethodResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            accountID,
+
+    private GetPaymentMethodRequest buildRequest() {
+
+        GetPaymentMethodRequest request = new GetPaymentMethodRequest(accountID,
             paymentMethodID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetPaymentMethodResponse call() throws Exception {
+        
+        RequestOperation<GetPaymentMethodRequest, GetPaymentMethodResponse> operation
+              = new GetPaymentMethodOperation( sdkConfiguration);
+        GetPaymentMethodRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

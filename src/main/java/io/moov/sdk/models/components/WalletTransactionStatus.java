@@ -17,7 +17,7 @@ public enum WalletTransactionStatus {
     @JsonValue
     private final String value;
 
-    private WalletTransactionStatus(String value) {
+    WalletTransactionStatus(String value) {
         this.value = value;
     }
     

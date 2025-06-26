@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListRefundsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class ListRefundsRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String transferID;
-    private final SDKMethodInterfaces.MethodCallListRefunds sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListRefundsRequestBuilder(SDKMethodInterfaces.MethodCallListRefunds sdk) {
-        this.sdk = sdk;
-    }
-                
-    public ListRefundsRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public ListRefundsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public ListRefundsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListRefundsRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class ListRefundsRequestBuilder {
         return this;
     }
 
-    public ListRefundsResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.listRefunds(
-            xMoovVersion,
-            accountID,
+
+    private ListRefundsRequest buildRequest() {
+
+        ListRefundsRequest request = new ListRefundsRequest(accountID,
             transferID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public ListRefundsResponse call() throws Exception {
+        
+        RequestOperation<ListRefundsRequest, ListRefundsResponse> operation
+              = new ListRefundsOperation( sdkConfiguration);
+        ListRefundsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

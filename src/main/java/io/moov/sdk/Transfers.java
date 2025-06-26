@@ -3,23 +3,15 @@
  */
 package io.moov.sdk;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.AsyncTransfer;
-import io.moov.sdk.models.components.Cancellation;
-import io.moov.sdk.models.components.CardAcquiringRefund;
-import io.moov.sdk.models.components.CreateRefundResponse;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.models.components.Amount;
+import io.moov.sdk.models.components.CreateReversal;
+import io.moov.sdk.models.components.CreateTransfer;
 import io.moov.sdk.models.components.CreateTransferOptions;
-import io.moov.sdk.models.components.CreatedTransfer;
 import io.moov.sdk.models.components.PatchTransfer;
-import io.moov.sdk.models.components.Reversal;
-import io.moov.sdk.models.components.Transfer;
-import io.moov.sdk.models.components.TransferOptions;
-import io.moov.sdk.models.errors.APIException;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.RefundValidationError;
-import io.moov.sdk.models.errors.ReversalValidationError;
-import io.moov.sdk.models.errors.TransferOptionsValidationError;
-import io.moov.sdk.models.errors.TransferValidationError;
+import io.moov.sdk.models.components.SourceDestinationOptions;
+import io.moov.sdk.models.components.TransferWaitFor;
 import io.moov.sdk.models.operations.CreateCancellationRequest;
 import io.moov.sdk.models.operations.CreateCancellationRequestBuilder;
 import io.moov.sdk.models.operations.CreateCancellationResponse;
@@ -29,7 +21,6 @@ import io.moov.sdk.models.operations.CreateReversalResponse;
 import io.moov.sdk.models.operations.CreateTransferOptionsForAccountRequest;
 import io.moov.sdk.models.operations.CreateTransferOptionsForAccountRequestBuilder;
 import io.moov.sdk.models.operations.CreateTransferOptionsForAccountResponse;
-import io.moov.sdk.models.operations.CreateTransferOptionsRequest;
 import io.moov.sdk.models.operations.CreateTransferOptionsRequestBuilder;
 import io.moov.sdk.models.operations.CreateTransferOptionsResponse;
 import io.moov.sdk.models.operations.CreateTransferRequest;
@@ -53,41 +44,28 @@ import io.moov.sdk.models.operations.ListRefundsResponse;
 import io.moov.sdk.models.operations.ListTransfersRequest;
 import io.moov.sdk.models.operations.ListTransfersRequestBuilder;
 import io.moov.sdk.models.operations.ListTransfersResponse;
-import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdateTransferRequest;
 import io.moov.sdk.models.operations.UpdateTransferRequestBuilder;
 import io.moov.sdk.models.operations.UpdateTransferResponse;
-import io.moov.sdk.utils.HTTPClient;
-import io.moov.sdk.utils.HTTPRequest;
-import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
-import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
-import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
-import io.moov.sdk.utils.SerializedBody;
-import io.moov.sdk.utils.Utils.JsonShape;
-import io.moov.sdk.utils.Utils;
-import java.io.InputStream;
+import io.moov.sdk.operations.CreateCancellationOperation;
+import io.moov.sdk.operations.CreateReversalOperation;
+import io.moov.sdk.operations.CreateTransferOperation;
+import io.moov.sdk.operations.CreateTransferOptionsForAccountOperation;
+import io.moov.sdk.operations.CreateTransferOptionsOperation;
+import io.moov.sdk.operations.GetCancellationOperation;
+import io.moov.sdk.operations.GetRefundOperation;
+import io.moov.sdk.operations.GetTransferOperation;
+import io.moov.sdk.operations.InitiateRefundOperation;
+import io.moov.sdk.operations.ListRefundsOperation;
+import io.moov.sdk.operations.ListTransfersOperation;
+import io.moov.sdk.operations.UpdateTransferOperation;
 import java.lang.Exception;
-import java.lang.Object;
 import java.lang.String;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
-public class Transfers implements
-            MethodCallCreateTransferOptionsForAccount,
-            MethodCallCreateTransfer,
-            MethodCallListTransfers,
-            MethodCallGetTransfer,
-            MethodCallUpdateTransfer,
-            MethodCallCreateCancellation,
-            MethodCallGetCancellation,
-            MethodCallInitiateRefund,
-            MethodCallListRefunds,
-            MethodCallGetRefund,
-            MethodCallCreateReversal,
-            MethodCallCreateTransferOptions {
 
+public class Transfers {
     private final SDKConfiguration sdkConfiguration;
 
     Transfers(SDKConfiguration sdkConfiguration) {
@@ -108,7 +86,7 @@ public class Transfers implements
      * @return The call builder
      */
     public CreateTransferOptionsForAccountRequestBuilder generateOptionsForAccount() {
-        return new CreateTransferOptionsForAccountRequestBuilder(this);
+        return new CreateTransferOptionsForAccountRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -128,223 +106,17 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public CreateTransferOptionsForAccountResponse generateOptionsForAccount(
-            String accountID,
-            CreateTransferOptions createTransferOptions) throws Exception {
-        return generateOptionsForAccount(Optional.empty(), accountID, createTransferOptions);
-    }
-    
-    /**
-     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
-     * supply in the request body.
-     * 
-     * <p>The accountID in the route should the partner's accountID.
-     * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID The partner's Moov account ID.
-     * @param createTransferOptions 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public CreateTransferOptionsForAccountResponse generateOptionsForAccount(
-            Optional<String> xMoovVersion,
             String accountID,
             CreateTransferOptions createTransferOptions) throws Exception {
         CreateTransferOptionsForAccountRequest request =
             CreateTransferOptionsForAccountRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .createTransferOptions(createTransferOptions)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                CreateTransferOptionsForAccountRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfer-options",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "createTransferOptions",
-                "json",
-                false);
-        if (_serializedRequestBody == null) {
-            throw new Exception("Request body is required");
-        }
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "createTransferOptionsForAccount", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createTransferOptionsForAccount",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createTransferOptionsForAccount",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createTransferOptionsForAccount",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        CreateTransferOptionsForAccountResponse.Builder _resBuilder = 
-            CreateTransferOptionsForAccountResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        CreateTransferOptionsForAccountResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                TransferOptions _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<TransferOptions>() {});
-                _res.withTransferOptions(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                TransferOptionsValidationError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<TransferOptionsValidationError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<CreateTransferOptionsForAccountRequest, CreateTransferOptionsForAccountResponse> operation
+              = new CreateTransferOptionsForAccountOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -359,7 +131,7 @@ public class Transfers implements
      * @return The call builder
      */
     public CreateTransferRequestBuilder create() {
-        return new CreateTransferRequestBuilder(this);
+        return new CreateTransferRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -370,234 +142,50 @@ public class Transfers implements
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param xIdempotencyKey Prevents duplicate transfers from being created.
+     * @param accountID Your Moov account ID.
+     * @param createTransfer 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateTransferResponse create(
-            CreateTransferRequest request) throws Exception {
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                CreateTransferRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<CreateTransferRequest>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "createTransfer",
-                "json",
-                false);
-        if (_serializedRequestBody == null) {
-            throw new Exception("Request body is required");
-        }
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "createTransfer", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createTransfer",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createTransfer",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createTransfer",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        CreateTransferResponse.Builder _resBuilder = 
-            CreateTransferResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
+            String xIdempotencyKey,
+            String accountID,
+            CreateTransfer createTransfer) throws Exception {
+        return create(xIdempotencyKey, Optional.empty(), accountID, createTransfer);
+    }
 
-        CreateTransferResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                CreatedTransfer _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<CreatedTransfer>() {});
-                _res.withCreatedTransfer(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                AsyncTransfer _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<AsyncTransfer>() {});
-                _res.withAsyncTransfer(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "202")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Transfer _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Transfer>() {});
-                _res.withTransfer(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "409")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                io.moov.sdk.models.errors.Transfer _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<io.moov.sdk.models.errors.Transfer>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                TransferValidationError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<TransferValidationError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+    /**
+     * Move money by providing the source, destination, and amount in the request body.
+     * 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param xIdempotencyKey Prevents duplicate transfers from being created.
+     * @param xWaitFor 
+     * @param accountID Your Moov account ID.
+     * @param createTransfer 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CreateTransferResponse create(
+            String xIdempotencyKey,
+            Optional<? extends TransferWaitFor> xWaitFor,
+            String accountID,
+            CreateTransfer createTransfer) throws Exception {
+        CreateTransferRequest request =
+            CreateTransferRequest
+                .builder()
+                .xIdempotencyKey(xIdempotencyKey)
+                .xWaitFor(xWaitFor)
+                .accountID(accountID)
+                .createTransfer(createTransfer)
+                .build();
+        RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
+              = new CreateTransferOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -617,7 +205,7 @@ public class Transfers implements
      * @return The call builder
      */
     public ListTransfersRequestBuilder list() {
-        return new ListTransfersRequestBuilder(this);
+        return new ListTransfersRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -633,149 +221,15 @@ public class Transfers implements
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListTransfersResponse list(
             ListTransfersRequest request) throws Exception {
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                ListTransfersRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-
-        _req.addQueryParams(Utils.getQueryParams(
-                ListTransfersRequest.class,
-                request, 
-                this.sdkConfiguration.globals));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "listTransfers", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listTransfers",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listTransfers",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listTransfers",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        ListTransfersResponse.Builder _resBuilder = 
-            ListTransfersResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        ListTransfersResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<Transfer> _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<Transfer>>() {});
-                _res.withTransfers(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
+              = new ListTransfersOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -791,7 +245,7 @@ public class Transfers implements
      * @return The call builder
      */
     public GetTransferRequestBuilder get() {
-        return new GetTransferRequestBuilder(this);
+        return new GetTransferRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -809,178 +263,17 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public GetTransferResponse get(
-            String transferID,
-            String accountID) throws Exception {
-        return get(Optional.empty(), transferID, accountID);
-    }
-    
-    /**
-     * Retrieve full transfer details for an individual transfer of a particular Moov account. 
-     * 
-     * <p>Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) 
-     * to learn more.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param transferID Identifier for the transfer.
-     * @param accountID 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetTransferResponse get(
-            Optional<String> xMoovVersion,
             String transferID,
             String accountID) throws Exception {
         GetTransferRequest request =
             GetTransferRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .transferID(transferID)
                 .accountID(accountID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                GetTransferRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers/{transferID}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getTransfer", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getTransfer",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getTransfer",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getTransfer",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetTransferResponse.Builder _resBuilder = 
-            GetTransferResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetTransferResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Transfer _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Transfer>() {});
-                _res.withTransfer(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<GetTransferRequest, GetTransferResponse> operation
+              = new GetTransferOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -995,7 +288,7 @@ public class Transfers implements
      * @return The call builder
      */
     public UpdateTransferRequestBuilder update() {
-        return new UpdateTransferRequestBuilder(this);
+        return new UpdateTransferRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -1013,194 +306,19 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public UpdateTransferResponse update(
-            String transferID,
-            String accountID,
-            PatchTransfer patchTransfer) throws Exception {
-        return update(Optional.empty(), transferID, accountID, patchTransfer);
-    }
-    
-    /**
-     * Update the metadata contained on a transfer. 
-     * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param transferID Identifier for the transfer.
-     * @param accountID 
-     * @param patchTransfer 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public UpdateTransferResponse update(
-            Optional<String> xMoovVersion,
             String transferID,
             String accountID,
             PatchTransfer patchTransfer) throws Exception {
         UpdateTransferRequest request =
             UpdateTransferRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .transferID(transferID)
                 .accountID(accountID)
                 .patchTransfer(patchTransfer)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                UpdateTransferRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers/{transferID}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "PATCH");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "patchTransfer",
-                "json",
-                false);
-        if (_serializedRequestBody == null) {
-            throw new Exception("Request body is required");
-        }
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "updateTransfer", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "updateTransfer",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "updateTransfer",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "updateTransfer",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        UpdateTransferResponse.Builder _resBuilder = 
-            UpdateTransferResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        UpdateTransferResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Transfer _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Transfer>() {});
-                _res.withTransfer(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
+              = new UpdateTransferOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -1213,7 +331,7 @@ public class Transfers implements
      * @return The call builder
      */
     public CreateCancellationRequestBuilder createCancellation() {
-        return new CreateCancellationRequestBuilder(this);
+        return new CreateCancellationRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -1228,190 +346,17 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public CreateCancellationResponse createCancellation(
-            String accountID,
-            String transferID) throws Exception {
-        return createCancellation(Optional.empty(), accountID, transferID);
-    }
-    
-    /**
-     * Initiate a cancellation for a card, ACH, or queued transfer.
-     * 
-     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-     *   to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID The partner's Moov account ID.
-     * @param transferID The transfer ID to cancel.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public CreateCancellationResponse createCancellation(
-            Optional<String> xMoovVersion,
             String accountID,
             String transferID) throws Exception {
         CreateCancellationRequest request =
             CreateCancellationRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .transferID(transferID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                CreateCancellationRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers/{transferID}/cancellations",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "createCancellation", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createCancellation",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createCancellation",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createCancellation",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        CreateCancellationResponse.Builder _resBuilder = 
-            CreateCancellationResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        CreateCancellationResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200", "202")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Cancellation _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Cancellation>() {});
-                _res.withCancellation(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
+              = new CreateCancellationOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -1424,7 +369,7 @@ public class Transfers implements
      * @return The call builder
      */
     public GetCancellationRequestBuilder getCancellation() {
-        return new GetCancellationRequestBuilder(this);
+        return new GetCancellationRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -1440,179 +385,19 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public GetCancellationResponse getCancellation(
-            String accountID,
-            String transferID,
-            String cancellationID) throws Exception {
-        return getCancellation(Optional.empty(), accountID, transferID, cancellationID);
-    }
-    
-    /**
-     * Get details of a cancellation for a transfer.
-     * 
-     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-     *   to specify the `/accounts/{accountID}/transfers.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID Moov account ID of the partner or transfer's source or destination.
-     * @param transferID Identifier for the transfer.
-     * @param cancellationID Identifier for the cancellation.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetCancellationResponse getCancellation(
-            Optional<String> xMoovVersion,
             String accountID,
             String transferID,
             String cancellationID) throws Exception {
         GetCancellationRequest request =
             GetCancellationRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .transferID(transferID)
                 .cancellationID(cancellationID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                GetCancellationRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getCancellation", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getCancellation",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getCancellation",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getCancellation",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetCancellationResponse.Builder _resBuilder = 
-            GetCancellationResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetCancellationResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Cancellation _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Cancellation>() {});
-                _res.withCancellation(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<GetCancellationRequest, GetCancellationResponse> operation
+              = new GetCancellationOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -1628,7 +413,7 @@ public class Transfers implements
      * @return The call builder
      */
     public InitiateRefundRequestBuilder initiateRefund() {
-        return new InitiateRefundRequestBuilder(this);
+        return new InitiateRefundRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -1640,215 +425,15 @@ public class Transfers implements
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public InitiateRefundResponse initiateRefund(
             InitiateRefundRequest request) throws Exception {
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                InitiateRefundRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers/{transferID}/refunds",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<InitiateRefundRequest>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "createRefund",
-                "json",
-                false);
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "initiateRefund", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "initiateRefund",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "initiateRefund",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "initiateRefund",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        InitiateRefundResponse.Builder _resBuilder = 
-            InitiateRefundResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        InitiateRefundResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                CreateRefundResponse _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<CreateRefundResponse>() {});
-                _res.withCreateRefundResponse(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "202")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                CardAcquiringRefund _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<CardAcquiringRefund>() {});
-                _res.withCardAcquiringRefund(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "409")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                io.moov.sdk.models.errors.CardAcquiringRefund _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<io.moov.sdk.models.errors.CardAcquiringRefund>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                RefundValidationError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<RefundValidationError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<InitiateRefundRequest, InitiateRefundResponse> operation
+              = new InitiateRefundOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -1861,7 +446,7 @@ public class Transfers implements
      * @return The call builder
      */
     public ListRefundsRequestBuilder listRefunds() {
-        return new ListRefundsRequestBuilder(this);
+        return new ListRefundsRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -1876,175 +461,17 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public ListRefundsResponse listRefunds(
-            String accountID,
-            String transferID) throws Exception {
-        return listRefunds(Optional.empty(), accountID, transferID);
-    }
-    
-    /**
-     * Get a list of refunds for a card transfer.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param transferID Identifier for the transfer.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ListRefundsResponse listRefunds(
-            Optional<String> xMoovVersion,
             String accountID,
             String transferID) throws Exception {
         ListRefundsRequest request =
             ListRefundsRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .transferID(transferID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                ListRefundsRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers/{transferID}/refunds",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "listRefunds", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listRefunds",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listRefunds",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listRefunds",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        ListRefundsResponse.Builder _resBuilder = 
-            ListRefundsResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        ListRefundsResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<CardAcquiringRefund> _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<CardAcquiringRefund>>() {});
-                _res.withCardAcquiringRefunds(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<ListRefundsRequest, ListRefundsResponse> operation
+              = new ListRefundsOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -2057,7 +484,7 @@ public class Transfers implements
      * @return The call builder
      */
     public GetRefundRequestBuilder getRefund() {
-        return new GetRefundRequestBuilder(this);
+        return new GetRefundRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -2073,179 +500,19 @@ public class Transfers implements
      * @throws Exception if the API call fails
      */
     public GetRefundResponse getRefund(
-            String transferID,
-            String accountID,
-            String refundID) throws Exception {
-        return getRefund(Optional.empty(), transferID, accountID, refundID);
-    }
-    
-    /**
-     * Get details of a refund for a card transfer.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param transferID Identifier for the transfer.
-     * @param accountID 
-     * @param refundID Identifier for the refund.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetRefundResponse getRefund(
-            Optional<String> xMoovVersion,
             String transferID,
             String accountID,
             String refundID) throws Exception {
         GetRefundRequest request =
             GetRefundRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .transferID(transferID)
                 .accountID(accountID)
                 .refundID(refundID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                GetRefundRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers/{transferID}/refunds/{refundID}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getRefund", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getRefund",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getRefund",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getRefund",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetRefundResponse.Builder _resBuilder = 
-            GetRefundResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetRefundResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                CardAcquiringRefund _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<CardAcquiringRefund>() {});
-                _res.withCardAcquiringRefund(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<GetRefundRequest, GetRefundResponse> operation
+              = new GetRefundOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -2260,7 +527,7 @@ public class Transfers implements
      * @return The call builder
      */
     public CreateReversalRequestBuilder createReversal() {
-        return new CreateReversalRequestBuilder(this);
+        return new CreateReversalRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -2271,184 +538,50 @@ public class Transfers implements
      * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
      * to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param xIdempotencyKey Prevents duplicate reversals from being created.
+     * @param accountID The Moov account ID.
+     * @param transferID The transfer ID to reverse.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateReversalResponse createReversal(
-            CreateReversalRequest request) throws Exception {
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                CreateReversalRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/transfers/{transferID}/reversals",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<CreateReversalRequest>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "createReversal",
-                "json",
-                false);
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "createReversal", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createReversal",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createReversal",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createReversal",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        CreateReversalResponse.Builder _resBuilder = 
-            CreateReversalResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
+            String xIdempotencyKey,
+            String accountID,
+            String transferID) throws Exception {
+        return createReversal(xIdempotencyKey, accountID, transferID, Optional.empty());
+    }
 
-        CreateReversalResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200", "202")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Reversal _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Reversal>() {});
-                _res.withReversal(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ReversalValidationError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<ReversalValidationError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+    /**
+     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
+     * Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
+     * to learn more.
+     * 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * to specify the `/accounts/{accountID}/transfers.write` scope.
+     * 
+     * @param xIdempotencyKey Prevents duplicate reversals from being created.
+     * @param accountID The Moov account ID.
+     * @param transferID The transfer ID to reverse.
+     * @param createReversal 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CreateReversalResponse createReversal(
+            String xIdempotencyKey,
+            String accountID,
+            String transferID,
+            Optional<? extends CreateReversal> createReversal) throws Exception {
+        CreateReversalRequest request =
+            CreateReversalRequest
+                .builder()
+                .xIdempotencyKey(xIdempotencyKey)
+                .accountID(accountID)
+                .transferID(transferID)
+                .createReversal(createReversal)
+                .build();
+        RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
+              = new CreateReversalOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -2464,7 +597,7 @@ public class Transfers implements
      * @return The call builder
      */
     public CreateTransferOptionsRequestBuilder generateOptions() {
-        return new CreateTransferOptionsRequestBuilder(this);
+        return new CreateTransferOptionsRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -2476,220 +609,26 @@ public class Transfers implements
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param createTransferOptions 
+     * @param source 
+     * @param destination 
+     * @param amount 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public CreateTransferOptionsResponse generateOptions(
-            CreateTransferOptions createTransferOptions) throws Exception {
-        return generateOptions(Optional.empty(), createTransferOptions);
-    }
-    
-    /**
-     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
-     * supply in the request. 
-     * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param createTransferOptions 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public CreateTransferOptionsResponse generateOptions(
-            Optional<String> xMoovVersion,
-            CreateTransferOptions createTransferOptions) throws Exception {
-        CreateTransferOptionsRequest request =
-            CreateTransferOptionsRequest
+            SourceDestinationOptions source,
+            SourceDestinationOptions destination,
+            Amount amount) throws Exception {
+        CreateTransferOptions request =
+            CreateTransferOptions
                 .builder()
-                .xMoovVersion(xMoovVersion)
-                .createTransferOptions(createTransferOptions)
+                .source(source)
+                .destination(destination)
+                .amount(amount)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                _baseUrl,
-                "/transfer-options");
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "createTransferOptions",
-                "json",
-                false);
-        if (_serializedRequestBody == null) {
-            throw new Exception("Request body is required");
-        }
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "createTransferOptions", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createTransferOptions",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createTransferOptions",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createTransferOptions",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        CreateTransferOptionsResponse.Builder _resBuilder = 
-            CreateTransferOptionsResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        CreateTransferOptionsResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                TransferOptions _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<TransferOptions>() {});
-                _res.withTransferOptions(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                TransferOptionsValidationError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<TransferOptionsValidationError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<CreateTransferOptions, CreateTransferOptionsResponse> operation
+              = new CreateTransferOptionsOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 }

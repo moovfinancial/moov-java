@@ -3,9 +3,11 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PaymentMethodType;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.ListPaymentMethodsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -13,29 +15,13 @@ import java.util.Optional;
 
 public class ListPaymentMethodsRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private Optional<String> sourceID = Optional.empty();
     private Optional<? extends PaymentMethodType> paymentMethodType = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallListPaymentMethods sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListPaymentMethodsRequestBuilder(SDKMethodInterfaces.MethodCallListPaymentMethods sdk) {
-        this.sdk = sdk;
-    }
-                
-    public ListPaymentMethodsRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public ListPaymentMethodsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public ListPaymentMethodsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListPaymentMethodsRequestBuilder accountID(String accountID) {
@@ -68,20 +54,22 @@ public class ListPaymentMethodsRequestBuilder {
         return this;
     }
 
-    public ListPaymentMethodsResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.list(
-            xMoovVersion,
-            accountID,
+
+    private ListPaymentMethodsRequest buildRequest() {
+
+        ListPaymentMethodsRequest request = new ListPaymentMethodsRequest(accountID,
             sourceID,
             paymentMethodType);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public ListPaymentMethodsResponse call() throws Exception {
+        
+        RequestOperation<ListPaymentMethodsRequest, ListPaymentMethodsResponse> operation
+              = new ListPaymentMethodsOperation( sdkConfiguration);
+        ListPaymentMethodsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

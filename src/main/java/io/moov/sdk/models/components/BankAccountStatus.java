@@ -18,7 +18,7 @@ public enum BankAccountStatus {
     @JsonValue
     private final String value;
 
-    private BankAccountStatus(String value) {
+    BankAccountStatus(String value) {
         this.value = value;
     }
     

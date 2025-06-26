@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateTransferOptions;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.CreateTransferOptionsForAccountOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class CreateTransferOptionsForAccountRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private CreateTransferOptions createTransferOptions;
-    private final SDKMethodInterfaces.MethodCallCreateTransferOptionsForAccount sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreateTransferOptionsForAccountRequestBuilder(SDKMethodInterfaces.MethodCallCreateTransferOptionsForAccount sdk) {
-        this.sdk = sdk;
-    }
-                
-    public CreateTransferOptionsForAccountRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public CreateTransferOptionsForAccountRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public CreateTransferOptionsForAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public CreateTransferOptionsForAccountRequestBuilder accountID(String accountID) {
@@ -49,19 +34,21 @@ public class CreateTransferOptionsForAccountRequestBuilder {
         return this;
     }
 
-    public CreateTransferOptionsForAccountResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.generateOptionsForAccount(
-            xMoovVersion,
-            accountID,
+
+    private CreateTransferOptionsForAccountRequest buildRequest() {
+
+        CreateTransferOptionsForAccountRequest request = new CreateTransferOptionsForAccountRequest(accountID,
             createTransferOptions);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public CreateTransferOptionsForAccountResponse call() throws Exception {
+        
+        RequestOperation<CreateTransferOptionsForAccountRequest, CreateTransferOptionsForAccountResponse> operation
+              = new CreateTransferOptionsForAccountOperation( sdkConfiguration);
+        CreateTransferOptionsForAccountRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

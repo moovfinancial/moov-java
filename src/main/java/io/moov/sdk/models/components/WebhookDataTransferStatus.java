@@ -37,7 +37,7 @@ public enum WebhookDataTransferStatus {
     @JsonValue
     private final String value;
 
-    private WebhookDataTransferStatus(String value) {
+    WebhookDataTransferStatus(String value) {
         this.value = value;
     }
     

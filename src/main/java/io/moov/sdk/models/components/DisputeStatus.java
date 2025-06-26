@@ -28,7 +28,7 @@ public enum DisputeStatus {
     @JsonValue
     private final String value;
 
-    private DisputeStatus(String value) {
+    DisputeStatus(String value) {
         this.value = value;
     }
     

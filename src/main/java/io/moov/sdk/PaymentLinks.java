@@ -3,15 +3,10 @@
  */
 package io.moov.sdk;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
 import io.moov.sdk.models.components.CreatePaymentLink;
-import io.moov.sdk.models.components.PaymentLink;
-import io.moov.sdk.models.components.QRCode;
 import io.moov.sdk.models.components.UpdatePaymentLink;
-import io.moov.sdk.models.errors.APIException;
-import io.moov.sdk.models.errors.CreatePaymentLinkError;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.UpdatePaymentLinkError;
 import io.moov.sdk.models.operations.CreatePaymentLinkRequest;
 import io.moov.sdk.models.operations.CreatePaymentLinkRequestBuilder;
 import io.moov.sdk.models.operations.CreatePaymentLinkResponse;
@@ -27,35 +22,22 @@ import io.moov.sdk.models.operations.GetPaymentLinkResponse;
 import io.moov.sdk.models.operations.ListPaymentLinksRequest;
 import io.moov.sdk.models.operations.ListPaymentLinksRequestBuilder;
 import io.moov.sdk.models.operations.ListPaymentLinksResponse;
-import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
 import io.moov.sdk.models.operations.UpdatePaymentLinkRequest;
 import io.moov.sdk.models.operations.UpdatePaymentLinkRequestBuilder;
 import io.moov.sdk.models.operations.UpdatePaymentLinkResponse;
-import io.moov.sdk.utils.HTTPClient;
-import io.moov.sdk.utils.HTTPRequest;
-import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
-import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
-import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
-import io.moov.sdk.utils.SerializedBody;
-import io.moov.sdk.utils.Utils.JsonShape;
-import io.moov.sdk.utils.Utils;
-import java.io.InputStream;
+import io.moov.sdk.operations.CreatePaymentLinkOperation;
+import io.moov.sdk.operations.DisablePaymentLinkOperation;
+import io.moov.sdk.operations.GetPaymentLinkOperation;
+import io.moov.sdk.operations.GetPaymentLinkQRCodeOperation;
+import io.moov.sdk.operations.ListPaymentLinksOperation;
+import io.moov.sdk.operations.UpdatePaymentLinkOperation;
 import java.lang.Exception;
-import java.lang.Object;
 import java.lang.String;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
-public class PaymentLinks implements
-            MethodCallCreatePaymentLink,
-            MethodCallListPaymentLinks,
-            MethodCallGetPaymentLink,
-            MethodCallUpdatePaymentLink,
-            MethodCallDisablePaymentLink,
-            MethodCallGetPaymentLinkQRCode {
 
+public class PaymentLinks {
     private final SDKConfiguration sdkConfiguration;
 
     PaymentLinks(SDKConfiguration sdkConfiguration) {
@@ -71,7 +53,7 @@ public class PaymentLinks implements
      * @return The call builder
      */
     public CreatePaymentLinkRequestBuilder create() {
-        return new CreatePaymentLinkRequestBuilder(this);
+        return new CreatePaymentLinkRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -92,224 +74,17 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public CreatePaymentLinkResponse create(
-            String accountID,
-            CreatePaymentLink createPaymentLink) throws Exception {
-        return create(Optional.empty(), accountID, createPaymentLink);
-    }
-    
-    /**
-     * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param createPaymentLink Request to create a new payment link.
-     *         
-     *         A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
-     *         `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
-     *         to a specific recipient.
-     *         
-     *         **Note:** The `payout` option is currently under development and is not yet available for general use.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public CreatePaymentLinkResponse create(
-            Optional<String> xMoovVersion,
             String accountID,
             CreatePaymentLink createPaymentLink) throws Exception {
         CreatePaymentLinkRequest request =
             CreatePaymentLinkRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .createPaymentLink(createPaymentLink)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                CreatePaymentLinkRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/payment-links",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "createPaymentLink",
-                "json",
-                false);
-        if (_serializedRequestBody == null) {
-            throw new Exception("Request body is required");
-        }
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "createPaymentLink", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createPaymentLink",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createPaymentLink",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "createPaymentLink",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        CreatePaymentLinkResponse.Builder _resBuilder = 
-            CreatePaymentLinkResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        CreatePaymentLinkResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                PaymentLink _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<PaymentLink>() {});
-                _res.withPaymentLink(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                CreatePaymentLinkError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<CreatePaymentLinkError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<CreatePaymentLinkRequest, CreatePaymentLinkResponse> operation
+              = new CreatePaymentLinkOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -322,7 +97,7 @@ public class PaymentLinks implements
      * @return The call builder
      */
     public ListPaymentLinksRequestBuilder list() {
-        return new ListPaymentLinksRequestBuilder(this);
+        return new ListPaymentLinksRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -336,171 +111,15 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public ListPaymentLinksResponse list(
-            String accountID) throws Exception {
-        return list(Optional.empty(), accountID);
-    }
-    
-    /**
-     * List all the payment links created under a Moov account.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ListPaymentLinksResponse list(
-            Optional<String> xMoovVersion,
             String accountID) throws Exception {
         ListPaymentLinksRequest request =
             ListPaymentLinksRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                ListPaymentLinksRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/payment-links",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "listPaymentLinks", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listPaymentLinks",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listPaymentLinks",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listPaymentLinks",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        ListPaymentLinksResponse.Builder _resBuilder = 
-            ListPaymentLinksResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        ListPaymentLinksResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<PaymentLink> _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<PaymentLink>>() {});
-                _res.withPaymentLinks(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
+              = new ListPaymentLinksOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -513,7 +132,7 @@ public class PaymentLinks implements
      * @return The call builder
      */
     public GetPaymentLinkRequestBuilder get() {
-        return new GetPaymentLinkRequestBuilder(this);
+        return new GetPaymentLinkRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -528,175 +147,17 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public GetPaymentLinkResponse get(
-            String accountID,
-            String paymentLinkCode) throws Exception {
-        return get(Optional.empty(), accountID, paymentLinkCode);
-    }
-    
-    /**
-     * Retrieve a payment link by code.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param paymentLinkCode 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetPaymentLinkResponse get(
-            Optional<String> xMoovVersion,
             String accountID,
             String paymentLinkCode) throws Exception {
         GetPaymentLinkRequest request =
             GetPaymentLinkRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .paymentLinkCode(paymentLinkCode)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                GetPaymentLinkRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/payment-links/{paymentLinkCode}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getPaymentLink", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getPaymentLink",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getPaymentLink",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getPaymentLink",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetPaymentLinkResponse.Builder _resBuilder = 
-            GetPaymentLinkResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetPaymentLinkResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                PaymentLink _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<PaymentLink>() {});
-                _res.withPaymentLink(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<GetPaymentLinkRequest, GetPaymentLinkResponse> operation
+              = new GetPaymentLinkOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -709,7 +170,7 @@ public class PaymentLinks implements
      * @return The call builder
      */
     public UpdatePaymentLinkRequestBuilder update() {
-        return new UpdatePaymentLinkRequestBuilder(this);
+        return new UpdatePaymentLinkRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -725,222 +186,19 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public UpdatePaymentLinkResponse update(
-            String accountID,
-            String paymentLinkCode,
-            UpdatePaymentLink updatePaymentLink) throws Exception {
-        return update(Optional.empty(), accountID, paymentLinkCode, updatePaymentLink);
-    }
-    
-    /**
-     * Update a payment link.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param paymentLinkCode 
-     * @param updatePaymentLink 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public UpdatePaymentLinkResponse update(
-            Optional<String> xMoovVersion,
             String accountID,
             String paymentLinkCode,
             UpdatePaymentLink updatePaymentLink) throws Exception {
         UpdatePaymentLinkRequest request =
             UpdatePaymentLinkRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .paymentLinkCode(paymentLinkCode)
                 .updatePaymentLink(updatePaymentLink)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                UpdatePaymentLinkRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/payment-links/{paymentLinkCode}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "PATCH");
-        Object _convertedRequest = Utils.convertToShape(
-                request, 
-                JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
-        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, 
-                "updatePaymentLink",
-                "json",
-                false);
-        if (_serializedRequestBody == null) {
-            throw new Exception("Request body is required");
-        }
-        _req.setBody(Optional.ofNullable(_serializedRequestBody));
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "updatePaymentLink", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "updatePaymentLink",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "updatePaymentLink",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "updatePaymentLink",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        UpdatePaymentLinkResponse.Builder _resBuilder = 
-            UpdatePaymentLinkResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        UpdatePaymentLinkResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                PaymentLink _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<PaymentLink>() {});
-                _res.withPaymentLink(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "409")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GenericError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GenericError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "422")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                UpdatePaymentLinkError _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<UpdatePaymentLinkError>() {});
-                throw _out;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<UpdatePaymentLinkRequest, UpdatePaymentLinkResponse> operation
+              = new UpdatePaymentLinkOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -953,7 +211,7 @@ public class PaymentLinks implements
      * @return The call builder
      */
     public DisablePaymentLinkRequestBuilder disable() {
-        return new DisablePaymentLinkRequestBuilder(this);
+        return new DisablePaymentLinkRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -968,164 +226,17 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public DisablePaymentLinkResponse disable(
-            String accountID,
-            String paymentLinkCode) throws Exception {
-        return disable(Optional.empty(), accountID, paymentLinkCode);
-    }
-    
-    /**
-     * Disable a payment link.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param paymentLinkCode 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public DisablePaymentLinkResponse disable(
-            Optional<String> xMoovVersion,
             String accountID,
             String paymentLinkCode) throws Exception {
         DisablePaymentLinkRequest request =
             DisablePaymentLinkRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .paymentLinkCode(paymentLinkCode)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                DisablePaymentLinkRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/payment-links/{paymentLinkCode}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "DELETE");
-        _req.addHeader("Accept", "*/*")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "disablePaymentLink", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "disablePaymentLink",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "disablePaymentLink",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "disablePaymentLink",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        DisablePaymentLinkResponse.Builder _resBuilder = 
-            DisablePaymentLinkResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        DisablePaymentLinkResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "204")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            return _res;
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<DisablePaymentLinkRequest, DisablePaymentLinkResponse> operation
+              = new DisablePaymentLinkOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -1140,7 +251,7 @@ public class PaymentLinks implements
      * @return The call builder
      */
     public GetPaymentLinkQRCodeRequestBuilder getQRCode() {
-        return new GetPaymentLinkQRCodeRequestBuilder(this);
+        return new GetPaymentLinkQRCodeRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -1157,182 +268,17 @@ public class PaymentLinks implements
      * @throws Exception if the API call fails
      */
     public GetPaymentLinkQRCodeResponse getQRCode(
-            String accountID,
-            String paymentLinkCode) throws Exception {
-        return getQRCode(Optional.empty(), accountID, paymentLinkCode);
-    }
-    
-    /**
-     * Retrieve the payment link encoded in a QR code. 
-     * 
-     * <p>Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param paymentLinkCode 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetPaymentLinkQRCodeResponse getQRCode(
-            Optional<String> xMoovVersion,
             String accountID,
             String paymentLinkCode) throws Exception {
         GetPaymentLinkQRCodeRequest request =
             GetPaymentLinkQRCodeRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .paymentLinkCode(paymentLinkCode)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                GetPaymentLinkQRCodeRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/payment-links/{paymentLinkCode}/qrcode",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json;q=1, image/png;q=0")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getPaymentLinkQRCode", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getPaymentLinkQRCode",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getPaymentLinkQRCode",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getPaymentLinkQRCode",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetPaymentLinkQRCodeResponse.Builder _resBuilder = 
-            GetPaymentLinkQRCodeResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200") && Utils.contentTypeMatches(_contentType, "image/png")) {
-            _resBuilder.responseStream(_httpRes.body());
-        }
-
-        GetPaymentLinkQRCodeResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                QRCode _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<QRCode>() {});
-                _res.withQRCode(Optional.ofNullable(_out));
-                return _res;
-            } else if (Utils.contentTypeMatches(_contentType, "image/png")) {
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<GetPaymentLinkQRCodeRequest, GetPaymentLinkQRCodeResponse> operation
+              = new GetPaymentLinkQRCodeOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 }

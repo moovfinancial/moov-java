@@ -3,36 +3,21 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.DisconnectAccountOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class DisconnectAccountRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
-    private final SDKMethodInterfaces.MethodCallDisconnectAccount sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public DisconnectAccountRequestBuilder(SDKMethodInterfaces.MethodCallDisconnectAccount sdk) {
-        this.sdk = sdk;
-    }
-                
-    public DisconnectAccountRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public DisconnectAccountRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public DisconnectAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public DisconnectAccountRequestBuilder accountID(String accountID) {
@@ -41,18 +26,20 @@ public class DisconnectAccountRequestBuilder {
         return this;
     }
 
-    public DisconnectAccountResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.disconnect(
-            xMoovVersion,
-            accountID);
+
+    private DisconnectAccountRequest buildRequest() {
+
+        DisconnectAccountRequest request = new DisconnectAccountRequest(accountID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public DisconnectAccountResponse call() throws Exception {
+        
+        RequestOperation<DisconnectAccountRequest, DisconnectAccountResponse> operation
+              = new DisconnectAccountOperation( sdkConfiguration);
+        DisconnectAccountRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

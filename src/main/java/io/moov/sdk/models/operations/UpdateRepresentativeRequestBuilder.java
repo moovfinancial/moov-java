@@ -3,39 +3,24 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateRepresentative;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.UpdateRepresentativeOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class UpdateRepresentativeRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String representativeID;
     private UpdateRepresentative updateRepresentative;
-    private final SDKMethodInterfaces.MethodCallUpdateRepresentative sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public UpdateRepresentativeRequestBuilder(SDKMethodInterfaces.MethodCallUpdateRepresentative sdk) {
-        this.sdk = sdk;
-    }
-                
-    public UpdateRepresentativeRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public UpdateRepresentativeRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public UpdateRepresentativeRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public UpdateRepresentativeRequestBuilder accountID(String accountID) {
@@ -56,20 +41,22 @@ public class UpdateRepresentativeRequestBuilder {
         return this;
     }
 
-    public UpdateRepresentativeResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.update(
-            xMoovVersion,
-            accountID,
+
+    private UpdateRepresentativeRequest buildRequest() {
+
+        UpdateRepresentativeRequest request = new UpdateRepresentativeRequest(accountID,
             representativeID,
             updateRepresentative);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public UpdateRepresentativeResponse call() throws Exception {
+        
+        RequestOperation<UpdateRepresentativeRequest, UpdateRepresentativeResponse> operation
+              = new UpdateRepresentativeOperation( sdkConfiguration);
+        UpdateRepresentativeRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

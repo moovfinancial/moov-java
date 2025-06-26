@@ -16,7 +16,7 @@ public enum CancellationStatus {
     @JsonValue
     private final String value;
 
-    private CancellationStatus(String value) {
+    CancellationStatus(String value) {
         this.value = value;
     }
     

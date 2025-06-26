@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.AcceptDisputeOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class AcceptDisputeRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String disputeID;
-    private final SDKMethodInterfaces.MethodCallAcceptDispute sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public AcceptDisputeRequestBuilder(SDKMethodInterfaces.MethodCallAcceptDispute sdk) {
-        this.sdk = sdk;
-    }
-                
-    public AcceptDisputeRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public AcceptDisputeRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public AcceptDisputeRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public AcceptDisputeRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class AcceptDisputeRequestBuilder {
         return this;
     }
 
-    public AcceptDisputeResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.accept(
-            xMoovVersion,
-            accountID,
+
+    private AcceptDisputeRequest buildRequest() {
+
+        AcceptDisputeRequest request = new AcceptDisputeRequest(accountID,
             disputeID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public AcceptDisputeResponse call() throws Exception {
+        
+        RequestOperation<AcceptDisputeRequest, AcceptDisputeResponse> operation
+              = new AcceptDisputeOperation( sdkConfiguration);
+        AcceptDisputeRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

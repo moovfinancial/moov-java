@@ -15,7 +15,7 @@ public enum BankAccountWaitFor {
     @JsonValue
     private final String value;
 
-    private BankAccountWaitFor(String value) {
+    BankAccountWaitFor(String value) {
         this.value = value;
     }
     

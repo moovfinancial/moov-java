@@ -27,7 +27,7 @@ public enum CallToAction {
     @JsonValue
     private final String value;
 
-    private CallToAction(String value) {
+    CallToAction(String value) {
         this.value = value;
     }
     

@@ -3,27 +3,68 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.models.components.UpdateEvidence;
+import io.moov.sdk.operations.UpdateDisputeEvidenceOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
+import java.lang.String;
 
 public class UpdateDisputeEvidenceRequestBuilder {
 
-    private UpdateDisputeEvidenceRequest request;
-    private final SDKMethodInterfaces.MethodCallUpdateDisputeEvidence sdk;
+    private String accountID;
+    private String disputeID;
+    private String evidenceID;
+    private UpdateEvidence updateEvidence;
+    private final SDKConfiguration sdkConfiguration;
 
-    public UpdateDisputeEvidenceRequestBuilder(SDKMethodInterfaces.MethodCallUpdateDisputeEvidence sdk) {
-        this.sdk = sdk;
+    public UpdateDisputeEvidenceRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public UpdateDisputeEvidenceRequestBuilder request(UpdateDisputeEvidenceRequest request) {
-        Utils.checkNotNull(request, "request");
-        this.request = request;
+    public UpdateDisputeEvidenceRequestBuilder accountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
         return this;
     }
 
-    public UpdateDisputeEvidenceResponse call() throws Exception {
+    public UpdateDisputeEvidenceRequestBuilder disputeID(String disputeID) {
+        Utils.checkNotNull(disputeID, "disputeID");
+        this.disputeID = disputeID;
+        return this;
+    }
 
-        return sdk.updateEvidence(
-            request);
+    public UpdateDisputeEvidenceRequestBuilder evidenceID(String evidenceID) {
+        Utils.checkNotNull(evidenceID, "evidenceID");
+        this.evidenceID = evidenceID;
+        return this;
+    }
+
+    public UpdateDisputeEvidenceRequestBuilder updateEvidence(UpdateEvidence updateEvidence) {
+        Utils.checkNotNull(updateEvidence, "updateEvidence");
+        this.updateEvidence = updateEvidence;
+        return this;
+    }
+
+
+    private UpdateDisputeEvidenceRequest buildRequest() {
+
+        UpdateDisputeEvidenceRequest request = new UpdateDisputeEvidenceRequest(accountID,
+            disputeID,
+            evidenceID,
+            updateEvidence);
+
+        return request;
+    }
+
+    public UpdateDisputeEvidenceResponse call() throws Exception {
+        
+        RequestOperation<UpdateDisputeEvidenceRequest, UpdateDisputeEvidenceResponse> operation
+              = new UpdateDisputeEvidenceOperation( sdkConfiguration);
+        UpdateDisputeEvidenceRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

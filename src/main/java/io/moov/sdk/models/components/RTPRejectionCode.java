@@ -33,7 +33,7 @@ public enum RTPRejectionCode {
     @JsonValue
     private final String value;
 
-    private RTPRejectionCode(String value) {
+    RTPRejectionCode(String value) {
         this.value = value;
     }
     

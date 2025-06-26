@@ -22,7 +22,7 @@ public enum TerminalApplicationStatus {
     @JsonValue
     private final String value;
 
-    private TerminalApplicationStatus(String value) {
+    TerminalApplicationStatus(String value) {
         this.value = value;
     }
     

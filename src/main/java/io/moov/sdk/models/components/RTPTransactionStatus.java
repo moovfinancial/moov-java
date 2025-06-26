@@ -22,7 +22,7 @@ public enum RTPTransactionStatus {
     @JsonValue
     private final String value;
 
-    private RTPTransactionStatus(String value) {
+    RTPTransactionStatus(String value) {
         this.value = value;
     }
     

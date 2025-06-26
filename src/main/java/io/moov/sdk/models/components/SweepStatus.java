@@ -19,7 +19,7 @@ public enum SweepStatus {
     @JsonValue
     private final String value;
 
-    private SweepStatus(String value) {
+    SweepStatus(String value) {
         this.value = value;
     }
     

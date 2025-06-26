@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.InitiateMicroDepositsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class InitiateMicroDepositsRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String bankAccountID;
-    private final SDKMethodInterfaces.MethodCallInitiateMicroDeposits sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public InitiateMicroDepositsRequestBuilder(SDKMethodInterfaces.MethodCallInitiateMicroDeposits sdk) {
-        this.sdk = sdk;
-    }
-                
-    public InitiateMicroDepositsRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public InitiateMicroDepositsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public InitiateMicroDepositsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public InitiateMicroDepositsRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class InitiateMicroDepositsRequestBuilder {
         return this;
     }
 
-    public InitiateMicroDepositsResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.initiateMicroDeposits(
-            xMoovVersion,
-            accountID,
+
+    private InitiateMicroDepositsRequest buildRequest() {
+
+        InitiateMicroDepositsRequest request = new InitiateMicroDepositsRequest(accountID,
             bankAccountID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public InitiateMicroDepositsResponse call() throws Exception {
+        
+        RequestOperation<InitiateMicroDepositsRequest, InitiateMicroDepositsResponse> operation
+              = new InitiateMicroDepositsOperation( sdkConfiguration);
+        InitiateMicroDepositsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

@@ -3,36 +3,21 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetAvatarOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetAvatarRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String uniqueID;
-    private final SDKMethodInterfaces.MethodCallGetAvatar sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetAvatarRequestBuilder(SDKMethodInterfaces.MethodCallGetAvatar sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetAvatarRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetAvatarRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetAvatarRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetAvatarRequestBuilder uniqueID(String uniqueID) {
@@ -41,18 +26,20 @@ public class GetAvatarRequestBuilder {
         return this;
     }
 
-    public GetAvatarResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            uniqueID);
+
+    private GetAvatarRequest buildRequest() {
+
+        GetAvatarRequest request = new GetAvatarRequest(uniqueID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetAvatarResponse call() throws Exception {
+        
+        RequestOperation<GetAvatarRequest, GetAvatarResponse> operation
+              = new GetAvatarOperation( sdkConfiguration);
+        GetAvatarRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetSchedulesOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetSchedulesRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String scheduleID;
-    private final SDKMethodInterfaces.MethodCallGetSchedules sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetSchedulesRequestBuilder(SDKMethodInterfaces.MethodCallGetSchedules sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetSchedulesRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetSchedulesRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetSchedulesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetSchedulesRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class GetSchedulesRequestBuilder {
         return this;
     }
 
-    public GetSchedulesResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            accountID,
+
+    private GetSchedulesRequest buildRequest() {
+
+        GetSchedulesRequest request = new GetSchedulesRequest(accountID,
             scheduleID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetSchedulesResponse call() throws Exception {
+        
+        RequestOperation<GetSchedulesRequest, GetSchedulesResponse> operation
+              = new GetSchedulesOperation( sdkConfiguration);
+        GetSchedulesRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

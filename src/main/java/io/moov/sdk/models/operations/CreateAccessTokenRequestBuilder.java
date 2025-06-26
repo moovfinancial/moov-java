@@ -3,57 +3,34 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.AuthTokenRequest;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.CreateAccessTokenOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.String;
-import java.util.Optional;
 
 public class CreateAccessTokenRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private AuthTokenRequest authTokenRequest;
-    private final SDKMethodInterfaces.MethodCallCreateAccessToken sdk;
+    private AuthTokenRequest request;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreateAccessTokenRequestBuilder(SDKMethodInterfaces.MethodCallCreateAccessToken sdk) {
-        this.sdk = sdk;
-    }
-                
-    public CreateAccessTokenRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
+    public CreateAccessTokenRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public CreateAccessTokenRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
-
-    public CreateAccessTokenRequestBuilder authTokenRequest(AuthTokenRequest authTokenRequest) {
-        Utils.checkNotNull(authTokenRequest, "authTokenRequest");
-        this.authTokenRequest = authTokenRequest;
+    public CreateAccessTokenRequestBuilder request(AuthTokenRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
 
     public CreateAccessTokenResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.createAccessToken(
-            xMoovVersion,
-            authTokenRequest);
-    }
+        
+        RequestOperation<AuthTokenRequest, CreateAccessTokenResponse> operation
+              = new CreateAccessTokenOperation( sdkConfiguration);
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

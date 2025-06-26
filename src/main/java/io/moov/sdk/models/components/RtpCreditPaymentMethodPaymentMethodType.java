@@ -14,7 +14,7 @@ public enum RtpCreditPaymentMethodPaymentMethodType {
     @JsonValue
     private final String value;
 
-    private RtpCreditPaymentMethodPaymentMethodType(String value) {
+    RtpCreditPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
     

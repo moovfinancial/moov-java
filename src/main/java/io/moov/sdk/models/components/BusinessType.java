@@ -28,7 +28,7 @@ public enum BusinessType {
     @JsonValue
     private final String value;
 
-    private BusinessType(String value) {
+    BusinessType(String value) {
         this.value = value;
     }
     

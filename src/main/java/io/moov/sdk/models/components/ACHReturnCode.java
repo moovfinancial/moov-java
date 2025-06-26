@@ -59,7 +59,7 @@ public enum ACHReturnCode {
     @JsonValue
     private final String value;
 
-    private ACHReturnCode(String value) {
+    ACHReturnCode(String value) {
         this.value = value;
     }
     

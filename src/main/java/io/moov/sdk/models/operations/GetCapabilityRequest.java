@@ -5,31 +5,14 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.CapabilityID;
-import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 public class GetCapabilityRequest {
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
-    private Optional<String> xMoovVersion;
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -37,44 +20,19 @@ public class GetCapabilityRequest {
     /**
      * Moov account capabilities.
      * 
-     * <p>The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+     * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=capabilityID")
     private CapabilityID capabilityID;
 
     @JsonCreator
     public GetCapabilityRequest(
-            Optional<String> xMoovVersion,
             String accountID,
             CapabilityID capabilityID) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(capabilityID, "capabilityID");
-        this.xMoovVersion = xMoovVersion;
         this.accountID = accountID;
         this.capabilityID = capabilityID;
-    }
-    
-    public GetCapabilityRequest(
-            String accountID,
-            CapabilityID capabilityID) {
-        this(Optional.empty(), accountID, capabilityID);
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @JsonIgnore
-    public Optional<String> xMoovVersion() {
-        return xMoovVersion;
     }
 
     @JsonIgnore
@@ -85,7 +43,7 @@ public class GetCapabilityRequest {
     /**
      * Moov account capabilities.
      * 
-     * <p>The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+     * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
      */
     @JsonIgnore
     public CapabilityID capabilityID() {
@@ -96,40 +54,6 @@ public class GetCapabilityRequest {
         return new Builder();
     }    
 
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public GetCapabilityRequest withXMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-        return this;
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public GetCapabilityRequest withXMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
-
     public GetCapabilityRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -139,7 +63,7 @@ public class GetCapabilityRequest {
     /**
      * Moov account capabilities.
      * 
-     * <p>The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+     * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
      */
     public GetCapabilityRequest withCapabilityID(CapabilityID capabilityID) {
         Utils.checkNotNull(capabilityID, "capabilityID");
@@ -158,7 +82,6 @@ public class GetCapabilityRequest {
         }
         GetCapabilityRequest other = (GetCapabilityRequest) o;
         return 
-            Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.accountID, other.accountID) &&
             Objects.deepEquals(this.capabilityID, other.capabilityID);
     }
@@ -166,7 +89,6 @@ public class GetCapabilityRequest {
     @Override
     public int hashCode() {
         return Objects.hash(
-            xMoovVersion,
             accountID,
             capabilityID);
     }
@@ -174,14 +96,11 @@ public class GetCapabilityRequest {
     @Override
     public String toString() {
         return Utils.toString(GetCapabilityRequest.class,
-                "xMoovVersion", xMoovVersion,
                 "accountID", accountID,
                 "capabilityID", capabilityID);
     }
     
     public final static class Builder {
- 
-        private Optional<String> xMoovVersion;
  
         private String accountID;
  
@@ -189,40 +108,6 @@ public class GetCapabilityRequest {
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(String xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-            return this;
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(Optional<String> xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = xMoovVersion;
-            return this;
         }
 
         public Builder accountID(String accountID) {
@@ -234,7 +119,7 @@ public class GetCapabilityRequest {
         /**
          * Moov account capabilities.
          * 
-         * <p>The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+         * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
          */
         public Builder capabilityID(CapabilityID capabilityID) {
             Utils.checkNotNull(capabilityID, "capabilityID");
@@ -243,19 +128,9 @@ public class GetCapabilityRequest {
         }
         
         public GetCapabilityRequest build() {
-            if (xMoovVersion == null) {
-                xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-            }
             return new GetCapabilityRequest(
-                xMoovVersion,
                 accountID,
                 capabilityID);
         }
-
-        private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-                new LazySingletonValue<>(
-                        "x-moov-version",
-                        "\"v2024.01.00\"",
-                        new TypeReference<Optional<String>>() {});
     }
 }

@@ -72,7 +72,7 @@ public enum RequirementID {
     @JsonValue
     private final String value;
 
-    private RequirementID(String value) {
+    RequirementID(String value) {
         this.value = value;
     }
     

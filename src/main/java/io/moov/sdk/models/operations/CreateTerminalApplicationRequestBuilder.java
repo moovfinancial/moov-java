@@ -3,57 +3,34 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateTerminalApplication;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.CreateTerminalApplicationOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.String;
-import java.util.Optional;
 
 public class CreateTerminalApplicationRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private CreateTerminalApplication createTerminalApplication;
-    private final SDKMethodInterfaces.MethodCallCreateTerminalApplication sdk;
+    private CreateTerminalApplication request;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreateTerminalApplicationRequestBuilder(SDKMethodInterfaces.MethodCallCreateTerminalApplication sdk) {
-        this.sdk = sdk;
-    }
-                
-    public CreateTerminalApplicationRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
+    public CreateTerminalApplicationRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public CreateTerminalApplicationRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
-
-    public CreateTerminalApplicationRequestBuilder createTerminalApplication(CreateTerminalApplication createTerminalApplication) {
-        Utils.checkNotNull(createTerminalApplication, "createTerminalApplication");
-        this.createTerminalApplication = createTerminalApplication;
+    public CreateTerminalApplicationRequestBuilder request(CreateTerminalApplication request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
 
     public CreateTerminalApplicationResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.create(
-            xMoovVersion,
-            createTerminalApplication);
-    }
+        
+        RequestOperation<CreateTerminalApplication, CreateTerminalApplicationResponse> operation
+              = new CreateTerminalApplicationOperation( sdkConfiguration);
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

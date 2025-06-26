@@ -32,7 +32,7 @@ public enum VerificationStatusDetail {
     @JsonValue
     private final String value;
 
-    private VerificationStatusDetail(String value) {
+    VerificationStatusDetail(String value) {
         this.value = value;
     }
     

@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetDisputeEvidenceDataOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetDisputeEvidenceDataRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String disputeID;
     private String evidenceID;
-    private final SDKMethodInterfaces.MethodCallGetDisputeEvidenceData sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetDisputeEvidenceDataRequestBuilder(SDKMethodInterfaces.MethodCallGetDisputeEvidenceData sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetDisputeEvidenceDataRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetDisputeEvidenceDataRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetDisputeEvidenceDataRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetDisputeEvidenceDataRequestBuilder accountID(String accountID) {
@@ -55,20 +40,22 @@ public class GetDisputeEvidenceDataRequestBuilder {
         return this;
     }
 
-    public GetDisputeEvidenceDataResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.getEvidenceData(
-            xMoovVersion,
-            accountID,
+
+    private GetDisputeEvidenceDataRequest buildRequest() {
+
+        GetDisputeEvidenceDataRequest request = new GetDisputeEvidenceDataRequest(accountID,
             disputeID,
             evidenceID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetDisputeEvidenceDataResponse call() throws Exception {
+        
+        RequestOperation<GetDisputeEvidenceDataRequest, GetDisputeEvidenceDataResponse> operation
+              = new GetDisputeEvidenceDataOperation( sdkConfiguration);
+        GetDisputeEvidenceDataRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

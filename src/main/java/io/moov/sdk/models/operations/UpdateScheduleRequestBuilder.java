@@ -3,39 +3,24 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpsertSchedule;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.UpdateScheduleOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class UpdateScheduleRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String scheduleID;
     private UpsertSchedule upsertSchedule;
-    private final SDKMethodInterfaces.MethodCallUpdateSchedule sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public UpdateScheduleRequestBuilder(SDKMethodInterfaces.MethodCallUpdateSchedule sdk) {
-        this.sdk = sdk;
-    }
-                
-    public UpdateScheduleRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public UpdateScheduleRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public UpdateScheduleRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public UpdateScheduleRequestBuilder accountID(String accountID) {
@@ -56,20 +41,22 @@ public class UpdateScheduleRequestBuilder {
         return this;
     }
 
-    public UpdateScheduleResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.update(
-            xMoovVersion,
-            accountID,
+
+    private UpdateScheduleRequest buildRequest() {
+
+        UpdateScheduleRequest request = new UpdateScheduleRequest(accountID,
             scheduleID,
             upsertSchedule);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public UpdateScheduleResponse call() throws Exception {
+        
+        RequestOperation<UpdateScheduleRequest, UpdateScheduleResponse> operation
+              = new UpdateScheduleOperation( sdkConfiguration);
+        UpdateScheduleRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

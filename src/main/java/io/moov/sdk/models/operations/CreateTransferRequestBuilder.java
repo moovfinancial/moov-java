@@ -3,27 +3,76 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.models.components.CreateTransfer;
+import io.moov.sdk.models.components.TransferWaitFor;
+import io.moov.sdk.operations.CreateTransferOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
+import java.lang.String;
+import java.util.Optional;
 
 public class CreateTransferRequestBuilder {
 
-    private CreateTransferRequest request;
-    private final SDKMethodInterfaces.MethodCallCreateTransfer sdk;
+    private String xIdempotencyKey;
+    private Optional<? extends TransferWaitFor> xWaitFor = Optional.empty();
+    private String accountID;
+    private CreateTransfer createTransfer;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreateTransferRequestBuilder(SDKMethodInterfaces.MethodCallCreateTransfer sdk) {
-        this.sdk = sdk;
+    public CreateTransferRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public CreateTransferRequestBuilder request(CreateTransferRequest request) {
-        Utils.checkNotNull(request, "request");
-        this.request = request;
+    public CreateTransferRequestBuilder xIdempotencyKey(String xIdempotencyKey) {
+        Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
+        this.xIdempotencyKey = xIdempotencyKey;
+        return this;
+    }
+                
+    public CreateTransferRequestBuilder xWaitFor(TransferWaitFor xWaitFor) {
+        Utils.checkNotNull(xWaitFor, "xWaitFor");
+        this.xWaitFor = Optional.of(xWaitFor);
         return this;
     }
 
-    public CreateTransferResponse call() throws Exception {
+    public CreateTransferRequestBuilder xWaitFor(Optional<? extends TransferWaitFor> xWaitFor) {
+        Utils.checkNotNull(xWaitFor, "xWaitFor");
+        this.xWaitFor = xWaitFor;
+        return this;
+    }
 
-        return sdk.create(
-            request);
+    public CreateTransferRequestBuilder accountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
+
+    public CreateTransferRequestBuilder createTransfer(CreateTransfer createTransfer) {
+        Utils.checkNotNull(createTransfer, "createTransfer");
+        this.createTransfer = createTransfer;
+        return this;
+    }
+
+
+    private CreateTransferRequest buildRequest() {
+
+        CreateTransferRequest request = new CreateTransferRequest(xIdempotencyKey,
+            xWaitFor,
+            accountID,
+            createTransfer);
+
+        return request;
+    }
+
+    public CreateTransferResponse call() throws Exception {
+        
+        RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
+              = new CreateTransferOperation( sdkConfiguration);
+        CreateTransferRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

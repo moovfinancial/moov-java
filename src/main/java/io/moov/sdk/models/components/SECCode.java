@@ -22,7 +22,7 @@ public enum SECCode {
     @JsonValue
     private final String value;
 
-    private SECCode(String value) {
+    SECCode(String value) {
         this.value = value;
     }
     

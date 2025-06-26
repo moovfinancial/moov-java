@@ -3,36 +3,21 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetEnrichmentProfileOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetEnrichmentProfileRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String email;
-    private final SDKMethodInterfaces.MethodCallGetEnrichmentProfile sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetEnrichmentProfileRequestBuilder(SDKMethodInterfaces.MethodCallGetEnrichmentProfile sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetEnrichmentProfileRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetEnrichmentProfileRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetEnrichmentProfileRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetEnrichmentProfileRequestBuilder email(String email) {
@@ -41,18 +26,20 @@ public class GetEnrichmentProfileRequestBuilder {
         return this;
     }
 
-    public GetEnrichmentProfileResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            email);
+
+    private GetEnrichmentProfileRequest buildRequest() {
+
+        GetEnrichmentProfileRequest request = new GetEnrichmentProfileRequest(email);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetEnrichmentProfileResponse call() throws Exception {
+        
+        RequestOperation<GetEnrichmentProfileRequest, GetEnrichmentProfileResponse> operation
+              = new GetEnrichmentProfileOperation( sdkConfiguration);
+        GetEnrichmentProfileRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

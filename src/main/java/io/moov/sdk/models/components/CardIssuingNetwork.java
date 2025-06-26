@@ -21,7 +21,7 @@ public enum CardIssuingNetwork {
     @JsonValue
     private final String value;
 
-    private CardIssuingNetwork(String value) {
+    CardIssuingNetwork(String value) {
         this.value = value;
     }
     

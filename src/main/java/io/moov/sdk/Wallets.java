@@ -3,34 +3,23 @@
  */
 package io.moov.sdk;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.models.components.Wallet;
-import io.moov.sdk.models.errors.APIException;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
 import io.moov.sdk.models.operations.GetWalletRequest;
 import io.moov.sdk.models.operations.GetWalletRequestBuilder;
 import io.moov.sdk.models.operations.GetWalletResponse;
 import io.moov.sdk.models.operations.ListWalletsRequest;
 import io.moov.sdk.models.operations.ListWalletsRequestBuilder;
 import io.moov.sdk.models.operations.ListWalletsResponse;
-import io.moov.sdk.models.operations.SDKMethodInterfaces.*;
-import io.moov.sdk.utils.HTTPClient;
-import io.moov.sdk.utils.HTTPRequest;
-import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
-import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
-import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
-import io.moov.sdk.utils.Utils;
-import java.io.InputStream;
+import io.moov.sdk.operations.GetWalletOperation;
+import io.moov.sdk.operations.ListWalletsOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
-public class Wallets implements
-            MethodCallListWallets,
-            MethodCallGetWallet {
 
+public class Wallets {
     private final SDKConfiguration sdkConfiguration;
 
     Wallets(SDKConfiguration sdkConfiguration) {
@@ -48,7 +37,7 @@ public class Wallets implements
      * @return The call builder
      */
     public ListWalletsRequestBuilder list() {
-        return new ListWalletsRequestBuilder(this);
+        return new ListWalletsRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -64,173 +53,15 @@ public class Wallets implements
      * @throws Exception if the API call fails
      */
     public ListWalletsResponse list(
-            String accountID) throws Exception {
-        return list(Optional.empty(), accountID);
-    }
-    
-    /**
-     * List the wallets associated with a Moov account. 
-     * 
-     * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ListWalletsResponse list(
-            Optional<String> xMoovVersion,
             String accountID) throws Exception {
         ListWalletsRequest request =
             ListWalletsRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                ListWalletsRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/wallets",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "listWallets", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listWallets",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listWallets",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "listWallets",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        ListWalletsResponse.Builder _resBuilder = 
-            ListWalletsResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        ListWalletsResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<Wallet> _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<Wallet>>() {});
-                _res.withWallets(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<ListWalletsRequest, ListWalletsResponse> operation
+              = new ListWalletsOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 
@@ -245,7 +76,7 @@ public class Wallets implements
      * @return The call builder
      */
     public GetWalletRequestBuilder get() {
-        return new GetWalletRequestBuilder(this);
+        return new GetWalletRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -262,177 +93,17 @@ public class Wallets implements
      * @throws Exception if the API call fails
      */
     public GetWalletResponse get(
-            String accountID,
-            String walletID) throws Exception {
-        return get(Optional.empty(), accountID, walletID);
-    }
-    
-    /**
-     * Get information on a specific wallet (e.g., the available balance). 
-     * 
-     * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-     * 
-     * @param xMoovVersion Specify an API version.
-     *         
-     *         API versioning follows the format `vYYYY.QQ.BB`, where 
-     *           - `YYYY` is the year
-     *           - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *           - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *             - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     *         
-     *         The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     * @param accountID 
-     * @param walletID 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetWalletResponse get(
-            Optional<String> xMoovVersion,
             String accountID,
             String walletID) throws Exception {
         GetWalletRequest request =
             GetWalletRequest
                 .builder()
-                .xMoovVersion(xMoovVersion)
                 .accountID(accountID)
                 .walletID(walletID)
                 .build();
-        
-        String _baseUrl = this.sdkConfiguration.serverUrl();
-        String _url = Utils.generateURL(
-                GetWalletRequest.class,
-                _baseUrl,
-                "/accounts/{accountID}/wallets/{walletID}",
-                request, this.sdkConfiguration.globals);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getWallet", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429", "4XX", "500", "504", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getWallet",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getWallet",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getWallet",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetWalletResponse.Builder _resBuilder = 
-            GetWalletResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetWalletResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                Wallet _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<Wallet>() {});
-                _res.withWallet(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401", "403", "404", "429")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "504")) {
-            _res.withHeaders(_httpRes.headers().map());
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new APIException(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new APIException(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<GetWalletRequest, GetWalletResponse> operation
+              = new GetWalletOperation( sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 }

@@ -23,7 +23,7 @@ public enum TransferFailureReason {
     @JsonValue
     private final String value;
 
-    private TransferFailureReason(String value) {
+    TransferFailureReason(String value) {
         this.value = value;
     }
     

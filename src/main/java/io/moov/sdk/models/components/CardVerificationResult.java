@@ -18,7 +18,7 @@ public enum CardVerificationResult {
     @JsonValue
     private final String value;
 
-    private CardVerificationResult(String value) {
+    CardVerificationResult(String value) {
         this.value = value;
     }
     

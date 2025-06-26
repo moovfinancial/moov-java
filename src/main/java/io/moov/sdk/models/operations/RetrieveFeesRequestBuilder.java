@@ -3,16 +3,20 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.RetrieveFeesOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class RetrieveFeesRequestBuilder {
 
     private RetrieveFeesRequest request;
-    private final SDKMethodInterfaces.MethodCallRetrieveFees sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public RetrieveFeesRequestBuilder(SDKMethodInterfaces.MethodCallRetrieveFees sdk) {
-        this.sdk = sdk;
+    public RetrieveFeesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public RetrieveFeesRequestBuilder request(RetrieveFeesRequest request) {
@@ -22,8 +26,10 @@ public class RetrieveFeesRequestBuilder {
     }
 
     public RetrieveFeesResponse call() throws Exception {
+        
+        RequestOperation<RetrieveFeesRequest, RetrieveFeesResponse> operation
+              = new RetrieveFeesOperation( sdkConfiguration);
 
-        return sdk.retrieveFees(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

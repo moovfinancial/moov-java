@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetPaymentLinkQRCodeOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetPaymentLinkQRCodeRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String paymentLinkCode;
-    private final SDKMethodInterfaces.MethodCallGetPaymentLinkQRCode sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetPaymentLinkQRCodeRequestBuilder(SDKMethodInterfaces.MethodCallGetPaymentLinkQRCode sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetPaymentLinkQRCodeRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetPaymentLinkQRCodeRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetPaymentLinkQRCodeRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetPaymentLinkQRCodeRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class GetPaymentLinkQRCodeRequestBuilder {
         return this;
     }
 
-    public GetPaymentLinkQRCodeResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.getQRCode(
-            xMoovVersion,
-            accountID,
+
+    private GetPaymentLinkQRCodeRequest buildRequest() {
+
+        GetPaymentLinkQRCodeRequest request = new GetPaymentLinkQRCodeRequest(accountID,
             paymentLinkCode);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetPaymentLinkQRCodeResponse call() throws Exception {
+        
+        RequestOperation<GetPaymentLinkQRCodeRequest, GetPaymentLinkQRCodeResponse> operation
+              = new GetPaymentLinkQRCodeOperation( sdkConfiguration);
+        GetPaymentLinkQRCodeRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

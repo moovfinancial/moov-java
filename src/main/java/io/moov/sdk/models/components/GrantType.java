@@ -23,7 +23,7 @@ public enum GrantType {
     @JsonValue
     private final String value;
 
-    private GrantType(String value) {
+    GrantType(String value) {
         this.value = value;
     }
     

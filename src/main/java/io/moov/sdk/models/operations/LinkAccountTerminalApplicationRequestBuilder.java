@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.LinkAccountTerminalApplication;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.LinkAccountTerminalApplicationOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class LinkAccountTerminalApplicationRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private LinkAccountTerminalApplication linkAccountTerminalApplication;
-    private final SDKMethodInterfaces.MethodCallLinkAccountTerminalApplication sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public LinkAccountTerminalApplicationRequestBuilder(SDKMethodInterfaces.MethodCallLinkAccountTerminalApplication sdk) {
-        this.sdk = sdk;
-    }
-                
-    public LinkAccountTerminalApplicationRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public LinkAccountTerminalApplicationRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public LinkAccountTerminalApplicationRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public LinkAccountTerminalApplicationRequestBuilder accountID(String accountID) {
@@ -49,19 +34,21 @@ public class LinkAccountTerminalApplicationRequestBuilder {
         return this;
     }
 
-    public LinkAccountTerminalApplicationResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.link(
-            xMoovVersion,
-            accountID,
+
+    private LinkAccountTerminalApplicationRequest buildRequest() {
+
+        LinkAccountTerminalApplicationRequest request = new LinkAccountTerminalApplicationRequest(accountID,
             linkAccountTerminalApplication);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public LinkAccountTerminalApplicationResponse call() throws Exception {
+        
+        RequestOperation<LinkAccountTerminalApplicationRequest, LinkAccountTerminalApplicationResponse> operation
+              = new LinkAccountTerminalApplicationOperation( sdkConfiguration);
+        LinkAccountTerminalApplicationRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

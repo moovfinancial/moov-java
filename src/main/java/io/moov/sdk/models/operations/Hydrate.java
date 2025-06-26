@@ -17,7 +17,7 @@ public enum Hydrate {
     @JsonValue
     private final String value;
 
-    private Hydrate(String value) {
+    Hydrate(String value) {
         this.value = value;
     }
     

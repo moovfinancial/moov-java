@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CapabilityID;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.DisableCapabilityOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class DisableCapabilityRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private CapabilityID capabilityID;
-    private final SDKMethodInterfaces.MethodCallDisableCapability sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public DisableCapabilityRequestBuilder(SDKMethodInterfaces.MethodCallDisableCapability sdk) {
-        this.sdk = sdk;
-    }
-                
-    public DisableCapabilityRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public DisableCapabilityRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public DisableCapabilityRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public DisableCapabilityRequestBuilder accountID(String accountID) {
@@ -49,19 +34,21 @@ public class DisableCapabilityRequestBuilder {
         return this;
     }
 
-    public DisableCapabilityResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.disable(
-            xMoovVersion,
-            accountID,
+
+    private DisableCapabilityRequest buildRequest() {
+
+        DisableCapabilityRequest request = new DisableCapabilityRequest(accountID,
             capabilityID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public DisableCapabilityResponse call() throws Exception {
+        
+        RequestOperation<DisableCapabilityRequest, DisableCapabilityResponse> operation
+              = new DisableCapabilityOperation( sdkConfiguration);
+        DisableCapabilityRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

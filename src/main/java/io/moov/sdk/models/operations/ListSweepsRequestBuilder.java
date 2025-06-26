@@ -3,16 +3,20 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListSweepsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class ListSweepsRequestBuilder {
 
     private ListSweepsRequest request;
-    private final SDKMethodInterfaces.MethodCallListSweeps sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListSweepsRequestBuilder(SDKMethodInterfaces.MethodCallListSweeps sdk) {
-        this.sdk = sdk;
+    public ListSweepsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListSweepsRequestBuilder request(ListSweepsRequest request) {
@@ -22,8 +26,10 @@ public class ListSweepsRequestBuilder {
     }
 
     public ListSweepsResponse call() throws Exception {
+        
+        RequestOperation<ListSweepsRequest, ListSweepsResponse> operation
+              = new ListSweepsOperation( sdkConfiguration);
 
-        return sdk.list(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

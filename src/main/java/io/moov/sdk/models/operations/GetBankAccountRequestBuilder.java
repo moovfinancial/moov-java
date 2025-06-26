@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetBankAccountOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetBankAccountRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String bankAccountID;
-    private final SDKMethodInterfaces.MethodCallGetBankAccount sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetBankAccountRequestBuilder(SDKMethodInterfaces.MethodCallGetBankAccount sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetBankAccountRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetBankAccountRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetBankAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetBankAccountRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class GetBankAccountRequestBuilder {
         return this;
     }
 
-    public GetBankAccountResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            accountID,
+
+    private GetBankAccountRequest buildRequest() {
+
+        GetBankAccountRequest request = new GetBankAccountRequest(accountID,
             bankAccountID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetBankAccountResponse call() throws Exception {
+        
+        RequestOperation<GetBankAccountRequest, GetBankAccountResponse> operation
+              = new GetBankAccountOperation( sdkConfiguration);
+        GetBankAccountRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

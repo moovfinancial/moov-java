@@ -5,8 +5,6 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
@@ -16,20 +14,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class GetEnrichmentAddressRequest {
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
-    private Optional<String> xMoovVersion;
 
     /**
      * Partial or complete address to search.
@@ -113,7 +97,6 @@ public class GetEnrichmentAddressRequest {
 
     @JsonCreator
     public GetEnrichmentAddressRequest(
-            Optional<String> xMoovVersion,
             String search,
             Optional<Long> maxResults,
             Optional<String> includeCities,
@@ -127,7 +110,6 @@ public class GetEnrichmentAddressRequest {
             Optional<String> preferGeolocation,
             Optional<String> selected,
             Optional<String> source) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(search, "search");
         Utils.checkNotNull(maxResults, "maxResults");
         Utils.checkNotNull(includeCities, "includeCities");
@@ -141,7 +123,6 @@ public class GetEnrichmentAddressRequest {
         Utils.checkNotNull(preferGeolocation, "preferGeolocation");
         Utils.checkNotNull(selected, "selected");
         Utils.checkNotNull(source, "source");
-        this.xMoovVersion = xMoovVersion;
         this.search = search;
         this.maxResults = maxResults;
         this.includeCities = includeCities;
@@ -159,23 +140,7 @@ public class GetEnrichmentAddressRequest {
     
     public GetEnrichmentAddressRequest(
             String search) {
-        this(Optional.empty(), search, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @JsonIgnore
-    public Optional<String> xMoovVersion() {
-        return xMoovVersion;
+        this(search, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -287,40 +252,6 @@ public class GetEnrichmentAddressRequest {
     public final static Builder builder() {
         return new Builder();
     }    
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public GetEnrichmentAddressRequest withXMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-        return this;
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public GetEnrichmentAddressRequest withXMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
 
     /**
      * Partial or complete address to search.
@@ -562,7 +493,6 @@ public class GetEnrichmentAddressRequest {
         }
         GetEnrichmentAddressRequest other = (GetEnrichmentAddressRequest) o;
         return 
-            Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.search, other.search) &&
             Objects.deepEquals(this.maxResults, other.maxResults) &&
             Objects.deepEquals(this.includeCities, other.includeCities) &&
@@ -581,7 +511,6 @@ public class GetEnrichmentAddressRequest {
     @Override
     public int hashCode() {
         return Objects.hash(
-            xMoovVersion,
             search,
             maxResults,
             includeCities,
@@ -600,7 +529,6 @@ public class GetEnrichmentAddressRequest {
     @Override
     public String toString() {
         return Utils.toString(GetEnrichmentAddressRequest.class,
-                "xMoovVersion", xMoovVersion,
                 "search", search,
                 "maxResults", maxResults,
                 "includeCities", includeCities,
@@ -617,8 +545,6 @@ public class GetEnrichmentAddressRequest {
     }
     
     public final static class Builder {
- 
-        private Optional<String> xMoovVersion;
  
         private String search;
  
@@ -648,40 +574,6 @@ public class GetEnrichmentAddressRequest {
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(String xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-            return this;
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(Optional<String> xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = xMoovVersion;
-            return this;
         }
 
         /**
@@ -914,11 +806,7 @@ public class GetEnrichmentAddressRequest {
         }
         
         public GetEnrichmentAddressRequest build() {
-            if (xMoovVersion == null) {
-                xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-            }
             return new GetEnrichmentAddressRequest(
-                xMoovVersion,
                 search,
                 maxResults,
                 includeCities,
@@ -933,11 +821,5 @@ public class GetEnrichmentAddressRequest {
                 selected,
                 source);
         }
-
-        private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-                new LazySingletonValue<>(
-                        "x-moov-version",
-                        "\"v2024.01.00\"",
-                        new TypeReference<Optional<String>>() {});
     }
 }

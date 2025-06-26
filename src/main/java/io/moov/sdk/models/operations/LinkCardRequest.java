@@ -5,10 +5,8 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
-import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
@@ -18,20 +16,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class LinkCardRequest {
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
-    private Optional<String> xMoovVersion;
 
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
@@ -50,15 +34,12 @@ public class LinkCardRequest {
 
     @JsonCreator
     public LinkCardRequest(
-            Optional<String> xMoovVersion,
             Optional<? extends LinkCardWaitFor> xWaitFor,
             String accountID,
             LinkCard linkCard) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(xWaitFor, "xWaitFor");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(linkCard, "linkCard");
-        this.xMoovVersion = xMoovVersion;
         this.xWaitFor = xWaitFor;
         this.accountID = accountID;
         this.linkCard = linkCard;
@@ -67,23 +48,7 @@ public class LinkCardRequest {
     public LinkCardRequest(
             String accountID,
             LinkCard linkCard) {
-        this(Optional.empty(), Optional.empty(), accountID, linkCard);
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @JsonIgnore
-    public Optional<String> xMoovVersion() {
-        return xMoovVersion;
+        this(Optional.empty(), accountID, linkCard);
     }
 
     /**
@@ -111,40 +76,6 @@ public class LinkCardRequest {
     public final static Builder builder() {
         return new Builder();
     }    
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public LinkCardRequest withXMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-        return this;
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public LinkCardRequest withXMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
 
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
@@ -193,7 +124,6 @@ public class LinkCardRequest {
         }
         LinkCardRequest other = (LinkCardRequest) o;
         return 
-            Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.xWaitFor, other.xWaitFor) &&
             Objects.deepEquals(this.accountID, other.accountID) &&
             Objects.deepEquals(this.linkCard, other.linkCard);
@@ -202,7 +132,6 @@ public class LinkCardRequest {
     @Override
     public int hashCode() {
         return Objects.hash(
-            xMoovVersion,
             xWaitFor,
             accountID,
             linkCard);
@@ -211,15 +140,12 @@ public class LinkCardRequest {
     @Override
     public String toString() {
         return Utils.toString(LinkCardRequest.class,
-                "xMoovVersion", xMoovVersion,
                 "xWaitFor", xWaitFor,
                 "accountID", accountID,
                 "linkCard", linkCard);
     }
     
     public final static class Builder {
- 
-        private Optional<String> xMoovVersion;
  
         private Optional<? extends LinkCardWaitFor> xWaitFor = Optional.empty();
  
@@ -229,40 +155,6 @@ public class LinkCardRequest {
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(String xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-            return this;
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(Optional<String> xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = xMoovVersion;
-            return this;
         }
 
         /**
@@ -302,20 +194,10 @@ public class LinkCardRequest {
         }
         
         public LinkCardRequest build() {
-            if (xMoovVersion == null) {
-                xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-            }
             return new LinkCardRequest(
-                xMoovVersion,
                 xWaitFor,
                 accountID,
                 linkCard);
         }
-
-        private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-                new LazySingletonValue<>(
-                        "x-moov-version",
-                        "\"v2024.01.00\"",
-                        new TypeReference<Optional<String>>() {});
     }
 }

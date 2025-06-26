@@ -14,7 +14,7 @@ public enum AchCreditSameDayPaymentMethodPaymentMethodType {
     @JsonValue
     private final String value;
 
-    private AchCreditSameDayPaymentMethodPaymentMethodType(String value) {
+    AchCreditSameDayPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
     

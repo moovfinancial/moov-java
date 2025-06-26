@@ -3,57 +3,34 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.OnboardingInviteRequest;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.CreateOnboardingInviteOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.String;
-import java.util.Optional;
 
 public class CreateOnboardingInviteRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private OnboardingInviteRequest onboardingInviteRequest;
-    private final SDKMethodInterfaces.MethodCallCreateOnboardingInvite sdk;
+    private OnboardingInviteRequest request;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreateOnboardingInviteRequestBuilder(SDKMethodInterfaces.MethodCallCreateOnboardingInvite sdk) {
-        this.sdk = sdk;
-    }
-                
-    public CreateOnboardingInviteRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
+    public CreateOnboardingInviteRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public CreateOnboardingInviteRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
-
-    public CreateOnboardingInviteRequestBuilder onboardingInviteRequest(OnboardingInviteRequest onboardingInviteRequest) {
-        Utils.checkNotNull(onboardingInviteRequest, "onboardingInviteRequest");
-        this.onboardingInviteRequest = onboardingInviteRequest;
+    public CreateOnboardingInviteRequestBuilder request(OnboardingInviteRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
 
     public CreateOnboardingInviteResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.createInvite(
-            xMoovVersion,
-            onboardingInviteRequest);
-    }
+        
+        RequestOperation<OnboardingInviteRequest, CreateOnboardingInviteResponse> operation
+              = new CreateOnboardingInviteOperation( sdkConfiguration);
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

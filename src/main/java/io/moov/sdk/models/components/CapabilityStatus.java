@@ -22,7 +22,7 @@ public enum CapabilityStatus {
     @JsonValue
     private final String value;
 
-    private CapabilityStatus(String value) {
+    CapabilityStatus(String value) {
         this.value = value;
     }
     

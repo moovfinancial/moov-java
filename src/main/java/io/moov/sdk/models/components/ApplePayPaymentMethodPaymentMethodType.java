@@ -14,7 +14,7 @@ public enum ApplePayPaymentMethodPaymentMethodType {
     @JsonValue
     private final String value;
 
-    private ApplePayPaymentMethodPaymentMethodType(String value) {
+    ApplePayPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
     

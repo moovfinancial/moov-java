@@ -3,16 +3,20 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListTransfersOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class ListTransfersRequestBuilder {
 
     private ListTransfersRequest request;
-    private final SDKMethodInterfaces.MethodCallListTransfers sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListTransfersRequestBuilder(SDKMethodInterfaces.MethodCallListTransfers sdk) {
-        this.sdk = sdk;
+    public ListTransfersRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListTransfersRequestBuilder request(ListTransfersRequest request) {
@@ -22,8 +26,10 @@ public class ListTransfersRequestBuilder {
     }
 
     public ListTransfersResponse call() throws Exception {
+        
+        RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
+              = new ListTransfersOperation( sdkConfiguration);
 
-        return sdk.list(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

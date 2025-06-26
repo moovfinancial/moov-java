@@ -32,7 +32,7 @@ public enum BankAccountStatusReason {
     @JsonValue
     private final String value;
 
-    private BankAccountStatusReason(String value) {
+    BankAccountStatusReason(String value) {
         this.value = value;
     }
     

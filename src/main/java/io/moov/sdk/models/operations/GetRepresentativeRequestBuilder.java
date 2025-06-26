@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetRepresentativeOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetRepresentativeRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String representativeID;
-    private final SDKMethodInterfaces.MethodCallGetRepresentative sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetRepresentativeRequestBuilder(SDKMethodInterfaces.MethodCallGetRepresentative sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetRepresentativeRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetRepresentativeRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetRepresentativeRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetRepresentativeRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class GetRepresentativeRequestBuilder {
         return this;
     }
 
-    public GetRepresentativeResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            accountID,
+
+    private GetRepresentativeRequest buildRequest() {
+
+        GetRepresentativeRequest request = new GetRepresentativeRequest(accountID,
             representativeID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetRepresentativeResponse call() throws Exception {
+        
+        RequestOperation<GetRepresentativeRequest, GetRepresentativeResponse> operation
+              = new GetRepresentativeOperation( sdkConfiguration);
+        GetRepresentativeRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

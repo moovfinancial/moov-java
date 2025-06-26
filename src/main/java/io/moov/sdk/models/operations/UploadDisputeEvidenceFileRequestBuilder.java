@@ -3,39 +3,24 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateEvidenceFileMultiPart;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.UploadDisputeEvidenceFileOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class UploadDisputeEvidenceFileRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String disputeID;
     private CreateEvidenceFileMultiPart createEvidenceFileMultiPart;
-    private final SDKMethodInterfaces.MethodCallUploadDisputeEvidenceFile sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public UploadDisputeEvidenceFileRequestBuilder(SDKMethodInterfaces.MethodCallUploadDisputeEvidenceFile sdk) {
-        this.sdk = sdk;
-    }
-                
-    public UploadDisputeEvidenceFileRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public UploadDisputeEvidenceFileRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public UploadDisputeEvidenceFileRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public UploadDisputeEvidenceFileRequestBuilder accountID(String accountID) {
@@ -56,20 +41,22 @@ public class UploadDisputeEvidenceFileRequestBuilder {
         return this;
     }
 
-    public UploadDisputeEvidenceFileResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.uploadEvidenceFile(
-            xMoovVersion,
-            accountID,
+
+    private UploadDisputeEvidenceFileRequest buildRequest() {
+
+        UploadDisputeEvidenceFileRequest request = new UploadDisputeEvidenceFileRequest(accountID,
             disputeID,
             createEvidenceFileMultiPart);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public UploadDisputeEvidenceFileResponse call() throws Exception {
+        
+        RequestOperation<UploadDisputeEvidenceFileRequest, UploadDisputeEvidenceFileResponse> operation
+              = new UploadDisputeEvidenceFileOperation( sdkConfiguration);
+        UploadDisputeEvidenceFileRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

@@ -26,7 +26,7 @@ public enum VerificationStatus {
     @JsonValue
     private final String value;
 
-    private VerificationStatus(String value) {
+    VerificationStatus(String value) {
         this.value = value;
     }
     

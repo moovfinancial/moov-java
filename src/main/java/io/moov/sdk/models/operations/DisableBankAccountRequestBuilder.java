@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.DisableBankAccountOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class DisableBankAccountRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String bankAccountID;
-    private final SDKMethodInterfaces.MethodCallDisableBankAccount sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public DisableBankAccountRequestBuilder(SDKMethodInterfaces.MethodCallDisableBankAccount sdk) {
-        this.sdk = sdk;
-    }
-                
-    public DisableBankAccountRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public DisableBankAccountRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public DisableBankAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public DisableBankAccountRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class DisableBankAccountRequestBuilder {
         return this;
     }
 
-    public DisableBankAccountResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.disable(
-            xMoovVersion,
-            accountID,
+
+    private DisableBankAccountRequest buildRequest() {
+
+        DisableBankAccountRequest request = new DisableBankAccountRequest(accountID,
             bankAccountID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public DisableBankAccountResponse call() throws Exception {
+        
+        RequestOperation<DisableBankAccountRequest, DisableBankAccountResponse> operation
+              = new DisableBankAccountOperation( sdkConfiguration);
+        DisableBankAccountRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

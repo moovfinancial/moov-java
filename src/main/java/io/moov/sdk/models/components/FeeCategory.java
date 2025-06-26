@@ -22,7 +22,7 @@ public enum FeeCategory {
     @JsonValue
     private final String value;
 
-    private FeeCategory(String value) {
+    FeeCategory(String value) {
         this.value = value;
     }
     

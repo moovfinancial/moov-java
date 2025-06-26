@@ -21,7 +21,7 @@ public enum OccurrenceStatus {
     @JsonValue
     private final String value;
 
-    private OccurrenceStatus(String value) {
+    OccurrenceStatus(String value) {
         this.value = value;
     }
     

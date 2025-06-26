@@ -3,16 +3,20 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListFeePlanAgreementsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class ListFeePlanAgreementsRequestBuilder {
 
     private ListFeePlanAgreementsRequest request;
-    private final SDKMethodInterfaces.MethodCallListFeePlanAgreements sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListFeePlanAgreementsRequestBuilder(SDKMethodInterfaces.MethodCallListFeePlanAgreements sdk) {
-        this.sdk = sdk;
+    public ListFeePlanAgreementsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListFeePlanAgreementsRequestBuilder request(ListFeePlanAgreementsRequest request) {
@@ -22,8 +26,10 @@ public class ListFeePlanAgreementsRequestBuilder {
     }
 
     public ListFeePlanAgreementsResponse call() throws Exception {
+        
+        RequestOperation<ListFeePlanAgreementsRequest, ListFeePlanAgreementsResponse> operation
+              = new ListFeePlanAgreementsOperation( sdkConfiguration);
 
-        return sdk.listFeePlanAgreements(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

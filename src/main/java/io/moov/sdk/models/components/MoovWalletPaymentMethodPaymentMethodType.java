@@ -14,7 +14,7 @@ public enum MoovWalletPaymentMethodPaymentMethodType {
     @JsonValue
     private final String value;
 
-    private MoovWalletPaymentMethodPaymentMethodType(String value) {
+    MoovWalletPaymentMethodPaymentMethodType(String value) {
         this.value = value;
     }
     

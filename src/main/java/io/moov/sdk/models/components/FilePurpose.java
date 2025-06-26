@@ -24,7 +24,7 @@ public enum FilePurpose {
     @JsonValue
     private final String value;
 
-    private FilePurpose(String value) {
+    FilePurpose(String value) {
         this.value = value;
     }
     

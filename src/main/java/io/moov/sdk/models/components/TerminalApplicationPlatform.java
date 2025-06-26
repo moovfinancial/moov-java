@@ -21,7 +21,7 @@ public enum TerminalApplicationPlatform {
     @JsonValue
     private final String value;
 
-    private TerminalApplicationPlatform(String value) {
+    TerminalApplicationPlatform(String value) {
         this.value = value;
     }
     

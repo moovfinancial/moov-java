@@ -14,7 +14,7 @@ public enum LinkCardWaitFor {
     @JsonValue
     private final String value;
 
-    private LinkCardWaitFor(String value) {
+    LinkCardWaitFor(String value) {
         this.value = value;
     }
     

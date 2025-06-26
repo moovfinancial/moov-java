@@ -3,27 +3,75 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.models.components.CreateReversal;
+import io.moov.sdk.operations.CreateReversalOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
+import java.lang.String;
+import java.util.Optional;
 
 public class CreateReversalRequestBuilder {
 
-    private CreateReversalRequest request;
-    private final SDKMethodInterfaces.MethodCallCreateReversal sdk;
+    private String xIdempotencyKey;
+    private String accountID;
+    private String transferID;
+    private Optional<? extends CreateReversal> createReversal = Optional.empty();
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreateReversalRequestBuilder(SDKMethodInterfaces.MethodCallCreateReversal sdk) {
-        this.sdk = sdk;
+    public CreateReversalRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public CreateReversalRequestBuilder request(CreateReversalRequest request) {
-        Utils.checkNotNull(request, "request");
-        this.request = request;
+    public CreateReversalRequestBuilder xIdempotencyKey(String xIdempotencyKey) {
+        Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
+        this.xIdempotencyKey = xIdempotencyKey;
         return this;
     }
 
-    public CreateReversalResponse call() throws Exception {
+    public CreateReversalRequestBuilder accountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
 
-        return sdk.createReversal(
-            request);
+    public CreateReversalRequestBuilder transferID(String transferID) {
+        Utils.checkNotNull(transferID, "transferID");
+        this.transferID = transferID;
+        return this;
+    }
+                
+    public CreateReversalRequestBuilder createReversal(CreateReversal createReversal) {
+        Utils.checkNotNull(createReversal, "createReversal");
+        this.createReversal = Optional.of(createReversal);
+        return this;
+    }
+
+    public CreateReversalRequestBuilder createReversal(Optional<? extends CreateReversal> createReversal) {
+        Utils.checkNotNull(createReversal, "createReversal");
+        this.createReversal = createReversal;
+        return this;
+    }
+
+
+    private CreateReversalRequest buildRequest() {
+
+        CreateReversalRequest request = new CreateReversalRequest(xIdempotencyKey,
+            accountID,
+            transferID,
+            createReversal);
+
+        return request;
+    }
+
+    public CreateReversalResponse call() throws Exception {
+        
+        RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
+              = new CreateReversalOperation( sdkConfiguration);
+        CreateReversalRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

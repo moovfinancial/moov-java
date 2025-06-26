@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetRefundOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetRefundRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String transferID;
     private String accountID;
     private String refundID;
-    private final SDKMethodInterfaces.MethodCallGetRefund sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetRefundRequestBuilder(SDKMethodInterfaces.MethodCallGetRefund sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetRefundRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetRefundRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetRefundRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetRefundRequestBuilder transferID(String transferID) {
@@ -55,20 +40,22 @@ public class GetRefundRequestBuilder {
         return this;
     }
 
-    public GetRefundResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.getRefund(
-            xMoovVersion,
-            transferID,
+
+    private GetRefundRequest buildRequest() {
+
+        GetRefundRequest request = new GetRefundRequest(transferID,
             accountID,
             refundID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetRefundResponse call() throws Exception {
+        
+        RequestOperation<GetRefundRequest, GetRefundResponse> operation
+              = new GetRefundOperation( sdkConfiguration);
+        GetRefundRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

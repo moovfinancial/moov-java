@@ -3,8 +3,10 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListAdjustmentsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -12,28 +14,12 @@ import java.util.Optional;
 
 public class ListAdjustmentsRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private Optional<String> walletID = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallListAdjustments sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListAdjustmentsRequestBuilder(SDKMethodInterfaces.MethodCallListAdjustments sdk) {
-        this.sdk = sdk;
-    }
-                
-    public ListAdjustmentsRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public ListAdjustmentsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public ListAdjustmentsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListAdjustmentsRequestBuilder accountID(String accountID) {
@@ -54,19 +40,21 @@ public class ListAdjustmentsRequestBuilder {
         return this;
     }
 
-    public ListAdjustmentsResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.list(
-            xMoovVersion,
-            accountID,
+
+    private ListAdjustmentsRequest buildRequest() {
+
+        ListAdjustmentsRequest request = new ListAdjustmentsRequest(accountID,
             walletID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public ListAdjustmentsResponse call() throws Exception {
+        
+        RequestOperation<ListAdjustmentsRequest, ListAdjustmentsResponse> operation
+              = new ListAdjustmentsOperation( sdkConfiguration);
+        ListAdjustmentsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

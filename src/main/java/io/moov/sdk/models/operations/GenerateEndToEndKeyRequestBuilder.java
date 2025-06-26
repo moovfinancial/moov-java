@@ -3,48 +3,34 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
-import io.moov.sdk.utils.Utils;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GenerateEndToEndKeyOperation;
 import java.lang.Exception;
-import java.lang.String;
-import java.util.Optional;
 
 public class GenerateEndToEndKeyRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private final SDKMethodInterfaces.MethodCallGenerateEndToEndKey sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GenerateEndToEndKeyRequestBuilder(SDKMethodInterfaces.MethodCallGenerateEndToEndKey sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GenerateEndToEndKeyRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
+    public GenerateEndToEndKeyRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public GenerateEndToEndKeyRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+
+    private GenerateEndToEndKeyRequest buildRequest() {
+
+        GenerateEndToEndKeyRequest request = new GenerateEndToEndKeyRequest();
+
+        return request;
     }
 
     public GenerateEndToEndKeyResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.generateKey(
-            xMoovVersion);
-    }
+        
+        RequestOperation<GenerateEndToEndKeyRequest, GenerateEndToEndKeyResponse> operation
+              = new GenerateEndToEndKeyOperation( sdkConfiguration);
+        GenerateEndToEndKeyRequest request = buildRequest();
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

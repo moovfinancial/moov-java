@@ -20,7 +20,7 @@ public enum CardAcquiringModel {
     @JsonValue
     private final String value;
 
-    private CardAcquiringModel(String value) {
+    CardAcquiringModel(String value) {
         this.value = value;
     }
     

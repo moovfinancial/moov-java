@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.RequestCard;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.RequestCardOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class RequestCardRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private RequestCard requestCard;
-    private final SDKMethodInterfaces.MethodCallRequestCard sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public RequestCardRequestBuilder(SDKMethodInterfaces.MethodCallRequestCard sdk) {
-        this.sdk = sdk;
-    }
-                
-    public RequestCardRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public RequestCardRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public RequestCardRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public RequestCardRequestBuilder accountID(String accountID) {
@@ -49,19 +34,21 @@ public class RequestCardRequestBuilder {
         return this;
     }
 
-    public RequestCardResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.request(
-            xMoovVersion,
-            accountID,
+
+    private RequestCardRequest buildRequest() {
+
+        RequestCardRequest request = new RequestCardRequest(accountID,
             requestCard);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public RequestCardResponse call() throws Exception {
+        
+        RequestOperation<RequestCardRequest, RequestCardResponse> operation
+              = new RequestCardOperation( sdkConfiguration);
+        RequestCardRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

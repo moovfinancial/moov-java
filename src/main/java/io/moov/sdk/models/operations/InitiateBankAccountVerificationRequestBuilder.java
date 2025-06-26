@@ -3,9 +3,11 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.BankAccountWaitFor;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.InitiateBankAccountVerificationOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -13,29 +15,13 @@ import java.util.Optional;
 
 public class InitiateBankAccountVerificationRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private Optional<? extends BankAccountWaitFor> xWaitFor = Optional.empty();
     private String accountID;
     private String bankAccountID;
-    private final SDKMethodInterfaces.MethodCallInitiateBankAccountVerification sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public InitiateBankAccountVerificationRequestBuilder(SDKMethodInterfaces.MethodCallInitiateBankAccountVerification sdk) {
-        this.sdk = sdk;
-    }
-                
-    public InitiateBankAccountVerificationRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public InitiateBankAccountVerificationRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public InitiateBankAccountVerificationRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public InitiateBankAccountVerificationRequestBuilder xWaitFor(BankAccountWaitFor xWaitFor) {
@@ -62,20 +48,22 @@ public class InitiateBankAccountVerificationRequestBuilder {
         return this;
     }
 
-    public InitiateBankAccountVerificationResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.initiateVerification(
-            xMoovVersion,
-            xWaitFor,
+
+    private InitiateBankAccountVerificationRequest buildRequest() {
+
+        InitiateBankAccountVerificationRequest request = new InitiateBankAccountVerificationRequest(xWaitFor,
             accountID,
             bankAccountID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public InitiateBankAccountVerificationResponse call() throws Exception {
+        
+        RequestOperation<InitiateBankAccountVerificationRequest, InitiateBankAccountVerificationResponse> operation
+              = new InitiateBankAccountVerificationOperation( sdkConfiguration);
+        InitiateBankAccountVerificationRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

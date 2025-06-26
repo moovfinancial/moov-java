@@ -18,7 +18,7 @@ public enum RefundCardStatus {
     @JsonValue
     private final String value;
 
-    private RefundCardStatus(String value) {
+    RefundCardStatus(String value) {
         this.value = value;
     }
     

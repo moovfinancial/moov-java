@@ -20,7 +20,7 @@ public enum TokenTypeHint {
     @JsonValue
     private final String value;
 
-    private TokenTypeHint(String value) {
+    TokenTypeHint(String value) {
         this.value = value;
     }
     

@@ -3,39 +3,24 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PatchTransfer;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.UpdateTransferOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class UpdateTransferRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String transferID;
     private String accountID;
     private PatchTransfer patchTransfer;
-    private final SDKMethodInterfaces.MethodCallUpdateTransfer sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public UpdateTransferRequestBuilder(SDKMethodInterfaces.MethodCallUpdateTransfer sdk) {
-        this.sdk = sdk;
-    }
-                
-    public UpdateTransferRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public UpdateTransferRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public UpdateTransferRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public UpdateTransferRequestBuilder transferID(String transferID) {
@@ -56,20 +41,22 @@ public class UpdateTransferRequestBuilder {
         return this;
     }
 
-    public UpdateTransferResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.update(
-            xMoovVersion,
-            transferID,
+
+    private UpdateTransferRequest buildRequest() {
+
+        UpdateTransferRequest request = new UpdateTransferRequest(transferID,
             accountID,
             patchTransfer);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public UpdateTransferResponse call() throws Exception {
+        
+        RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
+              = new UpdateTransferOperation( sdkConfiguration);
+        UpdateTransferRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

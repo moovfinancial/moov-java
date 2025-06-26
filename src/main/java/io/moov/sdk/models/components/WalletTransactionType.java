@@ -38,7 +38,7 @@ public enum WalletTransactionType {
     @JsonValue
     private final String value;
 
-    private WalletTransactionType(String value) {
+    WalletTransactionType(String value) {
         this.value = value;
     }
     

@@ -19,7 +19,7 @@ public enum ReceiptKind {
     @JsonValue
     private final String value;
 
-    private ReceiptKind(String value) {
+    ReceiptKind(String value) {
         this.value = value;
     }
     

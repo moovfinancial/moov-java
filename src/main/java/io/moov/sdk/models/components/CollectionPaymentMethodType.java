@@ -21,7 +21,7 @@ public enum CollectionPaymentMethodType {
     @JsonValue
     private final String value;
 
-    private CollectionPaymentMethodType(String value) {
+    CollectionPaymentMethodType(String value) {
         this.value = value;
     }
     

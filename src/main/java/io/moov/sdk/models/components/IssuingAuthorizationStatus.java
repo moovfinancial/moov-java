@@ -23,7 +23,7 @@ public enum IssuingAuthorizationStatus {
     @JsonValue
     private final String value;
 
-    private IssuingAuthorizationStatus(String value) {
+    IssuingAuthorizationStatus(String value) {
         this.value = value;
     }
     

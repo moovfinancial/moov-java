@@ -3,27 +3,93 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListInstitutionsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
+import java.lang.Long;
+import java.lang.String;
+import java.util.Optional;
 
 public class ListInstitutionsRequestBuilder {
 
-    private ListInstitutionsRequest request;
-    private final SDKMethodInterfaces.MethodCallListInstitutions sdk;
+    private Optional<String> name = Optional.empty();
+    private Optional<String> routingNumber = Optional.empty();
+    private Optional<String> state = Optional.empty();
+    private Optional<Long> limit = Optional.empty();
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListInstitutionsRequestBuilder(SDKMethodInterfaces.MethodCallListInstitutions sdk) {
-        this.sdk = sdk;
+    public ListInstitutionsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
-
-    public ListInstitutionsRequestBuilder request(ListInstitutionsRequest request) {
-        Utils.checkNotNull(request, "request");
-        this.request = request;
+                
+    public ListInstitutionsRequestBuilder name(String name) {
+        Utils.checkNotNull(name, "name");
+        this.name = Optional.of(name);
         return this;
     }
 
-    public ListInstitutionsResponse call() throws Exception {
+    public ListInstitutionsRequestBuilder name(Optional<String> name) {
+        Utils.checkNotNull(name, "name");
+        this.name = name;
+        return this;
+    }
+                
+    public ListInstitutionsRequestBuilder routingNumber(String routingNumber) {
+        Utils.checkNotNull(routingNumber, "routingNumber");
+        this.routingNumber = Optional.of(routingNumber);
+        return this;
+    }
 
-        return sdk.search(
-            request);
+    public ListInstitutionsRequestBuilder routingNumber(Optional<String> routingNumber) {
+        Utils.checkNotNull(routingNumber, "routingNumber");
+        this.routingNumber = routingNumber;
+        return this;
+    }
+                
+    public ListInstitutionsRequestBuilder state(String state) {
+        Utils.checkNotNull(state, "state");
+        this.state = Optional.of(state);
+        return this;
+    }
+
+    public ListInstitutionsRequestBuilder state(Optional<String> state) {
+        Utils.checkNotNull(state, "state");
+        this.state = state;
+        return this;
+    }
+                
+    public ListInstitutionsRequestBuilder limit(long limit) {
+        Utils.checkNotNull(limit, "limit");
+        this.limit = Optional.of(limit);
+        return this;
+    }
+
+    public ListInstitutionsRequestBuilder limit(Optional<Long> limit) {
+        Utils.checkNotNull(limit, "limit");
+        this.limit = limit;
+        return this;
+    }
+
+
+    private ListInstitutionsRequest buildRequest() {
+
+        ListInstitutionsRequest request = new ListInstitutionsRequest(name,
+            routingNumber,
+            state,
+            limit);
+
+        return request;
+    }
+
+    public ListInstitutionsResponse call() throws Exception {
+        
+        RequestOperation<ListInstitutionsRequest, ListInstitutionsResponse> operation
+              = new ListInstitutionsOperation( sdkConfiguration);
+        ListInstitutionsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

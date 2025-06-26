@@ -38,7 +38,7 @@ public enum CardTransactionFailureCode {
     @JsonValue
     private final String value;
 
-    private CardTransactionFailureCode(String value) {
+    CardTransactionFailureCode(String value) {
         this.value = value;
     }
     

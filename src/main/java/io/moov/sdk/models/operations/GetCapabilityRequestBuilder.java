@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CapabilityID;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.GetCapabilityOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetCapabilityRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private CapabilityID capabilityID;
-    private final SDKMethodInterfaces.MethodCallGetCapability sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetCapabilityRequestBuilder(SDKMethodInterfaces.MethodCallGetCapability sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetCapabilityRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetCapabilityRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetCapabilityRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetCapabilityRequestBuilder accountID(String accountID) {
@@ -49,19 +34,21 @@ public class GetCapabilityRequestBuilder {
         return this;
     }
 
-    public GetCapabilityResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            accountID,
+
+    private GetCapabilityRequest buildRequest() {
+
+        GetCapabilityRequest request = new GetCapabilityRequest(accountID,
             capabilityID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetCapabilityResponse call() throws Exception {
+        
+        RequestOperation<GetCapabilityRequest, GetCapabilityResponse> operation
+              = new GetCapabilityOperation( sdkConfiguration);
+        GetCapabilityRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

@@ -21,7 +21,7 @@ public enum FeeModel {
     @JsonValue
     private final String value;
 
-    private FeeModel(String value) {
+    FeeModel(String value) {
         this.value = value;
     }
     

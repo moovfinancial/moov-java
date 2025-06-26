@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetTransferOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetTransferRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String transferID;
     private String accountID;
-    private final SDKMethodInterfaces.MethodCallGetTransfer sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetTransferRequestBuilder(SDKMethodInterfaces.MethodCallGetTransfer sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetTransferRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetTransferRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetTransferRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetTransferRequestBuilder transferID(String transferID) {
@@ -48,19 +33,21 @@ public class GetTransferRequestBuilder {
         return this;
     }
 
-    public GetTransferResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            transferID,
+
+    private GetTransferRequest buildRequest() {
+
+        GetTransferRequest request = new GetTransferRequest(transferID,
             accountID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetTransferResponse call() throws Exception {
+        
+        RequestOperation<GetTransferRequest, GetTransferResponse> operation
+              = new GetTransferOperation( sdkConfiguration);
+        GetTransferRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

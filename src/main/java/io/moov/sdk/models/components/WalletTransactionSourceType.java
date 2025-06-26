@@ -20,7 +20,7 @@ public enum WalletTransactionSourceType {
     @JsonValue
     private final String value;
 
-    private WalletTransactionSourceType(String value) {
+    WalletTransactionSourceType(String value) {
         this.value = value;
     }
     

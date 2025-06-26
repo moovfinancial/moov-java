@@ -21,7 +21,7 @@ public enum DomesticPullFromCard {
     @JsonValue
     private final String value;
 
-    private DomesticPullFromCard(String value) {
+    DomesticPullFromCard(String value) {
         this.value = value;
     }
     

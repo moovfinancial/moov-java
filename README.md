@@ -45,7 +45,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.15.0'
+implementation 'io.moov:sdk:0.16.0'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.15.0</version>
+    <version>0.16.0</version>
 </dependency>
 ```
 
@@ -74,9 +74,11 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 ### Logging
 A logging framework/facade has not yet been adopted but is under consideration.
 
-For request and response logging (especially json bodies) use:
+For request and response logging (especially json bodies), call `enableHTTPDebugLogging()` on the SDK builder like so:
 ```java
-SpeakeasyHTTPClient.setDebugLogging(true); // experimental API only (may change without warning)
+SDK.builder()
+    .enableHTTPDebugLogging()
+    .build();
 ```
 Example output:
 ```
@@ -90,7 +92,9 @@ Response body:
   "token": "global"
 }
 ```
-WARNING: This should only used for temporary debugging purposes. Leaving this option on in a production system could expose credentials/secrets in logs. <i>Authorization</i> headers are redacted by default and there is the ability to specify redacted header names via `SpeakeasyHTTPClient.setRedactedHeaders`.
+__WARNING__: This should only used for temporary debugging purposes. Leaving this option on in a production system could expose credentials/secrets in logs. <i>Authorization</i> headers are redacted by default and there is the ability to specify redacted header names via `SpeakeasyHTTPClient.setRedactedHeaders`.
+
+__NOTE__: This is a convenience method that calls `HTTPClient.enableDebugLogging()`. The `SpeakeasyHTTPClient` honors this setting. If you are using a custom HTTP client, it is up to the custom client to honor this setting.
 
 Another option is to set the System property `-Djdk.httpclient.HttpClient.log=all`. However, this second option does not log bodies.
 <!-- End SDK Installation [installation] -->
@@ -122,15 +126,17 @@ public class Application {
                     .build())
             .build();
 
-        CreateAccountResponse res = sdk.accounts().create()
-                .createAccount(CreateAccount.builder()
-                    .accountType(CreateAccountType.BUSINESS)
-                    .profile(CreateProfile.builder()
-                        .business(CreateBusinessProfile.builder()
-                            .legalBusinessName("Whole Body Fitness LLC")
-                            .build())
+        CreateAccount req = CreateAccount.builder()
+                .accountType(CreateAccountType.BUSINESS)
+                .profile(CreateProfile.builder()
+                    .business(CreateBusinessProfile.builder()
+                        .legalBusinessName("Whole Body Fitness LLC")
                         .build())
                     .build())
+                .build();
+
+        CreateAccountResponse res = sdk.accounts().create()
+                .request(req)
                 .call();
 
         if (res.account().isPresent()) {
@@ -175,15 +181,17 @@ public class Application {
                 .xMoovVersion("v2024.01.00")
             .build();
 
-        CreateAccountResponse res = sdk.accounts().create()
-                .createAccount(CreateAccount.builder()
-                    .accountType(CreateAccountType.BUSINESS)
-                    .profile(CreateProfile.builder()
-                        .business(CreateBusinessProfile.builder()
-                            .legalBusinessName("Whole Body Fitness LLC")
-                            .build())
+        CreateAccount req = CreateAccount.builder()
+                .accountType(CreateAccountType.BUSINESS)
+                .profile(CreateProfile.builder()
+                    .business(CreateBusinessProfile.builder()
+                        .legalBusinessName("Whole Body Fitness LLC")
                         .build())
                     .build())
+                .build();
+
+        CreateAccountResponse res = sdk.accounts().create()
+                .request(req)
                 .call();
 
         if (res.account().isPresent()) {
@@ -1098,15 +1106,17 @@ public class Application {
                     .build())
             .build();
 
-        CreateAccountResponse res = sdk.accounts().create()
-                .createAccount(CreateAccount.builder()
-                    .accountType(CreateAccountType.BUSINESS)
-                    .profile(CreateProfile.builder()
-                        .business(CreateBusinessProfile.builder()
-                            .legalBusinessName("Whole Body Fitness LLC")
-                            .build())
+        CreateAccount req = CreateAccount.builder()
+                .accountType(CreateAccountType.BUSINESS)
+                .profile(CreateProfile.builder()
+                    .business(CreateBusinessProfile.builder()
+                        .legalBusinessName("Whole Body Fitness LLC")
                         .build())
                     .build())
+                .build();
+
+        CreateAccountResponse res = sdk.accounts().create()
+                .request(req)
                 .call();
 
         if (res.account().isPresent()) {
@@ -1146,15 +1156,17 @@ public class Application {
                     .build())
             .build();
 
-        CreateAccountResponse res = sdk.accounts().create()
-                .createAccount(CreateAccount.builder()
-                    .accountType(CreateAccountType.BUSINESS)
-                    .profile(CreateProfile.builder()
-                        .business(CreateBusinessProfile.builder()
-                            .legalBusinessName("Whole Body Fitness LLC")
-                            .build())
+        CreateAccount req = CreateAccount.builder()
+                .accountType(CreateAccountType.BUSINESS)
+                .profile(CreateProfile.builder()
+                    .business(CreateBusinessProfile.builder()
+                        .legalBusinessName("Whole Body Fitness LLC")
                         .build())
                     .build())
+                .build();
+
+        CreateAccountResponse res = sdk.accounts().create()
+                .request(req)
                 .call();
 
         if (res.account().isPresent()) {

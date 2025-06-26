@@ -3,16 +3,20 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListIssuedCardAuthorizationsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class ListIssuedCardAuthorizationsRequestBuilder {
 
     private ListIssuedCardAuthorizationsRequest request;
-    private final SDKMethodInterfaces.MethodCallListIssuedCardAuthorizations sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListIssuedCardAuthorizationsRequestBuilder(SDKMethodInterfaces.MethodCallListIssuedCardAuthorizations sdk) {
-        this.sdk = sdk;
+    public ListIssuedCardAuthorizationsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListIssuedCardAuthorizationsRequestBuilder request(ListIssuedCardAuthorizationsRequest request) {
@@ -22,8 +26,10 @@ public class ListIssuedCardAuthorizationsRequestBuilder {
     }
 
     public ListIssuedCardAuthorizationsResponse call() throws Exception {
+        
+        RequestOperation<ListIssuedCardAuthorizationsRequest, ListIssuedCardAuthorizationsResponse> operation
+              = new ListIssuedCardAuthorizationsOperation( sdkConfiguration);
 
-        return sdk.listAuthorizations(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

@@ -22,7 +22,7 @@ public enum DocumentType {
     @JsonValue
     private final String value;
 
-    private DocumentType(String value) {
+    DocumentType(String value) {
         this.value = value;
     }
     

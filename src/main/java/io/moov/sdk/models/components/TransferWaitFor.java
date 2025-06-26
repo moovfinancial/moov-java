@@ -14,7 +14,7 @@ public enum TransferWaitFor {
     @JsonValue
     private final String value;
 
-    private TransferWaitFor(String value) {
+    TransferWaitFor(String value) {
         this.value = value;
     }
     

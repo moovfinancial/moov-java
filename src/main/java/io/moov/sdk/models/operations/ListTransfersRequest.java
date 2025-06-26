@@ -5,9 +5,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.models.components.TransferStatus;
-import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Boolean;
@@ -21,20 +19,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class ListTransfersRequest {
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
-    private Optional<String> xMoovVersion;
 
     /**
      * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
@@ -101,7 +85,6 @@ public class ListTransfersRequest {
 
     @JsonCreator
     public ListTransfersRequest(
-            Optional<String> xMoovVersion,
             Optional<? extends List<String>> accountIDs,
             Optional<? extends TransferStatus> status,
             Optional<OffsetDateTime> startDateTime,
@@ -114,7 +97,6 @@ public class ListTransfersRequest {
             Optional<Long> skip,
             Optional<Long> count,
             String accountID) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(accountIDs, "accountIDs");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(startDateTime, "startDateTime");
@@ -127,7 +109,6 @@ public class ListTransfersRequest {
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(accountID, "accountID");
-        this.xMoovVersion = xMoovVersion;
         this.accountIDs = accountIDs;
         this.status = status;
         this.startDateTime = startDateTime;
@@ -144,23 +125,7 @@ public class ListTransfersRequest {
     
     public ListTransfersRequest(
             String accountID) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), accountID);
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @JsonIgnore
-    public Optional<String> xMoovVersion() {
-        return xMoovVersion;
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), accountID);
     }
 
     /**
@@ -255,40 +220,6 @@ public class ListTransfersRequest {
     public final static Builder builder() {
         return new Builder();
     }    
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public ListTransfersRequest withXMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-        return this;
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public ListTransfersRequest withXMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
 
     /**
      * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
@@ -493,7 +424,6 @@ public class ListTransfersRequest {
         }
         ListTransfersRequest other = (ListTransfersRequest) o;
         return 
-            Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.accountIDs, other.accountIDs) &&
             Objects.deepEquals(this.status, other.status) &&
             Objects.deepEquals(this.startDateTime, other.startDateTime) &&
@@ -511,7 +441,6 @@ public class ListTransfersRequest {
     @Override
     public int hashCode() {
         return Objects.hash(
-            xMoovVersion,
             accountIDs,
             status,
             startDateTime,
@@ -529,7 +458,6 @@ public class ListTransfersRequest {
     @Override
     public String toString() {
         return Utils.toString(ListTransfersRequest.class,
-                "xMoovVersion", xMoovVersion,
                 "accountIDs", accountIDs,
                 "status", status,
                 "startDateTime", startDateTime,
@@ -545,8 +473,6 @@ public class ListTransfersRequest {
     }
     
     public final static class Builder {
- 
-        private Optional<String> xMoovVersion;
  
         private Optional<? extends List<String>> accountIDs = Optional.empty();
  
@@ -574,40 +500,6 @@ public class ListTransfersRequest {
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(String xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-            return this;
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(Optional<String> xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = xMoovVersion;
-            return this;
         }
 
         /**
@@ -803,11 +695,7 @@ public class ListTransfersRequest {
         }
         
         public ListTransfersRequest build() {
-            if (xMoovVersion == null) {
-                xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-            }
             return new ListTransfersRequest(
-                xMoovVersion,
                 accountIDs,
                 status,
                 startDateTime,
@@ -821,11 +709,5 @@ public class ListTransfersRequest {
                 count,
                 accountID);
         }
-
-        private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-                new LazySingletonValue<>(
-                        "x-moov-version",
-                        "\"v2024.01.00\"",
-                        new TypeReference<Optional<String>>() {});
     }
 }

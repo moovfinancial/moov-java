@@ -3,57 +3,34 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateAccount;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.CreateAccountOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.String;
-import java.util.Optional;
 
 public class CreateAccountRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private CreateAccount createAccount;
-    private final SDKMethodInterfaces.MethodCallCreateAccount sdk;
+    private CreateAccount request;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreateAccountRequestBuilder(SDKMethodInterfaces.MethodCallCreateAccount sdk) {
-        this.sdk = sdk;
-    }
-                
-    public CreateAccountRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
+    public CreateAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public CreateAccountRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
-
-    public CreateAccountRequestBuilder createAccount(CreateAccount createAccount) {
-        Utils.checkNotNull(createAccount, "createAccount");
-        this.createAccount = createAccount;
+    public CreateAccountRequestBuilder request(CreateAccount request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
 
     public CreateAccountResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.create(
-            xMoovVersion,
-            createAccount);
-    }
+        
+        RequestOperation<CreateAccount, CreateAccountResponse> operation
+              = new CreateAccountOperation( sdkConfiguration);
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

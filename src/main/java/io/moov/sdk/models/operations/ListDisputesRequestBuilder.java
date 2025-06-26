@@ -3,16 +3,20 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListDisputesOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class ListDisputesRequestBuilder {
 
     private ListDisputesRequest request;
-    private final SDKMethodInterfaces.MethodCallListDisputes sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListDisputesRequestBuilder(SDKMethodInterfaces.MethodCallListDisputes sdk) {
-        this.sdk = sdk;
+    public ListDisputesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListDisputesRequestBuilder request(ListDisputesRequest request) {
@@ -22,8 +26,10 @@ public class ListDisputesRequestBuilder {
     }
 
     public ListDisputesResponse call() throws Exception {
+        
+        RequestOperation<ListDisputesRequest, ListDisputesResponse> operation
+              = new ListDisputesOperation( sdkConfiguration);
 
-        return sdk.list(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

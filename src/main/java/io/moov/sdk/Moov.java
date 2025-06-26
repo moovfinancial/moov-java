@@ -6,9 +6,9 @@ package io.moov.sdk;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.Hook.SdkInitData;
 import io.moov.sdk.utils.RetryConfig;
+import io.moov.sdk.utils.SpeakeasyHTTPClient;
 import io.moov.sdk.utils.Utils;
 import java.lang.String;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -31,6 +31,8 @@ public class Moov {
          */
         "https://api.moov.io",
     };
+
+    
 
     private final Accounts accounts;
 
@@ -229,7 +231,6 @@ public class Moov {
     public TerminalApplications terminalApplications() {
         return terminalApplications;
     }
-
     private SDKConfiguration sdkConfiguration;
 
     /**
@@ -324,6 +325,20 @@ public class Moov {
             this.sdkConfiguration.setRetryConfig(Optional.of(retryConfig));
             return this;
         }
+
+        /**
+         * Enables debug logging for HTTP requests and responses, including JSON body content.
+         *
+         * This is a convenience method that calls {@link HTTPClient#enableDebugLogging()}.
+         * {@link SpeakeasyHTTPClient} honors this setting. If you are using a custom HTTP client,
+         * it is up to the custom client to honor this setting.
+         *
+         * @return The builder instance.
+         */
+        public Builder enableHTTPDebugLogging() {
+            this.sdkConfiguration.client().enableDebugLogging();
+            return this;
+        }
         /**
          * Allows setting the xMoovVersion parameter for all supported operations.
          *
@@ -331,12 +346,7 @@ public class Moov {
          * @return The builder instance.
          */
         public Builder xMoovVersion(String xMoovVersion) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
-                this.sdkConfiguration.globals.get("parameters").put("header", new HashMap<>());
-            }
-
-            this.sdkConfiguration.globals.get("parameters").get("header").put("xMoovVersion", xMoovVersion);
-
+            this.sdkConfiguration.globals.putParam("header", "xMoovVersion", xMoovVersion);
             return this;
         }
         

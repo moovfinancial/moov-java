@@ -3,16 +3,20 @@
  */
 package io.moov.sdk.models.operations;
 
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.ListPartnerPricingAgreementsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class ListPartnerPricingAgreementsRequestBuilder {
 
     private ListPartnerPricingAgreementsRequest request;
-    private final SDKMethodInterfaces.MethodCallListPartnerPricingAgreements sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ListPartnerPricingAgreementsRequestBuilder(SDKMethodInterfaces.MethodCallListPartnerPricingAgreements sdk) {
-        this.sdk = sdk;
+    public ListPartnerPricingAgreementsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ListPartnerPricingAgreementsRequestBuilder request(ListPartnerPricingAgreementsRequest request) {
@@ -22,8 +26,10 @@ public class ListPartnerPricingAgreementsRequestBuilder {
     }
 
     public ListPartnerPricingAgreementsResponse call() throws Exception {
+        
+        RequestOperation<ListPartnerPricingAgreementsRequest, ListPartnerPricingAgreementsResponse> operation
+              = new ListPartnerPricingAgreementsOperation( sdkConfiguration);
 
-        return sdk.listPartnerPricingAgreements(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

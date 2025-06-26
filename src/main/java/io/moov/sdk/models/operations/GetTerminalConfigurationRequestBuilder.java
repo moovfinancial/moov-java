@@ -3,37 +3,22 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetTerminalConfigurationOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetTerminalConfigurationRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String terminalApplicationID;
-    private final SDKMethodInterfaces.MethodCallGetTerminalConfiguration sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetTerminalConfigurationRequestBuilder(SDKMethodInterfaces.MethodCallGetTerminalConfiguration sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetTerminalConfigurationRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetTerminalConfigurationRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetTerminalConfigurationRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetTerminalConfigurationRequestBuilder accountID(String accountID) {
@@ -48,19 +33,21 @@ public class GetTerminalConfigurationRequestBuilder {
         return this;
     }
 
-    public GetTerminalConfigurationResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.getConfiguration(
-            xMoovVersion,
-            accountID,
+
+    private GetTerminalConfigurationRequest buildRequest() {
+
+        GetTerminalConfigurationRequest request = new GetTerminalConfigurationRequest(accountID,
             terminalApplicationID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetTerminalConfigurationResponse call() throws Exception {
+        
+        RequestOperation<GetTerminalConfigurationRequest, GetTerminalConfigurationResponse> operation
+              = new GetTerminalConfigurationOperation( sdkConfiguration);
+        GetTerminalConfigurationRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

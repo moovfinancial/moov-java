@@ -50,7 +50,7 @@ public enum ApplicationScope {
     @JsonValue
     private final String value;
 
-    private ApplicationScope(String value) {
+    ApplicationScope(String value) {
         this.value = value;
     }
     

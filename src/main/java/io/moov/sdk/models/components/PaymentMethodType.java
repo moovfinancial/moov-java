@@ -29,7 +29,7 @@ public enum PaymentMethodType {
     @JsonValue
     private final String value;
 
-    private PaymentMethodType(String value) {
+    PaymentMethodType(String value) {
         this.value = value;
     }
     

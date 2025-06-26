@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetSweepOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetSweepRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String walletID;
     private String sweepID;
-    private final SDKMethodInterfaces.MethodCallGetSweep sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetSweepRequestBuilder(SDKMethodInterfaces.MethodCallGetSweep sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetSweepRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetSweepRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetSweepRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetSweepRequestBuilder accountID(String accountID) {
@@ -55,20 +40,22 @@ public class GetSweepRequestBuilder {
         return this;
     }
 
-    public GetSweepResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.get(
-            xMoovVersion,
-            accountID,
+
+    private GetSweepRequest buildRequest() {
+
+        GetSweepRequest request = new GetSweepRequest(accountID,
             walletID,
             sweepID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetSweepResponse call() throws Exception {
+        
+        RequestOperation<GetSweepRequest, GetSweepResponse> operation
+              = new GetSweepOperation( sdkConfiguration);
+        GetSweepRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

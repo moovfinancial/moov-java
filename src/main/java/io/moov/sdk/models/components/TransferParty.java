@@ -16,7 +16,7 @@ public enum TransferParty {
     @JsonValue
     private final String value;
 
-    private TransferParty(String value) {
+    TransferParty(String value) {
         this.value = value;
     }
     

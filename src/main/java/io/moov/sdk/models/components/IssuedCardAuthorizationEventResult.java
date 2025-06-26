@@ -21,7 +21,7 @@ public enum IssuedCardAuthorizationEventResult {
     @JsonValue
     private final String value;
 
-    private IssuedCardAuthorizationEventResult(String value) {
+    IssuedCardAuthorizationEventResult(String value) {
         this.value = value;
     }
     

@@ -3,8 +3,10 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetTermsOfServiceTokenOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -12,28 +14,12 @@ import java.util.Optional;
 
 public class GetTermsOfServiceTokenRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private Optional<String> origin = Optional.empty();
     private Optional<String> referer = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetTermsOfServiceToken sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetTermsOfServiceTokenRequestBuilder(SDKMethodInterfaces.MethodCallGetTermsOfServiceToken sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetTermsOfServiceTokenRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetTermsOfServiceTokenRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetTermsOfServiceTokenRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetTermsOfServiceTokenRequestBuilder origin(String origin) {
@@ -60,19 +46,21 @@ public class GetTermsOfServiceTokenRequestBuilder {
         return this;
     }
 
-    public GetTermsOfServiceTokenResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.getTermsOfServiceToken(
-            xMoovVersion,
-            origin,
+
+    private GetTermsOfServiceTokenRequest buildRequest() {
+
+        GetTermsOfServiceTokenRequest request = new GetTermsOfServiceTokenRequest(origin,
             referer);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetTermsOfServiceTokenResponse call() throws Exception {
+        
+        RequestOperation<GetTermsOfServiceTokenRequest, GetTermsOfServiceTokenResponse> operation
+              = new GetTermsOfServiceTokenOperation( sdkConfiguration);
+        GetTermsOfServiceTokenRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

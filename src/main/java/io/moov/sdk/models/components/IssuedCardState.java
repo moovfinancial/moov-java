@@ -27,7 +27,7 @@ public enum IssuedCardState {
     @JsonValue
     private final String value;
 
-    private IssuedCardState(String value) {
+    IssuedCardState(String value) {
         this.value = value;
     }
     

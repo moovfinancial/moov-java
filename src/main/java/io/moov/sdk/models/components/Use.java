@@ -20,7 +20,7 @@ public enum Use {
     @JsonValue
     private final String value;
 
-    private Use(String value) {
+    Use(String value) {
         this.value = value;
     }
     

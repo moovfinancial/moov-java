@@ -5,8 +5,6 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
@@ -16,20 +14,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class ListInstitutionsRequest {
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=x-moov-version")
-    private Optional<String> xMoovVersion;
 
     /**
      * Name of the financial institution. Either `name` or `routingNumber` is required.
@@ -57,17 +41,14 @@ public class ListInstitutionsRequest {
 
     @JsonCreator
     public ListInstitutionsRequest(
-            Optional<String> xMoovVersion,
             Optional<String> name,
             Optional<String> routingNumber,
             Optional<String> state,
             Optional<Long> limit) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(routingNumber, "routingNumber");
         Utils.checkNotNull(state, "state");
         Utils.checkNotNull(limit, "limit");
-        this.xMoovVersion = xMoovVersion;
         this.name = name;
         this.routingNumber = routingNumber;
         this.state = state;
@@ -75,23 +56,7 @@ public class ListInstitutionsRequest {
     }
     
     public ListInstitutionsRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    @JsonIgnore
-    public Optional<String> xMoovVersion() {
-        return xMoovVersion;
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -129,40 +94,6 @@ public class ListInstitutionsRequest {
     public final static Builder builder() {
         return new Builder();
     }    
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public ListInstitutionsRequest withXMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-        return this;
-    }
-
-    /**
-     * Specify an API version.
-     * 
-     * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-     *   - `YYYY` is the year
-     *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-     *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-     *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-     * 
-     * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-     */
-    public ListInstitutionsRequest withXMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
-    }
 
     /**
      * Name of the financial institution. Either `name` or `routingNumber` is required.
@@ -247,7 +178,6 @@ public class ListInstitutionsRequest {
         }
         ListInstitutionsRequest other = (ListInstitutionsRequest) o;
         return 
-            Objects.deepEquals(this.xMoovVersion, other.xMoovVersion) &&
             Objects.deepEquals(this.name, other.name) &&
             Objects.deepEquals(this.routingNumber, other.routingNumber) &&
             Objects.deepEquals(this.state, other.state) &&
@@ -257,7 +187,6 @@ public class ListInstitutionsRequest {
     @Override
     public int hashCode() {
         return Objects.hash(
-            xMoovVersion,
             name,
             routingNumber,
             state,
@@ -267,7 +196,6 @@ public class ListInstitutionsRequest {
     @Override
     public String toString() {
         return Utils.toString(ListInstitutionsRequest.class,
-                "xMoovVersion", xMoovVersion,
                 "name", name,
                 "routingNumber", routingNumber,
                 "state", state,
@@ -275,8 +203,6 @@ public class ListInstitutionsRequest {
     }
     
     public final static class Builder {
- 
-        private Optional<String> xMoovVersion;
  
         private Optional<String> name = Optional.empty();
  
@@ -288,40 +214,6 @@ public class ListInstitutionsRequest {
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(String xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = Optional.ofNullable(xMoovVersion);
-            return this;
-        }
-
-        /**
-         * Specify an API version.
-         * 
-         * <p>API versioning follows the format `vYYYY.QQ.BB`, where 
-         *   - `YYYY` is the year
-         *   - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
-         *   - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter. 
-         *     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
-         * 
-         * <p>The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
-         */
-        public Builder xMoovVersion(Optional<String> xMoovVersion) {
-            Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-            this.xMoovVersion = xMoovVersion;
-            return this;
         }
 
         /**
@@ -397,21 +289,11 @@ public class ListInstitutionsRequest {
         }
         
         public ListInstitutionsRequest build() {
-            if (xMoovVersion == null) {
-                xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-            }
             return new ListInstitutionsRequest(
-                xMoovVersion,
                 name,
                 routingNumber,
                 state,
                 limit);
         }
-
-        private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-                new LazySingletonValue<>(
-                        "x-moov-version",
-                        "\"v2024.01.00\"",
-                        new TypeReference<Optional<String>>() {});
     }
 }

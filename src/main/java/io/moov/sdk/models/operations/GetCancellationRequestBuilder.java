@@ -3,38 +3,23 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetCancellationOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetCancellationRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
     private String transferID;
     private String cancellationID;
-    private final SDKMethodInterfaces.MethodCallGetCancellation sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetCancellationRequestBuilder(SDKMethodInterfaces.MethodCallGetCancellation sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetCancellationRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetCancellationRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetCancellationRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetCancellationRequestBuilder accountID(String accountID) {
@@ -55,20 +40,22 @@ public class GetCancellationRequestBuilder {
         return this;
     }
 
-    public GetCancellationResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.getCancellation(
-            xMoovVersion,
-            accountID,
+
+    private GetCancellationRequest buildRequest() {
+
+        GetCancellationRequest request = new GetCancellationRequest(accountID,
             transferID,
             cancellationID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetCancellationResponse call() throws Exception {
+        
+        RequestOperation<GetCancellationRequest, GetCancellationResponse> operation
+              = new GetCancellationOperation( sdkConfiguration);
+        GetCancellationRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

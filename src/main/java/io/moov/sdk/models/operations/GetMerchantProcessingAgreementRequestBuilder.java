@@ -3,36 +3,21 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.GetMerchantProcessingAgreementOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.Optional;
 
 public class GetMerchantProcessingAgreementRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private String accountID;
-    private final SDKMethodInterfaces.MethodCallGetMerchantProcessingAgreement sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetMerchantProcessingAgreementRequestBuilder(SDKMethodInterfaces.MethodCallGetMerchantProcessingAgreement sdk) {
-        this.sdk = sdk;
-    }
-                
-    public GetMerchantProcessingAgreementRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public GetMerchantProcessingAgreementRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public GetMerchantProcessingAgreementRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetMerchantProcessingAgreementRequestBuilder accountID(String accountID) {
@@ -41,18 +26,20 @@ public class GetMerchantProcessingAgreementRequestBuilder {
         return this;
     }
 
-    public GetMerchantProcessingAgreementResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.getMerchantProcessingAgreement(
-            xMoovVersion,
-            accountID);
+
+    private GetMerchantProcessingAgreementRequest buildRequest() {
+
+        GetMerchantProcessingAgreementRequest request = new GetMerchantProcessingAgreementRequest(accountID);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public GetMerchantProcessingAgreementResponse call() throws Exception {
+        
+        RequestOperation<GetMerchantProcessingAgreementRequest, GetMerchantProcessingAgreementResponse> operation
+              = new GetMerchantProcessingAgreementOperation( sdkConfiguration);
+        GetMerchantProcessingAgreementRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

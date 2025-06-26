@@ -31,7 +31,7 @@ public enum RequirementErrorCode {
     @JsonValue
     private final String value;
 
-    private RequirementErrorCode(String value) {
+    RequirementErrorCode(String value) {
         this.value = value;
     }
     

@@ -25,7 +25,7 @@ public enum ACHTransactionStatus {
     @JsonValue
     private final String value;
 
-    private ACHTransactionStatus(String value) {
+    ACHTransactionStatus(String value) {
         this.value = value;
     }
     

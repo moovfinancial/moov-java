@@ -15,7 +15,7 @@ public enum CreateAccountType {
     @JsonValue
     private final String value;
 
-    private CreateAccountType(String value) {
+    CreateAccountType(String value) {
         this.value = value;
     }
     

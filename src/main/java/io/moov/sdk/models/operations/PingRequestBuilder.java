@@ -3,48 +3,34 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.moov.sdk.utils.LazySingletonValue;
-import io.moov.sdk.utils.Utils;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.operations.PingOperation;
 import java.lang.Exception;
-import java.lang.String;
-import java.util.Optional;
 
 public class PingRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private final SDKMethodInterfaces.MethodCallPing sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public PingRequestBuilder(SDKMethodInterfaces.MethodCallPing sdk) {
-        this.sdk = sdk;
-    }
-                
-    public PingRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
+    public PingRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
-    public PingRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+
+    private PingRequest buildRequest() {
+
+        PingRequest request = new PingRequest();
+
+        return request;
     }
 
     public PingResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.ping(
-            xMoovVersion);
-    }
+        
+        RequestOperation<PingRequest, PingResponse> operation
+              = new PingOperation( sdkConfiguration);
+        PingRequest request = buildRequest();
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

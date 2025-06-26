@@ -22,7 +22,7 @@ public enum DomesticPushToCard {
     @JsonValue
     private final String value;
 
-    private DomesticPushToCard(String value) {
+    DomesticPushToCard(String value) {
         this.value = value;
     }
     

@@ -3,10 +3,12 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.operations.LinkCardOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -14,29 +16,13 @@ import java.util.Optional;
 
 public class LinkCardRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
     private Optional<? extends LinkCardWaitFor> xWaitFor = Optional.empty();
     private String accountID;
     private LinkCard linkCard;
-    private final SDKMethodInterfaces.MethodCallLinkCard sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public LinkCardRequestBuilder(SDKMethodInterfaces.MethodCallLinkCard sdk) {
-        this.sdk = sdk;
-    }
-                
-    public LinkCardRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
-        return this;
-    }
-
-    public LinkCardRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
-        return this;
+    public LinkCardRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public LinkCardRequestBuilder xWaitFor(LinkCardWaitFor xWaitFor) {
@@ -63,20 +49,22 @@ public class LinkCardRequestBuilder {
         return this;
     }
 
-    public LinkCardResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.link(
-            xMoovVersion,
-            xWaitFor,
+
+    private LinkCardRequest buildRequest() {
+
+        LinkCardRequest request = new LinkCardRequest(xWaitFor,
             accountID,
             linkCard);
+
+        return request;
     }
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+    public LinkCardResponse call() throws Exception {
+        
+        RequestOperation<LinkCardRequest, LinkCardResponse> operation
+              = new LinkCardOperation( sdkConfiguration);
+        LinkCardRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

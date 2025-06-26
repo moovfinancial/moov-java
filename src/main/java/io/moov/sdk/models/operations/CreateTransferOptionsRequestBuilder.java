@@ -3,57 +3,61 @@
  */
 package io.moov.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import static io.moov.sdk.operations.Operations.RequestOperation;
+
+import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.models.components.Amount;
 import io.moov.sdk.models.components.CreateTransferOptions;
-import io.moov.sdk.utils.LazySingletonValue;
+import io.moov.sdk.models.components.SourceDestinationOptions;
+import io.moov.sdk.operations.CreateTransferOptionsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.String;
-import java.util.Optional;
 
 public class CreateTransferOptionsRequestBuilder {
 
-    private Optional<String> xMoovVersion = Utils.readDefaultOrConstValue(
-                            "xMoovVersion",
-                            "\"v2024.01.00\"",
-                            new TypeReference<Optional<String>>() {});
-    private CreateTransferOptions createTransferOptions;
-    private final SDKMethodInterfaces.MethodCallCreateTransferOptions sdk;
+    private SourceDestinationOptions source;
+    private SourceDestinationOptions destination;
+    private Amount amount;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreateTransferOptionsRequestBuilder(SDKMethodInterfaces.MethodCallCreateTransferOptions sdk) {
-        this.sdk = sdk;
+    public CreateTransferOptionsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
-                
-    public CreateTransferOptionsRequestBuilder xMoovVersion(String xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = Optional.of(xMoovVersion);
+
+    public CreateTransferOptionsRequestBuilder source(SourceDestinationOptions source) {
+        Utils.checkNotNull(source, "source");
+        this.source = source;
         return this;
     }
 
-    public CreateTransferOptionsRequestBuilder xMoovVersion(Optional<String> xMoovVersion) {
-        Utils.checkNotNull(xMoovVersion, "xMoovVersion");
-        this.xMoovVersion = xMoovVersion;
+    public CreateTransferOptionsRequestBuilder destination(SourceDestinationOptions destination) {
+        Utils.checkNotNull(destination, "destination");
+        this.destination = destination;
         return this;
     }
 
-    public CreateTransferOptionsRequestBuilder createTransferOptions(CreateTransferOptions createTransferOptions) {
-        Utils.checkNotNull(createTransferOptions, "createTransferOptions");
-        this.createTransferOptions = createTransferOptions;
+    public CreateTransferOptionsRequestBuilder amount(Amount amount) {
+        Utils.checkNotNull(amount, "amount");
+        this.amount = amount;
         return this;
+    }
+
+
+    private CreateTransferOptions buildRequest() {
+
+        CreateTransferOptions request = new CreateTransferOptions(source,
+            destination,
+            amount);
+
+        return request;
     }
 
     public CreateTransferOptionsResponse call() throws Exception {
-        if (xMoovVersion == null) {
-            xMoovVersion = _SINGLETON_VALUE_XMoovVersion.value();
-        }
-        return sdk.generateOptions(
-            xMoovVersion,
-            createTransferOptions);
-    }
+        
+        RequestOperation<CreateTransferOptions, CreateTransferOptionsResponse> operation
+              = new CreateTransferOptionsOperation( sdkConfiguration);
+        CreateTransferOptions request = buildRequest();
 
-    private static final LazySingletonValue<Optional<String>> _SINGLETON_VALUE_XMoovVersion =
-            new LazySingletonValue<>(
-                    "xMoovVersion",
-                    "\"v2024.01.00\"",
-                    new TypeReference<Optional<String>>() {});
+        return operation.handleResponse(operation.doRequest(request));
+    }
 }

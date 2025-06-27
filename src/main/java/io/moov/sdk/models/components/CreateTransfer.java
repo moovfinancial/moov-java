@@ -61,6 +61,13 @@ public class CreateTransfer {
     @JsonProperty("salesTaxAmount")
     private Optional<? extends Amount> salesTaxAmount;
 
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
+
     @JsonCreator
     public CreateTransfer(
             @JsonProperty("source") CreateTransferSource source,
@@ -69,7 +76,8 @@ public class CreateTransfer {
             @JsonProperty("facilitatorFee") Optional<? extends FacilitatorFee> facilitatorFee,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
-            @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount) {
+            @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(destination, "destination");
         Utils.checkNotNull(amount, "amount");
@@ -77,6 +85,7 @@ public class CreateTransfer {
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.source = source;
         this.destination = destination;
         this.amount = amount;
@@ -84,13 +93,14 @@ public class CreateTransfer {
         this.description = description;
         this.metadata = metadata;
         this.salesTaxAmount = salesTaxAmount;
+        this.foreignID = foreignID;
     }
     
     public CreateTransfer(
             CreateTransferSource source,
             CreateTransferDestination destination,
             Amount amount) {
-        this(source, destination, amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(source, destination, amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -147,6 +157,14 @@ public class CreateTransfer {
     @JsonIgnore
     public Optional<Amount> salesTaxAmount() {
         return (Optional<Amount>) salesTaxAmount;
+    }
+
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     public final static Builder builder() {
@@ -249,6 +267,24 @@ public class CreateTransfer {
         return this;
     }
 
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    public CreateTransfer withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    public CreateTransfer withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -266,7 +302,8 @@ public class CreateTransfer {
             Objects.deepEquals(this.facilitatorFee, other.facilitatorFee) &&
             Objects.deepEquals(this.description, other.description) &&
             Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.salesTaxAmount, other.salesTaxAmount);
+            Objects.deepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
+            Objects.deepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
@@ -278,7 +315,8 @@ public class CreateTransfer {
             facilitatorFee,
             description,
             metadata,
-            salesTaxAmount);
+            salesTaxAmount,
+            foreignID);
     }
     
     @Override
@@ -290,7 +328,8 @@ public class CreateTransfer {
                 "facilitatorFee", facilitatorFee,
                 "description", description,
                 "metadata", metadata,
-                "salesTaxAmount", salesTaxAmount);
+                "salesTaxAmount", salesTaxAmount,
+                "foreignID", foreignID);
     }
     
     public final static class Builder {
@@ -308,6 +347,8 @@ public class CreateTransfer {
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
  
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
+ 
+        private Optional<String> foreignID = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -408,6 +449,24 @@ public class CreateTransfer {
             this.salesTaxAmount = salesTaxAmount;
             return this;
         }
+
+        /**
+         * Optional alias from a foreign/external system which can be used to reference this resource.
+         */
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        /**
+         * Optional alias from a foreign/external system which can be used to reference this resource.
+         */
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
         
         public CreateTransfer build() {
             return new CreateTransfer(
@@ -417,7 +476,8 @@ public class CreateTransfer {
                 facilitatorFee,
                 description,
                 metadata,
-                salesTaxAmount);
+                salesTaxAmount,
+                foreignID);
         }
     }
 }

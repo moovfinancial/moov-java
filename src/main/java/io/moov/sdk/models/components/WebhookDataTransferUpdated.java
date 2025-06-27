@@ -5,11 +5,14 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
 
 public class WebhookDataTransferUpdated {
 
@@ -37,23 +40,39 @@ public class WebhookDataTransferUpdated {
     @JsonProperty("destination")
     private WebhookTransferPaymentMethodDetails destination;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
+
     @JsonCreator
     public WebhookDataTransferUpdated(
             @JsonProperty("accountID") String accountID,
             @JsonProperty("transferID") String transferID,
             @JsonProperty("status") WebhookDataTransferStatus status,
             @JsonProperty("source") WebhookTransferPaymentMethodDetails source,
-            @JsonProperty("destination") WebhookTransferPaymentMethodDetails destination) {
+            @JsonProperty("destination") WebhookTransferPaymentMethodDetails destination,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(destination, "destination");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.accountID = accountID;
         this.transferID = transferID;
         this.status = status;
         this.source = source;
         this.destination = destination;
+        this.foreignID = foreignID;
+    }
+    
+    public WebhookDataTransferUpdated(
+            String accountID,
+            String transferID,
+            WebhookDataTransferStatus status,
+            WebhookTransferPaymentMethodDetails source,
+            WebhookTransferPaymentMethodDetails destination) {
+        this(accountID, transferID, status, source, destination, Optional.empty());
     }
 
     /**
@@ -88,6 +107,11 @@ public class WebhookDataTransferUpdated {
     @JsonIgnore
     public WebhookTransferPaymentMethodDetails destination() {
         return destination;
+    }
+
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     public final static Builder builder() {
@@ -133,6 +157,18 @@ public class WebhookDataTransferUpdated {
         return this;
     }
 
+    public WebhookDataTransferUpdated withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+    public WebhookDataTransferUpdated withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -148,7 +184,8 @@ public class WebhookDataTransferUpdated {
             Objects.deepEquals(this.transferID, other.transferID) &&
             Objects.deepEquals(this.status, other.status) &&
             Objects.deepEquals(this.source, other.source) &&
-            Objects.deepEquals(this.destination, other.destination);
+            Objects.deepEquals(this.destination, other.destination) &&
+            Objects.deepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
@@ -158,7 +195,8 @@ public class WebhookDataTransferUpdated {
             transferID,
             status,
             source,
-            destination);
+            destination,
+            foreignID);
     }
     
     @Override
@@ -168,7 +206,8 @@ public class WebhookDataTransferUpdated {
                 "transferID", transferID,
                 "status", status,
                 "source", source,
-                "destination", destination);
+                "destination", destination,
+                "foreignID", foreignID);
     }
     
     public final static class Builder {
@@ -182,6 +221,8 @@ public class WebhookDataTransferUpdated {
         private WebhookTransferPaymentMethodDetails source;
  
         private WebhookTransferPaymentMethodDetails destination;
+ 
+        private Optional<String> foreignID = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -225,6 +266,18 @@ public class WebhookDataTransferUpdated {
             this.destination = destination;
             return this;
         }
+
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
         
         public WebhookDataTransferUpdated build() {
             return new WebhookDataTransferUpdated(
@@ -232,7 +285,8 @@ public class WebhookDataTransferUpdated {
                 transferID,
                 status,
                 source,
-                destination);
+                destination,
+                foreignID);
         }
     }
 }

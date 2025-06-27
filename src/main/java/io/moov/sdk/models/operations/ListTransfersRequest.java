@@ -74,6 +74,12 @@ public class ListTransfersRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=disputed")
     private Optional<Boolean> disputed;
 
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=foreignID")
+    private Optional<String> foreignID;
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
@@ -94,6 +100,7 @@ public class ListTransfersRequest {
             Optional<String> paymentLinkCode,
             Optional<Boolean> refunded,
             Optional<Boolean> disputed,
+            Optional<String> foreignID,
             Optional<Long> skip,
             Optional<Long> count,
             String accountID) {
@@ -106,6 +113,7 @@ public class ListTransfersRequest {
         Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
         Utils.checkNotNull(refunded, "refunded");
         Utils.checkNotNull(disputed, "disputed");
+        Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(accountID, "accountID");
@@ -118,6 +126,7 @@ public class ListTransfersRequest {
         this.paymentLinkCode = paymentLinkCode;
         this.refunded = refunded;
         this.disputed = disputed;
+        this.foreignID = foreignID;
         this.skip = skip;
         this.count = count;
         this.accountID = accountID;
@@ -125,7 +134,7 @@ public class ListTransfersRequest {
     
     public ListTransfersRequest(
             String accountID) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), accountID);
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), accountID);
     }
 
     /**
@@ -200,6 +209,14 @@ public class ListTransfersRequest {
     @JsonIgnore
     public Optional<Boolean> disputed() {
         return disputed;
+    }
+
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     @JsonIgnore
@@ -383,6 +400,24 @@ public class ListTransfersRequest {
         return this;
     }
 
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    public ListTransfersRequest withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    public ListTransfersRequest withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     public ListTransfersRequest withSkip(long skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = Optional.ofNullable(skip);
@@ -433,6 +468,7 @@ public class ListTransfersRequest {
             Objects.deepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
             Objects.deepEquals(this.refunded, other.refunded) &&
             Objects.deepEquals(this.disputed, other.disputed) &&
+            Objects.deepEquals(this.foreignID, other.foreignID) &&
             Objects.deepEquals(this.skip, other.skip) &&
             Objects.deepEquals(this.count, other.count) &&
             Objects.deepEquals(this.accountID, other.accountID);
@@ -450,6 +486,7 @@ public class ListTransfersRequest {
             paymentLinkCode,
             refunded,
             disputed,
+            foreignID,
             skip,
             count,
             accountID);
@@ -467,6 +504,7 @@ public class ListTransfersRequest {
                 "paymentLinkCode", paymentLinkCode,
                 "refunded", refunded,
                 "disputed", disputed,
+                "foreignID", foreignID,
                 "skip", skip,
                 "count", count,
                 "accountID", accountID);
@@ -491,6 +529,8 @@ public class ListTransfersRequest {
         private Optional<Boolean> refunded = Optional.empty();
  
         private Optional<Boolean> disputed = Optional.empty();
+ 
+        private Optional<String> foreignID = Optional.empty();
  
         private Optional<Long> skip = Optional.empty();
  
@@ -664,6 +704,24 @@ public class ListTransfersRequest {
             return this;
         }
 
+        /**
+         * Optional alias from a foreign/external system which can be used to reference this resource.
+         */
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        /**
+         * Optional alias from a foreign/external system which can be used to reference this resource.
+         */
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
+
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
@@ -705,6 +763,7 @@ public class ListTransfersRequest {
                 paymentLinkCode,
                 refunded,
                 disputed,
+                foreignID,
                 skip,
                 count,
                 accountID);

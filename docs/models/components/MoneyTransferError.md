@@ -1,0 +1,9 @@
+# MoneyTransferError
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `pullFromCard`                                                                                         | [Optional\<MoneyTransferPullFromCardError>](../../models/components/MoneyTransferPullFromCardError.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `pushToCard`                                                                                           | [Optional\<MoneyTransferPushToCardError>](../../models/components/MoneyTransferPushToCardError.md)     | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

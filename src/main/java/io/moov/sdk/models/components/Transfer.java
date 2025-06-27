@@ -154,6 +154,13 @@ public class Transfer {
     @JsonProperty("salesTaxAmount")
     private Optional<? extends Amount> salesTaxAmount;
 
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
+
     @JsonCreator
     public Transfer(
             @JsonProperty("transferID") String transferID,
@@ -181,7 +188,8 @@ public class Transfer {
             @JsonProperty("scheduleID") Optional<String> scheduleID,
             @JsonProperty("occurrenceID") Optional<String> occurrenceID,
             @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
-            @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount) {
+            @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(source, "source");
@@ -208,6 +216,7 @@ public class Transfer {
         Utils.checkNotNull(occurrenceID, "occurrenceID");
         Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.transferID = transferID;
         this.createdOn = createdOn;
         this.source = source;
@@ -234,6 +243,7 @@ public class Transfer {
         this.occurrenceID = occurrenceID;
         this.paymentLinkCode = paymentLinkCode;
         this.salesTaxAmount = salesTaxAmount;
+        this.foreignID = foreignID;
     }
     
     public Transfer(
@@ -243,7 +253,7 @@ public class Transfer {
             TransferDestination destination,
             TransferStatus status,
             Amount amount) {
-        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -415,6 +425,14 @@ public class Transfer {
     @JsonIgnore
     public Optional<Amount> salesTaxAmount() {
         return (Optional<Amount>) salesTaxAmount;
+    }
+
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     public final static Builder builder() {
@@ -754,6 +772,24 @@ public class Transfer {
         return this;
     }
 
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    public Transfer withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    public Transfer withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -790,7 +826,8 @@ public class Transfer {
             Objects.deepEquals(this.scheduleID, other.scheduleID) &&
             Objects.deepEquals(this.occurrenceID, other.occurrenceID) &&
             Objects.deepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
-            Objects.deepEquals(this.salesTaxAmount, other.salesTaxAmount);
+            Objects.deepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
+            Objects.deepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
@@ -821,7 +858,8 @@ public class Transfer {
             scheduleID,
             occurrenceID,
             paymentLinkCode,
-            salesTaxAmount);
+            salesTaxAmount,
+            foreignID);
     }
     
     @Override
@@ -852,7 +890,8 @@ public class Transfer {
                 "scheduleID", scheduleID,
                 "occurrenceID", occurrenceID,
                 "paymentLinkCode", paymentLinkCode,
-                "salesTaxAmount", salesTaxAmount);
+                "salesTaxAmount", salesTaxAmount,
+                "foreignID", foreignID);
     }
     
     public final static class Builder {
@@ -908,6 +947,8 @@ public class Transfer {
         private Optional<String> paymentLinkCode = Optional.empty();
  
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
+ 
+        private Optional<String> foreignID = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -1245,6 +1286,24 @@ public class Transfer {
             this.salesTaxAmount = salesTaxAmount;
             return this;
         }
+
+        /**
+         * Optional alias from a foreign/external system which can be used to reference this resource.
+         */
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        /**
+         * Optional alias from a foreign/external system which can be used to reference this resource.
+         */
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
         
         public Transfer build() {
             return new Transfer(
@@ -1273,7 +1332,8 @@ public class Transfer {
                 scheduleID,
                 occurrenceID,
                 paymentLinkCode,
-                salesTaxAmount);
+                salesTaxAmount,
+                foreignID);
         }
     }
 }

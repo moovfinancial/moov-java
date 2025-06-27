@@ -5,11 +5,14 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
 
 public class WebhookDataTransferCreated {
 
@@ -25,17 +28,31 @@ public class WebhookDataTransferCreated {
     @JsonProperty("status")
     private WebhookDataTransferStatus status;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
+
     @JsonCreator
     public WebhookDataTransferCreated(
             @JsonProperty("accountID") String accountID,
             @JsonProperty("transferID") String transferID,
-            @JsonProperty("status") WebhookDataTransferStatus status) {
+            @JsonProperty("status") WebhookDataTransferStatus status,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(status, "status");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.accountID = accountID;
         this.transferID = transferID;
         this.status = status;
+        this.foreignID = foreignID;
+    }
+    
+    public WebhookDataTransferCreated(
+            String accountID,
+            String transferID,
+            WebhookDataTransferStatus status) {
+        this(accountID, transferID, status, Optional.empty());
     }
 
     /**
@@ -54,6 +71,11 @@ public class WebhookDataTransferCreated {
     @JsonIgnore
     public WebhookDataTransferStatus status() {
         return status;
+    }
+
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     public final static Builder builder() {
@@ -81,6 +103,18 @@ public class WebhookDataTransferCreated {
         return this;
     }
 
+    public WebhookDataTransferCreated withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+    public WebhookDataTransferCreated withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -94,7 +128,8 @@ public class WebhookDataTransferCreated {
         return 
             Objects.deepEquals(this.accountID, other.accountID) &&
             Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.status, other.status);
+            Objects.deepEquals(this.status, other.status) &&
+            Objects.deepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
@@ -102,7 +137,8 @@ public class WebhookDataTransferCreated {
         return Objects.hash(
             accountID,
             transferID,
-            status);
+            status,
+            foreignID);
     }
     
     @Override
@@ -110,7 +146,8 @@ public class WebhookDataTransferCreated {
         return Utils.toString(WebhookDataTransferCreated.class,
                 "accountID", accountID,
                 "transferID", transferID,
-                "status", status);
+                "status", status,
+                "foreignID", foreignID);
     }
     
     public final static class Builder {
@@ -120,6 +157,8 @@ public class WebhookDataTransferCreated {
         private String transferID;
  
         private WebhookDataTransferStatus status;
+ 
+        private Optional<String> foreignID = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -145,12 +184,25 @@ public class WebhookDataTransferCreated {
             this.status = status;
             return this;
         }
+
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
         
         public WebhookDataTransferCreated build() {
             return new WebhookDataTransferCreated(
                 accountID,
                 transferID,
-                status);
+                status,
+                foreignID);
         }
     }
 }

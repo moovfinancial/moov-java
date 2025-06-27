@@ -1,0 +1,9 @@
+# CollectFundsError
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ach`                                                                                                | [Optional\<CollectFundsAchError>](../../models/components/CollectFundsAchError.md)                   | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `cardPayments`                                                                                       | [Optional\<CollectFundsCardPaymentsError>](../../models/components/CollectFundsCardPaymentsError.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

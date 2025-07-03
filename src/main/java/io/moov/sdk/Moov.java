@@ -66,6 +66,8 @@ public class Moov {
 
     private final AccountTerminalApplications accountTerminalApplications;
 
+    private final Support support;
+
     private final Transfers transfers;
 
     private final Underwriting underwriting;
@@ -162,6 +164,10 @@ public class Moov {
 
     public AccountTerminalApplications accountTerminalApplications() {
         return accountTerminalApplications;
+    }
+
+    public Support support() {
+        return support;
     }
 
     public Transfers transfers() {
@@ -406,6 +412,7 @@ public class Moov {
         this.scheduling = new Scheduling(sdkConfiguration);
         this.sweeps = new Sweeps(sdkConfiguration);
         this.accountTerminalApplications = new AccountTerminalApplications(sdkConfiguration);
+        this.support = new Support(sdkConfiguration);
         this.transfers = new Transfers(sdkConfiguration);
         this.underwriting = new Underwriting(sdkConfiguration);
         this.wallets = new Wallets(sdkConfiguration);

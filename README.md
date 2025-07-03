@@ -45,7 +45,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.17.0'
+implementation 'io.moov:sdk:0.19.0'
 ```
 
 Maven:
@@ -53,7 +53,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.17.0</version>
+    <version>0.19.0</version>
 </dependency>
 ```
 
@@ -896,6 +896,29 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### [support()](docs/sdks/support/README.md)
+
+* [createTicket](docs/sdks/support/README.md#createticket) - Create a support ticket for a Moov account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/support.write` scope.
+* [listTickets](docs/sdks/support/README.md#listtickets) - List all the support tickets created under a Moov account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/support.read` scope.
+* [getTicket](docs/sdks/support/README.md#getticket) - Retrieve a support ticket by ID.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/support.read` scope.
+* [updateTicket](docs/sdks/support/README.md#updateticket) - Updates a support ticket.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/support.write` scope.
+* [listTicketMessages](docs/sdks/support/README.md#listticketmessages) - List all the messages for a support ticket.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/support.read` scope.
 
 ### [sweeps()](docs/sdks/sweeps/README.md)
 

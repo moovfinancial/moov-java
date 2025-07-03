@@ -1,0 +1,10 @@
+# CreateTicketError
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `title`                                                                                    | *Optional\<String>*                                                                        | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `body`                                                                                     | *Optional\<String>*                                                                        | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `contact`                                                                                  | [Optional\<CreateTicketContactError>](../../models/components/CreateTicketContactError.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |

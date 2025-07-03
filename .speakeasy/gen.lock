@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 0e712d2aa7732fe657e95ee2ff87d85f
+  docChecksum: ccd477bb764cb2ce8b991f7c66a65f28
   docVersion: latest
   speakeasyVersion: 1.570.2
   generationVersion: 2.638.5
-  releaseVersion: 0.17.0
-  configChecksum: 000aaed3cb9ac0a97de77d84e6c92267
+  releaseVersion: 0.19.0
+  configChecksum: a01b800d9db5670af8d14b9c5ef7ebd4
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -189,6 +189,8 @@ generatedFiles:
   - docs/models/components/CreateReversal.md
   - docs/models/components/CreateSweepConfig.md
   - docs/models/components/CreateTerminalApplication.md
+  - docs/models/components/CreateTicket.md
+  - docs/models/components/CreateTicketContactError.md
   - docs/models/components/CreateTransfer.md
   - docs/models/components/CreateTransferDestination.md
   - docs/models/components/CreateTransferDestinationACH.md
@@ -444,6 +446,10 @@ generatedFiles:
   - docs/models/components/TermsOfServiceError.md
   - docs/models/components/TermsOfServiceToken.md
   - docs/models/components/TermsOfServiceTokenUpdate.md
+  - docs/models/components/Ticket.md
+  - docs/models/components/TicketContact.md
+  - docs/models/components/TicketMessage.md
+  - docs/models/components/TicketStatus.md
   - docs/models/components/TokenType.md
   - docs/models/components/TokenTypeHint.md
   - docs/models/components/TransactionSource.md
@@ -475,6 +481,8 @@ generatedFiles:
   - docs/models/components/UpdateRepresentativeGovernmentID.md
   - docs/models/components/UpdateRepresentativeItin.md
   - docs/models/components/UpdateRepresentativeSsn.md
+  - docs/models/components/UpdateTicket.md
+  - docs/models/components/UpdateTicketStatus.md
   - docs/models/components/UpdateUnderwriting.md
   - docs/models/components/UpsertSchedule.md
   - docs/models/components/UpsertUnderwriting.md
@@ -538,6 +546,7 @@ generatedFiles:
   - docs/models/errors/CreateAccountResponseBody.md
   - docs/models/errors/CreatePaymentLinkError.md
   - docs/models/errors/CreateSweepConfigError.md
+  - docs/models/errors/CreateTicketError.md
   - docs/models/errors/Error.md
   - docs/models/errors/FeePlanAgreementError.md
   - docs/models/errors/File.md
@@ -563,6 +572,7 @@ generatedFiles:
   - docs/models/errors/UpdateCardError.md
   - docs/models/errors/UpdateIssuedCardError.md
   - docs/models/errors/UpdatePaymentLinkError.md
+  - docs/models/errors/UpdateTicketError.md
   - docs/models/errors/UpdateUnderwritingError.md
   - docs/models/errors/UpdateUnderwritingErrorError.md
   - docs/models/errors/UpsertUnderwritingError.md
@@ -599,6 +609,8 @@ generatedFiles:
   - docs/models/operations/CreateSweepConfigRequest.md
   - docs/models/operations/CreateSweepConfigResponse.md
   - docs/models/operations/CreateTerminalApplicationResponse.md
+  - docs/models/operations/CreateTicketRequest.md
+  - docs/models/operations/CreateTicketResponse.md
   - docs/models/operations/CreateTransferOptionsForAccountRequest.md
   - docs/models/operations/CreateTransferOptionsForAccountResponse.md
   - docs/models/operations/CreateTransferOptionsResponse.md
@@ -694,6 +706,8 @@ generatedFiles:
   - docs/models/operations/GetTerminalConfigurationResponse.md
   - docs/models/operations/GetTermsOfServiceTokenRequest.md
   - docs/models/operations/GetTermsOfServiceTokenResponse.md
+  - docs/models/operations/GetTicketRequest.md
+  - docs/models/operations/GetTicketResponse.md
   - docs/models/operations/GetTransferRequest.md
   - docs/models/operations/GetTransferResponse.md
   - docs/models/operations/GetUnderwritingRequest.md
@@ -777,6 +791,10 @@ generatedFiles:
   - docs/models/operations/ListSweepsResponse.md
   - docs/models/operations/ListTerminalApplicationsRequest.md
   - docs/models/operations/ListTerminalApplicationsResponse.md
+  - docs/models/operations/ListTicketMessagesRequest.md
+  - docs/models/operations/ListTicketMessagesResponse.md
+  - docs/models/operations/ListTicketsRequest.md
+  - docs/models/operations/ListTicketsResponse.md
   - docs/models/operations/ListTransfersRequest.md
   - docs/models/operations/ListTransfersResponse.md
   - docs/models/operations/ListWalletTransactionsRequest.md
@@ -823,6 +841,8 @@ generatedFiles:
   - docs/models/operations/UpdateScheduleResponse.md
   - docs/models/operations/UpdateSweepConfigRequest.md
   - docs/models/operations/UpdateSweepConfigResponse.md
+  - docs/models/operations/UpdateTicketRequest.md
+  - docs/models/operations/UpdateTicketResponse.md
   - docs/models/operations/UpdateTransferRequest.md
   - docs/models/operations/UpdateTransferResponse.md
   - docs/models/operations/UploadDisputeEvidenceFileRequest.md
@@ -863,6 +883,7 @@ generatedFiles:
   - docs/sdks/receipts/README.md
   - docs/sdks/representatives/README.md
   - docs/sdks/scheduling/README.md
+  - docs/sdks/support/README.md
   - docs/sdks/sweeps/README.md
   - docs/sdks/terminalapplications/README.md
   - docs/sdks/transfers/README.md
@@ -905,6 +926,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/SDKConfiguration.java
   - src/main/java/io/moov/sdk/Scheduling.java
   - src/main/java/io/moov/sdk/SecuritySource.java
+  - src/main/java/io/moov/sdk/Support.java
   - src/main/java/io/moov/sdk/Sweeps.java
   - src/main/java/io/moov/sdk/TerminalApplications.java
   - src/main/java/io/moov/sdk/Transfers.java
@@ -1067,6 +1089,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/CreateReversal.java
   - src/main/java/io/moov/sdk/models/components/CreateSweepConfig.java
   - src/main/java/io/moov/sdk/models/components/CreateTerminalApplication.java
+  - src/main/java/io/moov/sdk/models/components/CreateTicket.java
+  - src/main/java/io/moov/sdk/models/components/CreateTicketContactError.java
   - src/main/java/io/moov/sdk/models/components/CreateTransfer.java
   - src/main/java/io/moov/sdk/models/components/CreateTransferDestination.java
   - src/main/java/io/moov/sdk/models/components/CreateTransferDestinationACH.java
@@ -1322,6 +1346,10 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/TermsOfServiceError.java
   - src/main/java/io/moov/sdk/models/components/TermsOfServiceToken.java
   - src/main/java/io/moov/sdk/models/components/TermsOfServiceTokenUpdate.java
+  - src/main/java/io/moov/sdk/models/components/Ticket.java
+  - src/main/java/io/moov/sdk/models/components/TicketContact.java
+  - src/main/java/io/moov/sdk/models/components/TicketMessage.java
+  - src/main/java/io/moov/sdk/models/components/TicketStatus.java
   - src/main/java/io/moov/sdk/models/components/TokenType.java
   - src/main/java/io/moov/sdk/models/components/TokenTypeHint.java
   - src/main/java/io/moov/sdk/models/components/TransactionSource.java
@@ -1353,6 +1381,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/UpdateRepresentativeGovernmentID.java
   - src/main/java/io/moov/sdk/models/components/UpdateRepresentativeItin.java
   - src/main/java/io/moov/sdk/models/components/UpdateRepresentativeSsn.java
+  - src/main/java/io/moov/sdk/models/components/UpdateTicket.java
+  - src/main/java/io/moov/sdk/models/components/UpdateTicketStatus.java
   - src/main/java/io/moov/sdk/models/components/UpdateUnderwriting.java
   - src/main/java/io/moov/sdk/models/components/UpsertSchedule.java
   - src/main/java/io/moov/sdk/models/components/UpsertUnderwriting.java
@@ -1418,6 +1448,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/CreateAccountResponseBody.java
   - src/main/java/io/moov/sdk/models/errors/CreatePaymentLinkError.java
   - src/main/java/io/moov/sdk/models/errors/CreateSweepConfigError.java
+  - src/main/java/io/moov/sdk/models/errors/CreateTicketError.java
   - src/main/java/io/moov/sdk/models/errors/Error.java
   - src/main/java/io/moov/sdk/models/errors/FeePlanAgreementError.java
   - src/main/java/io/moov/sdk/models/errors/File.java
@@ -1443,6 +1474,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/UpdateCardError.java
   - src/main/java/io/moov/sdk/models/errors/UpdateIssuedCardError.java
   - src/main/java/io/moov/sdk/models/errors/UpdatePaymentLinkError.java
+  - src/main/java/io/moov/sdk/models/errors/UpdateTicketError.java
   - src/main/java/io/moov/sdk/models/errors/UpdateUnderwritingError.java
   - src/main/java/io/moov/sdk/models/errors/UpdateUnderwritingErrorError.java
   - src/main/java/io/moov/sdk/models/errors/UpsertUnderwritingError.java
@@ -1498,6 +1530,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/CreateSweepConfigResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreateTerminalApplicationRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateTerminalApplicationResponse.java
+  - src/main/java/io/moov/sdk/models/operations/CreateTicketRequest.java
+  - src/main/java/io/moov/sdk/models/operations/CreateTicketRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/CreateTicketResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsForAccountRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsForAccountRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsForAccountResponse.java
@@ -1641,6 +1676,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/GetTermsOfServiceTokenRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetTermsOfServiceTokenRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetTermsOfServiceTokenResponse.java
+  - src/main/java/io/moov/sdk/models/operations/GetTicketRequest.java
+  - src/main/java/io/moov/sdk/models/operations/GetTicketRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/GetTicketResponse.java
   - src/main/java/io/moov/sdk/models/operations/GetTransferRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetTransferRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetTransferResponse.java
@@ -1765,6 +1803,12 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/ListTerminalApplicationsRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListTerminalApplicationsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListTerminalApplicationsResponse.java
+  - src/main/java/io/moov/sdk/models/operations/ListTicketMessagesRequest.java
+  - src/main/java/io/moov/sdk/models/operations/ListTicketMessagesRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/ListTicketMessagesResponse.java
+  - src/main/java/io/moov/sdk/models/operations/ListTicketsRequest.java
+  - src/main/java/io/moov/sdk/models/operations/ListTicketsRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/ListTicketsResponse.java
   - src/main/java/io/moov/sdk/models/operations/ListTransfersRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListTransfersRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListTransfersResponse.java
@@ -1835,6 +1879,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/UpdateSweepConfigRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpdateSweepConfigRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpdateSweepConfigResponse.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateTicketRequest.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateTicketRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateTicketResponse.java
   - src/main/java/io/moov/sdk/models/operations/UpdateTransferRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpdateTransferRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpdateTransferResponse.java
@@ -1872,6 +1919,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/CreateScheduleOperation.java
   - src/main/java/io/moov/sdk/operations/CreateSweepConfigOperation.java
   - src/main/java/io/moov/sdk/operations/CreateTerminalApplicationOperation.java
+  - src/main/java/io/moov/sdk/operations/CreateTicketOperation.java
   - src/main/java/io/moov/sdk/operations/CreateTransferOperation.java
   - src/main/java/io/moov/sdk/operations/CreateTransferOptionsForAccountOperation.java
   - src/main/java/io/moov/sdk/operations/CreateTransferOptionsOperation.java
@@ -1920,6 +1968,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/GetTerminalApplicationOperation.java
   - src/main/java/io/moov/sdk/operations/GetTerminalConfigurationOperation.java
   - src/main/java/io/moov/sdk/operations/GetTermsOfServiceTokenOperation.java
+  - src/main/java/io/moov/sdk/operations/GetTicketOperation.java
   - src/main/java/io/moov/sdk/operations/GetTransferOperation.java
   - src/main/java/io/moov/sdk/operations/GetUnderwritingOperation.java
   - src/main/java/io/moov/sdk/operations/GetWalletOperation.java
@@ -1961,6 +2010,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/ListSweepConfigsOperation.java
   - src/main/java/io/moov/sdk/operations/ListSweepsOperation.java
   - src/main/java/io/moov/sdk/operations/ListTerminalApplicationsOperation.java
+  - src/main/java/io/moov/sdk/operations/ListTicketMessagesOperation.java
+  - src/main/java/io/moov/sdk/operations/ListTicketsOperation.java
   - src/main/java/io/moov/sdk/operations/ListTransfersOperation.java
   - src/main/java/io/moov/sdk/operations/ListWalletTransactionsOperation.java
   - src/main/java/io/moov/sdk/operations/ListWalletsOperation.java
@@ -1986,6 +2037,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/UpdateRepresentativeOperation.java
   - src/main/java/io/moov/sdk/operations/UpdateScheduleOperation.java
   - src/main/java/io/moov/sdk/operations/UpdateSweepConfigOperation.java
+  - src/main/java/io/moov/sdk/operations/UpdateTicketOperation.java
   - src/main/java/io/moov/sdk/operations/UpdateTransferOperation.java
   - src/main/java/io/moov/sdk/operations/UploadDisputeEvidenceFileOperation.java
   - src/main/java/io/moov/sdk/operations/UploadDisputeEvidenceTextOperation.java
@@ -2203,6 +2255,8 @@ generatedFiles:
   - tests/mockserver/internal/sdk/models/components/createreversal.go
   - tests/mockserver/internal/sdk/models/components/createsweepconfig.go
   - tests/mockserver/internal/sdk/models/components/createterminalapplication.go
+  - tests/mockserver/internal/sdk/models/components/createticket.go
+  - tests/mockserver/internal/sdk/models/components/createticketcontacterror.go
   - tests/mockserver/internal/sdk/models/components/createtransfer.go
   - tests/mockserver/internal/sdk/models/components/createtransferdestination.go
   - tests/mockserver/internal/sdk/models/components/createtransferdestinationach.go
@@ -2433,6 +2487,10 @@ generatedFiles:
   - tests/mockserver/internal/sdk/models/components/termsofserviceerror.go
   - tests/mockserver/internal/sdk/models/components/termsofservicetoken.go
   - tests/mockserver/internal/sdk/models/components/termsofservicetokenupdate.go
+  - tests/mockserver/internal/sdk/models/components/ticket.go
+  - tests/mockserver/internal/sdk/models/components/ticketcontact.go
+  - tests/mockserver/internal/sdk/models/components/ticketmessage.go
+  - tests/mockserver/internal/sdk/models/components/ticketstatus.go
   - tests/mockserver/internal/sdk/models/components/tokentype.go
   - tests/mockserver/internal/sdk/models/components/transactionsource.go
   - tests/mockserver/internal/sdk/models/components/transfer.go
@@ -2457,6 +2515,8 @@ generatedFiles:
   - tests/mockserver/internal/sdk/models/components/updateissuedcard.go
   - tests/mockserver/internal/sdk/models/components/updatepaymentlink.go
   - tests/mockserver/internal/sdk/models/components/updaterepresentative.go
+  - tests/mockserver/internal/sdk/models/components/updateticket.go
+  - tests/mockserver/internal/sdk/models/components/updateticketstatus.go
   - tests/mockserver/internal/sdk/models/components/updateunderwriting.go
   - tests/mockserver/internal/sdk/models/components/updateunderwritingerror.go
   - tests/mockserver/internal/sdk/models/components/upsertschedule.go
@@ -2529,6 +2589,7 @@ generatedFiles:
   - tests/mockserver/internal/sdk/models/operations/createschedule.go
   - tests/mockserver/internal/sdk/models/operations/createsweepconfig.go
   - tests/mockserver/internal/sdk/models/operations/createterminalapplication.go
+  - tests/mockserver/internal/sdk/models/operations/createticket.go
   - tests/mockserver/internal/sdk/models/operations/createtransfer.go
   - tests/mockserver/internal/sdk/models/operations/createtransferoptions.go
   - tests/mockserver/internal/sdk/models/operations/createtransferoptionsforaccount.go
@@ -2577,6 +2638,7 @@ generatedFiles:
   - tests/mockserver/internal/sdk/models/operations/getterminalapplication.go
   - tests/mockserver/internal/sdk/models/operations/getterminalconfiguration.go
   - tests/mockserver/internal/sdk/models/operations/gettermsofservicetoken.go
+  - tests/mockserver/internal/sdk/models/operations/getticket.go
   - tests/mockserver/internal/sdk/models/operations/gettransfer.go
   - tests/mockserver/internal/sdk/models/operations/getunderwriting.go
   - tests/mockserver/internal/sdk/models/operations/getwallet.go
@@ -2618,6 +2680,8 @@ generatedFiles:
   - tests/mockserver/internal/sdk/models/operations/listsweepconfigs.go
   - tests/mockserver/internal/sdk/models/operations/listsweeps.go
   - tests/mockserver/internal/sdk/models/operations/listterminalapplications.go
+  - tests/mockserver/internal/sdk/models/operations/listticketmessages.go
+  - tests/mockserver/internal/sdk/models/operations/listtickets.go
   - tests/mockserver/internal/sdk/models/operations/listtransfers.go
   - tests/mockserver/internal/sdk/models/operations/listwallets.go
   - tests/mockserver/internal/sdk/models/operations/listwallettransactions.go
@@ -2642,6 +2706,7 @@ generatedFiles:
   - tests/mockserver/internal/sdk/models/operations/updaterepresentative.go
   - tests/mockserver/internal/sdk/models/operations/updateschedule.go
   - tests/mockserver/internal/sdk/models/operations/updatesweepconfig.go
+  - tests/mockserver/internal/sdk/models/operations/updateticket.go
   - tests/mockserver/internal/sdk/models/operations/updatetransfer.go
   - tests/mockserver/internal/sdk/models/operations/uploaddisputeevidencefile.go
   - tests/mockserver/internal/sdk/models/operations/uploaddisputeevidencetext.go
@@ -2658,6 +2723,7 @@ generatedFiles:
   - tests/mockserver/internal/sdk/models/sdkerrors/createaccount.go
   - tests/mockserver/internal/sdk/models/sdkerrors/createpaymentlinkerror.go
   - tests/mockserver/internal/sdk/models/sdkerrors/createsweepconfigerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/createticketerror.go
   - tests/mockserver/internal/sdk/models/sdkerrors/feeplanagreementerror.go
   - tests/mockserver/internal/sdk/models/sdkerrors/fileuploadvalidationerror.go
   - tests/mockserver/internal/sdk/models/sdkerrors/filevalidationerror.go
@@ -2681,6 +2747,7 @@ generatedFiles:
   - tests/mockserver/internal/sdk/models/sdkerrors/updatecarderror.go
   - tests/mockserver/internal/sdk/models/sdkerrors/updateissuedcarderror.go
   - tests/mockserver/internal/sdk/models/sdkerrors/updatepaymentlinkerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/updateticketerror.go
   - tests/mockserver/internal/sdk/models/sdkerrors/updateunderwritingerror.go
   - tests/mockserver/internal/sdk/models/sdkerrors/upsertunderwritingerror.go
   - tests/mockserver/internal/sdk/types/bigint.go
@@ -4662,5 +4729,76 @@ examples:
           application/json: {"error": "<value>"}
         "422":
           application/json: {}
+  createTicket:
+    speakeasy-default-create-ticket:
+      parameters:
+        path:
+          accountID: "4af4784a-c777-48f6-8211-063d5341f84b"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        application/json: {"title": "<value>", "body": "<value>", "contact": {"email": "Melany.Roberts@yahoo.com"}}
+      responses:
+        "200":
+          application/json: {"ticketID": "<id>", "number": 494500, "title": "<value>", "contact": {"email": "Melany.Roberts@yahoo.com"}, "status": "on-hold", "createdOn": "2024-03-04T08:59:45.001Z", "updatedOn": "2025-03-28T11:01:45.719Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  listTickets:
+    speakeasy-default-list-tickets:
+      parameters:
+        path:
+          accountID: "8ef75c13-2a50-4438-b294-2a850eb4986d"
+        query:
+          skip: 60
+          count: 20
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: [{"ticketID": "<id>", "number": 994820, "title": "<value>", "contact": {"email": "Shanel71@hotmail.com"}, "status": "in-progress", "createdOn": "2025-12-23T04:28:29.580Z", "updatedOn": "2024-03-28T03:42:32.571Z"}]
+  getTicket:
+    speakeasy-default-get-ticket:
+      parameters:
+        path:
+          accountID: "873ccb78-88b3-4520-85f2-7cc2aef5704b"
+          ticketID: "91fea9bf-b373-40f7-86e0-2c80690126e4"
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: {"ticketID": "<id>", "number": 55177, "title": "<value>", "contact": {"email": "Florencio.Fahey19@yahoo.com"}, "status": "on-hold", "createdOn": "2025-09-29T16:08:46.272Z", "updatedOn": "2024-10-10T04:04:41.316Z"}
+  updateTicket:
+    speakeasy-default-update-ticket:
+      parameters:
+        path:
+          accountID: "7cce2b85-37c2-4c76-954c-03dcec2b12f0"
+          ticketID: "1d621d17-8e7d-4ac0-9f7d-6e9fcebe8eef"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"ticketID": "<id>", "number": 696443, "title": "<value>", "contact": {"email": "Daryl.Lehner@yahoo.com"}, "status": "new", "createdOn": "2024-04-10T00:52:48.089Z", "updatedOn": "2024-03-13T16:45:35.474Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  listTicketMessages:
+    speakeasy-default-list-ticket-messages:
+      parameters:
+        path:
+          accountID: "72444918-8529-4986-b10c-41817e45d09e"
+          ticketID: "edeaab65-c54c-45b8-881b-19138f125fb1"
+        query:
+          skip: 60
+          count: 20
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: [{"author": "<value>", "body": "<value>", "sentOn": "2024-03-23T02:27:06.138Z"}]
 examplesVersion: 1.0.2
 generatedTests: {}

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class AchLocation {
 
@@ -117,16 +116,16 @@ public class AchLocation {
         }
         AchLocation other = (AchLocation) o;
         return 
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.city, other.city) &&
-            Objects.deepEquals(this.postalCode, other.postalCode) &&
-            Objects.deepEquals(this.postalCodeExtension, other.postalCodeExtension) &&
-            Objects.deepEquals(this.state, other.state);
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.city, other.city) &&
+            Utils.enhancedDeepEquals(this.postalCode, other.postalCode) &&
+            Utils.enhancedDeepEquals(this.postalCodeExtension, other.postalCodeExtension) &&
+            Utils.enhancedDeepEquals(this.state, other.state);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             address,
             city,
             postalCode,

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class PartialScheduleAccount {
@@ -99,14 +98,14 @@ public class PartialScheduleAccount {
         }
         PartialScheduleAccount other = (PartialScheduleAccount) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.displayName, other.displayName) &&
-            Objects.deepEquals(this.email, other.email);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.displayName, other.displayName) &&
+            Utils.enhancedDeepEquals(this.email, other.email);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             displayName,
             email);

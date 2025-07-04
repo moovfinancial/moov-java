@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -31,6 +30,7 @@ public class AuthTokenRequestError extends RuntimeException {
     public AuthTokenRequestError(
             @JsonProperty("scope") Optional<String> scope,
             @JsonProperty("refresh_token") Optional<String> refreshToken) {
+        super("API error occurred");
         Utils.checkNotNull(scope, "scope");
         Utils.checkNotNull(refreshToken, "refreshToken");
         this.scope = scope;
@@ -90,13 +90,13 @@ public class AuthTokenRequestError extends RuntimeException {
         }
         AuthTokenRequestError other = (AuthTokenRequestError) o;
         return 
-            Objects.deepEquals(this.scope, other.scope) &&
-            Objects.deepEquals(this.refreshToken, other.refreshToken);
+            Utils.enhancedDeepEquals(this.scope, other.scope) &&
+            Utils.enhancedDeepEquals(this.refreshToken, other.refreshToken);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             scope,
             refreshToken);
     }

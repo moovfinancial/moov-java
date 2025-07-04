@@ -10,7 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class SaveUnderwritingRequest {
 
@@ -67,13 +66,13 @@ public class SaveUnderwritingRequest {
         }
         SaveUnderwritingRequest other = (SaveUnderwritingRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.upsertUnderwriting, other.upsertUnderwriting);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.upsertUnderwriting, other.upsertUnderwriting);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             upsertUnderwriting);
     }

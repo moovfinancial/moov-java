@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class EnrichedBusinessProfile {
@@ -187,17 +186,17 @@ public class EnrichedBusinessProfile {
         }
         EnrichedBusinessProfile other = (EnrichedBusinessProfile) o;
         return 
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.industryCodes, other.industryCodes) &&
-            Objects.deepEquals(this.legalBusinessName, other.legalBusinessName) &&
-            Objects.deepEquals(this.phone, other.phone) &&
-            Objects.deepEquals(this.website, other.website);
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.industryCodes, other.industryCodes) &&
+            Utils.enhancedDeepEquals(this.legalBusinessName, other.legalBusinessName) &&
+            Utils.enhancedDeepEquals(this.phone, other.phone) &&
+            Utils.enhancedDeepEquals(this.website, other.website);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             address,
             email,
             industryCodes,

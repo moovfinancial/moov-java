@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class WebhookDataTerminalApplicationCreated {
 
@@ -75,13 +74,13 @@ public class WebhookDataTerminalApplicationCreated {
         }
         WebhookDataTerminalApplicationCreated other = (WebhookDataTerminalApplicationCreated) o;
         return 
-            Objects.deepEquals(this.terminalApplicationID, other.terminalApplicationID) &&
-            Objects.deepEquals(this.status, other.status);
+            Utils.enhancedDeepEquals(this.terminalApplicationID, other.terminalApplicationID) &&
+            Utils.enhancedDeepEquals(this.status, other.status);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             terminalApplicationID,
             status);
     }

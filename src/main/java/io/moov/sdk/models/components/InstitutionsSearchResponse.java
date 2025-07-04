@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 public class InstitutionsSearchResponse {
 
@@ -84,14 +83,14 @@ public class InstitutionsSearchResponse {
         }
         InstitutionsSearchResponse other = (InstitutionsSearchResponse) o;
         return 
-            Objects.deepEquals(this.ach, other.ach) &&
-            Objects.deepEquals(this.rtp, other.rtp) &&
-            Objects.deepEquals(this.wire, other.wire);
+            Utils.enhancedDeepEquals(this.ach, other.ach) &&
+            Utils.enhancedDeepEquals(this.rtp, other.rtp) &&
+            Utils.enhancedDeepEquals(this.wire, other.wire);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             ach,
             rtp,
             wire);

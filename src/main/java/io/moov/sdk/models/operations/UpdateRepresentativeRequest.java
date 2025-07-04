@@ -10,7 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class UpdateRepresentativeRequest {
 
@@ -102,14 +101,14 @@ public class UpdateRepresentativeRequest {
         }
         UpdateRepresentativeRequest other = (UpdateRepresentativeRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.representativeID, other.representativeID) &&
-            Objects.deepEquals(this.updateRepresentative, other.updateRepresentative);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.representativeID, other.representativeID) &&
+            Utils.enhancedDeepEquals(this.updateRepresentative, other.updateRepresentative);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             representativeID,
             updateRepresentative);

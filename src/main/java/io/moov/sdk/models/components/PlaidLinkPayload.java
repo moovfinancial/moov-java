@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * PlaidLinkPayload
@@ -89,12 +88,12 @@ public class PlaidLinkPayload {
         }
         PlaidLinkPayload other = (PlaidLinkPayload) o;
         return 
-            Objects.deepEquals(this.plaidLink, other.plaidLink);
+            Utils.enhancedDeepEquals(this.plaidLink, other.plaidLink);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             plaidLink);
     }
     

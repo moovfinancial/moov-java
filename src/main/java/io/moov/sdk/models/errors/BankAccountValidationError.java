@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -46,6 +45,7 @@ public class BankAccountValidationError extends RuntimeException {
             @JsonProperty("plaidLink") Optional<String> plaidLink,
             @JsonProperty("mx") Optional<String> mx,
             @JsonProperty("error") Optional<String> error) {
+        super("API error occurred");
         Utils.checkNotNull(account, "account");
         Utils.checkNotNull(plaid, "plaid");
         Utils.checkNotNull(plaidLink, "plaidLink");
@@ -162,16 +162,16 @@ public class BankAccountValidationError extends RuntimeException {
         }
         BankAccountValidationError other = (BankAccountValidationError) o;
         return 
-            Objects.deepEquals(this.account, other.account) &&
-            Objects.deepEquals(this.plaid, other.plaid) &&
-            Objects.deepEquals(this.plaidLink, other.plaidLink) &&
-            Objects.deepEquals(this.mx, other.mx) &&
-            Objects.deepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.account, other.account) &&
+            Utils.enhancedDeepEquals(this.plaid, other.plaid) &&
+            Utils.enhancedDeepEquals(this.plaidLink, other.plaidLink) &&
+            Utils.enhancedDeepEquals(this.mx, other.mx) &&
+            Utils.enhancedDeepEquals(this.error, other.error);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             account,
             plaid,
             plaidLink,

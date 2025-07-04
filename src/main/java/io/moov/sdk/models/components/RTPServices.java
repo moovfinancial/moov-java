@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class RTPServices {
 
@@ -85,13 +84,13 @@ public class RTPServices {
         }
         RTPServices other = (RTPServices) o;
         return 
-            Objects.deepEquals(this.receivePayments, other.receivePayments) &&
-            Objects.deepEquals(this.receiveRequestForPayment, other.receiveRequestForPayment);
+            Utils.enhancedDeepEquals(this.receivePayments, other.receivePayments) &&
+            Utils.enhancedDeepEquals(this.receiveRequestForPayment, other.receiveRequestForPayment);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             receivePayments,
             receiveRequestForPayment);
     }

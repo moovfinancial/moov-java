@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CreateTransferSourceACH {
@@ -186,15 +185,15 @@ public class CreateTransferSourceACH {
         }
         CreateTransferSourceACH other = (CreateTransferSourceACH) o;
         return 
-            Objects.deepEquals(this.companyEntryDescription, other.companyEntryDescription) &&
-            Objects.deepEquals(this.originatingCompanyName, other.originatingCompanyName) &&
-            Objects.deepEquals(this.debitHoldPeriod, other.debitHoldPeriod) &&
-            Objects.deepEquals(this.secCode, other.secCode);
+            Utils.enhancedDeepEquals(this.companyEntryDescription, other.companyEntryDescription) &&
+            Utils.enhancedDeepEquals(this.originatingCompanyName, other.originatingCompanyName) &&
+            Utils.enhancedDeepEquals(this.debitHoldPeriod, other.debitHoldPeriod) &&
+            Utils.enhancedDeepEquals(this.secCode, other.secCode);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             companyEntryDescription,
             originatingCompanyName,
             debitHoldPeriod,

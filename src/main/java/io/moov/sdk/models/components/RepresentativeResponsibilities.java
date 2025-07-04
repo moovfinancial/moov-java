@@ -13,7 +13,6 @@ import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -182,15 +181,15 @@ public class RepresentativeResponsibilities {
         }
         RepresentativeResponsibilities other = (RepresentativeResponsibilities) o;
         return 
-            Objects.deepEquals(this.isController, other.isController) &&
-            Objects.deepEquals(this.isOwner, other.isOwner) &&
-            Objects.deepEquals(this.ownershipPercentage, other.ownershipPercentage) &&
-            Objects.deepEquals(this.jobTitle, other.jobTitle);
+            Utils.enhancedDeepEquals(this.isController, other.isController) &&
+            Utils.enhancedDeepEquals(this.isOwner, other.isOwner) &&
+            Utils.enhancedDeepEquals(this.ownershipPercentage, other.ownershipPercentage) &&
+            Utils.enhancedDeepEquals(this.jobTitle, other.jobTitle);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             isController,
             isOwner,
             ownershipPercentage,

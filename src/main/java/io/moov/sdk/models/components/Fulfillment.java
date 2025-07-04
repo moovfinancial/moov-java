@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Fulfillment {
@@ -90,13 +89,13 @@ public class Fulfillment {
         }
         Fulfillment other = (Fulfillment) o;
         return 
-            Objects.deepEquals(this.method, other.method) &&
-            Objects.deepEquals(this.timeframe, other.timeframe);
+            Utils.enhancedDeepEquals(this.method, other.method) &&
+            Utils.enhancedDeepEquals(this.timeframe, other.timeframe);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             method,
             timeframe);
     }

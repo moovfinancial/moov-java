@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class RTPInstitution {
 
@@ -92,14 +91,14 @@ public class RTPInstitution {
         }
         RTPInstitution other = (RTPInstitution) o;
         return 
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.routingNumber, other.routingNumber) &&
-            Objects.deepEquals(this.services, other.services);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.routingNumber, other.routingNumber) &&
+            Utils.enhancedDeepEquals(this.services, other.services);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             name,
             routingNumber,
             services);

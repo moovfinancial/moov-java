@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -230,16 +229,16 @@ public class AppleBillingContact {
         }
         AppleBillingContact other = (AppleBillingContact) o;
         return 
-            Objects.deepEquals(this.addressLines, other.addressLines) &&
-            Objects.deepEquals(this.locality, other.locality) &&
-            Objects.deepEquals(this.postalCode, other.postalCode) &&
-            Objects.deepEquals(this.administrativeArea, other.administrativeArea) &&
-            Objects.deepEquals(this.countryCode, other.countryCode);
+            Utils.enhancedDeepEquals(this.addressLines, other.addressLines) &&
+            Utils.enhancedDeepEquals(this.locality, other.locality) &&
+            Utils.enhancedDeepEquals(this.postalCode, other.postalCode) &&
+            Utils.enhancedDeepEquals(this.administrativeArea, other.administrativeArea) &&
+            Utils.enhancedDeepEquals(this.countryCode, other.countryCode);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             addressLines,
             locality,
             postalCode,

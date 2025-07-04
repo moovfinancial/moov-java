@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -124,14 +123,14 @@ public class GuestProfile {
         }
         GuestProfile other = (GuestProfile) o;
         return 
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.phone, other.phone) &&
-            Objects.deepEquals(this.email, other.email);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.phone, other.phone) &&
+            Utils.enhancedDeepEquals(this.email, other.email);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             name,
             phone,
             email);

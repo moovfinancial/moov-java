@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -412,23 +411,23 @@ public class CardTransactionDetails {
         }
         CardTransactionDetails other = (CardTransactionDetails) o;
         return 
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.failureCode, other.failureCode) &&
-            Objects.deepEquals(this.dynamicDescriptor, other.dynamicDescriptor) &&
-            Objects.deepEquals(this.transactionSource, other.transactionSource) &&
-            Objects.deepEquals(this.initiatedOn, other.initiatedOn) &&
-            Objects.deepEquals(this.confirmedOn, other.confirmedOn) &&
-            Objects.deepEquals(this.settledOn, other.settledOn) &&
-            Objects.deepEquals(this.failedOn, other.failedOn) &&
-            Objects.deepEquals(this.canceledOn, other.canceledOn) &&
-            Objects.deepEquals(this.completedOn, other.completedOn) &&
-            Objects.deepEquals(this.interchangeQualification, other.interchangeQualification) &&
-            Objects.deepEquals(this.feeProgram, other.feeProgram);
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.failureCode, other.failureCode) &&
+            Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor) &&
+            Utils.enhancedDeepEquals(this.transactionSource, other.transactionSource) &&
+            Utils.enhancedDeepEquals(this.initiatedOn, other.initiatedOn) &&
+            Utils.enhancedDeepEquals(this.confirmedOn, other.confirmedOn) &&
+            Utils.enhancedDeepEquals(this.settledOn, other.settledOn) &&
+            Utils.enhancedDeepEquals(this.failedOn, other.failedOn) &&
+            Utils.enhancedDeepEquals(this.canceledOn, other.canceledOn) &&
+            Utils.enhancedDeepEquals(this.completedOn, other.completedOn) &&
+            Utils.enhancedDeepEquals(this.interchangeQualification, other.interchangeQualification) &&
+            Utils.enhancedDeepEquals(this.feeProgram, other.feeProgram);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             status,
             failureCode,
             dynamicDescriptor,

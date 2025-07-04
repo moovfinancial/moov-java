@@ -13,7 +13,6 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CollectFundsCardPayments {
@@ -177,16 +176,16 @@ public class CollectFundsCardPayments {
         }
         CollectFundsCardPayments other = (CollectFundsCardPayments) o;
         return 
-            Objects.deepEquals(this.cardAcceptanceMethods, other.cardAcceptanceMethods) &&
-            Objects.deepEquals(this.currentlyAcceptsCards, other.currentlyAcceptsCards) &&
-            Objects.deepEquals(this.estimatedActivity, other.estimatedActivity) &&
-            Objects.deepEquals(this.fulfillment, other.fulfillment) &&
-            Objects.deepEquals(this.refundPolicy, other.refundPolicy);
+            Utils.enhancedDeepEquals(this.cardAcceptanceMethods, other.cardAcceptanceMethods) &&
+            Utils.enhancedDeepEquals(this.currentlyAcceptsCards, other.currentlyAcceptsCards) &&
+            Utils.enhancedDeepEquals(this.estimatedActivity, other.estimatedActivity) &&
+            Utils.enhancedDeepEquals(this.fulfillment, other.fulfillment) &&
+            Utils.enhancedDeepEquals(this.refundPolicy, other.refundPolicy);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             cardAcceptanceMethods,
             currentlyAcceptsCards,
             estimatedActivity,

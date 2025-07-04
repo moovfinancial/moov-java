@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ACHInstitution {
@@ -135,15 +134,15 @@ public class ACHInstitution {
         }
         ACHInstitution other = (ACHInstitution) o;
         return 
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.routingNumber, other.routingNumber) &&
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.contact, other.contact);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.routingNumber, other.routingNumber) &&
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.contact, other.contact);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             name,
             routingNumber,
             address,

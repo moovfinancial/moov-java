@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -153,14 +152,14 @@ public class CardAcceptanceMethods {
         }
         CardAcceptanceMethods other = (CardAcceptanceMethods) o;
         return 
-            Objects.deepEquals(this.inPersonPercentage, other.inPersonPercentage) &&
-            Objects.deepEquals(this.mailOrPhonePercentage, other.mailOrPhonePercentage) &&
-            Objects.deepEquals(this.onlinePercentage, other.onlinePercentage);
+            Utils.enhancedDeepEquals(this.inPersonPercentage, other.inPersonPercentage) &&
+            Utils.enhancedDeepEquals(this.mailOrPhonePercentage, other.mailOrPhonePercentage) &&
+            Utils.enhancedDeepEquals(this.onlinePercentage, other.onlinePercentage);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             inPersonPercentage,
             mailOrPhonePercentage,
             onlinePercentage);

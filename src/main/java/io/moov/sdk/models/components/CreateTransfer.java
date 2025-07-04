@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CreateTransfer {
@@ -296,19 +295,19 @@ public class CreateTransfer {
         }
         CreateTransfer other = (CreateTransfer) o;
         return 
-            Objects.deepEquals(this.source, other.source) &&
-            Objects.deepEquals(this.destination, other.destination) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.facilitatorFee, other.facilitatorFee) &&
-            Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
-            Objects.deepEquals(this.foreignID, other.foreignID);
+            Utils.enhancedDeepEquals(this.source, other.source) &&
+            Utils.enhancedDeepEquals(this.destination, other.destination) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.facilitatorFee, other.facilitatorFee) &&
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             source,
             destination,
             amount,

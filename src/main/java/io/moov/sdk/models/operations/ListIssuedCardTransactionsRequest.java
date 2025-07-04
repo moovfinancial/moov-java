@@ -11,7 +11,6 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListIssuedCardTransactionsRequest {
@@ -217,17 +216,17 @@ public class ListIssuedCardTransactionsRequest {
         }
         ListIssuedCardTransactionsRequest other = (ListIssuedCardTransactionsRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.skip, other.skip) &&
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.issuedCardID, other.issuedCardID) &&
-            Objects.deepEquals(this.startDateTime, other.startDateTime) &&
-            Objects.deepEquals(this.endDateTime, other.endDateTime);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
+            Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
+            Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             skip,
             count,

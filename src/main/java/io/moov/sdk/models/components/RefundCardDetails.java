@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class RefundCardDetails {
@@ -204,18 +203,18 @@ public class RefundCardDetails {
         }
         RefundCardDetails other = (RefundCardDetails) o;
         return 
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.failureCode, other.failureCode) &&
-            Objects.deepEquals(this.initiatedOn, other.initiatedOn) &&
-            Objects.deepEquals(this.confirmedOn, other.confirmedOn) &&
-            Objects.deepEquals(this.settledOn, other.settledOn) &&
-            Objects.deepEquals(this.failedOn, other.failedOn) &&
-            Objects.deepEquals(this.completedOn, other.completedOn);
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.failureCode, other.failureCode) &&
+            Utils.enhancedDeepEquals(this.initiatedOn, other.initiatedOn) &&
+            Utils.enhancedDeepEquals(this.confirmedOn, other.confirmedOn) &&
+            Utils.enhancedDeepEquals(this.settledOn, other.settledOn) &&
+            Utils.enhancedDeepEquals(this.failedOn, other.failedOn) &&
+            Utils.enhancedDeepEquals(this.completedOn, other.completedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             status,
             failureCode,
             initiatedOn,

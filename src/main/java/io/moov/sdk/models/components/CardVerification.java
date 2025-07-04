@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -136,15 +135,15 @@ public class CardVerification {
         }
         CardVerification other = (CardVerification) o;
         return 
-            Objects.deepEquals(this.cvv, other.cvv) &&
-            Objects.deepEquals(this.addressLine1, other.addressLine1) &&
-            Objects.deepEquals(this.postalCode, other.postalCode) &&
-            Objects.deepEquals(this.accountName, other.accountName);
+            Utils.enhancedDeepEquals(this.cvv, other.cvv) &&
+            Utils.enhancedDeepEquals(this.addressLine1, other.addressLine1) &&
+            Utils.enhancedDeepEquals(this.postalCode, other.postalCode) &&
+            Utils.enhancedDeepEquals(this.accountName, other.accountName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             cvv,
             addressLine1,
             postalCode,

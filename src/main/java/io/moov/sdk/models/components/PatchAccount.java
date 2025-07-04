@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -212,17 +211,17 @@ public class PatchAccount {
         }
         PatchAccount other = (PatchAccount) o;
         return 
-            Objects.deepEquals(this.profile, other.profile) &&
-            Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.termsOfService, other.termsOfService) &&
-            Objects.deepEquals(this.foreignID, other.foreignID) &&
-            Objects.deepEquals(this.customerSupport, other.customerSupport) &&
-            Objects.deepEquals(this.settings, other.settings);
+            Utils.enhancedDeepEquals(this.profile, other.profile) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.termsOfService, other.termsOfService) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+            Utils.enhancedDeepEquals(this.customerSupport, other.customerSupport) &&
+            Utils.enhancedDeepEquals(this.settings, other.settings);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             profile,
             metadata,
             termsOfService,

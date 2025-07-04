@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -80,12 +79,12 @@ public class CardPaymentSettings {
         }
         CardPaymentSettings other = (CardPaymentSettings) o;
         return 
-            Objects.deepEquals(this.statementDescriptor, other.statementDescriptor);
+            Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             statementDescriptor);
     }
     

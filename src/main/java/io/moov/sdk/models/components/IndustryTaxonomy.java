@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * IndustryTaxonomy
@@ -167,16 +166,16 @@ public class IndustryTaxonomy {
         }
         IndustryTaxonomy other = (IndustryTaxonomy) o;
         return 
-            Objects.deepEquals(this.industry, other.industry) &&
-            Objects.deepEquals(this.displayName, other.displayName) &&
-            Objects.deepEquals(this.category, other.category) &&
-            Objects.deepEquals(this.categoryDisplayName, other.categoryDisplayName) &&
-            Objects.deepEquals(this.defaultMcc, other.defaultMcc);
+            Utils.enhancedDeepEquals(this.industry, other.industry) &&
+            Utils.enhancedDeepEquals(this.displayName, other.displayName) &&
+            Utils.enhancedDeepEquals(this.category, other.category) &&
+            Utils.enhancedDeepEquals(this.categoryDisplayName, other.categoryDisplayName) &&
+            Utils.enhancedDeepEquals(this.defaultMcc, other.defaultMcc);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             industry,
             displayName,
             category,

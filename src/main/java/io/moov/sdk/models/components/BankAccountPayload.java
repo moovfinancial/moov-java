@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * BankAccountPayload
@@ -54,12 +53,12 @@ public class BankAccountPayload {
         }
         BankAccountPayload other = (BankAccountPayload) o;
         return 
-            Objects.deepEquals(this.account, other.account);
+            Utils.enhancedDeepEquals(this.account, other.account);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             account);
     }
     

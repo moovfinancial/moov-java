@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -46,6 +45,7 @@ public class PatchSweepConfigError extends RuntimeException {
             @JsonProperty("pullPaymentMethodID") Optional<String> pullPaymentMethodID,
             @JsonProperty("statementDescriptor") Optional<String> statementDescriptor,
             @JsonProperty("minimumBalance") Optional<String> minimumBalance) {
+        super("API error occurred");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
         Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
@@ -162,16 +162,16 @@ public class PatchSweepConfigError extends RuntimeException {
         }
         PatchSweepConfigError other = (PatchSweepConfigError) o;
         return 
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
-            Objects.deepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
-            Objects.deepEquals(this.statementDescriptor, other.statementDescriptor) &&
-            Objects.deepEquals(this.minimumBalance, other.minimumBalance);
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
+            Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             status,
             pushPaymentMethodID,
             pullPaymentMethodID,

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class VolumeByCustomerTypeError {
@@ -87,13 +86,13 @@ public class VolumeByCustomerTypeError {
         }
         VolumeByCustomerTypeError other = (VolumeByCustomerTypeError) o;
         return 
-            Objects.deepEquals(this.businessToBusinessPercentage, other.businessToBusinessPercentage) &&
-            Objects.deepEquals(this.consumerToBusinessPercentage, other.consumerToBusinessPercentage);
+            Utils.enhancedDeepEquals(this.businessToBusinessPercentage, other.businessToBusinessPercentage) &&
+            Utils.enhancedDeepEquals(this.consumerToBusinessPercentage, other.consumerToBusinessPercentage);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             businessToBusinessPercentage,
             consumerToBusinessPercentage);
     }

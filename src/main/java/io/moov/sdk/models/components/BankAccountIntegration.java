@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class BankAccountIntegration {
 
@@ -135,16 +134,16 @@ public class BankAccountIntegration {
         }
         BankAccountIntegration other = (BankAccountIntegration) o;
         return 
-            Objects.deepEquals(this.holderName, other.holderName) &&
-            Objects.deepEquals(this.holderType, other.holderType) &&
-            Objects.deepEquals(this.accountNumber, other.accountNumber) &&
-            Objects.deepEquals(this.bankAccountType, other.bankAccountType) &&
-            Objects.deepEquals(this.routingNumber, other.routingNumber);
+            Utils.enhancedDeepEquals(this.holderName, other.holderName) &&
+            Utils.enhancedDeepEquals(this.holderType, other.holderType) &&
+            Utils.enhancedDeepEquals(this.accountNumber, other.accountNumber) &&
+            Utils.enhancedDeepEquals(this.bankAccountType, other.bankAccountType) &&
+            Utils.enhancedDeepEquals(this.routingNumber, other.routingNumber);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             holderName,
             holderType,
             accountNumber,

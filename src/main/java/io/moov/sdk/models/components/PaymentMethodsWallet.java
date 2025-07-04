@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class PaymentMethodsWallet {
 
@@ -49,12 +48,12 @@ public class PaymentMethodsWallet {
         }
         PaymentMethodsWallet other = (PaymentMethodsWallet) o;
         return 
-            Objects.deepEquals(this.walletID, other.walletID);
+            Utils.enhancedDeepEquals(this.walletID, other.walletID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             walletID);
     }
     

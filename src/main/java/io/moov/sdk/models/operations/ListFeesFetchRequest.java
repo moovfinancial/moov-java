@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListFeesFetchRequest {
@@ -80,13 +79,13 @@ public class ListFeesFetchRequest {
         }
         ListFeesFetchRequest other = (ListFeesFetchRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.listFeesFetchRequest, other.listFeesFetchRequest);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.listFeesFetchRequest, other.listFeesFetchRequest);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             listFeesFetchRequest);
     }

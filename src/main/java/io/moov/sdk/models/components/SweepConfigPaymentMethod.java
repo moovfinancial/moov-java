@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -97,13 +96,13 @@ public class SweepConfigPaymentMethod {
         }
         SweepConfigPaymentMethod other = (SweepConfigPaymentMethod) o;
         return 
-            Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Objects.deepEquals(this.disabledOn, other.disabledOn);
+            Utils.enhancedDeepEquals(this.paymentMethodID, other.paymentMethodID) &&
+            Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             paymentMethodID,
             disabledOn);
     }

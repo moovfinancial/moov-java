@@ -13,7 +13,6 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class LinkCard {
@@ -263,20 +262,20 @@ public class LinkCard {
         }
         LinkCard other = (LinkCard) o;
         return 
-            Objects.deepEquals(this.e2ee, other.e2ee) &&
-            Objects.deepEquals(this.cardNumber, other.cardNumber) &&
-            Objects.deepEquals(this.cardCvv, other.cardCvv) &&
-            Objects.deepEquals(this.expiration, other.expiration) &&
-            Objects.deepEquals(this.holderName, other.holderName) &&
-            Objects.deepEquals(this.billingAddress, other.billingAddress) &&
-            Objects.deepEquals(this.cardOnFile, other.cardOnFile) &&
-            Objects.deepEquals(this.merchantAccountID, other.merchantAccountID) &&
-            Objects.deepEquals(this.verifyName, other.verifyName);
+            Utils.enhancedDeepEquals(this.e2ee, other.e2ee) &&
+            Utils.enhancedDeepEquals(this.cardNumber, other.cardNumber) &&
+            Utils.enhancedDeepEquals(this.cardCvv, other.cardCvv) &&
+            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+            Utils.enhancedDeepEquals(this.holderName, other.holderName) &&
+            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
+            Utils.enhancedDeepEquals(this.cardOnFile, other.cardOnFile) &&
+            Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+            Utils.enhancedDeepEquals(this.verifyName, other.verifyName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             e2ee,
             cardNumber,
             cardCvv,

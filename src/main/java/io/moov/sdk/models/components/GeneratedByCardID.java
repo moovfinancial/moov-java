@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class GeneratedByCardID {
@@ -63,12 +62,12 @@ public class GeneratedByCardID {
         }
         GeneratedByCardID other = (GeneratedByCardID) o;
         return 
-            Objects.deepEquals(this.cardID, other.cardID);
+            Utils.enhancedDeepEquals(this.cardID, other.cardID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             cardID);
     }
     

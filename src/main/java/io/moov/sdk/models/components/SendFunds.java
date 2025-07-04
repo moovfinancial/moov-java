@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class SendFunds {
@@ -115,14 +114,14 @@ public class SendFunds {
         }
         SendFunds other = (SendFunds) o;
         return 
-            Objects.deepEquals(this.ach, other.ach) &&
-            Objects.deepEquals(this.pushToCard, other.pushToCard) &&
-            Objects.deepEquals(this.rtp, other.rtp);
+            Utils.enhancedDeepEquals(this.ach, other.ach) &&
+            Utils.enhancedDeepEquals(this.pushToCard, other.pushToCard) &&
+            Utils.enhancedDeepEquals(this.rtp, other.rtp);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             ach,
             pushToCard,
             rtp);

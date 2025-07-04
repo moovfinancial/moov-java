@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class CreateReversal {
 
@@ -59,12 +58,12 @@ public class CreateReversal {
         }
         CreateReversal other = (CreateReversal) o;
         return 
-            Objects.deepEquals(this.amount, other.amount);
+            Utils.enhancedDeepEquals(this.amount, other.amount);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount);
     }
     

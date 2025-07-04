@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class WebhookDataNetworkIDUpdated {
@@ -178,17 +177,17 @@ public class WebhookDataNetworkIDUpdated {
         }
         WebhookDataNetworkIDUpdated other = (WebhookDataNetworkIDUpdated) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.visaMid, other.visaMid) &&
-            Objects.deepEquals(this.mastercardMid, other.mastercardMid) &&
-            Objects.deepEquals(this.discoverMid, other.discoverMid) &&
-            Objects.deepEquals(this.amexMid, other.amexMid) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.visaMid, other.visaMid) &&
+            Utils.enhancedDeepEquals(this.mastercardMid, other.mastercardMid) &&
+            Utils.enhancedDeepEquals(this.discoverMid, other.discoverMid) &&
+            Utils.enhancedDeepEquals(this.amexMid, other.amexMid) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             visaMid,
             mastercardMid,

@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class TransferOptions {
@@ -91,13 +90,13 @@ public class TransferOptions {
         }
         TransferOptions other = (TransferOptions) o;
         return 
-            Objects.deepEquals(this.sourceOptions, other.sourceOptions) &&
-            Objects.deepEquals(this.destinationOptions, other.destinationOptions);
+            Utils.enhancedDeepEquals(this.sourceOptions, other.sourceOptions) &&
+            Utils.enhancedDeepEquals(this.destinationOptions, other.destinationOptions);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             sourceOptions,
             destinationOptions);
     }

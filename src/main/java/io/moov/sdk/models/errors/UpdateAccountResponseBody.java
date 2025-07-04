@@ -16,7 +16,6 @@ import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -41,6 +40,7 @@ public class UpdateAccountResponseBody extends RuntimeException {
     public UpdateAccountResponseBody(
             @JsonProperty("error") PatchAccountError error,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
+        super("API error occurred");
         Utils.checkNotNull(error, "error");
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.error = error;
@@ -105,13 +105,13 @@ public class UpdateAccountResponseBody extends RuntimeException {
         }
         UpdateAccountResponseBody other = (UpdateAccountResponseBody) o;
         return 
-            Objects.deepEquals(this.error, other.error) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse);
+            Utils.enhancedDeepEquals(this.error, other.error) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             error,
             rawResponse);
     }

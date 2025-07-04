@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class GetEnrichmentAddressRequest {
@@ -493,24 +492,24 @@ public class GetEnrichmentAddressRequest {
         }
         GetEnrichmentAddressRequest other = (GetEnrichmentAddressRequest) o;
         return 
-            Objects.deepEquals(this.search, other.search) &&
-            Objects.deepEquals(this.maxResults, other.maxResults) &&
-            Objects.deepEquals(this.includeCities, other.includeCities) &&
-            Objects.deepEquals(this.includeStates, other.includeStates) &&
-            Objects.deepEquals(this.includeZipcodes, other.includeZipcodes) &&
-            Objects.deepEquals(this.excludeStates, other.excludeStates) &&
-            Objects.deepEquals(this.preferCities, other.preferCities) &&
-            Objects.deepEquals(this.preferStates, other.preferStates) &&
-            Objects.deepEquals(this.preferZipcodes, other.preferZipcodes) &&
-            Objects.deepEquals(this.preferRatio, other.preferRatio) &&
-            Objects.deepEquals(this.preferGeolocation, other.preferGeolocation) &&
-            Objects.deepEquals(this.selected, other.selected) &&
-            Objects.deepEquals(this.source, other.source);
+            Utils.enhancedDeepEquals(this.search, other.search) &&
+            Utils.enhancedDeepEquals(this.maxResults, other.maxResults) &&
+            Utils.enhancedDeepEquals(this.includeCities, other.includeCities) &&
+            Utils.enhancedDeepEquals(this.includeStates, other.includeStates) &&
+            Utils.enhancedDeepEquals(this.includeZipcodes, other.includeZipcodes) &&
+            Utils.enhancedDeepEquals(this.excludeStates, other.excludeStates) &&
+            Utils.enhancedDeepEquals(this.preferCities, other.preferCities) &&
+            Utils.enhancedDeepEquals(this.preferStates, other.preferStates) &&
+            Utils.enhancedDeepEquals(this.preferZipcodes, other.preferZipcodes) &&
+            Utils.enhancedDeepEquals(this.preferRatio, other.preferRatio) &&
+            Utils.enhancedDeepEquals(this.preferGeolocation, other.preferGeolocation) &&
+            Utils.enhancedDeepEquals(this.selected, other.selected) &&
+            Utils.enhancedDeepEquals(this.source, other.source);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             search,
             maxResults,
             includeCities,

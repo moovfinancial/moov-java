@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -230,17 +229,17 @@ public class OnboardingInviteRequest {
         }
         OnboardingInviteRequest other = (OnboardingInviteRequest) o;
         return 
-            Objects.deepEquals(this.returnURL, other.returnURL) &&
-            Objects.deepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
-            Objects.deepEquals(this.scopes, other.scopes) &&
-            Objects.deepEquals(this.capabilities, other.capabilities) &&
-            Objects.deepEquals(this.feePlanCodes, other.feePlanCodes) &&
-            Objects.deepEquals(this.prefill, other.prefill);
+            Utils.enhancedDeepEquals(this.returnURL, other.returnURL) &&
+            Utils.enhancedDeepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
+            Utils.enhancedDeepEquals(this.scopes, other.scopes) &&
+            Utils.enhancedDeepEquals(this.capabilities, other.capabilities) &&
+            Utils.enhancedDeepEquals(this.feePlanCodes, other.feePlanCodes) &&
+            Utils.enhancedDeepEquals(this.prefill, other.prefill);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             returnURL,
             termsOfServiceURL,
             scopes,

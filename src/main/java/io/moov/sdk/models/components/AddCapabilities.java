@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 public class AddCapabilities {
 
@@ -50,12 +49,12 @@ public class AddCapabilities {
         }
         AddCapabilities other = (AddCapabilities) o;
         return 
-            Objects.deepEquals(this.capabilities, other.capabilities);
+            Utils.enhancedDeepEquals(this.capabilities, other.capabilities);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             capabilities);
     }
     

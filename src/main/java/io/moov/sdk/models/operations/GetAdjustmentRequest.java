@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class GetAdjustmentRequest {
 
@@ -66,13 +65,13 @@ public class GetAdjustmentRequest {
         }
         GetAdjustmentRequest other = (GetAdjustmentRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.adjustmentID, other.adjustmentID);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.adjustmentID, other.adjustmentID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             adjustmentID);
     }

@@ -11,7 +11,6 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * CompleteMicroDeposits
@@ -65,12 +64,12 @@ public class CompleteMicroDeposits {
         }
         CompleteMicroDeposits other = (CompleteMicroDeposits) o;
         return 
-            Objects.deepEquals(this.amounts, other.amounts);
+            Utils.enhancedDeepEquals(this.amounts, other.amounts);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amounts);
     }
     

@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -71,12 +70,12 @@ public class ListFeesFetchRequest {
         }
         ListFeesFetchRequest other = (ListFeesFetchRequest) o;
         return 
-            Objects.deepEquals(this.feeIDs, other.feeIDs);
+            Utils.enhancedDeepEquals(this.feeIDs, other.feeIDs);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             feeIDs);
     }
     

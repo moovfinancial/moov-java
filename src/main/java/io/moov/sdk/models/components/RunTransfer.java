@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * RunTransfer
@@ -131,16 +130,16 @@ public class RunTransfer {
         }
         RunTransfer other = (RunTransfer) o;
         return 
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.destination, other.destination) &&
-            Objects.deepEquals(this.partnerAccountID, other.partnerAccountID) &&
-            Objects.deepEquals(this.source, other.source) &&
-            Objects.deepEquals(this.description, other.description);
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.destination, other.destination) &&
+            Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
+            Utils.enhancedDeepEquals(this.source, other.source) &&
+            Utils.enhancedDeepEquals(this.description, other.description);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount,
             destination,
             partnerAccountID,

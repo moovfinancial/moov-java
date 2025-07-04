@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class ListOnboardingInvitesRequest {
 
@@ -35,7 +34,7 @@ public class ListOnboardingInvitesRequest {
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             );
     }
     

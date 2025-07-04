@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * MxPayload
@@ -80,12 +79,12 @@ public class MxPayload {
         }
         MxPayload other = (MxPayload) o;
         return 
-            Objects.deepEquals(this.mx, other.mx);
+            Utils.enhancedDeepEquals(this.mx, other.mx);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             mx);
     }
     

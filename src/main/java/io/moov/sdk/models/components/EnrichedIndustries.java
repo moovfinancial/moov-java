@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 public class EnrichedIndustries {
 
@@ -50,12 +49,12 @@ public class EnrichedIndustries {
         }
         EnrichedIndustries other = (EnrichedIndustries) o;
         return 
-            Objects.deepEquals(this.industries, other.industries);
+            Utils.enhancedDeepEquals(this.industries, other.industries);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             industries);
     }
     

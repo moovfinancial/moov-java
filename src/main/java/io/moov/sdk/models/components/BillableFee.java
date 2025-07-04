@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class BillableFee {
@@ -257,18 +256,18 @@ public class BillableFee {
         }
         BillableFee other = (BillableFee) o;
         return 
-            Objects.deepEquals(this.billableFeeID, other.billableFeeID) &&
-            Objects.deepEquals(this.billableEvent, other.billableEvent) &&
-            Objects.deepEquals(this.feeName, other.feeName) &&
-            Objects.deepEquals(this.feeModel, other.feeModel) &&
-            Objects.deepEquals(this.feeCategory, other.feeCategory) &&
-            Objects.deepEquals(this.feeProperties, other.feeProperties) &&
-            Objects.deepEquals(this.feeConditions, other.feeConditions);
+            Utils.enhancedDeepEquals(this.billableFeeID, other.billableFeeID) &&
+            Utils.enhancedDeepEquals(this.billableEvent, other.billableEvent) &&
+            Utils.enhancedDeepEquals(this.feeName, other.feeName) &&
+            Utils.enhancedDeepEquals(this.feeModel, other.feeModel) &&
+            Utils.enhancedDeepEquals(this.feeCategory, other.feeCategory) &&
+            Utils.enhancedDeepEquals(this.feeProperties, other.feeProperties) &&
+            Utils.enhancedDeepEquals(this.feeConditions, other.feeConditions);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             billableFeeID,
             billableEvent,
             feeName,

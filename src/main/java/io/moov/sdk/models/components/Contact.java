@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Contact {
@@ -65,12 +64,12 @@ public class Contact {
         }
         Contact other = (Contact) o;
         return 
-            Objects.deepEquals(this.phone, other.phone);
+            Utils.enhancedDeepEquals(this.phone, other.phone);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             phone);
     }
     

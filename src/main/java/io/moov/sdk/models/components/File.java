@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class File {
 
@@ -66,13 +65,13 @@ public class File {
         }
         File other = (File) o;
         return 
-            Objects.deepEquals(this.fileName, other.fileName) &&
-            Objects.deepEquals(this.content, other.content);
+            Utils.enhancedDeepEquals(this.fileName, other.fileName) &&
+            Utils.enhancedDeepEquals(this.content, other.content);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             fileName,
             content);
     }

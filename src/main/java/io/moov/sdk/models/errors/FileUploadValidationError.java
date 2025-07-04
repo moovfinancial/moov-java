@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -31,6 +30,7 @@ public class FileUploadValidationError extends RuntimeException {
     public FileUploadValidationError(
             @JsonProperty("evidenceType") Optional<String> evidenceType,
             @JsonProperty("file") Optional<? extends File> file) {
+        super("API error occurred");
         Utils.checkNotNull(evidenceType, "evidenceType");
         Utils.checkNotNull(file, "file");
         this.evidenceType = evidenceType;
@@ -91,13 +91,13 @@ public class FileUploadValidationError extends RuntimeException {
         }
         FileUploadValidationError other = (FileUploadValidationError) o;
         return 
-            Objects.deepEquals(this.evidenceType, other.evidenceType) &&
-            Objects.deepEquals(this.file, other.file);
+            Utils.enhancedDeepEquals(this.evidenceType, other.evidenceType) &&
+            Utils.enhancedDeepEquals(this.file, other.file);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             evidenceType,
             file);
     }

@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class OnboardingInvite {
@@ -419,24 +418,24 @@ public class OnboardingInvite {
         }
         OnboardingInvite other = (OnboardingInvite) o;
         return 
-            Objects.deepEquals(this.code, other.code) &&
-            Objects.deepEquals(this.link, other.link) &&
-            Objects.deepEquals(this.returnURL, other.returnURL) &&
-            Objects.deepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
-            Objects.deepEquals(this.scopes, other.scopes) &&
-            Objects.deepEquals(this.capabilities, other.capabilities) &&
-            Objects.deepEquals(this.feePlanCodes, other.feePlanCodes) &&
-            Objects.deepEquals(this.redeemedAccountID, other.redeemedAccountID) &&
-            Objects.deepEquals(this.prefill, other.prefill) &&
-            Objects.deepEquals(this.partner, other.partner) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.revokedOn, other.revokedOn) &&
-            Objects.deepEquals(this.redeemedOn, other.redeemedOn);
+            Utils.enhancedDeepEquals(this.code, other.code) &&
+            Utils.enhancedDeepEquals(this.link, other.link) &&
+            Utils.enhancedDeepEquals(this.returnURL, other.returnURL) &&
+            Utils.enhancedDeepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
+            Utils.enhancedDeepEquals(this.scopes, other.scopes) &&
+            Utils.enhancedDeepEquals(this.capabilities, other.capabilities) &&
+            Utils.enhancedDeepEquals(this.feePlanCodes, other.feePlanCodes) &&
+            Utils.enhancedDeepEquals(this.redeemedAccountID, other.redeemedAccountID) &&
+            Utils.enhancedDeepEquals(this.prefill, other.prefill) &&
+            Utils.enhancedDeepEquals(this.partner, other.partner) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.revokedOn, other.revokedOn) &&
+            Utils.enhancedDeepEquals(this.redeemedOn, other.redeemedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             code,
             link,
             returnURL,

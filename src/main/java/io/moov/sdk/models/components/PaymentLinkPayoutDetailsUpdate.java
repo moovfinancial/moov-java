@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class PaymentLinkPayoutDetailsUpdate {
@@ -123,13 +122,13 @@ public class PaymentLinkPayoutDetailsUpdate {
         }
         PaymentLinkPayoutDetailsUpdate other = (PaymentLinkPayoutDetailsUpdate) o;
         return 
-            Objects.deepEquals(this.allowedMethods, other.allowedMethods) &&
-            Objects.deepEquals(this.recipient, other.recipient);
+            Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
+            Utils.enhancedDeepEquals(this.recipient, other.recipient);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             allowedMethods,
             recipient);
     }

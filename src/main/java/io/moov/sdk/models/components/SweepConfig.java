@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class SweepConfig {
@@ -301,21 +300,21 @@ public class SweepConfig {
         }
         SweepConfig other = (SweepConfig) o;
         return 
-            Objects.deepEquals(this.sweepConfigID, other.sweepConfigID) &&
-            Objects.deepEquals(this.walletID, other.walletID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.pushPaymentMethod, other.pushPaymentMethod) &&
-            Objects.deepEquals(this.pullPaymentMethod, other.pullPaymentMethod) &&
-            Objects.deepEquals(this.minimumBalance, other.minimumBalance) &&
-            Objects.deepEquals(this.statementDescriptor, other.statementDescriptor) &&
-            Objects.deepEquals(this.lockedFields, other.lockedFields) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn);
+            Utils.enhancedDeepEquals(this.sweepConfigID, other.sweepConfigID) &&
+            Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.pushPaymentMethod, other.pushPaymentMethod) &&
+            Utils.enhancedDeepEquals(this.pullPaymentMethod, other.pullPaymentMethod) &&
+            Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance) &&
+            Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
+            Utils.enhancedDeepEquals(this.lockedFields, other.lockedFields) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             sweepConfigID,
             walletID,
             status,

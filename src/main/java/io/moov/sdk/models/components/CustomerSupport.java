@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -144,15 +143,15 @@ public class CustomerSupport {
         }
         CustomerSupport other = (CustomerSupport) o;
         return 
-            Objects.deepEquals(this.phone, other.phone) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.website, other.website);
+            Utils.enhancedDeepEquals(this.phone, other.phone) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.website, other.website);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             phone,
             email,
             address,

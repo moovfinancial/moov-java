@@ -13,7 +13,6 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class DisputeEvidenceResponse {
@@ -311,21 +310,21 @@ public class DisputeEvidenceResponse {
         }
         DisputeEvidenceResponse other = (DisputeEvidenceResponse) o;
         return 
-            Objects.deepEquals(this.evidenceID, other.evidenceID) &&
-            Objects.deepEquals(this.disputeID, other.disputeID) &&
-            Objects.deepEquals(this.evidenceType, other.evidenceType) &&
-            Objects.deepEquals(this.text, other.text) &&
-            Objects.deepEquals(this.mimeType, other.mimeType) &&
-            Objects.deepEquals(this.filename, other.filename) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.submittedOn, other.submittedOn);
+            Utils.enhancedDeepEquals(this.evidenceID, other.evidenceID) &&
+            Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
+            Utils.enhancedDeepEquals(this.evidenceType, other.evidenceType) &&
+            Utils.enhancedDeepEquals(this.text, other.text) &&
+            Utils.enhancedDeepEquals(this.mimeType, other.mimeType) &&
+            Utils.enhancedDeepEquals(this.filename, other.filename) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.submittedOn, other.submittedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             evidenceID,
             disputeID,
             evidenceType,

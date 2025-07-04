@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class ACHPaymentSettings {
 
@@ -58,12 +57,12 @@ public class ACHPaymentSettings {
         }
         ACHPaymentSettings other = (ACHPaymentSettings) o;
         return 
-            Objects.deepEquals(this.companyName, other.companyName);
+            Utils.enhancedDeepEquals(this.companyName, other.companyName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             companyName);
     }
     

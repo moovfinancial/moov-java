@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * MXAuthorizationCode
@@ -57,12 +56,12 @@ public class MXAuthorizationCode {
         }
         MXAuthorizationCode other = (MXAuthorizationCode) o;
         return 
-            Objects.deepEquals(this.authorizationCode, other.authorizationCode);
+            Utils.enhancedDeepEquals(this.authorizationCode, other.authorizationCode);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             authorizationCode);
     }
     

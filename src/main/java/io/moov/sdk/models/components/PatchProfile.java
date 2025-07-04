@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -108,13 +107,13 @@ public class PatchProfile {
         }
         PatchProfile other = (PatchProfile) o;
         return 
-            Objects.deepEquals(this.individual, other.individual) &&
-            Objects.deepEquals(this.business, other.business);
+            Utils.enhancedDeepEquals(this.individual, other.individual) &&
+            Utils.enhancedDeepEquals(this.business, other.business);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             individual,
             business);
     }

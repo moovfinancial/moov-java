@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CreateTransferSourceCard {
@@ -125,13 +124,13 @@ public class CreateTransferSourceCard {
         }
         CreateTransferSourceCard other = (CreateTransferSourceCard) o;
         return 
-            Objects.deepEquals(this.dynamicDescriptor, other.dynamicDescriptor) &&
-            Objects.deepEquals(this.transactionSource, other.transactionSource);
+            Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor) &&
+            Utils.enhancedDeepEquals(this.transactionSource, other.transactionSource);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             dynamicDescriptor,
             transactionSource);
     }

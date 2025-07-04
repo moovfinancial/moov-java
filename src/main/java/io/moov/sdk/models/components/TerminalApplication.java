@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -269,18 +268,18 @@ public class TerminalApplication {
         }
         TerminalApplication other = (TerminalApplication) o;
         return 
-            Objects.deepEquals(this.terminalApplicationID, other.terminalApplicationID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.platform, other.platform) &&
-            Objects.deepEquals(this.appBundleID, other.appBundleID) &&
-            Objects.deepEquals(this.packageName, other.packageName) &&
-            Objects.deepEquals(this.sha256Digest, other.sha256Digest) &&
-            Objects.deepEquals(this.versionCode, other.versionCode);
+            Utils.enhancedDeepEquals(this.terminalApplicationID, other.terminalApplicationID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.appBundleID, other.appBundleID) &&
+            Utils.enhancedDeepEquals(this.packageName, other.packageName) &&
+            Utils.enhancedDeepEquals(this.sha256Digest, other.sha256Digest) &&
+            Utils.enhancedDeepEquals(this.versionCode, other.versionCode);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             terminalApplicationID,
             status,
             platform,

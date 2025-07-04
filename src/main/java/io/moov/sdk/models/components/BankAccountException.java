@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -262,14 +261,14 @@ public class BankAccountException {
         }
         BankAccountException other = (BankAccountException) o;
         return 
-            Objects.deepEquals(this.achReturnCode, other.achReturnCode) &&
-            Objects.deepEquals(this.rtpRejectionCode, other.rtpRejectionCode) &&
-            Objects.deepEquals(this.description, other.description);
+            Utils.enhancedDeepEquals(this.achReturnCode, other.achReturnCode) &&
+            Utils.enhancedDeepEquals(this.rtpRejectionCode, other.rtpRejectionCode) &&
+            Utils.enhancedDeepEquals(this.description, other.description);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             achReturnCode,
             rtpRejectionCode,
             description);

@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -383,24 +382,24 @@ public class BankAccount {
         }
         BankAccount other = (BankAccount) o;
         return 
-            Objects.deepEquals(this.bankAccountID, other.bankAccountID) &&
-            Objects.deepEquals(this.fingerprint, other.fingerprint) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.holderName, other.holderName) &&
-            Objects.deepEquals(this.holderType, other.holderType) &&
-            Objects.deepEquals(this.bankName, other.bankName) &&
-            Objects.deepEquals(this.bankAccountType, other.bankAccountType) &&
-            Objects.deepEquals(this.routingNumber, other.routingNumber) &&
-            Objects.deepEquals(this.lastFourAccountNumber, other.lastFourAccountNumber) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.statusReason, other.statusReason) &&
-            Objects.deepEquals(this.exceptionDetails, other.exceptionDetails) &&
-            Objects.deepEquals(this.paymentMethods, other.paymentMethods);
+            Utils.enhancedDeepEquals(this.bankAccountID, other.bankAccountID) &&
+            Utils.enhancedDeepEquals(this.fingerprint, other.fingerprint) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.holderName, other.holderName) &&
+            Utils.enhancedDeepEquals(this.holderType, other.holderType) &&
+            Utils.enhancedDeepEquals(this.bankName, other.bankName) &&
+            Utils.enhancedDeepEquals(this.bankAccountType, other.bankAccountType) &&
+            Utils.enhancedDeepEquals(this.routingNumber, other.routingNumber) &&
+            Utils.enhancedDeepEquals(this.lastFourAccountNumber, other.lastFourAccountNumber) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.statusReason, other.statusReason) &&
+            Utils.enhancedDeepEquals(this.exceptionDetails, other.exceptionDetails) &&
+            Utils.enhancedDeepEquals(this.paymentMethods, other.paymentMethods);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             bankAccountID,
             fingerprint,
             status,

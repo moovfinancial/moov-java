@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class TransferAccount {
 
@@ -83,14 +82,14 @@ public class TransferAccount {
         }
         TransferAccount other = (TransferAccount) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.displayName, other.displayName);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.displayName, other.displayName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             email,
             displayName);

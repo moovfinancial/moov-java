@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Manual {
@@ -135,15 +134,15 @@ public class Manual {
         }
         Manual other = (Manual) o;
         return 
-            Objects.deepEquals(this.acceptedDate, other.acceptedDate) &&
-            Objects.deepEquals(this.acceptedDomain, other.acceptedDomain) &&
-            Objects.deepEquals(this.acceptedIP, other.acceptedIP) &&
-            Objects.deepEquals(this.acceptedUserAgent, other.acceptedUserAgent);
+            Utils.enhancedDeepEquals(this.acceptedDate, other.acceptedDate) &&
+            Utils.enhancedDeepEquals(this.acceptedDomain, other.acceptedDomain) &&
+            Utils.enhancedDeepEquals(this.acceptedIP, other.acceptedIP) &&
+            Utils.enhancedDeepEquals(this.acceptedUserAgent, other.acceptedUserAgent);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             acceptedDate,
             acceptedDomain,
             acceptedIP,

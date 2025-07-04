@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -242,18 +241,18 @@ public class RTPTransactionDetails {
         }
         RTPTransactionDetails other = (RTPTransactionDetails) o;
         return 
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.networkResponseCode, other.networkResponseCode) &&
-            Objects.deepEquals(this.failureCode, other.failureCode) &&
-            Objects.deepEquals(this.initiatedOn, other.initiatedOn) &&
-            Objects.deepEquals(this.completedOn, other.completedOn) &&
-            Objects.deepEquals(this.failedOn, other.failedOn) &&
-            Objects.deepEquals(this.acceptedWithoutPostingOn, other.acceptedWithoutPostingOn);
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.networkResponseCode, other.networkResponseCode) &&
+            Utils.enhancedDeepEquals(this.failureCode, other.failureCode) &&
+            Utils.enhancedDeepEquals(this.initiatedOn, other.initiatedOn) &&
+            Utils.enhancedDeepEquals(this.completedOn, other.completedOn) &&
+            Utils.enhancedDeepEquals(this.failedOn, other.failedOn) &&
+            Utils.enhancedDeepEquals(this.acceptedWithoutPostingOn, other.acceptedWithoutPostingOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             status,
             networkResponseCode,
             failureCode,

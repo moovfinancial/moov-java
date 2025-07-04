@@ -12,7 +12,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 
 @SuppressWarnings("serial")
 public class AssignCountriesError extends RuntimeException {
@@ -23,6 +22,7 @@ public class AssignCountriesError extends RuntimeException {
     @JsonCreator
     public AssignCountriesError(
             @JsonProperty("error") CountriesErrors error) {
+        super("API error occurred");
         Utils.checkNotNull(error, "error");
         this.error = error;
     }
@@ -53,12 +53,12 @@ public class AssignCountriesError extends RuntimeException {
         }
         AssignCountriesError other = (AssignCountriesError) o;
         return 
-            Objects.deepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.error, other.error);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             error);
     }
     

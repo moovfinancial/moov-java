@@ -14,7 +14,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 
 @JsonDeserialize(using = Email._Deserializer.class)
 public class Email {
@@ -67,12 +66,12 @@ public class Email {
             return false;
         }
         Email other = (Email) o;
-        return Objects.deepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(value.value());
+        return Utils.enhancedHash(value.value());
     }
     
     @SuppressWarnings("serial")

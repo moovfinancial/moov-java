@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -26,6 +25,7 @@ public class FeePlanAgreementError extends RuntimeException {
     @JsonCreator
     public FeePlanAgreementError(
             @JsonProperty("planID") Optional<String> planID) {
+        super("API error occurred");
         Utils.checkNotNull(planID, "planID");
         this.planID = planID;
     }
@@ -66,12 +66,12 @@ public class FeePlanAgreementError extends RuntimeException {
         }
         FeePlanAgreementError other = (FeePlanAgreementError) o;
         return 
-            Objects.deepEquals(this.planID, other.planID);
+            Utils.enhancedDeepEquals(this.planID, other.planID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             planID);
     }
     

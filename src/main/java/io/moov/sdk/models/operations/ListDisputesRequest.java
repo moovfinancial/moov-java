@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListDisputesRequest {
@@ -447,24 +446,24 @@ public class ListDisputesRequest {
         }
         ListDisputesRequest other = (ListDisputesRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.skip, other.skip) &&
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.startDateTime, other.startDateTime) &&
-            Objects.deepEquals(this.endDateTime, other.endDateTime) &&
-            Objects.deepEquals(this.respondStartDateTime, other.respondStartDateTime) &&
-            Objects.deepEquals(this.respondEndDateTime, other.respondEndDateTime) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.merchantAccountID, other.merchantAccountID) &&
-            Objects.deepEquals(this.cardholderAccountID, other.cardholderAccountID) &&
-            Objects.deepEquals(this.disputeIDs, other.disputeIDs) &&
-            Objects.deepEquals(this.transferIDs, other.transferIDs) &&
-            Objects.deepEquals(this.orderBy, other.orderBy);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
+            Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime) &&
+            Utils.enhancedDeepEquals(this.respondStartDateTime, other.respondStartDateTime) &&
+            Utils.enhancedDeepEquals(this.respondEndDateTime, other.respondEndDateTime) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+            Utils.enhancedDeepEquals(this.cardholderAccountID, other.cardholderAccountID) &&
+            Utils.enhancedDeepEquals(this.disputeIDs, other.disputeIDs) &&
+            Utils.enhancedDeepEquals(this.transferIDs, other.transferIDs) &&
+            Utils.enhancedDeepEquals(this.orderBy, other.orderBy);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             skip,
             count,

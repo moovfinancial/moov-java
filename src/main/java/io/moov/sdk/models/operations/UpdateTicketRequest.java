@@ -10,7 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class UpdateTicketRequest {
 
@@ -84,14 +83,14 @@ public class UpdateTicketRequest {
         }
         UpdateTicketRequest other = (UpdateTicketRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.ticketID, other.ticketID) &&
-            Objects.deepEquals(this.updateTicket, other.updateTicket);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.ticketID, other.ticketID) &&
+            Utils.enhancedDeepEquals(this.updateTicket, other.updateTicket);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             ticketID,
             updateTicket);

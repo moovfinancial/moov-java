@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * BrandColors
@@ -71,13 +70,13 @@ public class BrandColors {
         }
         BrandColors other = (BrandColors) o;
         return 
-            Objects.deepEquals(this.dark, other.dark) &&
-            Objects.deepEquals(this.light, other.light);
+            Utils.enhancedDeepEquals(this.dark, other.dark) &&
+            Utils.enhancedDeepEquals(this.light, other.light);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             dark,
             light);
     }

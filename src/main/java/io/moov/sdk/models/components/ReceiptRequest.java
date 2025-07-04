@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -271,17 +270,17 @@ public class ReceiptRequest {
         }
         ReceiptRequest other = (ReceiptRequest) o;
         return 
-            Objects.deepEquals(this.kind, other.kind) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.emailAccountID, other.emailAccountID) &&
-            Objects.deepEquals(this.forTransferID, other.forTransferID) &&
-            Objects.deepEquals(this.forScheduleID, other.forScheduleID) &&
-            Objects.deepEquals(this.forOccurrenceID, other.forOccurrenceID);
+            Utils.enhancedDeepEquals(this.kind, other.kind) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.emailAccountID, other.emailAccountID) &&
+            Utils.enhancedDeepEquals(this.forTransferID, other.forTransferID) &&
+            Utils.enhancedDeepEquals(this.forScheduleID, other.forScheduleID) &&
+            Utils.enhancedDeepEquals(this.forOccurrenceID, other.forOccurrenceID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             kind,
             email,
             emailAccountID,

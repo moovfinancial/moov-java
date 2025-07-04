@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -72,6 +71,7 @@ public class LinkCardError extends RuntimeException {
             @JsonProperty("cardOnFile") Optional<String> cardOnFile,
             @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
             @JsonProperty("verifyName") Optional<String> verifyName) {
+        super("API error occurred");
         Utils.checkNotNull(error, "error");
         Utils.checkNotNull(e2ee, "e2ee");
         Utils.checkNotNull(cardNumber, "cardNumber");
@@ -284,21 +284,21 @@ public class LinkCardError extends RuntimeException {
         }
         LinkCardError other = (LinkCardError) o;
         return 
-            Objects.deepEquals(this.error, other.error) &&
-            Objects.deepEquals(this.e2ee, other.e2ee) &&
-            Objects.deepEquals(this.cardNumber, other.cardNumber) &&
-            Objects.deepEquals(this.cardCvv, other.cardCvv) &&
-            Objects.deepEquals(this.expiration, other.expiration) &&
-            Objects.deepEquals(this.holderName, other.holderName) &&
-            Objects.deepEquals(this.billingAddress, other.billingAddress) &&
-            Objects.deepEquals(this.cardOnFile, other.cardOnFile) &&
-            Objects.deepEquals(this.merchantAccountID, other.merchantAccountID) &&
-            Objects.deepEquals(this.verifyName, other.verifyName);
+            Utils.enhancedDeepEquals(this.error, other.error) &&
+            Utils.enhancedDeepEquals(this.e2ee, other.e2ee) &&
+            Utils.enhancedDeepEquals(this.cardNumber, other.cardNumber) &&
+            Utils.enhancedDeepEquals(this.cardCvv, other.cardCvv) &&
+            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+            Utils.enhancedDeepEquals(this.holderName, other.holderName) &&
+            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
+            Utils.enhancedDeepEquals(this.cardOnFile, other.cardOnFile) &&
+            Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+            Utils.enhancedDeepEquals(this.verifyName, other.verifyName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             error,
             e2ee,
             cardNumber,

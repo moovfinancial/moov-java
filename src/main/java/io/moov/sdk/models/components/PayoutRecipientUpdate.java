@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -70,12 +69,12 @@ public class PayoutRecipientUpdate {
         }
         PayoutRecipientUpdate other = (PayoutRecipientUpdate) o;
         return 
-            Objects.deepEquals(this.email, other.email);
+            Utils.enhancedDeepEquals(this.email, other.email);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             email);
     }
     

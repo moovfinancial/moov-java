@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class WebhookDataRefundCreated {
 
@@ -83,14 +82,14 @@ public class WebhookDataRefundCreated {
         }
         WebhookDataRefundCreated other = (WebhookDataRefundCreated) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.refundID, other.refundID);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.refundID, other.refundID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             transferID,
             refundID);

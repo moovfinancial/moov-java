@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class RequestCard {
@@ -210,17 +209,17 @@ public class RequestCard {
         }
         RequestCard other = (RequestCard) o;
         return 
-            Objects.deepEquals(this.fundingWalletID, other.fundingWalletID) &&
-            Objects.deepEquals(this.authorizedUser, other.authorizedUser) &&
-            Objects.deepEquals(this.formFactor, other.formFactor) &&
-            Objects.deepEquals(this.memo, other.memo) &&
-            Objects.deepEquals(this.expiration, other.expiration) &&
-            Objects.deepEquals(this.controls, other.controls);
+            Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
+            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser) &&
+            Utils.enhancedDeepEquals(this.formFactor, other.formFactor) &&
+            Utils.enhancedDeepEquals(this.memo, other.memo) &&
+            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+            Utils.enhancedDeepEquals(this.controls, other.controls);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             fundingWalletID,
             authorizedUser,
             formFactor,

@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -405,21 +404,21 @@ public class TerminalCard {
         }
         TerminalCard other = (TerminalCard) o;
         return 
-            Objects.deepEquals(this.entryMode, other.entryMode) &&
-            Objects.deepEquals(this.brand, other.brand) &&
-            Objects.deepEquals(this.bin, other.bin) &&
-            Objects.deepEquals(this.cardType, other.cardType) &&
-            Objects.deepEquals(this.expiration, other.expiration) &&
-            Objects.deepEquals(this.fingerprint, other.fingerprint) &&
-            Objects.deepEquals(this.holderName, other.holderName) &&
-            Objects.deepEquals(this.issuer, other.issuer) &&
-            Objects.deepEquals(this.issuerCountry, other.issuerCountry) &&
-            Objects.deepEquals(this.lastFourCardNumber, other.lastFourCardNumber);
+            Utils.enhancedDeepEquals(this.entryMode, other.entryMode) &&
+            Utils.enhancedDeepEquals(this.brand, other.brand) &&
+            Utils.enhancedDeepEquals(this.bin, other.bin) &&
+            Utils.enhancedDeepEquals(this.cardType, other.cardType) &&
+            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+            Utils.enhancedDeepEquals(this.fingerprint, other.fingerprint) &&
+            Utils.enhancedDeepEquals(this.holderName, other.holderName) &&
+            Utils.enhancedDeepEquals(this.issuer, other.issuer) &&
+            Utils.enhancedDeepEquals(this.issuerCountry, other.issuerCountry) &&
+            Utils.enhancedDeepEquals(this.lastFourCardNumber, other.lastFourCardNumber);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             entryMode,
             brand,
             bin,

@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class WebhookDataWalletTransactionUpdated {
@@ -137,16 +136,16 @@ public class WebhookDataWalletTransactionUpdated {
         }
         WebhookDataWalletTransactionUpdated other = (WebhookDataWalletTransactionUpdated) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.walletID, other.walletID) &&
-            Objects.deepEquals(this.transactionID, other.transactionID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.availableBalance, other.availableBalance);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
+            Utils.enhancedDeepEquals(this.transactionID, other.transactionID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.availableBalance, other.availableBalance);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             walletID,
             transactionID,

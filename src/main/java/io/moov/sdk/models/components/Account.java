@@ -15,7 +15,6 @@ import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Account {
@@ -469,26 +468,26 @@ public class Account {
         }
         Account other = (Account) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.mode, other.mode) &&
-            Objects.deepEquals(this.accountType, other.accountType) &&
-            Objects.deepEquals(this.displayName, other.displayName) &&
-            Objects.deepEquals(this.profile, other.profile) &&
-            Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.termsOfService, other.termsOfService) &&
-            Objects.deepEquals(this.capabilities, other.capabilities) &&
-            Objects.deepEquals(this.verification, other.verification) &&
-            Objects.deepEquals(this.foreignID, other.foreignID) &&
-            Objects.deepEquals(this.customerSupport, other.customerSupport) &&
-            Objects.deepEquals(this.settings, other.settings) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.disconnectedOn, other.disconnectedOn);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.mode, other.mode) &&
+            Utils.enhancedDeepEquals(this.accountType, other.accountType) &&
+            Utils.enhancedDeepEquals(this.displayName, other.displayName) &&
+            Utils.enhancedDeepEquals(this.profile, other.profile) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.termsOfService, other.termsOfService) &&
+            Utils.enhancedDeepEquals(this.capabilities, other.capabilities) &&
+            Utils.enhancedDeepEquals(this.verification, other.verification) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+            Utils.enhancedDeepEquals(this.customerSupport, other.customerSupport) &&
+            Utils.enhancedDeepEquals(this.settings, other.settings) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.disconnectedOn, other.disconnectedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             mode,
             accountType,

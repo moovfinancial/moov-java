@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -70,12 +69,12 @@ public class TaxIDUpdate {
         }
         TaxIDUpdate other = (TaxIDUpdate) o;
         return 
-            Objects.deepEquals(this.ein, other.ein);
+            Utils.enhancedDeepEquals(this.ein, other.ein);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             ein);
     }
     

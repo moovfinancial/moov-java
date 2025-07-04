@@ -10,7 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class CreateApplePaySessionRequest {
 
@@ -76,13 +75,13 @@ public class CreateApplePaySessionRequest {
         }
         CreateApplePaySessionRequest other = (CreateApplePaySessionRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.createApplePaySession, other.createApplePaySession);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.createApplePaySession, other.createApplePaySession);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             createApplePaySession);
     }

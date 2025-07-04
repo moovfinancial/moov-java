@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -137,14 +136,14 @@ public class ApplePayHeader {
         }
         ApplePayHeader other = (ApplePayHeader) o;
         return 
-            Objects.deepEquals(this.ephemeralPublicKey, other.ephemeralPublicKey) &&
-            Objects.deepEquals(this.publicKeyHash, other.publicKeyHash) &&
-            Objects.deepEquals(this.transactionId, other.transactionId);
+            Utils.enhancedDeepEquals(this.ephemeralPublicKey, other.ephemeralPublicKey) &&
+            Utils.enhancedDeepEquals(this.publicKeyHash, other.publicKeyHash) &&
+            Utils.enhancedDeepEquals(this.transactionId, other.transactionId);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             ephemeralPublicKey,
             publicKeyHash,
             transactionId);

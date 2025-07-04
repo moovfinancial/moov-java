@@ -14,7 +14,6 @@ import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -47,6 +46,7 @@ public class OnboardingInviteError extends RuntimeException {
             @JsonProperty("scopes") Optional<? extends Map<String, String>> scopes,
             @JsonProperty("capabilities") Optional<? extends Map<String, String>> capabilities,
             @JsonProperty("feePlanCodes") Optional<? extends Map<String, String>> feePlanCodes) {
+        super("API error occurred");
         Utils.checkNotNull(returnURL, "returnURL");
         Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
         Utils.checkNotNull(scopes, "scopes");
@@ -166,16 +166,16 @@ public class OnboardingInviteError extends RuntimeException {
         }
         OnboardingInviteError other = (OnboardingInviteError) o;
         return 
-            Objects.deepEquals(this.returnURL, other.returnURL) &&
-            Objects.deepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
-            Objects.deepEquals(this.scopes, other.scopes) &&
-            Objects.deepEquals(this.capabilities, other.capabilities) &&
-            Objects.deepEquals(this.feePlanCodes, other.feePlanCodes);
+            Utils.enhancedDeepEquals(this.returnURL, other.returnURL) &&
+            Utils.enhancedDeepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
+            Utils.enhancedDeepEquals(this.scopes, other.scopes) &&
+            Utils.enhancedDeepEquals(this.capabilities, other.capabilities) &&
+            Utils.enhancedDeepEquals(this.feePlanCodes, other.feePlanCodes);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             returnURL,
             termsOfServiceURL,
             scopes,

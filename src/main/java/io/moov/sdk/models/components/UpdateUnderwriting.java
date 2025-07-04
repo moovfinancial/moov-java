@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class UpdateUnderwriting {
 
@@ -135,17 +134,17 @@ public class UpdateUnderwriting {
         }
         UpdateUnderwriting other = (UpdateUnderwriting) o;
         return 
-            Objects.deepEquals(this.averageTransactionSize, other.averageTransactionSize) &&
-            Objects.deepEquals(this.maxTransactionSize, other.maxTransactionSize) &&
-            Objects.deepEquals(this.averageMonthlyTransactionVolume, other.averageMonthlyTransactionVolume) &&
-            Objects.deepEquals(this.volumeByCustomerType, other.volumeByCustomerType) &&
-            Objects.deepEquals(this.cardVolumeDistribution, other.cardVolumeDistribution) &&
-            Objects.deepEquals(this.fulfillment, other.fulfillment);
+            Utils.enhancedDeepEquals(this.averageTransactionSize, other.averageTransactionSize) &&
+            Utils.enhancedDeepEquals(this.maxTransactionSize, other.maxTransactionSize) &&
+            Utils.enhancedDeepEquals(this.averageMonthlyTransactionVolume, other.averageMonthlyTransactionVolume) &&
+            Utils.enhancedDeepEquals(this.volumeByCustomerType, other.volumeByCustomerType) &&
+            Utils.enhancedDeepEquals(this.cardVolumeDistribution, other.cardVolumeDistribution) &&
+            Utils.enhancedDeepEquals(this.fulfillment, other.fulfillment);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             averageTransactionSize,
             maxTransactionSize,
             averageMonthlyTransactionVolume,

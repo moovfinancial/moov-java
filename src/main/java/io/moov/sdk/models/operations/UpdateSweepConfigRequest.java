@@ -10,7 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class UpdateSweepConfigRequest {
 
@@ -84,14 +83,14 @@ public class UpdateSweepConfigRequest {
         }
         UpdateSweepConfigRequest other = (UpdateSweepConfigRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.sweepConfigID, other.sweepConfigID) &&
-            Objects.deepEquals(this.patchSweepConfig, other.patchSweepConfig);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.sweepConfigID, other.sweepConfigID) &&
+            Utils.enhancedDeepEquals(this.patchSweepConfig, other.patchSweepConfig);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             sweepConfigID,
             patchSweepConfig);

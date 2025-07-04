@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * AuthorizedUser
@@ -71,13 +70,13 @@ public class AuthorizedUser {
         }
         AuthorizedUser other = (AuthorizedUser) o;
         return 
-            Objects.deepEquals(this.firstName, other.firstName) &&
-            Objects.deepEquals(this.lastName, other.lastName);
+            Utils.enhancedDeepEquals(this.firstName, other.firstName) &&
+            Utils.enhancedDeepEquals(this.lastName, other.lastName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             firstName,
             lastName);
     }

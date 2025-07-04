@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -306,22 +305,22 @@ public class Dispute {
         }
         Dispute other = (Dispute) o;
         return 
-            Objects.deepEquals(this.disputeID, other.disputeID) &&
-            Objects.deepEquals(this.merchantAccountID, other.merchantAccountID) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.networkReasonCode, other.networkReasonCode) &&
-            Objects.deepEquals(this.networkReasonDescription, other.networkReasonDescription) &&
-            Objects.deepEquals(this.transfer, other.transfer) &&
-            Objects.deepEquals(this.respondBy, other.respondBy) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.phase, other.phase) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.submittedOn, other.submittedOn);
+            Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
+            Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.networkReasonCode, other.networkReasonCode) &&
+            Utils.enhancedDeepEquals(this.networkReasonDescription, other.networkReasonDescription) &&
+            Utils.enhancedDeepEquals(this.transfer, other.transfer) &&
+            Utils.enhancedDeepEquals(this.respondBy, other.respondBy) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.phase, other.phase) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.submittedOn, other.submittedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             disputeID,
             merchantAccountID,
             amount,

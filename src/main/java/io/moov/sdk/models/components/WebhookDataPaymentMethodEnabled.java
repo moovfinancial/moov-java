@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class WebhookDataPaymentMethodEnabled {
 
@@ -83,14 +82,14 @@ public class WebhookDataPaymentMethodEnabled {
         }
         WebhookDataPaymentMethodEnabled other = (WebhookDataPaymentMethodEnabled) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Objects.deepEquals(this.sourceID, other.sourceID);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.paymentMethodID, other.paymentMethodID) &&
+            Utils.enhancedDeepEquals(this.sourceID, other.sourceID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             paymentMethodID,
             sourceID);

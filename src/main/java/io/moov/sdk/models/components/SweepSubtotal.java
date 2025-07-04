@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class SweepSubtotal {
 
@@ -111,14 +110,14 @@ public class SweepSubtotal {
         }
         SweepSubtotal other = (SweepSubtotal) o;
         return 
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.amount, other.amount);
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             type,
             count,
             amount);

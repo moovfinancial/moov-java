@@ -11,7 +11,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListFeePlansRequest {
@@ -93,13 +92,13 @@ public class ListFeePlansRequest {
         }
         ListFeePlansRequest other = (ListFeePlansRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.planIDs, other.planIDs);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.planIDs, other.planIDs);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             planIDs);
     }

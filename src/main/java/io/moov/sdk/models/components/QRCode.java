@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class QRCode {
 
@@ -58,12 +57,12 @@ public class QRCode {
         }
         QRCode other = (QRCode) o;
         return 
-            Objects.deepEquals(this.qrCode, other.qrCode);
+            Utils.enhancedDeepEquals(this.qrCode, other.qrCode);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             qrCode);
     }
     

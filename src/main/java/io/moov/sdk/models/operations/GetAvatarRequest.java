@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class GetAvatarRequest {
 
@@ -58,12 +57,12 @@ public class GetAvatarRequest {
         }
         GetAvatarRequest other = (GetAvatarRequest) o;
         return 
-            Objects.deepEquals(this.uniqueID, other.uniqueID);
+            Utils.enhancedDeepEquals(this.uniqueID, other.uniqueID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             uniqueID);
     }
     

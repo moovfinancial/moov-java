@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 /**
  * PaymentMethodsBankAccount
@@ -241,21 +240,21 @@ public class PaymentMethodsBankAccount {
         }
         PaymentMethodsBankAccount other = (PaymentMethodsBankAccount) o;
         return 
-            Objects.deepEquals(this.bankAccountID, other.bankAccountID) &&
-            Objects.deepEquals(this.fingerprint, other.fingerprint) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.holderName, other.holderName) &&
-            Objects.deepEquals(this.holderType, other.holderType) &&
-            Objects.deepEquals(this.bankName, other.bankName) &&
-            Objects.deepEquals(this.bankAccountType, other.bankAccountType) &&
-            Objects.deepEquals(this.routingNumber, other.routingNumber) &&
-            Objects.deepEquals(this.lastFourAccountNumber, other.lastFourAccountNumber) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn);
+            Utils.enhancedDeepEquals(this.bankAccountID, other.bankAccountID) &&
+            Utils.enhancedDeepEquals(this.fingerprint, other.fingerprint) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.holderName, other.holderName) &&
+            Utils.enhancedDeepEquals(this.holderType, other.holderType) &&
+            Utils.enhancedDeepEquals(this.bankName, other.bankName) &&
+            Utils.enhancedDeepEquals(this.bankAccountType, other.bankAccountType) &&
+            Utils.enhancedDeepEquals(this.routingNumber, other.routingNumber) &&
+            Utils.enhancedDeepEquals(this.lastFourAccountNumber, other.lastFourAccountNumber) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             bankAccountID,
             fingerprint,
             status,

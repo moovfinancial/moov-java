@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Sweep {
@@ -436,24 +435,24 @@ public class Sweep {
         }
         Sweep other = (Sweep) o;
         return 
-            Objects.deepEquals(this.sweepID, other.sweepID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.accruedAmount, other.accruedAmount) &&
-            Objects.deepEquals(this.residualBalance, other.residualBalance) &&
-            Objects.deepEquals(this.currency, other.currency) &&
-            Objects.deepEquals(this.accrualStartedOn, other.accrualStartedOn) &&
-            Objects.deepEquals(this.accrualEndedOn, other.accrualEndedOn) &&
-            Objects.deepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
-            Objects.deepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.transferAmount, other.transferAmount) &&
-            Objects.deepEquals(this.statementDescriptor, other.statementDescriptor) &&
-            Objects.deepEquals(this.subtotals, other.subtotals);
+            Utils.enhancedDeepEquals(this.sweepID, other.sweepID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.accruedAmount, other.accruedAmount) &&
+            Utils.enhancedDeepEquals(this.residualBalance, other.residualBalance) &&
+            Utils.enhancedDeepEquals(this.currency, other.currency) &&
+            Utils.enhancedDeepEquals(this.accrualStartedOn, other.accrualStartedOn) &&
+            Utils.enhancedDeepEquals(this.accrualEndedOn, other.accrualEndedOn) &&
+            Utils.enhancedDeepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.transferAmount, other.transferAmount) &&
+            Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
+            Utils.enhancedDeepEquals(this.subtotals, other.subtotals);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             sweepID,
             status,
             accruedAmount,

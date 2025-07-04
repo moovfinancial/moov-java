@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class GetRefundRequest {
 
@@ -101,14 +100,14 @@ public class GetRefundRequest {
         }
         GetRefundRequest other = (GetRefundRequest) o;
         return 
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.refundID, other.refundID);
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.refundID, other.refundID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             transferID,
             accountID,
             refundID);

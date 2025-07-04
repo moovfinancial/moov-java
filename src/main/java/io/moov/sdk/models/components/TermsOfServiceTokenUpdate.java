@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -68,12 +67,12 @@ public class TermsOfServiceTokenUpdate {
         }
         TermsOfServiceTokenUpdate other = (TermsOfServiceTokenUpdate) o;
         return 
-            Objects.deepEquals(this.token, other.token);
+            Utils.enhancedDeepEquals(this.token, other.token);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             token);
     }
     

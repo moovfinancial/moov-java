@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 public class AsyncTransfer {
 
@@ -67,13 +66,13 @@ public class AsyncTransfer {
         }
         AsyncTransfer other = (AsyncTransfer) o;
         return 
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.createdOn, other.createdOn);
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             transferID,
             createdOn);
     }

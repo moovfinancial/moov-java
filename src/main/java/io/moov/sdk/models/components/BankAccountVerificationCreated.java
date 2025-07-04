@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class BankAccountVerificationCreated {
 
@@ -66,13 +65,13 @@ public class BankAccountVerificationCreated {
         }
         BankAccountVerificationCreated other = (BankAccountVerificationCreated) o;
         return 
-            Objects.deepEquals(this.verificationMethod, other.verificationMethod) &&
-            Objects.deepEquals(this.status, other.status);
+            Utils.enhancedDeepEquals(this.verificationMethod, other.verificationMethod) &&
+            Utils.enhancedDeepEquals(this.status, other.status);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             verificationMethod,
             status);
     }

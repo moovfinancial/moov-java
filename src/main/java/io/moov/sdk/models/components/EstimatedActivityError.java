@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class EstimatedActivityError {
@@ -111,14 +110,14 @@ public class EstimatedActivityError {
         }
         EstimatedActivityError other = (EstimatedActivityError) o;
         return 
-            Objects.deepEquals(this.averageTransactionAmount, other.averageTransactionAmount) &&
-            Objects.deepEquals(this.maximumTransactionAmount, other.maximumTransactionAmount) &&
-            Objects.deepEquals(this.monthlyVolumeRange, other.monthlyVolumeRange);
+            Utils.enhancedDeepEquals(this.averageTransactionAmount, other.averageTransactionAmount) &&
+            Utils.enhancedDeepEquals(this.maximumTransactionAmount, other.maximumTransactionAmount) &&
+            Utils.enhancedDeepEquals(this.monthlyVolumeRange, other.monthlyVolumeRange);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             averageTransactionAmount,
             maximumTransactionAmount,
             monthlyVolumeRange);

@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -26,6 +25,7 @@ public class UpdateTicketError extends RuntimeException {
     @JsonCreator
     public UpdateTicketError(
             @JsonProperty("status") Optional<String> status) {
+        super("API error occurred");
         Utils.checkNotNull(status, "status");
         this.status = status;
     }
@@ -66,12 +66,12 @@ public class UpdateTicketError extends RuntimeException {
         }
         UpdateTicketError other = (UpdateTicketError) o;
         return 
-            Objects.deepEquals(this.status, other.status);
+            Utils.enhancedDeepEquals(this.status, other.status);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             status);
     }
     

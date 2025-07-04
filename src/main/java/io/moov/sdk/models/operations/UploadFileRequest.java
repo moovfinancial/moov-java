@@ -10,7 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class UploadFileRequest {
 
@@ -67,13 +66,13 @@ public class UploadFileRequest {
         }
         UploadFileRequest other = (UploadFileRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.fileUploadRequestMultiPart, other.fileUploadRequestMultiPart);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.fileUploadRequestMultiPart, other.fileUploadRequestMultiPart);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             fileUploadRequestMultiPart);
     }

@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -31,6 +30,7 @@ public class RevokeTokenRequestError extends RuntimeException {
     public RevokeTokenRequestError(
             @JsonProperty("token") Optional<String> token,
             @JsonProperty("token_type_hint") Optional<String> tokenTypeHint) {
+        super("API error occurred");
         Utils.checkNotNull(token, "token");
         Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
         this.token = token;
@@ -90,13 +90,13 @@ public class RevokeTokenRequestError extends RuntimeException {
         }
         RevokeTokenRequestError other = (RevokeTokenRequestError) o;
         return 
-            Objects.deepEquals(this.token, other.token) &&
-            Objects.deepEquals(this.tokenTypeHint, other.tokenTypeHint);
+            Utils.enhancedDeepEquals(this.token, other.token) &&
+            Utils.enhancedDeepEquals(this.tokenTypeHint, other.tokenTypeHint);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             token,
             tokenTypeHint);
     }

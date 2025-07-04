@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class PaymentLinkCustomerOptions {
@@ -151,14 +150,14 @@ public class PaymentLinkCustomerOptions {
         }
         PaymentLinkCustomerOptions other = (PaymentLinkCustomerOptions) o;
         return 
-            Objects.deepEquals(this.requireAddress, other.requireAddress) &&
-            Objects.deepEquals(this.requirePhone, other.requirePhone) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.requireAddress, other.requireAddress) &&
+            Utils.enhancedDeepEquals(this.requirePhone, other.requirePhone) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             requireAddress,
             requirePhone,
             metadata);

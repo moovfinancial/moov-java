@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -68,12 +67,12 @@ public class Error {
         }
         Error other = (Error) o;
         return 
-            Objects.deepEquals(this.message, other.message);
+            Utils.enhancedDeepEquals(this.message, other.message);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             message);
     }
     

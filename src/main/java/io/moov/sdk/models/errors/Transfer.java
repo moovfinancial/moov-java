@@ -28,7 +28,6 @@ import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -203,6 +202,7 @@ public class Transfer extends RuntimeException {
             @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("foreignID") Optional<String> foreignID) {
+        super("API error occurred");
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(source, "source");
@@ -814,38 +814,38 @@ public class Transfer extends RuntimeException {
         }
         Transfer other = (Transfer) o;
         return 
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.source, other.source) &&
-            Objects.deepEquals(this.destination, other.destination) &&
-            Objects.deepEquals(this.completedOn, other.completedOn) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.failureReason, other.failureReason) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.facilitatorFee, other.facilitatorFee) &&
-            Objects.deepEquals(this.moovFee, other.moovFee) &&
-            Objects.deepEquals(this.moovFeeDecimal, other.moovFeeDecimal) &&
-            Objects.deepEquals(this.moovFeeDetails, other.moovFeeDetails) &&
-            Objects.deepEquals(this.moovFees, other.moovFees) &&
-            Objects.deepEquals(this.groupID, other.groupID) &&
-            Objects.deepEquals(this.cancellations, other.cancellations) &&
-            Objects.deepEquals(this.refundedAmount, other.refundedAmount) &&
-            Objects.deepEquals(this.refunds, other.refunds) &&
-            Objects.deepEquals(this.disputedAmount, other.disputedAmount) &&
-            Objects.deepEquals(this.disputes, other.disputes) &&
-            Objects.deepEquals(this.sweepID, other.sweepID) &&
-            Objects.deepEquals(this.scheduleID, other.scheduleID) &&
-            Objects.deepEquals(this.occurrenceID, other.occurrenceID) &&
-            Objects.deepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
-            Objects.deepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
-            Objects.deepEquals(this.foreignID, other.foreignID);
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.source, other.source) &&
+            Utils.enhancedDeepEquals(this.destination, other.destination) &&
+            Utils.enhancedDeepEquals(this.completedOn, other.completedOn) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.failureReason, other.failureReason) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.facilitatorFee, other.facilitatorFee) &&
+            Utils.enhancedDeepEquals(this.moovFee, other.moovFee) &&
+            Utils.enhancedDeepEquals(this.moovFeeDecimal, other.moovFeeDecimal) &&
+            Utils.enhancedDeepEquals(this.moovFeeDetails, other.moovFeeDetails) &&
+            Utils.enhancedDeepEquals(this.moovFees, other.moovFees) &&
+            Utils.enhancedDeepEquals(this.groupID, other.groupID) &&
+            Utils.enhancedDeepEquals(this.cancellations, other.cancellations) &&
+            Utils.enhancedDeepEquals(this.refundedAmount, other.refundedAmount) &&
+            Utils.enhancedDeepEquals(this.refunds, other.refunds) &&
+            Utils.enhancedDeepEquals(this.disputedAmount, other.disputedAmount) &&
+            Utils.enhancedDeepEquals(this.disputes, other.disputes) &&
+            Utils.enhancedDeepEquals(this.sweepID, other.sweepID) &&
+            Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
+            Utils.enhancedDeepEquals(this.occurrenceID, other.occurrenceID) &&
+            Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
+            Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             transferID,
             createdOn,
             source,

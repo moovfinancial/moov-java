@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UpdateEvidence {
@@ -101,13 +100,13 @@ public class UpdateEvidence {
         }
         UpdateEvidence other = (UpdateEvidence) o;
         return 
-            Objects.deepEquals(this.evidenceType, other.evidenceType) &&
-            Objects.deepEquals(this.text, other.text);
+            Utils.enhancedDeepEquals(this.evidenceType, other.evidenceType) &&
+            Utils.enhancedDeepEquals(this.text, other.text);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             evidenceType,
             text);
     }

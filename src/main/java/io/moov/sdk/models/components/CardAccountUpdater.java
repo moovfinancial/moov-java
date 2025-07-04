@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -107,13 +106,13 @@ public class CardAccountUpdater {
         }
         CardAccountUpdater other = (CardAccountUpdater) o;
         return 
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.updateType, other.updateType);
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.updateType, other.updateType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             updatedOn,
             updateType);
     }

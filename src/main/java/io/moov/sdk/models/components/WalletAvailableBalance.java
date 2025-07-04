@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class WalletAvailableBalance {
 
@@ -108,14 +107,14 @@ public class WalletAvailableBalance {
         }
         WalletAvailableBalance other = (WalletAvailableBalance) o;
         return 
-            Objects.deepEquals(this.currency, other.currency) &&
-            Objects.deepEquals(this.value, other.value) &&
-            Objects.deepEquals(this.valueDecimal, other.valueDecimal);
+            Utils.enhancedDeepEquals(this.currency, other.currency) &&
+            Utils.enhancedDeepEquals(this.value, other.value) &&
+            Utils.enhancedDeepEquals(this.valueDecimal, other.valueDecimal);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             currency,
             value,
             valueDecimal);

@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class PaymentLink {
@@ -550,30 +549,30 @@ public class PaymentLink {
         }
         PaymentLink other = (PaymentLink) o;
         return 
-            Objects.deepEquals(this.code, other.code) &&
-            Objects.deepEquals(this.mode, other.mode) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.partnerAccountID, other.partnerAccountID) &&
-            Objects.deepEquals(this.merchantAccountID, other.merchantAccountID) &&
-            Objects.deepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
-            Objects.deepEquals(this.link, other.link) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.uses, other.uses) &&
-            Objects.deepEquals(this.maxUses, other.maxUses) &&
-            Objects.deepEquals(this.lastUsedOn, other.lastUsedOn) &&
-            Objects.deepEquals(this.expiresOn, other.expiresOn) &&
-            Objects.deepEquals(this.display, other.display) &&
-            Objects.deepEquals(this.customer, other.customer) &&
-            Objects.deepEquals(this.payment, other.payment) &&
-            Objects.deepEquals(this.payout, other.payout) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.disabledOn, other.disabledOn);
+            Utils.enhancedDeepEquals(this.code, other.code) &&
+            Utils.enhancedDeepEquals(this.mode, other.mode) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
+            Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+            Utils.enhancedDeepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.link, other.link) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.uses, other.uses) &&
+            Utils.enhancedDeepEquals(this.maxUses, other.maxUses) &&
+            Utils.enhancedDeepEquals(this.lastUsedOn, other.lastUsedOn) &&
+            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
+            Utils.enhancedDeepEquals(this.display, other.display) &&
+            Utils.enhancedDeepEquals(this.customer, other.customer) &&
+            Utils.enhancedDeepEquals(this.payment, other.payment) &&
+            Utils.enhancedDeepEquals(this.payout, other.payout) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             code,
             mode,
             status,

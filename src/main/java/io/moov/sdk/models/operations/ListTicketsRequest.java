@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListTicketsRequest {
@@ -102,14 +101,14 @@ public class ListTicketsRequest {
         }
         ListTicketsRequest other = (ListTicketsRequest) o;
         return 
-            Objects.deepEquals(this.skip, other.skip) &&
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.accountID, other.accountID);
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             skip,
             count,
             accountID);

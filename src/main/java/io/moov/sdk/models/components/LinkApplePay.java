@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -133,13 +132,13 @@ public class LinkApplePay {
         }
         LinkApplePay other = (LinkApplePay) o;
         return 
-            Objects.deepEquals(this.token, other.token) &&
-            Objects.deepEquals(this.billingContact, other.billingContact);
+            Utils.enhancedDeepEquals(this.token, other.token) &&
+            Utils.enhancedDeepEquals(this.billingContact, other.billingContact);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             token,
             billingContact);
     }

@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class GetScheduledOccurrenceRequest {
 
@@ -104,14 +103,14 @@ public class GetScheduledOccurrenceRequest {
         }
         GetScheduledOccurrenceRequest other = (GetScheduledOccurrenceRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.scheduleID, other.scheduleID) &&
-            Objects.deepEquals(this.occurrenceFilter, other.occurrenceFilter);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
+            Utils.enhancedDeepEquals(this.occurrenceFilter, other.occurrenceFilter);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             scheduleID,
             occurrenceFilter);

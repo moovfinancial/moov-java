@@ -11,7 +11,6 @@ import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class FulfillmentDetails {
 
@@ -102,15 +101,15 @@ public class FulfillmentDetails {
         }
         FulfillmentDetails other = (FulfillmentDetails) o;
         return 
-            Objects.deepEquals(this.hasPhysicalGoods, other.hasPhysicalGoods) &&
-            Objects.deepEquals(this.isShippingProduct, other.isShippingProduct) &&
-            Objects.deepEquals(this.shipmentDurationDays, other.shipmentDurationDays) &&
-            Objects.deepEquals(this.returnPolicy, other.returnPolicy);
+            Utils.enhancedDeepEquals(this.hasPhysicalGoods, other.hasPhysicalGoods) &&
+            Utils.enhancedDeepEquals(this.isShippingProduct, other.isShippingProduct) &&
+            Utils.enhancedDeepEquals(this.shipmentDurationDays, other.shipmentDurationDays) &&
+            Utils.enhancedDeepEquals(this.returnPolicy, other.returnPolicy);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             hasPhysicalGoods,
             isShippingProduct,
             shipmentDurationDays,

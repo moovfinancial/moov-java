@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Ssn {
@@ -87,13 +86,13 @@ public class Ssn {
         }
         Ssn other = (Ssn) o;
         return 
-            Objects.deepEquals(this.full, other.full) &&
-            Objects.deepEquals(this.lastFour, other.lastFour);
+            Utils.enhancedDeepEquals(this.full, other.full) &&
+            Utils.enhancedDeepEquals(this.lastFour, other.lastFour);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             full,
             lastFour);
     }

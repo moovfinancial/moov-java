@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Document {
@@ -169,16 +168,16 @@ public class Document {
         }
         Document other = (Document) o;
         return 
-            Objects.deepEquals(this.documentID, other.documentID) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.contentType, other.contentType) &&
-            Objects.deepEquals(this.parseErrors, other.parseErrors) &&
-            Objects.deepEquals(this.uploadedAt, other.uploadedAt);
+            Utils.enhancedDeepEquals(this.documentID, other.documentID) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
+            Utils.enhancedDeepEquals(this.parseErrors, other.parseErrors) &&
+            Utils.enhancedDeepEquals(this.uploadedAt, other.uploadedAt);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             documentID,
             type,
             contentType,

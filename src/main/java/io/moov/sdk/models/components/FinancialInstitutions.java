@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 public class FinancialInstitutions {
 
@@ -50,12 +49,12 @@ public class FinancialInstitutions {
         }
         FinancialInstitutions other = (FinancialInstitutions) o;
         return 
-            Objects.deepEquals(this.achParticipants, other.achParticipants);
+            Utils.enhancedDeepEquals(this.achParticipants, other.achParticipants);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             achParticipants);
     }
     

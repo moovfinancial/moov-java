@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 public class SentReceipt {
 
@@ -111,14 +110,14 @@ public class SentReceipt {
         }
         SentReceipt other = (SentReceipt) o;
         return 
-            Objects.deepEquals(this.receiptID, other.receiptID) &&
-            Objects.deepEquals(this.idempotencyKey, other.idempotencyKey) &&
-            Objects.deepEquals(this.sentOn, other.sentOn);
+            Utils.enhancedDeepEquals(this.receiptID, other.receiptID) &&
+            Utils.enhancedDeepEquals(this.idempotencyKey, other.idempotencyKey) &&
+            Utils.enhancedDeepEquals(this.sentOn, other.sentOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             receiptID,
             idempotencyKey,
             sentOn);

@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class IssuedCard {
@@ -333,22 +332,22 @@ public class IssuedCard {
         }
         IssuedCard other = (IssuedCard) o;
         return 
-            Objects.deepEquals(this.issuedCardID, other.issuedCardID) &&
-            Objects.deepEquals(this.brand, other.brand) &&
-            Objects.deepEquals(this.lastFourCardNumber, other.lastFourCardNumber) &&
-            Objects.deepEquals(this.expiration, other.expiration) &&
-            Objects.deepEquals(this.authorizedUser, other.authorizedUser) &&
-            Objects.deepEquals(this.memo, other.memo) &&
-            Objects.deepEquals(this.fundingWalletID, other.fundingWalletID) &&
-            Objects.deepEquals(this.state, other.state) &&
-            Objects.deepEquals(this.formFactor, other.formFactor) &&
-            Objects.deepEquals(this.controls, other.controls) &&
-            Objects.deepEquals(this.createdOn, other.createdOn);
+            Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
+            Utils.enhancedDeepEquals(this.brand, other.brand) &&
+            Utils.enhancedDeepEquals(this.lastFourCardNumber, other.lastFourCardNumber) &&
+            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser) &&
+            Utils.enhancedDeepEquals(this.memo, other.memo) &&
+            Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
+            Utils.enhancedDeepEquals(this.state, other.state) &&
+            Utils.enhancedDeepEquals(this.formFactor, other.formFactor) &&
+            Utils.enhancedDeepEquals(this.controls, other.controls) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             issuedCardID,
             brand,
             lastFourCardNumber,

@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -26,6 +25,7 @@ public class AccountTerminalApplicationError extends RuntimeException {
     @JsonCreator
     public AccountTerminalApplicationError(
             @JsonProperty("terminalApplicationID") Optional<String> terminalApplicationID) {
+        super("API error occurred");
         Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
         this.terminalApplicationID = terminalApplicationID;
     }
@@ -66,12 +66,12 @@ public class AccountTerminalApplicationError extends RuntimeException {
         }
         AccountTerminalApplicationError other = (AccountTerminalApplicationError) o;
         return 
-            Objects.deepEquals(this.terminalApplicationID, other.terminalApplicationID);
+            Utils.enhancedDeepEquals(this.terminalApplicationID, other.terminalApplicationID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             terminalApplicationID);
     }
     

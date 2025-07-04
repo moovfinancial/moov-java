@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class GetTerminalApplicationRequest {
 
@@ -49,12 +48,12 @@ public class GetTerminalApplicationRequest {
         }
         GetTerminalApplicationRequest other = (GetTerminalApplicationRequest) o;
         return 
-            Objects.deepEquals(this.terminalApplicationID, other.terminalApplicationID);
+            Utils.enhancedDeepEquals(this.terminalApplicationID, other.terminalApplicationID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             terminalApplicationID);
     }
     

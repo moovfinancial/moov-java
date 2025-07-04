@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class WebhookDataBankAccountUpdated {
@@ -158,16 +157,16 @@ public class WebhookDataBankAccountUpdated {
         }
         WebhookDataBankAccountUpdated other = (WebhookDataBankAccountUpdated) o;
         return 
-            Objects.deepEquals(this.bankAccountID, other.bankAccountID) &&
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.statusReason, other.statusReason) &&
-            Objects.deepEquals(this.exceptionDetails, other.exceptionDetails);
+            Utils.enhancedDeepEquals(this.bankAccountID, other.bankAccountID) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.statusReason, other.statusReason) &&
+            Utils.enhancedDeepEquals(this.exceptionDetails, other.exceptionDetails);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             bankAccountID,
             accountID,
             status,

@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -128,14 +127,14 @@ public class CardPresentPaymentPaymentMethod implements PaymentMethod {
         }
         CardPresentPaymentPaymentMethod other = (CardPresentPaymentPaymentMethod) o;
         return 
-            Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType) &&
-            Objects.deepEquals(this.terminalCard, other.terminalCard);
+            Utils.enhancedDeepEquals(this.paymentMethodID, other.paymentMethodID) &&
+            Utils.enhancedDeepEquals(this.paymentMethodType, other.paymentMethodType) &&
+            Utils.enhancedDeepEquals(this.terminalCard, other.terminalCard);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             paymentMethodID,
             paymentMethodType,
             terminalCard);

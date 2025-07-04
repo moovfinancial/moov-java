@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class TermsOfServiceError {
@@ -89,13 +88,13 @@ public class TermsOfServiceError {
         }
         TermsOfServiceError other = (TermsOfServiceError) o;
         return 
-            Objects.deepEquals(this.token, other.token) &&
-            Objects.deepEquals(this.manual, other.manual);
+            Utils.enhancedDeepEquals(this.token, other.token) &&
+            Utils.enhancedDeepEquals(this.manual, other.manual);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             token,
             manual);
     }

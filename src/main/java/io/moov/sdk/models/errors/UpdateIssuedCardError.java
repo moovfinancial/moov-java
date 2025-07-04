@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -37,6 +36,7 @@ public class UpdateIssuedCardError extends RuntimeException {
             @JsonProperty("state") Optional<String> state,
             @JsonProperty("memo") Optional<String> memo,
             @JsonProperty("authorizedUser") Optional<? extends CreateAuthorizedUserError> authorizedUser) {
+        super("API error occurred");
         Utils.checkNotNull(state, "state");
         Utils.checkNotNull(memo, "memo");
         Utils.checkNotNull(authorizedUser, "authorizedUser");
@@ -116,14 +116,14 @@ public class UpdateIssuedCardError extends RuntimeException {
         }
         UpdateIssuedCardError other = (UpdateIssuedCardError) o;
         return 
-            Objects.deepEquals(this.state, other.state) &&
-            Objects.deepEquals(this.memo, other.memo) &&
-            Objects.deepEquals(this.authorizedUser, other.authorizedUser);
+            Utils.enhancedDeepEquals(this.state, other.state) &&
+            Utils.enhancedDeepEquals(this.memo, other.memo) &&
+            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             state,
             memo,
             authorizedUser);

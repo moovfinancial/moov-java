@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -201,15 +200,15 @@ public class FacilitatorFee {
         }
         FacilitatorFee other = (FacilitatorFee) o;
         return 
-            Objects.deepEquals(this.total, other.total) &&
-            Objects.deepEquals(this.totalDecimal, other.totalDecimal) &&
-            Objects.deepEquals(this.markup, other.markup) &&
-            Objects.deepEquals(this.markupDecimal, other.markupDecimal);
+            Utils.enhancedDeepEquals(this.total, other.total) &&
+            Utils.enhancedDeepEquals(this.totalDecimal, other.totalDecimal) &&
+            Utils.enhancedDeepEquals(this.markup, other.markup) &&
+            Utils.enhancedDeepEquals(this.markupDecimal, other.markupDecimal);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             total,
             totalDecimal,
             markup,

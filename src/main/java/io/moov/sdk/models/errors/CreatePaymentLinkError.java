@@ -17,7 +17,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -65,6 +64,7 @@ public class CreatePaymentLinkError extends RuntimeException {
             @JsonProperty("display") Optional<? extends DisplayOptionsError> display,
             @JsonProperty("payment") Optional<? extends PaymentDetailsError> payment,
             @JsonProperty("payout") Optional<? extends PayoutDetailsError> payout) {
+        super("API error occurred");
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
         Utils.checkNotNull(amount, "amount");
@@ -242,19 +242,19 @@ public class CreatePaymentLinkError extends RuntimeException {
         }
         CreatePaymentLinkError other = (CreatePaymentLinkError) o;
         return 
-            Objects.deepEquals(this.partnerAccountID, other.partnerAccountID) &&
-            Objects.deepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.maxUses, other.maxUses) &&
-            Objects.deepEquals(this.expiresOn, other.expiresOn) &&
-            Objects.deepEquals(this.display, other.display) &&
-            Objects.deepEquals(this.payment, other.payment) &&
-            Objects.deepEquals(this.payout, other.payout);
+            Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
+            Utils.enhancedDeepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.maxUses, other.maxUses) &&
+            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
+            Utils.enhancedDeepEquals(this.display, other.display) &&
+            Utils.enhancedDeepEquals(this.payment, other.payment) &&
+            Utils.enhancedDeepEquals(this.payout, other.payout);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             partnerAccountID,
             merchantPaymentMethodID,
             amount,

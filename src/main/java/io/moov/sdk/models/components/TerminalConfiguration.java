@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * TerminalConfiguration
@@ -54,12 +53,12 @@ public class TerminalConfiguration {
         }
         TerminalConfiguration other = (TerminalConfiguration) o;
         return 
-            Objects.deepEquals(this.configuration, other.configuration);
+            Utils.enhancedDeepEquals(this.configuration, other.configuration);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             configuration);
     }
     

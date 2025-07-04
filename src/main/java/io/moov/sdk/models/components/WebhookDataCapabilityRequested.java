@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class WebhookDataCapabilityRequested {
@@ -114,14 +113,14 @@ public class WebhookDataCapabilityRequested {
         }
         WebhookDataCapabilityRequested other = (WebhookDataCapabilityRequested) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.foreignID, other.foreignID) &&
-            Objects.deepEquals(this.capabilityID, other.capabilityID);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+            Utils.enhancedDeepEquals(this.capabilityID, other.capabilityID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             foreignID,
             capabilityID);

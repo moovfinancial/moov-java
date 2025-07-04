@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -410,24 +409,24 @@ public class BusinessProfile {
         }
         BusinessProfile other = (BusinessProfile) o;
         return 
-            Objects.deepEquals(this.legalBusinessName, other.legalBusinessName) &&
-            Objects.deepEquals(this.doingBusinessAs, other.doingBusinessAs) &&
-            Objects.deepEquals(this.businessType, other.businessType) &&
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.phone, other.phone) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.website, other.website) &&
-            Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.taxIDProvided, other.taxIDProvided) &&
-            Objects.deepEquals(this.representatives, other.representatives) &&
-            Objects.deepEquals(this.ownersProvided, other.ownersProvided) &&
-            Objects.deepEquals(this.industryCodes, other.industryCodes) &&
-            Objects.deepEquals(this.primaryRegulator, other.primaryRegulator);
+            Utils.enhancedDeepEquals(this.legalBusinessName, other.legalBusinessName) &&
+            Utils.enhancedDeepEquals(this.doingBusinessAs, other.doingBusinessAs) &&
+            Utils.enhancedDeepEquals(this.businessType, other.businessType) &&
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.phone, other.phone) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.website, other.website) &&
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.taxIDProvided, other.taxIDProvided) &&
+            Utils.enhancedDeepEquals(this.representatives, other.representatives) &&
+            Utils.enhancedDeepEquals(this.ownersProvided, other.ownersProvided) &&
+            Utils.enhancedDeepEquals(this.industryCodes, other.industryCodes) &&
+            Utils.enhancedDeepEquals(this.primaryRegulator, other.primaryRegulator);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             legalBusinessName,
             doingBusinessAs,
             businessType,

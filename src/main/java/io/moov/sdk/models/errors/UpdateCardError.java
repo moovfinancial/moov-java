@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -62,6 +61,7 @@ public class UpdateCardError extends RuntimeException {
             @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
             @JsonProperty("verifyName") Optional<String> verifyName,
             @JsonProperty("holderName") Optional<String> holderName) {
+        super("API error occurred");
         Utils.checkNotNull(e2ee, "e2ee");
         Utils.checkNotNull(billingAddress, "billingAddress");
         Utils.checkNotNull(expiration, "expiration");
@@ -236,19 +236,19 @@ public class UpdateCardError extends RuntimeException {
         }
         UpdateCardError other = (UpdateCardError) o;
         return 
-            Objects.deepEquals(this.e2ee, other.e2ee) &&
-            Objects.deepEquals(this.billingAddress, other.billingAddress) &&
-            Objects.deepEquals(this.expiration, other.expiration) &&
-            Objects.deepEquals(this.cardCvv, other.cardCvv) &&
-            Objects.deepEquals(this.cardOnFile, other.cardOnFile) &&
-            Objects.deepEquals(this.merchantAccountID, other.merchantAccountID) &&
-            Objects.deepEquals(this.verifyName, other.verifyName) &&
-            Objects.deepEquals(this.holderName, other.holderName);
+            Utils.enhancedDeepEquals(this.e2ee, other.e2ee) &&
+            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
+            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+            Utils.enhancedDeepEquals(this.cardCvv, other.cardCvv) &&
+            Utils.enhancedDeepEquals(this.cardOnFile, other.cardOnFile) &&
+            Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+            Utils.enhancedDeepEquals(this.verifyName, other.verifyName) &&
+            Utils.enhancedDeepEquals(this.holderName, other.holderName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             e2ee,
             billingAddress,
             expiration,

@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class CreateEvidenceFileMultiPart {
 
@@ -90,13 +89,13 @@ public class CreateEvidenceFileMultiPart {
         }
         CreateEvidenceFileMultiPart other = (CreateEvidenceFileMultiPart) o;
         return 
-            Objects.deepEquals(this.file, other.file) &&
-            Objects.deepEquals(this.evidenceType, other.evidenceType);
+            Utils.enhancedDeepEquals(this.file, other.file) &&
+            Utils.enhancedDeepEquals(this.evidenceType, other.evidenceType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             file,
             evidenceType);
     }

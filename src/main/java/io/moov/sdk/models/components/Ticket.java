@@ -13,7 +13,6 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Ticket {
@@ -215,20 +214,20 @@ public class Ticket {
         }
         Ticket other = (Ticket) o;
         return 
-            Objects.deepEquals(this.ticketID, other.ticketID) &&
-            Objects.deepEquals(this.number, other.number) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.contact, other.contact) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.latestMessageOn, other.latestMessageOn) &&
-            Objects.deepEquals(this.closedOn, other.closedOn);
+            Utils.enhancedDeepEquals(this.ticketID, other.ticketID) &&
+            Utils.enhancedDeepEquals(this.number, other.number) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.contact, other.contact) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.latestMessageOn, other.latestMessageOn) &&
+            Utils.enhancedDeepEquals(this.closedOn, other.closedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             ticketID,
             number,
             title,

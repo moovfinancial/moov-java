@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -335,22 +334,22 @@ public class Representative {
         }
         Representative other = (Representative) o;
         return 
-            Objects.deepEquals(this.representativeID, other.representativeID) &&
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.phone, other.phone) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.birthDateProvided, other.birthDateProvided) &&
-            Objects.deepEquals(this.governmentIDProvided, other.governmentIDProvided) &&
-            Objects.deepEquals(this.responsibilities, other.responsibilities) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.disabledOn, other.disabledOn);
+            Utils.enhancedDeepEquals(this.representativeID, other.representativeID) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.phone, other.phone) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.birthDateProvided, other.birthDateProvided) &&
+            Utils.enhancedDeepEquals(this.governmentIDProvided, other.governmentIDProvided) &&
+            Utils.enhancedDeepEquals(this.responsibilities, other.responsibilities) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             representativeID,
             name,
             phone,

@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class VolumeByCustomerType {
 
@@ -67,13 +66,13 @@ public class VolumeByCustomerType {
         }
         VolumeByCustomerType other = (VolumeByCustomerType) o;
         return 
-            Objects.deepEquals(this.businessToBusinessPercentage, other.businessToBusinessPercentage) &&
-            Objects.deepEquals(this.consumerToBusinessPercentage, other.consumerToBusinessPercentage);
+            Utils.enhancedDeepEquals(this.businessToBusinessPercentage, other.businessToBusinessPercentage) &&
+            Utils.enhancedDeepEquals(this.consumerToBusinessPercentage, other.consumerToBusinessPercentage);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             businessToBusinessPercentage,
             consumerToBusinessPercentage);
     }

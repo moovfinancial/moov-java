@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -179,15 +178,15 @@ public class MoovFeeDetails {
         }
         MoovFeeDetails other = (MoovFeeDetails) o;
         return 
-            Objects.deepEquals(this.cardScheme, other.cardScheme) &&
-            Objects.deepEquals(this.interchange, other.interchange) &&
-            Objects.deepEquals(this.discount, other.discount) &&
-            Objects.deepEquals(this.moovProcessing, other.moovProcessing);
+            Utils.enhancedDeepEquals(this.cardScheme, other.cardScheme) &&
+            Utils.enhancedDeepEquals(this.interchange, other.interchange) &&
+            Utils.enhancedDeepEquals(this.discount, other.discount) &&
+            Utils.enhancedDeepEquals(this.moovProcessing, other.moovProcessing);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             cardScheme,
             interchange,
             discount,

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class DisplayOptionsError {
@@ -111,14 +110,14 @@ public class DisplayOptionsError {
         }
         DisplayOptionsError other = (DisplayOptionsError) o;
         return 
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.callToAction, other.callToAction);
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.callToAction, other.callToAction);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             title,
             description,
             callToAction);

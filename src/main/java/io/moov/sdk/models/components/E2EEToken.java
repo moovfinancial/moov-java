@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * E2EEToken
@@ -65,12 +64,12 @@ public class E2EEToken {
         }
         E2EEToken other = (E2EEToken) o;
         return 
-            Objects.deepEquals(this.token, other.token);
+            Utils.enhancedDeepEquals(this.token, other.token);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             token);
     }
     

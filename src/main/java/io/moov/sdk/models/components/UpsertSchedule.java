@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UpsertSchedule {
@@ -139,14 +138,14 @@ public class UpsertSchedule {
         }
         UpsertSchedule other = (UpsertSchedule) o;
         return 
-            Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.occurrences, other.occurrences) &&
-            Objects.deepEquals(this.recur, other.recur);
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.occurrences, other.occurrences) &&
+            Utils.enhancedDeepEquals(this.recur, other.recur);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             description,
             occurrences,
             recur);

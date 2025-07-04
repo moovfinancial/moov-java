@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -34,6 +33,7 @@ public class RefundValidationError extends RuntimeException {
     public RefundValidationError(
             @JsonProperty("amount") Optional<String> amount,
             @JsonProperty("error") Optional<String> error) {
+        super("API error occurred");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(error, "error");
         this.amount = amount;
@@ -102,13 +102,13 @@ public class RefundValidationError extends RuntimeException {
         }
         RefundValidationError other = (RefundValidationError) o;
         return 
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.error, other.error);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount,
             error);
     }

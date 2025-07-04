@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class CreateFeePlanAgreement {
 
@@ -49,12 +48,12 @@ public class CreateFeePlanAgreement {
         }
         CreateFeePlanAgreement other = (CreateFeePlanAgreement) o;
         return 
-            Objects.deepEquals(this.planID, other.planID);
+            Utils.enhancedDeepEquals(this.planID, other.planID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             planID);
     }
     

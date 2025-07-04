@@ -10,7 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class LinkAccountTerminalApplicationRequest {
 
@@ -67,13 +66,13 @@ public class LinkAccountTerminalApplicationRequest {
         }
         LinkAccountTerminalApplicationRequest other = (LinkAccountTerminalApplicationRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.linkAccountTerminalApplication, other.linkAccountTerminalApplication);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.linkAccountTerminalApplication, other.linkAccountTerminalApplication);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             linkAccountTerminalApplication);
     }

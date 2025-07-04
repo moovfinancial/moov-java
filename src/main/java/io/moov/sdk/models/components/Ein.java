@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class Ein {
 
@@ -49,12 +48,12 @@ public class Ein {
         }
         Ein other = (Ein) o;
         return 
-            Objects.deepEquals(this.number, other.number);
+            Utils.enhancedDeepEquals(this.number, other.number);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             number);
     }
     

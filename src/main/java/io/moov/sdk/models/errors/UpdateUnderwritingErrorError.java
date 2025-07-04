@@ -15,7 +15,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UpdateUnderwritingErrorError {
@@ -190,17 +189,17 @@ public class UpdateUnderwritingErrorError {
         }
         UpdateUnderwritingErrorError other = (UpdateUnderwritingErrorError) o;
         return 
-            Objects.deepEquals(this.averageMonthlyTransactionVolume, other.averageMonthlyTransactionVolume) &&
-            Objects.deepEquals(this.averageTransactionSize, other.averageTransactionSize) &&
-            Objects.deepEquals(this.maxTransactionSize, other.maxTransactionSize) &&
-            Objects.deepEquals(this.volumeByCustomerType, other.volumeByCustomerType) &&
-            Objects.deepEquals(this.cardVolumeDistribution, other.cardVolumeDistribution) &&
-            Objects.deepEquals(this.fulfillment, other.fulfillment);
+            Utils.enhancedDeepEquals(this.averageMonthlyTransactionVolume, other.averageMonthlyTransactionVolume) &&
+            Utils.enhancedDeepEquals(this.averageTransactionSize, other.averageTransactionSize) &&
+            Utils.enhancedDeepEquals(this.maxTransactionSize, other.maxTransactionSize) &&
+            Utils.enhancedDeepEquals(this.volumeByCustomerType, other.volumeByCustomerType) &&
+            Utils.enhancedDeepEquals(this.cardVolumeDistribution, other.cardVolumeDistribution) &&
+            Utils.enhancedDeepEquals(this.fulfillment, other.fulfillment);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             averageMonthlyTransactionVolume,
             averageTransactionSize,
             maxTransactionSize,

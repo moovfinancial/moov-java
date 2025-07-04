@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * AccountCapability
@@ -71,13 +70,13 @@ public class AccountCapability {
         }
         AccountCapability other = (AccountCapability) o;
         return 
-            Objects.deepEquals(this.capability, other.capability) &&
-            Objects.deepEquals(this.status, other.status);
+            Utils.enhancedDeepEquals(this.capability, other.capability) &&
+            Utils.enhancedDeepEquals(this.status, other.status);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             capability,
             status);
     }

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class IssuingVelocityLimitError {
@@ -87,13 +86,13 @@ public class IssuingVelocityLimitError {
         }
         IssuingVelocityLimitError other = (IssuingVelocityLimitError) o;
         return 
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.interval, other.interval);
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.interval, other.interval);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount,
             interval);
     }

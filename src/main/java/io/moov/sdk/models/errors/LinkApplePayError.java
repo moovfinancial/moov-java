@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -53,6 +52,7 @@ public class LinkApplePayError extends RuntimeException {
             @JsonProperty("paymentData") Optional<String> paymentData,
             @JsonProperty("paymentMethod") Optional<String> paymentMethod,
             @JsonProperty("transactionIdentifier") Optional<String> transactionIdentifier) {
+        super("API error occurred");
         Utils.checkNotNull(error, "error");
         Utils.checkNotNull(paymentData, "paymentData");
         Utils.checkNotNull(paymentMethod, "paymentMethod");
@@ -186,15 +186,15 @@ public class LinkApplePayError extends RuntimeException {
         }
         LinkApplePayError other = (LinkApplePayError) o;
         return 
-            Objects.deepEquals(this.error, other.error) &&
-            Objects.deepEquals(this.paymentData, other.paymentData) &&
-            Objects.deepEquals(this.paymentMethod, other.paymentMethod) &&
-            Objects.deepEquals(this.transactionIdentifier, other.transactionIdentifier);
+            Utils.enhancedDeepEquals(this.error, other.error) &&
+            Utils.enhancedDeepEquals(this.paymentData, other.paymentData) &&
+            Utils.enhancedDeepEquals(this.paymentMethod, other.paymentMethod) &&
+            Utils.enhancedDeepEquals(this.transactionIdentifier, other.transactionIdentifier);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             error,
             paymentData,
             paymentMethod,

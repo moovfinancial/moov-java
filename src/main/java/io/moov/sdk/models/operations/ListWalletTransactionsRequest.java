@@ -16,7 +16,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListWalletTransactionsRequest {
@@ -480,25 +479,25 @@ public class ListWalletTransactionsRequest {
         }
         ListWalletTransactionsRequest other = (ListWalletTransactionsRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.skip, other.skip) &&
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.walletID, other.walletID) &&
-            Objects.deepEquals(this.transactionType, other.transactionType) &&
-            Objects.deepEquals(this.transactionTypes, other.transactionTypes) &&
-            Objects.deepEquals(this.sourceType, other.sourceType) &&
-            Objects.deepEquals(this.sourceID, other.sourceID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.createdStartDateTime, other.createdStartDateTime) &&
-            Objects.deepEquals(this.createdEndDateTime, other.createdEndDateTime) &&
-            Objects.deepEquals(this.completedStartDateTime, other.completedStartDateTime) &&
-            Objects.deepEquals(this.completedEndDateTime, other.completedEndDateTime) &&
-            Objects.deepEquals(this.sweepID, other.sweepID);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
+            Utils.enhancedDeepEquals(this.transactionType, other.transactionType) &&
+            Utils.enhancedDeepEquals(this.transactionTypes, other.transactionTypes) &&
+            Utils.enhancedDeepEquals(this.sourceType, other.sourceType) &&
+            Utils.enhancedDeepEquals(this.sourceID, other.sourceID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.createdStartDateTime, other.createdStartDateTime) &&
+            Utils.enhancedDeepEquals(this.createdEndDateTime, other.createdEndDateTime) &&
+            Utils.enhancedDeepEquals(this.completedStartDateTime, other.completedStartDateTime) &&
+            Utils.enhancedDeepEquals(this.completedEndDateTime, other.completedEndDateTime) &&
+            Utils.enhancedDeepEquals(this.sweepID, other.sweepID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             skip,
             count,

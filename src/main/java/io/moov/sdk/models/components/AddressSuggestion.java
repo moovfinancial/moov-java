@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class AddressSuggestion {
@@ -196,17 +195,17 @@ public class AddressSuggestion {
         }
         AddressSuggestion other = (AddressSuggestion) o;
         return 
-            Objects.deepEquals(this.addressLine1, other.addressLine1) &&
-            Objects.deepEquals(this.addressLine2, other.addressLine2) &&
-            Objects.deepEquals(this.city, other.city) &&
-            Objects.deepEquals(this.entries, other.entries) &&
-            Objects.deepEquals(this.postalCode, other.postalCode) &&
-            Objects.deepEquals(this.stateOrProvince, other.stateOrProvince);
+            Utils.enhancedDeepEquals(this.addressLine1, other.addressLine1) &&
+            Utils.enhancedDeepEquals(this.addressLine2, other.addressLine2) &&
+            Utils.enhancedDeepEquals(this.city, other.city) &&
+            Utils.enhancedDeepEquals(this.entries, other.entries) &&
+            Utils.enhancedDeepEquals(this.postalCode, other.postalCode) &&
+            Utils.enhancedDeepEquals(this.stateOrProvince, other.stateOrProvince);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             addressLine1,
             addressLine2,
             city,

@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class IssuingVelocityLimit {
 
@@ -85,13 +84,13 @@ public class IssuingVelocityLimit {
         }
         IssuingVelocityLimit other = (IssuingVelocityLimit) o;
         return 
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.interval, other.interval);
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.interval, other.interval);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount,
             interval);
     }

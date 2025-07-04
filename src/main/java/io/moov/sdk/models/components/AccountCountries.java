@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * AccountCountries
@@ -55,12 +54,12 @@ public class AccountCountries {
         }
         AccountCountries other = (AccountCountries) o;
         return 
-            Objects.deepEquals(this.countries, other.countries);
+            Utils.enhancedDeepEquals(this.countries, other.countries);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             countries);
     }
     

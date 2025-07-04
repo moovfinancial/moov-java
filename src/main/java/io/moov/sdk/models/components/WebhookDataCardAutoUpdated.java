@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class WebhookDataCardAutoUpdated {
 
@@ -92,14 +91,14 @@ public class WebhookDataCardAutoUpdated {
         }
         WebhookDataCardAutoUpdated other = (WebhookDataCardAutoUpdated) o;
         return 
-            Objects.deepEquals(this.cardID, other.cardID) &&
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.updateType, other.updateType);
+            Utils.enhancedDeepEquals(this.cardID, other.cardID) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.updateType, other.updateType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             cardID,
             accountID,
             updateType);

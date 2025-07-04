@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class TransferSource {
@@ -386,22 +385,22 @@ public class TransferSource {
         }
         TransferSource other = (TransferSource) o;
         return 
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType) &&
-            Objects.deepEquals(this.account, other.account) &&
-            Objects.deepEquals(this.bankAccount, other.bankAccount) &&
-            Objects.deepEquals(this.wallet, other.wallet) &&
-            Objects.deepEquals(this.card, other.card) &&
-            Objects.deepEquals(this.applePay, other.applePay) &&
-            Objects.deepEquals(this.terminalCard, other.terminalCard) &&
-            Objects.deepEquals(this.cardDetails, other.cardDetails) &&
-            Objects.deepEquals(this.achDetails, other.achDetails);
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.paymentMethodID, other.paymentMethodID) &&
+            Utils.enhancedDeepEquals(this.paymentMethodType, other.paymentMethodType) &&
+            Utils.enhancedDeepEquals(this.account, other.account) &&
+            Utils.enhancedDeepEquals(this.bankAccount, other.bankAccount) &&
+            Utils.enhancedDeepEquals(this.wallet, other.wallet) &&
+            Utils.enhancedDeepEquals(this.card, other.card) &&
+            Utils.enhancedDeepEquals(this.applePay, other.applePay) &&
+            Utils.enhancedDeepEquals(this.terminalCard, other.terminalCard) &&
+            Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
+            Utils.enhancedDeepEquals(this.achDetails, other.achDetails);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             transferID,
             paymentMethodID,
             paymentMethodType,

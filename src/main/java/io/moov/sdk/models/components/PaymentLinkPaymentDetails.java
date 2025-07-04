@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -147,14 +146,14 @@ public class PaymentLinkPaymentDetails {
         }
         PaymentLinkPaymentDetails other = (PaymentLinkPaymentDetails) o;
         return 
-            Objects.deepEquals(this.allowedMethods, other.allowedMethods) &&
-            Objects.deepEquals(this.cardDetails, other.cardDetails) &&
-            Objects.deepEquals(this.achDetails, other.achDetails);
+            Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
+            Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
+            Utils.enhancedDeepEquals(this.achDetails, other.achDetails);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             allowedMethods,
             cardDetails,
             achDetails);

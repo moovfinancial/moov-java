@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class WebhookDataSweepUpdated {
@@ -117,15 +116,15 @@ public class WebhookDataSweepUpdated {
         }
         WebhookDataSweepUpdated other = (WebhookDataSweepUpdated) o;
         return 
-            Objects.deepEquals(this.walletID, other.walletID) &&
-            Objects.deepEquals(this.sweepID, other.sweepID) &&
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.status, other.status);
+            Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
+            Utils.enhancedDeepEquals(this.sweepID, other.sweepID) &&
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.status, other.status);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             walletID,
             sweepID,
             transferID,

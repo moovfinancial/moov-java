@@ -11,7 +11,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 
 @SuppressWarnings("serial")
 public class RepresentativeValidationError extends RuntimeException {
@@ -22,6 +21,7 @@ public class RepresentativeValidationError extends RuntimeException {
     @JsonCreator
     public RepresentativeValidationError(
             @JsonProperty("error") Error error) {
+        super("API error occurred");
         Utils.checkNotNull(error, "error");
         this.error = error;
     }
@@ -52,12 +52,12 @@ public class RepresentativeValidationError extends RuntimeException {
         }
         RepresentativeValidationError other = (RepresentativeValidationError) o;
         return 
-            Objects.deepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.error, other.error);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             error);
     }
     

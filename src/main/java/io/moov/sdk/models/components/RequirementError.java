@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class RequirementError {
@@ -92,13 +91,13 @@ public class RequirementError {
         }
         RequirementError other = (RequirementError) o;
         return 
-            Objects.deepEquals(this.requirement, other.requirement) &&
-            Objects.deepEquals(this.errorCode, other.errorCode);
+            Utils.enhancedDeepEquals(this.requirement, other.requirement) &&
+            Utils.enhancedDeepEquals(this.errorCode, other.errorCode);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             requirement,
             errorCode);
     }

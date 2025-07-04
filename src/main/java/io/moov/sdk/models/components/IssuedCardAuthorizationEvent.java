@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 public class IssuedCardAuthorizationEvent {
 
@@ -154,16 +153,16 @@ public class IssuedCardAuthorizationEvent {
         }
         IssuedCardAuthorizationEvent other = (IssuedCardAuthorizationEvent) o;
         return 
-            Objects.deepEquals(this.eventID, other.eventID) &&
-            Objects.deepEquals(this.eventType, other.eventType) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.result, other.result) &&
-            Objects.deepEquals(this.createdOn, other.createdOn);
+            Utils.enhancedDeepEquals(this.eventID, other.eventID) &&
+            Utils.enhancedDeepEquals(this.eventType, other.eventType) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.result, other.result) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             eventID,
             eventType,
             amount,

@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class RetrieveFeesRequest {
@@ -242,18 +241,18 @@ public class RetrieveFeesRequest {
         }
         RetrieveFeesRequest other = (RetrieveFeesRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.disputeID, other.disputeID) &&
-            Objects.deepEquals(this.startDateTime, other.startDateTime) &&
-            Objects.deepEquals(this.endDateTime, other.endDateTime) &&
-            Objects.deepEquals(this.skip, other.skip) &&
-            Objects.deepEquals(this.count, other.count);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
+            Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
+            Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             transferID,
             disputeID,

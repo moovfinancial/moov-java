@@ -11,7 +11,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 
 public class ApplePayMerchantDomains {
 
@@ -137,16 +136,16 @@ public class ApplePayMerchantDomains {
         }
         ApplePayMerchantDomains other = (ApplePayMerchantDomains) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.displayName, other.displayName) &&
-            Objects.deepEquals(this.domains, other.domains) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.displayName, other.displayName) &&
+            Utils.enhancedDeepEquals(this.domains, other.domains) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             displayName,
             domains,

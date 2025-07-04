@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class FulfillmentDetailsError {
@@ -87,13 +86,13 @@ public class FulfillmentDetailsError {
         }
         FulfillmentDetailsError other = (FulfillmentDetailsError) o;
         return 
-            Objects.deepEquals(this.shipmentDurationDays, other.shipmentDurationDays) &&
-            Objects.deepEquals(this.returnPolicy, other.returnPolicy);
+            Utils.enhancedDeepEquals(this.shipmentDurationDays, other.shipmentDurationDays) &&
+            Utils.enhancedDeepEquals(this.returnPolicy, other.returnPolicy);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             shipmentDurationDays,
             returnPolicy);
     }

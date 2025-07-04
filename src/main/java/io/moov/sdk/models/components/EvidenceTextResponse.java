@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 public class EvidenceTextResponse {
 
@@ -118,16 +117,16 @@ public class EvidenceTextResponse {
         }
         EvidenceTextResponse other = (EvidenceTextResponse) o;
         return 
-            Objects.deepEquals(this.evidenceID, other.evidenceID) &&
-            Objects.deepEquals(this.disputeID, other.disputeID) &&
-            Objects.deepEquals(this.evidenceType, other.evidenceType) &&
-            Objects.deepEquals(this.text, other.text) &&
-            Objects.deepEquals(this.createdOn, other.createdOn);
+            Utils.enhancedDeepEquals(this.evidenceID, other.evidenceID) &&
+            Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
+            Utils.enhancedDeepEquals(this.evidenceType, other.evidenceType) &&
+            Utils.enhancedDeepEquals(this.text, other.text) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             evidenceID,
             disputeID,
             evidenceType,

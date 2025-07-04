@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 /**
  * CardAcquiringDispute
@@ -89,14 +88,14 @@ public class CardAcquiringDispute {
         }
         CardAcquiringDispute other = (CardAcquiringDispute) o;
         return 
-            Objects.deepEquals(this.disputeID, other.disputeID) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.amount, other.amount);
+            Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             disputeID,
             createdOn,
             amount);

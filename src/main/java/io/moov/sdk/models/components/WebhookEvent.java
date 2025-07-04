@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 /**
  * WebhookEvent
@@ -133,15 +132,15 @@ public class WebhookEvent {
         }
         WebhookEvent other = (WebhookEvent) o;
         return 
-            Objects.deepEquals(this.eventID, other.eventID) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.data, other.data) &&
-            Objects.deepEquals(this.createdOn, other.createdOn);
+            Utils.enhancedDeepEquals(this.eventID, other.eventID) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.data, other.data) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             eventID,
             type,
             data,

@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -216,18 +215,18 @@ public class UpdateRepresentative {
         }
         UpdateRepresentative other = (UpdateRepresentative) o;
         return 
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.phone, other.phone) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.birthDate, other.birthDate) &&
-            Objects.deepEquals(this.governmentID, other.governmentID) &&
-            Objects.deepEquals(this.responsibilities, other.responsibilities);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.phone, other.phone) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.birthDate, other.birthDate) &&
+            Utils.enhancedDeepEquals(this.governmentID, other.governmentID) &&
+            Utils.enhancedDeepEquals(this.responsibilities, other.responsibilities);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             name,
             phone,
             email,

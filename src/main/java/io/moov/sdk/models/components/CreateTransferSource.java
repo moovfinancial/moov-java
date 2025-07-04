@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -183,16 +182,16 @@ public class CreateTransferSource {
         }
         CreateTransferSource other = (CreateTransferSource) o;
         return 
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Objects.deepEquals(this.paymentToken, other.paymentToken) &&
-            Objects.deepEquals(this.cardDetails, other.cardDetails) &&
-            Objects.deepEquals(this.achDetails, other.achDetails);
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.paymentMethodID, other.paymentMethodID) &&
+            Utils.enhancedDeepEquals(this.paymentToken, other.paymentToken) &&
+            Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
+            Utils.enhancedDeepEquals(this.achDetails, other.achDetails);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             transferID,
             paymentMethodID,
             paymentToken,

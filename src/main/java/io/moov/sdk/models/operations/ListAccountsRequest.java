@@ -15,7 +15,6 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListAccountsRequest {
@@ -440,21 +439,21 @@ public class ListAccountsRequest {
         }
         ListAccountsRequest other = (ListAccountsRequest) o;
         return 
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.includeGuest, other.includeGuest) &&
-            Objects.deepEquals(this.foreignID, other.foreignID) &&
-            Objects.deepEquals(this.includeDisconnected, other.includeDisconnected) &&
-            Objects.deepEquals(this.capability, other.capability) &&
-            Objects.deepEquals(this.capabilityStatus, other.capabilityStatus) &&
-            Objects.deepEquals(this.skip, other.skip) &&
-            Objects.deepEquals(this.count, other.count);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.includeGuest, other.includeGuest) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+            Utils.enhancedDeepEquals(this.includeDisconnected, other.includeDisconnected) &&
+            Utils.enhancedDeepEquals(this.capability, other.capability) &&
+            Utils.enhancedDeepEquals(this.capabilityStatus, other.capabilityStatus) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             name,
             email,
             type,

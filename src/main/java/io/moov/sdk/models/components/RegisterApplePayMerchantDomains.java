@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class RegisterApplePayMerchantDomains {
@@ -114,13 +113,13 @@ public class RegisterApplePayMerchantDomains {
         }
         RegisterApplePayMerchantDomains other = (RegisterApplePayMerchantDomains) o;
         return 
-            Objects.deepEquals(this.displayName, other.displayName) &&
-            Objects.deepEquals(this.domains, other.domains);
+            Utils.enhancedDeepEquals(this.displayName, other.displayName) &&
+            Utils.enhancedDeepEquals(this.domains, other.domains);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             displayName,
             domains);
     }

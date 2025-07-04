@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class CardVolumeDistribution {
 
@@ -101,15 +100,15 @@ public class CardVolumeDistribution {
         }
         CardVolumeDistribution other = (CardVolumeDistribution) o;
         return 
-            Objects.deepEquals(this.ecommercePercentage, other.ecommercePercentage) &&
-            Objects.deepEquals(this.cardPresentPercentage, other.cardPresentPercentage) &&
-            Objects.deepEquals(this.mailOrPhonePercentage, other.mailOrPhonePercentage) &&
-            Objects.deepEquals(this.debtRepaymentPercentage, other.debtRepaymentPercentage);
+            Utils.enhancedDeepEquals(this.ecommercePercentage, other.ecommercePercentage) &&
+            Utils.enhancedDeepEquals(this.cardPresentPercentage, other.cardPresentPercentage) &&
+            Utils.enhancedDeepEquals(this.mailOrPhonePercentage, other.mailOrPhonePercentage) &&
+            Utils.enhancedDeepEquals(this.debtRepaymentPercentage, other.debtRepaymentPercentage);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             ecommercePercentage,
             cardPresentPercentage,
             mailOrPhonePercentage,

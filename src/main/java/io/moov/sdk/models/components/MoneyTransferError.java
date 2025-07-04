@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class MoneyTransferError {
@@ -90,13 +89,13 @@ public class MoneyTransferError {
         }
         MoneyTransferError other = (MoneyTransferError) o;
         return 
-            Objects.deepEquals(this.pullFromCard, other.pullFromCard) &&
-            Objects.deepEquals(this.pushToCard, other.pushToCard);
+            Utils.enhancedDeepEquals(this.pullFromCard, other.pullFromCard) &&
+            Utils.enhancedDeepEquals(this.pushToCard, other.pushToCard);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             pullFromCard,
             pushToCard);
     }

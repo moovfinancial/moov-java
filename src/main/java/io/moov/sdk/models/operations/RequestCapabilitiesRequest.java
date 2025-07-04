@@ -10,7 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class RequestCapabilitiesRequest {
 
@@ -67,13 +66,13 @@ public class RequestCapabilitiesRequest {
         }
         RequestCapabilitiesRequest other = (RequestCapabilitiesRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.addCapabilities, other.addCapabilities);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.addCapabilities, other.addCapabilities);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             addCapabilities);
     }

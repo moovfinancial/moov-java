@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class VolumeShareByCustomerTypeError {
@@ -111,14 +110,14 @@ public class VolumeShareByCustomerTypeError {
         }
         VolumeShareByCustomerTypeError other = (VolumeShareByCustomerTypeError) o;
         return 
-            Objects.deepEquals(this.business, other.business) &&
-            Objects.deepEquals(this.consumer, other.consumer) &&
-            Objects.deepEquals(this.p2p, other.p2p);
+            Utils.enhancedDeepEquals(this.business, other.business) &&
+            Utils.enhancedDeepEquals(this.consumer, other.consumer) &&
+            Utils.enhancedDeepEquals(this.p2p, other.p2p);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             business,
             consumer,
             p2p);

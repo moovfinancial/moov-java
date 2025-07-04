@@ -12,7 +12,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class AuthTokenRequest {
@@ -225,16 +224,16 @@ public class AuthTokenRequest {
         }
         AuthTokenRequest other = (AuthTokenRequest) o;
         return 
-            Objects.deepEquals(this.grantType, other.grantType) &&
-            Objects.deepEquals(this.clientId, other.clientId) &&
-            Objects.deepEquals(this.clientSecret, other.clientSecret) &&
-            Objects.deepEquals(this.scope, other.scope) &&
-            Objects.deepEquals(this.refreshToken, other.refreshToken);
+            Utils.enhancedDeepEquals(this.grantType, other.grantType) &&
+            Utils.enhancedDeepEquals(this.clientId, other.clientId) &&
+            Utils.enhancedDeepEquals(this.clientSecret, other.clientSecret) &&
+            Utils.enhancedDeepEquals(this.scope, other.scope) &&
+            Utils.enhancedDeepEquals(this.refreshToken, other.refreshToken);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             grantType,
             clientId,
             clientSecret,

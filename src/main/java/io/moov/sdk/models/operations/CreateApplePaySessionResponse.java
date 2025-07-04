@@ -14,7 +14,6 @@ import java.lang.String;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CreateApplePaySessionResponse implements Response {
@@ -171,16 +170,16 @@ public class CreateApplePaySessionResponse implements Response {
         }
         CreateApplePaySessionResponse other = (CreateApplePaySessionResponse) o;
         return 
-            Objects.deepEquals(this.contentType, other.contentType) &&
-            Objects.deepEquals(this.statusCode, other.statusCode) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.applePaySession, other.applePaySession) &&
-            Objects.deepEquals(this.headers, other.headers);
+            Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
+            Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
+            Utils.enhancedDeepEquals(this.applePaySession, other.applePaySession) &&
+            Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             contentType,
             statusCode,
             rawResponse,

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CardAddress {
@@ -177,17 +176,17 @@ public class CardAddress {
         }
         CardAddress other = (CardAddress) o;
         return 
-            Objects.deepEquals(this.addressLine1, other.addressLine1) &&
-            Objects.deepEquals(this.addressLine2, other.addressLine2) &&
-            Objects.deepEquals(this.city, other.city) &&
-            Objects.deepEquals(this.stateOrProvince, other.stateOrProvince) &&
-            Objects.deepEquals(this.postalCode, other.postalCode) &&
-            Objects.deepEquals(this.country, other.country);
+            Utils.enhancedDeepEquals(this.addressLine1, other.addressLine1) &&
+            Utils.enhancedDeepEquals(this.addressLine2, other.addressLine2) &&
+            Utils.enhancedDeepEquals(this.city, other.city) &&
+            Utils.enhancedDeepEquals(this.stateOrProvince, other.stateOrProvince) &&
+            Utils.enhancedDeepEquals(this.postalCode, other.postalCode) &&
+            Utils.enhancedDeepEquals(this.country, other.country);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             addressLine1,
             addressLine2,
             city,

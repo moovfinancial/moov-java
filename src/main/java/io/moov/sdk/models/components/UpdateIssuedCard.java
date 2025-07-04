@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UpdateIssuedCard {
@@ -158,14 +157,14 @@ public class UpdateIssuedCard {
         }
         UpdateIssuedCard other = (UpdateIssuedCard) o;
         return 
-            Objects.deepEquals(this.state, other.state) &&
-            Objects.deepEquals(this.memo, other.memo) &&
-            Objects.deepEquals(this.authorizedUser, other.authorizedUser);
+            Utils.enhancedDeepEquals(this.state, other.state) &&
+            Utils.enhancedDeepEquals(this.memo, other.memo) &&
+            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             state,
             memo,
             authorizedUser);

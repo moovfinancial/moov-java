@@ -13,7 +13,6 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -163,15 +162,15 @@ public class Recur {
         }
         Recur other = (Recur) o;
         return 
-            Objects.deepEquals(this.recurrenceRule, other.recurrenceRule) &&
-            Objects.deepEquals(this.runTransfer, other.runTransfer) &&
-            Objects.deepEquals(this.indefinite, other.indefinite) &&
-            Objects.deepEquals(this.start, other.start);
+            Utils.enhancedDeepEquals(this.recurrenceRule, other.recurrenceRule) &&
+            Utils.enhancedDeepEquals(this.runTransfer, other.runTransfer) &&
+            Utils.enhancedDeepEquals(this.indefinite, other.indefinite) &&
+            Utils.enhancedDeepEquals(this.start, other.start);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             recurrenceRule,
             runTransfer,
             indefinite,

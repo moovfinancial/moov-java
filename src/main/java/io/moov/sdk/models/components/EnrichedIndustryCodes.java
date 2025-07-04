@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class EnrichedIndustryCodes {
@@ -87,13 +86,13 @@ public class EnrichedIndustryCodes {
         }
         EnrichedIndustryCodes other = (EnrichedIndustryCodes) o;
         return 
-            Objects.deepEquals(this.naics, other.naics) &&
-            Objects.deepEquals(this.sic, other.sic);
+            Utils.enhancedDeepEquals(this.naics, other.naics) &&
+            Utils.enhancedDeepEquals(this.sic, other.sic);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             naics,
             sic);
     }

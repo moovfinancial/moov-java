@@ -10,7 +10,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class CreateTransferOptionsForAccountRequest {
 
@@ -76,13 +75,13 @@ public class CreateTransferOptionsForAccountRequest {
         }
         CreateTransferOptionsForAccountRequest other = (CreateTransferOptionsForAccountRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.createTransferOptions, other.createTransferOptions);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.createTransferOptions, other.createTransferOptions);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             createTransferOptions);
     }

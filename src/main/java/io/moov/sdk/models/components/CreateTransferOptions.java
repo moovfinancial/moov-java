@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class CreateTransferOptions {
 
@@ -83,14 +82,14 @@ public class CreateTransferOptions {
         }
         CreateTransferOptions other = (CreateTransferOptions) o;
         return 
-            Objects.deepEquals(this.source, other.source) &&
-            Objects.deepEquals(this.destination, other.destination) &&
-            Objects.deepEquals(this.amount, other.amount);
+            Utils.enhancedDeepEquals(this.source, other.source) &&
+            Utils.enhancedDeepEquals(this.destination, other.destination) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             source,
             destination,
             amount);

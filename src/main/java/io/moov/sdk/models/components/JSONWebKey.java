@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -439,21 +438,21 @@ public class JSONWebKey {
         }
         JSONWebKey other = (JSONWebKey) o;
         return 
-            Objects.deepEquals(this.kty, other.kty) &&
-            Objects.deepEquals(this.use, other.use) &&
-            Objects.deepEquals(this.keyOps, other.keyOps) &&
-            Objects.deepEquals(this.alg, other.alg) &&
-            Objects.deepEquals(this.kid, other.kid) &&
-            Objects.deepEquals(this.crv, other.crv) &&
-            Objects.deepEquals(this.x, other.x) &&
-            Objects.deepEquals(this.y, other.y) &&
-            Objects.deepEquals(this.n, other.n) &&
-            Objects.deepEquals(this.e, other.e);
+            Utils.enhancedDeepEquals(this.kty, other.kty) &&
+            Utils.enhancedDeepEquals(this.use, other.use) &&
+            Utils.enhancedDeepEquals(this.keyOps, other.keyOps) &&
+            Utils.enhancedDeepEquals(this.alg, other.alg) &&
+            Utils.enhancedDeepEquals(this.kid, other.kid) &&
+            Utils.enhancedDeepEquals(this.crv, other.crv) &&
+            Utils.enhancedDeepEquals(this.x, other.x) &&
+            Utils.enhancedDeepEquals(this.y, other.y) &&
+            Utils.enhancedDeepEquals(this.n, other.n) &&
+            Utils.enhancedDeepEquals(this.e, other.e);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             kty,
             use,
             keyOps,

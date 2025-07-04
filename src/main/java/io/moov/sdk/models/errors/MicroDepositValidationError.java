@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -26,6 +25,7 @@ public class MicroDepositValidationError extends RuntimeException {
     @JsonCreator
     public MicroDepositValidationError(
             @JsonProperty("amounts") Optional<String> amounts) {
+        super("API error occurred");
         Utils.checkNotNull(amounts, "amounts");
         this.amounts = amounts;
     }
@@ -66,12 +66,12 @@ public class MicroDepositValidationError extends RuntimeException {
         }
         MicroDepositValidationError other = (MicroDepositValidationError) o;
         return 
-            Objects.deepEquals(this.amounts, other.amounts);
+            Utils.enhancedDeepEquals(this.amounts, other.amounts);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amounts);
     }
     

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * LinkApplePaymentMethod
@@ -118,14 +117,14 @@ public class LinkApplePaymentMethod {
         }
         LinkApplePaymentMethod other = (LinkApplePaymentMethod) o;
         return 
-            Objects.deepEquals(this.displayName, other.displayName) &&
-            Objects.deepEquals(this.network, other.network) &&
-            Objects.deepEquals(this.type, other.type);
+            Utils.enhancedDeepEquals(this.displayName, other.displayName) &&
+            Utils.enhancedDeepEquals(this.network, other.network) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             displayName,
             network,
             type);

@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -139,14 +138,14 @@ public class FileUploadRequestMultiPart {
         }
         FileUploadRequestMultiPart other = (FileUploadRequestMultiPart) o;
         return 
-            Objects.deepEquals(this.file, other.file) &&
-            Objects.deepEquals(this.filePurpose, other.filePurpose) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.file, other.file) &&
+            Utils.enhancedDeepEquals(this.filePurpose, other.filePurpose) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             file,
             filePurpose,
             metadata);

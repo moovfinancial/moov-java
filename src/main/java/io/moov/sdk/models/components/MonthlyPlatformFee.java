@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * MonthlyPlatformFee
@@ -95,13 +94,13 @@ public class MonthlyPlatformFee {
         }
         MonthlyPlatformFee other = (MonthlyPlatformFee) o;
         return 
-            Objects.deepEquals(this.currency, other.currency) &&
-            Objects.deepEquals(this.valueDecimal, other.valueDecimal);
+            Utils.enhancedDeepEquals(this.currency, other.currency) &&
+            Utils.enhancedDeepEquals(this.valueDecimal, other.valueDecimal);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             currency,
             valueDecimal);
     }

@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class GetPaymentLinkRequest {
 
@@ -66,13 +65,13 @@ public class GetPaymentLinkRequest {
         }
         GetPaymentLinkRequest other = (GetPaymentLinkRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.paymentLinkCode, other.paymentLinkCode);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             paymentLinkCode);
     }

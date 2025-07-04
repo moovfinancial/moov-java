@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class TicketContact {
@@ -81,13 +80,13 @@ public class TicketContact {
         }
         TicketContact other = (TicketContact) o;
         return 
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.name, other.name);
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.name, other.name);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             email,
             name);
     }

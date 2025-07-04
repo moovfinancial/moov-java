@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -228,18 +227,18 @@ public class IncurredFee {
         }
         IncurredFee other = (IncurredFee) o;
         return 
-            Objects.deepEquals(this.feeID, other.feeID) &&
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.walletID, other.walletID) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.feeName, other.feeName) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.generatedBy, other.generatedBy);
+            Utils.enhancedDeepEquals(this.feeID, other.feeID) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.feeName, other.feeName) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.generatedBy, other.generatedBy);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             feeID,
             accountID,
             walletID,

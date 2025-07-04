@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class AuthToken {
 
@@ -163,16 +162,16 @@ public class AuthToken {
         }
         AuthToken other = (AuthToken) o;
         return 
-            Objects.deepEquals(this.tokenType, other.tokenType) &&
-            Objects.deepEquals(this.accessToken, other.accessToken) &&
-            Objects.deepEquals(this.refreshToken, other.refreshToken) &&
-            Objects.deepEquals(this.expiresIn, other.expiresIn) &&
-            Objects.deepEquals(this.scope, other.scope);
+            Utils.enhancedDeepEquals(this.tokenType, other.tokenType) &&
+            Utils.enhancedDeepEquals(this.accessToken, other.accessToken) &&
+            Utils.enhancedDeepEquals(this.refreshToken, other.refreshToken) &&
+            Utils.enhancedDeepEquals(this.expiresIn, other.expiresIn) &&
+            Utils.enhancedDeepEquals(this.scope, other.scope);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             tokenType,
             accessToken,
             refreshToken,

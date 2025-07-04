@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class Amount {
 
@@ -91,13 +90,13 @@ public class Amount {
         }
         Amount other = (Amount) o;
         return 
-            Objects.deepEquals(this.currency, other.currency) &&
-            Objects.deepEquals(this.value, other.value);
+            Utils.enhancedDeepEquals(this.currency, other.currency) &&
+            Utils.enhancedDeepEquals(this.value, other.value);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             currency,
             value);
     }

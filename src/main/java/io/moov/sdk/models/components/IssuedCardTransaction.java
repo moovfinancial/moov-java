@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class IssuedCardTransaction {
@@ -199,19 +198,19 @@ public class IssuedCardTransaction {
         }
         IssuedCardTransaction other = (IssuedCardTransaction) o;
         return 
-            Objects.deepEquals(this.cardTransactionID, other.cardTransactionID) &&
-            Objects.deepEquals(this.issuedCardID, other.issuedCardID) &&
-            Objects.deepEquals(this.fundingWalletID, other.fundingWalletID) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.authorizationID, other.authorizationID) &&
-            Objects.deepEquals(this.authorizedOn, other.authorizedOn) &&
-            Objects.deepEquals(this.merchantData, other.merchantData) &&
-            Objects.deepEquals(this.createdOn, other.createdOn);
+            Utils.enhancedDeepEquals(this.cardTransactionID, other.cardTransactionID) &&
+            Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
+            Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.authorizationID, other.authorizationID) &&
+            Utils.enhancedDeepEquals(this.authorizedOn, other.authorizedOn) &&
+            Utils.enhancedDeepEquals(this.merchantData, other.merchantData) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             cardTransactionID,
             issuedCardID,
             fundingWalletID,

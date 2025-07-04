@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -257,18 +256,18 @@ public class ApplePayResponse {
         }
         ApplePayResponse other = (ApplePayResponse) o;
         return 
-            Objects.deepEquals(this.brand, other.brand) &&
-            Objects.deepEquals(this.cardType, other.cardType) &&
-            Objects.deepEquals(this.cardDisplayName, other.cardDisplayName) &&
-            Objects.deepEquals(this.fingerprint, other.fingerprint) &&
-            Objects.deepEquals(this.expiration, other.expiration) &&
-            Objects.deepEquals(this.dynamicLastFour, other.dynamicLastFour) &&
-            Objects.deepEquals(this.issuerCountry, other.issuerCountry);
+            Utils.enhancedDeepEquals(this.brand, other.brand) &&
+            Utils.enhancedDeepEquals(this.cardType, other.cardType) &&
+            Utils.enhancedDeepEquals(this.cardDisplayName, other.cardDisplayName) &&
+            Utils.enhancedDeepEquals(this.fingerprint, other.fingerprint) &&
+            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+            Utils.enhancedDeepEquals(this.dynamicLastFour, other.dynamicLastFour) &&
+            Utils.enhancedDeepEquals(this.issuerCountry, other.issuerCountry);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             brand,
             cardType,
             cardDisplayName,

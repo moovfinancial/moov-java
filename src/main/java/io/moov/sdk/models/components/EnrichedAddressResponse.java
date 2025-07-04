@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 public class EnrichedAddressResponse {
 
@@ -50,12 +49,12 @@ public class EnrichedAddressResponse {
         }
         EnrichedAddressResponse other = (EnrichedAddressResponse) o;
         return 
-            Objects.deepEquals(this.suggestions, other.suggestions);
+            Utils.enhancedDeepEquals(this.suggestions, other.suggestions);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             suggestions);
     }
     

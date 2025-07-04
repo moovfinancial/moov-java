@@ -11,7 +11,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListPaymentMethodsRequest {
@@ -140,14 +139,14 @@ public class ListPaymentMethodsRequest {
         }
         ListPaymentMethodsRequest other = (ListPaymentMethodsRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.sourceID, other.sourceID) &&
-            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.sourceID, other.sourceID) &&
+            Utils.enhancedDeepEquals(this.paymentMethodType, other.paymentMethodType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             sourceID,
             paymentMethodType);

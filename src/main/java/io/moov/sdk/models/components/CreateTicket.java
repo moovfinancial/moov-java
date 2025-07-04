@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * CreateTicket
@@ -88,14 +87,14 @@ public class CreateTicket {
         }
         CreateTicket other = (CreateTicket) o;
         return 
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.body, other.body) &&
-            Objects.deepEquals(this.contact, other.contact);
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.body, other.body) &&
+            Utils.enhancedDeepEquals(this.contact, other.contact);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             title,
             body,
             contact);

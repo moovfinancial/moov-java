@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UpdateColor {
@@ -63,12 +62,12 @@ public class UpdateColor {
         }
         UpdateColor other = (UpdateColor) o;
         return 
-            Objects.deepEquals(this.accent, other.accent);
+            Utils.enhancedDeepEquals(this.accent, other.accent);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accent);
     }
     

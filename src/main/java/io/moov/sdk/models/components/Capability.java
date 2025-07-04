@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Capability {
@@ -240,19 +239,19 @@ public class Capability {
         }
         Capability other = (Capability) o;
         return 
-            Objects.deepEquals(this.capability, other.capability) &&
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.requirements, other.requirements) &&
-            Objects.deepEquals(this.disabledReason, other.disabledReason) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.disabledOn, other.disabledOn);
+            Utils.enhancedDeepEquals(this.capability, other.capability) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.requirements, other.requirements) &&
+            Utils.enhancedDeepEquals(this.disabledReason, other.disabledReason) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             capability,
             accountID,
             status,

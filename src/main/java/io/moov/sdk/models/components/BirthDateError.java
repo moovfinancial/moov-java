@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class BirthDateError {
@@ -111,14 +110,14 @@ public class BirthDateError {
         }
         BirthDateError other = (BirthDateError) o;
         return 
-            Objects.deepEquals(this.day, other.day) &&
-            Objects.deepEquals(this.month, other.month) &&
-            Objects.deepEquals(this.year, other.year);
+            Utils.enhancedDeepEquals(this.day, other.day) &&
+            Utils.enhancedDeepEquals(this.month, other.month) &&
+            Utils.enhancedDeepEquals(this.year, other.year);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             day,
             month,
             year);

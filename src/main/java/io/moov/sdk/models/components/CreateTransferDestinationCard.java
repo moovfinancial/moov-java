@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CreateTransferDestinationCard {
@@ -75,12 +74,12 @@ public class CreateTransferDestinationCard {
         }
         CreateTransferDestinationCard other = (CreateTransferDestinationCard) o;
         return 
-            Objects.deepEquals(this.dynamicDescriptor, other.dynamicDescriptor);
+            Utils.enhancedDeepEquals(this.dynamicDescriptor, other.dynamicDescriptor);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             dynamicDescriptor);
     }
     

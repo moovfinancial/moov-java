@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -26,6 +25,7 @@ public class ReversalValidationError extends RuntimeException {
     @JsonCreator
     public ReversalValidationError(
             @JsonProperty("amount") Optional<String> amount) {
+        super("API error occurred");
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
     }
@@ -66,12 +66,12 @@ public class ReversalValidationError extends RuntimeException {
         }
         ReversalValidationError other = (ReversalValidationError) o;
         return 
-            Objects.deepEquals(this.amount, other.amount);
+            Utils.enhancedDeepEquals(this.amount, other.amount);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount);
     }
     

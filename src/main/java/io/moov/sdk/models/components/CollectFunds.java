@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CollectFunds {
@@ -90,13 +89,13 @@ public class CollectFunds {
         }
         CollectFunds other = (CollectFunds) o;
         return 
-            Objects.deepEquals(this.ach, other.ach) &&
-            Objects.deepEquals(this.cardPayments, other.cardPayments);
+            Utils.enhancedDeepEquals(this.ach, other.ach) &&
+            Utils.enhancedDeepEquals(this.cardPayments, other.cardPayments);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             ach,
             cardPayments);
     }

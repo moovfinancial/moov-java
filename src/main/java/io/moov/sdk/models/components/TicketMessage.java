@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 public class TicketMessage {
 
@@ -84,14 +83,14 @@ public class TicketMessage {
         }
         TicketMessage other = (TicketMessage) o;
         return 
-            Objects.deepEquals(this.author, other.author) &&
-            Objects.deepEquals(this.body, other.body) &&
-            Objects.deepEquals(this.sentOn, other.sentOn);
+            Utils.enhancedDeepEquals(this.author, other.author) &&
+            Utils.enhancedDeepEquals(this.body, other.body) &&
+            Utils.enhancedDeepEquals(this.sentOn, other.sentOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             author,
             body,
             sentOn);

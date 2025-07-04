@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class AchParticipant {
@@ -281,24 +280,24 @@ public class AchParticipant {
         }
         AchParticipant other = (AchParticipant) o;
         return 
-            Objects.deepEquals(this.achLocation, other.achLocation) &&
-            Objects.deepEquals(this.customerName, other.customerName) &&
-            Objects.deepEquals(this.newRoutingNumber, other.newRoutingNumber) &&
-            Objects.deepEquals(this.officeCode, other.officeCode) &&
-            Objects.deepEquals(this.phoneNumber, other.phoneNumber) &&
-            Objects.deepEquals(this.recordTypeCode, other.recordTypeCode) &&
-            Objects.deepEquals(this.revised, other.revised) &&
-            Objects.deepEquals(this.routingNumber, other.routingNumber) &&
-            Objects.deepEquals(this.servicingFRBNumber, other.servicingFRBNumber) &&
-            Objects.deepEquals(this.statusCode, other.statusCode) &&
-            Objects.deepEquals(this.viewCode, other.viewCode) &&
-            Objects.deepEquals(this.cleanName, other.cleanName) &&
-            Objects.deepEquals(this.logo, other.logo);
+            Utils.enhancedDeepEquals(this.achLocation, other.achLocation) &&
+            Utils.enhancedDeepEquals(this.customerName, other.customerName) &&
+            Utils.enhancedDeepEquals(this.newRoutingNumber, other.newRoutingNumber) &&
+            Utils.enhancedDeepEquals(this.officeCode, other.officeCode) &&
+            Utils.enhancedDeepEquals(this.phoneNumber, other.phoneNumber) &&
+            Utils.enhancedDeepEquals(this.recordTypeCode, other.recordTypeCode) &&
+            Utils.enhancedDeepEquals(this.revised, other.revised) &&
+            Utils.enhancedDeepEquals(this.routingNumber, other.routingNumber) &&
+            Utils.enhancedDeepEquals(this.servicingFRBNumber, other.servicingFRBNumber) &&
+            Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
+            Utils.enhancedDeepEquals(this.viewCode, other.viewCode) &&
+            Utils.enhancedDeepEquals(this.cleanName, other.cleanName) &&
+            Utils.enhancedDeepEquals(this.logo, other.logo);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             achLocation,
             customerName,
             newRoutingNumber,

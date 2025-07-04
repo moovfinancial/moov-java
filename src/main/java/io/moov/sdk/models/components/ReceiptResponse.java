@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ReceiptResponse {
@@ -396,21 +395,21 @@ public class ReceiptResponse {
         }
         ReceiptResponse other = (ReceiptResponse) o;
         return 
-            Objects.deepEquals(this.receiptID, other.receiptID) &&
-            Objects.deepEquals(this.createdBy, other.createdBy) &&
-            Objects.deepEquals(this.disabledOn, other.disabledOn) &&
-            Objects.deepEquals(this.kind, other.kind) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.emailAccountID, other.emailAccountID) &&
-            Objects.deepEquals(this.forTransferID, other.forTransferID) &&
-            Objects.deepEquals(this.forScheduleID, other.forScheduleID) &&
-            Objects.deepEquals(this.forOccurrenceID, other.forOccurrenceID) &&
-            Objects.deepEquals(this.sentFor, other.sentFor);
+            Utils.enhancedDeepEquals(this.receiptID, other.receiptID) &&
+            Utils.enhancedDeepEquals(this.createdBy, other.createdBy) &&
+            Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn) &&
+            Utils.enhancedDeepEquals(this.kind, other.kind) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.emailAccountID, other.emailAccountID) &&
+            Utils.enhancedDeepEquals(this.forTransferID, other.forTransferID) &&
+            Utils.enhancedDeepEquals(this.forScheduleID, other.forScheduleID) &&
+            Utils.enhancedDeepEquals(this.forOccurrenceID, other.forOccurrenceID) &&
+            Utils.enhancedDeepEquals(this.sentFor, other.sentFor);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             receiptID,
             createdBy,
             disabledOn,

@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class PartnerPricingAgreement {
@@ -327,23 +326,23 @@ public class PartnerPricingAgreement {
         }
         PartnerPricingAgreement other = (PartnerPricingAgreement) o;
         return 
-            Objects.deepEquals(this.agreementID, other.agreementID) &&
-            Objects.deepEquals(this.planID, other.planID) &&
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.acceptedOn, other.acceptedOn) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
-            Objects.deepEquals(this.billableFees, other.billableFees) &&
-            Objects.deepEquals(this.minimumCommitment, other.minimumCommitment) &&
-            Objects.deepEquals(this.monthlyPlatformFee, other.monthlyPlatformFee) &&
-            Objects.deepEquals(this.revenueShare, other.revenueShare);
+            Utils.enhancedDeepEquals(this.agreementID, other.agreementID) &&
+            Utils.enhancedDeepEquals(this.planID, other.planID) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.acceptedOn, other.acceptedOn) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
+            Utils.enhancedDeepEquals(this.billableFees, other.billableFees) &&
+            Utils.enhancedDeepEquals(this.minimumCommitment, other.minimumCommitment) &&
+            Utils.enhancedDeepEquals(this.monthlyPlatformFee, other.monthlyPlatformFee) &&
+            Utils.enhancedDeepEquals(this.revenueShare, other.revenueShare);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             agreementID,
             planID,
             accountID,

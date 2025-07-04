@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class InitiateRefundRequest {
@@ -185,16 +184,16 @@ public class InitiateRefundRequest {
         }
         InitiateRefundRequest other = (InitiateRefundRequest) o;
         return 
-            Objects.deepEquals(this.xIdempotencyKey, other.xIdempotencyKey) &&
-            Objects.deepEquals(this.xWaitFor, other.xWaitFor) &&
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.transferID, other.transferID) &&
-            Objects.deepEquals(this.createRefund, other.createRefund);
+            Utils.enhancedDeepEquals(this.xIdempotencyKey, other.xIdempotencyKey) &&
+            Utils.enhancedDeepEquals(this.xWaitFor, other.xWaitFor) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.createRefund, other.createRefund);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             xIdempotencyKey,
             xWaitFor,
             accountID,

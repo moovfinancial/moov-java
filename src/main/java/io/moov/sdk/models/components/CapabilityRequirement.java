@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -96,13 +95,13 @@ public class CapabilityRequirement {
         }
         CapabilityRequirement other = (CapabilityRequirement) o;
         return 
-            Objects.deepEquals(this.currentlyDue, other.currentlyDue) &&
-            Objects.deepEquals(this.errors, other.errors);
+            Utils.enhancedDeepEquals(this.currentlyDue, other.currentlyDue) &&
+            Utils.enhancedDeepEquals(this.errors, other.errors);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             currentlyDue,
             errors);
     }

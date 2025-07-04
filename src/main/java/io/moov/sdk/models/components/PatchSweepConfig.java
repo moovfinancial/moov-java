@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 public class PatchSweepConfig {
@@ -164,16 +163,16 @@ public class PatchSweepConfig {
         }
         PatchSweepConfig other = (PatchSweepConfig) o;
         return 
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
-            Objects.deepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
-            Objects.deepEquals(this.statementDescriptor, other.statementDescriptor) &&
-            Objects.deepEquals(this.minimumBalance, other.minimumBalance);
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
+            Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             status,
             pushPaymentMethodID,
             pullPaymentMethodID,

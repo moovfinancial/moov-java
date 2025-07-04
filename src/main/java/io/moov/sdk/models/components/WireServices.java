@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class WireServices {
 
@@ -111,14 +110,14 @@ public class WireServices {
         }
         WireServices other = (WireServices) o;
         return 
-            Objects.deepEquals(this.fundsTransferStatus, other.fundsTransferStatus) &&
-            Objects.deepEquals(this.fundsSettlementOnlyStatus, other.fundsSettlementOnlyStatus) &&
-            Objects.deepEquals(this.bookEntrySecuritiesTransferStatus, other.bookEntrySecuritiesTransferStatus);
+            Utils.enhancedDeepEquals(this.fundsTransferStatus, other.fundsTransferStatus) &&
+            Utils.enhancedDeepEquals(this.fundsSettlementOnlyStatus, other.fundsSettlementOnlyStatus) &&
+            Utils.enhancedDeepEquals(this.bookEntrySecuritiesTransferStatus, other.bookEntrySecuritiesTransferStatus);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             fundsTransferStatus,
             fundsSettlementOnlyStatus,
             bookEntrySecuritiesTransferStatus);

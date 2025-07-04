@@ -14,7 +14,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 
 /**
  * GeneratedBy
@@ -90,12 +89,12 @@ public class GeneratedBy {
             return false;
         }
         GeneratedBy other = (GeneratedBy) o;
-        return Objects.deepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(value.value());
+        return Utils.enhancedHash(value.value());
     }
     
     @SuppressWarnings("serial")

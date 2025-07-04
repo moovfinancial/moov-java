@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UpdateBrand {
@@ -65,12 +64,12 @@ public class UpdateBrand {
         }
         UpdateBrand other = (UpdateBrand) o;
         return 
-            Objects.deepEquals(this.colors, other.colors);
+            Utils.enhancedDeepEquals(this.colors, other.colors);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             colors);
     }
     

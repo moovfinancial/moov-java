@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -215,17 +214,17 @@ public class UpdatePaymentLink {
         }
         UpdatePaymentLink other = (UpdatePaymentLink) o;
         return 
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.expiresOn, other.expiresOn) &&
-            Objects.deepEquals(this.display, other.display) &&
-            Objects.deepEquals(this.customer, other.customer) &&
-            Objects.deepEquals(this.payment, other.payment) &&
-            Objects.deepEquals(this.payout, other.payout);
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
+            Utils.enhancedDeepEquals(this.display, other.display) &&
+            Utils.enhancedDeepEquals(this.customer, other.customer) &&
+            Utils.enhancedDeepEquals(this.payment, other.payment) &&
+            Utils.enhancedDeepEquals(this.payout, other.payout);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount,
             expiresOn,
             display,

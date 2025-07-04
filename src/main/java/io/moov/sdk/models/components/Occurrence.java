@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -196,15 +195,15 @@ public class Occurrence {
         }
         Occurrence other = (Occurrence) o;
         return 
-            Objects.deepEquals(this.canceled, other.canceled) &&
-            Objects.deepEquals(this.occurrenceID, other.occurrenceID) &&
-            Objects.deepEquals(this.runOn, other.runOn) &&
-            Objects.deepEquals(this.runTransfer, other.runTransfer);
+            Utils.enhancedDeepEquals(this.canceled, other.canceled) &&
+            Utils.enhancedDeepEquals(this.occurrenceID, other.occurrenceID) &&
+            Utils.enhancedDeepEquals(this.runOn, other.runOn) &&
+            Utils.enhancedDeepEquals(this.runTransfer, other.runTransfer);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             canceled,
             occurrenceID,
             runOn,

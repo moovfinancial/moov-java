@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class ReversedWithRefund {
 
@@ -58,12 +57,12 @@ public class ReversedWithRefund {
         }
         ReversedWithRefund other = (ReversedWithRefund) o;
         return 
-            Objects.deepEquals(this.refund, other.refund);
+            Utils.enhancedDeepEquals(this.refund, other.refund);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             refund);
     }
     

@@ -17,7 +17,6 @@ import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -58,6 +57,7 @@ public class CardAcquiringRefund extends RuntimeException {
             @JsonProperty("status") RefundStatus status,
             @JsonProperty("amount") Amount amount,
             @JsonProperty("cardDetails") Optional<? extends RefundCardDetails> cardDetails) {
+        super("API error occurred");
         Utils.checkNotNull(refundID, "refundID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
@@ -175,17 +175,17 @@ public class CardAcquiringRefund extends RuntimeException {
         }
         CardAcquiringRefund other = (CardAcquiringRefund) o;
         return 
-            Objects.deepEquals(this.refundID, other.refundID) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.cardDetails, other.cardDetails);
+            Utils.enhancedDeepEquals(this.refundID, other.refundID) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             refundID,
             createdOn,
             updatedOn,

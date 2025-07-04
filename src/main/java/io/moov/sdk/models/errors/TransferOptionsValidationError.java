@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -36,6 +35,7 @@ public class TransferOptionsValidationError extends RuntimeException {
             @JsonProperty("amount") Optional<String> amount,
             @JsonProperty("source") Optional<String> source,
             @JsonProperty("destination") Optional<String> destination) {
+        super("API error occurred");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(destination, "destination");
@@ -114,14 +114,14 @@ public class TransferOptionsValidationError extends RuntimeException {
         }
         TransferOptionsValidationError other = (TransferOptionsValidationError) o;
         return 
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.source, other.source) &&
-            Objects.deepEquals(this.destination, other.destination);
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.source, other.source) &&
+            Utils.enhancedDeepEquals(this.destination, other.destination);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount,
             source,
             destination);

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class CreateApplePaySession {
 
@@ -84,13 +83,13 @@ public class CreateApplePaySession {
         }
         CreateApplePaySession other = (CreateApplePaySession) o;
         return 
-            Objects.deepEquals(this.domain, other.domain) &&
-            Objects.deepEquals(this.displayName, other.displayName);
+            Utils.enhancedDeepEquals(this.domain, other.domain) &&
+            Utils.enhancedDeepEquals(this.displayName, other.displayName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             domain,
             displayName);
     }

@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -803,34 +802,34 @@ public class Card {
         }
         Card other = (Card) o;
         return 
-            Objects.deepEquals(this.cardID, other.cardID) &&
-            Objects.deepEquals(this.fingerprint, other.fingerprint) &&
-            Objects.deepEquals(this.brand, other.brand) &&
-            Objects.deepEquals(this.cardType, other.cardType) &&
-            Objects.deepEquals(this.cardCategory, other.cardCategory) &&
-            Objects.deepEquals(this.lastFourCardNumber, other.lastFourCardNumber) &&
-            Objects.deepEquals(this.bin, other.bin) &&
-            Objects.deepEquals(this.expiration, other.expiration) &&
-            Objects.deepEquals(this.holderName, other.holderName) &&
-            Objects.deepEquals(this.billingAddress, other.billingAddress) &&
-            Objects.deepEquals(this.cardVerification, other.cardVerification) &&
-            Objects.deepEquals(this.issuer, other.issuer) &&
-            Objects.deepEquals(this.issuerCountry, other.issuerCountry) &&
-            Objects.deepEquals(this.issuerURL, other.issuerURL) &&
-            Objects.deepEquals(this.issuerPhone, other.issuerPhone) &&
-            Objects.deepEquals(this.commercial, other.commercial) &&
-            Objects.deepEquals(this.regulated, other.regulated) &&
-            Objects.deepEquals(this.cardOnFile, other.cardOnFile) &&
-            Objects.deepEquals(this.merchantAccountID, other.merchantAccountID) &&
-            Objects.deepEquals(this.cardAccountUpdater, other.cardAccountUpdater) &&
-            Objects.deepEquals(this.domesticPushToCard, other.domesticPushToCard) &&
-            Objects.deepEquals(this.domesticPullFromCard, other.domesticPullFromCard) &&
-            Objects.deepEquals(this.paymentMethods, other.paymentMethods);
+            Utils.enhancedDeepEquals(this.cardID, other.cardID) &&
+            Utils.enhancedDeepEquals(this.fingerprint, other.fingerprint) &&
+            Utils.enhancedDeepEquals(this.brand, other.brand) &&
+            Utils.enhancedDeepEquals(this.cardType, other.cardType) &&
+            Utils.enhancedDeepEquals(this.cardCategory, other.cardCategory) &&
+            Utils.enhancedDeepEquals(this.lastFourCardNumber, other.lastFourCardNumber) &&
+            Utils.enhancedDeepEquals(this.bin, other.bin) &&
+            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+            Utils.enhancedDeepEquals(this.holderName, other.holderName) &&
+            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
+            Utils.enhancedDeepEquals(this.cardVerification, other.cardVerification) &&
+            Utils.enhancedDeepEquals(this.issuer, other.issuer) &&
+            Utils.enhancedDeepEquals(this.issuerCountry, other.issuerCountry) &&
+            Utils.enhancedDeepEquals(this.issuerURL, other.issuerURL) &&
+            Utils.enhancedDeepEquals(this.issuerPhone, other.issuerPhone) &&
+            Utils.enhancedDeepEquals(this.commercial, other.commercial) &&
+            Utils.enhancedDeepEquals(this.regulated, other.regulated) &&
+            Utils.enhancedDeepEquals(this.cardOnFile, other.cardOnFile) &&
+            Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+            Utils.enhancedDeepEquals(this.cardAccountUpdater, other.cardAccountUpdater) &&
+            Utils.enhancedDeepEquals(this.domesticPushToCard, other.domesticPushToCard) &&
+            Utils.enhancedDeepEquals(this.domesticPullFromCard, other.domesticPullFromCard) &&
+            Utils.enhancedDeepEquals(this.paymentMethods, other.paymentMethods);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             cardID,
             fingerprint,
             brand,

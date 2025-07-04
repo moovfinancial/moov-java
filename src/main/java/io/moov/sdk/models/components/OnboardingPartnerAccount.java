@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * OnboardingPartnerAccount
@@ -115,14 +114,14 @@ public class OnboardingPartnerAccount {
         }
         OnboardingPartnerAccount other = (OnboardingPartnerAccount) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.accountMode, other.accountMode) &&
-            Objects.deepEquals(this.displayName, other.displayName);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.accountMode, other.accountMode) &&
+            Utils.enhancedDeepEquals(this.displayName, other.displayName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             accountMode,
             displayName);

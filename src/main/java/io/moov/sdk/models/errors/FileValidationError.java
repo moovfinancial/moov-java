@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -41,6 +40,7 @@ public class FileValidationError extends RuntimeException {
             @JsonProperty("file") Optional<String> file,
             @JsonProperty("filePurpose") Optional<String> filePurpose,
             @JsonProperty("metadata") Optional<String> metadata) {
+        super("API error occurred");
         Utils.checkNotNull(error, "error");
         Utils.checkNotNull(file, "file");
         Utils.checkNotNull(filePurpose, "filePurpose");
@@ -138,15 +138,15 @@ public class FileValidationError extends RuntimeException {
         }
         FileValidationError other = (FileValidationError) o;
         return 
-            Objects.deepEquals(this.error, other.error) &&
-            Objects.deepEquals(this.file, other.file) &&
-            Objects.deepEquals(this.filePurpose, other.filePurpose) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.error, other.error) &&
+            Utils.enhancedDeepEquals(this.file, other.file) &&
+            Utils.enhancedDeepEquals(this.filePurpose, other.filePurpose) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             error,
             file,
             filePurpose,

@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class DeleteDisputeEvidenceFileRequest {
 
@@ -83,14 +82,14 @@ public class DeleteDisputeEvidenceFileRequest {
         }
         DeleteDisputeEvidenceFileRequest other = (DeleteDisputeEvidenceFileRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.disputeID, other.disputeID) &&
-            Objects.deepEquals(this.evidenceID, other.evidenceID);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
+            Utils.enhancedDeepEquals(this.evidenceID, other.evidenceID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             disputeID,
             evidenceID);

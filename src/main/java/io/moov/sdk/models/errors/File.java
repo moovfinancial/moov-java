@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class File {
@@ -87,13 +86,13 @@ public class File {
         }
         File other = (File) o;
         return 
-            Objects.deepEquals(this.filename, other.filename) &&
-            Objects.deepEquals(this.mimeType, other.mimeType);
+            Utils.enhancedDeepEquals(this.filename, other.filename) &&
+            Utils.enhancedDeepEquals(this.mimeType, other.mimeType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             filename,
             mimeType);
     }

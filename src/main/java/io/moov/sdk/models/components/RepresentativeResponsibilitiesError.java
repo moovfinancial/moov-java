@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class RepresentativeResponsibilitiesError {
@@ -135,15 +134,15 @@ public class RepresentativeResponsibilitiesError {
         }
         RepresentativeResponsibilitiesError other = (RepresentativeResponsibilitiesError) o;
         return 
-            Objects.deepEquals(this.isController, other.isController) &&
-            Objects.deepEquals(this.isOwner, other.isOwner) &&
-            Objects.deepEquals(this.ownershipPercentage, other.ownershipPercentage) &&
-            Objects.deepEquals(this.jobTitle, other.jobTitle);
+            Utils.enhancedDeepEquals(this.isController, other.isController) &&
+            Utils.enhancedDeepEquals(this.isOwner, other.isOwner) &&
+            Utils.enhancedDeepEquals(this.ownershipPercentage, other.ownershipPercentage) &&
+            Utils.enhancedDeepEquals(this.jobTitle, other.jobTitle);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             isController,
             isOwner,
             ownershipPercentage,

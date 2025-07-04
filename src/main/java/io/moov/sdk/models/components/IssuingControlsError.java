@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class IssuingControlsError {
@@ -66,12 +65,12 @@ public class IssuingControlsError {
         }
         IssuingControlsError other = (IssuingControlsError) o;
         return 
-            Objects.deepEquals(this.velocityLimits, other.velocityLimits);
+            Utils.enhancedDeepEquals(this.velocityLimits, other.velocityLimits);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             velocityLimits);
     }
     

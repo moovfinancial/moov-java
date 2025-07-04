@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -455,26 +454,26 @@ public class ACHTransactionDetails {
         }
         ACHTransactionDetails other = (ACHTransactionDetails) o;
         return 
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.traceNumber, other.traceNumber) &&
-            Objects.deepEquals(this.return_, other.return_) &&
-            Objects.deepEquals(this.correction, other.correction) &&
-            Objects.deepEquals(this.companyEntryDescription, other.companyEntryDescription) &&
-            Objects.deepEquals(this.originatingCompanyName, other.originatingCompanyName) &&
-            Objects.deepEquals(this.secCode, other.secCode) &&
-            Objects.deepEquals(this.canceledOn, other.canceledOn) &&
-            Objects.deepEquals(this.initiatedOn, other.initiatedOn) &&
-            Objects.deepEquals(this.originatedOn, other.originatedOn) &&
-            Objects.deepEquals(this.correctedOn, other.correctedOn) &&
-            Objects.deepEquals(this.returnedOn, other.returnedOn) &&
-            Objects.deepEquals(this.failedOn, other.failedOn) &&
-            Objects.deepEquals(this.completedOn, other.completedOn) &&
-            Objects.deepEquals(this.debitHoldPeriod, other.debitHoldPeriod);
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.traceNumber, other.traceNumber) &&
+            Utils.enhancedDeepEquals(this.return_, other.return_) &&
+            Utils.enhancedDeepEquals(this.correction, other.correction) &&
+            Utils.enhancedDeepEquals(this.companyEntryDescription, other.companyEntryDescription) &&
+            Utils.enhancedDeepEquals(this.originatingCompanyName, other.originatingCompanyName) &&
+            Utils.enhancedDeepEquals(this.secCode, other.secCode) &&
+            Utils.enhancedDeepEquals(this.canceledOn, other.canceledOn) &&
+            Utils.enhancedDeepEquals(this.initiatedOn, other.initiatedOn) &&
+            Utils.enhancedDeepEquals(this.originatedOn, other.originatedOn) &&
+            Utils.enhancedDeepEquals(this.correctedOn, other.correctedOn) &&
+            Utils.enhancedDeepEquals(this.returnedOn, other.returnedOn) &&
+            Utils.enhancedDeepEquals(this.failedOn, other.failedOn) &&
+            Utils.enhancedDeepEquals(this.completedOn, other.completedOn) &&
+            Utils.enhancedDeepEquals(this.debitHoldPeriod, other.debitHoldPeriod);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             status,
             traceNumber,
             return_,

@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -27,6 +26,7 @@ public class AddCapabilitiesError extends RuntimeException {
     @JsonCreator
     public AddCapabilitiesError(
             @JsonProperty("error") Optional<? extends CapabilitiesError> error) {
+        super("API error occurred");
         Utils.checkNotNull(error, "error");
         this.error = error;
     }
@@ -68,12 +68,12 @@ public class AddCapabilitiesError extends RuntimeException {
         }
         AddCapabilitiesError other = (AddCapabilitiesError) o;
         return 
-            Objects.deepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.error, other.error);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             error);
     }
     

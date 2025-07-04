@@ -13,7 +13,6 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -250,21 +249,21 @@ public class FileDetails {
         }
         FileDetails other = (FileDetails) o;
         return 
-            Objects.deepEquals(this.fileID, other.fileID) &&
-            Objects.deepEquals(this.fileName, other.fileName) &&
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.filePurpose, other.filePurpose) &&
-            Objects.deepEquals(this.fileStatus, other.fileStatus) &&
-            Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.decisionReason, other.decisionReason) &&
-            Objects.deepEquals(this.fileSizeBytes, other.fileSizeBytes) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn);
+            Utils.enhancedDeepEquals(this.fileID, other.fileID) &&
+            Utils.enhancedDeepEquals(this.fileName, other.fileName) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.filePurpose, other.filePurpose) &&
+            Utils.enhancedDeepEquals(this.fileStatus, other.fileStatus) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.decisionReason, other.decisionReason) &&
+            Utils.enhancedDeepEquals(this.fileSizeBytes, other.fileSizeBytes) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             fileID,
             fileName,
             accountID,

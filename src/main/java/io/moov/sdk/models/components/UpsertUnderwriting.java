@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UpsertUnderwriting {
@@ -215,18 +214,18 @@ public class UpsertUnderwriting {
         }
         UpsertUnderwriting other = (UpsertUnderwriting) o;
         return 
-            Objects.deepEquals(this.geographicReach, other.geographicReach) &&
-            Objects.deepEquals(this.businessPresence, other.businessPresence) &&
-            Objects.deepEquals(this.pendingLitigation, other.pendingLitigation) &&
-            Objects.deepEquals(this.volumeShareByCustomerType, other.volumeShareByCustomerType) &&
-            Objects.deepEquals(this.collectFunds, other.collectFunds) &&
-            Objects.deepEquals(this.moneyTransfer, other.moneyTransfer) &&
-            Objects.deepEquals(this.sendFunds, other.sendFunds);
+            Utils.enhancedDeepEquals(this.geographicReach, other.geographicReach) &&
+            Utils.enhancedDeepEquals(this.businessPresence, other.businessPresence) &&
+            Utils.enhancedDeepEquals(this.pendingLitigation, other.pendingLitigation) &&
+            Utils.enhancedDeepEquals(this.volumeShareByCustomerType, other.volumeShareByCustomerType) &&
+            Utils.enhancedDeepEquals(this.collectFunds, other.collectFunds) &&
+            Utils.enhancedDeepEquals(this.moneyTransfer, other.moneyTransfer) &&
+            Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             geographicReach,
             businessPresence,
             pendingLitigation,

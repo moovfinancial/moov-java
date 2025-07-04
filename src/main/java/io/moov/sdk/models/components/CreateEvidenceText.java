@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class CreateEvidenceText {
 
@@ -75,13 +74,13 @@ public class CreateEvidenceText {
         }
         CreateEvidenceText other = (CreateEvidenceText) o;
         return 
-            Objects.deepEquals(this.text, other.text) &&
-            Objects.deepEquals(this.evidenceType, other.evidenceType);
+            Utils.enhancedDeepEquals(this.text, other.text) &&
+            Utils.enhancedDeepEquals(this.evidenceType, other.evidenceType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             text,
             evidenceType);
     }

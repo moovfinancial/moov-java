@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 /**
  * TermsOfService
@@ -90,13 +89,13 @@ public class TermsOfService {
         }
         TermsOfService other = (TermsOfService) o;
         return 
-            Objects.deepEquals(this.acceptedDate, other.acceptedDate) &&
-            Objects.deepEquals(this.acceptedIP, other.acceptedIP);
+            Utils.enhancedDeepEquals(this.acceptedDate, other.acceptedDate) &&
+            Utils.enhancedDeepEquals(this.acceptedIP, other.acceptedIP);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             acceptedDate,
             acceptedIP);
     }

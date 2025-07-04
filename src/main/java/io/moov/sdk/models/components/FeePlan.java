@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class FeePlan {
@@ -248,19 +247,19 @@ public class FeePlan {
         }
         FeePlan other = (FeePlan) o;
         return 
-            Objects.deepEquals(this.planID, other.planID) &&
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
-            Objects.deepEquals(this.billableFees, other.billableFees) &&
-            Objects.deepEquals(this.minimumCommitment, other.minimumCommitment) &&
-            Objects.deepEquals(this.monthlyPlatformFee, other.monthlyPlatformFee) &&
-            Objects.deepEquals(this.createdAt, other.createdAt);
+            Utils.enhancedDeepEquals(this.planID, other.planID) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.cardAcquiringModel, other.cardAcquiringModel) &&
+            Utils.enhancedDeepEquals(this.billableFees, other.billableFees) &&
+            Utils.enhancedDeepEquals(this.minimumCommitment, other.minimumCommitment) &&
+            Utils.enhancedDeepEquals(this.monthlyPlatformFee, other.monthlyPlatformFee) &&
+            Utils.enhancedDeepEquals(this.createdAt, other.createdAt);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             planID,
             name,
             description,

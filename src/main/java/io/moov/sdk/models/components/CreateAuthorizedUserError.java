@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CreateAuthorizedUserError {
@@ -113,14 +112,14 @@ public class CreateAuthorizedUserError {
         }
         CreateAuthorizedUserError other = (CreateAuthorizedUserError) o;
         return 
-            Objects.deepEquals(this.firstName, other.firstName) &&
-            Objects.deepEquals(this.lastName, other.lastName) &&
-            Objects.deepEquals(this.birthDate, other.birthDate);
+            Utils.enhancedDeepEquals(this.firstName, other.firstName) &&
+            Utils.enhancedDeepEquals(this.lastName, other.lastName) &&
+            Utils.enhancedDeepEquals(this.birthDate, other.birthDate);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             firstName,
             lastName,
             birthDate);

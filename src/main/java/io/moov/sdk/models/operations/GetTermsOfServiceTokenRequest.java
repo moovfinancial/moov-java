@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class GetTermsOfServiceTokenRequest {
@@ -107,13 +106,13 @@ public class GetTermsOfServiceTokenRequest {
         }
         GetTermsOfServiceTokenRequest other = (GetTermsOfServiceTokenRequest) o;
         return 
-            Objects.deepEquals(this.origin, other.origin) &&
-            Objects.deepEquals(this.referer, other.referer);
+            Utils.enhancedDeepEquals(this.origin, other.origin) &&
+            Utils.enhancedDeepEquals(this.referer, other.referer);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             origin,
             referer);
     }

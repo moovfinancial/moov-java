@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -200,15 +199,15 @@ public class FeeProperties {
         }
         FeeProperties other = (FeeProperties) o;
         return 
-            Objects.deepEquals(this.fixedAmount, other.fixedAmount) &&
-            Objects.deepEquals(this.variableRate, other.variableRate) &&
-            Objects.deepEquals(this.minPerTransaction, other.minPerTransaction) &&
-            Objects.deepEquals(this.maxPerTransaction, other.maxPerTransaction);
+            Utils.enhancedDeepEquals(this.fixedAmount, other.fixedAmount) &&
+            Utils.enhancedDeepEquals(this.variableRate, other.variableRate) &&
+            Utils.enhancedDeepEquals(this.minPerTransaction, other.minPerTransaction) &&
+            Utils.enhancedDeepEquals(this.maxPerTransaction, other.maxPerTransaction);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             fixedAmount,
             variableRate,
             minPerTransaction,

@@ -15,7 +15,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListTransfersRequest {
@@ -459,24 +458,24 @@ public class ListTransfersRequest {
         }
         ListTransfersRequest other = (ListTransfersRequest) o;
         return 
-            Objects.deepEquals(this.accountIDs, other.accountIDs) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.startDateTime, other.startDateTime) &&
-            Objects.deepEquals(this.endDateTime, other.endDateTime) &&
-            Objects.deepEquals(this.groupID, other.groupID) &&
-            Objects.deepEquals(this.scheduleID, other.scheduleID) &&
-            Objects.deepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
-            Objects.deepEquals(this.refunded, other.refunded) &&
-            Objects.deepEquals(this.disputed, other.disputed) &&
-            Objects.deepEquals(this.foreignID, other.foreignID) &&
-            Objects.deepEquals(this.skip, other.skip) &&
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.accountID, other.accountID);
+            Utils.enhancedDeepEquals(this.accountIDs, other.accountIDs) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
+            Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime) &&
+            Utils.enhancedDeepEquals(this.groupID, other.groupID) &&
+            Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
+            Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
+            Utils.enhancedDeepEquals(this.refunded, other.refunded) &&
+            Utils.enhancedDeepEquals(this.disputed, other.disputed) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountIDs,
             status,
             startDateTime,

@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class LinkBankAccountRequest {
@@ -124,14 +123,14 @@ public class LinkBankAccountRequest {
         }
         LinkBankAccountRequest other = (LinkBankAccountRequest) o;
         return 
-            Objects.deepEquals(this.xWaitFor, other.xWaitFor) &&
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.linkBankAccount, other.linkBankAccount);
+            Utils.enhancedDeepEquals(this.xWaitFor, other.xWaitFor) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.linkBankAccount, other.linkBankAccount);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             xWaitFor,
             accountID,
             linkBankAccount);

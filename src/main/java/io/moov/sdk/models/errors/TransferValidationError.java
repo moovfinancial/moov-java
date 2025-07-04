@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -74,6 +73,7 @@ public class TransferValidationError extends RuntimeException {
             @JsonProperty("FacilitatorFee.MarkupDecimal") Optional<String> facilitatorFeeMarkupDecimal,
             @JsonProperty("metadata") Optional<String> metadata,
             @JsonProperty("error") Optional<String> error) {
+        super("API error occurred");
         Utils.checkNotNull(transfer, "transfer");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(source, "source");
@@ -294,21 +294,21 @@ public class TransferValidationError extends RuntimeException {
         }
         TransferValidationError other = (TransferValidationError) o;
         return 
-            Objects.deepEquals(this.transfer, other.transfer) &&
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.source, other.source) &&
-            Objects.deepEquals(this.sourcePaymentMethodID, other.sourcePaymentMethodID) &&
-            Objects.deepEquals(this.destinationPaymentMethodID, other.destinationPaymentMethodID) &&
-            Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.facilitatorFeeTotalDecimal, other.facilitatorFeeTotalDecimal) &&
-            Objects.deepEquals(this.facilitatorFeeMarkupDecimal, other.facilitatorFeeMarkupDecimal) &&
-            Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.transfer, other.transfer) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.source, other.source) &&
+            Utils.enhancedDeepEquals(this.sourcePaymentMethodID, other.sourcePaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.destinationPaymentMethodID, other.destinationPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.facilitatorFeeTotalDecimal, other.facilitatorFeeTotalDecimal) &&
+            Utils.enhancedDeepEquals(this.facilitatorFeeMarkupDecimal, other.facilitatorFeeMarkupDecimal) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.error, other.error);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             transfer,
             amount,
             source,

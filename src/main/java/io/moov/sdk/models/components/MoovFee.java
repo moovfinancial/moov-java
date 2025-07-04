@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * MoovFee
@@ -142,15 +141,15 @@ public class MoovFee {
         }
         MoovFee other = (MoovFee) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.transferParty, other.transferParty) &&
-            Objects.deepEquals(this.totalAmount, other.totalAmount) &&
-            Objects.deepEquals(this.feeIDs, other.feeIDs);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.transferParty, other.transferParty) &&
+            Utils.enhancedDeepEquals(this.totalAmount, other.totalAmount) &&
+            Utils.enhancedDeepEquals(this.feeIDs, other.feeIDs);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             transferParty,
             totalAmount,

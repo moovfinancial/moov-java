@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UpdateColors {
@@ -90,13 +89,13 @@ public class UpdateColors {
         }
         UpdateColors other = (UpdateColors) o;
         return 
-            Objects.deepEquals(this.dark, other.dark) &&
-            Objects.deepEquals(this.light, other.light);
+            Utils.enhancedDeepEquals(this.dark, other.dark) &&
+            Utils.enhancedDeepEquals(this.light, other.light);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             dark,
             light);
     }

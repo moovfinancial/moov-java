@@ -16,7 +16,6 @@ import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 public class GetPaymentMethodResponse implements Response {
@@ -174,16 +173,16 @@ public class GetPaymentMethodResponse implements Response {
         }
         GetPaymentMethodResponse other = (GetPaymentMethodResponse) o;
         return 
-            Objects.deepEquals(this.contentType, other.contentType) &&
-            Objects.deepEquals(this.statusCode, other.statusCode) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.paymentMethod, other.paymentMethod) &&
-            Objects.deepEquals(this.headers, other.headers);
+            Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
+            Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
+            Utils.enhancedDeepEquals(this.paymentMethod, other.paymentMethod) &&
+            Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             contentType,
             statusCode,
             rawResponse,

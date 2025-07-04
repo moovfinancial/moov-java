@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class IssuedCardAuthorization {
@@ -250,20 +249,20 @@ public class IssuedCardAuthorization {
         }
         IssuedCardAuthorization other = (IssuedCardAuthorization) o;
         return 
-            Objects.deepEquals(this.authorizationID, other.authorizationID) &&
-            Objects.deepEquals(this.issuedCardID, other.issuedCardID) &&
-            Objects.deepEquals(this.fundingWalletID, other.fundingWalletID) &&
-            Objects.deepEquals(this.network, other.network) &&
-            Objects.deepEquals(this.authorizedAmount, other.authorizedAmount) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.merchantData, other.merchantData) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.cardTransactions, other.cardTransactions);
+            Utils.enhancedDeepEquals(this.authorizationID, other.authorizationID) &&
+            Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
+            Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
+            Utils.enhancedDeepEquals(this.network, other.network) &&
+            Utils.enhancedDeepEquals(this.authorizedAmount, other.authorizedAmount) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.merchantData, other.merchantData) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.cardTransactions, other.cardTransactions);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             authorizationID,
             issuedCardID,
             fundingWalletID,

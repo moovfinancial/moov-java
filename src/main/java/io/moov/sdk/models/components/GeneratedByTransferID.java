@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class GeneratedByTransferID {
@@ -63,12 +62,12 @@ public class GeneratedByTransferID {
         }
         GeneratedByTransferID other = (GeneratedByTransferID) o;
         return 
-            Objects.deepEquals(this.transferID, other.transferID);
+            Utils.enhancedDeepEquals(this.transferID, other.transferID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             transferID);
     }
     

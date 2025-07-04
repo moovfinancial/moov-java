@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class IndividualNameUpdate {
@@ -183,15 +182,15 @@ public class IndividualNameUpdate {
         }
         IndividualNameUpdate other = (IndividualNameUpdate) o;
         return 
-            Objects.deepEquals(this.firstName, other.firstName) &&
-            Objects.deepEquals(this.middleName, other.middleName) &&
-            Objects.deepEquals(this.lastName, other.lastName) &&
-            Objects.deepEquals(this.suffix, other.suffix);
+            Utils.enhancedDeepEquals(this.firstName, other.firstName) &&
+            Utils.enhancedDeepEquals(this.middleName, other.middleName) &&
+            Utils.enhancedDeepEquals(this.lastName, other.lastName) &&
+            Utils.enhancedDeepEquals(this.suffix, other.suffix);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             firstName,
             middleName,
             lastName,

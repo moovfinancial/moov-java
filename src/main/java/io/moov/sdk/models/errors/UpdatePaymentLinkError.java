@@ -17,7 +17,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -50,6 +49,7 @@ public class UpdatePaymentLinkError extends RuntimeException {
             @JsonProperty("display") Optional<? extends DisplayOptionsError> display,
             @JsonProperty("payment") Optional<? extends PaymentDetailsError> payment,
             @JsonProperty("payout") Optional<? extends PayoutDetailsError> payout) {
+        super("API error occurred");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(expiresOn, "expiresOn");
         Utils.checkNotNull(display, "display");
@@ -170,16 +170,16 @@ public class UpdatePaymentLinkError extends RuntimeException {
         }
         UpdatePaymentLinkError other = (UpdatePaymentLinkError) o;
         return 
-            Objects.deepEquals(this.amount, other.amount) &&
-            Objects.deepEquals(this.expiresOn, other.expiresOn) &&
-            Objects.deepEquals(this.display, other.display) &&
-            Objects.deepEquals(this.payment, other.payment) &&
-            Objects.deepEquals(this.payout, other.payout);
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
+            Utils.enhancedDeepEquals(this.display, other.display) &&
+            Utils.enhancedDeepEquals(this.payment, other.payment) &&
+            Utils.enhancedDeepEquals(this.payout, other.payout);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount,
             expiresOn,
             display,

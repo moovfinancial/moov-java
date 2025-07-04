@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * Wallet
@@ -71,13 +70,13 @@ public class Wallet {
         }
         Wallet other = (Wallet) o;
         return 
-            Objects.deepEquals(this.walletID, other.walletID) &&
-            Objects.deepEquals(this.availableBalance, other.availableBalance);
+            Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
+            Utils.enhancedDeepEquals(this.availableBalance, other.availableBalance);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             walletID,
             availableBalance);
     }

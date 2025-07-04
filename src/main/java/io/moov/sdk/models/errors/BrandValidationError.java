@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -27,6 +26,7 @@ public class BrandValidationError extends RuntimeException {
     @JsonCreator
     public BrandValidationError(
             @JsonProperty("colors") Optional<? extends ColorsValidationError> colors) {
+        super("API error occurred");
         Utils.checkNotNull(colors, "colors");
         this.colors = colors;
     }
@@ -68,12 +68,12 @@ public class BrandValidationError extends RuntimeException {
         }
         BrandValidationError other = (BrandValidationError) o;
         return 
-            Objects.deepEquals(this.colors, other.colors);
+            Utils.enhancedDeepEquals(this.colors, other.colors);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             colors);
     }
     

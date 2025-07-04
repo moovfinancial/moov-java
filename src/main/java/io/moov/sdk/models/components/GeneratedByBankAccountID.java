@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class GeneratedByBankAccountID {
@@ -63,12 +62,12 @@ public class GeneratedByBankAccountID {
         }
         GeneratedByBankAccountID other = (GeneratedByBankAccountID) o;
         return 
-            Objects.deepEquals(this.bankAccountID, other.bankAccountID);
+            Utils.enhancedDeepEquals(this.bankAccountID, other.bankAccountID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             bankAccountID);
     }
     

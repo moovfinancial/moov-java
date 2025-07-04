@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 public class Cancellation {
 
@@ -84,14 +83,14 @@ public class Cancellation {
         }
         Cancellation other = (Cancellation) o;
         return 
-            Objects.deepEquals(this.cancellationID, other.cancellationID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.createdOn, other.createdOn);
+            Utils.enhancedDeepEquals(this.cancellationID, other.cancellationID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             cancellationID,
             status,
             createdOn);

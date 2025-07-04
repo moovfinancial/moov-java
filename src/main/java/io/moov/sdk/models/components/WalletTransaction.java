@@ -15,7 +15,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -556,31 +555,31 @@ public class WalletTransaction {
         }
         WalletTransaction other = (WalletTransaction) o;
         return 
-            Objects.deepEquals(this.walletID, other.walletID) &&
-            Objects.deepEquals(this.transactionID, other.transactionID) &&
-            Objects.deepEquals(this.transactionType, other.transactionType) &&
-            Objects.deepEquals(this.sourceType, other.sourceType) &&
-            Objects.deepEquals(this.sourceID, other.sourceID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.memo, other.memo) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.completedOn, other.completedOn) &&
-            Objects.deepEquals(this.currency, other.currency) &&
-            Objects.deepEquals(this.grossAmount, other.grossAmount) &&
-            Objects.deepEquals(this.grossAmountDecimal, other.grossAmountDecimal) &&
-            Objects.deepEquals(this.fee, other.fee) &&
-            Objects.deepEquals(this.feeIDs, other.feeIDs) &&
-            Objects.deepEquals(this.feeDecimal, other.feeDecimal) &&
-            Objects.deepEquals(this.netAmount, other.netAmount) &&
-            Objects.deepEquals(this.netAmountDecimal, other.netAmountDecimal) &&
-            Objects.deepEquals(this.availableBalance, other.availableBalance) &&
-            Objects.deepEquals(this.availableBalanceDecimal, other.availableBalanceDecimal) &&
-            Objects.deepEquals(this.sweepID, other.sweepID);
+            Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
+            Utils.enhancedDeepEquals(this.transactionID, other.transactionID) &&
+            Utils.enhancedDeepEquals(this.transactionType, other.transactionType) &&
+            Utils.enhancedDeepEquals(this.sourceType, other.sourceType) &&
+            Utils.enhancedDeepEquals(this.sourceID, other.sourceID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.memo, other.memo) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.completedOn, other.completedOn) &&
+            Utils.enhancedDeepEquals(this.currency, other.currency) &&
+            Utils.enhancedDeepEquals(this.grossAmount, other.grossAmount) &&
+            Utils.enhancedDeepEquals(this.grossAmountDecimal, other.grossAmountDecimal) &&
+            Utils.enhancedDeepEquals(this.fee, other.fee) &&
+            Utils.enhancedDeepEquals(this.feeIDs, other.feeIDs) &&
+            Utils.enhancedDeepEquals(this.feeDecimal, other.feeDecimal) &&
+            Utils.enhancedDeepEquals(this.netAmount, other.netAmount) &&
+            Utils.enhancedDeepEquals(this.netAmountDecimal, other.netAmountDecimal) &&
+            Utils.enhancedDeepEquals(this.availableBalance, other.availableBalance) &&
+            Utils.enhancedDeepEquals(this.availableBalanceDecimal, other.availableBalanceDecimal) &&
+            Utils.enhancedDeepEquals(this.sweepID, other.sweepID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             walletID,
             transactionID,
             transactionType,

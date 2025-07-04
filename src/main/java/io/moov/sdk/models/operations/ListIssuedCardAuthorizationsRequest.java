@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ListIssuedCardAuthorizationsRequest {
@@ -256,18 +255,18 @@ public class ListIssuedCardAuthorizationsRequest {
         }
         ListIssuedCardAuthorizationsRequest other = (ListIssuedCardAuthorizationsRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.skip, other.skip) &&
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.issuedCardID, other.issuedCardID) &&
-            Objects.deepEquals(this.startDateTime, other.startDateTime) &&
-            Objects.deepEquals(this.endDateTime, other.endDateTime) &&
-            Objects.deepEquals(this.statuses, other.statuses);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.issuedCardID, other.issuedCardID) &&
+            Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
+            Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime) &&
+            Utils.enhancedDeepEquals(this.statuses, other.statuses);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID,
             skip,
             count,

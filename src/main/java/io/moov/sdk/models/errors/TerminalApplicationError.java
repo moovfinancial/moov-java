@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -46,6 +45,7 @@ public class TerminalApplicationError extends RuntimeException {
             @JsonProperty("packageName") Optional<String> packageName,
             @JsonProperty("sha256Digest") Optional<String> sha256Digest,
             @JsonProperty("versionCode") Optional<String> versionCode) {
+        super("API error occurred");
         Utils.checkNotNull(platform, "platform");
         Utils.checkNotNull(appBundleID, "appBundleID");
         Utils.checkNotNull(packageName, "packageName");
@@ -162,16 +162,16 @@ public class TerminalApplicationError extends RuntimeException {
         }
         TerminalApplicationError other = (TerminalApplicationError) o;
         return 
-            Objects.deepEquals(this.platform, other.platform) &&
-            Objects.deepEquals(this.appBundleID, other.appBundleID) &&
-            Objects.deepEquals(this.packageName, other.packageName) &&
-            Objects.deepEquals(this.sha256Digest, other.sha256Digest) &&
-            Objects.deepEquals(this.versionCode, other.versionCode);
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.appBundleID, other.appBundleID) &&
+            Utils.enhancedDeepEquals(this.packageName, other.packageName) &&
+            Utils.enhancedDeepEquals(this.sha256Digest, other.sha256Digest) &&
+            Utils.enhancedDeepEquals(this.versionCode, other.versionCode);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             platform,
             appBundleID,
             packageName,

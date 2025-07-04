@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -206,15 +205,15 @@ public class Verification {
         }
         Verification other = (Verification) o;
         return 
-            Objects.deepEquals(this.verificationStatus, other.verificationStatus) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.details, other.details) &&
-            Objects.deepEquals(this.documents, other.documents);
+            Utils.enhancedDeepEquals(this.verificationStatus, other.verificationStatus) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.details, other.details) &&
+            Utils.enhancedDeepEquals(this.documents, other.documents);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             verificationStatus,
             status,
             details,

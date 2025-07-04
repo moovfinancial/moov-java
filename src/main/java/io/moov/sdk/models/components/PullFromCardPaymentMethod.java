@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class PullFromCardPaymentMethod implements PaymentMethod {
 
@@ -102,14 +101,14 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
         }
         PullFromCardPaymentMethod other = (PullFromCardPaymentMethod) o;
         return 
-            Objects.deepEquals(this.paymentMethodID, other.paymentMethodID) &&
-            Objects.deepEquals(this.paymentMethodType, other.paymentMethodType) &&
-            Objects.deepEquals(this.card, other.card);
+            Utils.enhancedDeepEquals(this.paymentMethodID, other.paymentMethodID) &&
+            Utils.enhancedDeepEquals(this.paymentMethodType, other.paymentMethodType) &&
+            Utils.enhancedDeepEquals(this.card, other.card);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             paymentMethodID,
             paymentMethodType,
             card);

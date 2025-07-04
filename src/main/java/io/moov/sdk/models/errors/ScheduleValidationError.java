@@ -14,7 +14,6 @@ import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -37,6 +36,7 @@ public class ScheduleValidationError extends RuntimeException {
             @JsonProperty("occurrences") Optional<? extends Map<String, String>> occurrences,
             @JsonProperty("recur") Optional<String> recur,
             @JsonProperty("description") Optional<String> description) {
+        super("API error occurred");
         Utils.checkNotNull(occurrences, "occurrences");
         Utils.checkNotNull(recur, "recur");
         Utils.checkNotNull(description, "description");
@@ -116,14 +116,14 @@ public class ScheduleValidationError extends RuntimeException {
         }
         ScheduleValidationError other = (ScheduleValidationError) o;
         return 
-            Objects.deepEquals(this.occurrences, other.occurrences) &&
-            Objects.deepEquals(this.recur, other.recur) &&
-            Objects.deepEquals(this.description, other.description);
+            Utils.enhancedDeepEquals(this.occurrences, other.occurrences) &&
+            Utils.enhancedDeepEquals(this.recur, other.recur) &&
+            Utils.enhancedDeepEquals(this.description, other.description);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             occurrences,
             recur,
             description);

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class CardVolumeDistributionError {
@@ -135,15 +134,15 @@ public class CardVolumeDistributionError {
         }
         CardVolumeDistributionError other = (CardVolumeDistributionError) o;
         return 
-            Objects.deepEquals(this.ecommercePercentage, other.ecommercePercentage) &&
-            Objects.deepEquals(this.cardPresentPercentage, other.cardPresentPercentage) &&
-            Objects.deepEquals(this.mailOrPhonePercentage, other.mailOrPhonePercentage) &&
-            Objects.deepEquals(this.debtRepaymentPercentage, other.debtRepaymentPercentage);
+            Utils.enhancedDeepEquals(this.ecommercePercentage, other.ecommercePercentage) &&
+            Utils.enhancedDeepEquals(this.cardPresentPercentage, other.cardPresentPercentage) &&
+            Utils.enhancedDeepEquals(this.mailOrPhonePercentage, other.mailOrPhonePercentage) &&
+            Utils.enhancedDeepEquals(this.debtRepaymentPercentage, other.debtRepaymentPercentage);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             ecommercePercentage,
             cardPresentPercentage,
             mailOrPhonePercentage,

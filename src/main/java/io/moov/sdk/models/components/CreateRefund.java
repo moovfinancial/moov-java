@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -83,12 +82,12 @@ public class CreateRefund {
         }
         CreateRefund other = (CreateRefund) o;
         return 
-            Objects.deepEquals(this.amount, other.amount);
+            Utils.enhancedDeepEquals(this.amount, other.amount);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             amount);
     }
     

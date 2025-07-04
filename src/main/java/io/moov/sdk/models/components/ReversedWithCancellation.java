@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class ReversedWithCancellation {
 
@@ -49,12 +48,12 @@ public class ReversedWithCancellation {
         }
         ReversedWithCancellation other = (ReversedWithCancellation) o;
         return 
-            Objects.deepEquals(this.cancellation, other.cancellation);
+            Utils.enhancedDeepEquals(this.cancellation, other.cancellation);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             cancellation);
     }
     

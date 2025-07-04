@@ -12,7 +12,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class BankAccountVerification {
@@ -113,14 +112,14 @@ public class BankAccountVerification {
         }
         BankAccountVerification other = (BankAccountVerification) o;
         return 
-            Objects.deepEquals(this.verificationMethod, other.verificationMethod) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.exceptionDetails, other.exceptionDetails);
+            Utils.enhancedDeepEquals(this.verificationMethod, other.verificationMethod) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.exceptionDetails, other.exceptionDetails);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             verificationMethod,
             status,
             exceptionDetails);

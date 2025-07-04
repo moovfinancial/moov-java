@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 public class PaymentLinkPayoutDetails {
 
@@ -91,13 +90,13 @@ public class PaymentLinkPayoutDetails {
         }
         PaymentLinkPayoutDetails other = (PaymentLinkPayoutDetails) o;
         return 
-            Objects.deepEquals(this.allowedMethods, other.allowedMethods) &&
-            Objects.deepEquals(this.recipient, other.recipient);
+            Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
+            Utils.enhancedDeepEquals(this.recipient, other.recipient);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             allowedMethods,
             recipient);
     }

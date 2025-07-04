@@ -13,7 +13,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 public class RevokeTokenRequest {
@@ -181,15 +180,15 @@ public class RevokeTokenRequest {
         }
         RevokeTokenRequest other = (RevokeTokenRequest) o;
         return 
-            Objects.deepEquals(this.token, other.token) &&
-            Objects.deepEquals(this.tokenTypeHint, other.tokenTypeHint) &&
-            Objects.deepEquals(this.clientId, other.clientId) &&
-            Objects.deepEquals(this.clientSecret, other.clientSecret);
+            Utils.enhancedDeepEquals(this.token, other.token) &&
+            Utils.enhancedDeepEquals(this.tokenTypeHint, other.tokenTypeHint) &&
+            Utils.enhancedDeepEquals(this.clientId, other.clientId) &&
+            Utils.enhancedDeepEquals(this.clientSecret, other.clientSecret);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             token,
             tokenTypeHint,
             clientId,

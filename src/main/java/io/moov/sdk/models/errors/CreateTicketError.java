@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -37,6 +36,7 @@ public class CreateTicketError extends RuntimeException {
             @JsonProperty("title") Optional<String> title,
             @JsonProperty("body") Optional<String> body,
             @JsonProperty("contact") Optional<? extends CreateTicketContactError> contact) {
+        super("API error occurred");
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(body, "body");
         Utils.checkNotNull(contact, "contact");
@@ -116,14 +116,14 @@ public class CreateTicketError extends RuntimeException {
         }
         CreateTicketError other = (CreateTicketError) o;
         return 
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.body, other.body) &&
-            Objects.deepEquals(this.contact, other.contact);
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.body, other.body) &&
+            Utils.enhancedDeepEquals(this.contact, other.contact);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             title,
             body,
             contact);

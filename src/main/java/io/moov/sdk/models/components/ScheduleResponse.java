@@ -14,7 +14,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ScheduleResponse {
@@ -317,23 +316,23 @@ public class ScheduleResponse {
         }
         ScheduleResponse other = (ScheduleResponse) o;
         return 
-            Objects.deepEquals(this.description, other.description) &&
-            Objects.deepEquals(this.destinationAccountID, other.destinationAccountID) &&
-            Objects.deepEquals(this.mode, other.mode) &&
-            Objects.deepEquals(this.occurrences, other.occurrences) &&
-            Objects.deepEquals(this.ownerAccountID, other.ownerAccountID) &&
-            Objects.deepEquals(this.partnerAccountID, other.partnerAccountID) &&
-            Objects.deepEquals(this.recur, other.recur) &&
-            Objects.deepEquals(this.scheduleID, other.scheduleID) &&
-            Objects.deepEquals(this.sourceAccountID, other.sourceAccountID) &&
-            Objects.deepEquals(this.createdOn, other.createdOn) &&
-            Objects.deepEquals(this.updatedOn, other.updatedOn) &&
-            Objects.deepEquals(this.disabledOn, other.disabledOn);
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.destinationAccountID, other.destinationAccountID) &&
+            Utils.enhancedDeepEquals(this.mode, other.mode) &&
+            Utils.enhancedDeepEquals(this.occurrences, other.occurrences) &&
+            Utils.enhancedDeepEquals(this.ownerAccountID, other.ownerAccountID) &&
+            Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
+            Utils.enhancedDeepEquals(this.recur, other.recur) &&
+            Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
+            Utils.enhancedDeepEquals(this.sourceAccountID, other.sourceAccountID) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             description,
             destinationAccountID,
             mode,

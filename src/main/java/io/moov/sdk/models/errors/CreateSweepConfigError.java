@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -51,6 +50,7 @@ public class CreateSweepConfigError extends RuntimeException {
             @JsonProperty("pullPaymentMethodID") Optional<String> pullPaymentMethodID,
             @JsonProperty("statementDescriptor") Optional<String> statementDescriptor,
             @JsonProperty("minimumBalance") Optional<String> minimumBalance) {
+        super("API error occurred");
         Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
@@ -186,17 +186,17 @@ public class CreateSweepConfigError extends RuntimeException {
         }
         CreateSweepConfigError other = (CreateSweepConfigError) o;
         return 
-            Objects.deepEquals(this.walletID, other.walletID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
-            Objects.deepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
-            Objects.deepEquals(this.statementDescriptor, other.statementDescriptor) &&
-            Objects.deepEquals(this.minimumBalance, other.minimumBalance);
+            Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.pushPaymentMethodID, other.pushPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.pullPaymentMethodID, other.pullPaymentMethodID) &&
+            Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
+            Utils.enhancedDeepEquals(this.minimumBalance, other.minimumBalance);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             walletID,
             status,
             pushPaymentMethodID,

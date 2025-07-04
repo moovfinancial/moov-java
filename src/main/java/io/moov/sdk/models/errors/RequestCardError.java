@@ -16,7 +16,6 @@ import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("serial")
@@ -54,6 +53,7 @@ public class RequestCardError extends RuntimeException {
             @JsonProperty("memo") Optional<String> memo,
             @JsonProperty("expiration") Optional<? extends CardExpirationError> expiration,
             @JsonProperty("controls") Optional<? extends IssuingControlsError> controls) {
+        super("API error occurred");
         Utils.checkNotNull(fundingWalletID, "fundingWalletID");
         Utils.checkNotNull(formFactor, "formFactor");
         Utils.checkNotNull(authorizedUser, "authorizedUser");
@@ -192,17 +192,17 @@ public class RequestCardError extends RuntimeException {
         }
         RequestCardError other = (RequestCardError) o;
         return 
-            Objects.deepEquals(this.fundingWalletID, other.fundingWalletID) &&
-            Objects.deepEquals(this.formFactor, other.formFactor) &&
-            Objects.deepEquals(this.authorizedUser, other.authorizedUser) &&
-            Objects.deepEquals(this.memo, other.memo) &&
-            Objects.deepEquals(this.expiration, other.expiration) &&
-            Objects.deepEquals(this.controls, other.controls);
+            Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
+            Utils.enhancedDeepEquals(this.formFactor, other.formFactor) &&
+            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser) &&
+            Utils.enhancedDeepEquals(this.memo, other.memo) &&
+            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+            Utils.enhancedDeepEquals(this.controls, other.controls);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             fundingWalletID,
             formFactor,
             authorizedUser,

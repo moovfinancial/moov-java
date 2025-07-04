@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
-import java.util.Objects;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 public class PatchTransfer {
@@ -66,12 +65,12 @@ public class PatchTransfer {
         }
         PatchTransfer other = (PatchTransfer) o;
         return 
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             metadata);
     }
     

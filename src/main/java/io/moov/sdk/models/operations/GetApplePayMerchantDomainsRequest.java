@@ -9,7 +9,6 @@ import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 public class GetApplePayMerchantDomainsRequest {
 
@@ -58,12 +57,12 @@ public class GetApplePayMerchantDomainsRequest {
         }
         GetApplePayMerchantDomainsRequest other = (GetApplePayMerchantDomainsRequest) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accountID);
     }
     

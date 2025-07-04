@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class OccurrencesResponse {
@@ -390,23 +389,23 @@ public class OccurrencesResponse {
         }
         OccurrencesResponse other = (OccurrencesResponse) o;
         return 
-            Objects.deepEquals(this.scheduleID, other.scheduleID) &&
-            Objects.deepEquals(this.occurrenceID, other.occurrenceID) &&
-            Objects.deepEquals(this.mode, other.mode) &&
-            Objects.deepEquals(this.generated, other.generated) &&
-            Objects.deepEquals(this.indefinite, other.indefinite) &&
-            Objects.deepEquals(this.canceledOn, other.canceledOn) &&
-            Objects.deepEquals(this.runOn, other.runOn) &&
-            Objects.deepEquals(this.runTransfer, other.runTransfer) &&
-            Objects.deepEquals(this.ranOn, other.ranOn) &&
-            Objects.deepEquals(this.ranTransferID, other.ranTransferID) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
+            Utils.enhancedDeepEquals(this.occurrenceID, other.occurrenceID) &&
+            Utils.enhancedDeepEquals(this.mode, other.mode) &&
+            Utils.enhancedDeepEquals(this.generated, other.generated) &&
+            Utils.enhancedDeepEquals(this.indefinite, other.indefinite) &&
+            Utils.enhancedDeepEquals(this.canceledOn, other.canceledOn) &&
+            Utils.enhancedDeepEquals(this.runOn, other.runOn) &&
+            Utils.enhancedDeepEquals(this.runTransfer, other.runTransfer) &&
+            Utils.enhancedDeepEquals(this.ranOn, other.ranOn) &&
+            Utils.enhancedDeepEquals(this.ranTransferID, other.ranTransferID) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.error, other.error);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             scheduleID,
             occurrenceID,
             mode,

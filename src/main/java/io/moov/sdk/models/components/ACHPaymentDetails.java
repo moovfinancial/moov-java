@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -116,13 +115,13 @@ public class ACHPaymentDetails {
         }
         ACHPaymentDetails other = (ACHPaymentDetails) o;
         return 
-            Objects.deepEquals(this.companyEntryDescription, other.companyEntryDescription) &&
-            Objects.deepEquals(this.originatingCompanyName, other.originatingCompanyName);
+            Utils.enhancedDeepEquals(this.companyEntryDescription, other.companyEntryDescription) &&
+            Utils.enhancedDeepEquals(this.originatingCompanyName, other.originatingCompanyName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             companyEntryDescription,
             originatingCompanyName);
     }

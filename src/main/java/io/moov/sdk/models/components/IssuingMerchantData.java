@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 public class IssuingMerchantData {
@@ -291,18 +290,18 @@ public class IssuingMerchantData {
         }
         IssuingMerchantData other = (IssuingMerchantData) o;
         return 
-            Objects.deepEquals(this.networkID, other.networkID) &&
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.city, other.city) &&
-            Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.postalCode, other.postalCode) &&
-            Objects.deepEquals(this.state, other.state) &&
-            Objects.deepEquals(this.mcc, other.mcc);
+            Utils.enhancedDeepEquals(this.networkID, other.networkID) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.city, other.city) &&
+            Utils.enhancedDeepEquals(this.country, other.country) &&
+            Utils.enhancedDeepEquals(this.postalCode, other.postalCode) &&
+            Utils.enhancedDeepEquals(this.state, other.state) &&
+            Utils.enhancedDeepEquals(this.mcc, other.mcc);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             networkID,
             name,
             city,

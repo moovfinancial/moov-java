@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class TerminalApplicationError extends RuntimeException {
 
@@ -22,17 +23,21 @@ public class TerminalApplicationError extends RuntimeException {
     @JsonProperty("platform")
     private Optional<String> platform;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("appBundleID")
     private Optional<String> appBundleID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("packageName")
     private Optional<String> packageName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sha256Digest")
     private Optional<String> sha256Digest;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("versionCode")
@@ -59,7 +64,8 @@ public class TerminalApplicationError extends RuntimeException {
     }
     
     public TerminalApplicationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -87,15 +93,17 @@ public class TerminalApplicationError extends RuntimeException {
         return versionCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TerminalApplicationError withPlatform(String platform) {
         Utils.checkNotNull(platform, "platform");
         this.platform = Optional.ofNullable(platform);
         return this;
     }
+
 
     public TerminalApplicationError withPlatform(Optional<String> platform) {
         Utils.checkNotNull(platform, "platform");
@@ -109,6 +117,7 @@ public class TerminalApplicationError extends RuntimeException {
         return this;
     }
 
+
     public TerminalApplicationError withAppBundleID(Optional<String> appBundleID) {
         Utils.checkNotNull(appBundleID, "appBundleID");
         this.appBundleID = appBundleID;
@@ -120,6 +129,7 @@ public class TerminalApplicationError extends RuntimeException {
         this.packageName = Optional.ofNullable(packageName);
         return this;
     }
+
 
     public TerminalApplicationError withPackageName(Optional<String> packageName) {
         Utils.checkNotNull(packageName, "packageName");
@@ -133,6 +143,7 @@ public class TerminalApplicationError extends RuntimeException {
         return this;
     }
 
+
     public TerminalApplicationError withSha256Digest(Optional<String> sha256Digest) {
         Utils.checkNotNull(sha256Digest, "sha256Digest");
         this.sha256Digest = sha256Digest;
@@ -145,13 +156,13 @@ public class TerminalApplicationError extends RuntimeException {
         return this;
     }
 
+
     public TerminalApplicationError withVersionCode(Optional<String> versionCode) {
         Utils.checkNotNull(versionCode, "versionCode");
         this.versionCode = versionCode;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -172,11 +183,8 @@ public class TerminalApplicationError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            platform,
-            appBundleID,
-            packageName,
-            sha256Digest,
-            versionCode);
+            platform, appBundleID, packageName,
+            sha256Digest, versionCode);
     }
     
     @Override
@@ -188,22 +196,24 @@ public class TerminalApplicationError extends RuntimeException {
                 "sha256Digest", sha256Digest,
                 "versionCode", versionCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> platform = Optional.empty();
- 
+
         private Optional<String> appBundleID = Optional.empty();
- 
+
         private Optional<String> packageName = Optional.empty();
- 
+
         private Optional<String> sha256Digest = Optional.empty();
- 
+
         private Optional<String> versionCode = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder platform(String platform) {
             Utils.checkNotNull(platform, "platform");
@@ -217,6 +227,7 @@ public class TerminalApplicationError extends RuntimeException {
             return this;
         }
 
+
         public Builder appBundleID(String appBundleID) {
             Utils.checkNotNull(appBundleID, "appBundleID");
             this.appBundleID = Optional.ofNullable(appBundleID);
@@ -228,6 +239,7 @@ public class TerminalApplicationError extends RuntimeException {
             this.appBundleID = appBundleID;
             return this;
         }
+
 
         public Builder packageName(String packageName) {
             Utils.checkNotNull(packageName, "packageName");
@@ -241,6 +253,7 @@ public class TerminalApplicationError extends RuntimeException {
             return this;
         }
 
+
         public Builder sha256Digest(String sha256Digest) {
             Utils.checkNotNull(sha256Digest, "sha256Digest");
             this.sha256Digest = Optional.ofNullable(sha256Digest);
@@ -253,6 +266,7 @@ public class TerminalApplicationError extends RuntimeException {
             return this;
         }
 
+
         public Builder versionCode(String versionCode) {
             Utils.checkNotNull(versionCode, "versionCode");
             this.versionCode = Optional.ofNullable(versionCode);
@@ -264,15 +278,14 @@ public class TerminalApplicationError extends RuntimeException {
             this.versionCode = versionCode;
             return this;
         }
-        
+
         public TerminalApplicationError build() {
+
             return new TerminalApplicationError(
-                platform,
-                appBundleID,
-                packageName,
-                sha256Digest,
-                versionCode);
+                platform, appBundleID, packageName,
+                sha256Digest, versionCode);
         }
+
     }
 }
 

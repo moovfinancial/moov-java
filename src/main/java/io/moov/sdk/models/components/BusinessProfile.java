@@ -22,7 +22,6 @@ import java.util.Optional;
  * <p>Describes a business.
  */
 public class BusinessProfile {
-
     /**
      * The legal name under which the entity is registered.
      */
@@ -43,21 +42,26 @@ public class BusinessProfile {
     @JsonProperty("businessType")
     private Optional<? extends BusinessType> businessType;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends Address> address;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("website")
     private Optional<String> website;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
@@ -70,12 +74,15 @@ public class BusinessProfile {
     @JsonProperty("taxIDProvided")
     private Optional<Boolean> taxIDProvided;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("representatives")
     private Optional<? extends List<Representative>> representatives;
 
+
     @JsonProperty("ownersProvided")
     private boolean ownersProvided;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("industryCodes")
@@ -134,7 +141,11 @@ public class BusinessProfile {
     public BusinessProfile(
             String legalBusinessName,
             boolean ownersProvided) {
-        this(legalBusinessName, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), ownersProvided, Optional.empty(), Optional.empty());
+        this(legalBusinessName, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), ownersProvided, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -223,9 +234,10 @@ public class BusinessProfile {
         return (Optional<PrimaryRegulator>) primaryRegulator;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The legal name under which the entity is registered.
@@ -245,6 +257,7 @@ public class BusinessProfile {
         return this;
     }
 
+
     /**
      * A registered trade name under which the business operates, if different from its legal name.
      */
@@ -263,6 +276,7 @@ public class BusinessProfile {
         return this;
     }
 
+
     /**
      * The type of entity represented by this business.
      */
@@ -278,6 +292,7 @@ public class BusinessProfile {
         return this;
     }
 
+
     public BusinessProfile withAddress(Optional<? extends Address> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -289,6 +304,7 @@ public class BusinessProfile {
         this.phone = Optional.ofNullable(phone);
         return this;
     }
+
 
     public BusinessProfile withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
@@ -302,6 +318,7 @@ public class BusinessProfile {
         return this;
     }
 
+
     public BusinessProfile withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
@@ -314,6 +331,7 @@ public class BusinessProfile {
         return this;
     }
 
+
     public BusinessProfile withWebsite(Optional<String> website) {
         Utils.checkNotNull(website, "website");
         this.website = website;
@@ -325,6 +343,7 @@ public class BusinessProfile {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     public BusinessProfile withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
@@ -341,6 +360,7 @@ public class BusinessProfile {
         return this;
     }
 
+
     /**
      * Indicates whether a tax ID has been provided for this business.
      */
@@ -355,6 +375,7 @@ public class BusinessProfile {
         this.representatives = Optional.ofNullable(representatives);
         return this;
     }
+
 
     public BusinessProfile withRepresentatives(Optional<? extends List<Representative>> representatives) {
         Utils.checkNotNull(representatives, "representatives");
@@ -374,6 +395,7 @@ public class BusinessProfile {
         return this;
     }
 
+
     public BusinessProfile withIndustryCodes(Optional<? extends IndustryCodes> industryCodes) {
         Utils.checkNotNull(industryCodes, "industryCodes");
         this.industryCodes = industryCodes;
@@ -389,6 +411,7 @@ public class BusinessProfile {
         return this;
     }
 
+
     /**
      * If the business is a financial institution, this field describes its primary regulator.
      */
@@ -398,7 +421,6 @@ public class BusinessProfile {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -427,18 +449,10 @@ public class BusinessProfile {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            legalBusinessName,
-            doingBusinessAs,
-            businessType,
-            address,
-            phone,
-            email,
-            website,
-            description,
-            taxIDProvided,
-            representatives,
-            ownersProvided,
-            industryCodes,
+            legalBusinessName, doingBusinessAs, businessType,
+            address, phone, email,
+            website, description, taxIDProvided,
+            representatives, ownersProvided, industryCodes,
             primaryRegulator);
     }
     
@@ -459,38 +473,40 @@ public class BusinessProfile {
                 "industryCodes", industryCodes,
                 "primaryRegulator", primaryRegulator);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String legalBusinessName;
- 
+
         private Optional<String> doingBusinessAs = Optional.empty();
- 
+
         private Optional<? extends BusinessType> businessType = Optional.empty();
- 
+
         private Optional<? extends Address> address = Optional.empty();
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<String> website = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<Boolean> taxIDProvided = Optional.empty();
- 
+
         private Optional<? extends List<Representative>> representatives = Optional.empty();
- 
+
         private Boolean ownersProvided;
- 
+
         private Optional<? extends IndustryCodes> industryCodes = Optional.empty();
- 
+
         private Optional<? extends PrimaryRegulator> primaryRegulator = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The legal name under which the entity is registered.
@@ -500,6 +516,7 @@ public class BusinessProfile {
             this.legalBusinessName = legalBusinessName;
             return this;
         }
+
 
         /**
          * A registered trade name under which the business operates, if different from its legal name.
@@ -519,6 +536,7 @@ public class BusinessProfile {
             return this;
         }
 
+
         /**
          * The type of entity represented by this business.
          */
@@ -537,6 +555,7 @@ public class BusinessProfile {
             return this;
         }
 
+
         public Builder address(Address address) {
             Utils.checkNotNull(address, "address");
             this.address = Optional.ofNullable(address);
@@ -548,6 +567,7 @@ public class BusinessProfile {
             this.address = address;
             return this;
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -561,6 +581,7 @@ public class BusinessProfile {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -572,6 +593,7 @@ public class BusinessProfile {
             this.email = email;
             return this;
         }
+
 
         public Builder website(String website) {
             Utils.checkNotNull(website, "website");
@@ -585,6 +607,7 @@ public class BusinessProfile {
             return this;
         }
 
+
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
@@ -596,6 +619,7 @@ public class BusinessProfile {
             this.description = description;
             return this;
         }
+
 
         /**
          * Indicates whether a tax ID has been provided for this business.
@@ -615,6 +639,7 @@ public class BusinessProfile {
             return this;
         }
 
+
         public Builder representatives(List<Representative> representatives) {
             Utils.checkNotNull(representatives, "representatives");
             this.representatives = Optional.ofNullable(representatives);
@@ -627,11 +652,13 @@ public class BusinessProfile {
             return this;
         }
 
+
         public Builder ownersProvided(boolean ownersProvided) {
             Utils.checkNotNull(ownersProvided, "ownersProvided");
             this.ownersProvided = ownersProvided;
             return this;
         }
+
 
         public Builder industryCodes(IndustryCodes industryCodes) {
             Utils.checkNotNull(industryCodes, "industryCodes");
@@ -644,6 +671,7 @@ public class BusinessProfile {
             this.industryCodes = industryCodes;
             return this;
         }
+
 
         /**
          * If the business is a financial institution, this field describes its primary regulator.
@@ -662,22 +690,16 @@ public class BusinessProfile {
             this.primaryRegulator = primaryRegulator;
             return this;
         }
-        
+
         public BusinessProfile build() {
+
             return new BusinessProfile(
-                legalBusinessName,
-                doingBusinessAs,
-                businessType,
-                address,
-                phone,
-                email,
-                website,
-                description,
-                taxIDProvided,
-                representatives,
-                ownersProvided,
-                industryCodes,
+                legalBusinessName, doingBusinessAs, businessType,
+                address, phone, email,
+                website, description, taxIDProvided,
+                representatives, ownersProvided, industryCodes,
                 primaryRegulator);
         }
+
     }
 }

@@ -46,7 +46,6 @@ public class FeePlans {
     FeePlans(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * List all fee plan agreements associated with an account.
      * 
@@ -69,13 +68,11 @@ public class FeePlans {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListFeePlanAgreementsResponse listFeePlanAgreements(
-            ListFeePlanAgreementsRequest request) throws Exception {
+    public ListFeePlanAgreementsResponse listFeePlanAgreements(ListFeePlanAgreementsRequest request) throws Exception {
         RequestOperation<ListFeePlanAgreementsRequest, ListFeePlanAgreementsResponse> operation
-              = new ListFeePlanAgreementsOperation( sdkConfiguration);
+              = new ListFeePlanAgreementsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation.
@@ -110,10 +107,9 @@ public class FeePlans {
                 .createFeePlanAgreement(createFeePlanAgreement)
                 .build();
         RequestOperation<CreateFeePlanAgreementsRequest, CreateFeePlanAgreementsResponse> operation
-              = new CreateFeePlanAgreementsOperation( sdkConfiguration);
+              = new CreateFeePlanAgreementsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all fee plans available for use by an account. This is intended to be used by an account when 
@@ -165,10 +161,9 @@ public class FeePlans {
                 .planIDs(planIDs)
                 .build();
         RequestOperation<ListFeePlansRequest, ListFeePlansResponse> operation
-              = new ListFeePlansOperation( sdkConfiguration);
+              = new ListFeePlansOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve fees associated with an account.
@@ -192,13 +187,11 @@ public class FeePlans {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RetrieveFeesResponse retrieveFees(
-            RetrieveFeesRequest request) throws Exception {
+    public RetrieveFeesResponse retrieveFees(RetrieveFeesRequest request) throws Exception {
         RequestOperation<RetrieveFeesRequest, RetrieveFeesResponse> operation
-              = new RetrieveFeesOperation( sdkConfiguration);
+              = new RetrieveFeesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List fees associated with an account.
@@ -247,10 +240,9 @@ public class FeePlans {
                 .listFeesFetchRequest(listFeesFetchRequest)
                 .build();
         RequestOperation<io.moov.sdk.models.operations.ListFeesFetchRequest, ListFeesFetchResponse> operation
-              = new ListFeesFetchOperation( sdkConfiguration);
+              = new ListFeesFetchOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all partner pricing plans available for use by an account.
@@ -299,10 +291,9 @@ public class FeePlans {
                 .planIDs(planIDs)
                 .build();
         RequestOperation<ListPartnerPricingRequest, ListPartnerPricingResponse> operation
-              = new ListPartnerPricingOperation( sdkConfiguration);
+              = new ListPartnerPricingOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all partner pricing agreements associated with an account.
@@ -326,10 +317,9 @@ public class FeePlans {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(
-            ListPartnerPricingAgreementsRequest request) throws Exception {
+    public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(ListPartnerPricingAgreementsRequest request) throws Exception {
         RequestOperation<ListPartnerPricingAgreementsRequest, ListPartnerPricingAgreementsResponse> operation
-              = new ListPartnerPricingAgreementsOperation( sdkConfiguration);
+              = new ListPartnerPricingAgreementsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

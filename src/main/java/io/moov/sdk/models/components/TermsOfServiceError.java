@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class TermsOfServiceError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("token")
     private Optional<String> token;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("manual")
@@ -49,15 +51,17 @@ public class TermsOfServiceError {
         return (Optional<Manual>) manual;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TermsOfServiceError withToken(String token) {
         Utils.checkNotNull(token, "token");
         this.token = Optional.ofNullable(token);
         return this;
     }
+
 
     public TermsOfServiceError withToken(Optional<String> token) {
         Utils.checkNotNull(token, "token");
@@ -71,13 +75,13 @@ public class TermsOfServiceError {
         return this;
     }
 
+
     public TermsOfServiceError withManual(Optional<? extends Manual> manual) {
         Utils.checkNotNull(manual, "manual");
         this.manual = manual;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -95,8 +99,7 @@ public class TermsOfServiceError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            token,
-            manual);
+            token, manual);
     }
     
     @Override
@@ -105,16 +108,18 @@ public class TermsOfServiceError {
                 "token", token,
                 "manual", manual);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> token = Optional.empty();
- 
+
         private Optional<? extends Manual> manual = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder token(String token) {
             Utils.checkNotNull(token, "token");
@@ -128,6 +133,7 @@ public class TermsOfServiceError {
             return this;
         }
 
+
         public Builder manual(Manual manual) {
             Utils.checkNotNull(manual, "manual");
             this.manual = Optional.ofNullable(manual);
@@ -139,11 +145,12 @@ public class TermsOfServiceError {
             this.manual = manual;
             return this;
         }
-        
+
         public TermsOfServiceError build() {
+
             return new TermsOfServiceError(
-                token,
-                manual);
+                token, manual);
         }
+
     }
 }

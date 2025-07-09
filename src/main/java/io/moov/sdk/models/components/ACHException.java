@@ -13,15 +13,18 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class ACHException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("code")
     private Optional<String> code;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("reason")
     private Optional<String> reason;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
@@ -59,15 +62,17 @@ public class ACHException {
         return description;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ACHException withCode(String code) {
         Utils.checkNotNull(code, "code");
         this.code = Optional.ofNullable(code);
         return this;
     }
+
 
     public ACHException withCode(Optional<String> code) {
         Utils.checkNotNull(code, "code");
@@ -81,6 +86,7 @@ public class ACHException {
         return this;
     }
 
+
     public ACHException withReason(Optional<String> reason) {
         Utils.checkNotNull(reason, "reason");
         this.reason = reason;
@@ -93,13 +99,13 @@ public class ACHException {
         return this;
     }
 
+
     public ACHException withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +124,7 @@ public class ACHException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            code,
-            reason,
-            description);
+            code, reason, description);
     }
     
     @Override
@@ -130,18 +134,20 @@ public class ACHException {
                 "reason", reason,
                 "description", description);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> code = Optional.empty();
- 
+
         private Optional<String> reason = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder code(String code) {
             Utils.checkNotNull(code, "code");
@@ -155,6 +161,7 @@ public class ACHException {
             return this;
         }
 
+
         public Builder reason(String reason) {
             Utils.checkNotNull(reason, "reason");
             this.reason = Optional.ofNullable(reason);
@@ -167,6 +174,7 @@ public class ACHException {
             return this;
         }
 
+
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
@@ -178,12 +186,12 @@ public class ACHException {
             this.description = description;
             return this;
         }
-        
+
         public ACHException build() {
+
             return new ACHException(
-                code,
-                reason,
-                description);
+                code, reason, description);
         }
+
     }
 }

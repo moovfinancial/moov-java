@@ -22,7 +22,6 @@ import java.util.Optional;
  * for more information.
  */
 public class ApplePayHeader {
-
     /**
      * Base64-encoded ephemeral public key, used for ECC-encrypted payment data.
      */
@@ -85,9 +84,10 @@ public class ApplePayHeader {
         return transactionId;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Base64-encoded ephemeral public key, used for ECC-encrypted payment data.
@@ -97,6 +97,7 @@ public class ApplePayHeader {
         this.ephemeralPublicKey = Optional.ofNullable(ephemeralPublicKey);
         return this;
     }
+
 
     /**
      * Base64-encoded ephemeral public key, used for ECC-encrypted payment data.
@@ -125,7 +126,6 @@ public class ApplePayHeader {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -144,9 +144,7 @@ public class ApplePayHeader {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ephemeralPublicKey,
-            publicKeyHash,
-            transactionId);
+            ephemeralPublicKey, publicKeyHash, transactionId);
     }
     
     @Override
@@ -156,18 +154,20 @@ public class ApplePayHeader {
                 "publicKeyHash", publicKeyHash,
                 "transactionId", transactionId);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> ephemeralPublicKey = Optional.empty();
- 
+
         private String publicKeyHash;
- 
+
         private String transactionId;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Base64-encoded ephemeral public key, used for ECC-encrypted payment data.
@@ -187,6 +187,7 @@ public class ApplePayHeader {
             return this;
         }
 
+
         /**
          * A base64-encoded, SHA-256 hash of the merchant's public key.
          */
@@ -196,6 +197,7 @@ public class ApplePayHeader {
             return this;
         }
 
+
         /**
          * A device-generated identifier for the transaction.
          */
@@ -204,12 +206,12 @@ public class ApplePayHeader {
             this.transactionId = transactionId;
             return this;
         }
-        
+
         public ApplePayHeader build() {
+
             return new ApplePayHeader(
-                ephemeralPublicKey,
-                publicKeyHash,
-                transactionId);
+                ephemeralPublicKey, publicKeyHash, transactionId);
         }
+
     }
 }

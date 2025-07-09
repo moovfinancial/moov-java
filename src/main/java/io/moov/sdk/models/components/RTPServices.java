@@ -11,8 +11,8 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 
-public class RTPServices {
 
+public class RTPServices {
     /**
      * Can the institution receive payments
      */
@@ -51,9 +51,10 @@ public class RTPServices {
         return receiveRequestForPayment;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Can the institution receive payments
@@ -73,7 +74,6 @@ public class RTPServices {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,8 +91,7 @@ public class RTPServices {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            receivePayments,
-            receiveRequestForPayment);
+            receivePayments, receiveRequestForPayment);
     }
     
     @Override
@@ -101,16 +100,18 @@ public class RTPServices {
                 "receivePayments", receivePayments,
                 "receiveRequestForPayment", receiveRequestForPayment);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Boolean receivePayments;
- 
+
         private Boolean receiveRequestForPayment;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Can the institution receive payments
@@ -121,6 +122,7 @@ public class RTPServices {
             return this;
         }
 
+
         /**
          * Can the institution receive request for payment messages
          */
@@ -129,11 +131,12 @@ public class RTPServices {
             this.receiveRequestForPayment = receiveRequestForPayment;
             return this;
         }
-        
+
         public RTPServices build() {
+
             return new RTPServices(
-                receivePayments,
-                receiveRequestForPayment);
+                receivePayments, receiveRequestForPayment);
         }
+
     }
 }

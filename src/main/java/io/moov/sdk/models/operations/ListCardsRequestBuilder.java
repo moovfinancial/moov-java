@@ -37,7 +37,7 @@ public class ListCardsRequestBuilder {
     public ListCardsResponse call() throws Exception {
         
         RequestOperation<ListCardsRequest, ListCardsResponse> operation
-              = new ListCardsOperation( sdkConfiguration);
+              = new ListCardsOperation(sdkConfiguration);
         ListCardsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

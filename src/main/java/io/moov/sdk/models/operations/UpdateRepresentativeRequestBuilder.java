@@ -54,7 +54,7 @@ public class UpdateRepresentativeRequestBuilder {
     public UpdateRepresentativeResponse call() throws Exception {
         
         RequestOperation<UpdateRepresentativeRequest, UpdateRepresentativeResponse> operation
-              = new UpdateRepresentativeOperation( sdkConfiguration);
+              = new UpdateRepresentativeOperation(sdkConfiguration);
         UpdateRepresentativeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

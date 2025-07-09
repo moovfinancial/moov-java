@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class MoneyTransferError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pullFromCard")
     private Optional<? extends MoneyTransferPullFromCardError> pullFromCard;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushToCard")
@@ -50,15 +52,17 @@ public class MoneyTransferError {
         return (Optional<MoneyTransferPushToCardError>) pushToCard;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public MoneyTransferError withPullFromCard(MoneyTransferPullFromCardError pullFromCard) {
         Utils.checkNotNull(pullFromCard, "pullFromCard");
         this.pullFromCard = Optional.ofNullable(pullFromCard);
         return this;
     }
+
 
     public MoneyTransferError withPullFromCard(Optional<? extends MoneyTransferPullFromCardError> pullFromCard) {
         Utils.checkNotNull(pullFromCard, "pullFromCard");
@@ -72,13 +76,13 @@ public class MoneyTransferError {
         return this;
     }
 
+
     public MoneyTransferError withPushToCard(Optional<? extends MoneyTransferPushToCardError> pushToCard) {
         Utils.checkNotNull(pushToCard, "pushToCard");
         this.pushToCard = pushToCard;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class MoneyTransferError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            pullFromCard,
-            pushToCard);
+            pullFromCard, pushToCard);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class MoneyTransferError {
                 "pullFromCard", pullFromCard,
                 "pushToCard", pushToCard);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends MoneyTransferPullFromCardError> pullFromCard = Optional.empty();
- 
+
         private Optional<? extends MoneyTransferPushToCardError> pushToCard = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder pullFromCard(MoneyTransferPullFromCardError pullFromCard) {
             Utils.checkNotNull(pullFromCard, "pullFromCard");
@@ -129,6 +134,7 @@ public class MoneyTransferError {
             return this;
         }
 
+
         public Builder pushToCard(MoneyTransferPushToCardError pushToCard) {
             Utils.checkNotNull(pushToCard, "pushToCard");
             this.pushToCard = Optional.ofNullable(pushToCard);
@@ -140,11 +146,12 @@ public class MoneyTransferError {
             this.pushToCard = pushToCard;
             return this;
         }
-        
+
         public MoneyTransferError build() {
+
             return new MoneyTransferError(
-                pullFromCard,
-                pushToCard);
+                pullFromCard, pushToCard);
         }
+
     }
 }

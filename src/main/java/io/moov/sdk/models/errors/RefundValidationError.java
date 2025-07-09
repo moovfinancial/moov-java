@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class RefundValidationError extends RuntimeException {
 
@@ -57,15 +58,17 @@ public class RefundValidationError extends RuntimeException {
         return error;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RefundValidationError withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
         return this;
     }
+
 
     public RefundValidationError withAmount(Optional<String> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -82,6 +85,7 @@ public class RefundValidationError extends RuntimeException {
         return this;
     }
 
+
     /**
      * Used for generic errors when invalid request data isn't attributed to a single request field.
      */
@@ -91,7 +95,6 @@ public class RefundValidationError extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -109,8 +112,7 @@ public class RefundValidationError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount,
-            error);
+            amount, error);
     }
     
     @Override
@@ -119,16 +121,18 @@ public class RefundValidationError extends RuntimeException {
                 "amount", amount,
                 "error", error);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> amount = Optional.empty();
- 
+
         private Optional<String> error = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");
@@ -141,6 +145,7 @@ public class RefundValidationError extends RuntimeException {
             this.amount = amount;
             return this;
         }
+
 
         /**
          * Used for generic errors when invalid request data isn't attributed to a single request field.
@@ -159,12 +164,13 @@ public class RefundValidationError extends RuntimeException {
             this.error = error;
             return this;
         }
-        
+
         public RefundValidationError build() {
+
             return new RefundValidationError(
-                amount,
-                error);
+                amount, error);
         }
+
     }
 }
 

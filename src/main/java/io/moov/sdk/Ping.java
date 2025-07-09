@@ -20,7 +20,6 @@ public class Ping {
     Ping(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * A simple endpoint to check auth.
      * 
@@ -48,7 +47,7 @@ public class Ping {
                 .builder()
                 .build();
         RequestOperation<PingRequest, PingResponse> operation
-              = new PingOperation( sdkConfiguration);
+              = new PingOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

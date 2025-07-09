@@ -11,13 +11,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class CreateTransferOptionsForAccountRequest {
 
+public class CreateTransferOptionsForAccountRequest {
     /**
      * The partner's Moov account ID.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreateTransferOptions createTransferOptions;
@@ -45,9 +46,10 @@ public class CreateTransferOptionsForAccountRequest {
         return createTransferOptions;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The partner's Moov account ID.
@@ -64,7 +66,6 @@ public class CreateTransferOptionsForAccountRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,8 +83,7 @@ public class CreateTransferOptionsForAccountRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            createTransferOptions);
+            accountID, createTransferOptions);
     }
     
     @Override
@@ -92,16 +92,18 @@ public class CreateTransferOptionsForAccountRequest {
                 "accountID", accountID,
                 "createTransferOptions", createTransferOptions);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private CreateTransferOptions createTransferOptions;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The partner's Moov account ID.
@@ -112,16 +114,18 @@ public class CreateTransferOptionsForAccountRequest {
             return this;
         }
 
+
         public Builder createTransferOptions(CreateTransferOptions createTransferOptions) {
             Utils.checkNotNull(createTransferOptions, "createTransferOptions");
             this.createTransferOptions = createTransferOptions;
             return this;
         }
-        
+
         public CreateTransferOptionsForAccountRequest build() {
+
             return new CreateTransferOptionsForAccountRequest(
-                accountID,
-                createTransferOptions);
+                accountID, createTransferOptions);
         }
+
     }
 }

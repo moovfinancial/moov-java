@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class FeePlanAgreementError extends RuntimeException {
 
@@ -39,9 +40,10 @@ public class FeePlanAgreementError extends RuntimeException {
         return planID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FeePlanAgreementError withPlanID(String planID) {
         Utils.checkNotNull(planID, "planID");
@@ -49,13 +51,13 @@ public class FeePlanAgreementError extends RuntimeException {
         return this;
     }
 
+
     public FeePlanAgreementError withPlanID(Optional<String> planID) {
         Utils.checkNotNull(planID, "planID");
         this.planID = planID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -80,14 +82,16 @@ public class FeePlanAgreementError extends RuntimeException {
         return Utils.toString(FeePlanAgreementError.class,
                 "planID", planID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> planID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder planID(String planID) {
             Utils.checkNotNull(planID, "planID");
@@ -100,11 +104,13 @@ public class FeePlanAgreementError extends RuntimeException {
             this.planID = planID;
             return this;
         }
-        
+
         public FeePlanAgreementError build() {
+
             return new FeePlanAgreementError(
                 planID);
         }
+
     }
 }
 

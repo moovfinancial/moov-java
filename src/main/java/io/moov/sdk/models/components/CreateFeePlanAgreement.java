@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CreateFeePlanAgreement {
 
     @JsonProperty("planID")
@@ -27,9 +28,10 @@ public class CreateFeePlanAgreement {
         return planID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateFeePlanAgreement withPlanID(String planID) {
         Utils.checkNotNull(planID, "planID");
@@ -37,7 +39,6 @@ public class CreateFeePlanAgreement {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,24 +63,28 @@ public class CreateFeePlanAgreement {
         return Utils.toString(CreateFeePlanAgreement.class,
                 "planID", planID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String planID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder planID(String planID) {
             Utils.checkNotNull(planID, "planID");
             this.planID = planID;
             return this;
         }
-        
+
         public CreateFeePlanAgreement build() {
+
             return new CreateFeePlanAgreement(
                 planID);
         }
+
     }
 }

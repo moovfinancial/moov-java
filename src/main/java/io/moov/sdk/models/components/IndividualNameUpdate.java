@@ -13,8 +13,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class IndividualNameUpdate {
 
+public class IndividualNameUpdate {
     /**
      * The individual's first given name.
      */
@@ -60,7 +60,8 @@ public class IndividualNameUpdate {
     }
     
     public IndividualNameUpdate() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -95,9 +96,10 @@ public class IndividualNameUpdate {
         return suffix;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The individual's first given name.
@@ -107,6 +109,7 @@ public class IndividualNameUpdate {
         this.firstName = Optional.ofNullable(firstName);
         return this;
     }
+
 
     /**
      * The individual's first given name.
@@ -126,6 +129,7 @@ public class IndividualNameUpdate {
         return this;
     }
 
+
     /**
      * The individual's second given name, if any.
      */
@@ -143,6 +147,7 @@ public class IndividualNameUpdate {
         this.lastName = Optional.ofNullable(lastName);
         return this;
     }
+
 
     /**
      * The individual's family name.
@@ -162,6 +167,7 @@ public class IndividualNameUpdate {
         return this;
     }
 
+
     /**
      * Suffix of a given name.
      */
@@ -171,7 +177,6 @@ public class IndividualNameUpdate {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -191,9 +196,7 @@ public class IndividualNameUpdate {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            firstName,
-            middleName,
-            lastName,
+            firstName, middleName, lastName,
             suffix);
     }
     
@@ -205,20 +208,22 @@ public class IndividualNameUpdate {
                 "lastName", lastName,
                 "suffix", suffix);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> firstName = Optional.empty();
- 
+
         private Optional<String> middleName = Optional.empty();
- 
+
         private Optional<String> lastName = Optional.empty();
- 
+
         private Optional<String> suffix = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The individual's first given name.
@@ -238,6 +243,7 @@ public class IndividualNameUpdate {
             return this;
         }
 
+
         /**
          * The individual's second given name, if any.
          */
@@ -255,6 +261,7 @@ public class IndividualNameUpdate {
             this.middleName = middleName;
             return this;
         }
+
 
         /**
          * The individual's family name.
@@ -274,6 +281,7 @@ public class IndividualNameUpdate {
             return this;
         }
 
+
         /**
          * Suffix of a given name.
          */
@@ -291,13 +299,13 @@ public class IndividualNameUpdate {
             this.suffix = suffix;
             return this;
         }
-        
+
         public IndividualNameUpdate build() {
+
             return new IndividualNameUpdate(
-                firstName,
-                middleName,
-                lastName,
+                firstName, middleName, lastName,
                 suffix);
         }
+
     }
 }

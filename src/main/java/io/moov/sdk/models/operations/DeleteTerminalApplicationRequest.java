@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class DeleteTerminalApplicationRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=terminalApplicationID")
@@ -27,9 +28,10 @@ public class DeleteTerminalApplicationRequest {
         return terminalApplicationID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public DeleteTerminalApplicationRequest withTerminalApplicationID(String terminalApplicationID) {
         Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
@@ -37,7 +39,6 @@ public class DeleteTerminalApplicationRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,24 +63,28 @@ public class DeleteTerminalApplicationRequest {
         return Utils.toString(DeleteTerminalApplicationRequest.class,
                 "terminalApplicationID", terminalApplicationID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String terminalApplicationID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder terminalApplicationID(String terminalApplicationID) {
             Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
             this.terminalApplicationID = terminalApplicationID;
             return this;
         }
-        
+
         public DeleteTerminalApplicationRequest build() {
+
             return new DeleteTerminalApplicationRequest(
                 terminalApplicationID);
         }
+
     }
 }

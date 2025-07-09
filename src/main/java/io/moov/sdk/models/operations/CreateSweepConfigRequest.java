@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CreateSweepConfigRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreateSweepConfig createSweepConfig;
@@ -39,9 +41,10 @@ public class CreateSweepConfigRequest {
         return createSweepConfig;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateSweepConfigRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class CreateSweepConfigRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class CreateSweepConfigRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            createSweepConfig);
+            accountID, createSweepConfig);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class CreateSweepConfigRequest {
                 "accountID", accountID,
                 "createSweepConfig", createSweepConfig);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private CreateSweepConfig createSweepConfig;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class CreateSweepConfigRequest {
             return this;
         }
 
+
         public Builder createSweepConfig(CreateSweepConfig createSweepConfig) {
             Utils.checkNotNull(createSweepConfig, "createSweepConfig");
             this.createSweepConfig = createSweepConfig;
             return this;
         }
-        
+
         public CreateSweepConfigRequest build() {
+
             return new CreateSweepConfigRequest(
-                accountID,
-                createSweepConfig);
+                accountID, createSweepConfig);
         }
+
     }
 }

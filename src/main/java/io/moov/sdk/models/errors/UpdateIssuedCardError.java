@@ -16,6 +16,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class UpdateIssuedCardError extends RuntimeException {
 
@@ -23,9 +24,11 @@ public class UpdateIssuedCardError extends RuntimeException {
     @JsonProperty("state")
     private Optional<String> state;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("memo")
     private Optional<String> memo;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("authorizedUser")
@@ -65,15 +68,17 @@ public class UpdateIssuedCardError extends RuntimeException {
         return (Optional<CreateAuthorizedUserError>) authorizedUser;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateIssuedCardError withState(String state) {
         Utils.checkNotNull(state, "state");
         this.state = Optional.ofNullable(state);
         return this;
     }
+
 
     public UpdateIssuedCardError withState(Optional<String> state) {
         Utils.checkNotNull(state, "state");
@@ -87,6 +92,7 @@ public class UpdateIssuedCardError extends RuntimeException {
         return this;
     }
 
+
     public UpdateIssuedCardError withMemo(Optional<String> memo) {
         Utils.checkNotNull(memo, "memo");
         this.memo = memo;
@@ -99,13 +105,13 @@ public class UpdateIssuedCardError extends RuntimeException {
         return this;
     }
 
+
     public UpdateIssuedCardError withAuthorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
         Utils.checkNotNull(authorizedUser, "authorizedUser");
         this.authorizedUser = authorizedUser;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -124,9 +130,7 @@ public class UpdateIssuedCardError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            state,
-            memo,
-            authorizedUser);
+            state, memo, authorizedUser);
     }
     
     @Override
@@ -136,18 +140,20 @@ public class UpdateIssuedCardError extends RuntimeException {
                 "memo", memo,
                 "authorizedUser", authorizedUser);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> state = Optional.empty();
- 
+
         private Optional<String> memo = Optional.empty();
- 
+
         private Optional<? extends CreateAuthorizedUserError> authorizedUser = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder state(String state) {
             Utils.checkNotNull(state, "state");
@@ -161,6 +167,7 @@ public class UpdateIssuedCardError extends RuntimeException {
             return this;
         }
 
+
         public Builder memo(String memo) {
             Utils.checkNotNull(memo, "memo");
             this.memo = Optional.ofNullable(memo);
@@ -173,6 +180,7 @@ public class UpdateIssuedCardError extends RuntimeException {
             return this;
         }
 
+
         public Builder authorizedUser(CreateAuthorizedUserError authorizedUser) {
             Utils.checkNotNull(authorizedUser, "authorizedUser");
             this.authorizedUser = Optional.ofNullable(authorizedUser);
@@ -184,13 +192,13 @@ public class UpdateIssuedCardError extends RuntimeException {
             this.authorizedUser = authorizedUser;
             return this;
         }
-        
+
         public UpdateIssuedCardError build() {
+
             return new UpdateIssuedCardError(
-                state,
-                memo,
-                authorizedUser);
+                state, memo, authorizedUser);
         }
+
     }
 }
 

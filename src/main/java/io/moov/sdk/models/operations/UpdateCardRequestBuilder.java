@@ -54,7 +54,7 @@ public class UpdateCardRequestBuilder {
     public UpdateCardResponse call() throws Exception {
         
         RequestOperation<UpdateCardRequest, UpdateCardResponse> operation
-              = new UpdateCardOperation( sdkConfiguration);
+              = new UpdateCardOperation(sdkConfiguration);
         UpdateCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

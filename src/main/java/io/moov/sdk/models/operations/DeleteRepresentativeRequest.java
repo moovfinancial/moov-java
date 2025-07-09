@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class DeleteRepresentativeRequest {
 
+public class DeleteRepresentativeRequest {
     /**
      * ID of the account.
      */
@@ -50,9 +50,10 @@ public class DeleteRepresentativeRequest {
         return representativeID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the account.
@@ -72,7 +73,6 @@ public class DeleteRepresentativeRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,8 +90,7 @@ public class DeleteRepresentativeRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            representativeID);
+            accountID, representativeID);
     }
     
     @Override
@@ -100,16 +99,18 @@ public class DeleteRepresentativeRequest {
                 "accountID", accountID,
                 "representativeID", representativeID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String representativeID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the account.
@@ -120,6 +121,7 @@ public class DeleteRepresentativeRequest {
             return this;
         }
 
+
         /**
          * ID of the representative.
          */
@@ -128,11 +130,12 @@ public class DeleteRepresentativeRequest {
             this.representativeID = representativeID;
             return this;
         }
-        
+
         public DeleteRepresentativeRequest build() {
+
             return new DeleteRepresentativeRequest(
-                accountID,
-                representativeID);
+                accountID, representativeID);
         }
+
     }
 }

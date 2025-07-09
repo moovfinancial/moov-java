@@ -14,47 +14,58 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CreateBusinessError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("legalBusinessName")
     private Optional<String> legalBusinessName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("doingBusinessAs")
     private Optional<String> doingBusinessAs;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("businessType")
     private Optional<String> businessType;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends AddressError> address;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumberError> phone;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("website")
     private Optional<String> website;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
     private Optional<String> description;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("taxID")
     private Optional<? extends CreateBusinessErrorTaxID> taxID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("industryCodes")
     private Optional<? extends CreateBusinessErrorIndustryCodes> industryCodes;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("primaryRegulator")
@@ -98,7 +109,10 @@ public class CreateBusinessError {
     }
     
     public CreateBusinessError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -160,15 +174,17 @@ public class CreateBusinessError {
         return primaryRegulator;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateBusinessError withLegalBusinessName(String legalBusinessName) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
         this.legalBusinessName = Optional.ofNullable(legalBusinessName);
         return this;
     }
+
 
     public CreateBusinessError withLegalBusinessName(Optional<String> legalBusinessName) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
@@ -182,6 +198,7 @@ public class CreateBusinessError {
         return this;
     }
 
+
     public CreateBusinessError withDoingBusinessAs(Optional<String> doingBusinessAs) {
         Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
         this.doingBusinessAs = doingBusinessAs;
@@ -193,6 +210,7 @@ public class CreateBusinessError {
         this.businessType = Optional.ofNullable(businessType);
         return this;
     }
+
 
     public CreateBusinessError withBusinessType(Optional<String> businessType) {
         Utils.checkNotNull(businessType, "businessType");
@@ -206,6 +224,7 @@ public class CreateBusinessError {
         return this;
     }
 
+
     public CreateBusinessError withAddress(Optional<? extends AddressError> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -217,6 +236,7 @@ public class CreateBusinessError {
         this.phone = Optional.ofNullable(phone);
         return this;
     }
+
 
     public CreateBusinessError withPhone(Optional<? extends PhoneNumberError> phone) {
         Utils.checkNotNull(phone, "phone");
@@ -230,6 +250,7 @@ public class CreateBusinessError {
         return this;
     }
 
+
     public CreateBusinessError withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
@@ -241,6 +262,7 @@ public class CreateBusinessError {
         this.website = Optional.ofNullable(website);
         return this;
     }
+
 
     public CreateBusinessError withWebsite(Optional<String> website) {
         Utils.checkNotNull(website, "website");
@@ -254,6 +276,7 @@ public class CreateBusinessError {
         return this;
     }
 
+
     public CreateBusinessError withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
@@ -265,6 +288,7 @@ public class CreateBusinessError {
         this.taxID = Optional.ofNullable(taxID);
         return this;
     }
+
 
     public CreateBusinessError withTaxID(Optional<? extends CreateBusinessErrorTaxID> taxID) {
         Utils.checkNotNull(taxID, "taxID");
@@ -278,6 +302,7 @@ public class CreateBusinessError {
         return this;
     }
 
+
     public CreateBusinessError withIndustryCodes(Optional<? extends CreateBusinessErrorIndustryCodes> industryCodes) {
         Utils.checkNotNull(industryCodes, "industryCodes");
         this.industryCodes = industryCodes;
@@ -290,13 +315,13 @@ public class CreateBusinessError {
         return this;
     }
 
+
     public CreateBusinessError withPrimaryRegulator(Optional<String> primaryRegulator) {
         Utils.checkNotNull(primaryRegulator, "primaryRegulator");
         this.primaryRegulator = primaryRegulator;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -323,17 +348,10 @@ public class CreateBusinessError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            legalBusinessName,
-            doingBusinessAs,
-            businessType,
-            address,
-            phone,
-            email,
-            website,
-            description,
-            taxID,
-            industryCodes,
-            primaryRegulator);
+            legalBusinessName, doingBusinessAs, businessType,
+            address, phone, email,
+            website, description, taxID,
+            industryCodes, primaryRegulator);
     }
     
     @Override
@@ -351,34 +369,36 @@ public class CreateBusinessError {
                 "industryCodes", industryCodes,
                 "primaryRegulator", primaryRegulator);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> legalBusinessName = Optional.empty();
- 
+
         private Optional<String> doingBusinessAs = Optional.empty();
- 
+
         private Optional<String> businessType = Optional.empty();
- 
+
         private Optional<? extends AddressError> address = Optional.empty();
- 
+
         private Optional<? extends PhoneNumberError> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<String> website = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<? extends CreateBusinessErrorTaxID> taxID = Optional.empty();
- 
+
         private Optional<? extends CreateBusinessErrorIndustryCodes> industryCodes = Optional.empty();
- 
+
         private Optional<String> primaryRegulator = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder legalBusinessName(String legalBusinessName) {
             Utils.checkNotNull(legalBusinessName, "legalBusinessName");
@@ -392,6 +412,7 @@ public class CreateBusinessError {
             return this;
         }
 
+
         public Builder doingBusinessAs(String doingBusinessAs) {
             Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
             this.doingBusinessAs = Optional.ofNullable(doingBusinessAs);
@@ -403,6 +424,7 @@ public class CreateBusinessError {
             this.doingBusinessAs = doingBusinessAs;
             return this;
         }
+
 
         public Builder businessType(String businessType) {
             Utils.checkNotNull(businessType, "businessType");
@@ -416,6 +438,7 @@ public class CreateBusinessError {
             return this;
         }
 
+
         public Builder address(AddressError address) {
             Utils.checkNotNull(address, "address");
             this.address = Optional.ofNullable(address);
@@ -427,6 +450,7 @@ public class CreateBusinessError {
             this.address = address;
             return this;
         }
+
 
         public Builder phone(PhoneNumberError phone) {
             Utils.checkNotNull(phone, "phone");
@@ -440,6 +464,7 @@ public class CreateBusinessError {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -451,6 +476,7 @@ public class CreateBusinessError {
             this.email = email;
             return this;
         }
+
 
         public Builder website(String website) {
             Utils.checkNotNull(website, "website");
@@ -464,6 +490,7 @@ public class CreateBusinessError {
             return this;
         }
 
+
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
@@ -475,6 +502,7 @@ public class CreateBusinessError {
             this.description = description;
             return this;
         }
+
 
         public Builder taxID(CreateBusinessErrorTaxID taxID) {
             Utils.checkNotNull(taxID, "taxID");
@@ -488,6 +516,7 @@ public class CreateBusinessError {
             return this;
         }
 
+
         public Builder industryCodes(CreateBusinessErrorIndustryCodes industryCodes) {
             Utils.checkNotNull(industryCodes, "industryCodes");
             this.industryCodes = Optional.ofNullable(industryCodes);
@@ -500,6 +529,7 @@ public class CreateBusinessError {
             return this;
         }
 
+
         public Builder primaryRegulator(String primaryRegulator) {
             Utils.checkNotNull(primaryRegulator, "primaryRegulator");
             this.primaryRegulator = Optional.ofNullable(primaryRegulator);
@@ -511,20 +541,15 @@ public class CreateBusinessError {
             this.primaryRegulator = primaryRegulator;
             return this;
         }
-        
+
         public CreateBusinessError build() {
+
             return new CreateBusinessError(
-                legalBusinessName,
-                doingBusinessAs,
-                businessType,
-                address,
-                phone,
-                email,
-                website,
-                description,
-                taxID,
-                industryCodes,
-                primaryRegulator);
+                legalBusinessName, doingBusinessAs, businessType,
+                address, phone, email,
+                website, description, taxID,
+                industryCodes, primaryRegulator);
         }
+
     }
 }

@@ -20,11 +20,14 @@ public class RunTransfer {
     @JsonProperty("amount")
     private Amount amount;
 
+
     @JsonProperty("destination")
     private SchedulePaymentMethod destination;
 
+
     @JsonProperty("partnerAccountID")
     private String partnerAccountID;
+
 
     @JsonProperty("source")
     private SchedulePaymentMethod source;
@@ -82,9 +85,10 @@ public class RunTransfer {
         return description;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RunTransfer withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
@@ -119,7 +123,6 @@ public class RunTransfer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -140,11 +143,8 @@ public class RunTransfer {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount,
-            destination,
-            partnerAccountID,
-            source,
-            description);
+            amount, destination, partnerAccountID,
+            source, description);
     }
     
     @Override
@@ -156,22 +156,24 @@ public class RunTransfer {
                 "source", source,
                 "description", description);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Amount amount;
- 
+
         private SchedulePaymentMethod destination;
- 
+
         private String partnerAccountID;
- 
+
         private SchedulePaymentMethod source;
- 
+
         private String description;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
@@ -179,11 +181,13 @@ public class RunTransfer {
             return this;
         }
 
+
         public Builder destination(SchedulePaymentMethod destination) {
             Utils.checkNotNull(destination, "destination");
             this.destination = destination;
             return this;
         }
+
 
         public Builder partnerAccountID(String partnerAccountID) {
             Utils.checkNotNull(partnerAccountID, "partnerAccountID");
@@ -191,11 +195,13 @@ public class RunTransfer {
             return this;
         }
 
+
         public Builder source(SchedulePaymentMethod source) {
             Utils.checkNotNull(source, "source");
             this.source = source;
             return this;
         }
+
 
         /**
          * Simple description to place on the transfer.
@@ -205,14 +211,13 @@ public class RunTransfer {
             this.description = description;
             return this;
         }
-        
+
         public RunTransfer build() {
+
             return new RunTransfer(
-                amount,
-                destination,
-                partnerAccountID,
-                source,
-                description);
+                amount, destination, partnerAccountID,
+                source, description);
         }
+
     }
 }

@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class UpdateEvidence {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -55,15 +56,17 @@ public class UpdateEvidence {
         return text;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateEvidence withEvidenceType(EvidenceType evidenceType) {
         Utils.checkNotNull(evidenceType, "evidenceType");
         this.evidenceType = Optional.ofNullable(evidenceType);
         return this;
     }
+
 
     public UpdateEvidence withEvidenceType(Optional<? extends EvidenceType> evidenceType) {
         Utils.checkNotNull(evidenceType, "evidenceType");
@@ -80,6 +83,7 @@ public class UpdateEvidence {
         return this;
     }
 
+
     /**
      * If updating text evidence, the new text to associate with the dispute.
      */
@@ -89,7 +93,6 @@ public class UpdateEvidence {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -107,8 +110,7 @@ public class UpdateEvidence {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            evidenceType,
-            text);
+            evidenceType, text);
     }
     
     @Override
@@ -117,16 +119,18 @@ public class UpdateEvidence {
                 "evidenceType", evidenceType,
                 "text", text);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends EvidenceType> evidenceType = Optional.empty();
- 
+
         private Optional<String> text = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder evidenceType(EvidenceType evidenceType) {
             Utils.checkNotNull(evidenceType, "evidenceType");
@@ -139,6 +143,7 @@ public class UpdateEvidence {
             this.evidenceType = evidenceType;
             return this;
         }
+
 
         /**
          * If updating text evidence, the new text to associate with the dispute.
@@ -157,11 +162,12 @@ public class UpdateEvidence {
             this.text = text;
             return this;
         }
-        
+
         public UpdateEvidence build() {
+
             return new UpdateEvidence(
-                evidenceType,
-                text);
+                evidenceType, text);
         }
+
     }
 }

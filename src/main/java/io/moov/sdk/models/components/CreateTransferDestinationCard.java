@@ -13,8 +13,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class CreateTransferDestinationCard {
 
+public class CreateTransferDestinationCard {
     /**
      * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
      */
@@ -41,9 +41,10 @@ public class CreateTransferDestinationCard {
         return dynamicDescriptor;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
@@ -54,6 +55,7 @@ public class CreateTransferDestinationCard {
         return this;
     }
 
+
     /**
      * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
      */
@@ -63,7 +65,6 @@ public class CreateTransferDestinationCard {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -88,14 +89,16 @@ public class CreateTransferDestinationCard {
         return Utils.toString(CreateTransferDestinationCard.class,
                 "dynamicDescriptor", dynamicDescriptor);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> dynamicDescriptor = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
@@ -114,10 +117,12 @@ public class CreateTransferDestinationCard {
             this.dynamicDescriptor = dynamicDescriptor;
             return this;
         }
-        
+
         public CreateTransferDestinationCard build() {
+
             return new CreateTransferDestinationCard(
                 dynamicDescriptor);
         }
+
     }
 }

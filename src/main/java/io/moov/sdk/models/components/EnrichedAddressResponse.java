@@ -11,6 +11,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
+
 public class EnrichedAddressResponse {
 
     @JsonProperty("suggestions")
@@ -28,9 +29,10 @@ public class EnrichedAddressResponse {
         return suggestions;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public EnrichedAddressResponse withSuggestions(List<AddressSuggestion> suggestions) {
         Utils.checkNotNull(suggestions, "suggestions");
@@ -38,7 +40,6 @@ public class EnrichedAddressResponse {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -63,24 +64,28 @@ public class EnrichedAddressResponse {
         return Utils.toString(EnrichedAddressResponse.class,
                 "suggestions", suggestions);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private List<AddressSuggestion> suggestions;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder suggestions(List<AddressSuggestion> suggestions) {
             Utils.checkNotNull(suggestions, "suggestions");
             this.suggestions = suggestions;
             return this;
         }
-        
+
         public EnrichedAddressResponse build() {
+
             return new EnrichedAddressResponse(
                 suggestions);
         }
+
     }
 }

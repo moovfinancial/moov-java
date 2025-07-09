@@ -10,13 +10,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GetFullIssuedCardRequest {
 
+public class GetFullIssuedCardRequest {
     /**
      * The Moov business account for which the card was issued.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=issuedCardID")
     private String issuedCardID;
@@ -44,9 +45,10 @@ public class GetFullIssuedCardRequest {
         return issuedCardID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The Moov business account for which the card was issued.
@@ -63,7 +65,6 @@ public class GetFullIssuedCardRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -81,8 +82,7 @@ public class GetFullIssuedCardRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            issuedCardID);
+            accountID, issuedCardID);
     }
     
     @Override
@@ -91,16 +91,18 @@ public class GetFullIssuedCardRequest {
                 "accountID", accountID,
                 "issuedCardID", issuedCardID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String issuedCardID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The Moov business account for which the card was issued.
@@ -111,16 +113,18 @@ public class GetFullIssuedCardRequest {
             return this;
         }
 
+
         public Builder issuedCardID(String issuedCardID) {
             Utils.checkNotNull(issuedCardID, "issuedCardID");
             this.issuedCardID = issuedCardID;
             return this;
         }
-        
+
         public GetFullIssuedCardRequest build() {
+
             return new GetFullIssuedCardRequest(
-                accountID,
-                issuedCardID);
+                accountID, issuedCardID);
         }
+
     }
 }

@@ -13,10 +13,12 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class WebhookDataCapabilityRequested {
 
     @JsonProperty("accountID")
     private String accountID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("foreignID")
@@ -69,9 +71,10 @@ public class WebhookDataCapabilityRequested {
         return capabilityID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataCapabilityRequested withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -84,6 +87,7 @@ public class WebhookDataCapabilityRequested {
         this.foreignID = Optional.ofNullable(foreignID);
         return this;
     }
+
 
     public WebhookDataCapabilityRequested withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
@@ -102,7 +106,6 @@ public class WebhookDataCapabilityRequested {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -121,9 +124,7 @@ public class WebhookDataCapabilityRequested {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            foreignID,
-            capabilityID);
+            accountID, foreignID, capabilityID);
     }
     
     @Override
@@ -133,24 +134,27 @@ public class WebhookDataCapabilityRequested {
                 "foreignID", foreignID,
                 "capabilityID", capabilityID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<String> foreignID = Optional.empty();
- 
+
         private CapabilityID capabilityID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder foreignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
@@ -164,6 +168,7 @@ public class WebhookDataCapabilityRequested {
             return this;
         }
 
+
         /**
          * Moov account capabilities.
          * 
@@ -174,12 +179,12 @@ public class WebhookDataCapabilityRequested {
             this.capabilityID = capabilityID;
             return this;
         }
-        
+
         public WebhookDataCapabilityRequested build() {
+
             return new WebhookDataCapabilityRequested(
-                accountID,
-                foreignID,
-                capabilityID);
+                accountID, foreignID, capabilityID);
         }
+
     }
 }

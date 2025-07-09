@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetTerminalConfigurationRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=terminalApplicationID")
     private String terminalApplicationID;
@@ -38,9 +40,10 @@ public class GetTerminalConfigurationRequest {
         return terminalApplicationID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetTerminalConfigurationRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class GetTerminalConfigurationRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class GetTerminalConfigurationRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            terminalApplicationID);
+            accountID, terminalApplicationID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class GetTerminalConfigurationRequest {
                 "accountID", accountID,
                 "terminalApplicationID", terminalApplicationID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String terminalApplicationID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class GetTerminalConfigurationRequest {
             return this;
         }
 
+
         public Builder terminalApplicationID(String terminalApplicationID) {
             Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
             this.terminalApplicationID = terminalApplicationID;
             return this;
         }
-        
+
         public GetTerminalConfigurationRequest build() {
+
             return new GetTerminalConfigurationRequest(
-                accountID,
-                terminalApplicationID);
+                accountID, terminalApplicationID);
         }
+
     }
 }

@@ -45,7 +45,7 @@ public class GetIssuedCardTransactionRequestBuilder {
     public GetIssuedCardTransactionResponse call() throws Exception {
         
         RequestOperation<GetIssuedCardTransactionRequest, GetIssuedCardTransactionResponse> operation
-              = new GetIssuedCardTransactionOperation( sdkConfiguration);
+              = new GetIssuedCardTransactionOperation(sdkConfiguration);
         GetIssuedCardTransactionRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

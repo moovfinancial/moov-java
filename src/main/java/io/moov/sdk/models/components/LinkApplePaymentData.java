@@ -19,7 +19,6 @@ import java.lang.String;
  *   for more information.
  */
 public class LinkApplePaymentData {
-
     /**
      * Specifies the encryption used for the payment token ("EC_v1" or "RSA_v1").
      */
@@ -98,9 +97,10 @@ public class LinkApplePaymentData {
         return header;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Specifies the encryption used for the payment token ("EC_v1" or "RSA_v1").
@@ -141,7 +141,6 @@ public class LinkApplePaymentData {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -161,9 +160,7 @@ public class LinkApplePaymentData {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            version,
-            data,
-            signature,
+            version, data, signature,
             header);
     }
     
@@ -175,20 +172,22 @@ public class LinkApplePaymentData {
                 "signature", signature,
                 "header", header);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String version;
- 
+
         private String data;
- 
+
         private String signature;
- 
+
         private ApplePayHeader header;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Specifies the encryption used for the payment token ("EC_v1" or "RSA_v1").
@@ -199,6 +198,7 @@ public class LinkApplePaymentData {
             return this;
         }
 
+
         /**
          * The encrypted, base64-encoded payment data.
          */
@@ -208,6 +208,7 @@ public class LinkApplePaymentData {
             return this;
         }
 
+
         /**
          * A base64 encoded signature of the payment and header data.
          */
@@ -216,6 +217,7 @@ public class LinkApplePaymentData {
             this.signature = signature;
             return this;
         }
+
 
         /**
          * Information needed to decrypt Apple Pay payment data.
@@ -228,13 +230,13 @@ public class LinkApplePaymentData {
             this.header = header;
             return this;
         }
-        
+
         public LinkApplePaymentData build() {
+
             return new LinkApplePaymentData(
-                version,
-                data,
-                signature,
+                version, data, signature,
                 header);
         }
+
     }
 }

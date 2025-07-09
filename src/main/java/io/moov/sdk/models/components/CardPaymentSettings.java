@@ -19,7 +19,6 @@ import java.util.Optional;
  * <p>User provided settings to manage card payments. This data is only allowed on a business account.
  */
 public class CardPaymentSettings {
-
     /**
      * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
      */
@@ -46,9 +45,10 @@ public class CardPaymentSettings {
         return statementDescriptor;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
@@ -59,6 +59,7 @@ public class CardPaymentSettings {
         return this;
     }
 
+
     /**
      * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
      */
@@ -68,7 +69,6 @@ public class CardPaymentSettings {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,14 +93,16 @@ public class CardPaymentSettings {
         return Utils.toString(CardPaymentSettings.class,
                 "statementDescriptor", statementDescriptor);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> statementDescriptor = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
@@ -119,10 +121,12 @@ public class CardPaymentSettings {
             this.statementDescriptor = statementDescriptor;
             return this;
         }
-        
+
         public CardPaymentSettings build() {
+
             return new CardPaymentSettings(
                 statementDescriptor);
         }
+
     }
 }

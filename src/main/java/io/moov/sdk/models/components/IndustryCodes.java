@@ -13,15 +13,18 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class IndustryCodes {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("naics")
     private Optional<String> naics;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sic")
     private Optional<String> sic;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mcc")
@@ -59,15 +62,17 @@ public class IndustryCodes {
         return mcc;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public IndustryCodes withNaics(String naics) {
         Utils.checkNotNull(naics, "naics");
         this.naics = Optional.ofNullable(naics);
         return this;
     }
+
 
     public IndustryCodes withNaics(Optional<String> naics) {
         Utils.checkNotNull(naics, "naics");
@@ -81,6 +86,7 @@ public class IndustryCodes {
         return this;
     }
 
+
     public IndustryCodes withSic(Optional<String> sic) {
         Utils.checkNotNull(sic, "sic");
         this.sic = sic;
@@ -93,13 +99,13 @@ public class IndustryCodes {
         return this;
     }
 
+
     public IndustryCodes withMcc(Optional<String> mcc) {
         Utils.checkNotNull(mcc, "mcc");
         this.mcc = mcc;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +124,7 @@ public class IndustryCodes {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            naics,
-            sic,
-            mcc);
+            naics, sic, mcc);
     }
     
     @Override
@@ -130,18 +134,20 @@ public class IndustryCodes {
                 "sic", sic,
                 "mcc", mcc);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> naics = Optional.empty();
- 
+
         private Optional<String> sic = Optional.empty();
- 
+
         private Optional<String> mcc = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder naics(String naics) {
             Utils.checkNotNull(naics, "naics");
@@ -155,6 +161,7 @@ public class IndustryCodes {
             return this;
         }
 
+
         public Builder sic(String sic) {
             Utils.checkNotNull(sic, "sic");
             this.sic = Optional.ofNullable(sic);
@@ -167,6 +174,7 @@ public class IndustryCodes {
             return this;
         }
 
+
         public Builder mcc(String mcc) {
             Utils.checkNotNull(mcc, "mcc");
             this.mcc = Optional.ofNullable(mcc);
@@ -178,12 +186,12 @@ public class IndustryCodes {
             this.mcc = mcc;
             return this;
         }
-        
+
         public IndustryCodes build() {
+
             return new IndustryCodes(
-                naics,
-                sic,
-                mcc);
+                naics, sic, mcc);
         }
+
     }
 }

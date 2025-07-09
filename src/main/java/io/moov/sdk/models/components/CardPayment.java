@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class CardPayment {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class CardPayment {
         return statementDescriptor;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardPayment withStatementDescriptor(String statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -45,13 +47,13 @@ public class CardPayment {
         return this;
     }
 
+
     public CardPayment withStatementDescriptor(Optional<String> statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
         this.statementDescriptor = statementDescriptor;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class CardPayment {
         return Utils.toString(CardPayment.class,
                 "statementDescriptor", statementDescriptor);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> statementDescriptor = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder statementDescriptor(String statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -96,10 +100,12 @@ public class CardPayment {
             this.statementDescriptor = statementDescriptor;
             return this;
         }
-        
+
         public CardPayment build() {
+
             return new CardPayment(
                 statementDescriptor);
         }
+
     }
 }

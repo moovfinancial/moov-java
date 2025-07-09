@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class InitiateRefundResponse implements Response {
 
+public class InitiateRefundResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
@@ -46,6 +46,7 @@ public class InitiateRefundResponse implements Response {
      */
     private Optional<? extends CardAcquiringRefund> cardAcquiringRefund;
 
+
     private Map<String, List<String>> headers;
 
     @JsonCreator
@@ -62,6 +63,7 @@ public class InitiateRefundResponse implements Response {
         Utils.checkNotNull(createRefundResponse, "createRefundResponse");
         Utils.checkNotNull(cardAcquiringRefund, "cardAcquiringRefund");
         headers = Utils.emptyMapIfNull(headers);
+        Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
@@ -75,7 +77,8 @@ public class InitiateRefundResponse implements Response {
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Map<String, List<String>> headers) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), headers);
+        this(contentType, statusCode, rawResponse,
+            Optional.empty(), Optional.empty(), headers);
     }
 
     /**
@@ -125,9 +128,10 @@ public class InitiateRefundResponse implements Response {
         return headers;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * HTTP response content type for this operation
@@ -165,6 +169,7 @@ public class InitiateRefundResponse implements Response {
         return this;
     }
 
+
     /**
      * The request completed successfully.
      */
@@ -183,6 +188,7 @@ public class InitiateRefundResponse implements Response {
         return this;
     }
 
+
     /**
      * A refund was successfully created but an error occurred while waiting for a synchronous response.
      */
@@ -198,7 +204,6 @@ public class InitiateRefundResponse implements Response {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -220,12 +225,8 @@ public class InitiateRefundResponse implements Response {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contentType,
-            statusCode,
-            rawResponse,
-            createRefundResponse,
-            cardAcquiringRefund,
-            headers);
+            contentType, statusCode, rawResponse,
+            createRefundResponse, cardAcquiringRefund, headers);
     }
     
     @Override
@@ -238,24 +239,26 @@ public class InitiateRefundResponse implements Response {
                 "cardAcquiringRefund", cardAcquiringRefund,
                 "headers", headers);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String contentType;
- 
+
         private Integer statusCode;
- 
+
         private HttpResponse<InputStream> rawResponse;
- 
+
         private Optional<? extends CreateRefundResponse> createRefundResponse = Optional.empty();
- 
+
         private Optional<? extends CardAcquiringRefund> cardAcquiringRefund = Optional.empty();
- 
+
         private Map<String, List<String>> headers;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * HTTP response content type for this operation
@@ -266,6 +269,7 @@ public class InitiateRefundResponse implements Response {
             return this;
         }
 
+
         /**
          * HTTP response status code for this operation
          */
@@ -275,6 +279,7 @@ public class InitiateRefundResponse implements Response {
             return this;
         }
 
+
         /**
          * Raw HTTP response; suitable for custom response parsing
          */
@@ -283,6 +288,7 @@ public class InitiateRefundResponse implements Response {
             this.rawResponse = rawResponse;
             return this;
         }
+
 
         /**
          * The request completed successfully.
@@ -302,6 +308,7 @@ public class InitiateRefundResponse implements Response {
             return this;
         }
 
+
         /**
          * A refund was successfully created but an error occurred while waiting for a synchronous response.
          */
@@ -320,20 +327,19 @@ public class InitiateRefundResponse implements Response {
             return this;
         }
 
+
         public Builder headers(Map<String, List<String>> headers) {
             Utils.checkNotNull(headers, "headers");
             this.headers = headers;
             return this;
         }
-        
+
         public InitiateRefundResponse build() {
+
             return new InitiateRefundResponse(
-                contentType,
-                statusCode,
-                rawResponse,
-                createRefundResponse,
-                cardAcquiringRefund,
-                headers);
+                contentType, statusCode, rawResponse,
+                createRefundResponse, cardAcquiringRefund, headers);
         }
+
     }
 }

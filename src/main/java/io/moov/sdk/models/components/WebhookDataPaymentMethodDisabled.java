@@ -10,13 +10,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataPaymentMethodDisabled {
 
     @JsonProperty("accountID")
     private String accountID;
 
+
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
+
 
     @JsonProperty("sourceID")
     private String sourceID;
@@ -49,9 +52,10 @@ public class WebhookDataPaymentMethodDisabled {
         return sourceID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataPaymentMethodDisabled withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -71,7 +75,6 @@ public class WebhookDataPaymentMethodDisabled {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,9 +93,7 @@ public class WebhookDataPaymentMethodDisabled {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            paymentMethodID,
-            sourceID);
+            accountID, paymentMethodID, sourceID);
     }
     
     @Override
@@ -102,18 +103,20 @@ public class WebhookDataPaymentMethodDisabled {
                 "paymentMethodID", paymentMethodID,
                 "sourceID", sourceID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String paymentMethodID;
- 
+
         private String sourceID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -121,23 +124,25 @@ public class WebhookDataPaymentMethodDisabled {
             return this;
         }
 
+
         public Builder paymentMethodID(String paymentMethodID) {
             Utils.checkNotNull(paymentMethodID, "paymentMethodID");
             this.paymentMethodID = paymentMethodID;
             return this;
         }
 
+
         public Builder sourceID(String sourceID) {
             Utils.checkNotNull(sourceID, "sourceID");
             this.sourceID = sourceID;
             return this;
         }
-        
+
         public WebhookDataPaymentMethodDisabled build() {
+
             return new WebhookDataPaymentMethodDisabled(
-                accountID,
-                paymentMethodID,
-                sourceID);
+                accountID, paymentMethodID, sourceID);
         }
+
     }
 }

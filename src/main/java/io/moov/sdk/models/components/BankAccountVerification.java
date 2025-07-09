@@ -14,10 +14,12 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class BankAccountVerification {
 
     @JsonProperty("verificationMethod")
     private BankAccountVerificationMethod verificationMethod;
+
 
     @JsonProperty("status")
     private BankAccountVerificationStatus status;
@@ -67,9 +69,10 @@ public class BankAccountVerification {
         return (Optional<BankAccountException>) exceptionDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BankAccountVerification withVerificationMethod(BankAccountVerificationMethod verificationMethod) {
         Utils.checkNotNull(verificationMethod, "verificationMethod");
@@ -92,6 +95,7 @@ public class BankAccountVerification {
         return this;
     }
 
+
     /**
      * Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
      */
@@ -101,7 +105,6 @@ public class BankAccountVerification {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -120,9 +123,7 @@ public class BankAccountVerification {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            verificationMethod,
-            status,
-            exceptionDetails);
+            verificationMethod, status, exceptionDetails);
     }
     
     @Override
@@ -132,18 +133,20 @@ public class BankAccountVerification {
                 "status", status,
                 "exceptionDetails", exceptionDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private BankAccountVerificationMethod verificationMethod;
- 
+
         private BankAccountVerificationStatus status;
- 
+
         private Optional<? extends BankAccountException> exceptionDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder verificationMethod(BankAccountVerificationMethod verificationMethod) {
             Utils.checkNotNull(verificationMethod, "verificationMethod");
@@ -151,11 +154,13 @@ public class BankAccountVerification {
             return this;
         }
 
+
         public Builder status(BankAccountVerificationStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         /**
          * Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
@@ -174,12 +179,12 @@ public class BankAccountVerification {
             this.exceptionDetails = exceptionDetails;
             return this;
         }
-        
+
         public BankAccountVerification build() {
+
             return new BankAccountVerification(
-                verificationMethod,
-                status,
-                exceptionDetails);
+                verificationMethod, status, exceptionDetails);
         }
+
     }
 }

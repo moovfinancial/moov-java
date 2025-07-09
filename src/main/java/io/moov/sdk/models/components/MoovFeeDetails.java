@@ -19,7 +19,6 @@ import java.util.Optional;
  * <p>Processing and pass-through costs that add up to the moovFee.
  */
 public class MoovFeeDetails {
-
     /**
      * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
      */
@@ -65,7 +64,8 @@ public class MoovFeeDetails {
     
     public MoovFeeDetails(
             String moovProcessing) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), moovProcessing);
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            moovProcessing);
     }
 
     /**
@@ -100,9 +100,10 @@ public class MoovFeeDetails {
         return moovProcessing;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
@@ -112,6 +113,7 @@ public class MoovFeeDetails {
         this.cardScheme = Optional.ofNullable(cardScheme);
         return this;
     }
+
 
     /**
      * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
@@ -131,6 +133,7 @@ public class MoovFeeDetails {
         return this;
     }
 
+
     /**
      * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to 9 decimal place precision.
      */
@@ -148,6 +151,7 @@ public class MoovFeeDetails {
         this.discount = Optional.ofNullable(discount);
         return this;
     }
+
 
     /**
      * Network discount fee for American Express. String type represents dollars with up to 9 decimal place precision.
@@ -167,7 +171,6 @@ public class MoovFeeDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -187,9 +190,7 @@ public class MoovFeeDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cardScheme,
-            interchange,
-            discount,
+            cardScheme, interchange, discount,
             moovProcessing);
     }
     
@@ -201,20 +202,22 @@ public class MoovFeeDetails {
                 "discount", discount,
                 "moovProcessing", moovProcessing);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> cardScheme = Optional.empty();
- 
+
         private Optional<String> interchange = Optional.empty();
- 
+
         private Optional<String> discount = Optional.empty();
- 
+
         private String moovProcessing;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
@@ -234,6 +237,7 @@ public class MoovFeeDetails {
             return this;
         }
 
+
         /**
          * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to 9 decimal place precision.
          */
@@ -251,6 +255,7 @@ public class MoovFeeDetails {
             this.interchange = interchange;
             return this;
         }
+
 
         /**
          * Network discount fee for American Express. String type represents dollars with up to 9 decimal place precision.
@@ -270,6 +275,7 @@ public class MoovFeeDetails {
             return this;
         }
 
+
         /**
          * Moov processing fee. String type represents dollars with up to 9 decimal place precision.
          */
@@ -278,13 +284,13 @@ public class MoovFeeDetails {
             this.moovProcessing = moovProcessing;
             return this;
         }
-        
+
         public MoovFeeDetails build() {
+
             return new MoovFeeDetails(
-                cardScheme,
-                interchange,
-                discount,
+                cardScheme, interchange, discount,
                 moovProcessing);
         }
+
     }
 }

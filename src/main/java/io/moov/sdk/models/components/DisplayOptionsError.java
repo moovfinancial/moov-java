@@ -13,15 +13,18 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class DisplayOptionsError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
     private Optional<String> description;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("callToAction")
@@ -59,15 +62,17 @@ public class DisplayOptionsError {
         return callToAction;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public DisplayOptionsError withTitle(String title) {
         Utils.checkNotNull(title, "title");
         this.title = Optional.ofNullable(title);
         return this;
     }
+
 
     public DisplayOptionsError withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
@@ -81,6 +86,7 @@ public class DisplayOptionsError {
         return this;
     }
 
+
     public DisplayOptionsError withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
@@ -93,13 +99,13 @@ public class DisplayOptionsError {
         return this;
     }
 
+
     public DisplayOptionsError withCallToAction(Optional<String> callToAction) {
         Utils.checkNotNull(callToAction, "callToAction");
         this.callToAction = callToAction;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +124,7 @@ public class DisplayOptionsError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            title,
-            description,
-            callToAction);
+            title, description, callToAction);
     }
     
     @Override
@@ -130,18 +134,20 @@ public class DisplayOptionsError {
                 "description", description,
                 "callToAction", callToAction);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<String> callToAction = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -155,6 +161,7 @@ public class DisplayOptionsError {
             return this;
         }
 
+
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
@@ -167,6 +174,7 @@ public class DisplayOptionsError {
             return this;
         }
 
+
         public Builder callToAction(String callToAction) {
             Utils.checkNotNull(callToAction, "callToAction");
             this.callToAction = Optional.ofNullable(callToAction);
@@ -178,12 +186,12 @@ public class DisplayOptionsError {
             this.callToAction = callToAction;
             return this;
         }
-        
+
         public DisplayOptionsError build() {
+
             return new DisplayOptionsError(
-                title,
-                description,
-                callToAction);
+                title, description, callToAction);
         }
+
     }
 }

@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class CreateTicketContactError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
@@ -47,15 +49,17 @@ public class CreateTicketContactError {
         return name;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateTicketContactError withEmail(String email) {
         Utils.checkNotNull(email, "email");
         this.email = Optional.ofNullable(email);
         return this;
     }
+
 
     public CreateTicketContactError withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
@@ -69,13 +73,13 @@ public class CreateTicketContactError {
         return this;
     }
 
+
     public CreateTicketContactError withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class CreateTicketContactError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            email,
-            name);
+            email, name);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class CreateTicketContactError {
                 "email", email,
                 "name", name);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<String> name = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -126,6 +131,7 @@ public class CreateTicketContactError {
             return this;
         }
 
+
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
             this.name = Optional.ofNullable(name);
@@ -137,11 +143,12 @@ public class CreateTicketContactError {
             this.name = name;
             return this;
         }
-        
+
         public CreateTicketContactError build() {
+
             return new CreateTicketContactError(
-                email,
-                name);
+                email, name);
         }
+
     }
 }

@@ -16,6 +16,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 public class Document {
 
     @JsonProperty("documentID")
@@ -39,6 +40,7 @@ public class Document {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parseErrors")
     private Optional<? extends List<String>> parseErrors;
+
 
     @JsonProperty("uploadedAt")
     private OffsetDateTime uploadedAt;
@@ -67,7 +69,8 @@ public class Document {
             DocumentType type,
             String contentType,
             OffsetDateTime uploadedAt) {
-        this(documentID, type, contentType, Optional.empty(), uploadedAt);
+        this(documentID, type, contentType,
+            Optional.empty(), uploadedAt);
     }
 
     @JsonIgnore
@@ -105,9 +108,10 @@ public class Document {
         return uploadedAt;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Document withDocumentID(String documentID) {
         Utils.checkNotNull(documentID, "documentID");
@@ -142,6 +146,7 @@ public class Document {
         return this;
     }
 
+
     /**
      * Optional array of errors encountered during automated parsing.
      */
@@ -157,7 +162,6 @@ public class Document {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -178,11 +182,8 @@ public class Document {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            documentID,
-            type,
-            contentType,
-            parseErrors,
-            uploadedAt);
+            documentID, type, contentType,
+            parseErrors, uploadedAt);
     }
     
     @Override
@@ -194,28 +195,31 @@ public class Document {
                 "parseErrors", parseErrors,
                 "uploadedAt", uploadedAt);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String documentID;
- 
+
         private DocumentType type;
- 
+
         private String contentType;
- 
+
         private Optional<? extends List<String>> parseErrors = Optional.empty();
- 
+
         private OffsetDateTime uploadedAt;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder documentID(String documentID) {
             Utils.checkNotNull(documentID, "documentID");
             this.documentID = documentID;
             return this;
         }
+
 
         /**
          * Types of documents that can be uploaded.
@@ -226,6 +230,7 @@ public class Document {
             return this;
         }
 
+
         /**
          * The document's MIME type.
          */
@@ -234,6 +239,7 @@ public class Document {
             this.contentType = contentType;
             return this;
         }
+
 
         /**
          * Optional array of errors encountered during automated parsing.
@@ -253,19 +259,19 @@ public class Document {
             return this;
         }
 
+
         public Builder uploadedAt(OffsetDateTime uploadedAt) {
             Utils.checkNotNull(uploadedAt, "uploadedAt");
             this.uploadedAt = uploadedAt;
             return this;
         }
-        
+
         public Document build() {
+
             return new Document(
-                documentID,
-                type,
-                contentType,
-                parseErrors,
-                uploadedAt);
+                documentID, type, contentType,
+                parseErrors, uploadedAt);
         }
+
     }
 }

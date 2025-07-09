@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class CreateScheduleResponse implements Response {
 
+public class CreateScheduleResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
@@ -40,6 +40,7 @@ public class CreateScheduleResponse implements Response {
      */
     private Optional<? extends ScheduleResponse> scheduleResponse;
 
+
     private Map<String, List<String>> headers;
 
     @JsonCreator
@@ -54,6 +55,7 @@ public class CreateScheduleResponse implements Response {
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(scheduleResponse, "scheduleResponse");
         headers = Utils.emptyMapIfNull(headers);
+        Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
@@ -66,7 +68,8 @@ public class CreateScheduleResponse implements Response {
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Map<String, List<String>> headers) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
+        this(contentType, statusCode, rawResponse,
+            Optional.empty(), headers);
     }
 
     /**
@@ -107,9 +110,10 @@ public class CreateScheduleResponse implements Response {
         return headers;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * HTTP response content type for this operation
@@ -147,6 +151,7 @@ public class CreateScheduleResponse implements Response {
         return this;
     }
 
+
     /**
      * The request completed successfully.
      */
@@ -162,7 +167,6 @@ public class CreateScheduleResponse implements Response {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -183,11 +187,8 @@ public class CreateScheduleResponse implements Response {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contentType,
-            statusCode,
-            rawResponse,
-            scheduleResponse,
-            headers);
+            contentType, statusCode, rawResponse,
+            scheduleResponse, headers);
     }
     
     @Override
@@ -199,22 +200,24 @@ public class CreateScheduleResponse implements Response {
                 "scheduleResponse", scheduleResponse,
                 "headers", headers);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String contentType;
- 
+
         private Integer statusCode;
- 
+
         private HttpResponse<InputStream> rawResponse;
- 
+
         private Optional<? extends ScheduleResponse> scheduleResponse = Optional.empty();
- 
+
         private Map<String, List<String>> headers;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * HTTP response content type for this operation
@@ -225,6 +228,7 @@ public class CreateScheduleResponse implements Response {
             return this;
         }
 
+
         /**
          * HTTP response status code for this operation
          */
@@ -234,6 +238,7 @@ public class CreateScheduleResponse implements Response {
             return this;
         }
 
+
         /**
          * Raw HTTP response; suitable for custom response parsing
          */
@@ -242,6 +247,7 @@ public class CreateScheduleResponse implements Response {
             this.rawResponse = rawResponse;
             return this;
         }
+
 
         /**
          * The request completed successfully.
@@ -261,19 +267,19 @@ public class CreateScheduleResponse implements Response {
             return this;
         }
 
+
         public Builder headers(Map<String, List<String>> headers) {
             Utils.checkNotNull(headers, "headers");
             this.headers = headers;
             return this;
         }
-        
+
         public CreateScheduleResponse build() {
+
             return new CreateScheduleResponse(
-                contentType,
-                statusCode,
-                rawResponse,
-                scheduleResponse,
-                headers);
+                contentType, statusCode, rawResponse,
+                scheduleResponse, headers);
         }
+
     }
 }

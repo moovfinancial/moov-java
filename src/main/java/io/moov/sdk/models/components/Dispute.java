@@ -24,8 +24,10 @@ public class Dispute {
     @JsonProperty("disputeID")
     private String disputeID;
 
+
     @JsonProperty("merchantAccountID")
     private String merchantAccountID;
+
 
     @JsonProperty("amount")
     private Amount amount;
@@ -45,8 +47,10 @@ public class Dispute {
     @JsonProperty("networkReasonDescription")
     private Optional<String> networkReasonDescription;
 
+
     @JsonProperty("transfer")
     private DisputeTransferDetails transfer;
+
 
     @JsonProperty("respondBy")
     private OffsetDateTime respondBy;
@@ -65,8 +69,10 @@ public class Dispute {
     @JsonProperty("phase")
     private DisputePhase phase;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("submittedOn")
@@ -119,7 +125,10 @@ public class Dispute {
             DisputeStatus status,
             DisputePhase phase,
             OffsetDateTime createdOn) {
-        this(disputeID, merchantAccountID, amount, networkReasonCode, Optional.empty(), transfer, respondBy, status, phase, createdOn, Optional.empty());
+        this(disputeID, merchantAccountID, amount,
+            networkReasonCode, Optional.empty(), transfer,
+            respondBy, status, phase,
+            createdOn, Optional.empty());
     }
 
     @JsonIgnore
@@ -193,9 +202,10 @@ public class Dispute {
         return submittedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Dispute withDisputeID(String disputeID) {
         Utils.checkNotNull(disputeID, "disputeID");
@@ -234,6 +244,7 @@ public class Dispute {
         this.networkReasonDescription = Optional.ofNullable(networkReasonDescription);
         return this;
     }
+
 
     /**
      * Provides detail on the card network's categorization of the dispute.
@@ -288,13 +299,13 @@ public class Dispute {
         return this;
     }
 
+
     public Dispute withSubmittedOn(Optional<OffsetDateTime> submittedOn) {
         Utils.checkNotNull(submittedOn, "submittedOn");
         this.submittedOn = submittedOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -321,17 +332,10 @@ public class Dispute {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            disputeID,
-            merchantAccountID,
-            amount,
-            networkReasonCode,
-            networkReasonDescription,
-            transfer,
-            respondBy,
-            status,
-            phase,
-            createdOn,
-            submittedOn);
+            disputeID, merchantAccountID, amount,
+            networkReasonCode, networkReasonDescription, transfer,
+            respondBy, status, phase,
+            createdOn, submittedOn);
     }
     
     @Override
@@ -349,34 +353,36 @@ public class Dispute {
                 "createdOn", createdOn,
                 "submittedOn", submittedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String disputeID;
- 
+
         private String merchantAccountID;
- 
+
         private Amount amount;
- 
+
         private String networkReasonCode;
- 
+
         private Optional<String> networkReasonDescription = Optional.empty();
- 
+
         private DisputeTransferDetails transfer;
- 
+
         private OffsetDateTime respondBy;
- 
+
         private DisputeStatus status;
- 
+
         private DisputePhase phase;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private Optional<OffsetDateTime> submittedOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
@@ -384,17 +390,20 @@ public class Dispute {
             return this;
         }
 
+
         public Builder merchantAccountID(String merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = merchantAccountID;
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
+
 
         /**
          * Indicates the card network's category for the dispute. 
@@ -406,6 +415,7 @@ public class Dispute {
             this.networkReasonCode = networkReasonCode;
             return this;
         }
+
 
         /**
          * Provides detail on the card network's categorization of the dispute.
@@ -425,17 +435,20 @@ public class Dispute {
             return this;
         }
 
+
         public Builder transfer(DisputeTransferDetails transfer) {
             Utils.checkNotNull(transfer, "transfer");
             this.transfer = transfer;
             return this;
         }
 
+
         public Builder respondBy(OffsetDateTime respondBy) {
             Utils.checkNotNull(respondBy, "respondBy");
             this.respondBy = respondBy;
             return this;
         }
+
 
         /**
          * The status of a particular dispute. 
@@ -448,6 +461,7 @@ public class Dispute {
             return this;
         }
 
+
         /**
          * The phase of a dispute within the dispute lifecycle.
          */
@@ -457,11 +471,13 @@ public class Dispute {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
+
 
         public Builder submittedOn(OffsetDateTime submittedOn) {
             Utils.checkNotNull(submittedOn, "submittedOn");
@@ -474,20 +490,15 @@ public class Dispute {
             this.submittedOn = submittedOn;
             return this;
         }
-        
+
         public Dispute build() {
+
             return new Dispute(
-                disputeID,
-                merchantAccountID,
-                amount,
-                networkReasonCode,
-                networkReasonDescription,
-                transfer,
-                respondBy,
-                status,
-                phase,
-                createdOn,
-                submittedOn);
+                disputeID, merchantAccountID, amount,
+                networkReasonCode, networkReasonDescription, transfer,
+                respondBy, status, phase,
+                createdOn, submittedOn);
         }
+
     }
 }

@@ -45,7 +45,7 @@ public class GetWalletRequestBuilder {
     public GetWalletResponse call() throws Exception {
         
         RequestOperation<GetWalletRequest, GetWalletResponse> operation
-              = new GetWalletOperation( sdkConfiguration);
+              = new GetWalletOperation(sdkConfiguration);
         GetWalletRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

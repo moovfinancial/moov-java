@@ -44,7 +44,6 @@ public class Scheduling {
     Scheduling(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Describes the schedule to create or modify.
      * 
@@ -78,10 +77,9 @@ public class Scheduling {
                 .upsertSchedule(upsertSchedule)
                 .build();
         RequestOperation<CreateScheduleRequest, CreateScheduleResponse> operation
-              = new CreateScheduleOperation( sdkConfiguration);
+              = new CreateScheduleOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response.
@@ -106,7 +104,8 @@ public class Scheduling {
      * @throws Exception if the API call fails
      */
     public ListSchedulesResponse list(String accountID) throws Exception {
-        return list(Optional.empty(), Optional.empty(), Optional.empty(), accountID);
+        return list(Optional.empty(), Optional.empty(), Optional.empty(),
+            accountID);
     }
 
     /**
@@ -136,10 +135,9 @@ public class Scheduling {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListSchedulesRequest, ListSchedulesResponse> operation
-              = new ListSchedulesOperation( sdkConfiguration);
+              = new ListSchedulesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Describes the schedule to modify.
@@ -177,10 +175,9 @@ public class Scheduling {
                 .upsertSchedule(upsertSchedule)
                 .build();
         RequestOperation<UpdateScheduleRequest, UpdateScheduleResponse> operation
-              = new UpdateScheduleOperation( sdkConfiguration);
+              = new UpdateScheduleOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
@@ -215,10 +212,9 @@ public class Scheduling {
                 .scheduleID(scheduleID)
                 .build();
         RequestOperation<GetSchedulesRequest, GetSchedulesResponse> operation
-              = new GetSchedulesOperation( sdkConfiguration);
+              = new GetSchedulesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Describes the schedule to cancel.
@@ -253,10 +249,9 @@ public class Scheduling {
                 .scheduleID(scheduleID)
                 .build();
         RequestOperation<CancelScheduleRequest, CancelScheduleResponse> operation
-              = new CancelScheduleOperation( sdkConfiguration);
+              = new CancelScheduleOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Gets a specific occurrence.
@@ -298,7 +293,7 @@ public class Scheduling {
                 .occurrenceFilter(occurrenceFilter)
                 .build();
         RequestOperation<GetScheduledOccurrenceRequest, GetScheduledOccurrenceResponse> operation
-              = new GetScheduledOccurrenceOperation( sdkConfiguration);
+              = new GetScheduledOccurrenceOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class GovernmentIDErrorSsn {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("full")
     private Optional<String> full;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastFour")
@@ -47,15 +49,17 @@ public class GovernmentIDErrorSsn {
         return lastFour;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GovernmentIDErrorSsn withFull(String full) {
         Utils.checkNotNull(full, "full");
         this.full = Optional.ofNullable(full);
         return this;
     }
+
 
     public GovernmentIDErrorSsn withFull(Optional<String> full) {
         Utils.checkNotNull(full, "full");
@@ -69,13 +73,13 @@ public class GovernmentIDErrorSsn {
         return this;
     }
 
+
     public GovernmentIDErrorSsn withLastFour(Optional<String> lastFour) {
         Utils.checkNotNull(lastFour, "lastFour");
         this.lastFour = lastFour;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class GovernmentIDErrorSsn {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            full,
-            lastFour);
+            full, lastFour);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class GovernmentIDErrorSsn {
                 "full", full,
                 "lastFour", lastFour);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> full = Optional.empty();
- 
+
         private Optional<String> lastFour = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder full(String full) {
             Utils.checkNotNull(full, "full");
@@ -126,6 +131,7 @@ public class GovernmentIDErrorSsn {
             return this;
         }
 
+
         public Builder lastFour(String lastFour) {
             Utils.checkNotNull(lastFour, "lastFour");
             this.lastFour = Optional.ofNullable(lastFour);
@@ -137,11 +143,12 @@ public class GovernmentIDErrorSsn {
             this.lastFour = lastFour;
             return this;
         }
-        
+
         public GovernmentIDErrorSsn build() {
+
             return new GovernmentIDErrorSsn(
-                full,
-                lastFour);
+                full, lastFour);
         }
+
     }
 }

@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class SendFundsRtp {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -37,9 +38,10 @@ public class SendFundsRtp {
         return (Optional<EstimatedActivity>) estimatedActivity;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public SendFundsRtp withEstimatedActivity(EstimatedActivity estimatedActivity) {
         Utils.checkNotNull(estimatedActivity, "estimatedActivity");
@@ -47,13 +49,13 @@ public class SendFundsRtp {
         return this;
     }
 
+
     public SendFundsRtp withEstimatedActivity(Optional<? extends EstimatedActivity> estimatedActivity) {
         Utils.checkNotNull(estimatedActivity, "estimatedActivity");
         this.estimatedActivity = estimatedActivity;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -78,14 +80,16 @@ public class SendFundsRtp {
         return Utils.toString(SendFundsRtp.class,
                 "estimatedActivity", estimatedActivity);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends EstimatedActivity> estimatedActivity = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder estimatedActivity(EstimatedActivity estimatedActivity) {
             Utils.checkNotNull(estimatedActivity, "estimatedActivity");
@@ -98,10 +102,12 @@ public class SendFundsRtp {
             this.estimatedActivity = estimatedActivity;
             return this;
         }
-        
+
         public SendFundsRtp build() {
+
             return new SendFundsRtp(
                 estimatedActivity);
         }
+
     }
 }

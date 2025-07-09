@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetScheduledOccurrenceRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=scheduleID")
     private String scheduleID;
@@ -63,9 +65,10 @@ public class GetScheduledOccurrenceRequest {
         return occurrenceFilter;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetScheduledOccurrenceRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -92,7 +95,6 @@ public class GetScheduledOccurrenceRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,9 +113,7 @@ public class GetScheduledOccurrenceRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            scheduleID,
-            occurrenceFilter);
+            accountID, scheduleID, occurrenceFilter);
     }
     
     @Override
@@ -123,18 +123,20 @@ public class GetScheduledOccurrenceRequest {
                 "scheduleID", scheduleID,
                 "occurrenceFilter", occurrenceFilter);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String scheduleID;
- 
+
         private String occurrenceFilter;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -142,11 +144,13 @@ public class GetScheduledOccurrenceRequest {
             return this;
         }
 
+
         public Builder scheduleID(String scheduleID) {
             Utils.checkNotNull(scheduleID, "scheduleID");
             this.scheduleID = scheduleID;
             return this;
         }
+
 
         /**
          * Allows the specification of additional filters beyond the UUID.
@@ -160,12 +164,12 @@ public class GetScheduledOccurrenceRequest {
             this.occurrenceFilter = occurrenceFilter;
             return this;
         }
-        
+
         public GetScheduledOccurrenceRequest build() {
+
             return new GetScheduledOccurrenceRequest(
-                accountID,
-                scheduleID,
-                occurrenceFilter);
+                accountID, scheduleID, occurrenceFilter);
         }
+
     }
 }

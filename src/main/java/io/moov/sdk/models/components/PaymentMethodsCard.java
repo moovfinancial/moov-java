@@ -21,7 +21,6 @@ import java.util.Optional;
  * <p>A card as contained within a payment method.
  */
 public class PaymentMethodsCard {
-
     /**
      * ID of the card.
      */
@@ -73,6 +72,7 @@ public class PaymentMethodsCard {
     @JsonProperty("holderName")
     private Optional<String> holderName;
 
+
     @JsonProperty("billingAddress")
     private CardAddress billingAddress;
 
@@ -102,6 +102,7 @@ public class PaymentMethodsCard {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardOnFile")
     private Optional<Boolean> cardOnFile;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantAccountID")
@@ -193,7 +194,12 @@ public class PaymentMethodsCard {
             CardExpiration expiration,
             CardAddress billingAddress,
             CardVerification cardVerification) {
-        this(cardID, fingerprint, brand, cardType, lastFourCardNumber, bin, expiration, Optional.empty(), billingAddress, cardVerification, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(cardID, fingerprint, brand,
+            cardType, lastFourCardNumber, bin,
+            expiration, Optional.empty(), billingAddress,
+            cardVerification, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -331,9 +337,10 @@ public class PaymentMethodsCard {
         return (Optional<DomesticPullFromCard>) domesticPullFromCard;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the card.
@@ -409,6 +416,7 @@ public class PaymentMethodsCard {
         return this;
     }
 
+
     /**
      * The name of the cardholder as it appears on the card.
      */
@@ -442,6 +450,7 @@ public class PaymentMethodsCard {
         return this;
     }
 
+
     /**
      * Financial institution that issued the card.
      */
@@ -459,6 +468,7 @@ public class PaymentMethodsCard {
         this.issuerCountry = Optional.ofNullable(issuerCountry);
         return this;
     }
+
 
     /**
      * Country where the card was issued.
@@ -478,6 +488,7 @@ public class PaymentMethodsCard {
         return this;
     }
 
+
     /**
      * Indicates cardholder has authorized card to be stored for future payments.
      */
@@ -493,6 +504,7 @@ public class PaymentMethodsCard {
         return this;
     }
 
+
     public PaymentMethodsCard withMerchantAccountID(Optional<String> merchantAccountID) {
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
         this.merchantAccountID = merchantAccountID;
@@ -507,6 +519,7 @@ public class PaymentMethodsCard {
         this.cardAccountUpdater = Optional.ofNullable(cardAccountUpdater);
         return this;
     }
+
 
     /**
      * The results of the most recent card update request.
@@ -526,6 +539,7 @@ public class PaymentMethodsCard {
         return this;
     }
 
+
     /**
      * Indicates which level of domestic push-to-card transfer is supported by the card, if any.
      */
@@ -544,6 +558,7 @@ public class PaymentMethodsCard {
         return this;
     }
 
+
     /**
      * Indicates if the card supports domestic pull-from-card transfer.
      */
@@ -553,7 +568,6 @@ public class PaymentMethodsCard {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -586,23 +600,12 @@ public class PaymentMethodsCard {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cardID,
-            fingerprint,
-            brand,
-            cardType,
-            lastFourCardNumber,
-            bin,
-            expiration,
-            holderName,
-            billingAddress,
-            cardVerification,
-            issuer,
-            issuerCountry,
-            cardOnFile,
-            merchantAccountID,
-            cardAccountUpdater,
-            domesticPushToCard,
-            domesticPullFromCard);
+            cardID, fingerprint, brand,
+            cardType, lastFourCardNumber, bin,
+            expiration, holderName, billingAddress,
+            cardVerification, issuer, issuerCountry,
+            cardOnFile, merchantAccountID, cardAccountUpdater,
+            domesticPushToCard, domesticPullFromCard);
     }
     
     @Override
@@ -626,46 +629,48 @@ public class PaymentMethodsCard {
                 "domesticPushToCard", domesticPushToCard,
                 "domesticPullFromCard", domesticPullFromCard);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String cardID;
- 
+
         private String fingerprint;
- 
+
         private CardBrand brand;
- 
+
         private CardType cardType;
- 
+
         private String lastFourCardNumber;
- 
+
         private String bin;
- 
+
         private CardExpiration expiration;
- 
+
         private Optional<String> holderName = Optional.empty();
- 
+
         private CardAddress billingAddress;
- 
+
         private CardVerification cardVerification;
- 
+
         private Optional<String> issuer = Optional.empty();
- 
+
         private Optional<String> issuerCountry = Optional.empty();
- 
+
         private Optional<Boolean> cardOnFile = Optional.empty();
- 
+
         private Optional<String> merchantAccountID = Optional.empty();
- 
+
         private Optional<? extends CardAccountUpdater> cardAccountUpdater = Optional.empty();
- 
+
         private Optional<? extends DomesticPushToCard> domesticPushToCard = Optional.empty();
- 
+
         private Optional<? extends DomesticPullFromCard> domesticPullFromCard = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the card.
@@ -675,6 +680,7 @@ public class PaymentMethodsCard {
             this.cardID = cardID;
             return this;
         }
+
 
         /**
          * Uniquely identifies a linked payment card or token.
@@ -687,6 +693,7 @@ public class PaymentMethodsCard {
             return this;
         }
 
+
         /**
          * The card brand.
          */
@@ -695,6 +702,7 @@ public class PaymentMethodsCard {
             this.brand = brand;
             return this;
         }
+
 
         /**
          * The type of the card.
@@ -705,6 +713,7 @@ public class PaymentMethodsCard {
             return this;
         }
 
+
         /**
          * Last four digits of the card number
          */
@@ -713,6 +722,7 @@ public class PaymentMethodsCard {
             this.lastFourCardNumber = lastFourCardNumber;
             return this;
         }
+
 
         /**
          * The first six to eight digits of the card number, which identifies the financial institution that issued the card.
@@ -723,6 +733,7 @@ public class PaymentMethodsCard {
             return this;
         }
 
+
         /**
          * The expiration date of the card or token.
          */
@@ -731,6 +742,7 @@ public class PaymentMethodsCard {
             this.expiration = expiration;
             return this;
         }
+
 
         /**
          * The name of the cardholder as it appears on the card.
@@ -750,11 +762,13 @@ public class PaymentMethodsCard {
             return this;
         }
 
+
         public Builder billingAddress(CardAddress billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = billingAddress;
             return this;
         }
+
 
         /**
          * The results of submitting cardholder data to a card network for verification.
@@ -764,6 +778,7 @@ public class PaymentMethodsCard {
             this.cardVerification = cardVerification;
             return this;
         }
+
 
         /**
          * Financial institution that issued the card.
@@ -783,6 +798,7 @@ public class PaymentMethodsCard {
             return this;
         }
 
+
         /**
          * Country where the card was issued.
          */
@@ -800,6 +816,7 @@ public class PaymentMethodsCard {
             this.issuerCountry = issuerCountry;
             return this;
         }
+
 
         /**
          * Indicates cardholder has authorized card to be stored for future payments.
@@ -819,6 +836,7 @@ public class PaymentMethodsCard {
             return this;
         }
 
+
         public Builder merchantAccountID(String merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = Optional.ofNullable(merchantAccountID);
@@ -830,6 +848,7 @@ public class PaymentMethodsCard {
             this.merchantAccountID = merchantAccountID;
             return this;
         }
+
 
         /**
          * The results of the most recent card update request.
@@ -849,6 +868,7 @@ public class PaymentMethodsCard {
             return this;
         }
 
+
         /**
          * Indicates which level of domestic push-to-card transfer is supported by the card, if any.
          */
@@ -867,6 +887,7 @@ public class PaymentMethodsCard {
             return this;
         }
 
+
         /**
          * Indicates if the card supports domestic pull-from-card transfer.
          */
@@ -884,26 +905,17 @@ public class PaymentMethodsCard {
             this.domesticPullFromCard = domesticPullFromCard;
             return this;
         }
-        
+
         public PaymentMethodsCard build() {
+
             return new PaymentMethodsCard(
-                cardID,
-                fingerprint,
-                brand,
-                cardType,
-                lastFourCardNumber,
-                bin,
-                expiration,
-                holderName,
-                billingAddress,
-                cardVerification,
-                issuer,
-                issuerCountry,
-                cardOnFile,
-                merchantAccountID,
-                cardAccountUpdater,
-                domesticPushToCard,
-                domesticPullFromCard);
+                cardID, fingerprint, brand,
+                cardType, lastFourCardNumber, bin,
+                expiration, holderName, billingAddress,
+                cardVerification, issuer, issuerCountry,
+                cardOnFile, merchantAccountID, cardAccountUpdater,
+                domesticPushToCard, domesticPullFromCard);
         }
+
     }
 }

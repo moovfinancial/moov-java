@@ -18,7 +18,6 @@ import java.lang.String;
  * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
  */
 public class E2EEToken {
-
     /**
      * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
      */
@@ -40,9 +39,10 @@ public class E2EEToken {
         return token;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
@@ -53,7 +53,6 @@ public class E2EEToken {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -78,14 +77,16 @@ public class E2EEToken {
         return Utils.toString(E2EEToken.class,
                 "token", token);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String token;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
@@ -95,10 +96,12 @@ public class E2EEToken {
             this.token = token;
             return this;
         }
-        
+
         public E2EEToken build() {
+
             return new E2EEToken(
                 token);
         }
+
     }
 }

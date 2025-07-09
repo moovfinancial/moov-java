@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class TransferOptionsValidationError extends RuntimeException {
 
@@ -22,9 +23,11 @@ public class TransferOptionsValidationError extends RuntimeException {
     @JsonProperty("amount")
     private Optional<String> amount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("source")
     private Optional<String> source;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("destination")
@@ -63,15 +66,17 @@ public class TransferOptionsValidationError extends RuntimeException {
         return destination;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TransferOptionsValidationError withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
         return this;
     }
+
 
     public TransferOptionsValidationError withAmount(Optional<String> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -85,6 +90,7 @@ public class TransferOptionsValidationError extends RuntimeException {
         return this;
     }
 
+
     public TransferOptionsValidationError withSource(Optional<String> source) {
         Utils.checkNotNull(source, "source");
         this.source = source;
@@ -97,13 +103,13 @@ public class TransferOptionsValidationError extends RuntimeException {
         return this;
     }
 
+
     public TransferOptionsValidationError withDestination(Optional<String> destination) {
         Utils.checkNotNull(destination, "destination");
         this.destination = destination;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -122,9 +128,7 @@ public class TransferOptionsValidationError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount,
-            source,
-            destination);
+            amount, source, destination);
     }
     
     @Override
@@ -134,18 +138,20 @@ public class TransferOptionsValidationError extends RuntimeException {
                 "source", source,
                 "destination", destination);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> amount = Optional.empty();
- 
+
         private Optional<String> source = Optional.empty();
- 
+
         private Optional<String> destination = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");
@@ -159,6 +165,7 @@ public class TransferOptionsValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder source(String source) {
             Utils.checkNotNull(source, "source");
             this.source = Optional.ofNullable(source);
@@ -171,6 +178,7 @@ public class TransferOptionsValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder destination(String destination) {
             Utils.checkNotNull(destination, "destination");
             this.destination = Optional.ofNullable(destination);
@@ -182,13 +190,13 @@ public class TransferOptionsValidationError extends RuntimeException {
             this.destination = destination;
             return this;
         }
-        
+
         public TransferOptionsValidationError build() {
+
             return new TransferOptionsValidationError(
-                amount,
-                source,
-                destination);
+                amount, source, destination);
         }
+
     }
 }
 

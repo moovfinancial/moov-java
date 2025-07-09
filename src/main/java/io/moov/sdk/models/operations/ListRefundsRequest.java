@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class ListRefundsRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
@@ -44,9 +45,10 @@ public class ListRefundsRequest {
         return transferID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListRefundsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -63,7 +65,6 @@ public class ListRefundsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -81,8 +82,7 @@ public class ListRefundsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            transferID);
+            accountID, transferID);
     }
     
     @Override
@@ -91,22 +91,25 @@ public class ListRefundsRequest {
                 "accountID", accountID,
                 "transferID", transferID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String transferID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * Identifier for the transfer.
@@ -116,11 +119,12 @@ public class ListRefundsRequest {
             this.transferID = transferID;
             return this;
         }
-        
+
         public ListRefundsRequest build() {
+
             return new ListRefundsRequest(
-                accountID,
-                transferID);
+                accountID, transferID);
         }
+
     }
 }

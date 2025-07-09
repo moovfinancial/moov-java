@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataTerminalApplicationCreated {
 
     @JsonProperty("terminalApplicationID")
@@ -44,9 +45,10 @@ public class WebhookDataTerminalApplicationCreated {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataTerminalApplicationCreated withTerminalApplicationID(String terminalApplicationID) {
         Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
@@ -63,7 +65,6 @@ public class WebhookDataTerminalApplicationCreated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -81,8 +82,7 @@ public class WebhookDataTerminalApplicationCreated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            terminalApplicationID,
-            status);
+            terminalApplicationID, status);
     }
     
     @Override
@@ -91,22 +91,25 @@ public class WebhookDataTerminalApplicationCreated {
                 "terminalApplicationID", terminalApplicationID,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String terminalApplicationID;
- 
+
         private TerminalApplicationStatus status;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder terminalApplicationID(String terminalApplicationID) {
             Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
             this.terminalApplicationID = terminalApplicationID;
             return this;
         }
+
 
         /**
          * Status of the terminal application.
@@ -116,11 +119,12 @@ public class WebhookDataTerminalApplicationCreated {
             this.status = status;
             return this;
         }
-        
+
         public WebhookDataTerminalApplicationCreated build() {
+
             return new WebhookDataTerminalApplicationCreated(
-                terminalApplicationID,
-                status);
+                terminalApplicationID, status);
         }
+
     }
 }

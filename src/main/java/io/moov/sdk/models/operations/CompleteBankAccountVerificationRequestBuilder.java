@@ -54,7 +54,7 @@ public class CompleteBankAccountVerificationRequestBuilder {
     public CompleteBankAccountVerificationResponse call() throws Exception {
         
         RequestOperation<CompleteBankAccountVerificationRequest, CompleteBankAccountVerificationResponse> operation
-              = new CompleteBankAccountVerificationOperation( sdkConfiguration);
+              = new CompleteBankAccountVerificationOperation(sdkConfiguration);
         CompleteBankAccountVerificationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

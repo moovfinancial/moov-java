@@ -45,7 +45,7 @@ public class DisableCardRequestBuilder {
     public DisableCardResponse call() throws Exception {
         
         RequestOperation<DisableCardRequest, DisableCardResponse> operation
-              = new DisableCardOperation( sdkConfiguration);
+              = new DisableCardOperation(sdkConfiguration);
         DisableCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

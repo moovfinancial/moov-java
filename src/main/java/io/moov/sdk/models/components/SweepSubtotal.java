@@ -11,8 +11,8 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 
-public class SweepSubtotal {
 
+public class SweepSubtotal {
     /**
      * The type of wallet transaction the subtotal is for.
      */
@@ -68,9 +68,10 @@ public class SweepSubtotal {
         return amount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The type of wallet transaction the subtotal is for.
@@ -99,7 +100,6 @@ public class SweepSubtotal {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +118,7 @@ public class SweepSubtotal {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            type,
-            count,
-            amount);
+            type, count, amount);
     }
     
     @Override
@@ -130,18 +128,20 @@ public class SweepSubtotal {
                 "count", count,
                 "amount", amount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private WalletTransactionType type;
- 
+
         private Long count;
- 
+
         private AmountDecimal amount;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The type of wallet transaction the subtotal is for.
@@ -152,6 +152,7 @@ public class SweepSubtotal {
             return this;
         }
 
+
         /**
          * The number of transactions of this type accrued in the sweep.
          */
@@ -161,6 +162,7 @@ public class SweepSubtotal {
             return this;
         }
 
+
         /**
          * The value of transactions of this type accrued in the sweep.
          */
@@ -169,12 +171,12 @@ public class SweepSubtotal {
             this.amount = amount;
             return this;
         }
-        
+
         public SweepSubtotal build() {
+
             return new SweepSubtotal(
-                type,
-                count,
-                amount);
+                type, count, amount);
         }
+
     }
 }

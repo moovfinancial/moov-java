@@ -29,7 +29,7 @@ public class CreateTerminalApplicationRequestBuilder {
     public CreateTerminalApplicationResponse call() throws Exception {
         
         RequestOperation<CreateTerminalApplication, CreateTerminalApplicationResponse> operation
-              = new CreateTerminalApplicationOperation( sdkConfiguration);
+              = new CreateTerminalApplicationOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

@@ -66,9 +66,10 @@ public class UpdateAccountResponseBody extends RuntimeException {
         return (Optional<HttpResponse<InputStream>>) rawResponse;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateAccountResponseBody withError(PatchAccountError error) {
         Utils.checkNotNull(error, "error");
@@ -85,6 +86,7 @@ public class UpdateAccountResponseBody extends RuntimeException {
         return this;
     }
 
+
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
@@ -94,7 +96,6 @@ public class UpdateAccountResponseBody extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,8 +113,7 @@ public class UpdateAccountResponseBody extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            error,
-            rawResponse);
+            error, rawResponse);
     }
     
     @Override
@@ -122,22 +122,25 @@ public class UpdateAccountResponseBody extends RuntimeException {
                 "error", error,
                 "rawResponse", rawResponse);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private PatchAccountError error;
- 
+
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder error(PatchAccountError error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
+
 
         /**
          * Raw HTTP response; suitable for custom response parsing
@@ -156,12 +159,13 @@ public class UpdateAccountResponseBody extends RuntimeException {
             this.rawResponse = rawResponse;
             return this;
         }
-        
+
         public UpdateAccountResponseBody build() {
+
             return new UpdateAccountResponseBody(
-                error,
-                rawResponse);
+                error, rawResponse);
         }
+
     }
 }
 

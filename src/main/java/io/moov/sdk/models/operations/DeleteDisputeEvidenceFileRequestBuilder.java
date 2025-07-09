@@ -53,7 +53,7 @@ public class DeleteDisputeEvidenceFileRequestBuilder {
     public DeleteDisputeEvidenceFileResponse call() throws Exception {
         
         RequestOperation<DeleteDisputeEvidenceFileRequest, DeleteDisputeEvidenceFileResponse> operation
-              = new DeleteDisputeEvidenceFileOperation( sdkConfiguration);
+              = new DeleteDisputeEvidenceFileOperation(sdkConfiguration);
         DeleteDisputeEvidenceFileRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

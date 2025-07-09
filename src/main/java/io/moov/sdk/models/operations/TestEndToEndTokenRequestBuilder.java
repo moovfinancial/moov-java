@@ -38,7 +38,7 @@ public class TestEndToEndTokenRequestBuilder {
     public TestEndToEndTokenResponse call() throws Exception {
         
         RequestOperation<E2EEToken, TestEndToEndTokenResponse> operation
-              = new TestEndToEndTokenOperation( sdkConfiguration);
+              = new TestEndToEndTokenOperation(sdkConfiguration);
         E2EEToken request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

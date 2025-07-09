@@ -46,7 +46,7 @@ public class AssignAccountCountriesRequestBuilder {
     public AssignAccountCountriesResponse call() throws Exception {
         
         RequestOperation<AssignAccountCountriesRequest, AssignAccountCountriesResponse> operation
-              = new AssignAccountCountriesOperation( sdkConfiguration);
+              = new AssignAccountCountriesOperation(sdkConfiguration);
         AssignAccountCountriesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

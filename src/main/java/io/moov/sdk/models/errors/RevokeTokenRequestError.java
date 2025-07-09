@@ -15,12 +15,14 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class RevokeTokenRequestError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("token")
     private Optional<String> token;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("token_type_hint")
@@ -51,15 +53,17 @@ public class RevokeTokenRequestError extends RuntimeException {
         return tokenTypeHint;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RevokeTokenRequestError withToken(String token) {
         Utils.checkNotNull(token, "token");
         this.token = Optional.ofNullable(token);
         return this;
     }
+
 
     public RevokeTokenRequestError withToken(Optional<String> token) {
         Utils.checkNotNull(token, "token");
@@ -73,13 +77,13 @@ public class RevokeTokenRequestError extends RuntimeException {
         return this;
     }
 
+
     public RevokeTokenRequestError withTokenTypeHint(Optional<String> tokenTypeHint) {
         Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
         this.tokenTypeHint = tokenTypeHint;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -97,8 +101,7 @@ public class RevokeTokenRequestError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            token,
-            tokenTypeHint);
+            token, tokenTypeHint);
     }
     
     @Override
@@ -107,16 +110,18 @@ public class RevokeTokenRequestError extends RuntimeException {
                 "token", token,
                 "tokenTypeHint", tokenTypeHint);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> token = Optional.empty();
- 
+
         private Optional<String> tokenTypeHint = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder token(String token) {
             Utils.checkNotNull(token, "token");
@@ -130,6 +135,7 @@ public class RevokeTokenRequestError extends RuntimeException {
             return this;
         }
 
+
         public Builder tokenTypeHint(String tokenTypeHint) {
             Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
             this.tokenTypeHint = Optional.ofNullable(tokenTypeHint);
@@ -141,12 +147,13 @@ public class RevokeTokenRequestError extends RuntimeException {
             this.tokenTypeHint = tokenTypeHint;
             return this;
         }
-        
+
         public RevokeTokenRequestError build() {
+
             return new RevokeTokenRequestError(
-                token,
-                tokenTypeHint);
+                token, tokenTypeHint);
         }
+
     }
 }
 

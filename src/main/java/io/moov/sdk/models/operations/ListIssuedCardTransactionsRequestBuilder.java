@@ -28,7 +28,7 @@ public class ListIssuedCardTransactionsRequestBuilder {
     public ListIssuedCardTransactionsResponse call() throws Exception {
         
         RequestOperation<ListIssuedCardTransactionsRequest, ListIssuedCardTransactionsResponse> operation
-              = new ListIssuedCardTransactionsOperation( sdkConfiguration);
+              = new ListIssuedCardTransactionsOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

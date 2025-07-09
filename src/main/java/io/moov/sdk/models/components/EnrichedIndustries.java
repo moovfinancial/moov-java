@@ -11,6 +11,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
+
 public class EnrichedIndustries {
 
     @JsonProperty("industries")
@@ -28,9 +29,10 @@ public class EnrichedIndustries {
         return industries;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public EnrichedIndustries withIndustries(List<IndustryTaxonomy> industries) {
         Utils.checkNotNull(industries, "industries");
@@ -38,7 +40,6 @@ public class EnrichedIndustries {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -63,24 +64,28 @@ public class EnrichedIndustries {
         return Utils.toString(EnrichedIndustries.class,
                 "industries", industries);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private List<IndustryTaxonomy> industries;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder industries(List<IndustryTaxonomy> industries) {
             Utils.checkNotNull(industries, "industries");
             this.industries = industries;
             return this;
         }
-        
+
         public EnrichedIndustries build() {
+
             return new EnrichedIndustries(
                 industries);
         }
+
     }
 }

@@ -33,9 +33,10 @@ public class AccountCountries {
         return countries;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AccountCountries withCountries(List<String> countries) {
         Utils.checkNotNull(countries, "countries");
@@ -43,7 +44,6 @@ public class AccountCountries {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -68,24 +68,28 @@ public class AccountCountries {
         return Utils.toString(AccountCountries.class,
                 "countries", countries);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private List<String> countries;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder countries(List<String> countries) {
             Utils.checkNotNull(countries, "countries");
             this.countries = countries;
             return this;
         }
-        
+
         public AccountCountries build() {
+
             return new AccountCountries(
                 countries);
         }
+
     }
 }

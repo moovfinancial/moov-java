@@ -10,13 +10,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataRefundCreated {
 
     @JsonProperty("accountID")
     private String accountID;
 
+
     @JsonProperty("transferID")
     private String transferID;
+
 
     @JsonProperty("refundID")
     private String refundID;
@@ -49,9 +52,10 @@ public class WebhookDataRefundCreated {
         return refundID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataRefundCreated withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -71,7 +75,6 @@ public class WebhookDataRefundCreated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,9 +93,7 @@ public class WebhookDataRefundCreated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            transferID,
-            refundID);
+            accountID, transferID, refundID);
     }
     
     @Override
@@ -102,18 +103,20 @@ public class WebhookDataRefundCreated {
                 "transferID", transferID,
                 "refundID", refundID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String transferID;
- 
+
         private String refundID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -121,23 +124,25 @@ public class WebhookDataRefundCreated {
             return this;
         }
 
+
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = transferID;
             return this;
         }
 
+
         public Builder refundID(String refundID) {
             Utils.checkNotNull(refundID, "refundID");
             this.refundID = refundID;
             return this;
         }
-        
+
         public WebhookDataRefundCreated build() {
+
             return new WebhookDataRefundCreated(
-                accountID,
-                transferID,
-                refundID);
+                accountID, transferID, refundID);
         }
+
     }
 }

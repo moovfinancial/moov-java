@@ -37,7 +37,7 @@ public class ListWalletsRequestBuilder {
     public ListWalletsResponse call() throws Exception {
         
         RequestOperation<ListWalletsRequest, ListWalletsResponse> operation
-              = new ListWalletsOperation( sdkConfiguration);
+              = new ListWalletsOperation(sdkConfiguration);
         ListWalletsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

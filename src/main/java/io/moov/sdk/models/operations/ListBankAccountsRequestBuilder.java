@@ -37,7 +37,7 @@ public class ListBankAccountsRequestBuilder {
     public ListBankAccountsResponse call() throws Exception {
         
         RequestOperation<ListBankAccountsRequest, ListBankAccountsResponse> operation
-              = new ListBankAccountsOperation( sdkConfiguration);
+              = new ListBankAccountsOperation(sdkConfiguration);
         ListBankAccountsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

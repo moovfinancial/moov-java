@@ -42,9 +42,10 @@ public class PayoutRecipientUpdate {
         return email;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PayoutRecipientUpdate withEmail(String email) {
         Utils.checkNotNull(email, "email");
@@ -52,13 +53,13 @@ public class PayoutRecipientUpdate {
         return this;
     }
 
+
     public PayoutRecipientUpdate withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -83,14 +84,16 @@ public class PayoutRecipientUpdate {
         return Utils.toString(PayoutRecipientUpdate.class,
                 "email", email);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> email = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -103,10 +106,12 @@ public class PayoutRecipientUpdate {
             this.email = email;
             return this;
         }
-        
+
         public PayoutRecipientUpdate build() {
+
             return new PayoutRecipientUpdate(
                 email);
         }
+
     }
 }

@@ -15,11 +15,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class EstimatedActivity {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("averageTransactionAmount")
     private Optional<Long> averageTransactionAmount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maximumTransactionAmount")
@@ -68,15 +70,17 @@ public class EstimatedActivity {
         return (Optional<MonthlyVolumeRange>) monthlyVolumeRange;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public EstimatedActivity withAverageTransactionAmount(long averageTransactionAmount) {
         Utils.checkNotNull(averageTransactionAmount, "averageTransactionAmount");
         this.averageTransactionAmount = Optional.ofNullable(averageTransactionAmount);
         return this;
     }
+
 
     public EstimatedActivity withAverageTransactionAmount(Optional<Long> averageTransactionAmount) {
         Utils.checkNotNull(averageTransactionAmount, "averageTransactionAmount");
@@ -89,6 +93,7 @@ public class EstimatedActivity {
         this.maximumTransactionAmount = Optional.ofNullable(maximumTransactionAmount);
         return this;
     }
+
 
     public EstimatedActivity withMaximumTransactionAmount(Optional<Long> maximumTransactionAmount) {
         Utils.checkNotNull(maximumTransactionAmount, "maximumTransactionAmount");
@@ -105,6 +110,7 @@ public class EstimatedActivity {
         return this;
     }
 
+
     /**
      * The low value in each range is included. The high value in each range is excluded.
      */
@@ -114,7 +120,6 @@ public class EstimatedActivity {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -133,9 +138,7 @@ public class EstimatedActivity {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            averageTransactionAmount,
-            maximumTransactionAmount,
-            monthlyVolumeRange);
+            averageTransactionAmount, maximumTransactionAmount, monthlyVolumeRange);
     }
     
     @Override
@@ -145,18 +148,20 @@ public class EstimatedActivity {
                 "maximumTransactionAmount", maximumTransactionAmount,
                 "monthlyVolumeRange", monthlyVolumeRange);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> averageTransactionAmount = Optional.empty();
- 
+
         private Optional<Long> maximumTransactionAmount = Optional.empty();
- 
+
         private Optional<? extends MonthlyVolumeRange> monthlyVolumeRange = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder averageTransactionAmount(long averageTransactionAmount) {
             Utils.checkNotNull(averageTransactionAmount, "averageTransactionAmount");
@@ -170,6 +175,7 @@ public class EstimatedActivity {
             return this;
         }
 
+
         public Builder maximumTransactionAmount(long maximumTransactionAmount) {
             Utils.checkNotNull(maximumTransactionAmount, "maximumTransactionAmount");
             this.maximumTransactionAmount = Optional.ofNullable(maximumTransactionAmount);
@@ -181,6 +187,7 @@ public class EstimatedActivity {
             this.maximumTransactionAmount = maximumTransactionAmount;
             return this;
         }
+
 
         /**
          * The low value in each range is included. The high value in each range is excluded.
@@ -199,12 +206,12 @@ public class EstimatedActivity {
             this.monthlyVolumeRange = monthlyVolumeRange;
             return this;
         }
-        
+
         public EstimatedActivity build() {
+
             return new EstimatedActivity(
-                averageTransactionAmount,
-                maximumTransactionAmount,
-                monthlyVolumeRange);
+                averageTransactionAmount, maximumTransactionAmount, monthlyVolumeRange);
         }
+
     }
 }

@@ -14,14 +14,15 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class TransferSource {
 
+public class TransferSource {
     /**
      * UUID present only if the transfer is part of a transfer group.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transferID")
     private Optional<String> transferID;
+
 
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
@@ -32,6 +33,7 @@ public class TransferSource {
     @JsonProperty("paymentMethodType")
     private PaymentMethodType paymentMethodType;
 
+
     @JsonProperty("account")
     private TransferAccount account;
 
@@ -41,6 +43,7 @@ public class TransferSource {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bankAccount")
     private Optional<? extends PaymentMethodsBankAccount> bankAccount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wallet")
@@ -122,7 +125,10 @@ public class TransferSource {
             String paymentMethodID,
             PaymentMethodType paymentMethodType,
             TransferAccount account) {
-        this(Optional.empty(), paymentMethodID, paymentMethodType, account, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), paymentMethodID, paymentMethodType,
+            account, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -211,9 +217,10 @@ public class TransferSource {
         return (Optional<ACHTransactionDetails>) achDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * UUID present only if the transfer is part of a transfer group.
@@ -223,6 +230,7 @@ public class TransferSource {
         this.transferID = Optional.ofNullable(transferID);
         return this;
     }
+
 
     /**
      * UUID present only if the transfer is part of a transfer group.
@@ -263,6 +271,7 @@ public class TransferSource {
         return this;
     }
 
+
     /**
      * A bank account as contained within a payment method.
      */
@@ -278,6 +287,7 @@ public class TransferSource {
         return this;
     }
 
+
     public TransferSource withWallet(Optional<? extends PaymentMethodsWallet> wallet) {
         Utils.checkNotNull(wallet, "wallet");
         this.wallet = wallet;
@@ -292,6 +302,7 @@ public class TransferSource {
         this.card = Optional.ofNullable(card);
         return this;
     }
+
 
     /**
      * A card as contained within a payment method.
@@ -311,6 +322,7 @@ public class TransferSource {
         return this;
     }
 
+
     /**
      * Describes an Apple Pay token on a Moov account.
      */
@@ -328,6 +340,7 @@ public class TransferSource {
         this.terminalCard = Optional.ofNullable(terminalCard);
         return this;
     }
+
 
     /**
      * Describes payment card details captured with tap or in-person payment.
@@ -347,6 +360,7 @@ public class TransferSource {
         return this;
     }
 
+
     /**
      * Card-specific details about the transaction.
      */
@@ -365,6 +379,7 @@ public class TransferSource {
         return this;
     }
 
+
     /**
      * ACH specific details about the transaction.
      */
@@ -374,7 +389,6 @@ public class TransferSource {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -401,17 +415,10 @@ public class TransferSource {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID,
-            paymentMethodID,
-            paymentMethodType,
-            account,
-            bankAccount,
-            wallet,
-            card,
-            applePay,
-            terminalCard,
-            cardDetails,
-            achDetails);
+            transferID, paymentMethodID, paymentMethodType,
+            account, bankAccount, wallet,
+            card, applePay, terminalCard,
+            cardDetails, achDetails);
     }
     
     @Override
@@ -429,34 +436,36 @@ public class TransferSource {
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> transferID = Optional.empty();
- 
+
         private String paymentMethodID;
- 
+
         private PaymentMethodType paymentMethodType;
- 
+
         private TransferAccount account;
- 
+
         private Optional<? extends PaymentMethodsBankAccount> bankAccount = Optional.empty();
- 
+
         private Optional<? extends PaymentMethodsWallet> wallet = Optional.empty();
- 
+
         private Optional<? extends PaymentMethodsCard> card = Optional.empty();
- 
+
         private Optional<? extends ApplePayResponse> applePay = Optional.empty();
- 
+
         private Optional<? extends TerminalCard> terminalCard = Optional.empty();
- 
+
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
- 
+
         private Optional<? extends ACHTransactionDetails> achDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * UUID present only if the transfer is part of a transfer group.
@@ -476,11 +485,13 @@ public class TransferSource {
             return this;
         }
 
+
         public Builder paymentMethodID(String paymentMethodID) {
             Utils.checkNotNull(paymentMethodID, "paymentMethodID");
             this.paymentMethodID = paymentMethodID;
             return this;
         }
+
 
         /**
          * The payment method type that represents a payment rail and directionality
@@ -491,11 +502,13 @@ public class TransferSource {
             return this;
         }
 
+
         public Builder account(TransferAccount account) {
             Utils.checkNotNull(account, "account");
             this.account = account;
             return this;
         }
+
 
         /**
          * A bank account as contained within a payment method.
@@ -515,6 +528,7 @@ public class TransferSource {
             return this;
         }
 
+
         public Builder wallet(PaymentMethodsWallet wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = Optional.ofNullable(wallet);
@@ -526,6 +540,7 @@ public class TransferSource {
             this.wallet = wallet;
             return this;
         }
+
 
         /**
          * A card as contained within a payment method.
@@ -545,6 +560,7 @@ public class TransferSource {
             return this;
         }
 
+
         /**
          * Describes an Apple Pay token on a Moov account.
          */
@@ -562,6 +578,7 @@ public class TransferSource {
             this.applePay = applePay;
             return this;
         }
+
 
         /**
          * Describes payment card details captured with tap or in-person payment.
@@ -581,6 +598,7 @@ public class TransferSource {
             return this;
         }
 
+
         /**
          * Card-specific details about the transaction.
          */
@@ -599,6 +617,7 @@ public class TransferSource {
             return this;
         }
 
+
         /**
          * ACH specific details about the transaction.
          */
@@ -616,20 +635,15 @@ public class TransferSource {
             this.achDetails = achDetails;
             return this;
         }
-        
+
         public TransferSource build() {
+
             return new TransferSource(
-                transferID,
-                paymentMethodID,
-                paymentMethodType,
-                account,
-                bankAccount,
-                wallet,
-                card,
-                applePay,
-                terminalCard,
-                cardDetails,
-                achDetails);
+                transferID, paymentMethodID, paymentMethodType,
+                account, bankAccount, wallet,
+                card, applePay, terminalCard,
+                cardDetails, achDetails);
         }
+
     }
 }

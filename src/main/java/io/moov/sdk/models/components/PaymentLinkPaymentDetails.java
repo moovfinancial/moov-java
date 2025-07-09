@@ -21,7 +21,6 @@ import java.util.Optional;
  * <p>Options for payment links used to collect payment.
  */
 public class PaymentLinkPaymentDetails {
-
     /**
      * A list of payment methods that should be supported for this payment link.
      */
@@ -86,9 +85,10 @@ public class PaymentLinkPaymentDetails {
         return (Optional<ACHPaymentDetails>) achDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A list of payment methods that should be supported for this payment link.
@@ -108,6 +108,7 @@ public class PaymentLinkPaymentDetails {
         return this;
     }
 
+
     /**
      * Options for payment links used to collect a card payment.
      */
@@ -126,6 +127,7 @@ public class PaymentLinkPaymentDetails {
         return this;
     }
 
+
     /**
      * Options for payment links used to collect an ACH payment.
      */
@@ -135,7 +137,6 @@ public class PaymentLinkPaymentDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -154,9 +155,7 @@ public class PaymentLinkPaymentDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods,
-            cardDetails,
-            achDetails);
+            allowedMethods, cardDetails, achDetails);
     }
     
     @Override
@@ -166,18 +165,20 @@ public class PaymentLinkPaymentDetails {
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private List<CollectionPaymentMethodType> allowedMethods;
- 
+
         private Optional<? extends CardPaymentDetails> cardDetails = Optional.empty();
- 
+
         private Optional<? extends ACHPaymentDetails> achDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A list of payment methods that should be supported for this payment link.
@@ -187,6 +188,7 @@ public class PaymentLinkPaymentDetails {
             this.allowedMethods = allowedMethods;
             return this;
         }
+
 
         /**
          * Options for payment links used to collect a card payment.
@@ -206,6 +208,7 @@ public class PaymentLinkPaymentDetails {
             return this;
         }
 
+
         /**
          * Options for payment links used to collect an ACH payment.
          */
@@ -223,12 +226,12 @@ public class PaymentLinkPaymentDetails {
             this.achDetails = achDetails;
             return this;
         }
-        
+
         public PaymentLinkPaymentDetails build() {
+
             return new PaymentLinkPaymentDetails(
-                allowedMethods,
-                cardDetails,
-                achDetails);
+                allowedMethods, cardDetails, achDetails);
         }
+
     }
 }

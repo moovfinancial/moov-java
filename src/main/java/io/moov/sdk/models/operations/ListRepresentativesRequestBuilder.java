@@ -37,7 +37,7 @@ public class ListRepresentativesRequestBuilder {
     public ListRepresentativesResponse call() throws Exception {
         
         RequestOperation<ListRepresentativesRequest, ListRepresentativesResponse> operation
-              = new ListRepresentativesOperation( sdkConfiguration);
+              = new ListRepresentativesOperation(sdkConfiguration);
         ListRepresentativesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

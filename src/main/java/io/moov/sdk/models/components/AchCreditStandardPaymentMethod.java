@@ -10,13 +10,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class AchCreditStandardPaymentMethod implements PaymentMethod {
 
+public class AchCreditStandardPaymentMethod implements PaymentMethod {
     /**
      * ID of the payment method.
      */
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
+
 
     @JsonProperty("paymentMethodType")
     private AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType;
@@ -62,9 +63,10 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
         return bankAccount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the payment method.
@@ -90,7 +92,6 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -109,9 +110,7 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            paymentMethodType,
-            bankAccount);
+            paymentMethodID, paymentMethodType, bankAccount);
     }
     
     @Override
@@ -121,18 +120,20 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
                 "paymentMethodType", paymentMethodType,
                 "bankAccount", bankAccount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType;
- 
+
         private PaymentMethodsBankAccount bankAccount;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the payment method.
@@ -143,11 +144,13 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
             return this;
         }
 
+
         public Builder paymentMethodType(AchCreditStandardPaymentMethodPaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;
         }
+
 
         /**
          * A bank account as contained within a payment method.
@@ -157,12 +160,12 @@ public class AchCreditStandardPaymentMethod implements PaymentMethod {
             this.bankAccount = bankAccount;
             return this;
         }
-        
+
         public AchCreditStandardPaymentMethod build() {
+
             return new AchCreditStandardPaymentMethod(
-                paymentMethodID,
-                paymentMethodType,
-                bankAccount);
+                paymentMethodID, paymentMethodType, bankAccount);
         }
+
     }
 }

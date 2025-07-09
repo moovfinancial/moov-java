@@ -11,8 +11,8 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 
-public class IssuingVelocityLimit {
 
+public class IssuingVelocityLimit {
     /**
      * The maximum amount in cents that can be spent in a given interval.
      */
@@ -51,9 +51,10 @@ public class IssuingVelocityLimit {
         return interval;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The maximum amount in cents that can be spent in a given interval.
@@ -73,7 +74,6 @@ public class IssuingVelocityLimit {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,8 +91,7 @@ public class IssuingVelocityLimit {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount,
-            interval);
+            amount, interval);
     }
     
     @Override
@@ -101,16 +100,18 @@ public class IssuingVelocityLimit {
                 "amount", amount,
                 "interval", interval);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long amount;
- 
+
         private IssuingIntervalLimit interval;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The maximum amount in cents that can be spent in a given interval.
@@ -121,6 +122,7 @@ public class IssuingVelocityLimit {
             return this;
         }
 
+
         /**
          * Specifies the time frame for the velocity limit. Currently supports only per-transaction limits.
          */
@@ -129,11 +131,12 @@ public class IssuingVelocityLimit {
             this.interval = interval;
             return this;
         }
-        
+
         public IssuingVelocityLimit build() {
+
             return new IssuingVelocityLimit(
-                amount,
-                interval);
+                amount, interval);
         }
+
     }
 }

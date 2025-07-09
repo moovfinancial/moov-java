@@ -82,7 +82,7 @@ public class RevokeAccessTokenRequestBuilder {
     public RevokeAccessTokenResponse call() throws Exception {
         
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
-              = new RevokeAccessTokenOperation( sdkConfiguration);
+              = new RevokeAccessTokenOperation(sdkConfiguration);
         RevokeTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

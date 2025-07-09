@@ -37,7 +37,7 @@ public class GetAccountCountriesRequestBuilder {
     public GetAccountCountriesResponse call() throws Exception {
         
         RequestOperation<GetAccountCountriesRequest, GetAccountCountriesResponse> operation
-              = new GetAccountCountriesOperation( sdkConfiguration);
+              = new GetAccountCountriesOperation(sdkConfiguration);
         GetAccountCountriesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

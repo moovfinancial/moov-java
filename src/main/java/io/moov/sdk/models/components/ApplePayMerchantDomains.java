@@ -12,6 +12,7 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+
 public class ApplePayMerchantDomains {
 
     @JsonProperty("accountID")
@@ -29,8 +30,10 @@ public class ApplePayMerchantDomains {
     @JsonProperty("domains")
     private List<String> domains;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
@@ -85,9 +88,10 @@ public class ApplePayMerchantDomains {
         return updatedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ApplePayMerchantDomains withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -125,7 +129,6 @@ public class ApplePayMerchantDomains {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -146,11 +149,8 @@ public class ApplePayMerchantDomains {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            displayName,
-            domains,
-            createdOn,
-            updatedOn);
+            accountID, displayName, domains,
+            createdOn, updatedOn);
     }
     
     @Override
@@ -162,28 +162,31 @@ public class ApplePayMerchantDomains {
                 "createdOn", createdOn,
                 "updatedOn", updatedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String displayName;
- 
+
         private List<String> domains;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * A UTF-8 string to display in the Buy button.
@@ -194,6 +197,7 @@ public class ApplePayMerchantDomains {
             return this;
         }
 
+
         /**
          * A unique list of fully-qualified, top-level or sub-domain names where you will accept Apple Pay.
          */
@@ -203,25 +207,26 @@ public class ApplePayMerchantDomains {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
-        
+
         public ApplePayMerchantDomains build() {
+
             return new ApplePayMerchantDomains(
-                accountID,
-                displayName,
-                domains,
-                createdOn,
-                updatedOn);
+                accountID, displayName, domains,
+                createdOn, updatedOn);
         }
+
     }
 }

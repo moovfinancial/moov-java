@@ -13,6 +13,7 @@ import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 
+
 @SuppressWarnings("serial")
 public class AssignCountriesError extends RuntimeException {
 
@@ -32,9 +33,10 @@ public class AssignCountriesError extends RuntimeException {
         return error;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AssignCountriesError withError(CountriesErrors error) {
         Utils.checkNotNull(error, "error");
@@ -42,7 +44,6 @@ public class AssignCountriesError extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -67,25 +68,29 @@ public class AssignCountriesError extends RuntimeException {
         return Utils.toString(AssignCountriesError.class,
                 "error", error);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private CountriesErrors error;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder error(CountriesErrors error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
-        
+
         public AssignCountriesError build() {
+
             return new AssignCountriesError(
                 error);
         }
+
     }
 }
 

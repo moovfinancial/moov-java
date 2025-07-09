@@ -11,16 +11,18 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class UpdateTransferRequest {
 
+public class UpdateTransferRequest {
     /**
      * Identifier for the transfer.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=transferID")
     private String transferID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PatchTransfer patchTransfer;
@@ -56,9 +58,10 @@ public class UpdateTransferRequest {
         return patchTransfer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Identifier for the transfer.
@@ -81,7 +84,6 @@ public class UpdateTransferRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -100,9 +102,7 @@ public class UpdateTransferRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID,
-            accountID,
-            patchTransfer);
+            transferID, accountID, patchTransfer);
     }
     
     @Override
@@ -112,18 +112,20 @@ public class UpdateTransferRequest {
                 "accountID", accountID,
                 "patchTransfer", patchTransfer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String transferID;
- 
+
         private String accountID;
- 
+
         private PatchTransfer patchTransfer;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Identifier for the transfer.
@@ -134,23 +136,25 @@ public class UpdateTransferRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
 
+
         public Builder patchTransfer(PatchTransfer patchTransfer) {
             Utils.checkNotNull(patchTransfer, "patchTransfer");
             this.patchTransfer = patchTransfer;
             return this;
         }
-        
+
         public UpdateTransferRequest build() {
+
             return new UpdateTransferRequest(
-                transferID,
-                accountID,
-                patchTransfer);
+                transferID, accountID, patchTransfer);
         }
+
     }
 }

@@ -13,6 +13,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class ListPaymentMethodsRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
@@ -76,9 +77,10 @@ public class ListPaymentMethodsRequest {
         return (Optional<PaymentMethodType>) paymentMethodType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListPaymentMethodsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -97,6 +99,7 @@ public class ListPaymentMethodsRequest {
         this.sourceID = Optional.ofNullable(sourceID);
         return this;
     }
+
 
     /**
      * Optional parameter to filter the account's payment methods by source ID. 
@@ -119,6 +122,7 @@ public class ListPaymentMethodsRequest {
         return this;
     }
 
+
     /**
      * Optional parameter to filter the account's payment methods by payment method type.
      */
@@ -128,7 +132,6 @@ public class ListPaymentMethodsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -147,9 +150,7 @@ public class ListPaymentMethodsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            sourceID,
-            paymentMethodType);
+            accountID, sourceID, paymentMethodType);
     }
     
     @Override
@@ -159,24 +160,27 @@ public class ListPaymentMethodsRequest {
                 "sourceID", sourceID,
                 "paymentMethodType", paymentMethodType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<String> sourceID = Optional.empty();
- 
+
         private Optional<? extends PaymentMethodType> paymentMethodType = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * Optional parameter to filter the account's payment methods by source ID. 
@@ -202,6 +206,7 @@ public class ListPaymentMethodsRequest {
             return this;
         }
 
+
         /**
          * Optional parameter to filter the account's payment methods by payment method type.
          */
@@ -219,12 +224,12 @@ public class ListPaymentMethodsRequest {
             this.paymentMethodType = paymentMethodType;
             return this;
         }
-        
+
         public ListPaymentMethodsRequest build() {
+
             return new ListPaymentMethodsRequest(
-                accountID,
-                sourceID,
-                paymentMethodType);
+                accountID, sourceID, paymentMethodType);
         }
+
     }
 }

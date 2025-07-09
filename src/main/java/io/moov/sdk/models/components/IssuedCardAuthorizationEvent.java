@@ -11,8 +11,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 
-public class IssuedCardAuthorizationEvent {
 
+public class IssuedCardAuthorizationEvent {
     /**
      * The identifier for this event. Use the `eventType` field to determine what resource is identified by this ID (`authorization`, `reversal`, etc.).
      */
@@ -36,6 +36,7 @@ public class IssuedCardAuthorizationEvent {
      */
     @JsonProperty("result")
     private IssuedCardAuthorizationEventResult result;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -96,9 +97,10 @@ public class IssuedCardAuthorizationEvent {
         return createdOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The identifier for this event. Use the `eventType` field to determine what resource is identified by this ID (`authorization`, `reversal`, etc.).
@@ -142,7 +144,6 @@ public class IssuedCardAuthorizationEvent {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -163,11 +164,8 @@ public class IssuedCardAuthorizationEvent {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            eventID,
-            eventType,
-            amount,
-            result,
-            createdOn);
+            eventID, eventType, amount,
+            result, createdOn);
     }
     
     @Override
@@ -179,22 +177,24 @@ public class IssuedCardAuthorizationEvent {
                 "result", result,
                 "createdOn", createdOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String eventID;
- 
+
         private IssuedCardEventType eventType;
- 
+
         private String amount;
- 
+
         private IssuedCardAuthorizationEventResult result;
- 
+
         private OffsetDateTime createdOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The identifier for this event. Use the `eventType` field to determine what resource is identified by this ID (`authorization`, `reversal`, etc.).
@@ -205,6 +205,7 @@ public class IssuedCardAuthorizationEvent {
             return this;
         }
 
+
         /**
          * The type of event that occurred on the card.
          */
@@ -213,6 +214,7 @@ public class IssuedCardAuthorizationEvent {
             this.eventType = eventType;
             return this;
         }
+
 
         /**
          * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
@@ -223,6 +225,7 @@ public class IssuedCardAuthorizationEvent {
             return this;
         }
 
+
         /**
          * The result of an event.
          */
@@ -232,19 +235,19 @@ public class IssuedCardAuthorizationEvent {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
-        
+
         public IssuedCardAuthorizationEvent build() {
+
             return new IssuedCardAuthorizationEvent(
-                eventID,
-                eventType,
-                amount,
-                result,
-                createdOn);
+                eventID, eventType, amount,
+                result, createdOn);
         }
+
     }
 }

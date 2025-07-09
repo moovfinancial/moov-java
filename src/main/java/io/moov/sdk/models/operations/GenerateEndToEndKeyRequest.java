@@ -8,19 +8,17 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GenerateEndToEndKeyRequest {
 
+public class GenerateEndToEndKeyRequest {
     @JsonCreator
     public GenerateEndToEndKeyRequest() {
-        
-        
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
 
-    
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -42,16 +40,19 @@ public class GenerateEndToEndKeyRequest {
     public String toString() {
         return Utils.toString(GenerateEndToEndKeyRequest.class);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
-        
+
         private Builder() {
           // force use of static builder() method
         }
-        
+
         public GenerateEndToEndKeyRequest build() {
+
             return new GenerateEndToEndKeyRequest(
                 );
         }
+
     }
 }

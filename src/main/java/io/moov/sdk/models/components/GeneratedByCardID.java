@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class GeneratedByCardID {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class GeneratedByCardID {
         return cardID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GeneratedByCardID withCardID(String cardID) {
         Utils.checkNotNull(cardID, "cardID");
@@ -45,13 +47,13 @@ public class GeneratedByCardID {
         return this;
     }
 
+
     public GeneratedByCardID withCardID(Optional<String> cardID) {
         Utils.checkNotNull(cardID, "cardID");
         this.cardID = cardID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class GeneratedByCardID {
         return Utils.toString(GeneratedByCardID.class,
                 "cardID", cardID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> cardID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder cardID(String cardID) {
             Utils.checkNotNull(cardID, "cardID");
@@ -96,10 +100,12 @@ public class GeneratedByCardID {
             this.cardID = cardID;
             return this;
         }
-        
+
         public GeneratedByCardID build() {
+
             return new GeneratedByCardID(
                 cardID);
         }
+
     }
 }

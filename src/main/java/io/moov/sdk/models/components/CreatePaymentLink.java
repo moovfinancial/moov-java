@@ -28,7 +28,6 @@ import java.util.Optional;
  * <p>**Note:** The `payout` option is currently under development and is not yet available for general use.
  */
 public class CreatePaymentLink {
-
     /**
      * The partner's Moov account ID.
      */
@@ -40,6 +39,7 @@ public class CreatePaymentLink {
      */
     @JsonProperty("merchantPaymentMethodID")
     private String merchantPaymentMethodID;
+
 
     @JsonProperty("amount")
     private Amount amount;
@@ -66,6 +66,7 @@ public class CreatePaymentLink {
     @JsonProperty("display")
     private PaymentLinkDisplayOptions display;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("customer")
     private Optional<? extends PaymentLinkCustomerOptions> customer;
@@ -76,6 +77,7 @@ public class CreatePaymentLink {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment")
     private Optional<? extends PaymentLinkPaymentDetails> payment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payout")
@@ -117,7 +119,9 @@ public class CreatePaymentLink {
             String merchantPaymentMethodID,
             Amount amount,
             PaymentLinkDisplayOptions display) {
-        this(partnerAccountID, merchantPaymentMethodID, amount, Optional.empty(), Optional.empty(), display, Optional.empty(), Optional.empty(), Optional.empty());
+        this(partnerAccountID, merchantPaymentMethodID, amount,
+            Optional.empty(), Optional.empty(), display,
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -188,9 +192,10 @@ public class CreatePaymentLink {
         return (Optional<PaymentLinkPayoutDetails>) payout;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The partner's Moov account ID.
@@ -227,6 +232,7 @@ public class CreatePaymentLink {
         return this;
     }
 
+
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
@@ -246,6 +252,7 @@ public class CreatePaymentLink {
         this.expiresOn = Optional.ofNullable(expiresOn);
         return this;
     }
+
 
     /**
      * An optional expiration date for this payment link.
@@ -271,6 +278,7 @@ public class CreatePaymentLink {
         return this;
     }
 
+
     public CreatePaymentLink withCustomer(Optional<? extends PaymentLinkCustomerOptions> customer) {
         Utils.checkNotNull(customer, "customer");
         this.customer = customer;
@@ -285,6 +293,7 @@ public class CreatePaymentLink {
         this.payment = Optional.ofNullable(payment);
         return this;
     }
+
 
     /**
      * Options for payment links used to collect payment.
@@ -301,13 +310,13 @@ public class CreatePaymentLink {
         return this;
     }
 
+
     public CreatePaymentLink withPayout(Optional<? extends PaymentLinkPayoutDetails> payout) {
         Utils.checkNotNull(payout, "payout");
         this.payout = payout;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -332,15 +341,9 @@ public class CreatePaymentLink {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            partnerAccountID,
-            merchantPaymentMethodID,
-            amount,
-            maxUses,
-            expiresOn,
-            display,
-            customer,
-            payment,
-            payout);
+            partnerAccountID, merchantPaymentMethodID, amount,
+            maxUses, expiresOn, display,
+            customer, payment, payout);
     }
     
     @Override
@@ -356,30 +359,32 @@ public class CreatePaymentLink {
                 "payment", payment,
                 "payout", payout);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String partnerAccountID;
- 
+
         private String merchantPaymentMethodID;
- 
+
         private Amount amount;
- 
+
         private Optional<Long> maxUses = Optional.empty();
- 
+
         private Optional<OffsetDateTime> expiresOn = Optional.empty();
- 
+
         private PaymentLinkDisplayOptions display;
- 
+
         private Optional<? extends PaymentLinkCustomerOptions> customer = Optional.empty();
- 
+
         private Optional<? extends PaymentLinkPaymentDetails> payment = Optional.empty();
- 
+
         private Optional<? extends PaymentLinkPayoutDetails> payout = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The partner's Moov account ID.
@@ -390,6 +395,7 @@ public class CreatePaymentLink {
             return this;
         }
 
+
         /**
          * The merchant's preferred payment method ID. Must be a wallet payment method.
          */
@@ -399,11 +405,13 @@ public class CreatePaymentLink {
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
+
 
         /**
          * An optional limit on the number of times this payment link can be used. 
@@ -427,6 +435,7 @@ public class CreatePaymentLink {
             return this;
         }
 
+
         /**
          * An optional expiration date for this payment link.
          */
@@ -445,6 +454,7 @@ public class CreatePaymentLink {
             return this;
         }
 
+
         /**
          * Customizable display options for a payment link.
          */
@@ -453,6 +463,7 @@ public class CreatePaymentLink {
             this.display = display;
             return this;
         }
+
 
         public Builder customer(PaymentLinkCustomerOptions customer) {
             Utils.checkNotNull(customer, "customer");
@@ -465,6 +476,7 @@ public class CreatePaymentLink {
             this.customer = customer;
             return this;
         }
+
 
         /**
          * Options for payment links used to collect payment.
@@ -484,6 +496,7 @@ public class CreatePaymentLink {
             return this;
         }
 
+
         public Builder payout(PaymentLinkPayoutDetails payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = Optional.ofNullable(payout);
@@ -495,18 +508,14 @@ public class CreatePaymentLink {
             this.payout = payout;
             return this;
         }
-        
+
         public CreatePaymentLink build() {
+
             return new CreatePaymentLink(
-                partnerAccountID,
-                merchantPaymentMethodID,
-                amount,
-                maxUses,
-                expiresOn,
-                display,
-                customer,
-                payment,
-                payout);
+                partnerAccountID, merchantPaymentMethodID, amount,
+                maxUses, expiresOn, display,
+                customer, payment, payout);
         }
+
     }
 }

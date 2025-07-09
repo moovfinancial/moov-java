@@ -11,6 +11,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
+
 public class AddCapabilities {
 
     @JsonProperty("capabilities")
@@ -28,9 +29,10 @@ public class AddCapabilities {
         return capabilities;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AddCapabilities withCapabilities(List<CapabilityID> capabilities) {
         Utils.checkNotNull(capabilities, "capabilities");
@@ -38,7 +40,6 @@ public class AddCapabilities {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -63,24 +64,28 @@ public class AddCapabilities {
         return Utils.toString(AddCapabilities.class,
                 "capabilities", capabilities);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private List<CapabilityID> capabilities;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder capabilities(List<CapabilityID> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = capabilities;
             return this;
         }
-        
+
         public AddCapabilities build() {
+
             return new AddCapabilities(
                 capabilities);
         }
+
     }
 }

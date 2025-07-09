@@ -53,7 +53,7 @@ public class GetWalletTransactionRequestBuilder {
     public GetWalletTransactionResponse call() throws Exception {
         
         RequestOperation<GetWalletTransactionRequest, GetWalletTransactionResponse> operation
-              = new GetWalletTransactionOperation( sdkConfiguration);
+              = new GetWalletTransactionOperation(sdkConfiguration);
         GetWalletTransactionRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

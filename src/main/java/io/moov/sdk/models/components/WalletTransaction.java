@@ -27,11 +27,14 @@ public class WalletTransaction {
     @JsonProperty("walletID")
     private String walletID;
 
+
     @JsonProperty("transactionID")
     private String transactionID;
 
+
     @JsonProperty("transactionType")
     private WalletTransactionType transactionType;
+
 
     @JsonProperty("sourceType")
     private WalletTransactionSourceType sourceType;
@@ -42,6 +45,7 @@ public class WalletTransaction {
     @JsonProperty("sourceID")
     private String sourceID;
 
+
     @JsonProperty("status")
     private WalletTransactionStatus status;
 
@@ -51,8 +55,10 @@ public class WalletTransaction {
     @JsonProperty("memo")
     private String memo;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("completedOn")
@@ -120,6 +126,7 @@ public class WalletTransaction {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("availableBalanceDecimal")
     private Optional<String> availableBalanceDecimal;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sweepID")
@@ -205,7 +212,13 @@ public class WalletTransaction {
             String feeDecimal,
             long netAmount,
             String netAmountDecimal) {
-        this(walletID, transactionID, transactionType, sourceType, sourceID, status, memo, createdOn, Optional.empty(), currency, grossAmount, grossAmountDecimal, fee, Optional.empty(), feeDecimal, netAmount, netAmountDecimal, Optional.empty(), Optional.empty(), Optional.empty());
+        this(walletID, transactionID, transactionType,
+            sourceType, sourceID, status,
+            memo, createdOn, Optional.empty(),
+            currency, grossAmount, grossAmountDecimal,
+            fee, Optional.empty(), feeDecimal,
+            netAmount, netAmountDecimal, Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -345,9 +358,10 @@ public class WalletTransaction {
         return sweepID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WalletTransaction withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -409,6 +423,7 @@ public class WalletTransaction {
         return this;
     }
 
+
     public WalletTransaction withCompletedOn(Optional<OffsetDateTime> completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
         this.completedOn = completedOn;
@@ -460,6 +475,7 @@ public class WalletTransaction {
         return this;
     }
 
+
     /**
      * The IDs of the fees paid for the transaction.
      */
@@ -505,6 +521,7 @@ public class WalletTransaction {
         return this;
     }
 
+
     /**
      * The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
@@ -523,6 +540,7 @@ public class WalletTransaction {
         return this;
     }
 
+
     /**
      * The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
@@ -538,13 +556,13 @@ public class WalletTransaction {
         return this;
     }
 
+
     public WalletTransaction withSweepID(Optional<String> sweepID) {
         Utils.checkNotNull(sweepID, "sweepID");
         this.sweepID = sweepID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -580,26 +598,13 @@ public class WalletTransaction {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID,
-            transactionID,
-            transactionType,
-            sourceType,
-            sourceID,
-            status,
-            memo,
-            createdOn,
-            completedOn,
-            currency,
-            grossAmount,
-            grossAmountDecimal,
-            fee,
-            feeIDs,
-            feeDecimal,
-            netAmount,
-            netAmountDecimal,
-            availableBalance,
-            availableBalanceDecimal,
-            sweepID);
+            walletID, transactionID, transactionType,
+            sourceType, sourceID, status,
+            memo, createdOn, completedOn,
+            currency, grossAmount, grossAmountDecimal,
+            fee, feeIDs, feeDecimal,
+            netAmount, netAmountDecimal, availableBalance,
+            availableBalanceDecimal, sweepID);
     }
     
     @Override
@@ -626,52 +631,54 @@ public class WalletTransaction {
                 "availableBalanceDecimal", availableBalanceDecimal,
                 "sweepID", sweepID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String walletID;
- 
+
         private String transactionID;
- 
+
         private WalletTransactionType transactionType;
- 
+
         private WalletTransactionSourceType sourceType;
- 
+
         private String sourceID;
- 
+
         private WalletTransactionStatus status;
- 
+
         private String memo;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private Optional<OffsetDateTime> completedOn = Optional.empty();
- 
+
         private String currency;
- 
+
         private Long grossAmount;
- 
+
         private String grossAmountDecimal;
- 
+
         private Long fee;
- 
+
         private Optional<? extends List<String>> feeIDs = Optional.empty();
- 
+
         private String feeDecimal;
- 
+
         private Long netAmount;
- 
+
         private String netAmountDecimal;
- 
+
         private Optional<Long> availableBalance = Optional.empty();
- 
+
         private Optional<String> availableBalanceDecimal = Optional.empty();
- 
+
         private Optional<String> sweepID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
@@ -679,11 +686,13 @@ public class WalletTransaction {
             return this;
         }
 
+
         public Builder transactionID(String transactionID) {
             Utils.checkNotNull(transactionID, "transactionID");
             this.transactionID = transactionID;
             return this;
         }
+
 
         public Builder transactionType(WalletTransactionType transactionType) {
             Utils.checkNotNull(transactionType, "transactionType");
@@ -691,11 +700,13 @@ public class WalletTransaction {
             return this;
         }
 
+
         public Builder sourceType(WalletTransactionSourceType sourceType) {
             Utils.checkNotNull(sourceType, "sourceType");
             this.sourceType = sourceType;
             return this;
         }
+
 
         /**
          * The ID of the Moov object to which this transaction is related.
@@ -706,11 +717,13 @@ public class WalletTransaction {
             return this;
         }
 
+
         public Builder status(WalletTransactionStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         /**
          * Detailed description of the transaction.
@@ -721,11 +734,13 @@ public class WalletTransaction {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
+
 
         public Builder completedOn(OffsetDateTime completedOn) {
             Utils.checkNotNull(completedOn, "completedOn");
@@ -739,6 +754,7 @@ public class WalletTransaction {
             return this;
         }
 
+
         /**
          * A 3-letter ISO 4217 currency code.
          */
@@ -747,6 +763,7 @@ public class WalletTransaction {
             this.currency = currency;
             return this;
         }
+
 
         /**
          * The total transaction amount. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
@@ -757,6 +774,7 @@ public class WalletTransaction {
             return this;
         }
 
+
         /**
          * The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
          */
@@ -766,6 +784,7 @@ public class WalletTransaction {
             return this;
         }
 
+
         /**
          * Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
          */
@@ -774,6 +793,7 @@ public class WalletTransaction {
             this.fee = fee;
             return this;
         }
+
 
         /**
          * The IDs of the fees paid for the transaction.
@@ -793,6 +813,7 @@ public class WalletTransaction {
             return this;
         }
 
+
         /**
          * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
          */
@@ -801,6 +822,7 @@ public class WalletTransaction {
             this.feeDecimal = feeDecimal;
             return this;
         }
+
 
         /**
          * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
@@ -811,6 +833,7 @@ public class WalletTransaction {
             return this;
         }
 
+
         /**
          * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
          */
@@ -819,6 +842,7 @@ public class WalletTransaction {
             this.netAmountDecimal = netAmountDecimal;
             return this;
         }
+
 
         /**
          * The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
@@ -838,6 +862,7 @@ public class WalletTransaction {
             return this;
         }
 
+
         /**
          * The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
          */
@@ -856,6 +881,7 @@ public class WalletTransaction {
             return this;
         }
 
+
         public Builder sweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = Optional.ofNullable(sweepID);
@@ -867,29 +893,18 @@ public class WalletTransaction {
             this.sweepID = sweepID;
             return this;
         }
-        
+
         public WalletTransaction build() {
+
             return new WalletTransaction(
-                walletID,
-                transactionID,
-                transactionType,
-                sourceType,
-                sourceID,
-                status,
-                memo,
-                createdOn,
-                completedOn,
-                currency,
-                grossAmount,
-                grossAmountDecimal,
-                fee,
-                feeIDs,
-                feeDecimal,
-                netAmount,
-                netAmountDecimal,
-                availableBalance,
-                availableBalanceDecimal,
-                sweepID);
+                walletID, transactionID, transactionType,
+                sourceType, sourceID, status,
+                memo, createdOn, completedOn,
+                currency, grossAmount, grossAmountDecimal,
+                fee, feeIDs, feeDecimal,
+                netAmount, netAmountDecimal, availableBalance,
+                availableBalanceDecimal, sweepID);
         }
+
     }
 }

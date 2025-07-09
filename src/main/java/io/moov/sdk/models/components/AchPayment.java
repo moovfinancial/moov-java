@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class AchPayment {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class AchPayment {
         return companyName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AchPayment withCompanyName(String companyName) {
         Utils.checkNotNull(companyName, "companyName");
@@ -45,13 +47,13 @@ public class AchPayment {
         return this;
     }
 
+
     public AchPayment withCompanyName(Optional<String> companyName) {
         Utils.checkNotNull(companyName, "companyName");
         this.companyName = companyName;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class AchPayment {
         return Utils.toString(AchPayment.class,
                 "companyName", companyName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> companyName = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder companyName(String companyName) {
             Utils.checkNotNull(companyName, "companyName");
@@ -96,10 +100,12 @@ public class AchPayment {
             this.companyName = companyName;
             return this;
         }
-        
+
         public AchPayment build() {
+
             return new AchPayment(
                 companyName);
         }
+
     }
 }

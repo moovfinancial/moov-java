@@ -37,7 +37,7 @@ public class DisconnectAccountRequestBuilder {
     public DisconnectAccountResponse call() throws Exception {
         
         RequestOperation<DisconnectAccountRequest, DisconnectAccountResponse> operation
-              = new DisconnectAccountOperation( sdkConfiguration);
+              = new DisconnectAccountOperation(sdkConfiguration);
         DisconnectAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

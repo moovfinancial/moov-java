@@ -13,15 +13,18 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class VolumeShareByCustomerTypeError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("business")
     private Optional<String> business;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("consumer")
     private Optional<String> consumer;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("p2p")
@@ -59,15 +62,17 @@ public class VolumeShareByCustomerTypeError {
         return p2p;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public VolumeShareByCustomerTypeError withBusiness(String business) {
         Utils.checkNotNull(business, "business");
         this.business = Optional.ofNullable(business);
         return this;
     }
+
 
     public VolumeShareByCustomerTypeError withBusiness(Optional<String> business) {
         Utils.checkNotNull(business, "business");
@@ -81,6 +86,7 @@ public class VolumeShareByCustomerTypeError {
         return this;
     }
 
+
     public VolumeShareByCustomerTypeError withConsumer(Optional<String> consumer) {
         Utils.checkNotNull(consumer, "consumer");
         this.consumer = consumer;
@@ -93,13 +99,13 @@ public class VolumeShareByCustomerTypeError {
         return this;
     }
 
+
     public VolumeShareByCustomerTypeError withP2p(Optional<String> p2p) {
         Utils.checkNotNull(p2p, "p2p");
         this.p2p = p2p;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +124,7 @@ public class VolumeShareByCustomerTypeError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            business,
-            consumer,
-            p2p);
+            business, consumer, p2p);
     }
     
     @Override
@@ -130,18 +134,20 @@ public class VolumeShareByCustomerTypeError {
                 "consumer", consumer,
                 "p2p", p2p);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> business = Optional.empty();
- 
+
         private Optional<String> consumer = Optional.empty();
- 
+
         private Optional<String> p2p = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder business(String business) {
             Utils.checkNotNull(business, "business");
@@ -155,6 +161,7 @@ public class VolumeShareByCustomerTypeError {
             return this;
         }
 
+
         public Builder consumer(String consumer) {
             Utils.checkNotNull(consumer, "consumer");
             this.consumer = Optional.ofNullable(consumer);
@@ -167,6 +174,7 @@ public class VolumeShareByCustomerTypeError {
             return this;
         }
 
+
         public Builder p2p(String p2p) {
             Utils.checkNotNull(p2p, "p2p");
             this.p2p = Optional.ofNullable(p2p);
@@ -178,12 +186,12 @@ public class VolumeShareByCustomerTypeError {
             this.p2p = p2p;
             return this;
         }
-        
+
         public VolumeShareByCustomerTypeError build() {
+
             return new VolumeShareByCustomerTypeError(
-                business,
-                consumer,
-                p2p);
+                business, consumer, p2p);
         }
+
     }
 }

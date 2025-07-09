@@ -11,13 +11,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UpdateSweepConfigRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sweepConfigID")
     private String sweepConfigID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PatchSweepConfig patchSweepConfig;
@@ -50,9 +53,10 @@ public class UpdateSweepConfigRequest {
         return patchSweepConfig;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateSweepConfigRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,7 +76,6 @@ public class UpdateSweepConfigRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class UpdateSweepConfigRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            sweepConfigID,
-            patchSweepConfig);
+            accountID, sweepConfigID, patchSweepConfig);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class UpdateSweepConfigRequest {
                 "sweepConfigID", sweepConfigID,
                 "patchSweepConfig", patchSweepConfig);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String sweepConfigID;
- 
+
         private PatchSweepConfig patchSweepConfig;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -122,23 +125,25 @@ public class UpdateSweepConfigRequest {
             return this;
         }
 
+
         public Builder sweepConfigID(String sweepConfigID) {
             Utils.checkNotNull(sweepConfigID, "sweepConfigID");
             this.sweepConfigID = sweepConfigID;
             return this;
         }
 
+
         public Builder patchSweepConfig(PatchSweepConfig patchSweepConfig) {
             Utils.checkNotNull(patchSweepConfig, "patchSweepConfig");
             this.patchSweepConfig = patchSweepConfig;
             return this;
         }
-        
+
         public UpdateSweepConfigRequest build() {
+
             return new UpdateSweepConfigRequest(
-                accountID,
-                sweepConfigID,
-                patchSweepConfig);
+                accountID, sweepConfigID, patchSweepConfig);
         }
+
     }
 }

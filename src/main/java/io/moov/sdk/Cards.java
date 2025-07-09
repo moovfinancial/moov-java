@@ -40,7 +40,6 @@ public class Cards {
     Cards(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Link a card to an existing Moov account. 
      * 
@@ -136,10 +135,9 @@ public class Cards {
                 .linkCard(linkCard)
                 .build();
         RequestOperation<LinkCardRequest, LinkCardResponse> operation
-              = new LinkCardOperation( sdkConfiguration);
+              = new LinkCardOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all the active cards associated with a Moov account. 
@@ -167,18 +165,16 @@ public class Cards {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListCardsResponse list(
-            String accountID) throws Exception {
+    public ListCardsResponse list(String accountID) throws Exception {
         ListCardsRequest request =
             ListCardsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListCardsRequest, ListCardsResponse> operation
-              = new ListCardsOperation( sdkConfiguration);
+              = new ListCardsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Fetch a specific card associated with a Moov account. 
@@ -217,10 +213,9 @@ public class Cards {
                 .cardID(cardID)
                 .build();
         RequestOperation<GetCardRequest, GetCardResponse> operation
-              = new GetCardOperation( sdkConfiguration);
+              = new GetCardOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Update a linked card and/or resubmit it for verification. 
@@ -276,10 +271,9 @@ public class Cards {
                 .updateCard(updateCard)
                 .build();
         RequestOperation<UpdateCardRequest, UpdateCardResponse> operation
-              = new UpdateCardOperation( sdkConfiguration);
+              = new UpdateCardOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Disables a card associated with a Moov account.
@@ -314,7 +308,7 @@ public class Cards {
                 .cardID(cardID)
                 .build();
         RequestOperation<DisableCardRequest, DisableCardResponse> operation
-              = new DisableCardOperation( sdkConfiguration);
+              = new DisableCardOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

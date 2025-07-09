@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataSweepCreated {
 
     @JsonProperty("walletID")
     private String walletID;
+
 
     @JsonProperty("sweepID")
     private String sweepID;
@@ -38,9 +40,10 @@ public class WebhookDataSweepCreated {
         return sweepID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataSweepCreated withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -54,7 +57,6 @@ public class WebhookDataSweepCreated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class WebhookDataSweepCreated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID,
-            sweepID);
+            walletID, sweepID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class WebhookDataSweepCreated {
                 "walletID", walletID,
                 "sweepID", sweepID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String walletID;
- 
+
         private String sweepID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
@@ -99,16 +102,18 @@ public class WebhookDataSweepCreated {
             return this;
         }
 
+
         public Builder sweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = sweepID;
             return this;
         }
-        
+
         public WebhookDataSweepCreated build() {
+
             return new WebhookDataSweepCreated(
-                walletID,
-                sweepID);
+                walletID, sweepID);
         }
+
     }
 }

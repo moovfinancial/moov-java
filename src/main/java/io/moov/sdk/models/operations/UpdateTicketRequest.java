@@ -11,13 +11,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UpdateTicketRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=ticketID")
     private String ticketID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpdateTicket updateTicket;
@@ -50,9 +53,10 @@ public class UpdateTicketRequest {
         return updateTicket;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateTicketRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,7 +76,6 @@ public class UpdateTicketRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class UpdateTicketRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            ticketID,
-            updateTicket);
+            accountID, ticketID, updateTicket);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class UpdateTicketRequest {
                 "ticketID", ticketID,
                 "updateTicket", updateTicket);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String ticketID;
- 
+
         private UpdateTicket updateTicket;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -122,23 +125,25 @@ public class UpdateTicketRequest {
             return this;
         }
 
+
         public Builder ticketID(String ticketID) {
             Utils.checkNotNull(ticketID, "ticketID");
             this.ticketID = ticketID;
             return this;
         }
 
+
         public Builder updateTicket(UpdateTicket updateTicket) {
             Utils.checkNotNull(updateTicket, "updateTicket");
             this.updateTicket = updateTicket;
             return this;
         }
-        
+
         public UpdateTicketRequest build() {
+
             return new UpdateTicketRequest(
-                accountID,
-                ticketID,
-                updateTicket);
+                accountID, ticketID, updateTicket);
         }
+
     }
 }

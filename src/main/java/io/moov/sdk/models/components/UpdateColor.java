@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class UpdateColor {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class UpdateColor {
         return accent;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateColor withAccent(String accent) {
         Utils.checkNotNull(accent, "accent");
@@ -45,13 +47,13 @@ public class UpdateColor {
         return this;
     }
 
+
     public UpdateColor withAccent(Optional<String> accent) {
         Utils.checkNotNull(accent, "accent");
         this.accent = accent;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class UpdateColor {
         return Utils.toString(UpdateColor.class,
                 "accent", accent);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> accent = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accent(String accent) {
             Utils.checkNotNull(accent, "accent");
@@ -96,10 +100,12 @@ public class UpdateColor {
             this.accent = accent;
             return this;
         }
-        
+
         public UpdateColor build() {
+
             return new UpdateColor(
                 accent);
         }
+
     }
 }

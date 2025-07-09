@@ -81,7 +81,7 @@ public class ListSchedulesRequestBuilder {
     public ListSchedulesResponse call() throws Exception {
         
         RequestOperation<ListSchedulesRequest, ListSchedulesResponse> operation
-              = new ListSchedulesOperation( sdkConfiguration);
+              = new ListSchedulesOperation(sdkConfiguration);
         ListSchedulesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

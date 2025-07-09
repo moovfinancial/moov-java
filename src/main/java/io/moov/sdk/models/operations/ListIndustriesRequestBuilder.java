@@ -28,7 +28,7 @@ public class ListIndustriesRequestBuilder {
     public ListIndustriesResponse call() throws Exception {
         
         RequestOperation<ListIndustriesRequest, ListIndustriesResponse> operation
-              = new ListIndustriesOperation( sdkConfiguration);
+              = new ListIndustriesOperation(sdkConfiguration);
         ListIndustriesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

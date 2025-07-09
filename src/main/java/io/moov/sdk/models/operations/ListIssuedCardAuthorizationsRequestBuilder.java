@@ -28,7 +28,7 @@ public class ListIssuedCardAuthorizationsRequestBuilder {
     public ListIssuedCardAuthorizationsResponse call() throws Exception {
         
         RequestOperation<ListIssuedCardAuthorizationsRequest, ListIssuedCardAuthorizationsResponse> operation
-              = new ListIssuedCardAuthorizationsOperation( sdkConfiguration);
+              = new ListIssuedCardAuthorizationsOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

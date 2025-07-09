@@ -73,7 +73,7 @@ public class SearchInstitutionsRequestBuilder {
     public SearchInstitutionsResponse call() throws Exception {
         
         RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
-              = new SearchInstitutionsOperation( sdkConfiguration);
+              = new SearchInstitutionsOperation(sdkConfiguration);
         SearchInstitutionsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

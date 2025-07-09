@@ -21,7 +21,6 @@ public class Avatars {
     Avatars(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Get avatar image for an account using a unique ID.    
      * 
@@ -44,15 +43,14 @@ public class Avatars {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAvatarResponse get(
-            String uniqueID) throws Exception {
+    public GetAvatarResponse get(String uniqueID) throws Exception {
         GetAvatarRequest request =
             GetAvatarRequest
                 .builder()
                 .uniqueID(uniqueID)
                 .build();
         RequestOperation<GetAvatarRequest, GetAvatarResponse> operation
-              = new GetAvatarOperation( sdkConfiguration);
+              = new GetAvatarOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

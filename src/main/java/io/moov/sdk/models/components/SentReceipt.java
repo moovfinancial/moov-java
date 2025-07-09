@@ -11,8 +11,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 
-public class SentReceipt {
 
+public class SentReceipt {
     /**
      * Unique identifier for the receipt.
      */
@@ -68,9 +68,10 @@ public class SentReceipt {
         return sentOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for the receipt.
@@ -99,7 +100,6 @@ public class SentReceipt {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +118,7 @@ public class SentReceipt {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            receiptID,
-            idempotencyKey,
-            sentOn);
+            receiptID, idempotencyKey, sentOn);
     }
     
     @Override
@@ -130,18 +128,20 @@ public class SentReceipt {
                 "idempotencyKey", idempotencyKey,
                 "sentOn", sentOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String receiptID;
- 
+
         private String idempotencyKey;
- 
+
         private OffsetDateTime sentOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for the receipt.
@@ -152,6 +152,7 @@ public class SentReceipt {
             return this;
         }
 
+
         /**
          * The idempotency key used when creating the receipt.
          */
@@ -161,6 +162,7 @@ public class SentReceipt {
             return this;
         }
 
+
         /**
          * When the receipt was sent.
          */
@@ -169,12 +171,12 @@ public class SentReceipt {
             this.sentOn = sentOn;
             return this;
         }
-        
+
         public SentReceipt build() {
+
             return new SentReceipt(
-                receiptID,
-                idempotencyKey,
-                sentOn);
+                receiptID, idempotencyKey, sentOn);
         }
+
     }
 }

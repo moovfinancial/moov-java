@@ -16,6 +16,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class UpdateCardError extends RuntimeException {
 
@@ -23,29 +24,36 @@ public class UpdateCardError extends RuntimeException {
     @JsonProperty("e2ee")
     private Optional<? extends End2EndEncryptionError> e2ee;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("billingAddress")
     private Optional<String> billingAddress;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiration")
     private Optional<String> expiration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardCvv")
     private Optional<String> cardCvv;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardOnFile")
     private Optional<String> cardOnFile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantAccountID")
     private Optional<String> merchantAccountID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("verifyName")
     private Optional<String> verifyName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("holderName")
@@ -81,7 +89,9 @@ public class UpdateCardError extends RuntimeException {
     }
     
     public UpdateCardError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -125,15 +135,17 @@ public class UpdateCardError extends RuntimeException {
         return holderName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateCardError withE2ee(End2EndEncryptionError e2ee) {
         Utils.checkNotNull(e2ee, "e2ee");
         this.e2ee = Optional.ofNullable(e2ee);
         return this;
     }
+
 
     public UpdateCardError withE2ee(Optional<? extends End2EndEncryptionError> e2ee) {
         Utils.checkNotNull(e2ee, "e2ee");
@@ -147,6 +159,7 @@ public class UpdateCardError extends RuntimeException {
         return this;
     }
 
+
     public UpdateCardError withBillingAddress(Optional<String> billingAddress) {
         Utils.checkNotNull(billingAddress, "billingAddress");
         this.billingAddress = billingAddress;
@@ -158,6 +171,7 @@ public class UpdateCardError extends RuntimeException {
         this.expiration = Optional.ofNullable(expiration);
         return this;
     }
+
 
     public UpdateCardError withExpiration(Optional<String> expiration) {
         Utils.checkNotNull(expiration, "expiration");
@@ -171,6 +185,7 @@ public class UpdateCardError extends RuntimeException {
         return this;
     }
 
+
     public UpdateCardError withCardCvv(Optional<String> cardCvv) {
         Utils.checkNotNull(cardCvv, "cardCvv");
         this.cardCvv = cardCvv;
@@ -182,6 +197,7 @@ public class UpdateCardError extends RuntimeException {
         this.cardOnFile = Optional.ofNullable(cardOnFile);
         return this;
     }
+
 
     public UpdateCardError withCardOnFile(Optional<String> cardOnFile) {
         Utils.checkNotNull(cardOnFile, "cardOnFile");
@@ -195,6 +211,7 @@ public class UpdateCardError extends RuntimeException {
         return this;
     }
 
+
     public UpdateCardError withMerchantAccountID(Optional<String> merchantAccountID) {
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
         this.merchantAccountID = merchantAccountID;
@@ -206,6 +223,7 @@ public class UpdateCardError extends RuntimeException {
         this.verifyName = Optional.ofNullable(verifyName);
         return this;
     }
+
 
     public UpdateCardError withVerifyName(Optional<String> verifyName) {
         Utils.checkNotNull(verifyName, "verifyName");
@@ -219,13 +237,13 @@ public class UpdateCardError extends RuntimeException {
         return this;
     }
 
+
     public UpdateCardError withHolderName(Optional<String> holderName) {
         Utils.checkNotNull(holderName, "holderName");
         this.holderName = holderName;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -249,14 +267,9 @@ public class UpdateCardError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            e2ee,
-            billingAddress,
-            expiration,
-            cardCvv,
-            cardOnFile,
-            merchantAccountID,
-            verifyName,
-            holderName);
+            e2ee, billingAddress, expiration,
+            cardCvv, cardOnFile, merchantAccountID,
+            verifyName, holderName);
     }
     
     @Override
@@ -271,28 +284,30 @@ public class UpdateCardError extends RuntimeException {
                 "verifyName", verifyName,
                 "holderName", holderName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends End2EndEncryptionError> e2ee = Optional.empty();
- 
+
         private Optional<String> billingAddress = Optional.empty();
- 
+
         private Optional<String> expiration = Optional.empty();
- 
+
         private Optional<String> cardCvv = Optional.empty();
- 
+
         private Optional<String> cardOnFile = Optional.empty();
- 
+
         private Optional<String> merchantAccountID = Optional.empty();
- 
+
         private Optional<String> verifyName = Optional.empty();
- 
+
         private Optional<String> holderName = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder e2ee(End2EndEncryptionError e2ee) {
             Utils.checkNotNull(e2ee, "e2ee");
@@ -306,6 +321,7 @@ public class UpdateCardError extends RuntimeException {
             return this;
         }
 
+
         public Builder billingAddress(String billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = Optional.ofNullable(billingAddress);
@@ -317,6 +333,7 @@ public class UpdateCardError extends RuntimeException {
             this.billingAddress = billingAddress;
             return this;
         }
+
 
         public Builder expiration(String expiration) {
             Utils.checkNotNull(expiration, "expiration");
@@ -330,6 +347,7 @@ public class UpdateCardError extends RuntimeException {
             return this;
         }
 
+
         public Builder cardCvv(String cardCvv) {
             Utils.checkNotNull(cardCvv, "cardCvv");
             this.cardCvv = Optional.ofNullable(cardCvv);
@@ -341,6 +359,7 @@ public class UpdateCardError extends RuntimeException {
             this.cardCvv = cardCvv;
             return this;
         }
+
 
         public Builder cardOnFile(String cardOnFile) {
             Utils.checkNotNull(cardOnFile, "cardOnFile");
@@ -354,6 +373,7 @@ public class UpdateCardError extends RuntimeException {
             return this;
         }
 
+
         public Builder merchantAccountID(String merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = Optional.ofNullable(merchantAccountID);
@@ -365,6 +385,7 @@ public class UpdateCardError extends RuntimeException {
             this.merchantAccountID = merchantAccountID;
             return this;
         }
+
 
         public Builder verifyName(String verifyName) {
             Utils.checkNotNull(verifyName, "verifyName");
@@ -378,6 +399,7 @@ public class UpdateCardError extends RuntimeException {
             return this;
         }
 
+
         public Builder holderName(String holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = Optional.ofNullable(holderName);
@@ -389,18 +411,15 @@ public class UpdateCardError extends RuntimeException {
             this.holderName = holderName;
             return this;
         }
-        
+
         public UpdateCardError build() {
+
             return new UpdateCardError(
-                e2ee,
-                billingAddress,
-                expiration,
-                cardCvv,
-                cardOnFile,
-                merchantAccountID,
-                verifyName,
-                holderName);
+                e2ee, billingAddress, expiration,
+                cardCvv, cardOnFile, merchantAccountID,
+                verifyName, holderName);
         }
+
     }
 }
 

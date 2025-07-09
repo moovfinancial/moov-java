@@ -41,14 +41,18 @@ public class Transfer extends RuntimeException {
     @JsonProperty("transferID")
     private String transferID;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonProperty("source")
     private TransferSource source;
 
+
     @JsonProperty("destination")
     private TransferDestination destination;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("completedOn")
@@ -66,6 +70,7 @@ public class Transfer extends RuntimeException {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failureReason")
     private Optional<? extends TransferFailureReason> failureReason;
+
 
     @JsonProperty("amount")
     private Amount amount;
@@ -119,41 +124,51 @@ public class Transfer extends RuntimeException {
     @JsonProperty("moovFees")
     private Optional<? extends List<MoovFee>> moovFees;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("groupID")
     private Optional<String> groupID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cancellations")
     private Optional<? extends List<Cancellation>> cancellations;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refundedAmount")
     private Optional<? extends Amount> refundedAmount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refunds")
     private Optional<? extends List<CardAcquiringRefund>> refunds;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disputedAmount")
     private Optional<? extends Amount> disputedAmount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disputes")
     private Optional<? extends List<CardAcquiringDispute>> disputes;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sweepID")
     private Optional<String> sweepID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scheduleID")
     private Optional<String> scheduleID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("occurrenceID")
     private Optional<String> occurrenceID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentLinkCode")
@@ -266,7 +281,15 @@ public class Transfer extends RuntimeException {
             TransferDestination destination,
             TransferStatus status,
             Amount amount) {
-        this(transferID, createdOn, source, destination, Optional.empty(), status, Optional.empty(), amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(transferID, createdOn, source,
+            destination, Optional.empty(), status,
+            Optional.empty(), amount, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -448,9 +471,10 @@ public class Transfer extends RuntimeException {
         return foreignID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Transfer withTransferID(String transferID) {
         Utils.checkNotNull(transferID, "transferID");
@@ -482,6 +506,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     public Transfer withCompletedOn(Optional<OffsetDateTime> completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
         this.completedOn = completedOn;
@@ -505,6 +530,7 @@ public class Transfer extends RuntimeException {
         this.failureReason = Optional.ofNullable(failureReason);
         return this;
     }
+
 
     /**
      * Reason for a transfer's failure.
@@ -530,6 +556,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     /**
      * An optional description of the transfer that is used on receipts and for your own internal use.
      */
@@ -547,6 +574,7 @@ public class Transfer extends RuntimeException {
         this.metadata = Optional.ofNullable(metadata);
         return this;
     }
+
 
     /**
      * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
@@ -566,6 +594,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     /**
      * Total or markup fee.
      */
@@ -583,6 +612,7 @@ public class Transfer extends RuntimeException {
         this.moovFee = Optional.ofNullable(moovFee);
         return this;
     }
+
 
     /**
      * Fees charged to your platform account for transfers.
@@ -602,6 +632,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     /**
      * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
      */
@@ -619,6 +650,7 @@ public class Transfer extends RuntimeException {
         this.moovFeeDetails = Optional.ofNullable(moovFeeDetails);
         return this;
     }
+
 
     /**
      * Processing and pass-through costs that add up to the moovFee.
@@ -638,6 +670,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     /**
      * Fees charged to accounts involved in the transfer.
      */
@@ -653,6 +686,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     public Transfer withGroupID(Optional<String> groupID) {
         Utils.checkNotNull(groupID, "groupID");
         this.groupID = groupID;
@@ -664,6 +698,7 @@ public class Transfer extends RuntimeException {
         this.cancellations = Optional.ofNullable(cancellations);
         return this;
     }
+
 
     public Transfer withCancellations(Optional<? extends List<Cancellation>> cancellations) {
         Utils.checkNotNull(cancellations, "cancellations");
@@ -677,6 +712,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     public Transfer withRefundedAmount(Optional<? extends Amount> refundedAmount) {
         Utils.checkNotNull(refundedAmount, "refundedAmount");
         this.refundedAmount = refundedAmount;
@@ -688,6 +724,7 @@ public class Transfer extends RuntimeException {
         this.refunds = Optional.ofNullable(refunds);
         return this;
     }
+
 
     public Transfer withRefunds(Optional<? extends List<CardAcquiringRefund>> refunds) {
         Utils.checkNotNull(refunds, "refunds");
@@ -701,6 +738,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     public Transfer withDisputedAmount(Optional<? extends Amount> disputedAmount) {
         Utils.checkNotNull(disputedAmount, "disputedAmount");
         this.disputedAmount = disputedAmount;
@@ -712,6 +750,7 @@ public class Transfer extends RuntimeException {
         this.disputes = Optional.ofNullable(disputes);
         return this;
     }
+
 
     public Transfer withDisputes(Optional<? extends List<CardAcquiringDispute>> disputes) {
         Utils.checkNotNull(disputes, "disputes");
@@ -725,6 +764,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     public Transfer withSweepID(Optional<String> sweepID) {
         Utils.checkNotNull(sweepID, "sweepID");
         this.sweepID = sweepID;
@@ -736,6 +776,7 @@ public class Transfer extends RuntimeException {
         this.scheduleID = Optional.ofNullable(scheduleID);
         return this;
     }
+
 
     public Transfer withScheduleID(Optional<String> scheduleID) {
         Utils.checkNotNull(scheduleID, "scheduleID");
@@ -749,6 +790,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     public Transfer withOccurrenceID(Optional<String> occurrenceID) {
         Utils.checkNotNull(occurrenceID, "occurrenceID");
         this.occurrenceID = occurrenceID;
@@ -760,6 +802,7 @@ public class Transfer extends RuntimeException {
         this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
         return this;
     }
+
 
     public Transfer withPaymentLinkCode(Optional<String> paymentLinkCode) {
         Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
@@ -775,6 +818,7 @@ public class Transfer extends RuntimeException {
         this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
         return this;
     }
+
 
     /**
      * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
@@ -794,6 +838,7 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
+
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
@@ -803,7 +848,6 @@ public class Transfer extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -846,33 +890,15 @@ public class Transfer extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID,
-            createdOn,
-            source,
-            destination,
-            completedOn,
-            status,
-            failureReason,
-            amount,
-            description,
-            metadata,
-            facilitatorFee,
-            moovFee,
-            moovFeeDecimal,
-            moovFeeDetails,
-            moovFees,
-            groupID,
-            cancellations,
-            refundedAmount,
-            refunds,
-            disputedAmount,
-            disputes,
-            sweepID,
-            scheduleID,
-            occurrenceID,
-            paymentLinkCode,
-            salesTaxAmount,
-            foreignID);
+            transferID, createdOn, source,
+            destination, completedOn, status,
+            failureReason, amount, description,
+            metadata, facilitatorFee, moovFee,
+            moovFeeDecimal, moovFeeDetails, moovFees,
+            groupID, cancellations, refundedAmount,
+            refunds, disputedAmount, disputes,
+            sweepID, scheduleID, occurrenceID,
+            paymentLinkCode, salesTaxAmount, foreignID);
     }
     
     @Override
@@ -906,66 +932,68 @@ public class Transfer extends RuntimeException {
                 "salesTaxAmount", salesTaxAmount,
                 "foreignID", foreignID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String transferID;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private TransferSource source;
- 
+
         private TransferDestination destination;
- 
+
         private Optional<OffsetDateTime> completedOn = Optional.empty();
- 
+
         private TransferStatus status;
- 
+
         private Optional<? extends TransferFailureReason> failureReason = Optional.empty();
- 
+
         private Amount amount;
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
- 
+
         private Optional<? extends FacilitatorFee> facilitatorFee = Optional.empty();
- 
+
         private Optional<Long> moovFee = Optional.empty();
- 
+
         private Optional<String> moovFeeDecimal = Optional.empty();
- 
+
         private Optional<? extends MoovFeeDetails> moovFeeDetails = Optional.empty();
- 
+
         private Optional<? extends List<MoovFee>> moovFees = Optional.empty();
- 
+
         private Optional<String> groupID = Optional.empty();
- 
+
         private Optional<? extends List<Cancellation>> cancellations = Optional.empty();
- 
+
         private Optional<? extends Amount> refundedAmount = Optional.empty();
- 
+
         private Optional<? extends List<CardAcquiringRefund>> refunds = Optional.empty();
- 
+
         private Optional<? extends Amount> disputedAmount = Optional.empty();
- 
+
         private Optional<? extends List<CardAcquiringDispute>> disputes = Optional.empty();
- 
+
         private Optional<String> sweepID = Optional.empty();
- 
+
         private Optional<String> scheduleID = Optional.empty();
- 
+
         private Optional<String> occurrenceID = Optional.empty();
- 
+
         private Optional<String> paymentLinkCode = Optional.empty();
- 
+
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
- 
+
         private Optional<String> foreignID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
@@ -973,11 +1001,13 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
+
 
         public Builder source(TransferSource source) {
             Utils.checkNotNull(source, "source");
@@ -985,11 +1015,13 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         public Builder destination(TransferDestination destination) {
             Utils.checkNotNull(destination, "destination");
             this.destination = destination;
             return this;
         }
+
 
         public Builder completedOn(OffsetDateTime completedOn) {
             Utils.checkNotNull(completedOn, "completedOn");
@@ -1003,6 +1035,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         /**
          * Status of a transfer.
          */
@@ -1011,6 +1044,7 @@ public class Transfer extends RuntimeException {
             this.status = status;
             return this;
         }
+
 
         /**
          * Reason for a transfer's failure.
@@ -1030,11 +1064,13 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
+
 
         /**
          * An optional description of the transfer that is used on receipts and for your own internal use.
@@ -1054,6 +1090,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         /**
          * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
          */
@@ -1071,6 +1108,7 @@ public class Transfer extends RuntimeException {
             this.metadata = metadata;
             return this;
         }
+
 
         /**
          * Total or markup fee.
@@ -1090,6 +1128,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         /**
          * Fees charged to your platform account for transfers.
          */
@@ -1107,6 +1146,7 @@ public class Transfer extends RuntimeException {
             this.moovFee = moovFee;
             return this;
         }
+
 
         /**
          * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
@@ -1126,6 +1166,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         /**
          * Processing and pass-through costs that add up to the moovFee.
          */
@@ -1143,6 +1184,7 @@ public class Transfer extends RuntimeException {
             this.moovFeeDetails = moovFeeDetails;
             return this;
         }
+
 
         /**
          * Fees charged to accounts involved in the transfer.
@@ -1162,6 +1204,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         public Builder groupID(String groupID) {
             Utils.checkNotNull(groupID, "groupID");
             this.groupID = Optional.ofNullable(groupID);
@@ -1173,6 +1216,7 @@ public class Transfer extends RuntimeException {
             this.groupID = groupID;
             return this;
         }
+
 
         public Builder cancellations(List<Cancellation> cancellations) {
             Utils.checkNotNull(cancellations, "cancellations");
@@ -1186,6 +1230,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         public Builder refundedAmount(Amount refundedAmount) {
             Utils.checkNotNull(refundedAmount, "refundedAmount");
             this.refundedAmount = Optional.ofNullable(refundedAmount);
@@ -1197,6 +1242,7 @@ public class Transfer extends RuntimeException {
             this.refundedAmount = refundedAmount;
             return this;
         }
+
 
         public Builder refunds(List<CardAcquiringRefund> refunds) {
             Utils.checkNotNull(refunds, "refunds");
@@ -1210,6 +1256,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         public Builder disputedAmount(Amount disputedAmount) {
             Utils.checkNotNull(disputedAmount, "disputedAmount");
             this.disputedAmount = Optional.ofNullable(disputedAmount);
@@ -1221,6 +1268,7 @@ public class Transfer extends RuntimeException {
             this.disputedAmount = disputedAmount;
             return this;
         }
+
 
         public Builder disputes(List<CardAcquiringDispute> disputes) {
             Utils.checkNotNull(disputes, "disputes");
@@ -1234,6 +1282,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         public Builder sweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = Optional.ofNullable(sweepID);
@@ -1245,6 +1294,7 @@ public class Transfer extends RuntimeException {
             this.sweepID = sweepID;
             return this;
         }
+
 
         public Builder scheduleID(String scheduleID) {
             Utils.checkNotNull(scheduleID, "scheduleID");
@@ -1258,6 +1308,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         public Builder occurrenceID(String occurrenceID) {
             Utils.checkNotNull(occurrenceID, "occurrenceID");
             this.occurrenceID = Optional.ofNullable(occurrenceID);
@@ -1270,6 +1321,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         public Builder paymentLinkCode(String paymentLinkCode) {
             Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
             this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
@@ -1281,6 +1333,7 @@ public class Transfer extends RuntimeException {
             this.paymentLinkCode = paymentLinkCode;
             return this;
         }
+
 
         /**
          * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
@@ -1300,6 +1353,7 @@ public class Transfer extends RuntimeException {
             return this;
         }
 
+
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
@@ -1317,37 +1371,21 @@ public class Transfer extends RuntimeException {
             this.foreignID = foreignID;
             return this;
         }
-        
+
         public Transfer build() {
+
             return new Transfer(
-                transferID,
-                createdOn,
-                source,
-                destination,
-                completedOn,
-                status,
-                failureReason,
-                amount,
-                description,
-                metadata,
-                facilitatorFee,
-                moovFee,
-                moovFeeDecimal,
-                moovFeeDetails,
-                moovFees,
-                groupID,
-                cancellations,
-                refundedAmount,
-                refunds,
-                disputedAmount,
-                disputes,
-                sweepID,
-                scheduleID,
-                occurrenceID,
-                paymentLinkCode,
-                salesTaxAmount,
-                foreignID);
+                transferID, createdOn, source,
+                destination, completedOn, status,
+                failureReason, amount, description,
+                metadata, facilitatorFee, moovFee,
+                moovFeeDecimal, moovFeeDetails, moovFees,
+                groupID, cancellations, refundedAmount,
+                refunds, disputedAmount, disputes,
+                sweepID, scheduleID, occurrenceID,
+                paymentLinkCode, salesTaxAmount, foreignID);
         }
+
     }
 }
 

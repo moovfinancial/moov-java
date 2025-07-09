@@ -53,7 +53,7 @@ public class ListPartnerPricingRequestBuilder {
     public ListPartnerPricingResponse call() throws Exception {
         
         RequestOperation<ListPartnerPricingRequest, ListPartnerPricingResponse> operation
-              = new ListPartnerPricingOperation( sdkConfiguration);
+              = new ListPartnerPricingOperation(sdkConfiguration);
         ListPartnerPricingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -11,8 +11,8 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 
-public class WireServices {
 
+public class WireServices {
     /**
      * The institution's capability to process standard Fedwire funds transfers.
      */
@@ -68,9 +68,10 @@ public class WireServices {
         return bookEntrySecuritiesTransferStatus;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The institution's capability to process standard Fedwire funds transfers.
@@ -99,7 +100,6 @@ public class WireServices {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +118,7 @@ public class WireServices {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            fundsTransferStatus,
-            fundsSettlementOnlyStatus,
-            bookEntrySecuritiesTransferStatus);
+            fundsTransferStatus, fundsSettlementOnlyStatus, bookEntrySecuritiesTransferStatus);
     }
     
     @Override
@@ -130,18 +128,20 @@ public class WireServices {
                 "fundsSettlementOnlyStatus", fundsSettlementOnlyStatus,
                 "bookEntrySecuritiesTransferStatus", bookEntrySecuritiesTransferStatus);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Boolean fundsTransferStatus;
- 
+
         private Boolean fundsSettlementOnlyStatus;
- 
+
         private Boolean bookEntrySecuritiesTransferStatus;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The institution's capability to process standard Fedwire funds transfers.
@@ -152,6 +152,7 @@ public class WireServices {
             return this;
         }
 
+
         /**
          * The institution's capability for settlement-only transfers.
          */
@@ -161,6 +162,7 @@ public class WireServices {
             return this;
         }
 
+
         /**
          * The institution's capability to handle transfers of securities.
          */
@@ -169,12 +171,12 @@ public class WireServices {
             this.bookEntrySecuritiesTransferStatus = bookEntrySecuritiesTransferStatus;
             return this;
         }
-        
+
         public WireServices build() {
+
             return new WireServices(
-                fundsTransferStatus,
-                fundsSettlementOnlyStatus,
-                bookEntrySecuritiesTransferStatus);
+                fundsTransferStatus, fundsSettlementOnlyStatus, bookEntrySecuritiesTransferStatus);
         }
+
     }
 }

@@ -21,13 +21,13 @@ import java.util.Optional;
  * Each object can be patched independent of patching the other fields.
  */
 public class PatchProfile {
-
     /**
      * Describes the fields available when patching an individual.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("individual")
     private Optional<? extends PatchIndividual> individual;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("business")
@@ -62,9 +62,10 @@ public class PatchProfile {
         return (Optional<PatchBusiness>) business;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Describes the fields available when patching an individual.
@@ -74,6 +75,7 @@ public class PatchProfile {
         this.individual = Optional.ofNullable(individual);
         return this;
     }
+
 
     /**
      * Describes the fields available when patching an individual.
@@ -90,13 +92,13 @@ public class PatchProfile {
         return this;
     }
 
+
     public PatchProfile withBusiness(Optional<? extends PatchBusiness> business) {
         Utils.checkNotNull(business, "business");
         this.business = business;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -114,8 +116,7 @@ public class PatchProfile {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            individual,
-            business);
+            individual, business);
     }
     
     @Override
@@ -124,16 +125,18 @@ public class PatchProfile {
                 "individual", individual,
                 "business", business);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends PatchIndividual> individual = Optional.empty();
- 
+
         private Optional<? extends PatchBusiness> business = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Describes the fields available when patching an individual.
@@ -153,6 +156,7 @@ public class PatchProfile {
             return this;
         }
 
+
         public Builder business(PatchBusiness business) {
             Utils.checkNotNull(business, "business");
             this.business = Optional.ofNullable(business);
@@ -164,11 +168,12 @@ public class PatchProfile {
             this.business = business;
             return this;
         }
-        
+
         public PatchProfile build() {
+
             return new PatchProfile(
-                individual,
-                business);
+                individual, business);
         }
+
     }
 }

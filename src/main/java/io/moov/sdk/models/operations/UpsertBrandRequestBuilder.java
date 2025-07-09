@@ -46,7 +46,7 @@ public class UpsertBrandRequestBuilder {
     public UpsertBrandResponse call() throws Exception {
         
         RequestOperation<UpsertBrandRequest, UpsertBrandResponse> operation
-              = new UpsertBrandOperation( sdkConfiguration);
+              = new UpsertBrandOperation(sdkConfiguration);
         UpsertBrandRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

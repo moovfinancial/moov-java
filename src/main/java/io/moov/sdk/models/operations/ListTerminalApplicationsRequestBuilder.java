@@ -28,7 +28,7 @@ public class ListTerminalApplicationsRequestBuilder {
     public ListTerminalApplicationsResponse call() throws Exception {
         
         RequestOperation<ListTerminalApplicationsRequest, ListTerminalApplicationsResponse> operation
-              = new ListTerminalApplicationsOperation( sdkConfiguration);
+              = new ListTerminalApplicationsOperation(sdkConfiguration);
         ListTerminalApplicationsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

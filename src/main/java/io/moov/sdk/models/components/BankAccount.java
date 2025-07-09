@@ -34,8 +34,10 @@ public class BankAccount {
     @JsonProperty("fingerprint")
     private String fingerprint;
 
+
     @JsonProperty("status")
     private BankAccountStatus status;
+
 
     @JsonProperty("holderName")
     private String holderName;
@@ -46,6 +48,7 @@ public class BankAccount {
     @JsonProperty("holderType")
     private BankAccountHolderType holderType;
 
+
     @JsonProperty("bankName")
     private String bankName;
 
@@ -55,11 +58,14 @@ public class BankAccount {
     @JsonProperty("bankAccountType")
     private BankAccountType bankAccountType;
 
+
     @JsonProperty("routingNumber")
     private String routingNumber;
 
+
     @JsonProperty("lastFourAccountNumber")
     private String lastFourAccountNumber;
+
 
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
@@ -142,7 +148,11 @@ public class BankAccount {
             String routingNumber,
             String lastFourAccountNumber,
             OffsetDateTime updatedOn) {
-        this(bankAccountID, fingerprint, status, holderName, holderType, bankName, bankAccountType, routingNumber, lastFourAccountNumber, updatedOn, Optional.empty(), Optional.empty(), Optional.empty());
+        this(bankAccountID, fingerprint, status,
+            holderName, holderType, bankName,
+            bankAccountType, routingNumber, lastFourAccountNumber,
+            updatedOn, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -236,9 +246,10 @@ public class BankAccount {
         return (Optional<List<BasicPaymentMethod>>) paymentMethods;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BankAccount withBankAccountID(String bankAccountID) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
@@ -320,6 +331,7 @@ public class BankAccount {
         return this;
     }
 
+
     /**
      * The reason the bank account status changed to the current value.
      */
@@ -337,6 +349,7 @@ public class BankAccount {
         this.exceptionDetails = Optional.ofNullable(exceptionDetails);
         return this;
     }
+
 
     /**
      * Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
@@ -359,6 +372,7 @@ public class BankAccount {
         return this;
     }
 
+
     /**
      * Includes any payment methods generated for a newly created bank account, removing the need to
      * call the List Payment Methods endpoint following a successful Create BankAccount request.
@@ -371,7 +385,6 @@ public class BankAccount {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -400,18 +413,10 @@ public class BankAccount {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            bankAccountID,
-            fingerprint,
-            status,
-            holderName,
-            holderType,
-            bankName,
-            bankAccountType,
-            routingNumber,
-            lastFourAccountNumber,
-            updatedOn,
-            statusReason,
-            exceptionDetails,
+            bankAccountID, fingerprint, status,
+            holderName, holderType, bankName,
+            bankAccountType, routingNumber, lastFourAccountNumber,
+            updatedOn, statusReason, exceptionDetails,
             paymentMethods);
     }
     
@@ -432,44 +437,47 @@ public class BankAccount {
                 "exceptionDetails", exceptionDetails,
                 "paymentMethods", paymentMethods);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String bankAccountID;
- 
+
         private String fingerprint;
- 
+
         private BankAccountStatus status;
- 
+
         private String holderName;
- 
+
         private BankAccountHolderType holderType;
- 
+
         private String bankName;
- 
+
         private BankAccountType bankAccountType;
- 
+
         private String routingNumber;
- 
+
         private String lastFourAccountNumber;
- 
+
         private OffsetDateTime updatedOn;
- 
+
         private Optional<? extends BankAccountStatusReason> statusReason = Optional.empty();
- 
+
         private Optional<? extends BankAccountException> exceptionDetails = Optional.empty();
- 
+
         private Optional<? extends List<BasicPaymentMethod>> paymentMethods = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
             this.bankAccountID = bankAccountID;
             return this;
         }
+
 
         /**
          * Once the bank account is linked, we don't reveal the full bank account number.
@@ -482,17 +490,20 @@ public class BankAccount {
             return this;
         }
 
+
         public Builder status(BankAccountStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
+
         public Builder holderName(String holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = holderName;
             return this;
         }
+
 
         /**
          * The type of holder on a funding source.
@@ -503,11 +514,13 @@ public class BankAccount {
             return this;
         }
 
+
         public Builder bankName(String bankName) {
             Utils.checkNotNull(bankName, "bankName");
             this.bankName = bankName;
             return this;
         }
+
 
         /**
          * The bank account type.
@@ -518,11 +531,13 @@ public class BankAccount {
             return this;
         }
 
+
         public Builder routingNumber(String routingNumber) {
             Utils.checkNotNull(routingNumber, "routingNumber");
             this.routingNumber = routingNumber;
             return this;
         }
+
 
         public Builder lastFourAccountNumber(String lastFourAccountNumber) {
             Utils.checkNotNull(lastFourAccountNumber, "lastFourAccountNumber");
@@ -530,11 +545,13 @@ public class BankAccount {
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
+
 
         /**
          * The reason the bank account status changed to the current value.
@@ -554,6 +571,7 @@ public class BankAccount {
             return this;
         }
 
+
         /**
          * Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
          */
@@ -571,6 +589,7 @@ public class BankAccount {
             this.exceptionDetails = exceptionDetails;
             return this;
         }
+
 
         /**
          * Includes any payment methods generated for a newly created bank account, removing the need to
@@ -595,22 +614,16 @@ public class BankAccount {
             this.paymentMethods = paymentMethods;
             return this;
         }
-        
+
         public BankAccount build() {
+
             return new BankAccount(
-                bankAccountID,
-                fingerprint,
-                status,
-                holderName,
-                holderType,
-                bankName,
-                bankAccountType,
-                routingNumber,
-                lastFourAccountNumber,
-                updatedOn,
-                statusReason,
-                exceptionDetails,
+                bankAccountID, fingerprint, status,
+                holderName, holderType, bankName,
+                bankAccountType, routingNumber, lastFourAccountNumber,
+                updatedOn, statusReason, exceptionDetails,
                 paymentMethods);
         }
+
     }
 }

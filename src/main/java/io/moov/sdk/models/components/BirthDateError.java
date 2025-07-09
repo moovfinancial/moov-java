@@ -13,15 +13,18 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class BirthDateError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("day")
     private Optional<String> day;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("month")
     private Optional<String> month;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
@@ -59,15 +62,17 @@ public class BirthDateError {
         return year;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BirthDateError withDay(String day) {
         Utils.checkNotNull(day, "day");
         this.day = Optional.ofNullable(day);
         return this;
     }
+
 
     public BirthDateError withDay(Optional<String> day) {
         Utils.checkNotNull(day, "day");
@@ -81,6 +86,7 @@ public class BirthDateError {
         return this;
     }
 
+
     public BirthDateError withMonth(Optional<String> month) {
         Utils.checkNotNull(month, "month");
         this.month = month;
@@ -93,13 +99,13 @@ public class BirthDateError {
         return this;
     }
 
+
     public BirthDateError withYear(Optional<String> year) {
         Utils.checkNotNull(year, "year");
         this.year = year;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +124,7 @@ public class BirthDateError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            day,
-            month,
-            year);
+            day, month, year);
     }
     
     @Override
@@ -130,18 +134,20 @@ public class BirthDateError {
                 "month", month,
                 "year", year);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> day = Optional.empty();
- 
+
         private Optional<String> month = Optional.empty();
- 
+
         private Optional<String> year = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder day(String day) {
             Utils.checkNotNull(day, "day");
@@ -155,6 +161,7 @@ public class BirthDateError {
             return this;
         }
 
+
         public Builder month(String month) {
             Utils.checkNotNull(month, "month");
             this.month = Optional.ofNullable(month);
@@ -167,6 +174,7 @@ public class BirthDateError {
             return this;
         }
 
+
         public Builder year(String year) {
             Utils.checkNotNull(year, "year");
             this.year = Optional.ofNullable(year);
@@ -178,12 +186,12 @@ public class BirthDateError {
             this.year = year;
             return this;
         }
-        
+
         public BirthDateError build() {
+
             return new BirthDateError(
-                day,
-                month,
-                year);
+                day, month, year);
         }
+
     }
 }

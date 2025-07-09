@@ -15,13 +15,16 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
+
 public class ListPartnerPricingAgreementsRequest {
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -59,7 +62,8 @@ public class ListPartnerPricingAgreementsRequest {
     
     public ListPartnerPricingAgreementsRequest(
             String accountID) {
-        this(Optional.empty(), Optional.empty(), accountID, Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), accountID,
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -95,15 +99,17 @@ public class ListPartnerPricingAgreementsRequest {
         return (Optional<List<FeePlanAgreementStatus>>) status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListPartnerPricingAgreementsRequest withSkip(long skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = Optional.ofNullable(skip);
         return this;
     }
+
 
     public ListPartnerPricingAgreementsRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
@@ -116,6 +122,7 @@ public class ListPartnerPricingAgreementsRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public ListPartnerPricingAgreementsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
@@ -138,6 +145,7 @@ public class ListPartnerPricingAgreementsRequest {
         return this;
     }
 
+
     /**
      * A comma-separated list of agreement IDs to filter the results by.
      */
@@ -156,6 +164,7 @@ public class ListPartnerPricingAgreementsRequest {
         return this;
     }
 
+
     /**
      * A comma-separated list of statuses to filter the results by.
      */
@@ -165,7 +174,6 @@ public class ListPartnerPricingAgreementsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -186,11 +194,8 @@ public class ListPartnerPricingAgreementsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            skip,
-            count,
-            accountID,
-            agreementID,
-            status);
+            skip, count, accountID,
+            agreementID, status);
     }
     
     @Override
@@ -202,22 +207,24 @@ public class ListPartnerPricingAgreementsRequest {
                 "agreementID", agreementID,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private String accountID;
- 
+
         private Optional<? extends List<String>> agreementID = Optional.empty();
- 
+
         private Optional<? extends List<FeePlanAgreementStatus>> status = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -231,6 +238,7 @@ public class ListPartnerPricingAgreementsRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -243,11 +251,13 @@ public class ListPartnerPricingAgreementsRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * A comma-separated list of agreement IDs to filter the results by.
@@ -267,6 +277,7 @@ public class ListPartnerPricingAgreementsRequest {
             return this;
         }
 
+
         /**
          * A comma-separated list of statuses to filter the results by.
          */
@@ -284,14 +295,13 @@ public class ListPartnerPricingAgreementsRequest {
             this.status = status;
             return this;
         }
-        
+
         public ListPartnerPricingAgreementsRequest build() {
+
             return new ListPartnerPricingAgreementsRequest(
-                skip,
-                count,
-                accountID,
-                agreementID,
-                status);
+                skip, count, accountID,
+                agreementID, status);
         }
+
     }
 }

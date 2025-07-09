@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class Account {
 
+public class Account {
     /**
      * Unique identifier for this account.
      */
@@ -36,6 +36,7 @@ public class Account {
      */
     @JsonProperty("accountType")
     private AccountType accountType;
+
 
     @JsonProperty("displayName")
     private String displayName;
@@ -59,6 +60,7 @@ public class Account {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("termsOfService")
     private Optional<? extends TermsOfService> termsOfService;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("capabilities")
@@ -92,11 +94,14 @@ public class Account {
     @JsonProperty("settings")
     private Optional<? extends Settings> settings;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
 
+
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disconnectedOn")
@@ -160,7 +165,11 @@ public class Account {
             Verification verification,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(accountID, mode, accountType, displayName, profile, Optional.empty(), Optional.empty(), Optional.empty(), verification, Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn, Optional.empty());
+        this(accountID, mode, accountType,
+            displayName, profile, Optional.empty(),
+            Optional.empty(), Optional.empty(), verification,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            createdOn, updatedOn, Optional.empty());
     }
 
     /**
@@ -274,9 +283,10 @@ public class Account {
         return disconnectedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for this account.
@@ -329,6 +339,7 @@ public class Account {
         return this;
     }
 
+
     /**
      * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
      */
@@ -347,6 +358,7 @@ public class Account {
         return this;
     }
 
+
     /**
      * Describes the acceptance of the Terms of Service.
      */
@@ -361,6 +373,7 @@ public class Account {
         this.capabilities = Optional.ofNullable(capabilities);
         return this;
     }
+
 
     public Account withCapabilities(Optional<? extends List<AccountCapability>> capabilities) {
         Utils.checkNotNull(capabilities, "capabilities");
@@ -386,6 +399,7 @@ public class Account {
         return this;
     }
 
+
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
@@ -405,6 +419,7 @@ public class Account {
         return this;
     }
 
+
     /**
      * User-provided information that can be displayed on credit card transactions for customers to use when
      * contacting a customer support team. This data is only allowed on a business account.
@@ -423,6 +438,7 @@ public class Account {
         this.settings = Optional.ofNullable(settings);
         return this;
     }
+
 
     /**
      * User provided settings to manage an account.
@@ -451,13 +467,13 @@ public class Account {
         return this;
     }
 
+
     public Account withDisconnectedOn(Optional<OffsetDateTime> disconnectedOn) {
         Utils.checkNotNull(disconnectedOn, "disconnectedOn");
         this.disconnectedOn = disconnectedOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -488,21 +504,11 @@ public class Account {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            mode,
-            accountType,
-            displayName,
-            profile,
-            metadata,
-            termsOfService,
-            capabilities,
-            verification,
-            foreignID,
-            customerSupport,
-            settings,
-            createdOn,
-            updatedOn,
-            disconnectedOn);
+            accountID, mode, accountType,
+            displayName, profile, metadata,
+            termsOfService, capabilities, verification,
+            foreignID, customerSupport, settings,
+            createdOn, updatedOn, disconnectedOn);
     }
     
     @Override
@@ -524,42 +530,44 @@ public class Account {
                 "updatedOn", updatedOn,
                 "disconnectedOn", disconnectedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Mode mode;
- 
+
         private AccountType accountType;
- 
+
         private String displayName;
- 
+
         private Profile profile;
- 
+
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
- 
+
         private Optional<? extends TermsOfService> termsOfService = Optional.empty();
- 
+
         private Optional<? extends List<AccountCapability>> capabilities = Optional.empty();
- 
+
         private Verification verification;
- 
+
         private Optional<String> foreignID = Optional.empty();
- 
+
         private Optional<? extends CustomerSupport> customerSupport = Optional.empty();
- 
+
         private Optional<? extends Settings> settings = Optional.empty();
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
- 
+
         private Optional<OffsetDateTime> disconnectedOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for this account.
@@ -570,6 +578,7 @@ public class Account {
             return this;
         }
 
+
         /**
          * The operating mode for an account.
          */
@@ -578,6 +587,7 @@ public class Account {
             this.mode = mode;
             return this;
         }
+
 
         /**
          * The type of entity represented by this account.
@@ -588,11 +598,13 @@ public class Account {
             return this;
         }
 
+
         public Builder displayName(String displayName) {
             Utils.checkNotNull(displayName, "displayName");
             this.displayName = displayName;
             return this;
         }
+
 
         /**
          * Describes a Moov account profile. A profile will have a business or an individual, depending on the account's type.
@@ -602,6 +614,7 @@ public class Account {
             this.profile = profile;
             return this;
         }
+
 
         /**
          * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
@@ -621,6 +634,7 @@ public class Account {
             return this;
         }
 
+
         /**
          * Describes the acceptance of the Terms of Service.
          */
@@ -639,6 +653,7 @@ public class Account {
             return this;
         }
 
+
         public Builder capabilities(List<AccountCapability> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = Optional.ofNullable(capabilities);
@@ -651,6 +666,7 @@ public class Account {
             return this;
         }
 
+
         /**
          * Describes identity verification status and relevant identity verification documents.
          */
@@ -659,6 +675,7 @@ public class Account {
             this.verification = verification;
             return this;
         }
+
 
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
@@ -677,6 +694,7 @@ public class Account {
             this.foreignID = foreignID;
             return this;
         }
+
 
         /**
          * User-provided information that can be displayed on credit card transactions for customers to use when
@@ -698,6 +716,7 @@ public class Account {
             return this;
         }
 
+
         /**
          * User provided settings to manage an account.
          */
@@ -716,17 +735,20 @@ public class Account {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
+
 
         public Builder disconnectedOn(OffsetDateTime disconnectedOn) {
             Utils.checkNotNull(disconnectedOn, "disconnectedOn");
@@ -739,24 +761,16 @@ public class Account {
             this.disconnectedOn = disconnectedOn;
             return this;
         }
-        
+
         public Account build() {
+
             return new Account(
-                accountID,
-                mode,
-                accountType,
-                displayName,
-                profile,
-                metadata,
-                termsOfService,
-                capabilities,
-                verification,
-                foreignID,
-                customerSupport,
-                settings,
-                createdOn,
-                updatedOn,
-                disconnectedOn);
+                accountID, mode, accountType,
+                displayName, profile, metadata,
+                termsOfService, capabilities, verification,
+                foreignID, customerSupport, settings,
+                createdOn, updatedOn, disconnectedOn);
         }
+
     }
 }

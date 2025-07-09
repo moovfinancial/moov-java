@@ -46,7 +46,7 @@ public class DisableCapabilityRequestBuilder {
     public DisableCapabilityResponse call() throws Exception {
         
         RequestOperation<DisableCapabilityRequest, DisableCapabilityResponse> operation
-              = new DisableCapabilityOperation( sdkConfiguration);
+              = new DisableCapabilityOperation(sdkConfiguration);
         DisableCapabilityRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

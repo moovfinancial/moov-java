@@ -13,8 +13,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class InitiateBankAccountVerificationRequest {
 
+public class InitiateBankAccountVerificationRequest {
     /**
      * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
      * 
@@ -23,8 +23,10 @@ public class InitiateBankAccountVerificationRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
     private Optional<? extends BankAccountWaitFor> xWaitFor;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=bankAccountID")
     private String bankAccountID;
@@ -69,9 +71,10 @@ public class InitiateBankAccountVerificationRequest {
         return bankAccountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
@@ -83,6 +86,7 @@ public class InitiateBankAccountVerificationRequest {
         this.xWaitFor = Optional.ofNullable(xWaitFor);
         return this;
     }
+
 
     /**
      * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
@@ -107,7 +111,6 @@ public class InitiateBankAccountVerificationRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -126,9 +129,7 @@ public class InitiateBankAccountVerificationRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            xWaitFor,
-            accountID,
-            bankAccountID);
+            xWaitFor, accountID, bankAccountID);
     }
     
     @Override
@@ -138,18 +139,20 @@ public class InitiateBankAccountVerificationRequest {
                 "accountID", accountID,
                 "bankAccountID", bankAccountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends BankAccountWaitFor> xWaitFor = Optional.empty();
- 
+
         private String accountID;
- 
+
         private String bankAccountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
@@ -173,23 +176,25 @@ public class InitiateBankAccountVerificationRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
 
+
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
             this.bankAccountID = bankAccountID;
             return this;
         }
-        
+
         public InitiateBankAccountVerificationRequest build() {
+
             return new InitiateBankAccountVerificationRequest(
-                xWaitFor,
-                accountID,
-                bankAccountID);
+                xWaitFor, accountID, bankAccountID);
         }
+
     }
 }

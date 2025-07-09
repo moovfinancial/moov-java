@@ -16,10 +16,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 public class CreateAccount {
 
     @JsonProperty("accountType")
     private CreateAccountType accountType;
+
 
     @JsonProperty("profile")
     private CreateProfile profile;
@@ -30,6 +32,7 @@ public class CreateAccount {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
     private Optional<? extends Map<String, String>> metadata;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("termsOfService")
@@ -56,6 +59,7 @@ public class CreateAccount {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("settings")
     private Optional<? extends Settings> settings;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("capabilities")
@@ -102,7 +106,9 @@ public class CreateAccount {
     public CreateAccount(
             CreateAccountType accountType,
             CreateProfile profile) {
-        this(accountType, profile, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountType, profile, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -172,9 +178,10 @@ public class CreateAccount {
         return (Optional<Mode>) mode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateAccount withAccountType(CreateAccountType accountType) {
         Utils.checkNotNull(accountType, "accountType");
@@ -197,6 +204,7 @@ public class CreateAccount {
         return this;
     }
 
+
     /**
      * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
      */
@@ -212,6 +220,7 @@ public class CreateAccount {
         return this;
     }
 
+
     public CreateAccount withTermsOfService(Optional<? extends CreateAccountTermsOfService> termsOfService) {
         Utils.checkNotNull(termsOfService, "termsOfService");
         this.termsOfService = termsOfService;
@@ -226,6 +235,7 @@ public class CreateAccount {
         this.foreignID = Optional.ofNullable(foreignID);
         return this;
     }
+
 
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
@@ -246,6 +256,7 @@ public class CreateAccount {
         return this;
     }
 
+
     /**
      * User-provided information that can be displayed on credit card transactions for customers to use when
      * contacting a customer support team. This data is only allowed on a business account.
@@ -265,6 +276,7 @@ public class CreateAccount {
         return this;
     }
 
+
     /**
      * User provided settings to manage an account.
      */
@@ -279,6 +291,7 @@ public class CreateAccount {
         this.capabilities = Optional.ofNullable(capabilities);
         return this;
     }
+
 
     public CreateAccount withCapabilities(Optional<? extends List<CapabilityID>> capabilities) {
         Utils.checkNotNull(capabilities, "capabilities");
@@ -295,6 +308,7 @@ public class CreateAccount {
         return this;
     }
 
+
     /**
      * The operating mode for an account.
      */
@@ -304,7 +318,6 @@ public class CreateAccount {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -329,15 +342,9 @@ public class CreateAccount {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountType,
-            profile,
-            metadata,
-            termsOfService,
-            foreignID,
-            customerSupport,
-            settings,
-            capabilities,
-            mode);
+            accountType, profile, metadata,
+            termsOfService, foreignID, customerSupport,
+            settings, capabilities, mode);
     }
     
     @Override
@@ -353,30 +360,32 @@ public class CreateAccount {
                 "capabilities", capabilities,
                 "mode", mode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private CreateAccountType accountType;
- 
+
         private CreateProfile profile;
- 
+
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
- 
+
         private Optional<? extends CreateAccountTermsOfService> termsOfService = Optional.empty();
- 
+
         private Optional<String> foreignID = Optional.empty();
- 
+
         private Optional<? extends CustomerSupport> customerSupport = Optional.empty();
- 
+
         private Optional<? extends Settings> settings = Optional.empty();
- 
+
         private Optional<? extends List<CapabilityID>> capabilities = Optional.empty();
- 
+
         private Optional<? extends Mode> mode = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountType(CreateAccountType accountType) {
             Utils.checkNotNull(accountType, "accountType");
@@ -384,11 +393,13 @@ public class CreateAccount {
             return this;
         }
 
+
         public Builder profile(CreateProfile profile) {
             Utils.checkNotNull(profile, "profile");
             this.profile = profile;
             return this;
         }
+
 
         /**
          * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
@@ -408,6 +419,7 @@ public class CreateAccount {
             return this;
         }
 
+
         public Builder termsOfService(CreateAccountTermsOfService termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
             this.termsOfService = Optional.ofNullable(termsOfService);
@@ -419,6 +431,7 @@ public class CreateAccount {
             this.termsOfService = termsOfService;
             return this;
         }
+
 
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
@@ -437,6 +450,7 @@ public class CreateAccount {
             this.foreignID = foreignID;
             return this;
         }
+
 
         /**
          * User-provided information that can be displayed on credit card transactions for customers to use when
@@ -458,6 +472,7 @@ public class CreateAccount {
             return this;
         }
 
+
         /**
          * User provided settings to manage an account.
          */
@@ -476,6 +491,7 @@ public class CreateAccount {
             return this;
         }
 
+
         public Builder capabilities(List<CapabilityID> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = Optional.ofNullable(capabilities);
@@ -487,6 +503,7 @@ public class CreateAccount {
             this.capabilities = capabilities;
             return this;
         }
+
 
         /**
          * The operating mode for an account.
@@ -505,18 +522,14 @@ public class CreateAccount {
             this.mode = mode;
             return this;
         }
-        
+
         public CreateAccount build() {
+
             return new CreateAccount(
-                accountType,
-                profile,
-                metadata,
-                termsOfService,
-                foreignID,
-                customerSupport,
-                settings,
-                capabilities,
-                mode);
+                accountType, profile, metadata,
+                termsOfService, foreignID, customerSupport,
+                settings, capabilities, mode);
         }
+
     }
 }

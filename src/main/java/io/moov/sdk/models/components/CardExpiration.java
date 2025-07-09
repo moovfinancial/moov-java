@@ -20,6 +20,7 @@ public class CardExpiration {
     @JsonProperty("month")
     private String month;
 
+
     @JsonProperty("year")
     private String year;
 
@@ -43,9 +44,10 @@ public class CardExpiration {
         return year;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardExpiration withMonth(String month) {
         Utils.checkNotNull(month, "month");
@@ -59,7 +61,6 @@ public class CardExpiration {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,8 +78,7 @@ public class CardExpiration {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            month,
-            year);
+            month, year);
     }
     
     @Override
@@ -87,16 +87,18 @@ public class CardExpiration {
                 "month", month,
                 "year", year);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String month;
- 
+
         private String year;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder month(String month) {
             Utils.checkNotNull(month, "month");
@@ -104,16 +106,18 @@ public class CardExpiration {
             return this;
         }
 
+
         public Builder year(String year) {
             Utils.checkNotNull(year, "year");
             this.year = year;
             return this;
         }
-        
+
         public CardExpiration build() {
+
             return new CardExpiration(
-                month,
-                year);
+                month, year);
         }
+
     }
 }

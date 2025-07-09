@@ -37,7 +37,7 @@ public class ListFilesRequestBuilder {
     public ListFilesResponse call() throws Exception {
         
         RequestOperation<ListFilesRequest, ListFilesResponse> operation
-              = new ListFilesOperation( sdkConfiguration);
+              = new ListFilesOperation(sdkConfiguration);
         ListFilesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

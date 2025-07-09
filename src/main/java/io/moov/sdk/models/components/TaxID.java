@@ -32,9 +32,10 @@ public class TaxID {
         return ein;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TaxID withEin(Ein ein) {
         Utils.checkNotNull(ein, "ein");
@@ -42,7 +43,6 @@ public class TaxID {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -67,24 +67,28 @@ public class TaxID {
         return Utils.toString(TaxID.class,
                 "ein", ein);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Ein ein;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ein(Ein ein) {
             Utils.checkNotNull(ein, "ein");
             this.ein = ein;
             return this;
         }
-        
+
         public TaxID build() {
+
             return new TaxID(
                 ein);
         }
+
     }
 }

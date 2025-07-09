@@ -21,12 +21,12 @@ import java.util.Optional;
  * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
  */
 public class SweepConfigPaymentMethod {
-
     /**
      * ID of the payment method.
      */
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disabledOn")
@@ -60,9 +60,10 @@ public class SweepConfigPaymentMethod {
         return disabledOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the payment method.
@@ -79,13 +80,13 @@ public class SweepConfigPaymentMethod {
         return this;
     }
 
+
     public SweepConfigPaymentMethod withDisabledOn(Optional<OffsetDateTime> disabledOn) {
         Utils.checkNotNull(disabledOn, "disabledOn");
         this.disabledOn = disabledOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -103,8 +104,7 @@ public class SweepConfigPaymentMethod {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            disabledOn);
+            paymentMethodID, disabledOn);
     }
     
     @Override
@@ -113,16 +113,18 @@ public class SweepConfigPaymentMethod {
                 "paymentMethodID", paymentMethodID,
                 "disabledOn", disabledOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private Optional<OffsetDateTime> disabledOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the payment method.
@@ -132,6 +134,7 @@ public class SweepConfigPaymentMethod {
             this.paymentMethodID = paymentMethodID;
             return this;
         }
+
 
         public Builder disabledOn(OffsetDateTime disabledOn) {
             Utils.checkNotNull(disabledOn, "disabledOn");
@@ -144,11 +147,12 @@ public class SweepConfigPaymentMethod {
             this.disabledOn = disabledOn;
             return this;
         }
-        
+
         public SweepConfigPaymentMethod build() {
+
             return new SweepConfigPaymentMethod(
-                paymentMethodID,
-                disabledOn);
+                paymentMethodID, disabledOn);
         }
+
     }
 }

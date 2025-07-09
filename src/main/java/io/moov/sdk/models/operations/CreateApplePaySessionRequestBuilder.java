@@ -46,7 +46,7 @@ public class CreateApplePaySessionRequestBuilder {
     public CreateApplePaySessionResponse call() throws Exception {
         
         RequestOperation<CreateApplePaySessionRequest, CreateApplePaySessionResponse> operation
-              = new CreateApplePaySessionOperation( sdkConfiguration);
+              = new CreateApplePaySessionOperation(sdkConfiguration);
         CreateApplePaySessionRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

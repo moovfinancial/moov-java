@@ -12,8 +12,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class SearchInstitutionsRequest {
 
+public class SearchInstitutionsRequest {
     /**
      * Name of the financial institution. Either `name` or `routingNumber` is required.
      */
@@ -73,9 +73,10 @@ public class SearchInstitutionsRequest {
         return limit;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Name of the financial institution. Either `name` or `routingNumber` is required.
@@ -85,6 +86,7 @@ public class SearchInstitutionsRequest {
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     /**
      * Name of the financial institution. Either `name` or `routingNumber` is required.
@@ -104,6 +106,7 @@ public class SearchInstitutionsRequest {
         return this;
     }
 
+
     /**
      * Routing number for a financial institution. Either `routingNumber` or `name` is required.
      */
@@ -122,6 +125,7 @@ public class SearchInstitutionsRequest {
         return this;
     }
 
+
     /**
      * Maximum results returned by a search.
      */
@@ -131,7 +135,6 @@ public class SearchInstitutionsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -150,9 +153,7 @@ public class SearchInstitutionsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            routingNumber,
-            limit);
+            name, routingNumber, limit);
     }
     
     @Override
@@ -162,18 +163,20 @@ public class SearchInstitutionsRequest {
                 "routingNumber", routingNumber,
                 "limit", limit);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<String> routingNumber = Optional.empty();
- 
+
         private Optional<Long> limit = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Name of the financial institution. Either `name` or `routingNumber` is required.
@@ -193,6 +196,7 @@ public class SearchInstitutionsRequest {
             return this;
         }
 
+
         /**
          * Routing number for a financial institution. Either `routingNumber` or `name` is required.
          */
@@ -211,6 +215,7 @@ public class SearchInstitutionsRequest {
             return this;
         }
 
+
         /**
          * Maximum results returned by a search.
          */
@@ -228,12 +233,12 @@ public class SearchInstitutionsRequest {
             this.limit = limit;
             return this;
         }
-        
+
         public SearchInstitutionsRequest build() {
+
             return new SearchInstitutionsRequest(
-                name,
-                routingNumber,
-                limit);
+                name, routingNumber, limit);
         }
+
     }
 }

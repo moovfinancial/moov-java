@@ -45,7 +45,7 @@ public class AcceptDisputeRequestBuilder {
     public AcceptDisputeResponse call() throws Exception {
         
         RequestOperation<AcceptDisputeRequest, AcceptDisputeResponse> operation
-              = new AcceptDisputeOperation( sdkConfiguration);
+              = new AcceptDisputeOperation(sdkConfiguration);
         AcceptDisputeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

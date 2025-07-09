@@ -16,8 +16,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class ReceiptResponse {
 
+public class ReceiptResponse {
     /**
      * Unique identifier for the receipt request.
      */
@@ -128,7 +128,10 @@ public class ReceiptResponse {
             String receiptID,
             String createdBy,
             ReceiptKind kind) {
-        this(receiptID, createdBy, Optional.empty(), kind, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(receiptID, createdBy, Optional.empty(),
+            kind, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -217,9 +220,10 @@ public class ReceiptResponse {
         return (Optional<List<SentReceipt>>) sentFor;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for the receipt request.
@@ -247,6 +251,7 @@ public class ReceiptResponse {
         this.disabledOn = Optional.ofNullable(disabledOn);
         return this;
     }
+
 
     /**
      * The date and time the receipt was disabled.
@@ -276,6 +281,7 @@ public class ReceiptResponse {
         return this;
     }
 
+
     /**
      * The email address the receipt is sent to.
      * Either email or emailAccountID will be in the response, but not both.
@@ -295,6 +301,7 @@ public class ReceiptResponse {
         this.emailAccountID = Optional.ofNullable(emailAccountID);
         return this;
     }
+
 
     /**
      * The accountID the receipt is sent to.
@@ -316,6 +323,7 @@ public class ReceiptResponse {
         return this;
     }
 
+
     /**
      * The ID of the transfer associated with this receipt.
      * Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
@@ -335,6 +343,7 @@ public class ReceiptResponse {
         this.forScheduleID = Optional.ofNullable(forScheduleID);
         return this;
     }
+
 
     /**
      * The ID of the schedule associated with this receipt.
@@ -356,6 +365,7 @@ public class ReceiptResponse {
         return this;
     }
 
+
     /**
      * The ID of the schedule occurrence associated with this receipt.
      * Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
@@ -375,6 +385,7 @@ public class ReceiptResponse {
         return this;
     }
 
+
     /**
      * The list of receipts that have been sent.
      */
@@ -384,7 +395,6 @@ public class ReceiptResponse {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -410,15 +420,9 @@ public class ReceiptResponse {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            receiptID,
-            createdBy,
-            disabledOn,
-            kind,
-            email,
-            emailAccountID,
-            forTransferID,
-            forScheduleID,
-            forOccurrenceID,
+            receiptID, createdBy, disabledOn,
+            kind, email, emailAccountID,
+            forTransferID, forScheduleID, forOccurrenceID,
             sentFor);
     }
     
@@ -436,32 +440,34 @@ public class ReceiptResponse {
                 "forOccurrenceID", forOccurrenceID,
                 "sentFor", sentFor);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String receiptID;
- 
+
         private String createdBy;
- 
+
         private Optional<OffsetDateTime> disabledOn = Optional.empty();
- 
+
         private ReceiptKind kind;
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<String> emailAccountID = Optional.empty();
- 
+
         private Optional<String> forTransferID = Optional.empty();
- 
+
         private Optional<String> forScheduleID = Optional.empty();
- 
+
         private Optional<String> forOccurrenceID = Optional.empty();
- 
+
         private Optional<? extends List<SentReceipt>> sentFor = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for the receipt request.
@@ -472,6 +478,7 @@ public class ReceiptResponse {
             return this;
         }
 
+
         /**
          * AccountID for which the receipt request was created.
          */
@@ -480,6 +487,7 @@ public class ReceiptResponse {
             this.createdBy = createdBy;
             return this;
         }
+
 
         /**
          * The date and time the receipt was disabled.
@@ -499,6 +507,7 @@ public class ReceiptResponse {
             return this;
         }
 
+
         /**
          * The type of receipt.
          */
@@ -507,6 +516,7 @@ public class ReceiptResponse {
             this.kind = kind;
             return this;
         }
+
 
         /**
          * The email address the receipt is sent to.
@@ -528,6 +538,7 @@ public class ReceiptResponse {
             return this;
         }
 
+
         /**
          * The accountID the receipt is sent to.
          * Either email or emailAccountID will be in the response, but not both.
@@ -547,6 +558,7 @@ public class ReceiptResponse {
             this.emailAccountID = emailAccountID;
             return this;
         }
+
 
         /**
          * The ID of the transfer associated with this receipt.
@@ -568,6 +580,7 @@ public class ReceiptResponse {
             return this;
         }
 
+
         /**
          * The ID of the schedule associated with this receipt.
          * Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
@@ -587,6 +600,7 @@ public class ReceiptResponse {
             this.forScheduleID = forScheduleID;
             return this;
         }
+
 
         /**
          * The ID of the schedule occurrence associated with this receipt.
@@ -608,6 +622,7 @@ public class ReceiptResponse {
             return this;
         }
 
+
         /**
          * The list of receipts that have been sent.
          */
@@ -625,19 +640,15 @@ public class ReceiptResponse {
             this.sentFor = sentFor;
             return this;
         }
-        
+
         public ReceiptResponse build() {
+
             return new ReceiptResponse(
-                receiptID,
-                createdBy,
-                disabledOn,
-                kind,
-                email,
-                emailAccountID,
-                forTransferID,
-                forScheduleID,
-                forOccurrenceID,
+                receiptID, createdBy, disabledOn,
+                kind, email, emailAccountID,
+                forTransferID, forScheduleID, forOccurrenceID,
                 sentFor);
         }
+
     }
 }

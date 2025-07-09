@@ -45,7 +45,7 @@ public class GetPaymentMethodRequestBuilder {
     public GetPaymentMethodResponse call() throws Exception {
         
         RequestOperation<GetPaymentMethodRequest, GetPaymentMethodResponse> operation
-              = new GetPaymentMethodOperation( sdkConfiguration);
+              = new GetPaymentMethodOperation(sdkConfiguration);
         GetPaymentMethodRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

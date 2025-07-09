@@ -25,13 +25,16 @@ public class AccountNameVerification {
     @JsonProperty("firstName")
     private Optional<? extends CardVerificationResult> firstName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastName")
     private Optional<? extends CardVerificationResult> lastName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("middleName")
     private Optional<? extends CardVerificationResult> middleName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fullName")
@@ -54,7 +57,8 @@ public class AccountNameVerification {
     }
     
     public AccountNameVerification() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -81,15 +85,17 @@ public class AccountNameVerification {
         return (Optional<CardVerificationResult>) fullName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AccountNameVerification withFirstName(CardVerificationResult firstName) {
         Utils.checkNotNull(firstName, "firstName");
         this.firstName = Optional.ofNullable(firstName);
         return this;
     }
+
 
     public AccountNameVerification withFirstName(Optional<? extends CardVerificationResult> firstName) {
         Utils.checkNotNull(firstName, "firstName");
@@ -103,6 +109,7 @@ public class AccountNameVerification {
         return this;
     }
 
+
     public AccountNameVerification withLastName(Optional<? extends CardVerificationResult> lastName) {
         Utils.checkNotNull(lastName, "lastName");
         this.lastName = lastName;
@@ -114,6 +121,7 @@ public class AccountNameVerification {
         this.middleName = Optional.ofNullable(middleName);
         return this;
     }
+
 
     public AccountNameVerification withMiddleName(Optional<? extends CardVerificationResult> middleName) {
         Utils.checkNotNull(middleName, "middleName");
@@ -127,13 +135,13 @@ public class AccountNameVerification {
         return this;
     }
 
+
     public AccountNameVerification withFullName(Optional<? extends CardVerificationResult> fullName) {
         Utils.checkNotNull(fullName, "fullName");
         this.fullName = fullName;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -153,9 +161,7 @@ public class AccountNameVerification {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            firstName,
-            lastName,
-            middleName,
+            firstName, lastName, middleName,
             fullName);
     }
     
@@ -167,20 +173,22 @@ public class AccountNameVerification {
                 "middleName", middleName,
                 "fullName", fullName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CardVerificationResult> firstName = Optional.empty();
- 
+
         private Optional<? extends CardVerificationResult> lastName = Optional.empty();
- 
+
         private Optional<? extends CardVerificationResult> middleName = Optional.empty();
- 
+
         private Optional<? extends CardVerificationResult> fullName = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder firstName(CardVerificationResult firstName) {
             Utils.checkNotNull(firstName, "firstName");
@@ -194,6 +202,7 @@ public class AccountNameVerification {
             return this;
         }
 
+
         public Builder lastName(CardVerificationResult lastName) {
             Utils.checkNotNull(lastName, "lastName");
             this.lastName = Optional.ofNullable(lastName);
@@ -205,6 +214,7 @@ public class AccountNameVerification {
             this.lastName = lastName;
             return this;
         }
+
 
         public Builder middleName(CardVerificationResult middleName) {
             Utils.checkNotNull(middleName, "middleName");
@@ -218,6 +228,7 @@ public class AccountNameVerification {
             return this;
         }
 
+
         public Builder fullName(CardVerificationResult fullName) {
             Utils.checkNotNull(fullName, "fullName");
             this.fullName = Optional.ofNullable(fullName);
@@ -229,13 +240,13 @@ public class AccountNameVerification {
             this.fullName = fullName;
             return this;
         }
-        
+
         public AccountNameVerification build() {
+
             return new AccountNameVerification(
-                firstName,
-                lastName,
-                middleName,
+                firstName, lastName, middleName,
                 fullName);
         }
+
     }
 }

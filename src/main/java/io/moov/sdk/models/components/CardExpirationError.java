@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class CardExpirationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("month")
     private Optional<String> month;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
@@ -47,15 +49,17 @@ public class CardExpirationError {
         return year;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardExpirationError withMonth(String month) {
         Utils.checkNotNull(month, "month");
         this.month = Optional.ofNullable(month);
         return this;
     }
+
 
     public CardExpirationError withMonth(Optional<String> month) {
         Utils.checkNotNull(month, "month");
@@ -69,13 +73,13 @@ public class CardExpirationError {
         return this;
     }
 
+
     public CardExpirationError withYear(Optional<String> year) {
         Utils.checkNotNull(year, "year");
         this.year = year;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class CardExpirationError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            month,
-            year);
+            month, year);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class CardExpirationError {
                 "month", month,
                 "year", year);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> month = Optional.empty();
- 
+
         private Optional<String> year = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder month(String month) {
             Utils.checkNotNull(month, "month");
@@ -126,6 +131,7 @@ public class CardExpirationError {
             return this;
         }
 
+
         public Builder year(String year) {
             Utils.checkNotNull(year, "year");
             this.year = Optional.ofNullable(year);
@@ -137,11 +143,12 @@ public class CardExpirationError {
             this.year = year;
             return this;
         }
-        
+
         public CardExpirationError build() {
+
             return new CardExpirationError(
-                month,
-                year);
+                month, year);
         }
+
     }
 }

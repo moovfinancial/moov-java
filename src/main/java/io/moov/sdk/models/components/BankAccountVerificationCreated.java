@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class BankAccountVerificationCreated {
 
     @JsonProperty("verificationMethod")
     private BankAccountVerificationMethod verificationMethod;
+
 
     @JsonProperty("status")
     private BankAccountVerificationStatus status;
@@ -38,9 +40,10 @@ public class BankAccountVerificationCreated {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BankAccountVerificationCreated withVerificationMethod(BankAccountVerificationMethod verificationMethod) {
         Utils.checkNotNull(verificationMethod, "verificationMethod");
@@ -54,7 +57,6 @@ public class BankAccountVerificationCreated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class BankAccountVerificationCreated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            verificationMethod,
-            status);
+            verificationMethod, status);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class BankAccountVerificationCreated {
                 "verificationMethod", verificationMethod,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private BankAccountVerificationMethod verificationMethod;
- 
+
         private BankAccountVerificationStatus status;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder verificationMethod(BankAccountVerificationMethod verificationMethod) {
             Utils.checkNotNull(verificationMethod, "verificationMethod");
@@ -99,16 +102,18 @@ public class BankAccountVerificationCreated {
             return this;
         }
 
+
         public Builder status(BankAccountVerificationStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
-        
+
         public BankAccountVerificationCreated build() {
+
             return new BankAccountVerificationCreated(
-                verificationMethod,
-                status);
+                verificationMethod, status);
         }
+
     }
 }

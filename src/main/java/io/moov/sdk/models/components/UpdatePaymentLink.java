@@ -16,11 +16,13 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
+
 public class UpdatePaymentLink {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<? extends AmountUpdate> amount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiresOn")
@@ -33,6 +35,7 @@ public class UpdatePaymentLink {
     @JsonProperty("display")
     private Optional<? extends PaymentLinkDisplayOptionsUpdate> display;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("customer")
     private Optional<? extends PaymentLinkCustomerOptions> customer;
@@ -43,6 +46,7 @@ public class UpdatePaymentLink {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment")
     private Optional<? extends PaymentLinkPaymentDetailsUpdate> payment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payout")
@@ -71,7 +75,8 @@ public class UpdatePaymentLink {
     }
     
     public UpdatePaymentLink() {
-        this(Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), JsonNullable.undefined(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -115,15 +120,17 @@ public class UpdatePaymentLink {
         return (Optional<PaymentLinkPayoutDetailsUpdate>) payout;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdatePaymentLink withAmount(AmountUpdate amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
         return this;
     }
+
 
     public UpdatePaymentLink withAmount(Optional<? extends AmountUpdate> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -152,6 +159,7 @@ public class UpdatePaymentLink {
         return this;
     }
 
+
     /**
      * Customizable display options for a payment link.
      */
@@ -166,6 +174,7 @@ public class UpdatePaymentLink {
         this.customer = Optional.ofNullable(customer);
         return this;
     }
+
 
     public UpdatePaymentLink withCustomer(Optional<? extends PaymentLinkCustomerOptions> customer) {
         Utils.checkNotNull(customer, "customer");
@@ -182,6 +191,7 @@ public class UpdatePaymentLink {
         return this;
     }
 
+
     /**
      * Options for payment links used to collect payment.
      */
@@ -197,13 +207,13 @@ public class UpdatePaymentLink {
         return this;
     }
 
+
     public UpdatePaymentLink withPayout(Optional<? extends PaymentLinkPayoutDetailsUpdate> payout) {
         Utils.checkNotNull(payout, "payout");
         this.payout = payout;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -225,12 +235,8 @@ public class UpdatePaymentLink {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount,
-            expiresOn,
-            display,
-            customer,
-            payment,
-            payout);
+            amount, expiresOn, display,
+            customer, payment, payout);
     }
     
     @Override
@@ -243,24 +249,26 @@ public class UpdatePaymentLink {
                 "payment", payment,
                 "payout", payout);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends AmountUpdate> amount = Optional.empty();
- 
+
         private JsonNullable<OffsetDateTime> expiresOn = JsonNullable.undefined();
- 
+
         private Optional<? extends PaymentLinkDisplayOptionsUpdate> display = Optional.empty();
- 
+
         private Optional<? extends PaymentLinkCustomerOptions> customer = Optional.empty();
- 
+
         private Optional<? extends PaymentLinkPaymentDetailsUpdate> payment = Optional.empty();
- 
+
         private Optional<? extends PaymentLinkPayoutDetailsUpdate> payout = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder amount(AmountUpdate amount) {
             Utils.checkNotNull(amount, "amount");
@@ -274,6 +282,7 @@ public class UpdatePaymentLink {
             return this;
         }
 
+
         public Builder expiresOn(OffsetDateTime expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
             this.expiresOn = JsonNullable.of(expiresOn);
@@ -285,6 +294,7 @@ public class UpdatePaymentLink {
             this.expiresOn = expiresOn;
             return this;
         }
+
 
         /**
          * Customizable display options for a payment link.
@@ -304,6 +314,7 @@ public class UpdatePaymentLink {
             return this;
         }
 
+
         public Builder customer(PaymentLinkCustomerOptions customer) {
             Utils.checkNotNull(customer, "customer");
             this.customer = Optional.ofNullable(customer);
@@ -315,6 +326,7 @@ public class UpdatePaymentLink {
             this.customer = customer;
             return this;
         }
+
 
         /**
          * Options for payment links used to collect payment.
@@ -334,6 +346,7 @@ public class UpdatePaymentLink {
             return this;
         }
 
+
         public Builder payout(PaymentLinkPayoutDetailsUpdate payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = Optional.ofNullable(payout);
@@ -345,15 +358,13 @@ public class UpdatePaymentLink {
             this.payout = payout;
             return this;
         }
-        
+
         public UpdatePaymentLink build() {
+
             return new UpdatePaymentLink(
-                amount,
-                expiresOn,
-                display,
-                customer,
-                payment,
-                payout);
+                amount, expiresOn, display,
+                customer, payment, payout);
         }
+
     }
 }

@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class TransferValidationError extends RuntimeException {
 
@@ -22,33 +23,41 @@ public class TransferValidationError extends RuntimeException {
     @JsonProperty("Transfer")
     private Optional<String> transfer;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<String> amount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("source")
     private Optional<String> source;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sourcePaymentMethodID")
     private Optional<String> sourcePaymentMethodID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("destinationPaymentMethodID")
     private Optional<String> destinationPaymentMethodID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
     private Optional<String> description;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("FacilitatorFee.TotalDecimal")
     private Optional<String> facilitatorFeeTotalDecimal;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("FacilitatorFee.MarkupDecimal")
     private Optional<String> facilitatorFeeMarkupDecimal;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
@@ -97,7 +106,10 @@ public class TransferValidationError extends RuntimeException {
     }
     
     public TransferValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -153,15 +165,17 @@ public class TransferValidationError extends RuntimeException {
         return error;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TransferValidationError withTransfer(String transfer) {
         Utils.checkNotNull(transfer, "transfer");
         this.transfer = Optional.ofNullable(transfer);
         return this;
     }
+
 
     public TransferValidationError withTransfer(Optional<String> transfer) {
         Utils.checkNotNull(transfer, "transfer");
@@ -175,6 +189,7 @@ public class TransferValidationError extends RuntimeException {
         return this;
     }
 
+
     public TransferValidationError withAmount(Optional<String> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
@@ -186,6 +201,7 @@ public class TransferValidationError extends RuntimeException {
         this.source = Optional.ofNullable(source);
         return this;
     }
+
 
     public TransferValidationError withSource(Optional<String> source) {
         Utils.checkNotNull(source, "source");
@@ -199,6 +215,7 @@ public class TransferValidationError extends RuntimeException {
         return this;
     }
 
+
     public TransferValidationError withSourcePaymentMethodID(Optional<String> sourcePaymentMethodID) {
         Utils.checkNotNull(sourcePaymentMethodID, "sourcePaymentMethodID");
         this.sourcePaymentMethodID = sourcePaymentMethodID;
@@ -210,6 +227,7 @@ public class TransferValidationError extends RuntimeException {
         this.destinationPaymentMethodID = Optional.ofNullable(destinationPaymentMethodID);
         return this;
     }
+
 
     public TransferValidationError withDestinationPaymentMethodID(Optional<String> destinationPaymentMethodID) {
         Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
@@ -223,6 +241,7 @@ public class TransferValidationError extends RuntimeException {
         return this;
     }
 
+
     public TransferValidationError withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
@@ -234,6 +253,7 @@ public class TransferValidationError extends RuntimeException {
         this.facilitatorFeeTotalDecimal = Optional.ofNullable(facilitatorFeeTotalDecimal);
         return this;
     }
+
 
     public TransferValidationError withFacilitatorFeeTotalDecimal(Optional<String> facilitatorFeeTotalDecimal) {
         Utils.checkNotNull(facilitatorFeeTotalDecimal, "facilitatorFeeTotalDecimal");
@@ -247,6 +267,7 @@ public class TransferValidationError extends RuntimeException {
         return this;
     }
 
+
     public TransferValidationError withFacilitatorFeeMarkupDecimal(Optional<String> facilitatorFeeMarkupDecimal) {
         Utils.checkNotNull(facilitatorFeeMarkupDecimal, "facilitatorFeeMarkupDecimal");
         this.facilitatorFeeMarkupDecimal = facilitatorFeeMarkupDecimal;
@@ -258,6 +279,7 @@ public class TransferValidationError extends RuntimeException {
         this.metadata = Optional.ofNullable(metadata);
         return this;
     }
+
 
     public TransferValidationError withMetadata(Optional<String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
@@ -274,6 +296,7 @@ public class TransferValidationError extends RuntimeException {
         return this;
     }
 
+
     /**
      * Used for generic errors when invalid request data isn't attributed to a single request field.
      */
@@ -283,7 +306,6 @@ public class TransferValidationError extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -309,15 +331,9 @@ public class TransferValidationError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transfer,
-            amount,
-            source,
-            sourcePaymentMethodID,
-            destinationPaymentMethodID,
-            description,
-            facilitatorFeeTotalDecimal,
-            facilitatorFeeMarkupDecimal,
-            metadata,
+            transfer, amount, source,
+            sourcePaymentMethodID, destinationPaymentMethodID, description,
+            facilitatorFeeTotalDecimal, facilitatorFeeMarkupDecimal, metadata,
             error);
     }
     
@@ -335,32 +351,34 @@ public class TransferValidationError extends RuntimeException {
                 "metadata", metadata,
                 "error", error);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> transfer = Optional.empty();
- 
+
         private Optional<String> amount = Optional.empty();
- 
+
         private Optional<String> source = Optional.empty();
- 
+
         private Optional<String> sourcePaymentMethodID = Optional.empty();
- 
+
         private Optional<String> destinationPaymentMethodID = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<String> facilitatorFeeTotalDecimal = Optional.empty();
- 
+
         private Optional<String> facilitatorFeeMarkupDecimal = Optional.empty();
- 
+
         private Optional<String> metadata = Optional.empty();
- 
+
         private Optional<String> error = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder transfer(String transfer) {
             Utils.checkNotNull(transfer, "transfer");
@@ -374,6 +392,7 @@ public class TransferValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
@@ -385,6 +404,7 @@ public class TransferValidationError extends RuntimeException {
             this.amount = amount;
             return this;
         }
+
 
         public Builder source(String source) {
             Utils.checkNotNull(source, "source");
@@ -398,6 +418,7 @@ public class TransferValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder sourcePaymentMethodID(String sourcePaymentMethodID) {
             Utils.checkNotNull(sourcePaymentMethodID, "sourcePaymentMethodID");
             this.sourcePaymentMethodID = Optional.ofNullable(sourcePaymentMethodID);
@@ -409,6 +430,7 @@ public class TransferValidationError extends RuntimeException {
             this.sourcePaymentMethodID = sourcePaymentMethodID;
             return this;
         }
+
 
         public Builder destinationPaymentMethodID(String destinationPaymentMethodID) {
             Utils.checkNotNull(destinationPaymentMethodID, "destinationPaymentMethodID");
@@ -422,6 +444,7 @@ public class TransferValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
@@ -433,6 +456,7 @@ public class TransferValidationError extends RuntimeException {
             this.description = description;
             return this;
         }
+
 
         public Builder facilitatorFeeTotalDecimal(String facilitatorFeeTotalDecimal) {
             Utils.checkNotNull(facilitatorFeeTotalDecimal, "facilitatorFeeTotalDecimal");
@@ -446,6 +470,7 @@ public class TransferValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder facilitatorFeeMarkupDecimal(String facilitatorFeeMarkupDecimal) {
             Utils.checkNotNull(facilitatorFeeMarkupDecimal, "facilitatorFeeMarkupDecimal");
             this.facilitatorFeeMarkupDecimal = Optional.ofNullable(facilitatorFeeMarkupDecimal);
@@ -458,6 +483,7 @@ public class TransferValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder metadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -469,6 +495,7 @@ public class TransferValidationError extends RuntimeException {
             this.metadata = metadata;
             return this;
         }
+
 
         /**
          * Used for generic errors when invalid request data isn't attributed to a single request field.
@@ -487,20 +514,16 @@ public class TransferValidationError extends RuntimeException {
             this.error = error;
             return this;
         }
-        
+
         public TransferValidationError build() {
+
             return new TransferValidationError(
-                transfer,
-                amount,
-                source,
-                sourcePaymentMethodID,
-                destinationPaymentMethodID,
-                description,
-                facilitatorFeeTotalDecimal,
-                facilitatorFeeMarkupDecimal,
-                metadata,
+                transfer, amount, source,
+                sourcePaymentMethodID, destinationPaymentMethodID, description,
+                facilitatorFeeTotalDecimal, facilitatorFeeMarkupDecimal, metadata,
                 error);
         }
+
     }
 }
 

@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetCardRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=cardID")
     private String cardID;
@@ -38,9 +40,10 @@ public class GetCardRequest {
         return cardID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetCardRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class GetCardRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class GetCardRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            cardID);
+            accountID, cardID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class GetCardRequest {
                 "accountID", accountID,
                 "cardID", cardID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String cardID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class GetCardRequest {
             return this;
         }
 
+
         public Builder cardID(String cardID) {
             Utils.checkNotNull(cardID, "cardID");
             this.cardID = cardID;
             return this;
         }
-        
+
         public GetCardRequest build() {
+
             return new GetCardRequest(
-                accountID,
-                cardID);
+                accountID, cardID);
         }
+
     }
 }

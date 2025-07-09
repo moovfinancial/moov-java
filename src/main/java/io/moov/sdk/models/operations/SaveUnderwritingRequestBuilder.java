@@ -46,7 +46,7 @@ public class SaveUnderwritingRequestBuilder {
     public SaveUnderwritingResponse call() throws Exception {
         
         RequestOperation<SaveUnderwritingRequest, SaveUnderwritingResponse> operation
-              = new SaveUnderwritingOperation( sdkConfiguration);
+              = new SaveUnderwritingOperation(sdkConfiguration);
         SaveUnderwritingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

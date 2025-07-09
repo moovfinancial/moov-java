@@ -67,7 +67,7 @@ public class ListPaymentMethodsRequestBuilder {
     public ListPaymentMethodsResponse call() throws Exception {
         
         RequestOperation<ListPaymentMethodsRequest, ListPaymentMethodsResponse> operation
-              = new ListPaymentMethodsOperation( sdkConfiguration);
+              = new ListPaymentMethodsOperation(sdkConfiguration);
         ListPaymentMethodsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

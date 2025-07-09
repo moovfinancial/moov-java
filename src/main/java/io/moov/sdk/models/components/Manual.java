@@ -13,19 +13,23 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class Manual {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("acceptedDate")
     private Optional<String> acceptedDate;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("acceptedDomain")
     private Optional<String> acceptedDomain;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("acceptedIP")
     private Optional<String> acceptedIP;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("acceptedUserAgent")
@@ -48,7 +52,8 @@ public class Manual {
     }
     
     public Manual() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -71,15 +76,17 @@ public class Manual {
         return acceptedUserAgent;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Manual withAcceptedDate(String acceptedDate) {
         Utils.checkNotNull(acceptedDate, "acceptedDate");
         this.acceptedDate = Optional.ofNullable(acceptedDate);
         return this;
     }
+
 
     public Manual withAcceptedDate(Optional<String> acceptedDate) {
         Utils.checkNotNull(acceptedDate, "acceptedDate");
@@ -93,6 +100,7 @@ public class Manual {
         return this;
     }
 
+
     public Manual withAcceptedDomain(Optional<String> acceptedDomain) {
         Utils.checkNotNull(acceptedDomain, "acceptedDomain");
         this.acceptedDomain = acceptedDomain;
@@ -104,6 +112,7 @@ public class Manual {
         this.acceptedIP = Optional.ofNullable(acceptedIP);
         return this;
     }
+
 
     public Manual withAcceptedIP(Optional<String> acceptedIP) {
         Utils.checkNotNull(acceptedIP, "acceptedIP");
@@ -117,13 +126,13 @@ public class Manual {
         return this;
     }
 
+
     public Manual withAcceptedUserAgent(Optional<String> acceptedUserAgent) {
         Utils.checkNotNull(acceptedUserAgent, "acceptedUserAgent");
         this.acceptedUserAgent = acceptedUserAgent;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -143,9 +152,7 @@ public class Manual {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            acceptedDate,
-            acceptedDomain,
-            acceptedIP,
+            acceptedDate, acceptedDomain, acceptedIP,
             acceptedUserAgent);
     }
     
@@ -157,20 +164,22 @@ public class Manual {
                 "acceptedIP", acceptedIP,
                 "acceptedUserAgent", acceptedUserAgent);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> acceptedDate = Optional.empty();
- 
+
         private Optional<String> acceptedDomain = Optional.empty();
- 
+
         private Optional<String> acceptedIP = Optional.empty();
- 
+
         private Optional<String> acceptedUserAgent = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder acceptedDate(String acceptedDate) {
             Utils.checkNotNull(acceptedDate, "acceptedDate");
@@ -184,6 +193,7 @@ public class Manual {
             return this;
         }
 
+
         public Builder acceptedDomain(String acceptedDomain) {
             Utils.checkNotNull(acceptedDomain, "acceptedDomain");
             this.acceptedDomain = Optional.ofNullable(acceptedDomain);
@@ -195,6 +205,7 @@ public class Manual {
             this.acceptedDomain = acceptedDomain;
             return this;
         }
+
 
         public Builder acceptedIP(String acceptedIP) {
             Utils.checkNotNull(acceptedIP, "acceptedIP");
@@ -208,6 +219,7 @@ public class Manual {
             return this;
         }
 
+
         public Builder acceptedUserAgent(String acceptedUserAgent) {
             Utils.checkNotNull(acceptedUserAgent, "acceptedUserAgent");
             this.acceptedUserAgent = Optional.ofNullable(acceptedUserAgent);
@@ -219,13 +231,13 @@ public class Manual {
             this.acceptedUserAgent = acceptedUserAgent;
             return this;
         }
-        
+
         public Manual build() {
+
             return new Manual(
-                acceptedDate,
-                acceptedDomain,
-                acceptedIP,
+                acceptedDate, acceptedDomain, acceptedIP,
                 acceptedUserAgent);
         }
+
     }
 }

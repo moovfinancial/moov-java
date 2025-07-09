@@ -13,17 +13,21 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class WebhookDataSweepUpdated {
 
     @JsonProperty("walletID")
     private String walletID;
 
+
     @JsonProperty("sweepID")
     private String sweepID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transferID")
     private Optional<String> transferID;
+
 
     @JsonProperty("status")
     private SweepStatus status;
@@ -48,7 +52,8 @@ public class WebhookDataSweepUpdated {
             String walletID,
             String sweepID,
             SweepStatus status) {
-        this(walletID, sweepID, Optional.empty(), status);
+        this(walletID, sweepID, Optional.empty(),
+            status);
     }
 
     @JsonIgnore
@@ -71,9 +76,10 @@ public class WebhookDataSweepUpdated {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataSweepUpdated withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -93,6 +99,7 @@ public class WebhookDataSweepUpdated {
         return this;
     }
 
+
     public WebhookDataSweepUpdated withTransferID(Optional<String> transferID) {
         Utils.checkNotNull(transferID, "transferID");
         this.transferID = transferID;
@@ -105,7 +112,6 @@ public class WebhookDataSweepUpdated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -125,9 +131,7 @@ public class WebhookDataSweepUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID,
-            sweepID,
-            transferID,
+            walletID, sweepID, transferID,
             status);
     }
     
@@ -139,20 +143,22 @@ public class WebhookDataSweepUpdated {
                 "transferID", transferID,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String walletID;
- 
+
         private String sweepID;
- 
+
         private Optional<String> transferID = Optional.empty();
- 
+
         private SweepStatus status;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
@@ -160,11 +166,13 @@ public class WebhookDataSweepUpdated {
             return this;
         }
 
+
         public Builder sweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = sweepID;
             return this;
         }
+
 
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
@@ -178,18 +186,19 @@ public class WebhookDataSweepUpdated {
             return this;
         }
 
+
         public Builder status(SweepStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
-        
+
         public WebhookDataSweepUpdated build() {
+
             return new WebhookDataSweepUpdated(
-                walletID,
-                sweepID,
-                transferID,
+                walletID, sweepID, transferID,
                 status);
         }
+
     }
 }

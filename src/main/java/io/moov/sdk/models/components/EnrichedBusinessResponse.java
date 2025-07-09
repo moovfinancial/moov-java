@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class EnrichedBusinessResponse {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -37,9 +38,10 @@ public class EnrichedBusinessResponse {
         return (Optional<EnrichedBusinessProfile>) business;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public EnrichedBusinessResponse withBusiness(EnrichedBusinessProfile business) {
         Utils.checkNotNull(business, "business");
@@ -47,13 +49,13 @@ public class EnrichedBusinessResponse {
         return this;
     }
 
+
     public EnrichedBusinessResponse withBusiness(Optional<? extends EnrichedBusinessProfile> business) {
         Utils.checkNotNull(business, "business");
         this.business = business;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -78,14 +80,16 @@ public class EnrichedBusinessResponse {
         return Utils.toString(EnrichedBusinessResponse.class,
                 "business", business);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends EnrichedBusinessProfile> business = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder business(EnrichedBusinessProfile business) {
             Utils.checkNotNull(business, "business");
@@ -98,10 +102,12 @@ public class EnrichedBusinessResponse {
             this.business = business;
             return this;
         }
-        
+
         public EnrichedBusinessResponse build() {
+
             return new EnrichedBusinessResponse(
                 business);
         }
+
     }
 }

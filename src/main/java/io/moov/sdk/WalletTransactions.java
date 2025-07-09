@@ -25,7 +25,6 @@ public class WalletTransactions {
     WalletTransactions(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * List all the transactions associated with a particular Moov wallet. 
      * 
@@ -52,13 +51,11 @@ public class WalletTransactions {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListWalletTransactionsResponse list(
-            ListWalletTransactionsRequest request) throws Exception {
+    public ListWalletTransactionsResponse list(ListWalletTransactionsRequest request) throws Exception {
         RequestOperation<ListWalletTransactionsRequest, ListWalletTransactionsResponse> operation
-              = new ListWalletTransactionsOperation( sdkConfiguration);
+              = new ListWalletTransactionsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get details on a specific wallet transaction. 
@@ -100,7 +97,7 @@ public class WalletTransactions {
                 .transactionID(transactionID)
                 .build();
         RequestOperation<GetWalletTransactionRequest, GetWalletTransactionResponse> operation
-              = new GetWalletTransactionOperation( sdkConfiguration);
+              = new GetWalletTransactionOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -14,15 +14,18 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CreateAuthorizedUserError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("firstName")
     private Optional<String> firstName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastName")
     private Optional<String> lastName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("birthDate")
@@ -61,15 +64,17 @@ public class CreateAuthorizedUserError {
         return (Optional<BirthDateError>) birthDate;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateAuthorizedUserError withFirstName(String firstName) {
         Utils.checkNotNull(firstName, "firstName");
         this.firstName = Optional.ofNullable(firstName);
         return this;
     }
+
 
     public CreateAuthorizedUserError withFirstName(Optional<String> firstName) {
         Utils.checkNotNull(firstName, "firstName");
@@ -83,6 +88,7 @@ public class CreateAuthorizedUserError {
         return this;
     }
 
+
     public CreateAuthorizedUserError withLastName(Optional<String> lastName) {
         Utils.checkNotNull(lastName, "lastName");
         this.lastName = lastName;
@@ -95,13 +101,13 @@ public class CreateAuthorizedUserError {
         return this;
     }
 
+
     public CreateAuthorizedUserError withBirthDate(Optional<? extends BirthDateError> birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
         this.birthDate = birthDate;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -120,9 +126,7 @@ public class CreateAuthorizedUserError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            firstName,
-            lastName,
-            birthDate);
+            firstName, lastName, birthDate);
     }
     
     @Override
@@ -132,18 +136,20 @@ public class CreateAuthorizedUserError {
                 "lastName", lastName,
                 "birthDate", birthDate);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> firstName = Optional.empty();
- 
+
         private Optional<String> lastName = Optional.empty();
- 
+
         private Optional<? extends BirthDateError> birthDate = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder firstName(String firstName) {
             Utils.checkNotNull(firstName, "firstName");
@@ -157,6 +163,7 @@ public class CreateAuthorizedUserError {
             return this;
         }
 
+
         public Builder lastName(String lastName) {
             Utils.checkNotNull(lastName, "lastName");
             this.lastName = Optional.ofNullable(lastName);
@@ -169,6 +176,7 @@ public class CreateAuthorizedUserError {
             return this;
         }
 
+
         public Builder birthDate(BirthDateError birthDate) {
             Utils.checkNotNull(birthDate, "birthDate");
             this.birthDate = Optional.ofNullable(birthDate);
@@ -180,12 +188,12 @@ public class CreateAuthorizedUserError {
             this.birthDate = birthDate;
             return this;
         }
-        
+
         public CreateAuthorizedUserError build() {
+
             return new CreateAuthorizedUserError(
-                firstName,
-                lastName,
-                birthDate);
+                firstName, lastName, birthDate);
         }
+
     }
 }

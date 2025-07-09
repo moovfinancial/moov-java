@@ -15,8 +15,8 @@ import java.lang.SuppressWarnings;
 import java.util.Map;
 import java.util.Optional;
 
-public class CreateTransfer {
 
+public class CreateTransfer {
     /**
      * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
      */
@@ -28,6 +28,7 @@ public class CreateTransfer {
      */
     @JsonProperty("destination")
     private CreateTransferDestination destination;
+
 
     @JsonProperty("amount")
     private Amount amount;
@@ -99,7 +100,9 @@ public class CreateTransfer {
             CreateTransferSource source,
             CreateTransferDestination destination,
             Amount amount) {
-        this(source, destination, amount, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(source, destination, amount,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -166,9 +169,10 @@ public class CreateTransfer {
         return foreignID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
@@ -203,6 +207,7 @@ public class CreateTransfer {
         return this;
     }
 
+
     /**
      * Total or markup fee.
      */
@@ -220,6 +225,7 @@ public class CreateTransfer {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     /**
      * An optional description of the transfer that is used on receipts and for your own internal use.
@@ -239,6 +245,7 @@ public class CreateTransfer {
         return this;
     }
 
+
     /**
      * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
      */
@@ -256,6 +263,7 @@ public class CreateTransfer {
         this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
         return this;
     }
+
 
     /**
      * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
@@ -275,6 +283,7 @@ public class CreateTransfer {
         return this;
     }
 
+
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
@@ -284,7 +293,6 @@ public class CreateTransfer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -308,14 +316,9 @@ public class CreateTransfer {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            source,
-            destination,
-            amount,
-            facilitatorFee,
-            description,
-            metadata,
-            salesTaxAmount,
-            foreignID);
+            source, destination, amount,
+            facilitatorFee, description, metadata,
+            salesTaxAmount, foreignID);
     }
     
     @Override
@@ -330,28 +333,30 @@ public class CreateTransfer {
                 "salesTaxAmount", salesTaxAmount,
                 "foreignID", foreignID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private CreateTransferSource source;
- 
+
         private CreateTransferDestination destination;
- 
+
         private Amount amount;
- 
+
         private Optional<? extends FacilitatorFee> facilitatorFee = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
- 
+
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
- 
+
         private Optional<String> foreignID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
@@ -362,6 +367,7 @@ public class CreateTransfer {
             return this;
         }
 
+
         /**
          * The final stage of a transfer and the ultimate recipient of the funds.
          */
@@ -371,11 +377,13 @@ public class CreateTransfer {
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
+
 
         /**
          * Total or markup fee.
@@ -395,6 +403,7 @@ public class CreateTransfer {
             return this;
         }
 
+
         /**
          * An optional description of the transfer that is used on receipts and for your own internal use.
          */
@@ -412,6 +421,7 @@ public class CreateTransfer {
             this.description = description;
             return this;
         }
+
 
         /**
          * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
@@ -431,6 +441,7 @@ public class CreateTransfer {
             return this;
         }
 
+
         /**
          * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
          */
@@ -449,6 +460,7 @@ public class CreateTransfer {
             return this;
         }
 
+
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
@@ -466,17 +478,14 @@ public class CreateTransfer {
             this.foreignID = foreignID;
             return this;
         }
-        
+
         public CreateTransfer build() {
+
             return new CreateTransfer(
-                source,
-                destination,
-                amount,
-                facilitatorFee,
-                description,
-                metadata,
-                salesTaxAmount,
-                foreignID);
+                source, destination, amount,
+                facilitatorFee, description, metadata,
+                salesTaxAmount, foreignID);
         }
+
     }
 }

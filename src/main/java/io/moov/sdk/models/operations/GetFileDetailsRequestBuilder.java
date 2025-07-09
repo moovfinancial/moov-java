@@ -45,7 +45,7 @@ public class GetFileDetailsRequestBuilder {
     public GetFileDetailsResponse call() throws Exception {
         
         RequestOperation<GetFileDetailsRequest, GetFileDetailsResponse> operation
-              = new GetFileDetailsOperation( sdkConfiguration);
+              = new GetFileDetailsOperation(sdkConfiguration);
         GetFileDetailsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

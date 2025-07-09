@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class SaveUnderwritingRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpsertUnderwriting upsertUnderwriting;
@@ -39,9 +41,10 @@ public class SaveUnderwritingRequest {
         return upsertUnderwriting;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public SaveUnderwritingRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class SaveUnderwritingRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class SaveUnderwritingRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            upsertUnderwriting);
+            accountID, upsertUnderwriting);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class SaveUnderwritingRequest {
                 "accountID", accountID,
                 "upsertUnderwriting", upsertUnderwriting);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private UpsertUnderwriting upsertUnderwriting;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class SaveUnderwritingRequest {
             return this;
         }
 
+
         public Builder upsertUnderwriting(UpsertUnderwriting upsertUnderwriting) {
             Utils.checkNotNull(upsertUnderwriting, "upsertUnderwriting");
             this.upsertUnderwriting = upsertUnderwriting;
             return this;
         }
-        
+
         public SaveUnderwritingRequest build() {
+
             return new SaveUnderwritingRequest(
-                accountID,
-                upsertUnderwriting);
+                accountID, upsertUnderwriting);
         }
+
     }
 }

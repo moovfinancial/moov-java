@@ -53,7 +53,7 @@ public class GetSweepRequestBuilder {
     public GetSweepResponse call() throws Exception {
         
         RequestOperation<GetSweepRequest, GetSweepResponse> operation
-              = new GetSweepOperation( sdkConfiguration);
+              = new GetSweepOperation(sdkConfiguration);
         GetSweepRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

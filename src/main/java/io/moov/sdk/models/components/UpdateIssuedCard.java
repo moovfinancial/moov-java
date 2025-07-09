@@ -14,8 +14,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class UpdateIssuedCard {
 
+public class UpdateIssuedCard {
     /**
      * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
      * 
@@ -27,6 +27,7 @@ public class UpdateIssuedCard {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("state")
     private Optional<? extends IssuedCardState> state;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("memo")
@@ -84,9 +85,10 @@ public class UpdateIssuedCard {
         return (Optional<CreateAuthorizedUserUpdate>) authorizedUser;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
@@ -101,6 +103,7 @@ public class UpdateIssuedCard {
         this.state = Optional.ofNullable(state);
         return this;
     }
+
 
     /**
      * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
@@ -122,6 +125,7 @@ public class UpdateIssuedCard {
         return this;
     }
 
+
     public UpdateIssuedCard withMemo(Optional<String> memo) {
         Utils.checkNotNull(memo, "memo");
         this.memo = memo;
@@ -137,6 +141,7 @@ public class UpdateIssuedCard {
         return this;
     }
 
+
     /**
      * Fields for identifying an authorized individual.
      */
@@ -146,7 +151,6 @@ public class UpdateIssuedCard {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -165,9 +169,7 @@ public class UpdateIssuedCard {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            state,
-            memo,
-            authorizedUser);
+            state, memo, authorizedUser);
     }
     
     @Override
@@ -177,18 +179,20 @@ public class UpdateIssuedCard {
                 "memo", memo,
                 "authorizedUser", authorizedUser);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends IssuedCardState> state = Optional.empty();
- 
+
         private Optional<String> memo = Optional.empty();
- 
+
         private Optional<? extends CreateAuthorizedUserUpdate> authorizedUser = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
@@ -218,6 +222,7 @@ public class UpdateIssuedCard {
             return this;
         }
 
+
         public Builder memo(String memo) {
             Utils.checkNotNull(memo, "memo");
             this.memo = Optional.ofNullable(memo);
@@ -229,6 +234,7 @@ public class UpdateIssuedCard {
             this.memo = memo;
             return this;
         }
+
 
         /**
          * Fields for identifying an authorized individual.
@@ -247,12 +253,12 @@ public class UpdateIssuedCard {
             this.authorizedUser = authorizedUser;
             return this;
         }
-        
+
         public UpdateIssuedCard build() {
+
             return new UpdateIssuedCard(
-                state,
-                memo,
-                authorizedUser);
+                state, memo, authorizedUser);
         }
+
     }
 }

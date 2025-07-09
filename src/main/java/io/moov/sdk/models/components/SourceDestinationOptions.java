@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class SourceDestinationOptions {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accountID")
     private Optional<String> accountID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentMethodID")
@@ -47,15 +49,17 @@ public class SourceDestinationOptions {
         return paymentMethodID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public SourceDestinationOptions withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = Optional.ofNullable(accountID);
         return this;
     }
+
 
     public SourceDestinationOptions withAccountID(Optional<String> accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -69,13 +73,13 @@ public class SourceDestinationOptions {
         return this;
     }
 
+
     public SourceDestinationOptions withPaymentMethodID(Optional<String> paymentMethodID) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         this.paymentMethodID = paymentMethodID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class SourceDestinationOptions {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            paymentMethodID);
+            accountID, paymentMethodID);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class SourceDestinationOptions {
                 "accountID", accountID,
                 "paymentMethodID", paymentMethodID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> accountID = Optional.empty();
- 
+
         private Optional<String> paymentMethodID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -126,6 +131,7 @@ public class SourceDestinationOptions {
             return this;
         }
 
+
         public Builder paymentMethodID(String paymentMethodID) {
             Utils.checkNotNull(paymentMethodID, "paymentMethodID");
             this.paymentMethodID = Optional.ofNullable(paymentMethodID);
@@ -137,11 +143,12 @@ public class SourceDestinationOptions {
             this.paymentMethodID = paymentMethodID;
             return this;
         }
-        
+
         public SourceDestinationOptions build() {
+
             return new SourceDestinationOptions(
-                accountID,
-                paymentMethodID);
+                accountID, paymentMethodID);
         }
+
     }
 }

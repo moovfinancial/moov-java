@@ -14,26 +14,32 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
+
 public class WebhookDataNetworkIDUpdated {
 
     @JsonProperty("accountID")
     private String accountID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("visaMid")
     private Optional<String> visaMid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mastercardMid")
     private Optional<String> mastercardMid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("discoverMid")
     private Optional<String> discoverMid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amexMid")
     private Optional<String> amexMid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedOn")
@@ -63,7 +69,8 @@ public class WebhookDataNetworkIDUpdated {
     
     public WebhookDataNetworkIDUpdated(
             String accountID) {
-        this(accountID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -96,9 +103,10 @@ public class WebhookDataNetworkIDUpdated {
         return updatedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataNetworkIDUpdated withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -112,6 +120,7 @@ public class WebhookDataNetworkIDUpdated {
         return this;
     }
 
+
     public WebhookDataNetworkIDUpdated withVisaMid(Optional<String> visaMid) {
         Utils.checkNotNull(visaMid, "visaMid");
         this.visaMid = visaMid;
@@ -123,6 +132,7 @@ public class WebhookDataNetworkIDUpdated {
         this.mastercardMid = Optional.ofNullable(mastercardMid);
         return this;
     }
+
 
     public WebhookDataNetworkIDUpdated withMastercardMid(Optional<String> mastercardMid) {
         Utils.checkNotNull(mastercardMid, "mastercardMid");
@@ -136,6 +146,7 @@ public class WebhookDataNetworkIDUpdated {
         return this;
     }
 
+
     public WebhookDataNetworkIDUpdated withDiscoverMid(Optional<String> discoverMid) {
         Utils.checkNotNull(discoverMid, "discoverMid");
         this.discoverMid = discoverMid;
@@ -147,6 +158,7 @@ public class WebhookDataNetworkIDUpdated {
         this.amexMid = Optional.ofNullable(amexMid);
         return this;
     }
+
 
     public WebhookDataNetworkIDUpdated withAmexMid(Optional<String> amexMid) {
         Utils.checkNotNull(amexMid, "amexMid");
@@ -160,13 +172,13 @@ public class WebhookDataNetworkIDUpdated {
         return this;
     }
 
+
     public WebhookDataNetworkIDUpdated withUpdatedOn(Optional<OffsetDateTime> updatedOn) {
         Utils.checkNotNull(updatedOn, "updatedOn");
         this.updatedOn = updatedOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -188,12 +200,8 @@ public class WebhookDataNetworkIDUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            visaMid,
-            mastercardMid,
-            discoverMid,
-            amexMid,
-            updatedOn);
+            accountID, visaMid, mastercardMid,
+            discoverMid, amexMid, updatedOn);
     }
     
     @Override
@@ -206,30 +214,33 @@ public class WebhookDataNetworkIDUpdated {
                 "amexMid", amexMid,
                 "updatedOn", updatedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<String> visaMid = Optional.empty();
- 
+
         private Optional<String> mastercardMid = Optional.empty();
- 
+
         private Optional<String> discoverMid = Optional.empty();
- 
+
         private Optional<String> amexMid = Optional.empty();
- 
+
         private Optional<OffsetDateTime> updatedOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder visaMid(String visaMid) {
             Utils.checkNotNull(visaMid, "visaMid");
@@ -243,6 +254,7 @@ public class WebhookDataNetworkIDUpdated {
             return this;
         }
 
+
         public Builder mastercardMid(String mastercardMid) {
             Utils.checkNotNull(mastercardMid, "mastercardMid");
             this.mastercardMid = Optional.ofNullable(mastercardMid);
@@ -254,6 +266,7 @@ public class WebhookDataNetworkIDUpdated {
             this.mastercardMid = mastercardMid;
             return this;
         }
+
 
         public Builder discoverMid(String discoverMid) {
             Utils.checkNotNull(discoverMid, "discoverMid");
@@ -267,6 +280,7 @@ public class WebhookDataNetworkIDUpdated {
             return this;
         }
 
+
         public Builder amexMid(String amexMid) {
             Utils.checkNotNull(amexMid, "amexMid");
             this.amexMid = Optional.ofNullable(amexMid);
@@ -279,6 +293,7 @@ public class WebhookDataNetworkIDUpdated {
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = Optional.ofNullable(updatedOn);
@@ -290,15 +305,13 @@ public class WebhookDataNetworkIDUpdated {
             this.updatedOn = updatedOn;
             return this;
         }
-        
+
         public WebhookDataNetworkIDUpdated build() {
+
             return new WebhookDataNetworkIDUpdated(
-                accountID,
-                visaMid,
-                mastercardMid,
-                discoverMid,
-                amexMid,
-                updatedOn);
+                accountID, visaMid, mastercardMid,
+                discoverMid, amexMid, updatedOn);
         }
+
     }
 }

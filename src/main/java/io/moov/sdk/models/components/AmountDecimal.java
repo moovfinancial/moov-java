@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class AmountDecimal {
 
+public class AmountDecimal {
     /**
      * A 3-letter ISO 4217 currency code.
      */
@@ -54,9 +54,10 @@ public class AmountDecimal {
         return valueDecimal;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A 3-letter ISO 4217 currency code.
@@ -78,7 +79,6 @@ public class AmountDecimal {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +96,7 @@ public class AmountDecimal {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            currency,
-            valueDecimal);
+            currency, valueDecimal);
     }
     
     @Override
@@ -106,16 +105,18 @@ public class AmountDecimal {
                 "currency", currency,
                 "valueDecimal", valueDecimal);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String currency;
- 
+
         private String valueDecimal;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A 3-letter ISO 4217 currency code.
@@ -125,6 +126,7 @@ public class AmountDecimal {
             this.currency = currency;
             return this;
         }
+
 
         /**
          * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
@@ -136,11 +138,12 @@ public class AmountDecimal {
             this.valueDecimal = valueDecimal;
             return this;
         }
-        
+
         public AmountDecimal build() {
+
             return new AmountDecimal(
-                currency,
-                valueDecimal);
+                currency, valueDecimal);
         }
+
     }
 }

@@ -11,13 +11,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class RequestCardRequest {
 
+public class RequestCardRequest {
     /**
      * The Moov business account for which the card is to be issued.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private RequestCard requestCard;
@@ -45,9 +46,10 @@ public class RequestCardRequest {
         return requestCard;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The Moov business account for which the card is to be issued.
@@ -64,7 +66,6 @@ public class RequestCardRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,8 +83,7 @@ public class RequestCardRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            requestCard);
+            accountID, requestCard);
     }
     
     @Override
@@ -92,16 +92,18 @@ public class RequestCardRequest {
                 "accountID", accountID,
                 "requestCard", requestCard);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private RequestCard requestCard;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The Moov business account for which the card is to be issued.
@@ -112,16 +114,18 @@ public class RequestCardRequest {
             return this;
         }
 
+
         public Builder requestCard(RequestCard requestCard) {
             Utils.checkNotNull(requestCard, "requestCard");
             this.requestCard = requestCard;
             return this;
         }
-        
+
         public RequestCardRequest build() {
+
             return new RequestCardRequest(
-                accountID,
-                requestCard);
+                accountID, requestCard);
         }
+
     }
 }

@@ -26,6 +26,7 @@ public class CapabilityRequirement {
     @JsonProperty("currentlyDue")
     private Optional<? extends List<RequirementID>> currentlyDue;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
     private Optional<? extends List<RequirementError>> errors;
@@ -56,15 +57,17 @@ public class CapabilityRequirement {
         return (Optional<List<RequirementError>>) errors;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CapabilityRequirement withCurrentlyDue(List<RequirementID> currentlyDue) {
         Utils.checkNotNull(currentlyDue, "currentlyDue");
         this.currentlyDue = Optional.ofNullable(currentlyDue);
         return this;
     }
+
 
     public CapabilityRequirement withCurrentlyDue(Optional<? extends List<RequirementID>> currentlyDue) {
         Utils.checkNotNull(currentlyDue, "currentlyDue");
@@ -78,13 +81,13 @@ public class CapabilityRequirement {
         return this;
     }
 
+
     public CapabilityRequirement withErrors(Optional<? extends List<RequirementError>> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -102,8 +105,7 @@ public class CapabilityRequirement {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            currentlyDue,
-            errors);
+            currentlyDue, errors);
     }
     
     @Override
@@ -112,16 +114,18 @@ public class CapabilityRequirement {
                 "currentlyDue", currentlyDue,
                 "errors", errors);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<RequirementID>> currentlyDue = Optional.empty();
- 
+
         private Optional<? extends List<RequirementError>> errors = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder currentlyDue(List<RequirementID> currentlyDue) {
             Utils.checkNotNull(currentlyDue, "currentlyDue");
@@ -135,6 +139,7 @@ public class CapabilityRequirement {
             return this;
         }
 
+
         public Builder errors(List<RequirementError> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = Optional.ofNullable(errors);
@@ -146,11 +151,12 @@ public class CapabilityRequirement {
             this.errors = errors;
             return this;
         }
-        
+
         public CapabilityRequirement build() {
+
             return new CapabilityRequirement(
-                currentlyDue,
-                errors);
+                currentlyDue, errors);
         }
+
     }
 }

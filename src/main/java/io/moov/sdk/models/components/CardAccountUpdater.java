@@ -61,15 +61,17 @@ public class CardAccountUpdater {
         return (Optional<CardUpdateReason>) updateType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardAccountUpdater withUpdatedOn(OffsetDateTime updatedOn) {
         Utils.checkNotNull(updatedOn, "updatedOn");
         this.updatedOn = Optional.ofNullable(updatedOn);
         return this;
     }
+
 
     public CardAccountUpdater withUpdatedOn(Optional<OffsetDateTime> updatedOn) {
         Utils.checkNotNull(updatedOn, "updatedOn");
@@ -86,6 +88,7 @@ public class CardAccountUpdater {
         return this;
     }
 
+
     /**
      * The results of the card update request.
      */
@@ -95,7 +98,6 @@ public class CardAccountUpdater {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -113,8 +115,7 @@ public class CardAccountUpdater {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            updatedOn,
-            updateType);
+            updatedOn, updateType);
     }
     
     @Override
@@ -123,16 +124,18 @@ public class CardAccountUpdater {
                 "updatedOn", updatedOn,
                 "updateType", updateType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<OffsetDateTime> updatedOn = Optional.empty();
- 
+
         private Optional<? extends CardUpdateReason> updateType = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
@@ -145,6 +148,7 @@ public class CardAccountUpdater {
             this.updatedOn = updatedOn;
             return this;
         }
+
 
         /**
          * The results of the card update request.
@@ -163,11 +167,12 @@ public class CardAccountUpdater {
             this.updateType = updateType;
             return this;
         }
-        
+
         public CardAccountUpdater build() {
+
             return new CardAccountUpdater(
-                updatedOn,
-                updateType);
+                updatedOn, updateType);
         }
+
     }
 }

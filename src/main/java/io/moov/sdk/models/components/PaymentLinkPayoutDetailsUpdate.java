@@ -15,8 +15,8 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
-public class PaymentLinkPayoutDetailsUpdate {
 
+public class PaymentLinkPayoutDetailsUpdate {
     /**
      * A list of payment methods that should be supported for this payment link.
      */
@@ -67,9 +67,10 @@ public class PaymentLinkPayoutDetailsUpdate {
         return (Optional<PayoutRecipientUpdate>) recipient;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A list of payment methods that should be supported for this payment link.
@@ -79,6 +80,7 @@ public class PaymentLinkPayoutDetailsUpdate {
         this.allowedMethods = Optional.ofNullable(allowedMethods);
         return this;
     }
+
 
     /**
      * A list of payment methods that should be supported for this payment link.
@@ -100,6 +102,7 @@ public class PaymentLinkPayoutDetailsUpdate {
         return this;
     }
 
+
     /**
      * Specify the intended recipient of the payout.
      * 
@@ -111,7 +114,6 @@ public class PaymentLinkPayoutDetailsUpdate {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -129,8 +131,7 @@ public class PaymentLinkPayoutDetailsUpdate {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods,
-            recipient);
+            allowedMethods, recipient);
     }
     
     @Override
@@ -139,16 +140,18 @@ public class PaymentLinkPayoutDetailsUpdate {
                 "allowedMethods", allowedMethods,
                 "recipient", recipient);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<DisbursementPaymentMethodType>> allowedMethods = Optional.empty();
- 
+
         private Optional<? extends PayoutRecipientUpdate> recipient = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A list of payment methods that should be supported for this payment link.
@@ -167,6 +170,7 @@ public class PaymentLinkPayoutDetailsUpdate {
             this.allowedMethods = allowedMethods;
             return this;
         }
+
 
         /**
          * Specify the intended recipient of the payout.
@@ -189,11 +193,12 @@ public class PaymentLinkPayoutDetailsUpdate {
             this.recipient = recipient;
             return this;
         }
-        
+
         public PaymentLinkPayoutDetailsUpdate build() {
+
             return new PaymentLinkPayoutDetailsUpdate(
-                allowedMethods,
-                recipient);
+                allowedMethods, recipient);
         }
+
     }
 }

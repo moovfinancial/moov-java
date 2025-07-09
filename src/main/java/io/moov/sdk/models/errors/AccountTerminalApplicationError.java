@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class AccountTerminalApplicationError extends RuntimeException {
 
@@ -39,9 +40,10 @@ public class AccountTerminalApplicationError extends RuntimeException {
         return terminalApplicationID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AccountTerminalApplicationError withTerminalApplicationID(String terminalApplicationID) {
         Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
@@ -49,13 +51,13 @@ public class AccountTerminalApplicationError extends RuntimeException {
         return this;
     }
 
+
     public AccountTerminalApplicationError withTerminalApplicationID(Optional<String> terminalApplicationID) {
         Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
         this.terminalApplicationID = terminalApplicationID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -80,14 +82,16 @@ public class AccountTerminalApplicationError extends RuntimeException {
         return Utils.toString(AccountTerminalApplicationError.class,
                 "terminalApplicationID", terminalApplicationID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> terminalApplicationID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder terminalApplicationID(String terminalApplicationID) {
             Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
@@ -100,11 +104,13 @@ public class AccountTerminalApplicationError extends RuntimeException {
             this.terminalApplicationID = terminalApplicationID;
             return this;
         }
-        
+
         public AccountTerminalApplicationError build() {
+
             return new AccountTerminalApplicationError(
                 terminalApplicationID);
         }
+
     }
 }
 

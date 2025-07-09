@@ -26,21 +26,26 @@ public class IncurredFee {
     @JsonProperty("feeID")
     private Optional<String> feeID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accountID")
     private Optional<String> accountID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("walletID")
     private Optional<String> walletID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("createdOn")
     private Optional<OffsetDateTime> createdOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("feeName")
     private Optional<String> feeName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
@@ -79,7 +84,9 @@ public class IncurredFee {
     }
     
     public IncurredFee() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -122,15 +129,17 @@ public class IncurredFee {
         return (Optional<GeneratedBy>) generatedBy;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public IncurredFee withFeeID(String feeID) {
         Utils.checkNotNull(feeID, "feeID");
         this.feeID = Optional.ofNullable(feeID);
         return this;
     }
+
 
     public IncurredFee withFeeID(Optional<String> feeID) {
         Utils.checkNotNull(feeID, "feeID");
@@ -144,6 +153,7 @@ public class IncurredFee {
         return this;
     }
 
+
     public IncurredFee withAccountID(Optional<String> accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -155,6 +165,7 @@ public class IncurredFee {
         this.walletID = Optional.ofNullable(walletID);
         return this;
     }
+
 
     public IncurredFee withWalletID(Optional<String> walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -168,6 +179,7 @@ public class IncurredFee {
         return this;
     }
 
+
     public IncurredFee withCreatedOn(Optional<OffsetDateTime> createdOn) {
         Utils.checkNotNull(createdOn, "createdOn");
         this.createdOn = createdOn;
@@ -180,6 +192,7 @@ public class IncurredFee {
         return this;
     }
 
+
     public IncurredFee withFeeName(Optional<String> feeName) {
         Utils.checkNotNull(feeName, "feeName");
         this.feeName = feeName;
@@ -191,6 +204,7 @@ public class IncurredFee {
         this.amount = Optional.ofNullable(amount);
         return this;
     }
+
 
     public IncurredFee withAmount(Optional<? extends AmountDecimal> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -207,6 +221,7 @@ public class IncurredFee {
         return this;
     }
 
+
     /**
      * The entity that generated the fee.
      */
@@ -216,7 +231,6 @@ public class IncurredFee {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -239,12 +253,8 @@ public class IncurredFee {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            feeID,
-            accountID,
-            walletID,
-            createdOn,
-            feeName,
-            amount,
+            feeID, accountID, walletID,
+            createdOn, feeName, amount,
             generatedBy);
     }
     
@@ -259,26 +269,28 @@ public class IncurredFee {
                 "amount", amount,
                 "generatedBy", generatedBy);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> feeID = Optional.empty();
- 
+
         private Optional<String> accountID = Optional.empty();
- 
+
         private Optional<String> walletID = Optional.empty();
- 
+
         private Optional<OffsetDateTime> createdOn = Optional.empty();
- 
+
         private Optional<String> feeName = Optional.empty();
- 
+
         private Optional<? extends AmountDecimal> amount = Optional.empty();
- 
+
         private Optional<? extends GeneratedBy> generatedBy = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder feeID(String feeID) {
             Utils.checkNotNull(feeID, "feeID");
@@ -292,6 +304,7 @@ public class IncurredFee {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = Optional.ofNullable(accountID);
@@ -303,6 +316,7 @@ public class IncurredFee {
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
@@ -316,6 +330,7 @@ public class IncurredFee {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = Optional.ofNullable(createdOn);
@@ -327,6 +342,7 @@ public class IncurredFee {
             this.createdOn = createdOn;
             return this;
         }
+
 
         public Builder feeName(String feeName) {
             Utils.checkNotNull(feeName, "feeName");
@@ -340,6 +356,7 @@ public class IncurredFee {
             return this;
         }
 
+
         public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
@@ -351,6 +368,7 @@ public class IncurredFee {
             this.amount = amount;
             return this;
         }
+
 
         /**
          * The entity that generated the fee.
@@ -369,16 +387,14 @@ public class IncurredFee {
             this.generatedBy = generatedBy;
             return this;
         }
-        
+
         public IncurredFee build() {
+
             return new IncurredFee(
-                feeID,
-                accountID,
-                walletID,
-                createdOn,
-                feeName,
-                amount,
+                feeID, accountID, walletID,
+                createdOn, feeName, amount,
                 generatedBy);
         }
+
     }
 }

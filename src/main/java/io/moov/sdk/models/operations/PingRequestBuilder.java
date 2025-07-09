@@ -28,7 +28,7 @@ public class PingRequestBuilder {
     public PingResponse call() throws Exception {
         
         RequestOperation<PingRequest, PingResponse> operation
-              = new PingOperation( sdkConfiguration);
+              = new PingOperation(sdkConfiguration);
         PingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

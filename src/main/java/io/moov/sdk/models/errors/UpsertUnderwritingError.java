@@ -22,6 +22,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class UpsertUnderwritingError extends RuntimeException {
 
@@ -29,49 +30,61 @@ public class UpsertUnderwritingError extends RuntimeException {
     @JsonProperty("geographicReach")
     private Optional<String> geographicReach;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("businessPresence")
     private Optional<String> businessPresence;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pendingLitigation")
     private Optional<String> pendingLitigation;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("volumeShareByCustomerType")
     private Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("collectFunds")
     private Optional<? extends CollectFundsError> collectFunds;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("moneyTransfer")
     private Optional<? extends MoneyTransferError> moneyTransfer;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sendFunds")
     private Optional<? extends SendFundsError> sendFunds;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("averageMonthlyTransactionVolume")
     private Optional<String> averageMonthlyTransactionVolume;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("averageTransactionSize")
     private Optional<String> averageTransactionSize;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maxTransactionSize")
     private Optional<String> maxTransactionSize;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("volumeByCustomerType")
     private Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardVolumeDistribution")
     private Optional<? extends CardVolumeDistributionError> cardVolumeDistribution;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fulfillment")
@@ -122,7 +135,11 @@ public class UpsertUnderwritingError extends RuntimeException {
     }
     
     public UpsertUnderwritingError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -197,15 +214,17 @@ public class UpsertUnderwritingError extends RuntimeException {
         return (Optional<FulfillmentDetailsError>) fulfillment;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpsertUnderwritingError withGeographicReach(String geographicReach) {
         Utils.checkNotNull(geographicReach, "geographicReach");
         this.geographicReach = Optional.ofNullable(geographicReach);
         return this;
     }
+
 
     public UpsertUnderwritingError withGeographicReach(Optional<String> geographicReach) {
         Utils.checkNotNull(geographicReach, "geographicReach");
@@ -219,6 +238,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         return this;
     }
 
+
     public UpsertUnderwritingError withBusinessPresence(Optional<String> businessPresence) {
         Utils.checkNotNull(businessPresence, "businessPresence");
         this.businessPresence = businessPresence;
@@ -230,6 +250,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         this.pendingLitigation = Optional.ofNullable(pendingLitigation);
         return this;
     }
+
 
     public UpsertUnderwritingError withPendingLitigation(Optional<String> pendingLitigation) {
         Utils.checkNotNull(pendingLitigation, "pendingLitigation");
@@ -243,6 +264,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         return this;
     }
 
+
     public UpsertUnderwritingError withVolumeShareByCustomerType(Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType) {
         Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
         this.volumeShareByCustomerType = volumeShareByCustomerType;
@@ -254,6 +276,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         this.collectFunds = Optional.ofNullable(collectFunds);
         return this;
     }
+
 
     public UpsertUnderwritingError withCollectFunds(Optional<? extends CollectFundsError> collectFunds) {
         Utils.checkNotNull(collectFunds, "collectFunds");
@@ -267,6 +290,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         return this;
     }
 
+
     public UpsertUnderwritingError withMoneyTransfer(Optional<? extends MoneyTransferError> moneyTransfer) {
         Utils.checkNotNull(moneyTransfer, "moneyTransfer");
         this.moneyTransfer = moneyTransfer;
@@ -278,6 +302,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         this.sendFunds = Optional.ofNullable(sendFunds);
         return this;
     }
+
 
     public UpsertUnderwritingError withSendFunds(Optional<? extends SendFundsError> sendFunds) {
         Utils.checkNotNull(sendFunds, "sendFunds");
@@ -291,6 +316,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         return this;
     }
 
+
     public UpsertUnderwritingError withAverageMonthlyTransactionVolume(Optional<String> averageMonthlyTransactionVolume) {
         Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
         this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
@@ -302,6 +328,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         this.averageTransactionSize = Optional.ofNullable(averageTransactionSize);
         return this;
     }
+
 
     public UpsertUnderwritingError withAverageTransactionSize(Optional<String> averageTransactionSize) {
         Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
@@ -315,6 +342,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         return this;
     }
 
+
     public UpsertUnderwritingError withMaxTransactionSize(Optional<String> maxTransactionSize) {
         Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
         this.maxTransactionSize = maxTransactionSize;
@@ -326,6 +354,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         this.volumeByCustomerType = Optional.ofNullable(volumeByCustomerType);
         return this;
     }
+
 
     public UpsertUnderwritingError withVolumeByCustomerType(Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType) {
         Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
@@ -339,6 +368,7 @@ public class UpsertUnderwritingError extends RuntimeException {
         return this;
     }
 
+
     public UpsertUnderwritingError withCardVolumeDistribution(Optional<? extends CardVolumeDistributionError> cardVolumeDistribution) {
         Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
         this.cardVolumeDistribution = cardVolumeDistribution;
@@ -351,13 +381,13 @@ public class UpsertUnderwritingError extends RuntimeException {
         return this;
     }
 
+
     public UpsertUnderwritingError withFulfillment(Optional<? extends FulfillmentDetailsError> fulfillment) {
         Utils.checkNotNull(fulfillment, "fulfillment");
         this.fulfillment = fulfillment;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -386,18 +416,10 @@ public class UpsertUnderwritingError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            geographicReach,
-            businessPresence,
-            pendingLitigation,
-            volumeShareByCustomerType,
-            collectFunds,
-            moneyTransfer,
-            sendFunds,
-            averageMonthlyTransactionVolume,
-            averageTransactionSize,
-            maxTransactionSize,
-            volumeByCustomerType,
-            cardVolumeDistribution,
+            geographicReach, businessPresence, pendingLitigation,
+            volumeShareByCustomerType, collectFunds, moneyTransfer,
+            sendFunds, averageMonthlyTransactionVolume, averageTransactionSize,
+            maxTransactionSize, volumeByCustomerType, cardVolumeDistribution,
             fulfillment);
     }
     
@@ -418,38 +440,40 @@ public class UpsertUnderwritingError extends RuntimeException {
                 "cardVolumeDistribution", cardVolumeDistribution,
                 "fulfillment", fulfillment);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> geographicReach = Optional.empty();
- 
+
         private Optional<String> businessPresence = Optional.empty();
- 
+
         private Optional<String> pendingLitigation = Optional.empty();
- 
+
         private Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType = Optional.empty();
- 
+
         private Optional<? extends CollectFundsError> collectFunds = Optional.empty();
- 
+
         private Optional<? extends MoneyTransferError> moneyTransfer = Optional.empty();
- 
+
         private Optional<? extends SendFundsError> sendFunds = Optional.empty();
- 
+
         private Optional<String> averageMonthlyTransactionVolume = Optional.empty();
- 
+
         private Optional<String> averageTransactionSize = Optional.empty();
- 
+
         private Optional<String> maxTransactionSize = Optional.empty();
- 
+
         private Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType = Optional.empty();
- 
+
         private Optional<? extends CardVolumeDistributionError> cardVolumeDistribution = Optional.empty();
- 
+
         private Optional<? extends FulfillmentDetailsError> fulfillment = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder geographicReach(String geographicReach) {
             Utils.checkNotNull(geographicReach, "geographicReach");
@@ -463,6 +487,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             return this;
         }
 
+
         public Builder businessPresence(String businessPresence) {
             Utils.checkNotNull(businessPresence, "businessPresence");
             this.businessPresence = Optional.ofNullable(businessPresence);
@@ -474,6 +499,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             this.businessPresence = businessPresence;
             return this;
         }
+
 
         public Builder pendingLitigation(String pendingLitigation) {
             Utils.checkNotNull(pendingLitigation, "pendingLitigation");
@@ -487,6 +513,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             return this;
         }
 
+
         public Builder volumeShareByCustomerType(VolumeShareByCustomerTypeError volumeShareByCustomerType) {
             Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
             this.volumeShareByCustomerType = Optional.ofNullable(volumeShareByCustomerType);
@@ -498,6 +525,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             this.volumeShareByCustomerType = volumeShareByCustomerType;
             return this;
         }
+
 
         public Builder collectFunds(CollectFundsError collectFunds) {
             Utils.checkNotNull(collectFunds, "collectFunds");
@@ -511,6 +539,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             return this;
         }
 
+
         public Builder moneyTransfer(MoneyTransferError moneyTransfer) {
             Utils.checkNotNull(moneyTransfer, "moneyTransfer");
             this.moneyTransfer = Optional.ofNullable(moneyTransfer);
@@ -522,6 +551,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             this.moneyTransfer = moneyTransfer;
             return this;
         }
+
 
         public Builder sendFunds(SendFundsError sendFunds) {
             Utils.checkNotNull(sendFunds, "sendFunds");
@@ -535,6 +565,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             return this;
         }
 
+
         public Builder averageMonthlyTransactionVolume(String averageMonthlyTransactionVolume) {
             Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
             this.averageMonthlyTransactionVolume = Optional.ofNullable(averageMonthlyTransactionVolume);
@@ -546,6 +577,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
             return this;
         }
+
 
         public Builder averageTransactionSize(String averageTransactionSize) {
             Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
@@ -559,6 +591,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             return this;
         }
 
+
         public Builder maxTransactionSize(String maxTransactionSize) {
             Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
             this.maxTransactionSize = Optional.ofNullable(maxTransactionSize);
@@ -570,6 +603,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             this.maxTransactionSize = maxTransactionSize;
             return this;
         }
+
 
         public Builder volumeByCustomerType(VolumeByCustomerTypeError volumeByCustomerType) {
             Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
@@ -583,6 +617,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             return this;
         }
 
+
         public Builder cardVolumeDistribution(CardVolumeDistributionError cardVolumeDistribution) {
             Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
             this.cardVolumeDistribution = Optional.ofNullable(cardVolumeDistribution);
@@ -595,6 +630,7 @@ public class UpsertUnderwritingError extends RuntimeException {
             return this;
         }
 
+
         public Builder fulfillment(FulfillmentDetailsError fulfillment) {
             Utils.checkNotNull(fulfillment, "fulfillment");
             this.fulfillment = Optional.ofNullable(fulfillment);
@@ -606,23 +642,17 @@ public class UpsertUnderwritingError extends RuntimeException {
             this.fulfillment = fulfillment;
             return this;
         }
-        
+
         public UpsertUnderwritingError build() {
+
             return new UpsertUnderwritingError(
-                geographicReach,
-                businessPresence,
-                pendingLitigation,
-                volumeShareByCustomerType,
-                collectFunds,
-                moneyTransfer,
-                sendFunds,
-                averageMonthlyTransactionVolume,
-                averageTransactionSize,
-                maxTransactionSize,
-                volumeByCustomerType,
-                cardVolumeDistribution,
+                geographicReach, businessPresence, pendingLitigation,
+                volumeShareByCustomerType, collectFunds, moneyTransfer,
+                sendFunds, averageMonthlyTransactionVolume, averageTransactionSize,
+                maxTransactionSize, volumeByCustomerType, cardVolumeDistribution,
                 fulfillment);
         }
+
     }
 }
 

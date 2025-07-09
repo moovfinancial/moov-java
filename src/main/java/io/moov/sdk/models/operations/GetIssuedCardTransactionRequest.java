@@ -10,13 +10,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GetIssuedCardTransactionRequest {
 
+public class GetIssuedCardTransactionRequest {
     /**
      * The Moov business account for which cards have been issued.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=cardTransactionID")
     private String cardTransactionID;
@@ -44,9 +45,10 @@ public class GetIssuedCardTransactionRequest {
         return cardTransactionID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The Moov business account for which cards have been issued.
@@ -63,7 +65,6 @@ public class GetIssuedCardTransactionRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -81,8 +82,7 @@ public class GetIssuedCardTransactionRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            cardTransactionID);
+            accountID, cardTransactionID);
     }
     
     @Override
@@ -91,16 +91,18 @@ public class GetIssuedCardTransactionRequest {
                 "accountID", accountID,
                 "cardTransactionID", cardTransactionID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String cardTransactionID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The Moov business account for which cards have been issued.
@@ -111,16 +113,18 @@ public class GetIssuedCardTransactionRequest {
             return this;
         }
 
+
         public Builder cardTransactionID(String cardTransactionID) {
             Utils.checkNotNull(cardTransactionID, "cardTransactionID");
             this.cardTransactionID = cardTransactionID;
             return this;
         }
-        
+
         public GetIssuedCardTransactionRequest build() {
+
             return new GetIssuedCardTransactionRequest(
-                accountID,
-                cardTransactionID);
+                accountID, cardTransactionID);
         }
+
     }
 }

@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class ACHPaymentDetailsError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("companyEntryDescription")
     private Optional<String> companyEntryDescription;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originatingCompanyName")
@@ -47,15 +49,17 @@ public class ACHPaymentDetailsError {
         return originatingCompanyName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ACHPaymentDetailsError withCompanyEntryDescription(String companyEntryDescription) {
         Utils.checkNotNull(companyEntryDescription, "companyEntryDescription");
         this.companyEntryDescription = Optional.ofNullable(companyEntryDescription);
         return this;
     }
+
 
     public ACHPaymentDetailsError withCompanyEntryDescription(Optional<String> companyEntryDescription) {
         Utils.checkNotNull(companyEntryDescription, "companyEntryDescription");
@@ -69,13 +73,13 @@ public class ACHPaymentDetailsError {
         return this;
     }
 
+
     public ACHPaymentDetailsError withOriginatingCompanyName(Optional<String> originatingCompanyName) {
         Utils.checkNotNull(originatingCompanyName, "originatingCompanyName");
         this.originatingCompanyName = originatingCompanyName;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class ACHPaymentDetailsError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyEntryDescription,
-            originatingCompanyName);
+            companyEntryDescription, originatingCompanyName);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class ACHPaymentDetailsError {
                 "companyEntryDescription", companyEntryDescription,
                 "originatingCompanyName", originatingCompanyName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> companyEntryDescription = Optional.empty();
- 
+
         private Optional<String> originatingCompanyName = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder companyEntryDescription(String companyEntryDescription) {
             Utils.checkNotNull(companyEntryDescription, "companyEntryDescription");
@@ -126,6 +131,7 @@ public class ACHPaymentDetailsError {
             return this;
         }
 
+
         public Builder originatingCompanyName(String originatingCompanyName) {
             Utils.checkNotNull(originatingCompanyName, "originatingCompanyName");
             this.originatingCompanyName = Optional.ofNullable(originatingCompanyName);
@@ -137,11 +143,12 @@ public class ACHPaymentDetailsError {
             this.originatingCompanyName = originatingCompanyName;
             return this;
         }
-        
+
         public ACHPaymentDetailsError build() {
+
             return new ACHPaymentDetailsError(
-                companyEntryDescription,
-                originatingCompanyName);
+                companyEntryDescription, originatingCompanyName);
         }
+
     }
 }

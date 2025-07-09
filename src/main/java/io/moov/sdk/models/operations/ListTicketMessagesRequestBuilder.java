@@ -75,7 +75,7 @@ public class ListTicketMessagesRequestBuilder {
     public ListTicketMessagesResponse call() throws Exception {
         
         RequestOperation<ListTicketMessagesRequest, ListTicketMessagesResponse> operation
-              = new ListTicketMessagesOperation( sdkConfiguration);
+              = new ListTicketMessagesOperation(sdkConfiguration);
         ListTicketMessagesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

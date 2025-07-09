@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Total or markup fee.
  */
 public class FacilitatorFee {
-
     /**
      * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
      */
@@ -69,7 +68,8 @@ public class FacilitatorFee {
     }
     
     public FacilitatorFee() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -107,9 +107,10 @@ public class FacilitatorFee {
         return markupDecimal;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
@@ -119,6 +120,7 @@ public class FacilitatorFee {
         this.total = Optional.ofNullable(total);
         return this;
     }
+
 
     /**
      * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
@@ -140,6 +142,7 @@ public class FacilitatorFee {
         return this;
     }
 
+
     /**
      * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
      * 
@@ -160,6 +163,7 @@ public class FacilitatorFee {
         return this;
     }
 
+
     /**
      * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
      */
@@ -179,6 +183,7 @@ public class FacilitatorFee {
         return this;
     }
 
+
     /**
      * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
      * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
@@ -189,7 +194,6 @@ public class FacilitatorFee {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -209,9 +213,7 @@ public class FacilitatorFee {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            total,
-            totalDecimal,
-            markup,
+            total, totalDecimal, markup,
             markupDecimal);
     }
     
@@ -223,20 +225,22 @@ public class FacilitatorFee {
                 "markup", markup,
                 "markupDecimal", markupDecimal);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> total = Optional.empty();
- 
+
         private Optional<String> totalDecimal = Optional.empty();
- 
+
         private Optional<Long> markup = Optional.empty();
- 
+
         private Optional<String> markupDecimal = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set.
@@ -255,6 +259,7 @@ public class FacilitatorFee {
             this.total = total;
             return this;
         }
+
 
         /**
          * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
@@ -278,6 +283,7 @@ public class FacilitatorFee {
             return this;
         }
 
+
         /**
          * Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set.
          */
@@ -295,6 +301,7 @@ public class FacilitatorFee {
             this.markup = markup;
             return this;
         }
+
 
         /**
          * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
@@ -315,13 +322,13 @@ public class FacilitatorFee {
             this.markupDecimal = markupDecimal;
             return this;
         }
-        
+
         public FacilitatorFee build() {
+
             return new FacilitatorFee(
-                total,
-                totalDecimal,
-                markup,
+                total, totalDecimal, markup,
                 markupDecimal);
         }
+
     }
 }

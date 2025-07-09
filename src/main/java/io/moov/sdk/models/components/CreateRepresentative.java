@@ -24,21 +24,26 @@ public class CreateRepresentative {
     @JsonProperty("name")
     private IndividualName name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends Address> address;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("birthDate")
     private Optional<? extends BirthDate> birthDate;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("governmentID")
@@ -78,7 +83,9 @@ public class CreateRepresentative {
     
     public CreateRepresentative(
             IndividualName name) {
-        this(name, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(name, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -124,9 +131,10 @@ public class CreateRepresentative {
         return (Optional<RepresentativeResponsibilities>) responsibilities;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateRepresentative withName(IndividualName name) {
         Utils.checkNotNull(name, "name");
@@ -140,6 +148,7 @@ public class CreateRepresentative {
         return this;
     }
 
+
     public CreateRepresentative withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
@@ -151,6 +160,7 @@ public class CreateRepresentative {
         this.email = Optional.ofNullable(email);
         return this;
     }
+
 
     public CreateRepresentative withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
@@ -164,6 +174,7 @@ public class CreateRepresentative {
         return this;
     }
 
+
     public CreateRepresentative withAddress(Optional<? extends Address> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -176,6 +187,7 @@ public class CreateRepresentative {
         return this;
     }
 
+
     public CreateRepresentative withBirthDate(Optional<? extends BirthDate> birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
         this.birthDate = birthDate;
@@ -187,6 +199,7 @@ public class CreateRepresentative {
         this.governmentID = Optional.ofNullable(governmentID);
         return this;
     }
+
 
     public CreateRepresentative withGovernmentID(Optional<? extends GovernmentID> governmentID) {
         Utils.checkNotNull(governmentID, "governmentID");
@@ -203,6 +216,7 @@ public class CreateRepresentative {
         return this;
     }
 
+
     /**
      * Describes the job responsibilities of a business representative.
      */
@@ -212,7 +226,6 @@ public class CreateRepresentative {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -235,12 +248,8 @@ public class CreateRepresentative {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            phone,
-            email,
-            address,
-            birthDate,
-            governmentID,
+            name, phone, email,
+            address, birthDate, governmentID,
             responsibilities);
     }
     
@@ -255,32 +264,35 @@ public class CreateRepresentative {
                 "governmentID", governmentID,
                 "responsibilities", responsibilities);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private IndividualName name;
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends Address> address = Optional.empty();
- 
+
         private Optional<? extends BirthDate> birthDate = Optional.empty();
- 
+
         private Optional<? extends GovernmentID> governmentID = Optional.empty();
- 
+
         private Optional<? extends RepresentativeResponsibilities> responsibilities = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(IndividualName name) {
             Utils.checkNotNull(name, "name");
             this.name = name;
             return this;
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -294,6 +306,7 @@ public class CreateRepresentative {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -305,6 +318,7 @@ public class CreateRepresentative {
             this.email = email;
             return this;
         }
+
 
         public Builder address(Address address) {
             Utils.checkNotNull(address, "address");
@@ -318,6 +332,7 @@ public class CreateRepresentative {
             return this;
         }
 
+
         public Builder birthDate(BirthDate birthDate) {
             Utils.checkNotNull(birthDate, "birthDate");
             this.birthDate = Optional.ofNullable(birthDate);
@@ -330,6 +345,7 @@ public class CreateRepresentative {
             return this;
         }
 
+
         public Builder governmentID(GovernmentID governmentID) {
             Utils.checkNotNull(governmentID, "governmentID");
             this.governmentID = Optional.ofNullable(governmentID);
@@ -341,6 +357,7 @@ public class CreateRepresentative {
             this.governmentID = governmentID;
             return this;
         }
+
 
         /**
          * Describes the job responsibilities of a business representative.
@@ -359,16 +376,14 @@ public class CreateRepresentative {
             this.responsibilities = responsibilities;
             return this;
         }
-        
+
         public CreateRepresentative build() {
+
             return new CreateRepresentative(
-                name,
-                phone,
-                email,
-                address,
-                birthDate,
-                governmentID,
+                name, phone, email,
+                address, birthDate, governmentID,
                 responsibilities);
         }
+
     }
 }

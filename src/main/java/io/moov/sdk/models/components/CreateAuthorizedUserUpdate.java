@@ -25,9 +25,11 @@ public class CreateAuthorizedUserUpdate {
     @JsonProperty("firstName")
     private Optional<String> firstName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastName")
     private Optional<String> lastName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("birthDate")
@@ -66,15 +68,17 @@ public class CreateAuthorizedUserUpdate {
         return (Optional<BirthDateUpdate>) birthDate;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateAuthorizedUserUpdate withFirstName(String firstName) {
         Utils.checkNotNull(firstName, "firstName");
         this.firstName = Optional.ofNullable(firstName);
         return this;
     }
+
 
     public CreateAuthorizedUserUpdate withFirstName(Optional<String> firstName) {
         Utils.checkNotNull(firstName, "firstName");
@@ -88,6 +92,7 @@ public class CreateAuthorizedUserUpdate {
         return this;
     }
 
+
     public CreateAuthorizedUserUpdate withLastName(Optional<String> lastName) {
         Utils.checkNotNull(lastName, "lastName");
         this.lastName = lastName;
@@ -100,13 +105,13 @@ public class CreateAuthorizedUserUpdate {
         return this;
     }
 
+
     public CreateAuthorizedUserUpdate withBirthDate(Optional<? extends BirthDateUpdate> birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
         this.birthDate = birthDate;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -125,9 +130,7 @@ public class CreateAuthorizedUserUpdate {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            firstName,
-            lastName,
-            birthDate);
+            firstName, lastName, birthDate);
     }
     
     @Override
@@ -137,18 +140,20 @@ public class CreateAuthorizedUserUpdate {
                 "lastName", lastName,
                 "birthDate", birthDate);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> firstName = Optional.empty();
- 
+
         private Optional<String> lastName = Optional.empty();
- 
+
         private Optional<? extends BirthDateUpdate> birthDate = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder firstName(String firstName) {
             Utils.checkNotNull(firstName, "firstName");
@@ -162,6 +167,7 @@ public class CreateAuthorizedUserUpdate {
             return this;
         }
 
+
         public Builder lastName(String lastName) {
             Utils.checkNotNull(lastName, "lastName");
             this.lastName = Optional.ofNullable(lastName);
@@ -174,6 +180,7 @@ public class CreateAuthorizedUserUpdate {
             return this;
         }
 
+
         public Builder birthDate(BirthDateUpdate birthDate) {
             Utils.checkNotNull(birthDate, "birthDate");
             this.birthDate = Optional.ofNullable(birthDate);
@@ -185,12 +192,12 @@ public class CreateAuthorizedUserUpdate {
             this.birthDate = birthDate;
             return this;
         }
-        
+
         public CreateAuthorizedUserUpdate build() {
+
             return new CreateAuthorizedUserUpdate(
-                firstName,
-                lastName,
-                birthDate);
+                firstName, lastName, birthDate);
         }
+
     }
 }

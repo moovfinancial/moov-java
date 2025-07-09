@@ -45,7 +45,7 @@ public class ListDisputeEvidenceRequestBuilder {
     public ListDisputeEvidenceResponse call() throws Exception {
         
         RequestOperation<ListDisputeEvidenceRequest, ListDisputeEvidenceResponse> operation
-              = new ListDisputeEvidenceOperation( sdkConfiguration);
+              = new ListDisputeEvidenceOperation(sdkConfiguration);
         ListDisputeEvidenceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

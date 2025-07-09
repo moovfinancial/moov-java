@@ -10,13 +10,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataCancellationUpdated {
 
     @JsonProperty("cancellationID")
     private String cancellationID;
 
+
     @JsonProperty("transferID")
     private String transferID;
+
 
     @JsonProperty("status")
     private CancellationStatus status;
@@ -49,9 +52,10 @@ public class WebhookDataCancellationUpdated {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataCancellationUpdated withCancellationID(String cancellationID) {
         Utils.checkNotNull(cancellationID, "cancellationID");
@@ -71,7 +75,6 @@ public class WebhookDataCancellationUpdated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,9 +93,7 @@ public class WebhookDataCancellationUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cancellationID,
-            transferID,
-            status);
+            cancellationID, transferID, status);
     }
     
     @Override
@@ -102,18 +103,20 @@ public class WebhookDataCancellationUpdated {
                 "transferID", transferID,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String cancellationID;
- 
+
         private String transferID;
- 
+
         private CancellationStatus status;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder cancellationID(String cancellationID) {
             Utils.checkNotNull(cancellationID, "cancellationID");
@@ -121,23 +124,25 @@ public class WebhookDataCancellationUpdated {
             return this;
         }
 
+
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = transferID;
             return this;
         }
 
+
         public Builder status(CancellationStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
-        
+
         public WebhookDataCancellationUpdated build() {
+
             return new WebhookDataCancellationUpdated(
-                cancellationID,
-                transferID,
-                status);
+                cancellationID, transferID, status);
         }
+
     }
 }

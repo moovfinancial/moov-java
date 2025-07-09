@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetEnrichmentProfileRequest {
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=email")
@@ -27,9 +28,10 @@ public class GetEnrichmentProfileRequest {
         return email;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetEnrichmentProfileRequest withEmail(String email) {
         Utils.checkNotNull(email, "email");
@@ -37,7 +39,6 @@ public class GetEnrichmentProfileRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,24 +63,28 @@ public class GetEnrichmentProfileRequest {
         return Utils.toString(GetEnrichmentProfileRequest.class,
                 "email", email);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String email;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = email;
             return this;
         }
-        
+
         public GetEnrichmentProfileRequest build() {
+
             return new GetEnrichmentProfileRequest(
                 email);
         }
+
     }
 }

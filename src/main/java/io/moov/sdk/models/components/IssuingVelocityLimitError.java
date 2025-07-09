@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class IssuingVelocityLimitError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<String> amount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("interval")
@@ -47,15 +49,17 @@ public class IssuingVelocityLimitError {
         return interval;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public IssuingVelocityLimitError withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
         return this;
     }
+
 
     public IssuingVelocityLimitError withAmount(Optional<String> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -69,13 +73,13 @@ public class IssuingVelocityLimitError {
         return this;
     }
 
+
     public IssuingVelocityLimitError withInterval(Optional<String> interval) {
         Utils.checkNotNull(interval, "interval");
         this.interval = interval;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class IssuingVelocityLimitError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount,
-            interval);
+            amount, interval);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class IssuingVelocityLimitError {
                 "amount", amount,
                 "interval", interval);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> amount = Optional.empty();
- 
+
         private Optional<String> interval = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");
@@ -126,6 +131,7 @@ public class IssuingVelocityLimitError {
             return this;
         }
 
+
         public Builder interval(String interval) {
             Utils.checkNotNull(interval, "interval");
             this.interval = Optional.ofNullable(interval);
@@ -137,11 +143,12 @@ public class IssuingVelocityLimitError {
             this.interval = interval;
             return this;
         }
-        
+
         public IssuingVelocityLimitError build() {
+
             return new IssuingVelocityLimitError(
-                amount,
-                interval);
+                amount, interval);
         }
+
     }
 }

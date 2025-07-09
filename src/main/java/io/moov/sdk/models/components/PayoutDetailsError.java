@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class PayoutDetailsError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowedMethods")
     private Optional<String> allowedMethods;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("recipient")
@@ -49,15 +51,17 @@ public class PayoutDetailsError {
         return (Optional<PayoutRecipientError>) recipient;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PayoutDetailsError withAllowedMethods(String allowedMethods) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         this.allowedMethods = Optional.ofNullable(allowedMethods);
         return this;
     }
+
 
     public PayoutDetailsError withAllowedMethods(Optional<String> allowedMethods) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
@@ -71,13 +75,13 @@ public class PayoutDetailsError {
         return this;
     }
 
+
     public PayoutDetailsError withRecipient(Optional<? extends PayoutRecipientError> recipient) {
         Utils.checkNotNull(recipient, "recipient");
         this.recipient = recipient;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -95,8 +99,7 @@ public class PayoutDetailsError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods,
-            recipient);
+            allowedMethods, recipient);
     }
     
     @Override
@@ -105,16 +108,18 @@ public class PayoutDetailsError {
                 "allowedMethods", allowedMethods,
                 "recipient", recipient);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> allowedMethods = Optional.empty();
- 
+
         private Optional<? extends PayoutRecipientError> recipient = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder allowedMethods(String allowedMethods) {
             Utils.checkNotNull(allowedMethods, "allowedMethods");
@@ -128,6 +133,7 @@ public class PayoutDetailsError {
             return this;
         }
 
+
         public Builder recipient(PayoutRecipientError recipient) {
             Utils.checkNotNull(recipient, "recipient");
             this.recipient = Optional.ofNullable(recipient);
@@ -139,11 +145,12 @@ public class PayoutDetailsError {
             this.recipient = recipient;
             return this;
         }
-        
+
         public PayoutDetailsError build() {
+
             return new PayoutDetailsError(
-                allowedMethods,
-                recipient);
+                allowedMethods, recipient);
         }
+
     }
 }

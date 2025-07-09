@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class Phone {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("number")
     private Optional<String> number;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("countryCode")
@@ -47,15 +49,17 @@ public class Phone {
         return countryCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Phone withNumber(String number) {
         Utils.checkNotNull(number, "number");
         this.number = Optional.ofNullable(number);
         return this;
     }
+
 
     public Phone withNumber(Optional<String> number) {
         Utils.checkNotNull(number, "number");
@@ -69,13 +73,13 @@ public class Phone {
         return this;
     }
 
+
     public Phone withCountryCode(Optional<String> countryCode) {
         Utils.checkNotNull(countryCode, "countryCode");
         this.countryCode = countryCode;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class Phone {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            number,
-            countryCode);
+            number, countryCode);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class Phone {
                 "number", number,
                 "countryCode", countryCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> number = Optional.empty();
- 
+
         private Optional<String> countryCode = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder number(String number) {
             Utils.checkNotNull(number, "number");
@@ -126,6 +131,7 @@ public class Phone {
             return this;
         }
 
+
         public Builder countryCode(String countryCode) {
             Utils.checkNotNull(countryCode, "countryCode");
             this.countryCode = Optional.ofNullable(countryCode);
@@ -137,11 +143,12 @@ public class Phone {
             this.countryCode = countryCode;
             return this;
         }
-        
+
         public Phone build() {
+
             return new Phone(
-                number,
-                countryCode);
+                number, countryCode);
         }
+
     }
 }

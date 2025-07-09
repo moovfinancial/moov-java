@@ -14,13 +14,16 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class WebhookDataBankAccountUpdated {
 
     @JsonProperty("bankAccountID")
     private String bankAccountID;
 
+
     @JsonProperty("accountID")
     private String accountID;
+
 
     @JsonProperty("status")
     private BankAccountStatus status;
@@ -62,7 +65,8 @@ public class WebhookDataBankAccountUpdated {
             String accountID,
             BankAccountStatus status,
             BankAccountStatusReason statusReason) {
-        this(bankAccountID, accountID, status, statusReason, Optional.empty());
+        this(bankAccountID, accountID, status,
+            statusReason, Optional.empty());
     }
 
     @JsonIgnore
@@ -97,9 +101,10 @@ public class WebhookDataBankAccountUpdated {
         return (Optional<BankAccountException>) exceptionDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataBankAccountUpdated withBankAccountID(String bankAccountID) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
@@ -137,6 +142,7 @@ public class WebhookDataBankAccountUpdated {
         return this;
     }
 
+
     /**
      * Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
      */
@@ -146,7 +152,6 @@ public class WebhookDataBankAccountUpdated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -167,11 +172,8 @@ public class WebhookDataBankAccountUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            bankAccountID,
-            accountID,
-            status,
-            statusReason,
-            exceptionDetails);
+            bankAccountID, accountID, status,
+            statusReason, exceptionDetails);
     }
     
     @Override
@@ -183,22 +185,24 @@ public class WebhookDataBankAccountUpdated {
                 "statusReason", statusReason,
                 "exceptionDetails", exceptionDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String bankAccountID;
- 
+
         private String accountID;
- 
+
         private BankAccountStatus status;
- 
+
         private BankAccountStatusReason statusReason;
- 
+
         private Optional<? extends BankAccountException> exceptionDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
@@ -206,17 +210,20 @@ public class WebhookDataBankAccountUpdated {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
 
+
         public Builder status(BankAccountStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         /**
          * The reason the bank account status changed to the current value.
@@ -226,6 +233,7 @@ public class WebhookDataBankAccountUpdated {
             this.statusReason = statusReason;
             return this;
         }
+
 
         /**
          * Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
@@ -244,14 +252,13 @@ public class WebhookDataBankAccountUpdated {
             this.exceptionDetails = exceptionDetails;
             return this;
         }
-        
+
         public WebhookDataBankAccountUpdated build() {
+
             return new WebhookDataBankAccountUpdated(
-                bankAccountID,
-                accountID,
-                status,
-                statusReason,
-                exceptionDetails);
+                bankAccountID, accountID, status,
+                statusReason, exceptionDetails);
         }
+
     }
 }

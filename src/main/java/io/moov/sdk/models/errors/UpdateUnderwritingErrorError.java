@@ -17,27 +17,33 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class UpdateUnderwritingErrorError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("averageMonthlyTransactionVolume")
     private Optional<String> averageMonthlyTransactionVolume;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("averageTransactionSize")
     private Optional<String> averageTransactionSize;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maxTransactionSize")
     private Optional<String> maxTransactionSize;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("volumeByCustomerType")
     private Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardVolumeDistribution")
     private Optional<? extends CardVolumeDistributionError> cardVolumeDistribution;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fulfillment")
@@ -66,7 +72,8 @@ public class UpdateUnderwritingErrorError {
     }
     
     public UpdateUnderwritingErrorError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -102,15 +109,17 @@ public class UpdateUnderwritingErrorError {
         return (Optional<FulfillmentDetailsError>) fulfillment;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateUnderwritingErrorError withAverageMonthlyTransactionVolume(String averageMonthlyTransactionVolume) {
         Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
         this.averageMonthlyTransactionVolume = Optional.ofNullable(averageMonthlyTransactionVolume);
         return this;
     }
+
 
     public UpdateUnderwritingErrorError withAverageMonthlyTransactionVolume(Optional<String> averageMonthlyTransactionVolume) {
         Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
@@ -124,6 +133,7 @@ public class UpdateUnderwritingErrorError {
         return this;
     }
 
+
     public UpdateUnderwritingErrorError withAverageTransactionSize(Optional<String> averageTransactionSize) {
         Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
         this.averageTransactionSize = averageTransactionSize;
@@ -135,6 +145,7 @@ public class UpdateUnderwritingErrorError {
         this.maxTransactionSize = Optional.ofNullable(maxTransactionSize);
         return this;
     }
+
 
     public UpdateUnderwritingErrorError withMaxTransactionSize(Optional<String> maxTransactionSize) {
         Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
@@ -148,6 +159,7 @@ public class UpdateUnderwritingErrorError {
         return this;
     }
 
+
     public UpdateUnderwritingErrorError withVolumeByCustomerType(Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType) {
         Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
         this.volumeByCustomerType = volumeByCustomerType;
@@ -159,6 +171,7 @@ public class UpdateUnderwritingErrorError {
         this.cardVolumeDistribution = Optional.ofNullable(cardVolumeDistribution);
         return this;
     }
+
 
     public UpdateUnderwritingErrorError withCardVolumeDistribution(Optional<? extends CardVolumeDistributionError> cardVolumeDistribution) {
         Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
@@ -172,13 +185,13 @@ public class UpdateUnderwritingErrorError {
         return this;
     }
 
+
     public UpdateUnderwritingErrorError withFulfillment(Optional<? extends FulfillmentDetailsError> fulfillment) {
         Utils.checkNotNull(fulfillment, "fulfillment");
         this.fulfillment = fulfillment;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -200,12 +213,8 @@ public class UpdateUnderwritingErrorError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            averageMonthlyTransactionVolume,
-            averageTransactionSize,
-            maxTransactionSize,
-            volumeByCustomerType,
-            cardVolumeDistribution,
-            fulfillment);
+            averageMonthlyTransactionVolume, averageTransactionSize, maxTransactionSize,
+            volumeByCustomerType, cardVolumeDistribution, fulfillment);
     }
     
     @Override
@@ -218,24 +227,26 @@ public class UpdateUnderwritingErrorError {
                 "cardVolumeDistribution", cardVolumeDistribution,
                 "fulfillment", fulfillment);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> averageMonthlyTransactionVolume = Optional.empty();
- 
+
         private Optional<String> averageTransactionSize = Optional.empty();
- 
+
         private Optional<String> maxTransactionSize = Optional.empty();
- 
+
         private Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType = Optional.empty();
- 
+
         private Optional<? extends CardVolumeDistributionError> cardVolumeDistribution = Optional.empty();
- 
+
         private Optional<? extends FulfillmentDetailsError> fulfillment = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder averageMonthlyTransactionVolume(String averageMonthlyTransactionVolume) {
             Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
@@ -249,6 +260,7 @@ public class UpdateUnderwritingErrorError {
             return this;
         }
 
+
         public Builder averageTransactionSize(String averageTransactionSize) {
             Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
             this.averageTransactionSize = Optional.ofNullable(averageTransactionSize);
@@ -260,6 +272,7 @@ public class UpdateUnderwritingErrorError {
             this.averageTransactionSize = averageTransactionSize;
             return this;
         }
+
 
         public Builder maxTransactionSize(String maxTransactionSize) {
             Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
@@ -273,6 +286,7 @@ public class UpdateUnderwritingErrorError {
             return this;
         }
 
+
         public Builder volumeByCustomerType(VolumeByCustomerTypeError volumeByCustomerType) {
             Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
             this.volumeByCustomerType = Optional.ofNullable(volumeByCustomerType);
@@ -284,6 +298,7 @@ public class UpdateUnderwritingErrorError {
             this.volumeByCustomerType = volumeByCustomerType;
             return this;
         }
+
 
         public Builder cardVolumeDistribution(CardVolumeDistributionError cardVolumeDistribution) {
             Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
@@ -297,6 +312,7 @@ public class UpdateUnderwritingErrorError {
             return this;
         }
 
+
         public Builder fulfillment(FulfillmentDetailsError fulfillment) {
             Utils.checkNotNull(fulfillment, "fulfillment");
             this.fulfillment = Optional.ofNullable(fulfillment);
@@ -308,15 +324,13 @@ public class UpdateUnderwritingErrorError {
             this.fulfillment = fulfillment;
             return this;
         }
-        
+
         public UpdateUnderwritingErrorError build() {
+
             return new UpdateUnderwritingErrorError(
-                averageMonthlyTransactionVolume,
-                averageTransactionSize,
-                maxTransactionSize,
-                volumeByCustomerType,
-                cardVolumeDistribution,
-                fulfillment);
+                averageMonthlyTransactionVolume, averageTransactionSize, maxTransactionSize,
+                volumeByCustomerType, cardVolumeDistribution, fulfillment);
         }
+
     }
 }

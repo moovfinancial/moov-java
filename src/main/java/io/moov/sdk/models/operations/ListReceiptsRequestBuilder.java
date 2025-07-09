@@ -37,7 +37,7 @@ public class ListReceiptsRequestBuilder {
     public ListReceiptsResponse call() throws Exception {
         
         RequestOperation<ListReceiptsRequest, ListReceiptsResponse> operation
-              = new ListReceiptsOperation( sdkConfiguration);
+              = new ListReceiptsOperation(sdkConfiguration);
         ListReceiptsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

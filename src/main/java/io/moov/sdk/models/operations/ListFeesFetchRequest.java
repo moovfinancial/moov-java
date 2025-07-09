@@ -12,10 +12,12 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class ListFeesFetchRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private Optional<? extends io.moov.sdk.models.components.ListFeesFetchRequest> listFeesFetchRequest;
@@ -46,9 +48,10 @@ public class ListFeesFetchRequest {
         return (Optional<io.moov.sdk.models.components.ListFeesFetchRequest>) listFeesFetchRequest;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListFeesFetchRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -62,13 +65,13 @@ public class ListFeesFetchRequest {
         return this;
     }
 
+
     public ListFeesFetchRequest withListFeesFetchRequest(Optional<? extends io.moov.sdk.models.components.ListFeesFetchRequest> listFeesFetchRequest) {
         Utils.checkNotNull(listFeesFetchRequest, "listFeesFetchRequest");
         this.listFeesFetchRequest = listFeesFetchRequest;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -86,8 +89,7 @@ public class ListFeesFetchRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            listFeesFetchRequest);
+            accountID, listFeesFetchRequest);
     }
     
     @Override
@@ -96,22 +98,25 @@ public class ListFeesFetchRequest {
                 "accountID", accountID,
                 "listFeesFetchRequest", listFeesFetchRequest);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<? extends io.moov.sdk.models.components.ListFeesFetchRequest> listFeesFetchRequest = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder listFeesFetchRequest(io.moov.sdk.models.components.ListFeesFetchRequest listFeesFetchRequest) {
             Utils.checkNotNull(listFeesFetchRequest, "listFeesFetchRequest");
@@ -124,11 +129,12 @@ public class ListFeesFetchRequest {
             this.listFeesFetchRequest = listFeesFetchRequest;
             return this;
         }
-        
+
         public ListFeesFetchRequest build() {
+
             return new ListFeesFetchRequest(
-                accountID,
-                listFeesFetchRequest);
+                accountID, listFeesFetchRequest);
         }
+
     }
 }

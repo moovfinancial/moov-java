@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class ReversalValidationError extends RuntimeException {
 
@@ -39,9 +40,10 @@ public class ReversalValidationError extends RuntimeException {
         return amount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ReversalValidationError withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
@@ -49,13 +51,13 @@ public class ReversalValidationError extends RuntimeException {
         return this;
     }
 
+
     public ReversalValidationError withAmount(Optional<String> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -80,14 +82,16 @@ public class ReversalValidationError extends RuntimeException {
         return Utils.toString(ReversalValidationError.class,
                 "amount", amount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> amount = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");
@@ -100,11 +104,13 @@ public class ReversalValidationError extends RuntimeException {
             this.amount = amount;
             return this;
         }
-        
+
         public ReversalValidationError build() {
+
             return new ReversalValidationError(
                 amount);
         }
+
     }
 }
 

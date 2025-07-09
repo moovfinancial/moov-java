@@ -42,9 +42,10 @@ public class TaxIDUpdate {
         return (Optional<TaxIDUpdateEin>) ein;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TaxIDUpdate withEin(TaxIDUpdateEin ein) {
         Utils.checkNotNull(ein, "ein");
@@ -52,13 +53,13 @@ public class TaxIDUpdate {
         return this;
     }
 
+
     public TaxIDUpdate withEin(Optional<? extends TaxIDUpdateEin> ein) {
         Utils.checkNotNull(ein, "ein");
         this.ein = ein;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -83,14 +84,16 @@ public class TaxIDUpdate {
         return Utils.toString(TaxIDUpdate.class,
                 "ein", ein);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends TaxIDUpdateEin> ein = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ein(TaxIDUpdateEin ein) {
             Utils.checkNotNull(ein, "ein");
@@ -103,10 +106,12 @@ public class TaxIDUpdate {
             this.ein = ein;
             return this;
         }
-        
+
         public TaxIDUpdate build() {
+
             return new TaxIDUpdate(
                 ein);
         }
+
     }
 }

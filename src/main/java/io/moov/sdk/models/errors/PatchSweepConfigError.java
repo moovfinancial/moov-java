@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class PatchSweepConfigError extends RuntimeException {
 
@@ -22,17 +23,21 @@ public class PatchSweepConfigError extends RuntimeException {
     @JsonProperty("status")
     private Optional<String> status;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushPaymentMethodID")
     private Optional<String> pushPaymentMethodID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pullPaymentMethodID")
     private Optional<String> pullPaymentMethodID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("statementDescriptor")
     private Optional<String> statementDescriptor;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minimumBalance")
@@ -59,7 +64,8 @@ public class PatchSweepConfigError extends RuntimeException {
     }
     
     public PatchSweepConfigError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -87,15 +93,17 @@ public class PatchSweepConfigError extends RuntimeException {
         return minimumBalance;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PatchSweepConfigError withStatus(String status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
     }
+
 
     public PatchSweepConfigError withStatus(Optional<String> status) {
         Utils.checkNotNull(status, "status");
@@ -109,6 +117,7 @@ public class PatchSweepConfigError extends RuntimeException {
         return this;
     }
 
+
     public PatchSweepConfigError withPushPaymentMethodID(Optional<String> pushPaymentMethodID) {
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
         this.pushPaymentMethodID = pushPaymentMethodID;
@@ -120,6 +129,7 @@ public class PatchSweepConfigError extends RuntimeException {
         this.pullPaymentMethodID = Optional.ofNullable(pullPaymentMethodID);
         return this;
     }
+
 
     public PatchSweepConfigError withPullPaymentMethodID(Optional<String> pullPaymentMethodID) {
         Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
@@ -133,6 +143,7 @@ public class PatchSweepConfigError extends RuntimeException {
         return this;
     }
 
+
     public PatchSweepConfigError withStatementDescriptor(Optional<String> statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
         this.statementDescriptor = statementDescriptor;
@@ -145,13 +156,13 @@ public class PatchSweepConfigError extends RuntimeException {
         return this;
     }
 
+
     public PatchSweepConfigError withMinimumBalance(Optional<String> minimumBalance) {
         Utils.checkNotNull(minimumBalance, "minimumBalance");
         this.minimumBalance = minimumBalance;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -172,11 +183,8 @@ public class PatchSweepConfigError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            status,
-            pushPaymentMethodID,
-            pullPaymentMethodID,
-            statementDescriptor,
-            minimumBalance);
+            status, pushPaymentMethodID, pullPaymentMethodID,
+            statementDescriptor, minimumBalance);
     }
     
     @Override
@@ -188,22 +196,24 @@ public class PatchSweepConfigError extends RuntimeException {
                 "statementDescriptor", statementDescriptor,
                 "minimumBalance", minimumBalance);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> status = Optional.empty();
- 
+
         private Optional<String> pushPaymentMethodID = Optional.empty();
- 
+
         private Optional<String> pullPaymentMethodID = Optional.empty();
- 
+
         private Optional<String> statementDescriptor = Optional.empty();
- 
+
         private Optional<String> minimumBalance = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder status(String status) {
             Utils.checkNotNull(status, "status");
@@ -217,6 +227,7 @@ public class PatchSweepConfigError extends RuntimeException {
             return this;
         }
 
+
         public Builder pushPaymentMethodID(String pushPaymentMethodID) {
             Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
             this.pushPaymentMethodID = Optional.ofNullable(pushPaymentMethodID);
@@ -228,6 +239,7 @@ public class PatchSweepConfigError extends RuntimeException {
             this.pushPaymentMethodID = pushPaymentMethodID;
             return this;
         }
+
 
         public Builder pullPaymentMethodID(String pullPaymentMethodID) {
             Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
@@ -241,6 +253,7 @@ public class PatchSweepConfigError extends RuntimeException {
             return this;
         }
 
+
         public Builder statementDescriptor(String statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
             this.statementDescriptor = Optional.ofNullable(statementDescriptor);
@@ -253,6 +266,7 @@ public class PatchSweepConfigError extends RuntimeException {
             return this;
         }
 
+
         public Builder minimumBalance(String minimumBalance) {
             Utils.checkNotNull(minimumBalance, "minimumBalance");
             this.minimumBalance = Optional.ofNullable(minimumBalance);
@@ -264,15 +278,14 @@ public class PatchSweepConfigError extends RuntimeException {
             this.minimumBalance = minimumBalance;
             return this;
         }
-        
+
         public PatchSweepConfigError build() {
+
             return new PatchSweepConfigError(
-                status,
-                pushPaymentMethodID,
-                pullPaymentMethodID,
-                statementDescriptor,
-                minimumBalance);
+                status, pushPaymentMethodID, pullPaymentMethodID,
+                statementDescriptor, minimumBalance);
         }
+
     }
 }
 

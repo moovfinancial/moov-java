@@ -11,19 +11,24 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 
+
 public class EvidenceTextResponse {
 
     @JsonProperty("evidenceID")
     private String evidenceID;
 
+
     @JsonProperty("disputeID")
     private String disputeID;
+
 
     @JsonProperty("evidenceType")
     private EvidenceType evidenceType;
 
+
     @JsonProperty("text")
     private String text;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -72,9 +77,10 @@ public class EvidenceTextResponse {
         return createdOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public EvidenceTextResponse withEvidenceID(String evidenceID) {
         Utils.checkNotNull(evidenceID, "evidenceID");
@@ -106,7 +112,6 @@ public class EvidenceTextResponse {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -127,11 +132,8 @@ public class EvidenceTextResponse {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            evidenceID,
-            disputeID,
-            evidenceType,
-            text,
-            createdOn);
+            evidenceID, disputeID, evidenceType,
+            text, createdOn);
     }
     
     @Override
@@ -143,22 +145,24 @@ public class EvidenceTextResponse {
                 "text", text,
                 "createdOn", createdOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String evidenceID;
- 
+
         private String disputeID;
- 
+
         private EvidenceType evidenceType;
- 
+
         private String text;
- 
+
         private OffsetDateTime createdOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder evidenceID(String evidenceID) {
             Utils.checkNotNull(evidenceID, "evidenceID");
@@ -166,11 +170,13 @@ public class EvidenceTextResponse {
             return this;
         }
 
+
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = disputeID;
             return this;
         }
+
 
         public Builder evidenceType(EvidenceType evidenceType) {
             Utils.checkNotNull(evidenceType, "evidenceType");
@@ -178,25 +184,26 @@ public class EvidenceTextResponse {
             return this;
         }
 
+
         public Builder text(String text) {
             Utils.checkNotNull(text, "text");
             this.text = text;
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
-        
+
         public EvidenceTextResponse build() {
+
             return new EvidenceTextResponse(
-                evidenceID,
-                disputeID,
-                evidenceType,
-                text,
-                createdOn);
+                evidenceID, disputeID, evidenceType,
+                text, createdOn);
         }
+
     }
 }

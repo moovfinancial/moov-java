@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Describes a guest account profile.
  */
 public class GuestProfile {
-
     /**
      * The name associated with the guest account.
      * This will default to "Guest {accountIDfirst8}" if no other name is provided.
@@ -28,9 +27,11 @@ public class GuestProfile {
     @JsonProperty("name")
     private String name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
@@ -74,9 +75,10 @@ public class GuestProfile {
         return email;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The name associated with the guest account.
@@ -94,6 +96,7 @@ public class GuestProfile {
         return this;
     }
 
+
     public GuestProfile withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
@@ -106,13 +109,13 @@ public class GuestProfile {
         return this;
     }
 
+
     public GuestProfile withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -131,9 +134,7 @@ public class GuestProfile {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            phone,
-            email);
+            name, phone, email);
     }
     
     @Override
@@ -143,18 +144,20 @@ public class GuestProfile {
                 "phone", phone,
                 "email", email);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String name;
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The name associated with the guest account.
@@ -165,6 +168,7 @@ public class GuestProfile {
             this.name = name;
             return this;
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -178,6 +182,7 @@ public class GuestProfile {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -189,12 +194,12 @@ public class GuestProfile {
             this.email = email;
             return this;
         }
-        
+
         public GuestProfile build() {
+
             return new GuestProfile(
-                name,
-                phone,
-                email);
+                name, phone, email);
         }
+
     }
 }

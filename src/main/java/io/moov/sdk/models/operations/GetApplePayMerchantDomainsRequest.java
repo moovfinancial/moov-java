@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GetApplePayMerchantDomainsRequest {
 
+public class GetApplePayMerchantDomainsRequest {
     /**
      * ID of the Moov account representing the merchant.
      */
@@ -33,9 +33,10 @@ public class GetApplePayMerchantDomainsRequest {
         return accountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the Moov account representing the merchant.
@@ -46,7 +47,6 @@ public class GetApplePayMerchantDomainsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class GetApplePayMerchantDomainsRequest {
         return Utils.toString(GetApplePayMerchantDomainsRequest.class,
                 "accountID", accountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the Moov account representing the merchant.
@@ -88,10 +90,12 @@ public class GetApplePayMerchantDomainsRequest {
             this.accountID = accountID;
             return this;
         }
-        
+
         public GetApplePayMerchantDomainsRequest build() {
+
             return new GetApplePayMerchantDomainsRequest(
                 accountID);
         }
+
     }
 }

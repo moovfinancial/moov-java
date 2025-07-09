@@ -15,11 +15,13 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
+
 public class TransferOptions {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sourceOptions")
     private Optional<? extends List<PaymentMethod>> sourceOptions;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("destinationOptions")
@@ -51,15 +53,17 @@ public class TransferOptions {
         return (Optional<List<PaymentMethod>>) destinationOptions;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TransferOptions withSourceOptions(List<PaymentMethod> sourceOptions) {
         Utils.checkNotNull(sourceOptions, "sourceOptions");
         this.sourceOptions = Optional.ofNullable(sourceOptions);
         return this;
     }
+
 
     public TransferOptions withSourceOptions(Optional<? extends List<PaymentMethod>> sourceOptions) {
         Utils.checkNotNull(sourceOptions, "sourceOptions");
@@ -73,13 +77,13 @@ public class TransferOptions {
         return this;
     }
 
+
     public TransferOptions withDestinationOptions(Optional<? extends List<PaymentMethod>> destinationOptions) {
         Utils.checkNotNull(destinationOptions, "destinationOptions");
         this.destinationOptions = destinationOptions;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -97,8 +101,7 @@ public class TransferOptions {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            sourceOptions,
-            destinationOptions);
+            sourceOptions, destinationOptions);
     }
     
     @Override
@@ -107,16 +110,18 @@ public class TransferOptions {
                 "sourceOptions", sourceOptions,
                 "destinationOptions", destinationOptions);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<PaymentMethod>> sourceOptions = Optional.empty();
- 
+
         private Optional<? extends List<PaymentMethod>> destinationOptions = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder sourceOptions(List<PaymentMethod> sourceOptions) {
             Utils.checkNotNull(sourceOptions, "sourceOptions");
@@ -130,6 +135,7 @@ public class TransferOptions {
             return this;
         }
 
+
         public Builder destinationOptions(List<PaymentMethod> destinationOptions) {
             Utils.checkNotNull(destinationOptions, "destinationOptions");
             this.destinationOptions = Optional.ofNullable(destinationOptions);
@@ -141,11 +147,12 @@ public class TransferOptions {
             this.destinationOptions = destinationOptions;
             return this;
         }
-        
+
         public TransferOptions build() {
+
             return new TransferOptions(
-                sourceOptions,
-                destinationOptions);
+                sourceOptions, destinationOptions);
         }
+
     }
 }

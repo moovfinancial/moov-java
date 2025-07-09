@@ -15,11 +15,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class PatchBusiness {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("legalBusinessName")
     private Optional<String> legalBusinessName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("doingBusinessAs")
@@ -32,21 +34,26 @@ public class PatchBusiness {
     @JsonProperty("businessType")
     private Optional<? extends BusinessType> businessType;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends AddressUpdate> address;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("website")
     private Optional<String> website;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
@@ -59,9 +66,11 @@ public class PatchBusiness {
     @JsonProperty("taxID")
     private Optional<? extends TaxIDUpdate> taxID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ownersProvided")
     private Optional<Boolean> ownersProvided;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("industryCodes")
@@ -115,7 +124,10 @@ public class PatchBusiness {
     }
     
     public PatchBusiness() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -193,15 +205,17 @@ public class PatchBusiness {
         return (Optional<PrimaryRegulator>) primaryRegulator;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PatchBusiness withLegalBusinessName(String legalBusinessName) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
         this.legalBusinessName = Optional.ofNullable(legalBusinessName);
         return this;
     }
+
 
     public PatchBusiness withLegalBusinessName(Optional<String> legalBusinessName) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
@@ -214,6 +228,7 @@ public class PatchBusiness {
         this.doingBusinessAs = Optional.ofNullable(doingBusinessAs);
         return this;
     }
+
 
     public PatchBusiness withDoingBusinessAs(Optional<String> doingBusinessAs) {
         Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
@@ -230,6 +245,7 @@ public class PatchBusiness {
         return this;
     }
 
+
     /**
      * The type of entity represented by this business.
      */
@@ -245,6 +261,7 @@ public class PatchBusiness {
         return this;
     }
 
+
     public PatchBusiness withAddress(Optional<? extends AddressUpdate> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -256,6 +273,7 @@ public class PatchBusiness {
         this.phone = Optional.ofNullable(phone);
         return this;
     }
+
 
     public PatchBusiness withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
@@ -269,6 +287,7 @@ public class PatchBusiness {
         return this;
     }
 
+
     public PatchBusiness withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
@@ -281,6 +300,7 @@ public class PatchBusiness {
         return this;
     }
 
+
     public PatchBusiness withWebsite(Optional<String> website) {
         Utils.checkNotNull(website, "website");
         this.website = website;
@@ -292,6 +312,7 @@ public class PatchBusiness {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     public PatchBusiness withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
@@ -308,6 +329,7 @@ public class PatchBusiness {
         return this;
     }
 
+
     /**
      * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
      */
@@ -323,6 +345,7 @@ public class PatchBusiness {
         return this;
     }
 
+
     public PatchBusiness withOwnersProvided(Optional<Boolean> ownersProvided) {
         Utils.checkNotNull(ownersProvided, "ownersProvided");
         this.ownersProvided = ownersProvided;
@@ -334,6 +357,7 @@ public class PatchBusiness {
         this.industryCodes = Optional.ofNullable(industryCodes);
         return this;
     }
+
 
     public PatchBusiness withIndustryCodes(Optional<? extends IndustryCodes> industryCodes) {
         Utils.checkNotNull(industryCodes, "industryCodes");
@@ -350,6 +374,7 @@ public class PatchBusiness {
         return this;
     }
 
+
     /**
      * If the business is a financial institution, this field describes its primary regulator.
      */
@@ -359,7 +384,6 @@ public class PatchBusiness {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -387,18 +411,10 @@ public class PatchBusiness {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            legalBusinessName,
-            doingBusinessAs,
-            businessType,
-            address,
-            phone,
-            email,
-            website,
-            description,
-            taxID,
-            ownersProvided,
-            industryCodes,
-            primaryRegulator);
+            legalBusinessName, doingBusinessAs, businessType,
+            address, phone, email,
+            website, description, taxID,
+            ownersProvided, industryCodes, primaryRegulator);
     }
     
     @Override
@@ -417,36 +433,38 @@ public class PatchBusiness {
                 "industryCodes", industryCodes,
                 "primaryRegulator", primaryRegulator);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> legalBusinessName = Optional.empty();
- 
+
         private Optional<String> doingBusinessAs = Optional.empty();
- 
+
         private Optional<? extends BusinessType> businessType = Optional.empty();
- 
+
         private Optional<? extends AddressUpdate> address = Optional.empty();
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<String> website = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<? extends TaxIDUpdate> taxID = Optional.empty();
- 
+
         private Optional<Boolean> ownersProvided = Optional.empty();
- 
+
         private Optional<? extends IndustryCodes> industryCodes = Optional.empty();
- 
+
         private Optional<? extends PrimaryRegulator> primaryRegulator = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder legalBusinessName(String legalBusinessName) {
             Utils.checkNotNull(legalBusinessName, "legalBusinessName");
@@ -460,6 +478,7 @@ public class PatchBusiness {
             return this;
         }
 
+
         public Builder doingBusinessAs(String doingBusinessAs) {
             Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
             this.doingBusinessAs = Optional.ofNullable(doingBusinessAs);
@@ -471,6 +490,7 @@ public class PatchBusiness {
             this.doingBusinessAs = doingBusinessAs;
             return this;
         }
+
 
         /**
          * The type of entity represented by this business.
@@ -490,6 +510,7 @@ public class PatchBusiness {
             return this;
         }
 
+
         public Builder address(AddressUpdate address) {
             Utils.checkNotNull(address, "address");
             this.address = Optional.ofNullable(address);
@@ -501,6 +522,7 @@ public class PatchBusiness {
             this.address = address;
             return this;
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -514,6 +536,7 @@ public class PatchBusiness {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -525,6 +548,7 @@ public class PatchBusiness {
             this.email = email;
             return this;
         }
+
 
         public Builder website(String website) {
             Utils.checkNotNull(website, "website");
@@ -538,6 +562,7 @@ public class PatchBusiness {
             return this;
         }
 
+
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
@@ -549,6 +574,7 @@ public class PatchBusiness {
             this.description = description;
             return this;
         }
+
 
         /**
          * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
@@ -568,6 +594,7 @@ public class PatchBusiness {
             return this;
         }
 
+
         public Builder ownersProvided(boolean ownersProvided) {
             Utils.checkNotNull(ownersProvided, "ownersProvided");
             this.ownersProvided = Optional.ofNullable(ownersProvided);
@@ -580,6 +607,7 @@ public class PatchBusiness {
             return this;
         }
 
+
         public Builder industryCodes(IndustryCodes industryCodes) {
             Utils.checkNotNull(industryCodes, "industryCodes");
             this.industryCodes = Optional.ofNullable(industryCodes);
@@ -591,6 +619,7 @@ public class PatchBusiness {
             this.industryCodes = industryCodes;
             return this;
         }
+
 
         /**
          * If the business is a financial institution, this field describes its primary regulator.
@@ -609,21 +638,15 @@ public class PatchBusiness {
             this.primaryRegulator = primaryRegulator;
             return this;
         }
-        
+
         public PatchBusiness build() {
+
             return new PatchBusiness(
-                legalBusinessName,
-                doingBusinessAs,
-                businessType,
-                address,
-                phone,
-                email,
-                website,
-                description,
-                taxID,
-                ownersProvided,
-                industryCodes,
-                primaryRegulator);
+                legalBusinessName, doingBusinessAs, businessType,
+                address, phone, email,
+                website, description, taxID,
+                ownersProvided, industryCodes, primaryRegulator);
         }
+
     }
 }

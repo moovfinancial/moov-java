@@ -22,7 +22,6 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * <p>Describes the fields available when patching a Moov account.
  */
 public class PatchAccount {
-
     /**
      * Describes the fields available when patching a profile.
      * Each object can be patched independent of patching the other fields.
@@ -31,21 +30,26 @@ public class PatchAccount {
     @JsonProperty("profile")
     private Optional<? extends PatchProfile> profile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
     private JsonNullable<? extends Map<String, String>> metadata;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("termsOfService")
     private Optional<? extends PatchAccountTermsOfService> termsOfService;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("foreignID")
     private Optional<String> foreignID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("customerSupport")
     private JsonNullable<? extends PatchAccountCustomerSupport> customerSupport;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("settings")
@@ -74,7 +78,8 @@ public class PatchAccount {
     }
     
     public PatchAccount() {
-        this(Optional.empty(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty());
+        this(Optional.empty(), JsonNullable.undefined(), Optional.empty(),
+            Optional.empty(), JsonNullable.undefined(), Optional.empty());
     }
 
     /**
@@ -116,9 +121,10 @@ public class PatchAccount {
         return (Optional<CreateAccountSettings>) settings;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Describes the fields available when patching a profile.
@@ -129,6 +135,7 @@ public class PatchAccount {
         this.profile = Optional.ofNullable(profile);
         return this;
     }
+
 
     /**
      * Describes the fields available when patching a profile.
@@ -158,6 +165,7 @@ public class PatchAccount {
         return this;
     }
 
+
     public PatchAccount withTermsOfService(Optional<? extends PatchAccountTermsOfService> termsOfService) {
         Utils.checkNotNull(termsOfService, "termsOfService");
         this.termsOfService = termsOfService;
@@ -169,6 +177,7 @@ public class PatchAccount {
         this.foreignID = Optional.ofNullable(foreignID);
         return this;
     }
+
 
     public PatchAccount withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
@@ -194,13 +203,13 @@ public class PatchAccount {
         return this;
     }
 
+
     public PatchAccount withSettings(Optional<? extends CreateAccountSettings> settings) {
         Utils.checkNotNull(settings, "settings");
         this.settings = settings;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -222,12 +231,8 @@ public class PatchAccount {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            profile,
-            metadata,
-            termsOfService,
-            foreignID,
-            customerSupport,
-            settings);
+            profile, metadata, termsOfService,
+            foreignID, customerSupport, settings);
     }
     
     @Override
@@ -240,24 +245,26 @@ public class PatchAccount {
                 "customerSupport", customerSupport,
                 "settings", settings);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends PatchProfile> profile = Optional.empty();
- 
+
         private JsonNullable<? extends Map<String, String>> metadata = JsonNullable.undefined();
- 
+
         private Optional<? extends PatchAccountTermsOfService> termsOfService = Optional.empty();
- 
+
         private Optional<String> foreignID = Optional.empty();
- 
+
         private JsonNullable<? extends PatchAccountCustomerSupport> customerSupport = JsonNullable.undefined();
- 
+
         private Optional<? extends CreateAccountSettings> settings = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Describes the fields available when patching a profile.
@@ -279,6 +286,7 @@ public class PatchAccount {
             return this;
         }
 
+
         public Builder metadata(Map<String, String> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = JsonNullable.of(metadata);
@@ -290,6 +298,7 @@ public class PatchAccount {
             this.metadata = metadata;
             return this;
         }
+
 
         public Builder termsOfService(PatchAccountTermsOfService termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
@@ -303,6 +312,7 @@ public class PatchAccount {
             return this;
         }
 
+
         public Builder foreignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = Optional.ofNullable(foreignID);
@@ -314,6 +324,7 @@ public class PatchAccount {
             this.foreignID = foreignID;
             return this;
         }
+
 
         public Builder customerSupport(PatchAccountCustomerSupport customerSupport) {
             Utils.checkNotNull(customerSupport, "customerSupport");
@@ -327,6 +338,7 @@ public class PatchAccount {
             return this;
         }
 
+
         public Builder settings(CreateAccountSettings settings) {
             Utils.checkNotNull(settings, "settings");
             this.settings = Optional.ofNullable(settings);
@@ -338,15 +350,13 @@ public class PatchAccount {
             this.settings = settings;
             return this;
         }
-        
+
         public PatchAccount build() {
+
             return new PatchAccount(
-                profile,
-                metadata,
-                termsOfService,
-                foreignID,
-                customerSupport,
-                settings);
+                profile, metadata, termsOfService,
+                foreignID, customerSupport, settings);
         }
+
     }
 }

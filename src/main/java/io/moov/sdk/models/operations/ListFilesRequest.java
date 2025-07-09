@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class ListFilesRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
@@ -27,9 +28,10 @@ public class ListFilesRequest {
         return accountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListFilesRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -37,7 +39,6 @@ public class ListFilesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,24 +63,28 @@ public class ListFilesRequest {
         return Utils.toString(ListFilesRequest.class,
                 "accountID", accountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
-        
+
         public ListFilesRequest build() {
+
             return new ListFilesRequest(
                 accountID);
         }
+
     }
 }

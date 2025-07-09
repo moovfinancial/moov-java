@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class UpdateColors {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("dark")
     private Optional<? extends UpdateColor> dark;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("light")
@@ -50,15 +52,17 @@ public class UpdateColors {
         return (Optional<UpdateColor>) light;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateColors withDark(UpdateColor dark) {
         Utils.checkNotNull(dark, "dark");
         this.dark = Optional.ofNullable(dark);
         return this;
     }
+
 
     public UpdateColors withDark(Optional<? extends UpdateColor> dark) {
         Utils.checkNotNull(dark, "dark");
@@ -72,13 +76,13 @@ public class UpdateColors {
         return this;
     }
 
+
     public UpdateColors withLight(Optional<? extends UpdateColor> light) {
         Utils.checkNotNull(light, "light");
         this.light = light;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class UpdateColors {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            dark,
-            light);
+            dark, light);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class UpdateColors {
                 "dark", dark,
                 "light", light);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends UpdateColor> dark = Optional.empty();
- 
+
         private Optional<? extends UpdateColor> light = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder dark(UpdateColor dark) {
             Utils.checkNotNull(dark, "dark");
@@ -129,6 +134,7 @@ public class UpdateColors {
             return this;
         }
 
+
         public Builder light(UpdateColor light) {
             Utils.checkNotNull(light, "light");
             this.light = Optional.ofNullable(light);
@@ -140,11 +146,12 @@ public class UpdateColors {
             this.light = light;
             return this;
         }
-        
+
         public UpdateColors build() {
+
             return new UpdateColors(
-                dark,
-                light);
+                dark, light);
         }
+
     }
 }

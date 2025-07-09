@@ -45,7 +45,7 @@ public class GetAccountTerminalApplicationRequestBuilder {
     public GetAccountTerminalApplicationResponse call() throws Exception {
         
         RequestOperation<GetAccountTerminalApplicationRequest, GetAccountTerminalApplicationResponse> operation
-              = new GetAccountTerminalApplicationOperation( sdkConfiguration);
+              = new GetAccountTerminalApplicationOperation(sdkConfiguration);
         GetAccountTerminalApplicationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -13,19 +13,23 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class RepresentativeResponsibilitiesError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("isController")
     private Optional<String> isController;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("isOwner")
     private Optional<String> isOwner;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ownershipPercentage")
     private Optional<String> ownershipPercentage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("jobTitle")
@@ -48,7 +52,8 @@ public class RepresentativeResponsibilitiesError {
     }
     
     public RepresentativeResponsibilitiesError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -71,15 +76,17 @@ public class RepresentativeResponsibilitiesError {
         return jobTitle;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RepresentativeResponsibilitiesError withIsController(String isController) {
         Utils.checkNotNull(isController, "isController");
         this.isController = Optional.ofNullable(isController);
         return this;
     }
+
 
     public RepresentativeResponsibilitiesError withIsController(Optional<String> isController) {
         Utils.checkNotNull(isController, "isController");
@@ -93,6 +100,7 @@ public class RepresentativeResponsibilitiesError {
         return this;
     }
 
+
     public RepresentativeResponsibilitiesError withIsOwner(Optional<String> isOwner) {
         Utils.checkNotNull(isOwner, "isOwner");
         this.isOwner = isOwner;
@@ -104,6 +112,7 @@ public class RepresentativeResponsibilitiesError {
         this.ownershipPercentage = Optional.ofNullable(ownershipPercentage);
         return this;
     }
+
 
     public RepresentativeResponsibilitiesError withOwnershipPercentage(Optional<String> ownershipPercentage) {
         Utils.checkNotNull(ownershipPercentage, "ownershipPercentage");
@@ -117,13 +126,13 @@ public class RepresentativeResponsibilitiesError {
         return this;
     }
 
+
     public RepresentativeResponsibilitiesError withJobTitle(Optional<String> jobTitle) {
         Utils.checkNotNull(jobTitle, "jobTitle");
         this.jobTitle = jobTitle;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -143,9 +152,7 @@ public class RepresentativeResponsibilitiesError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            isController,
-            isOwner,
-            ownershipPercentage,
+            isController, isOwner, ownershipPercentage,
             jobTitle);
     }
     
@@ -157,20 +164,22 @@ public class RepresentativeResponsibilitiesError {
                 "ownershipPercentage", ownershipPercentage,
                 "jobTitle", jobTitle);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> isController = Optional.empty();
- 
+
         private Optional<String> isOwner = Optional.empty();
- 
+
         private Optional<String> ownershipPercentage = Optional.empty();
- 
+
         private Optional<String> jobTitle = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder isController(String isController) {
             Utils.checkNotNull(isController, "isController");
@@ -184,6 +193,7 @@ public class RepresentativeResponsibilitiesError {
             return this;
         }
 
+
         public Builder isOwner(String isOwner) {
             Utils.checkNotNull(isOwner, "isOwner");
             this.isOwner = Optional.ofNullable(isOwner);
@@ -195,6 +205,7 @@ public class RepresentativeResponsibilitiesError {
             this.isOwner = isOwner;
             return this;
         }
+
 
         public Builder ownershipPercentage(String ownershipPercentage) {
             Utils.checkNotNull(ownershipPercentage, "ownershipPercentage");
@@ -208,6 +219,7 @@ public class RepresentativeResponsibilitiesError {
             return this;
         }
 
+
         public Builder jobTitle(String jobTitle) {
             Utils.checkNotNull(jobTitle, "jobTitle");
             this.jobTitle = Optional.ofNullable(jobTitle);
@@ -219,13 +231,13 @@ public class RepresentativeResponsibilitiesError {
             this.jobTitle = jobTitle;
             return this;
         }
-        
+
         public RepresentativeResponsibilitiesError build() {
+
             return new RepresentativeResponsibilitiesError(
-                isController,
-                isOwner,
-                ownershipPercentage,
+                isController, isOwner, ownershipPercentage,
                 jobTitle);
         }
+
     }
 }

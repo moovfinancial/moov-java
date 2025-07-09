@@ -20,7 +20,6 @@ public class EnrichedAddress {
     EnrichedAddress(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Fetch enriched address suggestions. Requires a partial address. 
      * 
@@ -43,10 +42,9 @@ public class EnrichedAddress {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetEnrichmentAddressResponse get(
-            GetEnrichmentAddressRequest request) throws Exception {
+    public GetEnrichmentAddressResponse get(GetEnrichmentAddressRequest request) throws Exception {
         RequestOperation<GetEnrichmentAddressRequest, GetEnrichmentAddressResponse> operation
-              = new GetEnrichmentAddressOperation( sdkConfiguration);
+              = new GetEnrichmentAddressOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

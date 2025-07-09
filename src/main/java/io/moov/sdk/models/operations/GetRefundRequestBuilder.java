@@ -53,7 +53,7 @@ public class GetRefundRequestBuilder {
     public GetRefundResponse call() throws Exception {
         
         RequestOperation<GetRefundRequest, GetRefundResponse> operation
-              = new GetRefundOperation( sdkConfiguration);
+              = new GetRefundOperation(sdkConfiguration);
         GetRefundRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

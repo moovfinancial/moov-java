@@ -22,23 +22,26 @@ import java.util.Optional;
  * <p>Describes a business representative.
  */
 public class Representative {
-
     /**
      * Unique identifier for this representative.
      */
     @JsonProperty("representativeID")
     private String representativeID;
 
+
     @JsonProperty("name")
     private IndividualName name;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
@@ -65,11 +68,14 @@ public class Representative {
     @JsonProperty("responsibilities")
     private Optional<? extends RepresentativeResponsibilities> responsibilities;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
 
+
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disabledOn")
@@ -117,7 +123,10 @@ public class Representative {
             IndividualName name,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(representativeID, name, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn, Optional.empty());
+        this(representativeID, name, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), createdOn,
+            updatedOn, Optional.empty());
     }
 
     /**
@@ -190,9 +199,10 @@ public class Representative {
         return disabledOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for this representative.
@@ -215,6 +225,7 @@ public class Representative {
         return this;
     }
 
+
     public Representative withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
@@ -227,6 +238,7 @@ public class Representative {
         return this;
     }
 
+
     public Representative withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
@@ -238,6 +250,7 @@ public class Representative {
         this.address = Optional.ofNullable(address);
         return this;
     }
+
 
     public Representative withAddress(Optional<? extends Address> address) {
         Utils.checkNotNull(address, "address");
@@ -253,6 +266,7 @@ public class Representative {
         this.birthDateProvided = Optional.ofNullable(birthDateProvided);
         return this;
     }
+
 
     /**
      * Indicates whether this representative's birth date has been provided.
@@ -272,6 +286,7 @@ public class Representative {
         return this;
     }
 
+
     /**
      * Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this representative.
      */
@@ -289,6 +304,7 @@ public class Representative {
         this.responsibilities = Optional.ofNullable(responsibilities);
         return this;
     }
+
 
     /**
      * Describes the job responsibilities of a business representative.
@@ -317,13 +333,13 @@ public class Representative {
         return this;
     }
 
+
     public Representative withDisabledOn(Optional<OffsetDateTime> disabledOn) {
         Utils.checkNotNull(disabledOn, "disabledOn");
         this.disabledOn = disabledOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -350,17 +366,10 @@ public class Representative {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            representativeID,
-            name,
-            phone,
-            email,
-            address,
-            birthDateProvided,
-            governmentIDProvided,
-            responsibilities,
-            createdOn,
-            updatedOn,
-            disabledOn);
+            representativeID, name, phone,
+            email, address, birthDateProvided,
+            governmentIDProvided, responsibilities, createdOn,
+            updatedOn, disabledOn);
     }
     
     @Override
@@ -378,34 +387,36 @@ public class Representative {
                 "updatedOn", updatedOn,
                 "disabledOn", disabledOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String representativeID;
- 
+
         private IndividualName name;
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends Address> address = Optional.empty();
- 
+
         private Optional<Boolean> birthDateProvided = Optional.empty();
- 
+
         private Optional<Boolean> governmentIDProvided = Optional.empty();
- 
+
         private Optional<? extends RepresentativeResponsibilities> responsibilities = Optional.empty();
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
- 
+
         private Optional<OffsetDateTime> disabledOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for this representative.
@@ -416,11 +427,13 @@ public class Representative {
             return this;
         }
 
+
         public Builder name(IndividualName name) {
             Utils.checkNotNull(name, "name");
             this.name = name;
             return this;
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -434,6 +447,7 @@ public class Representative {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -446,6 +460,7 @@ public class Representative {
             return this;
         }
 
+
         public Builder address(Address address) {
             Utils.checkNotNull(address, "address");
             this.address = Optional.ofNullable(address);
@@ -457,6 +472,7 @@ public class Representative {
             this.address = address;
             return this;
         }
+
 
         /**
          * Indicates whether this representative's birth date has been provided.
@@ -476,6 +492,7 @@ public class Representative {
             return this;
         }
 
+
         /**
          * Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this representative.
          */
@@ -493,6 +510,7 @@ public class Representative {
             this.governmentIDProvided = governmentIDProvided;
             return this;
         }
+
 
         /**
          * Describes the job responsibilities of a business representative.
@@ -512,17 +530,20 @@ public class Representative {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
+
 
         public Builder disabledOn(OffsetDateTime disabledOn) {
             Utils.checkNotNull(disabledOn, "disabledOn");
@@ -535,20 +556,15 @@ public class Representative {
             this.disabledOn = disabledOn;
             return this;
         }
-        
+
         public Representative build() {
+
             return new Representative(
-                representativeID,
-                name,
-                phone,
-                email,
-                address,
-                birthDateProvided,
-                governmentIDProvided,
-                responsibilities,
-                createdOn,
-                updatedOn,
-                disabledOn);
+                representativeID, name, phone,
+                email, address, birthDateProvided,
+                governmentIDProvided, responsibilities, createdOn,
+                updatedOn, disabledOn);
         }
+
     }
 }

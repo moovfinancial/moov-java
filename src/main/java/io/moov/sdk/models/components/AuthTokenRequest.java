@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class AuthTokenRequest {
 
+public class AuthTokenRequest {
     /**
      * The type of grant being requested.
      * 
@@ -79,7 +79,8 @@ public class AuthTokenRequest {
     
     public AuthTokenRequest(
             GrantType grantType) {
-        this(grantType, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(grantType, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -125,9 +126,10 @@ public class AuthTokenRequest {
         return refreshToken;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The type of grant being requested.
@@ -150,6 +152,7 @@ public class AuthTokenRequest {
         return this;
     }
 
+
     /**
      * Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
      */
@@ -167,6 +170,7 @@ public class AuthTokenRequest {
         this.clientSecret = Optional.ofNullable(clientSecret);
         return this;
     }
+
 
     /**
      * Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
@@ -186,6 +190,7 @@ public class AuthTokenRequest {
         return this;
     }
 
+
     /**
      * A space delimited list of scopes. Required when `grant_type` is `client_credentials`.
      */
@@ -204,6 +209,7 @@ public class AuthTokenRequest {
         return this;
     }
 
+
     /**
      * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
      */
@@ -213,7 +219,6 @@ public class AuthTokenRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -234,11 +239,8 @@ public class AuthTokenRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            grantType,
-            clientId,
-            clientSecret,
-            scope,
-            refreshToken);
+            grantType, clientId, clientSecret,
+            scope, refreshToken);
     }
     
     @Override
@@ -250,22 +252,24 @@ public class AuthTokenRequest {
                 "scope", scope,
                 "refreshToken", refreshToken);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private GrantType grantType;
- 
+
         private Optional<String> clientId = Optional.empty();
- 
+
         private Optional<String> clientSecret = Optional.empty();
- 
+
         private Optional<String> scope = Optional.empty();
- 
+
         private Optional<String> refreshToken = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The type of grant being requested.
@@ -278,6 +282,7 @@ public class AuthTokenRequest {
             this.grantType = grantType;
             return this;
         }
+
 
         /**
          * Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
@@ -297,6 +302,7 @@ public class AuthTokenRequest {
             return this;
         }
 
+
         /**
          * Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
          */
@@ -314,6 +320,7 @@ public class AuthTokenRequest {
             this.clientSecret = clientSecret;
             return this;
         }
+
 
         /**
          * A space delimited list of scopes. Required when `grant_type` is `client_credentials`.
@@ -333,6 +340,7 @@ public class AuthTokenRequest {
             return this;
         }
 
+
         /**
          * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
          */
@@ -350,14 +358,13 @@ public class AuthTokenRequest {
             this.refreshToken = refreshToken;
             return this;
         }
-        
+
         public AuthTokenRequest build() {
+
             return new AuthTokenRequest(
-                grantType,
-                clientId,
-                clientSecret,
-                scope,
-                refreshToken);
+                grantType, clientId, clientSecret,
+                scope, refreshToken);
         }
+
     }
 }

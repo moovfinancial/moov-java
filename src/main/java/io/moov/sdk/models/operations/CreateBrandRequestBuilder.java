@@ -46,7 +46,7 @@ public class CreateBrandRequestBuilder {
     public CreateBrandResponse call() throws Exception {
         
         RequestOperation<CreateBrandRequest, CreateBrandResponse> operation
-              = new CreateBrandOperation( sdkConfiguration);
+              = new CreateBrandOperation(sdkConfiguration);
         CreateBrandRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

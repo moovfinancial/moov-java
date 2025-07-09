@@ -10,13 +10,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class PullFromCardPaymentMethod implements PaymentMethod {
 
+public class PullFromCardPaymentMethod implements PaymentMethod {
     /**
      * ID of the payment method.
      */
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
+
 
     @JsonProperty("paymentMethodType")
     private PullFromCardPaymentMethodPaymentMethodType paymentMethodType;
@@ -62,9 +63,10 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
         return card;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the payment method.
@@ -90,7 +92,6 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -109,9 +110,7 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            paymentMethodType,
-            card);
+            paymentMethodID, paymentMethodType, card);
     }
     
     @Override
@@ -121,18 +120,20 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
                 "paymentMethodType", paymentMethodType,
                 "card", card);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private PullFromCardPaymentMethodPaymentMethodType paymentMethodType;
- 
+
         private PaymentMethodsCard card;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the payment method.
@@ -143,11 +144,13 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
             return this;
         }
 
+
         public Builder paymentMethodType(PullFromCardPaymentMethodPaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;
         }
+
 
         /**
          * A card as contained within a payment method.
@@ -157,12 +160,12 @@ public class PullFromCardPaymentMethod implements PaymentMethod {
             this.card = card;
             return this;
         }
-        
+
         public PullFromCardPaymentMethod build() {
+
             return new PullFromCardPaymentMethod(
-                paymentMethodID,
-                paymentMethodType,
-                card);
+                paymentMethodID, paymentMethodType, card);
         }
+
     }
 }

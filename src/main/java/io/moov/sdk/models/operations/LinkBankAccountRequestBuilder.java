@@ -62,7 +62,7 @@ public class LinkBankAccountRequestBuilder {
     public LinkBankAccountResponse call() throws Exception {
         
         RequestOperation<LinkBankAccountRequest, LinkBankAccountResponse> operation
-              = new LinkBankAccountOperation( sdkConfiguration);
+              = new LinkBankAccountOperation(sdkConfiguration);
         LinkBankAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

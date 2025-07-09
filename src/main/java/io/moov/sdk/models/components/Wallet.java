@@ -20,6 +20,7 @@ public class Wallet {
     @JsonProperty("walletID")
     private String walletID;
 
+
     @JsonProperty("availableBalance")
     private WalletAvailableBalance availableBalance;
 
@@ -43,9 +44,10 @@ public class Wallet {
         return availableBalance;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Wallet withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -59,7 +61,6 @@ public class Wallet {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,8 +78,7 @@ public class Wallet {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID,
-            availableBalance);
+            walletID, availableBalance);
     }
     
     @Override
@@ -87,16 +87,18 @@ public class Wallet {
                 "walletID", walletID,
                 "availableBalance", availableBalance);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String walletID;
- 
+
         private WalletAvailableBalance availableBalance;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
@@ -104,16 +106,18 @@ public class Wallet {
             return this;
         }
 
+
         public Builder availableBalance(WalletAvailableBalance availableBalance) {
             Utils.checkNotNull(availableBalance, "availableBalance");
             this.availableBalance = availableBalance;
             return this;
         }
-        
+
         public Wallet build() {
+
             return new Wallet(
-                walletID,
-                availableBalance);
+                walletID, availableBalance);
         }
+
     }
 }

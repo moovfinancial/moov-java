@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Customizable display options for a payment link.
  */
 public class PaymentLinkDisplayOptionsUpdate {
-
     /**
      * The payment page title displayed to the user.
      */
@@ -90,9 +89,10 @@ public class PaymentLinkDisplayOptionsUpdate {
         return (Optional<CallToAction>) callToAction;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The payment page title displayed to the user.
@@ -102,6 +102,7 @@ public class PaymentLinkDisplayOptionsUpdate {
         this.title = Optional.ofNullable(title);
         return this;
     }
+
 
     /**
      * The payment page title displayed to the user.
@@ -120,6 +121,7 @@ public class PaymentLinkDisplayOptionsUpdate {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     /**
      * A payment description displayed to the user.
@@ -142,6 +144,7 @@ public class PaymentLinkDisplayOptionsUpdate {
         return this;
     }
 
+
     /**
      * The text to be displayed on web form's submit button.
      * 
@@ -154,7 +157,6 @@ public class PaymentLinkDisplayOptionsUpdate {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -173,9 +175,7 @@ public class PaymentLinkDisplayOptionsUpdate {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            title,
-            description,
-            callToAction);
+            title, description, callToAction);
     }
     
     @Override
@@ -185,18 +185,20 @@ public class PaymentLinkDisplayOptionsUpdate {
                 "description", description,
                 "callToAction", callToAction);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<? extends CallToAction> callToAction = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The payment page title displayed to the user.
@@ -216,6 +218,7 @@ public class PaymentLinkDisplayOptionsUpdate {
             return this;
         }
 
+
         /**
          * A payment description displayed to the user.
          */
@@ -233,6 +236,7 @@ public class PaymentLinkDisplayOptionsUpdate {
             this.description = description;
             return this;
         }
+
 
         /**
          * The text to be displayed on web form's submit button.
@@ -257,12 +261,12 @@ public class PaymentLinkDisplayOptionsUpdate {
             this.callToAction = callToAction;
             return this;
         }
-        
+
         public PaymentLinkDisplayOptionsUpdate build() {
+
             return new PaymentLinkDisplayOptionsUpdate(
-                title,
-                description,
-                callToAction);
+                title, description, callToAction);
         }
+
     }
 }

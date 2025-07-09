@@ -13,19 +13,23 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class CardVolumeDistributionError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ecommercePercentage")
     private Optional<String> ecommercePercentage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardPresentPercentage")
     private Optional<String> cardPresentPercentage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mailOrPhonePercentage")
     private Optional<String> mailOrPhonePercentage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("debtRepaymentPercentage")
@@ -48,7 +52,8 @@ public class CardVolumeDistributionError {
     }
     
     public CardVolumeDistributionError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -71,15 +76,17 @@ public class CardVolumeDistributionError {
         return debtRepaymentPercentage;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardVolumeDistributionError withEcommercePercentage(String ecommercePercentage) {
         Utils.checkNotNull(ecommercePercentage, "ecommercePercentage");
         this.ecommercePercentage = Optional.ofNullable(ecommercePercentage);
         return this;
     }
+
 
     public CardVolumeDistributionError withEcommercePercentage(Optional<String> ecommercePercentage) {
         Utils.checkNotNull(ecommercePercentage, "ecommercePercentage");
@@ -93,6 +100,7 @@ public class CardVolumeDistributionError {
         return this;
     }
 
+
     public CardVolumeDistributionError withCardPresentPercentage(Optional<String> cardPresentPercentage) {
         Utils.checkNotNull(cardPresentPercentage, "cardPresentPercentage");
         this.cardPresentPercentage = cardPresentPercentage;
@@ -104,6 +112,7 @@ public class CardVolumeDistributionError {
         this.mailOrPhonePercentage = Optional.ofNullable(mailOrPhonePercentage);
         return this;
     }
+
 
     public CardVolumeDistributionError withMailOrPhonePercentage(Optional<String> mailOrPhonePercentage) {
         Utils.checkNotNull(mailOrPhonePercentage, "mailOrPhonePercentage");
@@ -117,13 +126,13 @@ public class CardVolumeDistributionError {
         return this;
     }
 
+
     public CardVolumeDistributionError withDebtRepaymentPercentage(Optional<String> debtRepaymentPercentage) {
         Utils.checkNotNull(debtRepaymentPercentage, "debtRepaymentPercentage");
         this.debtRepaymentPercentage = debtRepaymentPercentage;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -143,9 +152,7 @@ public class CardVolumeDistributionError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ecommercePercentage,
-            cardPresentPercentage,
-            mailOrPhonePercentage,
+            ecommercePercentage, cardPresentPercentage, mailOrPhonePercentage,
             debtRepaymentPercentage);
     }
     
@@ -157,20 +164,22 @@ public class CardVolumeDistributionError {
                 "mailOrPhonePercentage", mailOrPhonePercentage,
                 "debtRepaymentPercentage", debtRepaymentPercentage);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> ecommercePercentage = Optional.empty();
- 
+
         private Optional<String> cardPresentPercentage = Optional.empty();
- 
+
         private Optional<String> mailOrPhonePercentage = Optional.empty();
- 
+
         private Optional<String> debtRepaymentPercentage = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ecommercePercentage(String ecommercePercentage) {
             Utils.checkNotNull(ecommercePercentage, "ecommercePercentage");
@@ -184,6 +193,7 @@ public class CardVolumeDistributionError {
             return this;
         }
 
+
         public Builder cardPresentPercentage(String cardPresentPercentage) {
             Utils.checkNotNull(cardPresentPercentage, "cardPresentPercentage");
             this.cardPresentPercentage = Optional.ofNullable(cardPresentPercentage);
@@ -195,6 +205,7 @@ public class CardVolumeDistributionError {
             this.cardPresentPercentage = cardPresentPercentage;
             return this;
         }
+
 
         public Builder mailOrPhonePercentage(String mailOrPhonePercentage) {
             Utils.checkNotNull(mailOrPhonePercentage, "mailOrPhonePercentage");
@@ -208,6 +219,7 @@ public class CardVolumeDistributionError {
             return this;
         }
 
+
         public Builder debtRepaymentPercentage(String debtRepaymentPercentage) {
             Utils.checkNotNull(debtRepaymentPercentage, "debtRepaymentPercentage");
             this.debtRepaymentPercentage = Optional.ofNullable(debtRepaymentPercentage);
@@ -219,13 +231,13 @@ public class CardVolumeDistributionError {
             this.debtRepaymentPercentage = debtRepaymentPercentage;
             return this;
         }
-        
+
         public CardVolumeDistributionError build() {
+
             return new CardVolumeDistributionError(
-                ecommercePercentage,
-                cardPresentPercentage,
-                mailOrPhonePercentage,
+                ecommercePercentage, cardPresentPercentage, mailOrPhonePercentage,
                 debtRepaymentPercentage);
         }
+
     }
 }

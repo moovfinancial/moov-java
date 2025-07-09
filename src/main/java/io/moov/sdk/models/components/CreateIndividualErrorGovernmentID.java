@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CreateIndividualErrorGovernmentID {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ssn")
     private Optional<? extends CreateIndividualErrorSsn> ssn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("itin")
@@ -50,15 +52,17 @@ public class CreateIndividualErrorGovernmentID {
         return (Optional<CreateIndividualErrorItin>) itin;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateIndividualErrorGovernmentID withSsn(CreateIndividualErrorSsn ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = Optional.ofNullable(ssn);
         return this;
     }
+
 
     public CreateIndividualErrorGovernmentID withSsn(Optional<? extends CreateIndividualErrorSsn> ssn) {
         Utils.checkNotNull(ssn, "ssn");
@@ -72,13 +76,13 @@ public class CreateIndividualErrorGovernmentID {
         return this;
     }
 
+
     public CreateIndividualErrorGovernmentID withItin(Optional<? extends CreateIndividualErrorItin> itin) {
         Utils.checkNotNull(itin, "itin");
         this.itin = itin;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class CreateIndividualErrorGovernmentID {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ssn,
-            itin);
+            ssn, itin);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class CreateIndividualErrorGovernmentID {
                 "ssn", ssn,
                 "itin", itin);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CreateIndividualErrorSsn> ssn = Optional.empty();
- 
+
         private Optional<? extends CreateIndividualErrorItin> itin = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ssn(CreateIndividualErrorSsn ssn) {
             Utils.checkNotNull(ssn, "ssn");
@@ -129,6 +134,7 @@ public class CreateIndividualErrorGovernmentID {
             return this;
         }
 
+
         public Builder itin(CreateIndividualErrorItin itin) {
             Utils.checkNotNull(itin, "itin");
             this.itin = Optional.ofNullable(itin);
@@ -140,11 +146,12 @@ public class CreateIndividualErrorGovernmentID {
             this.itin = itin;
             return this;
         }
-        
+
         public CreateIndividualErrorGovernmentID build() {
+
             return new CreateIndividualErrorGovernmentID(
-                ssn,
-                itin);
+                ssn, itin);
         }
+
     }
 }

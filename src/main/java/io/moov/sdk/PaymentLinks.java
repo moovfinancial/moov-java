@@ -43,7 +43,6 @@ public class PaymentLinks {
     PaymentLinks(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
      * 
@@ -83,10 +82,9 @@ public class PaymentLinks {
                 .createPaymentLink(createPaymentLink)
                 .build();
         RequestOperation<CreatePaymentLinkRequest, CreatePaymentLinkResponse> operation
-              = new CreatePaymentLinkOperation( sdkConfiguration);
+              = new CreatePaymentLinkOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all the payment links created under a Moov account.
@@ -110,18 +108,16 @@ public class PaymentLinks {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListPaymentLinksResponse list(
-            String accountID) throws Exception {
+    public ListPaymentLinksResponse list(String accountID) throws Exception {
         ListPaymentLinksRequest request =
             ListPaymentLinksRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
-              = new ListPaymentLinksOperation( sdkConfiguration);
+              = new ListPaymentLinksOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve a payment link by code.
@@ -156,10 +152,9 @@ public class PaymentLinks {
                 .paymentLinkCode(paymentLinkCode)
                 .build();
         RequestOperation<GetPaymentLinkRequest, GetPaymentLinkResponse> operation
-              = new GetPaymentLinkOperation( sdkConfiguration);
+              = new GetPaymentLinkOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Update a payment link.
@@ -197,10 +192,9 @@ public class PaymentLinks {
                 .updatePaymentLink(updatePaymentLink)
                 .build();
         RequestOperation<UpdatePaymentLinkRequest, UpdatePaymentLinkResponse> operation
-              = new UpdatePaymentLinkOperation( sdkConfiguration);
+              = new UpdatePaymentLinkOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Disable a payment link.
@@ -235,10 +229,9 @@ public class PaymentLinks {
                 .paymentLinkCode(paymentLinkCode)
                 .build();
         RequestOperation<DisablePaymentLinkRequest, DisablePaymentLinkResponse> operation
-              = new DisablePaymentLinkOperation( sdkConfiguration);
+              = new DisablePaymentLinkOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve the payment link encoded in a QR code. 
@@ -277,7 +270,7 @@ public class PaymentLinks {
                 .paymentLinkCode(paymentLinkCode)
                 .build();
         RequestOperation<GetPaymentLinkQRCodeRequest, GetPaymentLinkQRCodeResponse> operation
-              = new GetPaymentLinkQRCodeOperation( sdkConfiguration);
+              = new GetPaymentLinkQRCodeOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

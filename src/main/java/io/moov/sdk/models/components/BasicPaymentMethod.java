@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class BasicPaymentMethod {
 
+public class BasicPaymentMethod {
     /**
      * ID of the payment method.
      */
@@ -50,9 +50,10 @@ public class BasicPaymentMethod {
         return paymentMethodType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the payment method.
@@ -72,7 +73,6 @@ public class BasicPaymentMethod {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,8 +90,7 @@ public class BasicPaymentMethod {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            paymentMethodType);
+            paymentMethodID, paymentMethodType);
     }
     
     @Override
@@ -100,16 +99,18 @@ public class BasicPaymentMethod {
                 "paymentMethodID", paymentMethodID,
                 "paymentMethodType", paymentMethodType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private PaymentMethodType paymentMethodType;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the payment method.
@@ -120,6 +121,7 @@ public class BasicPaymentMethod {
             return this;
         }
 
+
         /**
          * The payment method type that represents a payment rail and directionality
          */
@@ -128,11 +130,12 @@ public class BasicPaymentMethod {
             this.paymentMethodType = paymentMethodType;
             return this;
         }
-        
+
         public BasicPaymentMethod build() {
+
             return new BasicPaymentMethod(
-                paymentMethodID,
-                paymentMethodType);
+                paymentMethodID, paymentMethodType);
         }
+
     }
 }

@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class MicroDepositValidationError extends RuntimeException {
 
@@ -39,9 +40,10 @@ public class MicroDepositValidationError extends RuntimeException {
         return amounts;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public MicroDepositValidationError withAmounts(String amounts) {
         Utils.checkNotNull(amounts, "amounts");
@@ -49,13 +51,13 @@ public class MicroDepositValidationError extends RuntimeException {
         return this;
     }
 
+
     public MicroDepositValidationError withAmounts(Optional<String> amounts) {
         Utils.checkNotNull(amounts, "amounts");
         this.amounts = amounts;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -80,14 +82,16 @@ public class MicroDepositValidationError extends RuntimeException {
         return Utils.toString(MicroDepositValidationError.class,
                 "amounts", amounts);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> amounts = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder amounts(String amounts) {
             Utils.checkNotNull(amounts, "amounts");
@@ -100,11 +104,13 @@ public class MicroDepositValidationError extends RuntimeException {
             this.amounts = amounts;
             return this;
         }
-        
+
         public MicroDepositValidationError build() {
+
             return new MicroDepositValidationError(
                 amounts);
         }
+
     }
 }
 

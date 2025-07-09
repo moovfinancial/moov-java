@@ -21,7 +21,6 @@ import java.util.Optional;
  * <p>RTP specific details about the transaction.
  */
 public class RTPTransactionDetails {
-
     /**
      * Status of a transaction within the RTP lifecycle.
      */
@@ -42,17 +41,21 @@ public class RTPTransactionDetails {
     @JsonProperty("failureCode")
     private Optional<? extends RTPFailureCode> failureCode;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("initiatedOn")
     private Optional<OffsetDateTime> initiatedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("completedOn")
     private Optional<OffsetDateTime> completedOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failedOn")
     private Optional<OffsetDateTime> failedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("acceptedWithoutPostingOn")
@@ -85,7 +88,9 @@ public class RTPTransactionDetails {
     
     public RTPTransactionDetails(
             RTPTransactionStatus status) {
-        this(status, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(status, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -133,9 +138,10 @@ public class RTPTransactionDetails {
         return acceptedWithoutPostingOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Status of a transaction within the RTP lifecycle.
@@ -155,6 +161,7 @@ public class RTPTransactionDetails {
         return this;
     }
 
+
     /**
      * Response code returned by network on failure.
      */
@@ -173,6 +180,7 @@ public class RTPTransactionDetails {
         return this;
     }
 
+
     /**
      * Status codes for RTP failures.
      */
@@ -188,6 +196,7 @@ public class RTPTransactionDetails {
         return this;
     }
 
+
     public RTPTransactionDetails withInitiatedOn(Optional<OffsetDateTime> initiatedOn) {
         Utils.checkNotNull(initiatedOn, "initiatedOn");
         this.initiatedOn = initiatedOn;
@@ -199,6 +208,7 @@ public class RTPTransactionDetails {
         this.completedOn = Optional.ofNullable(completedOn);
         return this;
     }
+
 
     public RTPTransactionDetails withCompletedOn(Optional<OffsetDateTime> completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
@@ -212,6 +222,7 @@ public class RTPTransactionDetails {
         return this;
     }
 
+
     public RTPTransactionDetails withFailedOn(Optional<OffsetDateTime> failedOn) {
         Utils.checkNotNull(failedOn, "failedOn");
         this.failedOn = failedOn;
@@ -224,13 +235,13 @@ public class RTPTransactionDetails {
         return this;
     }
 
+
     public RTPTransactionDetails withAcceptedWithoutPostingOn(Optional<OffsetDateTime> acceptedWithoutPostingOn) {
         Utils.checkNotNull(acceptedWithoutPostingOn, "acceptedWithoutPostingOn");
         this.acceptedWithoutPostingOn = acceptedWithoutPostingOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -253,12 +264,8 @@ public class RTPTransactionDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            status,
-            networkResponseCode,
-            failureCode,
-            initiatedOn,
-            completedOn,
-            failedOn,
+            status, networkResponseCode, failureCode,
+            initiatedOn, completedOn, failedOn,
             acceptedWithoutPostingOn);
     }
     
@@ -273,26 +280,28 @@ public class RTPTransactionDetails {
                 "failedOn", failedOn,
                 "acceptedWithoutPostingOn", acceptedWithoutPostingOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private RTPTransactionStatus status;
- 
+
         private Optional<String> networkResponseCode = Optional.empty();
- 
+
         private Optional<? extends RTPFailureCode> failureCode = Optional.empty();
- 
+
         private Optional<OffsetDateTime> initiatedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> completedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> failedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> acceptedWithoutPostingOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Status of a transaction within the RTP lifecycle.
@@ -302,6 +311,7 @@ public class RTPTransactionDetails {
             this.status = status;
             return this;
         }
+
 
         /**
          * Response code returned by network on failure.
@@ -321,6 +331,7 @@ public class RTPTransactionDetails {
             return this;
         }
 
+
         /**
          * Status codes for RTP failures.
          */
@@ -339,6 +350,7 @@ public class RTPTransactionDetails {
             return this;
         }
 
+
         public Builder initiatedOn(OffsetDateTime initiatedOn) {
             Utils.checkNotNull(initiatedOn, "initiatedOn");
             this.initiatedOn = Optional.ofNullable(initiatedOn);
@@ -350,6 +362,7 @@ public class RTPTransactionDetails {
             this.initiatedOn = initiatedOn;
             return this;
         }
+
 
         public Builder completedOn(OffsetDateTime completedOn) {
             Utils.checkNotNull(completedOn, "completedOn");
@@ -363,6 +376,7 @@ public class RTPTransactionDetails {
             return this;
         }
 
+
         public Builder failedOn(OffsetDateTime failedOn) {
             Utils.checkNotNull(failedOn, "failedOn");
             this.failedOn = Optional.ofNullable(failedOn);
@@ -375,6 +389,7 @@ public class RTPTransactionDetails {
             return this;
         }
 
+
         public Builder acceptedWithoutPostingOn(OffsetDateTime acceptedWithoutPostingOn) {
             Utils.checkNotNull(acceptedWithoutPostingOn, "acceptedWithoutPostingOn");
             this.acceptedWithoutPostingOn = Optional.ofNullable(acceptedWithoutPostingOn);
@@ -386,16 +401,14 @@ public class RTPTransactionDetails {
             this.acceptedWithoutPostingOn = acceptedWithoutPostingOn;
             return this;
         }
-        
+
         public RTPTransactionDetails build() {
+
             return new RTPTransactionDetails(
-                status,
-                networkResponseCode,
-                failureCode,
-                initiatedOn,
-                completedOn,
-                failedOn,
+                status, networkResponseCode, failureCode,
+                initiatedOn, completedOn, failedOn,
                 acceptedWithoutPostingOn);
         }
+
     }
 }

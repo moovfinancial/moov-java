@@ -42,9 +42,10 @@ public class UpdateTicket {
         return (Optional<UpdateTicketStatus>) status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateTicket withStatus(UpdateTicketStatus status) {
         Utils.checkNotNull(status, "status");
@@ -52,13 +53,13 @@ public class UpdateTicket {
         return this;
     }
 
+
     public UpdateTicket withStatus(Optional<? extends UpdateTicketStatus> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -83,14 +84,16 @@ public class UpdateTicket {
         return Utils.toString(UpdateTicket.class,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends UpdateTicketStatus> status = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder status(UpdateTicketStatus status) {
             Utils.checkNotNull(status, "status");
@@ -103,10 +106,12 @@ public class UpdateTicket {
             this.status = status;
             return this;
         }
-        
+
         public UpdateTicket build() {
+
             return new UpdateTicket(
                 status);
         }
+
     }
 }

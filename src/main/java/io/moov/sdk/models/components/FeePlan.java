@@ -15,6 +15,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 public class FeePlan {
 
     @JsonProperty("planID")
@@ -57,6 +58,7 @@ public class FeePlan {
     @JsonProperty("monthlyPlatformFee")
     private MonthlyPlatformFee monthlyPlatformFee;
 
+
     @JsonProperty("createdAt")
     private OffsetDateTime createdAt;
 
@@ -96,7 +98,9 @@ public class FeePlan {
             MinimumCommitment minimumCommitment,
             MonthlyPlatformFee monthlyPlatformFee,
             OffsetDateTime createdAt) {
-        this(planID, name, Optional.empty(), cardAcquiringModel, billableFees, minimumCommitment, monthlyPlatformFee, createdAt);
+        this(planID, name, Optional.empty(),
+            cardAcquiringModel, billableFees, minimumCommitment,
+            monthlyPlatformFee, createdAt);
     }
 
     @JsonIgnore
@@ -157,9 +161,10 @@ public class FeePlan {
         return createdAt;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FeePlan withPlanID(String planID) {
         Utils.checkNotNull(planID, "planID");
@@ -184,6 +189,7 @@ public class FeePlan {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     /**
      * A description of the fee plan.
@@ -236,7 +242,6 @@ public class FeePlan {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -260,14 +265,9 @@ public class FeePlan {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            planID,
-            name,
-            description,
-            cardAcquiringModel,
-            billableFees,
-            minimumCommitment,
-            monthlyPlatformFee,
-            createdAt);
+            planID, name, description,
+            cardAcquiringModel, billableFees, minimumCommitment,
+            monthlyPlatformFee, createdAt);
     }
     
     @Override
@@ -282,34 +282,37 @@ public class FeePlan {
                 "monthlyPlatformFee", monthlyPlatformFee,
                 "createdAt", createdAt);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String planID;
- 
+
         private String name;
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private CardAcquiringModel cardAcquiringModel;
- 
+
         private List<BillableFee> billableFees;
- 
+
         private MinimumCommitment minimumCommitment;
- 
+
         private MonthlyPlatformFee monthlyPlatformFee;
- 
+
         private OffsetDateTime createdAt;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder planID(String planID) {
             Utils.checkNotNull(planID, "planID");
             this.planID = planID;
             return this;
         }
+
 
         /**
          * The name of the fee plan.
@@ -319,6 +322,7 @@ public class FeePlan {
             this.name = name;
             return this;
         }
+
 
         /**
          * A description of the fee plan.
@@ -338,6 +342,7 @@ public class FeePlan {
             return this;
         }
 
+
         /**
          * Specifies the card processing pricing model
          */
@@ -346,6 +351,7 @@ public class FeePlan {
             this.cardAcquiringModel = cardAcquiringModel;
             return this;
         }
+
 
         /**
          * Additional usage-based fees for this plan.
@@ -356,6 +362,7 @@ public class FeePlan {
             return this;
         }
 
+
         /**
          * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
          */
@@ -364,6 +371,7 @@ public class FeePlan {
             this.minimumCommitment = minimumCommitment;
             return this;
         }
+
 
         /**
          * Fixed recurring amount paid in the billing period regardless of usage.
@@ -374,22 +382,20 @@ public class FeePlan {
             return this;
         }
 
+
         public Builder createdAt(OffsetDateTime createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = createdAt;
             return this;
         }
-        
+
         public FeePlan build() {
+
             return new FeePlan(
-                planID,
-                name,
-                description,
-                cardAcquiringModel,
-                billableFees,
-                minimumCommitment,
-                monthlyPlatformFee,
-                createdAt);
+                planID, name, description,
+                cardAcquiringModel, billableFees, minimumCommitment,
+                monthlyPlatformFee, createdAt);
         }
+
     }
 }

@@ -12,16 +12,20 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class FulfillmentDetails {
 
     @JsonProperty("hasPhysicalGoods")
     private boolean hasPhysicalGoods;
 
+
     @JsonProperty("isShippingProduct")
     private boolean isShippingProduct;
 
+
     @JsonProperty("shipmentDurationDays")
     private long shipmentDurationDays;
+
 
     @JsonProperty("returnPolicy")
     private ReturnPolicyType returnPolicy;
@@ -62,9 +66,10 @@ public class FulfillmentDetails {
         return returnPolicy;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FulfillmentDetails withHasPhysicalGoods(boolean hasPhysicalGoods) {
         Utils.checkNotNull(hasPhysicalGoods, "hasPhysicalGoods");
@@ -90,7 +95,6 @@ public class FulfillmentDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -110,9 +114,7 @@ public class FulfillmentDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            hasPhysicalGoods,
-            isShippingProduct,
-            shipmentDurationDays,
+            hasPhysicalGoods, isShippingProduct, shipmentDurationDays,
             returnPolicy);
     }
     
@@ -124,20 +126,22 @@ public class FulfillmentDetails {
                 "shipmentDurationDays", shipmentDurationDays,
                 "returnPolicy", returnPolicy);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Boolean hasPhysicalGoods;
- 
+
         private Boolean isShippingProduct;
- 
+
         private Long shipmentDurationDays;
- 
+
         private ReturnPolicyType returnPolicy;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder hasPhysicalGoods(boolean hasPhysicalGoods) {
             Utils.checkNotNull(hasPhysicalGoods, "hasPhysicalGoods");
@@ -145,11 +149,13 @@ public class FulfillmentDetails {
             return this;
         }
 
+
         public Builder isShippingProduct(boolean isShippingProduct) {
             Utils.checkNotNull(isShippingProduct, "isShippingProduct");
             this.isShippingProduct = isShippingProduct;
             return this;
         }
+
 
         public Builder shipmentDurationDays(long shipmentDurationDays) {
             Utils.checkNotNull(shipmentDurationDays, "shipmentDurationDays");
@@ -157,18 +163,19 @@ public class FulfillmentDetails {
             return this;
         }
 
+
         public Builder returnPolicy(ReturnPolicyType returnPolicy) {
             Utils.checkNotNull(returnPolicy, "returnPolicy");
             this.returnPolicy = returnPolicy;
             return this;
         }
-        
+
         public FulfillmentDetails build() {
+
             return new FulfillmentDetails(
-                hasPhysicalGoods,
-                isShippingProduct,
-                shipmentDurationDays,
+                hasPhysicalGoods, isShippingProduct, shipmentDurationDays,
                 returnPolicy);
         }
+
     }
 }

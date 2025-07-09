@@ -45,7 +45,7 @@ public class GetTransferRequestBuilder {
     public GetTransferResponse call() throws Exception {
         
         RequestOperation<GetTransferRequest, GetTransferResponse> operation
-              = new GetTransferOperation( sdkConfiguration);
+              = new GetTransferOperation(sdkConfiguration);
         GetTransferRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

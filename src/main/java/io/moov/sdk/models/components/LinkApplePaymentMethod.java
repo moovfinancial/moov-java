@@ -19,7 +19,6 @@ import java.lang.String;
  *   for more information.
  */
 public class LinkApplePaymentMethod {
-
     /**
      * A display-friendly discription of the card.
      */
@@ -75,9 +74,10 @@ public class LinkApplePaymentMethod {
         return type;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A display-friendly discription of the card.
@@ -106,7 +106,6 @@ public class LinkApplePaymentMethod {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -125,9 +124,7 @@ public class LinkApplePaymentMethod {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            displayName,
-            network,
-            type);
+            displayName, network, type);
     }
     
     @Override
@@ -137,18 +134,20 @@ public class LinkApplePaymentMethod {
                 "network", network,
                 "type", type);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String displayName;
- 
+
         private String network;
- 
+
         private String type;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A display-friendly discription of the card.
@@ -159,6 +158,7 @@ public class LinkApplePaymentMethod {
             return this;
         }
 
+
         /**
          * The card's payment network.
          */
@@ -168,6 +168,7 @@ public class LinkApplePaymentMethod {
             return this;
         }
 
+
         /**
          * The type of card.
          */
@@ -176,12 +177,12 @@ public class LinkApplePaymentMethod {
             this.type = type;
             return this;
         }
-        
+
         public LinkApplePaymentMethod build() {
+
             return new LinkApplePaymentMethod(
-                displayName,
-                network,
-                type);
+                displayName, network, type);
         }
+
     }
 }

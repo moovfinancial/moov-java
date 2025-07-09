@@ -11,13 +11,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class UpdateApplePayMerchantDomainsRequest {
 
+public class UpdateApplePayMerchantDomainsRequest {
     /**
      * ID of the Moov account representing the merchant.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpdateApplePayMerchantDomains updateApplePayMerchantDomains;
@@ -45,9 +46,10 @@ public class UpdateApplePayMerchantDomainsRequest {
         return updateApplePayMerchantDomains;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the Moov account representing the merchant.
@@ -64,7 +66,6 @@ public class UpdateApplePayMerchantDomainsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,8 +83,7 @@ public class UpdateApplePayMerchantDomainsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            updateApplePayMerchantDomains);
+            accountID, updateApplePayMerchantDomains);
     }
     
     @Override
@@ -92,16 +92,18 @@ public class UpdateApplePayMerchantDomainsRequest {
                 "accountID", accountID,
                 "updateApplePayMerchantDomains", updateApplePayMerchantDomains);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private UpdateApplePayMerchantDomains updateApplePayMerchantDomains;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the Moov account representing the merchant.
@@ -112,16 +114,18 @@ public class UpdateApplePayMerchantDomainsRequest {
             return this;
         }
 
+
         public Builder updateApplePayMerchantDomains(UpdateApplePayMerchantDomains updateApplePayMerchantDomains) {
             Utils.checkNotNull(updateApplePayMerchantDomains, "updateApplePayMerchantDomains");
             this.updateApplePayMerchantDomains = updateApplePayMerchantDomains;
             return this;
         }
-        
+
         public UpdateApplePayMerchantDomainsRequest build() {
+
             return new UpdateApplePayMerchantDomainsRequest(
-                accountID,
-                updateApplePayMerchantDomains);
+                accountID, updateApplePayMerchantDomains);
         }
+
     }
 }

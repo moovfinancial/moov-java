@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class File {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filename")
     private Optional<String> filename;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mimeType")
@@ -47,15 +49,17 @@ public class File {
         return mimeType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public File withFilename(String filename) {
         Utils.checkNotNull(filename, "filename");
         this.filename = Optional.ofNullable(filename);
         return this;
     }
+
 
     public File withFilename(Optional<String> filename) {
         Utils.checkNotNull(filename, "filename");
@@ -69,13 +73,13 @@ public class File {
         return this;
     }
 
+
     public File withMimeType(Optional<String> mimeType) {
         Utils.checkNotNull(mimeType, "mimeType");
         this.mimeType = mimeType;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class File {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            filename,
-            mimeType);
+            filename, mimeType);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class File {
                 "filename", filename,
                 "mimeType", mimeType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> filename = Optional.empty();
- 
+
         private Optional<String> mimeType = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder filename(String filename) {
             Utils.checkNotNull(filename, "filename");
@@ -126,6 +131,7 @@ public class File {
             return this;
         }
 
+
         public Builder mimeType(String mimeType) {
             Utils.checkNotNull(mimeType, "mimeType");
             this.mimeType = Optional.ofNullable(mimeType);
@@ -137,11 +143,12 @@ public class File {
             this.mimeType = mimeType;
             return this;
         }
-        
+
         public File build() {
+
             return new File(
-                filename,
-                mimeType);
+                filename, mimeType);
         }
+
     }
 }

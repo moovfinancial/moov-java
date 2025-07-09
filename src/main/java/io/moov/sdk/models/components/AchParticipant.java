@@ -14,43 +14,56 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class AchParticipant {
 
     @JsonProperty("achLocation")
     private AchLocation achLocation;
 
+
     @JsonProperty("customerName")
     private String customerName;
+
 
     @JsonProperty("newRoutingNumber")
     private String newRoutingNumber;
 
+
     @JsonProperty("officeCode")
     private String officeCode;
+
 
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
+
     @JsonProperty("recordTypeCode")
     private String recordTypeCode;
+
 
     @JsonProperty("revised")
     private String revised;
 
+
     @JsonProperty("routingNumber")
     private String routingNumber;
+
 
     @JsonProperty("servicingFRBNumber")
     private String servicingFRBNumber;
 
+
     @JsonProperty("statusCode")
     private String statusCode;
+
 
     @JsonProperty("viewCode")
     private String viewCode;
 
+
     @JsonProperty("cleanName")
     private String cleanName;
+
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("logo")
@@ -112,7 +125,11 @@ public class AchParticipant {
             String statusCode,
             String viewCode,
             String cleanName) {
-        this(achLocation, customerName, newRoutingNumber, officeCode, phoneNumber, recordTypeCode, revised, routingNumber, servicingFRBNumber, statusCode, viewCode, cleanName, Optional.empty());
+        this(achLocation, customerName, newRoutingNumber,
+            officeCode, phoneNumber, recordTypeCode,
+            revised, routingNumber, servicingFRBNumber,
+            statusCode, viewCode, cleanName,
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -181,9 +198,10 @@ public class AchParticipant {
         return (Optional<Logo>) logo;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AchParticipant withAchLocation(AchLocation achLocation) {
         Utils.checkNotNull(achLocation, "achLocation");
@@ -263,13 +281,13 @@ public class AchParticipant {
         return this;
     }
 
+
     public AchParticipant withLogo(Optional<? extends Logo> logo) {
         Utils.checkNotNull(logo, "logo");
         this.logo = logo;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -298,18 +316,10 @@ public class AchParticipant {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            achLocation,
-            customerName,
-            newRoutingNumber,
-            officeCode,
-            phoneNumber,
-            recordTypeCode,
-            revised,
-            routingNumber,
-            servicingFRBNumber,
-            statusCode,
-            viewCode,
-            cleanName,
+            achLocation, customerName, newRoutingNumber,
+            officeCode, phoneNumber, recordTypeCode,
+            revised, routingNumber, servicingFRBNumber,
+            statusCode, viewCode, cleanName,
             logo);
     }
     
@@ -330,38 +340,40 @@ public class AchParticipant {
                 "cleanName", cleanName,
                 "logo", logo);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private AchLocation achLocation;
- 
+
         private String customerName;
- 
+
         private String newRoutingNumber;
- 
+
         private String officeCode;
- 
+
         private String phoneNumber;
- 
+
         private String recordTypeCode;
- 
+
         private String revised;
- 
+
         private String routingNumber;
- 
+
         private String servicingFRBNumber;
- 
+
         private String statusCode;
- 
+
         private String viewCode;
- 
+
         private String cleanName;
- 
+
         private Optional<? extends Logo> logo = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder achLocation(AchLocation achLocation) {
             Utils.checkNotNull(achLocation, "achLocation");
@@ -369,11 +381,13 @@ public class AchParticipant {
             return this;
         }
 
+
         public Builder customerName(String customerName) {
             Utils.checkNotNull(customerName, "customerName");
             this.customerName = customerName;
             return this;
         }
+
 
         public Builder newRoutingNumber(String newRoutingNumber) {
             Utils.checkNotNull(newRoutingNumber, "newRoutingNumber");
@@ -381,11 +395,13 @@ public class AchParticipant {
             return this;
         }
 
+
         public Builder officeCode(String officeCode) {
             Utils.checkNotNull(officeCode, "officeCode");
             this.officeCode = officeCode;
             return this;
         }
+
 
         public Builder phoneNumber(String phoneNumber) {
             Utils.checkNotNull(phoneNumber, "phoneNumber");
@@ -393,11 +409,13 @@ public class AchParticipant {
             return this;
         }
 
+
         public Builder recordTypeCode(String recordTypeCode) {
             Utils.checkNotNull(recordTypeCode, "recordTypeCode");
             this.recordTypeCode = recordTypeCode;
             return this;
         }
+
 
         public Builder revised(String revised) {
             Utils.checkNotNull(revised, "revised");
@@ -405,11 +423,13 @@ public class AchParticipant {
             return this;
         }
 
+
         public Builder routingNumber(String routingNumber) {
             Utils.checkNotNull(routingNumber, "routingNumber");
             this.routingNumber = routingNumber;
             return this;
         }
+
 
         public Builder servicingFRBNumber(String servicingFRBNumber) {
             Utils.checkNotNull(servicingFRBNumber, "servicingFRBNumber");
@@ -417,11 +437,13 @@ public class AchParticipant {
             return this;
         }
 
+
         public Builder statusCode(String statusCode) {
             Utils.checkNotNull(statusCode, "statusCode");
             this.statusCode = statusCode;
             return this;
         }
+
 
         public Builder viewCode(String viewCode) {
             Utils.checkNotNull(viewCode, "viewCode");
@@ -429,11 +451,13 @@ public class AchParticipant {
             return this;
         }
 
+
         public Builder cleanName(String cleanName) {
             Utils.checkNotNull(cleanName, "cleanName");
             this.cleanName = cleanName;
             return this;
         }
+
 
         public Builder logo(Logo logo) {
             Utils.checkNotNull(logo, "logo");
@@ -446,22 +470,16 @@ public class AchParticipant {
             this.logo = logo;
             return this;
         }
-        
+
         public AchParticipant build() {
+
             return new AchParticipant(
-                achLocation,
-                customerName,
-                newRoutingNumber,
-                officeCode,
-                phoneNumber,
-                recordTypeCode,
-                revised,
-                routingNumber,
-                servicingFRBNumber,
-                statusCode,
-                viewCode,
-                cleanName,
+                achLocation, customerName, newRoutingNumber,
+                officeCode, phoneNumber, recordTypeCode,
+                revised, routingNumber, servicingFRBNumber,
+                statusCode, viewCode, cleanName,
                 logo);
         }
+
     }
 }

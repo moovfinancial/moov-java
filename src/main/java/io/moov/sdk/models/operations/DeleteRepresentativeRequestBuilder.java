@@ -45,7 +45,7 @@ public class DeleteRepresentativeRequestBuilder {
     public DeleteRepresentativeResponse call() throws Exception {
         
         RequestOperation<DeleteRepresentativeRequest, DeleteRepresentativeResponse> operation
-              = new DeleteRepresentativeOperation( sdkConfiguration);
+              = new DeleteRepresentativeOperation(sdkConfiguration);
         DeleteRepresentativeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

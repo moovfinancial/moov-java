@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UpdateAccountRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private PatchAccount patchAccount;
@@ -39,9 +41,10 @@ public class UpdateAccountRequest {
         return patchAccount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateAccountRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class UpdateAccountRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class UpdateAccountRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            patchAccount);
+            accountID, patchAccount);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class UpdateAccountRequest {
                 "accountID", accountID,
                 "patchAccount", patchAccount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private PatchAccount patchAccount;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class UpdateAccountRequest {
             return this;
         }
 
+
         public Builder patchAccount(PatchAccount patchAccount) {
             Utils.checkNotNull(patchAccount, "patchAccount");
             this.patchAccount = patchAccount;
             return this;
         }
-        
+
         public UpdateAccountRequest build() {
+
             return new UpdateAccountRequest(
-                accountID,
-                patchAccount);
+                accountID, patchAccount);
         }
+
     }
 }

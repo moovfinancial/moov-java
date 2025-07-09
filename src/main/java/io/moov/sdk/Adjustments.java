@@ -25,7 +25,6 @@ public class Adjustments {
     Adjustments(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * List adjustments associated with a Moov account.
      * 
@@ -73,10 +72,9 @@ public class Adjustments {
                 .walletID(walletID)
                 .build();
         RequestOperation<ListAdjustmentsRequest, ListAdjustmentsResponse> operation
-              = new ListAdjustmentsOperation( sdkConfiguration);
+              = new ListAdjustmentsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve a specific adjustment associated with a Moov account.
@@ -111,7 +109,7 @@ public class Adjustments {
                 .adjustmentID(adjustmentID)
                 .build();
         RequestOperation<GetAdjustmentRequest, GetAdjustmentResponse> operation
-              = new GetAdjustmentOperation( sdkConfiguration);
+              = new GetAdjustmentOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -40,9 +40,10 @@ public class PlaidLinkIntegration {
         return publicToken;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PlaidLinkIntegration withPublicToken(String publicToken) {
         Utils.checkNotNull(publicToken, "publicToken");
@@ -50,7 +51,6 @@ public class PlaidLinkIntegration {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -75,24 +75,28 @@ public class PlaidLinkIntegration {
         return Utils.toString(PlaidLinkIntegration.class,
                 "publicToken", publicToken);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String publicToken;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder publicToken(String publicToken) {
             Utils.checkNotNull(publicToken, "publicToken");
             this.publicToken = publicToken;
             return this;
         }
-        
+
         public PlaidLinkIntegration build() {
+
             return new PlaidLinkIntegration(
                 publicToken);
         }
+
     }
 }

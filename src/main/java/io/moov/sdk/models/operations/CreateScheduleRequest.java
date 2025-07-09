@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CreateScheduleRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpsertSchedule upsertSchedule;
@@ -39,9 +41,10 @@ public class CreateScheduleRequest {
         return upsertSchedule;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateScheduleRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class CreateScheduleRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class CreateScheduleRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            upsertSchedule);
+            accountID, upsertSchedule);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class CreateScheduleRequest {
                 "accountID", accountID,
                 "upsertSchedule", upsertSchedule);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private UpsertSchedule upsertSchedule;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class CreateScheduleRequest {
             return this;
         }
 
+
         public Builder upsertSchedule(UpsertSchedule upsertSchedule) {
             Utils.checkNotNull(upsertSchedule, "upsertSchedule");
             this.upsertSchedule = upsertSchedule;
             return this;
         }
-        
+
         public CreateScheduleRequest build() {
+
             return new CreateScheduleRequest(
-                accountID,
-                upsertSchedule);
+                accountID, upsertSchedule);
         }
+
     }
 }

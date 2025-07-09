@@ -28,7 +28,7 @@ public class ListSweepsRequestBuilder {
     public ListSweepsResponse call() throws Exception {
         
         RequestOperation<ListSweepsRequest, ListSweepsResponse> operation
-              = new ListSweepsOperation( sdkConfiguration);
+              = new ListSweepsOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

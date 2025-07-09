@@ -54,7 +54,7 @@ public class UpdateScheduleRequestBuilder {
     public UpdateScheduleResponse call() throws Exception {
         
         RequestOperation<UpdateScheduleRequest, UpdateScheduleResponse> operation
-              = new UpdateScheduleOperation( sdkConfiguration);
+              = new UpdateScheduleOperation(sdkConfiguration);
         UpdateScheduleRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

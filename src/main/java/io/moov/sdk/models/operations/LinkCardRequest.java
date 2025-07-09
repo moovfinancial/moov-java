@@ -14,8 +14,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class LinkCardRequest {
 
+public class LinkCardRequest {
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
      * 
@@ -25,8 +25,10 @@ public class LinkCardRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
     private Optional<? extends LinkCardWaitFor> xWaitFor;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private LinkCard linkCard;
@@ -72,9 +74,10 @@ public class LinkCardRequest {
         return linkCard;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
@@ -87,6 +90,7 @@ public class LinkCardRequest {
         this.xWaitFor = Optional.ofNullable(xWaitFor);
         return this;
     }
+
 
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
@@ -112,7 +116,6 @@ public class LinkCardRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -131,9 +134,7 @@ public class LinkCardRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            xWaitFor,
-            accountID,
-            linkCard);
+            xWaitFor, accountID, linkCard);
     }
     
     @Override
@@ -143,18 +144,20 @@ public class LinkCardRequest {
                 "accountID", accountID,
                 "linkCard", linkCard);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends LinkCardWaitFor> xWaitFor = Optional.empty();
- 
+
         private String accountID;
- 
+
         private LinkCard linkCard;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
@@ -180,23 +183,25 @@ public class LinkCardRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
 
+
         public Builder linkCard(LinkCard linkCard) {
             Utils.checkNotNull(linkCard, "linkCard");
             this.linkCard = linkCard;
             return this;
         }
-        
+
         public LinkCardRequest build() {
+
             return new LinkCardRequest(
-                xWaitFor,
-                accountID,
-                linkCard);
+                xWaitFor, accountID, linkCard);
         }
+
     }
 }

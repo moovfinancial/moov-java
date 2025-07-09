@@ -35,7 +35,6 @@ public class Capabilities {
     Capabilities(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Retrieve all the capabilities an account has requested.
      * 
@@ -62,18 +61,16 @@ public class Capabilities {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListCapabilitiesResponse list(
-            String accountID) throws Exception {
+    public ListCapabilitiesResponse list(String accountID) throws Exception {
         ListCapabilitiesRequest request =
             ListCapabilitiesRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListCapabilitiesRequest, ListCapabilitiesResponse> operation
-              = new ListCapabilitiesOperation( sdkConfiguration);
+              = new ListCapabilitiesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
@@ -108,10 +105,9 @@ public class Capabilities {
                 .addCapabilities(addCapabilities)
                 .build();
         RequestOperation<RequestCapabilitiesRequest, RequestCapabilitiesResponse> operation
-              = new RequestCapabilitiesOperation( sdkConfiguration);
+              = new RequestCapabilitiesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
@@ -148,10 +144,9 @@ public class Capabilities {
                 .capabilityID(capabilityID)
                 .build();
         RequestOperation<GetCapabilityRequest, GetCapabilityResponse> operation
-              = new GetCapabilityOperation( sdkConfiguration);
+              = new GetCapabilityOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
@@ -188,7 +183,7 @@ public class Capabilities {
                 .capabilityID(capabilityID)
                 .build();
         RequestOperation<DisableCapabilityRequest, DisableCapabilityResponse> operation
-              = new DisableCapabilityOperation( sdkConfiguration);
+              = new DisableCapabilityOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

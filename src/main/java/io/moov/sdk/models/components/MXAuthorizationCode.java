@@ -35,9 +35,10 @@ public class MXAuthorizationCode {
         return authorizationCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public MXAuthorizationCode withAuthorizationCode(String authorizationCode) {
         Utils.checkNotNull(authorizationCode, "authorizationCode");
@@ -45,7 +46,6 @@ public class MXAuthorizationCode {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -70,24 +70,28 @@ public class MXAuthorizationCode {
         return Utils.toString(MXAuthorizationCode.class,
                 "authorizationCode", authorizationCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String authorizationCode;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder authorizationCode(String authorizationCode) {
             Utils.checkNotNull(authorizationCode, "authorizationCode");
             this.authorizationCode = authorizationCode;
             return this;
         }
-        
+
         public MXAuthorizationCode build() {
+
             return new MXAuthorizationCode(
                 authorizationCode);
         }
+
     }
 }

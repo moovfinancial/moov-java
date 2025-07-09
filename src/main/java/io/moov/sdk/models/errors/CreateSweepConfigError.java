@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class CreateSweepConfigError extends RuntimeException {
 
@@ -22,21 +23,26 @@ public class CreateSweepConfigError extends RuntimeException {
     @JsonProperty("walletID")
     private Optional<String> walletID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
     private Optional<String> status;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushPaymentMethodID")
     private Optional<String> pushPaymentMethodID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pullPaymentMethodID")
     private Optional<String> pullPaymentMethodID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("statementDescriptor")
     private Optional<String> statementDescriptor;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minimumBalance")
@@ -66,7 +72,8 @@ public class CreateSweepConfigError extends RuntimeException {
     }
     
     public CreateSweepConfigError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -99,15 +106,17 @@ public class CreateSweepConfigError extends RuntimeException {
         return minimumBalance;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateSweepConfigError withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
         this.walletID = Optional.ofNullable(walletID);
         return this;
     }
+
 
     public CreateSweepConfigError withWalletID(Optional<String> walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -121,6 +130,7 @@ public class CreateSweepConfigError extends RuntimeException {
         return this;
     }
 
+
     public CreateSweepConfigError withStatus(Optional<String> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
@@ -132,6 +142,7 @@ public class CreateSweepConfigError extends RuntimeException {
         this.pushPaymentMethodID = Optional.ofNullable(pushPaymentMethodID);
         return this;
     }
+
 
     public CreateSweepConfigError withPushPaymentMethodID(Optional<String> pushPaymentMethodID) {
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
@@ -145,6 +156,7 @@ public class CreateSweepConfigError extends RuntimeException {
         return this;
     }
 
+
     public CreateSweepConfigError withPullPaymentMethodID(Optional<String> pullPaymentMethodID) {
         Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
         this.pullPaymentMethodID = pullPaymentMethodID;
@@ -156,6 +168,7 @@ public class CreateSweepConfigError extends RuntimeException {
         this.statementDescriptor = Optional.ofNullable(statementDescriptor);
         return this;
     }
+
 
     public CreateSweepConfigError withStatementDescriptor(Optional<String> statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -169,13 +182,13 @@ public class CreateSweepConfigError extends RuntimeException {
         return this;
     }
 
+
     public CreateSweepConfigError withMinimumBalance(Optional<String> minimumBalance) {
         Utils.checkNotNull(minimumBalance, "minimumBalance");
         this.minimumBalance = minimumBalance;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -197,12 +210,8 @@ public class CreateSweepConfigError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID,
-            status,
-            pushPaymentMethodID,
-            pullPaymentMethodID,
-            statementDescriptor,
-            minimumBalance);
+            walletID, status, pushPaymentMethodID,
+            pullPaymentMethodID, statementDescriptor, minimumBalance);
     }
     
     @Override
@@ -215,24 +224,26 @@ public class CreateSweepConfigError extends RuntimeException {
                 "statementDescriptor", statementDescriptor,
                 "minimumBalance", minimumBalance);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> walletID = Optional.empty();
- 
+
         private Optional<String> status = Optional.empty();
- 
+
         private Optional<String> pushPaymentMethodID = Optional.empty();
- 
+
         private Optional<String> pullPaymentMethodID = Optional.empty();
- 
+
         private Optional<String> statementDescriptor = Optional.empty();
- 
+
         private Optional<String> minimumBalance = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
@@ -246,6 +257,7 @@ public class CreateSweepConfigError extends RuntimeException {
             return this;
         }
 
+
         public Builder status(String status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
@@ -257,6 +269,7 @@ public class CreateSweepConfigError extends RuntimeException {
             this.status = status;
             return this;
         }
+
 
         public Builder pushPaymentMethodID(String pushPaymentMethodID) {
             Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
@@ -270,6 +283,7 @@ public class CreateSweepConfigError extends RuntimeException {
             return this;
         }
 
+
         public Builder pullPaymentMethodID(String pullPaymentMethodID) {
             Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
             this.pullPaymentMethodID = Optional.ofNullable(pullPaymentMethodID);
@@ -281,6 +295,7 @@ public class CreateSweepConfigError extends RuntimeException {
             this.pullPaymentMethodID = pullPaymentMethodID;
             return this;
         }
+
 
         public Builder statementDescriptor(String statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -294,6 +309,7 @@ public class CreateSweepConfigError extends RuntimeException {
             return this;
         }
 
+
         public Builder minimumBalance(String minimumBalance) {
             Utils.checkNotNull(minimumBalance, "minimumBalance");
             this.minimumBalance = Optional.ofNullable(minimumBalance);
@@ -305,16 +321,14 @@ public class CreateSweepConfigError extends RuntimeException {
             this.minimumBalance = minimumBalance;
             return this;
         }
-        
+
         public CreateSweepConfigError build() {
+
             return new CreateSweepConfigError(
-                walletID,
-                status,
-                pushPaymentMethodID,
-                pullPaymentMethodID,
-                statementDescriptor,
-                minimumBalance);
+                walletID, status, pushPaymentMethodID,
+                pullPaymentMethodID, statementDescriptor, minimumBalance);
         }
+
     }
 }
 

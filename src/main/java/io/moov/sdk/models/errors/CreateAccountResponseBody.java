@@ -66,9 +66,10 @@ public class CreateAccountResponseBody extends RuntimeException {
         return (Optional<HttpResponse<InputStream>>) rawResponse;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateAccountResponseBody withError(CreateAccountError error) {
         Utils.checkNotNull(error, "error");
@@ -85,6 +86,7 @@ public class CreateAccountResponseBody extends RuntimeException {
         return this;
     }
 
+
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
@@ -94,7 +96,6 @@ public class CreateAccountResponseBody extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,8 +113,7 @@ public class CreateAccountResponseBody extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            error,
-            rawResponse);
+            error, rawResponse);
     }
     
     @Override
@@ -122,22 +122,25 @@ public class CreateAccountResponseBody extends RuntimeException {
                 "error", error,
                 "rawResponse", rawResponse);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private CreateAccountError error;
- 
+
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder error(CreateAccountError error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
+
 
         /**
          * Raw HTTP response; suitable for custom response parsing
@@ -156,12 +159,13 @@ public class CreateAccountResponseBody extends RuntimeException {
             this.rawResponse = rawResponse;
             return this;
         }
-        
+
         public CreateAccountResponseBody build() {
+
             return new CreateAccountResponseBody(
-                error,
-                rawResponse);
+                error, rawResponse);
         }
+
     }
 }
 

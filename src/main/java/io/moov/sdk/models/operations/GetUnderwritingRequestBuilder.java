@@ -37,7 +37,7 @@ public class GetUnderwritingRequestBuilder {
     public GetUnderwritingResponse call() throws Exception {
         
         RequestOperation<GetUnderwritingRequest, GetUnderwritingResponse> operation
-              = new GetUnderwritingOperation( sdkConfiguration);
+              = new GetUnderwritingOperation(sdkConfiguration);
         GetUnderwritingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

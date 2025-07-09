@@ -46,7 +46,7 @@ public class LinkAccountTerminalApplicationRequestBuilder {
     public LinkAccountTerminalApplicationResponse call() throws Exception {
         
         RequestOperation<LinkAccountTerminalApplicationRequest, LinkAccountTerminalApplicationResponse> operation
-              = new LinkAccountTerminalApplicationOperation( sdkConfiguration);
+              = new LinkAccountTerminalApplicationOperation(sdkConfiguration);
         LinkAccountTerminalApplicationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

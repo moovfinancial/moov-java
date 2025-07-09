@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class ListReceiptsRequest {
 
+public class ListReceiptsRequest {
     /**
      * The transfer, schedule, or transfer occurrence ID to filter receipts by.
      */
@@ -33,9 +33,10 @@ public class ListReceiptsRequest {
         return id;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The transfer, schedule, or transfer occurrence ID to filter receipts by.
@@ -46,7 +47,6 @@ public class ListReceiptsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class ListReceiptsRequest {
         return Utils.toString(ListReceiptsRequest.class,
                 "id", id);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String id;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The transfer, schedule, or transfer occurrence ID to filter receipts by.
@@ -88,10 +90,12 @@ public class ListReceiptsRequest {
             this.id = id;
             return this;
         }
-        
+
         public ListReceiptsRequest build() {
+
             return new ListReceiptsRequest(
                 id);
         }
+
     }
 }

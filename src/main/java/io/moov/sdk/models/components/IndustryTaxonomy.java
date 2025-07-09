@@ -16,7 +16,6 @@ import java.lang.String;
  * <p>A structured industry taxonomy entry with category and mapped to a default MCC code.
  */
 public class IndustryTaxonomy {
-
     /**
      * URL-safe identifier for the industry
      */
@@ -106,9 +105,10 @@ public class IndustryTaxonomy {
         return defaultMcc;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * URL-safe identifier for the industry
@@ -155,7 +155,6 @@ public class IndustryTaxonomy {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -176,11 +175,8 @@ public class IndustryTaxonomy {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            industry,
-            displayName,
-            category,
-            categoryDisplayName,
-            defaultMcc);
+            industry, displayName, category,
+            categoryDisplayName, defaultMcc);
     }
     
     @Override
@@ -192,22 +188,24 @@ public class IndustryTaxonomy {
                 "categoryDisplayName", categoryDisplayName,
                 "defaultMcc", defaultMcc);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String industry;
- 
+
         private String displayName;
- 
+
         private String category;
- 
+
         private String categoryDisplayName;
- 
+
         private String defaultMcc;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * URL-safe identifier for the industry
@@ -218,6 +216,7 @@ public class IndustryTaxonomy {
             return this;
         }
 
+
         /**
          * Display name of the industry
          */
@@ -226,6 +225,7 @@ public class IndustryTaxonomy {
             this.displayName = displayName;
             return this;
         }
+
 
         /**
          * Category slug
@@ -236,6 +236,7 @@ public class IndustryTaxonomy {
             return this;
         }
 
+
         /**
          * Human-readable category label
          */
@@ -245,6 +246,7 @@ public class IndustryTaxonomy {
             return this;
         }
 
+
         /**
          * Default Merchant Category Code
          */
@@ -253,14 +255,13 @@ public class IndustryTaxonomy {
             this.defaultMcc = defaultMcc;
             return this;
         }
-        
+
         public IndustryTaxonomy build() {
+
             return new IndustryTaxonomy(
-                industry,
-                displayName,
-                category,
-                categoryDisplayName,
-                defaultMcc);
+                industry, displayName, category,
+                categoryDisplayName, defaultMcc);
         }
+
     }
 }

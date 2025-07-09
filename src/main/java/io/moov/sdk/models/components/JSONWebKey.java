@@ -21,7 +21,6 @@ import java.util.Optional;
  * <p>Describes an [RFC7517](https://datatracker.ietf.org/doc/html/rfc7517) web key.
  */
 public class JSONWebKey {
-
     /**
      * The cryptographic algorithm family used with the key (e.g., 'RSA', 'EC', 'oct').
      */
@@ -137,7 +136,10 @@ public class JSONWebKey {
     
     public JSONWebKey(
             String kty) {
-        this(kty, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(kty, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -232,9 +234,10 @@ public class JSONWebKey {
         return e;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The cryptographic algorithm family used with the key (e.g., 'RSA', 'EC', 'oct').
@@ -254,6 +257,7 @@ public class JSONWebKey {
         return this;
     }
 
+
     /**
      * The intended use of the key. 'sig' for signature, 'enc' for encryption.
      */
@@ -271,6 +275,7 @@ public class JSONWebKey {
         this.keyOps = Optional.ofNullable(keyOps);
         return this;
     }
+
 
     /**
      * The permitted operations for the key, e.g., 'sign', 'verify', 'encrypt', 'decrypt'.
@@ -290,6 +295,7 @@ public class JSONWebKey {
         return this;
     }
 
+
     /**
      * The algorithm intended for use with the key, e.g., 'RS256' or 'ES256'.
      */
@@ -307,6 +313,7 @@ public class JSONWebKey {
         this.kid = Optional.ofNullable(kid);
         return this;
     }
+
 
     /**
      * A unique identifier for the key.
@@ -327,6 +334,7 @@ public class JSONWebKey {
         this.crv = Optional.ofNullable(crv);
         return this;
     }
+
 
     /**
      * The curve for Elliptic Curve keys, e.g., 'P-256', 'P-384', or 'P-521'.
@@ -350,6 +358,7 @@ public class JSONWebKey {
         return this;
     }
 
+
     /**
      * The x coordinate for Elliptic Curve keys.
      * 
@@ -371,6 +380,7 @@ public class JSONWebKey {
         this.y = Optional.ofNullable(y);
         return this;
     }
+
 
     /**
      * The y coordinate for Elliptic Curve keys.
@@ -394,6 +404,7 @@ public class JSONWebKey {
         return this;
     }
 
+
     /**
      * The modulus value for RSA keys.
      * 
@@ -416,6 +427,7 @@ public class JSONWebKey {
         return this;
     }
 
+
     /**
      * The exponent value for RSA keys.
      * 
@@ -427,7 +439,6 @@ public class JSONWebKey {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -453,15 +464,9 @@ public class JSONWebKey {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            kty,
-            use,
-            keyOps,
-            alg,
-            kid,
-            crv,
-            x,
-            y,
-            n,
+            kty, use, keyOps,
+            alg, kid, crv,
+            x, y, n,
             e);
     }
     
@@ -479,32 +484,34 @@ public class JSONWebKey {
                 "n", n,
                 "e", e);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String kty;
- 
+
         private Optional<? extends Use> use = Optional.empty();
- 
+
         private Optional<? extends List<String>> keyOps = Optional.empty();
- 
+
         private Optional<String> alg = Optional.empty();
- 
+
         private Optional<String> kid = Optional.empty();
- 
+
         private Optional<String> crv = Optional.empty();
- 
+
         private Optional<String> x = Optional.empty();
- 
+
         private Optional<String> y = Optional.empty();
- 
+
         private Optional<String> n = Optional.empty();
- 
+
         private Optional<String> e = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The cryptographic algorithm family used with the key (e.g., 'RSA', 'EC', 'oct').
@@ -514,6 +521,7 @@ public class JSONWebKey {
             this.kty = kty;
             return this;
         }
+
 
         /**
          * The intended use of the key. 'sig' for signature, 'enc' for encryption.
@@ -533,6 +541,7 @@ public class JSONWebKey {
             return this;
         }
 
+
         /**
          * The permitted operations for the key, e.g., 'sign', 'verify', 'encrypt', 'decrypt'.
          */
@@ -550,6 +559,7 @@ public class JSONWebKey {
             this.keyOps = keyOps;
             return this;
         }
+
 
         /**
          * The algorithm intended for use with the key, e.g., 'RS256' or 'ES256'.
@@ -569,6 +579,7 @@ public class JSONWebKey {
             return this;
         }
 
+
         /**
          * A unique identifier for the key.
          */
@@ -586,6 +597,7 @@ public class JSONWebKey {
             this.kid = kid;
             return this;
         }
+
 
         /**
          * The curve for Elliptic Curve keys, e.g., 'P-256', 'P-384', or 'P-521'.
@@ -609,6 +621,7 @@ public class JSONWebKey {
             return this;
         }
 
+
         /**
          * The x coordinate for Elliptic Curve keys.
          * 
@@ -630,6 +643,7 @@ public class JSONWebKey {
             this.x = x;
             return this;
         }
+
 
         /**
          * The y coordinate for Elliptic Curve keys.
@@ -653,6 +667,7 @@ public class JSONWebKey {
             return this;
         }
 
+
         /**
          * The modulus value for RSA keys.
          * 
@@ -675,6 +690,7 @@ public class JSONWebKey {
             return this;
         }
 
+
         /**
          * The exponent value for RSA keys.
          * 
@@ -696,19 +712,15 @@ public class JSONWebKey {
             this.e = e;
             return this;
         }
-        
+
         public JSONWebKey build() {
+
             return new JSONWebKey(
-                kty,
-                use,
-                keyOps,
-                alg,
-                kid,
-                crv,
-                x,
-                y,
-                n,
+                kty, use, keyOps,
+                alg, kid, crv,
+                x, y, n,
                 e);
         }
+
     }
 }

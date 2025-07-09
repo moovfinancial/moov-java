@@ -11,8 +11,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
-public class PaymentLinkPayoutDetails {
 
+public class PaymentLinkPayoutDetails {
     /**
      * A list of payment methods that should be supported for this payment link.
      */
@@ -55,9 +55,10 @@ public class PaymentLinkPayoutDetails {
         return recipient;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A list of payment methods that should be supported for this payment link.
@@ -79,7 +80,6 @@ public class PaymentLinkPayoutDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -97,8 +97,7 @@ public class PaymentLinkPayoutDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods,
-            recipient);
+            allowedMethods, recipient);
     }
     
     @Override
@@ -107,16 +106,18 @@ public class PaymentLinkPayoutDetails {
                 "allowedMethods", allowedMethods,
                 "recipient", recipient);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private List<DisbursementPaymentMethodType> allowedMethods;
- 
+
         private PayoutRecipient recipient;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A list of payment methods that should be supported for this payment link.
@@ -126,6 +127,7 @@ public class PaymentLinkPayoutDetails {
             this.allowedMethods = allowedMethods;
             return this;
         }
+
 
         /**
          * Specify the intended recipient of the payout.
@@ -137,11 +139,12 @@ public class PaymentLinkPayoutDetails {
             this.recipient = recipient;
             return this;
         }
-        
+
         public PaymentLinkPayoutDetails build() {
+
             return new PaymentLinkPayoutDetails(
-                allowedMethods,
-                recipient);
+                allowedMethods, recipient);
         }
+
     }
 }

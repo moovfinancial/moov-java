@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CreateBrandRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private BrandProperties brandProperties;
@@ -39,9 +41,10 @@ public class CreateBrandRequest {
         return brandProperties;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateBrandRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class CreateBrandRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class CreateBrandRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            brandProperties);
+            accountID, brandProperties);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class CreateBrandRequest {
                 "accountID", accountID,
                 "brandProperties", brandProperties);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private BrandProperties brandProperties;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class CreateBrandRequest {
             return this;
         }
 
+
         public Builder brandProperties(BrandProperties brandProperties) {
             Utils.checkNotNull(brandProperties, "brandProperties");
             this.brandProperties = brandProperties;
             return this;
         }
-        
+
         public CreateBrandRequest build() {
+
             return new CreateBrandRequest(
-                accountID,
-                brandProperties);
+                accountID, brandProperties);
         }
+
     }
 }

@@ -26,13 +26,16 @@ public class CustomerSupport {
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends Address> address;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("website")
@@ -55,7 +58,8 @@ public class CustomerSupport {
     }
     
     public CustomerSupport() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -80,15 +84,17 @@ public class CustomerSupport {
         return website;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CustomerSupport withPhone(PhoneNumber phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = Optional.ofNullable(phone);
         return this;
     }
+
 
     public CustomerSupport withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
@@ -102,6 +108,7 @@ public class CustomerSupport {
         return this;
     }
 
+
     public CustomerSupport withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
@@ -113,6 +120,7 @@ public class CustomerSupport {
         this.address = Optional.ofNullable(address);
         return this;
     }
+
 
     public CustomerSupport withAddress(Optional<? extends Address> address) {
         Utils.checkNotNull(address, "address");
@@ -126,13 +134,13 @@ public class CustomerSupport {
         return this;
     }
 
+
     public CustomerSupport withWebsite(Optional<String> website) {
         Utils.checkNotNull(website, "website");
         this.website = website;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -152,9 +160,7 @@ public class CustomerSupport {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            phone,
-            email,
-            address,
+            phone, email, address,
             website);
     }
     
@@ -166,20 +172,22 @@ public class CustomerSupport {
                 "address", address,
                 "website", website);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends Address> address = Optional.empty();
- 
+
         private Optional<String> website = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -193,6 +201,7 @@ public class CustomerSupport {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -204,6 +213,7 @@ public class CustomerSupport {
             this.email = email;
             return this;
         }
+
 
         public Builder address(Address address) {
             Utils.checkNotNull(address, "address");
@@ -217,6 +227,7 @@ public class CustomerSupport {
             return this;
         }
 
+
         public Builder website(String website) {
             Utils.checkNotNull(website, "website");
             this.website = Optional.ofNullable(website);
@@ -228,13 +239,13 @@ public class CustomerSupport {
             this.website = website;
             return this;
         }
-        
+
         public CustomerSupport build() {
+
             return new CustomerSupport(
-                phone,
-                email,
-                address,
+                phone, email, address,
                 website);
         }
+
     }
 }

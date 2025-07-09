@@ -10,13 +10,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CreateTransferOptions {
 
     @JsonProperty("source")
     private SourceDestinationOptions source;
 
+
     @JsonProperty("destination")
     private SourceDestinationOptions destination;
+
 
     @JsonProperty("amount")
     private Amount amount;
@@ -49,9 +52,10 @@ public class CreateTransferOptions {
         return amount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateTransferOptions withSource(SourceDestinationOptions source) {
         Utils.checkNotNull(source, "source");
@@ -71,7 +75,6 @@ public class CreateTransferOptions {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,9 +93,7 @@ public class CreateTransferOptions {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            source,
-            destination,
-            amount);
+            source, destination, amount);
     }
     
     @Override
@@ -102,18 +103,20 @@ public class CreateTransferOptions {
                 "destination", destination,
                 "amount", amount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private SourceDestinationOptions source;
- 
+
         private SourceDestinationOptions destination;
- 
+
         private Amount amount;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder source(SourceDestinationOptions source) {
             Utils.checkNotNull(source, "source");
@@ -121,23 +124,25 @@ public class CreateTransferOptions {
             return this;
         }
 
+
         public Builder destination(SourceDestinationOptions destination) {
             Utils.checkNotNull(destination, "destination");
             this.destination = destination;
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
-        
+
         public CreateTransferOptions build() {
+
             return new CreateTransferOptions(
-                source,
-                destination,
-                amount);
+                source, destination, amount);
         }
+
     }
 }

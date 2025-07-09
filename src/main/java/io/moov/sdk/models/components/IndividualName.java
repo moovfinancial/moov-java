@@ -13,8 +13,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class IndividualName {
 
+public class IndividualName {
     /**
      * The individual's first given name.
      */
@@ -60,7 +60,8 @@ public class IndividualName {
     public IndividualName(
             String firstName,
             String lastName) {
-        this(firstName, Optional.empty(), lastName, Optional.empty());
+        this(firstName, Optional.empty(), lastName,
+            Optional.empty());
     }
 
     /**
@@ -95,9 +96,10 @@ public class IndividualName {
         return suffix;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The individual's first given name.
@@ -116,6 +118,7 @@ public class IndividualName {
         this.middleName = Optional.ofNullable(middleName);
         return this;
     }
+
 
     /**
      * The individual's second given name, if any.
@@ -144,6 +147,7 @@ public class IndividualName {
         return this;
     }
 
+
     /**
      * Suffix of a given name.
      */
@@ -153,7 +157,6 @@ public class IndividualName {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -173,9 +176,7 @@ public class IndividualName {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            firstName,
-            middleName,
-            lastName,
+            firstName, middleName, lastName,
             suffix);
     }
     
@@ -187,20 +188,22 @@ public class IndividualName {
                 "lastName", lastName,
                 "suffix", suffix);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String firstName;
- 
+
         private Optional<String> middleName = Optional.empty();
- 
+
         private String lastName;
- 
+
         private Optional<String> suffix = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The individual's first given name.
@@ -210,6 +213,7 @@ public class IndividualName {
             this.firstName = firstName;
             return this;
         }
+
 
         /**
          * The individual's second given name, if any.
@@ -229,6 +233,7 @@ public class IndividualName {
             return this;
         }
 
+
         /**
          * The individual's family name.
          */
@@ -237,6 +242,7 @@ public class IndividualName {
             this.lastName = lastName;
             return this;
         }
+
 
         /**
          * Suffix of a given name.
@@ -255,13 +261,13 @@ public class IndividualName {
             this.suffix = suffix;
             return this;
         }
-        
+
         public IndividualName build() {
+
             return new IndividualName(
-                firstName,
-                middleName,
-                lastName,
+                firstName, middleName, lastName,
                 suffix);
         }
+
     }
 }

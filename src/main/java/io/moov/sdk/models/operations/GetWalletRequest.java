@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetWalletRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=walletID")
     private String walletID;
@@ -38,9 +40,10 @@ public class GetWalletRequest {
         return walletID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetWalletRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class GetWalletRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class GetWalletRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            walletID);
+            accountID, walletID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class GetWalletRequest {
                 "accountID", accountID,
                 "walletID", walletID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String walletID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class GetWalletRequest {
             return this;
         }
 
+
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
-        
+
         public GetWalletRequest build() {
+
             return new GetWalletRequest(
-                accountID,
-                walletID);
+                accountID, walletID);
         }
+
     }
 }

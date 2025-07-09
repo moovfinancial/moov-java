@@ -11,13 +11,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class CreateApplePaySessionRequest {
 
+public class CreateApplePaySessionRequest {
     /**
      * ID of the Moov account representing the merchant.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreateApplePaySession createApplePaySession;
@@ -45,9 +46,10 @@ public class CreateApplePaySessionRequest {
         return createApplePaySession;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the Moov account representing the merchant.
@@ -64,7 +66,6 @@ public class CreateApplePaySessionRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,8 +83,7 @@ public class CreateApplePaySessionRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            createApplePaySession);
+            accountID, createApplePaySession);
     }
     
     @Override
@@ -92,16 +92,18 @@ public class CreateApplePaySessionRequest {
                 "accountID", accountID,
                 "createApplePaySession", createApplePaySession);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private CreateApplePaySession createApplePaySession;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the Moov account representing the merchant.
@@ -112,16 +114,18 @@ public class CreateApplePaySessionRequest {
             return this;
         }
 
+
         public Builder createApplePaySession(CreateApplePaySession createApplePaySession) {
             Utils.checkNotNull(createApplePaySession, "createApplePaySession");
             this.createApplePaySession = createApplePaySession;
             return this;
         }
-        
+
         public CreateApplePaySessionRequest build() {
+
             return new CreateApplePaySessionRequest(
-                accountID,
-                createApplePaySession);
+                accountID, createApplePaySession);
         }
+
     }
 }

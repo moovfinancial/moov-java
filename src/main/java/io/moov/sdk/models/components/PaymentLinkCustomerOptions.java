@@ -16,8 +16,8 @@ import java.lang.SuppressWarnings;
 import java.util.Map;
 import java.util.Optional;
 
-public class PaymentLinkCustomerOptions {
 
+public class PaymentLinkCustomerOptions {
     /**
      * If true, a billing address is required when completing the payment form.
      */
@@ -81,9 +81,10 @@ public class PaymentLinkCustomerOptions {
         return (Optional<Map<String, String>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * If true, a billing address is required when completing the payment form.
@@ -93,6 +94,7 @@ public class PaymentLinkCustomerOptions {
         this.requireAddress = Optional.ofNullable(requireAddress);
         return this;
     }
+
 
     /**
      * If true, a billing address is required when completing the payment form.
@@ -112,6 +114,7 @@ public class PaymentLinkCustomerOptions {
         return this;
     }
 
+
     /**
      * If true, a phone number is required when completing the payment form.
      */
@@ -130,6 +133,7 @@ public class PaymentLinkCustomerOptions {
         return this;
     }
 
+
     /**
      * Optional free-form metadata for the Moov account that will represent this customer.
      */
@@ -139,7 +143,6 @@ public class PaymentLinkCustomerOptions {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -158,9 +161,7 @@ public class PaymentLinkCustomerOptions {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            requireAddress,
-            requirePhone,
-            metadata);
+            requireAddress, requirePhone, metadata);
     }
     
     @Override
@@ -170,18 +171,20 @@ public class PaymentLinkCustomerOptions {
                 "requirePhone", requirePhone,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> requireAddress = Optional.empty();
- 
+
         private Optional<Boolean> requirePhone = Optional.empty();
- 
+
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * If true, a billing address is required when completing the payment form.
@@ -201,6 +204,7 @@ public class PaymentLinkCustomerOptions {
             return this;
         }
 
+
         /**
          * If true, a phone number is required when completing the payment form.
          */
@@ -219,6 +223,7 @@ public class PaymentLinkCustomerOptions {
             return this;
         }
 
+
         /**
          * Optional free-form metadata for the Moov account that will represent this customer.
          */
@@ -236,12 +241,12 @@ public class PaymentLinkCustomerOptions {
             this.metadata = metadata;
             return this;
         }
-        
+
         public PaymentLinkCustomerOptions build() {
+
             return new PaymentLinkCustomerOptions(
-                requireAddress,
-                requirePhone,
-                metadata);
+                requireAddress, requirePhone, metadata);
         }
+
     }
 }

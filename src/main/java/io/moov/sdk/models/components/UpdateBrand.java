@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class UpdateBrand {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -37,9 +38,10 @@ public class UpdateBrand {
         return (Optional<UpdateColors>) colors;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateBrand withColors(UpdateColors colors) {
         Utils.checkNotNull(colors, "colors");
@@ -47,13 +49,13 @@ public class UpdateBrand {
         return this;
     }
 
+
     public UpdateBrand withColors(Optional<? extends UpdateColors> colors) {
         Utils.checkNotNull(colors, "colors");
         this.colors = colors;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -78,14 +80,16 @@ public class UpdateBrand {
         return Utils.toString(UpdateBrand.class,
                 "colors", colors);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends UpdateColors> colors = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder colors(UpdateColors colors) {
             Utils.checkNotNull(colors, "colors");
@@ -98,10 +102,12 @@ public class UpdateBrand {
             this.colors = colors;
             return this;
         }
-        
+
         public UpdateBrand build() {
+
             return new UpdateBrand(
                 colors);
         }
+
     }
 }

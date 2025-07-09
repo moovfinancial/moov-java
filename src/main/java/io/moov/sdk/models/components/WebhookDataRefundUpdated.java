@@ -10,16 +10,20 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataRefundUpdated {
 
     @JsonProperty("accountID")
     private String accountID;
 
+
     @JsonProperty("transferID")
     private String transferID;
 
+
     @JsonProperty("refundID")
     private String refundID;
+
 
     @JsonProperty("status")
     private RefundStatus status;
@@ -60,9 +64,10 @@ public class WebhookDataRefundUpdated {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataRefundUpdated withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -88,7 +93,6 @@ public class WebhookDataRefundUpdated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -108,9 +112,7 @@ public class WebhookDataRefundUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            transferID,
-            refundID,
+            accountID, transferID, refundID,
             status);
     }
     
@@ -122,20 +124,22 @@ public class WebhookDataRefundUpdated {
                 "refundID", refundID,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String transferID;
- 
+
         private String refundID;
- 
+
         private RefundStatus status;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -143,11 +147,13 @@ public class WebhookDataRefundUpdated {
             return this;
         }
 
+
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = transferID;
             return this;
         }
+
 
         public Builder refundID(String refundID) {
             Utils.checkNotNull(refundID, "refundID");
@@ -155,18 +161,19 @@ public class WebhookDataRefundUpdated {
             return this;
         }
 
+
         public Builder status(RefundStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
-        
+
         public WebhookDataRefundUpdated build() {
+
             return new WebhookDataRefundUpdated(
-                accountID,
-                transferID,
-                refundID,
+                accountID, transferID, refundID,
                 status);
         }
+
     }
 }

@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class CompleteBankAccountVerification {
 
+public class CompleteBankAccountVerification {
     /**
      * Code provided by user from their bank account transactions
      */
@@ -33,9 +33,10 @@ public class CompleteBankAccountVerification {
         return code;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Code provided by user from their bank account transactions
@@ -46,7 +47,6 @@ public class CompleteBankAccountVerification {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class CompleteBankAccountVerification {
         return Utils.toString(CompleteBankAccountVerification.class,
                 "code", code);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String code;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Code provided by user from their bank account transactions
@@ -88,10 +90,12 @@ public class CompleteBankAccountVerification {
             this.code = code;
             return this;
         }
-        
+
         public CompleteBankAccountVerification build() {
+
             return new CompleteBankAccountVerification(
                 code);
         }
+
     }
 }

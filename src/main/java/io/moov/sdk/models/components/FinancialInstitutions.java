@@ -11,6 +11,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
+
 public class FinancialInstitutions {
 
     @JsonProperty("achParticipants")
@@ -28,9 +29,10 @@ public class FinancialInstitutions {
         return achParticipants;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FinancialInstitutions withAchParticipants(List<AchParticipant> achParticipants) {
         Utils.checkNotNull(achParticipants, "achParticipants");
@@ -38,7 +40,6 @@ public class FinancialInstitutions {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -63,24 +64,28 @@ public class FinancialInstitutions {
         return Utils.toString(FinancialInstitutions.class,
                 "achParticipants", achParticipants);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private List<AchParticipant> achParticipants;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder achParticipants(List<AchParticipant> achParticipants) {
             Utils.checkNotNull(achParticipants, "achParticipants");
             this.achParticipants = achParticipants;
             return this;
         }
-        
+
         public FinancialInstitutions build() {
+
             return new FinancialInstitutions(
                 achParticipants);
         }
+
     }
 }

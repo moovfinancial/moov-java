@@ -45,7 +45,7 @@ public class GetAdjustmentRequestBuilder {
     public GetAdjustmentResponse call() throws Exception {
         
         RequestOperation<GetAdjustmentRequest, GetAdjustmentResponse> operation
-              = new GetAdjustmentOperation( sdkConfiguration);
+              = new GetAdjustmentOperation(sdkConfiguration);
         GetAdjustmentRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

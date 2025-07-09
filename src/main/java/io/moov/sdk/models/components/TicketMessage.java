@@ -11,13 +11,16 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 
+
 public class TicketMessage {
 
     @JsonProperty("author")
     private String author;
 
+
     @JsonProperty("body")
     private String body;
+
 
     @JsonProperty("sentOn")
     private OffsetDateTime sentOn;
@@ -50,9 +53,10 @@ public class TicketMessage {
         return sentOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TicketMessage withAuthor(String author) {
         Utils.checkNotNull(author, "author");
@@ -72,7 +76,6 @@ public class TicketMessage {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class TicketMessage {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            author,
-            body,
-            sentOn);
+            author, body, sentOn);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class TicketMessage {
                 "body", body,
                 "sentOn", sentOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String author;
- 
+
         private String body;
- 
+
         private OffsetDateTime sentOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder author(String author) {
             Utils.checkNotNull(author, "author");
@@ -122,23 +125,25 @@ public class TicketMessage {
             return this;
         }
 
+
         public Builder body(String body) {
             Utils.checkNotNull(body, "body");
             this.body = body;
             return this;
         }
 
+
         public Builder sentOn(OffsetDateTime sentOn) {
             Utils.checkNotNull(sentOn, "sentOn");
             this.sentOn = sentOn;
             return this;
         }
-        
+
         public TicketMessage build() {
+
             return new TicketMessage(
-                author,
-                body,
-                sentOn);
+                author, body, sentOn);
         }
+
     }
 }

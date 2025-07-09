@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class ListRepresentativesRequest {
 
+public class ListRepresentativesRequest {
     /**
      * ID of the account.
      */
@@ -33,9 +33,10 @@ public class ListRepresentativesRequest {
         return accountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the account.
@@ -46,7 +47,6 @@ public class ListRepresentativesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class ListRepresentativesRequest {
         return Utils.toString(ListRepresentativesRequest.class,
                 "accountID", accountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the account.
@@ -88,10 +90,12 @@ public class ListRepresentativesRequest {
             this.accountID = accountID;
             return this;
         }
-        
+
         public ListRepresentativesRequest build() {
+
             return new ListRepresentativesRequest(
                 accountID);
         }
+
     }
 }

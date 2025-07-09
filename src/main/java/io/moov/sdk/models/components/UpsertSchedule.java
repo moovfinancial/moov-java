@@ -15,14 +15,15 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
-public class UpsertSchedule {
 
+public class UpsertSchedule {
     /**
      * Simple description of what the schedule is.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
     private Optional<String> description;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("occurrences")
@@ -75,9 +76,10 @@ public class UpsertSchedule {
         return (Optional<Recur>) recur;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Simple description of what the schedule is.
@@ -87,6 +89,7 @@ public class UpsertSchedule {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     /**
      * Simple description of what the schedule is.
@@ -103,6 +106,7 @@ public class UpsertSchedule {
         return this;
     }
 
+
     public UpsertSchedule withOccurrences(Optional<? extends List<Occurrence>> occurrences) {
         Utils.checkNotNull(occurrences, "occurrences");
         this.occurrences = occurrences;
@@ -118,6 +122,7 @@ public class UpsertSchedule {
         return this;
     }
 
+
     /**
      * Defines configuration for recurring transfers.
      */
@@ -127,7 +132,6 @@ public class UpsertSchedule {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -146,9 +150,7 @@ public class UpsertSchedule {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            description,
-            occurrences,
-            recur);
+            description, occurrences, recur);
     }
     
     @Override
@@ -158,18 +160,20 @@ public class UpsertSchedule {
                 "occurrences", occurrences,
                 "recur", recur);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<? extends List<Occurrence>> occurrences = Optional.empty();
- 
+
         private Optional<? extends Recur> recur = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Simple description of what the schedule is.
@@ -189,6 +193,7 @@ public class UpsertSchedule {
             return this;
         }
 
+
         public Builder occurrences(List<Occurrence> occurrences) {
             Utils.checkNotNull(occurrences, "occurrences");
             this.occurrences = Optional.ofNullable(occurrences);
@@ -200,6 +205,7 @@ public class UpsertSchedule {
             this.occurrences = occurrences;
             return this;
         }
+
 
         /**
          * Defines configuration for recurring transfers.
@@ -218,12 +224,12 @@ public class UpsertSchedule {
             this.recur = recur;
             return this;
         }
-        
+
         public UpsertSchedule build() {
+
             return new UpsertSchedule(
-                description,
-                occurrences,
-                recur);
+                description, occurrences, recur);
         }
+
     }
 }

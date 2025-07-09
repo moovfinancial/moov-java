@@ -45,7 +45,7 @@ public class GetBankAccountVerificationRequestBuilder {
     public GetBankAccountVerificationResponse call() throws Exception {
         
         RequestOperation<GetBankAccountVerificationRequest, GetBankAccountVerificationResponse> operation
-              = new GetBankAccountVerificationOperation( sdkConfiguration);
+              = new GetBankAccountVerificationOperation(sdkConfiguration);
         GetBankAccountVerificationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

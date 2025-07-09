@@ -55,7 +55,7 @@ public class CreateTransferOptionsRequestBuilder {
     public CreateTransferOptionsResponse call() throws Exception {
         
         RequestOperation<CreateTransferOptions, CreateTransferOptionsResponse> operation
-              = new CreateTransferOptionsOperation( sdkConfiguration);
+              = new CreateTransferOptionsOperation(sdkConfiguration);
         CreateTransferOptions request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -13,10 +13,12 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class WebhookDataAccountUpdated {
 
     @JsonProperty("accountID")
     private String accountID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("foreignID")
@@ -47,9 +49,10 @@ public class WebhookDataAccountUpdated {
         return foreignID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataAccountUpdated withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -63,13 +66,13 @@ public class WebhookDataAccountUpdated {
         return this;
     }
 
+
     public WebhookDataAccountUpdated withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
         this.foreignID = foreignID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -87,8 +90,7 @@ public class WebhookDataAccountUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            foreignID);
+            accountID, foreignID);
     }
     
     @Override
@@ -97,22 +99,25 @@ public class WebhookDataAccountUpdated {
                 "accountID", accountID,
                 "foreignID", foreignID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<String> foreignID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder foreignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
@@ -125,11 +130,12 @@ public class WebhookDataAccountUpdated {
             this.foreignID = foreignID;
             return this;
         }
-        
+
         public WebhookDataAccountUpdated build() {
+
             return new WebhookDataAccountUpdated(
-                accountID,
-                foreignID);
+                accountID, foreignID);
         }
+
     }
 }

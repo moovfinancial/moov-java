@@ -53,7 +53,7 @@ public class ListFeesFetchRequestBuilder {
     public ListFeesFetchResponse call() throws Exception {
         
         RequestOperation<io.moov.sdk.models.operations.ListFeesFetchRequest, ListFeesFetchResponse> operation
-              = new ListFeesFetchOperation( sdkConfiguration);
+              = new ListFeesFetchOperation(sdkConfiguration);
         io.moov.sdk.models.operations.ListFeesFetchRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

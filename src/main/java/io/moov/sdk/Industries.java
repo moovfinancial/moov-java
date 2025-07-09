@@ -20,7 +20,6 @@ public class Industries {
     Industries(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Returns a list of industries relevant to merchant profile enrichment.  Results are ordered by industry name.
      * 
@@ -48,7 +47,7 @@ public class Industries {
                 .builder()
                 .build();
         RequestOperation<ListIndustriesRequest, ListIndustriesResponse> operation
-              = new ListIndustriesOperation( sdkConfiguration);
+              = new ListIndustriesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

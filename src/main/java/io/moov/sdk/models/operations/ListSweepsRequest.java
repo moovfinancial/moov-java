@@ -14,16 +14,20 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class ListSweepsRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=walletID")
     private String walletID;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
@@ -65,7 +69,8 @@ public class ListSweepsRequest {
     public ListSweepsRequest(
             String accountID,
             String walletID) {
-        this(accountID, walletID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountID, walletID, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -105,9 +110,10 @@ public class ListSweepsRequest {
         return statementDescriptor;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListSweepsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -127,6 +133,7 @@ public class ListSweepsRequest {
         return this;
     }
 
+
     public ListSweepsRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -138,6 +145,7 @@ public class ListSweepsRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public ListSweepsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
@@ -153,6 +161,7 @@ public class ListSweepsRequest {
         this.status = Optional.ofNullable(status);
         return this;
     }
+
 
     /**
      * Optional parameter to filter by sweep status.
@@ -172,6 +181,7 @@ public class ListSweepsRequest {
         return this;
     }
 
+
     /**
      * Optional string to filter by statement descriptor.
      */
@@ -181,7 +191,6 @@ public class ListSweepsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -203,12 +212,8 @@ public class ListSweepsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            walletID,
-            skip,
-            count,
-            status,
-            statementDescriptor);
+            accountID, walletID, skip,
+            count, status, statementDescriptor);
     }
     
     @Override
@@ -221,24 +226,26 @@ public class ListSweepsRequest {
                 "status", status,
                 "statementDescriptor", statementDescriptor);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String walletID;
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private Optional<? extends SweepStatus> status = Optional.empty();
- 
+
         private Optional<String> statementDescriptor = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -246,11 +253,13 @@ public class ListSweepsRequest {
             return this;
         }
 
+
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -264,6 +273,7 @@ public class ListSweepsRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -275,6 +285,7 @@ public class ListSweepsRequest {
             this.count = count;
             return this;
         }
+
 
         /**
          * Optional parameter to filter by sweep status.
@@ -294,6 +305,7 @@ public class ListSweepsRequest {
             return this;
         }
 
+
         /**
          * Optional string to filter by statement descriptor.
          */
@@ -311,15 +323,13 @@ public class ListSweepsRequest {
             this.statementDescriptor = statementDescriptor;
             return this;
         }
-        
+
         public ListSweepsRequest build() {
+
             return new ListSweepsRequest(
-                accountID,
-                walletID,
-                skip,
-                count,
-                status,
-                statementDescriptor);
+                accountID, walletID, skip,
+                count, status, statementDescriptor);
         }
+
     }
 }

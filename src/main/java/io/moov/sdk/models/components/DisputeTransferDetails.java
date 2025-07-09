@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class DisputeTransferDetails {
 
+public class DisputeTransferDetails {
     /**
      * The disputed transfer's ID.
      */
@@ -33,9 +33,10 @@ public class DisputeTransferDetails {
         return transferID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The disputed transfer's ID.
@@ -46,7 +47,6 @@ public class DisputeTransferDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class DisputeTransferDetails {
         return Utils.toString(DisputeTransferDetails.class,
                 "transferID", transferID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String transferID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The disputed transfer's ID.
@@ -88,10 +90,12 @@ public class DisputeTransferDetails {
             this.transferID = transferID;
             return this;
         }
-        
+
         public DisputeTransferDetails build() {
+
             return new DisputeTransferDetails(
                 transferID);
         }
+
     }
 }

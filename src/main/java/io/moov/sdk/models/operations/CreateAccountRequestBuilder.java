@@ -29,7 +29,7 @@ public class CreateAccountRequestBuilder {
     public CreateAccountResponse call() throws Exception {
         
         RequestOperation<CreateAccount, CreateAccountResponse> operation
-              = new CreateAccountOperation( sdkConfiguration);
+              = new CreateAccountOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

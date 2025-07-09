@@ -28,7 +28,7 @@ public class ListTransfersRequestBuilder {
     public ListTransfersResponse call() throws Exception {
         
         RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
-              = new ListTransfersOperation( sdkConfiguration);
+              = new ListTransfersOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

@@ -29,8 +29,10 @@ public class PaymentMethodsBankAccount {
     @JsonProperty("fingerprint")
     private String fingerprint;
 
+
     @JsonProperty("status")
     private BankAccountStatus status;
+
 
     @JsonProperty("holderName")
     private String holderName;
@@ -41,6 +43,7 @@ public class PaymentMethodsBankAccount {
     @JsonProperty("holderType")
     private BankAccountHolderType holderType;
 
+
     @JsonProperty("bankName")
     private String bankName;
 
@@ -50,11 +53,14 @@ public class PaymentMethodsBankAccount {
     @JsonProperty("bankAccountType")
     private BankAccountType bankAccountType;
 
+
     @JsonProperty("routingNumber")
     private String routingNumber;
 
+
     @JsonProperty("lastFourAccountNumber")
     private String lastFourAccountNumber;
+
 
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
@@ -154,9 +160,10 @@ public class PaymentMethodsBankAccount {
         return updatedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PaymentMethodsBankAccount withBankAccountID(String bankAccountID) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
@@ -229,7 +236,6 @@ public class PaymentMethodsBankAccount {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -255,15 +261,9 @@ public class PaymentMethodsBankAccount {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            bankAccountID,
-            fingerprint,
-            status,
-            holderName,
-            holderType,
-            bankName,
-            bankAccountType,
-            routingNumber,
-            lastFourAccountNumber,
+            bankAccountID, fingerprint, status,
+            holderName, holderType, bankName,
+            bankAccountType, routingNumber, lastFourAccountNumber,
             updatedOn);
     }
     
@@ -281,38 +281,41 @@ public class PaymentMethodsBankAccount {
                 "lastFourAccountNumber", lastFourAccountNumber,
                 "updatedOn", updatedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String bankAccountID;
- 
+
         private String fingerprint;
- 
+
         private BankAccountStatus status;
- 
+
         private String holderName;
- 
+
         private BankAccountHolderType holderType;
- 
+
         private String bankName;
- 
+
         private BankAccountType bankAccountType;
- 
+
         private String routingNumber;
- 
+
         private String lastFourAccountNumber;
- 
+
         private OffsetDateTime updatedOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
             this.bankAccountID = bankAccountID;
             return this;
         }
+
 
         /**
          * Once the bank account is linked, we don't reveal the full bank account number.
@@ -325,17 +328,20 @@ public class PaymentMethodsBankAccount {
             return this;
         }
 
+
         public Builder status(BankAccountStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
+
         public Builder holderName(String holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = holderName;
             return this;
         }
+
 
         /**
          * The type of holder on a funding source.
@@ -346,11 +352,13 @@ public class PaymentMethodsBankAccount {
             return this;
         }
 
+
         public Builder bankName(String bankName) {
             Utils.checkNotNull(bankName, "bankName");
             this.bankName = bankName;
             return this;
         }
+
 
         /**
          * The bank account type.
@@ -361,11 +369,13 @@ public class PaymentMethodsBankAccount {
             return this;
         }
 
+
         public Builder routingNumber(String routingNumber) {
             Utils.checkNotNull(routingNumber, "routingNumber");
             this.routingNumber = routingNumber;
             return this;
         }
+
 
         public Builder lastFourAccountNumber(String lastFourAccountNumber) {
             Utils.checkNotNull(lastFourAccountNumber, "lastFourAccountNumber");
@@ -373,24 +383,21 @@ public class PaymentMethodsBankAccount {
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
-        
+
         public PaymentMethodsBankAccount build() {
+
             return new PaymentMethodsBankAccount(
-                bankAccountID,
-                fingerprint,
-                status,
-                holderName,
-                holderType,
-                bankName,
-                bankAccountType,
-                routingNumber,
-                lastFourAccountNumber,
+                bankAccountID, fingerprint, status,
+                holderName, holderType, bankName,
+                bankAccountType, routingNumber, lastFourAccountNumber,
                 updatedOn);
         }
+
     }
 }

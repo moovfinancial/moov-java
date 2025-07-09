@@ -45,7 +45,7 @@ public class GetSchedulesRequestBuilder {
     public GetSchedulesResponse call() throws Exception {
         
         RequestOperation<GetSchedulesRequest, GetSchedulesResponse> operation
-              = new GetSchedulesOperation( sdkConfiguration);
+              = new GetSchedulesOperation(sdkConfiguration);
         GetSchedulesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

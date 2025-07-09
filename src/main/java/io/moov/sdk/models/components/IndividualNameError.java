@@ -13,19 +13,23 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class IndividualNameError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("firstName")
     private Optional<String> firstName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("middleName")
     private Optional<String> middleName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastName")
     private Optional<String> lastName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("suffix")
@@ -48,7 +52,8 @@ public class IndividualNameError {
     }
     
     public IndividualNameError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -71,15 +76,17 @@ public class IndividualNameError {
         return suffix;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public IndividualNameError withFirstName(String firstName) {
         Utils.checkNotNull(firstName, "firstName");
         this.firstName = Optional.ofNullable(firstName);
         return this;
     }
+
 
     public IndividualNameError withFirstName(Optional<String> firstName) {
         Utils.checkNotNull(firstName, "firstName");
@@ -93,6 +100,7 @@ public class IndividualNameError {
         return this;
     }
 
+
     public IndividualNameError withMiddleName(Optional<String> middleName) {
         Utils.checkNotNull(middleName, "middleName");
         this.middleName = middleName;
@@ -104,6 +112,7 @@ public class IndividualNameError {
         this.lastName = Optional.ofNullable(lastName);
         return this;
     }
+
 
     public IndividualNameError withLastName(Optional<String> lastName) {
         Utils.checkNotNull(lastName, "lastName");
@@ -117,13 +126,13 @@ public class IndividualNameError {
         return this;
     }
 
+
     public IndividualNameError withSuffix(Optional<String> suffix) {
         Utils.checkNotNull(suffix, "suffix");
         this.suffix = suffix;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -143,9 +152,7 @@ public class IndividualNameError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            firstName,
-            middleName,
-            lastName,
+            firstName, middleName, lastName,
             suffix);
     }
     
@@ -157,20 +164,22 @@ public class IndividualNameError {
                 "lastName", lastName,
                 "suffix", suffix);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> firstName = Optional.empty();
- 
+
         private Optional<String> middleName = Optional.empty();
- 
+
         private Optional<String> lastName = Optional.empty();
- 
+
         private Optional<String> suffix = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder firstName(String firstName) {
             Utils.checkNotNull(firstName, "firstName");
@@ -184,6 +193,7 @@ public class IndividualNameError {
             return this;
         }
 
+
         public Builder middleName(String middleName) {
             Utils.checkNotNull(middleName, "middleName");
             this.middleName = Optional.ofNullable(middleName);
@@ -195,6 +205,7 @@ public class IndividualNameError {
             this.middleName = middleName;
             return this;
         }
+
 
         public Builder lastName(String lastName) {
             Utils.checkNotNull(lastName, "lastName");
@@ -208,6 +219,7 @@ public class IndividualNameError {
             return this;
         }
 
+
         public Builder suffix(String suffix) {
             Utils.checkNotNull(suffix, "suffix");
             this.suffix = Optional.ofNullable(suffix);
@@ -219,13 +231,13 @@ public class IndividualNameError {
             this.suffix = suffix;
             return this;
         }
-        
+
         public IndividualNameError build() {
+
             return new IndividualNameError(
-                firstName,
-                middleName,
-                lastName,
+                firstName, middleName, lastName,
                 suffix);
         }
+
     }
 }

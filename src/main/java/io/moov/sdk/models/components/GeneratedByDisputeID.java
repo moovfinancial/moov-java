@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class GeneratedByDisputeID {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class GeneratedByDisputeID {
         return disputeID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GeneratedByDisputeID withDisputeID(String disputeID) {
         Utils.checkNotNull(disputeID, "disputeID");
@@ -45,13 +47,13 @@ public class GeneratedByDisputeID {
         return this;
     }
 
+
     public GeneratedByDisputeID withDisputeID(Optional<String> disputeID) {
         Utils.checkNotNull(disputeID, "disputeID");
         this.disputeID = disputeID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class GeneratedByDisputeID {
         return Utils.toString(GeneratedByDisputeID.class,
                 "disputeID", disputeID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> disputeID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
@@ -96,10 +100,12 @@ public class GeneratedByDisputeID {
             this.disputeID = disputeID;
             return this;
         }
-        
+
         public GeneratedByDisputeID build() {
+
             return new GeneratedByDisputeID(
                 disputeID);
         }
+
     }
 }

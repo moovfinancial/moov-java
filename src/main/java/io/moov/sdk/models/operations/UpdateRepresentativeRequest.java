@@ -11,8 +11,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class UpdateRepresentativeRequest {
 
+public class UpdateRepresentativeRequest {
     /**
      * ID of the account.
      */
@@ -24,6 +24,7 @@ public class UpdateRepresentativeRequest {
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=representativeID")
     private String representativeID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpdateRepresentative updateRepresentative;
@@ -62,9 +63,10 @@ public class UpdateRepresentativeRequest {
         return updateRepresentative;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the account.
@@ -90,7 +92,6 @@ public class UpdateRepresentativeRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -109,9 +110,7 @@ public class UpdateRepresentativeRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            representativeID,
-            updateRepresentative);
+            accountID, representativeID, updateRepresentative);
     }
     
     @Override
@@ -121,18 +120,20 @@ public class UpdateRepresentativeRequest {
                 "representativeID", representativeID,
                 "updateRepresentative", updateRepresentative);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String representativeID;
- 
+
         private UpdateRepresentative updateRepresentative;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the account.
@@ -143,6 +144,7 @@ public class UpdateRepresentativeRequest {
             return this;
         }
 
+
         /**
          * ID of the representative.
          */
@@ -152,17 +154,18 @@ public class UpdateRepresentativeRequest {
             return this;
         }
 
+
         public Builder updateRepresentative(UpdateRepresentative updateRepresentative) {
             Utils.checkNotNull(updateRepresentative, "updateRepresentative");
             this.updateRepresentative = updateRepresentative;
             return this;
         }
-        
+
         public UpdateRepresentativeRequest build() {
+
             return new UpdateRepresentativeRequest(
-                accountID,
-                representativeID,
-                updateRepresentative);
+                accountID, representativeID, updateRepresentative);
         }
+
     }
 }

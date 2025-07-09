@@ -14,20 +14,23 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class WireInstitution {
 
+public class WireInstitution {
     /**
      * Name of the financial institution.
      */
     @JsonProperty("name")
     private String name;
 
+
     @JsonProperty("routingNumber")
     private String routingNumber;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends Address> address;
+
 
     @JsonProperty("services")
     private WireServices services;
@@ -52,7 +55,8 @@ public class WireInstitution {
             String name,
             String routingNumber,
             WireServices services) {
-        this(name, routingNumber, Optional.empty(), services);
+        this(name, routingNumber, Optional.empty(),
+            services);
     }
 
     /**
@@ -79,9 +83,10 @@ public class WireInstitution {
         return services;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Name of the financial institution.
@@ -104,6 +109,7 @@ public class WireInstitution {
         return this;
     }
 
+
     public WireInstitution withAddress(Optional<? extends Address> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -116,7 +122,6 @@ public class WireInstitution {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -136,9 +141,7 @@ public class WireInstitution {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            routingNumber,
-            address,
+            name, routingNumber, address,
             services);
     }
     
@@ -150,20 +153,22 @@ public class WireInstitution {
                 "address", address,
                 "services", services);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String name;
- 
+
         private String routingNumber;
- 
+
         private Optional<? extends Address> address = Optional.empty();
- 
+
         private WireServices services;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Name of the financial institution.
@@ -174,11 +179,13 @@ public class WireInstitution {
             return this;
         }
 
+
         public Builder routingNumber(String routingNumber) {
             Utils.checkNotNull(routingNumber, "routingNumber");
             this.routingNumber = routingNumber;
             return this;
         }
+
 
         public Builder address(Address address) {
             Utils.checkNotNull(address, "address");
@@ -192,18 +199,19 @@ public class WireInstitution {
             return this;
         }
 
+
         public Builder services(WireServices services) {
             Utils.checkNotNull(services, "services");
             this.services = services;
             return this;
         }
-        
+
         public WireInstitution build() {
+
             return new WireInstitution(
-                name,
-                routingNumber,
-                address,
+                name, routingNumber, address,
                 services);
         }
+
     }
 }

@@ -13,27 +13,33 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class UpdateCardAddress {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addressLine1")
     private Optional<String> addressLine1;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addressLine2")
     private Optional<String> addressLine2;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("city")
     private Optional<String> city;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("stateOrProvince")
     private Optional<String> stateOrProvince;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("postalCode")
     private Optional<String> postalCode;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("country")
@@ -62,7 +68,8 @@ public class UpdateCardAddress {
     }
     
     public UpdateCardAddress() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -95,15 +102,17 @@ public class UpdateCardAddress {
         return country;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateCardAddress withAddressLine1(String addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
         this.addressLine1 = Optional.ofNullable(addressLine1);
         return this;
     }
+
 
     public UpdateCardAddress withAddressLine1(Optional<String> addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
@@ -117,6 +126,7 @@ public class UpdateCardAddress {
         return this;
     }
 
+
     public UpdateCardAddress withAddressLine2(Optional<String> addressLine2) {
         Utils.checkNotNull(addressLine2, "addressLine2");
         this.addressLine2 = addressLine2;
@@ -128,6 +138,7 @@ public class UpdateCardAddress {
         this.city = Optional.ofNullable(city);
         return this;
     }
+
 
     public UpdateCardAddress withCity(Optional<String> city) {
         Utils.checkNotNull(city, "city");
@@ -141,6 +152,7 @@ public class UpdateCardAddress {
         return this;
     }
 
+
     public UpdateCardAddress withStateOrProvince(Optional<String> stateOrProvince) {
         Utils.checkNotNull(stateOrProvince, "stateOrProvince");
         this.stateOrProvince = stateOrProvince;
@@ -152,6 +164,7 @@ public class UpdateCardAddress {
         this.postalCode = Optional.ofNullable(postalCode);
         return this;
     }
+
 
     public UpdateCardAddress withPostalCode(Optional<String> postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
@@ -165,13 +178,13 @@ public class UpdateCardAddress {
         return this;
     }
 
+
     public UpdateCardAddress withCountry(Optional<String> country) {
         Utils.checkNotNull(country, "country");
         this.country = country;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -193,12 +206,8 @@ public class UpdateCardAddress {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            addressLine1,
-            addressLine2,
-            city,
-            stateOrProvince,
-            postalCode,
-            country);
+            addressLine1, addressLine2, city,
+            stateOrProvince, postalCode, country);
     }
     
     @Override
@@ -211,24 +220,26 @@ public class UpdateCardAddress {
                 "postalCode", postalCode,
                 "country", country);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> addressLine1 = Optional.empty();
- 
+
         private Optional<String> addressLine2 = Optional.empty();
- 
+
         private Optional<String> city = Optional.empty();
- 
+
         private Optional<String> stateOrProvince = Optional.empty();
- 
+
         private Optional<String> postalCode = Optional.empty();
- 
+
         private Optional<String> country = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder addressLine1(String addressLine1) {
             Utils.checkNotNull(addressLine1, "addressLine1");
@@ -242,6 +253,7 @@ public class UpdateCardAddress {
             return this;
         }
 
+
         public Builder addressLine2(String addressLine2) {
             Utils.checkNotNull(addressLine2, "addressLine2");
             this.addressLine2 = Optional.ofNullable(addressLine2);
@@ -253,6 +265,7 @@ public class UpdateCardAddress {
             this.addressLine2 = addressLine2;
             return this;
         }
+
 
         public Builder city(String city) {
             Utils.checkNotNull(city, "city");
@@ -266,6 +279,7 @@ public class UpdateCardAddress {
             return this;
         }
 
+
         public Builder stateOrProvince(String stateOrProvince) {
             Utils.checkNotNull(stateOrProvince, "stateOrProvince");
             this.stateOrProvince = Optional.ofNullable(stateOrProvince);
@@ -277,6 +291,7 @@ public class UpdateCardAddress {
             this.stateOrProvince = stateOrProvince;
             return this;
         }
+
 
         public Builder postalCode(String postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
@@ -290,6 +305,7 @@ public class UpdateCardAddress {
             return this;
         }
 
+
         public Builder country(String country) {
             Utils.checkNotNull(country, "country");
             this.country = Optional.ofNullable(country);
@@ -301,15 +317,13 @@ public class UpdateCardAddress {
             this.country = country;
             return this;
         }
-        
+
         public UpdateCardAddress build() {
+
             return new UpdateCardAddress(
-                addressLine1,
-                addressLine2,
-                city,
-                stateOrProvince,
-                postalCode,
-                country);
+                addressLine1, addressLine2, city,
+                stateOrProvince, postalCode, country);
         }
+
     }
 }

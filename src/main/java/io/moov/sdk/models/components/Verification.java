@@ -22,7 +22,6 @@ import java.util.Optional;
  * <p>Describes identity verification status and relevant identity verification documents.
  */
 public class Verification {
-
     /**
      * Possible states an account verification can be in.
      * 
@@ -52,6 +51,7 @@ public class Verification {
     @Deprecated
     private Optional<? extends VerificationStatusDetail> details;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("documents")
     private Optional<? extends List<Document>> documents;
@@ -74,7 +74,8 @@ public class Verification {
     
     public Verification(
             VerificationStatus status) {
-        this(Optional.empty(), status, Optional.empty(), Optional.empty());
+        this(Optional.empty(), status, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -118,9 +119,10 @@ public class Verification {
         return (Optional<List<Document>>) documents;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Possible states an account verification can be in.
@@ -133,6 +135,7 @@ public class Verification {
         this.verificationStatus = Optional.ofNullable(verificationStatus);
         return this;
     }
+
 
     /**
      * Possible states an account verification can be in.
@@ -170,6 +173,7 @@ public class Verification {
         return this;
     }
 
+
     /**
      * Additional detail for a verification status.
      * 
@@ -188,13 +192,13 @@ public class Verification {
         return this;
     }
 
+
     public Verification withDocuments(Optional<? extends List<Document>> documents) {
         Utils.checkNotNull(documents, "documents");
         this.documents = documents;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -214,9 +218,7 @@ public class Verification {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            verificationStatus,
-            status,
-            details,
+            verificationStatus, status, details,
             documents);
     }
     
@@ -228,23 +230,25 @@ public class Verification {
                 "details", details,
                 "documents", documents);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         @Deprecated
         private Optional<? extends AccountVerificationStatus> verificationStatus = Optional.empty();
- 
+
         @Deprecated
         private VerificationStatus status;
- 
+
         @Deprecated
         private Optional<? extends VerificationStatusDetail> details = Optional.empty();
- 
+
         private Optional<? extends List<Document>> documents = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Possible states an account verification can be in.
@@ -270,6 +274,7 @@ public class Verification {
             return this;
         }
 
+
         /**
          * Possible states an account verification can be in.
          * 
@@ -281,6 +286,7 @@ public class Verification {
             this.status = status;
             return this;
         }
+
 
         /**
          * Additional detail for a verification status.
@@ -306,6 +312,7 @@ public class Verification {
             return this;
         }
 
+
         public Builder documents(List<Document> documents) {
             Utils.checkNotNull(documents, "documents");
             this.documents = Optional.ofNullable(documents);
@@ -317,13 +324,13 @@ public class Verification {
             this.documents = documents;
             return this;
         }
-        
+
         public Verification build() {
+
             return new Verification(
-                verificationStatus,
-                status,
-                details,
+                verificationStatus, status, details,
                 documents);
         }
+
     }
 }

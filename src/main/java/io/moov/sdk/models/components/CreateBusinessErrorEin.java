@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class CreateBusinessErrorEin {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class CreateBusinessErrorEin {
         return number;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateBusinessErrorEin withNumber(String number) {
         Utils.checkNotNull(number, "number");
@@ -45,13 +47,13 @@ public class CreateBusinessErrorEin {
         return this;
     }
 
+
     public CreateBusinessErrorEin withNumber(Optional<String> number) {
         Utils.checkNotNull(number, "number");
         this.number = number;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class CreateBusinessErrorEin {
         return Utils.toString(CreateBusinessErrorEin.class,
                 "number", number);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> number = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder number(String number) {
             Utils.checkNotNull(number, "number");
@@ -96,10 +100,12 @@ public class CreateBusinessErrorEin {
             this.number = number;
             return this;
         }
-        
+
         public CreateBusinessErrorEin build() {
+
             return new CreateBusinessErrorEin(
                 number);
         }
+
     }
 }

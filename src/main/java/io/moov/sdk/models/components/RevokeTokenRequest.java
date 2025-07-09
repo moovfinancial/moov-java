@@ -15,8 +15,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class RevokeTokenRequest {
 
+public class RevokeTokenRequest {
     /**
      * The access or refresh token to revoke.
      */
@@ -66,7 +66,8 @@ public class RevokeTokenRequest {
     
     public RevokeTokenRequest(
             String token) {
-        this(token, Optional.empty(), Optional.empty(), Optional.empty());
+        this(token, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -102,9 +103,10 @@ public class RevokeTokenRequest {
         return clientSecret;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The access or refresh token to revoke.
@@ -124,6 +126,7 @@ public class RevokeTokenRequest {
         return this;
     }
 
+
     /**
      * The type of token being revoked.
      */
@@ -141,6 +144,7 @@ public class RevokeTokenRequest {
         this.clientId = Optional.ofNullable(clientId);
         return this;
     }
+
 
     /**
      * Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
@@ -160,6 +164,7 @@ public class RevokeTokenRequest {
         return this;
     }
 
+
     /**
      * Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
      */
@@ -169,7 +174,6 @@ public class RevokeTokenRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -189,9 +193,7 @@ public class RevokeTokenRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            token,
-            tokenTypeHint,
-            clientId,
+            token, tokenTypeHint, clientId,
             clientSecret);
     }
     
@@ -203,20 +205,22 @@ public class RevokeTokenRequest {
                 "clientId", clientId,
                 "clientSecret", clientSecret);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String token;
- 
+
         private Optional<? extends TokenTypeHint> tokenTypeHint = Optional.empty();
- 
+
         private Optional<String> clientId = Optional.empty();
- 
+
         private Optional<String> clientSecret = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The access or refresh token to revoke.
@@ -226,6 +230,7 @@ public class RevokeTokenRequest {
             this.token = token;
             return this;
         }
+
 
         /**
          * The type of token being revoked.
@@ -245,6 +250,7 @@ public class RevokeTokenRequest {
             return this;
         }
 
+
         /**
          * Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
          */
@@ -263,6 +269,7 @@ public class RevokeTokenRequest {
             return this;
         }
 
+
         /**
          * Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
          */
@@ -280,13 +287,13 @@ public class RevokeTokenRequest {
             this.clientSecret = clientSecret;
             return this;
         }
-        
+
         public RevokeTokenRequest build() {
+
             return new RevokeTokenRequest(
-                token,
-                tokenTypeHint,
-                clientId,
+                token, tokenTypeHint, clientId,
                 clientSecret);
         }
+
     }
 }

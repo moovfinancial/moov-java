@@ -13,8 +13,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class CreateReversalRequest {
 
+public class CreateReversalRequest {
     /**
      * Prevents duplicate reversals from being created.
      */
@@ -32,6 +32,7 @@ public class CreateReversalRequest {
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=transferID")
     private String transferID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private Optional<? extends CreateReversal> createReversal;
@@ -56,7 +57,8 @@ public class CreateReversalRequest {
             String xIdempotencyKey,
             String accountID,
             String transferID) {
-        this(xIdempotencyKey, accountID, transferID, Optional.empty());
+        this(xIdempotencyKey, accountID, transferID,
+            Optional.empty());
     }
 
     /**
@@ -89,9 +91,10 @@ public class CreateReversalRequest {
         return (Optional<CreateReversal>) createReversal;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Prevents duplicate reversals from being created.
@@ -126,13 +129,13 @@ public class CreateReversalRequest {
         return this;
     }
 
+
     public CreateReversalRequest withCreateReversal(Optional<? extends CreateReversal> createReversal) {
         Utils.checkNotNull(createReversal, "createReversal");
         this.createReversal = createReversal;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -152,9 +155,7 @@ public class CreateReversalRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            xIdempotencyKey,
-            accountID,
-            transferID,
+            xIdempotencyKey, accountID, transferID,
             createReversal);
     }
     
@@ -166,20 +167,22 @@ public class CreateReversalRequest {
                 "transferID", transferID,
                 "createReversal", createReversal);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String xIdempotencyKey;
- 
+
         private String accountID;
- 
+
         private String transferID;
- 
+
         private Optional<? extends CreateReversal> createReversal = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Prevents duplicate reversals from being created.
@@ -190,6 +193,7 @@ public class CreateReversalRequest {
             return this;
         }
 
+
         /**
          * The Moov account ID.
          */
@@ -199,6 +203,7 @@ public class CreateReversalRequest {
             return this;
         }
 
+
         /**
          * The transfer ID to reverse.
          */
@@ -207,6 +212,7 @@ public class CreateReversalRequest {
             this.transferID = transferID;
             return this;
         }
+
 
         public Builder createReversal(CreateReversal createReversal) {
             Utils.checkNotNull(createReversal, "createReversal");
@@ -219,13 +225,13 @@ public class CreateReversalRequest {
             this.createReversal = createReversal;
             return this;
         }
-        
+
         public CreateReversalRequest build() {
+
             return new CreateReversalRequest(
-                xIdempotencyKey,
-                accountID,
-                transferID,
+                xIdempotencyKey, accountID, transferID,
                 createReversal);
         }
+
     }
 }

@@ -13,6 +13,7 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
+
 public class ListFeePlansRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
@@ -53,9 +54,10 @@ public class ListFeePlansRequest {
         return (Optional<List<String>>) planIDs;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListFeePlansRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,6 +74,7 @@ public class ListFeePlansRequest {
         return this;
     }
 
+
     /**
      * A comma-separated list of plan IDs to filter the results by.
      */
@@ -81,7 +84,6 @@ public class ListFeePlansRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -99,8 +101,7 @@ public class ListFeePlansRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            planIDs);
+            accountID, planIDs);
     }
     
     @Override
@@ -109,22 +110,25 @@ public class ListFeePlansRequest {
                 "accountID", accountID,
                 "planIDs", planIDs);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<? extends List<String>> planIDs = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * A comma-separated list of plan IDs to filter the results by.
@@ -143,11 +147,12 @@ public class ListFeePlansRequest {
             this.planIDs = planIDs;
             return this;
         }
-        
+
         public ListFeePlansRequest build() {
+
             return new ListFeePlansRequest(
-                accountID,
-                planIDs);
+                accountID, planIDs);
         }
+
     }
 }

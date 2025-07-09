@@ -37,7 +37,7 @@ public class GetBrandRequestBuilder {
     public GetBrandResponse call() throws Exception {
         
         RequestOperation<GetBrandRequest, GetBrandResponse> operation
-              = new GetBrandOperation( sdkConfiguration);
+              = new GetBrandOperation(sdkConfiguration);
         GetBrandRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -24,7 +24,6 @@ import java.util.Optional;
  *   for more information.
  */
 public class AppleBillingContact {
-
     /**
      * Address lines 1 and 2 for the contact.
      */
@@ -80,7 +79,8 @@ public class AppleBillingContact {
     }
     
     public AppleBillingContact() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -124,9 +124,10 @@ public class AppleBillingContact {
         return countryCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Address lines 1 and 2 for the contact.
@@ -136,6 +137,7 @@ public class AppleBillingContact {
         this.addressLines = Optional.ofNullable(addressLines);
         return this;
     }
+
 
     /**
      * Address lines 1 and 2 for the contact.
@@ -155,6 +157,7 @@ public class AppleBillingContact {
         return this;
     }
 
+
     /**
      * The contact's city.
      */
@@ -172,6 +175,7 @@ public class AppleBillingContact {
         this.postalCode = Optional.ofNullable(postalCode);
         return this;
     }
+
 
     /**
      * The contact's postal code.
@@ -191,6 +195,7 @@ public class AppleBillingContact {
         return this;
     }
 
+
     /**
      * The contact's two-letter state code.
      */
@@ -209,6 +214,7 @@ public class AppleBillingContact {
         return this;
     }
 
+
     /**
      * The contact's two-letter ISO 3166
      */
@@ -218,7 +224,6 @@ public class AppleBillingContact {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -239,11 +244,8 @@ public class AppleBillingContact {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            addressLines,
-            locality,
-            postalCode,
-            administrativeArea,
-            countryCode);
+            addressLines, locality, postalCode,
+            administrativeArea, countryCode);
     }
     
     @Override
@@ -255,22 +257,24 @@ public class AppleBillingContact {
                 "administrativeArea", administrativeArea,
                 "countryCode", countryCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<String>> addressLines = Optional.empty();
- 
+
         private Optional<String> locality = Optional.empty();
- 
+
         private Optional<String> postalCode = Optional.empty();
- 
+
         private Optional<String> administrativeArea = Optional.empty();
- 
+
         private Optional<String> countryCode = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Address lines 1 and 2 for the contact.
@@ -290,6 +294,7 @@ public class AppleBillingContact {
             return this;
         }
 
+
         /**
          * The contact's city.
          */
@@ -307,6 +312,7 @@ public class AppleBillingContact {
             this.locality = locality;
             return this;
         }
+
 
         /**
          * The contact's postal code.
@@ -326,6 +332,7 @@ public class AppleBillingContact {
             return this;
         }
 
+
         /**
          * The contact's two-letter state code.
          */
@@ -344,6 +351,7 @@ public class AppleBillingContact {
             return this;
         }
 
+
         /**
          * The contact's two-letter ISO 3166
          */
@@ -361,14 +369,13 @@ public class AppleBillingContact {
             this.countryCode = countryCode;
             return this;
         }
-        
+
         public AppleBillingContact build() {
+
             return new AppleBillingContact(
-                addressLines,
-                locality,
-                postalCode,
-                administrativeArea,
-                countryCode);
+                addressLines, locality, postalCode,
+                administrativeArea, countryCode);
         }
+
     }
 }

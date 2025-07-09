@@ -11,13 +11,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UpdatePaymentLinkRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=paymentLinkCode")
     private String paymentLinkCode;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpdatePaymentLink updatePaymentLink;
@@ -50,9 +53,10 @@ public class UpdatePaymentLinkRequest {
         return updatePaymentLink;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdatePaymentLinkRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,7 +76,6 @@ public class UpdatePaymentLinkRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class UpdatePaymentLinkRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            paymentLinkCode,
-            updatePaymentLink);
+            accountID, paymentLinkCode, updatePaymentLink);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class UpdatePaymentLinkRequest {
                 "paymentLinkCode", paymentLinkCode,
                 "updatePaymentLink", updatePaymentLink);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String paymentLinkCode;
- 
+
         private UpdatePaymentLink updatePaymentLink;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -122,23 +125,25 @@ public class UpdatePaymentLinkRequest {
             return this;
         }
 
+
         public Builder paymentLinkCode(String paymentLinkCode) {
             Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
             this.paymentLinkCode = paymentLinkCode;
             return this;
         }
 
+
         public Builder updatePaymentLink(UpdatePaymentLink updatePaymentLink) {
             Utils.checkNotNull(updatePaymentLink, "updatePaymentLink");
             this.updatePaymentLink = updatePaymentLink;
             return this;
         }
-        
+
         public UpdatePaymentLinkRequest build() {
+
             return new UpdatePaymentLinkRequest(
-                accountID,
-                paymentLinkCode,
-                updatePaymentLink);
+                accountID, paymentLinkCode, updatePaymentLink);
         }
+
     }
 }

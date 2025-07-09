@@ -57,7 +57,6 @@ public class BankAccounts {
     BankAccounts(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
      * 
@@ -126,10 +125,9 @@ public class BankAccounts {
                 .linkBankAccount(linkBankAccount)
                 .build();
         RequestOperation<LinkBankAccountRequest, LinkBankAccountResponse> operation
-              = new LinkBankAccountOperation( sdkConfiguration);
+              = new LinkBankAccountOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all the bank accounts associated with a particular Moov account. 
@@ -157,18 +155,16 @@ public class BankAccounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListBankAccountsResponse list(
-            String accountID) throws Exception {
+    public ListBankAccountsResponse list(String accountID) throws Exception {
         ListBankAccountsRequest request =
             ListBankAccountsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListBankAccountsRequest, ListBankAccountsResponse> operation
-              = new ListBankAccountsOperation( sdkConfiguration);
+              = new ListBankAccountsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov account. 
@@ -207,10 +203,9 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<GetBankAccountRequest, GetBankAccountResponse> operation
-              = new GetBankAccountOperation( sdkConfiguration);
+              = new GetBankAccountOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Discontinue using a specified bank account linked to a Moov account. 
@@ -245,10 +240,9 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<DisableBankAccountRequest, DisableBankAccountResponse> operation
-              = new DisableBankAccountOperation( sdkConfiguration);
+              = new DisableBankAccountOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity. 
@@ -305,10 +299,9 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<InitiateMicroDepositsRequest, InitiateMicroDepositsResponse> operation
-              = new InitiateMicroDepositsOperation( sdkConfiguration);
+              = new InitiateMicroDepositsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Complete the micro-deposit validation process by passing the amounts of the two transfers within three tries.
@@ -346,10 +339,9 @@ public class BankAccounts {
                 .completeMicroDeposits(completeMicroDeposits)
                 .build();
         RequestOperation<CompleteMicroDepositsRequest, CompleteMicroDepositsResponse> operation
-              = new CompleteMicroDepositsOperation( sdkConfiguration);
+              = new CompleteMicroDepositsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve the current status and details of an instant verification, including whether the verification method was instant or same-day 
@@ -402,10 +394,9 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<GetBankAccountVerificationRequest, GetBankAccountVerificationResponse> operation
-              = new GetBankAccountVerificationOperation( sdkConfiguration);
+              = new GetBankAccountVerificationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Instant micro-deposit verification offers a quick and efficient way to verify bank account ownership. 
@@ -505,10 +496,9 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<InitiateBankAccountVerificationRequest, InitiateBankAccountVerificationResponse> operation
-              = new InitiateBankAccountVerificationOperation( sdkConfiguration);
+              = new InitiateBankAccountVerificationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Finalize the instant micro-deposit verification by submitting the verification code displayed in the user's bank account. 
@@ -560,7 +550,7 @@ public class BankAccounts {
                 .completeBankAccountVerification(completeBankAccountVerification)
                 .build();
         RequestOperation<CompleteBankAccountVerificationRequest, CompleteBankAccountVerificationResponse> operation
-              = new CompleteBankAccountVerificationOperation( sdkConfiguration);
+              = new CompleteBankAccountVerificationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

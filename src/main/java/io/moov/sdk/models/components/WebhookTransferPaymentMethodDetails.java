@@ -20,6 +20,7 @@ public class WebhookTransferPaymentMethodDetails {
     @JsonProperty("accountID")
     private String accountID;
 
+
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
 
@@ -43,9 +44,10 @@ public class WebhookTransferPaymentMethodDetails {
         return paymentMethodID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookTransferPaymentMethodDetails withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -59,7 +61,6 @@ public class WebhookTransferPaymentMethodDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,8 +78,7 @@ public class WebhookTransferPaymentMethodDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            paymentMethodID);
+            accountID, paymentMethodID);
     }
     
     @Override
@@ -87,16 +87,18 @@ public class WebhookTransferPaymentMethodDetails {
                 "accountID", accountID,
                 "paymentMethodID", paymentMethodID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String paymentMethodID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -104,16 +106,18 @@ public class WebhookTransferPaymentMethodDetails {
             return this;
         }
 
+
         public Builder paymentMethodID(String paymentMethodID) {
             Utils.checkNotNull(paymentMethodID, "paymentMethodID");
             this.paymentMethodID = paymentMethodID;
             return this;
         }
-        
+
         public WebhookTransferPaymentMethodDetails build() {
+
             return new WebhookTransferPaymentMethodDetails(
-                accountID,
-                paymentMethodID);
+                accountID, paymentMethodID);
         }
+
     }
 }

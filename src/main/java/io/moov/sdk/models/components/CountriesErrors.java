@@ -11,6 +11,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Map;
 
+
 public class CountriesErrors {
 
     @JsonProperty("countries")
@@ -20,6 +21,7 @@ public class CountriesErrors {
     public CountriesErrors(
             @JsonProperty("countries") Map<String, String> countries) {
         countries = Utils.emptyMapIfNull(countries);
+        Utils.checkNotNull(countries, "countries");
         this.countries = countries;
     }
 
@@ -28,9 +30,10 @@ public class CountriesErrors {
         return countries;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CountriesErrors withCountries(Map<String, String> countries) {
         Utils.checkNotNull(countries, "countries");
@@ -38,7 +41,6 @@ public class CountriesErrors {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -63,24 +65,28 @@ public class CountriesErrors {
         return Utils.toString(CountriesErrors.class,
                 "countries", countries);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Map<String, String> countries;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder countries(Map<String, String> countries) {
             Utils.checkNotNull(countries, "countries");
             this.countries = countries;
             return this;
         }
-        
+
         public CountriesErrors build() {
+
             return new CountriesErrors(
                 countries);
         }
+
     }
 }

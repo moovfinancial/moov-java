@@ -53,7 +53,7 @@ public class GetDisputeEvidenceRequestBuilder {
     public GetDisputeEvidenceResponse call() throws Exception {
         
         RequestOperation<GetDisputeEvidenceRequest, GetDisputeEvidenceResponse> operation
-              = new GetDisputeEvidenceOperation( sdkConfiguration);
+              = new GetDisputeEvidenceOperation(sdkConfiguration);
         GetDisputeEvidenceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

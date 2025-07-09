@@ -16,8 +16,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class OnboardingInvite {
 
+public class OnboardingInvite {
     /**
      * A unique code that identifies an onboarding invite.
      */
@@ -71,6 +71,7 @@ public class OnboardingInvite {
     @JsonProperty("redeemedAccountID")
     private Optional<String> redeemedAccountID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("prefill")
     private Optional<? extends CreateAccount> prefill;
@@ -82,12 +83,15 @@ public class OnboardingInvite {
     @JsonProperty("partner")
     private Optional<? extends OnboardingPartnerAccount> partner;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("revokedOn")
     private Optional<OffsetDateTime> revokedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("redeemedOn")
@@ -143,7 +147,11 @@ public class OnboardingInvite {
             List<CapabilityID> capabilities,
             List<String> feePlanCodes,
             OffsetDateTime createdOn) {
-        this(code, link, Optional.empty(), Optional.empty(), scopes, capabilities, feePlanCodes, Optional.empty(), Optional.empty(), Optional.empty(), createdOn, Optional.empty(), Optional.empty());
+        this(code, link, Optional.empty(),
+            Optional.empty(), scopes, capabilities,
+            feePlanCodes, Optional.empty(), Optional.empty(),
+            Optional.empty(), createdOn, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -242,9 +250,10 @@ public class OnboardingInvite {
         return redeemedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A unique code that identifies an onboarding invite.
@@ -273,6 +282,7 @@ public class OnboardingInvite {
         return this;
     }
 
+
     /**
      * The scopes requested by the inviter.
      */
@@ -290,6 +300,7 @@ public class OnboardingInvite {
         this.termsOfServiceURL = Optional.ofNullable(termsOfServiceURL);
         return this;
     }
+
 
     /**
      * The terms of service URL set by the inviter.
@@ -338,6 +349,7 @@ public class OnboardingInvite {
         return this;
     }
 
+
     /**
      * The account ID of the account that redeemed the invite.
      */
@@ -353,6 +365,7 @@ public class OnboardingInvite {
         return this;
     }
 
+
     public OnboardingInvite withPrefill(Optional<? extends CreateAccount> prefill) {
         Utils.checkNotNull(prefill, "prefill");
         this.prefill = prefill;
@@ -367,6 +380,7 @@ public class OnboardingInvite {
         this.partner = Optional.ofNullable(partner);
         return this;
     }
+
 
     /**
      * The account that created the onboarding invite.
@@ -389,6 +403,7 @@ public class OnboardingInvite {
         return this;
     }
 
+
     public OnboardingInvite withRevokedOn(Optional<OffsetDateTime> revokedOn) {
         Utils.checkNotNull(revokedOn, "revokedOn");
         this.revokedOn = revokedOn;
@@ -401,13 +416,13 @@ public class OnboardingInvite {
         return this;
     }
 
+
     public OnboardingInvite withRedeemedOn(Optional<OffsetDateTime> redeemedOn) {
         Utils.checkNotNull(redeemedOn, "redeemedOn");
         this.redeemedOn = redeemedOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -436,18 +451,10 @@ public class OnboardingInvite {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            code,
-            link,
-            returnURL,
-            termsOfServiceURL,
-            scopes,
-            capabilities,
-            feePlanCodes,
-            redeemedAccountID,
-            prefill,
-            partner,
-            createdOn,
-            revokedOn,
+            code, link, returnURL,
+            termsOfServiceURL, scopes, capabilities,
+            feePlanCodes, redeemedAccountID, prefill,
+            partner, createdOn, revokedOn,
             redeemedOn);
     }
     
@@ -468,38 +475,40 @@ public class OnboardingInvite {
                 "revokedOn", revokedOn,
                 "redeemedOn", redeemedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String code;
- 
+
         private String link;
- 
+
         private Optional<String> returnURL = Optional.empty();
- 
+
         private Optional<String> termsOfServiceURL = Optional.empty();
- 
+
         private List<ApplicationScope> scopes;
- 
+
         private List<CapabilityID> capabilities;
- 
+
         private List<String> feePlanCodes;
- 
+
         private Optional<String> redeemedAccountID = Optional.empty();
- 
+
         private Optional<? extends CreateAccount> prefill = Optional.empty();
- 
+
         private Optional<? extends OnboardingPartnerAccount> partner = Optional.empty();
- 
+
         private OffsetDateTime createdOn;
- 
+
         private Optional<OffsetDateTime> revokedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> redeemedOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A unique code that identifies an onboarding invite.
@@ -510,6 +519,7 @@ public class OnboardingInvite {
             return this;
         }
 
+
         /**
          * A unique URL, including the invite code, that the recipient can follow to redeem the invitation.
          */
@@ -518,6 +528,7 @@ public class OnboardingInvite {
             this.link = link;
             return this;
         }
+
 
         /**
          * The scopes requested by the inviter.
@@ -537,6 +548,7 @@ public class OnboardingInvite {
             return this;
         }
 
+
         /**
          * The terms of service URL set by the inviter.
          */
@@ -555,6 +567,7 @@ public class OnboardingInvite {
             return this;
         }
 
+
         /**
          * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
          * account. These values are used to determine what can be done with the account onboarded.
@@ -564,6 +577,7 @@ public class OnboardingInvite {
             this.scopes = scopes;
             return this;
         }
+
 
         /**
          * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
@@ -575,6 +589,7 @@ public class OnboardingInvite {
             return this;
         }
 
+
         /**
          * List of fee plan codes to assign the account created by the invitee.
          */
@@ -583,6 +598,7 @@ public class OnboardingInvite {
             this.feePlanCodes = feePlanCodes;
             return this;
         }
+
 
         /**
          * The account ID of the account that redeemed the invite.
@@ -602,6 +618,7 @@ public class OnboardingInvite {
             return this;
         }
 
+
         public Builder prefill(CreateAccount prefill) {
             Utils.checkNotNull(prefill, "prefill");
             this.prefill = Optional.ofNullable(prefill);
@@ -613,6 +630,7 @@ public class OnboardingInvite {
             this.prefill = prefill;
             return this;
         }
+
 
         /**
          * The account that created the onboarding invite.
@@ -632,11 +650,13 @@ public class OnboardingInvite {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
+
 
         public Builder revokedOn(OffsetDateTime revokedOn) {
             Utils.checkNotNull(revokedOn, "revokedOn");
@@ -650,6 +670,7 @@ public class OnboardingInvite {
             return this;
         }
 
+
         public Builder redeemedOn(OffsetDateTime redeemedOn) {
             Utils.checkNotNull(redeemedOn, "redeemedOn");
             this.redeemedOn = Optional.ofNullable(redeemedOn);
@@ -661,22 +682,16 @@ public class OnboardingInvite {
             this.redeemedOn = redeemedOn;
             return this;
         }
-        
+
         public OnboardingInvite build() {
+
             return new OnboardingInvite(
-                code,
-                link,
-                returnURL,
-                termsOfServiceURL,
-                scopes,
-                capabilities,
-                feePlanCodes,
-                redeemedAccountID,
-                prefill,
-                partner,
-                createdOn,
-                revokedOn,
+                code, link, returnURL,
+                termsOfServiceURL, scopes, capabilities,
+                feePlanCodes, redeemedAccountID, prefill,
+                partner, createdOn, revokedOn,
                 redeemedOn);
         }
+
     }
 }

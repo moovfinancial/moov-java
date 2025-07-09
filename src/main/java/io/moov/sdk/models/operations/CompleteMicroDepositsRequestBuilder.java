@@ -54,7 +54,7 @@ public class CompleteMicroDepositsRequestBuilder {
     public CompleteMicroDepositsResponse call() throws Exception {
         
         RequestOperation<CompleteMicroDepositsRequest, CompleteMicroDepositsResponse> operation
-              = new CompleteMicroDepositsOperation( sdkConfiguration);
+              = new CompleteMicroDepositsOperation(sdkConfiguration);
         CompleteMicroDepositsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

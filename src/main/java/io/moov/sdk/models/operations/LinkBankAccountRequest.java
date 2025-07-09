@@ -14,8 +14,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class LinkBankAccountRequest {
 
+public class LinkBankAccountRequest {
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
      * 
@@ -25,8 +25,10 @@ public class LinkBankAccountRequest {
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
     private Optional<? extends BankAccountWaitFor> xWaitFor;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private LinkBankAccount linkBankAccount;
@@ -72,9 +74,10 @@ public class LinkBankAccountRequest {
         return linkBankAccount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
@@ -87,6 +90,7 @@ public class LinkBankAccountRequest {
         this.xWaitFor = Optional.ofNullable(xWaitFor);
         return this;
     }
+
 
     /**
      * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
@@ -112,7 +116,6 @@ public class LinkBankAccountRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -131,9 +134,7 @@ public class LinkBankAccountRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            xWaitFor,
-            accountID,
-            linkBankAccount);
+            xWaitFor, accountID, linkBankAccount);
     }
     
     @Override
@@ -143,18 +144,20 @@ public class LinkBankAccountRequest {
                 "accountID", accountID,
                 "linkBankAccount", linkBankAccount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends BankAccountWaitFor> xWaitFor = Optional.empty();
- 
+
         private String accountID;
- 
+
         private LinkBankAccount linkBankAccount;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
@@ -180,23 +183,25 @@ public class LinkBankAccountRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
 
+
         public Builder linkBankAccount(LinkBankAccount linkBankAccount) {
             Utils.checkNotNull(linkBankAccount, "linkBankAccount");
             this.linkBankAccount = linkBankAccount;
             return this;
         }
-        
+
         public LinkBankAccountRequest build() {
+
             return new LinkBankAccountRequest(
-                xWaitFor,
-                accountID,
-                linkBankAccount);
+                xWaitFor, accountID, linkBankAccount);
         }
+
     }
 }

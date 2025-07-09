@@ -28,7 +28,7 @@ public class ListOnboardingInvitesRequestBuilder {
     public ListOnboardingInvitesResponse call() throws Exception {
         
         RequestOperation<ListOnboardingInvitesRequest, ListOnboardingInvitesResponse> operation
-              = new ListOnboardingInvitesOperation( sdkConfiguration);
+              = new ListOnboardingInvitesOperation(sdkConfiguration);
         ListOnboardingInvitesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class FileUploadRequestMultiPartFile {
 
     @SpeakeasyMetadata("multipartForm:name=fileName")
     private String fileName;
+
 
     @SpeakeasyMetadata("multipartForm:content")
     private byte[] content;
@@ -38,9 +40,10 @@ public class FileUploadRequestMultiPartFile {
         return content;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FileUploadRequestMultiPartFile withFileName(String fileName) {
         Utils.checkNotNull(fileName, "fileName");
@@ -54,7 +57,6 @@ public class FileUploadRequestMultiPartFile {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class FileUploadRequestMultiPartFile {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            fileName,
-            content);
+            fileName, content);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class FileUploadRequestMultiPartFile {
                 "fileName", fileName,
                 "content", content);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String fileName;
- 
+
         private byte[] content;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder fileName(String fileName) {
             Utils.checkNotNull(fileName, "fileName");
@@ -99,16 +102,18 @@ public class FileUploadRequestMultiPartFile {
             return this;
         }
 
+
         public Builder content(byte[] content) {
             Utils.checkNotNull(content, "content");
             this.content = content;
             return this;
         }
-        
+
         public FileUploadRequestMultiPartFile build() {
+
             return new FileUploadRequestMultiPartFile(
-                fileName,
-                content);
+                fileName, content);
         }
+
     }
 }

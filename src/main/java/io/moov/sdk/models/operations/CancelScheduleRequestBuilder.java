@@ -45,7 +45,7 @@ public class CancelScheduleRequestBuilder {
     public CancelScheduleResponse call() throws Exception {
         
         RequestOperation<CancelScheduleRequest, CancelScheduleResponse> operation
-              = new CancelScheduleOperation( sdkConfiguration);
+              = new CancelScheduleOperation(sdkConfiguration);
         CancelScheduleRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

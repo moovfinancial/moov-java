@@ -52,7 +52,7 @@ public class ListAdjustmentsRequestBuilder {
     public ListAdjustmentsResponse call() throws Exception {
         
         RequestOperation<ListAdjustmentsRequest, ListAdjustmentsResponse> operation
-              = new ListAdjustmentsOperation( sdkConfiguration);
+              = new ListAdjustmentsOperation(sdkConfiguration);
         ListAdjustmentsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

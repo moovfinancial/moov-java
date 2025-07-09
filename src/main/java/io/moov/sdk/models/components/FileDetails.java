@@ -25,8 +25,10 @@ public class FileDetails {
     @JsonProperty("fileID")
     private String fileID;
 
+
     @JsonProperty("fileName")
     private String fileName;
+
 
     @JsonProperty("accountID")
     private String accountID;
@@ -43,18 +45,23 @@ public class FileDetails {
     @JsonProperty("fileStatus")
     private FileStatus fileStatus;
 
+
     @JsonProperty("metadata")
     private String metadata;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("decisionReason")
     private Optional<String> decisionReason;
 
+
     @JsonProperty("fileSizeBytes")
     private long fileSizeBytes;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
@@ -103,7 +110,10 @@ public class FileDetails {
             long fileSizeBytes,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(fileID, fileName, accountID, filePurpose, fileStatus, metadata, Optional.empty(), fileSizeBytes, createdOn, updatedOn);
+        this(fileID, fileName, accountID,
+            filePurpose, fileStatus, metadata,
+            Optional.empty(), fileSizeBytes, createdOn,
+            updatedOn);
     }
 
     @JsonIgnore
@@ -162,9 +172,10 @@ public class FileDetails {
         return updatedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FileDetails withFileID(String fileID) {
         Utils.checkNotNull(fileID, "fileID");
@@ -214,6 +225,7 @@ public class FileDetails {
         return this;
     }
 
+
     public FileDetails withDecisionReason(Optional<String> decisionReason) {
         Utils.checkNotNull(decisionReason, "decisionReason");
         this.decisionReason = decisionReason;
@@ -238,7 +250,6 @@ public class FileDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -264,15 +275,9 @@ public class FileDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            fileID,
-            fileName,
-            accountID,
-            filePurpose,
-            fileStatus,
-            metadata,
-            decisionReason,
-            fileSizeBytes,
-            createdOn,
+            fileID, fileName, accountID,
+            filePurpose, fileStatus, metadata,
+            decisionReason, fileSizeBytes, createdOn,
             updatedOn);
     }
     
@@ -290,32 +295,34 @@ public class FileDetails {
                 "createdOn", createdOn,
                 "updatedOn", updatedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String fileID;
- 
+
         private String fileName;
- 
+
         private String accountID;
- 
+
         private FilePurpose filePurpose;
- 
+
         private FileStatus fileStatus;
- 
+
         private String metadata;
- 
+
         private Optional<String> decisionReason = Optional.empty();
- 
+
         private Long fileSizeBytes;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder fileID(String fileID) {
             Utils.checkNotNull(fileID, "fileID");
@@ -323,17 +330,20 @@ public class FileDetails {
             return this;
         }
 
+
         public Builder fileName(String fileName) {
             Utils.checkNotNull(fileName, "fileName");
             this.fileName = fileName;
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * The file's purpose.
@@ -344,6 +354,7 @@ public class FileDetails {
             return this;
         }
 
+
         /**
          * The file's status.
          */
@@ -353,11 +364,13 @@ public class FileDetails {
             return this;
         }
 
+
         public Builder metadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;
         }
+
 
         public Builder decisionReason(String decisionReason) {
             Utils.checkNotNull(decisionReason, "decisionReason");
@@ -371,11 +384,13 @@ public class FileDetails {
             return this;
         }
 
+
         public Builder fileSizeBytes(long fileSizeBytes) {
             Utils.checkNotNull(fileSizeBytes, "fileSizeBytes");
             this.fileSizeBytes = fileSizeBytes;
             return this;
         }
+
 
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
@@ -383,24 +398,21 @@ public class FileDetails {
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
-        
+
         public FileDetails build() {
+
             return new FileDetails(
-                fileID,
-                fileName,
-                accountID,
-                filePurpose,
-                fileStatus,
-                metadata,
-                decisionReason,
-                fileSizeBytes,
-                createdOn,
+                fileID, fileName, accountID,
+                filePurpose, fileStatus, metadata,
+                decisionReason, fileSizeBytes, createdOn,
                 updatedOn);
         }
+
     }
 }

@@ -15,8 +15,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class CollectFundsCardPayments {
 
+public class CollectFundsCardPayments {
     /**
      * Describes the distribution of card transactions by payment method.
      */
@@ -24,17 +24,21 @@ public class CollectFundsCardPayments {
     @JsonProperty("cardAcceptanceMethods")
     private Optional<? extends CardAcceptanceMethods> cardAcceptanceMethods;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("currentlyAcceptsCards")
     private Optional<Boolean> currentlyAcceptsCards;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("estimatedActivity")
     private Optional<? extends EstimatedActivity> estimatedActivity;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fulfillment")
     private Optional<? extends Fulfillment> fulfillment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refundPolicy")
@@ -60,7 +64,8 @@ public class CollectFundsCardPayments {
     }
     
     public CollectFundsCardPayments() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -95,9 +100,10 @@ public class CollectFundsCardPayments {
         return (Optional<RefundPolicy>) refundPolicy;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Describes the distribution of card transactions by payment method.
@@ -107,6 +113,7 @@ public class CollectFundsCardPayments {
         this.cardAcceptanceMethods = Optional.ofNullable(cardAcceptanceMethods);
         return this;
     }
+
 
     /**
      * Describes the distribution of card transactions by payment method.
@@ -123,6 +130,7 @@ public class CollectFundsCardPayments {
         return this;
     }
 
+
     public CollectFundsCardPayments withCurrentlyAcceptsCards(Optional<Boolean> currentlyAcceptsCards) {
         Utils.checkNotNull(currentlyAcceptsCards, "currentlyAcceptsCards");
         this.currentlyAcceptsCards = currentlyAcceptsCards;
@@ -134,6 +142,7 @@ public class CollectFundsCardPayments {
         this.estimatedActivity = Optional.ofNullable(estimatedActivity);
         return this;
     }
+
 
     public CollectFundsCardPayments withEstimatedActivity(Optional<? extends EstimatedActivity> estimatedActivity) {
         Utils.checkNotNull(estimatedActivity, "estimatedActivity");
@@ -147,6 +156,7 @@ public class CollectFundsCardPayments {
         return this;
     }
 
+
     public CollectFundsCardPayments withFulfillment(Optional<? extends Fulfillment> fulfillment) {
         Utils.checkNotNull(fulfillment, "fulfillment");
         this.fulfillment = fulfillment;
@@ -159,13 +169,13 @@ public class CollectFundsCardPayments {
         return this;
     }
 
+
     public CollectFundsCardPayments withRefundPolicy(Optional<? extends RefundPolicy> refundPolicy) {
         Utils.checkNotNull(refundPolicy, "refundPolicy");
         this.refundPolicy = refundPolicy;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -186,11 +196,8 @@ public class CollectFundsCardPayments {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cardAcceptanceMethods,
-            currentlyAcceptsCards,
-            estimatedActivity,
-            fulfillment,
-            refundPolicy);
+            cardAcceptanceMethods, currentlyAcceptsCards, estimatedActivity,
+            fulfillment, refundPolicy);
     }
     
     @Override
@@ -202,22 +209,24 @@ public class CollectFundsCardPayments {
                 "fulfillment", fulfillment,
                 "refundPolicy", refundPolicy);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CardAcceptanceMethods> cardAcceptanceMethods = Optional.empty();
- 
+
         private Optional<Boolean> currentlyAcceptsCards = Optional.empty();
- 
+
         private Optional<? extends EstimatedActivity> estimatedActivity = Optional.empty();
- 
+
         private Optional<? extends Fulfillment> fulfillment = Optional.empty();
- 
+
         private Optional<? extends RefundPolicy> refundPolicy = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Describes the distribution of card transactions by payment method.
@@ -237,6 +246,7 @@ public class CollectFundsCardPayments {
             return this;
         }
 
+
         public Builder currentlyAcceptsCards(boolean currentlyAcceptsCards) {
             Utils.checkNotNull(currentlyAcceptsCards, "currentlyAcceptsCards");
             this.currentlyAcceptsCards = Optional.ofNullable(currentlyAcceptsCards);
@@ -248,6 +258,7 @@ public class CollectFundsCardPayments {
             this.currentlyAcceptsCards = currentlyAcceptsCards;
             return this;
         }
+
 
         public Builder estimatedActivity(EstimatedActivity estimatedActivity) {
             Utils.checkNotNull(estimatedActivity, "estimatedActivity");
@@ -261,6 +272,7 @@ public class CollectFundsCardPayments {
             return this;
         }
 
+
         public Builder fulfillment(Fulfillment fulfillment) {
             Utils.checkNotNull(fulfillment, "fulfillment");
             this.fulfillment = Optional.ofNullable(fulfillment);
@@ -273,6 +285,7 @@ public class CollectFundsCardPayments {
             return this;
         }
 
+
         public Builder refundPolicy(RefundPolicy refundPolicy) {
             Utils.checkNotNull(refundPolicy, "refundPolicy");
             this.refundPolicy = Optional.ofNullable(refundPolicy);
@@ -284,14 +297,13 @@ public class CollectFundsCardPayments {
             this.refundPolicy = refundPolicy;
             return this;
         }
-        
+
         public CollectFundsCardPayments build() {
+
             return new CollectFundsCardPayments(
-                cardAcceptanceMethods,
-                currentlyAcceptsCards,
-                estimatedActivity,
-                fulfillment,
-                refundPolicy);
+                cardAcceptanceMethods, currentlyAcceptsCards, estimatedActivity,
+                fulfillment, refundPolicy);
         }
+
     }
 }

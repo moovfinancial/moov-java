@@ -16,7 +16,6 @@ import java.lang.String;
  * <p>Describes a request to link an account with a terminal application.
  */
 public class LinkAccountTerminalApplication {
-
     /**
      * ID of the terminal application.
      */
@@ -38,9 +37,10 @@ public class LinkAccountTerminalApplication {
         return terminalApplicationID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the terminal application.
@@ -51,7 +51,6 @@ public class LinkAccountTerminalApplication {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +75,16 @@ public class LinkAccountTerminalApplication {
         return Utils.toString(LinkAccountTerminalApplication.class,
                 "terminalApplicationID", terminalApplicationID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String terminalApplicationID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the terminal application.
@@ -93,10 +94,12 @@ public class LinkAccountTerminalApplication {
             this.terminalApplicationID = terminalApplicationID;
             return this;
         }
-        
+
         public LinkAccountTerminalApplication build() {
+
             return new LinkAccountTerminalApplication(
                 terminalApplicationID);
         }
+
     }
 }

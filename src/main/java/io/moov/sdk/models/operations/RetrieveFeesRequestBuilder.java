@@ -28,7 +28,7 @@ public class RetrieveFeesRequestBuilder {
     public RetrieveFeesResponse call() throws Exception {
         
         RequestOperation<RetrieveFeesRequest, RetrieveFeesResponse> operation
-              = new RetrieveFeesOperation( sdkConfiguration);
+              = new RetrieveFeesOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

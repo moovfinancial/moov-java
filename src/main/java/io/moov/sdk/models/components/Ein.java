@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class Ein {
 
     @JsonProperty("number")
@@ -27,9 +28,10 @@ public class Ein {
         return number;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Ein withNumber(String number) {
         Utils.checkNotNull(number, "number");
@@ -37,7 +39,6 @@ public class Ein {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,24 +63,28 @@ public class Ein {
         return Utils.toString(Ein.class,
                 "number", number);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String number;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder number(String number) {
             Utils.checkNotNull(number, "number");
             this.number = number;
             return this;
         }
-        
+
         public Ein build() {
+
             return new Ein(
                 number);
         }
+
     }
 }

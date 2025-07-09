@@ -10,16 +10,18 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class MoovWalletPaymentMethod implements PaymentMethod {
 
+public class MoovWalletPaymentMethod implements PaymentMethod {
     /**
      * ID of the payment method.
      */
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
 
+
     @JsonProperty("paymentMethodType")
     private MoovWalletPaymentMethodPaymentMethodType paymentMethodType;
+
 
     @JsonProperty("wallet")
     private PaymentMethodsWallet wallet;
@@ -56,9 +58,10 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
         return wallet;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the payment method.
@@ -81,7 +84,6 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -100,9 +102,7 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            paymentMethodType,
-            wallet);
+            paymentMethodID, paymentMethodType, wallet);
     }
     
     @Override
@@ -112,18 +112,20 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
                 "paymentMethodType", paymentMethodType,
                 "wallet", wallet);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private MoovWalletPaymentMethodPaymentMethodType paymentMethodType;
- 
+
         private PaymentMethodsWallet wallet;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the payment method.
@@ -134,23 +136,25 @@ public class MoovWalletPaymentMethod implements PaymentMethod {
             return this;
         }
 
+
         public Builder paymentMethodType(MoovWalletPaymentMethodPaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;
         }
 
+
         public Builder wallet(PaymentMethodsWallet wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = wallet;
             return this;
         }
-        
+
         public MoovWalletPaymentMethod build() {
+
             return new MoovWalletPaymentMethod(
-                paymentMethodID,
-                paymentMethodType,
-                wallet);
+                paymentMethodID, paymentMethodType, wallet);
         }
+
     }
 }

@@ -46,7 +46,7 @@ public class CreateRepresentativeRequestBuilder {
     public CreateRepresentativeResponse call() throws Exception {
         
         RequestOperation<CreateRepresentativeRequest, CreateRepresentativeResponse> operation
-              = new CreateRepresentativeOperation( sdkConfiguration);
+              = new CreateRepresentativeOperation(sdkConfiguration);
         CreateRepresentativeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

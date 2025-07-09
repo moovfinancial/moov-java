@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class MoneyTransferPushToCardError {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -37,9 +38,10 @@ public class MoneyTransferPushToCardError {
         return (Optional<EstimatedActivityError>) estimatedActivity;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public MoneyTransferPushToCardError withEstimatedActivity(EstimatedActivityError estimatedActivity) {
         Utils.checkNotNull(estimatedActivity, "estimatedActivity");
@@ -47,13 +49,13 @@ public class MoneyTransferPushToCardError {
         return this;
     }
 
+
     public MoneyTransferPushToCardError withEstimatedActivity(Optional<? extends EstimatedActivityError> estimatedActivity) {
         Utils.checkNotNull(estimatedActivity, "estimatedActivity");
         this.estimatedActivity = estimatedActivity;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -78,14 +80,16 @@ public class MoneyTransferPushToCardError {
         return Utils.toString(MoneyTransferPushToCardError.class,
                 "estimatedActivity", estimatedActivity);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends EstimatedActivityError> estimatedActivity = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder estimatedActivity(EstimatedActivityError estimatedActivity) {
             Utils.checkNotNull(estimatedActivity, "estimatedActivity");
@@ -98,10 +102,12 @@ public class MoneyTransferPushToCardError {
             this.estimatedActivity = estimatedActivity;
             return this;
         }
-        
+
         public MoneyTransferPushToCardError build() {
+
             return new MoneyTransferPushToCardError(
                 estimatedActivity);
         }
+
     }
 }

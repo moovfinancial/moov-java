@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class BrandColor {
 
+public class BrandColor {
     /**
      * A CSS hex color representing an accent color.
      */
@@ -33,9 +33,10 @@ public class BrandColor {
         return accent;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A CSS hex color representing an accent color.
@@ -46,7 +47,6 @@ public class BrandColor {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class BrandColor {
         return Utils.toString(BrandColor.class,
                 "accent", accent);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accent;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A CSS hex color representing an accent color.
@@ -88,10 +90,12 @@ public class BrandColor {
             this.accent = accent;
             return this;
         }
-        
+
         public BrandColor build() {
+
             return new BrandColor(
                 accent);
         }
+
     }
 }

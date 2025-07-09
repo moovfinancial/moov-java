@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataBalanceUpdated {
 
     @JsonProperty("accountID")
     private String accountID;
+
 
     @JsonProperty("walletID")
     private String walletID;
@@ -38,9 +40,10 @@ public class WebhookDataBalanceUpdated {
         return walletID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataBalanceUpdated withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class WebhookDataBalanceUpdated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class WebhookDataBalanceUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            walletID);
+            accountID, walletID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class WebhookDataBalanceUpdated {
                 "accountID", accountID,
                 "walletID", walletID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String walletID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class WebhookDataBalanceUpdated {
             return this;
         }
 
+
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
-        
+
         public WebhookDataBalanceUpdated build() {
+
             return new WebhookDataBalanceUpdated(
-                accountID,
-                walletID);
+                accountID, walletID);
         }
+
     }
 }

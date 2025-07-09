@@ -30,7 +30,6 @@ public class Files {
     Files(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Upload a file and link it to the specified Moov account. 
      * 
@@ -70,10 +69,9 @@ public class Files {
                 .fileUploadRequestMultiPart(fileUploadRequestMultiPart)
                 .build();
         RequestOperation<UploadFileRequest, UploadFileResponse> operation
-              = new UploadFileOperation( sdkConfiguration);
+              = new UploadFileOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all the files associated with a particular Moov account.
@@ -97,18 +95,16 @@ public class Files {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListFilesResponse list(
-            String accountID) throws Exception {
+    public ListFilesResponse list(String accountID) throws Exception {
         ListFilesRequest request =
             ListFilesRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListFilesRequest, ListFilesResponse> operation
-              = new ListFilesOperation( sdkConfiguration);
+              = new ListFilesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve file details associated with a specific Moov account.
@@ -143,7 +139,7 @@ public class Files {
                 .fileID(fileID)
                 .build();
         RequestOperation<GetFileDetailsRequest, GetFileDetailsResponse> operation
-              = new GetFileDetailsOperation( sdkConfiguration);
+              = new GetFileDetailsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

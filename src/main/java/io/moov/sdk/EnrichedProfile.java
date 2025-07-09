@@ -21,7 +21,6 @@ public class EnrichedProfile {
     EnrichedProfile(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
      * 
@@ -44,15 +43,14 @@ public class EnrichedProfile {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetEnrichmentProfileResponse get(
-            String email) throws Exception {
+    public GetEnrichmentProfileResponse get(String email) throws Exception {
         GetEnrichmentProfileRequest request =
             GetEnrichmentProfileRequest
                 .builder()
                 .email(email)
                 .build();
         RequestOperation<GetEnrichmentProfileRequest, GetEnrichmentProfileResponse> operation
-              = new GetEnrichmentProfileOperation( sdkConfiguration);
+              = new GetEnrichmentProfileOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

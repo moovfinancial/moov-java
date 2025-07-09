@@ -37,7 +37,7 @@ public class GetAccountRequestBuilder {
     public GetAccountResponse call() throws Exception {
         
         RequestOperation<GetAccountRequest, GetAccountResponse> operation
-              = new GetAccountOperation( sdkConfiguration);
+              = new GetAccountOperation(sdkConfiguration);
         GetAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

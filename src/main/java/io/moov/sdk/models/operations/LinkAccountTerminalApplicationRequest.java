@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class LinkAccountTerminalApplicationRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private LinkAccountTerminalApplication linkAccountTerminalApplication;
@@ -39,9 +41,10 @@ public class LinkAccountTerminalApplicationRequest {
         return linkAccountTerminalApplication;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public LinkAccountTerminalApplicationRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class LinkAccountTerminalApplicationRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class LinkAccountTerminalApplicationRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            linkAccountTerminalApplication);
+            accountID, linkAccountTerminalApplication);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class LinkAccountTerminalApplicationRequest {
                 "accountID", accountID,
                 "linkAccountTerminalApplication", linkAccountTerminalApplication);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private LinkAccountTerminalApplication linkAccountTerminalApplication;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class LinkAccountTerminalApplicationRequest {
             return this;
         }
 
+
         public Builder linkAccountTerminalApplication(LinkAccountTerminalApplication linkAccountTerminalApplication) {
             Utils.checkNotNull(linkAccountTerminalApplication, "linkAccountTerminalApplication");
             this.linkAccountTerminalApplication = linkAccountTerminalApplication;
             return this;
         }
-        
+
         public LinkAccountTerminalApplicationRequest build() {
+
             return new LinkAccountTerminalApplicationRequest(
-                accountID,
-                linkAccountTerminalApplication);
+                accountID, linkAccountTerminalApplication);
         }
+
     }
 }

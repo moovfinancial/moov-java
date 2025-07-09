@@ -11,8 +11,8 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 
-public class CreateReversal {
 
+public class CreateReversal {
     /**
      * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
      */
@@ -34,9 +34,10 @@ public class CreateReversal {
         return amount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
@@ -47,7 +48,6 @@ public class CreateReversal {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,14 +72,16 @@ public class CreateReversal {
         return Utils.toString(CreateReversal.class,
                 "amount", amount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long amount;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
@@ -89,10 +91,12 @@ public class CreateReversal {
             this.amount = amount;
             return this;
         }
-        
+
         public CreateReversal build() {
+
             return new CreateReversal(
                 amount);
         }
+
     }
 }

@@ -16,13 +16,16 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 public class SweepConfig {
 
     @JsonProperty("sweepConfigID")
     private String sweepConfigID;
 
+
     @JsonProperty("walletID")
     private String walletID;
+
 
     @JsonProperty("status")
     private SweepConfigStatus status;
@@ -62,8 +65,10 @@ public class SweepConfig {
     @JsonProperty("lockedFields")
     private Optional<? extends List<String>> lockedFields;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
@@ -110,7 +115,10 @@ public class SweepConfig {
             SweepConfigPaymentMethod pullPaymentMethod,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(sweepConfigID, walletID, status, pushPaymentMethod, pullPaymentMethod, Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn);
+        this(sweepConfigID, walletID, status,
+            pushPaymentMethod, pullPaymentMethod, Optional.empty(),
+            Optional.empty(), Optional.empty(), createdOn,
+            updatedOn);
     }
 
     @JsonIgnore
@@ -181,9 +189,10 @@ public class SweepConfig {
         return updatedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public SweepConfig withSweepConfigID(String sweepConfigID) {
         Utils.checkNotNull(sweepConfigID, "sweepConfigID");
@@ -232,6 +241,7 @@ public class SweepConfig {
         return this;
     }
 
+
     /**
      * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00.
      */
@@ -250,6 +260,7 @@ public class SweepConfig {
         return this;
     }
 
+
     /**
      * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
      */
@@ -267,6 +278,7 @@ public class SweepConfig {
         this.lockedFields = Optional.ofNullable(lockedFields);
         return this;
     }
+
 
     /**
      * An array of fields that are locked. To request updates, please contact Moov support.
@@ -289,7 +301,6 @@ public class SweepConfig {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -315,15 +326,9 @@ public class SweepConfig {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            sweepConfigID,
-            walletID,
-            status,
-            pushPaymentMethod,
-            pullPaymentMethod,
-            minimumBalance,
-            statementDescriptor,
-            lockedFields,
-            createdOn,
+            sweepConfigID, walletID, status,
+            pushPaymentMethod, pullPaymentMethod, minimumBalance,
+            statementDescriptor, lockedFields, createdOn,
             updatedOn);
     }
     
@@ -341,32 +346,34 @@ public class SweepConfig {
                 "createdOn", createdOn,
                 "updatedOn", updatedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String sweepConfigID;
- 
+
         private String walletID;
- 
+
         private SweepConfigStatus status;
- 
+
         private SweepConfigPaymentMethod pushPaymentMethod;
- 
+
         private SweepConfigPaymentMethod pullPaymentMethod;
- 
+
         private Optional<String> minimumBalance = Optional.empty();
- 
+
         private Optional<String> statementDescriptor = Optional.empty();
- 
+
         private Optional<? extends List<String>> lockedFields = Optional.empty();
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder sweepConfigID(String sweepConfigID) {
             Utils.checkNotNull(sweepConfigID, "sweepConfigID");
@@ -374,17 +381,20 @@ public class SweepConfig {
             return this;
         }
 
+
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
 
+
         public Builder status(SweepConfigStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         /**
          * The payment method used to push or pull funds to a bank account.
@@ -396,6 +406,7 @@ public class SweepConfig {
             return this;
         }
 
+
         /**
          * The payment method used to push or pull funds to a bank account.
          * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
@@ -405,6 +416,7 @@ public class SweepConfig {
             this.pullPaymentMethod = pullPaymentMethod;
             return this;
         }
+
 
         /**
          * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00.
@@ -424,6 +436,7 @@ public class SweepConfig {
             return this;
         }
 
+
         /**
          * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
          */
@@ -441,6 +454,7 @@ public class SweepConfig {
             this.statementDescriptor = statementDescriptor;
             return this;
         }
+
 
         /**
          * An array of fields that are locked. To request updates, please contact Moov support.
@@ -460,30 +474,28 @@ public class SweepConfig {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
-        
+
         public SweepConfig build() {
+
             return new SweepConfig(
-                sweepConfigID,
-                walletID,
-                status,
-                pushPaymentMethod,
-                pullPaymentMethod,
-                minimumBalance,
-                statementDescriptor,
-                lockedFields,
-                createdOn,
+                sweepConfigID, walletID, status,
+                pushPaymentMethod, pullPaymentMethod, minimumBalance,
+                statementDescriptor, lockedFields, createdOn,
                 updatedOn);
         }
+
     }
 }

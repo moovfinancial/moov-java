@@ -14,23 +14,28 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CollectFundsCardPaymentsError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardAcceptanceMethods")
     private Optional<? extends CardAcceptanceMethodsError> cardAcceptanceMethods;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("currentlyAcceptsCards")
     private Optional<String> currentlyAcceptsCards;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("estimatedActivity")
     private Optional<? extends EstimatedActivityError> estimatedActivity;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fulfillment")
     private Optional<? extends FulfillmentError> fulfillment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refundPolicy")
@@ -56,7 +61,8 @@ public class CollectFundsCardPaymentsError {
     }
     
     public CollectFundsCardPaymentsError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -87,15 +93,17 @@ public class CollectFundsCardPaymentsError {
         return refundPolicy;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CollectFundsCardPaymentsError withCardAcceptanceMethods(CardAcceptanceMethodsError cardAcceptanceMethods) {
         Utils.checkNotNull(cardAcceptanceMethods, "cardAcceptanceMethods");
         this.cardAcceptanceMethods = Optional.ofNullable(cardAcceptanceMethods);
         return this;
     }
+
 
     public CollectFundsCardPaymentsError withCardAcceptanceMethods(Optional<? extends CardAcceptanceMethodsError> cardAcceptanceMethods) {
         Utils.checkNotNull(cardAcceptanceMethods, "cardAcceptanceMethods");
@@ -109,6 +117,7 @@ public class CollectFundsCardPaymentsError {
         return this;
     }
 
+
     public CollectFundsCardPaymentsError withCurrentlyAcceptsCards(Optional<String> currentlyAcceptsCards) {
         Utils.checkNotNull(currentlyAcceptsCards, "currentlyAcceptsCards");
         this.currentlyAcceptsCards = currentlyAcceptsCards;
@@ -120,6 +129,7 @@ public class CollectFundsCardPaymentsError {
         this.estimatedActivity = Optional.ofNullable(estimatedActivity);
         return this;
     }
+
 
     public CollectFundsCardPaymentsError withEstimatedActivity(Optional<? extends EstimatedActivityError> estimatedActivity) {
         Utils.checkNotNull(estimatedActivity, "estimatedActivity");
@@ -133,6 +143,7 @@ public class CollectFundsCardPaymentsError {
         return this;
     }
 
+
     public CollectFundsCardPaymentsError withFulfillment(Optional<? extends FulfillmentError> fulfillment) {
         Utils.checkNotNull(fulfillment, "fulfillment");
         this.fulfillment = fulfillment;
@@ -145,13 +156,13 @@ public class CollectFundsCardPaymentsError {
         return this;
     }
 
+
     public CollectFundsCardPaymentsError withRefundPolicy(Optional<String> refundPolicy) {
         Utils.checkNotNull(refundPolicy, "refundPolicy");
         this.refundPolicy = refundPolicy;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -172,11 +183,8 @@ public class CollectFundsCardPaymentsError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cardAcceptanceMethods,
-            currentlyAcceptsCards,
-            estimatedActivity,
-            fulfillment,
-            refundPolicy);
+            cardAcceptanceMethods, currentlyAcceptsCards, estimatedActivity,
+            fulfillment, refundPolicy);
     }
     
     @Override
@@ -188,22 +196,24 @@ public class CollectFundsCardPaymentsError {
                 "fulfillment", fulfillment,
                 "refundPolicy", refundPolicy);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CardAcceptanceMethodsError> cardAcceptanceMethods = Optional.empty();
- 
+
         private Optional<String> currentlyAcceptsCards = Optional.empty();
- 
+
         private Optional<? extends EstimatedActivityError> estimatedActivity = Optional.empty();
- 
+
         private Optional<? extends FulfillmentError> fulfillment = Optional.empty();
- 
+
         private Optional<String> refundPolicy = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder cardAcceptanceMethods(CardAcceptanceMethodsError cardAcceptanceMethods) {
             Utils.checkNotNull(cardAcceptanceMethods, "cardAcceptanceMethods");
@@ -217,6 +227,7 @@ public class CollectFundsCardPaymentsError {
             return this;
         }
 
+
         public Builder currentlyAcceptsCards(String currentlyAcceptsCards) {
             Utils.checkNotNull(currentlyAcceptsCards, "currentlyAcceptsCards");
             this.currentlyAcceptsCards = Optional.ofNullable(currentlyAcceptsCards);
@@ -228,6 +239,7 @@ public class CollectFundsCardPaymentsError {
             this.currentlyAcceptsCards = currentlyAcceptsCards;
             return this;
         }
+
 
         public Builder estimatedActivity(EstimatedActivityError estimatedActivity) {
             Utils.checkNotNull(estimatedActivity, "estimatedActivity");
@@ -241,6 +253,7 @@ public class CollectFundsCardPaymentsError {
             return this;
         }
 
+
         public Builder fulfillment(FulfillmentError fulfillment) {
             Utils.checkNotNull(fulfillment, "fulfillment");
             this.fulfillment = Optional.ofNullable(fulfillment);
@@ -253,6 +266,7 @@ public class CollectFundsCardPaymentsError {
             return this;
         }
 
+
         public Builder refundPolicy(String refundPolicy) {
             Utils.checkNotNull(refundPolicy, "refundPolicy");
             this.refundPolicy = Optional.ofNullable(refundPolicy);
@@ -264,14 +278,13 @@ public class CollectFundsCardPaymentsError {
             this.refundPolicy = refundPolicy;
             return this;
         }
-        
+
         public CollectFundsCardPaymentsError build() {
+
             return new CollectFundsCardPaymentsError(
-                cardAcceptanceMethods,
-                currentlyAcceptsCards,
-                estimatedActivity,
-                fulfillment,
-                refundPolicy);
+                cardAcceptanceMethods, currentlyAcceptsCards, estimatedActivity,
+                fulfillment, refundPolicy);
         }
+
     }
 }

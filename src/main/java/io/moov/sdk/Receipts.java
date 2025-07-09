@@ -25,7 +25,6 @@ public class Receipts {
     Receipts(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Create receipts for transfers and scheduled transfers.
      * 
@@ -48,13 +47,11 @@ public class Receipts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateReceiptsResponse create(
-            List<ReceiptRequest> request) throws Exception {
+    public CreateReceiptsResponse create(List<ReceiptRequest> request) throws Exception {
         RequestOperation<List<ReceiptRequest>, CreateReceiptsResponse> operation
-              = new CreateReceiptsOperation( sdkConfiguration);
+              = new CreateReceiptsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List receipts by transferID, scheduleID, or occurrenceID.
@@ -78,15 +75,14 @@ public class Receipts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListReceiptsResponse list(
-            String id) throws Exception {
+    public ListReceiptsResponse list(String id) throws Exception {
         ListReceiptsRequest request =
             ListReceiptsRequest
                 .builder()
                 .id(id)
                 .build();
         RequestOperation<ListReceiptsRequest, ListReceiptsResponse> operation
-              = new ListReceiptsOperation( sdkConfiguration);
+              = new ListReceiptsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

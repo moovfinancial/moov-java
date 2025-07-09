@@ -21,7 +21,6 @@ import java.util.Optional;
  * <p>Describes the job responsibilities of a business representative.
  */
 public class Responsibilities {
-
     /**
      * Indicates whether this individual has significant management responsibilities within the business.
      */
@@ -44,6 +43,7 @@ public class Responsibilities {
     @JsonProperty("ownershipPercentage")
     private Optional<Long> ownershipPercentage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("jobTitle")
     private Optional<String> jobTitle;
@@ -65,7 +65,8 @@ public class Responsibilities {
     }
     
     public Responsibilities() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -98,9 +99,10 @@ public class Responsibilities {
         return jobTitle;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Indicates whether this individual has significant management responsibilities within the business.
@@ -110,6 +112,7 @@ public class Responsibilities {
         this.isController = Optional.ofNullable(isController);
         return this;
     }
+
 
     /**
      * Indicates whether this individual has significant management responsibilities within the business.
@@ -130,6 +133,7 @@ public class Responsibilities {
         return this;
     }
 
+
     /**
      * If `true`, this field indicates that the individual has a business ownership stake of at least 25% in the
      * business. If the representative does not own at least 25% of the business, this field should be `false`.
@@ -149,6 +153,7 @@ public class Responsibilities {
         return this;
     }
 
+
     /**
      * The percentage of ownership this individual has in the business (required if `isOwner` is `true`).
      */
@@ -164,13 +169,13 @@ public class Responsibilities {
         return this;
     }
 
+
     public Responsibilities withJobTitle(Optional<String> jobTitle) {
         Utils.checkNotNull(jobTitle, "jobTitle");
         this.jobTitle = jobTitle;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -190,9 +195,7 @@ public class Responsibilities {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            isController,
-            isOwner,
-            ownershipPercentage,
+            isController, isOwner, ownershipPercentage,
             jobTitle);
     }
     
@@ -204,20 +207,22 @@ public class Responsibilities {
                 "ownershipPercentage", ownershipPercentage,
                 "jobTitle", jobTitle);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> isController = Optional.empty();
- 
+
         private Optional<Boolean> isOwner = Optional.empty();
- 
+
         private Optional<Long> ownershipPercentage = Optional.empty();
- 
+
         private Optional<String> jobTitle = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Indicates whether this individual has significant management responsibilities within the business.
@@ -236,6 +241,7 @@ public class Responsibilities {
             this.isController = isController;
             return this;
         }
+
 
         /**
          * If `true`, this field indicates that the individual has a business ownership stake of at least 25% in the
@@ -257,6 +263,7 @@ public class Responsibilities {
             return this;
         }
 
+
         /**
          * The percentage of ownership this individual has in the business (required if `isOwner` is `true`).
          */
@@ -275,6 +282,7 @@ public class Responsibilities {
             return this;
         }
 
+
         public Builder jobTitle(String jobTitle) {
             Utils.checkNotNull(jobTitle, "jobTitle");
             this.jobTitle = Optional.ofNullable(jobTitle);
@@ -286,13 +294,13 @@ public class Responsibilities {
             this.jobTitle = jobTitle;
             return this;
         }
-        
+
         public Responsibilities build() {
+
             return new Responsibilities(
-                isController,
-                isOwner,
-                ownershipPercentage,
+                isController, isOwner, ownershipPercentage,
                 jobTitle);
         }
+
     }
 }

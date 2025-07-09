@@ -83,7 +83,7 @@ public class ListIssuedCardsRequestBuilder {
     public ListIssuedCardsResponse call() throws Exception {
         
         RequestOperation<ListIssuedCardsRequest, ListIssuedCardsResponse> operation
-              = new ListIssuedCardsOperation( sdkConfiguration);
+              = new ListIssuedCardsOperation(sdkConfiguration);
         ListIssuedCardsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

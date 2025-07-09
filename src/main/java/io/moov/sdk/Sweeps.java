@@ -43,7 +43,6 @@ public class Sweeps {
     Sweeps(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Create a sweep config for a wallet.
      * 
@@ -77,10 +76,9 @@ public class Sweeps {
                 .createSweepConfig(createSweepConfig)
                 .build();
         RequestOperation<CreateSweepConfigRequest, CreateSweepConfigResponse> operation
-              = new CreateSweepConfigOperation( sdkConfiguration);
+              = new CreateSweepConfigOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List sweep configs associated with an account.
@@ -104,18 +102,16 @@ public class Sweeps {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListSweepConfigsResponse listConfigs(
-            String accountID) throws Exception {
+    public ListSweepConfigsResponse listConfigs(String accountID) throws Exception {
         ListSweepConfigsRequest request =
             ListSweepConfigsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListSweepConfigsRequest, ListSweepConfigsResponse> operation
-              = new ListSweepConfigsOperation( sdkConfiguration);
+              = new ListSweepConfigsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get a sweep config associated with a wallet.
@@ -150,10 +146,9 @@ public class Sweeps {
                 .sweepConfigID(sweepConfigID)
                 .build();
         RequestOperation<GetSweepConfigRequest, GetSweepConfigResponse> operation
-              = new GetSweepConfigOperation( sdkConfiguration);
+              = new GetSweepConfigOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Update settings on a sweep config.
@@ -191,10 +186,9 @@ public class Sweeps {
                 .patchSweepConfig(patchSweepConfig)
                 .build();
         RequestOperation<UpdateSweepConfigRequest, UpdateSweepConfigResponse> operation
-              = new UpdateSweepConfigOperation( sdkConfiguration);
+              = new UpdateSweepConfigOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List sweeps associated with a wallet.
@@ -218,13 +212,11 @@ public class Sweeps {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListSweepsResponse list(
-            ListSweepsRequest request) throws Exception {
+    public ListSweepsResponse list(ListSweepsRequest request) throws Exception {
         RequestOperation<ListSweepsRequest, ListSweepsResponse> operation
-              = new ListSweepsOperation( sdkConfiguration);
+              = new ListSweepsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get details on a specific sweep.
@@ -262,7 +254,7 @@ public class Sweeps {
                 .sweepID(sweepID)
                 .build();
         RequestOperation<GetSweepRequest, GetSweepResponse> operation
-              = new GetSweepOperation( sdkConfiguration);
+              = new GetSweepOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -14,27 +14,33 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CreateIndividualError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<? extends IndividualNameError> name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumberError> phone;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends AddressError> address;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("birthDate")
     private Optional<? extends BirthDateError> birthDate;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("governmentID")
@@ -63,7 +69,8 @@ public class CreateIndividualError {
     }
     
     public CreateIndividualError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -101,15 +108,17 @@ public class CreateIndividualError {
         return (Optional<CreateIndividualErrorGovernmentID>) governmentID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateIndividualError withName(IndividualNameError name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     public CreateIndividualError withName(Optional<? extends IndividualNameError> name) {
         Utils.checkNotNull(name, "name");
@@ -123,6 +132,7 @@ public class CreateIndividualError {
         return this;
     }
 
+
     public CreateIndividualError withPhone(Optional<? extends PhoneNumberError> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
@@ -134,6 +144,7 @@ public class CreateIndividualError {
         this.email = Optional.ofNullable(email);
         return this;
     }
+
 
     public CreateIndividualError withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
@@ -147,6 +158,7 @@ public class CreateIndividualError {
         return this;
     }
 
+
     public CreateIndividualError withAddress(Optional<? extends AddressError> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -158,6 +170,7 @@ public class CreateIndividualError {
         this.birthDate = Optional.ofNullable(birthDate);
         return this;
     }
+
 
     public CreateIndividualError withBirthDate(Optional<? extends BirthDateError> birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
@@ -171,13 +184,13 @@ public class CreateIndividualError {
         return this;
     }
 
+
     public CreateIndividualError withGovernmentID(Optional<? extends CreateIndividualErrorGovernmentID> governmentID) {
         Utils.checkNotNull(governmentID, "governmentID");
         this.governmentID = governmentID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -199,12 +212,8 @@ public class CreateIndividualError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            phone,
-            email,
-            address,
-            birthDate,
-            governmentID);
+            name, phone, email,
+            address, birthDate, governmentID);
     }
     
     @Override
@@ -217,24 +226,26 @@ public class CreateIndividualError {
                 "birthDate", birthDate,
                 "governmentID", governmentID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends IndividualNameError> name = Optional.empty();
- 
+
         private Optional<? extends PhoneNumberError> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends AddressError> address = Optional.empty();
- 
+
         private Optional<? extends BirthDateError> birthDate = Optional.empty();
- 
+
         private Optional<? extends CreateIndividualErrorGovernmentID> governmentID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(IndividualNameError name) {
             Utils.checkNotNull(name, "name");
@@ -248,6 +259,7 @@ public class CreateIndividualError {
             return this;
         }
 
+
         public Builder phone(PhoneNumberError phone) {
             Utils.checkNotNull(phone, "phone");
             this.phone = Optional.ofNullable(phone);
@@ -259,6 +271,7 @@ public class CreateIndividualError {
             this.phone = phone;
             return this;
         }
+
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -272,6 +285,7 @@ public class CreateIndividualError {
             return this;
         }
 
+
         public Builder address(AddressError address) {
             Utils.checkNotNull(address, "address");
             this.address = Optional.ofNullable(address);
@@ -283,6 +297,7 @@ public class CreateIndividualError {
             this.address = address;
             return this;
         }
+
 
         public Builder birthDate(BirthDateError birthDate) {
             Utils.checkNotNull(birthDate, "birthDate");
@@ -296,6 +311,7 @@ public class CreateIndividualError {
             return this;
         }
 
+
         public Builder governmentID(CreateIndividualErrorGovernmentID governmentID) {
             Utils.checkNotNull(governmentID, "governmentID");
             this.governmentID = Optional.ofNullable(governmentID);
@@ -307,15 +323,13 @@ public class CreateIndividualError {
             this.governmentID = governmentID;
             return this;
         }
-        
+
         public CreateIndividualError build() {
+
             return new CreateIndividualError(
-                name,
-                phone,
-                email,
-                address,
-                birthDate,
-                governmentID);
+                name, phone, email,
+                address, birthDate, governmentID);
         }
+
     }
 }

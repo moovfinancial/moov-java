@@ -26,7 +26,6 @@ public class Authentication {
     Authentication(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Revoke an auth token.
      * 
@@ -48,7 +47,8 @@ public class Authentication {
      * @throws Exception if the API call fails
      */
     public RevokeAccessTokenResponse revokeAccessToken(String token) throws Exception {
-        return revokeAccessToken(token, Optional.empty(), Optional.empty(), Optional.empty());
+        return revokeAccessToken(token, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -77,10 +77,9 @@ public class Authentication {
                 .clientSecret(clientSecret)
                 .build();
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
-              = new RevokeAccessTokenOperation( sdkConfiguration);
+              = new RevokeAccessTokenOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Create or refresh an access token.
@@ -98,10 +97,9 @@ public class Authentication {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateAccessTokenResponse createAccessToken(
-            AuthTokenRequest request) throws Exception {
+    public CreateAccessTokenResponse createAccessToken(AuthTokenRequest request) throws Exception {
         RequestOperation<AuthTokenRequest, CreateAccessTokenResponse> operation
-              = new CreateAccessTokenOperation( sdkConfiguration);
+              = new CreateAccessTokenOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

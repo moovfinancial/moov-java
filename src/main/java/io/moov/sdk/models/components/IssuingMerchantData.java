@@ -13,8 +13,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class IssuingMerchantData {
 
+public class IssuingMerchantData {
     /**
      * External identifier used to identify the merchant with the card brand.
      */
@@ -90,7 +90,9 @@ public class IssuingMerchantData {
     }
     
     public IssuingMerchantData() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -149,9 +151,10 @@ public class IssuingMerchantData {
         return mcc;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * External identifier used to identify the merchant with the card brand.
@@ -161,6 +164,7 @@ public class IssuingMerchantData {
         this.networkID = Optional.ofNullable(networkID);
         return this;
     }
+
 
     /**
      * External identifier used to identify the merchant with the card brand.
@@ -180,6 +184,7 @@ public class IssuingMerchantData {
         return this;
     }
 
+
     /**
      * Name of the merchant.
      */
@@ -197,6 +202,7 @@ public class IssuingMerchantData {
         this.city = Optional.ofNullable(city);
         return this;
     }
+
 
     /**
      * The merchant's location.
@@ -216,6 +222,7 @@ public class IssuingMerchantData {
         return this;
     }
 
+
     /**
      * Two-letter country code.
      */
@@ -233,6 +240,7 @@ public class IssuingMerchantData {
         this.postalCode = Optional.ofNullable(postalCode);
         return this;
     }
+
 
     /**
      * The merchant's five-digit postal code.
@@ -252,6 +260,7 @@ public class IssuingMerchantData {
         return this;
     }
 
+
     /**
      * The merchant's two-letter state abbreviation.
      */
@@ -270,6 +279,7 @@ public class IssuingMerchantData {
         return this;
     }
 
+
     /**
      * The Merchant Category Code.
      */
@@ -279,7 +289,6 @@ public class IssuingMerchantData {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -302,12 +311,8 @@ public class IssuingMerchantData {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            networkID,
-            name,
-            city,
-            country,
-            postalCode,
-            state,
+            networkID, name, city,
+            country, postalCode, state,
             mcc);
     }
     
@@ -322,26 +327,28 @@ public class IssuingMerchantData {
                 "state", state,
                 "mcc", mcc);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> networkID = Optional.empty();
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<String> city = Optional.empty();
- 
+
         private Optional<String> country = Optional.empty();
- 
+
         private Optional<String> postalCode = Optional.empty();
- 
+
         private Optional<String> state = Optional.empty();
- 
+
         private Optional<String> mcc = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * External identifier used to identify the merchant with the card brand.
@@ -361,6 +368,7 @@ public class IssuingMerchantData {
             return this;
         }
 
+
         /**
          * Name of the merchant.
          */
@@ -378,6 +386,7 @@ public class IssuingMerchantData {
             this.name = name;
             return this;
         }
+
 
         /**
          * The merchant's location.
@@ -397,6 +406,7 @@ public class IssuingMerchantData {
             return this;
         }
 
+
         /**
          * Two-letter country code.
          */
@@ -414,6 +424,7 @@ public class IssuingMerchantData {
             this.country = country;
             return this;
         }
+
 
         /**
          * The merchant's five-digit postal code.
@@ -433,6 +444,7 @@ public class IssuingMerchantData {
             return this;
         }
 
+
         /**
          * The merchant's two-letter state abbreviation.
          */
@@ -451,6 +463,7 @@ public class IssuingMerchantData {
             return this;
         }
 
+
         /**
          * The Merchant Category Code.
          */
@@ -468,16 +481,14 @@ public class IssuingMerchantData {
             this.mcc = mcc;
             return this;
         }
-        
+
         public IssuingMerchantData build() {
+
             return new IssuingMerchantData(
-                networkID,
-                name,
-                city,
-                country,
-                postalCode,
-                state,
+                networkID, name, city,
+                country, postalCode, state,
                 mcc);
         }
+
     }
 }

@@ -23,7 +23,6 @@ import java.util.Optional;
  *   for more information.
  */
 public class LinkApplePay {
-
     /**
      * Contains the user's payment information as returned from Apple Pay.
      * 
@@ -81,9 +80,10 @@ public class LinkApplePay {
         return (Optional<AppleBillingContact>) billingContact;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Contains the user's payment information as returned from Apple Pay.
@@ -109,6 +109,7 @@ public class LinkApplePay {
         return this;
     }
 
+
     /**
      * Billing contact information as returned from Apple Pay.
      * 
@@ -121,7 +122,6 @@ public class LinkApplePay {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -139,8 +139,7 @@ public class LinkApplePay {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            token,
-            billingContact);
+            token, billingContact);
     }
     
     @Override
@@ -149,16 +148,18 @@ public class LinkApplePay {
                 "token", token,
                 "billingContact", billingContact);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private LinkApplePayToken token;
- 
+
         private Optional<? extends AppleBillingContact> billingContact = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Contains the user's payment information as returned from Apple Pay.
@@ -171,6 +172,7 @@ public class LinkApplePay {
             this.token = token;
             return this;
         }
+
 
         /**
          * Billing contact information as returned from Apple Pay.
@@ -195,11 +197,12 @@ public class LinkApplePay {
             this.billingContact = billingContact;
             return this;
         }
-        
+
         public LinkApplePay build() {
+
             return new LinkApplePay(
-                token,
-                billingContact);
+                token, billingContact);
         }
+
     }
 }

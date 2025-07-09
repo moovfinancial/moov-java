@@ -14,19 +14,23 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CustomerSupportError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumberError> phone;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends AddressError> address;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("website")
@@ -49,7 +53,8 @@ public class CustomerSupportError {
     }
     
     public CustomerSupportError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -74,15 +79,17 @@ public class CustomerSupportError {
         return website;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CustomerSupportError withPhone(PhoneNumberError phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = Optional.ofNullable(phone);
         return this;
     }
+
 
     public CustomerSupportError withPhone(Optional<? extends PhoneNumberError> phone) {
         Utils.checkNotNull(phone, "phone");
@@ -96,6 +103,7 @@ public class CustomerSupportError {
         return this;
     }
 
+
     public CustomerSupportError withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
@@ -107,6 +115,7 @@ public class CustomerSupportError {
         this.address = Optional.ofNullable(address);
         return this;
     }
+
 
     public CustomerSupportError withAddress(Optional<? extends AddressError> address) {
         Utils.checkNotNull(address, "address");
@@ -120,13 +129,13 @@ public class CustomerSupportError {
         return this;
     }
 
+
     public CustomerSupportError withWebsite(Optional<String> website) {
         Utils.checkNotNull(website, "website");
         this.website = website;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -146,9 +155,7 @@ public class CustomerSupportError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            phone,
-            email,
-            address,
+            phone, email, address,
             website);
     }
     
@@ -160,20 +167,22 @@ public class CustomerSupportError {
                 "address", address,
                 "website", website);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends PhoneNumberError> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends AddressError> address = Optional.empty();
- 
+
         private Optional<String> website = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder phone(PhoneNumberError phone) {
             Utils.checkNotNull(phone, "phone");
@@ -187,6 +196,7 @@ public class CustomerSupportError {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -198,6 +208,7 @@ public class CustomerSupportError {
             this.email = email;
             return this;
         }
+
 
         public Builder address(AddressError address) {
             Utils.checkNotNull(address, "address");
@@ -211,6 +222,7 @@ public class CustomerSupportError {
             return this;
         }
 
+
         public Builder website(String website) {
             Utils.checkNotNull(website, "website");
             this.website = Optional.ofNullable(website);
@@ -222,13 +234,13 @@ public class CustomerSupportError {
             this.website = website;
             return this;
         }
-        
+
         public CustomerSupportError build() {
+
             return new CustomerSupportError(
-                phone,
-                email,
-                address,
+                phone, email, address,
                 website);
         }
+
     }
 }

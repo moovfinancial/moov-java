@@ -19,7 +19,6 @@ import java.util.Optional;
  * <p>Describes a terminal application.
  */
 public class TerminalApplication {
-
     /**
      * ID of the terminal application.
      */
@@ -95,7 +94,9 @@ public class TerminalApplication {
             String terminalApplicationID,
             TerminalApplicationStatus status,
             TerminalApplicationPlatform platform) {
-        this(terminalApplicationID, status, platform, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(terminalApplicationID, status, platform,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -154,9 +155,10 @@ public class TerminalApplication {
         return versionCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the terminal application.
@@ -194,6 +196,7 @@ public class TerminalApplication {
         return this;
     }
 
+
     /**
      * The app bundle identifier of the terminal application. Will be returned if platform is `ios`.
      */
@@ -211,6 +214,7 @@ public class TerminalApplication {
         this.packageName = Optional.ofNullable(packageName);
         return this;
     }
+
 
     /**
      * The app package name of the terminal application. Will be returned if platform is `android`.
@@ -230,6 +234,7 @@ public class TerminalApplication {
         return this;
     }
 
+
     /**
      * The app version of the terminal application Will be returned if platform is `android`.
      */
@@ -248,6 +253,7 @@ public class TerminalApplication {
         return this;
     }
 
+
     /**
      * The app version of the terminal application Will be returned if platform is `android`.
      */
@@ -257,7 +263,6 @@ public class TerminalApplication {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -280,12 +285,8 @@ public class TerminalApplication {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            terminalApplicationID,
-            status,
-            platform,
-            appBundleID,
-            packageName,
-            sha256Digest,
+            terminalApplicationID, status, platform,
+            appBundleID, packageName, sha256Digest,
             versionCode);
     }
     
@@ -300,26 +301,28 @@ public class TerminalApplication {
                 "sha256Digest", sha256Digest,
                 "versionCode", versionCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String terminalApplicationID;
- 
+
         private TerminalApplicationStatus status;
- 
+
         private TerminalApplicationPlatform platform;
- 
+
         private Optional<String> appBundleID = Optional.empty();
- 
+
         private Optional<String> packageName = Optional.empty();
- 
+
         private Optional<String> sha256Digest = Optional.empty();
- 
+
         private Optional<String> versionCode = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the terminal application.
@@ -330,6 +333,7 @@ public class TerminalApplication {
             return this;
         }
 
+
         /**
          * Status of the terminal application.
          */
@@ -339,6 +343,7 @@ public class TerminalApplication {
             return this;
         }
 
+
         /**
          * Platform of the terminal application.
          */
@@ -347,6 +352,7 @@ public class TerminalApplication {
             this.platform = platform;
             return this;
         }
+
 
         /**
          * The app bundle identifier of the terminal application. Will be returned if platform is `ios`.
@@ -366,6 +372,7 @@ public class TerminalApplication {
             return this;
         }
 
+
         /**
          * The app package name of the terminal application. Will be returned if platform is `android`.
          */
@@ -383,6 +390,7 @@ public class TerminalApplication {
             this.packageName = packageName;
             return this;
         }
+
 
         /**
          * The app version of the terminal application Will be returned if platform is `android`.
@@ -402,6 +410,7 @@ public class TerminalApplication {
             return this;
         }
 
+
         /**
          * The app version of the terminal application Will be returned if platform is `android`.
          */
@@ -419,16 +428,14 @@ public class TerminalApplication {
             this.versionCode = versionCode;
             return this;
         }
-        
+
         public TerminalApplication build() {
+
             return new TerminalApplication(
-                terminalApplicationID,
-                status,
-                platform,
-                appBundleID,
-                packageName,
-                sha256Digest,
+                terminalApplicationID, status, platform,
+                appBundleID, packageName, sha256Digest,
                 versionCode);
         }
+
     }
 }

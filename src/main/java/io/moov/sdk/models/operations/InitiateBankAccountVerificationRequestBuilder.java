@@ -61,7 +61,7 @@ public class InitiateBankAccountVerificationRequestBuilder {
     public InitiateBankAccountVerificationResponse call() throws Exception {
         
         RequestOperation<InitiateBankAccountVerificationRequest, InitiateBankAccountVerificationResponse> operation
-              = new InitiateBankAccountVerificationOperation( sdkConfiguration);
+              = new InitiateBankAccountVerificationOperation(sdkConfiguration);
         InitiateBankAccountVerificationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

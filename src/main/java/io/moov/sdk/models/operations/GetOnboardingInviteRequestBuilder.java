@@ -37,7 +37,7 @@ public class GetOnboardingInviteRequestBuilder {
     public GetOnboardingInviteResponse call() throws Exception {
         
         RequestOperation<GetOnboardingInviteRequest, GetOnboardingInviteResponse> operation
-              = new GetOnboardingInviteOperation( sdkConfiguration);
+              = new GetOnboardingInviteOperation(sdkConfiguration);
         GetOnboardingInviteRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

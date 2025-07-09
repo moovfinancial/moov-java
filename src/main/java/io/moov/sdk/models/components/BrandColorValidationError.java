@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class BrandColorValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class BrandColorValidationError {
         return accent;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BrandColorValidationError withAccent(String accent) {
         Utils.checkNotNull(accent, "accent");
@@ -45,13 +47,13 @@ public class BrandColorValidationError {
         return this;
     }
 
+
     public BrandColorValidationError withAccent(Optional<String> accent) {
         Utils.checkNotNull(accent, "accent");
         this.accent = accent;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class BrandColorValidationError {
         return Utils.toString(BrandColorValidationError.class,
                 "accent", accent);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> accent = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accent(String accent) {
             Utils.checkNotNull(accent, "accent");
@@ -96,10 +100,12 @@ public class BrandColorValidationError {
             this.accent = accent;
             return this;
         }
-        
+
         public BrandColorValidationError build() {
+
             return new BrandColorValidationError(
                 accent);
         }
+
     }
 }

@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class End2EndEncryptionError {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class End2EndEncryptionError {
         return token;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public End2EndEncryptionError withToken(String token) {
         Utils.checkNotNull(token, "token");
@@ -45,13 +47,13 @@ public class End2EndEncryptionError {
         return this;
     }
 
+
     public End2EndEncryptionError withToken(Optional<String> token) {
         Utils.checkNotNull(token, "token");
         this.token = token;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class End2EndEncryptionError {
         return Utils.toString(End2EndEncryptionError.class,
                 "token", token);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> token = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder token(String token) {
             Utils.checkNotNull(token, "token");
@@ -96,10 +100,12 @@ public class End2EndEncryptionError {
             this.token = token;
             return this;
         }
-        
+
         public End2EndEncryptionError build() {
+
             return new End2EndEncryptionError(
                 token);
         }
+
     }
 }

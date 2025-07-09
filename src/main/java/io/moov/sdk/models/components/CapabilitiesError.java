@@ -15,6 +15,7 @@ import java.lang.SuppressWarnings;
 import java.util.Map;
 import java.util.Optional;
 
+
 public class CapabilitiesError {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -38,9 +39,10 @@ public class CapabilitiesError {
         return (Optional<Map<String, String>>) capabilities;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CapabilitiesError withCapabilities(Map<String, String> capabilities) {
         Utils.checkNotNull(capabilities, "capabilities");
@@ -48,13 +50,13 @@ public class CapabilitiesError {
         return this;
     }
 
+
     public CapabilitiesError withCapabilities(Optional<? extends Map<String, String>> capabilities) {
         Utils.checkNotNull(capabilities, "capabilities");
         this.capabilities = capabilities;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -79,14 +81,16 @@ public class CapabilitiesError {
         return Utils.toString(CapabilitiesError.class,
                 "capabilities", capabilities);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends Map<String, String>> capabilities = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder capabilities(Map<String, String> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
@@ -99,10 +103,12 @@ public class CapabilitiesError {
             this.capabilities = capabilities;
             return this;
         }
-        
+
         public CapabilitiesError build() {
+
             return new CapabilitiesError(
                 capabilities);
         }
+
     }
 }

@@ -10,13 +10,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class CreateEvidenceText {
 
+public class CreateEvidenceText {
     /**
      * The text to associate with the dispute as evidence.
      */
     @JsonProperty("text")
     private String text;
+
 
     @JsonProperty("evidenceType")
     private EvidenceType evidenceType;
@@ -44,9 +45,10 @@ public class CreateEvidenceText {
         return evidenceType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The text to associate with the dispute as evidence.
@@ -63,7 +65,6 @@ public class CreateEvidenceText {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -81,8 +82,7 @@ public class CreateEvidenceText {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            text,
-            evidenceType);
+            text, evidenceType);
     }
     
     @Override
@@ -91,16 +91,18 @@ public class CreateEvidenceText {
                 "text", text,
                 "evidenceType", evidenceType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String text;
- 
+
         private EvidenceType evidenceType;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The text to associate with the dispute as evidence.
@@ -111,16 +113,18 @@ public class CreateEvidenceText {
             return this;
         }
 
+
         public Builder evidenceType(EvidenceType evidenceType) {
             Utils.checkNotNull(evidenceType, "evidenceType");
             this.evidenceType = evidenceType;
             return this;
         }
-        
+
         public CreateEvidenceText build() {
+
             return new CreateEvidenceText(
-                text,
-                evidenceType);
+                text, evidenceType);
         }
+
     }
 }

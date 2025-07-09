@@ -19,6 +19,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class UpdatePaymentLinkError extends RuntimeException {
 
@@ -26,17 +27,21 @@ public class UpdatePaymentLinkError extends RuntimeException {
     @JsonProperty("amount")
     private Optional<? extends AmountValidationError> amount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiresOn")
     private Optional<String> expiresOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("display")
     private Optional<? extends DisplayOptionsError> display;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment")
     private Optional<? extends PaymentDetailsError> payment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payout")
@@ -63,7 +68,8 @@ public class UpdatePaymentLinkError extends RuntimeException {
     }
     
     public UpdatePaymentLinkError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -95,15 +101,17 @@ public class UpdatePaymentLinkError extends RuntimeException {
         return (Optional<PayoutDetailsError>) payout;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdatePaymentLinkError withAmount(AmountValidationError amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = Optional.ofNullable(amount);
         return this;
     }
+
 
     public UpdatePaymentLinkError withAmount(Optional<? extends AmountValidationError> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -117,6 +125,7 @@ public class UpdatePaymentLinkError extends RuntimeException {
         return this;
     }
 
+
     public UpdatePaymentLinkError withExpiresOn(Optional<String> expiresOn) {
         Utils.checkNotNull(expiresOn, "expiresOn");
         this.expiresOn = expiresOn;
@@ -128,6 +137,7 @@ public class UpdatePaymentLinkError extends RuntimeException {
         this.display = Optional.ofNullable(display);
         return this;
     }
+
 
     public UpdatePaymentLinkError withDisplay(Optional<? extends DisplayOptionsError> display) {
         Utils.checkNotNull(display, "display");
@@ -141,6 +151,7 @@ public class UpdatePaymentLinkError extends RuntimeException {
         return this;
     }
 
+
     public UpdatePaymentLinkError withPayment(Optional<? extends PaymentDetailsError> payment) {
         Utils.checkNotNull(payment, "payment");
         this.payment = payment;
@@ -153,13 +164,13 @@ public class UpdatePaymentLinkError extends RuntimeException {
         return this;
     }
 
+
     public UpdatePaymentLinkError withPayout(Optional<? extends PayoutDetailsError> payout) {
         Utils.checkNotNull(payout, "payout");
         this.payout = payout;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -180,11 +191,8 @@ public class UpdatePaymentLinkError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount,
-            expiresOn,
-            display,
-            payment,
-            payout);
+            amount, expiresOn, display,
+            payment, payout);
     }
     
     @Override
@@ -196,22 +204,24 @@ public class UpdatePaymentLinkError extends RuntimeException {
                 "payment", payment,
                 "payout", payout);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends AmountValidationError> amount = Optional.empty();
- 
+
         private Optional<String> expiresOn = Optional.empty();
- 
+
         private Optional<? extends DisplayOptionsError> display = Optional.empty();
- 
+
         private Optional<? extends PaymentDetailsError> payment = Optional.empty();
- 
+
         private Optional<? extends PayoutDetailsError> payout = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder amount(AmountValidationError amount) {
             Utils.checkNotNull(amount, "amount");
@@ -225,6 +235,7 @@ public class UpdatePaymentLinkError extends RuntimeException {
             return this;
         }
 
+
         public Builder expiresOn(String expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
             this.expiresOn = Optional.ofNullable(expiresOn);
@@ -236,6 +247,7 @@ public class UpdatePaymentLinkError extends RuntimeException {
             this.expiresOn = expiresOn;
             return this;
         }
+
 
         public Builder display(DisplayOptionsError display) {
             Utils.checkNotNull(display, "display");
@@ -249,6 +261,7 @@ public class UpdatePaymentLinkError extends RuntimeException {
             return this;
         }
 
+
         public Builder payment(PaymentDetailsError payment) {
             Utils.checkNotNull(payment, "payment");
             this.payment = Optional.ofNullable(payment);
@@ -261,6 +274,7 @@ public class UpdatePaymentLinkError extends RuntimeException {
             return this;
         }
 
+
         public Builder payout(PayoutDetailsError payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = Optional.ofNullable(payout);
@@ -272,15 +286,14 @@ public class UpdatePaymentLinkError extends RuntimeException {
             this.payout = payout;
             return this;
         }
-        
+
         public UpdatePaymentLinkError build() {
+
             return new UpdatePaymentLinkError(
-                amount,
-                expiresOn,
-                display,
-                payment,
-                payout);
+                amount, expiresOn, display,
+                payment, payout);
         }
+
     }
 }
 

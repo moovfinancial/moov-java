@@ -62,7 +62,7 @@ public class UpdateDisputeEvidenceRequestBuilder {
     public UpdateDisputeEvidenceResponse call() throws Exception {
         
         RequestOperation<UpdateDisputeEvidenceRequest, UpdateDisputeEvidenceResponse> operation
-              = new UpdateDisputeEvidenceOperation( sdkConfiguration);
+              = new UpdateDisputeEvidenceOperation(sdkConfiguration);
         UpdateDisputeEvidenceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -54,7 +54,7 @@ public class UpdateTransferRequestBuilder {
     public UpdateTransferResponse call() throws Exception {
         
         RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
-              = new UpdateTransferOperation( sdkConfiguration);
+              = new UpdateTransferOperation(sdkConfiguration);
         UpdateTransferRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

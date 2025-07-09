@@ -15,8 +15,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class LinkCard {
 
+public class LinkCard {
     /**
      * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
      * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
@@ -26,8 +26,10 @@ public class LinkCard {
     @JsonProperty("e2ee")
     private Optional<? extends E2EEToken> e2ee;
 
+
     @JsonProperty("cardNumber")
     private String cardNumber;
+
 
     @JsonProperty("cardCvv")
     private String cardCvv;
@@ -38,20 +40,25 @@ public class LinkCard {
     @JsonProperty("expiration")
     private CardExpiration expiration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("holderName")
     private Optional<String> holderName;
 
+
     @JsonProperty("billingAddress")
     private CardAddress billingAddress;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardOnFile")
     private Optional<Boolean> cardOnFile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantAccountID")
     private Optional<String> merchantAccountID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("verifyName")
@@ -93,7 +100,9 @@ public class LinkCard {
             String cardCvv,
             CardExpiration expiration,
             CardAddress billingAddress) {
-        this(Optional.empty(), cardNumber, cardCvv, expiration, Optional.empty(), billingAddress, Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), cardNumber, cardCvv,
+            expiration, Optional.empty(), billingAddress,
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -150,9 +159,10 @@ public class LinkCard {
         return verifyName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
@@ -164,6 +174,7 @@ public class LinkCard {
         this.e2ee = Optional.ofNullable(e2ee);
         return this;
     }
+
 
     /**
      * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
@@ -203,6 +214,7 @@ public class LinkCard {
         return this;
     }
 
+
     public LinkCard withHolderName(Optional<String> holderName) {
         Utils.checkNotNull(holderName, "holderName");
         this.holderName = holderName;
@@ -221,6 +233,7 @@ public class LinkCard {
         return this;
     }
 
+
     public LinkCard withCardOnFile(Optional<Boolean> cardOnFile) {
         Utils.checkNotNull(cardOnFile, "cardOnFile");
         this.cardOnFile = cardOnFile;
@@ -232,6 +245,7 @@ public class LinkCard {
         this.merchantAccountID = Optional.ofNullable(merchantAccountID);
         return this;
     }
+
 
     public LinkCard withMerchantAccountID(Optional<String> merchantAccountID) {
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
@@ -245,13 +259,13 @@ public class LinkCard {
         return this;
     }
 
+
     public LinkCard withVerifyName(Optional<Boolean> verifyName) {
         Utils.checkNotNull(verifyName, "verifyName");
         this.verifyName = verifyName;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -276,15 +290,9 @@ public class LinkCard {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            e2ee,
-            cardNumber,
-            cardCvv,
-            expiration,
-            holderName,
-            billingAddress,
-            cardOnFile,
-            merchantAccountID,
-            verifyName);
+            e2ee, cardNumber, cardCvv,
+            expiration, holderName, billingAddress,
+            cardOnFile, merchantAccountID, verifyName);
     }
     
     @Override
@@ -300,30 +308,32 @@ public class LinkCard {
                 "merchantAccountID", merchantAccountID,
                 "verifyName", verifyName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends E2EEToken> e2ee = Optional.empty();
- 
+
         private String cardNumber;
- 
+
         private String cardCvv;
- 
+
         private CardExpiration expiration;
- 
+
         private Optional<String> holderName = Optional.empty();
- 
+
         private CardAddress billingAddress;
- 
+
         private Optional<Boolean> cardOnFile = Optional.empty();
- 
+
         private Optional<String> merchantAccountID = Optional.empty();
- 
+
         private Optional<Boolean> verifyName = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
@@ -347,17 +357,20 @@ public class LinkCard {
             return this;
         }
 
+
         public Builder cardNumber(String cardNumber) {
             Utils.checkNotNull(cardNumber, "cardNumber");
             this.cardNumber = cardNumber;
             return this;
         }
 
+
         public Builder cardCvv(String cardCvv) {
             Utils.checkNotNull(cardCvv, "cardCvv");
             this.cardCvv = cardCvv;
             return this;
         }
+
 
         /**
          * The expiration date of the card or token.
@@ -367,6 +380,7 @@ public class LinkCard {
             this.expiration = expiration;
             return this;
         }
+
 
         public Builder holderName(String holderName) {
             Utils.checkNotNull(holderName, "holderName");
@@ -380,11 +394,13 @@ public class LinkCard {
             return this;
         }
 
+
         public Builder billingAddress(CardAddress billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = billingAddress;
             return this;
         }
+
 
         public Builder cardOnFile(boolean cardOnFile) {
             Utils.checkNotNull(cardOnFile, "cardOnFile");
@@ -398,6 +414,7 @@ public class LinkCard {
             return this;
         }
 
+
         public Builder merchantAccountID(String merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = Optional.ofNullable(merchantAccountID);
@@ -410,6 +427,7 @@ public class LinkCard {
             return this;
         }
 
+
         public Builder verifyName(boolean verifyName) {
             Utils.checkNotNull(verifyName, "verifyName");
             this.verifyName = Optional.ofNullable(verifyName);
@@ -421,18 +439,14 @@ public class LinkCard {
             this.verifyName = verifyName;
             return this;
         }
-        
+
         public LinkCard build() {
+
             return new LinkCard(
-                e2ee,
-                cardNumber,
-                cardCvv,
-                expiration,
-                holderName,
-                billingAddress,
-                cardOnFile,
-                merchantAccountID,
-                verifyName);
+                e2ee, cardNumber, cardCvv,
+                expiration, holderName, billingAddress,
+                cardOnFile, merchantAccountID, verifyName);
         }
+
     }
 }

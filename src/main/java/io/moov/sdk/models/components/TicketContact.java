@@ -13,10 +13,12 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class TicketContact {
 
     @JsonProperty("email")
     private String email;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
@@ -47,9 +49,10 @@ public class TicketContact {
         return name;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TicketContact withEmail(String email) {
         Utils.checkNotNull(email, "email");
@@ -63,13 +66,13 @@ public class TicketContact {
         return this;
     }
 
+
     public TicketContact withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -87,8 +90,7 @@ public class TicketContact {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            email,
-            name);
+            email, name);
     }
     
     @Override
@@ -97,22 +99,25 @@ public class TicketContact {
                 "email", email,
                 "name", name);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String email;
- 
+
         private Optional<String> name = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = email;
             return this;
         }
+
 
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
@@ -125,11 +130,12 @@ public class TicketContact {
             this.name = name;
             return this;
         }
-        
+
         public TicketContact build() {
+
             return new TicketContact(
-                email,
-                name);
+                email, name);
         }
+
     }
 }

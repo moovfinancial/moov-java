@@ -13,7 +13,9 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Map;
+import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
+
 
 public class PatchTransfer {
 
@@ -21,15 +23,25 @@ public class PatchTransfer {
     @JsonProperty("metadata")
     private JsonNullable<? extends Map<String, String>> metadata;
 
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
+
     @JsonCreator
     public PatchTransfer(
-            @JsonProperty("metadata") JsonNullable<? extends Map<String, String>> metadata) {
+            @JsonProperty("metadata") JsonNullable<? extends Map<String, String>> metadata,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         Utils.checkNotNull(metadata, "metadata");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.metadata = metadata;
+        this.foreignID = foreignID;
     }
     
     public PatchTransfer() {
-        this(JsonNullable.undefined());
+        this(JsonNullable.undefined(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -38,9 +50,18 @@ public class PatchTransfer {
         return (JsonNullable<Map<String, String>>) metadata;
     }
 
-    public final static Builder builder() {
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
+    }
+
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PatchTransfer withMetadata(Map<String, String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
@@ -54,7 +75,25 @@ public class PatchTransfer {
         return this;
     }
 
-    
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    public PatchTransfer withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+
+    /**
+     * Optional alias from a foreign/external system which can be used to reference this resource.
+     */
+    public PatchTransfer withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -65,28 +104,34 @@ public class PatchTransfer {
         }
         PatchTransfer other = (PatchTransfer) o;
         return 
-            Utils.enhancedDeepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            metadata);
+            metadata, foreignID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PatchTransfer.class,
-                "metadata", metadata);
+                "metadata", metadata,
+                "foreignID", foreignID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private JsonNullable<? extends Map<String, String>> metadata = JsonNullable.undefined();
-        
+
+        private Optional<String> foreignID = Optional.empty();
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder metadata(Map<String, String> metadata) {
             Utils.checkNotNull(metadata, "metadata");
@@ -99,10 +144,31 @@ public class PatchTransfer {
             this.metadata = metadata;
             return this;
         }
-        
-        public PatchTransfer build() {
-            return new PatchTransfer(
-                metadata);
+
+
+        /**
+         * Optional alias from a foreign/external system which can be used to reference this resource.
+         */
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
         }
+
+        /**
+         * Optional alias from a foreign/external system which can be used to reference this resource.
+         */
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
+
+        public PatchTransfer build() {
+
+            return new PatchTransfer(
+                metadata, foreignID);
+        }
+
     }
 }

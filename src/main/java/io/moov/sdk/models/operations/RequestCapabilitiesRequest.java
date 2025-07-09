@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class RequestCapabilitiesRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private AddCapabilities addCapabilities;
@@ -39,9 +41,10 @@ public class RequestCapabilitiesRequest {
         return addCapabilities;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RequestCapabilitiesRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class RequestCapabilitiesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class RequestCapabilitiesRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            addCapabilities);
+            accountID, addCapabilities);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class RequestCapabilitiesRequest {
                 "accountID", accountID,
                 "addCapabilities", addCapabilities);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private AddCapabilities addCapabilities;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class RequestCapabilitiesRequest {
             return this;
         }
 
+
         public Builder addCapabilities(AddCapabilities addCapabilities) {
             Utils.checkNotNull(addCapabilities, "addCapabilities");
             this.addCapabilities = addCapabilities;
             return this;
         }
-        
+
         public RequestCapabilitiesRequest build() {
+
             return new RequestCapabilitiesRequest(
-                accountID,
-                addCapabilities);
+                accountID, addCapabilities);
         }
+
     }
 }

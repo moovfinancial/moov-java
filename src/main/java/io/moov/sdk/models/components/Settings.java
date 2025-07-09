@@ -20,13 +20,13 @@ import java.util.Optional;
  * <p>User provided settings to manage an account.
  */
 public class Settings {
-
     /**
      * User provided settings to manage card payments. This data is only allowed on a business account.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardPayment")
     private Optional<? extends CardPaymentSettings> cardPayment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("achPayment")
@@ -61,9 +61,10 @@ public class Settings {
         return (Optional<ACHPaymentSettings>) achPayment;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * User provided settings to manage card payments. This data is only allowed on a business account.
@@ -73,6 +74,7 @@ public class Settings {
         this.cardPayment = Optional.ofNullable(cardPayment);
         return this;
     }
+
 
     /**
      * User provided settings to manage card payments. This data is only allowed on a business account.
@@ -89,13 +91,13 @@ public class Settings {
         return this;
     }
 
+
     public Settings withAchPayment(Optional<? extends ACHPaymentSettings> achPayment) {
         Utils.checkNotNull(achPayment, "achPayment");
         this.achPayment = achPayment;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -113,8 +115,7 @@ public class Settings {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cardPayment,
-            achPayment);
+            cardPayment, achPayment);
     }
     
     @Override
@@ -123,16 +124,18 @@ public class Settings {
                 "cardPayment", cardPayment,
                 "achPayment", achPayment);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CardPaymentSettings> cardPayment = Optional.empty();
- 
+
         private Optional<? extends ACHPaymentSettings> achPayment = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * User provided settings to manage card payments. This data is only allowed on a business account.
@@ -152,6 +155,7 @@ public class Settings {
             return this;
         }
 
+
         public Builder achPayment(ACHPaymentSettings achPayment) {
             Utils.checkNotNull(achPayment, "achPayment");
             this.achPayment = Optional.ofNullable(achPayment);
@@ -163,11 +167,12 @@ public class Settings {
             this.achPayment = achPayment;
             return this;
         }
-        
+
         public Settings build() {
+
             return new Settings(
-                cardPayment,
-                achPayment);
+                cardPayment, achPayment);
         }
+
     }
 }

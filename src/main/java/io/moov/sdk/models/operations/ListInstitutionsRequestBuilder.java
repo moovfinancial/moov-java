@@ -87,7 +87,7 @@ public class ListInstitutionsRequestBuilder {
     public ListInstitutionsResponse call() throws Exception {
         
         RequestOperation<ListInstitutionsRequest, ListInstitutionsResponse> operation
-              = new ListInstitutionsOperation( sdkConfiguration);
+              = new ListInstitutionsOperation(sdkConfiguration);
         ListInstitutionsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

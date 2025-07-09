@@ -14,26 +14,32 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CreateIndividualProfile {
 
     @JsonProperty("name")
     private IndividualName name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends Address> address;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("birthDate")
     private Optional<? extends BirthDate> birthDate;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("governmentID")
@@ -63,7 +69,8 @@ public class CreateIndividualProfile {
     
     public CreateIndividualProfile(
             IndividualName name) {
-        this(name, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(name, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -100,9 +107,10 @@ public class CreateIndividualProfile {
         return (Optional<GovernmentID>) governmentID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateIndividualProfile withName(IndividualName name) {
         Utils.checkNotNull(name, "name");
@@ -116,6 +124,7 @@ public class CreateIndividualProfile {
         return this;
     }
 
+
     public CreateIndividualProfile withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
@@ -127,6 +136,7 @@ public class CreateIndividualProfile {
         this.email = Optional.ofNullable(email);
         return this;
     }
+
 
     public CreateIndividualProfile withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
@@ -140,6 +150,7 @@ public class CreateIndividualProfile {
         return this;
     }
 
+
     public CreateIndividualProfile withAddress(Optional<? extends Address> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -151,6 +162,7 @@ public class CreateIndividualProfile {
         this.birthDate = Optional.ofNullable(birthDate);
         return this;
     }
+
 
     public CreateIndividualProfile withBirthDate(Optional<? extends BirthDate> birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
@@ -164,13 +176,13 @@ public class CreateIndividualProfile {
         return this;
     }
 
+
     public CreateIndividualProfile withGovernmentID(Optional<? extends GovernmentID> governmentID) {
         Utils.checkNotNull(governmentID, "governmentID");
         this.governmentID = governmentID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -192,12 +204,8 @@ public class CreateIndividualProfile {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            phone,
-            email,
-            address,
-            birthDate,
-            governmentID);
+            name, phone, email,
+            address, birthDate, governmentID);
     }
     
     @Override
@@ -210,30 +218,33 @@ public class CreateIndividualProfile {
                 "birthDate", birthDate,
                 "governmentID", governmentID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private IndividualName name;
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends Address> address = Optional.empty();
- 
+
         private Optional<? extends BirthDate> birthDate = Optional.empty();
- 
+
         private Optional<? extends GovernmentID> governmentID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(IndividualName name) {
             Utils.checkNotNull(name, "name");
             this.name = name;
             return this;
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -247,6 +258,7 @@ public class CreateIndividualProfile {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -258,6 +270,7 @@ public class CreateIndividualProfile {
             this.email = email;
             return this;
         }
+
 
         public Builder address(Address address) {
             Utils.checkNotNull(address, "address");
@@ -271,6 +284,7 @@ public class CreateIndividualProfile {
             return this;
         }
 
+
         public Builder birthDate(BirthDate birthDate) {
             Utils.checkNotNull(birthDate, "birthDate");
             this.birthDate = Optional.ofNullable(birthDate);
@@ -283,6 +297,7 @@ public class CreateIndividualProfile {
             return this;
         }
 
+
         public Builder governmentID(GovernmentID governmentID) {
             Utils.checkNotNull(governmentID, "governmentID");
             this.governmentID = Optional.ofNullable(governmentID);
@@ -294,15 +309,13 @@ public class CreateIndividualProfile {
             this.governmentID = governmentID;
             return this;
         }
-        
+
         public CreateIndividualProfile build() {
+
             return new CreateIndividualProfile(
-                name,
-                phone,
-                email,
-                address,
-                birthDate,
-                governmentID);
+                name, phone, email,
+                address, birthDate, governmentID);
         }
+
     }
 }

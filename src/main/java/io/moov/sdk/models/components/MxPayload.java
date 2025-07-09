@@ -24,7 +24,6 @@ import java.lang.String;
  * ```
  */
 public class MxPayload {
-
     /**
      * The authorization code of a MX account which allows a processor to retrieve a linked payment account. 
      * 
@@ -52,9 +51,10 @@ public class MxPayload {
         return mx;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The authorization code of a MX account which allows a processor to retrieve a linked payment account. 
@@ -68,7 +68,6 @@ public class MxPayload {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,14 +92,16 @@ public class MxPayload {
         return Utils.toString(MxPayload.class,
                 "mx", mx);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private MXAuthorizationCode mx;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The authorization code of a MX account which allows a processor to retrieve a linked payment account. 
@@ -113,10 +114,12 @@ public class MxPayload {
             this.mx = mx;
             return this;
         }
-        
+
         public MxPayload build() {
+
             return new MxPayload(
                 mx);
         }
+
     }
 }

@@ -15,13 +15,16 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
+
 public class DisputeEvidenceResponse {
 
     @JsonProperty("evidenceID")
     private String evidenceID;
 
+
     @JsonProperty("disputeID")
     private String disputeID;
+
 
     @JsonProperty("evidenceType")
     private EvidenceType evidenceType;
@@ -54,8 +57,10 @@ public class DisputeEvidenceResponse {
     @JsonProperty("size")
     private Optional<Long> size;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
@@ -107,7 +112,10 @@ public class DisputeEvidenceResponse {
             EvidenceType evidenceType,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(evidenceID, disputeID, evidenceType, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), createdOn, updatedOn, Optional.empty());
+        this(evidenceID, disputeID, evidenceType,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), createdOn, updatedOn,
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -175,9 +183,10 @@ public class DisputeEvidenceResponse {
         return submittedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public DisputeEvidenceResponse withEvidenceID(String evidenceID) {
         Utils.checkNotNull(evidenceID, "evidenceID");
@@ -206,6 +215,7 @@ public class DisputeEvidenceResponse {
         return this;
     }
 
+
     /**
      * For text evidence, the text submitted as evidence.
      */
@@ -223,6 +233,7 @@ public class DisputeEvidenceResponse {
         this.mimeType = Optional.ofNullable(mimeType);
         return this;
     }
+
 
     /**
      * For file evidence, the MIME type of the file.
@@ -242,6 +253,7 @@ public class DisputeEvidenceResponse {
         return this;
     }
 
+
     /**
      * For file evidence, the name of the file.
      */
@@ -259,6 +271,7 @@ public class DisputeEvidenceResponse {
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     /**
      * For file evidence, the size of the file.
@@ -290,6 +303,7 @@ public class DisputeEvidenceResponse {
         return this;
     }
 
+
     /**
      * When the evidence was submitted for review.
      */
@@ -299,7 +313,6 @@ public class DisputeEvidenceResponse {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -325,15 +338,9 @@ public class DisputeEvidenceResponse {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            evidenceID,
-            disputeID,
-            evidenceType,
-            text,
-            mimeType,
-            filename,
-            size,
-            createdOn,
-            updatedOn,
+            evidenceID, disputeID, evidenceType,
+            text, mimeType, filename,
+            size, createdOn, updatedOn,
             submittedOn);
     }
     
@@ -351,32 +358,34 @@ public class DisputeEvidenceResponse {
                 "updatedOn", updatedOn,
                 "submittedOn", submittedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String evidenceID;
- 
+
         private String disputeID;
- 
+
         private EvidenceType evidenceType;
- 
+
         private Optional<String> text = Optional.empty();
- 
+
         private Optional<String> mimeType = Optional.empty();
- 
+
         private Optional<String> filename = Optional.empty();
- 
+
         private Optional<Long> size = Optional.empty();
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
- 
+
         private Optional<OffsetDateTime> submittedOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder evidenceID(String evidenceID) {
             Utils.checkNotNull(evidenceID, "evidenceID");
@@ -384,17 +393,20 @@ public class DisputeEvidenceResponse {
             return this;
         }
 
+
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = disputeID;
             return this;
         }
 
+
         public Builder evidenceType(EvidenceType evidenceType) {
             Utils.checkNotNull(evidenceType, "evidenceType");
             this.evidenceType = evidenceType;
             return this;
         }
+
 
         /**
          * For text evidence, the text submitted as evidence.
@@ -414,6 +426,7 @@ public class DisputeEvidenceResponse {
             return this;
         }
 
+
         /**
          * For file evidence, the MIME type of the file.
          */
@@ -431,6 +444,7 @@ public class DisputeEvidenceResponse {
             this.mimeType = mimeType;
             return this;
         }
+
 
         /**
          * For file evidence, the name of the file.
@@ -450,6 +464,7 @@ public class DisputeEvidenceResponse {
             return this;
         }
 
+
         /**
          * For file evidence, the size of the file.
          */
@@ -468,17 +483,20 @@ public class DisputeEvidenceResponse {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
+
 
         /**
          * When the evidence was submitted for review.
@@ -497,19 +515,15 @@ public class DisputeEvidenceResponse {
             this.submittedOn = submittedOn;
             return this;
         }
-        
+
         public DisputeEvidenceResponse build() {
+
             return new DisputeEvidenceResponse(
-                evidenceID,
-                disputeID,
-                evidenceType,
-                text,
-                mimeType,
-                filename,
-                size,
-                createdOn,
-                updatedOn,
+                evidenceID, disputeID, evidenceType,
+                text, mimeType, filename,
+                size, createdOn, updatedOn,
                 submittedOn);
         }
+
     }
 }

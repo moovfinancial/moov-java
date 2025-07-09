@@ -46,7 +46,7 @@ public class RegisterApplePayMerchantDomainsRequestBuilder {
     public RegisterApplePayMerchantDomainsResponse call() throws Exception {
         
         RequestOperation<RegisterApplePayMerchantDomainsRequest, RegisterApplePayMerchantDomainsResponse> operation
-              = new RegisterApplePayMerchantDomainsOperation( sdkConfiguration);
+              = new RegisterApplePayMerchantDomainsOperation(sdkConfiguration);
         RegisterApplePayMerchantDomainsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

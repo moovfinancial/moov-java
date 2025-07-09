@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetPaymentMethodRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=paymentMethodID")
     private String paymentMethodID;
@@ -38,9 +40,10 @@ public class GetPaymentMethodRequest {
         return paymentMethodID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetPaymentMethodRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class GetPaymentMethodRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class GetPaymentMethodRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            paymentMethodID);
+            accountID, paymentMethodID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class GetPaymentMethodRequest {
                 "accountID", accountID,
                 "paymentMethodID", paymentMethodID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String paymentMethodID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class GetPaymentMethodRequest {
             return this;
         }
 
+
         public Builder paymentMethodID(String paymentMethodID) {
             Utils.checkNotNull(paymentMethodID, "paymentMethodID");
             this.paymentMethodID = paymentMethodID;
             return this;
         }
-        
+
         public GetPaymentMethodRequest build() {
+
             return new GetPaymentMethodRequest(
-                accountID,
-                paymentMethodID);
+                accountID, paymentMethodID);
         }
+
     }
 }

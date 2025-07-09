@@ -16,8 +16,8 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
-public class IssuingControls {
 
+public class IssuingControls {
     /**
      * Indicates if the card is single-use. If true, the card closes after the first authorization.
      */
@@ -63,9 +63,10 @@ public class IssuingControls {
         return (Optional<List<IssuingVelocityLimit>>) velocityLimits;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Indicates if the card is single-use. If true, the card closes after the first authorization.
@@ -75,6 +76,7 @@ public class IssuingControls {
         this.singleUse = Optional.ofNullable(singleUse);
         return this;
     }
+
 
     /**
      * Indicates if the card is single-use. If true, the card closes after the first authorization.
@@ -94,6 +96,7 @@ public class IssuingControls {
         return this;
     }
 
+
     /**
      * Sets the spending limit per time interval. Only one limit per interval is supported.
      */
@@ -103,7 +106,6 @@ public class IssuingControls {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -121,8 +123,7 @@ public class IssuingControls {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            singleUse,
-            velocityLimits);
+            singleUse, velocityLimits);
     }
     
     @Override
@@ -131,16 +132,18 @@ public class IssuingControls {
                 "singleUse", singleUse,
                 "velocityLimits", velocityLimits);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> singleUse = Optional.empty();
- 
+
         private Optional<? extends List<IssuingVelocityLimit>> velocityLimits = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Indicates if the card is single-use. If true, the card closes after the first authorization.
@@ -160,6 +163,7 @@ public class IssuingControls {
             return this;
         }
 
+
         /**
          * Sets the spending limit per time interval. Only one limit per interval is supported.
          */
@@ -177,11 +181,12 @@ public class IssuingControls {
             this.velocityLimits = velocityLimits;
             return this;
         }
-        
+
         public IssuingControls build() {
+
             return new IssuingControls(
-                singleUse,
-                velocityLimits);
+                singleUse, velocityLimits);
         }
+
     }
 }

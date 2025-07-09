@@ -15,12 +15,14 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class AuthTokenRequestError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scope")
     private Optional<String> scope;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refresh_token")
@@ -51,15 +53,17 @@ public class AuthTokenRequestError extends RuntimeException {
         return refreshToken;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AuthTokenRequestError withScope(String scope) {
         Utils.checkNotNull(scope, "scope");
         this.scope = Optional.ofNullable(scope);
         return this;
     }
+
 
     public AuthTokenRequestError withScope(Optional<String> scope) {
         Utils.checkNotNull(scope, "scope");
@@ -73,13 +77,13 @@ public class AuthTokenRequestError extends RuntimeException {
         return this;
     }
 
+
     public AuthTokenRequestError withRefreshToken(Optional<String> refreshToken) {
         Utils.checkNotNull(refreshToken, "refreshToken");
         this.refreshToken = refreshToken;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -97,8 +101,7 @@ public class AuthTokenRequestError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            scope,
-            refreshToken);
+            scope, refreshToken);
     }
     
     @Override
@@ -107,16 +110,18 @@ public class AuthTokenRequestError extends RuntimeException {
                 "scope", scope,
                 "refreshToken", refreshToken);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> scope = Optional.empty();
- 
+
         private Optional<String> refreshToken = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder scope(String scope) {
             Utils.checkNotNull(scope, "scope");
@@ -130,6 +135,7 @@ public class AuthTokenRequestError extends RuntimeException {
             return this;
         }
 
+
         public Builder refreshToken(String refreshToken) {
             Utils.checkNotNull(refreshToken, "refreshToken");
             this.refreshToken = Optional.ofNullable(refreshToken);
@@ -141,12 +147,13 @@ public class AuthTokenRequestError extends RuntimeException {
             this.refreshToken = refreshToken;
             return this;
         }
-        
+
         public AuthTokenRequestError build() {
+
             return new AuthTokenRequestError(
-                scope,
-                refreshToken);
+                scope, refreshToken);
         }
+
     }
 }
 

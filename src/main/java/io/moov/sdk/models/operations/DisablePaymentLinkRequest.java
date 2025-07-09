@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class DisablePaymentLinkRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=paymentLinkCode")
     private String paymentLinkCode;
@@ -38,9 +40,10 @@ public class DisablePaymentLinkRequest {
         return paymentLinkCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public DisablePaymentLinkRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class DisablePaymentLinkRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class DisablePaymentLinkRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            paymentLinkCode);
+            accountID, paymentLinkCode);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class DisablePaymentLinkRequest {
                 "accountID", accountID,
                 "paymentLinkCode", paymentLinkCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String paymentLinkCode;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class DisablePaymentLinkRequest {
             return this;
         }
 
+
         public Builder paymentLinkCode(String paymentLinkCode) {
             Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
             this.paymentLinkCode = paymentLinkCode;
             return this;
         }
-        
+
         public DisablePaymentLinkRequest build() {
+
             return new DisablePaymentLinkRequest(
-                accountID,
-                paymentLinkCode);
+                accountID, paymentLinkCode);
         }
+
     }
 }

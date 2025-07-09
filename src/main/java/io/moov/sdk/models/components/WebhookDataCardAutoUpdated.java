@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataCardAutoUpdated {
 
     @JsonProperty("cardID")
     private String cardID;
+
 
     @JsonProperty("accountID")
     private String accountID;
@@ -55,9 +57,10 @@ public class WebhookDataCardAutoUpdated {
         return updateType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataCardAutoUpdated withCardID(String cardID) {
         Utils.checkNotNull(cardID, "cardID");
@@ -80,7 +83,6 @@ public class WebhookDataCardAutoUpdated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -99,9 +101,7 @@ public class WebhookDataCardAutoUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cardID,
-            accountID,
-            updateType);
+            cardID, accountID, updateType);
     }
     
     @Override
@@ -111,18 +111,20 @@ public class WebhookDataCardAutoUpdated {
                 "accountID", accountID,
                 "updateType", updateType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String cardID;
- 
+
         private String accountID;
- 
+
         private CardUpdateReason updateType;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder cardID(String cardID) {
             Utils.checkNotNull(cardID, "cardID");
@@ -130,11 +132,13 @@ public class WebhookDataCardAutoUpdated {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * The results of the card update request.
@@ -144,12 +148,12 @@ public class WebhookDataCardAutoUpdated {
             this.updateType = updateType;
             return this;
         }
-        
+
         public WebhookDataCardAutoUpdated build() {
+
             return new WebhookDataCardAutoUpdated(
-                cardID,
-                accountID,
-                updateType);
+                cardID, accountID, updateType);
         }
+
     }
 }

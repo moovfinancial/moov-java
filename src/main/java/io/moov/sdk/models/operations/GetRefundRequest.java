@@ -10,13 +10,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GetRefundRequest {
 
+public class GetRefundRequest {
     /**
      * Identifier for the transfer.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=transferID")
     private String transferID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -61,9 +62,10 @@ public class GetRefundRequest {
         return refundID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Identifier for the transfer.
@@ -89,7 +91,6 @@ public class GetRefundRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -108,9 +109,7 @@ public class GetRefundRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID,
-            accountID,
-            refundID);
+            transferID, accountID, refundID);
     }
     
     @Override
@@ -120,18 +119,20 @@ public class GetRefundRequest {
                 "accountID", accountID,
                 "refundID", refundID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String transferID;
- 
+
         private String accountID;
- 
+
         private String refundID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Identifier for the transfer.
@@ -142,11 +143,13 @@ public class GetRefundRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * Identifier for the refund.
@@ -156,12 +159,12 @@ public class GetRefundRequest {
             this.refundID = refundID;
             return this;
         }
-        
+
         public GetRefundRequest build() {
+
             return new GetRefundRequest(
-                transferID,
-                accountID,
-                refundID);
+                transferID, accountID, refundID);
         }
+
     }
 }

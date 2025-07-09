@@ -16,6 +16,7 @@ import java.lang.SuppressWarnings;
 import java.util.Map;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class OnboardingInviteError extends RuntimeException {
 
@@ -23,17 +24,21 @@ public class OnboardingInviteError extends RuntimeException {
     @JsonProperty("returnURL")
     private Optional<String> returnURL;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("termsOfServiceURL")
     private Optional<String> termsOfServiceURL;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scopes")
     private Optional<? extends Map<String, String>> scopes;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("capabilities")
     private Optional<? extends Map<String, String>> capabilities;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("feePlanCodes")
@@ -60,7 +65,8 @@ public class OnboardingInviteError extends RuntimeException {
     }
     
     public OnboardingInviteError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -91,15 +97,17 @@ public class OnboardingInviteError extends RuntimeException {
         return (Optional<Map<String, String>>) feePlanCodes;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public OnboardingInviteError withReturnURL(String returnURL) {
         Utils.checkNotNull(returnURL, "returnURL");
         this.returnURL = Optional.ofNullable(returnURL);
         return this;
     }
+
 
     public OnboardingInviteError withReturnURL(Optional<String> returnURL) {
         Utils.checkNotNull(returnURL, "returnURL");
@@ -113,6 +121,7 @@ public class OnboardingInviteError extends RuntimeException {
         return this;
     }
 
+
     public OnboardingInviteError withTermsOfServiceURL(Optional<String> termsOfServiceURL) {
         Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
         this.termsOfServiceURL = termsOfServiceURL;
@@ -124,6 +133,7 @@ public class OnboardingInviteError extends RuntimeException {
         this.scopes = Optional.ofNullable(scopes);
         return this;
     }
+
 
     public OnboardingInviteError withScopes(Optional<? extends Map<String, String>> scopes) {
         Utils.checkNotNull(scopes, "scopes");
@@ -137,6 +147,7 @@ public class OnboardingInviteError extends RuntimeException {
         return this;
     }
 
+
     public OnboardingInviteError withCapabilities(Optional<? extends Map<String, String>> capabilities) {
         Utils.checkNotNull(capabilities, "capabilities");
         this.capabilities = capabilities;
@@ -149,13 +160,13 @@ public class OnboardingInviteError extends RuntimeException {
         return this;
     }
 
+
     public OnboardingInviteError withFeePlanCodes(Optional<? extends Map<String, String>> feePlanCodes) {
         Utils.checkNotNull(feePlanCodes, "feePlanCodes");
         this.feePlanCodes = feePlanCodes;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -176,11 +187,8 @@ public class OnboardingInviteError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            returnURL,
-            termsOfServiceURL,
-            scopes,
-            capabilities,
-            feePlanCodes);
+            returnURL, termsOfServiceURL, scopes,
+            capabilities, feePlanCodes);
     }
     
     @Override
@@ -192,22 +200,24 @@ public class OnboardingInviteError extends RuntimeException {
                 "capabilities", capabilities,
                 "feePlanCodes", feePlanCodes);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> returnURL = Optional.empty();
- 
+
         private Optional<String> termsOfServiceURL = Optional.empty();
- 
+
         private Optional<? extends Map<String, String>> scopes = Optional.empty();
- 
+
         private Optional<? extends Map<String, String>> capabilities = Optional.empty();
- 
+
         private Optional<? extends Map<String, String>> feePlanCodes = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder returnURL(String returnURL) {
             Utils.checkNotNull(returnURL, "returnURL");
@@ -221,6 +231,7 @@ public class OnboardingInviteError extends RuntimeException {
             return this;
         }
 
+
         public Builder termsOfServiceURL(String termsOfServiceURL) {
             Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
             this.termsOfServiceURL = Optional.ofNullable(termsOfServiceURL);
@@ -232,6 +243,7 @@ public class OnboardingInviteError extends RuntimeException {
             this.termsOfServiceURL = termsOfServiceURL;
             return this;
         }
+
 
         public Builder scopes(Map<String, String> scopes) {
             Utils.checkNotNull(scopes, "scopes");
@@ -245,6 +257,7 @@ public class OnboardingInviteError extends RuntimeException {
             return this;
         }
 
+
         public Builder capabilities(Map<String, String> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = Optional.ofNullable(capabilities);
@@ -257,6 +270,7 @@ public class OnboardingInviteError extends RuntimeException {
             return this;
         }
 
+
         public Builder feePlanCodes(Map<String, String> feePlanCodes) {
             Utils.checkNotNull(feePlanCodes, "feePlanCodes");
             this.feePlanCodes = Optional.ofNullable(feePlanCodes);
@@ -268,15 +282,14 @@ public class OnboardingInviteError extends RuntimeException {
             this.feePlanCodes = feePlanCodes;
             return this;
         }
-        
+
         public OnboardingInviteError build() {
+
             return new OnboardingInviteError(
-                returnURL,
-                termsOfServiceURL,
-                scopes,
-                capabilities,
-                feePlanCodes);
+                returnURL, termsOfServiceURL, scopes,
+                capabilities, feePlanCodes);
         }
+
     }
 }
 

@@ -18,7 +18,6 @@ import java.lang.String;
  * <p>Describes the account to link to the Moov account using a Plaid using a Plaid public token.
  */
 public class PlaidLinkPayload {
-
     /**
      * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration for a linked funding source.
      * 
@@ -56,9 +55,10 @@ public class PlaidLinkPayload {
         return plaidLink;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration for a linked funding source.
@@ -77,7 +77,6 @@ public class PlaidLinkPayload {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -102,14 +101,16 @@ public class PlaidLinkPayload {
         return Utils.toString(PlaidLinkPayload.class,
                 "plaidLink", plaidLink);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private PlaidLinkIntegration plaidLink;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration for a linked funding source.
@@ -127,10 +128,12 @@ public class PlaidLinkPayload {
             this.plaidLink = plaidLink;
             return this;
         }
-        
+
         public PlaidLinkPayload build() {
+
             return new PlaidLinkPayload(
                 plaidLink);
         }
+
     }
 }

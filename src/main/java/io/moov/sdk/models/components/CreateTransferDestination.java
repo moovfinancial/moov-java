@@ -24,9 +24,11 @@ public class CreateTransferDestination {
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardDetails")
     private Optional<? extends CreateTransferDestinationCard> cardDetails;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("achDetails")
@@ -67,9 +69,10 @@ public class CreateTransferDestination {
         return (Optional<CreateTransferDestinationACH>) achDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateTransferDestination withPaymentMethodID(String paymentMethodID) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
@@ -83,6 +86,7 @@ public class CreateTransferDestination {
         return this;
     }
 
+
     public CreateTransferDestination withCardDetails(Optional<? extends CreateTransferDestinationCard> cardDetails) {
         Utils.checkNotNull(cardDetails, "cardDetails");
         this.cardDetails = cardDetails;
@@ -95,13 +99,13 @@ public class CreateTransferDestination {
         return this;
     }
 
+
     public CreateTransferDestination withAchDetails(Optional<? extends CreateTransferDestinationACH> achDetails) {
         Utils.checkNotNull(achDetails, "achDetails");
         this.achDetails = achDetails;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -120,9 +124,7 @@ public class CreateTransferDestination {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            cardDetails,
-            achDetails);
+            paymentMethodID, cardDetails, achDetails);
     }
     
     @Override
@@ -132,24 +134,27 @@ public class CreateTransferDestination {
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private Optional<? extends CreateTransferDestinationCard> cardDetails = Optional.empty();
- 
+
         private Optional<? extends CreateTransferDestinationACH> achDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder paymentMethodID(String paymentMethodID) {
             Utils.checkNotNull(paymentMethodID, "paymentMethodID");
             this.paymentMethodID = paymentMethodID;
             return this;
         }
+
 
         public Builder cardDetails(CreateTransferDestinationCard cardDetails) {
             Utils.checkNotNull(cardDetails, "cardDetails");
@@ -163,6 +168,7 @@ public class CreateTransferDestination {
             return this;
         }
 
+
         public Builder achDetails(CreateTransferDestinationACH achDetails) {
             Utils.checkNotNull(achDetails, "achDetails");
             this.achDetails = Optional.ofNullable(achDetails);
@@ -174,12 +180,12 @@ public class CreateTransferDestination {
             this.achDetails = achDetails;
             return this;
         }
-        
+
         public CreateTransferDestination build() {
+
             return new CreateTransferDestination(
-                paymentMethodID,
-                cardDetails,
-                achDetails);
+                paymentMethodID, cardDetails, achDetails);
         }
+
     }
 }

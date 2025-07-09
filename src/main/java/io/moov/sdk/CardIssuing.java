@@ -41,7 +41,6 @@ public class CardIssuing {
     CardIssuing(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Request a virtual card be issued.
      * 
@@ -75,10 +74,9 @@ public class CardIssuing {
                 .requestCard(requestCard)
                 .build();
         RequestOperation<RequestCardRequest, RequestCardResponse> operation
-              = new RequestCardOperation( sdkConfiguration);
+              = new RequestCardOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List Moov issued cards existing for the account.
@@ -103,7 +101,8 @@ public class CardIssuing {
      * @throws Exception if the API call fails
      */
     public ListIssuedCardsResponse list(String accountID) throws Exception {
-        return list(accountID, Optional.empty(), Optional.empty(), Optional.empty());
+        return list(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -133,10 +132,9 @@ public class CardIssuing {
                 .states(states)
                 .build();
         RequestOperation<ListIssuedCardsRequest, ListIssuedCardsResponse> operation
-              = new ListIssuedCardsOperation( sdkConfiguration);
+              = new ListIssuedCardsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve a single issued card associated with a Moov account.
@@ -171,10 +169,9 @@ public class CardIssuing {
                 .issuedCardID(issuedCardID)
                 .build();
         RequestOperation<GetIssuedCardRequest, GetIssuedCardResponse> operation
-              = new GetIssuedCardOperation( sdkConfiguration);
+              = new GetIssuedCardOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Update a Moov issued card.
@@ -212,10 +209,9 @@ public class CardIssuing {
                 .updateIssuedCard(updateIssuedCard)
                 .build();
         RequestOperation<UpdateIssuedCardRequest, UpdateIssuedCardResponse> operation
-              = new UpdateIssuedCardOperation( sdkConfiguration);
+              = new UpdateIssuedCardOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get issued card with PAN, CVV, and expiration. 
@@ -254,7 +250,7 @@ public class CardIssuing {
                 .issuedCardID(issuedCardID)
                 .build();
         RequestOperation<GetFullIssuedCardRequest, GetFullIssuedCardResponse> operation
-              = new GetFullIssuedCardOperation( sdkConfiguration);
+              = new GetFullIssuedCardOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

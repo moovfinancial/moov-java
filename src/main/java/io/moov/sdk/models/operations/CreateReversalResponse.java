@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class CreateReversalResponse implements Response {
 
+public class CreateReversalResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
@@ -40,6 +40,7 @@ public class CreateReversalResponse implements Response {
      */
     private Optional<? extends Reversal> reversal;
 
+
     private Map<String, List<String>> headers;
 
     @JsonCreator
@@ -54,6 +55,7 @@ public class CreateReversalResponse implements Response {
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(reversal, "reversal");
         headers = Utils.emptyMapIfNull(headers);
+        Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
@@ -66,7 +68,8 @@ public class CreateReversalResponse implements Response {
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Map<String, List<String>> headers) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
+        this(contentType, statusCode, rawResponse,
+            Optional.empty(), headers);
     }
 
     /**
@@ -107,9 +110,10 @@ public class CreateReversalResponse implements Response {
         return headers;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * HTTP response content type for this operation
@@ -147,6 +151,7 @@ public class CreateReversalResponse implements Response {
         return this;
     }
 
+
     /**
      * Successfully initiated a reversal.
      */
@@ -162,7 +167,6 @@ public class CreateReversalResponse implements Response {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -183,11 +187,8 @@ public class CreateReversalResponse implements Response {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contentType,
-            statusCode,
-            rawResponse,
-            reversal,
-            headers);
+            contentType, statusCode, rawResponse,
+            reversal, headers);
     }
     
     @Override
@@ -199,22 +200,24 @@ public class CreateReversalResponse implements Response {
                 "reversal", reversal,
                 "headers", headers);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String contentType;
- 
+
         private Integer statusCode;
- 
+
         private HttpResponse<InputStream> rawResponse;
- 
+
         private Optional<? extends Reversal> reversal = Optional.empty();
- 
+
         private Map<String, List<String>> headers;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * HTTP response content type for this operation
@@ -225,6 +228,7 @@ public class CreateReversalResponse implements Response {
             return this;
         }
 
+
         /**
          * HTTP response status code for this operation
          */
@@ -234,6 +238,7 @@ public class CreateReversalResponse implements Response {
             return this;
         }
 
+
         /**
          * Raw HTTP response; suitable for custom response parsing
          */
@@ -242,6 +247,7 @@ public class CreateReversalResponse implements Response {
             this.rawResponse = rawResponse;
             return this;
         }
+
 
         /**
          * Successfully initiated a reversal.
@@ -261,19 +267,19 @@ public class CreateReversalResponse implements Response {
             return this;
         }
 
+
         public Builder headers(Map<String, List<String>> headers) {
             Utils.checkNotNull(headers, "headers");
             this.headers = headers;
             return this;
         }
-        
+
         public CreateReversalResponse build() {
+
             return new CreateReversalResponse(
-                contentType,
-                statusCode,
-                rawResponse,
-                reversal,
-                headers);
+                contentType, statusCode, rawResponse,
+                reversal, headers);
         }
+
     }
 }

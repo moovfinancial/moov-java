@@ -45,7 +45,7 @@ public class GetIssuedCardAuthorizationRequestBuilder {
     public GetIssuedCardAuthorizationResponse call() throws Exception {
         
         RequestOperation<GetIssuedCardAuthorizationRequest, GetIssuedCardAuthorizationResponse> operation
-              = new GetIssuedCardAuthorizationOperation( sdkConfiguration);
+              = new GetIssuedCardAuthorizationOperation(sdkConfiguration);
         GetIssuedCardAuthorizationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

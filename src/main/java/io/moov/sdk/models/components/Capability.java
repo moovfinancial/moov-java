@@ -15,8 +15,8 @@ import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
-public class Capability {
 
+public class Capability {
     /**
      * Moov account capabilities.
      * 
@@ -24,6 +24,7 @@ public class Capability {
      */
     @JsonProperty("capability")
     private CapabilityID capability;
+
 
     @JsonProperty("accountID")
     private String accountID;
@@ -41,15 +42,19 @@ public class Capability {
     @JsonProperty("requirements")
     private Optional<? extends CapabilityRequirement> requirements;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disabledReason")
     private Optional<String> disabledReason;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
 
+
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disabledOn")
@@ -89,7 +94,9 @@ public class Capability {
             CapabilityStatus status,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(capability, accountID, status, Optional.empty(), Optional.empty(), createdOn, updatedOn, Optional.empty());
+        this(capability, accountID, status,
+            Optional.empty(), Optional.empty(), createdOn,
+            updatedOn, Optional.empty());
     }
 
     /**
@@ -144,9 +151,10 @@ public class Capability {
         return disabledOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Moov account capabilities.
@@ -183,6 +191,7 @@ public class Capability {
         return this;
     }
 
+
     /**
      * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
      */
@@ -197,6 +206,7 @@ public class Capability {
         this.disabledReason = Optional.ofNullable(disabledReason);
         return this;
     }
+
 
     public Capability withDisabledReason(Optional<String> disabledReason) {
         Utils.checkNotNull(disabledReason, "disabledReason");
@@ -222,13 +232,13 @@ public class Capability {
         return this;
     }
 
+
     public Capability withDisabledOn(Optional<OffsetDateTime> disabledOn) {
         Utils.checkNotNull(disabledOn, "disabledOn");
         this.disabledOn = disabledOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -252,14 +262,9 @@ public class Capability {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            capability,
-            accountID,
-            status,
-            requirements,
-            disabledReason,
-            createdOn,
-            updatedOn,
-            disabledOn);
+            capability, accountID, status,
+            requirements, disabledReason, createdOn,
+            updatedOn, disabledOn);
     }
     
     @Override
@@ -274,28 +279,30 @@ public class Capability {
                 "updatedOn", updatedOn,
                 "disabledOn", disabledOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private CapabilityID capability;
- 
+
         private String accountID;
- 
+
         private CapabilityStatus status;
- 
+
         private Optional<? extends CapabilityRequirement> requirements = Optional.empty();
- 
+
         private Optional<String> disabledReason = Optional.empty();
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
- 
+
         private Optional<OffsetDateTime> disabledOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Moov account capabilities.
@@ -308,11 +315,13 @@ public class Capability {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * The status of the capability requested for an account.
@@ -322,6 +331,7 @@ public class Capability {
             this.status = status;
             return this;
         }
+
 
         /**
          * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
@@ -341,6 +351,7 @@ public class Capability {
             return this;
         }
 
+
         public Builder disabledReason(String disabledReason) {
             Utils.checkNotNull(disabledReason, "disabledReason");
             this.disabledReason = Optional.ofNullable(disabledReason);
@@ -353,17 +364,20 @@ public class Capability {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
+
 
         public Builder disabledOn(OffsetDateTime disabledOn) {
             Utils.checkNotNull(disabledOn, "disabledOn");
@@ -376,17 +390,14 @@ public class Capability {
             this.disabledOn = disabledOn;
             return this;
         }
-        
+
         public Capability build() {
+
             return new Capability(
-                capability,
-                accountID,
-                status,
-                requirements,
-                disabledReason,
-                createdOn,
-                updatedOn,
-                disabledOn);
+                capability, accountID, status,
+                requirements, disabledReason, createdOn,
+                updatedOn, disabledOn);
         }
+
     }
 }

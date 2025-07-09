@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CollectFunds {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ach")
     private Optional<? extends CollectFundsAch> ach;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardPayments")
@@ -50,15 +52,17 @@ public class CollectFunds {
         return (Optional<CollectFundsCardPayments>) cardPayments;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CollectFunds withAch(CollectFundsAch ach) {
         Utils.checkNotNull(ach, "ach");
         this.ach = Optional.ofNullable(ach);
         return this;
     }
+
 
     public CollectFunds withAch(Optional<? extends CollectFundsAch> ach) {
         Utils.checkNotNull(ach, "ach");
@@ -72,13 +76,13 @@ public class CollectFunds {
         return this;
     }
 
+
     public CollectFunds withCardPayments(Optional<? extends CollectFundsCardPayments> cardPayments) {
         Utils.checkNotNull(cardPayments, "cardPayments");
         this.cardPayments = cardPayments;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class CollectFunds {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ach,
-            cardPayments);
+            ach, cardPayments);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class CollectFunds {
                 "ach", ach,
                 "cardPayments", cardPayments);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CollectFundsAch> ach = Optional.empty();
- 
+
         private Optional<? extends CollectFundsCardPayments> cardPayments = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ach(CollectFundsAch ach) {
             Utils.checkNotNull(ach, "ach");
@@ -129,6 +134,7 @@ public class CollectFunds {
             return this;
         }
 
+
         public Builder cardPayments(CollectFundsCardPayments cardPayments) {
             Utils.checkNotNull(cardPayments, "cardPayments");
             this.cardPayments = Optional.ofNullable(cardPayments);
@@ -140,11 +146,12 @@ public class CollectFunds {
             this.cardPayments = cardPayments;
             return this;
         }
-        
+
         public CollectFunds build() {
+
             return new CollectFunds(
-                ach,
-                cardPayments);
+                ach, cardPayments);
         }
+
     }
 }

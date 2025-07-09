@@ -15,30 +15,37 @@ import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
+
 public class RefundCardDetails {
 
     @JsonProperty("status")
     private RefundCardStatus status;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failureCode")
     private Optional<? extends CardTransactionFailureCode> failureCode;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("initiatedOn")
     private Optional<OffsetDateTime> initiatedOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("confirmedOn")
     private Optional<OffsetDateTime> confirmedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("settledOn")
     private Optional<OffsetDateTime> settledOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failedOn")
     private Optional<OffsetDateTime> failedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("completedOn")
@@ -71,7 +78,9 @@ public class RefundCardDetails {
     
     public RefundCardDetails(
             RefundCardStatus status) {
-        this(status, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(status, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -110,9 +119,10 @@ public class RefundCardDetails {
         return completedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RefundCardDetails withStatus(RefundCardStatus status) {
         Utils.checkNotNull(status, "status");
@@ -126,6 +136,7 @@ public class RefundCardDetails {
         return this;
     }
 
+
     public RefundCardDetails withFailureCode(Optional<? extends CardTransactionFailureCode> failureCode) {
         Utils.checkNotNull(failureCode, "failureCode");
         this.failureCode = failureCode;
@@ -137,6 +148,7 @@ public class RefundCardDetails {
         this.initiatedOn = Optional.ofNullable(initiatedOn);
         return this;
     }
+
 
     public RefundCardDetails withInitiatedOn(Optional<OffsetDateTime> initiatedOn) {
         Utils.checkNotNull(initiatedOn, "initiatedOn");
@@ -150,6 +162,7 @@ public class RefundCardDetails {
         return this;
     }
 
+
     public RefundCardDetails withConfirmedOn(Optional<OffsetDateTime> confirmedOn) {
         Utils.checkNotNull(confirmedOn, "confirmedOn");
         this.confirmedOn = confirmedOn;
@@ -161,6 +174,7 @@ public class RefundCardDetails {
         this.settledOn = Optional.ofNullable(settledOn);
         return this;
     }
+
 
     public RefundCardDetails withSettledOn(Optional<OffsetDateTime> settledOn) {
         Utils.checkNotNull(settledOn, "settledOn");
@@ -174,6 +188,7 @@ public class RefundCardDetails {
         return this;
     }
 
+
     public RefundCardDetails withFailedOn(Optional<OffsetDateTime> failedOn) {
         Utils.checkNotNull(failedOn, "failedOn");
         this.failedOn = failedOn;
@@ -186,13 +201,13 @@ public class RefundCardDetails {
         return this;
     }
 
+
     public RefundCardDetails withCompletedOn(Optional<OffsetDateTime> completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
         this.completedOn = completedOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -215,12 +230,8 @@ public class RefundCardDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            status,
-            failureCode,
-            initiatedOn,
-            confirmedOn,
-            settledOn,
-            failedOn,
+            status, failureCode, initiatedOn,
+            confirmedOn, settledOn, failedOn,
             completedOn);
     }
     
@@ -235,32 +246,35 @@ public class RefundCardDetails {
                 "failedOn", failedOn,
                 "completedOn", completedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private RefundCardStatus status;
- 
+
         private Optional<? extends CardTransactionFailureCode> failureCode = Optional.empty();
- 
+
         private Optional<OffsetDateTime> initiatedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> confirmedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> settledOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> failedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> completedOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder status(RefundCardStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         public Builder failureCode(CardTransactionFailureCode failureCode) {
             Utils.checkNotNull(failureCode, "failureCode");
@@ -274,6 +288,7 @@ public class RefundCardDetails {
             return this;
         }
 
+
         public Builder initiatedOn(OffsetDateTime initiatedOn) {
             Utils.checkNotNull(initiatedOn, "initiatedOn");
             this.initiatedOn = Optional.ofNullable(initiatedOn);
@@ -285,6 +300,7 @@ public class RefundCardDetails {
             this.initiatedOn = initiatedOn;
             return this;
         }
+
 
         public Builder confirmedOn(OffsetDateTime confirmedOn) {
             Utils.checkNotNull(confirmedOn, "confirmedOn");
@@ -298,6 +314,7 @@ public class RefundCardDetails {
             return this;
         }
 
+
         public Builder settledOn(OffsetDateTime settledOn) {
             Utils.checkNotNull(settledOn, "settledOn");
             this.settledOn = Optional.ofNullable(settledOn);
@@ -309,6 +326,7 @@ public class RefundCardDetails {
             this.settledOn = settledOn;
             return this;
         }
+
 
         public Builder failedOn(OffsetDateTime failedOn) {
             Utils.checkNotNull(failedOn, "failedOn");
@@ -322,6 +340,7 @@ public class RefundCardDetails {
             return this;
         }
 
+
         public Builder completedOn(OffsetDateTime completedOn) {
             Utils.checkNotNull(completedOn, "completedOn");
             this.completedOn = Optional.ofNullable(completedOn);
@@ -333,16 +352,14 @@ public class RefundCardDetails {
             this.completedOn = completedOn;
             return this;
         }
-        
+
         public RefundCardDetails build() {
+
             return new RefundCardDetails(
-                status,
-                failureCode,
-                initiatedOn,
-                confirmedOn,
-                settledOn,
-                failedOn,
+                status, failureCode, initiatedOn,
+                confirmedOn, settledOn, failedOn,
                 completedOn);
         }
+
     }
 }

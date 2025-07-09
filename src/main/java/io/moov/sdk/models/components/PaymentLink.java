@@ -16,8 +16,8 @@ import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
-public class PaymentLink {
 
+public class PaymentLink {
     /**
      * Unique code identifying this payment link.
      */
@@ -29,6 +29,7 @@ public class PaymentLink {
      */
     @JsonProperty("mode")
     private Mode mode;
+
 
     @JsonProperty("status")
     private PaymentLinkStatus status;
@@ -56,6 +57,7 @@ public class PaymentLink {
      */
     @JsonProperty("link")
     private String link;
+
 
     @JsonProperty("amount")
     private Amount amount;
@@ -95,6 +97,7 @@ public class PaymentLink {
     @JsonProperty("display")
     private PaymentLinkDisplayOptions display;
 
+
     @JsonProperty("customer")
     private PaymentLinkCustomerOptions customer;
 
@@ -105,15 +108,19 @@ public class PaymentLink {
     @JsonProperty("payment")
     private Optional<? extends PaymentLinkPaymentDetails> payment;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payout")
     private Optional<? extends PaymentLinkPayoutDetails> payout;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
 
+
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disabledOn")
@@ -194,7 +201,13 @@ public class PaymentLink {
             PaymentLinkCustomerOptions customer,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(code, mode, status, partnerAccountID, merchantAccountID, merchantPaymentMethodID, link, amount, uses, Optional.empty(), Optional.empty(), Optional.empty(), display, customer, Optional.empty(), Optional.empty(), createdOn, updatedOn, Optional.empty());
+        this(code, mode, status,
+            partnerAccountID, merchantAccountID, merchantPaymentMethodID,
+            link, amount, uses,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            display, customer, Optional.empty(),
+            Optional.empty(), createdOn, updatedOn,
+            Optional.empty());
     }
 
     /**
@@ -332,9 +345,10 @@ public class PaymentLink {
         return disabledOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique code identifying this payment link.
@@ -422,6 +436,7 @@ public class PaymentLink {
         return this;
     }
 
+
     /**
      * An optional limit on the number of times this payment link can be used. 
      * 
@@ -442,6 +457,7 @@ public class PaymentLink {
         return this;
     }
 
+
     /**
      * The timestamp when this payment link was last used.
      */
@@ -459,6 +475,7 @@ public class PaymentLink {
         this.expiresOn = Optional.ofNullable(expiresOn);
         return this;
     }
+
 
     /**
      * An optional expiration date for this payment link.
@@ -493,6 +510,7 @@ public class PaymentLink {
         return this;
     }
 
+
     /**
      * Options for payment links used to collect payment.
      */
@@ -507,6 +525,7 @@ public class PaymentLink {
         this.payout = Optional.ofNullable(payout);
         return this;
     }
+
 
     public PaymentLink withPayout(Optional<? extends PaymentLinkPayoutDetails> payout) {
         Utils.checkNotNull(payout, "payout");
@@ -532,13 +551,13 @@ public class PaymentLink {
         return this;
     }
 
+
     public PaymentLink withDisabledOn(Optional<OffsetDateTime> disabledOn) {
         Utils.checkNotNull(disabledOn, "disabledOn");
         this.disabledOn = disabledOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -573,24 +592,12 @@ public class PaymentLink {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            code,
-            mode,
-            status,
-            partnerAccountID,
-            merchantAccountID,
-            merchantPaymentMethodID,
-            link,
-            amount,
-            uses,
-            maxUses,
-            lastUsedOn,
-            expiresOn,
-            display,
-            customer,
-            payment,
-            payout,
-            createdOn,
-            updatedOn,
+            code, mode, status,
+            partnerAccountID, merchantAccountID, merchantPaymentMethodID,
+            link, amount, uses,
+            maxUses, lastUsedOn, expiresOn,
+            display, customer, payment,
+            payout, createdOn, updatedOn,
             disabledOn);
     }
     
@@ -617,50 +624,52 @@ public class PaymentLink {
                 "updatedOn", updatedOn,
                 "disabledOn", disabledOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String code;
- 
+
         private Mode mode;
- 
+
         private PaymentLinkStatus status;
- 
+
         private String partnerAccountID;
- 
+
         private String merchantAccountID;
- 
+
         private String merchantPaymentMethodID;
- 
+
         private String link;
- 
+
         private Amount amount;
- 
+
         private Long uses;
- 
+
         private Optional<Long> maxUses = Optional.empty();
- 
+
         private Optional<OffsetDateTime> lastUsedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> expiresOn = Optional.empty();
- 
+
         private PaymentLinkDisplayOptions display;
- 
+
         private PaymentLinkCustomerOptions customer;
- 
+
         private Optional<? extends PaymentLinkPaymentDetails> payment = Optional.empty();
- 
+
         private Optional<? extends PaymentLinkPayoutDetails> payout = Optional.empty();
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
- 
+
         private Optional<OffsetDateTime> disabledOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique code identifying this payment link.
@@ -671,6 +680,7 @@ public class PaymentLink {
             return this;
         }
 
+
         /**
          * The operating mode for an account.
          */
@@ -680,11 +690,13 @@ public class PaymentLink {
             return this;
         }
 
+
         public Builder status(PaymentLinkStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         /**
          * The partner's Moov account ID.
@@ -695,6 +707,7 @@ public class PaymentLink {
             return this;
         }
 
+
         /**
          * The merchant's Moov account ID.
          */
@@ -703,6 +716,7 @@ public class PaymentLink {
             this.merchantAccountID = merchantAccountID;
             return this;
         }
+
 
         /**
          * The merchant's preferred payment method ID. Must be a wallet payment method.
@@ -713,6 +727,7 @@ public class PaymentLink {
             return this;
         }
 
+
         /**
          * Link to the payment landing page for this payment link.
          */
@@ -722,11 +737,13 @@ public class PaymentLink {
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
+
 
         /**
          * The number of times this payment link has been used.
@@ -736,6 +753,7 @@ public class PaymentLink {
             this.uses = uses;
             return this;
         }
+
 
         /**
          * An optional limit on the number of times this payment link can be used. 
@@ -759,6 +777,7 @@ public class PaymentLink {
             return this;
         }
 
+
         /**
          * The timestamp when this payment link was last used.
          */
@@ -776,6 +795,7 @@ public class PaymentLink {
             this.lastUsedOn = lastUsedOn;
             return this;
         }
+
 
         /**
          * An optional expiration date for this payment link.
@@ -795,6 +815,7 @@ public class PaymentLink {
             return this;
         }
 
+
         /**
          * Customizable display options for a payment link.
          */
@@ -804,11 +825,13 @@ public class PaymentLink {
             return this;
         }
 
+
         public Builder customer(PaymentLinkCustomerOptions customer) {
             Utils.checkNotNull(customer, "customer");
             this.customer = customer;
             return this;
         }
+
 
         /**
          * Options for payment links used to collect payment.
@@ -828,6 +851,7 @@ public class PaymentLink {
             return this;
         }
 
+
         public Builder payout(PaymentLinkPayoutDetails payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = Optional.ofNullable(payout);
@@ -840,17 +864,20 @@ public class PaymentLink {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
+
 
         public Builder disabledOn(OffsetDateTime disabledOn) {
             Utils.checkNotNull(disabledOn, "disabledOn");
@@ -863,28 +890,18 @@ public class PaymentLink {
             this.disabledOn = disabledOn;
             return this;
         }
-        
+
         public PaymentLink build() {
+
             return new PaymentLink(
-                code,
-                mode,
-                status,
-                partnerAccountID,
-                merchantAccountID,
-                merchantPaymentMethodID,
-                link,
-                amount,
-                uses,
-                maxUses,
-                lastUsedOn,
-                expiresOn,
-                display,
-                customer,
-                payment,
-                payout,
-                createdOn,
-                updatedOn,
+                code, mode, status,
+                partnerAccountID, merchantAccountID, merchantPaymentMethodID,
+                link, amount, uses,
+                maxUses, lastUsedOn, expiresOn,
+                display, customer, payment,
+                payout, createdOn, updatedOn,
                 disabledOn);
         }
+
     }
 }

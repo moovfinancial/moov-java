@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class VolumeByCustomerTypeError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("businessToBusinessPercentage")
     private Optional<String> businessToBusinessPercentage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("consumerToBusinessPercentage")
@@ -47,15 +49,17 @@ public class VolumeByCustomerTypeError {
         return consumerToBusinessPercentage;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public VolumeByCustomerTypeError withBusinessToBusinessPercentage(String businessToBusinessPercentage) {
         Utils.checkNotNull(businessToBusinessPercentage, "businessToBusinessPercentage");
         this.businessToBusinessPercentage = Optional.ofNullable(businessToBusinessPercentage);
         return this;
     }
+
 
     public VolumeByCustomerTypeError withBusinessToBusinessPercentage(Optional<String> businessToBusinessPercentage) {
         Utils.checkNotNull(businessToBusinessPercentage, "businessToBusinessPercentage");
@@ -69,13 +73,13 @@ public class VolumeByCustomerTypeError {
         return this;
     }
 
+
     public VolumeByCustomerTypeError withConsumerToBusinessPercentage(Optional<String> consumerToBusinessPercentage) {
         Utils.checkNotNull(consumerToBusinessPercentage, "consumerToBusinessPercentage");
         this.consumerToBusinessPercentage = consumerToBusinessPercentage;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class VolumeByCustomerTypeError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            businessToBusinessPercentage,
-            consumerToBusinessPercentage);
+            businessToBusinessPercentage, consumerToBusinessPercentage);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class VolumeByCustomerTypeError {
                 "businessToBusinessPercentage", businessToBusinessPercentage,
                 "consumerToBusinessPercentage", consumerToBusinessPercentage);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> businessToBusinessPercentage = Optional.empty();
- 
+
         private Optional<String> consumerToBusinessPercentage = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder businessToBusinessPercentage(String businessToBusinessPercentage) {
             Utils.checkNotNull(businessToBusinessPercentage, "businessToBusinessPercentage");
@@ -126,6 +131,7 @@ public class VolumeByCustomerTypeError {
             return this;
         }
 
+
         public Builder consumerToBusinessPercentage(String consumerToBusinessPercentage) {
             Utils.checkNotNull(consumerToBusinessPercentage, "consumerToBusinessPercentage");
             this.consumerToBusinessPercentage = Optional.ofNullable(consumerToBusinessPercentage);
@@ -137,11 +143,12 @@ public class VolumeByCustomerTypeError {
             this.consumerToBusinessPercentage = consumerToBusinessPercentage;
             return this;
         }
-        
+
         public VolumeByCustomerTypeError build() {
+
             return new VolumeByCustomerTypeError(
-                businessToBusinessPercentage,
-                consumerToBusinessPercentage);
+                businessToBusinessPercentage, consumerToBusinessPercentage);
         }
+
     }
 }

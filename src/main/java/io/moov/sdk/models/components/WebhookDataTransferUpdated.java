@@ -13,16 +13,18 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class WebhookDataTransferUpdated {
 
+public class WebhookDataTransferUpdated {
     /**
      * The accountID which facilitated the transfer.
      */
     @JsonProperty("accountID")
     private String accountID;
 
+
     @JsonProperty("transferID")
     private String transferID;
+
 
     @JsonProperty("status")
     private WebhookDataTransferStatus status;
@@ -38,6 +40,7 @@ public class WebhookDataTransferUpdated {
      */
     @JsonProperty("destination")
     private WebhookTransferPaymentMethodDetails destination;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("foreignID")
@@ -71,7 +74,8 @@ public class WebhookDataTransferUpdated {
             WebhookDataTransferStatus status,
             WebhookTransferPaymentMethodDetails source,
             WebhookTransferPaymentMethodDetails destination) {
-        this(accountID, transferID, status, source, destination, Optional.empty());
+        this(accountID, transferID, status,
+            source, destination, Optional.empty());
     }
 
     /**
@@ -113,9 +117,10 @@ public class WebhookDataTransferUpdated {
         return foreignID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The accountID which facilitated the transfer.
@@ -162,13 +167,13 @@ public class WebhookDataTransferUpdated {
         return this;
     }
 
+
     public WebhookDataTransferUpdated withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
         this.foreignID = foreignID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -190,12 +195,8 @@ public class WebhookDataTransferUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            transferID,
-            status,
-            source,
-            destination,
-            foreignID);
+            accountID, transferID, status,
+            source, destination, foreignID);
     }
     
     @Override
@@ -208,24 +209,26 @@ public class WebhookDataTransferUpdated {
                 "destination", destination,
                 "foreignID", foreignID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String transferID;
- 
+
         private WebhookDataTransferStatus status;
- 
+
         private WebhookTransferPaymentMethodDetails source;
- 
+
         private WebhookTransferPaymentMethodDetails destination;
- 
+
         private Optional<String> foreignID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The accountID which facilitated the transfer.
@@ -236,17 +239,20 @@ public class WebhookDataTransferUpdated {
             return this;
         }
 
+
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = transferID;
             return this;
         }
 
+
         public Builder status(WebhookDataTransferStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         /**
          * Payment method details for the source or destination of a transfer.
@@ -257,6 +263,7 @@ public class WebhookDataTransferUpdated {
             return this;
         }
 
+
         /**
          * Payment method details for the source or destination of a transfer.
          */
@@ -265,6 +272,7 @@ public class WebhookDataTransferUpdated {
             this.destination = destination;
             return this;
         }
+
 
         public Builder foreignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
@@ -277,15 +285,13 @@ public class WebhookDataTransferUpdated {
             this.foreignID = foreignID;
             return this;
         }
-        
+
         public WebhookDataTransferUpdated build() {
+
             return new WebhookDataTransferUpdated(
-                accountID,
-                transferID,
-                status,
-                source,
-                destination,
-                foreignID);
+                accountID, transferID, status,
+                source, destination, foreignID);
         }
+
     }
 }

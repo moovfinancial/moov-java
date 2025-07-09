@@ -11,13 +11,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UploadDisputeEvidenceFileRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=disputeID")
     private String disputeID;
+
 
     @SpeakeasyMetadata("request:mediaType=multipart/form-data")
     private CreateEvidenceFileMultiPart createEvidenceFileMultiPart;
@@ -50,9 +53,10 @@ public class UploadDisputeEvidenceFileRequest {
         return createEvidenceFileMultiPart;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UploadDisputeEvidenceFileRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,7 +76,6 @@ public class UploadDisputeEvidenceFileRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class UploadDisputeEvidenceFileRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            disputeID,
-            createEvidenceFileMultiPart);
+            accountID, disputeID, createEvidenceFileMultiPart);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class UploadDisputeEvidenceFileRequest {
                 "disputeID", disputeID,
                 "createEvidenceFileMultiPart", createEvidenceFileMultiPart);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String disputeID;
- 
+
         private CreateEvidenceFileMultiPart createEvidenceFileMultiPart;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -122,23 +125,25 @@ public class UploadDisputeEvidenceFileRequest {
             return this;
         }
 
+
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = disputeID;
             return this;
         }
 
+
         public Builder createEvidenceFileMultiPart(CreateEvidenceFileMultiPart createEvidenceFileMultiPart) {
             Utils.checkNotNull(createEvidenceFileMultiPart, "createEvidenceFileMultiPart");
             this.createEvidenceFileMultiPart = createEvidenceFileMultiPart;
             return this;
         }
-        
+
         public UploadDisputeEvidenceFileRequest build() {
+
             return new UploadDisputeEvidenceFileRequest(
-                accountID,
-                disputeID,
-                createEvidenceFileMultiPart);
+                accountID, disputeID, createEvidenceFileMultiPart);
         }
+
     }
 }

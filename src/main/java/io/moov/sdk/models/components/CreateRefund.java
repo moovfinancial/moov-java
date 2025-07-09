@@ -22,7 +22,6 @@ import java.util.Optional;
  * <p>This request body is optional, an empty body will issue a refund for the full amount of the original transfer.
  */
 public class CreateRefund {
-
     /**
      * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
      */
@@ -49,9 +48,10 @@ public class CreateRefund {
         return amount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
@@ -62,6 +62,7 @@ public class CreateRefund {
         return this;
     }
 
+
     /**
      * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
      */
@@ -71,7 +72,6 @@ public class CreateRefund {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,14 +96,16 @@ public class CreateRefund {
         return Utils.toString(CreateRefund.class,
                 "amount", amount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> amount = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Amount to refund in cents. If null, the original transfer's full amount will be refunded.
@@ -122,10 +124,12 @@ public class CreateRefund {
             this.amount = amount;
             return this;
         }
-        
+
         public CreateRefund build() {
+
             return new CreateRefund(
                 amount);
         }
+
     }
 }

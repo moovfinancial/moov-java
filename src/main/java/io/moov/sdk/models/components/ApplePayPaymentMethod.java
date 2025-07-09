@@ -10,13 +10,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class ApplePayPaymentMethod implements PaymentMethod {
 
+public class ApplePayPaymentMethod implements PaymentMethod {
     /**
      * ID of the payment method.
      */
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
+
 
     @JsonProperty("paymentMethodType")
     private ApplePayPaymentMethodPaymentMethodType paymentMethodType;
@@ -62,9 +63,10 @@ public class ApplePayPaymentMethod implements PaymentMethod {
         return applePay;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the payment method.
@@ -90,7 +92,6 @@ public class ApplePayPaymentMethod implements PaymentMethod {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -109,9 +110,7 @@ public class ApplePayPaymentMethod implements PaymentMethod {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            paymentMethodType,
-            applePay);
+            paymentMethodID, paymentMethodType, applePay);
     }
     
     @Override
@@ -121,18 +120,20 @@ public class ApplePayPaymentMethod implements PaymentMethod {
                 "paymentMethodType", paymentMethodType,
                 "applePay", applePay);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private ApplePayPaymentMethodPaymentMethodType paymentMethodType;
- 
+
         private ApplePayResponse applePay;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the payment method.
@@ -143,11 +144,13 @@ public class ApplePayPaymentMethod implements PaymentMethod {
             return this;
         }
 
+
         public Builder paymentMethodType(ApplePayPaymentMethodPaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;
         }
+
 
         /**
          * Describes an Apple Pay token on a Moov account.
@@ -157,12 +160,12 @@ public class ApplePayPaymentMethod implements PaymentMethod {
             this.applePay = applePay;
             return this;
         }
-        
+
         public ApplePayPaymentMethod build() {
+
             return new ApplePayPaymentMethod(
-                paymentMethodID,
-                paymentMethodType,
-                applePay);
+                paymentMethodID, paymentMethodType, applePay);
         }
+
     }
 }

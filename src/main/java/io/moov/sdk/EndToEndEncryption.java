@@ -25,7 +25,6 @@ public class EndToEndEncryption {
     EndToEndEncryption(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Allows for testing a JWE token to ensure it's acceptable by Moov. 
      * 
@@ -48,18 +47,16 @@ public class EndToEndEncryption {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public TestEndToEndTokenResponse testEncryptedToken(
-            String token) throws Exception {
+    public TestEndToEndTokenResponse testEncryptedToken(String token) throws Exception {
         E2EEToken request =
             E2EEToken
                 .builder()
                 .token(token)
                 .build();
         RequestOperation<E2EEToken, TestEndToEndTokenResponse> operation
-              = new TestEndToEndTokenOperation( sdkConfiguration);
+              = new TestEndToEndTokenOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Generates a public key used to create a JWE token for passing secure authentication data through non-PCI compliant intermediaries.
@@ -82,7 +79,7 @@ public class EndToEndEncryption {
                 .builder()
                 .build();
         RequestOperation<GenerateEndToEndKeyRequest, GenerateEndToEndKeyResponse> operation
-              = new GenerateEndToEndKeyOperation( sdkConfiguration);
+              = new GenerateEndToEndKeyOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

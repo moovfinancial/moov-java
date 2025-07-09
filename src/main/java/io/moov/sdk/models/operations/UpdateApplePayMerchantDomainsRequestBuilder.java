@@ -46,7 +46,7 @@ public class UpdateApplePayMerchantDomainsRequestBuilder {
     public UpdateApplePayMerchantDomainsResponse call() throws Exception {
         
         RequestOperation<UpdateApplePayMerchantDomainsRequest, UpdateApplePayMerchantDomainsResponse> operation
-              = new UpdateApplePayMerchantDomainsOperation( sdkConfiguration);
+              = new UpdateApplePayMerchantDomainsOperation(sdkConfiguration);
         UpdateApplePayMerchantDomainsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

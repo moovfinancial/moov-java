@@ -29,7 +29,7 @@ public class CreateAccessTokenRequestBuilder {
     public CreateAccessTokenResponse call() throws Exception {
         
         RequestOperation<AuthTokenRequest, CreateAccessTokenResponse> operation
-              = new CreateAccessTokenOperation( sdkConfiguration);
+              = new CreateAccessTokenOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

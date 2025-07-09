@@ -14,8 +14,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class CreateTransferSourceACH {
 
+public class CreateTransferSourceACH {
     /**
      * An optional override of the default NACHA company entry description for a transfer.
      */
@@ -61,7 +61,8 @@ public class CreateTransferSourceACH {
     }
     
     public CreateTransferSourceACH() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -98,9 +99,10 @@ public class CreateTransferSourceACH {
         return (Optional<SECCode>) secCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An optional override of the default NACHA company entry description for a transfer.
@@ -110,6 +112,7 @@ public class CreateTransferSourceACH {
         this.companyEntryDescription = Optional.ofNullable(companyEntryDescription);
         return this;
     }
+
 
     /**
      * An optional override of the default NACHA company entry description for a transfer.
@@ -129,6 +132,7 @@ public class CreateTransferSourceACH {
         return this;
     }
 
+
     /**
      * An optional override of the default NACHA company name for a transfer.
      */
@@ -146,6 +150,7 @@ public class CreateTransferSourceACH {
         this.debitHoldPeriod = Optional.ofNullable(debitHoldPeriod);
         return this;
     }
+
 
     /**
      * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
@@ -165,6 +170,7 @@ public class CreateTransferSourceACH {
         return this;
     }
 
+
     /**
      * Code used to identify the ACH authorization method.
      */
@@ -174,7 +180,6 @@ public class CreateTransferSourceACH {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -194,9 +199,7 @@ public class CreateTransferSourceACH {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyEntryDescription,
-            originatingCompanyName,
-            debitHoldPeriod,
+            companyEntryDescription, originatingCompanyName, debitHoldPeriod,
             secCode);
     }
     
@@ -208,20 +211,22 @@ public class CreateTransferSourceACH {
                 "debitHoldPeriod", debitHoldPeriod,
                 "secCode", secCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> companyEntryDescription = Optional.empty();
- 
+
         private Optional<String> originatingCompanyName = Optional.empty();
- 
+
         private Optional<? extends DebitHoldPeriod> debitHoldPeriod = Optional.empty();
- 
+
         private Optional<? extends SECCode> secCode = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An optional override of the default NACHA company entry description for a transfer.
@@ -241,6 +246,7 @@ public class CreateTransferSourceACH {
             return this;
         }
 
+
         /**
          * An optional override of the default NACHA company name for a transfer.
          */
@@ -258,6 +264,7 @@ public class CreateTransferSourceACH {
             this.originatingCompanyName = originatingCompanyName;
             return this;
         }
+
 
         /**
          * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
@@ -277,6 +284,7 @@ public class CreateTransferSourceACH {
             return this;
         }
 
+
         /**
          * Code used to identify the ACH authorization method.
          */
@@ -294,13 +302,13 @@ public class CreateTransferSourceACH {
             this.secCode = secCode;
             return this;
         }
-        
+
         public CreateTransferSourceACH build() {
+
             return new CreateTransferSourceACH(
-                companyEntryDescription,
-                originatingCompanyName,
-                debitHoldPeriod,
+                companyEntryDescription, originatingCompanyName, debitHoldPeriod,
                 secCode);
         }
+
     }
 }

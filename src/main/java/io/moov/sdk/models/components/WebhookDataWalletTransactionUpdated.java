@@ -14,19 +14,24 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class WebhookDataWalletTransactionUpdated {
 
     @JsonProperty("accountID")
     private String accountID;
 
+
     @JsonProperty("walletID")
     private String walletID;
+
 
     @JsonProperty("transactionID")
     private String transactionID;
 
+
     @JsonProperty("status")
     private WalletTransactionStatus status;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("availableBalance")
@@ -56,7 +61,8 @@ public class WebhookDataWalletTransactionUpdated {
             String walletID,
             String transactionID,
             WalletTransactionStatus status) {
-        this(accountID, walletID, transactionID, status, Optional.empty());
+        this(accountID, walletID, transactionID,
+            status, Optional.empty());
     }
 
     @JsonIgnore
@@ -85,9 +91,10 @@ public class WebhookDataWalletTransactionUpdated {
         return (Optional<WalletAvailableBalance>) availableBalance;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataWalletTransactionUpdated withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -119,13 +126,13 @@ public class WebhookDataWalletTransactionUpdated {
         return this;
     }
 
+
     public WebhookDataWalletTransactionUpdated withAvailableBalance(Optional<? extends WalletAvailableBalance> availableBalance) {
         Utils.checkNotNull(availableBalance, "availableBalance");
         this.availableBalance = availableBalance;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -146,11 +153,8 @@ public class WebhookDataWalletTransactionUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            walletID,
-            transactionID,
-            status,
-            availableBalance);
+            accountID, walletID, transactionID,
+            status, availableBalance);
     }
     
     @Override
@@ -162,22 +166,24 @@ public class WebhookDataWalletTransactionUpdated {
                 "status", status,
                 "availableBalance", availableBalance);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String walletID;
- 
+
         private String transactionID;
- 
+
         private WalletTransactionStatus status;
- 
+
         private Optional<? extends WalletAvailableBalance> availableBalance = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -185,11 +191,13 @@ public class WebhookDataWalletTransactionUpdated {
             return this;
         }
 
+
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
+
 
         public Builder transactionID(String transactionID) {
             Utils.checkNotNull(transactionID, "transactionID");
@@ -197,11 +205,13 @@ public class WebhookDataWalletTransactionUpdated {
             return this;
         }
 
+
         public Builder status(WalletTransactionStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         public Builder availableBalance(WalletAvailableBalance availableBalance) {
             Utils.checkNotNull(availableBalance, "availableBalance");
@@ -214,14 +224,13 @@ public class WebhookDataWalletTransactionUpdated {
             this.availableBalance = availableBalance;
             return this;
         }
-        
+
         public WebhookDataWalletTransactionUpdated build() {
+
             return new WebhookDataWalletTransactionUpdated(
-                accountID,
-                walletID,
-                transactionID,
-                status,
-                availableBalance);
+                accountID, walletID, transactionID,
+                status, availableBalance);
         }
+
     }
 }

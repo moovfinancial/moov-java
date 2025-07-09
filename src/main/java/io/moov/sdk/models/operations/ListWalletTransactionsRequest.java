@@ -18,16 +18,20 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 public class ListWalletTransactionsRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=walletID")
     private String walletID;
@@ -141,7 +145,11 @@ public class ListWalletTransactionsRequest {
     public ListWalletTransactionsRequest(
             String accountID,
             String walletID) {
-        this(accountID, Optional.empty(), Optional.empty(), walletID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountID, Optional.empty(), Optional.empty(),
+            walletID, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -248,9 +256,10 @@ public class ListWalletTransactionsRequest {
         return sweepID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListWalletTransactionsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -264,6 +273,7 @@ public class ListWalletTransactionsRequest {
         return this;
     }
 
+
     public ListWalletTransactionsRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -275,6 +285,7 @@ public class ListWalletTransactionsRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public ListWalletTransactionsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
@@ -297,6 +308,7 @@ public class ListWalletTransactionsRequest {
         return this;
     }
 
+
     /**
      * Optional parameter to filter by transaction type.
      */
@@ -314,6 +326,7 @@ public class ListWalletTransactionsRequest {
         this.transactionTypes = Optional.ofNullable(transactionTypes);
         return this;
     }
+
 
     /**
      * Optional, comma-separated parameter to filter by transaction types.
@@ -333,6 +346,7 @@ public class ListWalletTransactionsRequest {
         return this;
     }
 
+
     /**
      * Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
      */
@@ -350,6 +364,7 @@ public class ListWalletTransactionsRequest {
         this.sourceID = Optional.ofNullable(sourceID);
         return this;
     }
+
 
     /**
      * Optional parameter to filter by source ID.
@@ -369,6 +384,7 @@ public class ListWalletTransactionsRequest {
         return this;
     }
 
+
     /**
      * Optional parameter to filter by status (`pending` or `completed`).
      */
@@ -386,6 +402,7 @@ public class ListWalletTransactionsRequest {
         this.createdStartDateTime = Optional.ofNullable(createdStartDateTime);
         return this;
     }
+
 
     /**
      * Optional date-time which inclusively filters all transactions created after this date-time.
@@ -405,6 +422,7 @@ public class ListWalletTransactionsRequest {
         return this;
     }
 
+
     /**
      * Optional date-time which exclusively filters all transactions created before this date-time.
      */
@@ -422,6 +440,7 @@ public class ListWalletTransactionsRequest {
         this.completedStartDateTime = Optional.ofNullable(completedStartDateTime);
         return this;
     }
+
 
     /**
      * Optional date-time which inclusively filters all transactions completed after this date-time.
@@ -441,6 +460,7 @@ public class ListWalletTransactionsRequest {
         return this;
     }
 
+
     /**
      * Optional date-time which exclusively filters all transactions completed before this date-time.
      */
@@ -459,6 +479,7 @@ public class ListWalletTransactionsRequest {
         return this;
     }
 
+
     /**
      * Optional ID to filter for transactions accrued in a sweep.
      */
@@ -468,7 +489,6 @@ public class ListWalletTransactionsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -498,20 +518,11 @@ public class ListWalletTransactionsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            skip,
-            count,
-            walletID,
-            transactionType,
-            transactionTypes,
-            sourceType,
-            sourceID,
-            status,
-            createdStartDateTime,
-            createdEndDateTime,
-            completedStartDateTime,
-            completedEndDateTime,
-            sweepID);
+            accountID, skip, count,
+            walletID, transactionType, transactionTypes,
+            sourceType, sourceID, status,
+            createdStartDateTime, createdEndDateTime, completedStartDateTime,
+            completedEndDateTime, sweepID);
     }
     
     @Override
@@ -532,46 +543,49 @@ public class ListWalletTransactionsRequest {
                 "completedEndDateTime", completedEndDateTime,
                 "sweepID", sweepID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private String walletID;
- 
+
         private Optional<? extends WalletTransactionType> transactionType = Optional.empty();
- 
+
         private Optional<? extends List<WalletTransactionType>> transactionTypes = Optional.empty();
- 
+
         private Optional<? extends WalletTransactionSourceType> sourceType = Optional.empty();
- 
+
         private Optional<String> sourceID = Optional.empty();
- 
+
         private Optional<? extends WalletTransactionStatus> status = Optional.empty();
- 
+
         private Optional<OffsetDateTime> createdStartDateTime = Optional.empty();
- 
+
         private Optional<OffsetDateTime> createdEndDateTime = Optional.empty();
- 
+
         private Optional<OffsetDateTime> completedStartDateTime = Optional.empty();
- 
+
         private Optional<OffsetDateTime> completedEndDateTime = Optional.empty();
- 
+
         private Optional<String> sweepID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -585,6 +599,7 @@ public class ListWalletTransactionsRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -597,11 +612,13 @@ public class ListWalletTransactionsRequest {
             return this;
         }
 
+
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
+
 
         /**
          * Optional parameter to filter by transaction type.
@@ -621,6 +638,7 @@ public class ListWalletTransactionsRequest {
             return this;
         }
 
+
         /**
          * Optional, comma-separated parameter to filter by transaction types.
          */
@@ -638,6 +656,7 @@ public class ListWalletTransactionsRequest {
             this.transactionTypes = transactionTypes;
             return this;
         }
+
 
         /**
          * Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
@@ -657,6 +676,7 @@ public class ListWalletTransactionsRequest {
             return this;
         }
 
+
         /**
          * Optional parameter to filter by source ID.
          */
@@ -674,6 +694,7 @@ public class ListWalletTransactionsRequest {
             this.sourceID = sourceID;
             return this;
         }
+
 
         /**
          * Optional parameter to filter by status (`pending` or `completed`).
@@ -693,6 +714,7 @@ public class ListWalletTransactionsRequest {
             return this;
         }
 
+
         /**
          * Optional date-time which inclusively filters all transactions created after this date-time.
          */
@@ -710,6 +732,7 @@ public class ListWalletTransactionsRequest {
             this.createdStartDateTime = createdStartDateTime;
             return this;
         }
+
 
         /**
          * Optional date-time which exclusively filters all transactions created before this date-time.
@@ -729,6 +752,7 @@ public class ListWalletTransactionsRequest {
             return this;
         }
 
+
         /**
          * Optional date-time which inclusively filters all transactions completed after this date-time.
          */
@@ -746,6 +770,7 @@ public class ListWalletTransactionsRequest {
             this.completedStartDateTime = completedStartDateTime;
             return this;
         }
+
 
         /**
          * Optional date-time which exclusively filters all transactions completed before this date-time.
@@ -765,6 +790,7 @@ public class ListWalletTransactionsRequest {
             return this;
         }
 
+
         /**
          * Optional ID to filter for transactions accrued in a sweep.
          */
@@ -782,23 +808,16 @@ public class ListWalletTransactionsRequest {
             this.sweepID = sweepID;
             return this;
         }
-        
+
         public ListWalletTransactionsRequest build() {
+
             return new ListWalletTransactionsRequest(
-                accountID,
-                skip,
-                count,
-                walletID,
-                transactionType,
-                transactionTypes,
-                sourceType,
-                sourceID,
-                status,
-                createdStartDateTime,
-                createdEndDateTime,
-                completedStartDateTime,
-                completedEndDateTime,
-                sweepID);
+                accountID, skip, count,
+                walletID, transactionType, transactionTypes,
+                sourceType, sourceID, status,
+                createdStartDateTime, createdEndDateTime, completedStartDateTime,
+                completedEndDateTime, sweepID);
         }
+
     }
 }

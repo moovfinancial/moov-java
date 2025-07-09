@@ -71,7 +71,6 @@ public class Transfers {
     Transfers(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
      * supply in the request body.
@@ -115,10 +114,9 @@ public class Transfers {
                 .createTransferOptions(createTransferOptions)
                 .build();
         RequestOperation<CreateTransferOptionsForAccountRequest, CreateTransferOptionsForAccountResponse> operation
-              = new CreateTransferOptionsForAccountOperation( sdkConfiguration);
+              = new CreateTransferOptionsForAccountOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Move money by providing the source, destination, and amount in the request body.
@@ -152,7 +150,8 @@ public class Transfers {
             String xIdempotencyKey,
             String accountID,
             CreateTransfer createTransfer) throws Exception {
-        return create(xIdempotencyKey, Optional.empty(), accountID, createTransfer);
+        return create(xIdempotencyKey, Optional.empty(), accountID,
+            createTransfer);
     }
 
     /**
@@ -184,10 +183,9 @@ public class Transfers {
                 .createTransfer(createTransfer)
                 .build();
         RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
-              = new CreateTransferOperation( sdkConfiguration);
+              = new CreateTransferOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all the transfers associated with a particular Moov account. 
@@ -225,13 +223,11 @@ public class Transfers {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListTransfersResponse list(
-            ListTransfersRequest request) throws Exception {
+    public ListTransfersResponse list(ListTransfersRequest request) throws Exception {
         RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
-              = new ListTransfersOperation( sdkConfiguration);
+              = new ListTransfersOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve full transfer details for an individual transfer of a particular Moov account. 
@@ -272,10 +268,9 @@ public class Transfers {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetTransferRequest, GetTransferResponse> operation
-              = new GetTransferOperation( sdkConfiguration);
+              = new GetTransferOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Update the metadata contained on a transfer. 
@@ -317,10 +312,9 @@ public class Transfers {
                 .patchTransfer(patchTransfer)
                 .build();
         RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
-              = new UpdateTransferOperation( sdkConfiguration);
+              = new UpdateTransferOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Initiate a cancellation for a card, ACH, or queued transfer.
@@ -355,10 +349,9 @@ public class Transfers {
                 .transferID(transferID)
                 .build();
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
-              = new CreateCancellationOperation( sdkConfiguration);
+              = new CreateCancellationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get details of a cancellation for a transfer.
@@ -396,10 +389,9 @@ public class Transfers {
                 .cancellationID(cancellationID)
                 .build();
         RequestOperation<GetCancellationRequest, GetCancellationResponse> operation
-              = new GetCancellationOperation( sdkConfiguration);
+              = new GetCancellationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Initiate a refund for a card transfer.
@@ -429,13 +421,11 @@ public class Transfers {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public InitiateRefundResponse initiateRefund(
-            InitiateRefundRequest request) throws Exception {
+    public InitiateRefundResponse initiateRefund(InitiateRefundRequest request) throws Exception {
         RequestOperation<InitiateRefundRequest, InitiateRefundResponse> operation
-              = new InitiateRefundOperation( sdkConfiguration);
+              = new InitiateRefundOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get a list of refunds for a card transfer.
@@ -470,10 +460,9 @@ public class Transfers {
                 .transferID(transferID)
                 .build();
         RequestOperation<ListRefundsRequest, ListRefundsResponse> operation
-              = new ListRefundsOperation( sdkConfiguration);
+              = new ListRefundsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get details of a refund for a card transfer.
@@ -511,10 +500,9 @@ public class Transfers {
                 .refundID(refundID)
                 .build();
         RequestOperation<GetRefundRequest, GetRefundResponse> operation
-              = new GetRefundOperation( sdkConfiguration);
+              = new GetRefundOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
@@ -548,7 +536,8 @@ public class Transfers {
             String xIdempotencyKey,
             String accountID,
             String transferID) throws Exception {
-        return createReversal(xIdempotencyKey, accountID, transferID, Optional.empty());
+        return createReversal(xIdempotencyKey, accountID, transferID,
+            Optional.empty());
     }
 
     /**
@@ -580,10 +569,9 @@ public class Transfers {
                 .createReversal(createReversal)
                 .build();
         RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
-              = new CreateReversalOperation( sdkConfiguration);
+              = new CreateReversalOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
@@ -627,7 +615,7 @@ public class Transfers {
                 .amount(amount)
                 .build();
         RequestOperation<CreateTransferOptions, CreateTransferOptionsResponse> operation
-              = new CreateTransferOptionsOperation( sdkConfiguration);
+              = new CreateTransferOptionsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

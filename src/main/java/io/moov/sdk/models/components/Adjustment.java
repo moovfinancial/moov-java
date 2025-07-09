@@ -21,11 +21,14 @@ public class Adjustment {
     @JsonProperty("adjustmentID")
     private String adjustmentID;
 
+
     @JsonProperty("walletID")
     private String walletID;
 
+
     @JsonProperty("amount")
     private AmountDecimal amount;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -66,9 +69,10 @@ public class Adjustment {
         return createdOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Adjustment withAdjustmentID(String adjustmentID) {
         Utils.checkNotNull(adjustmentID, "adjustmentID");
@@ -94,7 +98,6 @@ public class Adjustment {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -114,9 +117,7 @@ public class Adjustment {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            adjustmentID,
-            walletID,
-            amount,
+            adjustmentID, walletID, amount,
             createdOn);
     }
     
@@ -128,20 +129,22 @@ public class Adjustment {
                 "amount", amount,
                 "createdOn", createdOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String adjustmentID;
- 
+
         private String walletID;
- 
+
         private AmountDecimal amount;
- 
+
         private OffsetDateTime createdOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder adjustmentID(String adjustmentID) {
             Utils.checkNotNull(adjustmentID, "adjustmentID");
@@ -149,11 +152,13 @@ public class Adjustment {
             return this;
         }
 
+
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
+
 
         public Builder amount(AmountDecimal amount) {
             Utils.checkNotNull(amount, "amount");
@@ -161,18 +166,19 @@ public class Adjustment {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
-        
+
         public Adjustment build() {
+
             return new Adjustment(
-                adjustmentID,
-                walletID,
-                amount,
+                adjustmentID, walletID, amount,
                 createdOn);
         }
+
     }
 }

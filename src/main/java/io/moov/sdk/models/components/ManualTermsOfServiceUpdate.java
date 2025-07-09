@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Describes the acceptance of the Terms of Service. All data is required, and must be from the user.
  */
 public class ManualTermsOfServiceUpdate {
-
     /**
      * The date and time the terms of service were accepted.
      */
@@ -41,6 +40,7 @@ public class ManualTermsOfServiceUpdate {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("acceptedUserAgent")
     private Optional<String> acceptedUserAgent;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("acceptedDomain")
@@ -63,7 +63,8 @@ public class ManualTermsOfServiceUpdate {
     }
     
     public ManualTermsOfServiceUpdate() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -95,9 +96,10 @@ public class ManualTermsOfServiceUpdate {
         return acceptedDomain;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The date and time the terms of service were accepted.
@@ -107,6 +109,7 @@ public class ManualTermsOfServiceUpdate {
         this.acceptedDate = Optional.ofNullable(acceptedDate);
         return this;
     }
+
 
     /**
      * The date and time the terms of service were accepted.
@@ -126,6 +129,7 @@ public class ManualTermsOfServiceUpdate {
         return this;
     }
 
+
     /**
      * The IP address from which the terms of service were accepted.
      */
@@ -144,6 +148,7 @@ public class ManualTermsOfServiceUpdate {
         return this;
     }
 
+
     /**
      * The user-agent of the user making the request.
      */
@@ -159,13 +164,13 @@ public class ManualTermsOfServiceUpdate {
         return this;
     }
 
+
     public ManualTermsOfServiceUpdate withAcceptedDomain(Optional<String> acceptedDomain) {
         Utils.checkNotNull(acceptedDomain, "acceptedDomain");
         this.acceptedDomain = acceptedDomain;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -185,9 +190,7 @@ public class ManualTermsOfServiceUpdate {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            acceptedDate,
-            acceptedIP,
-            acceptedUserAgent,
+            acceptedDate, acceptedIP, acceptedUserAgent,
             acceptedDomain);
     }
     
@@ -199,20 +202,22 @@ public class ManualTermsOfServiceUpdate {
                 "acceptedUserAgent", acceptedUserAgent,
                 "acceptedDomain", acceptedDomain);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<OffsetDateTime> acceptedDate = Optional.empty();
- 
+
         private Optional<String> acceptedIP = Optional.empty();
- 
+
         private Optional<String> acceptedUserAgent = Optional.empty();
- 
+
         private Optional<String> acceptedDomain = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The date and time the terms of service were accepted.
@@ -232,6 +237,7 @@ public class ManualTermsOfServiceUpdate {
             return this;
         }
 
+
         /**
          * The IP address from which the terms of service were accepted.
          */
@@ -249,6 +255,7 @@ public class ManualTermsOfServiceUpdate {
             this.acceptedIP = acceptedIP;
             return this;
         }
+
 
         /**
          * The user-agent of the user making the request.
@@ -268,6 +275,7 @@ public class ManualTermsOfServiceUpdate {
             return this;
         }
 
+
         public Builder acceptedDomain(String acceptedDomain) {
             Utils.checkNotNull(acceptedDomain, "acceptedDomain");
             this.acceptedDomain = Optional.ofNullable(acceptedDomain);
@@ -279,13 +287,13 @@ public class ManualTermsOfServiceUpdate {
             this.acceptedDomain = acceptedDomain;
             return this;
         }
-        
+
         public ManualTermsOfServiceUpdate build() {
+
             return new ManualTermsOfServiceUpdate(
-                acceptedDate,
-                acceptedIP,
-                acceptedUserAgent,
+                acceptedDate, acceptedIP, acceptedUserAgent,
                 acceptedDomain);
         }
+
     }
 }

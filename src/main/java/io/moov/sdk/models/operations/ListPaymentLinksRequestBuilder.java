@@ -37,7 +37,7 @@ public class ListPaymentLinksRequestBuilder {
     public ListPaymentLinksResponse call() throws Exception {
         
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
-              = new ListPaymentLinksOperation( sdkConfiguration);
+              = new ListPaymentLinksOperation(sdkConfiguration);
         ListPaymentLinksRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

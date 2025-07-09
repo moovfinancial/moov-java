@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class MoneyTransfer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pullFromCard")
     private Optional<? extends MoneyTransferPullFromCard> pullFromCard;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushToCard")
@@ -50,15 +52,17 @@ public class MoneyTransfer {
         return (Optional<MoneyTransferPushToCard>) pushToCard;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public MoneyTransfer withPullFromCard(MoneyTransferPullFromCard pullFromCard) {
         Utils.checkNotNull(pullFromCard, "pullFromCard");
         this.pullFromCard = Optional.ofNullable(pullFromCard);
         return this;
     }
+
 
     public MoneyTransfer withPullFromCard(Optional<? extends MoneyTransferPullFromCard> pullFromCard) {
         Utils.checkNotNull(pullFromCard, "pullFromCard");
@@ -72,13 +76,13 @@ public class MoneyTransfer {
         return this;
     }
 
+
     public MoneyTransfer withPushToCard(Optional<? extends MoneyTransferPushToCard> pushToCard) {
         Utils.checkNotNull(pushToCard, "pushToCard");
         this.pushToCard = pushToCard;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class MoneyTransfer {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            pullFromCard,
-            pushToCard);
+            pullFromCard, pushToCard);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class MoneyTransfer {
                 "pullFromCard", pullFromCard,
                 "pushToCard", pushToCard);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends MoneyTransferPullFromCard> pullFromCard = Optional.empty();
- 
+
         private Optional<? extends MoneyTransferPushToCard> pushToCard = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder pullFromCard(MoneyTransferPullFromCard pullFromCard) {
             Utils.checkNotNull(pullFromCard, "pullFromCard");
@@ -129,6 +134,7 @@ public class MoneyTransfer {
             return this;
         }
 
+
         public Builder pushToCard(MoneyTransferPushToCard pushToCard) {
             Utils.checkNotNull(pushToCard, "pushToCard");
             this.pushToCard = Optional.ofNullable(pushToCard);
@@ -140,11 +146,12 @@ public class MoneyTransfer {
             this.pushToCard = pushToCard;
             return this;
         }
-        
+
         public MoneyTransfer build() {
+
             return new MoneyTransfer(
-                pullFromCard,
-                pushToCard);
+                pullFromCard, pushToCard);
         }
+
     }
 }

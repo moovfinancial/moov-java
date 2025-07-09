@@ -11,10 +11,12 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 
+
 public class AsyncTransfer {
 
     @JsonProperty("transferID")
     private String transferID;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -39,9 +41,10 @@ public class AsyncTransfer {
         return createdOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AsyncTransfer withTransferID(String transferID) {
         Utils.checkNotNull(transferID, "transferID");
@@ -55,7 +58,6 @@ public class AsyncTransfer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class AsyncTransfer {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID,
-            createdOn);
+            transferID, createdOn);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class AsyncTransfer {
                 "transferID", transferID,
                 "createdOn", createdOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String transferID;
- 
+
         private OffsetDateTime createdOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
@@ -100,16 +103,18 @@ public class AsyncTransfer {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
-        
+
         public AsyncTransfer build() {
+
             return new AsyncTransfer(
-                transferID,
-                createdOn);
+                transferID, createdOn);
         }
+
     }
 }

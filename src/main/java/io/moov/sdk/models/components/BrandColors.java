@@ -20,6 +20,7 @@ public class BrandColors {
     @JsonProperty("dark")
     private BrandColor dark;
 
+
     @JsonProperty("light")
     private BrandColor light;
 
@@ -43,9 +44,10 @@ public class BrandColors {
         return light;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BrandColors withDark(BrandColor dark) {
         Utils.checkNotNull(dark, "dark");
@@ -59,7 +61,6 @@ public class BrandColors {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,8 +78,7 @@ public class BrandColors {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            dark,
-            light);
+            dark, light);
     }
     
     @Override
@@ -87,16 +87,18 @@ public class BrandColors {
                 "dark", dark,
                 "light", light);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private BrandColor dark;
- 
+
         private BrandColor light;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder dark(BrandColor dark) {
             Utils.checkNotNull(dark, "dark");
@@ -104,16 +106,18 @@ public class BrandColors {
             return this;
         }
 
+
         public Builder light(BrandColor light) {
             Utils.checkNotNull(light, "light");
             this.light = light;
             return this;
         }
-        
+
         public BrandColors build() {
+
             return new BrandColors(
-                dark,
-                light);
+                dark, light);
         }
+
     }
 }

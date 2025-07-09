@@ -10,13 +10,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GetIssuedCardAuthorizationRequest {
 
+public class GetIssuedCardAuthorizationRequest {
     /**
      * The Moov business account for which cards have been issued.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=authorizationID")
     private String authorizationID;
@@ -44,9 +45,10 @@ public class GetIssuedCardAuthorizationRequest {
         return authorizationID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The Moov business account for which cards have been issued.
@@ -63,7 +65,6 @@ public class GetIssuedCardAuthorizationRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -81,8 +82,7 @@ public class GetIssuedCardAuthorizationRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            authorizationID);
+            accountID, authorizationID);
     }
     
     @Override
@@ -91,16 +91,18 @@ public class GetIssuedCardAuthorizationRequest {
                 "accountID", accountID,
                 "authorizationID", authorizationID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String authorizationID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The Moov business account for which cards have been issued.
@@ -111,16 +113,18 @@ public class GetIssuedCardAuthorizationRequest {
             return this;
         }
 
+
         public Builder authorizationID(String authorizationID) {
             Utils.checkNotNull(authorizationID, "authorizationID");
             this.authorizationID = authorizationID;
             return this;
         }
-        
+
         public GetIssuedCardAuthorizationRequest build() {
+
             return new GetIssuedCardAuthorizationRequest(
-                accountID,
-                authorizationID);
+                accountID, authorizationID);
         }
+
     }
 }

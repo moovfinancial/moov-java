@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
  */
 public class CreateTransferSource {
-
     /**
      * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
      * associating the new transfer with a parent transfer.
@@ -29,17 +28,21 @@ public class CreateTransferSource {
     @JsonProperty("transferID")
     private Optional<String> transferID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentMethodID")
     private Optional<String> paymentMethodID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentToken")
     private Optional<String> paymentToken;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardDetails")
     private Optional<? extends CreateTransferSourceCard> cardDetails;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("achDetails")
@@ -65,7 +68,8 @@ public class CreateTransferSource {
     }
     
     public CreateTransferSource() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -99,9 +103,10 @@ public class CreateTransferSource {
         return (Optional<CreateTransferSourceACH>) achDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
@@ -112,6 +117,7 @@ public class CreateTransferSource {
         this.transferID = Optional.ofNullable(transferID);
         return this;
     }
+
 
     /**
      * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
@@ -129,6 +135,7 @@ public class CreateTransferSource {
         return this;
     }
 
+
     public CreateTransferSource withPaymentMethodID(Optional<String> paymentMethodID) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
         this.paymentMethodID = paymentMethodID;
@@ -140,6 +147,7 @@ public class CreateTransferSource {
         this.paymentToken = Optional.ofNullable(paymentToken);
         return this;
     }
+
 
     public CreateTransferSource withPaymentToken(Optional<String> paymentToken) {
         Utils.checkNotNull(paymentToken, "paymentToken");
@@ -153,6 +161,7 @@ public class CreateTransferSource {
         return this;
     }
 
+
     public CreateTransferSource withCardDetails(Optional<? extends CreateTransferSourceCard> cardDetails) {
         Utils.checkNotNull(cardDetails, "cardDetails");
         this.cardDetails = cardDetails;
@@ -165,13 +174,13 @@ public class CreateTransferSource {
         return this;
     }
 
+
     public CreateTransferSource withAchDetails(Optional<? extends CreateTransferSourceACH> achDetails) {
         Utils.checkNotNull(achDetails, "achDetails");
         this.achDetails = achDetails;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -192,11 +201,8 @@ public class CreateTransferSource {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID,
-            paymentMethodID,
-            paymentToken,
-            cardDetails,
-            achDetails);
+            transferID, paymentMethodID, paymentToken,
+            cardDetails, achDetails);
     }
     
     @Override
@@ -208,22 +214,24 @@ public class CreateTransferSource {
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> transferID = Optional.empty();
- 
+
         private Optional<String> paymentMethodID = Optional.empty();
- 
+
         private Optional<String> paymentToken = Optional.empty();
- 
+
         private Optional<? extends CreateTransferSourceCard> cardDetails = Optional.empty();
- 
+
         private Optional<? extends CreateTransferSourceACH> achDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A `transferID` is used to create a [transfer group](https://docs.moov.io/guides/money-movement/transfer-groups/),
@@ -245,6 +253,7 @@ public class CreateTransferSource {
             return this;
         }
 
+
         public Builder paymentMethodID(String paymentMethodID) {
             Utils.checkNotNull(paymentMethodID, "paymentMethodID");
             this.paymentMethodID = Optional.ofNullable(paymentMethodID);
@@ -256,6 +265,7 @@ public class CreateTransferSource {
             this.paymentMethodID = paymentMethodID;
             return this;
         }
+
 
         public Builder paymentToken(String paymentToken) {
             Utils.checkNotNull(paymentToken, "paymentToken");
@@ -269,6 +279,7 @@ public class CreateTransferSource {
             return this;
         }
 
+
         public Builder cardDetails(CreateTransferSourceCard cardDetails) {
             Utils.checkNotNull(cardDetails, "cardDetails");
             this.cardDetails = Optional.ofNullable(cardDetails);
@@ -281,6 +292,7 @@ public class CreateTransferSource {
             return this;
         }
 
+
         public Builder achDetails(CreateTransferSourceACH achDetails) {
             Utils.checkNotNull(achDetails, "achDetails");
             this.achDetails = Optional.ofNullable(achDetails);
@@ -292,14 +304,13 @@ public class CreateTransferSource {
             this.achDetails = achDetails;
             return this;
         }
-        
+
         public CreateTransferSource build() {
+
             return new CreateTransferSource(
-                transferID,
-                paymentMethodID,
-                paymentToken,
-                cardDetails,
-                achDetails);
+                transferID, paymentMethodID, paymentToken,
+                cardDetails, achDetails);
         }
+
     }
 }

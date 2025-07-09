@@ -70,7 +70,7 @@ public class CreateTransferRequestBuilder {
     public CreateTransferResponse call() throws Exception {
         
         RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
-              = new CreateTransferOperation( sdkConfiguration);
+              = new CreateTransferOperation(sdkConfiguration);
         CreateTransferRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

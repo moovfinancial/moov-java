@@ -46,7 +46,7 @@ public class UpdateAccountRequestBuilder {
     public UpdateAccountResponse call() throws Exception {
         
         RequestOperation<UpdateAccountRequest, UpdateAccountResponse> operation
-              = new UpdateAccountOperation( sdkConfiguration);
+              = new UpdateAccountOperation(sdkConfiguration);
         UpdateAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -37,7 +37,7 @@ public class GetMerchantProcessingAgreementRequestBuilder {
     public GetMerchantProcessingAgreementResponse call() throws Exception {
         
         RequestOperation<GetMerchantProcessingAgreementRequest, GetMerchantProcessingAgreementResponse> operation
-              = new GetMerchantProcessingAgreementOperation( sdkConfiguration);
+              = new GetMerchantProcessingAgreementOperation(sdkConfiguration);
         GetMerchantProcessingAgreementRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

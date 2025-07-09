@@ -45,7 +45,7 @@ public class InitiateMicroDepositsRequestBuilder {
     public InitiateMicroDepositsResponse call() throws Exception {
         
         RequestOperation<InitiateMicroDepositsRequest, InitiateMicroDepositsResponse> operation
-              = new InitiateMicroDepositsOperation( sdkConfiguration);
+              = new InitiateMicroDepositsOperation(sdkConfiguration);
         InitiateMicroDepositsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

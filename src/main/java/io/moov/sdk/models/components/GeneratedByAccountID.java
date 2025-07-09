@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class GeneratedByAccountID {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class GeneratedByAccountID {
         return accountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GeneratedByAccountID withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -45,13 +47,13 @@ public class GeneratedByAccountID {
         return this;
     }
 
+
     public GeneratedByAccountID withAccountID(Optional<String> accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class GeneratedByAccountID {
         return Utils.toString(GeneratedByAccountID.class,
                 "accountID", accountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> accountID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -96,10 +100,12 @@ public class GeneratedByAccountID {
             this.accountID = accountID;
             return this;
         }
-        
+
         public GeneratedByAccountID build() {
+
             return new GeneratedByAccountID(
                 accountID);
         }
+
     }
 }

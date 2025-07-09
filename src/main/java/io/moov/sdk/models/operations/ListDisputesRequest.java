@@ -16,13 +16,16 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 public class ListDisputesRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
@@ -81,6 +84,7 @@ public class ListDisputesRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=transferIDs")
     private Optional<? extends List<String>> transferIDs;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=orderBy")
     private Optional<String> orderBy;
 
@@ -129,7 +133,11 @@ public class ListDisputesRequest {
     
     public ListDisputesRequest(
             String accountID) {
-        this(accountID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -227,9 +235,10 @@ public class ListDisputesRequest {
         return orderBy;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListDisputesRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -243,6 +252,7 @@ public class ListDisputesRequest {
         return this;
     }
 
+
     public ListDisputesRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -254,6 +264,7 @@ public class ListDisputesRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public ListDisputesRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
@@ -269,6 +280,7 @@ public class ListDisputesRequest {
         this.startDateTime = Optional.ofNullable(startDateTime);
         return this;
     }
+
 
     /**
      * Optional date-time parameter to filter all disputes created on and after the provided date and time.
@@ -288,6 +300,7 @@ public class ListDisputesRequest {
         return this;
     }
 
+
     /**
      * Optional date-time parameter to filter all disputes created on and before the provided date and time.
      */
@@ -305,6 +318,7 @@ public class ListDisputesRequest {
         this.respondStartDateTime = Optional.ofNullable(respondStartDateTime);
         return this;
     }
+
 
     /**
      * Optional date-time which exclusively filters all disputes with respond by before this date-time.
@@ -324,6 +338,7 @@ public class ListDisputesRequest {
         return this;
     }
 
+
     /**
      * Optional date-time which exclusively filters all disputes with respond by before this date-time.
      */
@@ -341,6 +356,7 @@ public class ListDisputesRequest {
         this.status = Optional.ofNullable(status);
         return this;
     }
+
 
     /**
      * Optional dispute status by which to filter the disputes.
@@ -360,6 +376,7 @@ public class ListDisputesRequest {
         return this;
     }
 
+
     /**
      * Optional parameter to filter by merchant account ID.
      */
@@ -377,6 +394,7 @@ public class ListDisputesRequest {
         this.cardholderAccountID = Optional.ofNullable(cardholderAccountID);
         return this;
     }
+
 
     /**
      * Optional parameter to filter by cardholder account ID.
@@ -396,6 +414,7 @@ public class ListDisputesRequest {
         return this;
     }
 
+
     /**
      * Optional parameter to filter by a comma separated list of dispute IDs.
      */
@@ -414,6 +433,7 @@ public class ListDisputesRequest {
         return this;
     }
 
+
     /**
      * Optional parameter to filter by a comma separated list of transfer IDs.
      */
@@ -429,13 +449,13 @@ public class ListDisputesRequest {
         return this;
     }
 
+
     public ListDisputesRequest withOrderBy(Optional<String> orderBy) {
         Utils.checkNotNull(orderBy, "orderBy");
         this.orderBy = orderBy;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -464,18 +484,10 @@ public class ListDisputesRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            skip,
-            count,
-            startDateTime,
-            endDateTime,
-            respondStartDateTime,
-            respondEndDateTime,
-            status,
-            merchantAccountID,
-            cardholderAccountID,
-            disputeIDs,
-            transferIDs,
+            accountID, skip, count,
+            startDateTime, endDateTime, respondStartDateTime,
+            respondEndDateTime, status, merchantAccountID,
+            cardholderAccountID, disputeIDs, transferIDs,
             orderBy);
     }
     
@@ -496,44 +508,47 @@ public class ListDisputesRequest {
                 "transferIDs", transferIDs,
                 "orderBy", orderBy);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private Optional<OffsetDateTime> startDateTime = Optional.empty();
- 
+
         private Optional<OffsetDateTime> endDateTime = Optional.empty();
- 
+
         private Optional<OffsetDateTime> respondStartDateTime = Optional.empty();
- 
+
         private Optional<OffsetDateTime> respondEndDateTime = Optional.empty();
- 
+
         private Optional<? extends DisputeStatus> status = Optional.empty();
- 
+
         private Optional<String> merchantAccountID = Optional.empty();
- 
+
         private Optional<String> cardholderAccountID = Optional.empty();
- 
+
         private Optional<? extends List<String>> disputeIDs = Optional.empty();
- 
+
         private Optional<? extends List<String>> transferIDs = Optional.empty();
- 
+
         private Optional<String> orderBy = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -547,6 +562,7 @@ public class ListDisputesRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -558,6 +574,7 @@ public class ListDisputesRequest {
             this.count = count;
             return this;
         }
+
 
         /**
          * Optional date-time parameter to filter all disputes created on and after the provided date and time.
@@ -577,6 +594,7 @@ public class ListDisputesRequest {
             return this;
         }
 
+
         /**
          * Optional date-time parameter to filter all disputes created on and before the provided date and time.
          */
@@ -594,6 +612,7 @@ public class ListDisputesRequest {
             this.endDateTime = endDateTime;
             return this;
         }
+
 
         /**
          * Optional date-time which exclusively filters all disputes with respond by before this date-time.
@@ -613,6 +632,7 @@ public class ListDisputesRequest {
             return this;
         }
 
+
         /**
          * Optional date-time which exclusively filters all disputes with respond by before this date-time.
          */
@@ -630,6 +650,7 @@ public class ListDisputesRequest {
             this.respondEndDateTime = respondEndDateTime;
             return this;
         }
+
 
         /**
          * Optional dispute status by which to filter the disputes.
@@ -649,6 +670,7 @@ public class ListDisputesRequest {
             return this;
         }
 
+
         /**
          * Optional parameter to filter by merchant account ID.
          */
@@ -666,6 +688,7 @@ public class ListDisputesRequest {
             this.merchantAccountID = merchantAccountID;
             return this;
         }
+
 
         /**
          * Optional parameter to filter by cardholder account ID.
@@ -685,6 +708,7 @@ public class ListDisputesRequest {
             return this;
         }
 
+
         /**
          * Optional parameter to filter by a comma separated list of dispute IDs.
          */
@@ -702,6 +726,7 @@ public class ListDisputesRequest {
             this.disputeIDs = disputeIDs;
             return this;
         }
+
 
         /**
          * Optional parameter to filter by a comma separated list of transfer IDs.
@@ -721,6 +746,7 @@ public class ListDisputesRequest {
             return this;
         }
 
+
         public Builder orderBy(String orderBy) {
             Utils.checkNotNull(orderBy, "orderBy");
             this.orderBy = Optional.ofNullable(orderBy);
@@ -732,22 +758,16 @@ public class ListDisputesRequest {
             this.orderBy = orderBy;
             return this;
         }
-        
+
         public ListDisputesRequest build() {
+
             return new ListDisputesRequest(
-                accountID,
-                skip,
-                count,
-                startDateTime,
-                endDateTime,
-                respondStartDateTime,
-                respondEndDateTime,
-                status,
-                merchantAccountID,
-                cardholderAccountID,
-                disputeIDs,
-                transferIDs,
+                accountID, skip, count,
+                startDateTime, endDateTime, respondStartDateTime,
+                respondEndDateTime, status, merchantAccountID,
+                cardholderAccountID, disputeIDs, transferIDs,
                 orderBy);
         }
+
     }
 }

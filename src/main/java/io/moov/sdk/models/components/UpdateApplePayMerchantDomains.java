@@ -15,8 +15,8 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
-public class UpdateApplePayMerchantDomains {
 
+public class UpdateApplePayMerchantDomains {
     /**
      * A unique list of fully-qualified, top-level or sub-domain names to add.
      */
@@ -63,9 +63,10 @@ public class UpdateApplePayMerchantDomains {
         return (Optional<List<String>>) removeDomains;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A unique list of fully-qualified, top-level or sub-domain names to add.
@@ -75,6 +76,7 @@ public class UpdateApplePayMerchantDomains {
         this.addDomains = Optional.ofNullable(addDomains);
         return this;
     }
+
 
     /**
      * A unique list of fully-qualified, top-level or sub-domain names to add.
@@ -94,6 +96,7 @@ public class UpdateApplePayMerchantDomains {
         return this;
     }
 
+
     /**
      * A unique list of fully-qualified, top-level or sub-domain names to remove.
      */
@@ -103,7 +106,6 @@ public class UpdateApplePayMerchantDomains {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -121,8 +123,7 @@ public class UpdateApplePayMerchantDomains {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            addDomains,
-            removeDomains);
+            addDomains, removeDomains);
     }
     
     @Override
@@ -131,16 +132,18 @@ public class UpdateApplePayMerchantDomains {
                 "addDomains", addDomains,
                 "removeDomains", removeDomains);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<String>> addDomains = Optional.empty();
- 
+
         private Optional<? extends List<String>> removeDomains = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A unique list of fully-qualified, top-level or sub-domain names to add.
@@ -160,6 +163,7 @@ public class UpdateApplePayMerchantDomains {
             return this;
         }
 
+
         /**
          * A unique list of fully-qualified, top-level or sub-domain names to remove.
          */
@@ -177,11 +181,12 @@ public class UpdateApplePayMerchantDomains {
             this.removeDomains = removeDomains;
             return this;
         }
-        
+
         public UpdateApplePayMerchantDomains build() {
+
             return new UpdateApplePayMerchantDomains(
-                addDomains,
-                removeDomains);
+                addDomains, removeDomains);
         }
+
     }
 }

@@ -15,32 +15,41 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
+
 public class Ticket {
 
     @JsonProperty("ticketID")
     private String ticketID;
 
+
     @JsonProperty("number")
     private long number;
+
 
     @JsonProperty("title")
     private String title;
 
+
     @JsonProperty("contact")
     private TicketContact contact;
+
 
     @JsonProperty("status")
     private TicketStatus status;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("latestMessageOn")
     private Optional<OffsetDateTime> latestMessageOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("closedOn")
@@ -85,7 +94,9 @@ public class Ticket {
             TicketStatus status,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(ticketID, number, title, contact, status, createdOn, updatedOn, Optional.empty(), Optional.empty());
+        this(ticketID, number, title,
+            contact, status, createdOn,
+            updatedOn, Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -133,9 +144,10 @@ public class Ticket {
         return closedOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Ticket withTicketID(String ticketID) {
         Utils.checkNotNull(ticketID, "ticketID");
@@ -185,6 +197,7 @@ public class Ticket {
         return this;
     }
 
+
     public Ticket withLatestMessageOn(Optional<OffsetDateTime> latestMessageOn) {
         Utils.checkNotNull(latestMessageOn, "latestMessageOn");
         this.latestMessageOn = latestMessageOn;
@@ -197,13 +210,13 @@ public class Ticket {
         return this;
     }
 
+
     public Ticket withClosedOn(Optional<OffsetDateTime> closedOn) {
         Utils.checkNotNull(closedOn, "closedOn");
         this.closedOn = closedOn;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -228,15 +241,9 @@ public class Ticket {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ticketID,
-            number,
-            title,
-            contact,
-            status,
-            createdOn,
-            updatedOn,
-            latestMessageOn,
-            closedOn);
+            ticketID, number, title,
+            contact, status, createdOn,
+            updatedOn, latestMessageOn, closedOn);
     }
     
     @Override
@@ -252,30 +259,32 @@ public class Ticket {
                 "latestMessageOn", latestMessageOn,
                 "closedOn", closedOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String ticketID;
- 
+
         private Long number;
- 
+
         private String title;
- 
+
         private TicketContact contact;
- 
+
         private TicketStatus status;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
- 
+
         private Optional<OffsetDateTime> latestMessageOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> closedOn = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ticketID(String ticketID) {
             Utils.checkNotNull(ticketID, "ticketID");
@@ -283,11 +292,13 @@ public class Ticket {
             return this;
         }
 
+
         public Builder number(long number) {
             Utils.checkNotNull(number, "number");
             this.number = number;
             return this;
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -295,11 +306,13 @@ public class Ticket {
             return this;
         }
 
+
         public Builder contact(TicketContact contact) {
             Utils.checkNotNull(contact, "contact");
             this.contact = contact;
             return this;
         }
+
 
         public Builder status(TicketStatus status) {
             Utils.checkNotNull(status, "status");
@@ -307,17 +320,20 @@ public class Ticket {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
+
 
         public Builder latestMessageOn(OffsetDateTime latestMessageOn) {
             Utils.checkNotNull(latestMessageOn, "latestMessageOn");
@@ -331,6 +347,7 @@ public class Ticket {
             return this;
         }
 
+
         public Builder closedOn(OffsetDateTime closedOn) {
             Utils.checkNotNull(closedOn, "closedOn");
             this.closedOn = Optional.ofNullable(closedOn);
@@ -342,18 +359,14 @@ public class Ticket {
             this.closedOn = closedOn;
             return this;
         }
-        
+
         public Ticket build() {
+
             return new Ticket(
-                ticketID,
-                number,
-                title,
-                contact,
-                status,
-                createdOn,
-                updatedOn,
-                latestMessageOn,
-                closedOn);
+                ticketID, number, title,
+                contact, status, createdOn,
+                updatedOn, latestMessageOn, closedOn);
         }
+
     }
 }

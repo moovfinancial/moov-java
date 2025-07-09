@@ -40,9 +40,10 @@ public class TermsOfServiceTokenUpdate {
         return token;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TermsOfServiceTokenUpdate withToken(String token) {
         Utils.checkNotNull(token, "token");
@@ -50,13 +51,13 @@ public class TermsOfServiceTokenUpdate {
         return this;
     }
 
+
     public TermsOfServiceTokenUpdate withToken(Optional<String> token) {
         Utils.checkNotNull(token, "token");
         this.token = token;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -81,14 +82,16 @@ public class TermsOfServiceTokenUpdate {
         return Utils.toString(TermsOfServiceTokenUpdate.class,
                 "token", token);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> token = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder token(String token) {
             Utils.checkNotNull(token, "token");
@@ -101,10 +104,12 @@ public class TermsOfServiceTokenUpdate {
             this.token = token;
             return this;
         }
-        
+
         public TermsOfServiceTokenUpdate build() {
+
             return new TermsOfServiceTokenUpdate(
                 token);
         }
+
     }
 }

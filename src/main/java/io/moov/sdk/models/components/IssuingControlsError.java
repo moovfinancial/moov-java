@@ -15,6 +15,7 @@ import java.lang.SuppressWarnings;
 import java.util.Map;
 import java.util.Optional;
 
+
 public class IssuingControlsError {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -38,9 +39,10 @@ public class IssuingControlsError {
         return (Optional<Map<String, IssuingVelocityLimitError>>) velocityLimits;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public IssuingControlsError withVelocityLimits(Map<String, IssuingVelocityLimitError> velocityLimits) {
         Utils.checkNotNull(velocityLimits, "velocityLimits");
@@ -48,13 +50,13 @@ public class IssuingControlsError {
         return this;
     }
 
+
     public IssuingControlsError withVelocityLimits(Optional<? extends Map<String, IssuingVelocityLimitError>> velocityLimits) {
         Utils.checkNotNull(velocityLimits, "velocityLimits");
         this.velocityLimits = velocityLimits;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -79,14 +81,16 @@ public class IssuingControlsError {
         return Utils.toString(IssuingControlsError.class,
                 "velocityLimits", velocityLimits);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends Map<String, IssuingVelocityLimitError>> velocityLimits = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder velocityLimits(Map<String, IssuingVelocityLimitError> velocityLimits) {
             Utils.checkNotNull(velocityLimits, "velocityLimits");
@@ -99,10 +103,12 @@ public class IssuingControlsError {
             this.velocityLimits = velocityLimits;
             return this;
         }
-        
+
         public IssuingControlsError build() {
+
             return new IssuingControlsError(
                 velocityLimits);
         }
+
     }
 }

@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class EnrichedIndustryCodes {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("naics")
     private Optional<String> naics;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sic")
@@ -47,15 +49,17 @@ public class EnrichedIndustryCodes {
         return sic;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public EnrichedIndustryCodes withNaics(String naics) {
         Utils.checkNotNull(naics, "naics");
         this.naics = Optional.ofNullable(naics);
         return this;
     }
+
 
     public EnrichedIndustryCodes withNaics(Optional<String> naics) {
         Utils.checkNotNull(naics, "naics");
@@ -69,13 +73,13 @@ public class EnrichedIndustryCodes {
         return this;
     }
 
+
     public EnrichedIndustryCodes withSic(Optional<String> sic) {
         Utils.checkNotNull(sic, "sic");
         this.sic = sic;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class EnrichedIndustryCodes {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            naics,
-            sic);
+            naics, sic);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class EnrichedIndustryCodes {
                 "naics", naics,
                 "sic", sic);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> naics = Optional.empty();
- 
+
         private Optional<String> sic = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder naics(String naics) {
             Utils.checkNotNull(naics, "naics");
@@ -126,6 +131,7 @@ public class EnrichedIndustryCodes {
             return this;
         }
 
+
         public Builder sic(String sic) {
             Utils.checkNotNull(sic, "sic");
             this.sic = Optional.ofNullable(sic);
@@ -137,11 +143,12 @@ public class EnrichedIndustryCodes {
             this.sic = sic;
             return this;
         }
-        
+
         public EnrichedIndustryCodes build() {
+
             return new EnrichedIndustryCodes(
-                naics,
-                sic);
+                naics, sic);
         }
+
     }
 }

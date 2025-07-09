@@ -16,16 +16,18 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class ListIssuedCardAuthorizationsRequest {
 
+public class ListIssuedCardAuthorizationsRequest {
     /**
      * The Moov business account for which cards have been issued.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
@@ -81,7 +83,9 @@ public class ListIssuedCardAuthorizationsRequest {
     
     public ListIssuedCardAuthorizationsRequest(
             String accountID) {
-        this(accountID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -135,9 +139,10 @@ public class ListIssuedCardAuthorizationsRequest {
         return (Optional<List<IssuingAuthorizationStatus>>) statuses;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The Moov business account for which cards have been issued.
@@ -154,6 +159,7 @@ public class ListIssuedCardAuthorizationsRequest {
         return this;
     }
 
+
     public ListIssuedCardAuthorizationsRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -165,6 +171,7 @@ public class ListIssuedCardAuthorizationsRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public ListIssuedCardAuthorizationsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
@@ -180,6 +187,7 @@ public class ListIssuedCardAuthorizationsRequest {
         this.issuedCardID = Optional.ofNullable(issuedCardID);
         return this;
     }
+
 
     /**
      * Optional ID of the issued card to filter results.
@@ -199,6 +207,7 @@ public class ListIssuedCardAuthorizationsRequest {
         return this;
     }
 
+
     /**
      * Optional date-time which inclusively filters all authorizations created after this date-time.
      */
@@ -216,6 +225,7 @@ public class ListIssuedCardAuthorizationsRequest {
         this.endDateTime = Optional.ofNullable(endDateTime);
         return this;
     }
+
 
     /**
      * Optional date-time which exclusively filters all authorizations created before this date-time.
@@ -235,6 +245,7 @@ public class ListIssuedCardAuthorizationsRequest {
         return this;
     }
 
+
     /**
      * Optional, comma-separated statuses of the authorization to filter results.
      */
@@ -244,7 +255,6 @@ public class ListIssuedCardAuthorizationsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -267,12 +277,8 @@ public class ListIssuedCardAuthorizationsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            skip,
-            count,
-            issuedCardID,
-            startDateTime,
-            endDateTime,
+            accountID, skip, count,
+            issuedCardID, startDateTime, endDateTime,
             statuses);
     }
     
@@ -287,26 +293,28 @@ public class ListIssuedCardAuthorizationsRequest {
                 "endDateTime", endDateTime,
                 "statuses", statuses);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private Optional<String> issuedCardID = Optional.empty();
- 
+
         private Optional<OffsetDateTime> startDateTime = Optional.empty();
- 
+
         private Optional<OffsetDateTime> endDateTime = Optional.empty();
- 
+
         private Optional<? extends List<IssuingAuthorizationStatus>> statuses = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The Moov business account for which cards have been issued.
@@ -316,6 +324,7 @@ public class ListIssuedCardAuthorizationsRequest {
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -329,6 +338,7 @@ public class ListIssuedCardAuthorizationsRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -340,6 +350,7 @@ public class ListIssuedCardAuthorizationsRequest {
             this.count = count;
             return this;
         }
+
 
         /**
          * Optional ID of the issued card to filter results.
@@ -359,6 +370,7 @@ public class ListIssuedCardAuthorizationsRequest {
             return this;
         }
 
+
         /**
          * Optional date-time which inclusively filters all authorizations created after this date-time.
          */
@@ -376,6 +388,7 @@ public class ListIssuedCardAuthorizationsRequest {
             this.startDateTime = startDateTime;
             return this;
         }
+
 
         /**
          * Optional date-time which exclusively filters all authorizations created before this date-time.
@@ -395,6 +408,7 @@ public class ListIssuedCardAuthorizationsRequest {
             return this;
         }
 
+
         /**
          * Optional, comma-separated statuses of the authorization to filter results.
          */
@@ -412,16 +426,14 @@ public class ListIssuedCardAuthorizationsRequest {
             this.statuses = statuses;
             return this;
         }
-        
+
         public ListIssuedCardAuthorizationsRequest build() {
+
             return new ListIssuedCardAuthorizationsRequest(
-                accountID,
-                skip,
-                count,
-                issuedCardID,
-                startDateTime,
-                endDateTime,
+                accountID, skip, count,
+                issuedCardID, startDateTime, endDateTime,
                 statuses);
         }
+
     }
 }

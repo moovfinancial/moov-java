@@ -28,7 +28,7 @@ public class GetEnrichmentAddressRequestBuilder {
     public GetEnrichmentAddressResponse call() throws Exception {
         
         RequestOperation<GetEnrichmentAddressRequest, GetEnrichmentAddressResponse> operation
-              = new GetEnrichmentAddressOperation( sdkConfiguration);
+              = new GetEnrichmentAddressOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

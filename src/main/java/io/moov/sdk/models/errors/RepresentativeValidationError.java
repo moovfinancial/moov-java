@@ -12,6 +12,7 @@ import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 
+
 @SuppressWarnings("serial")
 public class RepresentativeValidationError extends RuntimeException {
 
@@ -31,9 +32,10 @@ public class RepresentativeValidationError extends RuntimeException {
         return error;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RepresentativeValidationError withError(Error error) {
         Utils.checkNotNull(error, "error");
@@ -41,7 +43,6 @@ public class RepresentativeValidationError extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -66,25 +67,29 @@ public class RepresentativeValidationError extends RuntimeException {
         return Utils.toString(RepresentativeValidationError.class,
                 "error", error);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Error error;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder error(Error error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
-        
+
         public RepresentativeValidationError build() {
+
             return new RepresentativeValidationError(
                 error);
         }
+
     }
 }
 

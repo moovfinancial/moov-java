@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CreateBusinessErrorTaxID {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -37,9 +38,10 @@ public class CreateBusinessErrorTaxID {
         return (Optional<CreateBusinessErrorEin>) ein;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateBusinessErrorTaxID withEin(CreateBusinessErrorEin ein) {
         Utils.checkNotNull(ein, "ein");
@@ -47,13 +49,13 @@ public class CreateBusinessErrorTaxID {
         return this;
     }
 
+
     public CreateBusinessErrorTaxID withEin(Optional<? extends CreateBusinessErrorEin> ein) {
         Utils.checkNotNull(ein, "ein");
         this.ein = ein;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -78,14 +80,16 @@ public class CreateBusinessErrorTaxID {
         return Utils.toString(CreateBusinessErrorTaxID.class,
                 "ein", ein);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CreateBusinessErrorEin> ein = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ein(CreateBusinessErrorEin ein) {
             Utils.checkNotNull(ein, "ein");
@@ -98,10 +102,12 @@ public class CreateBusinessErrorTaxID {
             this.ein = ein;
             return this;
         }
-        
+
         public CreateBusinessErrorTaxID build() {
+
             return new CreateBusinessErrorTaxID(
                 ein);
         }
+
     }
 }

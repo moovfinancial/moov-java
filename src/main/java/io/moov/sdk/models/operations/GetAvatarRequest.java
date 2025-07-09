@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GetAvatarRequest {
 
+public class GetAvatarRequest {
     /**
      * Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
      */
@@ -33,9 +33,10 @@ public class GetAvatarRequest {
         return uniqueID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
@@ -46,7 +47,6 @@ public class GetAvatarRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class GetAvatarRequest {
         return Utils.toString(GetAvatarRequest.class,
                 "uniqueID", uniqueID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String uniqueID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
@@ -88,10 +90,12 @@ public class GetAvatarRequest {
             this.uniqueID = uniqueID;
             return this;
         }
-        
+
         public GetAvatarRequest build() {
+
             return new GetAvatarRequest(
                 uniqueID);
         }
+
     }
 }

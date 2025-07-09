@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataBankAccountDeleted {
 
     @JsonProperty("bankAccountID")
     private String bankAccountID;
+
 
     @JsonProperty("accountID")
     private String accountID;
@@ -38,9 +40,10 @@ public class WebhookDataBankAccountDeleted {
         return accountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataBankAccountDeleted withBankAccountID(String bankAccountID) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
@@ -54,7 +57,6 @@ public class WebhookDataBankAccountDeleted {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class WebhookDataBankAccountDeleted {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            bankAccountID,
-            accountID);
+            bankAccountID, accountID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class WebhookDataBankAccountDeleted {
                 "bankAccountID", bankAccountID,
                 "accountID", accountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String bankAccountID;
- 
+
         private String accountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
@@ -99,16 +102,18 @@ public class WebhookDataBankAccountDeleted {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
-        
+
         public WebhookDataBankAccountDeleted build() {
+
             return new WebhookDataBankAccountDeleted(
-                bankAccountID,
-                accountID);
+                bankAccountID, accountID);
         }
+
     }
 }

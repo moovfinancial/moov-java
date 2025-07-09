@@ -11,16 +11,20 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CardVolumeDistribution {
 
     @JsonProperty("ecommercePercentage")
     private int ecommercePercentage;
 
+
     @JsonProperty("cardPresentPercentage")
     private int cardPresentPercentage;
 
+
     @JsonProperty("mailOrPhonePercentage")
     private int mailOrPhonePercentage;
+
 
     @JsonProperty("debtRepaymentPercentage")
     private int debtRepaymentPercentage;
@@ -61,9 +65,10 @@ public class CardVolumeDistribution {
         return debtRepaymentPercentage;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardVolumeDistribution withEcommercePercentage(int ecommercePercentage) {
         Utils.checkNotNull(ecommercePercentage, "ecommercePercentage");
@@ -89,7 +94,6 @@ public class CardVolumeDistribution {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -109,9 +113,7 @@ public class CardVolumeDistribution {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ecommercePercentage,
-            cardPresentPercentage,
-            mailOrPhonePercentage,
+            ecommercePercentage, cardPresentPercentage, mailOrPhonePercentage,
             debtRepaymentPercentage);
     }
     
@@ -123,20 +125,22 @@ public class CardVolumeDistribution {
                 "mailOrPhonePercentage", mailOrPhonePercentage,
                 "debtRepaymentPercentage", debtRepaymentPercentage);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer ecommercePercentage;
- 
+
         private Integer cardPresentPercentage;
- 
+
         private Integer mailOrPhonePercentage;
- 
+
         private Integer debtRepaymentPercentage;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ecommercePercentage(int ecommercePercentage) {
             Utils.checkNotNull(ecommercePercentage, "ecommercePercentage");
@@ -144,11 +148,13 @@ public class CardVolumeDistribution {
             return this;
         }
 
+
         public Builder cardPresentPercentage(int cardPresentPercentage) {
             Utils.checkNotNull(cardPresentPercentage, "cardPresentPercentage");
             this.cardPresentPercentage = cardPresentPercentage;
             return this;
         }
+
 
         public Builder mailOrPhonePercentage(int mailOrPhonePercentage) {
             Utils.checkNotNull(mailOrPhonePercentage, "mailOrPhonePercentage");
@@ -156,18 +162,19 @@ public class CardVolumeDistribution {
             return this;
         }
 
+
         public Builder debtRepaymentPercentage(int debtRepaymentPercentage) {
             Utils.checkNotNull(debtRepaymentPercentage, "debtRepaymentPercentage");
             this.debtRepaymentPercentage = debtRepaymentPercentage;
             return this;
         }
-        
+
         public CardVolumeDistribution build() {
+
             return new CardVolumeDistribution(
-                ecommercePercentage,
-                cardPresentPercentage,
-                mailOrPhonePercentage,
+                ecommercePercentage, cardPresentPercentage, mailOrPhonePercentage,
                 debtRepaymentPercentage);
         }
+
     }
 }

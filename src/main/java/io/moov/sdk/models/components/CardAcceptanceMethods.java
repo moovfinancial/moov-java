@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Describes the distribution of card transactions by payment method.
  */
 public class CardAcceptanceMethods {
-
     /**
      * Percentage of card transactions that are in-person payments. Minimum value is 0, maximum is 100.
      */
@@ -83,9 +82,10 @@ public class CardAcceptanceMethods {
         return onlinePercentage;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Percentage of card transactions that are in-person payments. Minimum value is 0, maximum is 100.
@@ -95,6 +95,7 @@ public class CardAcceptanceMethods {
         this.inPersonPercentage = Optional.ofNullable(inPersonPercentage);
         return this;
     }
+
 
     /**
      * Percentage of card transactions that are in-person payments. Minimum value is 0, maximum is 100.
@@ -114,6 +115,7 @@ public class CardAcceptanceMethods {
         return this;
     }
 
+
     /**
      * Percentage of card transactions that are mail or phone payments. Minimum value is 0, maximum is 100.
      */
@@ -132,6 +134,7 @@ public class CardAcceptanceMethods {
         return this;
     }
 
+
     /**
      * Percentage of card transactions that are online payments. Minimum value is 0, maximum is 100.
      */
@@ -141,7 +144,6 @@ public class CardAcceptanceMethods {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -160,9 +162,7 @@ public class CardAcceptanceMethods {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            inPersonPercentage,
-            mailOrPhonePercentage,
-            onlinePercentage);
+            inPersonPercentage, mailOrPhonePercentage, onlinePercentage);
     }
     
     @Override
@@ -172,18 +172,20 @@ public class CardAcceptanceMethods {
                 "mailOrPhonePercentage", mailOrPhonePercentage,
                 "onlinePercentage", onlinePercentage);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> inPersonPercentage = Optional.empty();
- 
+
         private Optional<Integer> mailOrPhonePercentage = Optional.empty();
- 
+
         private Optional<Integer> onlinePercentage = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Percentage of card transactions that are in-person payments. Minimum value is 0, maximum is 100.
@@ -203,6 +205,7 @@ public class CardAcceptanceMethods {
             return this;
         }
 
+
         /**
          * Percentage of card transactions that are mail or phone payments. Minimum value is 0, maximum is 100.
          */
@@ -221,6 +224,7 @@ public class CardAcceptanceMethods {
             return this;
         }
 
+
         /**
          * Percentage of card transactions that are online payments. Minimum value is 0, maximum is 100.
          */
@@ -238,12 +242,12 @@ public class CardAcceptanceMethods {
             this.onlinePercentage = onlinePercentage;
             return this;
         }
-        
+
         public CardAcceptanceMethods build() {
+
             return new CardAcceptanceMethods(
-                inPersonPercentage,
-                mailOrPhonePercentage,
-                onlinePercentage);
+                inPersonPercentage, mailOrPhonePercentage, onlinePercentage);
         }
+
     }
 }

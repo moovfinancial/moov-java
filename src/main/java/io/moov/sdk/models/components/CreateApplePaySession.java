@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class CreateApplePaySession {
 
+public class CreateApplePaySession {
     /**
      * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include "https".
      */
@@ -50,9 +50,10 @@ public class CreateApplePaySession {
         return displayName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include "https".
@@ -72,7 +73,6 @@ public class CreateApplePaySession {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,8 +90,7 @@ public class CreateApplePaySession {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            domain,
-            displayName);
+            domain, displayName);
     }
     
     @Override
@@ -100,16 +99,18 @@ public class CreateApplePaySession {
                 "domain", domain,
                 "displayName", displayName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String domain;
- 
+
         private String displayName;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include "https".
@@ -120,6 +121,7 @@ public class CreateApplePaySession {
             return this;
         }
 
+
         /**
          * A UTF-8 string to display in the Buy button.
          */
@@ -128,11 +130,12 @@ public class CreateApplePaySession {
             this.displayName = displayName;
             return this;
         }
-        
+
         public CreateApplePaySession build() {
+
             return new CreateApplePaySession(
-                domain,
-                displayName);
+                domain, displayName);
         }
+
     }
 }

@@ -21,7 +21,6 @@ import java.util.Optional;
  * <p>Request to create an onboarding invite.
  */
 public class OnboardingInviteRequest {
-
     /**
      * Optional URL to redirect the user to after they complete the onboarding process.
      */
@@ -56,6 +55,7 @@ public class OnboardingInviteRequest {
     @JsonProperty("feePlanCodes")
     private List<String> feePlanCodes;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("prefill")
     private Optional<? extends CreateAccount> prefill;
@@ -86,7 +86,8 @@ public class OnboardingInviteRequest {
             List<ApplicationScope> scopes,
             List<CapabilityID> capabilities,
             List<String> feePlanCodes) {
-        this(Optional.empty(), Optional.empty(), scopes, capabilities, feePlanCodes, Optional.empty());
+        this(Optional.empty(), Optional.empty(), scopes,
+            capabilities, feePlanCodes, Optional.empty());
     }
 
     /**
@@ -137,9 +138,10 @@ public class OnboardingInviteRequest {
         return (Optional<CreateAccount>) prefill;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Optional URL to redirect the user to after they complete the onboarding process.
@@ -149,6 +151,7 @@ public class OnboardingInviteRequest {
         this.returnURL = Optional.ofNullable(returnURL);
         return this;
     }
+
 
     /**
      * Optional URL to redirect the user to after they complete the onboarding process.
@@ -167,6 +170,7 @@ public class OnboardingInviteRequest {
         this.termsOfServiceURL = Optional.ofNullable(termsOfServiceURL);
         return this;
     }
+
 
     /**
      * Optional URL to your organization's terms of service.
@@ -212,13 +216,13 @@ public class OnboardingInviteRequest {
         return this;
     }
 
+
     public OnboardingInviteRequest withPrefill(Optional<? extends CreateAccount> prefill) {
         Utils.checkNotNull(prefill, "prefill");
         this.prefill = prefill;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -240,12 +244,8 @@ public class OnboardingInviteRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            returnURL,
-            termsOfServiceURL,
-            scopes,
-            capabilities,
-            feePlanCodes,
-            prefill);
+            returnURL, termsOfServiceURL, scopes,
+            capabilities, feePlanCodes, prefill);
     }
     
     @Override
@@ -258,24 +258,26 @@ public class OnboardingInviteRequest {
                 "feePlanCodes", feePlanCodes,
                 "prefill", prefill);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> returnURL = Optional.empty();
- 
+
         private Optional<String> termsOfServiceURL = Optional.empty();
- 
+
         private List<ApplicationScope> scopes;
- 
+
         private List<CapabilityID> capabilities;
- 
+
         private List<String> feePlanCodes;
- 
+
         private Optional<? extends CreateAccount> prefill = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Optional URL to redirect the user to after they complete the onboarding process.
@@ -295,6 +297,7 @@ public class OnboardingInviteRequest {
             return this;
         }
 
+
         /**
          * Optional URL to your organization's terms of service.
          */
@@ -313,6 +316,7 @@ public class OnboardingInviteRequest {
             return this;
         }
 
+
         /**
          * List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
          *   account. These values are used to determine what can be done with the account onboarded.
@@ -322,6 +326,7 @@ public class OnboardingInviteRequest {
             this.scopes = scopes;
             return this;
         }
+
 
         /**
          * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
@@ -333,6 +338,7 @@ public class OnboardingInviteRequest {
             return this;
         }
 
+
         /**
          * List of fee plan codes to assign the account created by the invitee.
          */
@@ -341,6 +347,7 @@ public class OnboardingInviteRequest {
             this.feePlanCodes = feePlanCodes;
             return this;
         }
+
 
         public Builder prefill(CreateAccount prefill) {
             Utils.checkNotNull(prefill, "prefill");
@@ -353,15 +360,13 @@ public class OnboardingInviteRequest {
             this.prefill = prefill;
             return this;
         }
-        
+
         public OnboardingInviteRequest build() {
+
             return new OnboardingInviteRequest(
-                returnURL,
-                termsOfServiceURL,
-                scopes,
-                capabilities,
-                feePlanCodes,
-                prefill);
+                returnURL, termsOfServiceURL, scopes,
+                capabilities, feePlanCodes, prefill);
         }
+
     }
 }

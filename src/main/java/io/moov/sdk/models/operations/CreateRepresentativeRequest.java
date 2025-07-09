@@ -11,13 +11,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class CreateRepresentativeRequest {
 
+public class CreateRepresentativeRequest {
     /**
      * ID of the account.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreateRepresentative createRepresentative;
@@ -45,9 +46,10 @@ public class CreateRepresentativeRequest {
         return createRepresentative;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the account.
@@ -64,7 +66,6 @@ public class CreateRepresentativeRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,8 +83,7 @@ public class CreateRepresentativeRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            createRepresentative);
+            accountID, createRepresentative);
     }
     
     @Override
@@ -92,16 +92,18 @@ public class CreateRepresentativeRequest {
                 "accountID", accountID,
                 "createRepresentative", createRepresentative);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private CreateRepresentative createRepresentative;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the account.
@@ -112,16 +114,18 @@ public class CreateRepresentativeRequest {
             return this;
         }
 
+
         public Builder createRepresentative(CreateRepresentative createRepresentative) {
             Utils.checkNotNull(createRepresentative, "createRepresentative");
             this.createRepresentative = createRepresentative;
             return this;
         }
-        
+
         public CreateRepresentativeRequest build() {
+
             return new CreateRepresentativeRequest(
-                accountID,
-                createRepresentative);
+                accountID, createRepresentative);
         }
+
     }
 }

@@ -28,7 +28,7 @@ public class GenerateEndToEndKeyRequestBuilder {
     public GenerateEndToEndKeyResponse call() throws Exception {
         
         RequestOperation<GenerateEndToEndKeyRequest, GenerateEndToEndKeyResponse> operation
-              = new GenerateEndToEndKeyOperation( sdkConfiguration);
+              = new GenerateEndToEndKeyOperation(sdkConfiguration);
         GenerateEndToEndKeyRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

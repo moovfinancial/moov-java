@@ -20,31 +20,38 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class Error {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<? extends IndividualNameError> name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumberError> phone;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends AddressError> address;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("birthDate")
     private Optional<? extends BirthDateValidationError> birthDate;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("governmentID")
     private Optional<? extends GovernmentIDError> governmentID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("responsibilities")
@@ -76,7 +83,9 @@ public class Error {
     }
     
     public Error() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -120,15 +129,17 @@ public class Error {
         return (Optional<RepresentativeResponsibilitiesError>) responsibilities;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Error withName(IndividualNameError name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     public Error withName(Optional<? extends IndividualNameError> name) {
         Utils.checkNotNull(name, "name");
@@ -142,6 +153,7 @@ public class Error {
         return this;
     }
 
+
     public Error withPhone(Optional<? extends PhoneNumberError> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
@@ -153,6 +165,7 @@ public class Error {
         this.email = Optional.ofNullable(email);
         return this;
     }
+
 
     public Error withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
@@ -166,6 +179,7 @@ public class Error {
         return this;
     }
 
+
     public Error withAddress(Optional<? extends AddressError> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -177,6 +191,7 @@ public class Error {
         this.birthDate = Optional.ofNullable(birthDate);
         return this;
     }
+
 
     public Error withBirthDate(Optional<? extends BirthDateValidationError> birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
@@ -190,6 +205,7 @@ public class Error {
         return this;
     }
 
+
     public Error withGovernmentID(Optional<? extends GovernmentIDError> governmentID) {
         Utils.checkNotNull(governmentID, "governmentID");
         this.governmentID = governmentID;
@@ -202,13 +218,13 @@ public class Error {
         return this;
     }
 
+
     public Error withResponsibilities(Optional<? extends RepresentativeResponsibilitiesError> responsibilities) {
         Utils.checkNotNull(responsibilities, "responsibilities");
         this.responsibilities = responsibilities;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -231,12 +247,8 @@ public class Error {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            phone,
-            email,
-            address,
-            birthDate,
-            governmentID,
+            name, phone, email,
+            address, birthDate, governmentID,
             responsibilities);
     }
     
@@ -251,26 +263,28 @@ public class Error {
                 "governmentID", governmentID,
                 "responsibilities", responsibilities);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends IndividualNameError> name = Optional.empty();
- 
+
         private Optional<? extends PhoneNumberError> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends AddressError> address = Optional.empty();
- 
+
         private Optional<? extends BirthDateValidationError> birthDate = Optional.empty();
- 
+
         private Optional<? extends GovernmentIDError> governmentID = Optional.empty();
- 
+
         private Optional<? extends RepresentativeResponsibilitiesError> responsibilities = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(IndividualNameError name) {
             Utils.checkNotNull(name, "name");
@@ -284,6 +298,7 @@ public class Error {
             return this;
         }
 
+
         public Builder phone(PhoneNumberError phone) {
             Utils.checkNotNull(phone, "phone");
             this.phone = Optional.ofNullable(phone);
@@ -295,6 +310,7 @@ public class Error {
             this.phone = phone;
             return this;
         }
+
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -308,6 +324,7 @@ public class Error {
             return this;
         }
 
+
         public Builder address(AddressError address) {
             Utils.checkNotNull(address, "address");
             this.address = Optional.ofNullable(address);
@@ -319,6 +336,7 @@ public class Error {
             this.address = address;
             return this;
         }
+
 
         public Builder birthDate(BirthDateValidationError birthDate) {
             Utils.checkNotNull(birthDate, "birthDate");
@@ -332,6 +350,7 @@ public class Error {
             return this;
         }
 
+
         public Builder governmentID(GovernmentIDError governmentID) {
             Utils.checkNotNull(governmentID, "governmentID");
             this.governmentID = Optional.ofNullable(governmentID);
@@ -344,6 +363,7 @@ public class Error {
             return this;
         }
 
+
         public Builder responsibilities(RepresentativeResponsibilitiesError responsibilities) {
             Utils.checkNotNull(responsibilities, "responsibilities");
             this.responsibilities = Optional.ofNullable(responsibilities);
@@ -355,16 +375,14 @@ public class Error {
             this.responsibilities = responsibilities;
             return this;
         }
-        
+
         public Error build() {
+
             return new Error(
-                name,
-                phone,
-                email,
-                address,
-                birthDate,
-                governmentID,
+                name, phone, email,
+                address, birthDate, governmentID,
                 responsibilities);
         }
+
     }
 }

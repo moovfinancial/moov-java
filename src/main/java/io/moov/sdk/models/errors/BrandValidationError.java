@@ -16,6 +16,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class BrandValidationError extends RuntimeException {
 
@@ -41,9 +42,10 @@ public class BrandValidationError extends RuntimeException {
         return (Optional<ColorsValidationError>) colors;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BrandValidationError withColors(ColorsValidationError colors) {
         Utils.checkNotNull(colors, "colors");
@@ -51,13 +53,13 @@ public class BrandValidationError extends RuntimeException {
         return this;
     }
 
+
     public BrandValidationError withColors(Optional<? extends ColorsValidationError> colors) {
         Utils.checkNotNull(colors, "colors");
         this.colors = colors;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,14 +84,16 @@ public class BrandValidationError extends RuntimeException {
         return Utils.toString(BrandValidationError.class,
                 "colors", colors);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends ColorsValidationError> colors = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder colors(ColorsValidationError colors) {
             Utils.checkNotNull(colors, "colors");
@@ -102,11 +106,13 @@ public class BrandValidationError extends RuntimeException {
             this.colors = colors;
             return this;
         }
-        
+
         public BrandValidationError build() {
+
             return new BrandValidationError(
                 colors);
         }
+
     }
 }
 

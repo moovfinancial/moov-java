@@ -15,16 +15,18 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
-public class ListIssuedCardsRequest {
 
+public class ListIssuedCardsRequest {
     /**
      * The Moov business account for which the cards have been issued.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
@@ -53,7 +55,8 @@ public class ListIssuedCardsRequest {
     
     public ListIssuedCardsRequest(
             String accountID) {
-        this(accountID, Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -83,9 +86,10 @@ public class ListIssuedCardsRequest {
         return (Optional<List<IssuedCardState>>) states;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The Moov business account for which the cards have been issued.
@@ -102,6 +106,7 @@ public class ListIssuedCardsRequest {
         return this;
     }
 
+
     public ListIssuedCardsRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -113,6 +118,7 @@ public class ListIssuedCardsRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public ListIssuedCardsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
@@ -129,6 +135,7 @@ public class ListIssuedCardsRequest {
         return this;
     }
 
+
     /**
      * Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
      */
@@ -138,7 +145,6 @@ public class ListIssuedCardsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -158,9 +164,7 @@ public class ListIssuedCardsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            skip,
-            count,
+            accountID, skip, count,
             states);
     }
     
@@ -172,20 +176,22 @@ public class ListIssuedCardsRequest {
                 "count", count,
                 "states", states);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private Optional<? extends List<IssuedCardState>> states = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The Moov business account for which the cards have been issued.
@@ -195,6 +201,7 @@ public class ListIssuedCardsRequest {
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -208,6 +215,7 @@ public class ListIssuedCardsRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -219,6 +227,7 @@ public class ListIssuedCardsRequest {
             this.count = count;
             return this;
         }
+
 
         /**
          * Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
@@ -237,13 +246,13 @@ public class ListIssuedCardsRequest {
             this.states = states;
             return this;
         }
-        
+
         public ListIssuedCardsRequest build() {
+
             return new ListIssuedCardsRequest(
-                accountID,
-                skip,
-                count,
+                accountID, skip, count,
                 states);
         }
+
     }
 }

@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class CreateEvidenceFileMultiPart {
 
+public class CreateEvidenceFileMultiPart {
     /**
      * The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
      * 
@@ -22,6 +22,7 @@ public class CreateEvidenceFileMultiPart {
      */
     @SpeakeasyMetadata("multipartForm:file,name=file")
     private File file;
+
 
     @SpeakeasyMetadata("multipartForm:name=evidenceType")
     private EvidenceType evidenceType;
@@ -54,9 +55,10 @@ public class CreateEvidenceFileMultiPart {
         return evidenceType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
@@ -78,7 +80,6 @@ public class CreateEvidenceFileMultiPart {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +97,7 @@ public class CreateEvidenceFileMultiPart {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            file,
-            evidenceType);
+            file, evidenceType);
     }
     
     @Override
@@ -106,16 +106,18 @@ public class CreateEvidenceFileMultiPart {
                 "file", file,
                 "evidenceType", evidenceType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private File file;
- 
+
         private EvidenceType evidenceType;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
@@ -131,16 +133,18 @@ public class CreateEvidenceFileMultiPart {
             return this;
         }
 
+
         public Builder evidenceType(EvidenceType evidenceType) {
             Utils.checkNotNull(evidenceType, "evidenceType");
             this.evidenceType = evidenceType;
             return this;
         }
-        
+
         public CreateEvidenceFileMultiPart build() {
+
             return new CreateEvidenceFileMultiPart(
-                file,
-                evidenceType);
+                file, evidenceType);
         }
+
     }
 }

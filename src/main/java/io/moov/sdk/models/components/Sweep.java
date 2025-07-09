@@ -16,10 +16,12 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 public class Sweep {
 
     @JsonProperty("sweepID")
     private String sweepID;
+
 
     @JsonProperty("status")
     private SweepStatus status;
@@ -69,6 +71,7 @@ public class Sweep {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pullPaymentMethodID")
     private Optional<String> pullPaymentMethodID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transferID")
@@ -144,7 +147,11 @@ public class Sweep {
             String accruedAmount,
             String currency,
             OffsetDateTime accrualStartedOn) {
-        this(sweepID, status, accruedAmount, Optional.empty(), currency, accrualStartedOn, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(sweepID, status, accruedAmount,
+            Optional.empty(), currency, accrualStartedOn,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -243,9 +250,10 @@ public class Sweep {
         return (Optional<List<SweepSubtotal>>) subtotals;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Sweep withSweepID(String sweepID) {
         Utils.checkNotNull(sweepID, "sweepID");
@@ -276,6 +284,7 @@ public class Sweep {
         this.residualBalance = Optional.ofNullable(residualBalance);
         return this;
     }
+
 
     /**
      * Amount remaining in the wallet after the sweep transfer completes.
@@ -313,6 +322,7 @@ public class Sweep {
         return this;
     }
 
+
     /**
      * The date-time the sweep stopped accruing transactions.
      */
@@ -330,6 +340,7 @@ public class Sweep {
         this.pushPaymentMethodID = Optional.ofNullable(pushPaymentMethodID);
         return this;
     }
+
 
     /**
      * ID of the payment method.
@@ -349,6 +360,7 @@ public class Sweep {
         return this;
     }
 
+
     /**
      * ID of the payment method.
      */
@@ -364,6 +376,7 @@ public class Sweep {
         return this;
     }
 
+
     public Sweep withTransferID(Optional<String> transferID) {
         Utils.checkNotNull(transferID, "transferID");
         this.transferID = transferID;
@@ -378,6 +391,7 @@ public class Sweep {
         this.transferAmount = Optional.ofNullable(transferAmount);
         return this;
     }
+
 
     /**
      * Amount that is transferred.
@@ -397,6 +411,7 @@ public class Sweep {
         return this;
     }
 
+
     /**
      * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
      */
@@ -415,6 +430,7 @@ public class Sweep {
         return this;
     }
 
+
     /**
      * The subtotal of each transaction type contributing to the sweep's accrued amount.
      */
@@ -424,7 +440,6 @@ public class Sweep {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -453,18 +468,10 @@ public class Sweep {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            sweepID,
-            status,
-            accruedAmount,
-            residualBalance,
-            currency,
-            accrualStartedOn,
-            accrualEndedOn,
-            pushPaymentMethodID,
-            pullPaymentMethodID,
-            transferID,
-            transferAmount,
-            statementDescriptor,
+            sweepID, status, accruedAmount,
+            residualBalance, currency, accrualStartedOn,
+            accrualEndedOn, pushPaymentMethodID, pullPaymentMethodID,
+            transferID, transferAmount, statementDescriptor,
             subtotals);
     }
     
@@ -485,38 +492,40 @@ public class Sweep {
                 "statementDescriptor", statementDescriptor,
                 "subtotals", subtotals);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String sweepID;
- 
+
         private SweepStatus status;
- 
+
         private String accruedAmount;
- 
+
         private Optional<String> residualBalance = Optional.empty();
- 
+
         private String currency;
- 
+
         private OffsetDateTime accrualStartedOn;
- 
+
         private Optional<OffsetDateTime> accrualEndedOn = Optional.empty();
- 
+
         private Optional<String> pushPaymentMethodID = Optional.empty();
- 
+
         private Optional<String> pullPaymentMethodID = Optional.empty();
- 
+
         private Optional<String> transferID = Optional.empty();
- 
+
         private Optional<String> transferAmount = Optional.empty();
- 
+
         private Optional<String> statementDescriptor = Optional.empty();
- 
+
         private Optional<? extends List<SweepSubtotal>> subtotals = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder sweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
@@ -524,11 +533,13 @@ public class Sweep {
             return this;
         }
 
+
         public Builder status(SweepStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         /**
          * The total net amount of wallet transactions accrued in the sweep.
@@ -538,6 +549,7 @@ public class Sweep {
             this.accruedAmount = accruedAmount;
             return this;
         }
+
 
         /**
          * Amount remaining in the wallet after the sweep transfer completes.
@@ -557,6 +569,7 @@ public class Sweep {
             return this;
         }
 
+
         /**
          * A 3-letter ISO 4217 currency code.
          */
@@ -566,6 +579,7 @@ public class Sweep {
             return this;
         }
 
+
         /**
          * The date-time the sweep began accruing transactions.
          */
@@ -574,6 +588,7 @@ public class Sweep {
             this.accrualStartedOn = accrualStartedOn;
             return this;
         }
+
 
         /**
          * The date-time the sweep stopped accruing transactions.
@@ -593,6 +608,7 @@ public class Sweep {
             return this;
         }
 
+
         /**
          * ID of the payment method.
          */
@@ -610,6 +626,7 @@ public class Sweep {
             this.pushPaymentMethodID = pushPaymentMethodID;
             return this;
         }
+
 
         /**
          * ID of the payment method.
@@ -629,6 +646,7 @@ public class Sweep {
             return this;
         }
 
+
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = Optional.ofNullable(transferID);
@@ -640,6 +658,7 @@ public class Sweep {
             this.transferID = transferID;
             return this;
         }
+
 
         /**
          * Amount that is transferred.
@@ -659,6 +678,7 @@ public class Sweep {
             return this;
         }
 
+
         /**
          * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
          */
@@ -677,6 +697,7 @@ public class Sweep {
             return this;
         }
 
+
         /**
          * The subtotal of each transaction type contributing to the sweep's accrued amount.
          */
@@ -694,22 +715,16 @@ public class Sweep {
             this.subtotals = subtotals;
             return this;
         }
-        
+
         public Sweep build() {
+
             return new Sweep(
-                sweepID,
-                status,
-                accruedAmount,
-                residualBalance,
-                currency,
-                accrualStartedOn,
-                accrualEndedOn,
-                pushPaymentMethodID,
-                pullPaymentMethodID,
-                transferID,
-                transferAmount,
-                statementDescriptor,
+                sweepID, status, accruedAmount,
+                residualBalance, currency, accrualStartedOn,
+                accrualEndedOn, pushPaymentMethodID, pullPaymentMethodID,
+                transferID, transferAmount, statementDescriptor,
                 subtotals);
         }
+
     }
 }

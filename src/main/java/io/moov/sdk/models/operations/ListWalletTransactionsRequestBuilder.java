@@ -28,7 +28,7 @@ public class ListWalletTransactionsRequestBuilder {
     public ListWalletTransactionsResponse call() throws Exception {
         
         RequestOperation<ListWalletTransactionsRequest, ListWalletTransactionsResponse> operation
-              = new ListWalletTransactionsOperation( sdkConfiguration);
+              = new ListWalletTransactionsOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

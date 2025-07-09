@@ -14,13 +14,16 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
+
 public class IssuedCardTransaction {
 
     @JsonProperty("cardTransactionID")
     private String cardTransactionID;
 
+
     @JsonProperty("issuedCardID")
     private String issuedCardID;
+
 
     @JsonProperty("fundingWalletID")
     private String fundingWalletID;
@@ -31,15 +34,19 @@ public class IssuedCardTransaction {
     @JsonProperty("amount")
     private String amount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("authorizationID")
     private Optional<String> authorizationID;
 
+
     @JsonProperty("authorizedOn")
     private OffsetDateTime authorizedOn;
 
+
     @JsonProperty("merchantData")
     private IssuingMerchantData merchantData;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -80,7 +87,9 @@ public class IssuedCardTransaction {
             OffsetDateTime authorizedOn,
             IssuingMerchantData merchantData,
             OffsetDateTime createdOn) {
-        this(cardTransactionID, issuedCardID, fundingWalletID, amount, Optional.empty(), authorizedOn, merchantData, createdOn);
+        this(cardTransactionID, issuedCardID, fundingWalletID,
+            amount, Optional.empty(), authorizedOn,
+            merchantData, createdOn);
     }
 
     @JsonIgnore
@@ -126,9 +135,10 @@ public class IssuedCardTransaction {
         return createdOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public IssuedCardTransaction withCardTransactionID(String cardTransactionID) {
         Utils.checkNotNull(cardTransactionID, "cardTransactionID");
@@ -163,6 +173,7 @@ public class IssuedCardTransaction {
         return this;
     }
 
+
     public IssuedCardTransaction withAuthorizationID(Optional<String> authorizationID) {
         Utils.checkNotNull(authorizationID, "authorizationID");
         this.authorizationID = authorizationID;
@@ -187,7 +198,6 @@ public class IssuedCardTransaction {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -211,14 +221,9 @@ public class IssuedCardTransaction {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cardTransactionID,
-            issuedCardID,
-            fundingWalletID,
-            amount,
-            authorizationID,
-            authorizedOn,
-            merchantData,
-            createdOn);
+            cardTransactionID, issuedCardID, fundingWalletID,
+            amount, authorizationID, authorizedOn,
+            merchantData, createdOn);
     }
     
     @Override
@@ -233,28 +238,30 @@ public class IssuedCardTransaction {
                 "merchantData", merchantData,
                 "createdOn", createdOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String cardTransactionID;
- 
+
         private String issuedCardID;
- 
+
         private String fundingWalletID;
- 
+
         private String amount;
- 
+
         private Optional<String> authorizationID = Optional.empty();
- 
+
         private OffsetDateTime authorizedOn;
- 
+
         private IssuingMerchantData merchantData;
- 
+
         private OffsetDateTime createdOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder cardTransactionID(String cardTransactionID) {
             Utils.checkNotNull(cardTransactionID, "cardTransactionID");
@@ -262,17 +269,20 @@ public class IssuedCardTransaction {
             return this;
         }
 
+
         public Builder issuedCardID(String issuedCardID) {
             Utils.checkNotNull(issuedCardID, "issuedCardID");
             this.issuedCardID = issuedCardID;
             return this;
         }
 
+
         public Builder fundingWalletID(String fundingWalletID) {
             Utils.checkNotNull(fundingWalletID, "fundingWalletID");
             this.fundingWalletID = fundingWalletID;
             return this;
         }
+
 
         /**
          * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
@@ -282,6 +292,7 @@ public class IssuedCardTransaction {
             this.amount = amount;
             return this;
         }
+
 
         public Builder authorizationID(String authorizationID) {
             Utils.checkNotNull(authorizationID, "authorizationID");
@@ -295,11 +306,13 @@ public class IssuedCardTransaction {
             return this;
         }
 
+
         public Builder authorizedOn(OffsetDateTime authorizedOn) {
             Utils.checkNotNull(authorizedOn, "authorizedOn");
             this.authorizedOn = authorizedOn;
             return this;
         }
+
 
         public Builder merchantData(IssuingMerchantData merchantData) {
             Utils.checkNotNull(merchantData, "merchantData");
@@ -307,22 +320,20 @@ public class IssuedCardTransaction {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
-        
+
         public IssuedCardTransaction build() {
+
             return new IssuedCardTransaction(
-                cardTransactionID,
-                issuedCardID,
-                fundingWalletID,
-                amount,
-                authorizationID,
-                authorizedOn,
-                merchantData,
-                createdOn);
+                cardTransactionID, issuedCardID, fundingWalletID,
+                amount, authorizationID, authorizedOn,
+                merchantData, createdOn);
         }
+
     }
 }

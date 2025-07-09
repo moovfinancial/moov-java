@@ -14,15 +14,18 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class SendFunds {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ach")
     private Optional<? extends SendFundsAch> ach;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushToCard")
     private Optional<? extends SendFundsPushToCard> pushToCard;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rtp")
@@ -63,15 +66,17 @@ public class SendFunds {
         return (Optional<SendFundsRtp>) rtp;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public SendFunds withAch(SendFundsAch ach) {
         Utils.checkNotNull(ach, "ach");
         this.ach = Optional.ofNullable(ach);
         return this;
     }
+
 
     public SendFunds withAch(Optional<? extends SendFundsAch> ach) {
         Utils.checkNotNull(ach, "ach");
@@ -85,6 +90,7 @@ public class SendFunds {
         return this;
     }
 
+
     public SendFunds withPushToCard(Optional<? extends SendFundsPushToCard> pushToCard) {
         Utils.checkNotNull(pushToCard, "pushToCard");
         this.pushToCard = pushToCard;
@@ -97,13 +103,13 @@ public class SendFunds {
         return this;
     }
 
+
     public SendFunds withRtp(Optional<? extends SendFundsRtp> rtp) {
         Utils.checkNotNull(rtp, "rtp");
         this.rtp = rtp;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -122,9 +128,7 @@ public class SendFunds {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ach,
-            pushToCard,
-            rtp);
+            ach, pushToCard, rtp);
     }
     
     @Override
@@ -134,18 +138,20 @@ public class SendFunds {
                 "pushToCard", pushToCard,
                 "rtp", rtp);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends SendFundsAch> ach = Optional.empty();
- 
+
         private Optional<? extends SendFundsPushToCard> pushToCard = Optional.empty();
- 
+
         private Optional<? extends SendFundsRtp> rtp = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ach(SendFundsAch ach) {
             Utils.checkNotNull(ach, "ach");
@@ -159,6 +165,7 @@ public class SendFunds {
             return this;
         }
 
+
         public Builder pushToCard(SendFundsPushToCard pushToCard) {
             Utils.checkNotNull(pushToCard, "pushToCard");
             this.pushToCard = Optional.ofNullable(pushToCard);
@@ -171,6 +178,7 @@ public class SendFunds {
             return this;
         }
 
+
         public Builder rtp(SendFundsRtp rtp) {
             Utils.checkNotNull(rtp, "rtp");
             this.rtp = Optional.ofNullable(rtp);
@@ -182,12 +190,12 @@ public class SendFunds {
             this.rtp = rtp;
             return this;
         }
-        
+
         public SendFunds build() {
+
             return new SendFunds(
-                ach,
-                pushToCard,
-                rtp);
+                ach, pushToCard, rtp);
         }
+
     }
 }

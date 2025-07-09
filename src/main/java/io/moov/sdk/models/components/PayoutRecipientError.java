@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class PayoutRecipientError {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class PayoutRecipientError {
         return email;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PayoutRecipientError withEmail(String email) {
         Utils.checkNotNull(email, "email");
@@ -45,13 +47,13 @@ public class PayoutRecipientError {
         return this;
     }
 
+
     public PayoutRecipientError withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class PayoutRecipientError {
         return Utils.toString(PayoutRecipientError.class,
                 "email", email);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> email = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -96,10 +100,12 @@ public class PayoutRecipientError {
             this.email = email;
             return this;
         }
-        
+
         public PayoutRecipientError build() {
+
             return new PayoutRecipientError(
                 email);
         }
+
     }
 }

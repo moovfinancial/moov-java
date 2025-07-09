@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class TransferDestination {
 
     @JsonProperty("paymentMethodID")
@@ -25,6 +26,7 @@ public class TransferDestination {
     @JsonProperty("paymentMethodType")
     private PaymentMethodType paymentMethodType;
 
+
     @JsonProperty("account")
     private TransferAccount account;
 
@@ -34,6 +36,7 @@ public class TransferDestination {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bankAccount")
     private Optional<? extends PaymentMethodsBankAccount> bankAccount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("wallet")
@@ -112,7 +115,10 @@ public class TransferDestination {
             String paymentMethodID,
             PaymentMethodType paymentMethodType,
             TransferAccount account) {
-        this(paymentMethodID, paymentMethodType, account, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(paymentMethodID, paymentMethodType, account,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -193,9 +199,10 @@ public class TransferDestination {
         return (Optional<RTPTransactionDetails>) rtpDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TransferDestination withPaymentMethodID(String paymentMethodID) {
         Utils.checkNotNull(paymentMethodID, "paymentMethodID");
@@ -227,6 +234,7 @@ public class TransferDestination {
         return this;
     }
 
+
     /**
      * A bank account as contained within a payment method.
      */
@@ -242,6 +250,7 @@ public class TransferDestination {
         return this;
     }
 
+
     public TransferDestination withWallet(Optional<? extends PaymentMethodsWallet> wallet) {
         Utils.checkNotNull(wallet, "wallet");
         this.wallet = wallet;
@@ -256,6 +265,7 @@ public class TransferDestination {
         this.card = Optional.ofNullable(card);
         return this;
     }
+
 
     /**
      * A card as contained within a payment method.
@@ -275,6 +285,7 @@ public class TransferDestination {
         return this;
     }
 
+
     /**
      * ACH specific details about the transaction.
      */
@@ -292,6 +303,7 @@ public class TransferDestination {
         this.applePay = Optional.ofNullable(applePay);
         return this;
     }
+
 
     /**
      * Describes an Apple Pay token on a Moov account.
@@ -311,6 +323,7 @@ public class TransferDestination {
         return this;
     }
 
+
     /**
      * Card-specific details about the transaction.
      */
@@ -329,6 +342,7 @@ public class TransferDestination {
         return this;
     }
 
+
     /**
      * RTP specific details about the transaction.
      */
@@ -338,7 +352,6 @@ public class TransferDestination {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -364,15 +377,9 @@ public class TransferDestination {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            paymentMethodType,
-            account,
-            bankAccount,
-            wallet,
-            card,
-            achDetails,
-            applePay,
-            cardDetails,
+            paymentMethodID, paymentMethodType, account,
+            bankAccount, wallet, card,
+            achDetails, applePay, cardDetails,
             rtpDetails);
     }
     
@@ -390,38 +397,41 @@ public class TransferDestination {
                 "cardDetails", cardDetails,
                 "rtpDetails", rtpDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private PaymentMethodType paymentMethodType;
- 
+
         private TransferAccount account;
- 
+
         private Optional<? extends PaymentMethodsBankAccount> bankAccount = Optional.empty();
- 
+
         private Optional<? extends PaymentMethodsWallet> wallet = Optional.empty();
- 
+
         private Optional<? extends PaymentMethodsCard> card = Optional.empty();
- 
+
         private Optional<? extends ACHTransactionDetails> achDetails = Optional.empty();
- 
+
         private Optional<? extends ApplePayResponse> applePay = Optional.empty();
- 
+
         private Optional<? extends CardTransactionDetails> cardDetails = Optional.empty();
- 
+
         private Optional<? extends RTPTransactionDetails> rtpDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder paymentMethodID(String paymentMethodID) {
             Utils.checkNotNull(paymentMethodID, "paymentMethodID");
             this.paymentMethodID = paymentMethodID;
             return this;
         }
+
 
         /**
          * The payment method type that represents a payment rail and directionality
@@ -432,11 +442,13 @@ public class TransferDestination {
             return this;
         }
 
+
         public Builder account(TransferAccount account) {
             Utils.checkNotNull(account, "account");
             this.account = account;
             return this;
         }
+
 
         /**
          * A bank account as contained within a payment method.
@@ -456,6 +468,7 @@ public class TransferDestination {
             return this;
         }
 
+
         public Builder wallet(PaymentMethodsWallet wallet) {
             Utils.checkNotNull(wallet, "wallet");
             this.wallet = Optional.ofNullable(wallet);
@@ -467,6 +480,7 @@ public class TransferDestination {
             this.wallet = wallet;
             return this;
         }
+
 
         /**
          * A card as contained within a payment method.
@@ -486,6 +500,7 @@ public class TransferDestination {
             return this;
         }
 
+
         /**
          * ACH specific details about the transaction.
          */
@@ -503,6 +518,7 @@ public class TransferDestination {
             this.achDetails = achDetails;
             return this;
         }
+
 
         /**
          * Describes an Apple Pay token on a Moov account.
@@ -522,6 +538,7 @@ public class TransferDestination {
             return this;
         }
 
+
         /**
          * Card-specific details about the transaction.
          */
@@ -540,6 +557,7 @@ public class TransferDestination {
             return this;
         }
 
+
         /**
          * RTP specific details about the transaction.
          */
@@ -557,19 +575,15 @@ public class TransferDestination {
             this.rtpDetails = rtpDetails;
             return this;
         }
-        
+
         public TransferDestination build() {
+
             return new TransferDestination(
-                paymentMethodID,
-                paymentMethodType,
-                account,
-                bankAccount,
-                wallet,
-                card,
-                achDetails,
-                applePay,
-                cardDetails,
+                paymentMethodID, paymentMethodType, account,
+                bankAccount, wallet, card,
+                achDetails, applePay, cardDetails,
                 rtpDetails);
         }
+
     }
 }

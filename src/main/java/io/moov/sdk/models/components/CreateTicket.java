@@ -20,8 +20,10 @@ public class CreateTicket {
     @JsonProperty("title")
     private String title;
 
+
     @JsonProperty("body")
     private String body;
+
 
     @JsonProperty("contact")
     private TicketContact contact;
@@ -54,9 +56,10 @@ public class CreateTicket {
         return contact;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateTicket withTitle(String title) {
         Utils.checkNotNull(title, "title");
@@ -76,7 +79,6 @@ public class CreateTicket {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -95,9 +97,7 @@ public class CreateTicket {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            title,
-            body,
-            contact);
+            title, body, contact);
     }
     
     @Override
@@ -107,18 +107,20 @@ public class CreateTicket {
                 "body", body,
                 "contact", contact);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String title;
- 
+
         private String body;
- 
+
         private TicketContact contact;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -126,23 +128,25 @@ public class CreateTicket {
             return this;
         }
 
+
         public Builder body(String body) {
             Utils.checkNotNull(body, "body");
             this.body = body;
             return this;
         }
 
+
         public Builder contact(TicketContact contact) {
             Utils.checkNotNull(contact, "contact");
             this.contact = contact;
             return this;
         }
-        
+
         public CreateTicket build() {
+
             return new CreateTicket(
-                title,
-                body,
-                contact);
+                title, body, contact);
         }
+
     }
 }

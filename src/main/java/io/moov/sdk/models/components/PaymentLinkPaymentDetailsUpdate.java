@@ -21,7 +21,6 @@ import java.util.Optional;
  * <p>Options for payment links used to collect payment.
  */
 public class PaymentLinkPaymentDetailsUpdate {
-
     /**
      * A list of payment methods that should be supported for this payment link.
      */
@@ -87,9 +86,10 @@ public class PaymentLinkPaymentDetailsUpdate {
         return (Optional<ACHPaymentDetails>) achDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A list of payment methods that should be supported for this payment link.
@@ -99,6 +99,7 @@ public class PaymentLinkPaymentDetailsUpdate {
         this.allowedMethods = Optional.ofNullable(allowedMethods);
         return this;
     }
+
 
     /**
      * A list of payment methods that should be supported for this payment link.
@@ -118,6 +119,7 @@ public class PaymentLinkPaymentDetailsUpdate {
         return this;
     }
 
+
     /**
      * Options for payment links used to collect a card payment.
      */
@@ -136,6 +138,7 @@ public class PaymentLinkPaymentDetailsUpdate {
         return this;
     }
 
+
     /**
      * Options for payment links used to collect an ACH payment.
      */
@@ -145,7 +148,6 @@ public class PaymentLinkPaymentDetailsUpdate {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -164,9 +166,7 @@ public class PaymentLinkPaymentDetailsUpdate {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods,
-            cardDetails,
-            achDetails);
+            allowedMethods, cardDetails, achDetails);
     }
     
     @Override
@@ -176,18 +176,20 @@ public class PaymentLinkPaymentDetailsUpdate {
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<CollectionPaymentMethodType>> allowedMethods = Optional.empty();
- 
+
         private Optional<? extends CardPaymentDetails> cardDetails = Optional.empty();
- 
+
         private Optional<? extends ACHPaymentDetails> achDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A list of payment methods that should be supported for this payment link.
@@ -207,6 +209,7 @@ public class PaymentLinkPaymentDetailsUpdate {
             return this;
         }
 
+
         /**
          * Options for payment links used to collect a card payment.
          */
@@ -225,6 +228,7 @@ public class PaymentLinkPaymentDetailsUpdate {
             return this;
         }
 
+
         /**
          * Options for payment links used to collect an ACH payment.
          */
@@ -242,12 +246,12 @@ public class PaymentLinkPaymentDetailsUpdate {
             this.achDetails = achDetails;
             return this;
         }
-        
+
         public PaymentLinkPaymentDetailsUpdate build() {
+
             return new PaymentLinkPaymentDetailsUpdate(
-                allowedMethods,
-                cardDetails,
-                achDetails);
+                allowedMethods, cardDetails, achDetails);
         }
+
     }
 }

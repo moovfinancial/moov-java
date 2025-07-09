@@ -30,7 +30,7 @@ public class CreateReceiptsRequestBuilder {
     public CreateReceiptsResponse call() throws Exception {
         
         RequestOperation<List<ReceiptRequest>, CreateReceiptsResponse> operation
-              = new CreateReceiptsOperation( sdkConfiguration);
+              = new CreateReceiptsOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

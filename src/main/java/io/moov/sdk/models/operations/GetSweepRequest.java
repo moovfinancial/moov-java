@@ -10,13 +10,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetSweepRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=walletID")
     private String walletID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sweepID")
     private String sweepID;
@@ -49,9 +52,10 @@ public class GetSweepRequest {
         return sweepID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSweepRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -71,7 +75,6 @@ public class GetSweepRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,9 +93,7 @@ public class GetSweepRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            walletID,
-            sweepID);
+            accountID, walletID, sweepID);
     }
     
     @Override
@@ -102,18 +103,20 @@ public class GetSweepRequest {
                 "walletID", walletID,
                 "sweepID", sweepID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String walletID;
- 
+
         private String sweepID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -121,23 +124,25 @@ public class GetSweepRequest {
             return this;
         }
 
+
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
 
+
         public Builder sweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = sweepID;
             return this;
         }
-        
+
         public GetSweepRequest build() {
+
             return new GetSweepRequest(
-                accountID,
-                walletID,
-                sweepID);
+                accountID, walletID, sweepID);
         }
+
     }
 }

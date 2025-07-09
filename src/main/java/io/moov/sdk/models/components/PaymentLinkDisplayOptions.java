@@ -16,7 +16,6 @@ import java.lang.String;
  * <p>Customizable display options for a payment link.
  */
 public class PaymentLinkDisplayOptions {
-
     /**
      * The payment page title displayed to the user.
      */
@@ -78,9 +77,10 @@ public class PaymentLinkDisplayOptions {
         return callToAction;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The payment page title displayed to the user.
@@ -112,7 +112,6 @@ public class PaymentLinkDisplayOptions {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -131,9 +130,7 @@ public class PaymentLinkDisplayOptions {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            title,
-            description,
-            callToAction);
+            title, description, callToAction);
     }
     
     @Override
@@ -143,18 +140,20 @@ public class PaymentLinkDisplayOptions {
                 "description", description,
                 "callToAction", callToAction);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String title;
- 
+
         private String description;
- 
+
         private CallToAction callToAction;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The payment page title displayed to the user.
@@ -165,6 +164,7 @@ public class PaymentLinkDisplayOptions {
             return this;
         }
 
+
         /**
          * A payment description displayed to the user.
          */
@@ -173,6 +173,7 @@ public class PaymentLinkDisplayOptions {
             this.description = description;
             return this;
         }
+
 
         /**
          * The text to be displayed on web form's submit button.
@@ -185,12 +186,12 @@ public class PaymentLinkDisplayOptions {
             this.callToAction = callToAction;
             return this;
         }
-        
+
         public PaymentLinkDisplayOptions build() {
+
             return new PaymentLinkDisplayOptions(
-                title,
-                description,
-                callToAction);
+                title, description, callToAction);
         }
+
     }
 }

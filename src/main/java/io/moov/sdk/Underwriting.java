@@ -31,7 +31,6 @@ public class Underwriting {
     Underwriting(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Retrieve underwriting associated with a given Moov account. 
      * 
@@ -58,18 +57,16 @@ public class Underwriting {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetUnderwritingResponse get(
-            String accountID) throws Exception {
+    public GetUnderwritingResponse get(String accountID) throws Exception {
         GetUnderwritingRequest request =
             GetUnderwritingRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetUnderwritingRequest, GetUnderwritingResponse> operation
-              = new GetUnderwritingOperation( sdkConfiguration);
+              = new GetUnderwritingOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Create or update the account's underwriting.
@@ -108,10 +105,9 @@ public class Underwriting {
                 .upsertUnderwriting(upsertUnderwriting)
                 .build();
         RequestOperation<SaveUnderwritingRequest, SaveUnderwritingResponse> operation
-              = new SaveUnderwritingOperation( sdkConfiguration);
+              = new SaveUnderwritingOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Create or update the account's underwriting.
@@ -150,7 +146,7 @@ public class Underwriting {
                 .updateUnderwriting(updateUnderwriting)
                 .build();
         RequestOperation<UpsertUnderwritingRequest, UpsertUnderwritingResponse> operation
-              = new UpsertUnderwritingOperation( sdkConfiguration);
+              = new UpsertUnderwritingOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

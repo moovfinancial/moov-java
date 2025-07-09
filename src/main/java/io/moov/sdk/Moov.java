@@ -32,212 +32,279 @@ public class Moov {
         "https://api.moov.io",
     };
 
-    
 
     private final Accounts accounts;
 
+
     private final Adjustments adjustments;
+
 
     private final ApplePay applePay;
 
+
     private final BankAccounts bankAccounts;
+
 
     private final Branding branding;
 
+
     private final Capabilities capabilities;
+
 
     private final Cards cards;
 
+
     private final Disputes disputes;
+
 
     private final FeePlans feePlans;
 
+
     private final Files files;
+
 
     private final PaymentLinks paymentLinks;
 
+
     private final PaymentMethods paymentMethods;
+
 
     private final Representatives representatives;
 
+
     private final Scheduling scheduling;
+
 
     private final Sweeps sweeps;
 
+
     private final AccountTerminalApplications accountTerminalApplications;
+
 
     private final Support support;
 
+
     private final Transfers transfers;
+
 
     private final Underwriting underwriting;
 
+
     private final Wallets wallets;
+
 
     private final WalletTransactions walletTransactions;
 
+
     private final Avatars avatars;
+
 
     private final EndToEndEncryption endToEndEncryption;
 
+
     private final EnrichedAddress enrichedAddress;
+
 
     private final EnrichedProfile enrichedProfile;
 
+
     private final Industries industries;
+
 
     private final Institutions institutions;
 
+
     private final IssuingTransactions issuingTransactions;
+
 
     private final CardIssuing cardIssuing;
 
+
     private final Authentication authentication;
+
 
     private final Onboarding onboarding;
 
+
     private final Ping ping;
+
 
     private final Receipts receipts;
 
+
     private final TerminalApplications terminalApplications;
+
 
     public Accounts accounts() {
         return accounts;
     }
 
+
     public Adjustments adjustments() {
         return adjustments;
     }
+
 
     public ApplePay applePay() {
         return applePay;
     }
 
+
     public BankAccounts bankAccounts() {
         return bankAccounts;
     }
+
 
     public Branding branding() {
         return branding;
     }
 
+
     public Capabilities capabilities() {
         return capabilities;
     }
+
 
     public Cards cards() {
         return cards;
     }
 
+
     public Disputes disputes() {
         return disputes;
     }
+
 
     public FeePlans feePlans() {
         return feePlans;
     }
 
+
     public Files files() {
         return files;
     }
+
 
     public PaymentLinks paymentLinks() {
         return paymentLinks;
     }
 
+
     public PaymentMethods paymentMethods() {
         return paymentMethods;
     }
+
 
     public Representatives representatives() {
         return representatives;
     }
 
+
     public Scheduling scheduling() {
         return scheduling;
     }
+
 
     public Sweeps sweeps() {
         return sweeps;
     }
 
+
     public AccountTerminalApplications accountTerminalApplications() {
         return accountTerminalApplications;
     }
+
 
     public Support support() {
         return support;
     }
 
+
     public Transfers transfers() {
         return transfers;
     }
+
 
     public Underwriting underwriting() {
         return underwriting;
     }
 
+
     public Wallets wallets() {
         return wallets;
     }
+
 
     public WalletTransactions walletTransactions() {
         return walletTransactions;
     }
 
+
     public Avatars avatars() {
         return avatars;
     }
+
 
     public EndToEndEncryption endToEndEncryption() {
         return endToEndEncryption;
     }
 
+
     public EnrichedAddress enrichedAddress() {
         return enrichedAddress;
     }
+
 
     public EnrichedProfile enrichedProfile() {
         return enrichedProfile;
     }
 
+
     public Industries industries() {
         return industries;
     }
+
 
     public Institutions institutions() {
         return institutions;
     }
 
+
     public IssuingTransactions issuingTransactions() {
         return issuingTransactions;
     }
+
 
     public CardIssuing cardIssuing() {
         return cardIssuing;
     }
 
+
     public Authentication authentication() {
         return authentication;
     }
+
 
     public Onboarding onboarding() {
         return onboarding;
     }
 
+
     public Ping ping() {
         return ping;
     }
+
 
     public Receipts receipts() {
         return receipts;
     }
 
+
     public TerminalApplications terminalApplications() {
         return terminalApplications;
     }
-    private SDKConfiguration sdkConfiguration;
+
+    private final SDKConfiguration sdkConfiguration;
 
     /**
      * The Builder class allows the configuration of a new instance of the SDK.
@@ -334,11 +401,13 @@ public class Moov {
 
         /**
          * Enables debug logging for HTTP requests and responses, including JSON body content.
-         *
+         * <p>
          * Convenience method that calls {@link HTTPClient#enableDebugLogging(boolean)}.
          * {@link SpeakeasyHTTPClient} honors this setting. If you are using a custom HTTP client,
          * it is up to the custom client to honor this setting.
+         * </p>
          *
+         * @param enabled Whether to enable debug logging.
          * @return The builder instance.
          */
         public Builder enableHTTPDebugLogging(boolean enabled) {
@@ -430,8 +499,10 @@ public class Moov {
         this.ping = new Ping(sdkConfiguration);
         this.receipts = new Receipts(sdkConfiguration);
         this.terminalApplications = new TerminalApplications(sdkConfiguration);
-        
-        SdkInitData data = this.sdkConfiguration.hooks().sdkInit(new SdkInitData(this.sdkConfiguration.resolvedServerUrl(), this.sdkConfiguration.client()));
+        SdkInitData data = this.sdkConfiguration.hooks().sdkInit(
+                new SdkInitData(
+                        this.sdkConfiguration.resolvedServerUrl(), 
+                        this.sdkConfiguration.client()));
         this.sdkConfiguration.setServerUrl(data.baseUrl());
         this.sdkConfiguration.setClient(data.client());
     }

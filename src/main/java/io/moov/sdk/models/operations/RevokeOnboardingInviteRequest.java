@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class RevokeOnboardingInviteRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=code")
@@ -27,9 +28,10 @@ public class RevokeOnboardingInviteRequest {
         return code;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RevokeOnboardingInviteRequest withCode(String code) {
         Utils.checkNotNull(code, "code");
@@ -37,7 +39,6 @@ public class RevokeOnboardingInviteRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,24 +63,28 @@ public class RevokeOnboardingInviteRequest {
         return Utils.toString(RevokeOnboardingInviteRequest.class,
                 "code", code);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String code;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder code(String code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
             return this;
         }
-        
+
         public RevokeOnboardingInviteRequest build() {
+
             return new RevokeOnboardingInviteRequest(
                 code);
         }
+
     }
 }

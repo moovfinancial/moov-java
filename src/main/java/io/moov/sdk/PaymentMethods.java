@@ -26,7 +26,6 @@ public class PaymentMethods {
     PaymentMethods(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods 
      * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
@@ -83,10 +82,9 @@ public class PaymentMethods {
                 .paymentMethodType(paymentMethodType)
                 .build();
         RequestOperation<ListPaymentMethodsRequest, ListPaymentMethodsResponse> operation
-              = new ListPaymentMethodsOperation( sdkConfiguration);
+              = new ListPaymentMethodsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
@@ -121,7 +119,7 @@ public class PaymentMethods {
                 .paymentMethodID(paymentMethodID)
                 .build();
         RequestOperation<GetPaymentMethodRequest, GetPaymentMethodResponse> operation
-              = new GetPaymentMethodOperation( sdkConfiguration);
+              = new GetPaymentMethodOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

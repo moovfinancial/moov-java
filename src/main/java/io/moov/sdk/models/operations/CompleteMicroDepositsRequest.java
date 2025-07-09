@@ -11,13 +11,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CompleteMicroDepositsRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=bankAccountID")
     private String bankAccountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CompleteMicroDeposits completeMicroDeposits;
@@ -50,9 +53,10 @@ public class CompleteMicroDepositsRequest {
         return completeMicroDeposits;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CompleteMicroDepositsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,7 +76,6 @@ public class CompleteMicroDepositsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class CompleteMicroDepositsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            bankAccountID,
-            completeMicroDeposits);
+            accountID, bankAccountID, completeMicroDeposits);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class CompleteMicroDepositsRequest {
                 "bankAccountID", bankAccountID,
                 "completeMicroDeposits", completeMicroDeposits);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String bankAccountID;
- 
+
         private CompleteMicroDeposits completeMicroDeposits;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -122,23 +125,25 @@ public class CompleteMicroDepositsRequest {
             return this;
         }
 
+
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
             this.bankAccountID = bankAccountID;
             return this;
         }
 
+
         public Builder completeMicroDeposits(CompleteMicroDeposits completeMicroDeposits) {
             Utils.checkNotNull(completeMicroDeposits, "completeMicroDeposits");
             this.completeMicroDeposits = completeMicroDeposits;
             return this;
         }
-        
+
         public CompleteMicroDepositsRequest build() {
+
             return new CompleteMicroDepositsRequest(
-                accountID,
-                bankAccountID,
-                completeMicroDeposits);
+                accountID, bankAccountID, completeMicroDeposits);
         }
+
     }
 }

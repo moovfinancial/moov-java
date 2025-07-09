@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetSchedulesRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=scheduleID")
     private String scheduleID;
@@ -38,9 +40,10 @@ public class GetSchedulesRequest {
         return scheduleID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSchedulesRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class GetSchedulesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class GetSchedulesRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            scheduleID);
+            accountID, scheduleID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class GetSchedulesRequest {
                 "accountID", accountID,
                 "scheduleID", scheduleID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String scheduleID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class GetSchedulesRequest {
             return this;
         }
 
+
         public Builder scheduleID(String scheduleID) {
             Utils.checkNotNull(scheduleID, "scheduleID");
             this.scheduleID = scheduleID;
             return this;
         }
-        
+
         public GetSchedulesRequest build() {
+
             return new GetSchedulesRequest(
-                accountID,
-                scheduleID);
+                accountID, scheduleID);
         }
+
     }
 }

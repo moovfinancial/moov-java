@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CreateProfile {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("individual")
     private Optional<? extends CreateIndividualProfile> individual;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("business")
@@ -50,15 +52,17 @@ public class CreateProfile {
         return (Optional<CreateBusinessProfile>) business;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateProfile withIndividual(CreateIndividualProfile individual) {
         Utils.checkNotNull(individual, "individual");
         this.individual = Optional.ofNullable(individual);
         return this;
     }
+
 
     public CreateProfile withIndividual(Optional<? extends CreateIndividualProfile> individual) {
         Utils.checkNotNull(individual, "individual");
@@ -72,13 +76,13 @@ public class CreateProfile {
         return this;
     }
 
+
     public CreateProfile withBusiness(Optional<? extends CreateBusinessProfile> business) {
         Utils.checkNotNull(business, "business");
         this.business = business;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class CreateProfile {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            individual,
-            business);
+            individual, business);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class CreateProfile {
                 "individual", individual,
                 "business", business);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CreateIndividualProfile> individual = Optional.empty();
- 
+
         private Optional<? extends CreateBusinessProfile> business = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder individual(CreateIndividualProfile individual) {
             Utils.checkNotNull(individual, "individual");
@@ -129,6 +134,7 @@ public class CreateProfile {
             return this;
         }
 
+
         public Builder business(CreateBusinessProfile business) {
             Utils.checkNotNull(business, "business");
             this.business = Optional.ofNullable(business);
@@ -140,11 +146,12 @@ public class CreateProfile {
             this.business = business;
             return this;
         }
-        
+
         public CreateProfile build() {
+
             return new CreateProfile(
-                individual,
-                business);
+                individual, business);
         }
+
     }
 }

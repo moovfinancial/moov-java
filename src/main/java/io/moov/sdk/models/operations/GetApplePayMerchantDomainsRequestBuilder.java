@@ -37,7 +37,7 @@ public class GetApplePayMerchantDomainsRequestBuilder {
     public GetApplePayMerchantDomainsResponse call() throws Exception {
         
         RequestOperation<GetApplePayMerchantDomainsRequest, GetApplePayMerchantDomainsResponse> operation
-              = new GetApplePayMerchantDomainsOperation( sdkConfiguration);
+              = new GetApplePayMerchantDomainsOperation(sdkConfiguration);
         GetApplePayMerchantDomainsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

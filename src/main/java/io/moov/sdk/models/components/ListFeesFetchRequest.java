@@ -43,9 +43,10 @@ public class ListFeesFetchRequest {
         return (Optional<List<String>>) feeIDs;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListFeesFetchRequest withFeeIDs(List<String> feeIDs) {
         Utils.checkNotNull(feeIDs, "feeIDs");
@@ -53,13 +54,13 @@ public class ListFeesFetchRequest {
         return this;
     }
 
+
     public ListFeesFetchRequest withFeeIDs(Optional<? extends List<String>> feeIDs) {
         Utils.checkNotNull(feeIDs, "feeIDs");
         this.feeIDs = feeIDs;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -84,14 +85,16 @@ public class ListFeesFetchRequest {
         return Utils.toString(ListFeesFetchRequest.class,
                 "feeIDs", feeIDs);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<String>> feeIDs = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder feeIDs(List<String> feeIDs) {
             Utils.checkNotNull(feeIDs, "feeIDs");
@@ -104,10 +107,12 @@ public class ListFeesFetchRequest {
             this.feeIDs = feeIDs;
             return this;
         }
-        
+
         public ListFeesFetchRequest build() {
+
             return new ListFeesFetchRequest(
                 feeIDs);
         }
+
     }
 }

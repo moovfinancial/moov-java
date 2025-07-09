@@ -20,6 +20,7 @@ public class AccountCapability {
     @JsonProperty("capability")
     private String capability;
 
+
     @JsonProperty("status")
     private String status;
 
@@ -43,9 +44,10 @@ public class AccountCapability {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AccountCapability withCapability(String capability) {
         Utils.checkNotNull(capability, "capability");
@@ -59,7 +61,6 @@ public class AccountCapability {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,8 +78,7 @@ public class AccountCapability {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            capability,
-            status);
+            capability, status);
     }
     
     @Override
@@ -87,16 +87,18 @@ public class AccountCapability {
                 "capability", capability,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String capability;
- 
+
         private String status;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder capability(String capability) {
             Utils.checkNotNull(capability, "capability");
@@ -104,16 +106,18 @@ public class AccountCapability {
             return this;
         }
 
+
         public Builder status(String status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
-        
+
         public AccountCapability build() {
+
             return new AccountCapability(
-                capability,
-                status);
+                capability, status);
         }
+
     }
 }

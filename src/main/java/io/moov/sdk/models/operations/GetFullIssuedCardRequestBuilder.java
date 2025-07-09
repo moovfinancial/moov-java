@@ -45,7 +45,7 @@ public class GetFullIssuedCardRequestBuilder {
     public GetFullIssuedCardResponse call() throws Exception {
         
         RequestOperation<GetFullIssuedCardRequest, GetFullIssuedCardResponse> operation
-              = new GetFullIssuedCardOperation( sdkConfiguration);
+              = new GetFullIssuedCardOperation(sdkConfiguration);
         GetFullIssuedCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

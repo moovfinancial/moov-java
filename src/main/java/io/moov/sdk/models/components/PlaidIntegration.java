@@ -42,9 +42,10 @@ public class PlaidIntegration {
         return token;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PlaidIntegration withToken(String token) {
         Utils.checkNotNull(token, "token");
@@ -52,7 +53,6 @@ public class PlaidIntegration {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,24 +77,28 @@ public class PlaidIntegration {
         return Utils.toString(PlaidIntegration.class,
                 "token", token);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String token;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder token(String token) {
             Utils.checkNotNull(token, "token");
             this.token = token;
             return this;
         }
-        
+
         public PlaidIntegration build() {
+
             return new PlaidIntegration(
                 token);
         }
+
     }
 }

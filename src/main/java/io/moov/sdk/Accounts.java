@@ -55,7 +55,6 @@ public class Accounts {
     Accounts(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
      * information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
@@ -100,13 +99,11 @@ public class Accounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateAccountResponse create(
-            CreateAccount request) throws Exception {
+    public CreateAccountResponse create(CreateAccount request) throws Exception {
         RequestOperation<CreateAccount, CreateAccountResponse> operation
-              = new CreateAccountOperation( sdkConfiguration);
+              = new CreateAccountOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List or search accounts to which the caller is connected.
@@ -138,13 +135,11 @@ public class Accounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListAccountsResponse list(
-            ListAccountsRequest request) throws Exception {
+    public ListAccountsResponse list(ListAccountsRequest request) throws Exception {
         RequestOperation<ListAccountsRequest, ListAccountsResponse> operation
-              = new ListAccountsOperation( sdkConfiguration);
+              = new ListAccountsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieves details for the account with the specified ID.
@@ -168,18 +163,16 @@ public class Accounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAccountResponse get(
-            String accountID) throws Exception {
+    public GetAccountResponse get(String accountID) throws Exception {
         GetAccountRequest request =
             GetAccountRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetAccountRequest, GetAccountResponse> operation
-              = new GetAccountOperation( sdkConfiguration);
+              = new GetAccountOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * When **can** profile data be updated:
@@ -230,10 +223,9 @@ public class Accounts {
                 .patchAccount(patchAccount)
                 .build();
         RequestOperation<UpdateAccountRequest, UpdateAccountResponse> operation
-              = new UpdateAccountOperation( sdkConfiguration);
+              = new UpdateAccountOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * This will sever the connection between you and the account specified and it will no longer be listed as 
@@ -261,18 +253,16 @@ public class Accounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DisconnectAccountResponse disconnect(
-            String accountID) throws Exception {
+    public DisconnectAccountResponse disconnect(String accountID) throws Exception {
         DisconnectAccountRequest request =
             DisconnectAccountRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<DisconnectAccountRequest, DisconnectAccountResponse> operation
-              = new DisconnectAccountOperation( sdkConfiguration);
+              = new DisconnectAccountOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve the specified countries of operation for an account. 
@@ -296,18 +286,16 @@ public class Accounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAccountCountriesResponse getCountries(
-            String accountID) throws Exception {
+    public GetAccountCountriesResponse getCountries(String accountID) throws Exception {
         GetAccountCountriesRequest request =
             GetAccountCountriesRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetAccountCountriesRequest, GetAccountCountriesResponse> operation
-              = new GetAccountCountriesOperation( sdkConfiguration);
+              = new GetAccountCountriesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Assign the countries of operation for an account.
@@ -346,10 +334,9 @@ public class Accounts {
                 .accountCountries(accountCountries)
                 .build();
         RequestOperation<AssignAccountCountriesRequest, AssignAccountCountriesResponse> operation
-              = new AssignAccountCountriesOperation( sdkConfiguration);
+              = new AssignAccountCountriesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve a merchant account's processing agreement.
@@ -373,18 +360,16 @@ public class Accounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetMerchantProcessingAgreementResponse getMerchantProcessingAgreement(
-            String accountID) throws Exception {
+    public GetMerchantProcessingAgreementResponse getMerchantProcessingAgreement(String accountID) throws Exception {
         GetMerchantProcessingAgreementRequest request =
             GetMerchantProcessingAgreementRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetMerchantProcessingAgreementRequest, GetMerchantProcessingAgreementResponse> operation
-              = new GetMerchantProcessingAgreementOperation( sdkConfiguration);
+              = new GetMerchantProcessingAgreementOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Generates a non-expiring token that can then be used to accept Moov's terms of service. 
@@ -435,7 +420,7 @@ public class Accounts {
                 .referer(referer)
                 .build();
         RequestOperation<GetTermsOfServiceTokenRequest, GetTermsOfServiceTokenResponse> operation
-              = new GetTermsOfServiceTokenOperation( sdkConfiguration);
+              = new GetTermsOfServiceTokenOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

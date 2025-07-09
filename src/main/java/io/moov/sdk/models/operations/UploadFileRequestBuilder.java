@@ -46,7 +46,7 @@ public class UploadFileRequestBuilder {
     public UploadFileResponse call() throws Exception {
         
         RequestOperation<UploadFileRequest, UploadFileResponse> operation
-              = new UploadFileOperation( sdkConfiguration);
+              = new UploadFileOperation(sdkConfiguration);
         UploadFileRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

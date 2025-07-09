@@ -107,8 +107,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
                     .build())
             .build();
 
@@ -180,8 +180,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
                     .build())
             .build();
 
@@ -242,8 +242,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
                     .build())
             .build();
 
@@ -309,8 +309,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
                     .build())
             .build();
 
@@ -447,8 +447,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
                     .build())
             .build();
 
@@ -502,8 +502,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
                     .build())
             .build();
 
@@ -564,8 +564,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
                     .build())
             .build();
 
@@ -627,8 +627,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
                     .build())
             .build();
 
@@ -684,8 +684,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username("")
-                    .password("")
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
                     .build())
             .build();
 

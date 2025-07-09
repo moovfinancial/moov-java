@@ -54,7 +54,7 @@ public class UploadDisputeEvidenceTextRequestBuilder {
     public UploadDisputeEvidenceTextResponse call() throws Exception {
         
         RequestOperation<UploadDisputeEvidenceTextRequest, UploadDisputeEvidenceTextResponse> operation
-              = new UploadDisputeEvidenceTextOperation( sdkConfiguration);
+              = new UploadDisputeEvidenceTextOperation(sdkConfiguration);
         UploadDisputeEvidenceTextRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

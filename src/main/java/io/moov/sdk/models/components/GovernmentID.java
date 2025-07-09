@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class GovernmentID {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ssn")
     private Optional<? extends Ssn> ssn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("itin")
@@ -50,15 +52,17 @@ public class GovernmentID {
         return (Optional<Itin>) itin;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GovernmentID withSsn(Ssn ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = Optional.ofNullable(ssn);
         return this;
     }
+
 
     public GovernmentID withSsn(Optional<? extends Ssn> ssn) {
         Utils.checkNotNull(ssn, "ssn");
@@ -72,13 +76,13 @@ public class GovernmentID {
         return this;
     }
 
+
     public GovernmentID withItin(Optional<? extends Itin> itin) {
         Utils.checkNotNull(itin, "itin");
         this.itin = itin;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class GovernmentID {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ssn,
-            itin);
+            ssn, itin);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class GovernmentID {
                 "ssn", ssn,
                 "itin", itin);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends Ssn> ssn = Optional.empty();
- 
+
         private Optional<? extends Itin> itin = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ssn(Ssn ssn) {
             Utils.checkNotNull(ssn, "ssn");
@@ -129,6 +134,7 @@ public class GovernmentID {
             return this;
         }
 
+
         public Builder itin(Itin itin) {
             Utils.checkNotNull(itin, "itin");
             this.itin = Optional.ofNullable(itin);
@@ -140,11 +146,12 @@ public class GovernmentID {
             this.itin = itin;
             return this;
         }
-        
+
         public GovernmentID build() {
+
             return new GovernmentID(
-                ssn,
-                itin);
+                ssn, itin);
         }
+
     }
 }

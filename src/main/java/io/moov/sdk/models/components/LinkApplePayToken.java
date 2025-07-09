@@ -19,7 +19,6 @@ import java.lang.String;
  *   for more information.
  */
 public class LinkApplePayToken {
-
     /**
      * Contains the encrypted payment data.
      * 
@@ -87,9 +86,10 @@ public class LinkApplePayToken {
         return transactionIdentifier;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Contains the encrypted payment data.
@@ -124,7 +124,6 @@ public class LinkApplePayToken {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -143,9 +142,7 @@ public class LinkApplePayToken {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentData,
-            paymentMethod,
-            transactionIdentifier);
+            paymentData, paymentMethod, transactionIdentifier);
     }
     
     @Override
@@ -155,18 +152,20 @@ public class LinkApplePayToken {
                 "paymentMethod", paymentMethod,
                 "transactionIdentifier", transactionIdentifier);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private LinkApplePaymentData paymentData;
- 
+
         private LinkApplePaymentMethod paymentMethod;
- 
+
         private String transactionIdentifier;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Contains the encrypted payment data.
@@ -180,6 +179,7 @@ public class LinkApplePayToken {
             return this;
         }
 
+
         /**
          * Provides information about the underlying card.
          * 
@@ -192,6 +192,7 @@ public class LinkApplePayToken {
             return this;
         }
 
+
         /**
          * A unique identifier provided by Apple Pay for this payment.
          */
@@ -200,12 +201,12 @@ public class LinkApplePayToken {
             this.transactionIdentifier = transactionIdentifier;
             return this;
         }
-        
+
         public LinkApplePayToken build() {
+
             return new LinkApplePayToken(
-                paymentData,
-                paymentMethod,
-                transactionIdentifier);
+                paymentData, paymentMethod, transactionIdentifier);
         }
+
     }
 }

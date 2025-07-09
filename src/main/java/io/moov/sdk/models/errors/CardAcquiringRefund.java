@@ -26,24 +26,28 @@ import java.util.Optional;
  */
 @SuppressWarnings("serial")
 public class CardAcquiringRefund extends RuntimeException {
-
     /**
      * Identifier for the refund.
      */
     @JsonProperty("refundID")
     private String refundID;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
 
+
     @JsonProperty("status")
     private RefundStatus status;
 
+
     @JsonProperty("amount")
     private Amount amount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardDetails")
@@ -78,7 +82,8 @@ public class CardAcquiringRefund extends RuntimeException {
             OffsetDateTime updatedOn,
             RefundStatus status,
             Amount amount) {
-        this(refundID, createdOn, updatedOn, status, amount, Optional.empty());
+        this(refundID, createdOn, updatedOn,
+            status, amount, Optional.empty());
     }
 
     /**
@@ -115,9 +120,10 @@ public class CardAcquiringRefund extends RuntimeException {
         return (Optional<RefundCardDetails>) cardDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Identifier for the refund.
@@ -158,13 +164,13 @@ public class CardAcquiringRefund extends RuntimeException {
         return this;
     }
 
+
     public CardAcquiringRefund withCardDetails(Optional<? extends RefundCardDetails> cardDetails) {
         Utils.checkNotNull(cardDetails, "cardDetails");
         this.cardDetails = cardDetails;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -186,12 +192,8 @@ public class CardAcquiringRefund extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            refundID,
-            createdOn,
-            updatedOn,
-            status,
-            amount,
-            cardDetails);
+            refundID, createdOn, updatedOn,
+            status, amount, cardDetails);
     }
     
     @Override
@@ -204,24 +206,26 @@ public class CardAcquiringRefund extends RuntimeException {
                 "amount", amount,
                 "cardDetails", cardDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String refundID;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
- 
+
         private RefundStatus status;
- 
+
         private Amount amount;
- 
+
         private Optional<? extends RefundCardDetails> cardDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Identifier for the refund.
@@ -232,11 +236,13 @@ public class CardAcquiringRefund extends RuntimeException {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
+
 
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
@@ -244,17 +250,20 @@ public class CardAcquiringRefund extends RuntimeException {
             return this;
         }
 
+
         public Builder status(RefundStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
+
 
         public Builder cardDetails(RefundCardDetails cardDetails) {
             Utils.checkNotNull(cardDetails, "cardDetails");
@@ -267,16 +276,14 @@ public class CardAcquiringRefund extends RuntimeException {
             this.cardDetails = cardDetails;
             return this;
         }
-        
+
         public CardAcquiringRefund build() {
+
             return new CardAcquiringRefund(
-                refundID,
-                createdOn,
-                updatedOn,
-                status,
-                amount,
-                cardDetails);
+                refundID, createdOn, updatedOn,
+                status, amount, cardDetails);
         }
+
     }
 }
 

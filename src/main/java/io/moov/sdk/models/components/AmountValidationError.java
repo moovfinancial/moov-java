@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class AmountValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("currency")
     private Optional<String> currency;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("value")
@@ -47,15 +49,17 @@ public class AmountValidationError {
         return value;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AmountValidationError withCurrency(String currency) {
         Utils.checkNotNull(currency, "currency");
         this.currency = Optional.ofNullable(currency);
         return this;
     }
+
 
     public AmountValidationError withCurrency(Optional<String> currency) {
         Utils.checkNotNull(currency, "currency");
@@ -69,13 +73,13 @@ public class AmountValidationError {
         return this;
     }
 
+
     public AmountValidationError withValue(Optional<String> value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class AmountValidationError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            currency,
-            value);
+            currency, value);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class AmountValidationError {
                 "currency", currency,
                 "value", value);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> currency = Optional.empty();
- 
+
         private Optional<String> value = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder currency(String currency) {
             Utils.checkNotNull(currency, "currency");
@@ -126,6 +131,7 @@ public class AmountValidationError {
             return this;
         }
 
+
         public Builder value(String value) {
             Utils.checkNotNull(value, "value");
             this.value = Optional.ofNullable(value);
@@ -137,11 +143,12 @@ public class AmountValidationError {
             this.value = value;
             return this;
         }
-        
+
         public AmountValidationError build() {
+
             return new AmountValidationError(
-                currency,
-                value);
+                currency, value);
         }
+
     }
 }

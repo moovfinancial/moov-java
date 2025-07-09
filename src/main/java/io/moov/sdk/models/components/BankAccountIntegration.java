@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class BankAccountIntegration {
 
     @JsonProperty("holderName")
@@ -21,6 +22,7 @@ public class BankAccountIntegration {
     @JsonProperty("holderType")
     private BankAccountHolderType holderType;
 
+
     @JsonProperty("accountNumber")
     private String accountNumber;
 
@@ -29,6 +31,7 @@ public class BankAccountIntegration {
      */
     @JsonProperty("bankAccountType")
     private BankAccountType bankAccountType;
+
 
     @JsonProperty("routingNumber")
     private String routingNumber;
@@ -83,9 +86,10 @@ public class BankAccountIntegration {
         return routingNumber;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BankAccountIntegration withHolderName(String holderName) {
         Utils.checkNotNull(holderName, "holderName");
@@ -123,7 +127,6 @@ public class BankAccountIntegration {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -144,11 +147,8 @@ public class BankAccountIntegration {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            holderName,
-            holderType,
-            accountNumber,
-            bankAccountType,
-            routingNumber);
+            holderName, holderType, accountNumber,
+            bankAccountType, routingNumber);
     }
     
     @Override
@@ -160,28 +160,31 @@ public class BankAccountIntegration {
                 "bankAccountType", bankAccountType,
                 "routingNumber", routingNumber);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String holderName;
- 
+
         private BankAccountHolderType holderType;
- 
+
         private String accountNumber;
- 
+
         private BankAccountType bankAccountType;
- 
+
         private String routingNumber;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder holderName(String holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = holderName;
             return this;
         }
+
 
         /**
          * The type of holder on a funding source.
@@ -192,11 +195,13 @@ public class BankAccountIntegration {
             return this;
         }
 
+
         public Builder accountNumber(String accountNumber) {
             Utils.checkNotNull(accountNumber, "accountNumber");
             this.accountNumber = accountNumber;
             return this;
         }
+
 
         /**
          * The bank account type.
@@ -207,19 +212,19 @@ public class BankAccountIntegration {
             return this;
         }
 
+
         public Builder routingNumber(String routingNumber) {
             Utils.checkNotNull(routingNumber, "routingNumber");
             this.routingNumber = routingNumber;
             return this;
         }
-        
+
         public BankAccountIntegration build() {
+
             return new BankAccountIntegration(
-                holderName,
-                holderType,
-                accountNumber,
-                bankAccountType,
-                routingNumber);
+                holderName, holderType, accountNumber,
+                bankAccountType, routingNumber);
         }
+
     }
 }

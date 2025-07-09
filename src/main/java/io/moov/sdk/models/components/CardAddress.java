@@ -13,26 +13,32 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class CardAddress {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addressLine1")
     private Optional<String> addressLine1;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addressLine2")
     private Optional<String> addressLine2;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("city")
     private Optional<String> city;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("stateOrProvince")
     private Optional<String> stateOrProvince;
 
+
     @JsonProperty("postalCode")
     private String postalCode;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("country")
@@ -62,7 +68,8 @@ public class CardAddress {
     
     public CardAddress(
             String postalCode) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), postalCode, Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), postalCode, Optional.empty());
     }
 
     @JsonIgnore
@@ -95,15 +102,17 @@ public class CardAddress {
         return country;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardAddress withAddressLine1(String addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
         this.addressLine1 = Optional.ofNullable(addressLine1);
         return this;
     }
+
 
     public CardAddress withAddressLine1(Optional<String> addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
@@ -117,6 +126,7 @@ public class CardAddress {
         return this;
     }
 
+
     public CardAddress withAddressLine2(Optional<String> addressLine2) {
         Utils.checkNotNull(addressLine2, "addressLine2");
         this.addressLine2 = addressLine2;
@@ -129,6 +139,7 @@ public class CardAddress {
         return this;
     }
 
+
     public CardAddress withCity(Optional<String> city) {
         Utils.checkNotNull(city, "city");
         this.city = city;
@@ -140,6 +151,7 @@ public class CardAddress {
         this.stateOrProvince = Optional.ofNullable(stateOrProvince);
         return this;
     }
+
 
     public CardAddress withStateOrProvince(Optional<String> stateOrProvince) {
         Utils.checkNotNull(stateOrProvince, "stateOrProvince");
@@ -159,13 +171,13 @@ public class CardAddress {
         return this;
     }
 
+
     public CardAddress withCountry(Optional<String> country) {
         Utils.checkNotNull(country, "country");
         this.country = country;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -187,12 +199,8 @@ public class CardAddress {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            addressLine1,
-            addressLine2,
-            city,
-            stateOrProvince,
-            postalCode,
-            country);
+            addressLine1, addressLine2, city,
+            stateOrProvince, postalCode, country);
     }
     
     @Override
@@ -205,24 +213,26 @@ public class CardAddress {
                 "postalCode", postalCode,
                 "country", country);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> addressLine1 = Optional.empty();
- 
+
         private Optional<String> addressLine2 = Optional.empty();
- 
+
         private Optional<String> city = Optional.empty();
- 
+
         private Optional<String> stateOrProvince = Optional.empty();
- 
+
         private String postalCode;
- 
+
         private Optional<String> country = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder addressLine1(String addressLine1) {
             Utils.checkNotNull(addressLine1, "addressLine1");
@@ -236,6 +246,7 @@ public class CardAddress {
             return this;
         }
 
+
         public Builder addressLine2(String addressLine2) {
             Utils.checkNotNull(addressLine2, "addressLine2");
             this.addressLine2 = Optional.ofNullable(addressLine2);
@@ -247,6 +258,7 @@ public class CardAddress {
             this.addressLine2 = addressLine2;
             return this;
         }
+
 
         public Builder city(String city) {
             Utils.checkNotNull(city, "city");
@@ -260,6 +272,7 @@ public class CardAddress {
             return this;
         }
 
+
         public Builder stateOrProvince(String stateOrProvince) {
             Utils.checkNotNull(stateOrProvince, "stateOrProvince");
             this.stateOrProvince = Optional.ofNullable(stateOrProvince);
@@ -272,11 +285,13 @@ public class CardAddress {
             return this;
         }
 
+
         public Builder postalCode(String postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = postalCode;
             return this;
         }
+
 
         public Builder country(String country) {
             Utils.checkNotNull(country, "country");
@@ -289,15 +304,13 @@ public class CardAddress {
             this.country = country;
             return this;
         }
-        
+
         public CardAddress build() {
+
             return new CardAddress(
-                addressLine1,
-                addressLine2,
-                city,
-                stateOrProvince,
-                postalCode,
-                country);
+                addressLine1, addressLine2, city,
+                stateOrProvince, postalCode, country);
         }
+
     }
 }

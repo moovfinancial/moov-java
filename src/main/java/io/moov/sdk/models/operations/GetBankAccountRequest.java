@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetBankAccountRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=bankAccountID")
     private String bankAccountID;
@@ -38,9 +40,10 @@ public class GetBankAccountRequest {
         return bankAccountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetBankAccountRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class GetBankAccountRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class GetBankAccountRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            bankAccountID);
+            accountID, bankAccountID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class GetBankAccountRequest {
                 "accountID", accountID,
                 "bankAccountID", bankAccountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String bankAccountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class GetBankAccountRequest {
             return this;
         }
 
+
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
             this.bankAccountID = bankAccountID;
             return this;
         }
-        
+
         public GetBankAccountRequest build() {
+
             return new GetBankAccountRequest(
-                accountID,
-                bankAccountID);
+                accountID, bankAccountID);
         }
+
     }
 }

@@ -11,22 +11,28 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UpdateUnderwriting {
 
     @JsonProperty("averageTransactionSize")
     private long averageTransactionSize;
 
+
     @JsonProperty("maxTransactionSize")
     private long maxTransactionSize;
+
 
     @JsonProperty("averageMonthlyTransactionVolume")
     private long averageMonthlyTransactionVolume;
 
+
     @JsonProperty("volumeByCustomerType")
     private VolumeByCustomerType volumeByCustomerType;
 
+
     @JsonProperty("cardVolumeDistribution")
     private CardVolumeDistribution cardVolumeDistribution;
+
 
     @JsonProperty("fulfillment")
     private FulfillmentDetails fulfillment;
@@ -83,9 +89,10 @@ public class UpdateUnderwriting {
         return fulfillment;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateUnderwriting withAverageTransactionSize(long averageTransactionSize) {
         Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
@@ -123,7 +130,6 @@ public class UpdateUnderwriting {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -145,12 +151,8 @@ public class UpdateUnderwriting {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            averageTransactionSize,
-            maxTransactionSize,
-            averageMonthlyTransactionVolume,
-            volumeByCustomerType,
-            cardVolumeDistribution,
-            fulfillment);
+            averageTransactionSize, maxTransactionSize, averageMonthlyTransactionVolume,
+            volumeByCustomerType, cardVolumeDistribution, fulfillment);
     }
     
     @Override
@@ -163,24 +165,26 @@ public class UpdateUnderwriting {
                 "cardVolumeDistribution", cardVolumeDistribution,
                 "fulfillment", fulfillment);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long averageTransactionSize;
- 
+
         private Long maxTransactionSize;
- 
+
         private Long averageMonthlyTransactionVolume;
- 
+
         private VolumeByCustomerType volumeByCustomerType;
- 
+
         private CardVolumeDistribution cardVolumeDistribution;
- 
+
         private FulfillmentDetails fulfillment;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder averageTransactionSize(long averageTransactionSize) {
             Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
@@ -188,11 +192,13 @@ public class UpdateUnderwriting {
             return this;
         }
 
+
         public Builder maxTransactionSize(long maxTransactionSize) {
             Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
             this.maxTransactionSize = maxTransactionSize;
             return this;
         }
+
 
         public Builder averageMonthlyTransactionVolume(long averageMonthlyTransactionVolume) {
             Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
@@ -200,11 +206,13 @@ public class UpdateUnderwriting {
             return this;
         }
 
+
         public Builder volumeByCustomerType(VolumeByCustomerType volumeByCustomerType) {
             Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
             this.volumeByCustomerType = volumeByCustomerType;
             return this;
         }
+
 
         public Builder cardVolumeDistribution(CardVolumeDistribution cardVolumeDistribution) {
             Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
@@ -212,20 +220,19 @@ public class UpdateUnderwriting {
             return this;
         }
 
+
         public Builder fulfillment(FulfillmentDetails fulfillment) {
             Utils.checkNotNull(fulfillment, "fulfillment");
             this.fulfillment = fulfillment;
             return this;
         }
-        
+
         public UpdateUnderwriting build() {
+
             return new UpdateUnderwriting(
-                averageTransactionSize,
-                maxTransactionSize,
-                averageMonthlyTransactionVolume,
-                volumeByCustomerType,
-                cardVolumeDistribution,
-                fulfillment);
+                averageTransactionSize, maxTransactionSize, averageMonthlyTransactionVolume,
+                volumeByCustomerType, cardVolumeDistribution, fulfillment);
         }
+
     }
 }

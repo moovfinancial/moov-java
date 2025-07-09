@@ -11,16 +11,18 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class UpdateIssuedCardRequest {
 
+public class UpdateIssuedCardRequest {
     /**
      * The Moov business account for which the card was issued.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=issuedCardID")
     private String issuedCardID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpdateIssuedCard updateIssuedCard;
@@ -56,9 +58,10 @@ public class UpdateIssuedCardRequest {
         return updateIssuedCard;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The Moov business account for which the card was issued.
@@ -81,7 +84,6 @@ public class UpdateIssuedCardRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -100,9 +102,7 @@ public class UpdateIssuedCardRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            issuedCardID,
-            updateIssuedCard);
+            accountID, issuedCardID, updateIssuedCard);
     }
     
     @Override
@@ -112,18 +112,20 @@ public class UpdateIssuedCardRequest {
                 "issuedCardID", issuedCardID,
                 "updateIssuedCard", updateIssuedCard);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String issuedCardID;
- 
+
         private UpdateIssuedCard updateIssuedCard;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The Moov business account for which the card was issued.
@@ -134,23 +136,25 @@ public class UpdateIssuedCardRequest {
             return this;
         }
 
+
         public Builder issuedCardID(String issuedCardID) {
             Utils.checkNotNull(issuedCardID, "issuedCardID");
             this.issuedCardID = issuedCardID;
             return this;
         }
 
+
         public Builder updateIssuedCard(UpdateIssuedCard updateIssuedCard) {
             Utils.checkNotNull(updateIssuedCard, "updateIssuedCard");
             this.updateIssuedCard = updateIssuedCard;
             return this;
         }
-        
+
         public UpdateIssuedCardRequest build() {
+
             return new UpdateIssuedCardRequest(
-                accountID,
-                issuedCardID,
-                updateIssuedCard);
+                accountID, issuedCardID, updateIssuedCard);
         }
+
     }
 }

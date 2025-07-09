@@ -46,7 +46,7 @@ public class CreateFeePlanAgreementsRequestBuilder {
     public CreateFeePlanAgreementsResponse call() throws Exception {
         
         RequestOperation<CreateFeePlanAgreementsRequest, CreateFeePlanAgreementsResponse> operation
-              = new CreateFeePlanAgreementsOperation( sdkConfiguration);
+              = new CreateFeePlanAgreementsOperation(sdkConfiguration);
         CreateFeePlanAgreementsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

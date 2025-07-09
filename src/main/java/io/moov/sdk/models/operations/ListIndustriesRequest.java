@@ -8,19 +8,17 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class ListIndustriesRequest {
 
+public class ListIndustriesRequest {
     @JsonCreator
     public ListIndustriesRequest() {
-        
-        
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
 
-    
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -42,16 +40,19 @@ public class ListIndustriesRequest {
     public String toString() {
         return Utils.toString(ListIndustriesRequest.class);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
-        
+
         private Builder() {
           // force use of static builder() method
         }
-        
+
         public ListIndustriesRequest build() {
+
             return new ListIndustriesRequest(
                 );
         }
+
     }
 }

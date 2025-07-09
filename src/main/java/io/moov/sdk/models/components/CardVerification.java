@@ -24,8 +24,10 @@ public class CardVerification {
     @JsonProperty("cvv")
     private CardVerificationResult cvv;
 
+
     @JsonProperty("addressLine1")
     private CardVerificationResult addressLine1;
+
 
     @JsonProperty("postalCode")
     private CardVerificationResult postalCode;
@@ -57,7 +59,8 @@ public class CardVerification {
             CardVerificationResult cvv,
             CardVerificationResult addressLine1,
             CardVerificationResult postalCode) {
-        this(cvv, addressLine1, postalCode, Optional.empty());
+        this(cvv, addressLine1, postalCode,
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -84,9 +87,10 @@ public class CardVerification {
         return (Optional<AccountNameVerification>) accountName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardVerification withCvv(CardVerificationResult cvv) {
         Utils.checkNotNull(cvv, "cvv");
@@ -115,6 +119,7 @@ public class CardVerification {
         return this;
     }
 
+
     /**
      * The results of submitting cardholder name to a card network for verification.
      */
@@ -124,7 +129,6 @@ public class CardVerification {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -144,9 +148,7 @@ public class CardVerification {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cvv,
-            addressLine1,
-            postalCode,
+            cvv, addressLine1, postalCode,
             accountName);
     }
     
@@ -158,20 +160,22 @@ public class CardVerification {
                 "postalCode", postalCode,
                 "accountName", accountName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private CardVerificationResult cvv;
- 
+
         private CardVerificationResult addressLine1;
- 
+
         private CardVerificationResult postalCode;
- 
+
         private Optional<? extends AccountNameVerification> accountName = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder cvv(CardVerificationResult cvv) {
             Utils.checkNotNull(cvv, "cvv");
@@ -179,17 +183,20 @@ public class CardVerification {
             return this;
         }
 
+
         public Builder addressLine1(CardVerificationResult addressLine1) {
             Utils.checkNotNull(addressLine1, "addressLine1");
             this.addressLine1 = addressLine1;
             return this;
         }
 
+
         public Builder postalCode(CardVerificationResult postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = postalCode;
             return this;
         }
+
 
         /**
          * The results of submitting cardholder name to a card network for verification.
@@ -208,13 +215,13 @@ public class CardVerification {
             this.accountName = accountName;
             return this;
         }
-        
+
         public CardVerification build() {
+
             return new CardVerification(
-                cvv,
-                addressLine1,
-                postalCode,
+                cvv, addressLine1, postalCode,
                 accountName);
         }
+
     }
 }

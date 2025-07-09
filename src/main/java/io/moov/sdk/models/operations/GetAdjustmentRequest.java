@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetAdjustmentRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=adjustmentID")
     private String adjustmentID;
@@ -38,9 +40,10 @@ public class GetAdjustmentRequest {
         return adjustmentID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetAdjustmentRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class GetAdjustmentRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class GetAdjustmentRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            adjustmentID);
+            accountID, adjustmentID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class GetAdjustmentRequest {
                 "accountID", accountID,
                 "adjustmentID", adjustmentID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String adjustmentID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class GetAdjustmentRequest {
             return this;
         }
 
+
         public Builder adjustmentID(String adjustmentID) {
             Utils.checkNotNull(adjustmentID, "adjustmentID");
             this.adjustmentID = adjustmentID;
             return this;
         }
-        
+
         public GetAdjustmentRequest build() {
+
             return new GetAdjustmentRequest(
-                accountID,
-                adjustmentID);
+                accountID, adjustmentID);
         }
+
     }
 }

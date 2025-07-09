@@ -18,6 +18,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class RequestCardError extends RuntimeException {
 
@@ -25,21 +26,26 @@ public class RequestCardError extends RuntimeException {
     @JsonProperty("fundingWalletID")
     private Optional<String> fundingWalletID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("formFactor")
     private Optional<String> formFactor;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("authorizedUser")
     private Optional<? extends CreateAuthorizedUserError> authorizedUser;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("memo")
     private Optional<String> memo;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiration")
     private Optional<? extends CardExpirationError> expiration;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("controls")
@@ -69,7 +75,8 @@ public class RequestCardError extends RuntimeException {
     }
     
     public RequestCardError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -105,15 +112,17 @@ public class RequestCardError extends RuntimeException {
         return (Optional<IssuingControlsError>) controls;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RequestCardError withFundingWalletID(String fundingWalletID) {
         Utils.checkNotNull(fundingWalletID, "fundingWalletID");
         this.fundingWalletID = Optional.ofNullable(fundingWalletID);
         return this;
     }
+
 
     public RequestCardError withFundingWalletID(Optional<String> fundingWalletID) {
         Utils.checkNotNull(fundingWalletID, "fundingWalletID");
@@ -127,6 +136,7 @@ public class RequestCardError extends RuntimeException {
         return this;
     }
 
+
     public RequestCardError withFormFactor(Optional<String> formFactor) {
         Utils.checkNotNull(formFactor, "formFactor");
         this.formFactor = formFactor;
@@ -138,6 +148,7 @@ public class RequestCardError extends RuntimeException {
         this.authorizedUser = Optional.ofNullable(authorizedUser);
         return this;
     }
+
 
     public RequestCardError withAuthorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
         Utils.checkNotNull(authorizedUser, "authorizedUser");
@@ -151,6 +162,7 @@ public class RequestCardError extends RuntimeException {
         return this;
     }
 
+
     public RequestCardError withMemo(Optional<String> memo) {
         Utils.checkNotNull(memo, "memo");
         this.memo = memo;
@@ -162,6 +174,7 @@ public class RequestCardError extends RuntimeException {
         this.expiration = Optional.ofNullable(expiration);
         return this;
     }
+
 
     public RequestCardError withExpiration(Optional<? extends CardExpirationError> expiration) {
         Utils.checkNotNull(expiration, "expiration");
@@ -175,13 +188,13 @@ public class RequestCardError extends RuntimeException {
         return this;
     }
 
+
     public RequestCardError withControls(Optional<? extends IssuingControlsError> controls) {
         Utils.checkNotNull(controls, "controls");
         this.controls = controls;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -203,12 +216,8 @@ public class RequestCardError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            fundingWalletID,
-            formFactor,
-            authorizedUser,
-            memo,
-            expiration,
-            controls);
+            fundingWalletID, formFactor, authorizedUser,
+            memo, expiration, controls);
     }
     
     @Override
@@ -221,24 +230,26 @@ public class RequestCardError extends RuntimeException {
                 "expiration", expiration,
                 "controls", controls);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> fundingWalletID = Optional.empty();
- 
+
         private Optional<String> formFactor = Optional.empty();
- 
+
         private Optional<? extends CreateAuthorizedUserError> authorizedUser = Optional.empty();
- 
+
         private Optional<String> memo = Optional.empty();
- 
+
         private Optional<? extends CardExpirationError> expiration = Optional.empty();
- 
+
         private Optional<? extends IssuingControlsError> controls = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder fundingWalletID(String fundingWalletID) {
             Utils.checkNotNull(fundingWalletID, "fundingWalletID");
@@ -252,6 +263,7 @@ public class RequestCardError extends RuntimeException {
             return this;
         }
 
+
         public Builder formFactor(String formFactor) {
             Utils.checkNotNull(formFactor, "formFactor");
             this.formFactor = Optional.ofNullable(formFactor);
@@ -263,6 +275,7 @@ public class RequestCardError extends RuntimeException {
             this.formFactor = formFactor;
             return this;
         }
+
 
         public Builder authorizedUser(CreateAuthorizedUserError authorizedUser) {
             Utils.checkNotNull(authorizedUser, "authorizedUser");
@@ -276,6 +289,7 @@ public class RequestCardError extends RuntimeException {
             return this;
         }
 
+
         public Builder memo(String memo) {
             Utils.checkNotNull(memo, "memo");
             this.memo = Optional.ofNullable(memo);
@@ -287,6 +301,7 @@ public class RequestCardError extends RuntimeException {
             this.memo = memo;
             return this;
         }
+
 
         public Builder expiration(CardExpirationError expiration) {
             Utils.checkNotNull(expiration, "expiration");
@@ -300,6 +315,7 @@ public class RequestCardError extends RuntimeException {
             return this;
         }
 
+
         public Builder controls(IssuingControlsError controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = Optional.ofNullable(controls);
@@ -311,16 +327,14 @@ public class RequestCardError extends RuntimeException {
             this.controls = controls;
             return this;
         }
-        
+
         public RequestCardError build() {
+
             return new RequestCardError(
-                fundingWalletID,
-                formFactor,
-                authorizedUser,
-                memo,
-                expiration,
-                controls);
+                fundingWalletID, formFactor, authorizedUser,
+                memo, expiration, controls);
         }
+
     }
 }
 

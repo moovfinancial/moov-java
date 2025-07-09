@@ -16,6 +16,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class CreateTicketError extends RuntimeException {
 
@@ -23,9 +24,11 @@ public class CreateTicketError extends RuntimeException {
     @JsonProperty("title")
     private Optional<String> title;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("body")
     private Optional<String> body;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contact")
@@ -65,15 +68,17 @@ public class CreateTicketError extends RuntimeException {
         return (Optional<CreateTicketContactError>) contact;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateTicketError withTitle(String title) {
         Utils.checkNotNull(title, "title");
         this.title = Optional.ofNullable(title);
         return this;
     }
+
 
     public CreateTicketError withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
@@ -87,6 +92,7 @@ public class CreateTicketError extends RuntimeException {
         return this;
     }
 
+
     public CreateTicketError withBody(Optional<String> body) {
         Utils.checkNotNull(body, "body");
         this.body = body;
@@ -99,13 +105,13 @@ public class CreateTicketError extends RuntimeException {
         return this;
     }
 
+
     public CreateTicketError withContact(Optional<? extends CreateTicketContactError> contact) {
         Utils.checkNotNull(contact, "contact");
         this.contact = contact;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -124,9 +130,7 @@ public class CreateTicketError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            title,
-            body,
-            contact);
+            title, body, contact);
     }
     
     @Override
@@ -136,18 +140,20 @@ public class CreateTicketError extends RuntimeException {
                 "body", body,
                 "contact", contact);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> body = Optional.empty();
- 
+
         private Optional<? extends CreateTicketContactError> contact = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -161,6 +167,7 @@ public class CreateTicketError extends RuntimeException {
             return this;
         }
 
+
         public Builder body(String body) {
             Utils.checkNotNull(body, "body");
             this.body = Optional.ofNullable(body);
@@ -173,6 +180,7 @@ public class CreateTicketError extends RuntimeException {
             return this;
         }
 
+
         public Builder contact(CreateTicketContactError contact) {
             Utils.checkNotNull(contact, "contact");
             this.contact = Optional.ofNullable(contact);
@@ -184,13 +192,13 @@ public class CreateTicketError extends RuntimeException {
             this.contact = contact;
             return this;
         }
-        
+
         public CreateTicketError build() {
+
             return new CreateTicketError(
-                title,
-                body,
-                contact);
+                title, body, contact);
         }
+
     }
 }
 

@@ -13,15 +13,18 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class CardAcceptanceMethodsError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("inPersonPercentage")
     private Optional<String> inPersonPercentage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mailOrPhonePercentage")
     private Optional<String> mailOrPhonePercentage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("onlinePercentage")
@@ -59,15 +62,17 @@ public class CardAcceptanceMethodsError {
         return onlinePercentage;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardAcceptanceMethodsError withInPersonPercentage(String inPersonPercentage) {
         Utils.checkNotNull(inPersonPercentage, "inPersonPercentage");
         this.inPersonPercentage = Optional.ofNullable(inPersonPercentage);
         return this;
     }
+
 
     public CardAcceptanceMethodsError withInPersonPercentage(Optional<String> inPersonPercentage) {
         Utils.checkNotNull(inPersonPercentage, "inPersonPercentage");
@@ -81,6 +86,7 @@ public class CardAcceptanceMethodsError {
         return this;
     }
 
+
     public CardAcceptanceMethodsError withMailOrPhonePercentage(Optional<String> mailOrPhonePercentage) {
         Utils.checkNotNull(mailOrPhonePercentage, "mailOrPhonePercentage");
         this.mailOrPhonePercentage = mailOrPhonePercentage;
@@ -93,13 +99,13 @@ public class CardAcceptanceMethodsError {
         return this;
     }
 
+
     public CardAcceptanceMethodsError withOnlinePercentage(Optional<String> onlinePercentage) {
         Utils.checkNotNull(onlinePercentage, "onlinePercentage");
         this.onlinePercentage = onlinePercentage;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +124,7 @@ public class CardAcceptanceMethodsError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            inPersonPercentage,
-            mailOrPhonePercentage,
-            onlinePercentage);
+            inPersonPercentage, mailOrPhonePercentage, onlinePercentage);
     }
     
     @Override
@@ -130,18 +134,20 @@ public class CardAcceptanceMethodsError {
                 "mailOrPhonePercentage", mailOrPhonePercentage,
                 "onlinePercentage", onlinePercentage);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> inPersonPercentage = Optional.empty();
- 
+
         private Optional<String> mailOrPhonePercentage = Optional.empty();
- 
+
         private Optional<String> onlinePercentage = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder inPersonPercentage(String inPersonPercentage) {
             Utils.checkNotNull(inPersonPercentage, "inPersonPercentage");
@@ -155,6 +161,7 @@ public class CardAcceptanceMethodsError {
             return this;
         }
 
+
         public Builder mailOrPhonePercentage(String mailOrPhonePercentage) {
             Utils.checkNotNull(mailOrPhonePercentage, "mailOrPhonePercentage");
             this.mailOrPhonePercentage = Optional.ofNullable(mailOrPhonePercentage);
@@ -167,6 +174,7 @@ public class CardAcceptanceMethodsError {
             return this;
         }
 
+
         public Builder onlinePercentage(String onlinePercentage) {
             Utils.checkNotNull(onlinePercentage, "onlinePercentage");
             this.onlinePercentage = Optional.ofNullable(onlinePercentage);
@@ -178,12 +186,12 @@ public class CardAcceptanceMethodsError {
             this.onlinePercentage = onlinePercentage;
             return this;
         }
-        
+
         public CardAcceptanceMethodsError build() {
+
             return new CardAcceptanceMethodsError(
-                inPersonPercentage,
-                mailOrPhonePercentage,
-                onlinePercentage);
+                inPersonPercentage, mailOrPhonePercentage, onlinePercentage);
         }
+
     }
 }

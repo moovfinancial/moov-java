@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class ColorsValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("light")
     private Optional<? extends BrandColorValidationError> light;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("dark")
@@ -50,15 +52,17 @@ public class ColorsValidationError {
         return (Optional<BrandColorValidationError>) dark;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ColorsValidationError withLight(BrandColorValidationError light) {
         Utils.checkNotNull(light, "light");
         this.light = Optional.ofNullable(light);
         return this;
     }
+
 
     public ColorsValidationError withLight(Optional<? extends BrandColorValidationError> light) {
         Utils.checkNotNull(light, "light");
@@ -72,13 +76,13 @@ public class ColorsValidationError {
         return this;
     }
 
+
     public ColorsValidationError withDark(Optional<? extends BrandColorValidationError> dark) {
         Utils.checkNotNull(dark, "dark");
         this.dark = dark;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class ColorsValidationError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            light,
-            dark);
+            light, dark);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class ColorsValidationError {
                 "light", light,
                 "dark", dark);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends BrandColorValidationError> light = Optional.empty();
- 
+
         private Optional<? extends BrandColorValidationError> dark = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder light(BrandColorValidationError light) {
             Utils.checkNotNull(light, "light");
@@ -129,6 +134,7 @@ public class ColorsValidationError {
             return this;
         }
 
+
         public Builder dark(BrandColorValidationError dark) {
             Utils.checkNotNull(dark, "dark");
             this.dark = Optional.ofNullable(dark);
@@ -140,11 +146,12 @@ public class ColorsValidationError {
             this.dark = dark;
             return this;
         }
-        
+
         public ColorsValidationError build() {
+
             return new ColorsValidationError(
-                light,
-                dark);
+                light, dark);
         }
+
     }
 }

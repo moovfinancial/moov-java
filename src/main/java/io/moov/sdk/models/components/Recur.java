@@ -21,7 +21,6 @@ import java.util.Optional;
  * <p>Defines configuration for recurring transfers.
  */
 public class Recur {
-
     /**
      * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10). 
      *   Generators available online at the following sites - https://freetools.textmagic.com/rrule-generator, https://jkbrzt.github.io/rrule/
@@ -41,6 +40,7 @@ public class Recur {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("indefinite")
     private Optional<Boolean> indefinite;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("start")
@@ -65,7 +65,8 @@ public class Recur {
     public Recur(
             String recurrenceRule,
             RunTransfer runTransfer) {
-        this(recurrenceRule, runTransfer, Optional.empty(), Optional.empty());
+        this(recurrenceRule, runTransfer, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -98,9 +99,10 @@ public class Recur {
         return start;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10). 
@@ -130,6 +132,7 @@ public class Recur {
         return this;
     }
 
+
     /**
      * True if the RRule set runs indefinitely.
      */
@@ -145,13 +148,13 @@ public class Recur {
         return this;
     }
 
+
     public Recur withStart(Optional<OffsetDateTime> start) {
         Utils.checkNotNull(start, "start");
         this.start = start;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -171,9 +174,7 @@ public class Recur {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            recurrenceRule,
-            runTransfer,
-            indefinite,
+            recurrenceRule, runTransfer, indefinite,
             start);
     }
     
@@ -185,20 +186,22 @@ public class Recur {
                 "indefinite", indefinite,
                 "start", start);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String recurrenceRule;
- 
+
         private RunTransfer runTransfer;
- 
+
         private Optional<Boolean> indefinite = Optional.empty();
- 
+
         private Optional<OffsetDateTime> start = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10). 
@@ -210,6 +213,7 @@ public class Recur {
             return this;
         }
 
+
         /**
          * Defines the attributes of a transfer.
          */
@@ -218,6 +222,7 @@ public class Recur {
             this.runTransfer = runTransfer;
             return this;
         }
+
 
         /**
          * True if the RRule set runs indefinitely.
@@ -237,6 +242,7 @@ public class Recur {
             return this;
         }
 
+
         public Builder start(OffsetDateTime start) {
             Utils.checkNotNull(start, "start");
             this.start = Optional.ofNullable(start);
@@ -248,13 +254,13 @@ public class Recur {
             this.start = start;
             return this;
         }
-        
+
         public Recur build() {
+
             return new Recur(
-                recurrenceRule,
-                runTransfer,
-                indefinite,
+                recurrenceRule, runTransfer, indefinite,
                 start);
         }
+
     }
 }

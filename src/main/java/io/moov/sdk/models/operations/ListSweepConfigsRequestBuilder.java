@@ -37,7 +37,7 @@ public class ListSweepConfigsRequestBuilder {
     public ListSweepConfigsResponse call() throws Exception {
         
         RequestOperation<ListSweepConfigsRequest, ListSweepConfigsResponse> operation
-              = new ListSweepConfigsOperation( sdkConfiguration);
+              = new ListSweepConfigsOperation(sdkConfiguration);
         ListSweepConfigsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

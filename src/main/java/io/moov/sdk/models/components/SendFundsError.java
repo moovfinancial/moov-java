@@ -14,15 +14,18 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class SendFundsError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ach")
     private Optional<? extends SendFundsAchError> ach;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushToCard")
     private Optional<? extends SendFundsPushToCardError> pushToCard;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rtp")
@@ -63,15 +66,17 @@ public class SendFundsError {
         return (Optional<SendFundsRtpError>) rtp;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public SendFundsError withAch(SendFundsAchError ach) {
         Utils.checkNotNull(ach, "ach");
         this.ach = Optional.ofNullable(ach);
         return this;
     }
+
 
     public SendFundsError withAch(Optional<? extends SendFundsAchError> ach) {
         Utils.checkNotNull(ach, "ach");
@@ -85,6 +90,7 @@ public class SendFundsError {
         return this;
     }
 
+
     public SendFundsError withPushToCard(Optional<? extends SendFundsPushToCardError> pushToCard) {
         Utils.checkNotNull(pushToCard, "pushToCard");
         this.pushToCard = pushToCard;
@@ -97,13 +103,13 @@ public class SendFundsError {
         return this;
     }
 
+
     public SendFundsError withRtp(Optional<? extends SendFundsRtpError> rtp) {
         Utils.checkNotNull(rtp, "rtp");
         this.rtp = rtp;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -122,9 +128,7 @@ public class SendFundsError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ach,
-            pushToCard,
-            rtp);
+            ach, pushToCard, rtp);
     }
     
     @Override
@@ -134,18 +138,20 @@ public class SendFundsError {
                 "pushToCard", pushToCard,
                 "rtp", rtp);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends SendFundsAchError> ach = Optional.empty();
- 
+
         private Optional<? extends SendFundsPushToCardError> pushToCard = Optional.empty();
- 
+
         private Optional<? extends SendFundsRtpError> rtp = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ach(SendFundsAchError ach) {
             Utils.checkNotNull(ach, "ach");
@@ -159,6 +165,7 @@ public class SendFundsError {
             return this;
         }
 
+
         public Builder pushToCard(SendFundsPushToCardError pushToCard) {
             Utils.checkNotNull(pushToCard, "pushToCard");
             this.pushToCard = Optional.ofNullable(pushToCard);
@@ -171,6 +178,7 @@ public class SendFundsError {
             return this;
         }
 
+
         public Builder rtp(SendFundsRtpError rtp) {
             Utils.checkNotNull(rtp, "rtp");
             this.rtp = Optional.ofNullable(rtp);
@@ -182,12 +190,12 @@ public class SendFundsError {
             this.rtp = rtp;
             return this;
         }
-        
+
         public SendFundsError build() {
+
             return new SendFundsError(
-                ach,
-                pushToCard,
-                rtp);
+                ach, pushToCard, rtp);
         }
+
     }
 }

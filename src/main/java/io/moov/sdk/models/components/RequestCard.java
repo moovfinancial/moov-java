@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class RequestCard {
 
     @JsonProperty("fundingWalletID")
@@ -45,6 +46,7 @@ public class RequestCard {
     @JsonProperty("expiration")
     private Optional<? extends CardExpiration> expiration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("controls")
     private Optional<? extends IssuingControls> controls;
@@ -75,7 +77,8 @@ public class RequestCard {
             String fundingWalletID,
             CreateAuthorizedUser authorizedUser,
             IssuedCardFormFactor formFactor) {
-        this(fundingWalletID, authorizedUser, formFactor, Optional.empty(), Optional.empty(), Optional.empty());
+        this(fundingWalletID, authorizedUser, formFactor,
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -122,9 +125,10 @@ public class RequestCard {
         return (Optional<IssuingControls>) controls;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RequestCard withFundingWalletID(String fundingWalletID) {
         Utils.checkNotNull(fundingWalletID, "fundingWalletID");
@@ -159,6 +163,7 @@ public class RequestCard {
         return this;
     }
 
+
     /**
      * An optional descriptive name for the card.
      */
@@ -177,6 +182,7 @@ public class RequestCard {
         return this;
     }
 
+
     /**
      * The expiration date of the card or token.
      */
@@ -192,13 +198,13 @@ public class RequestCard {
         return this;
     }
 
+
     public RequestCard withControls(Optional<? extends IssuingControls> controls) {
         Utils.checkNotNull(controls, "controls");
         this.controls = controls;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -220,12 +226,8 @@ public class RequestCard {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            fundingWalletID,
-            authorizedUser,
-            formFactor,
-            memo,
-            expiration,
-            controls);
+            fundingWalletID, authorizedUser, formFactor,
+            memo, expiration, controls);
     }
     
     @Override
@@ -238,30 +240,33 @@ public class RequestCard {
                 "expiration", expiration,
                 "controls", controls);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String fundingWalletID;
- 
+
         private CreateAuthorizedUser authorizedUser;
- 
+
         private IssuedCardFormFactor formFactor;
- 
+
         private Optional<String> memo = Optional.empty();
- 
+
         private Optional<? extends CardExpiration> expiration = Optional.empty();
- 
+
         private Optional<? extends IssuingControls> controls = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder fundingWalletID(String fundingWalletID) {
             Utils.checkNotNull(fundingWalletID, "fundingWalletID");
             this.fundingWalletID = fundingWalletID;
             return this;
         }
+
 
         /**
          * Fields for identifying an authorized individual.
@@ -272,6 +277,7 @@ public class RequestCard {
             return this;
         }
 
+
         /**
          * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
          */
@@ -280,6 +286,7 @@ public class RequestCard {
             this.formFactor = formFactor;
             return this;
         }
+
 
         /**
          * An optional descriptive name for the card.
@@ -299,6 +306,7 @@ public class RequestCard {
             return this;
         }
 
+
         /**
          * The expiration date of the card or token.
          */
@@ -317,6 +325,7 @@ public class RequestCard {
             return this;
         }
 
+
         public Builder controls(IssuingControls controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = Optional.ofNullable(controls);
@@ -328,15 +337,13 @@ public class RequestCard {
             this.controls = controls;
             return this;
         }
-        
+
         public RequestCard build() {
+
             return new RequestCard(
-                fundingWalletID,
-                authorizedUser,
-                formFactor,
-                memo,
-                expiration,
-                controls);
+                fundingWalletID, authorizedUser, formFactor,
+                memo, expiration, controls);
         }
+
     }
 }

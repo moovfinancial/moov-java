@@ -15,9 +15,9 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class LinkApplePayError extends RuntimeException {
-
     /**
      * Describes an error that wasn't attributable to a single request field.
      */
@@ -64,7 +64,8 @@ public class LinkApplePayError extends RuntimeException {
     }
     
     public LinkApplePayError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -99,9 +100,10 @@ public class LinkApplePayError extends RuntimeException {
         return transactionIdentifier;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Describes an error that wasn't attributable to a single request field.
@@ -111,6 +113,7 @@ public class LinkApplePayError extends RuntimeException {
         this.error = Optional.ofNullable(error);
         return this;
     }
+
 
     /**
      * Describes an error that wasn't attributable to a single request field.
@@ -130,6 +133,7 @@ public class LinkApplePayError extends RuntimeException {
         return this;
     }
 
+
     /**
      * Describes an error within the `token.paymentData` request field.
      */
@@ -147,6 +151,7 @@ public class LinkApplePayError extends RuntimeException {
         this.paymentMethod = Optional.ofNullable(paymentMethod);
         return this;
     }
+
 
     /**
      * Describes an error within the `token.paymentMethod` request field.
@@ -166,6 +171,7 @@ public class LinkApplePayError extends RuntimeException {
         return this;
     }
 
+
     /**
      * Describes an error within the `token.transactionIdentifier` request field.
      */
@@ -175,7 +181,6 @@ public class LinkApplePayError extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -195,9 +200,7 @@ public class LinkApplePayError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            error,
-            paymentData,
-            paymentMethod,
+            error, paymentData, paymentMethod,
             transactionIdentifier);
     }
     
@@ -209,20 +212,22 @@ public class LinkApplePayError extends RuntimeException {
                 "paymentMethod", paymentMethod,
                 "transactionIdentifier", transactionIdentifier);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> error = Optional.empty();
- 
+
         private Optional<String> paymentData = Optional.empty();
- 
+
         private Optional<String> paymentMethod = Optional.empty();
- 
+
         private Optional<String> transactionIdentifier = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Describes an error that wasn't attributable to a single request field.
@@ -242,6 +247,7 @@ public class LinkApplePayError extends RuntimeException {
             return this;
         }
 
+
         /**
          * Describes an error within the `token.paymentData` request field.
          */
@@ -259,6 +265,7 @@ public class LinkApplePayError extends RuntimeException {
             this.paymentData = paymentData;
             return this;
         }
+
 
         /**
          * Describes an error within the `token.paymentMethod` request field.
@@ -278,6 +285,7 @@ public class LinkApplePayError extends RuntimeException {
             return this;
         }
 
+
         /**
          * Describes an error within the `token.transactionIdentifier` request field.
          */
@@ -295,14 +303,14 @@ public class LinkApplePayError extends RuntimeException {
             this.transactionIdentifier = transactionIdentifier;
             return this;
         }
-        
+
         public LinkApplePayError build() {
+
             return new LinkApplePayError(
-                error,
-                paymentData,
-                paymentMethod,
+                error, paymentData, paymentMethod,
                 transactionIdentifier);
         }
+
     }
 }
 

@@ -16,13 +16,16 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 public class IssuedCardAuthorization {
 
     @JsonProperty("authorizationID")
     private String authorizationID;
 
+
     @JsonProperty("issuedCardID")
     private String issuedCardID;
+
 
     @JsonProperty("fundingWalletID")
     private String fundingWalletID;
@@ -45,8 +48,10 @@ public class IssuedCardAuthorization {
     @JsonProperty("status")
     private IssuingAuthorizationStatus status;
 
+
     @JsonProperty("merchantData")
     private IssuingMerchantData merchantData;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -98,7 +103,9 @@ public class IssuedCardAuthorization {
             IssuingAuthorizationStatus status,
             IssuingMerchantData merchantData,
             OffsetDateTime createdOn) {
-        this(authorizationID, issuedCardID, fundingWalletID, network, authorizedAmount, status, merchantData, createdOn, Optional.empty());
+        this(authorizationID, issuedCardID, fundingWalletID,
+            network, authorizedAmount, status,
+            merchantData, createdOn, Optional.empty());
     }
 
     @JsonIgnore
@@ -159,9 +166,10 @@ public class IssuedCardAuthorization {
         return (Optional<List<String>>) cardTransactions;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public IssuedCardAuthorization withAuthorizationID(String authorizationID) {
         Utils.checkNotNull(authorizationID, "authorizationID");
@@ -229,6 +237,7 @@ public class IssuedCardAuthorization {
         return this;
     }
 
+
     /**
      * List of card transaction IDs associated with this authorization.
      */
@@ -238,7 +247,6 @@ public class IssuedCardAuthorization {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -263,15 +271,9 @@ public class IssuedCardAuthorization {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            authorizationID,
-            issuedCardID,
-            fundingWalletID,
-            network,
-            authorizedAmount,
-            status,
-            merchantData,
-            createdOn,
-            cardTransactions);
+            authorizationID, issuedCardID, fundingWalletID,
+            network, authorizedAmount, status,
+            merchantData, createdOn, cardTransactions);
     }
     
     @Override
@@ -287,30 +289,32 @@ public class IssuedCardAuthorization {
                 "createdOn", createdOn,
                 "cardTransactions", cardTransactions);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String authorizationID;
- 
+
         private String issuedCardID;
- 
+
         private String fundingWalletID;
- 
+
         private CardIssuingNetwork network;
- 
+
         private String authorizedAmount;
- 
+
         private IssuingAuthorizationStatus status;
- 
+
         private IssuingMerchantData merchantData;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private Optional<? extends List<String>> cardTransactions = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder authorizationID(String authorizationID) {
             Utils.checkNotNull(authorizationID, "authorizationID");
@@ -318,17 +322,20 @@ public class IssuedCardAuthorization {
             return this;
         }
 
+
         public Builder issuedCardID(String issuedCardID) {
             Utils.checkNotNull(issuedCardID, "issuedCardID");
             this.issuedCardID = issuedCardID;
             return this;
         }
 
+
         public Builder fundingWalletID(String fundingWalletID) {
             Utils.checkNotNull(fundingWalletID, "fundingWalletID");
             this.fundingWalletID = fundingWalletID;
             return this;
         }
+
 
         /**
          * The name of the network a card transaction is routed through.
@@ -339,6 +346,7 @@ public class IssuedCardAuthorization {
             return this;
         }
 
+
         /**
          * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
          */
@@ -347,6 +355,7 @@ public class IssuedCardAuthorization {
             this.authorizedAmount = authorizedAmount;
             return this;
         }
+
 
         /**
          * Status of a card issuing authorization.
@@ -357,17 +366,20 @@ public class IssuedCardAuthorization {
             return this;
         }
 
+
         public Builder merchantData(IssuingMerchantData merchantData) {
             Utils.checkNotNull(merchantData, "merchantData");
             this.merchantData = merchantData;
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
+
 
         /**
          * List of card transaction IDs associated with this authorization.
@@ -386,18 +398,14 @@ public class IssuedCardAuthorization {
             this.cardTransactions = cardTransactions;
             return this;
         }
-        
+
         public IssuedCardAuthorization build() {
+
             return new IssuedCardAuthorization(
-                authorizationID,
-                issuedCardID,
-                fundingWalletID,
-                network,
-                authorizedAmount,
-                status,
-                merchantData,
-                createdOn,
-                cardTransactions);
+                authorizationID, issuedCardID, fundingWalletID,
+                network, authorizedAmount, status,
+                merchantData, createdOn, cardTransactions);
         }
+
     }
 }

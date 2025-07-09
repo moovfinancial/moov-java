@@ -20,6 +20,7 @@ public class AuthorizedUser {
     @JsonProperty("firstName")
     private String firstName;
 
+
     @JsonProperty("lastName")
     private String lastName;
 
@@ -43,9 +44,10 @@ public class AuthorizedUser {
         return lastName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AuthorizedUser withFirstName(String firstName) {
         Utils.checkNotNull(firstName, "firstName");
@@ -59,7 +61,6 @@ public class AuthorizedUser {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,8 +78,7 @@ public class AuthorizedUser {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            firstName,
-            lastName);
+            firstName, lastName);
     }
     
     @Override
@@ -87,16 +87,18 @@ public class AuthorizedUser {
                 "firstName", firstName,
                 "lastName", lastName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String firstName;
- 
+
         private String lastName;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder firstName(String firstName) {
             Utils.checkNotNull(firstName, "firstName");
@@ -104,16 +106,18 @@ public class AuthorizedUser {
             return this;
         }
 
+
         public Builder lastName(String lastName) {
             Utils.checkNotNull(lastName, "lastName");
             this.lastName = lastName;
             return this;
         }
-        
+
         public AuthorizedUser build() {
+
             return new AuthorizedUser(
-                firstName,
-                lastName);
+                firstName, lastName);
         }
+
     }
 }

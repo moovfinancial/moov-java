@@ -17,8 +17,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class ListTransfersRequest {
 
+public class ListTransfersRequest {
     /**
      * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
      */
@@ -79,11 +79,14 @@ public class ListTransfersRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=foreignID")
     private Optional<String> foreignID;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -133,7 +136,11 @@ public class ListTransfersRequest {
     
     public ListTransfersRequest(
             String accountID) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), accountID);
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            accountID);
     }
 
     /**
@@ -233,9 +240,10 @@ public class ListTransfersRequest {
         return accountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
@@ -245,6 +253,7 @@ public class ListTransfersRequest {
         this.accountIDs = Optional.ofNullable(accountIDs);
         return this;
     }
+
 
     /**
      * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
@@ -264,6 +273,7 @@ public class ListTransfersRequest {
         return this;
     }
 
+
     /**
      * Optional parameter for filtering transfers by status.
      */
@@ -281,6 +291,7 @@ public class ListTransfersRequest {
         this.startDateTime = Optional.ofNullable(startDateTime);
         return this;
     }
+
 
     /**
      * Optional date-time which inclusively filters all transfers created after this date-time.
@@ -300,6 +311,7 @@ public class ListTransfersRequest {
         return this;
     }
 
+
     /**
      * Optional date-time which exclusively filters all transfers created before this date-time.
      */
@@ -317,6 +329,7 @@ public class ListTransfersRequest {
         this.groupID = Optional.ofNullable(groupID);
         return this;
     }
+
 
     /**
      * Optional ID to filter for transfers in the same group.
@@ -336,6 +349,7 @@ public class ListTransfersRequest {
         return this;
     }
 
+
     /**
      * Optional ID to filter for transfer occurrences belonging to the same schedule.
      */
@@ -353,6 +367,7 @@ public class ListTransfersRequest {
         this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
         return this;
     }
+
 
     /**
      * Optional code to filter for transfers associated with the payment link.
@@ -372,6 +387,7 @@ public class ListTransfersRequest {
         return this;
     }
 
+
     /**
      * Optional parameter to only return refunded transfers.
      */
@@ -389,6 +405,7 @@ public class ListTransfersRequest {
         this.disputed = Optional.ofNullable(disputed);
         return this;
     }
+
 
     /**
      * Optional parameter to only return disputed transfers.
@@ -408,6 +425,7 @@ public class ListTransfersRequest {
         return this;
     }
 
+
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
@@ -423,6 +441,7 @@ public class ListTransfersRequest {
         return this;
     }
 
+
     public ListTransfersRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -434,6 +453,7 @@ public class ListTransfersRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public ListTransfersRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
@@ -447,7 +467,6 @@ public class ListTransfersRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -476,18 +495,10 @@ public class ListTransfersRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountIDs,
-            status,
-            startDateTime,
-            endDateTime,
-            groupID,
-            scheduleID,
-            paymentLinkCode,
-            refunded,
-            disputed,
-            foreignID,
-            skip,
-            count,
+            accountIDs, status, startDateTime,
+            endDateTime, groupID, scheduleID,
+            paymentLinkCode, refunded, disputed,
+            foreignID, skip, count,
             accountID);
     }
     
@@ -508,38 +519,40 @@ public class ListTransfersRequest {
                 "count", count,
                 "accountID", accountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<String>> accountIDs = Optional.empty();
- 
+
         private Optional<? extends TransferStatus> status = Optional.empty();
- 
+
         private Optional<OffsetDateTime> startDateTime = Optional.empty();
- 
+
         private Optional<OffsetDateTime> endDateTime = Optional.empty();
- 
+
         private Optional<String> groupID = Optional.empty();
- 
+
         private Optional<String> scheduleID = Optional.empty();
- 
+
         private Optional<String> paymentLinkCode = Optional.empty();
- 
+
         private Optional<Boolean> refunded = Optional.empty();
- 
+
         private Optional<Boolean> disputed = Optional.empty();
- 
+
         private Optional<String> foreignID = Optional.empty();
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private String accountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
@@ -559,6 +572,7 @@ public class ListTransfersRequest {
             return this;
         }
 
+
         /**
          * Optional parameter for filtering transfers by status.
          */
@@ -576,6 +590,7 @@ public class ListTransfersRequest {
             this.status = status;
             return this;
         }
+
 
         /**
          * Optional date-time which inclusively filters all transfers created after this date-time.
@@ -595,6 +610,7 @@ public class ListTransfersRequest {
             return this;
         }
 
+
         /**
          * Optional date-time which exclusively filters all transfers created before this date-time.
          */
@@ -612,6 +628,7 @@ public class ListTransfersRequest {
             this.endDateTime = endDateTime;
             return this;
         }
+
 
         /**
          * Optional ID to filter for transfers in the same group.
@@ -631,6 +648,7 @@ public class ListTransfersRequest {
             return this;
         }
 
+
         /**
          * Optional ID to filter for transfer occurrences belonging to the same schedule.
          */
@@ -648,6 +666,7 @@ public class ListTransfersRequest {
             this.scheduleID = scheduleID;
             return this;
         }
+
 
         /**
          * Optional code to filter for transfers associated with the payment link.
@@ -667,6 +686,7 @@ public class ListTransfersRequest {
             return this;
         }
 
+
         /**
          * Optional parameter to only return refunded transfers.
          */
@@ -684,6 +704,7 @@ public class ListTransfersRequest {
             this.refunded = refunded;
             return this;
         }
+
 
         /**
          * Optional parameter to only return disputed transfers.
@@ -703,6 +724,7 @@ public class ListTransfersRequest {
             return this;
         }
 
+
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
@@ -721,6 +743,7 @@ public class ListTransfersRequest {
             return this;
         }
 
+
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
@@ -732,6 +755,7 @@ public class ListTransfersRequest {
             this.skip = skip;
             return this;
         }
+
 
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
@@ -745,27 +769,22 @@ public class ListTransfersRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
-        
+
         public ListTransfersRequest build() {
+
             return new ListTransfersRequest(
-                accountIDs,
-                status,
-                startDateTime,
-                endDateTime,
-                groupID,
-                scheduleID,
-                paymentLinkCode,
-                refunded,
-                disputed,
-                foreignID,
-                skip,
-                count,
+                accountIDs, status, startDateTime,
+                endDateTime, groupID, scheduleID,
+                paymentLinkCode, refunded, disputed,
+                foreignID, skip, count,
                 accountID);
         }
+
     }
 }

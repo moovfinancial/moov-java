@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class ACHPaymentSettings {
 
+public class ACHPaymentSettings {
     /**
      * The description that shows up on ACH transactions. This will default to the account's display name on account creation.
      */
@@ -33,9 +33,10 @@ public class ACHPaymentSettings {
         return companyName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The description that shows up on ACH transactions. This will default to the account's display name on account creation.
@@ -46,7 +47,6 @@ public class ACHPaymentSettings {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class ACHPaymentSettings {
         return Utils.toString(ACHPaymentSettings.class,
                 "companyName", companyName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String companyName;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The description that shows up on ACH transactions. This will default to the account's display name on account creation.
@@ -88,10 +90,12 @@ public class ACHPaymentSettings {
             this.companyName = companyName;
             return this;
         }
-        
+
         public ACHPaymentSettings build() {
+
             return new ACHPaymentSettings(
                 companyName);
         }
+
     }
 }

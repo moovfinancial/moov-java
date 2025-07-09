@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetDisputeRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=disputeID")
     private String disputeID;
@@ -38,9 +40,10 @@ public class GetDisputeRequest {
         return disputeID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetDisputeRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class GetDisputeRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class GetDisputeRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            disputeID);
+            accountID, disputeID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class GetDisputeRequest {
                 "accountID", accountID,
                 "disputeID", disputeID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String disputeID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class GetDisputeRequest {
             return this;
         }
 
+
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = disputeID;
             return this;
         }
-        
+
         public GetDisputeRequest build() {
+
             return new GetDisputeRequest(
-                accountID,
-                disputeID);
+                accountID, disputeID);
         }
+
     }
 }

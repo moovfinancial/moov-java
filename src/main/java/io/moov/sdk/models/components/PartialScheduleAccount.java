@@ -13,13 +13,16 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class PartialScheduleAccount {
 
     @JsonProperty("accountID")
     private String accountID;
 
+
     @JsonProperty("displayName")
     private String displayName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
@@ -59,9 +62,10 @@ public class PartialScheduleAccount {
         return email;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PartialScheduleAccount withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -81,13 +85,13 @@ public class PartialScheduleAccount {
         return this;
     }
 
+
     public PartialScheduleAccount withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -106,9 +110,7 @@ public class PartialScheduleAccount {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            displayName,
-            email);
+            accountID, displayName, email);
     }
     
     @Override
@@ -118,18 +120,20 @@ public class PartialScheduleAccount {
                 "displayName", displayName,
                 "email", email);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String displayName;
- 
+
         private Optional<String> email = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -137,11 +141,13 @@ public class PartialScheduleAccount {
             return this;
         }
 
+
         public Builder displayName(String displayName) {
             Utils.checkNotNull(displayName, "displayName");
             this.displayName = displayName;
             return this;
         }
+
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -154,12 +160,12 @@ public class PartialScheduleAccount {
             this.email = email;
             return this;
         }
-        
+
         public PartialScheduleAccount build() {
+
             return new PartialScheduleAccount(
-                accountID,
-                displayName,
-                email);
+                accountID, displayName, email);
         }
+
     }
 }

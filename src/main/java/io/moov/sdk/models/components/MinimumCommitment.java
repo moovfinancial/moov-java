@@ -16,7 +16,6 @@ import java.lang.String;
  * <p>The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
  */
 public class MinimumCommitment {
-
     /**
      * A 3-letter ISO 4217 currency code.
      */
@@ -59,9 +58,10 @@ public class MinimumCommitment {
         return valueDecimal;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A 3-letter ISO 4217 currency code.
@@ -83,7 +83,6 @@ public class MinimumCommitment {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -101,8 +100,7 @@ public class MinimumCommitment {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            currency,
-            valueDecimal);
+            currency, valueDecimal);
     }
     
     @Override
@@ -111,16 +109,18 @@ public class MinimumCommitment {
                 "currency", currency,
                 "valueDecimal", valueDecimal);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String currency;
- 
+
         private String valueDecimal;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A 3-letter ISO 4217 currency code.
@@ -130,6 +130,7 @@ public class MinimumCommitment {
             this.currency = currency;
             return this;
         }
+
 
         /**
          * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
@@ -141,11 +142,12 @@ public class MinimumCommitment {
             this.valueDecimal = valueDecimal;
             return this;
         }
-        
+
         public MinimumCommitment build() {
+
             return new MinimumCommitment(
-                currency,
-                valueDecimal);
+                currency, valueDecimal);
         }
+
     }
 }

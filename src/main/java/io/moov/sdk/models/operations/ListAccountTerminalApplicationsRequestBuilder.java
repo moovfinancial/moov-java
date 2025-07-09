@@ -37,7 +37,7 @@ public class ListAccountTerminalApplicationsRequestBuilder {
     public ListAccountTerminalApplicationsResponse call() throws Exception {
         
         RequestOperation<ListAccountTerminalApplicationsRequest, ListAccountTerminalApplicationsResponse> operation
-              = new ListAccountTerminalApplicationsOperation( sdkConfiguration);
+              = new ListAccountTerminalApplicationsOperation(sdkConfiguration);
         ListAccountTerminalApplicationsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

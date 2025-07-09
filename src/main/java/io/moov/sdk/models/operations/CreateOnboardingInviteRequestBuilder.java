@@ -29,7 +29,7 @@ public class CreateOnboardingInviteRequestBuilder {
     public CreateOnboardingInviteResponse call() throws Exception {
         
         RequestOperation<OnboardingInviteRequest, CreateOnboardingInviteResponse> operation
-              = new CreateOnboardingInviteOperation( sdkConfiguration);
+              = new CreateOnboardingInviteOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

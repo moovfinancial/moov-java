@@ -11,8 +11,8 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 
-public class Amount {
 
+public class Amount {
     /**
      * A 3-letter ISO 4217 currency code.
      */
@@ -55,9 +55,10 @@ public class Amount {
         return value;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A 3-letter ISO 4217 currency code.
@@ -79,7 +80,6 @@ public class Amount {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -97,8 +97,7 @@ public class Amount {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            currency,
-            value);
+            currency, value);
     }
     
     @Override
@@ -107,16 +106,18 @@ public class Amount {
                 "currency", currency,
                 "value", value);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String currency;
- 
+
         private Long value;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A 3-letter ISO 4217 currency code.
@@ -126,6 +127,7 @@ public class Amount {
             this.currency = currency;
             return this;
         }
+
 
         /**
          * Quantity in the smallest unit of the specified currency. 
@@ -137,11 +139,12 @@ public class Amount {
             this.value = value;
             return this;
         }
-        
+
         public Amount build() {
+
             return new Amount(
-                currency,
-                value);
+                currency, value);
         }
+
     }
 }

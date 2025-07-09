@@ -10,19 +10,24 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class AchLocation {
 
     @JsonProperty("address")
     private String address;
 
+
     @JsonProperty("city")
     private String city;
+
 
     @JsonProperty("postalCode")
     private String postalCode;
 
+
     @JsonProperty("postalCodeExtension")
     private String postalCodeExtension;
+
 
     @JsonProperty("state")
     private String state;
@@ -71,9 +76,10 @@ public class AchLocation {
         return state;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AchLocation withAddress(String address) {
         Utils.checkNotNull(address, "address");
@@ -105,7 +111,6 @@ public class AchLocation {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -126,11 +131,8 @@ public class AchLocation {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            address,
-            city,
-            postalCode,
-            postalCodeExtension,
-            state);
+            address, city, postalCode,
+            postalCodeExtension, state);
     }
     
     @Override
@@ -142,22 +144,24 @@ public class AchLocation {
                 "postalCodeExtension", postalCodeExtension,
                 "state", state);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String address;
- 
+
         private String city;
- 
+
         private String postalCode;
- 
+
         private String postalCodeExtension;
- 
+
         private String state;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder address(String address) {
             Utils.checkNotNull(address, "address");
@@ -165,11 +169,13 @@ public class AchLocation {
             return this;
         }
 
+
         public Builder city(String city) {
             Utils.checkNotNull(city, "city");
             this.city = city;
             return this;
         }
+
 
         public Builder postalCode(String postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
@@ -177,25 +183,26 @@ public class AchLocation {
             return this;
         }
 
+
         public Builder postalCodeExtension(String postalCodeExtension) {
             Utils.checkNotNull(postalCodeExtension, "postalCodeExtension");
             this.postalCodeExtension = postalCodeExtension;
             return this;
         }
 
+
         public Builder state(String state) {
             Utils.checkNotNull(state, "state");
             this.state = state;
             return this;
         }
-        
+
         public AchLocation build() {
+
             return new AchLocation(
-                address,
-                city,
-                postalCode,
-                postalCodeExtension,
-                state);
+                address, city, postalCode,
+                postalCodeExtension, state);
         }
+
     }
 }

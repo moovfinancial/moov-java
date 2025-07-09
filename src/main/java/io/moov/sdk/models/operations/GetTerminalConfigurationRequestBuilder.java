@@ -45,7 +45,7 @@ public class GetTerminalConfigurationRequestBuilder {
     public GetTerminalConfigurationResponse call() throws Exception {
         
         RequestOperation<GetTerminalConfigurationRequest, GetTerminalConfigurationResponse> operation
-              = new GetTerminalConfigurationOperation( sdkConfiguration);
+              = new GetTerminalConfigurationOperation(sdkConfiguration);
         GetTerminalConfigurationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

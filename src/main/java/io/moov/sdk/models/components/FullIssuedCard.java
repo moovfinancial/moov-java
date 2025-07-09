@@ -31,6 +31,7 @@ public class FullIssuedCard {
     @JsonProperty("brand")
     private CardBrand brand;
 
+
     @JsonProperty("lastFourCardNumber")
     private String lastFourCardNumber;
 
@@ -76,9 +77,11 @@ public class FullIssuedCard {
     @JsonProperty("formFactor")
     private IssuedCardFormFactor formFactor;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("controls")
     private Optional<? extends IssuingControls> controls;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -150,7 +153,11 @@ public class FullIssuedCard {
             OffsetDateTime createdOn,
             String pan,
             String cvv) {
-        this(issuedCardID, brand, lastFourCardNumber, expiration, authorizedUser, Optional.empty(), fundingWalletID, state, formFactor, Optional.empty(), createdOn, pan, cvv);
+        this(issuedCardID, brand, lastFourCardNumber,
+            expiration, authorizedUser, Optional.empty(),
+            fundingWalletID, state, formFactor,
+            Optional.empty(), createdOn, pan,
+            cvv);
     }
 
     @JsonIgnore
@@ -251,9 +258,10 @@ public class FullIssuedCard {
         return cvv;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FullIssuedCard withIssuedCardID(String issuedCardID) {
         Utils.checkNotNull(issuedCardID, "issuedCardID");
@@ -303,6 +311,7 @@ public class FullIssuedCard {
         return this;
     }
 
+
     /**
      * Optional descriptor for the card.
      */
@@ -350,6 +359,7 @@ public class FullIssuedCard {
         return this;
     }
 
+
     public FullIssuedCard withControls(Optional<? extends IssuingControls> controls) {
         Utils.checkNotNull(controls, "controls");
         this.controls = controls;
@@ -380,7 +390,6 @@ public class FullIssuedCard {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -409,18 +418,10 @@ public class FullIssuedCard {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            issuedCardID,
-            brand,
-            lastFourCardNumber,
-            expiration,
-            authorizedUser,
-            memo,
-            fundingWalletID,
-            state,
-            formFactor,
-            controls,
-            createdOn,
-            pan,
+            issuedCardID, brand, lastFourCardNumber,
+            expiration, authorizedUser, memo,
+            fundingWalletID, state, formFactor,
+            controls, createdOn, pan,
             cvv);
     }
     
@@ -441,44 +442,47 @@ public class FullIssuedCard {
                 "pan", pan,
                 "cvv", cvv);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String issuedCardID;
- 
+
         private CardBrand brand;
- 
+
         private String lastFourCardNumber;
- 
+
         private CardExpiration expiration;
- 
+
         private AuthorizedUser authorizedUser;
- 
+
         private Optional<String> memo = Optional.empty();
- 
+
         private String fundingWalletID;
- 
+
         private IssuedCardState state;
- 
+
         private IssuedCardFormFactor formFactor;
- 
+
         private Optional<? extends IssuingControls> controls = Optional.empty();
- 
+
         private OffsetDateTime createdOn;
- 
+
         private String pan;
- 
+
         private String cvv;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder issuedCardID(String issuedCardID) {
             Utils.checkNotNull(issuedCardID, "issuedCardID");
             this.issuedCardID = issuedCardID;
             return this;
         }
+
 
         /**
          * The card brand.
@@ -489,11 +493,13 @@ public class FullIssuedCard {
             return this;
         }
 
+
         public Builder lastFourCardNumber(String lastFourCardNumber) {
             Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
             this.lastFourCardNumber = lastFourCardNumber;
             return this;
         }
+
 
         /**
          * The expiration date of the card or token.
@@ -504,6 +510,7 @@ public class FullIssuedCard {
             return this;
         }
 
+
         /**
          * Fields for identifying an authorized individual.
          */
@@ -512,6 +519,7 @@ public class FullIssuedCard {
             this.authorizedUser = authorizedUser;
             return this;
         }
+
 
         /**
          * Optional descriptor for the card.
@@ -531,6 +539,7 @@ public class FullIssuedCard {
             return this;
         }
 
+
         /**
          * Unique identifier for the wallet funding the card.
          */
@@ -539,6 +548,7 @@ public class FullIssuedCard {
             this.fundingWalletID = fundingWalletID;
             return this;
         }
+
 
         /**
          * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
@@ -554,6 +564,7 @@ public class FullIssuedCard {
             return this;
         }
 
+
         /**
          * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
          */
@@ -562,6 +573,7 @@ public class FullIssuedCard {
             this.formFactor = formFactor;
             return this;
         }
+
 
         public Builder controls(IssuingControls controls) {
             Utils.checkNotNull(controls, "controls");
@@ -575,11 +587,13 @@ public class FullIssuedCard {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
+
 
         /**
          * The issued card's Primary Account Number (PAN)
@@ -590,6 +604,7 @@ public class FullIssuedCard {
             return this;
         }
 
+
         /**
          * The issued card's 3- or 4-digit Card Verification Value (CVV).
          */
@@ -598,22 +613,16 @@ public class FullIssuedCard {
             this.cvv = cvv;
             return this;
         }
-        
+
         public FullIssuedCard build() {
+
             return new FullIssuedCard(
-                issuedCardID,
-                brand,
-                lastFourCardNumber,
-                expiration,
-                authorizedUser,
-                memo,
-                fundingWalletID,
-                state,
-                formFactor,
-                controls,
-                createdOn,
-                pan,
+                issuedCardID, brand, lastFourCardNumber,
+                expiration, authorizedUser, memo,
+                fundingWalletID, state, formFactor,
+                controls, createdOn, pan,
                 cvv);
         }
+
     }
 }

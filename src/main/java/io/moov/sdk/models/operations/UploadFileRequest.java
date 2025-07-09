@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UploadFileRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=multipart/form-data")
     private FileUploadRequestMultiPart fileUploadRequestMultiPart;
@@ -39,9 +41,10 @@ public class UploadFileRequest {
         return fileUploadRequestMultiPart;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UploadFileRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class UploadFileRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class UploadFileRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            fileUploadRequestMultiPart);
+            accountID, fileUploadRequestMultiPart);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class UploadFileRequest {
                 "accountID", accountID,
                 "fileUploadRequestMultiPart", fileUploadRequestMultiPart);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private FileUploadRequestMultiPart fileUploadRequestMultiPart;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class UploadFileRequest {
             return this;
         }
 
+
         public Builder fileUploadRequestMultiPart(FileUploadRequestMultiPart fileUploadRequestMultiPart) {
             Utils.checkNotNull(fileUploadRequestMultiPart, "fileUploadRequestMultiPart");
             this.fileUploadRequestMultiPart = fileUploadRequestMultiPart;
             return this;
         }
-        
+
         public UploadFileRequest build() {
+
             return new UploadFileRequest(
-                accountID,
-                fileUploadRequestMultiPart);
+                accountID, fileUploadRequestMultiPart);
         }
+
     }
 }

@@ -15,8 +15,8 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
-public class RegisterApplePayMerchantDomains {
 
+public class RegisterApplePayMerchantDomains {
     /**
      * A UTF-8 string to display in the Buy button.
      */
@@ -62,9 +62,10 @@ public class RegisterApplePayMerchantDomains {
         return (Optional<List<String>>) domains;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A UTF-8 string to display in the Buy button.
@@ -74,6 +75,7 @@ public class RegisterApplePayMerchantDomains {
         this.displayName = Optional.ofNullable(displayName);
         return this;
     }
+
 
     /**
      * A UTF-8 string to display in the Buy button.
@@ -93,6 +95,7 @@ public class RegisterApplePayMerchantDomains {
         return this;
     }
 
+
     /**
      * A unique list of fully-qualified, top-level or sub-domain names where you will accept Apple Pay.
      */
@@ -102,7 +105,6 @@ public class RegisterApplePayMerchantDomains {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -120,8 +122,7 @@ public class RegisterApplePayMerchantDomains {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            displayName,
-            domains);
+            displayName, domains);
     }
     
     @Override
@@ -130,16 +131,18 @@ public class RegisterApplePayMerchantDomains {
                 "displayName", displayName,
                 "domains", domains);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> displayName = Optional.empty();
- 
+
         private Optional<? extends List<String>> domains = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A UTF-8 string to display in the Buy button.
@@ -159,6 +162,7 @@ public class RegisterApplePayMerchantDomains {
             return this;
         }
 
+
         /**
          * A unique list of fully-qualified, top-level or sub-domain names where you will accept Apple Pay.
          */
@@ -176,11 +180,12 @@ public class RegisterApplePayMerchantDomains {
             this.domains = domains;
             return this;
         }
-        
+
         public RegisterApplePayMerchantDomains build() {
+
             return new RegisterApplePayMerchantDomains(
-                displayName,
-                domains);
+                displayName, domains);
         }
+
     }
 }

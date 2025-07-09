@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class AssignAccountCountriesRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private AccountCountries accountCountries;
@@ -39,9 +41,10 @@ public class AssignAccountCountriesRequest {
         return accountCountries;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AssignAccountCountriesRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class AssignAccountCountriesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class AssignAccountCountriesRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            accountCountries);
+            accountID, accountCountries);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class AssignAccountCountriesRequest {
                 "accountID", accountID,
                 "accountCountries", accountCountries);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private AccountCountries accountCountries;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class AssignAccountCountriesRequest {
             return this;
         }
 
+
         public Builder accountCountries(AccountCountries accountCountries) {
             Utils.checkNotNull(accountCountries, "accountCountries");
             this.accountCountries = accountCountries;
             return this;
         }
-        
+
         public AssignAccountCountriesRequest build() {
+
             return new AssignAccountCountriesRequest(
-                accountID,
-                accountCountries);
+                accountID, accountCountries);
         }
+
     }
 }

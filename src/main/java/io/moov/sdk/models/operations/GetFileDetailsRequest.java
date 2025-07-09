@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetFileDetailsRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=fileID")
     private String fileID;
@@ -38,9 +40,10 @@ public class GetFileDetailsRequest {
         return fileID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetFileDetailsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class GetFileDetailsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class GetFileDetailsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            fileID);
+            accountID, fileID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class GetFileDetailsRequest {
                 "accountID", accountID,
                 "fileID", fileID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String fileID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class GetFileDetailsRequest {
             return this;
         }
 
+
         public Builder fileID(String fileID) {
             Utils.checkNotNull(fileID, "fileID");
             this.fileID = fileID;
             return this;
         }
-        
+
         public GetFileDetailsRequest build() {
+
             return new GetFileDetailsRequest(
-                accountID,
-                fileID);
+                accountID, fileID);
         }
+
     }
 }

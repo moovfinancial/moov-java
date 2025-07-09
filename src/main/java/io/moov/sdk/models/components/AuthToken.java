@@ -11,8 +11,8 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 
-public class AuthToken {
 
+public class AuthToken {
     /**
      * An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
      */
@@ -102,9 +102,10 @@ public class AuthToken {
         return scope;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
@@ -151,7 +152,6 @@ public class AuthToken {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -172,11 +172,8 @@ public class AuthToken {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            tokenType,
-            accessToken,
-            refreshToken,
-            expiresIn,
-            scope);
+            tokenType, accessToken, refreshToken,
+            expiresIn, scope);
     }
     
     @Override
@@ -188,22 +185,24 @@ public class AuthToken {
                 "expiresIn", expiresIn,
                 "scope", scope);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private TokenType tokenType;
- 
+
         private String accessToken;
- 
+
         private String refreshToken;
- 
+
         private Integer expiresIn;
- 
+
         private String scope;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type.
@@ -214,6 +213,7 @@ public class AuthToken {
             return this;
         }
 
+
         /**
          * A value passed to the authorization server to gain access to the system.
          */
@@ -222,6 +222,7 @@ public class AuthToken {
             this.accessToken = accessToken;
             return this;
         }
+
 
         /**
          * A value passed to the authorization server to obtain a new access token.
@@ -232,6 +233,7 @@ public class AuthToken {
             return this;
         }
 
+
         /**
          * Unix timestamp indicating when this token expires.
          */
@@ -241,6 +243,7 @@ public class AuthToken {
             return this;
         }
 
+
         /**
          * A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are allowed.
          */
@@ -249,14 +252,13 @@ public class AuthToken {
             this.scope = scope;
             return this;
         }
-        
+
         public AuthToken build() {
+
             return new AuthToken(
-                tokenType,
-                accessToken,
-                refreshToken,
-                expiresIn,
-                scope);
+                tokenType, accessToken, refreshToken,
+                expiresIn, scope);
         }
+
     }
 }

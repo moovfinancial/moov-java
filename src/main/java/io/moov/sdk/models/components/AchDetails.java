@@ -13,8 +13,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class AchDetails {
 
+public class AchDetails {
     /**
      * An optional override of the default NACHA company entry description for a transfer.
      */
@@ -59,9 +59,10 @@ public class AchDetails {
         return originatingCompanyName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An optional override of the default NACHA company entry description for a transfer.
@@ -71,6 +72,7 @@ public class AchDetails {
         this.companyEntryDescription = Optional.ofNullable(companyEntryDescription);
         return this;
     }
+
 
     /**
      * An optional override of the default NACHA company entry description for a transfer.
@@ -90,6 +92,7 @@ public class AchDetails {
         return this;
     }
 
+
     /**
      * An optional override of the default NACHA company name for a transfer.
      */
@@ -99,7 +102,6 @@ public class AchDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -117,8 +119,7 @@ public class AchDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyEntryDescription,
-            originatingCompanyName);
+            companyEntryDescription, originatingCompanyName);
     }
     
     @Override
@@ -127,16 +128,18 @@ public class AchDetails {
                 "companyEntryDescription", companyEntryDescription,
                 "originatingCompanyName", originatingCompanyName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> companyEntryDescription = Optional.empty();
- 
+
         private Optional<String> originatingCompanyName = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An optional override of the default NACHA company entry description for a transfer.
@@ -156,6 +159,7 @@ public class AchDetails {
             return this;
         }
 
+
         /**
          * An optional override of the default NACHA company name for a transfer.
          */
@@ -173,11 +177,12 @@ public class AchDetails {
             this.originatingCompanyName = originatingCompanyName;
             return this;
         }
-        
+
         public AchDetails build() {
+
             return new AchDetails(
-                companyEntryDescription,
-                originatingCompanyName);
+                companyEntryDescription, originatingCompanyName);
         }
+
     }
 }

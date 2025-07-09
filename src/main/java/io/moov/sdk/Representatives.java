@@ -39,7 +39,6 @@ public class Representatives {
     Representatives(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Moov accounts associated with businesses require information regarding individuals who represent the business. 
      * You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
@@ -77,10 +76,9 @@ public class Representatives {
                 .createRepresentative(createRepresentative)
                 .build();
         RequestOperation<CreateRepresentativeRequest, CreateRepresentativeResponse> operation
-              = new CreateRepresentativeOperation( sdkConfiguration);
+              = new CreateRepresentativeOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
@@ -110,18 +108,16 @@ public class Representatives {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListRepresentativesResponse list(
-            String accountID) throws Exception {
+    public ListRepresentativesResponse list(String accountID) throws Exception {
         ListRepresentativesRequest request =
             ListRepresentativesRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListRepresentativesRequest, ListRepresentativesResponse> operation
-              = new ListRepresentativesOperation( sdkConfiguration);
+              = new ListRepresentativesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
@@ -156,10 +152,9 @@ public class Representatives {
                 .representativeID(representativeID)
                 .build();
         RequestOperation<DeleteRepresentativeRequest, DeleteRepresentativeResponse> operation
-              = new DeleteRepresentativeOperation( sdkConfiguration);
+              = new DeleteRepresentativeOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
@@ -194,10 +189,9 @@ public class Representatives {
                 .representativeID(representativeID)
                 .build();
         RequestOperation<GetRepresentativeRequest, GetRepresentativeResponse> operation
-              = new GetRepresentativeOperation( sdkConfiguration);
+              = new GetRepresentativeOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * If a representative's information has changed you can patch the information associated with a specific representative ID. 
@@ -261,7 +255,7 @@ public class Representatives {
                 .updateRepresentative(updateRepresentative)
                 .build();
         RequestOperation<UpdateRepresentativeRequest, UpdateRepresentativeResponse> operation
-              = new UpdateRepresentativeOperation( sdkConfiguration);
+              = new UpdateRepresentativeOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

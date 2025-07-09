@@ -17,7 +17,6 @@ import java.util.List;
  * <p>Moov fee charged to an account involved in a transfer.
  */
 public class MoovFee {
-
     /**
      * ID of the account that fees were charged to.
      */
@@ -90,9 +89,10 @@ public class MoovFee {
         return feeIDs;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the account that fees were charged to.
@@ -130,7 +130,6 @@ public class MoovFee {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -150,9 +149,7 @@ public class MoovFee {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            transferParty,
-            totalAmount,
+            accountID, transferParty, totalAmount,
             feeIDs);
     }
     
@@ -164,20 +161,22 @@ public class MoovFee {
                 "totalAmount", totalAmount,
                 "feeIDs", feeIDs);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private TransferParty transferParty;
- 
+
         private AmountDecimal totalAmount;
- 
+
         private List<String> feeIDs;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the account that fees were charged to.
@@ -188,6 +187,7 @@ public class MoovFee {
             return this;
         }
 
+
         /**
          * Indicates whether the account charged was the partner, source, or destination of the transfer.
          */
@@ -196,6 +196,7 @@ public class MoovFee {
             this.transferParty = transferParty;
             return this;
         }
+
 
         /**
          * The total amount of fees charged to the account.
@@ -206,6 +207,7 @@ public class MoovFee {
             return this;
         }
 
+
         /**
          * List of fee IDs that sum to the totalAmount.
          */
@@ -214,13 +216,13 @@ public class MoovFee {
             this.feeIDs = feeIDs;
             return this;
         }
-        
+
         public MoovFee build() {
+
             return new MoovFee(
-                accountID,
-                transferParty,
-                totalAmount,
+                accountID, transferParty, totalAmount,
                 feeIDs);
         }
+
     }
 }

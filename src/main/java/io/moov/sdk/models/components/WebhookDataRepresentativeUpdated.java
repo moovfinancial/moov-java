@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataRepresentativeUpdated {
 
     @JsonProperty("accountID")
     private String accountID;
+
 
     @JsonProperty("representativeID")
     private String representativeID;
@@ -38,9 +40,10 @@ public class WebhookDataRepresentativeUpdated {
         return representativeID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataRepresentativeUpdated withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,7 +57,6 @@ public class WebhookDataRepresentativeUpdated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class WebhookDataRepresentativeUpdated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            representativeID);
+            accountID, representativeID);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class WebhookDataRepresentativeUpdated {
                 "accountID", accountID,
                 "representativeID", representativeID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String representativeID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -99,16 +102,18 @@ public class WebhookDataRepresentativeUpdated {
             return this;
         }
 
+
         public Builder representativeID(String representativeID) {
             Utils.checkNotNull(representativeID, "representativeID");
             this.representativeID = representativeID;
             return this;
         }
-        
+
         public WebhookDataRepresentativeUpdated build() {
+
             return new WebhookDataRepresentativeUpdated(
-                accountID,
-                representativeID);
+                accountID, representativeID);
         }
+
     }
 }

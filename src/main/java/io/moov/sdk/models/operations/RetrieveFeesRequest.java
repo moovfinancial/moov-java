@@ -12,6 +12,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class RetrieveFeesRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
@@ -41,8 +42,10 @@ public class RetrieveFeesRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=endDateTime")
     private Optional<String> endDateTime;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
@@ -74,7 +77,9 @@ public class RetrieveFeesRequest {
     
     public RetrieveFeesRequest(
             String accountID) {
-        this(accountID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -124,9 +129,10 @@ public class RetrieveFeesRequest {
         return count;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public RetrieveFeesRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -142,6 +148,7 @@ public class RetrieveFeesRequest {
         this.transferID = Optional.ofNullable(transferID);
         return this;
     }
+
 
     /**
      * Optional transfer ID to filter the results by.
@@ -161,6 +168,7 @@ public class RetrieveFeesRequest {
         return this;
     }
 
+
     /**
      * Optional dispute ID to filter the results by.
      */
@@ -178,6 +186,7 @@ public class RetrieveFeesRequest {
         this.startDateTime = Optional.ofNullable(startDateTime);
         return this;
     }
+
 
     /**
      * Optional date-time to inclusively filter all fees created after this date-time.
@@ -197,6 +206,7 @@ public class RetrieveFeesRequest {
         return this;
     }
 
+
     /**
      * Optional date-time to exclusively filter all fees created before this date-time.
      */
@@ -212,6 +222,7 @@ public class RetrieveFeesRequest {
         return this;
     }
 
+
     public RetrieveFeesRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -224,13 +235,13 @@ public class RetrieveFeesRequest {
         return this;
     }
 
+
     public RetrieveFeesRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -253,12 +264,8 @@ public class RetrieveFeesRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            transferID,
-            disputeID,
-            startDateTime,
-            endDateTime,
-            skip,
+            accountID, transferID, disputeID,
+            startDateTime, endDateTime, skip,
             count);
     }
     
@@ -273,32 +280,35 @@ public class RetrieveFeesRequest {
                 "skip", skip,
                 "count", count);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<String> transferID = Optional.empty();
- 
+
         private Optional<String> disputeID = Optional.empty();
- 
+
         private Optional<String> startDateTime = Optional.empty();
- 
+
         private Optional<String> endDateTime = Optional.empty();
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * Optional transfer ID to filter the results by.
@@ -318,6 +328,7 @@ public class RetrieveFeesRequest {
             return this;
         }
 
+
         /**
          * Optional dispute ID to filter the results by.
          */
@@ -335,6 +346,7 @@ public class RetrieveFeesRequest {
             this.disputeID = disputeID;
             return this;
         }
+
 
         /**
          * Optional date-time to inclusively filter all fees created after this date-time.
@@ -354,6 +366,7 @@ public class RetrieveFeesRequest {
             return this;
         }
 
+
         /**
          * Optional date-time to exclusively filter all fees created before this date-time.
          */
@@ -372,6 +385,7 @@ public class RetrieveFeesRequest {
             return this;
         }
 
+
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
@@ -384,6 +398,7 @@ public class RetrieveFeesRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -395,16 +410,14 @@ public class RetrieveFeesRequest {
             this.count = count;
             return this;
         }
-        
+
         public RetrieveFeesRequest build() {
+
             return new RetrieveFeesRequest(
-                accountID,
-                transferID,
-                disputeID,
-                startDateTime,
-                endDateTime,
-                skip,
+                accountID, transferID, disputeID,
+                startDateTime, endDateTime, skip,
                 count);
         }
+
     }
 }

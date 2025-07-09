@@ -16,6 +16,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 public class PartnerPricing {
 
     @JsonProperty("planID")
@@ -46,6 +47,7 @@ public class PartnerPricing {
     @JsonProperty("cardAcquiringModel")
     private CardAcquiringModel cardAcquiringModel;
 
+
     @JsonProperty("billableFees")
     private List<BillableFee> billableFees;
 
@@ -60,6 +62,7 @@ public class PartnerPricing {
      */
     @JsonProperty("monthlyPlatformFee")
     private MonthlyPlatformFee monthlyPlatformFee;
+
 
     @JsonProperty("createdAt")
     private OffsetDateTime createdAt;
@@ -104,7 +107,9 @@ public class PartnerPricing {
             MinimumCommitment minimumCommitment,
             MonthlyPlatformFee monthlyPlatformFee,
             OffsetDateTime createdAt) {
-        this(planID, name, Optional.empty(), revenueShare, cardAcquiringModel, billableFees, minimumCommitment, monthlyPlatformFee, createdAt);
+        this(planID, name, Optional.empty(),
+            revenueShare, cardAcquiringModel, billableFees,
+            minimumCommitment, monthlyPlatformFee, createdAt);
     }
 
     @JsonIgnore
@@ -170,9 +175,10 @@ public class PartnerPricing {
         return createdAt;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PartnerPricing withPlanID(String planID) {
         Utils.checkNotNull(planID, "planID");
@@ -197,6 +203,7 @@ public class PartnerPricing {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     /**
      * A description of the fee plan.
@@ -255,7 +262,6 @@ public class PartnerPricing {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -280,15 +286,9 @@ public class PartnerPricing {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            planID,
-            name,
-            description,
-            revenueShare,
-            cardAcquiringModel,
-            billableFees,
-            minimumCommitment,
-            monthlyPlatformFee,
-            createdAt);
+            planID, name, description,
+            revenueShare, cardAcquiringModel, billableFees,
+            minimumCommitment, monthlyPlatformFee, createdAt);
     }
     
     @Override
@@ -304,36 +304,39 @@ public class PartnerPricing {
                 "monthlyPlatformFee", monthlyPlatformFee,
                 "createdAt", createdAt);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String planID;
- 
+
         private String name;
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Long revenueShare;
- 
+
         private CardAcquiringModel cardAcquiringModel;
- 
+
         private List<BillableFee> billableFees;
- 
+
         private MinimumCommitment minimumCommitment;
- 
+
         private MonthlyPlatformFee monthlyPlatformFee;
- 
+
         private OffsetDateTime createdAt;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder planID(String planID) {
             Utils.checkNotNull(planID, "planID");
             this.planID = planID;
             return this;
         }
+
 
         /**
          * The name of the fee plan.
@@ -343,6 +346,7 @@ public class PartnerPricing {
             this.name = name;
             return this;
         }
+
 
         /**
          * A description of the fee plan.
@@ -362,6 +366,7 @@ public class PartnerPricing {
             return this;
         }
 
+
         /**
          * The integer percentage value of the revenue split for partner.
          */
@@ -370,6 +375,7 @@ public class PartnerPricing {
             this.revenueShare = revenueShare;
             return this;
         }
+
 
         /**
          * Specifies the card processing pricing model
@@ -380,11 +386,13 @@ public class PartnerPricing {
             return this;
         }
 
+
         public Builder billableFees(List<BillableFee> billableFees) {
             Utils.checkNotNull(billableFees, "billableFees");
             this.billableFees = billableFees;
             return this;
         }
+
 
         /**
          * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
@@ -395,6 +403,7 @@ public class PartnerPricing {
             return this;
         }
 
+
         /**
          * Fixed recurring amount paid in the billing period regardless of usage.
          */
@@ -404,23 +413,20 @@ public class PartnerPricing {
             return this;
         }
 
+
         public Builder createdAt(OffsetDateTime createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = createdAt;
             return this;
         }
-        
+
         public PartnerPricing build() {
+
             return new PartnerPricing(
-                planID,
-                name,
-                description,
-                revenueShare,
-                cardAcquiringModel,
-                billableFees,
-                minimumCommitment,
-                monthlyPlatformFee,
-                createdAt);
+                planID, name, description,
+                revenueShare, cardAcquiringModel, billableFees,
+                minimumCommitment, monthlyPlatformFee, createdAt);
         }
+
     }
 }

@@ -45,7 +45,7 @@ public class DisableBankAccountRequestBuilder {
     public DisableBankAccountResponse call() throws Exception {
         
         RequestOperation<DisableBankAccountRequest, DisableBankAccountResponse> operation
-              = new DisableBankAccountOperation( sdkConfiguration);
+              = new DisableBankAccountOperation(sdkConfiguration);
         DisableBankAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

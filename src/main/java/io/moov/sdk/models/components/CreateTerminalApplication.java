@@ -19,7 +19,6 @@ import java.util.Optional;
  * <p>Describes a create terminal application request.
  */
 public class CreateTerminalApplication {
-
     /**
      * Platform of the terminal application.
      */
@@ -75,7 +74,8 @@ public class CreateTerminalApplication {
     
     public CreateTerminalApplication(
             TerminalApplicationPlatform platform) {
-        this(platform, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(platform, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -118,9 +118,10 @@ public class CreateTerminalApplication {
         return versionCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Platform of the terminal application.
@@ -140,6 +141,7 @@ public class CreateTerminalApplication {
         return this;
     }
 
+
     /**
      * The app bundle identifier of the terminal application. Required if platform is `ios`.
      */
@@ -157,6 +159,7 @@ public class CreateTerminalApplication {
         this.packageName = Optional.ofNullable(packageName);
         return this;
     }
+
 
     /**
      * The app package name of the terminal application. Required if platform is `android`.
@@ -176,6 +179,7 @@ public class CreateTerminalApplication {
         return this;
     }
 
+
     /**
      * The app version of the terminal application. Required if paltform is `android`.
      */
@@ -194,6 +198,7 @@ public class CreateTerminalApplication {
         return this;
     }
 
+
     /**
      * The app version of the terminal application. Required if platform is `android`.
      */
@@ -203,7 +208,6 @@ public class CreateTerminalApplication {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -224,11 +228,8 @@ public class CreateTerminalApplication {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            platform,
-            appBundleID,
-            packageName,
-            sha256Digest,
-            versionCode);
+            platform, appBundleID, packageName,
+            sha256Digest, versionCode);
     }
     
     @Override
@@ -240,22 +241,24 @@ public class CreateTerminalApplication {
                 "sha256Digest", sha256Digest,
                 "versionCode", versionCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private TerminalApplicationPlatform platform;
- 
+
         private Optional<String> appBundleID = Optional.empty();
- 
+
         private Optional<String> packageName = Optional.empty();
- 
+
         private Optional<String> sha256Digest = Optional.empty();
- 
+
         private Optional<String> versionCode = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Platform of the terminal application.
@@ -265,6 +268,7 @@ public class CreateTerminalApplication {
             this.platform = platform;
             return this;
         }
+
 
         /**
          * The app bundle identifier of the terminal application. Required if platform is `ios`.
@@ -284,6 +288,7 @@ public class CreateTerminalApplication {
             return this;
         }
 
+
         /**
          * The app package name of the terminal application. Required if platform is `android`.
          */
@@ -301,6 +306,7 @@ public class CreateTerminalApplication {
             this.packageName = packageName;
             return this;
         }
+
 
         /**
          * The app version of the terminal application. Required if paltform is `android`.
@@ -320,6 +326,7 @@ public class CreateTerminalApplication {
             return this;
         }
 
+
         /**
          * The app version of the terminal application. Required if platform is `android`.
          */
@@ -337,14 +344,13 @@ public class CreateTerminalApplication {
             this.versionCode = versionCode;
             return this;
         }
-        
+
         public CreateTerminalApplication build() {
+
             return new CreateTerminalApplication(
-                platform,
-                appBundleID,
-                packageName,
-                sha256Digest,
-                versionCode);
+                platform, appBundleID, packageName,
+                sha256Digest, versionCode);
         }
+
     }
 }

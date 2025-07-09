@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class GeneratedByBankAccountID {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class GeneratedByBankAccountID {
         return bankAccountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GeneratedByBankAccountID withBankAccountID(String bankAccountID) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
@@ -45,13 +47,13 @@ public class GeneratedByBankAccountID {
         return this;
     }
 
+
     public GeneratedByBankAccountID withBankAccountID(Optional<String> bankAccountID) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
         this.bankAccountID = bankAccountID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class GeneratedByBankAccountID {
         return Utils.toString(GeneratedByBankAccountID.class,
                 "bankAccountID", bankAccountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> bankAccountID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
@@ -96,10 +100,12 @@ public class GeneratedByBankAccountID {
             this.bankAccountID = bankAccountID;
             return this;
         }
-        
+
         public GeneratedByBankAccountID build() {
+
             return new GeneratedByBankAccountID(
                 bankAccountID);
         }
+
     }
 }

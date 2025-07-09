@@ -14,27 +14,33 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class EnrichedBusinessProfile {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends Address> address;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("industryCodes")
     private Optional<? extends EnrichedIndustryCodes> industryCodes;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("legalBusinessName")
     private Optional<String> legalBusinessName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("website")
@@ -63,7 +69,8 @@ public class EnrichedBusinessProfile {
     }
     
     public EnrichedBusinessProfile() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -99,15 +106,17 @@ public class EnrichedBusinessProfile {
         return website;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public EnrichedBusinessProfile withAddress(Address address) {
         Utils.checkNotNull(address, "address");
         this.address = Optional.ofNullable(address);
         return this;
     }
+
 
     public EnrichedBusinessProfile withAddress(Optional<? extends Address> address) {
         Utils.checkNotNull(address, "address");
@@ -121,6 +130,7 @@ public class EnrichedBusinessProfile {
         return this;
     }
 
+
     public EnrichedBusinessProfile withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
@@ -132,6 +142,7 @@ public class EnrichedBusinessProfile {
         this.industryCodes = Optional.ofNullable(industryCodes);
         return this;
     }
+
 
     public EnrichedBusinessProfile withIndustryCodes(Optional<? extends EnrichedIndustryCodes> industryCodes) {
         Utils.checkNotNull(industryCodes, "industryCodes");
@@ -145,6 +156,7 @@ public class EnrichedBusinessProfile {
         return this;
     }
 
+
     public EnrichedBusinessProfile withLegalBusinessName(Optional<String> legalBusinessName) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
         this.legalBusinessName = legalBusinessName;
@@ -156,6 +168,7 @@ public class EnrichedBusinessProfile {
         this.phone = Optional.ofNullable(phone);
         return this;
     }
+
 
     public EnrichedBusinessProfile withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
@@ -169,13 +182,13 @@ public class EnrichedBusinessProfile {
         return this;
     }
 
+
     public EnrichedBusinessProfile withWebsite(Optional<String> website) {
         Utils.checkNotNull(website, "website");
         this.website = website;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -197,12 +210,8 @@ public class EnrichedBusinessProfile {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            address,
-            email,
-            industryCodes,
-            legalBusinessName,
-            phone,
-            website);
+            address, email, industryCodes,
+            legalBusinessName, phone, website);
     }
     
     @Override
@@ -215,24 +224,26 @@ public class EnrichedBusinessProfile {
                 "phone", phone,
                 "website", website);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends Address> address = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends EnrichedIndustryCodes> industryCodes = Optional.empty();
- 
+
         private Optional<String> legalBusinessName = Optional.empty();
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> website = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder address(Address address) {
             Utils.checkNotNull(address, "address");
@@ -246,6 +257,7 @@ public class EnrichedBusinessProfile {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -257,6 +269,7 @@ public class EnrichedBusinessProfile {
             this.email = email;
             return this;
         }
+
 
         public Builder industryCodes(EnrichedIndustryCodes industryCodes) {
             Utils.checkNotNull(industryCodes, "industryCodes");
@@ -270,6 +283,7 @@ public class EnrichedBusinessProfile {
             return this;
         }
 
+
         public Builder legalBusinessName(String legalBusinessName) {
             Utils.checkNotNull(legalBusinessName, "legalBusinessName");
             this.legalBusinessName = Optional.ofNullable(legalBusinessName);
@@ -281,6 +295,7 @@ public class EnrichedBusinessProfile {
             this.legalBusinessName = legalBusinessName;
             return this;
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -294,6 +309,7 @@ public class EnrichedBusinessProfile {
             return this;
         }
 
+
         public Builder website(String website) {
             Utils.checkNotNull(website, "website");
             this.website = Optional.ofNullable(website);
@@ -305,15 +321,13 @@ public class EnrichedBusinessProfile {
             this.website = website;
             return this;
         }
-        
+
         public EnrichedBusinessProfile build() {
+
             return new EnrichedBusinessProfile(
-                address,
-                email,
-                industryCodes,
-                legalBusinessName,
-                phone,
-                website);
+                address, email, industryCodes,
+                legalBusinessName, phone, website);
         }
+
     }
 }

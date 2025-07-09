@@ -11,8 +11,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class GetTermsOfServiceTokenRequest {
 
+public class GetTermsOfServiceTokenRequest {
     /**
      * Indicates the domain from which the request originated. Required if referer header is not present.
      */
@@ -55,9 +55,10 @@ public class GetTermsOfServiceTokenRequest {
         return referer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Indicates the domain from which the request originated. Required if referer header is not present.
@@ -67,6 +68,7 @@ public class GetTermsOfServiceTokenRequest {
         this.origin = Optional.ofNullable(origin);
         return this;
     }
+
 
     /**
      * Indicates the domain from which the request originated. Required if referer header is not present.
@@ -86,6 +88,7 @@ public class GetTermsOfServiceTokenRequest {
         return this;
     }
 
+
     /**
      * Specifies the URL of the resource from which the request originated. Required if origin header is not present.
      */
@@ -95,7 +98,6 @@ public class GetTermsOfServiceTokenRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -113,8 +115,7 @@ public class GetTermsOfServiceTokenRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            origin,
-            referer);
+            origin, referer);
     }
     
     @Override
@@ -123,16 +124,18 @@ public class GetTermsOfServiceTokenRequest {
                 "origin", origin,
                 "referer", referer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> origin = Optional.empty();
- 
+
         private Optional<String> referer = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Indicates the domain from which the request originated. Required if referer header is not present.
@@ -152,6 +155,7 @@ public class GetTermsOfServiceTokenRequest {
             return this;
         }
 
+
         /**
          * Specifies the URL of the resource from which the request originated. Required if origin header is not present.
          */
@@ -169,11 +173,12 @@ public class GetTermsOfServiceTokenRequest {
             this.referer = referer;
             return this;
         }
-        
+
         public GetTermsOfServiceTokenRequest build() {
+
             return new GetTermsOfServiceTokenRequest(
-                origin,
-                referer);
+                origin, referer);
         }
+
     }
 }

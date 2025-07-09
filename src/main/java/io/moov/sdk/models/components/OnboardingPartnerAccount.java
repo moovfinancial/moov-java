@@ -16,7 +16,6 @@ import java.lang.String;
  * <p>The account that created the onboarding invite.
  */
 public class OnboardingPartnerAccount {
-
     /**
      * The account ID of the partner that created the invite.
      */
@@ -72,9 +71,10 @@ public class OnboardingPartnerAccount {
         return displayName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The account ID of the partner that created the invite.
@@ -103,7 +103,6 @@ public class OnboardingPartnerAccount {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -122,9 +121,7 @@ public class OnboardingPartnerAccount {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            accountMode,
-            displayName);
+            accountID, accountMode, displayName);
     }
     
     @Override
@@ -134,18 +131,20 @@ public class OnboardingPartnerAccount {
                 "accountMode", accountMode,
                 "displayName", displayName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Mode accountMode;
- 
+
         private String displayName;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The account ID of the partner that created the invite.
@@ -156,6 +155,7 @@ public class OnboardingPartnerAccount {
             return this;
         }
 
+
         /**
          * The operating mode for an account.
          */
@@ -165,6 +165,7 @@ public class OnboardingPartnerAccount {
             return this;
         }
 
+
         /**
          * The name of the Moov account used to create the onboarding invite.
          */
@@ -173,12 +174,12 @@ public class OnboardingPartnerAccount {
             this.displayName = displayName;
             return this;
         }
-        
+
         public OnboardingPartnerAccount build() {
+
             return new OnboardingPartnerAccount(
-                accountID,
-                accountMode,
-                displayName);
+                accountID, accountMode, displayName);
         }
+
     }
 }

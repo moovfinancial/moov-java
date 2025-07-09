@@ -40,7 +40,6 @@ public class Support {
     Support(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Create a support ticket for a Moov account.
      * 
@@ -74,10 +73,9 @@ public class Support {
                 .createTicket(createTicket)
                 .build();
         RequestOperation<CreateTicketRequest, CreateTicketResponse> operation
-              = new CreateTicketOperation( sdkConfiguration);
+              = new CreateTicketOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all the support tickets created under a Moov account.
@@ -129,10 +127,9 @@ public class Support {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListTicketsRequest, ListTicketsResponse> operation
-              = new ListTicketsOperation( sdkConfiguration);
+              = new ListTicketsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve a support ticket by ID.
@@ -167,10 +164,9 @@ public class Support {
                 .ticketID(ticketID)
                 .build();
         RequestOperation<GetTicketRequest, GetTicketResponse> operation
-              = new GetTicketOperation( sdkConfiguration);
+              = new GetTicketOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Updates a support ticket.
@@ -208,10 +204,9 @@ public class Support {
                 .updateTicket(updateTicket)
                 .build();
         RequestOperation<UpdateTicketRequest, UpdateTicketResponse> operation
-              = new UpdateTicketOperation( sdkConfiguration);
+              = new UpdateTicketOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all the messages for a support ticket.
@@ -239,7 +234,8 @@ public class Support {
     public ListTicketMessagesResponse listTicketMessages(
             String accountID,
             String ticketID) throws Exception {
-        return listTicketMessages(Optional.empty(), Optional.empty(), accountID, ticketID);
+        return listTicketMessages(Optional.empty(), Optional.empty(), accountID,
+            ticketID);
     }
 
     /**
@@ -269,7 +265,7 @@ public class Support {
                 .ticketID(ticketID)
                 .build();
         RequestOperation<ListTicketMessagesRequest, ListTicketMessagesResponse> operation
-              = new ListTicketMessagesOperation( sdkConfiguration);
+              = new ListTicketMessagesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

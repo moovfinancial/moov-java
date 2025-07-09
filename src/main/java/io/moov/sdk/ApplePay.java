@@ -41,7 +41,6 @@ public class ApplePay {
     ApplePay(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Add domains to be registered with Apple Pay.
      * 
@@ -81,10 +80,9 @@ public class ApplePay {
                 .registerApplePayMerchantDomains(registerApplePayMerchantDomains)
                 .build();
         RequestOperation<RegisterApplePayMerchantDomainsRequest, RegisterApplePayMerchantDomainsResponse> operation
-              = new RegisterApplePayMerchantDomainsOperation( sdkConfiguration);
+              = new RegisterApplePayMerchantDomainsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Add or remove domains to be registered with Apple Pay. 
@@ -125,10 +123,9 @@ public class ApplePay {
                 .updateApplePayMerchantDomains(updateApplePayMerchantDomains)
                 .build();
         RequestOperation<UpdateApplePayMerchantDomainsRequest, UpdateApplePayMerchantDomainsResponse> operation
-              = new UpdateApplePayMerchantDomainsOperation( sdkConfiguration);
+              = new UpdateApplePayMerchantDomainsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get domains registered with Apple Pay. 
@@ -156,18 +153,16 @@ public class ApplePay {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetApplePayMerchantDomainsResponse getMerchantDomains(
-            String accountID) throws Exception {
+    public GetApplePayMerchantDomainsResponse getMerchantDomains(String accountID) throws Exception {
         GetApplePayMerchantDomainsRequest request =
             GetApplePayMerchantDomainsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetApplePayMerchantDomainsRequest, GetApplePayMerchantDomainsResponse> operation
-              = new GetApplePayMerchantDomainsOperation( sdkConfiguration);
+              = new GetApplePayMerchantDomainsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Create a session with Apple Pay to facilitate a payment. 
@@ -208,10 +203,9 @@ public class ApplePay {
                 .createApplePaySession(createApplePaySession)
                 .build();
         RequestOperation<CreateApplePaySessionRequest, CreateApplePaySessionResponse> operation
-              = new CreateApplePaySessionOperation( sdkConfiguration);
+              = new CreateApplePaySessionOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Connect an Apple Pay token to the specified account. 
@@ -255,7 +249,7 @@ public class ApplePay {
                 .linkApplePay(linkApplePay)
                 .build();
         RequestOperation<LinkApplePayTokenRequest, LinkApplePayTokenResponse> operation
-              = new LinkApplePayTokenOperation( sdkConfiguration);
+              = new LinkApplePayTokenOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

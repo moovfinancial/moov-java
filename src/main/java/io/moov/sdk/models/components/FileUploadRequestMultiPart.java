@@ -17,7 +17,6 @@ import java.util.Optional;
  * <p>Request to upload a file for an account.
  */
 public class FileUploadRequestMultiPart {
-
     /**
      * The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
      */
@@ -83,9 +82,10 @@ public class FileUploadRequestMultiPart {
         return metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
@@ -116,6 +116,7 @@ public class FileUploadRequestMultiPart {
         return this;
     }
 
+
     /**
      * Additional metadata to be stored with the file, formatted as a JSON string.
      * 
@@ -127,7 +128,6 @@ public class FileUploadRequestMultiPart {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -146,9 +146,7 @@ public class FileUploadRequestMultiPart {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            file,
-            filePurpose,
-            metadata);
+            file, filePurpose, metadata);
     }
     
     @Override
@@ -158,18 +156,20 @@ public class FileUploadRequestMultiPart {
                 "filePurpose", filePurpose,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private FileUploadRequestMultiPartFile file;
- 
+
         private FilePurpose filePurpose;
- 
+
         private Optional<String> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
@@ -180,6 +180,7 @@ public class FileUploadRequestMultiPart {
             return this;
         }
 
+
         /**
          * The file's purpose.
          */
@@ -188,6 +189,7 @@ public class FileUploadRequestMultiPart {
             this.filePurpose = filePurpose;
             return this;
         }
+
 
         /**
          * Additional metadata to be stored with the file, formatted as a JSON string.
@@ -210,12 +212,12 @@ public class FileUploadRequestMultiPart {
             this.metadata = metadata;
             return this;
         }
-        
+
         public FileUploadRequestMultiPart build() {
+
             return new FileUploadRequestMultiPart(
-                file,
-                filePurpose,
-                metadata);
+                file, filePurpose, metadata);
         }
+
     }
 }

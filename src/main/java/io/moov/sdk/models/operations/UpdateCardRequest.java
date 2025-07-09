@@ -11,13 +11,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UpdateCardRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=cardID")
     private String cardID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpdateCard updateCard;
@@ -50,9 +53,10 @@ public class UpdateCardRequest {
         return updateCard;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateCardRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,7 +76,6 @@ public class UpdateCardRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class UpdateCardRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            cardID,
-            updateCard);
+            accountID, cardID, updateCard);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class UpdateCardRequest {
                 "cardID", cardID,
                 "updateCard", updateCard);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String cardID;
- 
+
         private UpdateCard updateCard;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -122,23 +125,25 @@ public class UpdateCardRequest {
             return this;
         }
 
+
         public Builder cardID(String cardID) {
             Utils.checkNotNull(cardID, "cardID");
             this.cardID = cardID;
             return this;
         }
 
+
         public Builder updateCard(UpdateCard updateCard) {
             Utils.checkNotNull(updateCard, "updateCard");
             this.updateCard = updateCard;
             return this;
         }
-        
+
         public UpdateCardRequest build() {
+
             return new UpdateCardRequest(
-                accountID,
-                cardID,
-                updateCard);
+                accountID, cardID, updateCard);
         }
+
     }
 }

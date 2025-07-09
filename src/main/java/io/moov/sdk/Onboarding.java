@@ -33,7 +33,6 @@ public class Onboarding {
     Onboarding(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
      * 
@@ -56,13 +55,11 @@ public class Onboarding {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateOnboardingInviteResponse createInvite(
-            OnboardingInviteRequest request) throws Exception {
+    public CreateOnboardingInviteResponse createInvite(OnboardingInviteRequest request) throws Exception {
         RequestOperation<OnboardingInviteRequest, CreateOnboardingInviteResponse> operation
-              = new CreateOnboardingInviteOperation( sdkConfiguration);
+              = new CreateOnboardingInviteOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all the onboarding invites created by the caller's account.
@@ -91,10 +88,9 @@ public class Onboarding {
                 .builder()
                 .build();
         RequestOperation<ListOnboardingInvitesRequest, ListOnboardingInvitesResponse> operation
-              = new ListOnboardingInvitesOperation( sdkConfiguration);
+              = new ListOnboardingInvitesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve details about an onboarding invite.
@@ -118,18 +114,16 @@ public class Onboarding {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetOnboardingInviteResponse getInvite(
-            String code) throws Exception {
+    public GetOnboardingInviteResponse getInvite(String code) throws Exception {
         GetOnboardingInviteRequest request =
             GetOnboardingInviteRequest
                 .builder()
                 .code(code)
                 .build();
         RequestOperation<GetOnboardingInviteRequest, GetOnboardingInviteResponse> operation
-              = new GetOnboardingInviteOperation( sdkConfiguration);
+              = new GetOnboardingInviteOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Revoke an onboarding invite, rendering the invitation link unusable.
@@ -153,15 +147,14 @@ public class Onboarding {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RevokeOnboardingInviteResponse revokeInvite(
-            String code) throws Exception {
+    public RevokeOnboardingInviteResponse revokeInvite(String code) throws Exception {
         RevokeOnboardingInviteRequest request =
             RevokeOnboardingInviteRequest
                 .builder()
                 .code(code)
                 .build();
         RequestOperation<RevokeOnboardingInviteRequest, RevokeOnboardingInviteResponse> operation
-              = new RevokeOnboardingInviteOperation( sdkConfiguration);
+              = new RevokeOnboardingInviteOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

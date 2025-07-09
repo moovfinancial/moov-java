@@ -38,7 +38,6 @@ public class IssuingTransactions {
     IssuingTransactions(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * List issued card authorizations associated with a Moov account.
      * 
@@ -61,13 +60,11 @@ public class IssuingTransactions {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListIssuedCardAuthorizationsResponse listAuthorizations(
-            ListIssuedCardAuthorizationsRequest request) throws Exception {
+    public ListIssuedCardAuthorizationsResponse listAuthorizations(ListIssuedCardAuthorizationsRequest request) throws Exception {
         RequestOperation<ListIssuedCardAuthorizationsRequest, ListIssuedCardAuthorizationsResponse> operation
-              = new ListIssuedCardAuthorizationsOperation( sdkConfiguration);
+              = new ListIssuedCardAuthorizationsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieves details of an authorization associated with a specific Moov account.
@@ -102,10 +99,9 @@ public class IssuingTransactions {
                 .authorizationID(authorizationID)
                 .build();
         RequestOperation<GetIssuedCardAuthorizationRequest, GetIssuedCardAuthorizationResponse> operation
-              = new GetIssuedCardAuthorizationOperation( sdkConfiguration);
+              = new GetIssuedCardAuthorizationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
@@ -133,7 +129,8 @@ public class IssuingTransactions {
     public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(
             String accountID,
             String authorizationID) throws Exception {
-        return listAuthorizationEvents(accountID, authorizationID, Optional.empty(), Optional.empty());
+        return listAuthorizationEvents(accountID, authorizationID, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -163,10 +160,9 @@ public class IssuingTransactions {
                 .count(count)
                 .build();
         RequestOperation<ListIssuedCardAuthorizationEventsRequest, ListIssuedCardAuthorizationEventsResponse> operation
-              = new ListIssuedCardAuthorizationEventsOperation( sdkConfiguration);
+              = new ListIssuedCardAuthorizationEventsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List issued card transactions associated with a Moov account.
@@ -190,13 +186,11 @@ public class IssuingTransactions {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListIssuedCardTransactionsResponse list(
-            ListIssuedCardTransactionsRequest request) throws Exception {
+    public ListIssuedCardTransactionsResponse list(ListIssuedCardTransactionsRequest request) throws Exception {
         RequestOperation<ListIssuedCardTransactionsRequest, ListIssuedCardTransactionsResponse> operation
-              = new ListIssuedCardTransactionsOperation( sdkConfiguration);
+              = new ListIssuedCardTransactionsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieves details of an issued card transaction associated with a specific Moov account.
@@ -231,7 +225,7 @@ public class IssuingTransactions {
                 .cardTransactionID(cardTransactionID)
                 .build();
         RequestOperation<GetIssuedCardTransactionRequest, GetIssuedCardTransactionResponse> operation
-              = new GetIssuedCardTransactionOperation( sdkConfiguration);
+              = new GetIssuedCardTransactionOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

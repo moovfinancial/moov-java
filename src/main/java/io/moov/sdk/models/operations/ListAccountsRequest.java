@@ -17,8 +17,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class ListAccountsRequest {
 
+public class ListAccountsRequest {
     /**
      * Filter connected accounts by name.
      * 
@@ -84,8 +84,10 @@ public class ListAccountsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=capabilityStatus")
     private Optional<? extends CapabilityStatus> capabilityStatus;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
@@ -125,7 +127,10 @@ public class ListAccountsRequest {
     }
     
     public ListAccountsRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -222,9 +227,10 @@ public class ListAccountsRequest {
         return count;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Filter connected accounts by name.
@@ -241,6 +247,7 @@ public class ListAccountsRequest {
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     /**
      * Filter connected accounts by name.
@@ -269,6 +276,7 @@ public class ListAccountsRequest {
         return this;
     }
 
+
     /**
      * Filter connected accounts by email address.
      * 
@@ -292,6 +300,7 @@ public class ListAccountsRequest {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     /**
      * Filter connected accounts by AccountType.
@@ -317,6 +326,7 @@ public class ListAccountsRequest {
         return this;
     }
 
+
     /**
      * Filter accounts with AccountType guest.
      * 
@@ -336,6 +346,7 @@ public class ListAccountsRequest {
         this.foreignID = Optional.ofNullable(foreignID);
         return this;
     }
+
 
     /**
      * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
@@ -357,6 +368,7 @@ public class ListAccountsRequest {
         return this;
     }
 
+
     /**
      * Filter disconnected accounts.
      * 
@@ -377,6 +389,7 @@ public class ListAccountsRequest {
         return this;
     }
 
+
     /**
      * Filter connected accounts by the capability.
      */
@@ -395,6 +408,7 @@ public class ListAccountsRequest {
         return this;
     }
 
+
     /**
      * Filter connected accounts by the capability.
      */
@@ -410,6 +424,7 @@ public class ListAccountsRequest {
         return this;
     }
 
+
     public ListAccountsRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -422,13 +437,13 @@ public class ListAccountsRequest {
         return this;
     }
 
+
     public ListAccountsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -454,15 +469,9 @@ public class ListAccountsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            email,
-            type,
-            includeGuest,
-            foreignID,
-            includeDisconnected,
-            capability,
-            capabilityStatus,
-            skip,
+            name, email, type,
+            includeGuest, foreignID, includeDisconnected,
+            capability, capabilityStatus, skip,
             count);
     }
     
@@ -480,32 +489,34 @@ public class ListAccountsRequest {
                 "skip", skip,
                 "count", count);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends AccountType> type = Optional.empty();
- 
+
         private Optional<Boolean> includeGuest = Optional.empty();
- 
+
         private Optional<String> foreignID = Optional.empty();
- 
+
         private Optional<Boolean> includeDisconnected = Optional.empty();
- 
+
         private Optional<? extends CapabilityID> capability = Optional.empty();
- 
+
         private Optional<? extends CapabilityStatus> capabilityStatus = Optional.empty();
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Filter connected accounts by name.
@@ -539,6 +550,7 @@ public class ListAccountsRequest {
             return this;
         }
 
+
         /**
          * Filter connected accounts by email address.
          * 
@@ -560,6 +572,7 @@ public class ListAccountsRequest {
             this.email = email;
             return this;
         }
+
 
         /**
          * Filter connected accounts by AccountType.
@@ -587,6 +600,7 @@ public class ListAccountsRequest {
             return this;
         }
 
+
         /**
          * Filter accounts with AccountType guest.
          * 
@@ -609,6 +623,7 @@ public class ListAccountsRequest {
             return this;
         }
 
+
         /**
          * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
          */
@@ -626,6 +641,7 @@ public class ListAccountsRequest {
             this.foreignID = foreignID;
             return this;
         }
+
 
         /**
          * Filter disconnected accounts.
@@ -649,6 +665,7 @@ public class ListAccountsRequest {
             return this;
         }
 
+
         /**
          * Filter connected accounts by the capability.
          */
@@ -666,6 +683,7 @@ public class ListAccountsRequest {
             this.capability = capability;
             return this;
         }
+
 
         /**
          * Filter connected accounts by the capability.
@@ -685,6 +703,7 @@ public class ListAccountsRequest {
             return this;
         }
 
+
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
@@ -697,6 +716,7 @@ public class ListAccountsRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -708,19 +728,15 @@ public class ListAccountsRequest {
             this.count = count;
             return this;
         }
-        
+
         public ListAccountsRequest build() {
+
             return new ListAccountsRequest(
-                name,
-                email,
-                type,
-                includeGuest,
-                foreignID,
-                includeDisconnected,
-                capability,
-                capabilityStatus,
-                skip,
+                name, email, type,
+                includeGuest, foreignID, includeDisconnected,
+                capability, capabilityStatus, skip,
                 count);
         }
+
     }
 }

@@ -16,14 +16,15 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class ScheduleListResponse {
 
+public class ScheduleListResponse {
     /**
      * Simple description to place on the transfer.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
     private Optional<String> description;
+
 
     @JsonProperty("destinationAccountID")
     private String destinationAccountID;
@@ -34,12 +35,15 @@ public class ScheduleListResponse {
     @JsonProperty("mode")
     private Mode mode;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("occurrences")
     private Optional<? extends List<OccurrencesResponse>> occurrences;
 
+
     @JsonProperty("ownerAccountID")
     private String ownerAccountID;
+
 
     @JsonProperty("partnerAccountID")
     private String partnerAccountID;
@@ -51,29 +55,37 @@ public class ScheduleListResponse {
     @JsonProperty("recur")
     private Optional<? extends Recur> recur;
 
+
     @JsonProperty("scheduleID")
     private String scheduleID;
+
 
     @JsonProperty("sourceAccountID")
     private String sourceAccountID;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
 
+
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disabledOn")
     private Optional<OffsetDateTime> disabledOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sourceAccount")
     private Optional<? extends PartialScheduleAccount> sourceAccount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("destinationAccount")
     private Optional<? extends PartialScheduleAccount> destinationAccount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("partnerAccount")
@@ -137,7 +149,11 @@ public class ScheduleListResponse {
             String sourceAccountID,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(Optional.empty(), destinationAccountID, mode, Optional.empty(), ownerAccountID, partnerAccountID, Optional.empty(), scheduleID, sourceAccountID, createdOn, updatedOn, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), destinationAccountID, mode,
+            Optional.empty(), ownerAccountID, partnerAccountID,
+            Optional.empty(), scheduleID, sourceAccountID,
+            createdOn, updatedOn, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -229,9 +245,10 @@ public class ScheduleListResponse {
         return (Optional<PartialScheduleAccount>) partnerAccount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Simple description to place on the transfer.
@@ -241,6 +258,7 @@ public class ScheduleListResponse {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     /**
      * Simple description to place on the transfer.
@@ -272,6 +290,7 @@ public class ScheduleListResponse {
         return this;
     }
 
+
     public ScheduleListResponse withOccurrences(Optional<? extends List<OccurrencesResponse>> occurrences) {
         Utils.checkNotNull(occurrences, "occurrences");
         this.occurrences = occurrences;
@@ -298,6 +317,7 @@ public class ScheduleListResponse {
         this.recur = Optional.ofNullable(recur);
         return this;
     }
+
 
     /**
      * Defines configuration for recurring transfers.
@@ -338,6 +358,7 @@ public class ScheduleListResponse {
         return this;
     }
 
+
     public ScheduleListResponse withDisabledOn(Optional<OffsetDateTime> disabledOn) {
         Utils.checkNotNull(disabledOn, "disabledOn");
         this.disabledOn = disabledOn;
@@ -349,6 +370,7 @@ public class ScheduleListResponse {
         this.sourceAccount = Optional.ofNullable(sourceAccount);
         return this;
     }
+
 
     public ScheduleListResponse withSourceAccount(Optional<? extends PartialScheduleAccount> sourceAccount) {
         Utils.checkNotNull(sourceAccount, "sourceAccount");
@@ -362,6 +384,7 @@ public class ScheduleListResponse {
         return this;
     }
 
+
     public ScheduleListResponse withDestinationAccount(Optional<? extends PartialScheduleAccount> destinationAccount) {
         Utils.checkNotNull(destinationAccount, "destinationAccount");
         this.destinationAccount = destinationAccount;
@@ -374,13 +397,13 @@ public class ScheduleListResponse {
         return this;
     }
 
+
     public ScheduleListResponse withPartnerAccount(Optional<? extends PartialScheduleAccount> partnerAccount) {
         Utils.checkNotNull(partnerAccount, "partnerAccount");
         this.partnerAccount = partnerAccount;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -411,21 +434,11 @@ public class ScheduleListResponse {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            description,
-            destinationAccountID,
-            mode,
-            occurrences,
-            ownerAccountID,
-            partnerAccountID,
-            recur,
-            scheduleID,
-            sourceAccountID,
-            createdOn,
-            updatedOn,
-            disabledOn,
-            sourceAccount,
-            destinationAccount,
-            partnerAccount);
+            description, destinationAccountID, mode,
+            occurrences, ownerAccountID, partnerAccountID,
+            recur, scheduleID, sourceAccountID,
+            createdOn, updatedOn, disabledOn,
+            sourceAccount, destinationAccount, partnerAccount);
     }
     
     @Override
@@ -447,42 +460,44 @@ public class ScheduleListResponse {
                 "destinationAccount", destinationAccount,
                 "partnerAccount", partnerAccount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private String destinationAccountID;
- 
+
         private Mode mode;
- 
+
         private Optional<? extends List<OccurrencesResponse>> occurrences = Optional.empty();
- 
+
         private String ownerAccountID;
- 
+
         private String partnerAccountID;
- 
+
         private Optional<? extends Recur> recur = Optional.empty();
- 
+
         private String scheduleID;
- 
+
         private String sourceAccountID;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private OffsetDateTime updatedOn;
- 
+
         private Optional<OffsetDateTime> disabledOn = Optional.empty();
- 
+
         private Optional<? extends PartialScheduleAccount> sourceAccount = Optional.empty();
- 
+
         private Optional<? extends PartialScheduleAccount> destinationAccount = Optional.empty();
- 
+
         private Optional<? extends PartialScheduleAccount> partnerAccount = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Simple description to place on the transfer.
@@ -502,11 +517,13 @@ public class ScheduleListResponse {
             return this;
         }
 
+
         public Builder destinationAccountID(String destinationAccountID) {
             Utils.checkNotNull(destinationAccountID, "destinationAccountID");
             this.destinationAccountID = destinationAccountID;
             return this;
         }
+
 
         /**
          * The operating mode for an account.
@@ -516,6 +533,7 @@ public class ScheduleListResponse {
             this.mode = mode;
             return this;
         }
+
 
         public Builder occurrences(List<OccurrencesResponse> occurrences) {
             Utils.checkNotNull(occurrences, "occurrences");
@@ -529,17 +547,20 @@ public class ScheduleListResponse {
             return this;
         }
 
+
         public Builder ownerAccountID(String ownerAccountID) {
             Utils.checkNotNull(ownerAccountID, "ownerAccountID");
             this.ownerAccountID = ownerAccountID;
             return this;
         }
 
+
         public Builder partnerAccountID(String partnerAccountID) {
             Utils.checkNotNull(partnerAccountID, "partnerAccountID");
             this.partnerAccountID = partnerAccountID;
             return this;
         }
+
 
         /**
          * Defines configuration for recurring transfers.
@@ -559,11 +580,13 @@ public class ScheduleListResponse {
             return this;
         }
 
+
         public Builder scheduleID(String scheduleID) {
             Utils.checkNotNull(scheduleID, "scheduleID");
             this.scheduleID = scheduleID;
             return this;
         }
+
 
         public Builder sourceAccountID(String sourceAccountID) {
             Utils.checkNotNull(sourceAccountID, "sourceAccountID");
@@ -571,17 +594,20 @@ public class ScheduleListResponse {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder updatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
+
 
         public Builder disabledOn(OffsetDateTime disabledOn) {
             Utils.checkNotNull(disabledOn, "disabledOn");
@@ -595,6 +621,7 @@ public class ScheduleListResponse {
             return this;
         }
 
+
         public Builder sourceAccount(PartialScheduleAccount sourceAccount) {
             Utils.checkNotNull(sourceAccount, "sourceAccount");
             this.sourceAccount = Optional.ofNullable(sourceAccount);
@@ -606,6 +633,7 @@ public class ScheduleListResponse {
             this.sourceAccount = sourceAccount;
             return this;
         }
+
 
         public Builder destinationAccount(PartialScheduleAccount destinationAccount) {
             Utils.checkNotNull(destinationAccount, "destinationAccount");
@@ -619,6 +647,7 @@ public class ScheduleListResponse {
             return this;
         }
 
+
         public Builder partnerAccount(PartialScheduleAccount partnerAccount) {
             Utils.checkNotNull(partnerAccount, "partnerAccount");
             this.partnerAccount = Optional.ofNullable(partnerAccount);
@@ -630,24 +659,16 @@ public class ScheduleListResponse {
             this.partnerAccount = partnerAccount;
             return this;
         }
-        
+
         public ScheduleListResponse build() {
+
             return new ScheduleListResponse(
-                description,
-                destinationAccountID,
-                mode,
-                occurrences,
-                ownerAccountID,
-                partnerAccountID,
-                recur,
-                scheduleID,
-                sourceAccountID,
-                createdOn,
-                updatedOn,
-                disabledOn,
-                sourceAccount,
-                destinationAccount,
-                partnerAccount);
+                description, destinationAccountID, mode,
+                occurrences, ownerAccountID, partnerAccountID,
+                recur, scheduleID, sourceAccountID,
+                createdOn, updatedOn, disabledOn,
+                sourceAccount, destinationAccount, partnerAccount);
         }
+
     }
 }

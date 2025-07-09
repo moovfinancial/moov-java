@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class GetPaymentLinkQRCodeResponse implements Response {
 
+public class GetPaymentLinkQRCodeResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
@@ -45,6 +45,7 @@ public class GetPaymentLinkQRCodeResponse implements Response {
      */
     private Optional<? extends InputStream> responseStream;
 
+
     private Map<String, List<String>> headers;
 
     @JsonCreator
@@ -61,6 +62,7 @@ public class GetPaymentLinkQRCodeResponse implements Response {
         Utils.checkNotNull(qrCode, "qrCode");
         Utils.checkNotNull(responseStream, "responseStream");
         headers = Utils.emptyMapIfNull(headers);
+        Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
@@ -74,7 +76,8 @@ public class GetPaymentLinkQRCodeResponse implements Response {
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Map<String, List<String>> headers) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), headers);
+        this(contentType, statusCode, rawResponse,
+            Optional.empty(), Optional.empty(), headers);
     }
 
     /**
@@ -124,9 +127,10 @@ public class GetPaymentLinkQRCodeResponse implements Response {
         return headers;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * HTTP response content type for this operation
@@ -164,6 +168,7 @@ public class GetPaymentLinkQRCodeResponse implements Response {
         return this;
     }
 
+
     /**
      * The request has succeeded.
      */
@@ -182,6 +187,7 @@ public class GetPaymentLinkQRCodeResponse implements Response {
         return this;
     }
 
+
     /**
      * The request has succeeded.
      */
@@ -197,7 +203,6 @@ public class GetPaymentLinkQRCodeResponse implements Response {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -219,12 +224,8 @@ public class GetPaymentLinkQRCodeResponse implements Response {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contentType,
-            statusCode,
-            rawResponse,
-            qrCode,
-            responseStream,
-            headers);
+            contentType, statusCode, rawResponse,
+            qrCode, responseStream, headers);
     }
     
     @Override
@@ -237,24 +238,26 @@ public class GetPaymentLinkQRCodeResponse implements Response {
                 "responseStream", responseStream,
                 "headers", headers);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String contentType;
- 
+
         private Integer statusCode;
- 
+
         private HttpResponse<InputStream> rawResponse;
- 
+
         private Optional<? extends QRCode> qrCode = Optional.empty();
- 
+
         private Optional<? extends InputStream> responseStream = Optional.empty();
- 
+
         private Map<String, List<String>> headers;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * HTTP response content type for this operation
@@ -265,6 +268,7 @@ public class GetPaymentLinkQRCodeResponse implements Response {
             return this;
         }
 
+
         /**
          * HTTP response status code for this operation
          */
@@ -274,6 +278,7 @@ public class GetPaymentLinkQRCodeResponse implements Response {
             return this;
         }
 
+
         /**
          * Raw HTTP response; suitable for custom response parsing
          */
@@ -282,6 +287,7 @@ public class GetPaymentLinkQRCodeResponse implements Response {
             this.rawResponse = rawResponse;
             return this;
         }
+
 
         /**
          * The request has succeeded.
@@ -301,6 +307,7 @@ public class GetPaymentLinkQRCodeResponse implements Response {
             return this;
         }
 
+
         /**
          * The request has succeeded.
          */
@@ -319,20 +326,19 @@ public class GetPaymentLinkQRCodeResponse implements Response {
             return this;
         }
 
+
         public Builder headers(Map<String, List<String>> headers) {
             Utils.checkNotNull(headers, "headers");
             this.headers = headers;
             return this;
         }
-        
+
         public GetPaymentLinkQRCodeResponse build() {
+
             return new GetPaymentLinkQRCodeResponse(
-                contentType,
-                statusCode,
-                rawResponse,
-                qrCode,
-                responseStream,
-                headers);
+                contentType, statusCode, rawResponse,
+                qrCode, responseStream, headers);
         }
+
     }
 }

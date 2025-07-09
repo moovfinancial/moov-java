@@ -14,15 +14,18 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class PaymentDetailsError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowedMethods")
     private Optional<String> allowedMethods;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardDetails")
     private Optional<? extends CardPaymentDetailsError> cardDetails;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("achDetails")
@@ -62,15 +65,17 @@ public class PaymentDetailsError {
         return (Optional<ACHPaymentDetailsError>) achDetails;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PaymentDetailsError withAllowedMethods(String allowedMethods) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         this.allowedMethods = Optional.ofNullable(allowedMethods);
         return this;
     }
+
 
     public PaymentDetailsError withAllowedMethods(Optional<String> allowedMethods) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
@@ -84,6 +89,7 @@ public class PaymentDetailsError {
         return this;
     }
 
+
     public PaymentDetailsError withCardDetails(Optional<? extends CardPaymentDetailsError> cardDetails) {
         Utils.checkNotNull(cardDetails, "cardDetails");
         this.cardDetails = cardDetails;
@@ -96,13 +102,13 @@ public class PaymentDetailsError {
         return this;
     }
 
+
     public PaymentDetailsError withAchDetails(Optional<? extends ACHPaymentDetailsError> achDetails) {
         Utils.checkNotNull(achDetails, "achDetails");
         this.achDetails = achDetails;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -121,9 +127,7 @@ public class PaymentDetailsError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods,
-            cardDetails,
-            achDetails);
+            allowedMethods, cardDetails, achDetails);
     }
     
     @Override
@@ -133,18 +137,20 @@ public class PaymentDetailsError {
                 "cardDetails", cardDetails,
                 "achDetails", achDetails);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> allowedMethods = Optional.empty();
- 
+
         private Optional<? extends CardPaymentDetailsError> cardDetails = Optional.empty();
- 
+
         private Optional<? extends ACHPaymentDetailsError> achDetails = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder allowedMethods(String allowedMethods) {
             Utils.checkNotNull(allowedMethods, "allowedMethods");
@@ -158,6 +164,7 @@ public class PaymentDetailsError {
             return this;
         }
 
+
         public Builder cardDetails(CardPaymentDetailsError cardDetails) {
             Utils.checkNotNull(cardDetails, "cardDetails");
             this.cardDetails = Optional.ofNullable(cardDetails);
@@ -170,6 +177,7 @@ public class PaymentDetailsError {
             return this;
         }
 
+
         public Builder achDetails(ACHPaymentDetailsError achDetails) {
             Utils.checkNotNull(achDetails, "achDetails");
             this.achDetails = Optional.ofNullable(achDetails);
@@ -181,12 +189,12 @@ public class PaymentDetailsError {
             this.achDetails = achDetails;
             return this;
         }
-        
+
         public PaymentDetailsError build() {
+
             return new PaymentDetailsError(
-                allowedMethods,
-                cardDetails,
-                achDetails);
+                allowedMethods, cardDetails, achDetails);
         }
+
     }
 }

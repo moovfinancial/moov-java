@@ -15,12 +15,14 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class FileUploadValidationError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("evidenceType")
     private Optional<String> evidenceType;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("file")
@@ -52,15 +54,17 @@ public class FileUploadValidationError extends RuntimeException {
         return (Optional<File>) file;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FileUploadValidationError withEvidenceType(String evidenceType) {
         Utils.checkNotNull(evidenceType, "evidenceType");
         this.evidenceType = Optional.ofNullable(evidenceType);
         return this;
     }
+
 
     public FileUploadValidationError withEvidenceType(Optional<String> evidenceType) {
         Utils.checkNotNull(evidenceType, "evidenceType");
@@ -74,13 +78,13 @@ public class FileUploadValidationError extends RuntimeException {
         return this;
     }
 
+
     public FileUploadValidationError withFile(Optional<? extends File> file) {
         Utils.checkNotNull(file, "file");
         this.file = file;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -98,8 +102,7 @@ public class FileUploadValidationError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            evidenceType,
-            file);
+            evidenceType, file);
     }
     
     @Override
@@ -108,16 +111,18 @@ public class FileUploadValidationError extends RuntimeException {
                 "evidenceType", evidenceType,
                 "file", file);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> evidenceType = Optional.empty();
- 
+
         private Optional<? extends File> file = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder evidenceType(String evidenceType) {
             Utils.checkNotNull(evidenceType, "evidenceType");
@@ -131,6 +136,7 @@ public class FileUploadValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder file(File file) {
             Utils.checkNotNull(file, "file");
             this.file = Optional.ofNullable(file);
@@ -142,12 +148,13 @@ public class FileUploadValidationError extends RuntimeException {
             this.file = file;
             return this;
         }
-        
+
         public FileUploadValidationError build() {
+
             return new FileUploadValidationError(
-                evidenceType,
-                file);
+                evidenceType, file);
         }
+
     }
 }
 

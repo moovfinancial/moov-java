@@ -14,6 +14,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class Contact {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -37,9 +38,10 @@ public class Contact {
         return (Optional<PhoneNumber>) phone;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Contact withPhone(PhoneNumber phone) {
         Utils.checkNotNull(phone, "phone");
@@ -47,13 +49,13 @@ public class Contact {
         return this;
     }
 
+
     public Contact withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -78,14 +80,16 @@ public class Contact {
         return Utils.toString(Contact.class,
                 "phone", phone);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -98,10 +102,12 @@ public class Contact {
             this.phone = phone;
             return this;
         }
-        
+
         public Contact build() {
+
             return new Contact(
                 phone);
         }
+
     }
 }

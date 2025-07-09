@@ -46,7 +46,7 @@ public class CreateTransferOptionsForAccountRequestBuilder {
     public CreateTransferOptionsForAccountResponse call() throws Exception {
         
         RequestOperation<CreateTransferOptionsForAccountRequest, CreateTransferOptionsForAccountResponse> operation
-              = new CreateTransferOptionsForAccountOperation( sdkConfiguration);
+              = new CreateTransferOptionsForAccountOperation(sdkConfiguration);
         CreateTransferOptionsForAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -11,13 +11,16 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
+
 public class InstitutionsSearchResponse {
 
     @JsonProperty("ach")
     private List<ACHInstitution> ach;
 
+
     @JsonProperty("rtp")
     private List<RTPInstitution> rtp;
+
 
     @JsonProperty("wire")
     private List<WireInstitution> wire;
@@ -50,9 +53,10 @@ public class InstitutionsSearchResponse {
         return wire;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public InstitutionsSearchResponse withAch(List<ACHInstitution> ach) {
         Utils.checkNotNull(ach, "ach");
@@ -72,7 +76,6 @@ public class InstitutionsSearchResponse {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class InstitutionsSearchResponse {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ach,
-            rtp,
-            wire);
+            ach, rtp, wire);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class InstitutionsSearchResponse {
                 "rtp", rtp,
                 "wire", wire);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private List<ACHInstitution> ach;
- 
+
         private List<RTPInstitution> rtp;
- 
+
         private List<WireInstitution> wire;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ach(List<ACHInstitution> ach) {
             Utils.checkNotNull(ach, "ach");
@@ -122,23 +125,25 @@ public class InstitutionsSearchResponse {
             return this;
         }
 
+
         public Builder rtp(List<RTPInstitution> rtp) {
             Utils.checkNotNull(rtp, "rtp");
             this.rtp = rtp;
             return this;
         }
 
+
         public Builder wire(List<WireInstitution> wire) {
             Utils.checkNotNull(wire, "wire");
             this.wire = wire;
             return this;
         }
-        
+
         public InstitutionsSearchResponse build() {
+
             return new InstitutionsSearchResponse(
-                ach,
-                rtp,
-                wire);
+                ach, rtp, wire);
         }
+
     }
 }

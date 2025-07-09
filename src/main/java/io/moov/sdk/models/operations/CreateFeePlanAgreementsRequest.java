@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CreateFeePlanAgreementsRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreateFeePlanAgreement createFeePlanAgreement;
@@ -39,9 +41,10 @@ public class CreateFeePlanAgreementsRequest {
         return createFeePlanAgreement;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateFeePlanAgreementsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class CreateFeePlanAgreementsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class CreateFeePlanAgreementsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            createFeePlanAgreement);
+            accountID, createFeePlanAgreement);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class CreateFeePlanAgreementsRequest {
                 "accountID", accountID,
                 "createFeePlanAgreement", createFeePlanAgreement);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private CreateFeePlanAgreement createFeePlanAgreement;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class CreateFeePlanAgreementsRequest {
             return this;
         }
 
+
         public Builder createFeePlanAgreement(CreateFeePlanAgreement createFeePlanAgreement) {
             Utils.checkNotNull(createFeePlanAgreement, "createFeePlanAgreement");
             this.createFeePlanAgreement = createFeePlanAgreement;
             return this;
         }
-        
+
         public CreateFeePlanAgreementsRequest build() {
+
             return new CreateFeePlanAgreementsRequest(
-                accountID,
-                createFeePlanAgreement);
+                accountID, createFeePlanAgreement);
         }
+
     }
 }

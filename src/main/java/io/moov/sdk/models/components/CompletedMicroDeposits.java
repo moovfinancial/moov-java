@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CompletedMicroDeposits {
 
     @JsonProperty("status")
@@ -27,9 +28,10 @@ public class CompletedMicroDeposits {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CompletedMicroDeposits withStatus(MicroDepositStatus status) {
         Utils.checkNotNull(status, "status");
@@ -37,7 +39,6 @@ public class CompletedMicroDeposits {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,24 +63,28 @@ public class CompletedMicroDeposits {
         return Utils.toString(CompletedMicroDeposits.class,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private MicroDepositStatus status;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder status(MicroDepositStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
-        
+
         public CompletedMicroDeposits build() {
+
             return new CompletedMicroDeposits(
                 status);
         }
+
     }
 }

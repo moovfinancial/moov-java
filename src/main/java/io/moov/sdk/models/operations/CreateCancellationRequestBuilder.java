@@ -45,7 +45,7 @@ public class CreateCancellationRequestBuilder {
     public CreateCancellationResponse call() throws Exception {
         
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
-              = new CreateCancellationOperation( sdkConfiguration);
+              = new CreateCancellationOperation(sdkConfiguration);
         CreateCancellationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

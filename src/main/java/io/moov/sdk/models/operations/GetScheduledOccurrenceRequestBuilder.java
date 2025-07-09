@@ -53,7 +53,7 @@ public class GetScheduledOccurrenceRequestBuilder {
     public GetScheduledOccurrenceResponse call() throws Exception {
         
         RequestOperation<GetScheduledOccurrenceRequest, GetScheduledOccurrenceResponse> operation
-              = new GetScheduledOccurrenceOperation( sdkConfiguration);
+              = new GetScheduledOccurrenceOperation(sdkConfiguration);
         GetScheduledOccurrenceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

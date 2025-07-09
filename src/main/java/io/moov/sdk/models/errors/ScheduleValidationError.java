@@ -16,6 +16,7 @@ import java.lang.SuppressWarnings;
 import java.util.Map;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class ScheduleValidationError extends RuntimeException {
 
@@ -23,9 +24,11 @@ public class ScheduleValidationError extends RuntimeException {
     @JsonProperty("occurrences")
     private Optional<? extends Map<String, String>> occurrences;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("recur")
     private Optional<String> recur;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
@@ -65,15 +68,17 @@ public class ScheduleValidationError extends RuntimeException {
         return description;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ScheduleValidationError withOccurrences(Map<String, String> occurrences) {
         Utils.checkNotNull(occurrences, "occurrences");
         this.occurrences = Optional.ofNullable(occurrences);
         return this;
     }
+
 
     public ScheduleValidationError withOccurrences(Optional<? extends Map<String, String>> occurrences) {
         Utils.checkNotNull(occurrences, "occurrences");
@@ -87,6 +92,7 @@ public class ScheduleValidationError extends RuntimeException {
         return this;
     }
 
+
     public ScheduleValidationError withRecur(Optional<String> recur) {
         Utils.checkNotNull(recur, "recur");
         this.recur = recur;
@@ -99,13 +105,13 @@ public class ScheduleValidationError extends RuntimeException {
         return this;
     }
 
+
     public ScheduleValidationError withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -124,9 +130,7 @@ public class ScheduleValidationError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            occurrences,
-            recur,
-            description);
+            occurrences, recur, description);
     }
     
     @Override
@@ -136,18 +140,20 @@ public class ScheduleValidationError extends RuntimeException {
                 "recur", recur,
                 "description", description);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends Map<String, String>> occurrences = Optional.empty();
- 
+
         private Optional<String> recur = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder occurrences(Map<String, String> occurrences) {
             Utils.checkNotNull(occurrences, "occurrences");
@@ -161,6 +167,7 @@ public class ScheduleValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder recur(String recur) {
             Utils.checkNotNull(recur, "recur");
             this.recur = Optional.ofNullable(recur);
@@ -173,6 +180,7 @@ public class ScheduleValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
@@ -184,13 +192,13 @@ public class ScheduleValidationError extends RuntimeException {
             this.description = description;
             return this;
         }
-        
+
         public ScheduleValidationError build() {
+
             return new ScheduleValidationError(
-                occurrences,
-                recur,
-                description);
+                occurrences, recur, description);
         }
+
     }
 }
 

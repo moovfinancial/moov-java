@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class PaymentMethodsWallet {
 
     @JsonProperty("walletID")
@@ -27,9 +28,10 @@ public class PaymentMethodsWallet {
         return walletID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PaymentMethodsWallet withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -37,7 +39,6 @@ public class PaymentMethodsWallet {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,24 +63,28 @@ public class PaymentMethodsWallet {
         return Utils.toString(PaymentMethodsWallet.class,
                 "walletID", walletID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String walletID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
-        
+
         public PaymentMethodsWallet build() {
+
             return new PaymentMethodsWallet(
                 walletID);
         }
+
     }
 }

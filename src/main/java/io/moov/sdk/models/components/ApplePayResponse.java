@@ -19,7 +19,6 @@ import java.util.Optional;
  * <p>Describes an Apple Pay token on a Moov account.
  */
 public class ApplePayResponse {
-
     /**
      * The card brand.
      */
@@ -100,7 +99,9 @@ public class ApplePayResponse {
             String fingerprint,
             CardExpiration expiration,
             String dynamicLastFour) {
-        this(brand, cardType, cardDisplayName, fingerprint, expiration, dynamicLastFour, Optional.empty());
+        this(brand, cardType, cardDisplayName,
+            fingerprint, expiration, dynamicLastFour,
+            Optional.empty());
     }
 
     /**
@@ -164,9 +165,10 @@ public class ApplePayResponse {
         return issuerCountry;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The card brand.
@@ -236,6 +238,7 @@ public class ApplePayResponse {
         return this;
     }
 
+
     /**
      * Country where the underlying card was issued.
      */
@@ -245,7 +248,6 @@ public class ApplePayResponse {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -268,12 +270,8 @@ public class ApplePayResponse {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            brand,
-            cardType,
-            cardDisplayName,
-            fingerprint,
-            expiration,
-            dynamicLastFour,
+            brand, cardType, cardDisplayName,
+            fingerprint, expiration, dynamicLastFour,
             issuerCountry);
     }
     
@@ -288,26 +286,28 @@ public class ApplePayResponse {
                 "dynamicLastFour", dynamicLastFour,
                 "issuerCountry", issuerCountry);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private CardBrand brand;
- 
+
         private CardType cardType;
- 
+
         private String cardDisplayName;
- 
+
         private String fingerprint;
- 
+
         private CardExpiration expiration;
- 
+
         private String dynamicLastFour;
- 
+
         private Optional<String> issuerCountry = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The card brand.
@@ -318,6 +318,7 @@ public class ApplePayResponse {
             return this;
         }
 
+
         /**
          * The type of the card.
          */
@@ -326,6 +327,7 @@ public class ApplePayResponse {
             this.cardType = cardType;
             return this;
         }
+
 
         /**
          * User-friendly name of the tokenized card returned by Apple.
@@ -339,6 +341,7 @@ public class ApplePayResponse {
             return this;
         }
 
+
         /**
          * Uniquely identifies a linked payment card or token.
          * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
@@ -350,6 +353,7 @@ public class ApplePayResponse {
             return this;
         }
 
+
         /**
          * The expiration date of the card or token.
          */
@@ -359,6 +363,7 @@ public class ApplePayResponse {
             return this;
         }
 
+
         /**
          * The last four digits of the Apple Pay token, which may differ from the tokenized card's last four digits.
          */
@@ -367,6 +372,7 @@ public class ApplePayResponse {
             this.dynamicLastFour = dynamicLastFour;
             return this;
         }
+
 
         /**
          * Country where the underlying card was issued.
@@ -385,16 +391,14 @@ public class ApplePayResponse {
             this.issuerCountry = issuerCountry;
             return this;
         }
-        
+
         public ApplePayResponse build() {
+
             return new ApplePayResponse(
-                brand,
-                cardType,
-                cardDisplayName,
-                fingerprint,
-                expiration,
-                dynamicLastFour,
+                brand, cardType, cardDisplayName,
+                fingerprint, expiration, dynamicLastFour,
                 issuerCountry);
         }
+
     }
 }

@@ -13,16 +13,18 @@ import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
-public class ListIssuedCardTransactionsRequest {
 
+public class ListIssuedCardTransactionsRequest {
     /**
      * The Moov business account for which cards have been issued.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
@@ -69,7 +71,8 @@ public class ListIssuedCardTransactionsRequest {
     
     public ListIssuedCardTransactionsRequest(
             String accountID) {
-        this(accountID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -114,9 +117,10 @@ public class ListIssuedCardTransactionsRequest {
         return endDateTime;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The Moov business account for which cards have been issued.
@@ -133,6 +137,7 @@ public class ListIssuedCardTransactionsRequest {
         return this;
     }
 
+
     public ListIssuedCardTransactionsRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -144,6 +149,7 @@ public class ListIssuedCardTransactionsRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public ListIssuedCardTransactionsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
@@ -159,6 +165,7 @@ public class ListIssuedCardTransactionsRequest {
         this.issuedCardID = Optional.ofNullable(issuedCardID);
         return this;
     }
+
 
     /**
      * Optional ID of the issued card to filter results.
@@ -178,6 +185,7 @@ public class ListIssuedCardTransactionsRequest {
         return this;
     }
 
+
     /**
      * Optional date-time which inclusively filters all card transactions created after this date-time.
      */
@@ -196,6 +204,7 @@ public class ListIssuedCardTransactionsRequest {
         return this;
     }
 
+
     /**
      * Optional date-time which exclusively filters all card transactions created before this date-time.
      */
@@ -205,7 +214,6 @@ public class ListIssuedCardTransactionsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -227,12 +235,8 @@ public class ListIssuedCardTransactionsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            skip,
-            count,
-            issuedCardID,
-            startDateTime,
-            endDateTime);
+            accountID, skip, count,
+            issuedCardID, startDateTime, endDateTime);
     }
     
     @Override
@@ -245,24 +249,26 @@ public class ListIssuedCardTransactionsRequest {
                 "startDateTime", startDateTime,
                 "endDateTime", endDateTime);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private Optional<String> issuedCardID = Optional.empty();
- 
+
         private Optional<OffsetDateTime> startDateTime = Optional.empty();
- 
+
         private Optional<OffsetDateTime> endDateTime = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The Moov business account for which cards have been issued.
@@ -272,6 +278,7 @@ public class ListIssuedCardTransactionsRequest {
             this.accountID = accountID;
             return this;
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -285,6 +292,7 @@ public class ListIssuedCardTransactionsRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -296,6 +304,7 @@ public class ListIssuedCardTransactionsRequest {
             this.count = count;
             return this;
         }
+
 
         /**
          * Optional ID of the issued card to filter results.
@@ -315,6 +324,7 @@ public class ListIssuedCardTransactionsRequest {
             return this;
         }
 
+
         /**
          * Optional date-time which inclusively filters all card transactions created after this date-time.
          */
@@ -333,6 +343,7 @@ public class ListIssuedCardTransactionsRequest {
             return this;
         }
 
+
         /**
          * Optional date-time which exclusively filters all card transactions created before this date-time.
          */
@@ -350,15 +361,13 @@ public class ListIssuedCardTransactionsRequest {
             this.endDateTime = endDateTime;
             return this;
         }
-        
+
         public ListIssuedCardTransactionsRequest build() {
+
             return new ListIssuedCardTransactionsRequest(
-                accountID,
-                skip,
-                count,
-                issuedCardID,
-                startDateTime,
-                endDateTime);
+                accountID, skip, count,
+                issuedCardID, startDateTime, endDateTime);
         }
+
     }
 }

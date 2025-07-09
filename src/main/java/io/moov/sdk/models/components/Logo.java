@@ -10,10 +10,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class Logo {
 
     @JsonProperty("name")
     private String name;
+
 
     @JsonProperty("url")
     private String url;
@@ -38,9 +40,10 @@ public class Logo {
         return url;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Logo withName(String name) {
         Utils.checkNotNull(name, "name");
@@ -54,7 +57,6 @@ public class Logo {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,8 +74,7 @@ public class Logo {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            url);
+            name, url);
     }
     
     @Override
@@ -82,16 +83,18 @@ public class Logo {
                 "name", name,
                 "url", url);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String name;
- 
+
         private String url;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
@@ -99,16 +102,18 @@ public class Logo {
             return this;
         }
 
+
         public Builder url(String url) {
             Utils.checkNotNull(url, "url");
             this.url = url;
             return this;
         }
-        
+
         public Logo build() {
+
             return new Logo(
-                name,
-                url);
+                name, url);
         }
+
     }
 }

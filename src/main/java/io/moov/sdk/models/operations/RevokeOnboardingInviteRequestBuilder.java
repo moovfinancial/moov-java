@@ -37,7 +37,7 @@ public class RevokeOnboardingInviteRequestBuilder {
     public RevokeOnboardingInviteResponse call() throws Exception {
         
         RequestOperation<RevokeOnboardingInviteRequest, RevokeOnboardingInviteResponse> operation
-              = new RevokeOnboardingInviteOperation( sdkConfiguration);
+              = new RevokeOnboardingInviteOperation(sdkConfiguration);
         RevokeOnboardingInviteRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -54,7 +54,7 @@ public class UpdateTicketRequestBuilder {
     public UpdateTicketResponse call() throws Exception {
         
         RequestOperation<UpdateTicketRequest, UpdateTicketResponse> operation
-              = new UpdateTicketOperation( sdkConfiguration);
+              = new UpdateTicketOperation(sdkConfiguration);
         UpdateTicketRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

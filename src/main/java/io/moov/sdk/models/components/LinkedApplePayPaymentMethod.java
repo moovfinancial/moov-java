@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class LinkedApplePayPaymentMethod {
 
+public class LinkedApplePayPaymentMethod {
     /**
      * The new payment method's ID.
      */
@@ -67,9 +67,10 @@ public class LinkedApplePayPaymentMethod {
         return applePay;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The new payment method's ID.
@@ -98,7 +99,6 @@ public class LinkedApplePayPaymentMethod {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -117,9 +117,7 @@ public class LinkedApplePayPaymentMethod {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            paymentMethodType,
-            applePay);
+            paymentMethodID, paymentMethodType, applePay);
     }
     
     @Override
@@ -129,18 +127,20 @@ public class LinkedApplePayPaymentMethod {
                 "paymentMethodType", paymentMethodType,
                 "applePay", applePay);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private PaymentMethodType paymentMethodType;
- 
+
         private ApplePayResponse applePay;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The new payment method's ID.
@@ -151,6 +151,7 @@ public class LinkedApplePayPaymentMethod {
             return this;
         }
 
+
         /**
          * The payment method type that represents a payment rail and directionality
          */
@@ -160,6 +161,7 @@ public class LinkedApplePayPaymentMethod {
             return this;
         }
 
+
         /**
          * Describes an Apple Pay token on a Moov account.
          */
@@ -168,12 +170,12 @@ public class LinkedApplePayPaymentMethod {
             this.applePay = applePay;
             return this;
         }
-        
+
         public LinkedApplePayPaymentMethod build() {
+
             return new LinkedApplePayPaymentMethod(
-                paymentMethodID,
-                paymentMethodType,
-                applePay);
+                paymentMethodID, paymentMethodType, applePay);
         }
+
     }
 }

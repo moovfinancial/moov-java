@@ -62,7 +62,7 @@ public class LinkCardRequestBuilder {
     public LinkCardResponse call() throws Exception {
         
         RequestOperation<LinkCardRequest, LinkCardResponse> operation
-              = new LinkCardOperation( sdkConfiguration);
+              = new LinkCardOperation(sdkConfiguration);
         LinkCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

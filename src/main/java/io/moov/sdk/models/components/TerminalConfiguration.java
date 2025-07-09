@@ -32,9 +32,10 @@ public class TerminalConfiguration {
         return configuration;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TerminalConfiguration withConfiguration(String configuration) {
         Utils.checkNotNull(configuration, "configuration");
@@ -42,7 +43,6 @@ public class TerminalConfiguration {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -67,24 +67,28 @@ public class TerminalConfiguration {
         return Utils.toString(TerminalConfiguration.class,
                 "configuration", configuration);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String configuration;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder configuration(String configuration) {
             Utils.checkNotNull(configuration, "configuration");
             this.configuration = configuration;
             return this;
         }
-        
+
         public TerminalConfiguration build() {
+
             return new TerminalConfiguration(
                 configuration);
         }
+
     }
 }

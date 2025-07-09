@@ -15,13 +15,16 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 public class FeePlanAgreement {
 
     @JsonProperty("agreementID")
     private String agreementID;
 
+
     @JsonProperty("planID")
     private String planID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accountID")
@@ -40,8 +43,10 @@ public class FeePlanAgreement {
     @JsonProperty("description")
     private Optional<String> description;
 
+
     @JsonProperty("acceptedOn")
     private OffsetDateTime acceptedOn;
+
 
     @JsonProperty("status")
     private FeePlanAgreementStatus status;
@@ -51,6 +56,7 @@ public class FeePlanAgreement {
      */
     @JsonProperty("cardAcquiringModel")
     private CardAcquiringModel cardAcquiringModel;
+
 
     @JsonProperty("billableFees")
     private List<BillableFee> billableFees;
@@ -114,7 +120,10 @@ public class FeePlanAgreement {
             List<BillableFee> billableFees,
             MinimumCommitment minimumCommitment,
             MonthlyPlatformFee monthlyPlatformFee) {
-        this(agreementID, planID, Optional.empty(), name, Optional.empty(), acceptedOn, status, cardAcquiringModel, billableFees, minimumCommitment, monthlyPlatformFee);
+        this(agreementID, planID, Optional.empty(),
+            name, Optional.empty(), acceptedOn,
+            status, cardAcquiringModel, billableFees,
+            minimumCommitment, monthlyPlatformFee);
     }
 
     @JsonIgnore
@@ -187,9 +196,10 @@ public class FeePlanAgreement {
         return monthlyPlatformFee;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FeePlanAgreement withAgreementID(String agreementID) {
         Utils.checkNotNull(agreementID, "agreementID");
@@ -208,6 +218,7 @@ public class FeePlanAgreement {
         this.accountID = Optional.ofNullable(accountID);
         return this;
     }
+
 
     public FeePlanAgreement withAccountID(Optional<String> accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -232,6 +243,7 @@ public class FeePlanAgreement {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     /**
      * The description of the agreement.
@@ -287,7 +299,6 @@ public class FeePlanAgreement {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -314,17 +325,10 @@ public class FeePlanAgreement {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            agreementID,
-            planID,
-            accountID,
-            name,
-            description,
-            acceptedOn,
-            status,
-            cardAcquiringModel,
-            billableFees,
-            minimumCommitment,
-            monthlyPlatformFee);
+            agreementID, planID, accountID,
+            name, description, acceptedOn,
+            status, cardAcquiringModel, billableFees,
+            minimumCommitment, monthlyPlatformFee);
     }
     
     @Override
@@ -342,34 +346,36 @@ public class FeePlanAgreement {
                 "minimumCommitment", minimumCommitment,
                 "monthlyPlatformFee", monthlyPlatformFee);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String agreementID;
- 
+
         private String planID;
- 
+
         private Optional<String> accountID = Optional.empty();
- 
+
         private String name;
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private OffsetDateTime acceptedOn;
- 
+
         private FeePlanAgreementStatus status;
- 
+
         private CardAcquiringModel cardAcquiringModel;
- 
+
         private List<BillableFee> billableFees;
- 
+
         private MinimumCommitment minimumCommitment;
- 
+
         private MonthlyPlatformFee monthlyPlatformFee;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder agreementID(String agreementID) {
             Utils.checkNotNull(agreementID, "agreementID");
@@ -377,11 +383,13 @@ public class FeePlanAgreement {
             return this;
         }
 
+
         public Builder planID(String planID) {
             Utils.checkNotNull(planID, "planID");
             this.planID = planID;
             return this;
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -395,6 +403,7 @@ public class FeePlanAgreement {
             return this;
         }
 
+
         /**
          * The name of the agreement.
          */
@@ -403,6 +412,7 @@ public class FeePlanAgreement {
             this.name = name;
             return this;
         }
+
 
         /**
          * The description of the agreement.
@@ -422,17 +432,20 @@ public class FeePlanAgreement {
             return this;
         }
 
+
         public Builder acceptedOn(OffsetDateTime acceptedOn) {
             Utils.checkNotNull(acceptedOn, "acceptedOn");
             this.acceptedOn = acceptedOn;
             return this;
         }
 
+
         public Builder status(FeePlanAgreementStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         /**
          * Specifies the card processing pricing model
@@ -443,11 +456,13 @@ public class FeePlanAgreement {
             return this;
         }
 
+
         public Builder billableFees(List<BillableFee> billableFees) {
             Utils.checkNotNull(billableFees, "billableFees");
             this.billableFees = billableFees;
             return this;
         }
+
 
         /**
          * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
@@ -458,6 +473,7 @@ public class FeePlanAgreement {
             return this;
         }
 
+
         /**
          * Fixed recurring amount paid in the billing period regardless of usage.
          */
@@ -466,20 +482,15 @@ public class FeePlanAgreement {
             this.monthlyPlatformFee = monthlyPlatformFee;
             return this;
         }
-        
+
         public FeePlanAgreement build() {
+
             return new FeePlanAgreement(
-                agreementID,
-                planID,
-                accountID,
-                name,
-                description,
-                acceptedOn,
-                status,
-                cardAcquiringModel,
-                billableFees,
-                minimumCommitment,
-                monthlyPlatformFee);
+                agreementID, planID, accountID,
+                name, description, acceptedOn,
+                status, cardAcquiringModel, billableFees,
+                minimumCommitment, monthlyPlatformFee);
         }
+
     }
 }

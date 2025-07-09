@@ -24,8 +24,10 @@ public class CreateAuthorizedUser {
     @JsonProperty("firstName")
     private String firstName;
 
+
     @JsonProperty("lastName")
     private String lastName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("birthDate")
@@ -66,9 +68,10 @@ public class CreateAuthorizedUser {
         return (Optional<BirthDate>) birthDate;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateAuthorizedUser withFirstName(String firstName) {
         Utils.checkNotNull(firstName, "firstName");
@@ -88,13 +91,13 @@ public class CreateAuthorizedUser {
         return this;
     }
 
+
     public CreateAuthorizedUser withBirthDate(Optional<? extends BirthDate> birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
         this.birthDate = birthDate;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -113,9 +116,7 @@ public class CreateAuthorizedUser {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            firstName,
-            lastName,
-            birthDate);
+            firstName, lastName, birthDate);
     }
     
     @Override
@@ -125,18 +126,20 @@ public class CreateAuthorizedUser {
                 "lastName", lastName,
                 "birthDate", birthDate);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String firstName;
- 
+
         private String lastName;
- 
+
         private Optional<? extends BirthDate> birthDate = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder firstName(String firstName) {
             Utils.checkNotNull(firstName, "firstName");
@@ -144,11 +147,13 @@ public class CreateAuthorizedUser {
             return this;
         }
 
+
         public Builder lastName(String lastName) {
             Utils.checkNotNull(lastName, "lastName");
             this.lastName = lastName;
             return this;
         }
+
 
         public Builder birthDate(BirthDate birthDate) {
             Utils.checkNotNull(birthDate, "birthDate");
@@ -161,12 +166,12 @@ public class CreateAuthorizedUser {
             this.birthDate = birthDate;
             return this;
         }
-        
+
         public CreateAuthorizedUser build() {
+
             return new CreateAuthorizedUser(
-                firstName,
-                lastName,
-                birthDate);
+                firstName, lastName, birthDate);
         }
+
     }
 }

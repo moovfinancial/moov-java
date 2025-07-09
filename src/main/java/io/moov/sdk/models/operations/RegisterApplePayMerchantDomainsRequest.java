@@ -11,13 +11,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class RegisterApplePayMerchantDomainsRequest {
 
+public class RegisterApplePayMerchantDomainsRequest {
     /**
      * ID of the Moov account representing the merchant.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private RegisterApplePayMerchantDomains registerApplePayMerchantDomains;
@@ -45,9 +46,10 @@ public class RegisterApplePayMerchantDomainsRequest {
         return registerApplePayMerchantDomains;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the Moov account representing the merchant.
@@ -64,7 +66,6 @@ public class RegisterApplePayMerchantDomainsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,8 +83,7 @@ public class RegisterApplePayMerchantDomainsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            registerApplePayMerchantDomains);
+            accountID, registerApplePayMerchantDomains);
     }
     
     @Override
@@ -92,16 +92,18 @@ public class RegisterApplePayMerchantDomainsRequest {
                 "accountID", accountID,
                 "registerApplePayMerchantDomains", registerApplePayMerchantDomains);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private RegisterApplePayMerchantDomains registerApplePayMerchantDomains;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the Moov account representing the merchant.
@@ -112,16 +114,18 @@ public class RegisterApplePayMerchantDomainsRequest {
             return this;
         }
 
+
         public Builder registerApplePayMerchantDomains(RegisterApplePayMerchantDomains registerApplePayMerchantDomains) {
             Utils.checkNotNull(registerApplePayMerchantDomains, "registerApplePayMerchantDomains");
             this.registerApplePayMerchantDomains = registerApplePayMerchantDomains;
             return this;
         }
-        
+
         public RegisterApplePayMerchantDomainsRequest build() {
+
             return new RegisterApplePayMerchantDomainsRequest(
-                accountID,
-                registerApplePayMerchantDomains);
+                accountID, registerApplePayMerchantDomains);
         }
+
     }
 }

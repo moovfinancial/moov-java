@@ -67,7 +67,7 @@ public class ListTicketsRequestBuilder {
     public ListTicketsResponse call() throws Exception {
         
         RequestOperation<ListTicketsRequest, ListTicketsResponse> operation
-              = new ListTicketsOperation( sdkConfiguration);
+              = new ListTicketsOperation(sdkConfiguration);
         ListTicketsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

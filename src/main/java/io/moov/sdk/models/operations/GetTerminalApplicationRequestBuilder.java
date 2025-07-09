@@ -37,7 +37,7 @@ public class GetTerminalApplicationRequestBuilder {
     public GetTerminalApplicationResponse call() throws Exception {
         
         RequestOperation<GetTerminalApplicationRequest, GetTerminalApplicationResponse> operation
-              = new GetTerminalApplicationOperation( sdkConfiguration);
+              = new GetTerminalApplicationOperation(sdkConfiguration);
         GetTerminalApplicationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

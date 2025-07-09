@@ -12,8 +12,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class ListInstitutionsRequest {
 
+public class ListInstitutionsRequest {
     /**
      * Name of the financial institution. Either `name` or `routingNumber` is required.
      */
@@ -55,7 +55,8 @@ public class ListInstitutionsRequest {
     }
     
     public ListInstitutionsRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -90,9 +91,10 @@ public class ListInstitutionsRequest {
         return limit;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Name of the financial institution. Either `name` or `routingNumber` is required.
@@ -102,6 +104,7 @@ public class ListInstitutionsRequest {
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     /**
      * Name of the financial institution. Either `name` or `routingNumber` is required.
@@ -121,6 +124,7 @@ public class ListInstitutionsRequest {
         return this;
     }
 
+
     /**
      * Routing number for a financial institution. Either `routingNumber` or `name` is required.
      */
@@ -138,6 +142,7 @@ public class ListInstitutionsRequest {
         this.state = Optional.ofNullable(state);
         return this;
     }
+
 
     /**
      * The state where a financial institution is based.
@@ -157,6 +162,7 @@ public class ListInstitutionsRequest {
         return this;
     }
 
+
     /**
      * Maximum results returned by a search.
      */
@@ -166,7 +172,6 @@ public class ListInstitutionsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -186,9 +191,7 @@ public class ListInstitutionsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            routingNumber,
-            state,
+            name, routingNumber, state,
             limit);
     }
     
@@ -200,20 +203,22 @@ public class ListInstitutionsRequest {
                 "state", state,
                 "limit", limit);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<String> routingNumber = Optional.empty();
- 
+
         private Optional<String> state = Optional.empty();
- 
+
         private Optional<Long> limit = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Name of the financial institution. Either `name` or `routingNumber` is required.
@@ -233,6 +238,7 @@ public class ListInstitutionsRequest {
             return this;
         }
 
+
         /**
          * Routing number for a financial institution. Either `routingNumber` or `name` is required.
          */
@@ -250,6 +256,7 @@ public class ListInstitutionsRequest {
             this.routingNumber = routingNumber;
             return this;
         }
+
 
         /**
          * The state where a financial institution is based.
@@ -269,6 +276,7 @@ public class ListInstitutionsRequest {
             return this;
         }
 
+
         /**
          * Maximum results returned by a search.
          */
@@ -286,13 +294,13 @@ public class ListInstitutionsRequest {
             this.limit = limit;
             return this;
         }
-        
+
         public ListInstitutionsRequest build() {
+
             return new ListInstitutionsRequest(
-                name,
-                routingNumber,
-                state,
+                name, routingNumber, state,
                 limit);
         }
+
     }
 }

@@ -10,13 +10,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class GetWalletTransactionRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=walletID")
     private String walletID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=transactionID")
     private String transactionID;
@@ -49,9 +52,10 @@ public class GetWalletTransactionRequest {
         return transactionID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetWalletTransactionRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -71,7 +75,6 @@ public class GetWalletTransactionRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,9 +93,7 @@ public class GetWalletTransactionRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            walletID,
-            transactionID);
+            accountID, walletID, transactionID);
     }
     
     @Override
@@ -102,18 +103,20 @@ public class GetWalletTransactionRequest {
                 "walletID", walletID,
                 "transactionID", transactionID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String walletID;
- 
+
         private String transactionID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -121,23 +124,25 @@ public class GetWalletTransactionRequest {
             return this;
         }
 
+
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
             this.walletID = walletID;
             return this;
         }
 
+
         public Builder transactionID(String transactionID) {
             Utils.checkNotNull(transactionID, "transactionID");
             this.transactionID = transactionID;
             return this;
         }
-        
+
         public GetWalletTransactionRequest build() {
+
             return new GetWalletTransactionRequest(
-                accountID,
-                walletID,
-                transactionID);
+                accountID, walletID, transactionID);
         }
+
     }
 }

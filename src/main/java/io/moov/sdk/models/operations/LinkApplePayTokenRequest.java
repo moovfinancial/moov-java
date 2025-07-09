@@ -11,13 +11,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class LinkApplePayTokenRequest {
 
+public class LinkApplePayTokenRequest {
     /**
      * ID of the Moov account representing the cardholder.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private LinkApplePay linkApplePay;
@@ -45,9 +46,10 @@ public class LinkApplePayTokenRequest {
         return linkApplePay;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the Moov account representing the cardholder.
@@ -64,7 +66,6 @@ public class LinkApplePayTokenRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,8 +83,7 @@ public class LinkApplePayTokenRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            linkApplePay);
+            accountID, linkApplePay);
     }
     
     @Override
@@ -92,16 +92,18 @@ public class LinkApplePayTokenRequest {
                 "accountID", accountID,
                 "linkApplePay", linkApplePay);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private LinkApplePay linkApplePay;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the Moov account representing the cardholder.
@@ -112,16 +114,18 @@ public class LinkApplePayTokenRequest {
             return this;
         }
 
+
         public Builder linkApplePay(LinkApplePay linkApplePay) {
             Utils.checkNotNull(linkApplePay, "linkApplePay");
             this.linkApplePay = linkApplePay;
             return this;
         }
-        
+
         public LinkApplePayTokenRequest build() {
+
             return new LinkApplePayTokenRequest(
-                accountID,
-                linkApplePay);
+                accountID, linkApplePay);
         }
+
     }
 }

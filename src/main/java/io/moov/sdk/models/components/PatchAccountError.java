@@ -14,27 +14,33 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class PatchAccountError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("profile")
     private Optional<? extends CreateProfileError> profile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
     private Optional<String> metadata;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("termsOfService")
     private Optional<? extends TermsOfServiceError> termsOfService;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("foreignID")
     private Optional<String> foreignID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("customerSupport")
     private Optional<? extends CustomerSupportError> customerSupport;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("settings")
@@ -63,7 +69,8 @@ public class PatchAccountError {
     }
     
     public PatchAccountError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -100,15 +107,17 @@ public class PatchAccountError {
         return (Optional<CreateAccountSettings>) settings;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PatchAccountError withProfile(CreateProfileError profile) {
         Utils.checkNotNull(profile, "profile");
         this.profile = Optional.ofNullable(profile);
         return this;
     }
+
 
     public PatchAccountError withProfile(Optional<? extends CreateProfileError> profile) {
         Utils.checkNotNull(profile, "profile");
@@ -122,6 +131,7 @@ public class PatchAccountError {
         return this;
     }
 
+
     public PatchAccountError withMetadata(Optional<String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
@@ -133,6 +143,7 @@ public class PatchAccountError {
         this.termsOfService = Optional.ofNullable(termsOfService);
         return this;
     }
+
 
     public PatchAccountError withTermsOfService(Optional<? extends TermsOfServiceError> termsOfService) {
         Utils.checkNotNull(termsOfService, "termsOfService");
@@ -146,6 +157,7 @@ public class PatchAccountError {
         return this;
     }
 
+
     public PatchAccountError withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
         this.foreignID = foreignID;
@@ -157,6 +169,7 @@ public class PatchAccountError {
         this.customerSupport = Optional.ofNullable(customerSupport);
         return this;
     }
+
 
     public PatchAccountError withCustomerSupport(Optional<? extends CustomerSupportError> customerSupport) {
         Utils.checkNotNull(customerSupport, "customerSupport");
@@ -170,13 +183,13 @@ public class PatchAccountError {
         return this;
     }
 
+
     public PatchAccountError withSettings(Optional<? extends CreateAccountSettings> settings) {
         Utils.checkNotNull(settings, "settings");
         this.settings = settings;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -198,12 +211,8 @@ public class PatchAccountError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            profile,
-            metadata,
-            termsOfService,
-            foreignID,
-            customerSupport,
-            settings);
+            profile, metadata, termsOfService,
+            foreignID, customerSupport, settings);
     }
     
     @Override
@@ -216,24 +225,26 @@ public class PatchAccountError {
                 "customerSupport", customerSupport,
                 "settings", settings);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CreateProfileError> profile = Optional.empty();
- 
+
         private Optional<String> metadata = Optional.empty();
- 
+
         private Optional<? extends TermsOfServiceError> termsOfService = Optional.empty();
- 
+
         private Optional<String> foreignID = Optional.empty();
- 
+
         private Optional<? extends CustomerSupportError> customerSupport = Optional.empty();
- 
+
         private Optional<? extends CreateAccountSettings> settings = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder profile(CreateProfileError profile) {
             Utils.checkNotNull(profile, "profile");
@@ -247,6 +258,7 @@ public class PatchAccountError {
             return this;
         }
 
+
         public Builder metadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -258,6 +270,7 @@ public class PatchAccountError {
             this.metadata = metadata;
             return this;
         }
+
 
         public Builder termsOfService(TermsOfServiceError termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
@@ -271,6 +284,7 @@ public class PatchAccountError {
             return this;
         }
 
+
         public Builder foreignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = Optional.ofNullable(foreignID);
@@ -282,6 +296,7 @@ public class PatchAccountError {
             this.foreignID = foreignID;
             return this;
         }
+
 
         public Builder customerSupport(CustomerSupportError customerSupport) {
             Utils.checkNotNull(customerSupport, "customerSupport");
@@ -295,6 +310,7 @@ public class PatchAccountError {
             return this;
         }
 
+
         public Builder settings(CreateAccountSettings settings) {
             Utils.checkNotNull(settings, "settings");
             this.settings = Optional.ofNullable(settings);
@@ -306,15 +322,13 @@ public class PatchAccountError {
             this.settings = settings;
             return this;
         }
-        
+
         public PatchAccountError build() {
+
             return new PatchAccountError(
-                profile,
-                metadata,
-                termsOfService,
-                foreignID,
-                customerSupport,
-                settings);
+                profile, metadata, termsOfService,
+                foreignID, customerSupport, settings);
         }
+
     }
 }

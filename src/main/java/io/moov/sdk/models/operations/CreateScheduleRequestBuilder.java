@@ -46,7 +46,7 @@ public class CreateScheduleRequestBuilder {
     public CreateScheduleResponse call() throws Exception {
         
         RequestOperation<CreateScheduleRequest, CreateScheduleResponse> operation
-              = new CreateScheduleOperation( sdkConfiguration);
+              = new CreateScheduleOperation(sdkConfiguration);
         CreateScheduleRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

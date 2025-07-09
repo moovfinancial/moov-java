@@ -45,7 +45,7 @@ public class DisablePaymentLinkRequestBuilder {
     public DisablePaymentLinkResponse call() throws Exception {
         
         RequestOperation<DisablePaymentLinkRequest, DisablePaymentLinkResponse> operation
-              = new DisablePaymentLinkOperation( sdkConfiguration);
+              = new DisablePaymentLinkOperation(sdkConfiguration);
         DisablePaymentLinkRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

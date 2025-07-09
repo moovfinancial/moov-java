@@ -12,8 +12,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class GetEnrichmentAddressRequest {
 
+public class GetEnrichmentAddressRequest {
     /**
      * Partial or complete address to search.
      */
@@ -139,7 +139,11 @@ public class GetEnrichmentAddressRequest {
     
     public GetEnrichmentAddressRequest(
             String search) {
-        this(search, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(search, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -248,9 +252,10 @@ public class GetEnrichmentAddressRequest {
         return source;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Partial or complete address to search.
@@ -270,6 +275,7 @@ public class GetEnrichmentAddressRequest {
         return this;
     }
 
+
     /**
      * Maximum number of results to return.
      */
@@ -287,6 +293,7 @@ public class GetEnrichmentAddressRequest {
         this.includeCities = Optional.ofNullable(includeCities);
         return this;
     }
+
 
     /**
      * Limits results to a list of given cities.
@@ -306,6 +313,7 @@ public class GetEnrichmentAddressRequest {
         return this;
     }
 
+
     /**
      * Limits results to a list of given states.
      */
@@ -323,6 +331,7 @@ public class GetEnrichmentAddressRequest {
         this.includeZipcodes = Optional.ofNullable(includeZipcodes);
         return this;
     }
+
 
     /**
      * Limits results to a list of given zipcodes.
@@ -342,6 +351,7 @@ public class GetEnrichmentAddressRequest {
         return this;
     }
 
+
     /**
      * Exclude list of states from results. No `include` pararmeters may be used with this parameter.
      */
@@ -359,6 +369,7 @@ public class GetEnrichmentAddressRequest {
         this.preferCities = Optional.ofNullable(preferCities);
         return this;
     }
+
 
     /**
      * Display results with the listed cities at the top.
@@ -378,6 +389,7 @@ public class GetEnrichmentAddressRequest {
         return this;
     }
 
+
     /**
      * Display results with the listed states at the top.
      */
@@ -396,6 +408,7 @@ public class GetEnrichmentAddressRequest {
         return this;
     }
 
+
     /**
      * Display results with the listed zipcodes at the top.
      */
@@ -413,6 +426,7 @@ public class GetEnrichmentAddressRequest {
         this.preferRatio = Optional.ofNullable(preferRatio);
         return this;
     }
+
 
     /**
      * Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
@@ -434,6 +448,7 @@ public class GetEnrichmentAddressRequest {
         return this;
     }
 
+
     /**
      * If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
      *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
@@ -454,6 +469,7 @@ public class GetEnrichmentAddressRequest {
         return this;
     }
 
+
     /**
      * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
      */
@@ -472,6 +488,7 @@ public class GetEnrichmentAddressRequest {
         return this;
     }
 
+
     /**
      * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
      */
@@ -481,7 +498,6 @@ public class GetEnrichmentAddressRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -510,18 +526,10 @@ public class GetEnrichmentAddressRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            search,
-            maxResults,
-            includeCities,
-            includeStates,
-            includeZipcodes,
-            excludeStates,
-            preferCities,
-            preferStates,
-            preferZipcodes,
-            preferRatio,
-            preferGeolocation,
-            selected,
+            search, maxResults, includeCities,
+            includeStates, includeZipcodes, excludeStates,
+            preferCities, preferStates, preferZipcodes,
+            preferRatio, preferGeolocation, selected,
             source);
     }
     
@@ -542,38 +550,40 @@ public class GetEnrichmentAddressRequest {
                 "selected", selected,
                 "source", source);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String search;
- 
+
         private Optional<Long> maxResults = Optional.empty();
- 
+
         private Optional<String> includeCities = Optional.empty();
- 
+
         private Optional<String> includeStates = Optional.empty();
- 
+
         private Optional<String> includeZipcodes = Optional.empty();
- 
+
         private Optional<String> excludeStates = Optional.empty();
- 
+
         private Optional<String> preferCities = Optional.empty();
- 
+
         private Optional<String> preferStates = Optional.empty();
- 
+
         private Optional<String> preferZipcodes = Optional.empty();
- 
+
         private Optional<Long> preferRatio = Optional.empty();
- 
+
         private Optional<String> preferGeolocation = Optional.empty();
- 
+
         private Optional<String> selected = Optional.empty();
- 
+
         private Optional<String> source = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Partial or complete address to search.
@@ -583,6 +593,7 @@ public class GetEnrichmentAddressRequest {
             this.search = search;
             return this;
         }
+
 
         /**
          * Maximum number of results to return.
@@ -602,6 +613,7 @@ public class GetEnrichmentAddressRequest {
             return this;
         }
 
+
         /**
          * Limits results to a list of given cities.
          */
@@ -619,6 +631,7 @@ public class GetEnrichmentAddressRequest {
             this.includeCities = includeCities;
             return this;
         }
+
 
         /**
          * Limits results to a list of given states.
@@ -638,6 +651,7 @@ public class GetEnrichmentAddressRequest {
             return this;
         }
 
+
         /**
          * Limits results to a list of given zipcodes.
          */
@@ -655,6 +669,7 @@ public class GetEnrichmentAddressRequest {
             this.includeZipcodes = includeZipcodes;
             return this;
         }
+
 
         /**
          * Exclude list of states from results. No `include` pararmeters may be used with this parameter.
@@ -674,6 +689,7 @@ public class GetEnrichmentAddressRequest {
             return this;
         }
 
+
         /**
          * Display results with the listed cities at the top.
          */
@@ -691,6 +707,7 @@ public class GetEnrichmentAddressRequest {
             this.preferCities = preferCities;
             return this;
         }
+
 
         /**
          * Display results with the listed states at the top.
@@ -710,6 +727,7 @@ public class GetEnrichmentAddressRequest {
             return this;
         }
 
+
         /**
          * Display results with the listed zipcodes at the top.
          */
@@ -728,6 +746,7 @@ public class GetEnrichmentAddressRequest {
             return this;
         }
 
+
         /**
          * Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
          */
@@ -745,6 +764,7 @@ public class GetEnrichmentAddressRequest {
             this.preferRatio = preferRatio;
             return this;
         }
+
 
         /**
          * If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
@@ -768,6 +788,7 @@ public class GetEnrichmentAddressRequest {
             return this;
         }
 
+
         /**
          * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
          */
@@ -786,6 +807,7 @@ public class GetEnrichmentAddressRequest {
             return this;
         }
 
+
         /**
          * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
          */
@@ -803,22 +825,16 @@ public class GetEnrichmentAddressRequest {
             this.source = source;
             return this;
         }
-        
+
         public GetEnrichmentAddressRequest build() {
+
             return new GetEnrichmentAddressRequest(
-                search,
-                maxResults,
-                includeCities,
-                includeStates,
-                includeZipcodes,
-                excludeStates,
-                preferCities,
-                preferStates,
-                preferZipcodes,
-                preferRatio,
-                preferGeolocation,
-                selected,
+                search, maxResults, includeCities,
+                includeStates, includeZipcodes, excludeStates,
+                preferCities, preferStates, preferZipcodes,
+                preferRatio, preferGeolocation, selected,
                 source);
         }
+
     }
 }

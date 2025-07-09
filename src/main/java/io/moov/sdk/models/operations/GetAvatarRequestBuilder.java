@@ -37,7 +37,7 @@ public class GetAvatarRequestBuilder {
     public GetAvatarResponse call() throws Exception {
         
         RequestOperation<GetAvatarRequest, GetAvatarResponse> operation
-              = new GetAvatarOperation( sdkConfiguration);
+              = new GetAvatarOperation(sdkConfiguration);
         GetAvatarRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

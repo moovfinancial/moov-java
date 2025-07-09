@@ -14,23 +14,28 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import org.openapitools.jackson.nullable.JsonNullable;
 
+
 public class PatchSweepConfig {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
     private JsonNullable<? extends Status> status;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushPaymentMethodID")
     private JsonNullable<? extends PushPaymentMethodID> pushPaymentMethodID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pullPaymentMethodID")
     private JsonNullable<? extends PullPaymentMethodID> pullPaymentMethodID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("statementDescriptor")
     private JsonNullable<? extends StatementDescriptor> statementDescriptor;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minimumBalance")
@@ -56,7 +61,8 @@ public class PatchSweepConfig {
     }
     
     public PatchSweepConfig() {
-        this(JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined());
+        this(JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     @SuppressWarnings("unchecked")
@@ -88,9 +94,10 @@ public class PatchSweepConfig {
         return minimumBalance;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PatchSweepConfig withStatus(Status status) {
         Utils.checkNotNull(status, "status");
@@ -152,7 +159,6 @@ public class PatchSweepConfig {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -173,11 +179,8 @@ public class PatchSweepConfig {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            status,
-            pushPaymentMethodID,
-            pullPaymentMethodID,
-            statementDescriptor,
-            minimumBalance);
+            status, pushPaymentMethodID, pullPaymentMethodID,
+            statementDescriptor, minimumBalance);
     }
     
     @Override
@@ -189,22 +192,24 @@ public class PatchSweepConfig {
                 "statementDescriptor", statementDescriptor,
                 "minimumBalance", minimumBalance);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private JsonNullable<? extends Status> status = JsonNullable.undefined();
- 
+
         private JsonNullable<? extends PushPaymentMethodID> pushPaymentMethodID = JsonNullable.undefined();
- 
+
         private JsonNullable<? extends PullPaymentMethodID> pullPaymentMethodID = JsonNullable.undefined();
- 
+
         private JsonNullable<? extends StatementDescriptor> statementDescriptor = JsonNullable.undefined();
- 
+
         private JsonNullable<String> minimumBalance = JsonNullable.undefined();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder status(Status status) {
             Utils.checkNotNull(status, "status");
@@ -218,6 +223,7 @@ public class PatchSweepConfig {
             return this;
         }
 
+
         public Builder pushPaymentMethodID(PushPaymentMethodID pushPaymentMethodID) {
             Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
             this.pushPaymentMethodID = JsonNullable.of(pushPaymentMethodID);
@@ -229,6 +235,7 @@ public class PatchSweepConfig {
             this.pushPaymentMethodID = pushPaymentMethodID;
             return this;
         }
+
 
         public Builder pullPaymentMethodID(PullPaymentMethodID pullPaymentMethodID) {
             Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
@@ -242,6 +249,7 @@ public class PatchSweepConfig {
             return this;
         }
 
+
         public Builder statementDescriptor(StatementDescriptor statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
             this.statementDescriptor = JsonNullable.of(statementDescriptor);
@@ -254,6 +262,7 @@ public class PatchSweepConfig {
             return this;
         }
 
+
         public Builder minimumBalance(String minimumBalance) {
             Utils.checkNotNull(minimumBalance, "minimumBalance");
             this.minimumBalance = JsonNullable.of(minimumBalance);
@@ -265,14 +274,13 @@ public class PatchSweepConfig {
             this.minimumBalance = minimumBalance;
             return this;
         }
-        
+
         public PatchSweepConfig build() {
+
             return new PatchSweepConfig(
-                status,
-                pushPaymentMethodID,
-                pullPaymentMethodID,
-                statementDescriptor,
-                minimumBalance);
+                status, pushPaymentMethodID, pullPaymentMethodID,
+                statementDescriptor, minimumBalance);
         }
+
     }
 }

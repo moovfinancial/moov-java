@@ -11,16 +11,20 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UpdateDisputeEvidenceRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=disputeID")
     private String disputeID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=evidenceID")
     private String evidenceID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpdateEvidence updateEvidence;
@@ -61,9 +65,10 @@ public class UpdateDisputeEvidenceRequest {
         return updateEvidence;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateDisputeEvidenceRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -89,7 +94,6 @@ public class UpdateDisputeEvidenceRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -109,9 +113,7 @@ public class UpdateDisputeEvidenceRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            disputeID,
-            evidenceID,
+            accountID, disputeID, evidenceID,
             updateEvidence);
     }
     
@@ -123,20 +125,22 @@ public class UpdateDisputeEvidenceRequest {
                 "evidenceID", evidenceID,
                 "updateEvidence", updateEvidence);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String disputeID;
- 
+
         private String evidenceID;
- 
+
         private UpdateEvidence updateEvidence;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -144,11 +148,13 @@ public class UpdateDisputeEvidenceRequest {
             return this;
         }
 
+
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = disputeID;
             return this;
         }
+
 
         public Builder evidenceID(String evidenceID) {
             Utils.checkNotNull(evidenceID, "evidenceID");
@@ -156,18 +162,19 @@ public class UpdateDisputeEvidenceRequest {
             return this;
         }
 
+
         public Builder updateEvidence(UpdateEvidence updateEvidence) {
             Utils.checkNotNull(updateEvidence, "updateEvidence");
             this.updateEvidence = updateEvidence;
             return this;
         }
-        
+
         public UpdateDisputeEvidenceRequest build() {
+
             return new UpdateDisputeEvidenceRequest(
-                accountID,
-                disputeID,
-                evidenceID,
+                accountID, disputeID, evidenceID,
                 updateEvidence);
         }
+
     }
 }

@@ -25,13 +25,16 @@ public class IndividualProfile {
     @JsonProperty("name")
     private IndividualName name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
@@ -75,7 +78,8 @@ public class IndividualProfile {
     
     public IndividualProfile(
             IndividualName name) {
-        this(name, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(name, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -116,9 +120,10 @@ public class IndividualProfile {
         return governmentIDProvided;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public IndividualProfile withName(IndividualName name) {
         Utils.checkNotNull(name, "name");
@@ -132,6 +137,7 @@ public class IndividualProfile {
         return this;
     }
 
+
     public IndividualProfile withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
@@ -144,6 +150,7 @@ public class IndividualProfile {
         return this;
     }
 
+
     public IndividualProfile withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
@@ -155,6 +162,7 @@ public class IndividualProfile {
         this.address = Optional.ofNullable(address);
         return this;
     }
+
 
     public IndividualProfile withAddress(Optional<? extends Address> address) {
         Utils.checkNotNull(address, "address");
@@ -170,6 +178,7 @@ public class IndividualProfile {
         this.birthDateProvided = Optional.ofNullable(birthDateProvided);
         return this;
     }
+
 
     /**
      * Indicates whether this individual's birth date has been provided.
@@ -189,6 +198,7 @@ public class IndividualProfile {
         return this;
     }
 
+
     /**
      * Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this individual.
      */
@@ -198,7 +208,6 @@ public class IndividualProfile {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -220,12 +229,8 @@ public class IndividualProfile {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            phone,
-            email,
-            address,
-            birthDateProvided,
-            governmentIDProvided);
+            name, phone, email,
+            address, birthDateProvided, governmentIDProvided);
     }
     
     @Override
@@ -238,30 +243,33 @@ public class IndividualProfile {
                 "birthDateProvided", birthDateProvided,
                 "governmentIDProvided", governmentIDProvided);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private IndividualName name;
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends Address> address = Optional.empty();
- 
+
         private Optional<Boolean> birthDateProvided = Optional.empty();
- 
+
         private Optional<Boolean> governmentIDProvided = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(IndividualName name) {
             Utils.checkNotNull(name, "name");
             this.name = name;
             return this;
         }
+
 
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
@@ -275,6 +283,7 @@ public class IndividualProfile {
             return this;
         }
 
+
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = Optional.ofNullable(email);
@@ -287,6 +296,7 @@ public class IndividualProfile {
             return this;
         }
 
+
         public Builder address(Address address) {
             Utils.checkNotNull(address, "address");
             this.address = Optional.ofNullable(address);
@@ -298,6 +308,7 @@ public class IndividualProfile {
             this.address = address;
             return this;
         }
+
 
         /**
          * Indicates whether this individual's birth date has been provided.
@@ -317,6 +328,7 @@ public class IndividualProfile {
             return this;
         }
 
+
         /**
          * Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this individual.
          */
@@ -334,15 +346,13 @@ public class IndividualProfile {
             this.governmentIDProvided = governmentIDProvided;
             return this;
         }
-        
+
         public IndividualProfile build() {
+
             return new IndividualProfile(
-                name,
-                phone,
-                email,
-                address,
-                birthDateProvided,
-                governmentIDProvided);
+                name, phone, email,
+                address, birthDateProvided, governmentIDProvided);
         }
+
     }
 }

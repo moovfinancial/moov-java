@@ -18,21 +18,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 public class CreatedTransfer {
 
     @JsonProperty("transferID")
     private String transferID;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("source")
     private Optional<? extends TransferSource> source;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("destination")
     private Optional<? extends TransferDestination> destination;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("completedOn")
@@ -51,6 +56,7 @@ public class CreatedTransfer {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failureReason")
     private Optional<? extends TransferFailureReason> failureReason;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
@@ -98,41 +104,51 @@ public class CreatedTransfer {
     @JsonProperty("moovFeeDetails")
     private Optional<? extends MoovFeeDetails> moovFeeDetails;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("groupID")
     private Optional<String> groupID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cancellations")
     private Optional<? extends List<Cancellation>> cancellations;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refundedAmount")
     private Optional<? extends Amount> refundedAmount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refunds")
     private Optional<? extends List<CardAcquiringRefund>> refunds;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disputedAmount")
     private Optional<? extends Amount> disputedAmount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("disputes")
     private Optional<? extends List<CardAcquiringDispute>> disputes;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sweepID")
     private Optional<String> sweepID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scheduleID")
     private Optional<String> scheduleID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("occurrenceID")
     private Optional<String> occurrenceID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentLinkCode")
@@ -237,7 +253,15 @@ public class CreatedTransfer {
     public CreatedTransfer(
             String transferID,
             OffsetDateTime createdOn) {
-        this(transferID, createdOn, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(transferID, createdOn, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -414,9 +438,10 @@ public class CreatedTransfer {
         return foreignID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreatedTransfer withTransferID(String transferID) {
         Utils.checkNotNull(transferID, "transferID");
@@ -436,6 +461,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     public CreatedTransfer withSource(Optional<? extends TransferSource> source) {
         Utils.checkNotNull(source, "source");
         this.source = source;
@@ -448,6 +474,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     public CreatedTransfer withDestination(Optional<? extends TransferDestination> destination) {
         Utils.checkNotNull(destination, "destination");
         this.destination = destination;
@@ -459,6 +486,7 @@ public class CreatedTransfer {
         this.completedOn = Optional.ofNullable(completedOn);
         return this;
     }
+
 
     public CreatedTransfer withCompletedOn(Optional<OffsetDateTime> completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
@@ -474,6 +502,7 @@ public class CreatedTransfer {
         this.status = Optional.ofNullable(status);
         return this;
     }
+
 
     /**
      * Status of a transfer.
@@ -493,6 +522,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     /**
      * Reason for a transfer's failure.
      */
@@ -508,6 +538,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     public CreatedTransfer withAmount(Optional<? extends Amount> amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
@@ -522,6 +553,7 @@ public class CreatedTransfer {
         this.description = Optional.ofNullable(description);
         return this;
     }
+
 
     /**
      * An optional description of the transfer that is used on receipts and for your own internal use.
@@ -541,6 +573,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     /**
      * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
      */
@@ -558,6 +591,7 @@ public class CreatedTransfer {
         this.facilitatorFee = Optional.ofNullable(facilitatorFee);
         return this;
     }
+
 
     /**
      * Total or markup fee.
@@ -577,6 +611,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     /**
      * Fees charged to your platform account for transfers.
      */
@@ -594,6 +629,7 @@ public class CreatedTransfer {
         this.moovFeeDecimal = Optional.ofNullable(moovFeeDecimal);
         return this;
     }
+
 
     /**
      * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
@@ -613,6 +649,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     /**
      * Processing and pass-through costs that add up to the moovFee.
      */
@@ -628,6 +665,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     public CreatedTransfer withGroupID(Optional<String> groupID) {
         Utils.checkNotNull(groupID, "groupID");
         this.groupID = groupID;
@@ -639,6 +677,7 @@ public class CreatedTransfer {
         this.cancellations = Optional.ofNullable(cancellations);
         return this;
     }
+
 
     public CreatedTransfer withCancellations(Optional<? extends List<Cancellation>> cancellations) {
         Utils.checkNotNull(cancellations, "cancellations");
@@ -652,6 +691,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     public CreatedTransfer withRefundedAmount(Optional<? extends Amount> refundedAmount) {
         Utils.checkNotNull(refundedAmount, "refundedAmount");
         this.refundedAmount = refundedAmount;
@@ -663,6 +703,7 @@ public class CreatedTransfer {
         this.refunds = Optional.ofNullable(refunds);
         return this;
     }
+
 
     public CreatedTransfer withRefunds(Optional<? extends List<CardAcquiringRefund>> refunds) {
         Utils.checkNotNull(refunds, "refunds");
@@ -676,6 +717,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     public CreatedTransfer withDisputedAmount(Optional<? extends Amount> disputedAmount) {
         Utils.checkNotNull(disputedAmount, "disputedAmount");
         this.disputedAmount = disputedAmount;
@@ -687,6 +729,7 @@ public class CreatedTransfer {
         this.disputes = Optional.ofNullable(disputes);
         return this;
     }
+
 
     public CreatedTransfer withDisputes(Optional<? extends List<CardAcquiringDispute>> disputes) {
         Utils.checkNotNull(disputes, "disputes");
@@ -700,6 +743,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     public CreatedTransfer withSweepID(Optional<String> sweepID) {
         Utils.checkNotNull(sweepID, "sweepID");
         this.sweepID = sweepID;
@@ -711,6 +755,7 @@ public class CreatedTransfer {
         this.scheduleID = Optional.ofNullable(scheduleID);
         return this;
     }
+
 
     public CreatedTransfer withScheduleID(Optional<String> scheduleID) {
         Utils.checkNotNull(scheduleID, "scheduleID");
@@ -724,6 +769,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     public CreatedTransfer withOccurrenceID(Optional<String> occurrenceID) {
         Utils.checkNotNull(occurrenceID, "occurrenceID");
         this.occurrenceID = occurrenceID;
@@ -735,6 +781,7 @@ public class CreatedTransfer {
         this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
         return this;
     }
+
 
     public CreatedTransfer withPaymentLinkCode(Optional<String> paymentLinkCode) {
         Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
@@ -750,6 +797,7 @@ public class CreatedTransfer {
         this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
         return this;
     }
+
 
     /**
      * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
@@ -769,6 +817,7 @@ public class CreatedTransfer {
         return this;
     }
 
+
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
      */
@@ -778,7 +827,6 @@ public class CreatedTransfer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -820,32 +868,15 @@ public class CreatedTransfer {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID,
-            createdOn,
-            source,
-            destination,
-            completedOn,
-            status,
-            failureReason,
-            amount,
-            description,
-            metadata,
-            facilitatorFee,
-            moovFee,
-            moovFeeDecimal,
-            moovFeeDetails,
-            groupID,
-            cancellations,
-            refundedAmount,
-            refunds,
-            disputedAmount,
-            disputes,
-            sweepID,
-            scheduleID,
-            occurrenceID,
-            paymentLinkCode,
-            salesTaxAmount,
-            foreignID);
+            transferID, createdOn, source,
+            destination, completedOn, status,
+            failureReason, amount, description,
+            metadata, facilitatorFee, moovFee,
+            moovFeeDecimal, moovFeeDetails, groupID,
+            cancellations, refundedAmount, refunds,
+            disputedAmount, disputes, sweepID,
+            scheduleID, occurrenceID, paymentLinkCode,
+            salesTaxAmount, foreignID);
     }
     
     @Override
@@ -878,64 +909,66 @@ public class CreatedTransfer {
                 "salesTaxAmount", salesTaxAmount,
                 "foreignID", foreignID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String transferID;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private Optional<? extends TransferSource> source = Optional.empty();
- 
+
         private Optional<? extends TransferDestination> destination = Optional.empty();
- 
+
         private Optional<OffsetDateTime> completedOn = Optional.empty();
- 
+
         private Optional<? extends TransferStatus> status = Optional.empty();
- 
+
         private Optional<? extends TransferFailureReason> failureReason = Optional.empty();
- 
+
         private Optional<? extends Amount> amount = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
- 
+
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
- 
+
         private Optional<? extends FacilitatorFee> facilitatorFee = Optional.empty();
- 
+
         private Optional<Long> moovFee = Optional.empty();
- 
+
         private Optional<String> moovFeeDecimal = Optional.empty();
- 
+
         private Optional<? extends MoovFeeDetails> moovFeeDetails = Optional.empty();
- 
+
         private Optional<String> groupID = Optional.empty();
- 
+
         private Optional<? extends List<Cancellation>> cancellations = Optional.empty();
- 
+
         private Optional<? extends Amount> refundedAmount = Optional.empty();
- 
+
         private Optional<? extends List<CardAcquiringRefund>> refunds = Optional.empty();
- 
+
         private Optional<? extends Amount> disputedAmount = Optional.empty();
- 
+
         private Optional<? extends List<CardAcquiringDispute>> disputes = Optional.empty();
- 
+
         private Optional<String> sweepID = Optional.empty();
- 
+
         private Optional<String> scheduleID = Optional.empty();
- 
+
         private Optional<String> occurrenceID = Optional.empty();
- 
+
         private Optional<String> paymentLinkCode = Optional.empty();
- 
+
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
- 
+
         private Optional<String> foreignID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
@@ -943,11 +976,13 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
+
 
         public Builder source(TransferSource source) {
             Utils.checkNotNull(source, "source");
@@ -961,6 +996,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder destination(TransferDestination destination) {
             Utils.checkNotNull(destination, "destination");
             this.destination = Optional.ofNullable(destination);
@@ -973,6 +1009,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder completedOn(OffsetDateTime completedOn) {
             Utils.checkNotNull(completedOn, "completedOn");
             this.completedOn = Optional.ofNullable(completedOn);
@@ -984,6 +1021,7 @@ public class CreatedTransfer {
             this.completedOn = completedOn;
             return this;
         }
+
 
         /**
          * Status of a transfer.
@@ -1003,6 +1041,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         /**
          * Reason for a transfer's failure.
          */
@@ -1021,6 +1060,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
@@ -1032,6 +1072,7 @@ public class CreatedTransfer {
             this.amount = amount;
             return this;
         }
+
 
         /**
          * An optional description of the transfer that is used on receipts and for your own internal use.
@@ -1051,6 +1092,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         /**
          * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
          */
@@ -1068,6 +1110,7 @@ public class CreatedTransfer {
             this.metadata = metadata;
             return this;
         }
+
 
         /**
          * Total or markup fee.
@@ -1087,6 +1130,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         /**
          * Fees charged to your platform account for transfers.
          */
@@ -1104,6 +1148,7 @@ public class CreatedTransfer {
             this.moovFee = moovFee;
             return this;
         }
+
 
         /**
          * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
@@ -1123,6 +1168,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         /**
          * Processing and pass-through costs that add up to the moovFee.
          */
@@ -1141,6 +1187,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder groupID(String groupID) {
             Utils.checkNotNull(groupID, "groupID");
             this.groupID = Optional.ofNullable(groupID);
@@ -1152,6 +1199,7 @@ public class CreatedTransfer {
             this.groupID = groupID;
             return this;
         }
+
 
         public Builder cancellations(List<Cancellation> cancellations) {
             Utils.checkNotNull(cancellations, "cancellations");
@@ -1165,6 +1213,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder refundedAmount(Amount refundedAmount) {
             Utils.checkNotNull(refundedAmount, "refundedAmount");
             this.refundedAmount = Optional.ofNullable(refundedAmount);
@@ -1176,6 +1225,7 @@ public class CreatedTransfer {
             this.refundedAmount = refundedAmount;
             return this;
         }
+
 
         public Builder refunds(List<CardAcquiringRefund> refunds) {
             Utils.checkNotNull(refunds, "refunds");
@@ -1189,6 +1239,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder disputedAmount(Amount disputedAmount) {
             Utils.checkNotNull(disputedAmount, "disputedAmount");
             this.disputedAmount = Optional.ofNullable(disputedAmount);
@@ -1200,6 +1251,7 @@ public class CreatedTransfer {
             this.disputedAmount = disputedAmount;
             return this;
         }
+
 
         public Builder disputes(List<CardAcquiringDispute> disputes) {
             Utils.checkNotNull(disputes, "disputes");
@@ -1213,6 +1265,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder sweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = Optional.ofNullable(sweepID);
@@ -1224,6 +1277,7 @@ public class CreatedTransfer {
             this.sweepID = sweepID;
             return this;
         }
+
 
         public Builder scheduleID(String scheduleID) {
             Utils.checkNotNull(scheduleID, "scheduleID");
@@ -1237,6 +1291,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder occurrenceID(String occurrenceID) {
             Utils.checkNotNull(occurrenceID, "occurrenceID");
             this.occurrenceID = Optional.ofNullable(occurrenceID);
@@ -1249,6 +1304,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         public Builder paymentLinkCode(String paymentLinkCode) {
             Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
             this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
@@ -1260,6 +1316,7 @@ public class CreatedTransfer {
             this.paymentLinkCode = paymentLinkCode;
             return this;
         }
+
 
         /**
          * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
@@ -1279,6 +1336,7 @@ public class CreatedTransfer {
             return this;
         }
 
+
         /**
          * Optional alias from a foreign/external system which can be used to reference this resource.
          */
@@ -1296,35 +1354,20 @@ public class CreatedTransfer {
             this.foreignID = foreignID;
             return this;
         }
-        
+
         public CreatedTransfer build() {
+
             return new CreatedTransfer(
-                transferID,
-                createdOn,
-                source,
-                destination,
-                completedOn,
-                status,
-                failureReason,
-                amount,
-                description,
-                metadata,
-                facilitatorFee,
-                moovFee,
-                moovFeeDecimal,
-                moovFeeDetails,
-                groupID,
-                cancellations,
-                refundedAmount,
-                refunds,
-                disputedAmount,
-                disputes,
-                sweepID,
-                scheduleID,
-                occurrenceID,
-                paymentLinkCode,
-                salesTaxAmount,
-                foreignID);
+                transferID, createdOn, source,
+                destination, completedOn, status,
+                failureReason, amount, description,
+                metadata, facilitatorFee, moovFee,
+                moovFeeDecimal, moovFeeDetails, groupID,
+                cancellations, refundedAmount, refunds,
+                disputedAmount, disputes, sweepID,
+                scheduleID, occurrenceID, paymentLinkCode,
+                salesTaxAmount, foreignID);
         }
+
     }
 }

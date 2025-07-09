@@ -17,7 +17,6 @@ import java.time.OffsetDateTime;
  * <p>Describes the acceptance of the Terms of Service. All data is required, and must be from the user.
  */
 public class ManualTermsOfService {
-
     /**
      * The date and time the terms of service were accepted.
      */
@@ -35,6 +34,7 @@ public class ManualTermsOfService {
      */
     @JsonProperty("acceptedUserAgent")
     private String acceptedUserAgent;
+
 
     @JsonProperty("acceptedDomain")
     private String acceptedDomain;
@@ -84,9 +84,10 @@ public class ManualTermsOfService {
         return acceptedDomain;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The date and time the terms of service were accepted.
@@ -121,7 +122,6 @@ public class ManualTermsOfService {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -141,9 +141,7 @@ public class ManualTermsOfService {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            acceptedDate,
-            acceptedIP,
-            acceptedUserAgent,
+            acceptedDate, acceptedIP, acceptedUserAgent,
             acceptedDomain);
     }
     
@@ -155,20 +153,22 @@ public class ManualTermsOfService {
                 "acceptedUserAgent", acceptedUserAgent,
                 "acceptedDomain", acceptedDomain);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private OffsetDateTime acceptedDate;
- 
+
         private String acceptedIP;
- 
+
         private String acceptedUserAgent;
- 
+
         private String acceptedDomain;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The date and time the terms of service were accepted.
@@ -179,6 +179,7 @@ public class ManualTermsOfService {
             return this;
         }
 
+
         /**
          * The IP address from which the terms of service were accepted.
          */
@@ -187,6 +188,7 @@ public class ManualTermsOfService {
             this.acceptedIP = acceptedIP;
             return this;
         }
+
 
         /**
          * The user-agent of the user making the request.
@@ -197,18 +199,19 @@ public class ManualTermsOfService {
             return this;
         }
 
+
         public Builder acceptedDomain(String acceptedDomain) {
             Utils.checkNotNull(acceptedDomain, "acceptedDomain");
             this.acceptedDomain = acceptedDomain;
             return this;
         }
-        
+
         public ManualTermsOfService build() {
+
             return new ManualTermsOfService(
-                acceptedDate,
-                acceptedIP,
-                acceptedUserAgent,
+                acceptedDate, acceptedIP, acceptedUserAgent,
                 acceptedDomain);
         }
+
     }
 }

@@ -14,20 +14,23 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class ACHInstitution {
 
+public class ACHInstitution {
     /**
      * Name of the financial institution.
      */
     @JsonProperty("name")
     private String name;
 
+
     @JsonProperty("routingNumber")
     private String routingNumber;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends Address> address;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contact")
@@ -52,7 +55,8 @@ public class ACHInstitution {
     public ACHInstitution(
             String name,
             String routingNumber) {
-        this(name, routingNumber, Optional.empty(), Optional.empty());
+        this(name, routingNumber, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -80,9 +84,10 @@ public class ACHInstitution {
         return (Optional<Contact>) contact;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Name of the financial institution.
@@ -105,6 +110,7 @@ public class ACHInstitution {
         return this;
     }
 
+
     public ACHInstitution withAddress(Optional<? extends Address> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -117,13 +123,13 @@ public class ACHInstitution {
         return this;
     }
 
+
     public ACHInstitution withContact(Optional<? extends Contact> contact) {
         Utils.checkNotNull(contact, "contact");
         this.contact = contact;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -143,9 +149,7 @@ public class ACHInstitution {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            routingNumber,
-            address,
+            name, routingNumber, address,
             contact);
     }
     
@@ -157,20 +161,22 @@ public class ACHInstitution {
                 "address", address,
                 "contact", contact);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String name;
- 
+
         private String routingNumber;
- 
+
         private Optional<? extends Address> address = Optional.empty();
- 
+
         private Optional<? extends Contact> contact = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Name of the financial institution.
@@ -181,11 +187,13 @@ public class ACHInstitution {
             return this;
         }
 
+
         public Builder routingNumber(String routingNumber) {
             Utils.checkNotNull(routingNumber, "routingNumber");
             this.routingNumber = routingNumber;
             return this;
         }
+
 
         public Builder address(Address address) {
             Utils.checkNotNull(address, "address");
@@ -199,6 +207,7 @@ public class ACHInstitution {
             return this;
         }
 
+
         public Builder contact(Contact contact) {
             Utils.checkNotNull(contact, "contact");
             this.contact = Optional.ofNullable(contact);
@@ -210,13 +219,13 @@ public class ACHInstitution {
             this.contact = contact;
             return this;
         }
-        
+
         public ACHInstitution build() {
+
             return new ACHInstitution(
-                name,
-                routingNumber,
-                address,
+                name, routingNumber, address,
                 contact);
         }
+
     }
 }

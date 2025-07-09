@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class CreateCancellationRequest {
 
+public class CreateCancellationRequest {
     /**
      * The partner's Moov account ID.
      */
@@ -50,9 +50,10 @@ public class CreateCancellationRequest {
         return transferID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The partner's Moov account ID.
@@ -72,7 +73,6 @@ public class CreateCancellationRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,8 +90,7 @@ public class CreateCancellationRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            transferID);
+            accountID, transferID);
     }
     
     @Override
@@ -100,16 +99,18 @@ public class CreateCancellationRequest {
                 "accountID", accountID,
                 "transferID", transferID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String transferID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The partner's Moov account ID.
@@ -120,6 +121,7 @@ public class CreateCancellationRequest {
             return this;
         }
 
+
         /**
          * The transfer ID to cancel.
          */
@@ -128,11 +130,12 @@ public class CreateCancellationRequest {
             this.transferID = transferID;
             return this;
         }
-        
+
         public CreateCancellationRequest build() {
+
             return new CreateCancellationRequest(
-                accountID,
-                transferID);
+                accountID, transferID);
         }
+
     }
 }

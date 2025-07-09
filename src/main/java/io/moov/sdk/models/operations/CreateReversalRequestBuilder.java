@@ -69,7 +69,7 @@ public class CreateReversalRequestBuilder {
     public CreateReversalResponse call() throws Exception {
         
         RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
-              = new CreateReversalOperation( sdkConfiguration);
+              = new CreateReversalOperation(sdkConfiguration);
         CreateReversalRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

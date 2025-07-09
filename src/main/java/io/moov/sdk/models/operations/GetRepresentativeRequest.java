@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GetRepresentativeRequest {
 
+public class GetRepresentativeRequest {
     /**
      * ID of the account.
      */
@@ -50,9 +50,10 @@ public class GetRepresentativeRequest {
         return representativeID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the account.
@@ -72,7 +73,6 @@ public class GetRepresentativeRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,8 +90,7 @@ public class GetRepresentativeRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            representativeID);
+            accountID, representativeID);
     }
     
     @Override
@@ -100,16 +99,18 @@ public class GetRepresentativeRequest {
                 "accountID", accountID,
                 "representativeID", representativeID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String representativeID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the account.
@@ -120,6 +121,7 @@ public class GetRepresentativeRequest {
             return this;
         }
 
+
         /**
          * ID of the representative.
          */
@@ -128,11 +130,12 @@ public class GetRepresentativeRequest {
             this.representativeID = representativeID;
             return this;
         }
-        
+
         public GetRepresentativeRequest build() {
+
             return new GetRepresentativeRequest(
-                accountID,
-                representativeID);
+                accountID, representativeID);
         }
+
     }
 }

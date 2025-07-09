@@ -11,13 +11,16 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class BirthDate {
 
     @JsonProperty("day")
     private long day;
 
+
     @JsonProperty("month")
     private long month;
+
 
     @JsonProperty("year")
     private long year;
@@ -50,9 +53,10 @@ public class BirthDate {
         return year;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BirthDate withDay(long day) {
         Utils.checkNotNull(day, "day");
@@ -72,7 +76,6 @@ public class BirthDate {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class BirthDate {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            day,
-            month,
-            year);
+            day, month, year);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class BirthDate {
                 "month", month,
                 "year", year);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long day;
- 
+
         private Long month;
- 
+
         private Long year;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder day(long day) {
             Utils.checkNotNull(day, "day");
@@ -122,23 +125,25 @@ public class BirthDate {
             return this;
         }
 
+
         public Builder month(long month) {
             Utils.checkNotNull(month, "month");
             this.month = month;
             return this;
         }
 
+
         public Builder year(long year) {
             Utils.checkNotNull(year, "year");
             this.year = year;
             return this;
         }
-        
+
         public BirthDate build() {
+
             return new BirthDate(
-                day,
-                month,
-                year);
+                day, month, year);
         }
+
     }
 }

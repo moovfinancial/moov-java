@@ -19,7 +19,6 @@ import java.util.Optional;
  * <p>A receipt request for a specific transfer, schedule, or schedule occurrence.
  */
 public class ReceiptRequest {
-
     /**
      * The type of receipt being requested.
      */
@@ -90,7 +89,8 @@ public class ReceiptRequest {
     
     public ReceiptRequest(
             ReceiptKind kind) {
-        this(kind, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(kind, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -146,9 +146,10 @@ public class ReceiptRequest {
         return forOccurrenceID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The type of receipt being requested.
@@ -168,6 +169,7 @@ public class ReceiptRequest {
         this.email = Optional.ofNullable(email);
         return this;
     }
+
 
     /**
      * The email address to send the receipt to.
@@ -189,6 +191,7 @@ public class ReceiptRequest {
         return this;
     }
 
+
     /**
      * The accountID to send the receipt to.
      * Either email or emailAccountID must be provided, but not both.
@@ -208,6 +211,7 @@ public class ReceiptRequest {
         this.forTransferID = Optional.ofNullable(forTransferID);
         return this;
     }
+
 
     /**
      * The ID of the transfer associated with this receipt.
@@ -229,6 +233,7 @@ public class ReceiptRequest {
         return this;
     }
 
+
     /**
      * The ID of the schedule associated with this receipt.
      * Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
@@ -249,6 +254,7 @@ public class ReceiptRequest {
         return this;
     }
 
+
     /**
      * The ID of the schedule occurrence associated with this receipt.
      * Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
@@ -259,7 +265,6 @@ public class ReceiptRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -281,12 +286,8 @@ public class ReceiptRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            kind,
-            email,
-            emailAccountID,
-            forTransferID,
-            forScheduleID,
-            forOccurrenceID);
+            kind, email, emailAccountID,
+            forTransferID, forScheduleID, forOccurrenceID);
     }
     
     @Override
@@ -299,24 +300,26 @@ public class ReceiptRequest {
                 "forScheduleID", forScheduleID,
                 "forOccurrenceID", forOccurrenceID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private ReceiptKind kind;
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<String> emailAccountID = Optional.empty();
- 
+
         private Optional<String> forTransferID = Optional.empty();
- 
+
         private Optional<String> forScheduleID = Optional.empty();
- 
+
         private Optional<String> forOccurrenceID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The type of receipt being requested.
@@ -326,6 +329,7 @@ public class ReceiptRequest {
             this.kind = kind;
             return this;
         }
+
 
         /**
          * The email address to send the receipt to.
@@ -347,6 +351,7 @@ public class ReceiptRequest {
             return this;
         }
 
+
         /**
          * The accountID to send the receipt to.
          * Either email or emailAccountID must be provided, but not both.
@@ -366,6 +371,7 @@ public class ReceiptRequest {
             this.emailAccountID = emailAccountID;
             return this;
         }
+
 
         /**
          * The ID of the transfer associated with this receipt.
@@ -387,6 +393,7 @@ public class ReceiptRequest {
             return this;
         }
 
+
         /**
          * The ID of the schedule associated with this receipt.
          * Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
@@ -407,6 +414,7 @@ public class ReceiptRequest {
             return this;
         }
 
+
         /**
          * The ID of the schedule occurrence associated with this receipt.
          * Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
@@ -426,15 +434,13 @@ public class ReceiptRequest {
             this.forOccurrenceID = forOccurrenceID;
             return this;
         }
-        
+
         public ReceiptRequest build() {
+
             return new ReceiptRequest(
-                kind,
-                email,
-                emailAccountID,
-                forTransferID,
-                forScheduleID,
-                forOccurrenceID);
+                kind, email, emailAccountID,
+                forTransferID, forScheduleID, forOccurrenceID);
         }
+
     }
 }

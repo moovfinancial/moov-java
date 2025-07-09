@@ -18,7 +18,6 @@ import java.time.OffsetDateTime;
  * <p>Details of a successfully uploaded evidence file.
  */
 public class EvidenceUploadResponse {
-
     /**
      * The ID of the evidence.
      */
@@ -48,6 +47,7 @@ public class EvidenceUploadResponse {
      */
     @JsonProperty("size")
     private long size;
+
 
     @JsonProperty("evidenceType")
     private EvidenceType evidenceType;
@@ -136,9 +136,10 @@ public class EvidenceUploadResponse {
         return createdOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The ID of the evidence.
@@ -200,7 +201,6 @@ public class EvidenceUploadResponse {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -223,12 +223,8 @@ public class EvidenceUploadResponse {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            evidenceID,
-            disputeID,
-            filename,
-            mimeType,
-            size,
-            evidenceType,
+            evidenceID, disputeID, filename,
+            mimeType, size, evidenceType,
             createdOn);
     }
     
@@ -243,26 +239,28 @@ public class EvidenceUploadResponse {
                 "evidenceType", evidenceType,
                 "createdOn", createdOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String evidenceID;
- 
+
         private String disputeID;
- 
+
         private String filename;
- 
+
         private String mimeType;
- 
+
         private Long size;
- 
+
         private EvidenceType evidenceType;
- 
+
         private OffsetDateTime createdOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The ID of the evidence.
@@ -273,6 +271,7 @@ public class EvidenceUploadResponse {
             return this;
         }
 
+
         /**
          * The ID of the dispute the evidence is associated with.
          */
@@ -281,6 +280,7 @@ public class EvidenceUploadResponse {
             this.disputeID = disputeID;
             return this;
         }
+
 
         /**
          * The name of the evidence file.
@@ -291,6 +291,7 @@ public class EvidenceUploadResponse {
             return this;
         }
 
+
         /**
          * The MIME type of the evidence file.
          */
@@ -299,6 +300,7 @@ public class EvidenceUploadResponse {
             this.mimeType = mimeType;
             return this;
         }
+
 
         /**
          * The size of the evidence file.
@@ -309,11 +311,13 @@ public class EvidenceUploadResponse {
             return this;
         }
 
+
         public Builder evidenceType(EvidenceType evidenceType) {
             Utils.checkNotNull(evidenceType, "evidenceType");
             this.evidenceType = evidenceType;
             return this;
         }
+
 
         /**
          * The date and time the evidence was uploaded.
@@ -323,16 +327,14 @@ public class EvidenceUploadResponse {
             this.createdOn = createdOn;
             return this;
         }
-        
+
         public EvidenceUploadResponse build() {
+
             return new EvidenceUploadResponse(
-                evidenceID,
-                disputeID,
-                filename,
-                mimeType,
-                size,
-                evidenceType,
+                evidenceID, disputeID, filename,
+                mimeType, size, evidenceType,
                 createdOn);
         }
+
     }
 }

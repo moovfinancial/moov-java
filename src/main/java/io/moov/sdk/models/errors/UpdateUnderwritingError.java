@@ -12,6 +12,7 @@ import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 
+
 @SuppressWarnings("serial")
 public class UpdateUnderwritingError extends RuntimeException {
 
@@ -31,9 +32,10 @@ public class UpdateUnderwritingError extends RuntimeException {
         return error;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateUnderwritingError withError(UpdateUnderwritingErrorError error) {
         Utils.checkNotNull(error, "error");
@@ -41,7 +43,6 @@ public class UpdateUnderwritingError extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -66,25 +67,29 @@ public class UpdateUnderwritingError extends RuntimeException {
         return Utils.toString(UpdateUnderwritingError.class,
                 "error", error);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private UpdateUnderwritingErrorError error;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder error(UpdateUnderwritingErrorError error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
-        
+
         public UpdateUnderwritingError build() {
+
             return new UpdateUnderwritingError(
                 error);
         }
+
     }
 }
 

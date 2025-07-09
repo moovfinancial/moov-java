@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CreatePaymentLinkRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreatePaymentLink createPaymentLink;
@@ -39,9 +41,10 @@ public class CreatePaymentLinkRequest {
         return createPaymentLink;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreatePaymentLinkRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class CreatePaymentLinkRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class CreatePaymentLinkRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            createPaymentLink);
+            accountID, createPaymentLink);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class CreatePaymentLinkRequest {
                 "accountID", accountID,
                 "createPaymentLink", createPaymentLink);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private CreatePaymentLink createPaymentLink;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class CreatePaymentLinkRequest {
             return this;
         }
 
+
         public Builder createPaymentLink(CreatePaymentLink createPaymentLink) {
             Utils.checkNotNull(createPaymentLink, "createPaymentLink");
             this.createPaymentLink = createPaymentLink;
             return this;
         }
-        
+
         public CreatePaymentLinkRequest build() {
+
             return new CreatePaymentLinkRequest(
-                accountID,
-                createPaymentLink);
+                accountID, createPaymentLink);
         }
+
     }
 }

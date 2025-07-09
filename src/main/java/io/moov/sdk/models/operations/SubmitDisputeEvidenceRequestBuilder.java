@@ -45,7 +45,7 @@ public class SubmitDisputeEvidenceRequestBuilder {
     public SubmitDisputeEvidenceResponse call() throws Exception {
         
         RequestOperation<SubmitDisputeEvidenceRequest, SubmitDisputeEvidenceResponse> operation
-              = new SubmitDisputeEvidenceOperation( sdkConfiguration);
+              = new SubmitDisputeEvidenceOperation(sdkConfiguration);
         SubmitDisputeEvidenceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

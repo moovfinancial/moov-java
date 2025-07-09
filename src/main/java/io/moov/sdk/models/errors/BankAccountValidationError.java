@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class BankAccountValidationError extends RuntimeException {
 
@@ -22,17 +23,21 @@ public class BankAccountValidationError extends RuntimeException {
     @JsonProperty("account")
     private Optional<String> account;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("plaid")
     private Optional<String> plaid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("plaidLink")
     private Optional<String> plaidLink;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mx")
     private Optional<String> mx;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("error")
@@ -59,7 +64,8 @@ public class BankAccountValidationError extends RuntimeException {
     }
     
     public BankAccountValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -87,15 +93,17 @@ public class BankAccountValidationError extends RuntimeException {
         return error;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BankAccountValidationError withAccount(String account) {
         Utils.checkNotNull(account, "account");
         this.account = Optional.ofNullable(account);
         return this;
     }
+
 
     public BankAccountValidationError withAccount(Optional<String> account) {
         Utils.checkNotNull(account, "account");
@@ -109,6 +117,7 @@ public class BankAccountValidationError extends RuntimeException {
         return this;
     }
 
+
     public BankAccountValidationError withPlaid(Optional<String> plaid) {
         Utils.checkNotNull(plaid, "plaid");
         this.plaid = plaid;
@@ -120,6 +129,7 @@ public class BankAccountValidationError extends RuntimeException {
         this.plaidLink = Optional.ofNullable(plaidLink);
         return this;
     }
+
 
     public BankAccountValidationError withPlaidLink(Optional<String> plaidLink) {
         Utils.checkNotNull(plaidLink, "plaidLink");
@@ -133,6 +143,7 @@ public class BankAccountValidationError extends RuntimeException {
         return this;
     }
 
+
     public BankAccountValidationError withMx(Optional<String> mx) {
         Utils.checkNotNull(mx, "mx");
         this.mx = mx;
@@ -145,13 +156,13 @@ public class BankAccountValidationError extends RuntimeException {
         return this;
     }
 
+
     public BankAccountValidationError withError(Optional<String> error) {
         Utils.checkNotNull(error, "error");
         this.error = error;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -172,11 +183,8 @@ public class BankAccountValidationError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            account,
-            plaid,
-            plaidLink,
-            mx,
-            error);
+            account, plaid, plaidLink,
+            mx, error);
     }
     
     @Override
@@ -188,22 +196,24 @@ public class BankAccountValidationError extends RuntimeException {
                 "mx", mx,
                 "error", error);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> account = Optional.empty();
- 
+
         private Optional<String> plaid = Optional.empty();
- 
+
         private Optional<String> plaidLink = Optional.empty();
- 
+
         private Optional<String> mx = Optional.empty();
- 
+
         private Optional<String> error = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder account(String account) {
             Utils.checkNotNull(account, "account");
@@ -217,6 +227,7 @@ public class BankAccountValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder plaid(String plaid) {
             Utils.checkNotNull(plaid, "plaid");
             this.plaid = Optional.ofNullable(plaid);
@@ -228,6 +239,7 @@ public class BankAccountValidationError extends RuntimeException {
             this.plaid = plaid;
             return this;
         }
+
 
         public Builder plaidLink(String plaidLink) {
             Utils.checkNotNull(plaidLink, "plaidLink");
@@ -241,6 +253,7 @@ public class BankAccountValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder mx(String mx) {
             Utils.checkNotNull(mx, "mx");
             this.mx = Optional.ofNullable(mx);
@@ -253,6 +266,7 @@ public class BankAccountValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder error(String error) {
             Utils.checkNotNull(error, "error");
             this.error = Optional.ofNullable(error);
@@ -264,15 +278,14 @@ public class BankAccountValidationError extends RuntimeException {
             this.error = error;
             return this;
         }
-        
+
         public BankAccountValidationError build() {
+
             return new BankAccountValidationError(
-                account,
-                plaid,
-                plaidLink,
-                mx,
-                error);
+                account, plaid, plaidLink,
+                mx, error);
         }
+
     }
 }
 

@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class UpdateTicketError extends RuntimeException {
 
@@ -39,9 +40,10 @@ public class UpdateTicketError extends RuntimeException {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateTicketError withStatus(String status) {
         Utils.checkNotNull(status, "status");
@@ -49,13 +51,13 @@ public class UpdateTicketError extends RuntimeException {
         return this;
     }
 
+
     public UpdateTicketError withStatus(Optional<String> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -80,14 +82,16 @@ public class UpdateTicketError extends RuntimeException {
         return Utils.toString(UpdateTicketError.class,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> status = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder status(String status) {
             Utils.checkNotNull(status, "status");
@@ -100,11 +104,13 @@ public class UpdateTicketError extends RuntimeException {
             this.status = status;
             return this;
         }
-        
+
         public UpdateTicketError build() {
+
             return new UpdateTicketError(
                 status);
         }
+
     }
 }
 

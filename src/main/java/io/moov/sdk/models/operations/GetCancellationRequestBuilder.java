@@ -53,7 +53,7 @@ public class GetCancellationRequestBuilder {
     public GetCancellationResponse call() throws Exception {
         
         RequestOperation<GetCancellationRequest, GetCancellationResponse> operation
-              = new GetCancellationOperation( sdkConfiguration);
+              = new GetCancellationOperation(sdkConfiguration);
         GetCancellationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

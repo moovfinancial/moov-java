@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class CreateAccountSettings {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardPayment")
     private Optional<? extends CardPayment> cardPayment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("achPayment")
@@ -50,15 +52,17 @@ public class CreateAccountSettings {
         return (Optional<AchPayment>) achPayment;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateAccountSettings withCardPayment(CardPayment cardPayment) {
         Utils.checkNotNull(cardPayment, "cardPayment");
         this.cardPayment = Optional.ofNullable(cardPayment);
         return this;
     }
+
 
     public CreateAccountSettings withCardPayment(Optional<? extends CardPayment> cardPayment) {
         Utils.checkNotNull(cardPayment, "cardPayment");
@@ -72,13 +76,13 @@ public class CreateAccountSettings {
         return this;
     }
 
+
     public CreateAccountSettings withAchPayment(Optional<? extends AchPayment> achPayment) {
         Utils.checkNotNull(achPayment, "achPayment");
         this.achPayment = achPayment;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class CreateAccountSettings {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cardPayment,
-            achPayment);
+            cardPayment, achPayment);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class CreateAccountSettings {
                 "cardPayment", cardPayment,
                 "achPayment", achPayment);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CardPayment> cardPayment = Optional.empty();
- 
+
         private Optional<? extends AchPayment> achPayment = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder cardPayment(CardPayment cardPayment) {
             Utils.checkNotNull(cardPayment, "cardPayment");
@@ -129,6 +134,7 @@ public class CreateAccountSettings {
             return this;
         }
 
+
         public Builder achPayment(AchPayment achPayment) {
             Utils.checkNotNull(achPayment, "achPayment");
             this.achPayment = Optional.ofNullable(achPayment);
@@ -140,11 +146,12 @@ public class CreateAccountSettings {
             this.achPayment = achPayment;
             return this;
         }
-        
+
         public CreateAccountSettings build() {
+
             return new CreateAccountSettings(
-                cardPayment,
-                achPayment);
+                cardPayment, achPayment);
         }
+
     }
 }

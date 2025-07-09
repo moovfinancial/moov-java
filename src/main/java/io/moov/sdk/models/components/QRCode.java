@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class QRCode {
 
+public class QRCode {
     /**
      * A base64-encoded PNG image of the QR code.
      */
@@ -33,9 +33,10 @@ public class QRCode {
         return qrCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A base64-encoded PNG image of the QR code.
@@ -46,7 +47,6 @@ public class QRCode {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class QRCode {
         return Utils.toString(QRCode.class,
                 "qrCode", qrCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String qrCode;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A base64-encoded PNG image of the QR code.
@@ -88,10 +90,12 @@ public class QRCode {
             this.qrCode = qrCode;
             return this;
         }
-        
+
         public QRCode build() {
+
             return new QRCode(
                 qrCode);
         }
+
     }
 }

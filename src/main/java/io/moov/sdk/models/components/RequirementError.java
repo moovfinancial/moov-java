@@ -14,13 +14,14 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class RequirementError {
 
+public class RequirementError {
     /**
      * The unique ID of what the requirement is asking to be filled out.
      */
     @JsonProperty("requirement")
     private RequirementID requirement;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errorCode")
@@ -55,9 +56,10 @@ public class RequirementError {
         return (Optional<RequirementErrorCode>) errorCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique ID of what the requirement is asking to be filled out.
@@ -74,13 +76,13 @@ public class RequirementError {
         return this;
     }
 
+
     public RequirementError withErrorCode(Optional<? extends RequirementErrorCode> errorCode) {
         Utils.checkNotNull(errorCode, "errorCode");
         this.errorCode = errorCode;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -98,8 +100,7 @@ public class RequirementError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            requirement,
-            errorCode);
+            requirement, errorCode);
     }
     
     @Override
@@ -108,16 +109,18 @@ public class RequirementError {
                 "requirement", requirement,
                 "errorCode", errorCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private RequirementID requirement;
- 
+
         private Optional<? extends RequirementErrorCode> errorCode = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique ID of what the requirement is asking to be filled out.
@@ -127,6 +130,7 @@ public class RequirementError {
             this.requirement = requirement;
             return this;
         }
+
 
         public Builder errorCode(RequirementErrorCode errorCode) {
             Utils.checkNotNull(errorCode, "errorCode");
@@ -139,11 +143,12 @@ public class RequirementError {
             this.errorCode = errorCode;
             return this;
         }
-        
+
         public RequirementError build() {
+
             return new RequirementError(
-                requirement,
-                errorCode);
+                requirement, errorCode);
         }
+
     }
 }

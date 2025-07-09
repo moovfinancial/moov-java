@@ -11,10 +11,12 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class VolumeByCustomerType {
 
     @JsonProperty("businessToBusinessPercentage")
     private int businessToBusinessPercentage;
+
 
     @JsonProperty("consumerToBusinessPercentage")
     private int consumerToBusinessPercentage;
@@ -39,9 +41,10 @@ public class VolumeByCustomerType {
         return consumerToBusinessPercentage;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public VolumeByCustomerType withBusinessToBusinessPercentage(int businessToBusinessPercentage) {
         Utils.checkNotNull(businessToBusinessPercentage, "businessToBusinessPercentage");
@@ -55,7 +58,6 @@ public class VolumeByCustomerType {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class VolumeByCustomerType {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            businessToBusinessPercentage,
-            consumerToBusinessPercentage);
+            businessToBusinessPercentage, consumerToBusinessPercentage);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class VolumeByCustomerType {
                 "businessToBusinessPercentage", businessToBusinessPercentage,
                 "consumerToBusinessPercentage", consumerToBusinessPercentage);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer businessToBusinessPercentage;
- 
+
         private Integer consumerToBusinessPercentage;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder businessToBusinessPercentage(int businessToBusinessPercentage) {
             Utils.checkNotNull(businessToBusinessPercentage, "businessToBusinessPercentage");
@@ -100,16 +103,18 @@ public class VolumeByCustomerType {
             return this;
         }
 
+
         public Builder consumerToBusinessPercentage(int consumerToBusinessPercentage) {
             Utils.checkNotNull(consumerToBusinessPercentage, "consumerToBusinessPercentage");
             this.consumerToBusinessPercentage = consumerToBusinessPercentage;
             return this;
         }
-        
+
         public VolumeByCustomerType build() {
+
             return new VolumeByCustomerType(
-                businessToBusinessPercentage,
-                consumerToBusinessPercentage);
+                businessToBusinessPercentage, consumerToBusinessPercentage);
         }
+
     }
 }

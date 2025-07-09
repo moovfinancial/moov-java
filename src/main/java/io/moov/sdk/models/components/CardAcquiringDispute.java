@@ -21,8 +21,10 @@ public class CardAcquiringDispute {
     @JsonProperty("disputeID")
     private String disputeID;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonProperty("amount")
     private Amount amount;
@@ -55,9 +57,10 @@ public class CardAcquiringDispute {
         return amount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardAcquiringDispute withDisputeID(String disputeID) {
         Utils.checkNotNull(disputeID, "disputeID");
@@ -77,7 +80,6 @@ public class CardAcquiringDispute {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,9 +98,7 @@ public class CardAcquiringDispute {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            disputeID,
-            createdOn,
-            amount);
+            disputeID, createdOn, amount);
     }
     
     @Override
@@ -108,18 +108,20 @@ public class CardAcquiringDispute {
                 "createdOn", createdOn,
                 "amount", amount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String disputeID;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private Amount amount;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
@@ -127,23 +129,25 @@ public class CardAcquiringDispute {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
-        
+
         public CardAcquiringDispute build() {
+
             return new CardAcquiringDispute(
-                disputeID,
-                createdOn,
-                amount);
+                disputeID, createdOn, amount);
         }
+
     }
 }

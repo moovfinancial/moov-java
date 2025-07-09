@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UpdateBrandRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private UpdateBrand updateBrand;
@@ -39,9 +41,10 @@ public class UpdateBrandRequest {
         return updateBrand;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateBrandRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class UpdateBrandRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class UpdateBrandRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            updateBrand);
+            accountID, updateBrand);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class UpdateBrandRequest {
                 "accountID", accountID,
                 "updateBrand", updateBrand);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private UpdateBrand updateBrand;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class UpdateBrandRequest {
             return this;
         }
 
+
         public Builder updateBrand(UpdateBrand updateBrand) {
             Utils.checkNotNull(updateBrand, "updateBrand");
             this.updateBrand = updateBrand;
             return this;
         }
-        
+
         public UpdateBrandRequest build() {
+
             return new UpdateBrandRequest(
-                accountID,
-                updateBrand);
+                accountID, updateBrand);
         }
+
     }
 }

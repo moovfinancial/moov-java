@@ -21,8 +21,10 @@ public class AsyncCreatedRefund {
     @JsonProperty("refundID")
     private String refundID;
 
+
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
+
 
     @JsonProperty("amount")
     private Amount amount;
@@ -55,9 +57,10 @@ public class AsyncCreatedRefund {
         return amount;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AsyncCreatedRefund withRefundID(String refundID) {
         Utils.checkNotNull(refundID, "refundID");
@@ -77,7 +80,6 @@ public class AsyncCreatedRefund {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,9 +98,7 @@ public class AsyncCreatedRefund {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            refundID,
-            createdOn,
-            amount);
+            refundID, createdOn, amount);
     }
     
     @Override
@@ -108,18 +108,20 @@ public class AsyncCreatedRefund {
                 "createdOn", createdOn,
                 "amount", amount);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String refundID;
- 
+
         private OffsetDateTime createdOn;
- 
+
         private Amount amount;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder refundID(String refundID) {
             Utils.checkNotNull(refundID, "refundID");
@@ -127,23 +129,25 @@ public class AsyncCreatedRefund {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
+
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
-        
+
         public AsyncCreatedRefund build() {
+
             return new AsyncCreatedRefund(
-                refundID,
-                createdOn,
-                amount);
+                refundID, createdOn, amount);
         }
+
     }
 }

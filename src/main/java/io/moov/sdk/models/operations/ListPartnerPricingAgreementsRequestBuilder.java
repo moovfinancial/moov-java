@@ -28,7 +28,7 @@ public class ListPartnerPricingAgreementsRequestBuilder {
     public ListPartnerPricingAgreementsResponse call() throws Exception {
         
         RequestOperation<ListPartnerPricingAgreementsRequest, ListPartnerPricingAgreementsResponse> operation
-              = new ListPartnerPricingAgreementsOperation( sdkConfiguration);
+              = new ListPartnerPricingAgreementsOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class GovernmentIDError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ssn")
     private Optional<? extends GovernmentIDErrorSsn> ssn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("itin")
@@ -50,15 +52,17 @@ public class GovernmentIDError {
         return (Optional<GovernmentIDErrorItin>) itin;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GovernmentIDError withSsn(GovernmentIDErrorSsn ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = Optional.ofNullable(ssn);
         return this;
     }
+
 
     public GovernmentIDError withSsn(Optional<? extends GovernmentIDErrorSsn> ssn) {
         Utils.checkNotNull(ssn, "ssn");
@@ -72,13 +76,13 @@ public class GovernmentIDError {
         return this;
     }
 
+
     public GovernmentIDError withItin(Optional<? extends GovernmentIDErrorItin> itin) {
         Utils.checkNotNull(itin, "itin");
         this.itin = itin;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class GovernmentIDError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ssn,
-            itin);
+            ssn, itin);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class GovernmentIDError {
                 "ssn", ssn,
                 "itin", itin);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends GovernmentIDErrorSsn> ssn = Optional.empty();
- 
+
         private Optional<? extends GovernmentIDErrorItin> itin = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ssn(GovernmentIDErrorSsn ssn) {
             Utils.checkNotNull(ssn, "ssn");
@@ -129,6 +134,7 @@ public class GovernmentIDError {
             return this;
         }
 
+
         public Builder itin(GovernmentIDErrorItin itin) {
             Utils.checkNotNull(itin, "itin");
             this.itin = Optional.ofNullable(itin);
@@ -140,11 +146,12 @@ public class GovernmentIDError {
             this.itin = itin;
             return this;
         }
-        
+
         public GovernmentIDError build() {
+
             return new GovernmentIDError(
-                ssn,
-                itin);
+                ssn, itin);
         }
+
     }
 }

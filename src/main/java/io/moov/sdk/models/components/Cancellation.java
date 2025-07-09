@@ -11,13 +11,16 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 
+
 public class Cancellation {
 
     @JsonProperty("cancellationID")
     private String cancellationID;
 
+
     @JsonProperty("status")
     private CancellationStatus status;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -50,9 +53,10 @@ public class Cancellation {
         return createdOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Cancellation withCancellationID(String cancellationID) {
         Utils.checkNotNull(cancellationID, "cancellationID");
@@ -72,7 +76,6 @@ public class Cancellation {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class Cancellation {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cancellationID,
-            status,
-            createdOn);
+            cancellationID, status, createdOn);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class Cancellation {
                 "status", status,
                 "createdOn", createdOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String cancellationID;
- 
+
         private CancellationStatus status;
- 
+
         private OffsetDateTime createdOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder cancellationID(String cancellationID) {
             Utils.checkNotNull(cancellationID, "cancellationID");
@@ -122,23 +125,25 @@ public class Cancellation {
             return this;
         }
 
+
         public Builder status(CancellationStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
-        
+
         public Cancellation build() {
+
             return new Cancellation(
-                cancellationID,
-                status,
-                createdOn);
+                cancellationID, status, createdOn);
         }
+
     }
 }

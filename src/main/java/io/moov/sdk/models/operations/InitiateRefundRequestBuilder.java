@@ -28,7 +28,7 @@ public class InitiateRefundRequestBuilder {
     public InitiateRefundResponse call() throws Exception {
         
         RequestOperation<InitiateRefundRequest, InitiateRefundResponse> operation
-              = new InitiateRefundOperation( sdkConfiguration);
+              = new InitiateRefundOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

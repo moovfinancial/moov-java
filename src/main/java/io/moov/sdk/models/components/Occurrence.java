@@ -22,7 +22,6 @@ import java.util.Optional;
  * <p>Occurrences to either create or modify.
  */
 public class Occurrence {
-
     /**
      * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
      */
@@ -69,7 +68,8 @@ public class Occurrence {
     }
     
     public Occurrence() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -106,9 +106,10 @@ public class Occurrence {
         return (Optional<RunTransfer>) runTransfer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
@@ -118,6 +119,7 @@ public class Occurrence {
         this.canceled = Optional.ofNullable(canceled);
         return this;
     }
+
 
     /**
      * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
@@ -138,6 +140,7 @@ public class Occurrence {
         return this;
     }
 
+
     /**
      * If set this defines what occurrence to modify, if invalid will fail the request. 
      *   If null or "" it defines to add a new occurrence.
@@ -157,6 +160,7 @@ public class Occurrence {
         return this;
     }
 
+
     /**
      * Timestamp to run the transfer after. Value must be into the future.
      */
@@ -175,6 +179,7 @@ public class Occurrence {
         return this;
     }
 
+
     /**
      * Defines the attributes of a transfer.
      */
@@ -184,7 +189,6 @@ public class Occurrence {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -204,9 +208,7 @@ public class Occurrence {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            canceled,
-            occurrenceID,
-            runOn,
+            canceled, occurrenceID, runOn,
             runTransfer);
     }
     
@@ -218,20 +220,22 @@ public class Occurrence {
                 "runOn", runOn,
                 "runTransfer", runTransfer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> canceled = Optional.empty();
- 
+
         private Optional<String> occurrenceID = Optional.empty();
- 
+
         private Optional<OffsetDateTime> runOn = Optional.empty();
- 
+
         private Optional<? extends RunTransfer> runTransfer = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
@@ -250,6 +254,7 @@ public class Occurrence {
             this.canceled = canceled;
             return this;
         }
+
 
         /**
          * If set this defines what occurrence to modify, if invalid will fail the request. 
@@ -271,6 +276,7 @@ public class Occurrence {
             return this;
         }
 
+
         /**
          * Timestamp to run the transfer after. Value must be into the future.
          */
@@ -289,6 +295,7 @@ public class Occurrence {
             return this;
         }
 
+
         /**
          * Defines the attributes of a transfer.
          */
@@ -306,13 +313,13 @@ public class Occurrence {
             this.runTransfer = runTransfer;
             return this;
         }
-        
+
         public Occurrence build() {
+
             return new Occurrence(
-                canceled,
-                occurrenceID,
-                runOn,
+                canceled, occurrenceID, runOn,
                 runTransfer);
         }
+
     }
 }

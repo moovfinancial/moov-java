@@ -11,13 +11,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CompleteBankAccountVerificationRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=bankAccountID")
     private String bankAccountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CompleteBankAccountVerification completeBankAccountVerification;
@@ -50,9 +53,10 @@ public class CompleteBankAccountVerificationRequest {
         return completeBankAccountVerification;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CompleteBankAccountVerificationRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,7 +76,6 @@ public class CompleteBankAccountVerificationRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class CompleteBankAccountVerificationRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            bankAccountID,
-            completeBankAccountVerification);
+            accountID, bankAccountID, completeBankAccountVerification);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class CompleteBankAccountVerificationRequest {
                 "bankAccountID", bankAccountID,
                 "completeBankAccountVerification", completeBankAccountVerification);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String bankAccountID;
- 
+
         private CompleteBankAccountVerification completeBankAccountVerification;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -122,23 +125,25 @@ public class CompleteBankAccountVerificationRequest {
             return this;
         }
 
+
         public Builder bankAccountID(String bankAccountID) {
             Utils.checkNotNull(bankAccountID, "bankAccountID");
             this.bankAccountID = bankAccountID;
             return this;
         }
 
+
         public Builder completeBankAccountVerification(CompleteBankAccountVerification completeBankAccountVerification) {
             Utils.checkNotNull(completeBankAccountVerification, "completeBankAccountVerification");
             this.completeBankAccountVerification = completeBankAccountVerification;
             return this;
         }
-        
+
         public CompleteBankAccountVerificationRequest build() {
+
             return new CompleteBankAccountVerificationRequest(
-                accountID,
-                bankAccountID,
-                completeBankAccountVerification);
+                accountID, bankAccountID, completeBankAccountVerification);
         }
+
     }
 }

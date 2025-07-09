@@ -45,7 +45,7 @@ public class GetTicketRequestBuilder {
     public GetTicketResponse call() throws Exception {
         
         RequestOperation<GetTicketRequest, GetTicketResponse> operation
-              = new GetTicketOperation( sdkConfiguration);
+              = new GetTicketOperation(sdkConfiguration);
         GetTicketRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

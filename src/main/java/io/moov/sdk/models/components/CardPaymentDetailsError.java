@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class CardPaymentDetailsError {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -35,9 +36,10 @@ public class CardPaymentDetailsError {
         return dynamicDescriptor;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CardPaymentDetailsError withDynamicDescriptor(String dynamicDescriptor) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
@@ -45,13 +47,13 @@ public class CardPaymentDetailsError {
         return this;
     }
 
+
     public CardPaymentDetailsError withDynamicDescriptor(Optional<String> dynamicDescriptor) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
         this.dynamicDescriptor = dynamicDescriptor;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,14 +78,16 @@ public class CardPaymentDetailsError {
         return Utils.toString(CardPaymentDetailsError.class,
                 "dynamicDescriptor", dynamicDescriptor);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> dynamicDescriptor = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder dynamicDescriptor(String dynamicDescriptor) {
             Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
@@ -96,10 +100,12 @@ public class CardPaymentDetailsError {
             this.dynamicDescriptor = dynamicDescriptor;
             return this;
         }
-        
+
         public CardPaymentDetailsError build() {
+
             return new CardPaymentDetailsError(
                 dynamicDescriptor);
         }
+
     }
 }

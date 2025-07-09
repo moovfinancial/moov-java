@@ -28,7 +28,7 @@ public class ListDisputesRequestBuilder {
     public ListDisputesResponse call() throws Exception {
         
         RequestOperation<ListDisputesRequest, ListDisputesResponse> operation
-              = new ListDisputesOperation( sdkConfiguration);
+              = new ListDisputesOperation(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

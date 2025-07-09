@@ -35,7 +35,6 @@ public class Branding {
     Branding(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Create brand properties for the specified account.
      * 
@@ -69,10 +68,9 @@ public class Branding {
                 .brandProperties(brandProperties)
                 .build();
         RequestOperation<CreateBrandRequest, CreateBrandResponse> operation
-              = new CreateBrandOperation( sdkConfiguration);
+              = new CreateBrandOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Create or replace brand properties for the specified account.
@@ -107,10 +105,9 @@ public class Branding {
                 .brandProperties(brandProperties)
                 .build();
         RequestOperation<UpsertBrandRequest, UpsertBrandResponse> operation
-              = new UpsertBrandOperation( sdkConfiguration);
+              = new UpsertBrandOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get brand properties for the specified account.
@@ -134,18 +131,16 @@ public class Branding {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetBrandResponse get(
-            String accountID) throws Exception {
+    public GetBrandResponse get(String accountID) throws Exception {
         GetBrandRequest request =
             GetBrandRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<GetBrandRequest, GetBrandResponse> operation
-              = new GetBrandOperation( sdkConfiguration);
+              = new GetBrandOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Updates the brand properties for the specified account.
@@ -180,7 +175,7 @@ public class Branding {
                 .updateBrand(updateBrand)
                 .build();
         RequestOperation<UpdateBrandRequest, UpdateBrandResponse> operation
-              = new UpdateBrandOperation( sdkConfiguration);
+              = new UpdateBrandOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

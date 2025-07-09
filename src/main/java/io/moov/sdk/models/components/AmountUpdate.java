@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class AmountUpdate {
 
+public class AmountUpdate {
     /**
      * A 3-letter ISO 4217 currency code.
      */
@@ -64,9 +64,10 @@ public class AmountUpdate {
         return value;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A 3-letter ISO 4217 currency code.
@@ -76,6 +77,7 @@ public class AmountUpdate {
         this.currency = Optional.ofNullable(currency);
         return this;
     }
+
 
     /**
      * A 3-letter ISO 4217 currency code.
@@ -97,6 +99,7 @@ public class AmountUpdate {
         return this;
     }
 
+
     /**
      * Quantity in the smallest unit of the specified currency. 
      * 
@@ -108,7 +111,6 @@ public class AmountUpdate {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -126,8 +128,7 @@ public class AmountUpdate {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            currency,
-            value);
+            currency, value);
     }
     
     @Override
@@ -136,16 +137,18 @@ public class AmountUpdate {
                 "currency", currency,
                 "value", value);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> currency = Optional.empty();
- 
+
         private Optional<Long> value = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A 3-letter ISO 4217 currency code.
@@ -164,6 +167,7 @@ public class AmountUpdate {
             this.currency = currency;
             return this;
         }
+
 
         /**
          * Quantity in the smallest unit of the specified currency. 
@@ -186,11 +190,12 @@ public class AmountUpdate {
             this.value = value;
             return this;
         }
-        
+
         public AmountUpdate build() {
+
             return new AmountUpdate(
-                currency,
-                value);
+                currency, value);
         }
+
     }
 }

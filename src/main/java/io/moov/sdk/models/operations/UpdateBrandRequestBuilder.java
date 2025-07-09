@@ -46,7 +46,7 @@ public class UpdateBrandRequestBuilder {
     public UpdateBrandResponse call() throws Exception {
         
         RequestOperation<UpdateBrandRequest, UpdateBrandResponse> operation
-              = new UpdateBrandOperation( sdkConfiguration);
+              = new UpdateBrandOperation(sdkConfiguration);
         UpdateBrandRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

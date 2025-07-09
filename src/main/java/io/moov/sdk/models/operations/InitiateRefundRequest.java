@@ -14,8 +14,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class InitiateRefundRequest {
 
+public class InitiateRefundRequest {
     /**
      * Prevents duplicate refunds from being created.
      */
@@ -40,6 +40,7 @@ public class InitiateRefundRequest {
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=transferID")
     private String transferID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private Optional<? extends CreateRefund> createRefund;
@@ -67,7 +68,8 @@ public class InitiateRefundRequest {
             String xIdempotencyKey,
             String accountID,
             String transferID) {
-        this(xIdempotencyKey, Optional.empty(), accountID, transferID, Optional.empty());
+        this(xIdempotencyKey, Optional.empty(), accountID,
+            transferID, Optional.empty());
     }
 
     /**
@@ -110,9 +112,10 @@ public class InitiateRefundRequest {
         return (Optional<CreateRefund>) createRefund;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Prevents duplicate refunds from being created.
@@ -132,6 +135,7 @@ public class InitiateRefundRequest {
         this.xWaitFor = Optional.ofNullable(xWaitFor);
         return this;
     }
+
 
     /**
      * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
@@ -167,13 +171,13 @@ public class InitiateRefundRequest {
         return this;
     }
 
+
     public InitiateRefundRequest withCreateRefund(Optional<? extends CreateRefund> createRefund) {
         Utils.checkNotNull(createRefund, "createRefund");
         this.createRefund = createRefund;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -194,11 +198,8 @@ public class InitiateRefundRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            xIdempotencyKey,
-            xWaitFor,
-            accountID,
-            transferID,
-            createRefund);
+            xIdempotencyKey, xWaitFor, accountID,
+            transferID, createRefund);
     }
     
     @Override
@@ -210,22 +211,24 @@ public class InitiateRefundRequest {
                 "transferID", transferID,
                 "createRefund", createRefund);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String xIdempotencyKey;
- 
+
         private Optional<? extends TransferWaitFor> xWaitFor = Optional.empty();
- 
+
         private String accountID;
- 
+
         private String transferID;
- 
+
         private Optional<? extends CreateRefund> createRefund = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Prevents duplicate refunds from being created.
@@ -235,6 +238,7 @@ public class InitiateRefundRequest {
             this.xIdempotencyKey = xIdempotencyKey;
             return this;
         }
+
 
         /**
          * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
@@ -256,6 +260,7 @@ public class InitiateRefundRequest {
             return this;
         }
 
+
         /**
          * The merchant's Moov account ID.
          */
@@ -265,6 +270,7 @@ public class InitiateRefundRequest {
             return this;
         }
 
+
         /**
          * Identifier for the transfer.
          */
@@ -273,6 +279,7 @@ public class InitiateRefundRequest {
             this.transferID = transferID;
             return this;
         }
+
 
         public Builder createRefund(CreateRefund createRefund) {
             Utils.checkNotNull(createRefund, "createRefund");
@@ -285,14 +292,13 @@ public class InitiateRefundRequest {
             this.createRefund = createRefund;
             return this;
         }
-        
+
         public InitiateRefundRequest build() {
+
             return new InitiateRefundRequest(
-                xIdempotencyKey,
-                xWaitFor,
-                accountID,
-                transferID,
-                createRefund);
+                xIdempotencyKey, xWaitFor, accountID,
+                transferID, createRefund);
         }
+
     }
 }

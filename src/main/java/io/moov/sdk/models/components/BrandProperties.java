@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class BrandProperties {
 
+public class BrandProperties {
     /**
      * Brand colors for light and dark modes.
      */
@@ -33,9 +33,10 @@ public class BrandProperties {
         return colors;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Brand colors for light and dark modes.
@@ -46,7 +47,6 @@ public class BrandProperties {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class BrandProperties {
         return Utils.toString(BrandProperties.class,
                 "colors", colors);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private BrandColors colors;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Brand colors for light and dark modes.
@@ -88,10 +90,12 @@ public class BrandProperties {
             this.colors = colors;
             return this;
         }
-        
+
         public BrandProperties build() {
+
             return new BrandProperties(
                 colors);
         }
+
     }
 }

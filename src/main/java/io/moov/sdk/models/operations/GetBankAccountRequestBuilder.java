@@ -45,7 +45,7 @@ public class GetBankAccountRequestBuilder {
     public GetBankAccountResponse call() throws Exception {
         
         RequestOperation<GetBankAccountRequest, GetBankAccountResponse> operation
-              = new GetBankAccountOperation( sdkConfiguration);
+              = new GetBankAccountOperation(sdkConfiguration);
         GetBankAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

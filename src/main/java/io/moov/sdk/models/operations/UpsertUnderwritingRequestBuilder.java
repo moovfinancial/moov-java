@@ -46,7 +46,7 @@ public class UpsertUnderwritingRequestBuilder {
     public UpsertUnderwritingResponse call() throws Exception {
         
         RequestOperation<UpsertUnderwritingRequest, UpsertUnderwritingResponse> operation
-              = new UpsertUnderwritingOperation( sdkConfiguration);
+              = new UpsertUnderwritingOperation(sdkConfiguration);
         UpsertUnderwritingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Reason for, and details related to, an `errored` or `verificationFailed` bank account status.
  */
 public class BankAccountException {
-
     /**
      * The return code of an ACH transaction that caused the bank account status to change.
      * 
@@ -143,9 +142,10 @@ public class BankAccountException {
         return description;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The return code of an ACH transaction that caused the bank account status to change.
@@ -176,6 +176,7 @@ public class BankAccountException {
         this.achReturnCode = Optional.ofNullable(achReturnCode);
         return this;
     }
+
 
     /**
      * The return code of an ACH transaction that caused the bank account status to change.
@@ -224,6 +225,7 @@ public class BankAccountException {
         return this;
     }
 
+
     /**
      * The rejection code of an RTP transaction that caused the bank account status to change.
      * 
@@ -250,7 +252,6 @@ public class BankAccountException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -269,9 +270,7 @@ public class BankAccountException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            achReturnCode,
-            rtpRejectionCode,
-            description);
+            achReturnCode, rtpRejectionCode, description);
     }
     
     @Override
@@ -281,18 +280,20 @@ public class BankAccountException {
                 "rtpRejectionCode", rtpRejectionCode,
                 "description", description);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends ACHReturnCode> achReturnCode = Optional.empty();
- 
+
         private Optional<? extends RTPRejectionCode> rtpRejectionCode = Optional.empty();
- 
+
         private String description;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The return code of an ACH transaction that caused the bank account status to change.
@@ -354,6 +355,7 @@ public class BankAccountException {
             return this;
         }
 
+
         /**
          * The rejection code of an RTP transaction that caused the bank account status to change.
          * 
@@ -388,6 +390,7 @@ public class BankAccountException {
             return this;
         }
 
+
         /**
          * Details related to an `errored` or `verificationFailed` bank account status.
          */
@@ -396,12 +399,12 @@ public class BankAccountException {
             this.description = description;
             return this;
         }
-        
+
         public BankAccountException build() {
+
             return new BankAccountException(
-                achReturnCode,
-                rtpRejectionCode,
-                description);
+                achReturnCode, rtpRejectionCode, description);
         }
+
     }
 }

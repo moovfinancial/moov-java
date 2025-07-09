@@ -11,10 +11,12 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class CreateTicketRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreateTicket createTicket;
@@ -39,9 +41,10 @@ public class CreateTicketRequest {
         return createTicket;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateTicketRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -55,7 +58,6 @@ public class CreateTicketRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -73,8 +75,7 @@ public class CreateTicketRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            createTicket);
+            accountID, createTicket);
     }
     
     @Override
@@ -83,16 +84,18 @@ public class CreateTicketRequest {
                 "accountID", accountID,
                 "createTicket", createTicket);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private CreateTicket createTicket;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -100,16 +103,18 @@ public class CreateTicketRequest {
             return this;
         }
 
+
         public Builder createTicket(CreateTicket createTicket) {
             Utils.checkNotNull(createTicket, "createTicket");
             this.createTicket = createTicket;
             return this;
         }
-        
+
         public CreateTicketRequest build() {
+
             return new CreateTicketRequest(
-                accountID,
-                createTicket);
+                accountID, createTicket);
         }
+
     }
 }

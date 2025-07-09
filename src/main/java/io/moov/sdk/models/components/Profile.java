@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Describes a Moov account profile. A profile will have a business or an individual, depending on the account's type.
  */
 public class Profile {
-
     /**
      * Describes an individual.
      */
@@ -86,9 +85,10 @@ public class Profile {
         return (Optional<GuestProfile>) guest;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Describes an individual.
@@ -98,6 +98,7 @@ public class Profile {
         this.individual = Optional.ofNullable(individual);
         return this;
     }
+
 
     /**
      * Describes an individual.
@@ -117,6 +118,7 @@ public class Profile {
         return this;
     }
 
+
     /**
      * Describes a business.
      */
@@ -135,6 +137,7 @@ public class Profile {
         return this;
     }
 
+
     /**
      * Describes a guest account profile.
      */
@@ -144,7 +147,6 @@ public class Profile {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -163,9 +165,7 @@ public class Profile {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            individual,
-            business,
-            guest);
+            individual, business, guest);
     }
     
     @Override
@@ -175,18 +175,20 @@ public class Profile {
                 "business", business,
                 "guest", guest);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends IndividualProfile> individual = Optional.empty();
- 
+
         private Optional<? extends BusinessProfile> business = Optional.empty();
- 
+
         private Optional<? extends GuestProfile> guest = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Describes an individual.
@@ -206,6 +208,7 @@ public class Profile {
             return this;
         }
 
+
         /**
          * Describes a business.
          */
@@ -224,6 +227,7 @@ public class Profile {
             return this;
         }
 
+
         /**
          * Describes a guest account profile.
          */
@@ -241,12 +245,12 @@ public class Profile {
             this.guest = guest;
             return this;
         }
-        
+
         public Profile build() {
+
             return new Profile(
-                individual,
-                business,
-                guest);
+                individual, business, guest);
         }
+
     }
 }

@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GetCancellationRequest {
 
+public class GetCancellationRequest {
     /**
      * Moov account ID of the partner or transfer's source or destination.
      */
@@ -67,9 +67,10 @@ public class GetCancellationRequest {
         return cancellationID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Moov account ID of the partner or transfer's source or destination.
@@ -98,7 +99,6 @@ public class GetCancellationRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -117,9 +117,7 @@ public class GetCancellationRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            transferID,
-            cancellationID);
+            accountID, transferID, cancellationID);
     }
     
     @Override
@@ -129,18 +127,20 @@ public class GetCancellationRequest {
                 "transferID", transferID,
                 "cancellationID", cancellationID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String transferID;
- 
+
         private String cancellationID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Moov account ID of the partner or transfer's source or destination.
@@ -151,6 +151,7 @@ public class GetCancellationRequest {
             return this;
         }
 
+
         /**
          * Identifier for the transfer.
          */
@@ -160,6 +161,7 @@ public class GetCancellationRequest {
             return this;
         }
 
+
         /**
          * Identifier for the cancellation.
          */
@@ -168,12 +170,12 @@ public class GetCancellationRequest {
             this.cancellationID = cancellationID;
             return this;
         }
-        
+
         public GetCancellationRequest build() {
+
             return new GetCancellationRequest(
-                accountID,
-                transferID,
-                cancellationID);
+                accountID, transferID, cancellationID);
         }
+
     }
 }

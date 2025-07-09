@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class FulfillmentError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("method")
     private Optional<String> method;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("timeframe")
@@ -47,15 +49,17 @@ public class FulfillmentError {
         return timeframe;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FulfillmentError withMethod(String method) {
         Utils.checkNotNull(method, "method");
         this.method = Optional.ofNullable(method);
         return this;
     }
+
 
     public FulfillmentError withMethod(Optional<String> method) {
         Utils.checkNotNull(method, "method");
@@ -69,13 +73,13 @@ public class FulfillmentError {
         return this;
     }
 
+
     public FulfillmentError withTimeframe(Optional<String> timeframe) {
         Utils.checkNotNull(timeframe, "timeframe");
         this.timeframe = timeframe;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class FulfillmentError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            method,
-            timeframe);
+            method, timeframe);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class FulfillmentError {
                 "method", method,
                 "timeframe", timeframe);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> method = Optional.empty();
- 
+
         private Optional<String> timeframe = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder method(String method) {
             Utils.checkNotNull(method, "method");
@@ -126,6 +131,7 @@ public class FulfillmentError {
             return this;
         }
 
+
         public Builder timeframe(String timeframe) {
             Utils.checkNotNull(timeframe, "timeframe");
             this.timeframe = Optional.ofNullable(timeframe);
@@ -137,11 +143,12 @@ public class FulfillmentError {
             this.timeframe = timeframe;
             return this;
         }
-        
+
         public FulfillmentError build() {
+
             return new FulfillmentError(
-                method,
-                timeframe);
+                method, timeframe);
         }
+
     }
 }

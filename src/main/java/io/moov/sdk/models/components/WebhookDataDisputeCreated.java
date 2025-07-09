@@ -10,16 +10,20 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class WebhookDataDisputeCreated {
 
     @JsonProperty("accountID")
     private String accountID;
 
+
     @JsonProperty("transferID")
     private String transferID;
 
+
     @JsonProperty("transactionID")
     private String transactionID;
+
 
     @JsonProperty("disputeID")
     private String disputeID;
@@ -98,9 +102,10 @@ public class WebhookDataDisputeCreated {
         return phase;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public WebhookDataDisputeCreated withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -146,7 +151,6 @@ public class WebhookDataDisputeCreated {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -168,12 +172,8 @@ public class WebhookDataDisputeCreated {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            transferID,
-            transactionID,
-            disputeID,
-            status,
-            phase);
+            accountID, transferID, transactionID,
+            disputeID, status, phase);
     }
     
     @Override
@@ -186,24 +186,26 @@ public class WebhookDataDisputeCreated {
                 "status", status,
                 "phase", phase);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String transferID;
- 
+
         private String transactionID;
- 
+
         private String disputeID;
- 
+
         private DisputeStatus status;
- 
+
         private DisputePhase phase;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -211,11 +213,13 @@ public class WebhookDataDisputeCreated {
             return this;
         }
 
+
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = transferID;
             return this;
         }
+
 
         public Builder transactionID(String transactionID) {
             Utils.checkNotNull(transactionID, "transactionID");
@@ -223,11 +227,13 @@ public class WebhookDataDisputeCreated {
             return this;
         }
 
+
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = disputeID;
             return this;
         }
+
 
         /**
          * The status of a particular dispute. 
@@ -240,6 +246,7 @@ public class WebhookDataDisputeCreated {
             return this;
         }
 
+
         /**
          * The phase of a dispute within the dispute lifecycle.
          */
@@ -248,15 +255,13 @@ public class WebhookDataDisputeCreated {
             this.phase = phase;
             return this;
         }
-        
+
         public WebhookDataDisputeCreated build() {
+
             return new WebhookDataDisputeCreated(
-                accountID,
-                transferID,
-                transactionID,
-                disputeID,
-                status,
-                phase);
+                accountID, transferID, transactionID,
+                disputeID, status, phase);
         }
+
     }
 }

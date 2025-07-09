@@ -10,8 +10,8 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class ReversedWithRefund {
 
+public class ReversedWithRefund {
     /**
      * Details of a card refund.
      */
@@ -33,9 +33,10 @@ public class ReversedWithRefund {
         return refund;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Details of a card refund.
@@ -46,7 +47,6 @@ public class ReversedWithRefund {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -71,14 +71,16 @@ public class ReversedWithRefund {
         return Utils.toString(ReversedWithRefund.class,
                 "refund", refund);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private CardAcquiringRefund refund;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Details of a card refund.
@@ -88,10 +90,12 @@ public class ReversedWithRefund {
             this.refund = refund;
             return this;
         }
-        
+
         public ReversedWithRefund build() {
+
             return new ReversedWithRefund(
                 refund);
         }
+
     }
 }

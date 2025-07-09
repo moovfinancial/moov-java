@@ -22,12 +22,12 @@ import java.util.Optional;
  * <p>Card-specific details about the transaction.
  */
 public class CardTransactionDetails {
-
     /**
      * Status of a transaction within the card payment lifecycle.
      */
     @JsonProperty("status")
     private CardTransactionStatus status;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failureCode")
@@ -50,25 +50,31 @@ public class CardTransactionDetails {
     @JsonProperty("transactionSource")
     private Optional<? extends TransactionSource> transactionSource;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("initiatedOn")
     private Optional<OffsetDateTime> initiatedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("confirmedOn")
     private Optional<OffsetDateTime> confirmedOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("settledOn")
     private Optional<OffsetDateTime> settledOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failedOn")
     private Optional<OffsetDateTime> failedOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canceledOn")
     private Optional<OffsetDateTime> canceledOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("completedOn")
@@ -133,7 +139,10 @@ public class CardTransactionDetails {
     
     public CardTransactionDetails(
             CardTransactionStatus status) {
-        this(status, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(status, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -219,9 +228,10 @@ public class CardTransactionDetails {
         return feeProgram;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Status of a transaction within the card payment lifecycle.
@@ -238,6 +248,7 @@ public class CardTransactionDetails {
         return this;
     }
 
+
     public CardTransactionDetails withFailureCode(Optional<? extends CardTransactionFailureCode> failureCode) {
         Utils.checkNotNull(failureCode, "failureCode");
         this.failureCode = failureCode;
@@ -252,6 +263,7 @@ public class CardTransactionDetails {
         this.dynamicDescriptor = Optional.ofNullable(dynamicDescriptor);
         return this;
     }
+
 
     /**
      * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
@@ -274,6 +286,7 @@ public class CardTransactionDetails {
         return this;
     }
 
+
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
@@ -292,6 +305,7 @@ public class CardTransactionDetails {
         return this;
     }
 
+
     public CardTransactionDetails withInitiatedOn(Optional<OffsetDateTime> initiatedOn) {
         Utils.checkNotNull(initiatedOn, "initiatedOn");
         this.initiatedOn = initiatedOn;
@@ -303,6 +317,7 @@ public class CardTransactionDetails {
         this.confirmedOn = Optional.ofNullable(confirmedOn);
         return this;
     }
+
 
     public CardTransactionDetails withConfirmedOn(Optional<OffsetDateTime> confirmedOn) {
         Utils.checkNotNull(confirmedOn, "confirmedOn");
@@ -316,6 +331,7 @@ public class CardTransactionDetails {
         return this;
     }
 
+
     public CardTransactionDetails withSettledOn(Optional<OffsetDateTime> settledOn) {
         Utils.checkNotNull(settledOn, "settledOn");
         this.settledOn = settledOn;
@@ -327,6 +343,7 @@ public class CardTransactionDetails {
         this.failedOn = Optional.ofNullable(failedOn);
         return this;
     }
+
 
     public CardTransactionDetails withFailedOn(Optional<OffsetDateTime> failedOn) {
         Utils.checkNotNull(failedOn, "failedOn");
@@ -340,6 +357,7 @@ public class CardTransactionDetails {
         return this;
     }
 
+
     public CardTransactionDetails withCanceledOn(Optional<OffsetDateTime> canceledOn) {
         Utils.checkNotNull(canceledOn, "canceledOn");
         this.canceledOn = canceledOn;
@@ -351,6 +369,7 @@ public class CardTransactionDetails {
         this.completedOn = Optional.ofNullable(completedOn);
         return this;
     }
+
 
     public CardTransactionDetails withCompletedOn(Optional<OffsetDateTime> completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
@@ -369,6 +388,7 @@ public class CardTransactionDetails {
         this.interchangeQualification = Optional.ofNullable(interchangeQualification);
         return this;
     }
+
 
     /**
      * The program assigned by the card network that determines the interchange rate for the transfer.
@@ -391,6 +411,7 @@ public class CardTransactionDetails {
         return this;
     }
 
+
     /**
      * The program assigned by the card network that determines the interchange rate for the transfer.
      */
@@ -400,7 +421,6 @@ public class CardTransactionDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -428,18 +448,10 @@ public class CardTransactionDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            status,
-            failureCode,
-            dynamicDescriptor,
-            transactionSource,
-            initiatedOn,
-            confirmedOn,
-            settledOn,
-            failedOn,
-            canceledOn,
-            completedOn,
-            interchangeQualification,
-            feeProgram);
+            status, failureCode, dynamicDescriptor,
+            transactionSource, initiatedOn, confirmedOn,
+            settledOn, failedOn, canceledOn,
+            completedOn, interchangeQualification, feeProgram);
     }
     
     @Override
@@ -458,37 +470,39 @@ public class CardTransactionDetails {
                 "interchangeQualification", interchangeQualification,
                 "feeProgram", feeProgram);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private CardTransactionStatus status;
- 
+
         private Optional<? extends CardTransactionFailureCode> failureCode = Optional.empty();
- 
+
         private Optional<String> dynamicDescriptor = Optional.empty();
- 
+
         private Optional<? extends TransactionSource> transactionSource = Optional.empty();
- 
+
         private Optional<OffsetDateTime> initiatedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> confirmedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> settledOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> failedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> canceledOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> completedOn = Optional.empty();
- 
+
         @Deprecated
         private Optional<String> interchangeQualification = Optional.empty();
- 
+
         private Optional<String> feeProgram = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Status of a transaction within the card payment lifecycle.
@@ -498,6 +512,7 @@ public class CardTransactionDetails {
             this.status = status;
             return this;
         }
+
 
         public Builder failureCode(CardTransactionFailureCode failureCode) {
             Utils.checkNotNull(failureCode, "failureCode");
@@ -510,6 +525,7 @@ public class CardTransactionDetails {
             this.failureCode = failureCode;
             return this;
         }
+
 
         /**
          * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
@@ -528,6 +544,7 @@ public class CardTransactionDetails {
             this.dynamicDescriptor = dynamicDescriptor;
             return this;
         }
+
 
         /**
          * Specifies the nature and initiator of a transaction. 
@@ -553,6 +570,7 @@ public class CardTransactionDetails {
             return this;
         }
 
+
         public Builder initiatedOn(OffsetDateTime initiatedOn) {
             Utils.checkNotNull(initiatedOn, "initiatedOn");
             this.initiatedOn = Optional.ofNullable(initiatedOn);
@@ -564,6 +582,7 @@ public class CardTransactionDetails {
             this.initiatedOn = initiatedOn;
             return this;
         }
+
 
         public Builder confirmedOn(OffsetDateTime confirmedOn) {
             Utils.checkNotNull(confirmedOn, "confirmedOn");
@@ -577,6 +596,7 @@ public class CardTransactionDetails {
             return this;
         }
 
+
         public Builder settledOn(OffsetDateTime settledOn) {
             Utils.checkNotNull(settledOn, "settledOn");
             this.settledOn = Optional.ofNullable(settledOn);
@@ -588,6 +608,7 @@ public class CardTransactionDetails {
             this.settledOn = settledOn;
             return this;
         }
+
 
         public Builder failedOn(OffsetDateTime failedOn) {
             Utils.checkNotNull(failedOn, "failedOn");
@@ -601,6 +622,7 @@ public class CardTransactionDetails {
             return this;
         }
 
+
         public Builder canceledOn(OffsetDateTime canceledOn) {
             Utils.checkNotNull(canceledOn, "canceledOn");
             this.canceledOn = Optional.ofNullable(canceledOn);
@@ -613,6 +635,7 @@ public class CardTransactionDetails {
             return this;
         }
 
+
         public Builder completedOn(OffsetDateTime completedOn) {
             Utils.checkNotNull(completedOn, "completedOn");
             this.completedOn = Optional.ofNullable(completedOn);
@@ -624,6 +647,7 @@ public class CardTransactionDetails {
             this.completedOn = completedOn;
             return this;
         }
+
 
         /**
          * The program assigned by the card network that determines the interchange rate for the transfer.
@@ -649,6 +673,7 @@ public class CardTransactionDetails {
             return this;
         }
 
+
         /**
          * The program assigned by the card network that determines the interchange rate for the transfer.
          */
@@ -666,21 +691,15 @@ public class CardTransactionDetails {
             this.feeProgram = feeProgram;
             return this;
         }
-        
+
         public CardTransactionDetails build() {
+
             return new CardTransactionDetails(
-                status,
-                failureCode,
-                dynamicDescriptor,
-                transactionSource,
-                initiatedOn,
-                confirmedOn,
-                settledOn,
-                failedOn,
-                canceledOn,
-                completedOn,
-                interchangeQualification,
-                feeProgram);
+                status, failureCode, dynamicDescriptor,
+                transactionSource, initiatedOn, confirmedOn,
+                settledOn, failedOn, canceledOn,
+                completedOn, interchangeQualification, feeProgram);
         }
+
     }
 }

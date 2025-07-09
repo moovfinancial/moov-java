@@ -17,7 +17,6 @@ import java.time.OffsetDateTime;
  * <p>Webhook events are sent to your webhook URL when certain actions occur in the Moov API. You can subscribe to these events to receive real-time notifications.
  */
 public class WebhookEvent {
-
     /**
      * Unique identifier for the webhook event.
      */
@@ -35,6 +34,7 @@ public class WebhookEvent {
      */
     @JsonProperty("data")
     private WebhookData data;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -84,9 +84,10 @@ public class WebhookEvent {
         return createdOn;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for the webhook event.
@@ -121,7 +122,6 @@ public class WebhookEvent {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -141,9 +141,7 @@ public class WebhookEvent {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            eventID,
-            type,
-            data,
+            eventID, type, data,
             createdOn);
     }
     
@@ -155,20 +153,22 @@ public class WebhookEvent {
                 "data", data,
                 "createdOn", createdOn);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String eventID;
- 
+
         private WebhookEventType type;
- 
+
         private WebhookData data;
- 
+
         private OffsetDateTime createdOn;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for the webhook event.
@@ -179,6 +179,7 @@ public class WebhookEvent {
             return this;
         }
 
+
         /**
          * The type of event that occurred.
          */
@@ -187,6 +188,7 @@ public class WebhookEvent {
             this.type = type;
             return this;
         }
+
 
         /**
          * The data for the webhook event. The contents are based on the event type.
@@ -197,18 +199,19 @@ public class WebhookEvent {
             return this;
         }
 
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
-        
+
         public WebhookEvent build() {
+
             return new WebhookEvent(
-                eventID,
-                type,
-                data,
+                eventID, type, data,
                 createdOn);
         }
+
     }
 }

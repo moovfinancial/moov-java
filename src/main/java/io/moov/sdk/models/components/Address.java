@@ -13,23 +13,29 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class Address {
 
     @JsonProperty("addressLine1")
     private String addressLine1;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addressLine2")
     private Optional<String> addressLine2;
 
+
     @JsonProperty("city")
     private String city;
+
 
     @JsonProperty("stateOrProvince")
     private String stateOrProvince;
 
+
     @JsonProperty("postalCode")
     private String postalCode;
+
 
     @JsonProperty("country")
     private String country;
@@ -62,7 +68,8 @@ public class Address {
             String stateOrProvince,
             String postalCode,
             String country) {
-        this(addressLine1, Optional.empty(), city, stateOrProvince, postalCode, country);
+        this(addressLine1, Optional.empty(), city,
+            stateOrProvince, postalCode, country);
     }
 
     @JsonIgnore
@@ -95,9 +102,10 @@ public class Address {
         return country;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Address withAddressLine1(String addressLine1) {
         Utils.checkNotNull(addressLine1, "addressLine1");
@@ -110,6 +118,7 @@ public class Address {
         this.addressLine2 = Optional.ofNullable(addressLine2);
         return this;
     }
+
 
     public Address withAddressLine2(Optional<String> addressLine2) {
         Utils.checkNotNull(addressLine2, "addressLine2");
@@ -141,7 +150,6 @@ public class Address {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -163,12 +171,8 @@ public class Address {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            addressLine1,
-            addressLine2,
-            city,
-            stateOrProvince,
-            postalCode,
-            country);
+            addressLine1, addressLine2, city,
+            stateOrProvince, postalCode, country);
     }
     
     @Override
@@ -181,30 +185,33 @@ public class Address {
                 "postalCode", postalCode,
                 "country", country);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String addressLine1;
- 
+
         private Optional<String> addressLine2 = Optional.empty();
- 
+
         private String city;
- 
+
         private String stateOrProvince;
- 
+
         private String postalCode;
- 
+
         private String country;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder addressLine1(String addressLine1) {
             Utils.checkNotNull(addressLine1, "addressLine1");
             this.addressLine1 = addressLine1;
             return this;
         }
+
 
         public Builder addressLine2(String addressLine2) {
             Utils.checkNotNull(addressLine2, "addressLine2");
@@ -218,11 +225,13 @@ public class Address {
             return this;
         }
 
+
         public Builder city(String city) {
             Utils.checkNotNull(city, "city");
             this.city = city;
             return this;
         }
+
 
         public Builder stateOrProvince(String stateOrProvince) {
             Utils.checkNotNull(stateOrProvince, "stateOrProvince");
@@ -230,26 +239,26 @@ public class Address {
             return this;
         }
 
+
         public Builder postalCode(String postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = postalCode;
             return this;
         }
 
+
         public Builder country(String country) {
             Utils.checkNotNull(country, "country");
             this.country = country;
             return this;
         }
-        
+
         public Address build() {
+
             return new Address(
-                addressLine1,
-                addressLine2,
-                city,
-                stateOrProvince,
-                postalCode,
-                country);
+                addressLine1, addressLine2, city,
+                stateOrProvince, postalCode, country);
         }
+
     }
 }

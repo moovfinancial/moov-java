@@ -16,6 +16,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class AddCapabilitiesError extends RuntimeException {
 
@@ -41,9 +42,10 @@ public class AddCapabilitiesError extends RuntimeException {
         return (Optional<CapabilitiesError>) error;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AddCapabilitiesError withError(CapabilitiesError error) {
         Utils.checkNotNull(error, "error");
@@ -51,13 +53,13 @@ public class AddCapabilitiesError extends RuntimeException {
         return this;
     }
 
+
     public AddCapabilitiesError withError(Optional<? extends CapabilitiesError> error) {
         Utils.checkNotNull(error, "error");
         this.error = error;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,14 +84,16 @@ public class AddCapabilitiesError extends RuntimeException {
         return Utils.toString(AddCapabilitiesError.class,
                 "error", error);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends CapabilitiesError> error = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder error(CapabilitiesError error) {
             Utils.checkNotNull(error, "error");
@@ -102,11 +106,13 @@ public class AddCapabilitiesError extends RuntimeException {
             this.error = error;
             return this;
         }
-        
+
         public AddCapabilitiesError build() {
+
             return new AddCapabilitiesError(
                 error);
         }
+
     }
 }
 

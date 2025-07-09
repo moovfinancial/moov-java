@@ -53,7 +53,7 @@ public class ListFeePlansRequestBuilder {
     public ListFeePlansResponse call() throws Exception {
         
         RequestOperation<ListFeePlansRequest, ListFeePlansResponse> operation
-              = new ListFeePlansOperation( sdkConfiguration);
+              = new ListFeePlansOperation(sdkConfiguration);
         ListFeePlansRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

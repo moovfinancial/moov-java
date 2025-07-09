@@ -37,7 +37,7 @@ public class DeleteTerminalApplicationRequestBuilder {
     public DeleteTerminalApplicationResponse call() throws Exception {
         
         RequestOperation<DeleteTerminalApplicationRequest, DeleteTerminalApplicationResponse> operation
-              = new DeleteTerminalApplicationOperation( sdkConfiguration);
+              = new DeleteTerminalApplicationOperation(sdkConfiguration);
         DeleteTerminalApplicationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

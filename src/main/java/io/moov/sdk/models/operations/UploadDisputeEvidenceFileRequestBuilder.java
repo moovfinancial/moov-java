@@ -54,7 +54,7 @@ public class UploadDisputeEvidenceFileRequestBuilder {
     public UploadDisputeEvidenceFileResponse call() throws Exception {
         
         RequestOperation<UploadDisputeEvidenceFileRequest, UploadDisputeEvidenceFileResponse> operation
-              = new UploadDisputeEvidenceFileOperation( sdkConfiguration);
+              = new UploadDisputeEvidenceFileOperation(sdkConfiguration);
         UploadDisputeEvidenceFileRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

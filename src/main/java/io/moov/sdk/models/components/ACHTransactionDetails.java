@@ -21,19 +21,21 @@ import java.util.Optional;
  * <p>ACH specific details about the transaction.
  */
 public class ACHTransactionDetails {
-
     /**
      * Status of a transaction within the ACH lifecycle.
      */
     @JsonProperty("status")
     private ACHTransactionStatus status;
 
+
     @JsonProperty("traceNumber")
     private String traceNumber;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("return")
     private Optional<? extends ACHException> return_;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("correction")
@@ -60,29 +62,36 @@ public class ACHTransactionDetails {
     @JsonProperty("secCode")
     private Optional<? extends SECCode> secCode;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canceledOn")
     private Optional<OffsetDateTime> canceledOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("initiatedOn")
     private Optional<OffsetDateTime> initiatedOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originatedOn")
     private Optional<OffsetDateTime> originatedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("correctedOn")
     private Optional<OffsetDateTime> correctedOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("returnedOn")
     private Optional<OffsetDateTime> returnedOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("failedOn")
     private Optional<OffsetDateTime> failedOn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("completedOn")
@@ -147,7 +156,11 @@ public class ACHTransactionDetails {
     public ACHTransactionDetails(
             ACHTransactionStatus status,
             String traceNumber) {
-        this(status, traceNumber, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(status, traceNumber, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -244,9 +257,10 @@ public class ACHTransactionDetails {
         return (Optional<DebitHoldPeriod>) debitHoldPeriod;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Status of a transaction within the ACH lifecycle.
@@ -269,6 +283,7 @@ public class ACHTransactionDetails {
         return this;
     }
 
+
     public ACHTransactionDetails withReturn(Optional<? extends ACHException> return_) {
         Utils.checkNotNull(return_, "return_");
         this.return_ = return_;
@@ -280,6 +295,7 @@ public class ACHTransactionDetails {
         this.correction = Optional.ofNullable(correction);
         return this;
     }
+
 
     public ACHTransactionDetails withCorrection(Optional<? extends ACHException> correction) {
         Utils.checkNotNull(correction, "correction");
@@ -295,6 +311,7 @@ public class ACHTransactionDetails {
         this.companyEntryDescription = Optional.ofNullable(companyEntryDescription);
         return this;
     }
+
 
     /**
      * An optional override of the default NACHA company entry description for a transfer.
@@ -314,6 +331,7 @@ public class ACHTransactionDetails {
         return this;
     }
 
+
     /**
      * An optional override of the default NACHA company name for a transfer.
      */
@@ -332,6 +350,7 @@ public class ACHTransactionDetails {
         return this;
     }
 
+
     /**
      * Code used to identify the ACH authorization method.
      */
@@ -347,6 +366,7 @@ public class ACHTransactionDetails {
         return this;
     }
 
+
     public ACHTransactionDetails withCanceledOn(Optional<OffsetDateTime> canceledOn) {
         Utils.checkNotNull(canceledOn, "canceledOn");
         this.canceledOn = canceledOn;
@@ -358,6 +378,7 @@ public class ACHTransactionDetails {
         this.initiatedOn = Optional.ofNullable(initiatedOn);
         return this;
     }
+
 
     public ACHTransactionDetails withInitiatedOn(Optional<OffsetDateTime> initiatedOn) {
         Utils.checkNotNull(initiatedOn, "initiatedOn");
@@ -371,6 +392,7 @@ public class ACHTransactionDetails {
         return this;
     }
 
+
     public ACHTransactionDetails withOriginatedOn(Optional<OffsetDateTime> originatedOn) {
         Utils.checkNotNull(originatedOn, "originatedOn");
         this.originatedOn = originatedOn;
@@ -382,6 +404,7 @@ public class ACHTransactionDetails {
         this.correctedOn = Optional.ofNullable(correctedOn);
         return this;
     }
+
 
     public ACHTransactionDetails withCorrectedOn(Optional<OffsetDateTime> correctedOn) {
         Utils.checkNotNull(correctedOn, "correctedOn");
@@ -395,6 +418,7 @@ public class ACHTransactionDetails {
         return this;
     }
 
+
     public ACHTransactionDetails withReturnedOn(Optional<OffsetDateTime> returnedOn) {
         Utils.checkNotNull(returnedOn, "returnedOn");
         this.returnedOn = returnedOn;
@@ -407,6 +431,7 @@ public class ACHTransactionDetails {
         return this;
     }
 
+
     public ACHTransactionDetails withFailedOn(Optional<OffsetDateTime> failedOn) {
         Utils.checkNotNull(failedOn, "failedOn");
         this.failedOn = failedOn;
@@ -418,6 +443,7 @@ public class ACHTransactionDetails {
         this.completedOn = Optional.ofNullable(completedOn);
         return this;
     }
+
 
     public ACHTransactionDetails withCompletedOn(Optional<OffsetDateTime> completedOn) {
         Utils.checkNotNull(completedOn, "completedOn");
@@ -434,6 +460,7 @@ public class ACHTransactionDetails {
         return this;
     }
 
+
     /**
      * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
      */
@@ -443,7 +470,6 @@ public class ACHTransactionDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -474,21 +500,11 @@ public class ACHTransactionDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            status,
-            traceNumber,
-            return_,
-            correction,
-            companyEntryDescription,
-            originatingCompanyName,
-            secCode,
-            canceledOn,
-            initiatedOn,
-            originatedOn,
-            correctedOn,
-            returnedOn,
-            failedOn,
-            completedOn,
-            debitHoldPeriod);
+            status, traceNumber, return_,
+            correction, companyEntryDescription, originatingCompanyName,
+            secCode, canceledOn, initiatedOn,
+            originatedOn, correctedOn, returnedOn,
+            failedOn, completedOn, debitHoldPeriod);
     }
     
     @Override
@@ -510,42 +526,44 @@ public class ACHTransactionDetails {
                 "completedOn", completedOn,
                 "debitHoldPeriod", debitHoldPeriod);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private ACHTransactionStatus status;
- 
+
         private String traceNumber;
- 
+
         private Optional<? extends ACHException> return_ = Optional.empty();
- 
+
         private Optional<? extends ACHException> correction = Optional.empty();
- 
+
         private Optional<String> companyEntryDescription = Optional.empty();
- 
+
         private Optional<String> originatingCompanyName = Optional.empty();
- 
+
         private Optional<? extends SECCode> secCode = Optional.empty();
- 
+
         private Optional<OffsetDateTime> canceledOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> initiatedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> originatedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> correctedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> returnedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> failedOn = Optional.empty();
- 
+
         private Optional<OffsetDateTime> completedOn = Optional.empty();
- 
+
         private Optional<? extends DebitHoldPeriod> debitHoldPeriod = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Status of a transaction within the ACH lifecycle.
@@ -556,11 +574,13 @@ public class ACHTransactionDetails {
             return this;
         }
 
+
         public Builder traceNumber(String traceNumber) {
             Utils.checkNotNull(traceNumber, "traceNumber");
             this.traceNumber = traceNumber;
             return this;
         }
+
 
         public Builder return_(ACHException return_) {
             Utils.checkNotNull(return_, "return_");
@@ -574,6 +594,7 @@ public class ACHTransactionDetails {
             return this;
         }
 
+
         public Builder correction(ACHException correction) {
             Utils.checkNotNull(correction, "correction");
             this.correction = Optional.ofNullable(correction);
@@ -585,6 +606,7 @@ public class ACHTransactionDetails {
             this.correction = correction;
             return this;
         }
+
 
         /**
          * An optional override of the default NACHA company entry description for a transfer.
@@ -604,6 +626,7 @@ public class ACHTransactionDetails {
             return this;
         }
 
+
         /**
          * An optional override of the default NACHA company name for a transfer.
          */
@@ -621,6 +644,7 @@ public class ACHTransactionDetails {
             this.originatingCompanyName = originatingCompanyName;
             return this;
         }
+
 
         /**
          * Code used to identify the ACH authorization method.
@@ -640,6 +664,7 @@ public class ACHTransactionDetails {
             return this;
         }
 
+
         public Builder canceledOn(OffsetDateTime canceledOn) {
             Utils.checkNotNull(canceledOn, "canceledOn");
             this.canceledOn = Optional.ofNullable(canceledOn);
@@ -651,6 +676,7 @@ public class ACHTransactionDetails {
             this.canceledOn = canceledOn;
             return this;
         }
+
 
         public Builder initiatedOn(OffsetDateTime initiatedOn) {
             Utils.checkNotNull(initiatedOn, "initiatedOn");
@@ -664,6 +690,7 @@ public class ACHTransactionDetails {
             return this;
         }
 
+
         public Builder originatedOn(OffsetDateTime originatedOn) {
             Utils.checkNotNull(originatedOn, "originatedOn");
             this.originatedOn = Optional.ofNullable(originatedOn);
@@ -675,6 +702,7 @@ public class ACHTransactionDetails {
             this.originatedOn = originatedOn;
             return this;
         }
+
 
         public Builder correctedOn(OffsetDateTime correctedOn) {
             Utils.checkNotNull(correctedOn, "correctedOn");
@@ -688,6 +716,7 @@ public class ACHTransactionDetails {
             return this;
         }
 
+
         public Builder returnedOn(OffsetDateTime returnedOn) {
             Utils.checkNotNull(returnedOn, "returnedOn");
             this.returnedOn = Optional.ofNullable(returnedOn);
@@ -699,6 +728,7 @@ public class ACHTransactionDetails {
             this.returnedOn = returnedOn;
             return this;
         }
+
 
         public Builder failedOn(OffsetDateTime failedOn) {
             Utils.checkNotNull(failedOn, "failedOn");
@@ -712,6 +742,7 @@ public class ACHTransactionDetails {
             return this;
         }
 
+
         public Builder completedOn(OffsetDateTime completedOn) {
             Utils.checkNotNull(completedOn, "completedOn");
             this.completedOn = Optional.ofNullable(completedOn);
@@ -723,6 +754,7 @@ public class ACHTransactionDetails {
             this.completedOn = completedOn;
             return this;
         }
+
 
         /**
          * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
@@ -741,24 +773,16 @@ public class ACHTransactionDetails {
             this.debitHoldPeriod = debitHoldPeriod;
             return this;
         }
-        
+
         public ACHTransactionDetails build() {
+
             return new ACHTransactionDetails(
-                status,
-                traceNumber,
-                return_,
-                correction,
-                companyEntryDescription,
-                originatingCompanyName,
-                secCode,
-                canceledOn,
-                initiatedOn,
-                originatedOn,
-                correctedOn,
-                returnedOn,
-                failedOn,
-                completedOn,
-                debitHoldPeriod);
+                status, traceNumber, return_,
+                correction, companyEntryDescription, originatingCompanyName,
+                secCode, canceledOn, initiatedOn,
+                originatedOn, correctedOn, returnedOn,
+                failedOn, completedOn, debitHoldPeriod);
         }
+
     }
 }

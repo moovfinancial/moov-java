@@ -12,16 +12,20 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class ListTicketMessagesRequest {
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=ticketID")
     private String ticketID;
@@ -45,7 +49,8 @@ public class ListTicketMessagesRequest {
     public ListTicketMessagesRequest(
             String accountID,
             String ticketID) {
-        this(Optional.empty(), Optional.empty(), accountID, ticketID);
+        this(Optional.empty(), Optional.empty(), accountID,
+            ticketID);
     }
 
     @JsonIgnore
@@ -68,15 +73,17 @@ public class ListTicketMessagesRequest {
         return ticketID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListTicketMessagesRequest withSkip(long skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = Optional.ofNullable(skip);
         return this;
     }
+
 
     public ListTicketMessagesRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
@@ -89,6 +96,7 @@ public class ListTicketMessagesRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public ListTicketMessagesRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
@@ -108,7 +116,6 @@ public class ListTicketMessagesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -128,9 +135,7 @@ public class ListTicketMessagesRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            skip,
-            count,
-            accountID,
+            skip, count, accountID,
             ticketID);
     }
     
@@ -142,20 +147,22 @@ public class ListTicketMessagesRequest {
                 "accountID", accountID,
                 "ticketID", ticketID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private String accountID;
- 
+
         private String ticketID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -169,6 +176,7 @@ public class ListTicketMessagesRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -181,24 +189,26 @@ public class ListTicketMessagesRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
 
+
         public Builder ticketID(String ticketID) {
             Utils.checkNotNull(ticketID, "ticketID");
             this.ticketID = ticketID;
             return this;
         }
-        
+
         public ListTicketMessagesRequest build() {
+
             return new ListTicketMessagesRequest(
-                skip,
-                count,
-                accountID,
+                skip, count, accountID,
                 ticketID);
         }
+
     }
 }

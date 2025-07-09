@@ -25,21 +25,26 @@ public class PatchIndividual {
     @JsonProperty("name")
     private Optional<? extends IndividualNameUpdate> name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private Optional<? extends PhoneNumber> phone;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private Optional<String> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<? extends AddressUpdate> address;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("birthDate")
     private Optional<? extends BirthDateUpdate> birthDate;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("governmentID")
@@ -68,7 +73,8 @@ public class PatchIndividual {
     }
     
     public PatchIndividual() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -106,15 +112,17 @@ public class PatchIndividual {
         return (Optional<GovernmentID>) governmentID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PatchIndividual withName(IndividualNameUpdate name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     public PatchIndividual withName(Optional<? extends IndividualNameUpdate> name) {
         Utils.checkNotNull(name, "name");
@@ -128,6 +136,7 @@ public class PatchIndividual {
         return this;
     }
 
+
     public PatchIndividual withPhone(Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(phone, "phone");
         this.phone = phone;
@@ -139,6 +148,7 @@ public class PatchIndividual {
         this.email = Optional.ofNullable(email);
         return this;
     }
+
 
     public PatchIndividual withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
@@ -152,6 +162,7 @@ public class PatchIndividual {
         return this;
     }
 
+
     public PatchIndividual withAddress(Optional<? extends AddressUpdate> address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
@@ -163,6 +174,7 @@ public class PatchIndividual {
         this.birthDate = Optional.ofNullable(birthDate);
         return this;
     }
+
 
     public PatchIndividual withBirthDate(Optional<? extends BirthDateUpdate> birthDate) {
         Utils.checkNotNull(birthDate, "birthDate");
@@ -176,13 +188,13 @@ public class PatchIndividual {
         return this;
     }
 
+
     public PatchIndividual withGovernmentID(Optional<? extends GovernmentID> governmentID) {
         Utils.checkNotNull(governmentID, "governmentID");
         this.governmentID = governmentID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -204,12 +216,8 @@ public class PatchIndividual {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            phone,
-            email,
-            address,
-            birthDate,
-            governmentID);
+            name, phone, email,
+            address, birthDate, governmentID);
     }
     
     @Override
@@ -222,24 +230,26 @@ public class PatchIndividual {
                 "birthDate", birthDate,
                 "governmentID", governmentID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends IndividualNameUpdate> name = Optional.empty();
- 
+
         private Optional<? extends PhoneNumber> phone = Optional.empty();
- 
+
         private Optional<String> email = Optional.empty();
- 
+
         private Optional<? extends AddressUpdate> address = Optional.empty();
- 
+
         private Optional<? extends BirthDateUpdate> birthDate = Optional.empty();
- 
+
         private Optional<? extends GovernmentID> governmentID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(IndividualNameUpdate name) {
             Utils.checkNotNull(name, "name");
@@ -253,6 +263,7 @@ public class PatchIndividual {
             return this;
         }
 
+
         public Builder phone(PhoneNumber phone) {
             Utils.checkNotNull(phone, "phone");
             this.phone = Optional.ofNullable(phone);
@@ -264,6 +275,7 @@ public class PatchIndividual {
             this.phone = phone;
             return this;
         }
+
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -277,6 +289,7 @@ public class PatchIndividual {
             return this;
         }
 
+
         public Builder address(AddressUpdate address) {
             Utils.checkNotNull(address, "address");
             this.address = Optional.ofNullable(address);
@@ -288,6 +301,7 @@ public class PatchIndividual {
             this.address = address;
             return this;
         }
+
 
         public Builder birthDate(BirthDateUpdate birthDate) {
             Utils.checkNotNull(birthDate, "birthDate");
@@ -301,6 +315,7 @@ public class PatchIndividual {
             return this;
         }
 
+
         public Builder governmentID(GovernmentID governmentID) {
             Utils.checkNotNull(governmentID, "governmentID");
             this.governmentID = Optional.ofNullable(governmentID);
@@ -312,15 +327,13 @@ public class PatchIndividual {
             this.governmentID = governmentID;
             return this;
         }
-        
+
         public PatchIndividual build() {
+
             return new PatchIndividual(
-                name,
-                phone,
-                email,
-                address,
-                birthDate,
-                governmentID);
+                name, phone, email,
+                address, birthDate, governmentID);
         }
+
     }
 }

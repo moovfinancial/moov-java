@@ -58,7 +58,7 @@ public class GetTermsOfServiceTokenRequestBuilder {
     public GetTermsOfServiceTokenResponse call() throws Exception {
         
         RequestOperation<GetTermsOfServiceTokenRequest, GetTermsOfServiceTokenResponse> operation
-              = new GetTermsOfServiceTokenOperation( sdkConfiguration);
+              = new GetTermsOfServiceTokenOperation(sdkConfiguration);
         GetTermsOfServiceTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -33,7 +33,6 @@ public class TerminalApplications {
     TerminalApplications(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Create a new terminal application.
      * 
@@ -56,13 +55,11 @@ public class TerminalApplications {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateTerminalApplicationResponse create(
-            CreateTerminalApplication request) throws Exception {
+    public CreateTerminalApplicationResponse create(CreateTerminalApplication request) throws Exception {
         RequestOperation<CreateTerminalApplication, CreateTerminalApplicationResponse> operation
-              = new CreateTerminalApplicationOperation( sdkConfiguration);
+              = new CreateTerminalApplicationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * List all the terminal applications for a Moov Account.
@@ -91,10 +88,9 @@ public class TerminalApplications {
                 .builder()
                 .build();
         RequestOperation<ListTerminalApplicationsRequest, ListTerminalApplicationsResponse> operation
-              = new ListTerminalApplicationsOperation( sdkConfiguration);
+              = new ListTerminalApplicationsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Fetch a specific terminal application.
@@ -118,18 +114,16 @@ public class TerminalApplications {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTerminalApplicationResponse get(
-            String terminalApplicationID) throws Exception {
+    public GetTerminalApplicationResponse get(String terminalApplicationID) throws Exception {
         GetTerminalApplicationRequest request =
             GetTerminalApplicationRequest
                 .builder()
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetTerminalApplicationRequest, GetTerminalApplicationResponse> operation
-              = new GetTerminalApplicationOperation( sdkConfiguration);
+              = new GetTerminalApplicationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Delete a specific terminal application.
@@ -153,15 +147,14 @@ public class TerminalApplications {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DeleteTerminalApplicationResponse delete(
-            String terminalApplicationID) throws Exception {
+    public DeleteTerminalApplicationResponse delete(String terminalApplicationID) throws Exception {
         DeleteTerminalApplicationRequest request =
             DeleteTerminalApplicationRequest
                 .builder()
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<DeleteTerminalApplicationRequest, DeleteTerminalApplicationResponse> operation
-              = new DeleteTerminalApplicationOperation( sdkConfiguration);
+              = new DeleteTerminalApplicationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

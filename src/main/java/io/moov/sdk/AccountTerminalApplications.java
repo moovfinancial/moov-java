@@ -34,7 +34,6 @@ public class AccountTerminalApplications {
     AccountTerminalApplications(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Link an account with a terminal application.
      * 
@@ -68,10 +67,9 @@ public class AccountTerminalApplications {
                 .linkAccountTerminalApplication(linkAccountTerminalApplication)
                 .build();
         RequestOperation<LinkAccountTerminalApplicationRequest, LinkAccountTerminalApplicationResponse> operation
-              = new LinkAccountTerminalApplicationOperation( sdkConfiguration);
+              = new LinkAccountTerminalApplicationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Retrieve all terminal applications linked to a specific account.
@@ -95,18 +93,16 @@ public class AccountTerminalApplications {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListAccountTerminalApplicationsResponse list(
-            String accountID) throws Exception {
+    public ListAccountTerminalApplicationsResponse list(String accountID) throws Exception {
         ListAccountTerminalApplicationsRequest request =
             ListAccountTerminalApplicationsRequest
                 .builder()
                 .accountID(accountID)
                 .build();
         RequestOperation<ListAccountTerminalApplicationsRequest, ListAccountTerminalApplicationsResponse> operation
-              = new ListAccountTerminalApplicationsOperation( sdkConfiguration);
+              = new ListAccountTerminalApplicationsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
@@ -141,10 +137,9 @@ public class AccountTerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetAccountTerminalApplicationRequest, GetAccountTerminalApplicationResponse> operation
-              = new GetAccountTerminalApplicationOperation( sdkConfiguration);
+              = new GetAccountTerminalApplicationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Fetch the configuration for a given Terminal Application linked to a specific Account.
@@ -179,7 +174,7 @@ public class AccountTerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetTerminalConfigurationRequest, GetTerminalConfigurationResponse> operation
-              = new GetTerminalConfigurationOperation( sdkConfiguration);
+              = new GetTerminalConfigurationOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -10,16 +10,18 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class RTPInstitution {
 
+public class RTPInstitution {
     /**
      * Name of the financial institution.
      */
     @JsonProperty("name")
     private String name;
 
+
     @JsonProperty("routingNumber")
     private String routingNumber;
+
 
     @JsonProperty("services")
     private RTPServices services;
@@ -55,9 +57,10 @@ public class RTPInstitution {
         return services;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Name of the financial institution.
@@ -80,7 +83,6 @@ public class RTPInstitution {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -99,9 +101,7 @@ public class RTPInstitution {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            routingNumber,
-            services);
+            name, routingNumber, services);
     }
     
     @Override
@@ -111,18 +111,20 @@ public class RTPInstitution {
                 "routingNumber", routingNumber,
                 "services", services);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String name;
- 
+
         private String routingNumber;
- 
+
         private RTPServices services;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Name of the financial institution.
@@ -133,23 +135,25 @@ public class RTPInstitution {
             return this;
         }
 
+
         public Builder routingNumber(String routingNumber) {
             Utils.checkNotNull(routingNumber, "routingNumber");
             this.routingNumber = routingNumber;
             return this;
         }
 
+
         public Builder services(RTPServices services) {
             Utils.checkNotNull(services, "services");
             this.services = services;
             return this;
         }
-        
+
         public RTPInstitution build() {
+
             return new RTPInstitution(
-                name,
-                routingNumber,
-                services);
+                name, routingNumber, services);
         }
+
     }
 }

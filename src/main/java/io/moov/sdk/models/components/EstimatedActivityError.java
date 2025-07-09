@@ -13,15 +13,18 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class EstimatedActivityError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("averageTransactionAmount")
     private Optional<String> averageTransactionAmount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maximumTransactionAmount")
     private Optional<String> maximumTransactionAmount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("monthlyVolumeRange")
@@ -59,15 +62,17 @@ public class EstimatedActivityError {
         return monthlyVolumeRange;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public EstimatedActivityError withAverageTransactionAmount(String averageTransactionAmount) {
         Utils.checkNotNull(averageTransactionAmount, "averageTransactionAmount");
         this.averageTransactionAmount = Optional.ofNullable(averageTransactionAmount);
         return this;
     }
+
 
     public EstimatedActivityError withAverageTransactionAmount(Optional<String> averageTransactionAmount) {
         Utils.checkNotNull(averageTransactionAmount, "averageTransactionAmount");
@@ -81,6 +86,7 @@ public class EstimatedActivityError {
         return this;
     }
 
+
     public EstimatedActivityError withMaximumTransactionAmount(Optional<String> maximumTransactionAmount) {
         Utils.checkNotNull(maximumTransactionAmount, "maximumTransactionAmount");
         this.maximumTransactionAmount = maximumTransactionAmount;
@@ -93,13 +99,13 @@ public class EstimatedActivityError {
         return this;
     }
 
+
     public EstimatedActivityError withMonthlyVolumeRange(Optional<String> monthlyVolumeRange) {
         Utils.checkNotNull(monthlyVolumeRange, "monthlyVolumeRange");
         this.monthlyVolumeRange = monthlyVolumeRange;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,9 +124,7 @@ public class EstimatedActivityError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            averageTransactionAmount,
-            maximumTransactionAmount,
-            monthlyVolumeRange);
+            averageTransactionAmount, maximumTransactionAmount, monthlyVolumeRange);
     }
     
     @Override
@@ -130,18 +134,20 @@ public class EstimatedActivityError {
                 "maximumTransactionAmount", maximumTransactionAmount,
                 "monthlyVolumeRange", monthlyVolumeRange);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> averageTransactionAmount = Optional.empty();
- 
+
         private Optional<String> maximumTransactionAmount = Optional.empty();
- 
+
         private Optional<String> monthlyVolumeRange = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder averageTransactionAmount(String averageTransactionAmount) {
             Utils.checkNotNull(averageTransactionAmount, "averageTransactionAmount");
@@ -155,6 +161,7 @@ public class EstimatedActivityError {
             return this;
         }
 
+
         public Builder maximumTransactionAmount(String maximumTransactionAmount) {
             Utils.checkNotNull(maximumTransactionAmount, "maximumTransactionAmount");
             this.maximumTransactionAmount = Optional.ofNullable(maximumTransactionAmount);
@@ -167,6 +174,7 @@ public class EstimatedActivityError {
             return this;
         }
 
+
         public Builder monthlyVolumeRange(String monthlyVolumeRange) {
             Utils.checkNotNull(monthlyVolumeRange, "monthlyVolumeRange");
             this.monthlyVolumeRange = Optional.ofNullable(monthlyVolumeRange);
@@ -178,12 +186,12 @@ public class EstimatedActivityError {
             this.monthlyVolumeRange = monthlyVolumeRange;
             return this;
         }
-        
+
         public EstimatedActivityError build() {
+
             return new EstimatedActivityError(
-                averageTransactionAmount,
-                maximumTransactionAmount,
-                monthlyVolumeRange);
+                averageTransactionAmount, maximumTransactionAmount, monthlyVolumeRange);
         }
+
     }
 }

@@ -14,15 +14,18 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class VolumeShareByCustomerType {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("business")
     private Optional<Integer> business;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("consumer")
     private Optional<Integer> consumer;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("p2p")
@@ -60,15 +63,17 @@ public class VolumeShareByCustomerType {
         return p2p;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public VolumeShareByCustomerType withBusiness(int business) {
         Utils.checkNotNull(business, "business");
         this.business = Optional.ofNullable(business);
         return this;
     }
+
 
     public VolumeShareByCustomerType withBusiness(Optional<Integer> business) {
         Utils.checkNotNull(business, "business");
@@ -82,6 +87,7 @@ public class VolumeShareByCustomerType {
         return this;
     }
 
+
     public VolumeShareByCustomerType withConsumer(Optional<Integer> consumer) {
         Utils.checkNotNull(consumer, "consumer");
         this.consumer = consumer;
@@ -94,13 +100,13 @@ public class VolumeShareByCustomerType {
         return this;
     }
 
+
     public VolumeShareByCustomerType withP2p(Optional<Integer> p2p) {
         Utils.checkNotNull(p2p, "p2p");
         this.p2p = p2p;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -119,9 +125,7 @@ public class VolumeShareByCustomerType {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            business,
-            consumer,
-            p2p);
+            business, consumer, p2p);
     }
     
     @Override
@@ -131,18 +135,20 @@ public class VolumeShareByCustomerType {
                 "consumer", consumer,
                 "p2p", p2p);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> business = Optional.empty();
- 
+
         private Optional<Integer> consumer = Optional.empty();
- 
+
         private Optional<Integer> p2p = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder business(int business) {
             Utils.checkNotNull(business, "business");
@@ -156,6 +162,7 @@ public class VolumeShareByCustomerType {
             return this;
         }
 
+
         public Builder consumer(int consumer) {
             Utils.checkNotNull(consumer, "consumer");
             this.consumer = Optional.ofNullable(consumer);
@@ -168,6 +175,7 @@ public class VolumeShareByCustomerType {
             return this;
         }
 
+
         public Builder p2p(int p2p) {
             Utils.checkNotNull(p2p, "p2p");
             this.p2p = Optional.ofNullable(p2p);
@@ -179,12 +187,12 @@ public class VolumeShareByCustomerType {
             this.p2p = p2p;
             return this;
         }
-        
+
         public VolumeShareByCustomerType build() {
+
             return new VolumeShareByCustomerType(
-                business,
-                consumer,
-                p2p);
+                business, consumer, p2p);
         }
+
     }
 }

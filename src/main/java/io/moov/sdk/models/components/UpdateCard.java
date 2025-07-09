@@ -15,8 +15,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class UpdateCard {
 
+public class UpdateCard {
     /**
      * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
      * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
@@ -26,29 +26,36 @@ public class UpdateCard {
     @JsonProperty("e2ee")
     private Optional<? extends E2EETokenUpdate> e2ee;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("billingAddress")
     private Optional<? extends UpdateCardAddress> billingAddress;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiration")
     private Optional<? extends UpdateCardExpiration> expiration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardCvv")
     private Optional<String> cardCvv;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardOnFile")
     private Optional<Boolean> cardOnFile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantAccountID")
     private Optional<String> merchantAccountID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("verifyName")
     private Optional<Boolean> verifyName;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("holderName")
@@ -83,7 +90,9 @@ public class UpdateCard {
     }
     
     public UpdateCard() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -134,9 +143,10 @@ public class UpdateCard {
         return holderName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
@@ -148,6 +158,7 @@ public class UpdateCard {
         this.e2ee = Optional.ofNullable(e2ee);
         return this;
     }
+
 
     /**
      * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
@@ -166,6 +177,7 @@ public class UpdateCard {
         return this;
     }
 
+
     public UpdateCard withBillingAddress(Optional<? extends UpdateCardAddress> billingAddress) {
         Utils.checkNotNull(billingAddress, "billingAddress");
         this.billingAddress = billingAddress;
@@ -177,6 +189,7 @@ public class UpdateCard {
         this.expiration = Optional.ofNullable(expiration);
         return this;
     }
+
 
     public UpdateCard withExpiration(Optional<? extends UpdateCardExpiration> expiration) {
         Utils.checkNotNull(expiration, "expiration");
@@ -190,6 +203,7 @@ public class UpdateCard {
         return this;
     }
 
+
     public UpdateCard withCardCvv(Optional<String> cardCvv) {
         Utils.checkNotNull(cardCvv, "cardCvv");
         this.cardCvv = cardCvv;
@@ -201,6 +215,7 @@ public class UpdateCard {
         this.cardOnFile = Optional.ofNullable(cardOnFile);
         return this;
     }
+
 
     public UpdateCard withCardOnFile(Optional<Boolean> cardOnFile) {
         Utils.checkNotNull(cardOnFile, "cardOnFile");
@@ -214,6 +229,7 @@ public class UpdateCard {
         return this;
     }
 
+
     public UpdateCard withMerchantAccountID(Optional<String> merchantAccountID) {
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
         this.merchantAccountID = merchantAccountID;
@@ -225,6 +241,7 @@ public class UpdateCard {
         this.verifyName = Optional.ofNullable(verifyName);
         return this;
     }
+
 
     public UpdateCard withVerifyName(Optional<Boolean> verifyName) {
         Utils.checkNotNull(verifyName, "verifyName");
@@ -238,13 +255,13 @@ public class UpdateCard {
         return this;
     }
 
+
     public UpdateCard withHolderName(Optional<String> holderName) {
         Utils.checkNotNull(holderName, "holderName");
         this.holderName = holderName;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -268,14 +285,9 @@ public class UpdateCard {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            e2ee,
-            billingAddress,
-            expiration,
-            cardCvv,
-            cardOnFile,
-            merchantAccountID,
-            verifyName,
-            holderName);
+            e2ee, billingAddress, expiration,
+            cardCvv, cardOnFile, merchantAccountID,
+            verifyName, holderName);
     }
     
     @Override
@@ -290,28 +302,30 @@ public class UpdateCard {
                 "verifyName", verifyName,
                 "holderName", holderName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends E2EETokenUpdate> e2ee = Optional.empty();
- 
+
         private Optional<? extends UpdateCardAddress> billingAddress = Optional.empty();
- 
+
         private Optional<? extends UpdateCardExpiration> expiration = Optional.empty();
- 
+
         private Optional<String> cardCvv = Optional.empty();
- 
+
         private Optional<Boolean> cardOnFile = Optional.empty();
- 
+
         private Optional<String> merchantAccountID = Optional.empty();
- 
+
         private Optional<Boolean> verifyName = Optional.empty();
- 
+
         private Optional<String> holderName = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
@@ -335,6 +349,7 @@ public class UpdateCard {
             return this;
         }
 
+
         public Builder billingAddress(UpdateCardAddress billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = Optional.ofNullable(billingAddress);
@@ -346,6 +361,7 @@ public class UpdateCard {
             this.billingAddress = billingAddress;
             return this;
         }
+
 
         public Builder expiration(UpdateCardExpiration expiration) {
             Utils.checkNotNull(expiration, "expiration");
@@ -359,6 +375,7 @@ public class UpdateCard {
             return this;
         }
 
+
         public Builder cardCvv(String cardCvv) {
             Utils.checkNotNull(cardCvv, "cardCvv");
             this.cardCvv = Optional.ofNullable(cardCvv);
@@ -370,6 +387,7 @@ public class UpdateCard {
             this.cardCvv = cardCvv;
             return this;
         }
+
 
         public Builder cardOnFile(boolean cardOnFile) {
             Utils.checkNotNull(cardOnFile, "cardOnFile");
@@ -383,6 +401,7 @@ public class UpdateCard {
             return this;
         }
 
+
         public Builder merchantAccountID(String merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = Optional.ofNullable(merchantAccountID);
@@ -394,6 +413,7 @@ public class UpdateCard {
             this.merchantAccountID = merchantAccountID;
             return this;
         }
+
 
         public Builder verifyName(boolean verifyName) {
             Utils.checkNotNull(verifyName, "verifyName");
@@ -407,6 +427,7 @@ public class UpdateCard {
             return this;
         }
 
+
         public Builder holderName(String holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = Optional.ofNullable(holderName);
@@ -418,17 +439,14 @@ public class UpdateCard {
             this.holderName = holderName;
             return this;
         }
-        
+
         public UpdateCard build() {
+
             return new UpdateCard(
-                e2ee,
-                billingAddress,
-                expiration,
-                cardCvv,
-                cardOnFile,
-                merchantAccountID,
-                verifyName,
-                holderName);
+                e2ee, billingAddress, expiration,
+                cardCvv, cardOnFile, merchantAccountID,
+                verifyName, holderName);
         }
+
     }
 }

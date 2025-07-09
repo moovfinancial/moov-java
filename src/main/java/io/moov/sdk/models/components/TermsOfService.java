@@ -17,7 +17,6 @@ import java.time.OffsetDateTime;
  * <p>Describes the acceptance of the Terms of Service.
  */
 public class TermsOfService {
-
     /**
      * The date and time the terms of service were accepted.
      */
@@ -56,9 +55,10 @@ public class TermsOfService {
         return acceptedIP;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The date and time the terms of service were accepted.
@@ -78,7 +78,6 @@ public class TermsOfService {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +95,7 @@ public class TermsOfService {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            acceptedDate,
-            acceptedIP);
+            acceptedDate, acceptedIP);
     }
     
     @Override
@@ -106,16 +104,18 @@ public class TermsOfService {
                 "acceptedDate", acceptedDate,
                 "acceptedIP", acceptedIP);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private OffsetDateTime acceptedDate;
- 
+
         private String acceptedIP;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The date and time the terms of service were accepted.
@@ -126,6 +126,7 @@ public class TermsOfService {
             return this;
         }
 
+
         /**
          * The IP address from which the terms of service were accepted.
          */
@@ -134,11 +135,12 @@ public class TermsOfService {
             this.acceptedIP = acceptedIP;
             return this;
         }
-        
+
         public TermsOfService build() {
+
             return new TermsOfService(
-                acceptedDate,
-                acceptedIP);
+                acceptedDate, acceptedIP);
         }
+
     }
 }

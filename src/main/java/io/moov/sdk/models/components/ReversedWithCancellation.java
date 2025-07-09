@@ -10,6 +10,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class ReversedWithCancellation {
 
     @JsonProperty("cancellation")
@@ -27,9 +28,10 @@ public class ReversedWithCancellation {
         return cancellation;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ReversedWithCancellation withCancellation(Cancellation cancellation) {
         Utils.checkNotNull(cancellation, "cancellation");
@@ -37,7 +39,6 @@ public class ReversedWithCancellation {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,24 +63,28 @@ public class ReversedWithCancellation {
         return Utils.toString(ReversedWithCancellation.class,
                 "cancellation", cancellation);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Cancellation cancellation;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder cancellation(Cancellation cancellation) {
             Utils.checkNotNull(cancellation, "cancellation");
             this.cancellation = cancellation;
             return this;
         }
-        
+
         public ReversedWithCancellation build() {
+
             return new ReversedWithCancellation(
                 cancellation);
         }
+
     }
 }

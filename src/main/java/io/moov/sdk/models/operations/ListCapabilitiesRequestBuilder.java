@@ -37,7 +37,7 @@ public class ListCapabilitiesRequestBuilder {
     public ListCapabilitiesResponse call() throws Exception {
         
         RequestOperation<ListCapabilitiesRequest, ListCapabilitiesResponse> operation
-              = new ListCapabilitiesOperation( sdkConfiguration);
+              = new ListCapabilitiesOperation(sdkConfiguration);
         ListCapabilitiesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

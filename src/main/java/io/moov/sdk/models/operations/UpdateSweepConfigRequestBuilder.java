@@ -54,7 +54,7 @@ public class UpdateSweepConfigRequestBuilder {
     public UpdateSweepConfigResponse call() throws Exception {
         
         RequestOperation<UpdateSweepConfigRequest, UpdateSweepConfigResponse> operation
-              = new UpdateSweepConfigOperation( sdkConfiguration);
+              = new UpdateSweepConfigOperation(sdkConfiguration);
         UpdateSweepConfigRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

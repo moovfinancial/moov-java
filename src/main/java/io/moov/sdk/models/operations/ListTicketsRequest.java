@@ -12,13 +12,16 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class ListTicketsRequest {
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -56,15 +59,17 @@ public class ListTicketsRequest {
         return accountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListTicketsRequest withSkip(long skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = Optional.ofNullable(skip);
         return this;
     }
+
 
     public ListTicketsRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
@@ -78,6 +83,7 @@ public class ListTicketsRequest {
         return this;
     }
 
+
     public ListTicketsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
@@ -90,7 +96,6 @@ public class ListTicketsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -109,9 +114,7 @@ public class ListTicketsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            skip,
-            count,
-            accountID);
+            skip, count, accountID);
     }
     
     @Override
@@ -121,18 +124,20 @@ public class ListTicketsRequest {
                 "count", count,
                 "accountID", accountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private String accountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -146,6 +151,7 @@ public class ListTicketsRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -158,17 +164,18 @@ public class ListTicketsRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
-        
+
         public ListTicketsRequest build() {
+
             return new ListTicketsRequest(
-                skip,
-                count,
-                accountID);
+                skip, count, accountID);
         }
+
     }
 }

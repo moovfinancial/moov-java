@@ -32,9 +32,10 @@ public class BankAccountPayload {
         return account;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BankAccountPayload withAccount(BankAccountIntegration account) {
         Utils.checkNotNull(account, "account");
@@ -42,7 +43,6 @@ public class BankAccountPayload {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -67,24 +67,28 @@ public class BankAccountPayload {
         return Utils.toString(BankAccountPayload.class,
                 "account", account);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private BankAccountIntegration account;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder account(BankAccountIntegration account) {
             Utils.checkNotNull(account, "account");
             this.account = account;
             return this;
         }
-        
+
         public BankAccountPayload build() {
+
             return new BankAccountPayload(
                 account);
         }
+
     }
 }

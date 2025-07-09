@@ -13,16 +13,20 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class ListSchedulesRequest {
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=hydrate")
     private Optional<? extends Hydrate> hydrate;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -45,7 +49,8 @@ public class ListSchedulesRequest {
     
     public ListSchedulesRequest(
             String accountID) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), accountID);
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            accountID);
     }
 
     @JsonIgnore
@@ -69,15 +74,17 @@ public class ListSchedulesRequest {
         return accountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ListSchedulesRequest withSkip(long skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = Optional.ofNullable(skip);
         return this;
     }
+
 
     public ListSchedulesRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
@@ -91,6 +98,7 @@ public class ListSchedulesRequest {
         return this;
     }
 
+
     public ListSchedulesRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
@@ -102,6 +110,7 @@ public class ListSchedulesRequest {
         this.hydrate = Optional.ofNullable(hydrate);
         return this;
     }
+
 
     public ListSchedulesRequest withHydrate(Optional<? extends Hydrate> hydrate) {
         Utils.checkNotNull(hydrate, "hydrate");
@@ -115,7 +124,6 @@ public class ListSchedulesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -135,9 +143,7 @@ public class ListSchedulesRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            skip,
-            count,
-            hydrate,
+            skip, count, hydrate,
             accountID);
     }
     
@@ -149,20 +155,22 @@ public class ListSchedulesRequest {
                 "hydrate", hydrate,
                 "accountID", accountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
- 
+
         private Optional<? extends Hydrate> hydrate = Optional.empty();
- 
+
         private String accountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -176,6 +184,7 @@ public class ListSchedulesRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -187,6 +196,7 @@ public class ListSchedulesRequest {
             this.count = count;
             return this;
         }
+
 
         public Builder hydrate(Hydrate hydrate) {
             Utils.checkNotNull(hydrate, "hydrate");
@@ -200,18 +210,19 @@ public class ListSchedulesRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
-        
+
         public ListSchedulesRequest build() {
+
             return new ListSchedulesRequest(
-                skip,
-                count,
-                hydrate,
+                skip, count, hydrate,
                 accountID);
         }
+
     }
 }

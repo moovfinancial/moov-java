@@ -15,31 +15,38 @@ import java.lang.SuppressWarnings;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
+
 public class UpdateRepresentative {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<? extends IndividualNameUpdate> name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("phone")
     private JsonNullable<? extends Phone> phone;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
     private JsonNullable<? extends Email> email;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private JsonNullable<? extends UpdateRepresentativeAddress> address;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("birthDate")
     private JsonNullable<? extends UpdateRepresentativeBirthDate> birthDate;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("governmentID")
     private JsonNullable<? extends UpdateRepresentativeGovernmentID> governmentID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("responsibilities")
@@ -71,7 +78,9 @@ public class UpdateRepresentative {
     }
     
     public UpdateRepresentative() {
-        this(Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined());
+        this(Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined());
     }
 
     @SuppressWarnings("unchecked")
@@ -116,15 +125,17 @@ public class UpdateRepresentative {
         return (JsonNullable<Responsibilities>) responsibilities;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateRepresentative withName(IndividualNameUpdate name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     public UpdateRepresentative withName(Optional<? extends IndividualNameUpdate> name) {
         Utils.checkNotNull(name, "name");
@@ -204,7 +215,6 @@ public class UpdateRepresentative {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -227,12 +237,8 @@ public class UpdateRepresentative {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name,
-            phone,
-            email,
-            address,
-            birthDate,
-            governmentID,
+            name, phone, email,
+            address, birthDate, governmentID,
             responsibilities);
     }
     
@@ -247,26 +253,28 @@ public class UpdateRepresentative {
                 "governmentID", governmentID,
                 "responsibilities", responsibilities);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends IndividualNameUpdate> name = Optional.empty();
- 
+
         private JsonNullable<? extends Phone> phone = JsonNullable.undefined();
- 
+
         private JsonNullable<? extends Email> email = JsonNullable.undefined();
- 
+
         private JsonNullable<? extends UpdateRepresentativeAddress> address = JsonNullable.undefined();
- 
+
         private JsonNullable<? extends UpdateRepresentativeBirthDate> birthDate = JsonNullable.undefined();
- 
+
         private JsonNullable<? extends UpdateRepresentativeGovernmentID> governmentID = JsonNullable.undefined();
- 
+
         private JsonNullable<? extends Responsibilities> responsibilities = JsonNullable.undefined();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(IndividualNameUpdate name) {
             Utils.checkNotNull(name, "name");
@@ -280,6 +288,7 @@ public class UpdateRepresentative {
             return this;
         }
 
+
         public Builder phone(Phone phone) {
             Utils.checkNotNull(phone, "phone");
             this.phone = JsonNullable.of(phone);
@@ -291,6 +300,7 @@ public class UpdateRepresentative {
             this.phone = phone;
             return this;
         }
+
 
         public Builder email(Email email) {
             Utils.checkNotNull(email, "email");
@@ -304,6 +314,7 @@ public class UpdateRepresentative {
             return this;
         }
 
+
         public Builder address(UpdateRepresentativeAddress address) {
             Utils.checkNotNull(address, "address");
             this.address = JsonNullable.of(address);
@@ -315,6 +326,7 @@ public class UpdateRepresentative {
             this.address = address;
             return this;
         }
+
 
         public Builder birthDate(UpdateRepresentativeBirthDate birthDate) {
             Utils.checkNotNull(birthDate, "birthDate");
@@ -328,6 +340,7 @@ public class UpdateRepresentative {
             return this;
         }
 
+
         public Builder governmentID(UpdateRepresentativeGovernmentID governmentID) {
             Utils.checkNotNull(governmentID, "governmentID");
             this.governmentID = JsonNullable.of(governmentID);
@@ -340,6 +353,7 @@ public class UpdateRepresentative {
             return this;
         }
 
+
         public Builder responsibilities(Responsibilities responsibilities) {
             Utils.checkNotNull(responsibilities, "responsibilities");
             this.responsibilities = JsonNullable.of(responsibilities);
@@ -351,16 +365,14 @@ public class UpdateRepresentative {
             this.responsibilities = responsibilities;
             return this;
         }
-        
+
         public UpdateRepresentative build() {
+
             return new UpdateRepresentative(
-                name,
-                phone,
-                email,
-                address,
-                birthDate,
-                governmentID,
+                name, phone, email,
+                address, birthDate, governmentID,
                 responsibilities);
         }
+
     }
 }

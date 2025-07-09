@@ -13,10 +13,12 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class CreateSweepConfig {
 
     @JsonProperty("walletID")
     private String walletID;
+
 
     @JsonProperty("status")
     private SweepConfigStatus status;
@@ -39,6 +41,7 @@ public class CreateSweepConfig {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("statementDescriptor")
     private Optional<String> statementDescriptor;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minimumBalance")
@@ -71,7 +74,8 @@ public class CreateSweepConfig {
             SweepConfigStatus status,
             String pushPaymentMethodID,
             String pullPaymentMethodID) {
-        this(walletID, status, pushPaymentMethodID, pullPaymentMethodID, Optional.empty(), Optional.empty());
+        this(walletID, status, pushPaymentMethodID,
+            pullPaymentMethodID, Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -113,9 +117,10 @@ public class CreateSweepConfig {
         return minimumBalance;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateSweepConfig withWalletID(String walletID) {
         Utils.checkNotNull(walletID, "walletID");
@@ -156,6 +161,7 @@ public class CreateSweepConfig {
         return this;
     }
 
+
     /**
      * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
      */
@@ -171,13 +177,13 @@ public class CreateSweepConfig {
         return this;
     }
 
+
     public CreateSweepConfig withMinimumBalance(Optional<String> minimumBalance) {
         Utils.checkNotNull(minimumBalance, "minimumBalance");
         this.minimumBalance = minimumBalance;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -199,12 +205,8 @@ public class CreateSweepConfig {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID,
-            status,
-            pushPaymentMethodID,
-            pullPaymentMethodID,
-            statementDescriptor,
-            minimumBalance);
+            walletID, status, pushPaymentMethodID,
+            pullPaymentMethodID, statementDescriptor, minimumBalance);
     }
     
     @Override
@@ -217,24 +219,26 @@ public class CreateSweepConfig {
                 "statementDescriptor", statementDescriptor,
                 "minimumBalance", minimumBalance);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String walletID;
- 
+
         private SweepConfigStatus status;
- 
+
         private String pushPaymentMethodID;
- 
+
         private String pullPaymentMethodID;
- 
+
         private Optional<String> statementDescriptor = Optional.empty();
- 
+
         private Optional<String> minimumBalance = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder walletID(String walletID) {
             Utils.checkNotNull(walletID, "walletID");
@@ -242,11 +246,13 @@ public class CreateSweepConfig {
             return this;
         }
 
+
         public Builder status(SweepConfigStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
+
 
         /**
          * ID of the payment method.
@@ -257,6 +263,7 @@ public class CreateSweepConfig {
             return this;
         }
 
+
         /**
          * ID of the payment method.
          */
@@ -265,6 +272,7 @@ public class CreateSweepConfig {
             this.pullPaymentMethodID = pullPaymentMethodID;
             return this;
         }
+
 
         /**
          * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
@@ -284,6 +292,7 @@ public class CreateSweepConfig {
             return this;
         }
 
+
         public Builder minimumBalance(String minimumBalance) {
             Utils.checkNotNull(minimumBalance, "minimumBalance");
             this.minimumBalance = Optional.ofNullable(minimumBalance);
@@ -295,15 +304,13 @@ public class CreateSweepConfig {
             this.minimumBalance = minimumBalance;
             return this;
         }
-        
+
         public CreateSweepConfig build() {
+
             return new CreateSweepConfig(
-                walletID,
-                status,
-                pushPaymentMethodID,
-                pullPaymentMethodID,
-                statementDescriptor,
-                minimumBalance);
+                walletID, status, pushPaymentMethodID,
+                pullPaymentMethodID, statementDescriptor, minimumBalance);
         }
+
     }
 }

@@ -19,7 +19,6 @@ import java.util.Optional;
  * <p>Options for payment links used to collect an ACH payment.
  */
 public class ACHPaymentDetails {
-
     /**
      * An optional override of the default NACHA company entry description for a transfer.
      */
@@ -64,9 +63,10 @@ public class ACHPaymentDetails {
         return originatingCompanyName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An optional override of the default NACHA company entry description for a transfer.
@@ -76,6 +76,7 @@ public class ACHPaymentDetails {
         this.companyEntryDescription = Optional.ofNullable(companyEntryDescription);
         return this;
     }
+
 
     /**
      * An optional override of the default NACHA company entry description for a transfer.
@@ -95,6 +96,7 @@ public class ACHPaymentDetails {
         return this;
     }
 
+
     /**
      * An optional override of the default NACHA company name for a transfer.
      */
@@ -104,7 +106,6 @@ public class ACHPaymentDetails {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -122,8 +123,7 @@ public class ACHPaymentDetails {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyEntryDescription,
-            originatingCompanyName);
+            companyEntryDescription, originatingCompanyName);
     }
     
     @Override
@@ -132,16 +132,18 @@ public class ACHPaymentDetails {
                 "companyEntryDescription", companyEntryDescription,
                 "originatingCompanyName", originatingCompanyName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> companyEntryDescription = Optional.empty();
- 
+
         private Optional<String> originatingCompanyName = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An optional override of the default NACHA company entry description for a transfer.
@@ -161,6 +163,7 @@ public class ACHPaymentDetails {
             return this;
         }
 
+
         /**
          * An optional override of the default NACHA company name for a transfer.
          */
@@ -178,11 +181,12 @@ public class ACHPaymentDetails {
             this.originatingCompanyName = originatingCompanyName;
             return this;
         }
-        
+
         public ACHPaymentDetails build() {
+
             return new ACHPaymentDetails(
-                companyEntryDescription,
-                originatingCompanyName);
+                companyEntryDescription, originatingCompanyName);
         }
+
     }
 }

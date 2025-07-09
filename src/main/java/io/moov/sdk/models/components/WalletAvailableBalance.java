@@ -11,8 +11,8 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 
-public class WalletAvailableBalance {
 
+public class WalletAvailableBalance {
     /**
      * A 3-letter ISO 4217 currency code.
      */
@@ -26,6 +26,7 @@ public class WalletAvailableBalance {
      */
     @JsonProperty("value")
     private long value;
+
 
     @JsonProperty("valueDecimal")
     private String valueDecimal;
@@ -66,9 +67,10 @@ public class WalletAvailableBalance {
         return valueDecimal;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A 3-letter ISO 4217 currency code.
@@ -96,7 +98,6 @@ public class WalletAvailableBalance {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -115,9 +116,7 @@ public class WalletAvailableBalance {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            currency,
-            value,
-            valueDecimal);
+            currency, value, valueDecimal);
     }
     
     @Override
@@ -127,18 +126,20 @@ public class WalletAvailableBalance {
                 "value", value,
                 "valueDecimal", valueDecimal);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String currency;
- 
+
         private Long value;
- 
+
         private String valueDecimal;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A 3-letter ISO 4217 currency code.
@@ -148,6 +149,7 @@ public class WalletAvailableBalance {
             this.currency = currency;
             return this;
         }
+
 
         /**
          * Quantity in the smallest unit of the specified currency. 
@@ -160,17 +162,18 @@ public class WalletAvailableBalance {
             return this;
         }
 
+
         public Builder valueDecimal(String valueDecimal) {
             Utils.checkNotNull(valueDecimal, "valueDecimal");
             this.valueDecimal = valueDecimal;
             return this;
         }
-        
+
         public WalletAvailableBalance build() {
+
             return new WalletAvailableBalance(
-                currency,
-                value,
-                valueDecimal);
+                currency, value, valueDecimal);
         }
+
     }
 }

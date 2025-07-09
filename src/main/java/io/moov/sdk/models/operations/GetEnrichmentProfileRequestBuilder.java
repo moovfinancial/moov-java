@@ -37,7 +37,7 @@ public class GetEnrichmentProfileRequestBuilder {
     public GetEnrichmentProfileResponse call() throws Exception {
         
         RequestOperation<GetEnrichmentProfileRequest, GetEnrichmentProfileResponse> operation
-              = new GetEnrichmentProfileOperation( sdkConfiguration);
+              = new GetEnrichmentProfileOperation(sdkConfiguration);
         GetEnrichmentProfileRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

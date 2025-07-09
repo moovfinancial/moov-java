@@ -14,11 +14,13 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 public class UpdateRepresentativeGovernmentID {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ssn")
     private Optional<? extends UpdateRepresentativeSsn> ssn;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("itin")
@@ -50,15 +52,17 @@ public class UpdateRepresentativeGovernmentID {
         return (Optional<UpdateRepresentativeItin>) itin;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UpdateRepresentativeGovernmentID withSsn(UpdateRepresentativeSsn ssn) {
         Utils.checkNotNull(ssn, "ssn");
         this.ssn = Optional.ofNullable(ssn);
         return this;
     }
+
 
     public UpdateRepresentativeGovernmentID withSsn(Optional<? extends UpdateRepresentativeSsn> ssn) {
         Utils.checkNotNull(ssn, "ssn");
@@ -72,13 +76,13 @@ public class UpdateRepresentativeGovernmentID {
         return this;
     }
 
+
     public UpdateRepresentativeGovernmentID withItin(Optional<? extends UpdateRepresentativeItin> itin) {
         Utils.checkNotNull(itin, "itin");
         this.itin = itin;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,8 +100,7 @@ public class UpdateRepresentativeGovernmentID {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ssn,
-            itin);
+            ssn, itin);
     }
     
     @Override
@@ -106,16 +109,18 @@ public class UpdateRepresentativeGovernmentID {
                 "ssn", ssn,
                 "itin", itin);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends UpdateRepresentativeSsn> ssn = Optional.empty();
- 
+
         private Optional<? extends UpdateRepresentativeItin> itin = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ssn(UpdateRepresentativeSsn ssn) {
             Utils.checkNotNull(ssn, "ssn");
@@ -129,6 +134,7 @@ public class UpdateRepresentativeGovernmentID {
             return this;
         }
 
+
         public Builder itin(UpdateRepresentativeItin itin) {
             Utils.checkNotNull(itin, "itin");
             this.itin = Optional.ofNullable(itin);
@@ -140,11 +146,12 @@ public class UpdateRepresentativeGovernmentID {
             this.itin = itin;
             return this;
         }
-        
+
         public UpdateRepresentativeGovernmentID build() {
+
             return new UpdateRepresentativeGovernmentID(
-                ssn,
-                itin);
+                ssn, itin);
         }
+
     }
 }

@@ -12,19 +12,22 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-public class ListIssuedCardAuthorizationEventsRequest {
 
+public class ListIssuedCardAuthorizationEventsRequest {
     /**
      * The Moov business account for which cards have been issued.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=authorizationID")
     private String authorizationID;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
     private Optional<Long> count;
@@ -48,7 +51,8 @@ public class ListIssuedCardAuthorizationEventsRequest {
     public ListIssuedCardAuthorizationEventsRequest(
             String accountID,
             String authorizationID) {
-        this(accountID, authorizationID, Optional.empty(), Optional.empty());
+        this(accountID, authorizationID, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -74,9 +78,10 @@ public class ListIssuedCardAuthorizationEventsRequest {
         return count;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The Moov business account for which cards have been issued.
@@ -99,6 +104,7 @@ public class ListIssuedCardAuthorizationEventsRequest {
         return this;
     }
 
+
     public ListIssuedCardAuthorizationEventsRequest withSkip(Optional<Long> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
@@ -111,13 +117,13 @@ public class ListIssuedCardAuthorizationEventsRequest {
         return this;
     }
 
+
     public ListIssuedCardAuthorizationEventsRequest withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -137,9 +143,7 @@ public class ListIssuedCardAuthorizationEventsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            authorizationID,
-            skip,
+            accountID, authorizationID, skip,
             count);
     }
     
@@ -151,20 +155,22 @@ public class ListIssuedCardAuthorizationEventsRequest {
                 "skip", skip,
                 "count", count);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String authorizationID;
- 
+
         private Optional<Long> skip = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The Moov business account for which cards have been issued.
@@ -175,11 +181,13 @@ public class ListIssuedCardAuthorizationEventsRequest {
             return this;
         }
 
+
         public Builder authorizationID(String authorizationID) {
             Utils.checkNotNull(authorizationID, "authorizationID");
             this.authorizationID = authorizationID;
             return this;
         }
+
 
         public Builder skip(long skip) {
             Utils.checkNotNull(skip, "skip");
@@ -193,6 +201,7 @@ public class ListIssuedCardAuthorizationEventsRequest {
             return this;
         }
 
+
         public Builder count(long count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -204,13 +213,13 @@ public class ListIssuedCardAuthorizationEventsRequest {
             this.count = count;
             return this;
         }
-        
+
         public ListIssuedCardAuthorizationEventsRequest build() {
+
             return new ListIssuedCardAuthorizationEventsRequest(
-                accountID,
-                authorizationID,
-                skip,
+                accountID, authorizationID, skip,
                 count);
         }
+
     }
 }

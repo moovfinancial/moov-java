@@ -64,7 +64,6 @@ public class Disputes {
     Disputes(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Returns the list of disputes. 
      * 
@@ -91,13 +90,11 @@ public class Disputes {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListDisputesResponse list(
-            ListDisputesRequest request) throws Exception {
+    public ListDisputesResponse list(ListDisputesRequest request) throws Exception {
         RequestOperation<ListDisputesRequest, ListDisputesResponse> operation
-              = new ListDisputesOperation( sdkConfiguration);
+              = new ListDisputesOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get a dispute by ID. 
@@ -136,10 +133,9 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<GetDisputeRequest, GetDisputeResponse> operation
-              = new GetDisputeOperation( sdkConfiguration);
+              = new GetDisputeOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Accepts liability for a dispute. 
@@ -178,10 +174,9 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<AcceptDisputeRequest, AcceptDisputeResponse> operation
-              = new AcceptDisputeOperation( sdkConfiguration);
+              = new AcceptDisputeOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Returns a dispute's public evidence by its ID. 
@@ -220,10 +215,9 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<ListDisputeEvidenceRequest, ListDisputeEvidenceResponse> operation
-              = new ListDisputeEvidenceOperation( sdkConfiguration);
+              = new ListDisputeEvidenceOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Uploads a file as evidence for a dispute. 
@@ -265,10 +259,9 @@ public class Disputes {
                 .createEvidenceFileMultiPart(createEvidenceFileMultiPart)
                 .build();
         RequestOperation<UploadDisputeEvidenceFileRequest, UploadDisputeEvidenceFileResponse> operation
-              = new UploadDisputeEvidenceFileOperation( sdkConfiguration);
+              = new UploadDisputeEvidenceFileOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Uploads text as evidence for a dispute.
@@ -310,10 +303,9 @@ public class Disputes {
                 .createEvidenceText(createEvidenceText)
                 .build();
         RequestOperation<UploadDisputeEvidenceTextRequest, UploadDisputeEvidenceTextResponse> operation
-              = new UploadDisputeEvidenceTextOperation( sdkConfiguration);
+              = new UploadDisputeEvidenceTextOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Submit the evidence associated with a dispute.
@@ -358,10 +350,9 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<SubmitDisputeEvidenceRequest, SubmitDisputeEvidenceResponse> operation
-              = new SubmitDisputeEvidenceOperation( sdkConfiguration);
+              = new SubmitDisputeEvidenceOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Get dispute evidence by ID.
@@ -403,10 +394,9 @@ public class Disputes {
                 .evidenceID(evidenceID)
                 .build();
         RequestOperation<GetDisputeEvidenceRequest, GetDisputeEvidenceResponse> operation
-              = new GetDisputeEvidenceOperation( sdkConfiguration);
+              = new GetDisputeEvidenceOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Updates dispute evidence by ID.
@@ -451,10 +441,9 @@ public class Disputes {
                 .updateEvidence(updateEvidence)
                 .build();
         RequestOperation<UpdateDisputeEvidenceRequest, UpdateDisputeEvidenceResponse> operation
-              = new UpdateDisputeEvidenceOperation( sdkConfiguration);
+              = new UpdateDisputeEvidenceOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Deletes dispute evidence by ID. 
@@ -496,10 +485,9 @@ public class Disputes {
                 .evidenceID(evidenceID)
                 .build();
         RequestOperation<DeleteDisputeEvidenceFileRequest, DeleteDisputeEvidenceFileResponse> operation
-              = new DeleteDisputeEvidenceFileOperation( sdkConfiguration);
+              = new DeleteDisputeEvidenceFileOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Downloads dispute evidence data by ID.
@@ -541,7 +529,7 @@ public class Disputes {
                 .evidenceID(evidenceID)
                 .build();
         RequestOperation<GetDisputeEvidenceDataRequest, GetDisputeEvidenceDataResponse> operation
-              = new GetDisputeEvidenceDataOperation( sdkConfiguration);
+              = new GetDisputeEvidenceDataOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

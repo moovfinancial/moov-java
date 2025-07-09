@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Defines the specific parameters used for fee calculation.
  */
 public class FeeProperties {
-
     /**
      * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
      */
@@ -68,7 +67,8 @@ public class FeeProperties {
     }
     
     public FeeProperties() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -108,9 +108,10 @@ public class FeeProperties {
         return (Optional<AmountDecimal>) maxPerTransaction;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
@@ -120,6 +121,7 @@ public class FeeProperties {
         this.fixedAmount = Optional.ofNullable(fixedAmount);
         return this;
     }
+
 
     /**
      * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
@@ -141,6 +143,7 @@ public class FeeProperties {
         return this;
     }
 
+
     /**
      * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
      * 
@@ -161,6 +164,7 @@ public class FeeProperties {
         return this;
     }
 
+
     /**
      * Specifies the minimum allowable spending for a single transaction, working as a transaction floor.
      */
@@ -179,6 +183,7 @@ public class FeeProperties {
         return this;
     }
 
+
     /**
      * Specifies the maximum allowable spending for a single transaction, working as a transaction ceiling.
      */
@@ -188,7 +193,6 @@ public class FeeProperties {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -208,9 +212,7 @@ public class FeeProperties {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            fixedAmount,
-            variableRate,
-            minPerTransaction,
+            fixedAmount, variableRate, minPerTransaction,
             maxPerTransaction);
     }
     
@@ -222,20 +224,22 @@ public class FeeProperties {
                 "minPerTransaction", minPerTransaction,
                 "maxPerTransaction", maxPerTransaction);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends AmountDecimal> fixedAmount = Optional.empty();
- 
+
         private Optional<String> variableRate = Optional.empty();
- 
+
         private Optional<? extends AmountDecimal> minPerTransaction = Optional.empty();
- 
+
         private Optional<? extends AmountDecimal> maxPerTransaction = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
@@ -254,6 +258,7 @@ public class FeeProperties {
             this.fixedAmount = fixedAmount;
             return this;
         }
+
 
         /**
          * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
@@ -277,6 +282,7 @@ public class FeeProperties {
             return this;
         }
 
+
         /**
          * Specifies the minimum allowable spending for a single transaction, working as a transaction floor.
          */
@@ -295,6 +301,7 @@ public class FeeProperties {
             return this;
         }
 
+
         /**
          * Specifies the maximum allowable spending for a single transaction, working as a transaction ceiling.
          */
@@ -312,13 +319,13 @@ public class FeeProperties {
             this.maxPerTransaction = maxPerTransaction;
             return this;
         }
-        
+
         public FeeProperties build() {
+
             return new FeeProperties(
-                fixedAmount,
-                variableRate,
-                minPerTransaction,
+                fixedAmount, variableRate, minPerTransaction,
                 maxPerTransaction);
         }
+
     }
 }

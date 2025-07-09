@@ -26,7 +26,6 @@ public class Institutions {
     Institutions(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-
     /**
      * Search for financial institutions by name or routing number.
      * 
@@ -88,10 +87,9 @@ public class Institutions {
                 .limit(limit)
                 .build();
         RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
-              = new SearchInstitutionsOperation( sdkConfiguration);
+              = new SearchInstitutionsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
-
 
     /**
      * Search for institutions by either their name or routing number.
@@ -115,7 +113,8 @@ public class Institutions {
      * @throws Exception if the API call fails
      */
     public ListInstitutionsResponse searchDirect() throws Exception {
-        return search(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        return search(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -145,7 +144,7 @@ public class Institutions {
                 .limit(limit)
                 .build();
         RequestOperation<ListInstitutionsRequest, ListInstitutionsResponse> operation
-              = new ListInstitutionsOperation( sdkConfiguration);
+              = new ListInstitutionsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

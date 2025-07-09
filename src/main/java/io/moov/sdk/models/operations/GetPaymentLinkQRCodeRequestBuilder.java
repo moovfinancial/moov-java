@@ -45,7 +45,7 @@ public class GetPaymentLinkQRCodeRequestBuilder {
     public GetPaymentLinkQRCodeResponse call() throws Exception {
         
         RequestOperation<GetPaymentLinkQRCodeRequest, GetPaymentLinkQRCodeResponse> operation
-              = new GetPaymentLinkQRCodeOperation( sdkConfiguration);
+              = new GetPaymentLinkQRCodeOperation(sdkConfiguration);
         GetPaymentLinkQRCodeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -46,7 +46,7 @@ public class GetCapabilityRequestBuilder {
     public GetCapabilityResponse call() throws Exception {
         
         RequestOperation<GetCapabilityRequest, GetCapabilityResponse> operation
-              = new GetCapabilityOperation( sdkConfiguration);
+              = new GetCapabilityOperation(sdkConfiguration);
         GetCapabilityRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

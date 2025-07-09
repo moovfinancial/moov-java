@@ -10,13 +10,14 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
-public class GetTransferRequest {
 
+public class GetTransferRequest {
     /**
      * Identifier for the transfer.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=transferID")
     private String transferID;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -44,9 +45,10 @@ public class GetTransferRequest {
         return accountID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Identifier for the transfer.
@@ -63,7 +65,6 @@ public class GetTransferRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -81,8 +82,7 @@ public class GetTransferRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transferID,
-            accountID);
+            transferID, accountID);
     }
     
     @Override
@@ -91,16 +91,18 @@ public class GetTransferRequest {
                 "transferID", transferID,
                 "accountID", accountID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String transferID;
- 
+
         private String accountID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Identifier for the transfer.
@@ -111,16 +113,18 @@ public class GetTransferRequest {
             return this;
         }
 
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
-        
+
         public GetTransferRequest build() {
+
             return new GetTransferRequest(
-                transferID,
-                accountID);
+                transferID, accountID);
         }
+
     }
 }

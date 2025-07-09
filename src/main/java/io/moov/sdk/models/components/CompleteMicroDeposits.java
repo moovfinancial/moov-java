@@ -18,7 +18,6 @@ import java.util.List;
  * <p>Request to complete the micro-deposit verification workflow.
  */
 public class CompleteMicroDeposits {
-
     /**
      * Two positive integers, in cents, equal to the values of the micro-deposits sent to the bank account.
      */
@@ -40,9 +39,10 @@ public class CompleteMicroDeposits {
         return amounts;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Two positive integers, in cents, equal to the values of the micro-deposits sent to the bank account.
@@ -53,7 +53,6 @@ public class CompleteMicroDeposits {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -78,14 +77,16 @@ public class CompleteMicroDeposits {
         return Utils.toString(CompleteMicroDeposits.class,
                 "amounts", amounts);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private List<Long> amounts;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Two positive integers, in cents, equal to the values of the micro-deposits sent to the bank account.
@@ -95,10 +96,12 @@ public class CompleteMicroDeposits {
             this.amounts = amounts;
             return this;
         }
-        
+
         public CompleteMicroDeposits build() {
+
             return new CompleteMicroDeposits(
                 amounts);
         }
+
     }
 }

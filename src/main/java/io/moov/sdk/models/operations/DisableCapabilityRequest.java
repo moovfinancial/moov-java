@@ -11,6 +11,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class DisableCapabilityRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
@@ -49,9 +50,10 @@ public class DisableCapabilityRequest {
         return capabilityID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public DisableCapabilityRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -70,7 +72,6 @@ public class DisableCapabilityRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -88,8 +89,7 @@ public class DisableCapabilityRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            capabilityID);
+            accountID, capabilityID);
     }
     
     @Override
@@ -98,22 +98,25 @@ public class DisableCapabilityRequest {
                 "accountID", accountID,
                 "capabilityID", capabilityID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private CapabilityID capabilityID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
             return this;
         }
+
 
         /**
          * Moov account capabilities.
@@ -125,11 +128,12 @@ public class DisableCapabilityRequest {
             this.capabilityID = capabilityID;
             return this;
         }
-        
+
         public DisableCapabilityRequest build() {
+
             return new DisableCapabilityRequest(
-                accountID,
-                capabilityID);
+                accountID, capabilityID);
         }
+
     }
 }

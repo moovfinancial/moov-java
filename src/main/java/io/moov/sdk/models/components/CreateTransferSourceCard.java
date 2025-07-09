@@ -14,8 +14,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class CreateTransferSourceCard {
 
+public class CreateTransferSourceCard {
     /**
      * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
      */
@@ -67,9 +67,10 @@ public class CreateTransferSourceCard {
         return (Optional<TransactionSource>) transactionSource;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
@@ -79,6 +80,7 @@ public class CreateTransferSourceCard {
         this.dynamicDescriptor = Optional.ofNullable(dynamicDescriptor);
         return this;
     }
+
 
     /**
      * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
@@ -101,6 +103,7 @@ public class CreateTransferSourceCard {
         return this;
     }
 
+
     /**
      * Specifies the nature and initiator of a transaction. 
      * 
@@ -113,7 +116,6 @@ public class CreateTransferSourceCard {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -131,8 +133,7 @@ public class CreateTransferSourceCard {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            dynamicDescriptor,
-            transactionSource);
+            dynamicDescriptor, transactionSource);
     }
     
     @Override
@@ -141,16 +142,18 @@ public class CreateTransferSourceCard {
                 "dynamicDescriptor", dynamicDescriptor,
                 "transactionSource", transactionSource);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> dynamicDescriptor = Optional.empty();
- 
+
         private Optional<? extends TransactionSource> transactionSource = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
@@ -169,6 +172,7 @@ public class CreateTransferSourceCard {
             this.dynamicDescriptor = dynamicDescriptor;
             return this;
         }
+
 
         /**
          * Specifies the nature and initiator of a transaction. 
@@ -193,11 +197,12 @@ public class CreateTransferSourceCard {
             this.transactionSource = transactionSource;
             return this;
         }
-        
+
         public CreateTransferSourceCard build() {
+
             return new CreateTransferSourceCard(
-                dynamicDescriptor,
-                transactionSource);
+                dynamicDescriptor, transactionSource);
         }
+
     }
 }

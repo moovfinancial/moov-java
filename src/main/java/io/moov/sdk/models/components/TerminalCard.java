@@ -20,7 +20,6 @@ import java.util.Optional;
  * <p>Describes payment card details captured with tap or in-person payment.
  */
 public class TerminalCard {
-
     /**
      * How the card information was entered into the point of sale terminal.
      */
@@ -34,6 +33,7 @@ public class TerminalCard {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("brand")
     private Optional<? extends CardBrand> brand;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bin")
@@ -125,7 +125,10 @@ public class TerminalCard {
     }
     
     public TerminalCard() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -211,9 +214,10 @@ public class TerminalCard {
         return lastFourCardNumber;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * How the card information was entered into the point of sale terminal.
@@ -223,6 +227,7 @@ public class TerminalCard {
         this.entryMode = Optional.ofNullable(entryMode);
         return this;
     }
+
 
     /**
      * How the card information was entered into the point of sale terminal.
@@ -242,6 +247,7 @@ public class TerminalCard {
         return this;
     }
 
+
     /**
      * The card brand.
      */
@@ -257,6 +263,7 @@ public class TerminalCard {
         return this;
     }
 
+
     public TerminalCard withBin(Optional<String> bin) {
         Utils.checkNotNull(bin, "bin");
         this.bin = bin;
@@ -271,6 +278,7 @@ public class TerminalCard {
         this.cardType = Optional.ofNullable(cardType);
         return this;
     }
+
 
     /**
      * The type of the card.
@@ -289,6 +297,7 @@ public class TerminalCard {
         this.expiration = Optional.ofNullable(expiration);
         return this;
     }
+
 
     /**
      * The expiration date of the card or token.
@@ -310,6 +319,7 @@ public class TerminalCard {
         return this;
     }
 
+
     /**
      * Uniquely identifies a linked payment card or token.
      * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
@@ -330,6 +340,7 @@ public class TerminalCard {
         return this;
     }
 
+
     /**
      * The name of the cardholder as it appears on the card.
      */
@@ -347,6 +358,7 @@ public class TerminalCard {
         this.issuer = Optional.ofNullable(issuer);
         return this;
     }
+
 
     /**
      * Financial institution that issued the card.
@@ -366,6 +378,7 @@ public class TerminalCard {
         return this;
     }
 
+
     /**
      * Country where the card was issued.
      */
@@ -384,6 +397,7 @@ public class TerminalCard {
         return this;
     }
 
+
     /**
      * Last four digits of the card number
      */
@@ -393,7 +407,6 @@ public class TerminalCard {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -419,15 +432,9 @@ public class TerminalCard {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            entryMode,
-            brand,
-            bin,
-            cardType,
-            expiration,
-            fingerprint,
-            holderName,
-            issuer,
-            issuerCountry,
+            entryMode, brand, bin,
+            cardType, expiration, fingerprint,
+            holderName, issuer, issuerCountry,
             lastFourCardNumber);
     }
     
@@ -445,32 +452,34 @@ public class TerminalCard {
                 "issuerCountry", issuerCountry,
                 "lastFourCardNumber", lastFourCardNumber);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends EntryMode> entryMode = Optional.empty();
- 
+
         private Optional<? extends CardBrand> brand = Optional.empty();
- 
+
         private Optional<String> bin = Optional.empty();
- 
+
         private Optional<? extends CardType> cardType = Optional.empty();
- 
+
         private Optional<? extends CardExpiration> expiration = Optional.empty();
- 
+
         private Optional<String> fingerprint = Optional.empty();
- 
+
         private Optional<String> holderName = Optional.empty();
- 
+
         private Optional<String> issuer = Optional.empty();
- 
+
         private Optional<String> issuerCountry = Optional.empty();
- 
+
         private Optional<String> lastFourCardNumber = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * How the card information was entered into the point of sale terminal.
@@ -490,6 +499,7 @@ public class TerminalCard {
             return this;
         }
 
+
         /**
          * The card brand.
          */
@@ -508,6 +518,7 @@ public class TerminalCard {
             return this;
         }
 
+
         public Builder bin(String bin) {
             Utils.checkNotNull(bin, "bin");
             this.bin = Optional.ofNullable(bin);
@@ -519,6 +530,7 @@ public class TerminalCard {
             this.bin = bin;
             return this;
         }
+
 
         /**
          * The type of the card.
@@ -538,6 +550,7 @@ public class TerminalCard {
             return this;
         }
 
+
         /**
          * The expiration date of the card or token.
          */
@@ -555,6 +568,7 @@ public class TerminalCard {
             this.expiration = expiration;
             return this;
         }
+
 
         /**
          * Uniquely identifies a linked payment card or token.
@@ -578,6 +592,7 @@ public class TerminalCard {
             return this;
         }
 
+
         /**
          * The name of the cardholder as it appears on the card.
          */
@@ -595,6 +610,7 @@ public class TerminalCard {
             this.holderName = holderName;
             return this;
         }
+
 
         /**
          * Financial institution that issued the card.
@@ -614,6 +630,7 @@ public class TerminalCard {
             return this;
         }
 
+
         /**
          * Country where the card was issued.
          */
@@ -632,6 +649,7 @@ public class TerminalCard {
             return this;
         }
 
+
         /**
          * Last four digits of the card number
          */
@@ -649,19 +667,15 @@ public class TerminalCard {
             this.lastFourCardNumber = lastFourCardNumber;
             return this;
         }
-        
+
         public TerminalCard build() {
+
             return new TerminalCard(
-                entryMode,
-                brand,
-                bin,
-                cardType,
-                expiration,
-                fingerprint,
-                holderName,
-                issuer,
-                issuerCountry,
+                entryMode, brand, bin,
+                cardType, expiration, fingerprint,
+                holderName, issuer, issuerCountry,
                 lastFourCardNumber);
         }
+
     }
 }

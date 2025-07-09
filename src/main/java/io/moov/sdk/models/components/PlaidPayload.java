@@ -16,7 +16,6 @@ import java.lang.String;
  * <p>Describes the account to link to the Moov account using a Plaid processor token.
  */
 public class PlaidPayload {
-
     /**
      * The details of a Plaid processor integration for a linked funding source. 
      * 
@@ -58,9 +57,10 @@ public class PlaidPayload {
         return plaid;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The details of a Plaid processor integration for a linked funding source. 
@@ -81,7 +81,6 @@ public class PlaidPayload {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -106,14 +105,16 @@ public class PlaidPayload {
         return Utils.toString(PlaidPayload.class,
                 "plaid", plaid);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private PlaidIntegration plaid;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The details of a Plaid processor integration for a linked funding source. 
@@ -133,10 +134,12 @@ public class PlaidPayload {
             this.plaid = plaid;
             return this;
         }
-        
+
         public PlaidPayload build() {
+
             return new PlaidPayload(
                 plaid);
         }
+
     }
 }

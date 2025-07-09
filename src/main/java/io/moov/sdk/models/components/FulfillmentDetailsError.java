@@ -13,11 +13,13 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
+
 public class FulfillmentDetailsError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("shipmentDurationDays")
     private Optional<String> shipmentDurationDays;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("returnPolicy")
@@ -47,15 +49,17 @@ public class FulfillmentDetailsError {
         return returnPolicy;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FulfillmentDetailsError withShipmentDurationDays(String shipmentDurationDays) {
         Utils.checkNotNull(shipmentDurationDays, "shipmentDurationDays");
         this.shipmentDurationDays = Optional.ofNullable(shipmentDurationDays);
         return this;
     }
+
 
     public FulfillmentDetailsError withShipmentDurationDays(Optional<String> shipmentDurationDays) {
         Utils.checkNotNull(shipmentDurationDays, "shipmentDurationDays");
@@ -69,13 +73,13 @@ public class FulfillmentDetailsError {
         return this;
     }
 
+
     public FulfillmentDetailsError withReturnPolicy(Optional<String> returnPolicy) {
         Utils.checkNotNull(returnPolicy, "returnPolicy");
         this.returnPolicy = returnPolicy;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,8 +97,7 @@ public class FulfillmentDetailsError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            shipmentDurationDays,
-            returnPolicy);
+            shipmentDurationDays, returnPolicy);
     }
     
     @Override
@@ -103,16 +106,18 @@ public class FulfillmentDetailsError {
                 "shipmentDurationDays", shipmentDurationDays,
                 "returnPolicy", returnPolicy);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> shipmentDurationDays = Optional.empty();
- 
+
         private Optional<String> returnPolicy = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder shipmentDurationDays(String shipmentDurationDays) {
             Utils.checkNotNull(shipmentDurationDays, "shipmentDurationDays");
@@ -126,6 +131,7 @@ public class FulfillmentDetailsError {
             return this;
         }
 
+
         public Builder returnPolicy(String returnPolicy) {
             Utils.checkNotNull(returnPolicy, "returnPolicy");
             this.returnPolicy = Optional.ofNullable(returnPolicy);
@@ -137,11 +143,12 @@ public class FulfillmentDetailsError {
             this.returnPolicy = returnPolicy;
             return this;
         }
-        
+
         public FulfillmentDetailsError build() {
+
             return new FulfillmentDetailsError(
-                shipmentDurationDays,
-                returnPolicy);
+                shipmentDurationDays, returnPolicy);
         }
+
     }
 }

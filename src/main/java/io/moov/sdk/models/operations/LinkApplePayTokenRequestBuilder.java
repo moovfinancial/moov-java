@@ -46,7 +46,7 @@ public class LinkApplePayTokenRequestBuilder {
     public LinkApplePayTokenResponse call() throws Exception {
         
         RequestOperation<LinkApplePayTokenRequest, LinkApplePayTokenResponse> operation
-              = new LinkApplePayTokenOperation( sdkConfiguration);
+              = new LinkApplePayTokenOperation(sdkConfiguration);
         LinkApplePayTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

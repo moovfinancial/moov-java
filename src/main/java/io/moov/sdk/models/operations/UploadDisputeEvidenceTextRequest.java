@@ -11,13 +11,16 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 
+
 public class UploadDisputeEvidenceTextRequest {
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=disputeID")
     private String disputeID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreateEvidenceText createEvidenceText;
@@ -50,9 +53,10 @@ public class UploadDisputeEvidenceTextRequest {
         return createEvidenceText;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public UploadDisputeEvidenceTextRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -72,7 +76,6 @@ public class UploadDisputeEvidenceTextRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,9 +94,7 @@ public class UploadDisputeEvidenceTextRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID,
-            disputeID,
-            createEvidenceText);
+            accountID, disputeID, createEvidenceText);
     }
     
     @Override
@@ -103,18 +104,20 @@ public class UploadDisputeEvidenceTextRequest {
                 "disputeID", disputeID,
                 "createEvidenceText", createEvidenceText);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String accountID;
- 
+
         private String disputeID;
- 
+
         private CreateEvidenceText createEvidenceText;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -122,23 +125,25 @@ public class UploadDisputeEvidenceTextRequest {
             return this;
         }
 
+
         public Builder disputeID(String disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = disputeID;
             return this;
         }
 
+
         public Builder createEvidenceText(CreateEvidenceText createEvidenceText) {
             Utils.checkNotNull(createEvidenceText, "createEvidenceText");
             this.createEvidenceText = createEvidenceText;
             return this;
         }
-        
+
         public UploadDisputeEvidenceTextRequest build() {
+
             return new UploadDisputeEvidenceTextRequest(
-                accountID,
-                disputeID,
-                createEvidenceText);
+                accountID, disputeID, createEvidenceText);
         }
+
     }
 }

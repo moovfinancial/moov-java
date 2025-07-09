@@ -15,35 +15,43 @@ import java.lang.SuppressWarnings;
 import java.util.Map;
 import java.util.Optional;
 
+
 public class CreateAccountError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("accountType")
     private Optional<String> accountType;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("profile")
     private Optional<? extends CreateProfileError> profile;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
     private Optional<String> metadata;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("termsOfService")
     private Optional<? extends TermsOfServiceError> termsOfService;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("foreignID")
     private Optional<String> foreignID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("customerSupport")
     private Optional<? extends CustomerSupportError> customerSupport;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("settings")
     private Optional<? extends CreateAccountSettings> settings;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("capabilities")
@@ -78,7 +86,9 @@ public class CreateAccountError {
     }
     
     public CreateAccountError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -126,15 +136,17 @@ public class CreateAccountError {
         return (Optional<Map<String, String>>) capabilities;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreateAccountError withAccountType(String accountType) {
         Utils.checkNotNull(accountType, "accountType");
         this.accountType = Optional.ofNullable(accountType);
         return this;
     }
+
 
     public CreateAccountError withAccountType(Optional<String> accountType) {
         Utils.checkNotNull(accountType, "accountType");
@@ -148,6 +160,7 @@ public class CreateAccountError {
         return this;
     }
 
+
     public CreateAccountError withProfile(Optional<? extends CreateProfileError> profile) {
         Utils.checkNotNull(profile, "profile");
         this.profile = profile;
@@ -159,6 +172,7 @@ public class CreateAccountError {
         this.metadata = Optional.ofNullable(metadata);
         return this;
     }
+
 
     public CreateAccountError withMetadata(Optional<String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
@@ -172,6 +186,7 @@ public class CreateAccountError {
         return this;
     }
 
+
     public CreateAccountError withTermsOfService(Optional<? extends TermsOfServiceError> termsOfService) {
         Utils.checkNotNull(termsOfService, "termsOfService");
         this.termsOfService = termsOfService;
@@ -183,6 +198,7 @@ public class CreateAccountError {
         this.foreignID = Optional.ofNullable(foreignID);
         return this;
     }
+
 
     public CreateAccountError withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
@@ -196,6 +212,7 @@ public class CreateAccountError {
         return this;
     }
 
+
     public CreateAccountError withCustomerSupport(Optional<? extends CustomerSupportError> customerSupport) {
         Utils.checkNotNull(customerSupport, "customerSupport");
         this.customerSupport = customerSupport;
@@ -207,6 +224,7 @@ public class CreateAccountError {
         this.settings = Optional.ofNullable(settings);
         return this;
     }
+
 
     public CreateAccountError withSettings(Optional<? extends CreateAccountSettings> settings) {
         Utils.checkNotNull(settings, "settings");
@@ -220,13 +238,13 @@ public class CreateAccountError {
         return this;
     }
 
+
     public CreateAccountError withCapabilities(Optional<? extends Map<String, String>> capabilities) {
         Utils.checkNotNull(capabilities, "capabilities");
         this.capabilities = capabilities;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -250,14 +268,9 @@ public class CreateAccountError {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountType,
-            profile,
-            metadata,
-            termsOfService,
-            foreignID,
-            customerSupport,
-            settings,
-            capabilities);
+            accountType, profile, metadata,
+            termsOfService, foreignID, customerSupport,
+            settings, capabilities);
     }
     
     @Override
@@ -272,28 +285,30 @@ public class CreateAccountError {
                 "settings", settings,
                 "capabilities", capabilities);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> accountType = Optional.empty();
- 
+
         private Optional<? extends CreateProfileError> profile = Optional.empty();
- 
+
         private Optional<String> metadata = Optional.empty();
- 
+
         private Optional<? extends TermsOfServiceError> termsOfService = Optional.empty();
- 
+
         private Optional<String> foreignID = Optional.empty();
- 
+
         private Optional<? extends CustomerSupportError> customerSupport = Optional.empty();
- 
+
         private Optional<? extends CreateAccountSettings> settings = Optional.empty();
- 
+
         private Optional<? extends Map<String, String>> capabilities = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountType(String accountType) {
             Utils.checkNotNull(accountType, "accountType");
@@ -307,6 +322,7 @@ public class CreateAccountError {
             return this;
         }
 
+
         public Builder profile(CreateProfileError profile) {
             Utils.checkNotNull(profile, "profile");
             this.profile = Optional.ofNullable(profile);
@@ -318,6 +334,7 @@ public class CreateAccountError {
             this.profile = profile;
             return this;
         }
+
 
         public Builder metadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
@@ -331,6 +348,7 @@ public class CreateAccountError {
             return this;
         }
 
+
         public Builder termsOfService(TermsOfServiceError termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
             this.termsOfService = Optional.ofNullable(termsOfService);
@@ -342,6 +360,7 @@ public class CreateAccountError {
             this.termsOfService = termsOfService;
             return this;
         }
+
 
         public Builder foreignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
@@ -355,6 +374,7 @@ public class CreateAccountError {
             return this;
         }
 
+
         public Builder customerSupport(CustomerSupportError customerSupport) {
             Utils.checkNotNull(customerSupport, "customerSupport");
             this.customerSupport = Optional.ofNullable(customerSupport);
@@ -366,6 +386,7 @@ public class CreateAccountError {
             this.customerSupport = customerSupport;
             return this;
         }
+
 
         public Builder settings(CreateAccountSettings settings) {
             Utils.checkNotNull(settings, "settings");
@@ -379,6 +400,7 @@ public class CreateAccountError {
             return this;
         }
 
+
         public Builder capabilities(Map<String, String> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = Optional.ofNullable(capabilities);
@@ -390,17 +412,14 @@ public class CreateAccountError {
             this.capabilities = capabilities;
             return this;
         }
-        
+
         public CreateAccountError build() {
+
             return new CreateAccountError(
-                accountType,
-                profile,
-                metadata,
-                termsOfService,
-                foreignID,
-                customerSupport,
-                settings,
-                capabilities);
+                accountType, profile, metadata,
+                termsOfService, foreignID, customerSupport,
+                settings, capabilities);
         }
+
     }
 }

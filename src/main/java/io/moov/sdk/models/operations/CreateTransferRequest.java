@@ -14,8 +14,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-public class CreateTransferRequest {
 
+public class CreateTransferRequest {
     /**
      * Prevents duplicate transfers from being created.
      */
@@ -34,6 +34,7 @@ public class CreateTransferRequest {
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
+
 
     @SpeakeasyMetadata("request:mediaType=application/json")
     private CreateTransfer createTransfer;
@@ -58,7 +59,8 @@ public class CreateTransferRequest {
             String xIdempotencyKey,
             String accountID,
             CreateTransfer createTransfer) {
-        this(xIdempotencyKey, Optional.empty(), accountID, createTransfer);
+        this(xIdempotencyKey, Optional.empty(), accountID,
+            createTransfer);
     }
 
     /**
@@ -92,9 +94,10 @@ public class CreateTransferRequest {
         return createTransfer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Prevents duplicate transfers from being created.
@@ -114,6 +117,7 @@ public class CreateTransferRequest {
         this.xWaitFor = Optional.ofNullable(xWaitFor);
         return this;
     }
+
 
     /**
      * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
@@ -140,7 +144,6 @@ public class CreateTransferRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -160,9 +163,7 @@ public class CreateTransferRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            xIdempotencyKey,
-            xWaitFor,
-            accountID,
+            xIdempotencyKey, xWaitFor, accountID,
             createTransfer);
     }
     
@@ -174,20 +175,22 @@ public class CreateTransferRequest {
                 "accountID", accountID,
                 "createTransfer", createTransfer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String xIdempotencyKey;
- 
+
         private Optional<? extends TransferWaitFor> xWaitFor = Optional.empty();
- 
+
         private String accountID;
- 
+
         private CreateTransfer createTransfer;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Prevents duplicate transfers from being created.
@@ -197,6 +200,7 @@ public class CreateTransferRequest {
             this.xIdempotencyKey = xIdempotencyKey;
             return this;
         }
+
 
         /**
          * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
@@ -218,6 +222,7 @@ public class CreateTransferRequest {
             return this;
         }
 
+
         /**
          * Your Moov account ID.
          */
@@ -227,18 +232,19 @@ public class CreateTransferRequest {
             return this;
         }
 
+
         public Builder createTransfer(CreateTransfer createTransfer) {
             Utils.checkNotNull(createTransfer, "createTransfer");
             this.createTransfer = createTransfer;
             return this;
         }
-        
+
         public CreateTransferRequest build() {
+
             return new CreateTransferRequest(
-                xIdempotencyKey,
-                xWaitFor,
-                accountID,
+                xIdempotencyKey, xWaitFor, accountID,
                 createTransfer);
         }
+
     }
 }

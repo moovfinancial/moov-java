@@ -19,6 +19,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class CreatePaymentLinkError extends RuntimeException {
 
@@ -26,29 +27,36 @@ public class CreatePaymentLinkError extends RuntimeException {
     @JsonProperty("partnerAccountID")
     private Optional<String> partnerAccountID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("merchantPaymentMethodID")
     private Optional<String> merchantPaymentMethodID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<? extends AmountValidationError> amount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maxUses")
     private Optional<String> maxUses;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiresOn")
     private Optional<String> expiresOn;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("display")
     private Optional<? extends DisplayOptionsError> display;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payment")
     private Optional<? extends PaymentDetailsError> payment;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("payout")
@@ -84,7 +92,9 @@ public class CreatePaymentLinkError extends RuntimeException {
     }
     
     public CreatePaymentLinkError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -131,15 +141,17 @@ public class CreatePaymentLinkError extends RuntimeException {
         return (Optional<PayoutDetailsError>) payout;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public CreatePaymentLinkError withPartnerAccountID(String partnerAccountID) {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         this.partnerAccountID = Optional.ofNullable(partnerAccountID);
         return this;
     }
+
 
     public CreatePaymentLinkError withPartnerAccountID(Optional<String> partnerAccountID) {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
@@ -153,6 +165,7 @@ public class CreatePaymentLinkError extends RuntimeException {
         return this;
     }
 
+
     public CreatePaymentLinkError withMerchantPaymentMethodID(Optional<String> merchantPaymentMethodID) {
         Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
         this.merchantPaymentMethodID = merchantPaymentMethodID;
@@ -164,6 +177,7 @@ public class CreatePaymentLinkError extends RuntimeException {
         this.amount = Optional.ofNullable(amount);
         return this;
     }
+
 
     public CreatePaymentLinkError withAmount(Optional<? extends AmountValidationError> amount) {
         Utils.checkNotNull(amount, "amount");
@@ -177,6 +191,7 @@ public class CreatePaymentLinkError extends RuntimeException {
         return this;
     }
 
+
     public CreatePaymentLinkError withMaxUses(Optional<String> maxUses) {
         Utils.checkNotNull(maxUses, "maxUses");
         this.maxUses = maxUses;
@@ -188,6 +203,7 @@ public class CreatePaymentLinkError extends RuntimeException {
         this.expiresOn = Optional.ofNullable(expiresOn);
         return this;
     }
+
 
     public CreatePaymentLinkError withExpiresOn(Optional<String> expiresOn) {
         Utils.checkNotNull(expiresOn, "expiresOn");
@@ -201,6 +217,7 @@ public class CreatePaymentLinkError extends RuntimeException {
         return this;
     }
 
+
     public CreatePaymentLinkError withDisplay(Optional<? extends DisplayOptionsError> display) {
         Utils.checkNotNull(display, "display");
         this.display = display;
@@ -212,6 +229,7 @@ public class CreatePaymentLinkError extends RuntimeException {
         this.payment = Optional.ofNullable(payment);
         return this;
     }
+
 
     public CreatePaymentLinkError withPayment(Optional<? extends PaymentDetailsError> payment) {
         Utils.checkNotNull(payment, "payment");
@@ -225,13 +243,13 @@ public class CreatePaymentLinkError extends RuntimeException {
         return this;
     }
 
+
     public CreatePaymentLinkError withPayout(Optional<? extends PayoutDetailsError> payout) {
         Utils.checkNotNull(payout, "payout");
         this.payout = payout;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -255,14 +273,9 @@ public class CreatePaymentLinkError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            partnerAccountID,
-            merchantPaymentMethodID,
-            amount,
-            maxUses,
-            expiresOn,
-            display,
-            payment,
-            payout);
+            partnerAccountID, merchantPaymentMethodID, amount,
+            maxUses, expiresOn, display,
+            payment, payout);
     }
     
     @Override
@@ -277,28 +290,30 @@ public class CreatePaymentLinkError extends RuntimeException {
                 "payment", payment,
                 "payout", payout);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> partnerAccountID = Optional.empty();
- 
+
         private Optional<String> merchantPaymentMethodID = Optional.empty();
- 
+
         private Optional<? extends AmountValidationError> amount = Optional.empty();
- 
+
         private Optional<String> maxUses = Optional.empty();
- 
+
         private Optional<String> expiresOn = Optional.empty();
- 
+
         private Optional<? extends DisplayOptionsError> display = Optional.empty();
- 
+
         private Optional<? extends PaymentDetailsError> payment = Optional.empty();
- 
+
         private Optional<? extends PayoutDetailsError> payout = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder partnerAccountID(String partnerAccountID) {
             Utils.checkNotNull(partnerAccountID, "partnerAccountID");
@@ -312,6 +327,7 @@ public class CreatePaymentLinkError extends RuntimeException {
             return this;
         }
 
+
         public Builder merchantPaymentMethodID(String merchantPaymentMethodID) {
             Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
             this.merchantPaymentMethodID = Optional.ofNullable(merchantPaymentMethodID);
@@ -323,6 +339,7 @@ public class CreatePaymentLinkError extends RuntimeException {
             this.merchantPaymentMethodID = merchantPaymentMethodID;
             return this;
         }
+
 
         public Builder amount(AmountValidationError amount) {
             Utils.checkNotNull(amount, "amount");
@@ -336,6 +353,7 @@ public class CreatePaymentLinkError extends RuntimeException {
             return this;
         }
 
+
         public Builder maxUses(String maxUses) {
             Utils.checkNotNull(maxUses, "maxUses");
             this.maxUses = Optional.ofNullable(maxUses);
@@ -347,6 +365,7 @@ public class CreatePaymentLinkError extends RuntimeException {
             this.maxUses = maxUses;
             return this;
         }
+
 
         public Builder expiresOn(String expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
@@ -360,6 +379,7 @@ public class CreatePaymentLinkError extends RuntimeException {
             return this;
         }
 
+
         public Builder display(DisplayOptionsError display) {
             Utils.checkNotNull(display, "display");
             this.display = Optional.ofNullable(display);
@@ -371,6 +391,7 @@ public class CreatePaymentLinkError extends RuntimeException {
             this.display = display;
             return this;
         }
+
 
         public Builder payment(PaymentDetailsError payment) {
             Utils.checkNotNull(payment, "payment");
@@ -384,6 +405,7 @@ public class CreatePaymentLinkError extends RuntimeException {
             return this;
         }
 
+
         public Builder payout(PayoutDetailsError payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = Optional.ofNullable(payout);
@@ -395,18 +417,15 @@ public class CreatePaymentLinkError extends RuntimeException {
             this.payout = payout;
             return this;
         }
-        
+
         public CreatePaymentLinkError build() {
+
             return new CreatePaymentLinkError(
-                partnerAccountID,
-                merchantPaymentMethodID,
-                amount,
-                maxUses,
-                expiresOn,
-                display,
-                payment,
-                payout);
+                partnerAccountID, merchantPaymentMethodID, amount,
+                maxUses, expiresOn, display,
+                payment, payout);
         }
+
     }
 }
 

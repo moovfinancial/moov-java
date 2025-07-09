@@ -16,6 +16,7 @@ import java.lang.SuppressWarnings;
 import java.util.Map;
 import java.util.Optional;
 
+
 public class BillableFee {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -41,6 +42,7 @@ public class BillableFee {
      */
     @JsonProperty("feeModel")
     private FeeModel feeModel;
+
 
     @JsonProperty("feeCategory")
     private FeeCategory feeCategory;
@@ -87,7 +89,9 @@ public class BillableFee {
     public BillableFee(
             FeeModel feeModel,
             FeeCategory feeCategory) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), feeModel, feeCategory, Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            feeModel, feeCategory, Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -142,15 +146,17 @@ public class BillableFee {
         return (Optional<Map<String, Object>>) feeConditions;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public BillableFee withBillableFeeID(String billableFeeID) {
         Utils.checkNotNull(billableFeeID, "billableFeeID");
         this.billableFeeID = Optional.ofNullable(billableFeeID);
         return this;
     }
+
 
     public BillableFee withBillableFeeID(Optional<String> billableFeeID) {
         Utils.checkNotNull(billableFeeID, "billableFeeID");
@@ -166,6 +172,7 @@ public class BillableFee {
         this.billableEvent = Optional.ofNullable(billableEvent);
         return this;
     }
+
 
     /**
      * A unique code identifying a charge.
@@ -184,6 +191,7 @@ public class BillableFee {
         this.feeName = Optional.ofNullable(feeName);
         return this;
     }
+
 
     /**
      * Specifies the name of the fee that will be billed.
@@ -218,6 +226,7 @@ public class BillableFee {
         return this;
     }
 
+
     /**
      * Defines the specific parameters used for fee calculation.
      */
@@ -236,6 +245,7 @@ public class BillableFee {
         return this;
     }
 
+
     /**
      * Defines the specific conditions that must be met for the fee to be applied.
      */
@@ -245,7 +255,6 @@ public class BillableFee {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -268,12 +277,8 @@ public class BillableFee {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            billableFeeID,
-            billableEvent,
-            feeName,
-            feeModel,
-            feeCategory,
-            feeProperties,
+            billableFeeID, billableEvent, feeName,
+            feeModel, feeCategory, feeProperties,
             feeConditions);
     }
     
@@ -288,26 +293,28 @@ public class BillableFee {
                 "feeProperties", feeProperties,
                 "feeConditions", feeConditions);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> billableFeeID = Optional.empty();
- 
+
         private Optional<String> billableEvent = Optional.empty();
- 
+
         private Optional<String> feeName = Optional.empty();
- 
+
         private FeeModel feeModel;
- 
+
         private FeeCategory feeCategory;
- 
+
         private Optional<? extends FeeProperties> feeProperties = Optional.empty();
- 
+
         private Optional<? extends Map<String, Object>> feeConditions = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder billableFeeID(String billableFeeID) {
             Utils.checkNotNull(billableFeeID, "billableFeeID");
@@ -320,6 +327,7 @@ public class BillableFee {
             this.billableFeeID = billableFeeID;
             return this;
         }
+
 
         /**
          * A unique code identifying a charge.
@@ -339,6 +347,7 @@ public class BillableFee {
             return this;
         }
 
+
         /**
          * Specifies the name of the fee that will be billed.
          */
@@ -357,6 +366,7 @@ public class BillableFee {
             return this;
         }
 
+
         /**
          * Specifies the pricing model used for the calculation of the final fee.
          */
@@ -366,11 +376,13 @@ public class BillableFee {
             return this;
         }
 
+
         public Builder feeCategory(FeeCategory feeCategory) {
             Utils.checkNotNull(feeCategory, "feeCategory");
             this.feeCategory = feeCategory;
             return this;
         }
+
 
         /**
          * Defines the specific parameters used for fee calculation.
@@ -390,6 +402,7 @@ public class BillableFee {
             return this;
         }
 
+
         /**
          * Defines the specific conditions that must be met for the fee to be applied.
          */
@@ -407,16 +420,14 @@ public class BillableFee {
             this.feeConditions = feeConditions;
             return this;
         }
-        
+
         public BillableFee build() {
+
             return new BillableFee(
-                billableFeeID,
-                billableEvent,
-                feeName,
-                feeModel,
-                feeCategory,
-                feeProperties,
+                billableFeeID, billableEvent, feeName,
+                feeModel, feeCategory, feeProperties,
                 feeConditions);
         }
+
     }
 }

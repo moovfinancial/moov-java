@@ -15,6 +15,7 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
+
 @SuppressWarnings("serial")
 public class FileValidationError extends RuntimeException {
 
@@ -22,13 +23,16 @@ public class FileValidationError extends RuntimeException {
     @JsonProperty("error")
     private Optional<String> error;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("file")
     private Optional<String> file;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filePurpose")
     private Optional<String> filePurpose;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadata")
@@ -52,7 +56,8 @@ public class FileValidationError extends RuntimeException {
     }
     
     public FileValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -75,15 +80,17 @@ public class FileValidationError extends RuntimeException {
         return metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FileValidationError withError(String error) {
         Utils.checkNotNull(error, "error");
         this.error = Optional.ofNullable(error);
         return this;
     }
+
 
     public FileValidationError withError(Optional<String> error) {
         Utils.checkNotNull(error, "error");
@@ -97,6 +104,7 @@ public class FileValidationError extends RuntimeException {
         return this;
     }
 
+
     public FileValidationError withFile(Optional<String> file) {
         Utils.checkNotNull(file, "file");
         this.file = file;
@@ -108,6 +116,7 @@ public class FileValidationError extends RuntimeException {
         this.filePurpose = Optional.ofNullable(filePurpose);
         return this;
     }
+
 
     public FileValidationError withFilePurpose(Optional<String> filePurpose) {
         Utils.checkNotNull(filePurpose, "filePurpose");
@@ -121,13 +130,13 @@ public class FileValidationError extends RuntimeException {
         return this;
     }
 
+
     public FileValidationError withMetadata(Optional<String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -147,9 +156,7 @@ public class FileValidationError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            error,
-            file,
-            filePurpose,
+            error, file, filePurpose,
             metadata);
     }
     
@@ -161,20 +168,22 @@ public class FileValidationError extends RuntimeException {
                 "filePurpose", filePurpose,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> error = Optional.empty();
- 
+
         private Optional<String> file = Optional.empty();
- 
+
         private Optional<String> filePurpose = Optional.empty();
- 
+
         private Optional<String> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder error(String error) {
             Utils.checkNotNull(error, "error");
@@ -188,6 +197,7 @@ public class FileValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder file(String file) {
             Utils.checkNotNull(file, "file");
             this.file = Optional.ofNullable(file);
@@ -199,6 +209,7 @@ public class FileValidationError extends RuntimeException {
             this.file = file;
             return this;
         }
+
 
         public Builder filePurpose(String filePurpose) {
             Utils.checkNotNull(filePurpose, "filePurpose");
@@ -212,6 +223,7 @@ public class FileValidationError extends RuntimeException {
             return this;
         }
 
+
         public Builder metadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -223,14 +235,14 @@ public class FileValidationError extends RuntimeException {
             this.metadata = metadata;
             return this;
         }
-        
+
         public FileValidationError build() {
+
             return new FileValidationError(
-                error,
-                file,
-                filePurpose,
+                error, file, filePurpose,
                 metadata);
         }
+
     }
 }
 

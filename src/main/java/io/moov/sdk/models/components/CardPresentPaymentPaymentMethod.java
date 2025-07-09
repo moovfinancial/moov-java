@@ -20,12 +20,12 @@ import java.util.Optional;
  * <p>A card used at point of sale terminal for a card present transaction as contained within a payment method.
  */
 public class CardPresentPaymentPaymentMethod implements PaymentMethod {
-
     /**
      * ID of the payment method.
      */
     @JsonProperty("paymentMethodID")
     private String paymentMethodID;
+
 
     @JsonProperty("paymentMethodType")
     private CardPresentPaymentPaymentMethodPaymentMethodType paymentMethodType;
@@ -79,9 +79,10 @@ public class CardPresentPaymentPaymentMethod implements PaymentMethod {
         return (Optional<TerminalCard>) terminalCard;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * ID of the payment method.
@@ -107,6 +108,7 @@ public class CardPresentPaymentPaymentMethod implements PaymentMethod {
         return this;
     }
 
+
     /**
      * Describes payment card details captured with tap or in-person payment.
      */
@@ -116,7 +118,6 @@ public class CardPresentPaymentPaymentMethod implements PaymentMethod {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -135,9 +136,7 @@ public class CardPresentPaymentPaymentMethod implements PaymentMethod {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentMethodID,
-            paymentMethodType,
-            terminalCard);
+            paymentMethodID, paymentMethodType, terminalCard);
     }
     
     @Override
@@ -147,18 +146,20 @@ public class CardPresentPaymentPaymentMethod implements PaymentMethod {
                 "paymentMethodType", paymentMethodType,
                 "terminalCard", terminalCard);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String paymentMethodID;
- 
+
         private CardPresentPaymentPaymentMethodPaymentMethodType paymentMethodType;
- 
+
         private Optional<? extends TerminalCard> terminalCard = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * ID of the payment method.
@@ -169,11 +170,13 @@ public class CardPresentPaymentPaymentMethod implements PaymentMethod {
             return this;
         }
 
+
         public Builder paymentMethodType(CardPresentPaymentPaymentMethodPaymentMethodType paymentMethodType) {
             Utils.checkNotNull(paymentMethodType, "paymentMethodType");
             this.paymentMethodType = paymentMethodType;
             return this;
         }
+
 
         /**
          * Describes payment card details captured with tap or in-person payment.
@@ -192,12 +195,12 @@ public class CardPresentPaymentPaymentMethod implements PaymentMethod {
             this.terminalCard = terminalCard;
             return this;
         }
-        
+
         public CardPresentPaymentPaymentMethod build() {
+
             return new CardPresentPaymentPaymentMethod(
-                paymentMethodID,
-                paymentMethodType,
-                terminalCard);
+                paymentMethodID, paymentMethodType, terminalCard);
         }
+
     }
 }

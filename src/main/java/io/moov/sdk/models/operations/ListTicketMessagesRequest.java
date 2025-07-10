@@ -7,21 +7,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Optional;
 
 
 public class ListTicketMessagesRequest {
-
-    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
-    private Optional<Long> skip;
-
-
-    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
-    private Optional<Long> count;
-
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
@@ -32,35 +22,12 @@ public class ListTicketMessagesRequest {
 
     @JsonCreator
     public ListTicketMessagesRequest(
-            Optional<Long> skip,
-            Optional<Long> count,
             String accountID,
             String ticketID) {
-        Utils.checkNotNull(skip, "skip");
-        Utils.checkNotNull(count, "count");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(ticketID, "ticketID");
-        this.skip = skip;
-        this.count = count;
         this.accountID = accountID;
         this.ticketID = ticketID;
-    }
-    
-    public ListTicketMessagesRequest(
-            String accountID,
-            String ticketID) {
-        this(Optional.empty(), Optional.empty(), accountID,
-            ticketID);
-    }
-
-    @JsonIgnore
-    public Optional<Long> skip() {
-        return skip;
-    }
-
-    @JsonIgnore
-    public Optional<Long> count() {
-        return count;
     }
 
     @JsonIgnore
@@ -77,32 +44,6 @@ public class ListTicketMessagesRequest {
         return new Builder();
     }
 
-
-    public ListTicketMessagesRequest withSkip(long skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = Optional.ofNullable(skip);
-        return this;
-    }
-
-
-    public ListTicketMessagesRequest withSkip(Optional<Long> skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = skip;
-        return this;
-    }
-
-    public ListTicketMessagesRequest withCount(long count) {
-        Utils.checkNotNull(count, "count");
-        this.count = Optional.ofNullable(count);
-        return this;
-    }
-
-
-    public ListTicketMessagesRequest withCount(Optional<Long> count) {
-        Utils.checkNotNull(count, "count");
-        this.count = count;
-        return this;
-    }
 
     public ListTicketMessagesRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -126,8 +67,6 @@ public class ListTicketMessagesRequest {
         }
         ListTicketMessagesRequest other = (ListTicketMessagesRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.skip, other.skip) &&
-            Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.ticketID, other.ticketID);
     }
@@ -135,15 +74,12 @@ public class ListTicketMessagesRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            skip, count, accountID,
-            ticketID);
+            accountID, ticketID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ListTicketMessagesRequest.class,
-                "skip", skip,
-                "count", count,
                 "accountID", accountID,
                 "ticketID", ticketID);
     }
@@ -151,42 +87,12 @@ public class ListTicketMessagesRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Long> skip = Optional.empty();
-
-        private Optional<Long> count = Optional.empty();
-
         private String accountID;
 
         private String ticketID;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        public Builder skip(long skip) {
-            Utils.checkNotNull(skip, "skip");
-            this.skip = Optional.ofNullable(skip);
-            return this;
-        }
-
-        public Builder skip(Optional<Long> skip) {
-            Utils.checkNotNull(skip, "skip");
-            this.skip = skip;
-            return this;
-        }
-
-
-        public Builder count(long count) {
-            Utils.checkNotNull(count, "count");
-            this.count = Optional.ofNullable(count);
-            return this;
-        }
-
-        public Builder count(Optional<Long> count) {
-            Utils.checkNotNull(count, "count");
-            this.count = count;
-            return this;
         }
 
 
@@ -206,8 +112,7 @@ public class ListTicketMessagesRequest {
         public ListTicketMessagesRequest build() {
 
             return new ListTicketMessagesRequest(
-                skip, count, accountID,
-                ticketID);
+                accountID, ticketID);
         }
 
     }

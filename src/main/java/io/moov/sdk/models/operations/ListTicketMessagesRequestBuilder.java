@@ -9,44 +9,16 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListTicketMessagesOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.Long;
 import java.lang.String;
-import java.util.Optional;
 
 public class ListTicketMessagesRequestBuilder {
 
-    private Optional<Long> skip = Optional.empty();
-    private Optional<Long> count = Optional.empty();
     private String accountID;
     private String ticketID;
     private final SDKConfiguration sdkConfiguration;
 
     public ListTicketMessagesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
-    }
-                
-    public ListTicketMessagesRequestBuilder skip(long skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = Optional.of(skip);
-        return this;
-    }
-
-    public ListTicketMessagesRequestBuilder skip(Optional<Long> skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = skip;
-        return this;
-    }
-                
-    public ListTicketMessagesRequestBuilder count(long count) {
-        Utils.checkNotNull(count, "count");
-        this.count = Optional.of(count);
-        return this;
-    }
-
-    public ListTicketMessagesRequestBuilder count(Optional<Long> count) {
-        Utils.checkNotNull(count, "count");
-        this.count = count;
-        return this;
     }
 
     public ListTicketMessagesRequestBuilder accountID(String accountID) {
@@ -64,9 +36,7 @@ public class ListTicketMessagesRequestBuilder {
 
     private ListTicketMessagesRequest buildRequest() {
 
-        ListTicketMessagesRequest request = new ListTicketMessagesRequest(skip,
-            count,
-            accountID,
+        ListTicketMessagesRequest request = new ListTicketMessagesRequest(accountID,
             ticketID);
 
         return request;

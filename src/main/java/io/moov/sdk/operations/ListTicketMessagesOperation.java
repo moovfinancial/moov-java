@@ -48,11 +48,6 @@ public class ListTicketMessagesOperation implements RequestOperation<ListTicketM
         req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
-        req.addQueryParams(Utils.getQueryParams(
-                ListTicketMessagesRequest.class,
-                request, 
-                this.sdkConfiguration.globals));
         req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
         
         Optional<SecuritySource> hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());

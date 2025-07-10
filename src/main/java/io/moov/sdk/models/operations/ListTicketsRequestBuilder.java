@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class ListTicketsRequestBuilder {
 
-    private Optional<Long> skip = Optional.empty();
+    private Optional<String> cursor = Optional.empty();
     private Optional<Long> count = Optional.empty();
     private String accountID;
     private final SDKConfiguration sdkConfiguration;
@@ -24,15 +24,15 @@ public class ListTicketsRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
                 
-    public ListTicketsRequestBuilder skip(long skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = Optional.of(skip);
+    public ListTicketsRequestBuilder cursor(String cursor) {
+        Utils.checkNotNull(cursor, "cursor");
+        this.cursor = Optional.of(cursor);
         return this;
     }
 
-    public ListTicketsRequestBuilder skip(Optional<Long> skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = skip;
+    public ListTicketsRequestBuilder cursor(Optional<String> cursor) {
+        Utils.checkNotNull(cursor, "cursor");
+        this.cursor = cursor;
         return this;
     }
                 
@@ -57,7 +57,7 @@ public class ListTicketsRequestBuilder {
 
     private ListTicketsRequest buildRequest() {
 
-        ListTicketsRequest request = new ListTicketsRequest(skip,
+        ListTicketsRequest request = new ListTicketsRequest(cursor,
             count,
             accountID);
 

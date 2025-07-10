@@ -8,30 +8,30 @@
 * [createTicket](#createticket) - Create a support ticket for a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 * [listTickets](#listtickets) - List all the support tickets created under a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 * [getTicket](#getticket) - Retrieve a support ticket by ID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 * [updateTicket](#updateticket) - Updates a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 * [listTicketMessages](#listticketmessages) - List all the messages for a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ## createTicket
 
 Create a support ticket for a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
 ### Example Usage
 
@@ -99,7 +99,7 @@ public class Application {
 List all the support tickets created under a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ### Example Usage
 
@@ -124,7 +124,6 @@ public class Application {
             .build();
 
         ListTicketsResponse res = sdk.support().listTickets()
-                .skip(60L)
                 .count(20L)
                 .accountID("8ef75c13-2a50-4438-b294-2a850eb4986d")
                 .call();
@@ -138,11 +137,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter          | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `skip`             | *Optional\<Long>*  | :heavy_minus_sign: | N/A                | 60                 |
-| `count`            | *Optional\<Long>*  | :heavy_minus_sign: | N/A                | 20                 |
-| `accountID`        | *String*           | :heavy_check_mark: | N/A                |                    |
+| Parameter           | Type                | Required            | Description         | Example             |
+| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `cursor`            | *Optional\<String>* | :heavy_minus_sign:  | N/A                 |                     |
+| `count`             | *Optional\<Long>*   | :heavy_minus_sign:  | N/A                 | 20                  |
+| `accountID`         | *String*            | :heavy_check_mark:  | N/A                 |                     |
 
 ### Response
 
@@ -159,7 +158,7 @@ public class Application {
 Retrieve a support ticket by ID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ### Example Usage
 
@@ -217,7 +216,7 @@ public class Application {
 Updates a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
 ### Example Usage
 
@@ -283,7 +282,7 @@ public class Application {
 List all the messages for a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ### Example Usage
 
@@ -308,8 +307,6 @@ public class Application {
             .build();
 
         ListTicketMessagesResponse res = sdk.support().listTicketMessages()
-                .skip(60L)
-                .count(20L)
                 .accountID("72444918-8529-4986-b10c-41817e45d09e")
                 .ticketID("edeaab65-c54c-45b8-881b-19138f125fb1")
                 .call();
@@ -323,12 +320,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter          | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `skip`             | *Optional\<Long>*  | :heavy_minus_sign: | N/A                | 60                 |
-| `count`            | *Optional\<Long>*  | :heavy_minus_sign: | N/A                | 20                 |
-| `accountID`        | *String*           | :heavy_check_mark: | N/A                |                    |
-| `ticketID`         | *String*           | :heavy_check_mark: | N/A                |                    |
+| Parameter          | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
+| `ticketID`         | *String*           | :heavy_check_mark: | N/A                |
 
 ### Response
 

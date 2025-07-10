@@ -44,7 +44,7 @@ public class Support {
      * Create a support ticket for a Moov account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
      * 
      * @return The call builder
      */
@@ -56,7 +56,7 @@ public class Support {
      * Create a support ticket for a Moov account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
      * 
      * @param accountID 
      * @param createTicket Request to create a new support ticket.
@@ -81,7 +81,7 @@ public class Support {
      * List all the support tickets created under a Moov account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * @return The call builder
      */
@@ -93,7 +93,7 @@ public class Support {
      * List all the support tickets created under a Moov account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * @param accountID 
      * @return The response from the API call
@@ -107,22 +107,22 @@ public class Support {
      * List all the support tickets created under a Moov account.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
-     * @param skip 
+     * @param cursor 
      * @param count 
      * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public ListTicketsResponse listTickets(
-            Optional<Long> skip,
+            Optional<String> cursor,
             Optional<Long> count,
             String accountID) throws Exception {
         ListTicketsRequest request =
             ListTicketsRequest
                 .builder()
-                .skip(skip)
+                .cursor(cursor)
                 .count(count)
                 .accountID(accountID)
                 .build();
@@ -135,7 +135,7 @@ public class Support {
      * Retrieve a support ticket by ID.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * @return The call builder
      */
@@ -147,7 +147,7 @@ public class Support {
      * Retrieve a support ticket by ID.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * @param accountID 
      * @param ticketID 
@@ -172,7 +172,7 @@ public class Support {
      * Updates a support ticket.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
      * 
      * @return The call builder
      */
@@ -184,7 +184,7 @@ public class Support {
      * Updates a support ticket.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.write` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
      * 
      * @param accountID 
      * @param ticketID 
@@ -212,7 +212,7 @@ public class Support {
      * List all the messages for a support ticket.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * @return The call builder
      */
@@ -224,7 +224,7 @@ public class Support {
      * List all the messages for a support ticket.
      * 
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.read` scope.
+     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * @param accountID 
      * @param ticketID 
@@ -232,35 +232,11 @@ public class Support {
      * @throws Exception if the API call fails
      */
     public ListTicketMessagesResponse listTicketMessages(
-            String accountID,
-            String ticketID) throws Exception {
-        return listTicketMessages(Optional.empty(), Optional.empty(), accountID,
-            ticketID);
-    }
-
-    /**
-     * List all the messages for a support ticket.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/support.read` scope.
-     * 
-     * @param skip 
-     * @param count 
-     * @param accountID 
-     * @param ticketID 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ListTicketMessagesResponse listTicketMessages(
-            Optional<Long> skip,
-            Optional<Long> count,
             String accountID,
             String ticketID) throws Exception {
         ListTicketMessagesRequest request =
             ListTicketMessagesRequest
                 .builder()
-                .skip(skip)
-                .count(count)
                 .accountID(accountID)
                 .ticketID(ticketID)
                 .build();

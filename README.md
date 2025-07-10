@@ -28,6 +28,7 @@ works at a high level, read our [concepts](https://docs.moov.io/guides/get-start
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
+  * [Debugging](#debugging)
 * [Development](#development)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
@@ -45,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.21.0'
+implementation 'io.moov:sdk:0.22.0'
 ```
 
 Maven:
@@ -53,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.21.0</version>
+    <version>0.22.0</version>
 </dependency>
 ```
 
@@ -70,33 +71,6 @@ On Windows:
 ```bash
 gradlew.bat publishToMavenLocal -Pskip.signing
 ```
-
-### Logging
-A logging framework/facade has not yet been adopted but is under consideration.
-
-For request and response logging (especially json bodies), call `enableHTTPDebugLogging(boolean)` on the SDK builder like so:
-```java
-SDK.builder()
-    .enableHTTPDebugLogging(true)
-    .build();
-```
-Example output:
-```
-Sending request: http://localhost:35123/bearer#global GET
-Request headers: {Accept=[application/json], Authorization=[******], Client-Level-Header=[added by client], Idempotency-Key=[some-key], x-speakeasy-user-agent=[speakeasy-sdk/java 0.0.1 internal 0.1.0 org.openapis.openapi]}
-Received response: (GET http://localhost:35123/bearer#global) 200
-Response headers: {access-control-allow-credentials=[true], access-control-allow-origin=[*], connection=[keep-alive], content-length=[50], content-type=[application/json], date=[Wed, 09 Apr 2025 01:43:29 GMT], server=[gunicorn/19.9.0]}
-Response body:
-{
-  "authenticated": true, 
-  "token": "global"
-}
-```
-__WARNING__: This should only used for temporary debugging purposes. Leaving this option on in a production system could expose credentials/secrets in logs. <i>Authorization</i> headers are redacted by default and there is the ability to specify redacted header names via `SpeakeasyHTTPClient.setRedactedHeaders`.
-
-__NOTE__: This is a convenience method that calls `HTTPClient.enableDebugLogging()`. The `SpeakeasyHTTPClient` honors this setting. If you are using a custom HTTP client, it is up to the custom client to honor this setting.
-
-Another option is to set the System property `-Djdk.httpclient.HttpClient.log=all`. However, this second option does not log bodies.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -902,23 +876,23 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 * [createTicket](docs/sdks/support/README.md#createticket) - Create a support ticket for a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 * [listTickets](docs/sdks/support/README.md#listtickets) - List all the support tickets created under a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 * [getTicket](docs/sdks/support/README.md#getticket) - Retrieve a support ticket by ID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 * [updateTicket](docs/sdks/support/README.md#updateticket) - Updates a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 * [listTicketMessages](docs/sdks/support/README.md#listticketmessages) - List all the messages for a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ### [sweeps()](docs/sdks/sweeps/README.md)
 
@@ -1205,6 +1179,37 @@ public class Application {
 }
 ```
 <!-- End Server Selection [server] -->
+
+<!-- Start Debugging [debug] -->
+## Debugging
+
+### Debug
+You can setup your SDK to emit debug logs for SDK requests and responses.
+
+For request and response logging (especially json bodies), call `enableHTTPDebugLogging(boolean)` on the SDK builder like so:
+```java
+SDK.builder()
+    .enableHTTPDebugLogging(true)
+    .build();
+```
+Example output:
+```
+Sending request: http://localhost:35123/bearer#global GET
+Request headers: {Accept=[application/json], Authorization=[******], Client-Level-Header=[added by client], Idempotency-Key=[some-key], x-speakeasy-user-agent=[speakeasy-sdk/java 0.0.1 internal 0.1.0 org.openapis.openapi]}
+Received response: (GET http://localhost:35123/bearer#global) 200
+Response headers: {access-control-allow-credentials=[true], access-control-allow-origin=[*], connection=[keep-alive], content-length=[50], content-type=[application/json], date=[Wed, 09 Apr 2025 01:43:29 GMT], server=[gunicorn/19.9.0]}
+Response body:
+{
+  "authenticated": true, 
+  "token": "global"
+}
+```
+__WARNING__: This should only used for temporary debugging purposes. Leaving this option on in a production system could expose credentials/secrets in logs. <i>Authorization</i> headers are redacted by default and there is the ability to specify redacted header names via `SpeakeasyHTTPClient.setRedactedHeaders`.
+
+__NOTE__: This is a convenience method that calls `HTTPClient.enableDebugLogging()`. The `SpeakeasyHTTPClient` honors this setting. If you are using a custom HTTP client, it is up to the custom client to honor this setting.
+
+Another option is to set the System property `-Djdk.httpclient.HttpClient.log=all`. However, this second option does not log bodies.
+<!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

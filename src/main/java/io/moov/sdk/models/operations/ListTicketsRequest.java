@@ -15,8 +15,8 @@ import java.util.Optional;
 
 public class ListTicketsRequest {
 
-    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
-    private Optional<Long> skip;
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=cursor")
+    private Optional<String> cursor;
 
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
@@ -28,13 +28,13 @@ public class ListTicketsRequest {
 
     @JsonCreator
     public ListTicketsRequest(
-            Optional<Long> skip,
+            Optional<String> cursor,
             Optional<Long> count,
             String accountID) {
-        Utils.checkNotNull(skip, "skip");
+        Utils.checkNotNull(cursor, "cursor");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(accountID, "accountID");
-        this.skip = skip;
+        this.cursor = cursor;
         this.count = count;
         this.accountID = accountID;
     }
@@ -45,8 +45,8 @@ public class ListTicketsRequest {
     }
 
     @JsonIgnore
-    public Optional<Long> skip() {
-        return skip;
+    public Optional<String> cursor() {
+        return cursor;
     }
 
     @JsonIgnore
@@ -64,16 +64,16 @@ public class ListTicketsRequest {
     }
 
 
-    public ListTicketsRequest withSkip(long skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = Optional.ofNullable(skip);
+    public ListTicketsRequest withCursor(String cursor) {
+        Utils.checkNotNull(cursor, "cursor");
+        this.cursor = Optional.ofNullable(cursor);
         return this;
     }
 
 
-    public ListTicketsRequest withSkip(Optional<Long> skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = skip;
+    public ListTicketsRequest withCursor(Optional<String> cursor) {
+        Utils.checkNotNull(cursor, "cursor");
+        this.cursor = cursor;
         return this;
     }
 
@@ -106,7 +106,7 @@ public class ListTicketsRequest {
         }
         ListTicketsRequest other = (ListTicketsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.cursor, other.cursor) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
@@ -114,13 +114,13 @@ public class ListTicketsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            skip, count, accountID);
+            cursor, count, accountID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ListTicketsRequest.class,
-                "skip", skip,
+                "cursor", cursor,
                 "count", count,
                 "accountID", accountID);
     }
@@ -128,7 +128,7 @@ public class ListTicketsRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Long> skip = Optional.empty();
+        private Optional<String> cursor = Optional.empty();
 
         private Optional<Long> count = Optional.empty();
 
@@ -139,15 +139,15 @@ public class ListTicketsRequest {
         }
 
 
-        public Builder skip(long skip) {
-            Utils.checkNotNull(skip, "skip");
-            this.skip = Optional.ofNullable(skip);
+        public Builder cursor(String cursor) {
+            Utils.checkNotNull(cursor, "cursor");
+            this.cursor = Optional.ofNullable(cursor);
             return this;
         }
 
-        public Builder skip(Optional<Long> skip) {
-            Utils.checkNotNull(skip, "skip");
-            this.skip = skip;
+        public Builder cursor(Optional<String> cursor) {
+            Utils.checkNotNull(cursor, "cursor");
+            this.cursor = cursor;
             return this;
         }
 
@@ -174,7 +174,7 @@ public class ListTicketsRequest {
         public ListTicketsRequest build() {
 
             return new ListTicketsRequest(
-                skip, count, accountID);
+                cursor, count, accountID);
         }
 
     }

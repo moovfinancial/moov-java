@@ -90,6 +90,20 @@ public class TerminalCard {
     @JsonProperty("lastFourCardNumber")
     private Optional<String> lastFourCardNumber;
 
+    /**
+     * Identifier for the point of sale terminal application.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("applicationID")
+    private Optional<String> applicationID;
+
+    /**
+     * Name label for the point of sale terminal application.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("applicationName")
+    private Optional<String> applicationName;
+
     @JsonCreator
     public TerminalCard(
             @JsonProperty("entryMode") Optional<? extends EntryMode> entryMode,
@@ -101,7 +115,9 @@ public class TerminalCard {
             @JsonProperty("holderName") Optional<String> holderName,
             @JsonProperty("issuer") Optional<String> issuer,
             @JsonProperty("issuerCountry") Optional<String> issuerCountry,
-            @JsonProperty("lastFourCardNumber") Optional<String> lastFourCardNumber) {
+            @JsonProperty("lastFourCardNumber") Optional<String> lastFourCardNumber,
+            @JsonProperty("applicationID") Optional<String> applicationID,
+            @JsonProperty("applicationName") Optional<String> applicationName) {
         Utils.checkNotNull(entryMode, "entryMode");
         Utils.checkNotNull(brand, "brand");
         Utils.checkNotNull(bin, "bin");
@@ -112,6 +128,8 @@ public class TerminalCard {
         Utils.checkNotNull(issuer, "issuer");
         Utils.checkNotNull(issuerCountry, "issuerCountry");
         Utils.checkNotNull(lastFourCardNumber, "lastFourCardNumber");
+        Utils.checkNotNull(applicationID, "applicationID");
+        Utils.checkNotNull(applicationName, "applicationName");
         this.entryMode = entryMode;
         this.brand = brand;
         this.bin = bin;
@@ -122,13 +140,15 @@ public class TerminalCard {
         this.issuer = issuer;
         this.issuerCountry = issuerCountry;
         this.lastFourCardNumber = lastFourCardNumber;
+        this.applicationID = applicationID;
+        this.applicationName = applicationName;
     }
     
     public TerminalCard() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -212,6 +232,22 @@ public class TerminalCard {
     @JsonIgnore
     public Optional<String> lastFourCardNumber() {
         return lastFourCardNumber;
+    }
+
+    /**
+     * Identifier for the point of sale terminal application.
+     */
+    @JsonIgnore
+    public Optional<String> applicationID() {
+        return applicationID;
+    }
+
+    /**
+     * Name label for the point of sale terminal application.
+     */
+    @JsonIgnore
+    public Optional<String> applicationName() {
+        return applicationName;
     }
 
     public static Builder builder() {
@@ -407,6 +443,44 @@ public class TerminalCard {
         return this;
     }
 
+    /**
+     * Identifier for the point of sale terminal application.
+     */
+    public TerminalCard withApplicationID(String applicationID) {
+        Utils.checkNotNull(applicationID, "applicationID");
+        this.applicationID = Optional.ofNullable(applicationID);
+        return this;
+    }
+
+
+    /**
+     * Identifier for the point of sale terminal application.
+     */
+    public TerminalCard withApplicationID(Optional<String> applicationID) {
+        Utils.checkNotNull(applicationID, "applicationID");
+        this.applicationID = applicationID;
+        return this;
+    }
+
+    /**
+     * Name label for the point of sale terminal application.
+     */
+    public TerminalCard withApplicationName(String applicationName) {
+        Utils.checkNotNull(applicationName, "applicationName");
+        this.applicationName = Optional.ofNullable(applicationName);
+        return this;
+    }
+
+
+    /**
+     * Name label for the point of sale terminal application.
+     */
+    public TerminalCard withApplicationName(Optional<String> applicationName) {
+        Utils.checkNotNull(applicationName, "applicationName");
+        this.applicationName = applicationName;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -426,7 +500,9 @@ public class TerminalCard {
             Utils.enhancedDeepEquals(this.holderName, other.holderName) &&
             Utils.enhancedDeepEquals(this.issuer, other.issuer) &&
             Utils.enhancedDeepEquals(this.issuerCountry, other.issuerCountry) &&
-            Utils.enhancedDeepEquals(this.lastFourCardNumber, other.lastFourCardNumber);
+            Utils.enhancedDeepEquals(this.lastFourCardNumber, other.lastFourCardNumber) &&
+            Utils.enhancedDeepEquals(this.applicationID, other.applicationID) &&
+            Utils.enhancedDeepEquals(this.applicationName, other.applicationName);
     }
     
     @Override
@@ -435,7 +511,7 @@ public class TerminalCard {
             entryMode, brand, bin,
             cardType, expiration, fingerprint,
             holderName, issuer, issuerCountry,
-            lastFourCardNumber);
+            lastFourCardNumber, applicationID, applicationName);
     }
     
     @Override
@@ -450,7 +526,9 @@ public class TerminalCard {
                 "holderName", holderName,
                 "issuer", issuer,
                 "issuerCountry", issuerCountry,
-                "lastFourCardNumber", lastFourCardNumber);
+                "lastFourCardNumber", lastFourCardNumber,
+                "applicationID", applicationID,
+                "applicationName", applicationName);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -475,6 +553,10 @@ public class TerminalCard {
         private Optional<String> issuerCountry = Optional.empty();
 
         private Optional<String> lastFourCardNumber = Optional.empty();
+
+        private Optional<String> applicationID = Optional.empty();
+
+        private Optional<String> applicationName = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -668,13 +750,51 @@ public class TerminalCard {
             return this;
         }
 
+
+        /**
+         * Identifier for the point of sale terminal application.
+         */
+        public Builder applicationID(String applicationID) {
+            Utils.checkNotNull(applicationID, "applicationID");
+            this.applicationID = Optional.ofNullable(applicationID);
+            return this;
+        }
+
+        /**
+         * Identifier for the point of sale terminal application.
+         */
+        public Builder applicationID(Optional<String> applicationID) {
+            Utils.checkNotNull(applicationID, "applicationID");
+            this.applicationID = applicationID;
+            return this;
+        }
+
+
+        /**
+         * Name label for the point of sale terminal application.
+         */
+        public Builder applicationName(String applicationName) {
+            Utils.checkNotNull(applicationName, "applicationName");
+            this.applicationName = Optional.ofNullable(applicationName);
+            return this;
+        }
+
+        /**
+         * Name label for the point of sale terminal application.
+         */
+        public Builder applicationName(Optional<String> applicationName) {
+            Utils.checkNotNull(applicationName, "applicationName");
+            this.applicationName = applicationName;
+            return this;
+        }
+
         public TerminalCard build() {
 
             return new TerminalCard(
                 entryMode, brand, bin,
                 cardType, expiration, fingerprint,
                 holderName, issuer, issuerCountry,
-                lastFourCardNumber);
+                lastFourCardNumber, applicationID, applicationName);
         }
 
     }

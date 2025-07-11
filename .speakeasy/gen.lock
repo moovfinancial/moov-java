@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 81650e785eaee7a6cfc41b36de435f19
+  docChecksum: 07a9b652dcde386714743ccb19537611
   docVersion: latest
-  speakeasyVersion: 1.580.1
-  generationVersion: 2.656.3
-  releaseVersion: 0.22.0
-  configChecksum: bd9b39053c51dce3f5703dec5f5c682f
+  speakeasyVersion: 1.580.2
+  generationVersion: 2.656.5
+  releaseVersion: 0.22.1
+  configChecksum: 2500878a6a9434b7662094855ae13d1c
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -610,8 +610,7 @@ generatedFiles:
   - docs/models/operations/CreateTerminalApplicationResponse.md
   - docs/models/operations/CreateTicketRequest.md
   - docs/models/operations/CreateTicketResponse.md
-  - docs/models/operations/CreateTransferOptionsForAccountRequest.md
-  - docs/models/operations/CreateTransferOptionsForAccountResponse.md
+  - docs/models/operations/CreateTransferOptionsRequest.md
   - docs/models/operations/CreateTransferOptionsResponse.md
   - docs/models/operations/CreateTransferRequest.md
   - docs/models/operations/CreateTransferResponse.md
@@ -1532,9 +1531,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/CreateTicketRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreateTicketRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateTicketResponse.java
-  - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsForAccountRequest.java
-  - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsForAccountRequestBuilder.java
-  - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsForAccountResponse.java
+  - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateTransferOptionsResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreateTransferRequest.java
@@ -1920,7 +1917,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/CreateTerminalApplicationOperation.java
   - src/main/java/io/moov/sdk/operations/CreateTicketOperation.java
   - src/main/java/io/moov/sdk/operations/CreateTransferOperation.java
-  - src/main/java/io/moov/sdk/operations/CreateTransferOptionsForAccountOperation.java
   - src/main/java/io/moov/sdk/operations/CreateTransferOptionsOperation.java
   - src/main/java/io/moov/sdk/operations/DeleteDisputeEvidenceFileOperation.java
   - src/main/java/io/moov/sdk/operations/DeleteRepresentativeOperation.java
@@ -3566,6 +3562,8 @@ examples:
   createTransferOptions:
     speakeasy-default-create-transfer-options:
       parameters:
+        path:
+          accountID: "deafe3cf-31d4-4dcc-8176-3d6bf8bb4f04"
         header:
           x-moov-version: "v2024.01.00"
       requestBody:

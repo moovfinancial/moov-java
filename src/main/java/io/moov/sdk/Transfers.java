@@ -5,12 +5,10 @@ package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
-import io.moov.sdk.models.components.Amount;
 import io.moov.sdk.models.components.CreateReversal;
 import io.moov.sdk.models.components.CreateTransfer;
 import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.models.components.PatchTransfer;
-import io.moov.sdk.models.components.SourceDestinationOptions;
 import io.moov.sdk.models.components.TransferWaitFor;
 import io.moov.sdk.models.operations.CreateCancellationRequest;
 import io.moov.sdk.models.operations.CreateCancellationRequestBuilder;
@@ -18,9 +16,7 @@ import io.moov.sdk.models.operations.CreateCancellationResponse;
 import io.moov.sdk.models.operations.CreateReversalRequest;
 import io.moov.sdk.models.operations.CreateReversalRequestBuilder;
 import io.moov.sdk.models.operations.CreateReversalResponse;
-import io.moov.sdk.models.operations.CreateTransferOptionsForAccountRequest;
-import io.moov.sdk.models.operations.CreateTransferOptionsForAccountRequestBuilder;
-import io.moov.sdk.models.operations.CreateTransferOptionsForAccountResponse;
+import io.moov.sdk.models.operations.CreateTransferOptionsRequest;
 import io.moov.sdk.models.operations.CreateTransferOptionsRequestBuilder;
 import io.moov.sdk.models.operations.CreateTransferOptionsResponse;
 import io.moov.sdk.models.operations.CreateTransferRequest;
@@ -50,7 +46,6 @@ import io.moov.sdk.models.operations.UpdateTransferResponse;
 import io.moov.sdk.operations.CreateCancellationOperation;
 import io.moov.sdk.operations.CreateReversalOperation;
 import io.moov.sdk.operations.CreateTransferOperation;
-import io.moov.sdk.operations.CreateTransferOptionsForAccountOperation;
 import io.moov.sdk.operations.CreateTransferOptionsOperation;
 import io.moov.sdk.operations.GetCancellationOperation;
 import io.moov.sdk.operations.GetRefundOperation;
@@ -84,8 +79,8 @@ public class Transfers {
      * 
      * @return The call builder
      */
-    public CreateTransferOptionsForAccountRequestBuilder generateOptionsForAccount() {
-        return new CreateTransferOptionsForAccountRequestBuilder(sdkConfiguration);
+    public CreateTransferOptionsRequestBuilder generateOptions() {
+        return new CreateTransferOptionsRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -104,17 +99,17 @@ public class Transfers {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateTransferOptionsForAccountResponse generateOptionsForAccount(
+    public CreateTransferOptionsResponse generateOptions(
             String accountID,
             CreateTransferOptions createTransferOptions) throws Exception {
-        CreateTransferOptionsForAccountRequest request =
-            CreateTransferOptionsForAccountRequest
+        CreateTransferOptionsRequest request =
+            CreateTransferOptionsRequest
                 .builder()
                 .accountID(accountID)
                 .createTransferOptions(createTransferOptions)
                 .build();
-        RequestOperation<CreateTransferOptionsForAccountRequest, CreateTransferOptionsForAccountResponse> operation
-              = new CreateTransferOptionsForAccountOperation(sdkConfiguration);
+        RequestOperation<CreateTransferOptionsRequest, CreateTransferOptionsResponse> operation
+              = new CreateTransferOptionsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -570,52 +565,6 @@ public class Transfers {
                 .build();
         RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
               = new CreateReversalOperation(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
-     * supply in the request. 
-     * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @return The call builder
-     */
-    public CreateTransferOptionsRequestBuilder generateOptions() {
-        return new CreateTransferOptionsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
-     * supply in the request. 
-     * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-     * 
-     * @param source 
-     * @param destination 
-     * @param amount 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public CreateTransferOptionsResponse generateOptions(
-            SourceDestinationOptions source,
-            SourceDestinationOptions destination,
-            Amount amount) throws Exception {
-        CreateTransferOptions request =
-            CreateTransferOptions
-                .builder()
-                .source(source)
-                .destination(destination)
-                .amount(amount)
-                .build();
-        RequestOperation<CreateTransferOptions, CreateTransferOptionsResponse> operation
-              = new CreateTransferOptionsOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

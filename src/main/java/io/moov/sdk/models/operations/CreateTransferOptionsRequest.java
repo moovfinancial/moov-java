@@ -12,7 +12,7 @@ import java.lang.Override;
 import java.lang.String;
 
 
-public class CreateTransferOptionsForAccountRequest {
+public class CreateTransferOptionsRequest {
     /**
      * The partner's Moov account ID.
      */
@@ -24,7 +24,7 @@ public class CreateTransferOptionsForAccountRequest {
     private CreateTransferOptions createTransferOptions;
 
     @JsonCreator
-    public CreateTransferOptionsForAccountRequest(
+    public CreateTransferOptionsRequest(
             String accountID,
             CreateTransferOptions createTransferOptions) {
         Utils.checkNotNull(accountID, "accountID");
@@ -54,13 +54,13 @@ public class CreateTransferOptionsForAccountRequest {
     /**
      * The partner's Moov account ID.
      */
-    public CreateTransferOptionsForAccountRequest withAccountID(String accountID) {
+    public CreateTransferOptionsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
-    public CreateTransferOptionsForAccountRequest withCreateTransferOptions(CreateTransferOptions createTransferOptions) {
+    public CreateTransferOptionsRequest withCreateTransferOptions(CreateTransferOptions createTransferOptions) {
         Utils.checkNotNull(createTransferOptions, "createTransferOptions");
         this.createTransferOptions = createTransferOptions;
         return this;
@@ -74,7 +74,7 @@ public class CreateTransferOptionsForAccountRequest {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateTransferOptionsForAccountRequest other = (CreateTransferOptionsForAccountRequest) o;
+        CreateTransferOptionsRequest other = (CreateTransferOptionsRequest) o;
         return 
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.createTransferOptions, other.createTransferOptions);
@@ -88,7 +88,7 @@ public class CreateTransferOptionsForAccountRequest {
     
     @Override
     public String toString() {
-        return Utils.toString(CreateTransferOptionsForAccountRequest.class,
+        return Utils.toString(CreateTransferOptionsRequest.class,
                 "accountID", accountID,
                 "createTransferOptions", createTransferOptions);
     }
@@ -121,9 +121,9 @@ public class CreateTransferOptionsForAccountRequest {
             return this;
         }
 
-        public CreateTransferOptionsForAccountRequest build() {
+        public CreateTransferOptionsRequest build() {
 
-            return new CreateTransferOptionsForAccountRequest(
+            return new CreateTransferOptionsRequest(
                 accountID, createTransferOptions);
         }
 

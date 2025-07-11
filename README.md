@@ -46,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.22.0'
+implementation 'io.moov:sdk:0.22.1'
 ```
 
 Maven:
@@ -54,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.22.0</version>
+    <version>0.22.1</version>
 </dependency>
 ```
 
@@ -942,7 +942,7 @@ you'll need to specify the `/terminal-applications.write` scope.
 
 ### [transfers()](docs/sdks/transfers/README.md)
 
-* [generateOptionsForAccount](docs/sdks/transfers/README.md#generateoptionsforaccount) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+* [generateOptions](docs/sdks/transfers/README.md#generateoptions) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
 supply in the request body.
 
 The accountID in the route should the partner's accountID.
@@ -1010,13 +1010,6 @@ to learn more.
 
 To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
 to specify the `/accounts/{accountID}/transfers.write` scope.
-* [generateOptions](docs/sdks/transfers/README.md#generateoptions) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
-supply in the request. 
-
-Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### [underwriting()](docs/sdks/underwriting/README.md)
 

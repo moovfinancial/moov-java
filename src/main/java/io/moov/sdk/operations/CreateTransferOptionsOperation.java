@@ -8,11 +8,11 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
-import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.models.components.TransferOptions;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.TransferOptionsValidationError;
+import io.moov.sdk.models.operations.CreateTransferOptionsRequest;
 import io.moov.sdk.models.operations.CreateTransferOptionsResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
@@ -31,7 +31,7 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-public class CreateTransferOptionsOperation implements RequestOperation<CreateTransferOptions, CreateTransferOptionsResponse> {
+public class CreateTransferOptionsOperation implements RequestOperation<CreateTransferOptionsRequest, CreateTransferOptionsResponse> {
     
     private final SDKConfiguration sdkConfiguration;
 
@@ -40,11 +40,13 @@ public class CreateTransferOptionsOperation implements RequestOperation<CreateTr
     }
     
     @Override
-    public HttpResponse<InputStream> doRequest(CreateTransferOptions request) throws Exception {
+    public HttpResponse<InputStream> doRequest(CreateTransferOptionsRequest request) throws Exception {
         String baseUrl = this.sdkConfiguration.serverUrl();
         String url = Utils.generateURL(
+                CreateTransferOptionsRequest.class,
                 baseUrl,
-                "/transfer-options");
+                "/accounts/{accountID}/transfer-options",
+                request, this.sdkConfiguration.globals);
         
         HTTPRequest req = new HTTPRequest(url, "POST");
         Object convertedRequest = Utils.convertToShape(
@@ -53,7 +55,7 @@ public class CreateTransferOptionsOperation implements RequestOperation<CreateTr
                 new TypeReference<Object>() {});
         SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                 convertedRequest, 
-                "request",
+                "createTransferOptions",
                 "json",
                 false);
         if (serializedRequestBody == null) {

@@ -5,7 +5,7 @@
 
 ### Available Operations
 
-* [generateOptionsForAccount](#generateoptionsforaccount) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+* [generateOptions](#generateoptions) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
 supply in the request body.
 
 The accountID in the route should the partner's accountID.
@@ -73,15 +73,8 @@ to learn more.
 
 To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
 to specify the `/accounts/{accountID}/transfers.write` scope.
-* [generateOptions](#generateoptions) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
-supply in the request. 
 
-Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-
-## generateOptionsForAccount
+## generateOptions
 
 Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
 supply in the request body.
@@ -102,7 +95,7 @@ import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.TransferOptionsValidationError;
-import io.moov.sdk.models.operations.CreateTransferOptionsForAccountResponse;
+import io.moov.sdk.models.operations.CreateTransferOptionsResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -117,8 +110,8 @@ public class Application {
                     .build())
             .build();
 
-        CreateTransferOptionsForAccountResponse res = sdk.transfers().generateOptionsForAccount()
-                .accountID("d00e90ff-48ce-48a8-b5e0-b7fd222c1b3a")
+        CreateTransferOptionsResponse res = sdk.transfers().generateOptions()
+                .accountID("deafe3cf-31d4-4dcc-8176-3d6bf8bb4f04")
                 .createTransferOptions(CreateTransferOptions.builder()
                     .source(SourceDestinationOptions.builder()
                         .build())
@@ -147,7 +140,7 @@ public class Application {
 
 ### Response
 
-**[CreateTransferOptionsForAccountResponse](../../models/operations/CreateTransferOptionsForAccountResponse.md)**
+**[CreateTransferOptionsResponse](../../models/operations/CreateTransferOptionsResponse.md)**
 
 ### Errors
 
@@ -819,75 +812,3 @@ public class Application {
 | models/errors/GenericError            | 400, 409                              | application/json                      |
 | models/errors/ReversalValidationError | 422                                   | application/json                      |
 | models/errors/APIException            | 4XX, 5XX                              | \*/\*                                 |
-
-## generateOptions
-
-Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
-supply in the request. 
-
-Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-
-### Example Usage
-
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.TransferOptionsValidationError;
-import io.moov.sdk.models.operations.CreateTransferOptionsResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, TransferOptionsValidationError, Exception {
-
-        Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
-                .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
-                    .build())
-            .build();
-
-        CreateTransferOptionsResponse res = sdk.transfers().generateOptions()
-                .source(SourceDestinationOptions.builder()
-                    .build())
-                .destination(SourceDestinationOptions.builder()
-                    .build())
-                .amount(Amount.builder()
-                    .currency("USD")
-                    .value(1204L)
-                    .build())
-                .call();
-
-        if (res.transferOptions().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `source`                                                                        | [SourceDestinationOptions](../../models/components/SourceDestinationOptions.md) | :heavy_check_mark:                                                              | N/A                                                                             |
-| `destination`                                                                   | [SourceDestinationOptions](../../models/components/SourceDestinationOptions.md) | :heavy_check_mark:                                                              | N/A                                                                             |
-| `amount`                                                                        | [Amount](../../models/components/Amount.md)                                     | :heavy_check_mark:                                                              | N/A                                                                             |
-
-### Response
-
-**[CreateTransferOptionsResponse](../../models/operations/CreateTransferOptionsResponse.md)**
-
-### Errors
-
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/GenericError                   | 400                                          | application/json                             |
-| models/errors/TransferOptionsValidationError | 422                                          | application/json                             |
-| models/errors/APIException                   | 4XX, 5XX                                     | \*/\*                                        |

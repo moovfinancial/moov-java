@@ -6,57 +6,48 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.models.components.Amount;
 import io.moov.sdk.models.components.CreateTransferOptions;
-import io.moov.sdk.models.components.SourceDestinationOptions;
 import io.moov.sdk.operations.CreateTransferOptionsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
+import java.lang.String;
 
 public class CreateTransferOptionsRequestBuilder {
 
-    private SourceDestinationOptions source;
-    private SourceDestinationOptions destination;
-    private Amount amount;
+    private String accountID;
+    private CreateTransferOptions createTransferOptions;
     private final SDKConfiguration sdkConfiguration;
 
     public CreateTransferOptionsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public CreateTransferOptionsRequestBuilder source(SourceDestinationOptions source) {
-        Utils.checkNotNull(source, "source");
-        this.source = source;
+    public CreateTransferOptionsRequestBuilder accountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
         return this;
     }
 
-    public CreateTransferOptionsRequestBuilder destination(SourceDestinationOptions destination) {
-        Utils.checkNotNull(destination, "destination");
-        this.destination = destination;
-        return this;
-    }
-
-    public CreateTransferOptionsRequestBuilder amount(Amount amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = amount;
+    public CreateTransferOptionsRequestBuilder createTransferOptions(CreateTransferOptions createTransferOptions) {
+        Utils.checkNotNull(createTransferOptions, "createTransferOptions");
+        this.createTransferOptions = createTransferOptions;
         return this;
     }
 
 
-    private CreateTransferOptions buildRequest() {
+    private CreateTransferOptionsRequest buildRequest() {
 
-        CreateTransferOptions request = new CreateTransferOptions(source,
-            destination,
-            amount);
+        CreateTransferOptionsRequest request = new CreateTransferOptionsRequest(accountID,
+            createTransferOptions);
 
         return request;
     }
 
     public CreateTransferOptionsResponse call() throws Exception {
         
-        RequestOperation<CreateTransferOptions, CreateTransferOptionsResponse> operation
+        RequestOperation<CreateTransferOptionsRequest, CreateTransferOptionsResponse> operation
               = new CreateTransferOptionsOperation(sdkConfiguration);
-        CreateTransferOptions request = buildRequest();
+        CreateTransferOptionsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

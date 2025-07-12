@@ -6,6 +6,7 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.CreateTicket;
+import io.moov.sdk.models.components.TicketStatus;
 import io.moov.sdk.models.components.UpdateTicket;
 import io.moov.sdk.models.operations.CreateTicketRequest;
 import io.moov.sdk.models.operations.CreateTicketRequestBuilder;
@@ -100,7 +101,8 @@ public class Support {
      * @throws Exception if the API call fails
      */
     public ListTicketsResponse listTickets(String accountID) throws Exception {
-        return listTickets(Optional.empty(), Optional.empty(), accountID);
+        return listTickets(Optional.empty(), Optional.empty(), Optional.empty(),
+            accountID);
     }
 
     /**
@@ -111,6 +113,7 @@ public class Support {
      * 
      * @param cursor 
      * @param count 
+     * @param status 
      * @param accountID 
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -118,12 +121,14 @@ public class Support {
     public ListTicketsResponse listTickets(
             Optional<String> cursor,
             Optional<Long> count,
+            Optional<? extends TicketStatus> status,
             String accountID) throws Exception {
         ListTicketsRequest request =
             ListTicketsRequest
                 .builder()
                 .cursor(cursor)
                 .count(count)
+                .status(status)
                 .accountID(accountID)
                 .build();
         RequestOperation<ListTicketsRequest, ListTicketsResponse> operation

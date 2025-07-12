@@ -8,10 +8,10 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
-import io.moov.sdk.models.components.Ticket;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.ListTicketsRequest;
 import io.moov.sdk.models.operations.ListTicketsResponse;
+import io.moov.sdk.models.operations.ListTicketsResponseBody;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
@@ -23,7 +23,6 @@ import java.lang.Exception;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -128,11 +127,11 @@ public class ListTicketsOperation implements RequestOperation<ListTicketsRequest
         if (Utils.statusCodeMatches(response.statusCode(), "200")) {
             res.withHeaders(response.headers().map());
             if (Utils.contentTypeMatches(contentType, "application/json")) {
-                List<Ticket> out = Utils.mapper().readValue(
+                ListTicketsResponseBody out = Utils.mapper().readValue(
                     response.body(),
                     new TypeReference<>() {
                     });
-                res.withTickets(out);
+                res.withObject(out);
                 return res;
             } else {
                 throw new APIException(

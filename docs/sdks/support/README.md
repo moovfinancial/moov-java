@@ -128,7 +128,7 @@ public class Application {
                 .accountID("8ef75c13-2a50-4438-b294-2a850eb4986d")
                 .call();
 
-        if (res.tickets().isPresent()) {
+        if (res.object().isPresent()) {
             // handle response
         }
     }
@@ -137,11 +137,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter           | Type                | Required            | Description         | Example             |
-| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `cursor`            | *Optional\<String>* | :heavy_minus_sign:  | N/A                 |                     |
-| `count`             | *Optional\<Long>*   | :heavy_minus_sign:  | N/A                 | 20                  |
-| `accountID`         | *String*            | :heavy_check_mark:  | N/A                 |                     |
+| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `cursor`                                                           | *Optional\<String>*                                                | :heavy_minus_sign:                                                 | N/A                                                                |                                                                    |
+| `count`                                                            | *Optional\<Long>*                                                  | :heavy_minus_sign:                                                 | N/A                                                                | 20                                                                 |
+| `status`                                                           | [Optional\<TicketStatus>](../../models/components/TicketStatus.md) | :heavy_minus_sign:                                                 | N/A                                                                |                                                                    |
+| `accountID`                                                        | *String*                                                           | :heavy_check_mark:                                                 | N/A                                                                |                                                                    |
 
 ### Response
 

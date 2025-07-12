@@ -5,11 +5,13 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.moov.sdk.models.components.TicketStatus;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
@@ -23,6 +25,10 @@ public class ListTicketsRequest {
     private Optional<Long> count;
 
 
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=status")
+    private Optional<? extends TicketStatus> status;
+
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
@@ -30,18 +36,22 @@ public class ListTicketsRequest {
     public ListTicketsRequest(
             Optional<String> cursor,
             Optional<Long> count,
+            Optional<? extends TicketStatus> status,
             String accountID) {
         Utils.checkNotNull(cursor, "cursor");
         Utils.checkNotNull(count, "count");
+        Utils.checkNotNull(status, "status");
         Utils.checkNotNull(accountID, "accountID");
         this.cursor = cursor;
         this.count = count;
+        this.status = status;
         this.accountID = accountID;
     }
     
     public ListTicketsRequest(
             String accountID) {
-        this(Optional.empty(), Optional.empty(), accountID);
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            accountID);
     }
 
     @JsonIgnore
@@ -52,6 +62,12 @@ public class ListTicketsRequest {
     @JsonIgnore
     public Optional<Long> count() {
         return count;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TicketStatus> status() {
+        return (Optional<TicketStatus>) status;
     }
 
     @JsonIgnore
@@ -90,6 +106,19 @@ public class ListTicketsRequest {
         return this;
     }
 
+    public ListTicketsRequest withStatus(TicketStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
+        return this;
+    }
+
+
+    public ListTicketsRequest withStatus(Optional<? extends TicketStatus> status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
+
     public ListTicketsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -108,13 +137,15 @@ public class ListTicketsRequest {
         return 
             Utils.enhancedDeepEquals(this.cursor, other.cursor) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            cursor, count, accountID);
+            cursor, count, status,
+            accountID);
     }
     
     @Override
@@ -122,6 +153,7 @@ public class ListTicketsRequest {
         return Utils.toString(ListTicketsRequest.class,
                 "cursor", cursor,
                 "count", count,
+                "status", status,
                 "accountID", accountID);
     }
 
@@ -131,6 +163,8 @@ public class ListTicketsRequest {
         private Optional<String> cursor = Optional.empty();
 
         private Optional<Long> count = Optional.empty();
+
+        private Optional<? extends TicketStatus> status = Optional.empty();
 
         private String accountID;
 
@@ -165,6 +199,19 @@ public class ListTicketsRequest {
         }
 
 
+        public Builder status(TicketStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
+            return this;
+        }
+
+        public Builder status(Optional<? extends TicketStatus> status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
+        }
+
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
@@ -174,7 +221,8 @@ public class ListTicketsRequest {
         public ListTicketsRequest build() {
 
             return new ListTicketsRequest(
-                cursor, count, accountID);
+                cursor, count, status,
+                accountID);
         }
 
     }

@@ -6,6 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
+import io.moov.sdk.models.components.TicketStatus;
 import io.moov.sdk.operations.ListTicketsOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
@@ -17,6 +18,7 @@ public class ListTicketsRequestBuilder {
 
     private Optional<String> cursor = Optional.empty();
     private Optional<Long> count = Optional.empty();
+    private Optional<? extends TicketStatus> status = Optional.empty();
     private String accountID;
     private final SDKConfiguration sdkConfiguration;
 
@@ -47,6 +49,18 @@ public class ListTicketsRequestBuilder {
         this.count = count;
         return this;
     }
+                
+    public ListTicketsRequestBuilder status(TicketStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.of(status);
+        return this;
+    }
+
+    public ListTicketsRequestBuilder status(Optional<? extends TicketStatus> status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
 
     public ListTicketsRequestBuilder accountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -59,6 +73,7 @@ public class ListTicketsRequestBuilder {
 
         ListTicketsRequest request = new ListTicketsRequest(cursor,
             count,
+            status,
             accountID);
 
         return request;

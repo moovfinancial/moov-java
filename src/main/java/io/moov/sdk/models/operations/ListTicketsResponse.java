@@ -5,7 +5,6 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.Ticket;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -38,7 +37,7 @@ public class ListTicketsResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends List<Ticket>> tickets;
+    private Optional<? extends ListTicketsResponseBody> object;
 
 
     private Map<String, List<String>> headers;
@@ -48,18 +47,18 @@ public class ListTicketsResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<Ticket>> tickets,
+            Optional<? extends ListTicketsResponseBody> object,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(tickets, "tickets");
+        Utils.checkNotNull(object, "object");
         headers = Utils.emptyMapIfNull(headers);
         Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.tickets = tickets;
+        this.object = object;
         this.headers = headers;
     }
     
@@ -101,8 +100,8 @@ public class ListTicketsResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Ticket>> tickets() {
-        return (Optional<List<Ticket>>) tickets;
+    public Optional<ListTicketsResponseBody> object() {
+        return (Optional<ListTicketsResponseBody>) object;
     }
 
     @JsonIgnore
@@ -145,9 +144,9 @@ public class ListTicketsResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public ListTicketsResponse withTickets(List<Ticket> tickets) {
-        Utils.checkNotNull(tickets, "tickets");
-        this.tickets = Optional.ofNullable(tickets);
+    public ListTicketsResponse withObject(ListTicketsResponseBody object) {
+        Utils.checkNotNull(object, "object");
+        this.object = Optional.ofNullable(object);
         return this;
     }
 
@@ -155,9 +154,9 @@ public class ListTicketsResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public ListTicketsResponse withTickets(Optional<? extends List<Ticket>> tickets) {
-        Utils.checkNotNull(tickets, "tickets");
-        this.tickets = tickets;
+    public ListTicketsResponse withObject(Optional<? extends ListTicketsResponseBody> object) {
+        Utils.checkNotNull(object, "object");
+        this.object = object;
         return this;
     }
 
@@ -180,7 +179,7 @@ public class ListTicketsResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.tickets, other.tickets) &&
+            Utils.enhancedDeepEquals(this.object, other.object) &&
             Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
@@ -188,7 +187,7 @@ public class ListTicketsResponse implements Response {
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            tickets, headers);
+            object, headers);
     }
     
     @Override
@@ -197,7 +196,7 @@ public class ListTicketsResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "tickets", tickets,
+                "object", object,
                 "headers", headers);
     }
 
@@ -210,7 +209,7 @@ public class ListTicketsResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends List<Ticket>> tickets = Optional.empty();
+        private Optional<? extends ListTicketsResponseBody> object = Optional.empty();
 
         private Map<String, List<String>> headers;
 
@@ -252,18 +251,18 @@ public class ListTicketsResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder tickets(List<Ticket> tickets) {
-            Utils.checkNotNull(tickets, "tickets");
-            this.tickets = Optional.ofNullable(tickets);
+        public Builder object(ListTicketsResponseBody object) {
+            Utils.checkNotNull(object, "object");
+            this.object = Optional.ofNullable(object);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder tickets(Optional<? extends List<Ticket>> tickets) {
-            Utils.checkNotNull(tickets, "tickets");
-            this.tickets = tickets;
+        public Builder object(Optional<? extends ListTicketsResponseBody> object) {
+            Utils.checkNotNull(object, "object");
+            this.object = object;
             return this;
         }
 
@@ -278,7 +277,7 @@ public class ListTicketsResponse implements Response {
 
             return new ListTicketsResponse(
                 contentType, statusCode, rawResponse,
-                tickets, headers);
+                object, headers);
         }
 
     }

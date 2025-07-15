@@ -72,9 +72,7 @@ public class PaymentLinks {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreatePaymentLinkResponse create(
-            String accountID,
-            CreatePaymentLink createPaymentLink) throws Exception {
+    public CreatePaymentLinkResponse create(String accountID, CreatePaymentLink createPaymentLink) throws Exception {
         CreatePaymentLinkRequest request =
             CreatePaymentLinkRequest
                 .builder()
@@ -142,9 +140,7 @@ public class PaymentLinks {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPaymentLinkResponse get(
-            String accountID,
-            String paymentLinkCode) throws Exception {
+    public GetPaymentLinkResponse get(String accountID, String paymentLinkCode) throws Exception {
         GetPaymentLinkRequest request =
             GetPaymentLinkRequest
                 .builder()
@@ -181,8 +177,7 @@ public class PaymentLinks {
      * @throws Exception if the API call fails
      */
     public UpdatePaymentLinkResponse update(
-            String accountID,
-            String paymentLinkCode,
+            String accountID, String paymentLinkCode,
             UpdatePaymentLink updatePaymentLink) throws Exception {
         UpdatePaymentLinkRequest request =
             UpdatePaymentLinkRequest
@@ -219,9 +214,7 @@ public class PaymentLinks {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DisablePaymentLinkResponse disable(
-            String accountID,
-            String paymentLinkCode) throws Exception {
+    public DisablePaymentLinkResponse disable(String accountID, String paymentLinkCode) throws Exception {
         DisablePaymentLinkRequest request =
             DisablePaymentLinkRequest
                 .builder()
@@ -260,9 +253,7 @@ public class PaymentLinks {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPaymentLinkQRCodeResponse getQRCode(
-            String accountID,
-            String paymentLinkCode) throws Exception {
+    public GetPaymentLinkQRCodeResponse getQRCode(String accountID, String paymentLinkCode) throws Exception {
         GetPaymentLinkQRCodeRequest request =
             GetPaymentLinkQRCodeRequest
                 .builder()

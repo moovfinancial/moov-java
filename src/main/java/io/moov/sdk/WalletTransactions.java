@@ -86,8 +86,7 @@ public class WalletTransactions {
      * @throws Exception if the API call fails
      */
     public GetWalletTransactionResponse get(
-            String accountID,
-            String walletID,
+            String accountID, String walletID,
             String transactionID) throws Exception {
         GetWalletTransactionRequest request =
             GetWalletTransactionRequest

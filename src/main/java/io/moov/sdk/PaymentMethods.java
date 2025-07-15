@@ -71,8 +71,7 @@ public class PaymentMethods {
      * @throws Exception if the API call fails
      */
     public ListPaymentMethodsResponse list(
-            String accountID,
-            Optional<String> sourceID,
+            String accountID, Optional<String> sourceID,
             Optional<? extends PaymentMethodType> paymentMethodType) throws Exception {
         ListPaymentMethodsRequest request =
             ListPaymentMethodsRequest
@@ -109,9 +108,7 @@ public class PaymentMethods {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPaymentMethodResponse get(
-            String accountID,
-            String paymentMethodID) throws Exception {
+    public GetPaymentMethodResponse get(String accountID, String paymentMethodID) throws Exception {
         GetPaymentMethodRequest request =
             GetPaymentMethodRequest
                 .builder()

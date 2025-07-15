@@ -5,31 +5,38 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.List;
+import java.util.Optional;
 
 
 public class InstitutionsSearchResponse {
 
+    @JsonInclude(Include.ALWAYS)
     @JsonProperty("ach")
-    private List<ACHInstitution> ach;
+    private Optional<? extends List<ACHInstitution>> ach;
 
 
+    @JsonInclude(Include.ALWAYS)
     @JsonProperty("rtp")
-    private List<RTPInstitution> rtp;
+    private Optional<? extends List<RTPInstitution>> rtp;
 
 
+    @JsonInclude(Include.ALWAYS)
     @JsonProperty("wire")
-    private List<WireInstitution> wire;
+    private Optional<? extends List<WireInstitution>> wire;
 
     @JsonCreator
     public InstitutionsSearchResponse(
-            @JsonProperty("ach") List<ACHInstitution> ach,
-            @JsonProperty("rtp") List<RTPInstitution> rtp,
-            @JsonProperty("wire") List<WireInstitution> wire) {
+            @JsonProperty("ach") Optional<? extends List<ACHInstitution>> ach,
+            @JsonProperty("rtp") Optional<? extends List<RTPInstitution>> rtp,
+            @JsonProperty("wire") Optional<? extends List<WireInstitution>> wire) {
         Utils.checkNotNull(ach, "ach");
         Utils.checkNotNull(rtp, "rtp");
         Utils.checkNotNull(wire, "wire");
@@ -37,20 +44,27 @@ public class InstitutionsSearchResponse {
         this.rtp = rtp;
         this.wire = wire;
     }
-
-    @JsonIgnore
-    public List<ACHInstitution> ach() {
-        return ach;
+    
+    public InstitutionsSearchResponse() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<RTPInstitution> rtp() {
-        return rtp;
+    public Optional<List<ACHInstitution>> ach() {
+        return (Optional<List<ACHInstitution>>) ach;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<WireInstitution> wire() {
-        return wire;
+    public Optional<List<RTPInstitution>> rtp() {
+        return (Optional<List<RTPInstitution>>) rtp;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<WireInstitution>> wire() {
+        return (Optional<List<WireInstitution>>) wire;
     }
 
     public static Builder builder() {
@@ -60,17 +74,38 @@ public class InstitutionsSearchResponse {
 
     public InstitutionsSearchResponse withAch(List<ACHInstitution> ach) {
         Utils.checkNotNull(ach, "ach");
+        this.ach = Optional.ofNullable(ach);
+        return this;
+    }
+
+
+    public InstitutionsSearchResponse withAch(Optional<? extends List<ACHInstitution>> ach) {
+        Utils.checkNotNull(ach, "ach");
         this.ach = ach;
         return this;
     }
 
     public InstitutionsSearchResponse withRtp(List<RTPInstitution> rtp) {
         Utils.checkNotNull(rtp, "rtp");
+        this.rtp = Optional.ofNullable(rtp);
+        return this;
+    }
+
+
+    public InstitutionsSearchResponse withRtp(Optional<? extends List<RTPInstitution>> rtp) {
+        Utils.checkNotNull(rtp, "rtp");
         this.rtp = rtp;
         return this;
     }
 
     public InstitutionsSearchResponse withWire(List<WireInstitution> wire) {
+        Utils.checkNotNull(wire, "wire");
+        this.wire = Optional.ofNullable(wire);
+        return this;
+    }
+
+
+    public InstitutionsSearchResponse withWire(Optional<? extends List<WireInstitution>> wire) {
         Utils.checkNotNull(wire, "wire");
         this.wire = wire;
         return this;
@@ -108,11 +143,11 @@ public class InstitutionsSearchResponse {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private List<ACHInstitution> ach;
+        private Optional<? extends List<ACHInstitution>> ach = Optional.empty();
 
-        private List<RTPInstitution> rtp;
+        private Optional<? extends List<RTPInstitution>> rtp = Optional.empty();
 
-        private List<WireInstitution> wire;
+        private Optional<? extends List<WireInstitution>> wire = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -121,6 +156,12 @@ public class InstitutionsSearchResponse {
 
         public Builder ach(List<ACHInstitution> ach) {
             Utils.checkNotNull(ach, "ach");
+            this.ach = Optional.ofNullable(ach);
+            return this;
+        }
+
+        public Builder ach(Optional<? extends List<ACHInstitution>> ach) {
+            Utils.checkNotNull(ach, "ach");
             this.ach = ach;
             return this;
         }
@@ -128,12 +169,24 @@ public class InstitutionsSearchResponse {
 
         public Builder rtp(List<RTPInstitution> rtp) {
             Utils.checkNotNull(rtp, "rtp");
+            this.rtp = Optional.ofNullable(rtp);
+            return this;
+        }
+
+        public Builder rtp(Optional<? extends List<RTPInstitution>> rtp) {
+            Utils.checkNotNull(rtp, "rtp");
             this.rtp = rtp;
             return this;
         }
 
 
         public Builder wire(List<WireInstitution> wire) {
+            Utils.checkNotNull(wire, "wire");
+            this.wire = Optional.ofNullable(wire);
+            return this;
+        }
+
+        public Builder wire(Optional<? extends List<WireInstitution>> wire) {
             Utils.checkNotNull(wire, "wire");
             this.wire = wire;
             return this;

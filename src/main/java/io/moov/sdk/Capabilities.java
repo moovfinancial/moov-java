@@ -95,9 +95,7 @@ public class Capabilities {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RequestCapabilitiesResponse request(
-            String accountID,
-            AddCapabilities addCapabilities) throws Exception {
+    public RequestCapabilitiesResponse request(String accountID, AddCapabilities addCapabilities) throws Exception {
         RequestCapabilitiesRequest request =
             RequestCapabilitiesRequest
                 .builder()
@@ -134,9 +132,7 @@ public class Capabilities {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetCapabilityResponse get(
-            String accountID,
-            CapabilityID capabilityID) throws Exception {
+    public GetCapabilityResponse get(String accountID, CapabilityID capabilityID) throws Exception {
         GetCapabilityRequest request =
             GetCapabilityRequest
                 .builder()
@@ -173,9 +169,7 @@ public class Capabilities {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DisableCapabilityResponse disable(
-            String accountID,
-            CapabilityID capabilityID) throws Exception {
+    public DisableCapabilityResponse disable(String accountID, CapabilityID capabilityID) throws Exception {
         DisableCapabilityRequest request =
             DisableCapabilityRequest
                 .builder()

@@ -66,9 +66,7 @@ public class Representatives {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateRepresentativeResponse create(
-            String accountID,
-            CreateRepresentative createRepresentative) throws Exception {
+    public CreateRepresentativeResponse create(String accountID, CreateRepresentative createRepresentative) throws Exception {
         CreateRepresentativeRequest request =
             CreateRepresentativeRequest
                 .builder()
@@ -142,9 +140,7 @@ public class Representatives {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DeleteRepresentativeResponse delete(
-            String accountID,
-            String representativeID) throws Exception {
+    public DeleteRepresentativeResponse delete(String accountID, String representativeID) throws Exception {
         DeleteRepresentativeRequest request =
             DeleteRepresentativeRequest
                 .builder()
@@ -179,9 +175,7 @@ public class Representatives {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetRepresentativeResponse get(
-            String accountID,
-            String representativeID) throws Exception {
+    public GetRepresentativeResponse get(String accountID, String representativeID) throws Exception {
         GetRepresentativeRequest request =
             GetRepresentativeRequest
                 .builder()
@@ -244,8 +238,7 @@ public class Representatives {
      * @throws Exception if the API call fails
      */
     public UpdateRepresentativeResponse update(
-            String accountID,
-            String representativeID,
+            String accountID, String representativeID,
             UpdateRepresentative updateRepresentative) throws Exception {
         UpdateRepresentativeRequest request =
             UpdateRepresentativeRequest

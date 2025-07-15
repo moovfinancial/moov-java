@@ -59,9 +59,7 @@ public class Files {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UploadFileResponse upload(
-            String accountID,
-            FileUploadRequestMultiPart fileUploadRequestMultiPart) throws Exception {
+    public UploadFileResponse upload(String accountID, FileUploadRequestMultiPart fileUploadRequestMultiPart) throws Exception {
         UploadFileRequest request =
             UploadFileRequest
                 .builder()
@@ -129,9 +127,7 @@ public class Files {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetFileDetailsResponse get(
-            String accountID,
-            String fileID) throws Exception {
+    public GetFileDetailsResponse get(String accountID, String fileID) throws Exception {
         GetFileDetailsRequest request =
             GetFileDetailsRequest
                 .builder()

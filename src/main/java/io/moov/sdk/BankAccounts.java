@@ -90,9 +90,7 @@ public class BankAccounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public LinkBankAccountResponse link(
-            String accountID,
-            LinkBankAccount linkBankAccount) throws Exception {
+    public LinkBankAccountResponse link(String accountID, LinkBankAccount linkBankAccount) throws Exception {
         return link(Optional.empty(), accountID, linkBankAccount);
     }
 
@@ -114,8 +112,7 @@ public class BankAccounts {
      * @throws Exception if the API call fails
      */
     public LinkBankAccountResponse link(
-            Optional<? extends BankAccountWaitFor> xWaitFor,
-            String accountID,
+            Optional<? extends BankAccountWaitFor> xWaitFor, String accountID,
             LinkBankAccount linkBankAccount) throws Exception {
         LinkBankAccountRequest request =
             LinkBankAccountRequest
@@ -193,9 +190,7 @@ public class BankAccounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetBankAccountResponse get(
-            String accountID,
-            String bankAccountID) throws Exception {
+    public GetBankAccountResponse get(String accountID, String bankAccountID) throws Exception {
         GetBankAccountRequest request =
             GetBankAccountRequest
                 .builder()
@@ -230,9 +225,7 @@ public class BankAccounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DisableBankAccountResponse disable(
-            String accountID,
-            String bankAccountID) throws Exception {
+    public DisableBankAccountResponse disable(String accountID, String bankAccountID) throws Exception {
         DisableBankAccountRequest request =
             DisableBankAccountRequest
                 .builder()
@@ -289,9 +282,7 @@ public class BankAccounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public InitiateMicroDepositsResponse initiateMicroDeposits(
-            String accountID,
-            String bankAccountID) throws Exception {
+    public InitiateMicroDepositsResponse initiateMicroDeposits(String accountID, String bankAccountID) throws Exception {
         InitiateMicroDepositsRequest request =
             InitiateMicroDepositsRequest
                 .builder()
@@ -328,8 +319,7 @@ public class BankAccounts {
      * @throws Exception if the API call fails
      */
     public CompleteMicroDepositsResponse completeMicroDeposits(
-            String accountID,
-            String bankAccountID,
+            String accountID, String bankAccountID,
             CompleteMicroDeposits completeMicroDeposits) throws Exception {
         CompleteMicroDepositsRequest request =
             CompleteMicroDepositsRequest
@@ -384,9 +374,7 @@ public class BankAccounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetBankAccountVerificationResponse getVerification(
-            String accountID,
-            String bankAccountID) throws Exception {
+    public GetBankAccountVerificationResponse getVerification(String accountID, String bankAccountID) throws Exception {
         GetBankAccountVerificationRequest request =
             GetBankAccountVerificationRequest
                 .builder()
@@ -451,9 +439,7 @@ public class BankAccounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public InitiateBankAccountVerificationResponse initiateVerification(
-            String accountID,
-            String bankAccountID) throws Exception {
+    public InitiateBankAccountVerificationResponse initiateVerification(String accountID, String bankAccountID) throws Exception {
         return initiateVerification(Optional.empty(), accountID, bankAccountID);
     }
 
@@ -485,8 +471,7 @@ public class BankAccounts {
      * @throws Exception if the API call fails
      */
     public InitiateBankAccountVerificationResponse initiateVerification(
-            Optional<? extends BankAccountWaitFor> xWaitFor,
-            String accountID,
+            Optional<? extends BankAccountWaitFor> xWaitFor, String accountID,
             String bankAccountID) throws Exception {
         InitiateBankAccountVerificationRequest request =
             InitiateBankAccountVerificationRequest
@@ -539,8 +524,7 @@ public class BankAccounts {
      * @throws Exception if the API call fails
      */
     public CompleteBankAccountVerificationResponse completeVerification(
-            String accountID,
-            String bankAccountID,
+            String accountID, String bankAccountID,
             CompleteBankAccountVerification completeBankAccountVerification) throws Exception {
         CompleteBankAccountVerificationRequest request =
             CompleteBankAccountVerificationRequest

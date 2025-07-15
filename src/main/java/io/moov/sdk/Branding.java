@@ -58,9 +58,7 @@ public class Branding {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateBrandResponse create(
-            String accountID,
-            BrandProperties brandProperties) throws Exception {
+    public CreateBrandResponse create(String accountID, BrandProperties brandProperties) throws Exception {
         CreateBrandRequest request =
             CreateBrandRequest
                 .builder()
@@ -95,9 +93,7 @@ public class Branding {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpsertBrandResponse upsert(
-            String accountID,
-            BrandProperties brandProperties) throws Exception {
+    public UpsertBrandResponse upsert(String accountID, BrandProperties brandProperties) throws Exception {
         UpsertBrandRequest request =
             UpsertBrandRequest
                 .builder()
@@ -165,9 +161,7 @@ public class Branding {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateBrandResponse update(
-            String accountID,
-            UpdateBrand updateBrand) throws Exception {
+    public UpdateBrandResponse update(String accountID, UpdateBrand updateBrand) throws Exception {
         UpdateBrandRequest request =
             UpdateBrandRequest
                 .builder()

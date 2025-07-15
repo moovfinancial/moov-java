@@ -89,9 +89,7 @@ public class IssuingTransactions {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetIssuedCardAuthorizationResponse getAuthorization(
-            String accountID,
-            String authorizationID) throws Exception {
+    public GetIssuedCardAuthorizationResponse getAuthorization(String accountID, String authorizationID) throws Exception {
         GetIssuedCardAuthorizationRequest request =
             GetIssuedCardAuthorizationRequest
                 .builder()
@@ -126,9 +124,7 @@ public class IssuingTransactions {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(
-            String accountID,
-            String authorizationID) throws Exception {
+    public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(String accountID, String authorizationID) throws Exception {
         return listAuthorizationEvents(accountID, authorizationID, Optional.empty(),
             Optional.empty());
     }
@@ -147,10 +143,8 @@ public class IssuingTransactions {
      * @throws Exception if the API call fails
      */
     public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(
-            String accountID,
-            String authorizationID,
-            Optional<Long> skip,
-            Optional<Long> count) throws Exception {
+            String accountID, String authorizationID,
+            Optional<Long> skip, Optional<Long> count) throws Exception {
         ListIssuedCardAuthorizationEventsRequest request =
             ListIssuedCardAuthorizationEventsRequest
                 .builder()
@@ -215,9 +209,7 @@ public class IssuingTransactions {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetIssuedCardTransactionResponse get(
-            String accountID,
-            String cardTransactionID) throws Exception {
+    public GetIssuedCardTransactionResponse get(String accountID, String cardTransactionID) throws Exception {
         GetIssuedCardTransactionRequest request =
             GetIssuedCardTransactionRequest
                 .builder()

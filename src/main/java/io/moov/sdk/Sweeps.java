@@ -66,9 +66,7 @@ public class Sweeps {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateSweepConfigResponse createConfig(
-            String accountID,
-            CreateSweepConfig createSweepConfig) throws Exception {
+    public CreateSweepConfigResponse createConfig(String accountID, CreateSweepConfig createSweepConfig) throws Exception {
         CreateSweepConfigRequest request =
             CreateSweepConfigRequest
                 .builder()
@@ -136,9 +134,7 @@ public class Sweeps {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetSweepConfigResponse getConfig(
-            String accountID,
-            String sweepConfigID) throws Exception {
+    public GetSweepConfigResponse getConfig(String accountID, String sweepConfigID) throws Exception {
         GetSweepConfigRequest request =
             GetSweepConfigRequest
                 .builder()
@@ -175,8 +171,7 @@ public class Sweeps {
      * @throws Exception if the API call fails
      */
     public UpdateSweepConfigResponse updateConfig(
-            String accountID,
-            String sweepConfigID,
+            String accountID, String sweepConfigID,
             PatchSweepConfig patchSweepConfig) throws Exception {
         UpdateSweepConfigRequest request =
             UpdateSweepConfigRequest
@@ -243,8 +238,7 @@ public class Sweeps {
      * @throws Exception if the API call fails
      */
     public GetSweepResponse get(
-            String accountID,
-            String walletID,
+            String accountID, String walletID,
             String sweepID) throws Exception {
         GetSweepRequest request =
             GetSweepRequest

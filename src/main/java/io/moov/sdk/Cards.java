@@ -91,9 +91,7 @@ public class Cards {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public LinkCardResponse link(
-            String accountID,
-            LinkCard linkCard) throws Exception {
+    public LinkCardResponse link(String accountID, LinkCard linkCard) throws Exception {
         return link(Optional.empty(), accountID, linkCard);
     }
 
@@ -124,8 +122,7 @@ public class Cards {
      * @throws Exception if the API call fails
      */
     public LinkCardResponse link(
-            Optional<? extends LinkCardWaitFor> xWaitFor,
-            String accountID,
+            Optional<? extends LinkCardWaitFor> xWaitFor, String accountID,
             LinkCard linkCard) throws Exception {
         LinkCardRequest request =
             LinkCardRequest
@@ -203,9 +200,7 @@ public class Cards {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetCardResponse get(
-            String accountID,
-            String cardID) throws Exception {
+    public GetCardResponse get(String accountID, String cardID) throws Exception {
         GetCardRequest request =
             GetCardRequest
                 .builder()
@@ -260,8 +255,7 @@ public class Cards {
      * @throws Exception if the API call fails
      */
     public UpdateCardResponse update(
-            String accountID,
-            String cardID,
+            String accountID, String cardID,
             UpdateCard updateCard) throws Exception {
         UpdateCardRequest request =
             UpdateCardRequest
@@ -298,9 +292,7 @@ public class Cards {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public DisableCardResponse disable(
-            String accountID,
-            String cardID) throws Exception {
+    public DisableCardResponse disable(String accountID, String cardID) throws Exception {
         DisableCardRequest request =
             DisableCardRequest
                 .builder()

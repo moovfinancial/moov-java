@@ -62,9 +62,7 @@ public class Adjustments {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListAdjustmentsResponse list(
-            String accountID,
-            Optional<String> walletID) throws Exception {
+    public ListAdjustmentsResponse list(String accountID, Optional<String> walletID) throws Exception {
         ListAdjustmentsRequest request =
             ListAdjustmentsRequest
                 .builder()
@@ -99,9 +97,7 @@ public class Adjustments {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAdjustmentResponse get(
-            String accountID,
-            String adjustmentID) throws Exception {
+    public GetAdjustmentResponse get(String accountID, String adjustmentID) throws Exception {
         GetAdjustmentRequest request =
             GetAdjustmentRequest
                 .builder()

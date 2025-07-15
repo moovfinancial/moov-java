@@ -67,9 +67,7 @@ public class Scheduling {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateScheduleResponse create(
-            String accountID,
-            UpsertSchedule upsertSchedule) throws Exception {
+    public CreateScheduleResponse create(String accountID, UpsertSchedule upsertSchedule) throws Exception {
         CreateScheduleRequest request =
             CreateScheduleRequest
                 .builder()
@@ -122,10 +120,8 @@ public class Scheduling {
      * @throws Exception if the API call fails
      */
     public ListSchedulesResponse list(
-            Optional<Long> skip,
-            Optional<Long> count,
-            Optional<? extends Hydrate> hydrate,
-            String accountID) throws Exception {
+            Optional<Long> skip, Optional<Long> count,
+            Optional<? extends Hydrate> hydrate, String accountID) throws Exception {
         ListSchedulesRequest request =
             ListSchedulesRequest
                 .builder()
@@ -164,8 +160,7 @@ public class Scheduling {
      * @throws Exception if the API call fails
      */
     public UpdateScheduleResponse update(
-            String accountID,
-            String scheduleID,
+            String accountID, String scheduleID,
             UpsertSchedule upsertSchedule) throws Exception {
         UpdateScheduleRequest request =
             UpdateScheduleRequest
@@ -202,9 +197,7 @@ public class Scheduling {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetSchedulesResponse get(
-            String accountID,
-            String scheduleID) throws Exception {
+    public GetSchedulesResponse get(String accountID, String scheduleID) throws Exception {
         GetSchedulesRequest request =
             GetSchedulesRequest
                 .builder()
@@ -239,9 +232,7 @@ public class Scheduling {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CancelScheduleResponse cancel(
-            String accountID,
-            String scheduleID) throws Exception {
+    public CancelScheduleResponse cancel(String accountID, String scheduleID) throws Exception {
         CancelScheduleRequest request =
             CancelScheduleRequest
                 .builder()
@@ -282,8 +273,7 @@ public class Scheduling {
      * @throws Exception if the API call fails
      */
     public GetScheduledOccurrenceResponse getOccurrance(
-            String accountID,
-            String scheduleID,
+            String accountID, String scheduleID,
             String occurrenceFilter) throws Exception {
         GetScheduledOccurrenceRequest request =
             GetScheduledOccurrenceRequest

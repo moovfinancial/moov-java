@@ -76,8 +76,7 @@ public class Institutions {
      * @throws Exception if the API call fails
      */
     public SearchInstitutionsResponse searchInstitutions(
-            Optional<String> name,
-            Optional<String> routingNumber,
+            Optional<String> name, Optional<String> routingNumber,
             Optional<Long> limit) throws Exception {
         SearchInstitutionsRequest request =
             SearchInstitutionsRequest
@@ -131,10 +130,8 @@ public class Institutions {
      * @throws Exception if the API call fails
      */
     public ListInstitutionsResponse search(
-            Optional<String> name,
-            Optional<String> routingNumber,
-            Optional<String> state,
-            Optional<Long> limit) throws Exception {
+            Optional<String> name, Optional<String> routingNumber,
+            Optional<String> state, Optional<Long> limit) throws Exception {
         ListInstitutionsRequest request =
             ListInstitutionsRequest
                 .builder()

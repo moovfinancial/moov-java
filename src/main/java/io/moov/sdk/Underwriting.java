@@ -95,9 +95,7 @@ public class Underwriting {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public SaveUnderwritingResponse save(
-            String accountID,
-            UpsertUnderwriting upsertUnderwriting) throws Exception {
+    public SaveUnderwritingResponse save(String accountID, UpsertUnderwriting upsertUnderwriting) throws Exception {
         SaveUnderwritingRequest request =
             SaveUnderwritingRequest
                 .builder()
@@ -136,9 +134,7 @@ public class Underwriting {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpsertUnderwritingResponse upsert(
-            String accountID,
-            UpdateUnderwriting updateUnderwriting) throws Exception {
+    public UpsertUnderwritingResponse upsert(String accountID, UpdateUnderwriting updateUnderwriting) throws Exception {
         UpsertUnderwritingRequest request =
             UpsertUnderwritingRequest
                 .builder()

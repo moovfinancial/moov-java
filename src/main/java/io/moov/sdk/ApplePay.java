@@ -70,9 +70,7 @@ public class ApplePay {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public RegisterApplePayMerchantDomainsResponse registerMerchantDomains(
-            String accountID,
-            RegisterApplePayMerchantDomains registerApplePayMerchantDomains) throws Exception {
+    public RegisterApplePayMerchantDomainsResponse registerMerchantDomains(String accountID, RegisterApplePayMerchantDomains registerApplePayMerchantDomains) throws Exception {
         RegisterApplePayMerchantDomainsRequest request =
             RegisterApplePayMerchantDomainsRequest
                 .builder()
@@ -113,9 +111,7 @@ public class ApplePay {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateApplePayMerchantDomainsResponse updateMerchantDomains(
-            String accountID,
-            UpdateApplePayMerchantDomains updateApplePayMerchantDomains) throws Exception {
+    public UpdateApplePayMerchantDomainsResponse updateMerchantDomains(String accountID, UpdateApplePayMerchantDomains updateApplePayMerchantDomains) throws Exception {
         UpdateApplePayMerchantDomainsRequest request =
             UpdateApplePayMerchantDomainsRequest
                 .builder()
@@ -193,9 +189,7 @@ public class ApplePay {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateApplePaySessionResponse createSession(
-            String accountID,
-            CreateApplePaySession createApplePaySession) throws Exception {
+    public CreateApplePaySessionResponse createSession(String accountID, CreateApplePaySession createApplePaySession) throws Exception {
         CreateApplePaySessionRequest request =
             CreateApplePaySessionRequest
                 .builder()
@@ -239,9 +233,7 @@ public class ApplePay {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public LinkApplePayTokenResponse linkToken(
-            String accountID,
-            LinkApplePay linkApplePay) throws Exception {
+    public LinkApplePayTokenResponse linkToken(String accountID, LinkApplePay linkApplePay) throws Exception {
         LinkApplePayTokenRequest request =
             LinkApplePayTokenRequest
                 .builder()

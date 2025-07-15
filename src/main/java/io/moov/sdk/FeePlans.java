@@ -97,9 +97,7 @@ public class FeePlans {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateFeePlanAgreementsResponse createFeePlanAgreements(
-            String accountID,
-            CreateFeePlanAgreement createFeePlanAgreement) throws Exception {
+    public CreateFeePlanAgreementsResponse createFeePlanAgreements(String accountID, CreateFeePlanAgreement createFeePlanAgreement) throws Exception {
         CreateFeePlanAgreementsRequest request =
             CreateFeePlanAgreementsRequest
                 .builder()
@@ -151,9 +149,7 @@ public class FeePlans {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListFeePlansResponse listFeePlans(
-            String accountID,
-            Optional<? extends List<String>> planIDs) throws Exception {
+    public ListFeePlansResponse listFeePlans(String accountID, Optional<? extends List<String>> planIDs) throws Exception {
         ListFeePlansRequest request =
             ListFeePlansRequest
                 .builder()
@@ -230,9 +226,7 @@ public class FeePlans {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListFeesFetchResponse listFeesFetch(
-            String accountID,
-            Optional<? extends ListFeesFetchRequest> listFeesFetchRequest) throws Exception {
+    public ListFeesFetchResponse listFeesFetch(String accountID, Optional<? extends ListFeesFetchRequest> listFeesFetchRequest) throws Exception {
         io.moov.sdk.models.operations.ListFeesFetchRequest request =
             io.moov.sdk.models.operations.ListFeesFetchRequest
                 .builder()
@@ -281,9 +275,7 @@ public class FeePlans {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListPartnerPricingResponse listPartnerPricing(
-            String accountID,
-            Optional<? extends List<String>> planIDs) throws Exception {
+    public ListPartnerPricingResponse listPartnerPricing(String accountID, Optional<? extends List<String>> planIDs) throws Exception {
         ListPartnerPricingRequest request =
             ListPartnerPricingRequest
                 .builder()

@@ -57,9 +57,7 @@ public class AccountTerminalApplications {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public LinkAccountTerminalApplicationResponse link(
-            String accountID,
-            LinkAccountTerminalApplication linkAccountTerminalApplication) throws Exception {
+    public LinkAccountTerminalApplicationResponse link(String accountID, LinkAccountTerminalApplication linkAccountTerminalApplication) throws Exception {
         LinkAccountTerminalApplicationRequest request =
             LinkAccountTerminalApplicationRequest
                 .builder()
@@ -127,9 +125,7 @@ public class AccountTerminalApplications {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAccountTerminalApplicationResponse get(
-            String accountID,
-            String terminalApplicationID) throws Exception {
+    public GetAccountTerminalApplicationResponse get(String accountID, String terminalApplicationID) throws Exception {
         GetAccountTerminalApplicationRequest request =
             GetAccountTerminalApplicationRequest
                 .builder()
@@ -164,9 +160,7 @@ public class AccountTerminalApplications {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTerminalConfigurationResponse getConfiguration(
-            String accountID,
-            String terminalApplicationID) throws Exception {
+    public GetTerminalConfigurationResponse getConfiguration(String accountID, String terminalApplicationID) throws Exception {
         GetTerminalConfigurationRequest request =
             GetTerminalConfigurationRequest
                 .builder()

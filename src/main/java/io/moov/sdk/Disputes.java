@@ -123,9 +123,7 @@ public class Disputes {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetDisputeResponse get(
-            String accountID,
-            String disputeID) throws Exception {
+    public GetDisputeResponse get(String accountID, String disputeID) throws Exception {
         GetDisputeRequest request =
             GetDisputeRequest
                 .builder()
@@ -164,9 +162,7 @@ public class Disputes {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public AcceptDisputeResponse accept(
-            String accountID,
-            String disputeID) throws Exception {
+    public AcceptDisputeResponse accept(String accountID, String disputeID) throws Exception {
         AcceptDisputeRequest request =
             AcceptDisputeRequest
                 .builder()
@@ -205,9 +201,7 @@ public class Disputes {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListDisputeEvidenceResponse listEvidence(
-            String accountID,
-            String disputeID) throws Exception {
+    public ListDisputeEvidenceResponse listEvidence(String accountID, String disputeID) throws Exception {
         ListDisputeEvidenceRequest request =
             ListDisputeEvidenceRequest
                 .builder()
@@ -248,8 +242,7 @@ public class Disputes {
      * @throws Exception if the API call fails
      */
     public UploadDisputeEvidenceFileResponse uploadEvidenceFile(
-            String accountID,
-            String disputeID,
+            String accountID, String disputeID,
             CreateEvidenceFileMultiPart createEvidenceFileMultiPart) throws Exception {
         UploadDisputeEvidenceFileRequest request =
             UploadDisputeEvidenceFileRequest
@@ -292,8 +285,7 @@ public class Disputes {
      * @throws Exception if the API call fails
      */
     public UploadDisputeEvidenceTextResponse uploadEvidenceText(
-            String accountID,
-            String disputeID,
+            String accountID, String disputeID,
             CreateEvidenceText createEvidenceText) throws Exception {
         UploadDisputeEvidenceTextRequest request =
             UploadDisputeEvidenceTextRequest
@@ -340,9 +332,7 @@ public class Disputes {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public SubmitDisputeEvidenceResponse submitEvidence(
-            String accountID,
-            String disputeID) throws Exception {
+    public SubmitDisputeEvidenceResponse submitEvidence(String accountID, String disputeID) throws Exception {
         SubmitDisputeEvidenceRequest request =
             SubmitDisputeEvidenceRequest
                 .builder()
@@ -383,8 +373,7 @@ public class Disputes {
      * @throws Exception if the API call fails
      */
     public GetDisputeEvidenceResponse getEvidence(
-            String accountID,
-            String disputeID,
+            String accountID, String disputeID,
             String evidenceID) throws Exception {
         GetDisputeEvidenceRequest request =
             GetDisputeEvidenceRequest
@@ -428,10 +417,8 @@ public class Disputes {
      * @throws Exception if the API call fails
      */
     public UpdateDisputeEvidenceResponse updateEvidence(
-            String accountID,
-            String disputeID,
-            String evidenceID,
-            UpdateEvidence updateEvidence) throws Exception {
+            String accountID, String disputeID,
+            String evidenceID, UpdateEvidence updateEvidence) throws Exception {
         UpdateDisputeEvidenceRequest request =
             UpdateDisputeEvidenceRequest
                 .builder()
@@ -474,8 +461,7 @@ public class Disputes {
      * @throws Exception if the API call fails
      */
     public DeleteDisputeEvidenceFileResponse deleteEvidence(
-            String accountID,
-            String disputeID,
+            String accountID, String disputeID,
             String evidenceID) throws Exception {
         DeleteDisputeEvidenceFileRequest request =
             DeleteDisputeEvidenceFileRequest
@@ -518,8 +504,7 @@ public class Disputes {
      * @throws Exception if the API call fails
      */
     public GetDisputeEvidenceDataResponse getEvidenceData(
-            String accountID,
-            String disputeID,
+            String accountID, String disputeID,
             String evidenceID) throws Exception {
         GetDisputeEvidenceDataRequest request =
             GetDisputeEvidenceDataRequest

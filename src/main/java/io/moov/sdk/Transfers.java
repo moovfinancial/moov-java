@@ -99,9 +99,7 @@ public class Transfers {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateTransferOptionsResponse generateOptions(
-            String accountID,
-            CreateTransferOptions createTransferOptions) throws Exception {
+    public CreateTransferOptionsResponse generateOptions(String accountID, CreateTransferOptions createTransferOptions) throws Exception {
         CreateTransferOptionsRequest request =
             CreateTransferOptionsRequest
                 .builder()
@@ -142,8 +140,7 @@ public class Transfers {
      * @throws Exception if the API call fails
      */
     public CreateTransferResponse create(
-            String xIdempotencyKey,
-            String accountID,
+            String xIdempotencyKey, String accountID,
             CreateTransfer createTransfer) throws Exception {
         return create(xIdempotencyKey, Optional.empty(), accountID,
             createTransfer);
@@ -165,10 +162,8 @@ public class Transfers {
      * @throws Exception if the API call fails
      */
     public CreateTransferResponse create(
-            String xIdempotencyKey,
-            Optional<? extends TransferWaitFor> xWaitFor,
-            String accountID,
-            CreateTransfer createTransfer) throws Exception {
+            String xIdempotencyKey, Optional<? extends TransferWaitFor> xWaitFor,
+            String accountID, CreateTransfer createTransfer) throws Exception {
         CreateTransferRequest request =
             CreateTransferRequest
                 .builder()
@@ -253,9 +248,7 @@ public class Transfers {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTransferResponse get(
-            String transferID,
-            String accountID) throws Exception {
+    public GetTransferResponse get(String transferID, String accountID) throws Exception {
         GetTransferRequest request =
             GetTransferRequest
                 .builder()
@@ -296,8 +289,7 @@ public class Transfers {
      * @throws Exception if the API call fails
      */
     public UpdateTransferResponse update(
-            String transferID,
-            String accountID,
+            String transferID, String accountID,
             PatchTransfer patchTransfer) throws Exception {
         UpdateTransferRequest request =
             UpdateTransferRequest
@@ -334,9 +326,7 @@ public class Transfers {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateCancellationResponse createCancellation(
-            String accountID,
-            String transferID) throws Exception {
+    public CreateCancellationResponse createCancellation(String accountID, String transferID) throws Exception {
         CreateCancellationRequest request =
             CreateCancellationRequest
                 .builder()
@@ -373,8 +363,7 @@ public class Transfers {
      * @throws Exception if the API call fails
      */
     public GetCancellationResponse getCancellation(
-            String accountID,
-            String transferID,
+            String accountID, String transferID,
             String cancellationID) throws Exception {
         GetCancellationRequest request =
             GetCancellationRequest
@@ -445,9 +434,7 @@ public class Transfers {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListRefundsResponse listRefunds(
-            String accountID,
-            String transferID) throws Exception {
+    public ListRefundsResponse listRefunds(String accountID, String transferID) throws Exception {
         ListRefundsRequest request =
             ListRefundsRequest
                 .builder()
@@ -484,8 +471,7 @@ public class Transfers {
      * @throws Exception if the API call fails
      */
     public GetRefundResponse getRefund(
-            String transferID,
-            String accountID,
+            String transferID, String accountID,
             String refundID) throws Exception {
         GetRefundRequest request =
             GetRefundRequest
@@ -528,8 +514,7 @@ public class Transfers {
      * @throws Exception if the API call fails
      */
     public CreateReversalResponse createReversal(
-            String xIdempotencyKey,
-            String accountID,
+            String xIdempotencyKey, String accountID,
             String transferID) throws Exception {
         return createReversal(xIdempotencyKey, accountID, transferID,
             Optional.empty());
@@ -551,10 +536,8 @@ public class Transfers {
      * @throws Exception if the API call fails
      */
     public CreateReversalResponse createReversal(
-            String xIdempotencyKey,
-            String accountID,
-            String transferID,
-            Optional<? extends CreateReversal> createReversal) throws Exception {
+            String xIdempotencyKey, String accountID,
+            String transferID, Optional<? extends CreateReversal> createReversal) throws Exception {
         CreateReversalRequest request =
             CreateReversalRequest
                 .builder()

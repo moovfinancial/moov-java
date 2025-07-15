@@ -64,9 +64,7 @@ public class Support {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CreateTicketResponse createTicket(
-            String accountID,
-            CreateTicket createTicket) throws Exception {
+    public CreateTicketResponse createTicket(String accountID, CreateTicket createTicket) throws Exception {
         CreateTicketRequest request =
             CreateTicketRequest
                 .builder()
@@ -119,10 +117,8 @@ public class Support {
      * @throws Exception if the API call fails
      */
     public ListTicketsResponse listTickets(
-            Optional<String> cursor,
-            Optional<Long> count,
-            Optional<? extends TicketStatus> status,
-            String accountID) throws Exception {
+            Optional<String> cursor, Optional<Long> count,
+            Optional<? extends TicketStatus> status, String accountID) throws Exception {
         ListTicketsRequest request =
             ListTicketsRequest
                 .builder()
@@ -159,9 +155,7 @@ public class Support {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTicketResponse getTicket(
-            String accountID,
-            String ticketID) throws Exception {
+    public GetTicketResponse getTicket(String accountID, String ticketID) throws Exception {
         GetTicketRequest request =
             GetTicketRequest
                 .builder()
@@ -198,8 +192,7 @@ public class Support {
      * @throws Exception if the API call fails
      */
     public UpdateTicketResponse updateTicket(
-            String accountID,
-            String ticketID,
+            String accountID, String ticketID,
             UpdateTicket updateTicket) throws Exception {
         UpdateTicketRequest request =
             UpdateTicketRequest
@@ -236,9 +229,7 @@ public class Support {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListTicketMessagesResponse listTicketMessages(
-            String accountID,
-            String ticketID) throws Exception {
+    public ListTicketMessagesResponse listTicketMessages(String accountID, String ticketID) throws Exception {
         ListTicketMessagesRequest request =
             ListTicketMessagesRequest
                 .builder()

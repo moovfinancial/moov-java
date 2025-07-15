@@ -64,10 +64,8 @@ public class Authentication {
      * @throws Exception if the API call fails
      */
     public RevokeAccessTokenResponse revokeAccessToken(
-            String token,
-            Optional<? extends TokenTypeHint> tokenTypeHint,
-            Optional<String> clientId,
-            Optional<String> clientSecret) throws Exception {
+            String token, Optional<? extends TokenTypeHint> tokenTypeHint,
+            Optional<String> clientId, Optional<String> clientSecret) throws Exception {
         RevokeTokenRequest request =
             RevokeTokenRequest
                 .builder()

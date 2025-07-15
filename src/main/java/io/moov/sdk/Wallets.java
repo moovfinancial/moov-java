@@ -89,9 +89,7 @@ public class Wallets {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetWalletResponse get(
-            String accountID,
-            String walletID) throws Exception {
+    public GetWalletResponse get(String accountID, String walletID) throws Exception {
         GetWalletRequest request =
             GetWalletRequest
                 .builder()

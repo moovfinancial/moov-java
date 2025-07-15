@@ -213,9 +213,7 @@ public class Accounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public UpdateAccountResponse update(
-            String accountID,
-            PatchAccount patchAccount) throws Exception {
+    public UpdateAccountResponse update(String accountID, PatchAccount patchAccount) throws Exception {
         UpdateAccountRequest request =
             UpdateAccountRequest
                 .builder()
@@ -324,9 +322,7 @@ public class Accounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public AssignAccountCountriesResponse assignCountries(
-            String accountID,
-            AccountCountries accountCountries) throws Exception {
+    public AssignAccountCountriesResponse assignCountries(String accountID, AccountCountries accountCountries) throws Exception {
         AssignAccountCountriesRequest request =
             AssignAccountCountriesRequest
                 .builder()
@@ -410,9 +406,7 @@ public class Accounts {
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTermsOfServiceTokenResponse getTermsOfServiceToken(
-            Optional<String> origin,
-            Optional<String> referer) throws Exception {
+    public GetTermsOfServiceTokenResponse getTermsOfServiceToken(Optional<String> origin, Optional<String> referer) throws Exception {
         GetTermsOfServiceTokenRequest request =
             GetTermsOfServiceTokenRequest
                 .builder()

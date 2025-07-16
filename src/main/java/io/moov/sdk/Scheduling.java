@@ -34,7 +34,6 @@ import io.moov.sdk.operations.UpdateScheduleOperation;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -44,6 +43,7 @@ public class Scheduling {
     Scheduling(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Describes the schedule to create or modify.
      * 

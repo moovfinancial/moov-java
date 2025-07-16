@@ -30,7 +30,6 @@ import io.moov.sdk.operations.ListCardsOperation;
 import io.moov.sdk.operations.UpdateCardOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -40,6 +39,7 @@ public class Cards {
     Cards(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Link a card to an existing Moov account. 
      * 

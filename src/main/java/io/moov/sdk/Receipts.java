@@ -16,7 +16,6 @@ import io.moov.sdk.operations.ListReceiptsOperation;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.List;
-import java.util.Optional;
 
 
 public class Receipts {
@@ -25,6 +24,7 @@ public class Receipts {
     Receipts(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Create receipts for transfers and scheduled transfers.
      * 

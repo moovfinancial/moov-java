@@ -16,7 +16,6 @@ import io.moov.sdk.operations.GetPaymentMethodOperation;
 import io.moov.sdk.operations.ListPaymentMethodsOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -26,6 +25,7 @@ public class PaymentMethods {
     PaymentMethods(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods 
      * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.

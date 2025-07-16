@@ -45,7 +45,6 @@ import io.moov.sdk.operations.ListAccountsOperation;
 import io.moov.sdk.operations.UpdateAccountOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -55,6 +54,7 @@ public class Accounts {
     Accounts(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
      * information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).

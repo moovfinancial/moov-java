@@ -21,6 +21,10 @@ you'll need to specify the `/terminal-applications.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/terminal-applications.write` scope.
+* [createVersion](#createversion) - Register a new version of a terminal application. For Android applications, this is used to register a new version code of the application.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/terminal-applications.write` scope.
 
 ## create
 
@@ -54,11 +58,10 @@ public class Application {
             .build();
 
         CreateTerminalApplication req = CreateTerminalApplication.builder()
-                .platform(TerminalApplicationPlatform.IOS)
-                .appBundleID("com.example.app")
+                .platform(TerminalApplicationPlatform.ANDROID)
                 .packageName("com.example.app")
-                .sha256Digest("1234567890")
-                .versionCode("1.0.0")
+                .sha256Digest("AA:BB:CC:DD:EE:FF:AA:BB:CC:DD:EE:FF:AA:BB:CC:DD:AA:BB:CC:DD:EE:FF:AA:BB:CC:DD:EE:FF:AA:BB:CC:DD")
+                .versionCode("20332277")
                 .build();
 
         CreateTerminalApplicationResponse res = sdk.terminalApplications().create()
@@ -250,3 +253,68 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/GenericError | 400, 409                   | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## createVersion
+
+Register a new version of a terminal application. For Android applications, this is used to register a new version code of the application.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/terminal-applications.write` scope.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.TerminalApplicationVersion;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.TerminalApplicationError;
+import io.moov.sdk.models.operations.CreateTerminalApplicationVersionResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, TerminalApplicationError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username(System.getenv().getOrDefault("", ""))
+                    .password(System.getenv().getOrDefault("", ""))
+                    .build())
+            .build();
+
+        CreateTerminalApplicationVersionResponse res = sdk.terminalApplications().createVersion()
+                .terminalApplicationID("12345678-1234-1234-1234-123456789012")
+                .terminalApplicationVersion(TerminalApplicationVersion.builder()
+                    .version("20440059")
+                    .build())
+                .call();
+
+        if (res.terminalApplicationVersion().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `terminalApplicationID`                                                             | *String*                                                                            | :heavy_check_mark:                                                                  | N/A                                                                                 | 12345678-1234-1234-1234-123456789012                                                |
+| `terminalApplicationVersion`                                                        | [TerminalApplicationVersion](../../models/components/TerminalApplicationVersion.md) | :heavy_check_mark:                                                                  | N/A                                                                                 | {<br/>"version": "20440059"<br/>}                                                   |
+
+### Response
+
+**[CreateTerminalApplicationVersionResponse](../../models/operations/CreateTerminalApplicationVersionResponse.md)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| models/errors/GenericError             | 400, 409                               | application/json                       |
+| models/errors/TerminalApplicationError | 422                                    | application/json                       |
+| models/errors/APIException             | 4XX, 5XX                               | \*/\*                                  |

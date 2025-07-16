@@ -33,8 +33,6 @@ import io.moov.sdk.operations.ListPaymentLinksOperation;
 import io.moov.sdk.operations.UpdatePaymentLinkOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class PaymentLinks {
@@ -43,6 +41,7 @@ public class PaymentLinks {
     PaymentLinks(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
      * 

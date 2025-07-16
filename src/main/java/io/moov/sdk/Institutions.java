@@ -16,7 +16,6 @@ import io.moov.sdk.operations.SearchInstitutionsOperation;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -26,6 +25,7 @@ public class Institutions {
     Institutions(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Search for financial institutions by name or routing number.
      * 

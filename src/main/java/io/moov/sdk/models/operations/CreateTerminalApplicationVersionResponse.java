@@ -5,7 +5,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.AccountTerminalApplication;
+import io.moov.sdk.models.components.TerminalApplicationVersion;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 
-public class ListAccountTerminalApplicationsResponse implements Response {
+public class CreateTerminalApplicationVersionResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
@@ -38,32 +38,32 @@ public class ListAccountTerminalApplicationsResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends List<AccountTerminalApplication>> accountTerminalApplications;
+    private Optional<? extends TerminalApplicationVersion> terminalApplicationVersion;
 
 
     private Map<String, List<String>> headers;
 
     @JsonCreator
-    public ListAccountTerminalApplicationsResponse(
+    public CreateTerminalApplicationVersionResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends List<AccountTerminalApplication>> accountTerminalApplications,
+            Optional<? extends TerminalApplicationVersion> terminalApplicationVersion,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(accountTerminalApplications, "accountTerminalApplications");
+        Utils.checkNotNull(terminalApplicationVersion, "terminalApplicationVersion");
         headers = Utils.emptyMapIfNull(headers);
         Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.accountTerminalApplications = accountTerminalApplications;
+        this.terminalApplicationVersion = terminalApplicationVersion;
         this.headers = headers;
     }
     
-    public ListAccountTerminalApplicationsResponse(
+    public CreateTerminalApplicationVersionResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
@@ -101,8 +101,8 @@ public class ListAccountTerminalApplicationsResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<AccountTerminalApplication>> accountTerminalApplications() {
-        return (Optional<List<AccountTerminalApplication>>) accountTerminalApplications;
+    public Optional<TerminalApplicationVersion> terminalApplicationVersion() {
+        return (Optional<TerminalApplicationVersion>) terminalApplicationVersion;
     }
 
     @JsonIgnore
@@ -118,7 +118,7 @@ public class ListAccountTerminalApplicationsResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
-    public ListAccountTerminalApplicationsResponse withContentType(String contentType) {
+    public CreateTerminalApplicationVersionResponse withContentType(String contentType) {
         Utils.checkNotNull(contentType, "contentType");
         this.contentType = contentType;
         return this;
@@ -127,7 +127,7 @@ public class ListAccountTerminalApplicationsResponse implements Response {
     /**
      * HTTP response status code for this operation
      */
-    public ListAccountTerminalApplicationsResponse withStatusCode(int statusCode) {
+    public CreateTerminalApplicationVersionResponse withStatusCode(int statusCode) {
         Utils.checkNotNull(statusCode, "statusCode");
         this.statusCode = statusCode;
         return this;
@@ -136,7 +136,7 @@ public class ListAccountTerminalApplicationsResponse implements Response {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public ListAccountTerminalApplicationsResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
+    public CreateTerminalApplicationVersionResponse withRawResponse(HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = rawResponse;
         return this;
@@ -145,9 +145,9 @@ public class ListAccountTerminalApplicationsResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public ListAccountTerminalApplicationsResponse withAccountTerminalApplications(List<AccountTerminalApplication> accountTerminalApplications) {
-        Utils.checkNotNull(accountTerminalApplications, "accountTerminalApplications");
-        this.accountTerminalApplications = Optional.ofNullable(accountTerminalApplications);
+    public CreateTerminalApplicationVersionResponse withTerminalApplicationVersion(TerminalApplicationVersion terminalApplicationVersion) {
+        Utils.checkNotNull(terminalApplicationVersion, "terminalApplicationVersion");
+        this.terminalApplicationVersion = Optional.ofNullable(terminalApplicationVersion);
         return this;
     }
 
@@ -155,13 +155,13 @@ public class ListAccountTerminalApplicationsResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public ListAccountTerminalApplicationsResponse withAccountTerminalApplications(Optional<? extends List<AccountTerminalApplication>> accountTerminalApplications) {
-        Utils.checkNotNull(accountTerminalApplications, "accountTerminalApplications");
-        this.accountTerminalApplications = accountTerminalApplications;
+    public CreateTerminalApplicationVersionResponse withTerminalApplicationVersion(Optional<? extends TerminalApplicationVersion> terminalApplicationVersion) {
+        Utils.checkNotNull(terminalApplicationVersion, "terminalApplicationVersion");
+        this.terminalApplicationVersion = terminalApplicationVersion;
         return this;
     }
 
-    public ListAccountTerminalApplicationsResponse withHeaders(Map<String, List<String>> headers) {
+    public CreateTerminalApplicationVersionResponse withHeaders(Map<String, List<String>> headers) {
         Utils.checkNotNull(headers, "headers");
         this.headers = headers;
         return this;
@@ -175,12 +175,12 @@ public class ListAccountTerminalApplicationsResponse implements Response {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ListAccountTerminalApplicationsResponse other = (ListAccountTerminalApplicationsResponse) o;
+        CreateTerminalApplicationVersionResponse other = (CreateTerminalApplicationVersionResponse) o;
         return 
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.accountTerminalApplications, other.accountTerminalApplications) &&
+            Utils.enhancedDeepEquals(this.terminalApplicationVersion, other.terminalApplicationVersion) &&
             Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
@@ -188,16 +188,16 @@ public class ListAccountTerminalApplicationsResponse implements Response {
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            accountTerminalApplications, headers);
+            terminalApplicationVersion, headers);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(ListAccountTerminalApplicationsResponse.class,
+        return Utils.toString(CreateTerminalApplicationVersionResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "accountTerminalApplications", accountTerminalApplications,
+                "terminalApplicationVersion", terminalApplicationVersion,
                 "headers", headers);
     }
 
@@ -210,7 +210,7 @@ public class ListAccountTerminalApplicationsResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends List<AccountTerminalApplication>> accountTerminalApplications = Optional.empty();
+        private Optional<? extends TerminalApplicationVersion> terminalApplicationVersion = Optional.empty();
 
         private Map<String, List<String>> headers;
 
@@ -252,18 +252,18 @@ public class ListAccountTerminalApplicationsResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder accountTerminalApplications(List<AccountTerminalApplication> accountTerminalApplications) {
-            Utils.checkNotNull(accountTerminalApplications, "accountTerminalApplications");
-            this.accountTerminalApplications = Optional.ofNullable(accountTerminalApplications);
+        public Builder terminalApplicationVersion(TerminalApplicationVersion terminalApplicationVersion) {
+            Utils.checkNotNull(terminalApplicationVersion, "terminalApplicationVersion");
+            this.terminalApplicationVersion = Optional.ofNullable(terminalApplicationVersion);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder accountTerminalApplications(Optional<? extends List<AccountTerminalApplication>> accountTerminalApplications) {
-            Utils.checkNotNull(accountTerminalApplications, "accountTerminalApplications");
-            this.accountTerminalApplications = accountTerminalApplications;
+        public Builder terminalApplicationVersion(Optional<? extends TerminalApplicationVersion> terminalApplicationVersion) {
+            Utils.checkNotNull(terminalApplicationVersion, "terminalApplicationVersion");
+            this.terminalApplicationVersion = terminalApplicationVersion;
             return this;
         }
 
@@ -274,11 +274,11 @@ public class ListAccountTerminalApplicationsResponse implements Response {
             return this;
         }
 
-        public ListAccountTerminalApplicationsResponse build() {
+        public CreateTerminalApplicationVersionResponse build() {
 
-            return new ListAccountTerminalApplicationsResponse(
+            return new CreateTerminalApplicationVersionResponse(
                 contentType, statusCode, rawResponse,
-                accountTerminalApplications, headers);
+                terminalApplicationVersion, headers);
         }
 
     }

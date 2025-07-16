@@ -31,7 +31,6 @@ import io.moov.sdk.operations.UpdateTicketOperation;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -41,6 +40,7 @@ public class Support {
     Support(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Create a support ticket for a Moov account.
      * 

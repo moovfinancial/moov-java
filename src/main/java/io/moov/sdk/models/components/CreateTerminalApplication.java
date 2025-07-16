@@ -40,14 +40,14 @@ public class CreateTerminalApplication {
     private Optional<String> packageName;
 
     /**
-     * The app version of the terminal application. Required if paltform is `android`.
+     * The SHA-256 digest of the signing key for the application. Required if platform is `android`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sha256Digest")
     private Optional<String> sha256Digest;
 
     /**
-     * The app version of the terminal application. Required if platform is `android`.
+     * The version code of the Android application. Required if platform is `android`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("versionCode")
@@ -103,7 +103,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if paltform is `android`.
+     * The SHA-256 digest of the signing key for the application. Required if platform is `android`.
      */
     @JsonIgnore
     public Optional<String> sha256Digest() {
@@ -111,7 +111,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if platform is `android`.
+     * The version code of the Android application. Required if platform is `android`.
      */
     @JsonIgnore
     public Optional<String> versionCode() {
@@ -171,7 +171,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if paltform is `android`.
+     * The SHA-256 digest of the signing key for the application. Required if platform is `android`.
      */
     public CreateTerminalApplication withSha256Digest(String sha256Digest) {
         Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -181,7 +181,7 @@ public class CreateTerminalApplication {
 
 
     /**
-     * The app version of the terminal application. Required if paltform is `android`.
+     * The SHA-256 digest of the signing key for the application. Required if platform is `android`.
      */
     public CreateTerminalApplication withSha256Digest(Optional<String> sha256Digest) {
         Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -190,7 +190,7 @@ public class CreateTerminalApplication {
     }
 
     /**
-     * The app version of the terminal application. Required if platform is `android`.
+     * The version code of the Android application. Required if platform is `android`.
      */
     public CreateTerminalApplication withVersionCode(String versionCode) {
         Utils.checkNotNull(versionCode, "versionCode");
@@ -200,7 +200,7 @@ public class CreateTerminalApplication {
 
 
     /**
-     * The app version of the terminal application. Required if platform is `android`.
+     * The version code of the Android application. Required if platform is `android`.
      */
     public CreateTerminalApplication withVersionCode(Optional<String> versionCode) {
         Utils.checkNotNull(versionCode, "versionCode");
@@ -309,7 +309,7 @@ public class CreateTerminalApplication {
 
 
         /**
-         * The app version of the terminal application. Required if paltform is `android`.
+         * The SHA-256 digest of the signing key for the application. Required if platform is `android`.
          */
         public Builder sha256Digest(String sha256Digest) {
             Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -318,7 +318,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app version of the terminal application. Required if paltform is `android`.
+         * The SHA-256 digest of the signing key for the application. Required if platform is `android`.
          */
         public Builder sha256Digest(Optional<String> sha256Digest) {
             Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -328,7 +328,7 @@ public class CreateTerminalApplication {
 
 
         /**
-         * The app version of the terminal application. Required if platform is `android`.
+         * The version code of the Android application. Required if platform is `android`.
          */
         public Builder versionCode(String versionCode) {
             Utils.checkNotNull(versionCode, "versionCode");
@@ -337,7 +337,7 @@ public class CreateTerminalApplication {
         }
 
         /**
-         * The app version of the terminal application. Required if platform is `android`.
+         * The version code of the Android application. Required if platform is `android`.
          */
         public Builder versionCode(Optional<String> versionCode) {
             Utils.checkNotNull(versionCode, "versionCode");

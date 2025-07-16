@@ -8,33 +8,37 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
-import io.moov.sdk.models.components.AccountTerminalApplication;
+import io.moov.sdk.models.components.TerminalApplicationVersion;
 import io.moov.sdk.models.errors.APIException;
-import io.moov.sdk.models.operations.ListAccountTerminalApplicationsRequest;
-import io.moov.sdk.models.operations.ListAccountTerminalApplicationsResponse;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.TerminalApplicationError;
+import io.moov.sdk.models.operations.CreateTerminalApplicationVersionRequest;
+import io.moov.sdk.models.operations.CreateTerminalApplicationVersionResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
 import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
 import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
+import io.moov.sdk.utils.SerializedBody;
+import io.moov.sdk.utils.Utils.JsonShape;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
+import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
 import java.util.Optional;
 
 
-public class ListAccountTerminalApplicationsOperation implements RequestOperation<ListAccountTerminalApplicationsRequest, ListAccountTerminalApplicationsResponse> {
+public class CreateTerminalApplicationVersionOperation implements RequestOperation<CreateTerminalApplicationVersionRequest, CreateTerminalApplicationVersionResponse> {
 
     private final SDKConfiguration sdkConfiguration;
     private final String baseUrl;
     private final SecuritySource securitySource;
     private final HTTPClient client;
 
-    public ListAccountTerminalApplicationsOperation(SDKConfiguration sdkConfiguration) {
+    public CreateTerminalApplicationVersionOperation(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
         this.baseUrl = this.sdkConfiguration.serverUrl();
         this.securitySource = this.sdkConfiguration.securitySource();
@@ -45,13 +49,26 @@ public class ListAccountTerminalApplicationsOperation implements RequestOperatio
         return Optional.ofNullable(this.securitySource);
     }
 
-    public HttpRequest buildRequest(ListAccountTerminalApplicationsRequest request) throws Exception {
+    public HttpRequest buildRequest(CreateTerminalApplicationVersionRequest request) throws Exception {
         String url = Utils.generateURL(
-                ListAccountTerminalApplicationsRequest.class,
+                CreateTerminalApplicationVersionRequest.class,
                 this.baseUrl,
-                "/accounts/{accountID}/terminal-applications",
+                "/terminal-applications/{terminalApplicationID}/versions",
                 request, this.sdkConfiguration.globals);
-        HTTPRequest req = new HTTPRequest(url, "GET");
+        HTTPRequest req = new HTTPRequest(url, "POST");
+        Object convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
+        SerializedBody serializedRequestBody = Utils.serializeRequestBody(
+                convertedRequest, 
+                "terminalApplicationVersion",
+                "json",
+                false);
+        if (serializedRequestBody == null) {
+            throw new Exception("Request body is required");
+        }
+        req.setBody(Optional.ofNullable(serializedRequestBody));
         req.addHeader("Accept", "application/json")
                 .addHeader("user-agent", SDKConfiguration.USER_AGENT);
         req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -61,7 +78,7 @@ public class ListAccountTerminalApplicationsOperation implements RequestOperatio
               new BeforeRequestContextImpl(
                   this.sdkConfiguration,
                   this.baseUrl,
-                  "listAccountTerminalApplications",
+                  "createTerminalApplicationVersion",
                   java.util.Optional.of(java.util.List.of()),
                   securitySource()),
               req.build());
@@ -74,7 +91,7 @@ public class ListAccountTerminalApplicationsOperation implements RequestOperatio
                 new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "listAccountTerminalApplications",
+                    "createTerminalApplicationVersion",
                     java.util.Optional.of(java.util.List.of()),
                     securitySource()),
                 Optional.ofNullable(response),
@@ -87,19 +104,19 @@ public class ListAccountTerminalApplicationsOperation implements RequestOperatio
                 new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "listAccountTerminalApplications",
+                    "createTerminalApplicationVersion",
                     java.util.Optional.of(java.util.List.of()),
                     securitySource()),
                 response);
     }
 
     @Override
-    public HttpResponse<InputStream> doRequest(ListAccountTerminalApplicationsRequest request) throws Exception {
+    public HttpResponse<InputStream> doRequest(CreateTerminalApplicationVersionRequest request) throws Exception {
         HttpRequest r = buildRequest(request);
         HttpResponse<InputStream> httpRes;
         try {
             httpRes = client.send(r);
-            if (Utils.statusCodeMatches(httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
+            if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "403", "404", "409", "422", "429", "4XX", "500", "504", "5XX")) {
                 httpRes = onError(httpRes, null);
             } else {
                 httpRes = onSuccess(httpRes);
@@ -113,28 +130,28 @@ public class ListAccountTerminalApplicationsOperation implements RequestOperatio
 
 
     @Override
-    public ListAccountTerminalApplicationsResponse handleResponse(HttpResponse<InputStream> response) throws Exception {
+    public CreateTerminalApplicationVersionResponse handleResponse(HttpResponse<InputStream> response) throws Exception {
         String contentType = response
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        ListAccountTerminalApplicationsResponse.Builder resBuilder = 
-            ListAccountTerminalApplicationsResponse
+        CreateTerminalApplicationVersionResponse.Builder resBuilder = 
+            CreateTerminalApplicationVersionResponse
                 .builder()
                 .contentType(contentType)
                 .statusCode(response.statusCode())
                 .rawResponse(response);
 
-        ListAccountTerminalApplicationsResponse res = resBuilder.build();
+        CreateTerminalApplicationVersionResponse res = resBuilder.build();
         
         if (Utils.statusCodeMatches(response.statusCode(), "200")) {
             res.withHeaders(response.headers().map());
             if (Utils.contentTypeMatches(contentType, "application/json")) {
-                List<AccountTerminalApplication> out = Utils.mapper().readValue(
+                TerminalApplicationVersion out = Utils.mapper().readValue(
                     response.body(),
                     new TypeReference<>() {
                     });
-                res.withAccountTerminalApplications(out);
+                res.withTerminalApplicationVersion(out);
                 return res;
             } else {
                 throw new APIException(
@@ -144,7 +161,39 @@ public class ListAccountTerminalApplicationsOperation implements RequestOperatio
                     Utils.extractByteArrayFromBody(response));
             }
         }
-        if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "429")) {
+        if (Utils.statusCodeMatches(response.statusCode(), "400", "409")) {
+            res.withHeaders(response.headers().map());
+            if (Utils.contentTypeMatches(contentType, "application/json")) {
+                GenericError out = Utils.mapper().readValue(
+                    response.body(),
+                    new TypeReference<>() {
+                    });
+                throw out;
+            } else {
+                throw new APIException(
+                    response, 
+                    response.statusCode(), 
+                    "Unexpected content-type received: " + contentType, 
+                    Utils.extractByteArrayFromBody(response));
+            }
+        }
+        if (Utils.statusCodeMatches(response.statusCode(), "422")) {
+            res.withHeaders(response.headers().map());
+            if (Utils.contentTypeMatches(contentType, "application/json")) {
+                TerminalApplicationError out = Utils.mapper().readValue(
+                    response.body(),
+                    new TypeReference<>() {
+                    });
+                throw out;
+            } else {
+                throw new APIException(
+                    response, 
+                    response.statusCode(), 
+                    "Unexpected content-type received: " + contentType, 
+                    Utils.extractByteArrayFromBody(response));
+            }
+        }
+        if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "404", "429")) {
             res.withHeaders(response.headers().map());
             // no content 
             throw new APIException(

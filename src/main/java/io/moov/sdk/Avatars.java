@@ -11,8 +11,6 @@ import io.moov.sdk.models.operations.GetAvatarResponse;
 import io.moov.sdk.operations.GetAvatarOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Avatars {
@@ -21,6 +19,7 @@ public class Avatars {
     Avatars(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Get avatar image for an account using a unique ID.    
      * 

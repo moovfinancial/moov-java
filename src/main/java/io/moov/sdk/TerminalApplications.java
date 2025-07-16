@@ -6,8 +6,12 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.CreateTerminalApplication;
+import io.moov.sdk.models.components.TerminalApplicationVersion;
 import io.moov.sdk.models.operations.CreateTerminalApplicationRequestBuilder;
 import io.moov.sdk.models.operations.CreateTerminalApplicationResponse;
+import io.moov.sdk.models.operations.CreateTerminalApplicationVersionRequest;
+import io.moov.sdk.models.operations.CreateTerminalApplicationVersionRequestBuilder;
+import io.moov.sdk.models.operations.CreateTerminalApplicationVersionResponse;
 import io.moov.sdk.models.operations.DeleteTerminalApplicationRequest;
 import io.moov.sdk.models.operations.DeleteTerminalApplicationRequestBuilder;
 import io.moov.sdk.models.operations.DeleteTerminalApplicationResponse;
@@ -18,13 +22,12 @@ import io.moov.sdk.models.operations.ListTerminalApplicationsRequest;
 import io.moov.sdk.models.operations.ListTerminalApplicationsRequestBuilder;
 import io.moov.sdk.models.operations.ListTerminalApplicationsResponse;
 import io.moov.sdk.operations.CreateTerminalApplicationOperation;
+import io.moov.sdk.operations.CreateTerminalApplicationVersionOperation;
 import io.moov.sdk.operations.DeleteTerminalApplicationOperation;
 import io.moov.sdk.operations.GetTerminalApplicationOperation;
 import io.moov.sdk.operations.ListTerminalApplicationsOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class TerminalApplications {
@@ -33,6 +36,7 @@ public class TerminalApplications {
     TerminalApplications(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Create a new terminal application.
      * 
@@ -155,6 +159,41 @@ public class TerminalApplications {
                 .build();
         RequestOperation<DeleteTerminalApplicationRequest, DeleteTerminalApplicationResponse> operation
               = new DeleteTerminalApplicationOperation(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Register a new version of a terminal application. For Android applications, this is used to register a new version code of the application.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/terminal-applications.write` scope.
+     * 
+     * @return The call builder
+     */
+    public CreateTerminalApplicationVersionRequestBuilder createVersion() {
+        return new CreateTerminalApplicationVersionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Register a new version of a terminal application. For Android applications, this is used to register a new version code of the application.
+     * 
+     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * you'll need to specify the `/terminal-applications.write` scope.
+     * 
+     * @param terminalApplicationID 
+     * @param terminalApplicationVersion Describes a terminal application version.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CreateTerminalApplicationVersionResponse createVersion(String terminalApplicationID, TerminalApplicationVersion terminalApplicationVersion) throws Exception {
+        CreateTerminalApplicationVersionRequest request =
+            CreateTerminalApplicationVersionRequest
+                .builder()
+                .terminalApplicationID(terminalApplicationID)
+                .terminalApplicationVersion(terminalApplicationVersion)
+                .build();
+        RequestOperation<CreateTerminalApplicationVersionRequest, CreateTerminalApplicationVersionResponse> operation
+              = new CreateTerminalApplicationVersionOperation(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

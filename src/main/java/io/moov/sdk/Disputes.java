@@ -54,8 +54,6 @@ import io.moov.sdk.operations.UploadDisputeEvidenceFileOperation;
 import io.moov.sdk.operations.UploadDisputeEvidenceTextOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Disputes {
@@ -64,6 +62,7 @@ public class Disputes {
     Disputes(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Returns the list of disputes. 
      * 

@@ -46,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.22.3'
+implementation 'io.moov:sdk:0.22.4'
 ```
 
 Maven:
@@ -54,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.22.3</version>
+    <version>0.22.4</version>
 </dependency>
 ```
 
@@ -936,6 +936,10 @@ you'll need to specify the `/terminal-applications.read` scope.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/terminal-applications.read` scope.
 * [delete](docs/sdks/terminalapplications/README.md#delete) - Delete a specific terminal application.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/terminal-applications.write` scope.
+* [createVersion](docs/sdks/terminalapplications/README.md#createversion) - Register a new version of a terminal application. For Android applications, this is used to register a new version code of the application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/terminal-applications.write` scope.

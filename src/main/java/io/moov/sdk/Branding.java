@@ -25,8 +25,6 @@ import io.moov.sdk.operations.UpdateBrandOperation;
 import io.moov.sdk.operations.UpsertBrandOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Branding {
@@ -35,6 +33,7 @@ public class Branding {
     Branding(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Create brand properties for the specified account.
      * 

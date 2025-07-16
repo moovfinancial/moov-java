@@ -47,7 +47,6 @@ import io.moov.sdk.operations.LinkBankAccountOperation;
 import io.moov.sdk.operations.ListBankAccountsOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -57,6 +56,7 @@ public class BankAccounts {
     BankAccounts(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
      * 

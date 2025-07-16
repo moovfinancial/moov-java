@@ -16,7 +16,6 @@ import io.moov.sdk.operations.CreateAccessTokenOperation;
 import io.moov.sdk.operations.RevokeAccessTokenOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -26,6 +25,7 @@ public class Authentication {
     Authentication(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Revoke an auth token.
      * 

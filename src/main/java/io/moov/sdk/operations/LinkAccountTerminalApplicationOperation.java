@@ -8,7 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
-import io.moov.sdk.models.components.TerminalApplication;
+import io.moov.sdk.models.components.AccountTerminalApplication;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.AccountTerminalApplicationError;
 import io.moov.sdk.models.errors.GenericError;
@@ -147,11 +147,11 @@ public class LinkAccountTerminalApplicationOperation implements RequestOperation
         if (Utils.statusCodeMatches(response.statusCode(), "200")) {
             res.withHeaders(response.headers().map());
             if (Utils.contentTypeMatches(contentType, "application/json")) {
-                TerminalApplication out = Utils.mapper().readValue(
+                AccountTerminalApplication out = Utils.mapper().readValue(
                     response.body(),
                     new TypeReference<>() {
                     });
-                res.withTerminalApplication(out);
+                res.withAccountTerminalApplication(out);
                 return res;
             } else {
                 throw new APIException(

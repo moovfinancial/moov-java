@@ -15,8 +15,6 @@ import io.moov.sdk.operations.GenerateEndToEndKeyOperation;
 import io.moov.sdk.operations.TestEndToEndTokenOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class EndToEndEncryption {
@@ -25,6 +23,7 @@ public class EndToEndEncryption {
     EndToEndEncryption(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Allows for testing a JWE token to ensure it's acceptable by Moov. 
      * 

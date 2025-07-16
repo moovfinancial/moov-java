@@ -41,6 +41,7 @@ public class CardIssuing {
     CardIssuing(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Request a virtual card be issued.
      * 

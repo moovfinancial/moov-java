@@ -28,7 +28,6 @@ import io.moov.sdk.operations.ListIssuedCardTransactionsOperation;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -38,6 +37,7 @@ public class IssuingTransactions {
     IssuingTransactions(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * List issued card authorizations associated with a Moov account.
      * 

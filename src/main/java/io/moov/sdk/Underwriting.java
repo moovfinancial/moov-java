@@ -21,8 +21,6 @@ import io.moov.sdk.operations.SaveUnderwritingOperation;
 import io.moov.sdk.operations.UpsertUnderwritingOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Underwriting {
@@ -31,6 +29,7 @@ public class Underwriting {
     Underwriting(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Retrieve underwriting associated with a given Moov account. 
      * 

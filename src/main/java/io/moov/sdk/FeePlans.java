@@ -46,6 +46,7 @@ public class FeePlans {
     FeePlans(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * List all fee plan agreements associated with an account.
      * 

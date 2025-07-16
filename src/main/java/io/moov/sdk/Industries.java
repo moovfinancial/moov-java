@@ -10,8 +10,6 @@ import io.moov.sdk.models.operations.ListIndustriesRequestBuilder;
 import io.moov.sdk.models.operations.ListIndustriesResponse;
 import io.moov.sdk.operations.ListIndustriesOperation;
 import java.lang.Exception;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Industries {
@@ -20,6 +18,7 @@ public class Industries {
     Industries(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Returns a list of industries relevant to merchant profile enrichment.  Results are ordered by industry name.
      * 

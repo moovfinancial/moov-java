@@ -10,8 +10,6 @@ import io.moov.sdk.models.operations.PingRequestBuilder;
 import io.moov.sdk.models.operations.PingResponse;
 import io.moov.sdk.operations.PingOperation;
 import java.lang.Exception;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Ping {
@@ -20,6 +18,7 @@ public class Ping {
     Ping(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * A simple endpoint to check auth.
      * 

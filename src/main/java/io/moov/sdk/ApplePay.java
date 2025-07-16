@@ -31,8 +31,6 @@ import io.moov.sdk.operations.RegisterApplePayMerchantDomainsOperation;
 import io.moov.sdk.operations.UpdateApplePayMerchantDomainsOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class ApplePay {
@@ -41,6 +39,7 @@ public class ApplePay {
     ApplePay(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Add domains to be registered with Apple Pay.
      * 

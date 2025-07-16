@@ -15,8 +15,6 @@ import io.moov.sdk.operations.GetWalletTransactionOperation;
 import io.moov.sdk.operations.ListWalletTransactionsOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class WalletTransactions {
@@ -25,6 +23,7 @@ public class WalletTransactions {
     WalletTransactions(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * List all the transactions associated with a particular Moov wallet. 
      * 

@@ -10,8 +10,6 @@ import io.moov.sdk.models.operations.GetEnrichmentAddressRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentAddressResponse;
 import io.moov.sdk.operations.GetEnrichmentAddressOperation;
 import java.lang.Exception;
-import java.util.List;
-import java.util.Optional;
 
 
 public class EnrichedAddress {
@@ -20,6 +18,7 @@ public class EnrichedAddress {
     EnrichedAddress(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Fetch enriched address suggestions. Requires a partial address. 
      * 

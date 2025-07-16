@@ -61,7 +61,7 @@ public class Application {
                     .build())
                 .call();
 
-        if (res.terminalApplication().isPresent()) {
+        if (res.accountTerminalApplication().isPresent()) {
             // handle response
         }
     }
@@ -120,7 +120,7 @@ public class Application {
                 .accountID("76d4c8a0-1f2b-4e3b-8f5c-7a9e1b2c3d4e")
                 .call();
 
-        if (res.terminalApplications().isPresent()) {
+        if (res.accountTerminalApplications().isPresent()) {
             // handle response
         }
     }
@@ -177,7 +177,7 @@ public class Application {
                 .terminalApplicationID("12345678-1234-1234-1234-123456789012")
                 .call();
 
-        if (res.terminalApplication().isPresent()) {
+        if (res.accountTerminalApplication().isPresent()) {
             // handle response
         }
     }

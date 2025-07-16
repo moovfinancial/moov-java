@@ -11,8 +11,6 @@ import io.moov.sdk.models.operations.GetEnrichmentProfileResponse;
 import io.moov.sdk.operations.GetEnrichmentProfileOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class EnrichedProfile {
@@ -21,6 +19,7 @@ public class EnrichedProfile {
     EnrichedProfile(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
      * 

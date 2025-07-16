@@ -20,8 +20,6 @@ import io.moov.sdk.operations.ListFilesOperation;
 import io.moov.sdk.operations.UploadFileOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Files {
@@ -30,6 +28,7 @@ public class Files {
     Files(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Upload a file and link it to the specified Moov account. 
      * 

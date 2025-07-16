@@ -24,8 +24,6 @@ import io.moov.sdk.operations.LinkAccountTerminalApplicationOperation;
 import io.moov.sdk.operations.ListAccountTerminalApplicationsOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class AccountTerminalApplications {
@@ -34,6 +32,7 @@ public class AccountTerminalApplications {
     AccountTerminalApplications(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Link an account with a terminal application.
      * 

@@ -15,7 +15,6 @@ import io.moov.sdk.operations.GetAdjustmentOperation;
 import io.moov.sdk.operations.ListAdjustmentsOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -25,6 +24,7 @@ public class Adjustments {
     Adjustments(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * List adjustments associated with a Moov account.
      * 

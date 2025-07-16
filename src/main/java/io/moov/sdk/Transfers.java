@@ -56,7 +56,6 @@ import io.moov.sdk.operations.ListTransfersOperation;
 import io.moov.sdk.operations.UpdateTransferOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -66,6 +65,7 @@ public class Transfers {
     Transfers(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
      * supply in the request body.

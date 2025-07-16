@@ -33,8 +33,6 @@ import io.moov.sdk.operations.ListSweepsOperation;
 import io.moov.sdk.operations.UpdateSweepConfigOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Sweeps {
@@ -43,6 +41,7 @@ public class Sweeps {
     Sweeps(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Create a sweep config for a wallet.
      * 

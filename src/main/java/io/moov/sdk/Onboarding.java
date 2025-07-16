@@ -23,8 +23,6 @@ import io.moov.sdk.operations.ListOnboardingInvitesOperation;
 import io.moov.sdk.operations.RevokeOnboardingInviteOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Onboarding {
@@ -33,6 +31,7 @@ public class Onboarding {
     Onboarding(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
      * 

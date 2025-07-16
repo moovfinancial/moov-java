@@ -5,7 +5,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.TerminalApplication;
+import io.moov.sdk.models.components.AccountTerminalApplication;
 import io.moov.sdk.utils.Response;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
@@ -38,7 +38,7 @@ public class LinkAccountTerminalApplicationResponse implements Response {
     /**
      * The request completed successfully.
      */
-    private Optional<? extends TerminalApplication> terminalApplication;
+    private Optional<? extends AccountTerminalApplication> accountTerminalApplication;
 
 
     private Map<String, List<String>> headers;
@@ -48,18 +48,18 @@ public class LinkAccountTerminalApplicationResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends TerminalApplication> terminalApplication,
+            Optional<? extends AccountTerminalApplication> accountTerminalApplication,
             Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(terminalApplication, "terminalApplication");
+        Utils.checkNotNull(accountTerminalApplication, "accountTerminalApplication");
         headers = Utils.emptyMapIfNull(headers);
         Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.terminalApplication = terminalApplication;
+        this.accountTerminalApplication = accountTerminalApplication;
         this.headers = headers;
     }
     
@@ -101,8 +101,8 @@ public class LinkAccountTerminalApplicationResponse implements Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<TerminalApplication> terminalApplication() {
-        return (Optional<TerminalApplication>) terminalApplication;
+    public Optional<AccountTerminalApplication> accountTerminalApplication() {
+        return (Optional<AccountTerminalApplication>) accountTerminalApplication;
     }
 
     @JsonIgnore
@@ -145,9 +145,9 @@ public class LinkAccountTerminalApplicationResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public LinkAccountTerminalApplicationResponse withTerminalApplication(TerminalApplication terminalApplication) {
-        Utils.checkNotNull(terminalApplication, "terminalApplication");
-        this.terminalApplication = Optional.ofNullable(terminalApplication);
+    public LinkAccountTerminalApplicationResponse withAccountTerminalApplication(AccountTerminalApplication accountTerminalApplication) {
+        Utils.checkNotNull(accountTerminalApplication, "accountTerminalApplication");
+        this.accountTerminalApplication = Optional.ofNullable(accountTerminalApplication);
         return this;
     }
 
@@ -155,9 +155,9 @@ public class LinkAccountTerminalApplicationResponse implements Response {
     /**
      * The request completed successfully.
      */
-    public LinkAccountTerminalApplicationResponse withTerminalApplication(Optional<? extends TerminalApplication> terminalApplication) {
-        Utils.checkNotNull(terminalApplication, "terminalApplication");
-        this.terminalApplication = terminalApplication;
+    public LinkAccountTerminalApplicationResponse withAccountTerminalApplication(Optional<? extends AccountTerminalApplication> accountTerminalApplication) {
+        Utils.checkNotNull(accountTerminalApplication, "accountTerminalApplication");
+        this.accountTerminalApplication = accountTerminalApplication;
         return this;
     }
 
@@ -180,7 +180,7 @@ public class LinkAccountTerminalApplicationResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.terminalApplication, other.terminalApplication) &&
+            Utils.enhancedDeepEquals(this.accountTerminalApplication, other.accountTerminalApplication) &&
             Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
@@ -188,7 +188,7 @@ public class LinkAccountTerminalApplicationResponse implements Response {
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            terminalApplication, headers);
+            accountTerminalApplication, headers);
     }
     
     @Override
@@ -197,7 +197,7 @@ public class LinkAccountTerminalApplicationResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "terminalApplication", terminalApplication,
+                "accountTerminalApplication", accountTerminalApplication,
                 "headers", headers);
     }
 
@@ -210,7 +210,7 @@ public class LinkAccountTerminalApplicationResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends TerminalApplication> terminalApplication = Optional.empty();
+        private Optional<? extends AccountTerminalApplication> accountTerminalApplication = Optional.empty();
 
         private Map<String, List<String>> headers;
 
@@ -252,18 +252,18 @@ public class LinkAccountTerminalApplicationResponse implements Response {
         /**
          * The request completed successfully.
          */
-        public Builder terminalApplication(TerminalApplication terminalApplication) {
-            Utils.checkNotNull(terminalApplication, "terminalApplication");
-            this.terminalApplication = Optional.ofNullable(terminalApplication);
+        public Builder accountTerminalApplication(AccountTerminalApplication accountTerminalApplication) {
+            Utils.checkNotNull(accountTerminalApplication, "accountTerminalApplication");
+            this.accountTerminalApplication = Optional.ofNullable(accountTerminalApplication);
             return this;
         }
 
         /**
          * The request completed successfully.
          */
-        public Builder terminalApplication(Optional<? extends TerminalApplication> terminalApplication) {
-            Utils.checkNotNull(terminalApplication, "terminalApplication");
-            this.terminalApplication = terminalApplication;
+        public Builder accountTerminalApplication(Optional<? extends AccountTerminalApplication> accountTerminalApplication) {
+            Utils.checkNotNull(accountTerminalApplication, "accountTerminalApplication");
+            this.accountTerminalApplication = accountTerminalApplication;
             return this;
         }
 
@@ -278,7 +278,7 @@ public class LinkAccountTerminalApplicationResponse implements Response {
 
             return new LinkAccountTerminalApplicationResponse(
                 contentType, statusCode, rawResponse,
-                terminalApplication, headers);
+                accountTerminalApplication, headers);
         }
 
     }

@@ -25,8 +25,6 @@ import io.moov.sdk.operations.ListCapabilitiesOperation;
 import io.moov.sdk.operations.RequestCapabilitiesOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Capabilities {
@@ -35,6 +33,7 @@ public class Capabilities {
     Capabilities(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Retrieve all the capabilities an account has requested.
      * 

@@ -29,8 +29,6 @@ import io.moov.sdk.operations.ListRepresentativesOperation;
 import io.moov.sdk.operations.UpdateRepresentativeOperation;
 import java.lang.Exception;
 import java.lang.String;
-import java.util.List;
-import java.util.Optional;
 
 
 public class Representatives {
@@ -39,6 +37,7 @@ public class Representatives {
     Representatives(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+
     /**
      * Moov accounts associated with businesses require information regarding individuals who represent the business. 
      * You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 422c0b88e1dfc0c7b3fec79520c3d1ea
+  docChecksum: e48020f9b4b025da5684c327be9fefbf
   docVersion: latest
   speakeasyVersion: 1.582.0
   generationVersion: 2.657.1
-  releaseVersion: 0.22.4
-  configChecksum: 73421329df9b84ee10c66c0614999128
+  releaseVersion: 0.22.5
+  configChecksum: 4fc5b0fa13bf28a90c2c70cdbfdc8e0c
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -291,6 +291,7 @@ generatedFiles:
   - docs/models/components/ItemListNextPage.md
   - docs/models/components/Itin.md
   - docs/models/components/JSONWebKey.md
+  - docs/models/components/Kind.md
   - docs/models/components/LinkAccountTerminalApplication.md
   - docs/models/components/LinkApplePay.md
   - docs/models/components/LinkApplePayToken.md
@@ -1196,6 +1197,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/ItemListNextPage.java
   - src/main/java/io/moov/sdk/models/components/Itin.java
   - src/main/java/io/moov/sdk/models/components/JSONWebKey.java
+  - src/main/java/io/moov/sdk/models/components/Kind.java
   - src/main/java/io/moov/sdk/models/components/LinkAccountTerminalApplication.java
   - src/main/java/io/moov/sdk/models/components/LinkApplePay.java
   - src/main/java/io/moov/sdk/models/components/LinkApplePayToken.java

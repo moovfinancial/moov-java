@@ -19,11 +19,9 @@ import java.util.Optional;
  * <p>A receipt request for a specific transfer, schedule, or schedule occurrence.
  */
 public class ReceiptRequest {
-    /**
-     * The type of receipt being requested.
-     */
+
     @JsonProperty("kind")
-    private ReceiptKind kind;
+    private Kind kind;
 
     /**
      * The email address to send the receipt to.
@@ -67,7 +65,7 @@ public class ReceiptRequest {
 
     @JsonCreator
     public ReceiptRequest(
-            @JsonProperty("kind") ReceiptKind kind,
+            @JsonProperty("kind") Kind kind,
             @JsonProperty("email") Optional<String> email,
             @JsonProperty("emailAccountID") Optional<String> emailAccountID,
             @JsonProperty("forTransferID") Optional<String> forTransferID,
@@ -88,16 +86,13 @@ public class ReceiptRequest {
     }
     
     public ReceiptRequest(
-            ReceiptKind kind) {
+            Kind kind) {
         this(kind, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    /**
-     * The type of receipt being requested.
-     */
     @JsonIgnore
-    public ReceiptKind kind() {
+    public Kind kind() {
         return kind;
     }
 
@@ -151,10 +146,7 @@ public class ReceiptRequest {
     }
 
 
-    /**
-     * The type of receipt being requested.
-     */
-    public ReceiptRequest withKind(ReceiptKind kind) {
+    public ReceiptRequest withKind(Kind kind) {
         Utils.checkNotNull(kind, "kind");
         this.kind = kind;
         return this;
@@ -304,7 +296,7 @@ public class ReceiptRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private ReceiptKind kind;
+        private Kind kind;
 
         private Optional<String> email = Optional.empty();
 
@@ -321,10 +313,7 @@ public class ReceiptRequest {
         }
 
 
-        /**
-         * The type of receipt being requested.
-         */
-        public Builder kind(ReceiptKind kind) {
+        public Builder kind(Kind kind) {
             Utils.checkNotNull(kind, "kind");
             this.kind = kind;
             return this;

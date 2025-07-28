@@ -1,11 +1,13 @@
 name: Generate Latest
+
 permissions:
   checks: write
   contents: write
   pull-requests: write
   statuses: write
   id-token: write
-"on":
+
+on:
   workflow_dispatch:
     inputs:
       force:
@@ -16,27 +18,34 @@ permissions:
         description: optionally set a specific SDK version
         type: string
   schedule:
-    - cron: 0 0 * * *
+    - cron: '0 0 * * *'
+
 jobs:
   generate:
-    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
-    with:
-      force: ${{ github.event.inputs.force }}
-      mode: direct
-      set_version: ${{ github.event.inputs.set_version }}
-    secrets:
-      github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      java_gpg_passphrase: ${{ secrets.JAVA_GPG_PASSPHRASE }}
-      java_gpg_secret_key: ${{ secrets.JAVA_GPG_SECRET_KEY }}
-      ossrh_password: ${{ secrets.OSSRH_PASSWORD }}
-      ossrh_username: ${{ secrets.OSSRH_USERNAME }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-    slackNotification:
-      name: Slack Notification on Failure
-      if: failure()
-      runs-on: ubuntu-latest
-      steps:
-      - name: Slack Notification
+    name: Generate SDKs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate SDKs
+        uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
+        with:
+          force: ${{ github.event.inputs.force }}
+          mode: direct
+          set_version: ${{ github.event.inputs.set_version }}
+        secrets:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          java_gpg_passphrase: ${{ secrets.JAVA_GPG_PASSPHRASE }}
+          java_gpg_secret_key: ${{ secrets.JAVA_GPG_SECRET_KEY }}
+          ossrh_password: ${{ secrets.OSSRH_PASSWORD }}
+          ossrh_username: ${{ secrets.OSSRH_USERNAME }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+
+  slackNotification:
+    name: Slack Notification on Failure
+    if: failure()
+    runs-on: ubuntu-latest
+    needs: generate
+    steps:
+      - name: Send Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

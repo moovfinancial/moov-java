@@ -1,11 +1,13 @@
 name: Generate Latest
+
 permissions:
   checks: write
   contents: write
   pull-requests: write
   statuses: write
   id-token: write
-"on":
+
+on:
   workflow_dispatch:
     inputs:
       force:
@@ -16,9 +18,11 @@ permissions:
         description: optionally set a specific SDK version
         type: string
   schedule:
-    - cron: 0 0 * * *
+    - cron: '0 0 * * *'
+
 jobs:
   generate:
+    name: Generate SDKs
     uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
     with:
       force: ${{ github.event.inputs.force }}
@@ -31,3 +35,14 @@ jobs:
       ossrh_password: ${{ secrets.OSSRH_PASSWORD }}
       ossrh_username: ${{ secrets.OSSRH_USERNAME }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+
+  slackNotification:
+    name: Slack Notification on Failure
+    if: failure()
+    runs-on: ubuntu-latest
+    needs: generate
+    steps:
+      - name: Send Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

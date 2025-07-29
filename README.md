@@ -46,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.22.7'
+implementation 'io.moov:sdk:0.23.0'
 ```
 
 Maven:
@@ -54,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.22.7</version>
+    <version>0.23.0</version>
 </dependency>
 ```
 
@@ -83,14 +83,14 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.CreateAccountError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
+    public static void main(String[] args) throws GenericError, CreateAccountError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -138,14 +138,14 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.CreateAccountError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
+    public static void main(String[] args) throws GenericError, CreateAccountError, Exception {
 
         Moov sdk = Moov.builder()
                 .security(Security.builder()
@@ -877,22 +877,37 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+
+If you're creating the ticket on behalf of another account, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
 * [listTickets](docs/sdks/support/README.md#listtickets) - List all the support tickets created under a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+If you're listing another account's tickets, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 * [getTicket](docs/sdks/support/README.md#getticket) - Retrieve a support ticket by ID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+If you're retrieving another account's ticket, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 * [updateTicket](docs/sdks/support/README.md#updateticket) - Updates a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+
+If you're updating the ticket on behalf of another account, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
 * [listTicketMessages](docs/sdks/support/README.md#listticketmessages) - List all the messages for a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+If you're listing another account's messages, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 
 ### [sweeps()](docs/sdks/sweeps/README.md)
 
@@ -1076,11 +1091,11 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By default, an API error will throw a `models/errors/APIException` exception. When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `create` method throws the following exceptions:
 
-| Error Type                              | Status Code | Content Type     |
-| --------------------------------------- | ----------- | ---------------- |
-| models/errors/GenericError              | 400, 409    | application/json |
-| models/errors/CreateAccountResponseBody | 422         | application/json |
-| models/errors/APIException              | 4XX, 5XX    | \*/\*            |
+| Error Type                       | Status Code | Content Type     |
+| -------------------------------- | ----------- | ---------------- |
+| models/errors/GenericError       | 400, 409    | application/json |
+| models/errors/CreateAccountError | 422         | application/json |
+| models/errors/APIException       | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -1089,14 +1104,14 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.CreateAccountError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
+    public static void main(String[] args) throws GenericError, CreateAccountError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -1138,14 +1153,14 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.CreateAccountError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
+    public static void main(String[] args) throws GenericError, CreateAccountError, Exception {
 
         Moov sdk = Moov.builder()
                 .serverURL("https://api.moov.io")

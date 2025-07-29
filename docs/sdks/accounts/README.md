@@ -90,19 +90,20 @@ to specify the `/accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createAccount" method="post" path="/accounts" -->
 ```java
 package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.CreateAccountError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
+    public static void main(String[] args) throws GenericError, CreateAccountError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -144,11 +145,11 @@ public class Application {
 
 ### Errors
 
-| Error Type                              | Status Code                             | Content Type                            |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/GenericError              | 400, 409                                | application/json                        |
-| models/errors/CreateAccountResponseBody | 422                                     | application/json                        |
-| models/errors/APIException              | 4XX, 5XX                                | \*/\*                                   |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models/errors/GenericError       | 400, 409                         | application/json                 |
+| models/errors/CreateAccountError | 422                              | application/json                 |
+| models/errors/APIException       | 4XX, 5XX                         | \*/\*                            |
 
 ## list
 
@@ -163,6 +164,7 @@ to specify the `/accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listAccounts" method="get" path="/accounts" -->
 ```java
 package hello.world;
 
@@ -227,6 +229,7 @@ to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getAccount" method="get" path="/accounts/{accountID}" -->
 ```java
 package hello.world;
 
@@ -291,20 +294,21 @@ to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updateAccount" method="patch" path="/accounts/{accountID}" -->
 ```java
 package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.UpdateAccountResponseBody;
+import io.moov.sdk.models.errors.PatchAccountError;
 import io.moov.sdk.models.operations.UpdateAccountResponse;
 import java.lang.Exception;
 import java.util.Map;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, UpdateAccountResponseBody, Exception {
+    public static void main(String[] args) throws GenericError, PatchAccountError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -414,11 +418,11 @@ public class Application {
 
 ### Errors
 
-| Error Type                              | Status Code                             | Content Type                            |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/GenericError              | 400, 409                                | application/json                        |
-| models/errors/UpdateAccountResponseBody | 422                                     | application/json                        |
-| models/errors/APIException              | 4XX, 5XX                                | \*/\*                                   |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| models/errors/GenericError      | 400, 409                        | application/json                |
+| models/errors/PatchAccountError | 422                             | application/json                |
+| models/errors/APIException      | 4XX, 5XX                        | \*/\*                           |
 
 ## disconnect
 
@@ -431,6 +435,7 @@ you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="disconnectAccount" method="delete" path="/accounts/{accountID}" -->
 ```java
 package hello.world;
 
@@ -487,6 +492,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getAccountCountries" method="get" path="/accounts/{accountID}/countries" -->
 ```java
 package hello.world;
 
@@ -545,6 +551,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="assignAccountCountries" method="put" path="/accounts/{accountID}/countries" -->
 ```java
 package hello.world;
 
@@ -612,6 +619,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getMerchantProcessingAgreement" method="get" path="/accounts/{accountID}/merchant-agreement" -->
 ```java
 package hello.world;
 
@@ -669,6 +677,7 @@ token patched to the account. Read more in our [documentation](https://docs.moov
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTermsOfServiceToken" method="get" path="/tos-token" -->
 ```java
 package hello.world;
 

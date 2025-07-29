@@ -25,6 +25,7 @@ you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listPaymentMethods" method="get" path="/accounts/{accountID}/payment-methods" -->
 ```java
 package hello.world;
 
@@ -83,6 +84,7 @@ you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getPaymentMethod" method="get" path="/accounts/{accountID}/payment-methods/{paymentMethodID}" -->
 ```java
 package hello.world;
 

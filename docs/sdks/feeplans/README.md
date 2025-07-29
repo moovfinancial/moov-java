@@ -44,6 +44,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listFeePlanAgreements" method="get" path="/accounts/{accountID}/fee-plan-agreements" -->
 ```java
 package hello.world;
 
@@ -107,6 +108,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createFeePlanAgreements" method="post" path="/accounts/{accountID}/fee-plan-agreements" -->
 ```java
 package hello.world;
 
@@ -173,6 +175,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listFeePlans" method="get" path="/accounts/{accountID}/fee-plans" -->
 ```java
 package hello.world;
 
@@ -230,6 +233,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="retrieveFees" method="get" path="/accounts/{accountID}/fees" -->
 ```java
 package hello.world;
 
@@ -293,6 +297,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listFeesFetch" method="post" path="/accounts/{accountID}/fees/.fetch" -->
 ```java
 package hello.world;
 
@@ -350,6 +355,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listPartnerPricing" method="get" path="/accounts/{accountID}/partner-pricing" -->
 ```java
 package hello.world;
 
@@ -407,6 +413,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listPartnerPricingAgreements" method="get" path="/accounts/{accountID}/partner-pricing-agreements" -->
 ```java
 package hello.world;
 

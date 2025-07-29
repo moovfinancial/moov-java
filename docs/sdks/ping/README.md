@@ -19,6 +19,7 @@ you'll need to specify the `/ping.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="ping" method="get" path="/ping" -->
 ```java
 package hello.world;
 

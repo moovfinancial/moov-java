@@ -23,6 +23,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createReceipts" method="post" path="/receipts" -->
 ```java
 package hello.world;
 
@@ -85,6 +86,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listReceipts" method="get" path="/receipts" -->
 ```java
 package hello.world;
 

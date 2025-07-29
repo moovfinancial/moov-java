@@ -31,6 +31,7 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createBrand" method="post" path="/accounts/{accountID}/branding" -->
 ```java
 package hello.world;
 
@@ -102,6 +103,7 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="upsertBrand" method="put" path="/accounts/{accountID}/branding" -->
 ```java
 package hello.world;
 
@@ -173,6 +175,7 @@ you'll need to specify the `/accounts/{accountID}/branding.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getBrand" method="get" path="/accounts/{accountID}/branding" -->
 ```java
 package hello.world;
 
@@ -229,6 +232,7 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updateBrand" method="patch" path="/accounts/{accountID}/branding" -->
 ```java
 package hello.world;
 

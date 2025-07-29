@@ -19,6 +19,7 @@ you'll need to specify the `/profile-enrichment.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getEnrichmentAddress" method="get" path="/enrichment/address" -->
 ```java
 package hello.world;
 

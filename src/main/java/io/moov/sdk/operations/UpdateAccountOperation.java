@@ -11,7 +11,7 @@ import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.components.Account;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.UpdateAccountResponseBody;
+import io.moov.sdk.models.errors.PatchAccountError;
 import io.moov.sdk.models.operations.UpdateAccountRequest;
 import io.moov.sdk.models.operations.UpdateAccountResponse;
 import io.moov.sdk.utils.HTTPClient;
@@ -180,12 +180,10 @@ public class UpdateAccountOperation implements RequestOperation<UpdateAccountReq
         if (Utils.statusCodeMatches(response.statusCode(), "422")) {
             res.withHeaders(response.headers().map());
             if (Utils.contentTypeMatches(contentType, "application/json")) {
-                UpdateAccountResponseBody out = Utils.mapper().readValue(
+                PatchAccountError out = Utils.mapper().readValue(
                     response.body(),
                     new TypeReference<>() {
                     });
-                    out.withRawResponse(response);
-                
                 throw out;
             } else {
                 throw new APIException(

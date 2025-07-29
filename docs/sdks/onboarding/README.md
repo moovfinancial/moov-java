@@ -31,6 +31,7 @@ you'll need to specify the `/accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createOnboardingInvite" method="post" path="/onboarding-invites" -->
 ```java
 package hello.world;
 
@@ -109,6 +110,7 @@ you'll need to specify the `/accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listOnboardingInvites" method="get" path="/onboarding-invites" -->
 ```java
 package hello.world;
 
@@ -158,6 +160,7 @@ you'll need to specify the `/accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getOnboardingInvite" method="get" path="/onboarding-invites/{code}" -->
 ```java
 package hello.world;
 
@@ -214,6 +217,7 @@ you'll need to specify the `/accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="revokeOnboardingInvite" method="delete" path="/onboarding-invites/{code}" -->
 ```java
 package hello.world;
 

@@ -31,6 +31,7 @@ you'll need to specify the `/accounts/{accountID}/terminal-applications.write` s
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="linkAccountTerminalApplication" method="post" path="/accounts/{accountID}/terminal-applications" -->
 ```java
 package hello.world;
 
@@ -96,6 +97,7 @@ you'll need to specify the `/accounts/{accountID}/terminal-applications.read` sc
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listAccountTerminalApplications" method="get" path="/accounts/{accountID}/terminal-applications" -->
 ```java
 package hello.world;
 
@@ -152,6 +154,7 @@ you'll need to specify the `/accounts/{accountID}/terminal-applications.read` sc
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getAccountTerminalApplication" method="get" path="/accounts/{accountID}/terminal-applications/{terminalApplicationID}" -->
 ```java
 package hello.world;
 
@@ -210,6 +213,7 @@ you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` s
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTerminalConfiguration" method="get" path="/accounts/{accountID}/terminal-applications/{terminalApplicationID}/configuration" -->
 ```java
 package hello.world;
 

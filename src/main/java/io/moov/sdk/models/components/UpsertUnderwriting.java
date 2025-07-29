@@ -51,6 +51,11 @@ public class UpsertUnderwriting {
     @JsonProperty("sendFunds")
     private Optional<? extends SendFunds> sendFunds;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("submissionIntent")
+    private Optional<? extends SubmissionIntent> submissionIntent;
+
     @JsonCreator
     public UpsertUnderwriting(
             @JsonProperty("geographicReach") Optional<? extends GeographicReach> geographicReach,
@@ -59,7 +64,8 @@ public class UpsertUnderwriting {
             @JsonProperty("volumeShareByCustomerType") Optional<? extends VolumeShareByCustomerType> volumeShareByCustomerType,
             @JsonProperty("collectFunds") Optional<? extends CollectFunds> collectFunds,
             @JsonProperty("moneyTransfer") Optional<? extends MoneyTransfer> moneyTransfer,
-            @JsonProperty("sendFunds") Optional<? extends SendFunds> sendFunds) {
+            @JsonProperty("sendFunds") Optional<? extends SendFunds> sendFunds,
+            @JsonProperty("submissionIntent") Optional<? extends SubmissionIntent> submissionIntent) {
         Utils.checkNotNull(geographicReach, "geographicReach");
         Utils.checkNotNull(businessPresence, "businessPresence");
         Utils.checkNotNull(pendingLitigation, "pendingLitigation");
@@ -67,6 +73,7 @@ public class UpsertUnderwriting {
         Utils.checkNotNull(collectFunds, "collectFunds");
         Utils.checkNotNull(moneyTransfer, "moneyTransfer");
         Utils.checkNotNull(sendFunds, "sendFunds");
+        Utils.checkNotNull(submissionIntent, "submissionIntent");
         this.geographicReach = geographicReach;
         this.businessPresence = businessPresence;
         this.pendingLitigation = pendingLitigation;
@@ -74,12 +81,13 @@ public class UpsertUnderwriting {
         this.collectFunds = collectFunds;
         this.moneyTransfer = moneyTransfer;
         this.sendFunds = sendFunds;
+        this.submissionIntent = submissionIntent;
     }
     
     public UpsertUnderwriting() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -122,6 +130,12 @@ public class UpsertUnderwriting {
     @JsonIgnore
     public Optional<SendFunds> sendFunds() {
         return (Optional<SendFunds>) sendFunds;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<SubmissionIntent> submissionIntent() {
+        return (Optional<SubmissionIntent>) submissionIntent;
     }
 
     public static Builder builder() {
@@ -220,6 +234,19 @@ public class UpsertUnderwriting {
         return this;
     }
 
+    public UpsertUnderwriting withSubmissionIntent(SubmissionIntent submissionIntent) {
+        Utils.checkNotNull(submissionIntent, "submissionIntent");
+        this.submissionIntent = Optional.ofNullable(submissionIntent);
+        return this;
+    }
+
+
+    public UpsertUnderwriting withSubmissionIntent(Optional<? extends SubmissionIntent> submissionIntent) {
+        Utils.checkNotNull(submissionIntent, "submissionIntent");
+        this.submissionIntent = submissionIntent;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -236,7 +263,8 @@ public class UpsertUnderwriting {
             Utils.enhancedDeepEquals(this.volumeShareByCustomerType, other.volumeShareByCustomerType) &&
             Utils.enhancedDeepEquals(this.collectFunds, other.collectFunds) &&
             Utils.enhancedDeepEquals(this.moneyTransfer, other.moneyTransfer) &&
-            Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds);
+            Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds) &&
+            Utils.enhancedDeepEquals(this.submissionIntent, other.submissionIntent);
     }
     
     @Override
@@ -244,7 +272,7 @@ public class UpsertUnderwriting {
         return Utils.enhancedHash(
             geographicReach, businessPresence, pendingLitigation,
             volumeShareByCustomerType, collectFunds, moneyTransfer,
-            sendFunds);
+            sendFunds, submissionIntent);
     }
     
     @Override
@@ -256,7 +284,8 @@ public class UpsertUnderwriting {
                 "volumeShareByCustomerType", volumeShareByCustomerType,
                 "collectFunds", collectFunds,
                 "moneyTransfer", moneyTransfer,
-                "sendFunds", sendFunds);
+                "sendFunds", sendFunds,
+                "submissionIntent", submissionIntent);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -275,6 +304,8 @@ public class UpsertUnderwriting {
         private Optional<? extends MoneyTransfer> moneyTransfer = Optional.empty();
 
         private Optional<? extends SendFunds> sendFunds = Optional.empty();
+
+        private Optional<? extends SubmissionIntent> submissionIntent = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -371,12 +402,25 @@ public class UpsertUnderwriting {
             return this;
         }
 
+
+        public Builder submissionIntent(SubmissionIntent submissionIntent) {
+            Utils.checkNotNull(submissionIntent, "submissionIntent");
+            this.submissionIntent = Optional.ofNullable(submissionIntent);
+            return this;
+        }
+
+        public Builder submissionIntent(Optional<? extends SubmissionIntent> submissionIntent) {
+            Utils.checkNotNull(submissionIntent, "submissionIntent");
+            this.submissionIntent = submissionIntent;
+            return this;
+        }
+
         public UpsertUnderwriting build() {
 
             return new UpsertUnderwriting(
                 geographicReach, businessPresence, pendingLitigation,
                 volumeShareByCustomerType, collectFunds, moneyTransfer,
-                sendFunds);
+                sendFunds, submissionIntent);
         }
 
     }

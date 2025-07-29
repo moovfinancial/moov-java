@@ -18,6 +18,7 @@ Allows clients to notify the authorization server that a previously obtained ref
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="revokeAccessToken" method="post" path="/oauth2/revoke" -->
 ```java
 package hello.world;
 
@@ -78,6 +79,7 @@ Create or refresh an access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createAccessToken" method="post" path="/oauth2/token" -->
 ```java
 package hello.world;
 

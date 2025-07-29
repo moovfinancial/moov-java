@@ -76,6 +76,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="linkCard" method="post" path="/accounts/{accountID}/cards" -->
 ```java
 package hello.world;
 
@@ -153,6 +154,7 @@ you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listCards" method="get" path="/accounts/{accountID}/cards" -->
 ```java
 package hello.world;
 
@@ -211,6 +213,7 @@ you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getCard" method="get" path="/accounts/{accountID}/cards/{cardID}" -->
 ```java
 package hello.world;
 
@@ -278,6 +281,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updateCard" method="patch" path="/accounts/{accountID}/cards/{cardID}" -->
 ```java
 package hello.world;
 
@@ -345,6 +349,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="disableCard" method="delete" path="/accounts/{accountID}/cards/{cardID}" -->
 ```java
 package hello.world;
 

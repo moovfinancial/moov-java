@@ -20,6 +20,7 @@ you'll need to specify the `/ping.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="testEndToEndToken" method="post" path="/debug/end-to-end-token" -->
 ```java
 package hello.world;
 
@@ -73,6 +74,7 @@ Generates a public key used to create a JWE token for passing secure authenticat
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="generateEndToEndKey" method="post" path="/end-to-end-keys" -->
 ```java
 package hello.world;
 

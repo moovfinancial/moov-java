@@ -23,6 +23,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listAdjustments" method="get" path="/accounts/{accountID}/adjustments" -->
 ```java
 package hello.world;
 
@@ -80,6 +81,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getAdjustment" method="get" path="/accounts/{accountID}/adjustments/{adjustmentID}" -->
 ```java
 package hello.world;
 

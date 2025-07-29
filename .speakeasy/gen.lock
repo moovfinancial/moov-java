@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 19e7961ab0d985923f557bd1e477884e
+  docChecksum: 733f1675a08b48527ea82b9089916438
   docVersion: latest
-  speakeasyVersion: 1.584.0
-  generationVersion: 2.660.0
-  releaseVersion: 0.22.7
-  configChecksum: 961050e671ecccdbb169a3bec6ab44a5
+  speakeasyVersion: 1.592.1
+  generationVersion: 2.667.0
+  releaseVersion: 0.23.0
+  configChecksum: 4a4a9ee2086a2bd566650d55559a32f6
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.44.0
+    core: 3.45.2
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     flattening: 2.81.1
@@ -159,7 +159,6 @@ generatedFiles:
   - docs/models/components/Contact.md
   - docs/models/components/CountriesErrors.md
   - docs/models/components/CreateAccount.md
-  - docs/models/components/CreateAccountError.md
   - docs/models/components/CreateAccountSettings.md
   - docs/models/components/CreateAccountTermsOfService.md
   - docs/models/components/CreateAccountType.md
@@ -334,7 +333,6 @@ generatedFiles:
   - docs/models/components/PartnerPricingAgreement.md
   - docs/models/components/PatchAccount.md
   - docs/models/components/PatchAccountCustomerSupport.md
-  - docs/models/components/PatchAccountError.md
   - docs/models/components/PatchAccountTermsOfService.md
   - docs/models/components/PatchBusiness.md
   - docs/models/components/PatchIndividual.md
@@ -430,6 +428,7 @@ generatedFiles:
   - docs/models/components/StatementDescriptor.md
   - docs/models/components/StatementDescriptor2.md
   - docs/models/components/Status.md
+  - docs/models/components/SubmissionIntent.md
   - docs/models/components/Sweep.md
   - docs/models/components/SweepConfig.md
   - docs/models/components/SweepConfigPaymentMethod.md
@@ -546,7 +545,7 @@ generatedFiles:
   - docs/models/errors/BankAccountValidationError.md
   - docs/models/errors/BrandValidationError.md
   - docs/models/errors/CardAcquiringRefund.md
-  - docs/models/errors/CreateAccountResponseBody.md
+  - docs/models/errors/CreateAccountError.md
   - docs/models/errors/CreatePaymentLinkError.md
   - docs/models/errors/CreateSweepConfigError.md
   - docs/models/errors/CreateTicketError.md
@@ -560,6 +559,7 @@ generatedFiles:
   - docs/models/errors/LinkCardError.md
   - docs/models/errors/MicroDepositValidationError.md
   - docs/models/errors/OnboardingInviteError.md
+  - docs/models/errors/PatchAccountError.md
   - docs/models/errors/PatchSweepConfigError.md
   - docs/models/errors/RefundValidationError.md
   - docs/models/errors/RepresentativeValidationError.md
@@ -571,7 +571,6 @@ generatedFiles:
   - docs/models/errors/Transfer.md
   - docs/models/errors/TransferOptionsValidationError.md
   - docs/models/errors/TransferValidationError.md
-  - docs/models/errors/UpdateAccountResponseBody.md
   - docs/models/errors/UpdateCardError.md
   - docs/models/errors/UpdateIssuedCardError.md
   - docs/models/errors/UpdatePaymentLinkError.md
@@ -1065,7 +1064,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/Contact.java
   - src/main/java/io/moov/sdk/models/components/CountriesErrors.java
   - src/main/java/io/moov/sdk/models/components/CreateAccount.java
-  - src/main/java/io/moov/sdk/models/components/CreateAccountError.java
   - src/main/java/io/moov/sdk/models/components/CreateAccountSettings.java
   - src/main/java/io/moov/sdk/models/components/CreateAccountTermsOfService.java
   - src/main/java/io/moov/sdk/models/components/CreateAccountType.java
@@ -1240,7 +1238,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/PartnerPricingAgreement.java
   - src/main/java/io/moov/sdk/models/components/PatchAccount.java
   - src/main/java/io/moov/sdk/models/components/PatchAccountCustomerSupport.java
-  - src/main/java/io/moov/sdk/models/components/PatchAccountError.java
   - src/main/java/io/moov/sdk/models/components/PatchAccountTermsOfService.java
   - src/main/java/io/moov/sdk/models/components/PatchBusiness.java
   - src/main/java/io/moov/sdk/models/components/PatchIndividual.java
@@ -1336,6 +1333,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/StatementDescriptor.java
   - src/main/java/io/moov/sdk/models/components/StatementDescriptor2.java
   - src/main/java/io/moov/sdk/models/components/Status.java
+  - src/main/java/io/moov/sdk/models/components/SubmissionIntent.java
   - src/main/java/io/moov/sdk/models/components/Sweep.java
   - src/main/java/io/moov/sdk/models/components/SweepConfig.java
   - src/main/java/io/moov/sdk/models/components/SweepConfigPaymentMethod.java
@@ -1454,7 +1452,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/BankAccountValidationError.java
   - src/main/java/io/moov/sdk/models/errors/BrandValidationError.java
   - src/main/java/io/moov/sdk/models/errors/CardAcquiringRefund.java
-  - src/main/java/io/moov/sdk/models/errors/CreateAccountResponseBody.java
+  - src/main/java/io/moov/sdk/models/errors/CreateAccountError.java
   - src/main/java/io/moov/sdk/models/errors/CreatePaymentLinkError.java
   - src/main/java/io/moov/sdk/models/errors/CreateSweepConfigError.java
   - src/main/java/io/moov/sdk/models/errors/CreateTicketError.java
@@ -1468,6 +1466,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/LinkCardError.java
   - src/main/java/io/moov/sdk/models/errors/MicroDepositValidationError.java
   - src/main/java/io/moov/sdk/models/errors/OnboardingInviteError.java
+  - src/main/java/io/moov/sdk/models/errors/PatchAccountError.java
   - src/main/java/io/moov/sdk/models/errors/PatchSweepConfigError.java
   - src/main/java/io/moov/sdk/models/errors/RefundValidationError.java
   - src/main/java/io/moov/sdk/models/errors/RepresentativeValidationError.java
@@ -1479,7 +1478,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/Transfer.java
   - src/main/java/io/moov/sdk/models/errors/TransferOptionsValidationError.java
   - src/main/java/io/moov/sdk/models/errors/TransferValidationError.java
-  - src/main/java/io/moov/sdk/models/errors/UpdateAccountResponseBody.java
   - src/main/java/io/moov/sdk/models/errors/UpdateCardError.java
   - src/main/java/io/moov/sdk/models/errors/UpdateIssuedCardError.java
   - src/main/java/io/moov/sdk/models/errors/UpdatePaymentLinkError.java
@@ -2118,7 +2116,7 @@ examples:
         "400":
           application/json: {"error": "<value>"}
         "422":
-          application/json: {"error": {"capabilities": {"0": "first element failed validation..."}}}
+          application/json: {"capabilities": {"0": "first element failed validation..."}}
   listAccounts:
     speakeasy-default-list-accounts:
       parameters:
@@ -2156,7 +2154,7 @@ examples:
         "400":
           application/json: {"error": "<value>"}
         "422":
-          application/json: {"error": {}}
+          application/json: {}
   disconnectAccount:
     speakeasy-default-disconnect-account:
       parameters:

@@ -107,6 +107,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="linkBankAccount" method="post" path="/accounts/{accountID}/bank-accounts" -->
 ```java
 package hello.world;
 
@@ -176,6 +177,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listBankAccounts" method="get" path="/accounts/{accountID}/bank-accounts" -->
 ```java
 package hello.world;
 
@@ -234,6 +236,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getBankAccount" method="get" path="/accounts/{accountID}/bank-accounts/{bankAccountID}" -->
 ```java
 package hello.world;
 
@@ -292,6 +295,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="disableBankAccount" method="delete" path="/accounts/{accountID}/bank-accounts/{bankAccountID}" -->
 ```java
 package hello.world;
 
@@ -361,6 +365,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="initiateMicroDeposits" method="post" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/micro-deposits" -->
 ```java
 package hello.world;
 
@@ -419,6 +424,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="completeMicroDeposits" method="put" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/micro-deposits" -->
 ```java
 package hello.world;
 
@@ -498,6 +504,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getBankAccountVerification" method="get" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/verify" -->
 ```java
 package hello.world;
 
@@ -571,6 +578,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="initiateBankAccountVerification" method="post" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/verify" -->
 ```java
 package hello.world;
 
@@ -639,6 +647,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="completeBankAccountVerification" method="put" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/verify" -->
 ```java
 package hello.world;
 

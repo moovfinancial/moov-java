@@ -88,6 +88,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createTransferOptions" method="post" path="/accounts/{accountID}/transfer-options" -->
 ```java
 package hello.world;
 
@@ -161,6 +162,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createTransfer" method="post" path="/accounts/{accountID}/transfers" -->
 ```java
 package hello.world;
 
@@ -248,6 +250,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listTransfers" method="get" path="/accounts/{accountID}/transfers" -->
 ```java
 package hello.world;
 
@@ -314,6 +317,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTransfer" method="get" path="/accounts/{accountID}/transfers/{transferID}" -->
 ```java
 package hello.world;
 
@@ -374,6 +378,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updateTransfer" method="patch" path="/accounts/{accountID}/transfers/{transferID}" -->
 ```java
 package hello.world;
 
@@ -439,6 +444,7 @@ public class Application {
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createCancellation" method="post" path="/accounts/{accountID}/transfers/{transferID}/cancellations" -->
 ```java
 package hello.world;
 
@@ -499,6 +505,7 @@ public class Application {
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getCancellation" method="get" path="/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}" -->
 ```java
 package hello.world;
 
@@ -562,6 +569,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="initiateRefund" method="post" path="/accounts/{accountID}/transfers/{transferID}/refunds" -->
 ```java
 package hello.world;
 
@@ -633,6 +641,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listRefunds" method="get" path="/accounts/{accountID}/transfers/{transferID}/refunds" -->
 ```java
 package hello.world;
 
@@ -691,6 +700,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getRefund" method="get" path="/accounts/{accountID}/transfers/{transferID}/refunds/{refundID}" -->
 ```java
 package hello.world;
 
@@ -753,6 +763,7 @@ to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createReversal" method="post" path="/accounts/{accountID}/transfers/{transferID}/reversals" -->
 ```java
 package hello.world;
 

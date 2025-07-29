@@ -39,6 +39,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createSchedule" method="post" path="/accounts/{accountID}/schedules" -->
 ```java
 package hello.world;
 
@@ -201,6 +202,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listSchedules" method="get" path="/accounts/{accountID}/schedules" -->
 ```java
 package hello.world;
 
@@ -262,6 +264,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updateSchedule" method="put" path="/accounts/{accountID}/schedules/{scheduleID}" -->
 ```java
 package hello.world;
 
@@ -458,6 +461,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getSchedules" method="get" path="/accounts/{accountID}/schedules/{scheduleID}" -->
 ```java
 package hello.world;
 
@@ -516,6 +520,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="cancelSchedule" method="delete" path="/accounts/{accountID}/schedules/{scheduleID}" -->
 ```java
 package hello.world;
 
@@ -574,6 +579,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getScheduledOccurrence" method="get" path="/accounts/{accountID}/schedules/{scheduleID}/occurrences/{occurrenceFilter}" -->
 ```java
 package hello.world;
 

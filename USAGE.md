@@ -4,14 +4,14 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.CreateAccountError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, CreateAccountResponseBody, Exception {
+    public static void main(String[] args) throws GenericError, CreateAccountError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")

@@ -35,6 +35,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getUnderwriting" method="get" path="/accounts/{accountID}/underwriting" -->
 ```java
 package hello.world;
 
@@ -93,6 +94,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="saveUnderwriting" method="post" path="/accounts/{accountID}/underwriting" -->
 ```java
 package hello.world;
 
@@ -159,6 +161,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="upsertUnderwriting" method="put" path="/accounts/{accountID}/underwriting" -->
 ```java
 package hello.world;
 

@@ -52,6 +52,7 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="registerApplePayMerchantDomains" method="post" path="/accounts/{accountID}/apple-pay/domains" -->
 ```java
 package hello.world;
 
@@ -120,6 +121,7 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updateApplePayMerchantDomains" method="patch" path="/accounts/{accountID}/apple-pay/domains" -->
 ```java
 package hello.world;
 
@@ -187,6 +189,7 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getApplePayMerchantDomains" method="get" path="/accounts/{accountID}/apple-pay/domains" -->
 ```java
 package hello.world;
 
@@ -246,6 +249,7 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createApplePaySession" method="post" path="/accounts/{accountID}/apple-pay/sessions" -->
 ```java
 package hello.world;
 
@@ -313,6 +317,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="linkApplePayToken" method="post" path="/accounts/{accountID}/apple-pay/tokens" -->
 ```java
 package hello.world;
 

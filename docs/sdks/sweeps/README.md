@@ -39,6 +39,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createSweepConfig" method="post" path="/accounts/{accountID}/sweep-configs" -->
 ```java
 package hello.world;
 
@@ -106,6 +107,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listSweepConfigs" method="get" path="/accounts/{accountID}/sweep-configs" -->
 ```java
 package hello.world;
 
@@ -162,6 +164,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getSweepConfig" method="get" path="/accounts/{accountID}/sweep-configs/{sweepConfigID}" -->
 ```java
 package hello.world;
 
@@ -220,6 +223,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updateSweepConfig" method="patch" path="/accounts/{accountID}/sweep-configs/{sweepConfigID}" -->
 ```java
 package hello.world;
 
@@ -286,6 +290,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listSweeps" method="get" path="/accounts/{accountID}/wallets/{walletID}/sweeps" -->
 ```java
 package hello.world;
 
@@ -350,6 +355,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getSweep" method="get" path="/accounts/{accountID}/wallets/{walletID}/sweeps/{sweepID}" -->
 ```java
 package hello.world;
 

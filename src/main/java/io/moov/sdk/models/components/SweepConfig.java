@@ -32,14 +32,14 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
      */
     @JsonProperty("pushPaymentMethod")
     private SweepConfigPaymentMethod pushPaymentMethod;
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
      */
     @JsonProperty("pullPaymentMethod")
     private SweepConfigPaymentMethod pullPaymentMethod;
@@ -138,7 +138,7 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
      */
     @JsonIgnore
     public SweepConfigPaymentMethod pushPaymentMethod() {
@@ -147,7 +147,7 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
      */
     @JsonIgnore
     public SweepConfigPaymentMethod pullPaymentMethod() {
@@ -214,7 +214,7 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
      */
     public SweepConfig withPushPaymentMethod(SweepConfigPaymentMethod pushPaymentMethod) {
         Utils.checkNotNull(pushPaymentMethod, "pushPaymentMethod");
@@ -224,7 +224,7 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
      */
     public SweepConfig withPullPaymentMethod(SweepConfigPaymentMethod pullPaymentMethod) {
         Utils.checkNotNull(pullPaymentMethod, "pullPaymentMethod");
@@ -398,7 +398,7 @@ public class SweepConfig {
 
         /**
          * The payment method used to push or pull funds to a bank account.
-         * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+         * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
          */
         public Builder pushPaymentMethod(SweepConfigPaymentMethod pushPaymentMethod) {
             Utils.checkNotNull(pushPaymentMethod, "pushPaymentMethod");
@@ -409,7 +409,7 @@ public class SweepConfig {
 
         /**
          * The payment method used to push or pull funds to a bank account.
-         * The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+         * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
          */
         public Builder pullPaymentMethod(SweepConfigPaymentMethod pullPaymentMethod) {
             Utils.checkNotNull(pullPaymentMethod, "pullPaymentMethod");

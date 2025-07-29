@@ -33,6 +33,7 @@ you'll need to specify the `/accounts/{accountID}/files.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="uploadFile" method="post" path="/accounts/{accountID}/files" -->
 ```java
 package hello.world;
 
@@ -103,6 +104,7 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listFiles" method="get" path="/accounts/{accountID}/files" -->
 ```java
 package hello.world;
 
@@ -159,6 +161,7 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getFileDetails" method="get" path="/accounts/{accountID}/files/{fileID}" -->
 ```java
 package hello.world;
 

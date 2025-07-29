@@ -37,6 +37,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="requestCard" method="post" path="/issuing/{accountID}/issued-cards" -->
 ```java
 package hello.world;
 
@@ -123,6 +124,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listIssuedCards" method="get" path="/issuing/{accountID}/issued-cards" -->
 ```java
 package hello.world;
 
@@ -184,6 +186,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getIssuedCard" method="get" path="/issuing/{accountID}/issued-cards/{issuedCardID}" -->
 ```java
 package hello.world;
 
@@ -242,6 +245,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updateIssuedCard" method="patch" path="/issuing/{accountID}/issued-cards/{issuedCardID}" -->
 ```java
 package hello.world;
 
@@ -314,6 +318,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scop
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getFullIssuedCard" method="get" path="/issuing/{accountID}/issued-cards/{issuedCardID}/details" -->
 ```java
 package hello.world;
 

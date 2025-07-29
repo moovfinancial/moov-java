@@ -35,6 +35,7 @@ you'll need to specify the `/terminal-applications.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createTerminalApplication" method="post" path="/terminal-applications" -->
 ```java
 package hello.world;
 
@@ -102,6 +103,7 @@ you'll need to specify the `/terminal-applications.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listTerminalApplications" method="get" path="/terminal-applications" -->
 ```java
 package hello.world;
 
@@ -151,6 +153,7 @@ you'll need to specify the `/terminal-applications.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTerminalApplication" method="get" path="/terminal-applications/{terminalApplicationID}" -->
 ```java
 package hello.world;
 
@@ -207,6 +210,7 @@ you'll need to specify the `/terminal-applications.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="deleteTerminalApplication" method="delete" path="/terminal-applications/{terminalApplicationID}" -->
 ```java
 package hello.world;
 
@@ -263,6 +267,7 @@ you'll need to specify the `/terminal-applications.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createTerminalApplicationVersion" method="post" path="/terminal-applications/{terminalApplicationID}/versions" -->
 ```java
 package hello.world;
 

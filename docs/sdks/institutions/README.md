@@ -31,6 +31,7 @@ you'll need to specify the `/institutions.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="searchInstitutions" method="get" path="/institutions" -->
 ```java
 package hello.world;
 
@@ -88,6 +89,7 @@ you'll need to specify the `/fed.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listInstitutions" method="get" path="/institutions/ach/search" -->
 ```java
 package hello.world;
 

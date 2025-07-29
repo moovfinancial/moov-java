@@ -19,6 +19,7 @@ you'll need to specify the `/profile-enrichment.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getAvatar" method="get" path="/avatars/{uniqueID}" -->
 ```java
 package hello.world;
 

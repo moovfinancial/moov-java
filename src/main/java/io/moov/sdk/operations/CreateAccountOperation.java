@@ -11,7 +11,7 @@ import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.components.Account;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.errors.APIException;
-import io.moov.sdk.models.errors.CreateAccountResponseBody;
+import io.moov.sdk.models.errors.CreateAccountError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateAccountResponse;
 import io.moov.sdk.utils.HTTPClient;
@@ -178,12 +178,10 @@ public class CreateAccountOperation implements RequestOperation<CreateAccount, C
         if (Utils.statusCodeMatches(response.statusCode(), "422")) {
             res.withHeaders(response.headers().map());
             if (Utils.contentTypeMatches(contentType, "application/json")) {
-                CreateAccountResponseBody out = Utils.mapper().readValue(
+                CreateAccountError out = Utils.mapper().readValue(
                     response.body(),
                     new TypeReference<>() {
                     });
-                    out.withRawResponse(response);
-                
                 throw out;
             } else {
                 throw new APIException(

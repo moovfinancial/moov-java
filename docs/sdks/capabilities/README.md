@@ -35,6 +35,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listCapabilities" method="get" path="/accounts/{accountID}/capabilities" -->
 ```java
 package hello.world;
 
@@ -91,6 +92,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="requestCapabilities" method="post" path="/accounts/{accountID}/capabilities" -->
 ```java
 package hello.world;
 
@@ -157,6 +159,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getCapability" method="get" path="/accounts/{accountID}/capabilities/{capabilityID}" -->
 ```java
 package hello.world;
 
@@ -216,6 +219,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="disableCapability" method="delete" path="/accounts/{accountID}/capabilities/{capabilityID}" -->
 ```java
 package hello.world;
 

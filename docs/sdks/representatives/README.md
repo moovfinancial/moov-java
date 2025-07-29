@@ -55,6 +55,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createRepresentative" method="post" path="/accounts/{accountID}/representatives" -->
 ```java
 package hello.world;
 
@@ -149,6 +150,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="listRepresentatives" method="get" path="/accounts/{accountID}/representatives" -->
 ```java
 package hello.world;
 
@@ -205,6 +207,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="deleteRepresentative" method="delete" path="/accounts/{accountID}/representatives/{representativeID}" -->
 ```java
 package hello.world;
 
@@ -263,6 +266,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getRepresentative" method="get" path="/accounts/{accountID}/representatives/{representativeID}" -->
 ```java
 package hello.world;
 
@@ -334,6 +338,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updateRepresentative" method="patch" path="/accounts/{accountID}/representatives/{representativeID}" -->
 ```java
 package hello.world;
 

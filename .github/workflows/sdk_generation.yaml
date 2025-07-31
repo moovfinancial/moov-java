@@ -35,14 +35,4 @@ jobs:
       ossrh_password: ${{ secrets.OSSRH_PASSWORD }}
       ossrh_username: ${{ secrets.OSSRH_USERNAME }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-
-  slackNotification:
-    name: Slack Notification on Failure
-    if: failure()
-    runs-on: ubuntu-latest
-    needs: generate
-    steps:
-      - name: Send Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      slack_webhook_url: ${{ secrets.SLACK_WEBHOOK }}

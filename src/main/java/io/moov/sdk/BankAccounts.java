@@ -36,15 +36,12 @@ import io.moov.sdk.models.operations.LinkBankAccountResponse;
 import io.moov.sdk.models.operations.ListBankAccountsRequest;
 import io.moov.sdk.models.operations.ListBankAccountsRequestBuilder;
 import io.moov.sdk.models.operations.ListBankAccountsResponse;
-import io.moov.sdk.operations.CompleteBankAccountVerificationOperation;
-import io.moov.sdk.operations.CompleteMicroDepositsOperation;
-import io.moov.sdk.operations.DisableBankAccountOperation;
-import io.moov.sdk.operations.GetBankAccountOperation;
-import io.moov.sdk.operations.GetBankAccountVerificationOperation;
-import io.moov.sdk.operations.InitiateBankAccountVerificationOperation;
-import io.moov.sdk.operations.InitiateMicroDepositsOperation;
-import io.moov.sdk.operations.LinkBankAccountOperation;
-import io.moov.sdk.operations.ListBankAccountsOperation;
+import io.moov.sdk.operations.DisableBankAccount;
+import io.moov.sdk.operations.GetBankAccount;
+import io.moov.sdk.operations.GetBankAccountVerification;
+import io.moov.sdk.operations.InitiateBankAccountVerification;
+import io.moov.sdk.operations.InitiateMicroDeposits;
+import io.moov.sdk.operations.ListBankAccounts;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
@@ -122,7 +119,7 @@ public class BankAccounts {
                 .linkBankAccount(linkBankAccount)
                 .build();
         RequestOperation<LinkBankAccountRequest, LinkBankAccountResponse> operation
-              = new LinkBankAccountOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.LinkBankAccount.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -159,7 +156,7 @@ public class BankAccounts {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListBankAccountsRequest, ListBankAccountsResponse> operation
-              = new ListBankAccountsOperation(sdkConfiguration);
+              = new ListBankAccounts.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -198,7 +195,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<GetBankAccountRequest, GetBankAccountResponse> operation
-              = new GetBankAccountOperation(sdkConfiguration);
+              = new GetBankAccount.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -233,7 +230,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<DisableBankAccountRequest, DisableBankAccountResponse> operation
-              = new DisableBankAccountOperation(sdkConfiguration);
+              = new DisableBankAccount.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -290,7 +287,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<InitiateMicroDepositsRequest, InitiateMicroDepositsResponse> operation
-              = new InitiateMicroDepositsOperation(sdkConfiguration);
+              = new InitiateMicroDeposits.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -329,7 +326,7 @@ public class BankAccounts {
                 .completeMicroDeposits(completeMicroDeposits)
                 .build();
         RequestOperation<CompleteMicroDepositsRequest, CompleteMicroDepositsResponse> operation
-              = new CompleteMicroDepositsOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CompleteMicroDeposits.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -382,7 +379,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<GetBankAccountVerificationRequest, GetBankAccountVerificationResponse> operation
-              = new GetBankAccountVerificationOperation(sdkConfiguration);
+              = new GetBankAccountVerification.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -481,7 +478,7 @@ public class BankAccounts {
                 .bankAccountID(bankAccountID)
                 .build();
         RequestOperation<InitiateBankAccountVerificationRequest, InitiateBankAccountVerificationResponse> operation
-              = new InitiateBankAccountVerificationOperation(sdkConfiguration);
+              = new InitiateBankAccountVerification.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -534,7 +531,7 @@ public class BankAccounts {
                 .completeBankAccountVerification(completeBankAccountVerification)
                 .build();
         RequestOperation<CompleteBankAccountVerificationRequest, CompleteBankAccountVerificationResponse> operation
-              = new CompleteBankAccountVerificationOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CompleteBankAccountVerification.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

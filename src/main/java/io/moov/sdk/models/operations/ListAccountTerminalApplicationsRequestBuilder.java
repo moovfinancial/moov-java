@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListAccountTerminalApplicationsOperation;
+import io.moov.sdk.operations.ListAccountTerminalApplications;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class ListAccountTerminalApplicationsRequestBuilder {
     public ListAccountTerminalApplicationsResponse call() throws Exception {
         
         RequestOperation<ListAccountTerminalApplicationsRequest, ListAccountTerminalApplicationsResponse> operation
-              = new ListAccountTerminalApplicationsOperation(sdkConfiguration);
+              = new ListAccountTerminalApplications.Sync(sdkConfiguration);
         ListAccountTerminalApplicationsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

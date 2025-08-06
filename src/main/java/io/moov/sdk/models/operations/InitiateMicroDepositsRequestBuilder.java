@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.InitiateMicroDepositsOperation;
+import io.moov.sdk.operations.InitiateMicroDeposits;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class InitiateMicroDepositsRequestBuilder {
     public InitiateMicroDepositsResponse call() throws Exception {
         
         RequestOperation<InitiateMicroDepositsRequest, InitiateMicroDepositsResponse> operation
-              = new InitiateMicroDepositsOperation(sdkConfiguration);
+              = new InitiateMicroDeposits.Sync(sdkConfiguration);
         InitiateMicroDepositsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

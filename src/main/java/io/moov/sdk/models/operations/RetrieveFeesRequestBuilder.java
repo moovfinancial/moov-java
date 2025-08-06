@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.RetrieveFeesOperation;
+import io.moov.sdk.operations.RetrieveFees;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -28,7 +28,7 @@ public class RetrieveFeesRequestBuilder {
     public RetrieveFeesResponse call() throws Exception {
         
         RequestOperation<RetrieveFeesRequest, RetrieveFeesResponse> operation
-              = new RetrieveFeesOperation(sdkConfiguration);
+              = new RetrieveFees.Sync(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

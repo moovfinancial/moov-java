@@ -7,7 +7,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateTicket;
-import io.moov.sdk.operations.UpdateTicketOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -54,7 +53,7 @@ public class UpdateTicketRequestBuilder {
     public UpdateTicketResponse call() throws Exception {
         
         RequestOperation<UpdateTicketRequest, UpdateTicketResponse> operation
-              = new UpdateTicketOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateTicket.Sync(sdkConfiguration);
         UpdateTicketRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

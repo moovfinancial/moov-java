@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.BrandProperties;
-import io.moov.sdk.operations.UpsertBrandOperation;
+import io.moov.sdk.operations.UpsertBrand;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -46,7 +46,7 @@ public class UpsertBrandRequestBuilder {
     public UpsertBrandResponse call() throws Exception {
         
         RequestOperation<UpsertBrandRequest, UpsertBrandResponse> operation
-              = new UpsertBrandOperation(sdkConfiguration);
+              = new UpsertBrand.Sync(sdkConfiguration);
         UpsertBrandRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

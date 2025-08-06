@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListPaymentLinksOperation;
+import io.moov.sdk.operations.ListPaymentLinks;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class ListPaymentLinksRequestBuilder {
     public ListPaymentLinksResponse call() throws Exception {
         
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
-              = new ListPaymentLinksOperation(sdkConfiguration);
+              = new ListPaymentLinks.Sync(sdkConfiguration);
         ListPaymentLinksRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -43,17 +43,14 @@ import io.moov.sdk.models.operations.ListTransfersResponse;
 import io.moov.sdk.models.operations.UpdateTransferRequest;
 import io.moov.sdk.models.operations.UpdateTransferRequestBuilder;
 import io.moov.sdk.models.operations.UpdateTransferResponse;
-import io.moov.sdk.operations.CreateCancellationOperation;
-import io.moov.sdk.operations.CreateReversalOperation;
-import io.moov.sdk.operations.CreateTransferOperation;
-import io.moov.sdk.operations.CreateTransferOptionsOperation;
-import io.moov.sdk.operations.GetCancellationOperation;
-import io.moov.sdk.operations.GetRefundOperation;
-import io.moov.sdk.operations.GetTransferOperation;
-import io.moov.sdk.operations.InitiateRefundOperation;
-import io.moov.sdk.operations.ListRefundsOperation;
-import io.moov.sdk.operations.ListTransfersOperation;
-import io.moov.sdk.operations.UpdateTransferOperation;
+import io.moov.sdk.operations.CreateCancellation;
+import io.moov.sdk.operations.GetCancellation;
+import io.moov.sdk.operations.GetRefund;
+import io.moov.sdk.operations.GetTransfer;
+import io.moov.sdk.operations.InitiateRefund;
+import io.moov.sdk.operations.ListRefunds;
+import io.moov.sdk.operations.ListTransfers;
+import io.moov.sdk.operations.UpdateTransfer;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
@@ -107,7 +104,7 @@ public class Transfers {
                 .createTransferOptions(createTransferOptions)
                 .build();
         RequestOperation<CreateTransferOptionsRequest, CreateTransferOptionsResponse> operation
-              = new CreateTransferOptionsOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateTransferOptions.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -173,7 +170,7 @@ public class Transfers {
                 .createTransfer(createTransfer)
                 .build();
         RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
-              = new CreateTransferOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -215,7 +212,7 @@ public class Transfers {
      */
     public ListTransfersResponse list(ListTransfersRequest request) throws Exception {
         RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
-              = new ListTransfersOperation(sdkConfiguration);
+              = new ListTransfers.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -256,7 +253,7 @@ public class Transfers {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetTransferRequest, GetTransferResponse> operation
-              = new GetTransferOperation(sdkConfiguration);
+              = new GetTransfer.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -299,7 +296,7 @@ public class Transfers {
                 .patchTransfer(patchTransfer)
                 .build();
         RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
-              = new UpdateTransferOperation(sdkConfiguration);
+              = new UpdateTransfer.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -334,7 +331,7 @@ public class Transfers {
                 .transferID(transferID)
                 .build();
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
-              = new CreateCancellationOperation(sdkConfiguration);
+              = new CreateCancellation.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -373,7 +370,7 @@ public class Transfers {
                 .cancellationID(cancellationID)
                 .build();
         RequestOperation<GetCancellationRequest, GetCancellationResponse> operation
-              = new GetCancellationOperation(sdkConfiguration);
+              = new GetCancellation.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -407,7 +404,7 @@ public class Transfers {
      */
     public InitiateRefundResponse initiateRefund(InitiateRefundRequest request) throws Exception {
         RequestOperation<InitiateRefundRequest, InitiateRefundResponse> operation
-              = new InitiateRefundOperation(sdkConfiguration);
+              = new InitiateRefund.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -442,7 +439,7 @@ public class Transfers {
                 .transferID(transferID)
                 .build();
         RequestOperation<ListRefundsRequest, ListRefundsResponse> operation
-              = new ListRefundsOperation(sdkConfiguration);
+              = new ListRefunds.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -481,7 +478,7 @@ public class Transfers {
                 .refundID(refundID)
                 .build();
         RequestOperation<GetRefundRequest, GetRefundResponse> operation
-              = new GetRefundOperation(sdkConfiguration);
+              = new GetRefund.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -547,7 +544,7 @@ public class Transfers {
                 .createReversal(createReversal)
                 .build();
         RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
-              = new CreateReversalOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateReversal.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

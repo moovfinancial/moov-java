@@ -11,8 +11,8 @@ import io.moov.sdk.models.operations.ListInstitutionsResponse;
 import io.moov.sdk.models.operations.SearchInstitutionsRequest;
 import io.moov.sdk.models.operations.SearchInstitutionsRequestBuilder;
 import io.moov.sdk.models.operations.SearchInstitutionsResponse;
-import io.moov.sdk.operations.ListInstitutionsOperation;
-import io.moov.sdk.operations.SearchInstitutionsOperation;
+import io.moov.sdk.operations.ListInstitutions;
+import io.moov.sdk.operations.SearchInstitutions;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
@@ -86,7 +86,7 @@ public class Institutions {
                 .limit(limit)
                 .build();
         RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
-              = new SearchInstitutionsOperation(sdkConfiguration);
+              = new SearchInstitutions.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -141,7 +141,7 @@ public class Institutions {
                 .limit(limit)
                 .build();
         RequestOperation<ListInstitutionsRequest, ListInstitutionsResponse> operation
-              = new ListInstitutionsOperation(sdkConfiguration);
+              = new ListInstitutions.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -23,11 +23,9 @@ import io.moov.sdk.models.operations.ListTicketsResponse;
 import io.moov.sdk.models.operations.UpdateTicketRequest;
 import io.moov.sdk.models.operations.UpdateTicketRequestBuilder;
 import io.moov.sdk.models.operations.UpdateTicketResponse;
-import io.moov.sdk.operations.CreateTicketOperation;
-import io.moov.sdk.operations.GetTicketOperation;
-import io.moov.sdk.operations.ListTicketMessagesOperation;
-import io.moov.sdk.operations.ListTicketsOperation;
-import io.moov.sdk.operations.UpdateTicketOperation;
+import io.moov.sdk.operations.GetTicket;
+import io.moov.sdk.operations.ListTicketMessages;
+import io.moov.sdk.operations.ListTickets;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
@@ -78,7 +76,7 @@ public class Support {
                 .createTicket(createTicket)
                 .build();
         RequestOperation<CreateTicketRequest, CreateTicketResponse> operation
-              = new CreateTicketOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateTicket.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -143,7 +141,7 @@ public class Support {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListTicketsRequest, ListTicketsResponse> operation
-              = new ListTicketsOperation(sdkConfiguration);
+              = new ListTickets.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -184,7 +182,7 @@ public class Support {
                 .ticketID(ticketID)
                 .build();
         RequestOperation<GetTicketRequest, GetTicketResponse> operation
-              = new GetTicketOperation(sdkConfiguration);
+              = new GetTicket.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -229,7 +227,7 @@ public class Support {
                 .updateTicket(updateTicket)
                 .build();
         RequestOperation<UpdateTicketRequest, UpdateTicketResponse> operation
-              = new UpdateTicketOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateTicket.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -270,7 +268,7 @@ public class Support {
                 .ticketID(ticketID)
                 .build();
         RequestOperation<ListTicketMessagesRequest, ListTicketMessagesResponse> operation
-              = new ListTicketMessagesOperation(sdkConfiguration);
+              = new ListTicketMessages.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

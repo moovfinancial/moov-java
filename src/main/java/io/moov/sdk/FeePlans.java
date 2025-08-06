@@ -27,13 +27,13 @@ import io.moov.sdk.models.operations.ListPartnerPricingResponse;
 import io.moov.sdk.models.operations.RetrieveFeesRequest;
 import io.moov.sdk.models.operations.RetrieveFeesRequestBuilder;
 import io.moov.sdk.models.operations.RetrieveFeesResponse;
-import io.moov.sdk.operations.CreateFeePlanAgreementsOperation;
-import io.moov.sdk.operations.ListFeePlanAgreementsOperation;
-import io.moov.sdk.operations.ListFeePlansOperation;
-import io.moov.sdk.operations.ListFeesFetchOperation;
-import io.moov.sdk.operations.ListPartnerPricingAgreementsOperation;
-import io.moov.sdk.operations.ListPartnerPricingOperation;
-import io.moov.sdk.operations.RetrieveFeesOperation;
+import io.moov.sdk.operations.CreateFeePlanAgreements;
+import io.moov.sdk.operations.ListFeePlanAgreements;
+import io.moov.sdk.operations.ListFeePlans;
+import io.moov.sdk.operations.ListFeesFetch;
+import io.moov.sdk.operations.ListPartnerPricing;
+import io.moov.sdk.operations.ListPartnerPricingAgreements;
+import io.moov.sdk.operations.RetrieveFees;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.List;
@@ -71,7 +71,7 @@ public class FeePlans {
      */
     public ListFeePlanAgreementsResponse listFeePlanAgreements(ListFeePlanAgreementsRequest request) throws Exception {
         RequestOperation<ListFeePlanAgreementsRequest, ListFeePlanAgreementsResponse> operation
-              = new ListFeePlanAgreementsOperation(sdkConfiguration);
+              = new ListFeePlanAgreements.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -106,7 +106,7 @@ public class FeePlans {
                 .createFeePlanAgreement(createFeePlanAgreement)
                 .build();
         RequestOperation<CreateFeePlanAgreementsRequest, CreateFeePlanAgreementsResponse> operation
-              = new CreateFeePlanAgreementsOperation(sdkConfiguration);
+              = new CreateFeePlanAgreements.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -158,7 +158,7 @@ public class FeePlans {
                 .planIDs(planIDs)
                 .build();
         RequestOperation<ListFeePlansRequest, ListFeePlansResponse> operation
-              = new ListFeePlansOperation(sdkConfiguration);
+              = new ListFeePlans.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -186,7 +186,7 @@ public class FeePlans {
      */
     public RetrieveFeesResponse retrieveFees(RetrieveFeesRequest request) throws Exception {
         RequestOperation<RetrieveFeesRequest, RetrieveFeesResponse> operation
-              = new RetrieveFeesOperation(sdkConfiguration);
+              = new RetrieveFees.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -235,7 +235,7 @@ public class FeePlans {
                 .listFeesFetchRequest(listFeesFetchRequest)
                 .build();
         RequestOperation<io.moov.sdk.models.operations.ListFeesFetchRequest, ListFeesFetchResponse> operation
-              = new ListFeesFetchOperation(sdkConfiguration);
+              = new ListFeesFetch.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -284,7 +284,7 @@ public class FeePlans {
                 .planIDs(planIDs)
                 .build();
         RequestOperation<ListPartnerPricingRequest, ListPartnerPricingResponse> operation
-              = new ListPartnerPricingOperation(sdkConfiguration);
+              = new ListPartnerPricing.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -312,7 +312,7 @@ public class FeePlans {
      */
     public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(ListPartnerPricingAgreementsRequest request) throws Exception {
         RequestOperation<ListPartnerPricingAgreementsRequest, ListPartnerPricingAgreementsResponse> operation
-              = new ListPartnerPricingAgreementsOperation(sdkConfiguration);
+              = new ListPartnerPricingAgreements.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

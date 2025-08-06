@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListWalletTransactionsOperation;
+import io.moov.sdk.operations.ListWalletTransactions;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -28,7 +28,7 @@ public class ListWalletTransactionsRequestBuilder {
     public ListWalletTransactionsResponse call() throws Exception {
         
         RequestOperation<ListWalletTransactionsRequest, ListWalletTransactionsResponse> operation
-              = new ListWalletTransactionsOperation(sdkConfiguration);
+              = new ListWalletTransactions.Sync(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetWalletTransactionOperation;
+import io.moov.sdk.operations.GetWalletTransaction;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -53,7 +53,7 @@ public class GetWalletTransactionRequestBuilder {
     public GetWalletTransactionResponse call() throws Exception {
         
         RequestOperation<GetWalletTransactionRequest, GetWalletTransactionResponse> operation
-              = new GetWalletTransactionOperation(sdkConfiguration);
+              = new GetWalletTransaction.Sync(sdkConfiguration);
         GetWalletTransactionRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

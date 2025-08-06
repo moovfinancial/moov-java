@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetSweepConfigOperation;
+import io.moov.sdk.operations.GetSweepConfig;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class GetSweepConfigRequestBuilder {
     public GetSweepConfigResponse call() throws Exception {
         
         RequestOperation<GetSweepConfigRequest, GetSweepConfigResponse> operation
-              = new GetSweepConfigOperation(sdkConfiguration);
+              = new GetSweepConfig.Sync(sdkConfiguration);
         GetSweepConfigRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -11,8 +11,8 @@ import io.moov.sdk.models.operations.GetWalletResponse;
 import io.moov.sdk.models.operations.ListWalletsRequest;
 import io.moov.sdk.models.operations.ListWalletsRequestBuilder;
 import io.moov.sdk.models.operations.ListWalletsResponse;
-import io.moov.sdk.operations.GetWalletOperation;
-import io.moov.sdk.operations.ListWalletsOperation;
+import io.moov.sdk.operations.GetWallet;
+import io.moov.sdk.operations.ListWallets;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -57,7 +57,7 @@ public class Wallets {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListWalletsRequest, ListWalletsResponse> operation
-              = new ListWalletsOperation(sdkConfiguration);
+              = new ListWallets.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -96,7 +96,7 @@ public class Wallets {
                 .walletID(walletID)
                 .build();
         RequestOperation<GetWalletRequest, GetWalletResponse> operation
-              = new GetWalletOperation(sdkConfiguration);
+              = new GetWallet.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

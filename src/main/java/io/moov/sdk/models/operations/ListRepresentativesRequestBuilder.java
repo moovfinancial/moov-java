@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListRepresentativesOperation;
+import io.moov.sdk.operations.ListRepresentatives;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class ListRepresentativesRequestBuilder {
     public ListRepresentativesResponse call() throws Exception {
         
         RequestOperation<ListRepresentativesRequest, ListRepresentativesResponse> operation
-              = new ListRepresentativesOperation(sdkConfiguration);
+              = new ListRepresentatives.Sync(sdkConfiguration);
         ListRepresentativesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

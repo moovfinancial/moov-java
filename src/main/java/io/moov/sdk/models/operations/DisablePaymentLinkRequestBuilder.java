@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.DisablePaymentLinkOperation;
+import io.moov.sdk.operations.DisablePaymentLink;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class DisablePaymentLinkRequestBuilder {
     public DisablePaymentLinkResponse call() throws Exception {
         
         RequestOperation<DisablePaymentLinkRequest, DisablePaymentLinkResponse> operation
-              = new DisablePaymentLinkOperation(sdkConfiguration);
+              = new DisablePaymentLink.Sync(sdkConfiguration);
         DisablePaymentLinkRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

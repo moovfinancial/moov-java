@@ -7,7 +7,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.LinkAccountTerminalApplication;
-import io.moov.sdk.operations.LinkAccountTerminalApplicationOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -46,7 +45,7 @@ public class LinkAccountTerminalApplicationRequestBuilder {
     public LinkAccountTerminalApplicationResponse call() throws Exception {
         
         RequestOperation<LinkAccountTerminalApplicationRequest, LinkAccountTerminalApplicationResponse> operation
-              = new LinkAccountTerminalApplicationOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.LinkAccountTerminalApplication.Sync(sdkConfiguration);
         LinkAccountTerminalApplicationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetAccountOperation;
+import io.moov.sdk.operations.GetAccount;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class GetAccountRequestBuilder {
     public GetAccountResponse call() throws Exception {
         
         RequestOperation<GetAccountRequest, GetAccountResponse> operation
-              = new GetAccountOperation(sdkConfiguration);
+              = new GetAccount.Sync(sdkConfiguration);
         GetAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

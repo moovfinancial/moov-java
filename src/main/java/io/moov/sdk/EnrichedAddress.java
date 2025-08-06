@@ -8,7 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.models.operations.GetEnrichmentAddressRequest;
 import io.moov.sdk.models.operations.GetEnrichmentAddressRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentAddressResponse;
-import io.moov.sdk.operations.GetEnrichmentAddressOperation;
+import io.moov.sdk.operations.GetEnrichmentAddress;
 import java.lang.Exception;
 
 
@@ -43,7 +43,7 @@ public class EnrichedAddress {
      */
     public GetEnrichmentAddressResponse get(GetEnrichmentAddressRequest request) throws Exception {
         RequestOperation<GetEnrichmentAddressRequest, GetEnrichmentAddressResponse> operation
-              = new GetEnrichmentAddressOperation(sdkConfiguration);
+              = new GetEnrichmentAddress.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

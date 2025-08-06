@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PatchTransfer;
-import io.moov.sdk.operations.UpdateTransferOperation;
+import io.moov.sdk.operations.UpdateTransfer;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -54,7 +54,7 @@ public class UpdateTransferRequestBuilder {
     public UpdateTransferResponse call() throws Exception {
         
         RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
-              = new UpdateTransferOperation(sdkConfiguration);
+              = new UpdateTransfer.Sync(sdkConfiguration);
         UpdateTransferRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

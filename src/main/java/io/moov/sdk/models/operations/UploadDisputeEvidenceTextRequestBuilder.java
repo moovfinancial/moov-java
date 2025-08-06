@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateEvidenceText;
-import io.moov.sdk.operations.UploadDisputeEvidenceTextOperation;
+import io.moov.sdk.operations.UploadDisputeEvidenceText;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -54,7 +54,7 @@ public class UploadDisputeEvidenceTextRequestBuilder {
     public UploadDisputeEvidenceTextResponse call() throws Exception {
         
         RequestOperation<UploadDisputeEvidenceTextRequest, UploadDisputeEvidenceTextResponse> operation
-              = new UploadDisputeEvidenceTextOperation(sdkConfiguration);
+              = new UploadDisputeEvidenceText.Sync(sdkConfiguration);
         UploadDisputeEvidenceTextRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

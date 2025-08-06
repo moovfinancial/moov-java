@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetPaymentMethodOperation;
+import io.moov.sdk.operations.GetPaymentMethod;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class GetPaymentMethodRequestBuilder {
     public GetPaymentMethodResponse call() throws Exception {
         
         RequestOperation<GetPaymentMethodRequest, GetPaymentMethodResponse> operation
-              = new GetPaymentMethodOperation(sdkConfiguration);
+              = new GetPaymentMethod.Sync(sdkConfiguration);
         GetPaymentMethodRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

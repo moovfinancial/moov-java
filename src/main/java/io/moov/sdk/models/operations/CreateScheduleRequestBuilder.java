@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpsertSchedule;
-import io.moov.sdk.operations.CreateScheduleOperation;
+import io.moov.sdk.operations.CreateSchedule;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -46,7 +46,7 @@ public class CreateScheduleRequestBuilder {
     public CreateScheduleResponse call() throws Exception {
         
         RequestOperation<CreateScheduleRequest, CreateScheduleResponse> operation
-              = new CreateScheduleOperation(sdkConfiguration);
+              = new CreateSchedule.Sync(sdkConfiguration);
         CreateScheduleRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

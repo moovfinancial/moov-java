@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.BrandProperties;
-import io.moov.sdk.operations.CreateBrandOperation;
+import io.moov.sdk.operations.CreateBrand;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -46,7 +46,7 @@ public class CreateBrandRequestBuilder {
     public CreateBrandResponse call() throws Exception {
         
         RequestOperation<CreateBrandRequest, CreateBrandResponse> operation
-              = new CreateBrandOperation(sdkConfiguration);
+              = new CreateBrand.Sync(sdkConfiguration);
         CreateBrandRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

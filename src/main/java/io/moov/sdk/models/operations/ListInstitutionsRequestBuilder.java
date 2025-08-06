@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListInstitutionsOperation;
+import io.moov.sdk.operations.ListInstitutions;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -87,7 +87,7 @@ public class ListInstitutionsRequestBuilder {
     public ListInstitutionsResponse call() throws Exception {
         
         RequestOperation<ListInstitutionsRequest, ListInstitutionsResponse> operation
-              = new ListInstitutionsOperation(sdkConfiguration);
+              = new ListInstitutions.Sync(sdkConfiguration);
         ListInstitutionsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

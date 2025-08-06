@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetTerminalConfigurationOperation;
+import io.moov.sdk.operations.GetTerminalConfiguration;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class GetTerminalConfigurationRequestBuilder {
     public GetTerminalConfigurationResponse call() throws Exception {
         
         RequestOperation<GetTerminalConfigurationRequest, GetTerminalConfigurationResponse> operation
-              = new GetTerminalConfigurationOperation(sdkConfiguration);
+              = new GetTerminalConfiguration.Sync(sdkConfiguration);
         GetTerminalConfigurationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

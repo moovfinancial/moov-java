@@ -8,7 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.RevokeTokenRequest;
 import io.moov.sdk.models.components.TokenTypeHint;
-import io.moov.sdk.operations.RevokeAccessTokenOperation;
+import io.moov.sdk.operations.RevokeAccessToken;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -82,7 +82,7 @@ public class RevokeAccessTokenRequestBuilder {
     public RevokeAccessTokenResponse call() throws Exception {
         
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
-              = new RevokeAccessTokenOperation(sdkConfiguration);
+              = new RevokeAccessToken.Sync(sdkConfiguration);
         RevokeTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

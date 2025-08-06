@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetAdjustmentOperation;
+import io.moov.sdk.operations.GetAdjustment;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class GetAdjustmentRequestBuilder {
     public GetAdjustmentResponse call() throws Exception {
         
         RequestOperation<GetAdjustmentRequest, GetAdjustmentResponse> operation
-              = new GetAdjustmentOperation(sdkConfiguration);
+              = new GetAdjustment.Sync(sdkConfiguration);
         GetAdjustmentRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -7,7 +7,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateTerminalApplication;
-import io.moov.sdk.operations.CreateTerminalApplicationOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -29,7 +28,7 @@ public class CreateTerminalApplicationRequestBuilder {
     public CreateTerminalApplicationResponse call() throws Exception {
         
         RequestOperation<CreateTerminalApplication, CreateTerminalApplicationResponse> operation
-              = new CreateTerminalApplicationOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateTerminalApplication.Sync(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateUnderwriting;
-import io.moov.sdk.operations.UpsertUnderwritingOperation;
+import io.moov.sdk.operations.UpsertUnderwriting;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -46,7 +46,7 @@ public class UpsertUnderwritingRequestBuilder {
     public UpsertUnderwritingResponse call() throws Exception {
         
         RequestOperation<UpsertUnderwritingRequest, UpsertUnderwritingResponse> operation
-              = new UpsertUnderwritingOperation(sdkConfiguration);
+              = new UpsertUnderwriting.Sync(sdkConfiguration);
         UpsertUnderwritingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

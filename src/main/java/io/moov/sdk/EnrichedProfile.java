@@ -8,7 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.models.operations.GetEnrichmentProfileRequest;
 import io.moov.sdk.models.operations.GetEnrichmentProfileRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentProfileResponse;
-import io.moov.sdk.operations.GetEnrichmentProfileOperation;
+import io.moov.sdk.operations.GetEnrichmentProfile;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -49,7 +49,7 @@ public class EnrichedProfile {
                 .email(email)
                 .build();
         RequestOperation<GetEnrichmentProfileRequest, GetEnrichmentProfileResponse> operation
-              = new GetEnrichmentProfileOperation(sdkConfiguration);
+              = new GetEnrichmentProfile.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -8,7 +8,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.BankAccountWaitFor;
 import io.moov.sdk.models.components.LinkBankAccount;
-import io.moov.sdk.operations.LinkBankAccountOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -62,7 +61,7 @@ public class LinkBankAccountRequestBuilder {
     public LinkBankAccountResponse call() throws Exception {
         
         RequestOperation<LinkBankAccountRequest, LinkBankAccountResponse> operation
-              = new LinkBankAccountOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.LinkBankAccount.Sync(sdkConfiguration);
         LinkBankAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

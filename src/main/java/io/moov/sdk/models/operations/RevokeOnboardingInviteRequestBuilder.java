@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.RevokeOnboardingInviteOperation;
+import io.moov.sdk.operations.RevokeOnboardingInvite;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class RevokeOnboardingInviteRequestBuilder {
     public RevokeOnboardingInviteResponse call() throws Exception {
         
         RequestOperation<RevokeOnboardingInviteRequest, RevokeOnboardingInviteResponse> operation
-              = new RevokeOnboardingInviteOperation(sdkConfiguration);
+              = new RevokeOnboardingInvite.Sync(sdkConfiguration);
         RevokeOnboardingInviteRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

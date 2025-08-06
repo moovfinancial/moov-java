@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetDisputeEvidenceDataOperation;
+import io.moov.sdk.operations.GetDisputeEvidenceData;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -53,7 +53,7 @@ public class GetDisputeEvidenceDataRequestBuilder {
     public GetDisputeEvidenceDataResponse call() throws Exception {
         
         RequestOperation<GetDisputeEvidenceDataRequest, GetDisputeEvidenceDataResponse> operation
-              = new GetDisputeEvidenceDataOperation(sdkConfiguration);
+              = new GetDisputeEvidenceData.Sync(sdkConfiguration);
         GetDisputeEvidenceDataRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

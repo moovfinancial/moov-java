@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetEnrichmentProfileOperation;
+import io.moov.sdk.operations.GetEnrichmentProfile;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class GetEnrichmentProfileRequestBuilder {
     public GetEnrichmentProfileResponse call() throws Exception {
         
         RequestOperation<GetEnrichmentProfileRequest, GetEnrichmentProfileResponse> operation
-              = new GetEnrichmentProfileOperation(sdkConfiguration);
+              = new GetEnrichmentProfile.Sync(sdkConfiguration);
         GetEnrichmentProfileRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

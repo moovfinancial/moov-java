@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListIndustriesOperation;
+import io.moov.sdk.operations.ListIndustries;
 import java.lang.Exception;
 
 public class ListIndustriesRequestBuilder {
@@ -28,7 +28,7 @@ public class ListIndustriesRequestBuilder {
     public ListIndustriesResponse call() throws Exception {
         
         RequestOperation<ListIndustriesRequest, ListIndustriesResponse> operation
-              = new ListIndustriesOperation(sdkConfiguration);
+              = new ListIndustries.Sync(sdkConfiguration);
         ListIndustriesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -11,8 +11,8 @@ import io.moov.sdk.models.operations.GetAdjustmentResponse;
 import io.moov.sdk.models.operations.ListAdjustmentsRequest;
 import io.moov.sdk.models.operations.ListAdjustmentsRequestBuilder;
 import io.moov.sdk.models.operations.ListAdjustmentsResponse;
-import io.moov.sdk.operations.GetAdjustmentOperation;
-import io.moov.sdk.operations.ListAdjustmentsOperation;
+import io.moov.sdk.operations.GetAdjustment;
+import io.moov.sdk.operations.ListAdjustments;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
@@ -70,7 +70,7 @@ public class Adjustments {
                 .walletID(walletID)
                 .build();
         RequestOperation<ListAdjustmentsRequest, ListAdjustmentsResponse> operation
-              = new ListAdjustmentsOperation(sdkConfiguration);
+              = new ListAdjustments.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -105,7 +105,7 @@ public class Adjustments {
                 .adjustmentID(adjustmentID)
                 .build();
         RequestOperation<GetAdjustmentRequest, GetAdjustmentResponse> operation
-              = new GetAdjustmentOperation(sdkConfiguration);
+              = new GetAdjustment.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

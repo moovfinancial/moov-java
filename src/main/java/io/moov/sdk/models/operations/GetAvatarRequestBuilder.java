@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetAvatarOperation;
+import io.moov.sdk.operations.GetAvatar;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class GetAvatarRequestBuilder {
     public GetAvatarResponse call() throws Exception {
         
         RequestOperation<GetAvatarRequest, GetAvatarResponse> operation
-              = new GetAvatarOperation(sdkConfiguration);
+              = new GetAvatar.Sync(sdkConfiguration);
         GetAvatarRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

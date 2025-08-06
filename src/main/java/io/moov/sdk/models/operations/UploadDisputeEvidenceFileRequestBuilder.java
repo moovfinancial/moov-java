@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateEvidenceFileMultiPart;
-import io.moov.sdk.operations.UploadDisputeEvidenceFileOperation;
+import io.moov.sdk.operations.UploadDisputeEvidenceFile;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -54,7 +54,7 @@ public class UploadDisputeEvidenceFileRequestBuilder {
     public UploadDisputeEvidenceFileResponse call() throws Exception {
         
         RequestOperation<UploadDisputeEvidenceFileRequest, UploadDisputeEvidenceFileResponse> operation
-              = new UploadDisputeEvidenceFileOperation(sdkConfiguration);
+              = new UploadDisputeEvidenceFile.Sync(sdkConfiguration);
         UploadDisputeEvidenceFileRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -12,8 +12,8 @@ import io.moov.sdk.models.operations.CreateAccessTokenRequestBuilder;
 import io.moov.sdk.models.operations.CreateAccessTokenResponse;
 import io.moov.sdk.models.operations.RevokeAccessTokenRequestBuilder;
 import io.moov.sdk.models.operations.RevokeAccessTokenResponse;
-import io.moov.sdk.operations.CreateAccessTokenOperation;
-import io.moov.sdk.operations.RevokeAccessTokenOperation;
+import io.moov.sdk.operations.CreateAccessToken;
+import io.moov.sdk.operations.RevokeAccessToken;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
@@ -75,7 +75,7 @@ public class Authentication {
                 .clientSecret(clientSecret)
                 .build();
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
-              = new RevokeAccessTokenOperation(sdkConfiguration);
+              = new RevokeAccessToken.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -97,7 +97,7 @@ public class Authentication {
      */
     public CreateAccessTokenResponse createAccessToken(AuthTokenRequest request) throws Exception {
         RequestOperation<AuthTokenRequest, CreateAccessTokenResponse> operation
-              = new CreateAccessTokenOperation(sdkConfiguration);
+              = new CreateAccessToken.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

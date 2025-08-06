@@ -19,10 +19,10 @@ import io.moov.sdk.models.operations.ListCapabilitiesResponse;
 import io.moov.sdk.models.operations.RequestCapabilitiesRequest;
 import io.moov.sdk.models.operations.RequestCapabilitiesRequestBuilder;
 import io.moov.sdk.models.operations.RequestCapabilitiesResponse;
-import io.moov.sdk.operations.DisableCapabilityOperation;
-import io.moov.sdk.operations.GetCapabilityOperation;
-import io.moov.sdk.operations.ListCapabilitiesOperation;
-import io.moov.sdk.operations.RequestCapabilitiesOperation;
+import io.moov.sdk.operations.DisableCapability;
+import io.moov.sdk.operations.GetCapability;
+import io.moov.sdk.operations.ListCapabilities;
+import io.moov.sdk.operations.RequestCapabilities;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -67,7 +67,7 @@ public class Capabilities {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListCapabilitiesRequest, ListCapabilitiesResponse> operation
-              = new ListCapabilitiesOperation(sdkConfiguration);
+              = new ListCapabilities.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -102,7 +102,7 @@ public class Capabilities {
                 .addCapabilities(addCapabilities)
                 .build();
         RequestOperation<RequestCapabilitiesRequest, RequestCapabilitiesResponse> operation
-              = new RequestCapabilitiesOperation(sdkConfiguration);
+              = new RequestCapabilities.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -139,7 +139,7 @@ public class Capabilities {
                 .capabilityID(capabilityID)
                 .build();
         RequestOperation<GetCapabilityRequest, GetCapabilityResponse> operation
-              = new GetCapabilityOperation(sdkConfiguration);
+              = new GetCapability.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -176,7 +176,7 @@ public class Capabilities {
                 .capabilityID(capabilityID)
                 .build();
         RequestOperation<DisableCapabilityRequest, DisableCapabilityResponse> operation
-              = new DisableCapabilityOperation(sdkConfiguration);
+              = new DisableCapability.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

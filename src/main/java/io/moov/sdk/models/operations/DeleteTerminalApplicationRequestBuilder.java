@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.DeleteTerminalApplicationOperation;
+import io.moov.sdk.operations.DeleteTerminalApplication;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class DeleteTerminalApplicationRequestBuilder {
     public DeleteTerminalApplicationResponse call() throws Exception {
         
         RequestOperation<DeleteTerminalApplicationRequest, DeleteTerminalApplicationResponse> operation
-              = new DeleteTerminalApplicationOperation(sdkConfiguration);
+              = new DeleteTerminalApplication.Sync(sdkConfiguration);
         DeleteTerminalApplicationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

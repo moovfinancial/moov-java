@@ -7,7 +7,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateAccount;
-import io.moov.sdk.operations.CreateAccountOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -29,7 +28,7 @@ public class CreateAccountRequestBuilder {
     public CreateAccountResponse call() throws Exception {
         
         RequestOperation<CreateAccount, CreateAccountResponse> operation
-              = new CreateAccountOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateAccount.Sync(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

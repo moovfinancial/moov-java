@@ -15,9 +15,9 @@ import io.moov.sdk.models.operations.ListFilesResponse;
 import io.moov.sdk.models.operations.UploadFileRequest;
 import io.moov.sdk.models.operations.UploadFileRequestBuilder;
 import io.moov.sdk.models.operations.UploadFileResponse;
-import io.moov.sdk.operations.GetFileDetailsOperation;
-import io.moov.sdk.operations.ListFilesOperation;
-import io.moov.sdk.operations.UploadFileOperation;
+import io.moov.sdk.operations.GetFileDetails;
+import io.moov.sdk.operations.ListFiles;
+import io.moov.sdk.operations.UploadFile;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -66,7 +66,7 @@ public class Files {
                 .fileUploadRequestMultiPart(fileUploadRequestMultiPart)
                 .build();
         RequestOperation<UploadFileRequest, UploadFileResponse> operation
-              = new UploadFileOperation(sdkConfiguration);
+              = new UploadFile.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -99,7 +99,7 @@ public class Files {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListFilesRequest, ListFilesResponse> operation
-              = new ListFilesOperation(sdkConfiguration);
+              = new ListFiles.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -134,7 +134,7 @@ public class Files {
                 .fileID(fileID)
                 .build();
         RequestOperation<GetFileDetailsRequest, GetFileDetailsResponse> operation
-              = new GetFileDetailsOperation(sdkConfiguration);
+              = new GetFileDetails.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

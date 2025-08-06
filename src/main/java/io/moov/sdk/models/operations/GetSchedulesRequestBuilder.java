@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetSchedulesOperation;
+import io.moov.sdk.operations.GetSchedules;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class GetSchedulesRequestBuilder {
     public GetSchedulesResponse call() throws Exception {
         
         RequestOperation<GetSchedulesRequest, GetSchedulesResponse> operation
-              = new GetSchedulesOperation(sdkConfiguration);
+              = new GetSchedules.Sync(sdkConfiguration);
         GetSchedulesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

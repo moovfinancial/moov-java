@@ -19,10 +19,9 @@ import io.moov.sdk.models.operations.UpdateBrandResponse;
 import io.moov.sdk.models.operations.UpsertBrandRequest;
 import io.moov.sdk.models.operations.UpsertBrandRequestBuilder;
 import io.moov.sdk.models.operations.UpsertBrandResponse;
-import io.moov.sdk.operations.CreateBrandOperation;
-import io.moov.sdk.operations.GetBrandOperation;
-import io.moov.sdk.operations.UpdateBrandOperation;
-import io.moov.sdk.operations.UpsertBrandOperation;
+import io.moov.sdk.operations.CreateBrand;
+import io.moov.sdk.operations.GetBrand;
+import io.moov.sdk.operations.UpsertBrand;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -65,7 +64,7 @@ public class Branding {
                 .brandProperties(brandProperties)
                 .build();
         RequestOperation<CreateBrandRequest, CreateBrandResponse> operation
-              = new CreateBrandOperation(sdkConfiguration);
+              = new CreateBrand.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -100,7 +99,7 @@ public class Branding {
                 .brandProperties(brandProperties)
                 .build();
         RequestOperation<UpsertBrandRequest, UpsertBrandResponse> operation
-              = new UpsertBrandOperation(sdkConfiguration);
+              = new UpsertBrand.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -133,7 +132,7 @@ public class Branding {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetBrandRequest, GetBrandResponse> operation
-              = new GetBrandOperation(sdkConfiguration);
+              = new GetBrand.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -168,7 +167,7 @@ public class Branding {
                 .updateBrand(updateBrand)
                 .build();
         RequestOperation<UpdateBrandRequest, UpdateBrandResponse> operation
-              = new UpdateBrandOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateBrand.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

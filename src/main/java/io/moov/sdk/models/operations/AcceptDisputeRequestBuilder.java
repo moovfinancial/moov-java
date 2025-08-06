@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.AcceptDisputeOperation;
+import io.moov.sdk.operations.AcceptDispute;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class AcceptDisputeRequestBuilder {
     public AcceptDisputeResponse call() throws Exception {
         
         RequestOperation<AcceptDisputeRequest, AcceptDisputeResponse> operation
-              = new AcceptDisputeOperation(sdkConfiguration);
+              = new AcceptDispute.Sync(sdkConfiguration);
         AcceptDisputeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

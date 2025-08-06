@@ -17,10 +17,10 @@ import io.moov.sdk.models.operations.ListOnboardingInvitesResponse;
 import io.moov.sdk.models.operations.RevokeOnboardingInviteRequest;
 import io.moov.sdk.models.operations.RevokeOnboardingInviteRequestBuilder;
 import io.moov.sdk.models.operations.RevokeOnboardingInviteResponse;
-import io.moov.sdk.operations.CreateOnboardingInviteOperation;
-import io.moov.sdk.operations.GetOnboardingInviteOperation;
-import io.moov.sdk.operations.ListOnboardingInvitesOperation;
-import io.moov.sdk.operations.RevokeOnboardingInviteOperation;
+import io.moov.sdk.operations.CreateOnboardingInvite;
+import io.moov.sdk.operations.GetOnboardingInvite;
+import io.moov.sdk.operations.ListOnboardingInvites;
+import io.moov.sdk.operations.RevokeOnboardingInvite;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -56,7 +56,7 @@ public class Onboarding {
      */
     public CreateOnboardingInviteResponse createInvite(OnboardingInviteRequest request) throws Exception {
         RequestOperation<OnboardingInviteRequest, CreateOnboardingInviteResponse> operation
-              = new CreateOnboardingInviteOperation(sdkConfiguration);
+              = new CreateOnboardingInvite.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -87,7 +87,7 @@ public class Onboarding {
                 .builder()
                 .build();
         RequestOperation<ListOnboardingInvitesRequest, ListOnboardingInvitesResponse> operation
-              = new ListOnboardingInvitesOperation(sdkConfiguration);
+              = new ListOnboardingInvites.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -120,7 +120,7 @@ public class Onboarding {
                 .code(code)
                 .build();
         RequestOperation<GetOnboardingInviteRequest, GetOnboardingInviteResponse> operation
-              = new GetOnboardingInviteOperation(sdkConfiguration);
+              = new GetOnboardingInvite.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -153,7 +153,7 @@ public class Onboarding {
                 .code(code)
                 .build();
         RequestOperation<RevokeOnboardingInviteRequest, RevokeOnboardingInviteResponse> operation
-              = new RevokeOnboardingInviteOperation(sdkConfiguration);
+              = new RevokeOnboardingInvite.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

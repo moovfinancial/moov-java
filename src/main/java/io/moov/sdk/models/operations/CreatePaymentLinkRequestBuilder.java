@@ -7,7 +7,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreatePaymentLink;
-import io.moov.sdk.operations.CreatePaymentLinkOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -46,7 +45,7 @@ public class CreatePaymentLinkRequestBuilder {
     public CreatePaymentLinkResponse call() throws Exception {
         
         RequestOperation<CreatePaymentLinkRequest, CreatePaymentLinkResponse> operation
-              = new CreatePaymentLinkOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreatePaymentLink.Sync(sdkConfiguration);
         CreatePaymentLinkRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

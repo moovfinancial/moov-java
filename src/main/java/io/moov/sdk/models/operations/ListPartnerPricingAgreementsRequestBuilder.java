@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListPartnerPricingAgreementsOperation;
+import io.moov.sdk.operations.ListPartnerPricingAgreements;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -28,7 +28,7 @@ public class ListPartnerPricingAgreementsRequestBuilder {
     public ListPartnerPricingAgreementsResponse call() throws Exception {
         
         RequestOperation<ListPartnerPricingAgreementsRequest, ListPartnerPricingAgreementsResponse> operation
-              = new ListPartnerPricingAgreementsOperation(sdkConfiguration);
+              = new ListPartnerPricingAgreements.Sync(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

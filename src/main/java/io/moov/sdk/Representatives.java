@@ -22,11 +22,9 @@ import io.moov.sdk.models.operations.ListRepresentativesResponse;
 import io.moov.sdk.models.operations.UpdateRepresentativeRequest;
 import io.moov.sdk.models.operations.UpdateRepresentativeRequestBuilder;
 import io.moov.sdk.models.operations.UpdateRepresentativeResponse;
-import io.moov.sdk.operations.CreateRepresentativeOperation;
-import io.moov.sdk.operations.DeleteRepresentativeOperation;
-import io.moov.sdk.operations.GetRepresentativeOperation;
-import io.moov.sdk.operations.ListRepresentativesOperation;
-import io.moov.sdk.operations.UpdateRepresentativeOperation;
+import io.moov.sdk.operations.DeleteRepresentative;
+import io.moov.sdk.operations.GetRepresentative;
+import io.moov.sdk.operations.ListRepresentatives;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -73,7 +71,7 @@ public class Representatives {
                 .createRepresentative(createRepresentative)
                 .build();
         RequestOperation<CreateRepresentativeRequest, CreateRepresentativeResponse> operation
-              = new CreateRepresentativeOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateRepresentative.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -112,7 +110,7 @@ public class Representatives {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListRepresentativesRequest, ListRepresentativesResponse> operation
-              = new ListRepresentativesOperation(sdkConfiguration);
+              = new ListRepresentatives.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -147,7 +145,7 @@ public class Representatives {
                 .representativeID(representativeID)
                 .build();
         RequestOperation<DeleteRepresentativeRequest, DeleteRepresentativeResponse> operation
-              = new DeleteRepresentativeOperation(sdkConfiguration);
+              = new DeleteRepresentative.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -182,7 +180,7 @@ public class Representatives {
                 .representativeID(representativeID)
                 .build();
         RequestOperation<GetRepresentativeRequest, GetRepresentativeResponse> operation
-              = new GetRepresentativeOperation(sdkConfiguration);
+              = new GetRepresentative.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -247,7 +245,7 @@ public class Representatives {
                 .updateRepresentative(updateRepresentative)
                 .build();
         RequestOperation<UpdateRepresentativeRequest, UpdateRepresentativeResponse> operation
-              = new UpdateRepresentativeOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateRepresentative.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -41,17 +41,17 @@ import io.moov.sdk.models.operations.UploadDisputeEvidenceFileResponse;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceTextRequest;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceTextRequestBuilder;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceTextResponse;
-import io.moov.sdk.operations.AcceptDisputeOperation;
-import io.moov.sdk.operations.DeleteDisputeEvidenceFileOperation;
-import io.moov.sdk.operations.GetDisputeEvidenceDataOperation;
-import io.moov.sdk.operations.GetDisputeEvidenceOperation;
-import io.moov.sdk.operations.GetDisputeOperation;
-import io.moov.sdk.operations.ListDisputeEvidenceOperation;
-import io.moov.sdk.operations.ListDisputesOperation;
-import io.moov.sdk.operations.SubmitDisputeEvidenceOperation;
-import io.moov.sdk.operations.UpdateDisputeEvidenceOperation;
-import io.moov.sdk.operations.UploadDisputeEvidenceFileOperation;
-import io.moov.sdk.operations.UploadDisputeEvidenceTextOperation;
+import io.moov.sdk.operations.AcceptDispute;
+import io.moov.sdk.operations.DeleteDisputeEvidenceFile;
+import io.moov.sdk.operations.GetDispute;
+import io.moov.sdk.operations.GetDisputeEvidence;
+import io.moov.sdk.operations.GetDisputeEvidenceData;
+import io.moov.sdk.operations.ListDisputeEvidence;
+import io.moov.sdk.operations.ListDisputes;
+import io.moov.sdk.operations.SubmitDisputeEvidence;
+import io.moov.sdk.operations.UpdateDisputeEvidence;
+import io.moov.sdk.operations.UploadDisputeEvidenceFile;
+import io.moov.sdk.operations.UploadDisputeEvidenceText;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -91,7 +91,7 @@ public class Disputes {
      */
     public ListDisputesResponse list(ListDisputesRequest request) throws Exception {
         RequestOperation<ListDisputesRequest, ListDisputesResponse> operation
-              = new ListDisputesOperation(sdkConfiguration);
+              = new ListDisputes.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -130,7 +130,7 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<GetDisputeRequest, GetDisputeResponse> operation
-              = new GetDisputeOperation(sdkConfiguration);
+              = new GetDispute.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -169,7 +169,7 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<AcceptDisputeRequest, AcceptDisputeResponse> operation
-              = new AcceptDisputeOperation(sdkConfiguration);
+              = new AcceptDispute.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -208,7 +208,7 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<ListDisputeEvidenceRequest, ListDisputeEvidenceResponse> operation
-              = new ListDisputeEvidenceOperation(sdkConfiguration);
+              = new ListDisputeEvidence.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -251,7 +251,7 @@ public class Disputes {
                 .createEvidenceFileMultiPart(createEvidenceFileMultiPart)
                 .build();
         RequestOperation<UploadDisputeEvidenceFileRequest, UploadDisputeEvidenceFileResponse> operation
-              = new UploadDisputeEvidenceFileOperation(sdkConfiguration);
+              = new UploadDisputeEvidenceFile.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -294,7 +294,7 @@ public class Disputes {
                 .createEvidenceText(createEvidenceText)
                 .build();
         RequestOperation<UploadDisputeEvidenceTextRequest, UploadDisputeEvidenceTextResponse> operation
-              = new UploadDisputeEvidenceTextOperation(sdkConfiguration);
+              = new UploadDisputeEvidenceText.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -339,7 +339,7 @@ public class Disputes {
                 .disputeID(disputeID)
                 .build();
         RequestOperation<SubmitDisputeEvidenceRequest, SubmitDisputeEvidenceResponse> operation
-              = new SubmitDisputeEvidenceOperation(sdkConfiguration);
+              = new SubmitDisputeEvidence.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -382,7 +382,7 @@ public class Disputes {
                 .evidenceID(evidenceID)
                 .build();
         RequestOperation<GetDisputeEvidenceRequest, GetDisputeEvidenceResponse> operation
-              = new GetDisputeEvidenceOperation(sdkConfiguration);
+              = new GetDisputeEvidence.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -427,7 +427,7 @@ public class Disputes {
                 .updateEvidence(updateEvidence)
                 .build();
         RequestOperation<UpdateDisputeEvidenceRequest, UpdateDisputeEvidenceResponse> operation
-              = new UpdateDisputeEvidenceOperation(sdkConfiguration);
+              = new UpdateDisputeEvidence.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -470,7 +470,7 @@ public class Disputes {
                 .evidenceID(evidenceID)
                 .build();
         RequestOperation<DeleteDisputeEvidenceFileRequest, DeleteDisputeEvidenceFileResponse> operation
-              = new DeleteDisputeEvidenceFileOperation(sdkConfiguration);
+              = new DeleteDisputeEvidenceFile.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -513,7 +513,7 @@ public class Disputes {
                 .evidenceID(evidenceID)
                 .build();
         RequestOperation<GetDisputeEvidenceDataRequest, GetDisputeEvidenceDataResponse> operation
-              = new GetDisputeEvidenceDataOperation(sdkConfiguration);
+              = new GetDisputeEvidenceData.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.LinkApplePay;
-import io.moov.sdk.operations.LinkApplePayTokenOperation;
+import io.moov.sdk.operations.LinkApplePayToken;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -46,7 +46,7 @@ public class LinkApplePayTokenRequestBuilder {
     public LinkApplePayTokenResponse call() throws Exception {
         
         RequestOperation<LinkApplePayTokenRequest, LinkApplePayTokenResponse> operation
-              = new LinkApplePayTokenOperation(sdkConfiguration);
+              = new LinkApplePayToken.Sync(sdkConfiguration);
         LinkApplePayTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetFileDetailsOperation;
+import io.moov.sdk.operations.GetFileDetails;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class GetFileDetailsRequestBuilder {
     public GetFileDetailsResponse call() throws Exception {
         
         RequestOperation<GetFileDetailsRequest, GetFileDetailsResponse> operation
-              = new GetFileDetailsOperation(sdkConfiguration);
+              = new GetFileDetails.Sync(sdkConfiguration);
         GetFileDetailsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

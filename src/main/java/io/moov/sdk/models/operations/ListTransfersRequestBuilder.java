@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListTransfersOperation;
+import io.moov.sdk.operations.ListTransfers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -28,7 +28,7 @@ public class ListTransfersRequestBuilder {
     public ListTransfersResponse call() throws Exception {
         
         RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
-              = new ListTransfersOperation(sdkConfiguration);
+              = new ListTransfers.Sync(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

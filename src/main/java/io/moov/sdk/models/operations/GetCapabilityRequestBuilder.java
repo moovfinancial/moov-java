@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CapabilityID;
-import io.moov.sdk.operations.GetCapabilityOperation;
+import io.moov.sdk.operations.GetCapability;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -46,7 +46,7 @@ public class GetCapabilityRequestBuilder {
     public GetCapabilityResponse call() throws Exception {
         
         RequestOperation<GetCapabilityRequest, GetCapabilityResponse> operation
-              = new GetCapabilityOperation(sdkConfiguration);
+              = new GetCapability.Sync(sdkConfiguration);
         GetCapabilityRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

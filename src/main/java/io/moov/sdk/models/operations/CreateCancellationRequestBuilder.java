@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.CreateCancellationOperation;
+import io.moov.sdk.operations.CreateCancellation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class CreateCancellationRequestBuilder {
     public CreateCancellationResponse call() throws Exception {
         
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
-              = new CreateCancellationOperation(sdkConfiguration);
+              = new CreateCancellation.Sync(sdkConfiguration);
         CreateCancellationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -8,7 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.models.operations.ListIndustriesRequest;
 import io.moov.sdk.models.operations.ListIndustriesRequestBuilder;
 import io.moov.sdk.models.operations.ListIndustriesResponse;
-import io.moov.sdk.operations.ListIndustriesOperation;
+import io.moov.sdk.operations.ListIndustries;
 import java.lang.Exception;
 
 
@@ -46,7 +46,7 @@ public class Industries {
                 .builder()
                 .build();
         RequestOperation<ListIndustriesRequest, ListIndustriesResponse> operation
-              = new ListIndustriesOperation(sdkConfiguration);
+              = new ListIndustries.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

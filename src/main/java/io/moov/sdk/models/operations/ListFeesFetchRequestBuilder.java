@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.ListFeesFetchRequest;
-import io.moov.sdk.operations.ListFeesFetchOperation;
+import io.moov.sdk.operations.ListFeesFetch;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -53,7 +53,7 @@ public class ListFeesFetchRequestBuilder {
     public ListFeesFetchResponse call() throws Exception {
         
         RequestOperation<io.moov.sdk.models.operations.ListFeesFetchRequest, ListFeesFetchResponse> operation
-              = new ListFeesFetchOperation(sdkConfiguration);
+              = new ListFeesFetch.Sync(sdkConfiguration);
         io.moov.sdk.models.operations.ListFeesFetchRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

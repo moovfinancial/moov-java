@@ -21,11 +21,10 @@ import io.moov.sdk.models.operations.GetTerminalApplicationResponse;
 import io.moov.sdk.models.operations.ListTerminalApplicationsRequest;
 import io.moov.sdk.models.operations.ListTerminalApplicationsRequestBuilder;
 import io.moov.sdk.models.operations.ListTerminalApplicationsResponse;
-import io.moov.sdk.operations.CreateTerminalApplicationOperation;
-import io.moov.sdk.operations.CreateTerminalApplicationVersionOperation;
-import io.moov.sdk.operations.DeleteTerminalApplicationOperation;
-import io.moov.sdk.operations.GetTerminalApplicationOperation;
-import io.moov.sdk.operations.ListTerminalApplicationsOperation;
+import io.moov.sdk.operations.CreateTerminalApplicationVersion;
+import io.moov.sdk.operations.DeleteTerminalApplication;
+import io.moov.sdk.operations.GetTerminalApplication;
+import io.moov.sdk.operations.ListTerminalApplications;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -61,7 +60,7 @@ public class TerminalApplications {
      */
     public CreateTerminalApplicationResponse create(CreateTerminalApplication request) throws Exception {
         RequestOperation<CreateTerminalApplication, CreateTerminalApplicationResponse> operation
-              = new CreateTerminalApplicationOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateTerminalApplication.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -92,7 +91,7 @@ public class TerminalApplications {
                 .builder()
                 .build();
         RequestOperation<ListTerminalApplicationsRequest, ListTerminalApplicationsResponse> operation
-              = new ListTerminalApplicationsOperation(sdkConfiguration);
+              = new ListTerminalApplications.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -125,7 +124,7 @@ public class TerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetTerminalApplicationRequest, GetTerminalApplicationResponse> operation
-              = new GetTerminalApplicationOperation(sdkConfiguration);
+              = new GetTerminalApplication.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -158,7 +157,7 @@ public class TerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<DeleteTerminalApplicationRequest, DeleteTerminalApplicationResponse> operation
-              = new DeleteTerminalApplicationOperation(sdkConfiguration);
+              = new DeleteTerminalApplication.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -193,7 +192,7 @@ public class TerminalApplications {
                 .terminalApplicationVersion(terminalApplicationVersion)
                 .build();
         RequestOperation<CreateTerminalApplicationVersionRequest, CreateTerminalApplicationVersionResponse> operation
-              = new CreateTerminalApplicationVersionOperation(sdkConfiguration);
+              = new CreateTerminalApplicationVersion.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

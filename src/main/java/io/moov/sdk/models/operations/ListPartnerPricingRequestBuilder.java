@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListPartnerPricingOperation;
+import io.moov.sdk.operations.ListPartnerPricing;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -53,7 +53,7 @@ public class ListPartnerPricingRequestBuilder {
     public ListPartnerPricingResponse call() throws Exception {
         
         RequestOperation<ListPartnerPricingRequest, ListPartnerPricingResponse> operation
-              = new ListPartnerPricingOperation(sdkConfiguration);
+              = new ListPartnerPricing.Sync(sdkConfiguration);
         ListPartnerPricingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpsertSchedule;
-import io.moov.sdk.operations.UpdateScheduleOperation;
+import io.moov.sdk.operations.UpdateSchedule;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -54,7 +54,7 @@ public class UpdateScheduleRequestBuilder {
     public UpdateScheduleResponse call() throws Exception {
         
         RequestOperation<UpdateScheduleRequest, UpdateScheduleResponse> operation
-              = new UpdateScheduleOperation(sdkConfiguration);
+              = new UpdateSchedule.Sync(sdkConfiguration);
         UpdateScheduleRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

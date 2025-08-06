@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListIssuedCardAuthorizationsOperation;
+import io.moov.sdk.operations.ListIssuedCardAuthorizations;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -28,7 +28,7 @@ public class ListIssuedCardAuthorizationsRequestBuilder {
     public ListIssuedCardAuthorizationsResponse call() throws Exception {
         
         RequestOperation<ListIssuedCardAuthorizationsRequest, ListIssuedCardAuthorizationsResponse> operation
-              = new ListIssuedCardAuthorizationsOperation(sdkConfiguration);
+              = new ListIssuedCardAuthorizations.Sync(sdkConfiguration);
 
         return operation.handleResponse(operation.doRequest(request));
     }

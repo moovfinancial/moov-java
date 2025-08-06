@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListBankAccountsOperation;
+import io.moov.sdk.operations.ListBankAccounts;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class ListBankAccountsRequestBuilder {
     public ListBankAccountsResponse call() throws Exception {
         
         RequestOperation<ListBankAccountsRequest, ListBankAccountsResponse> operation
-              = new ListBankAccountsOperation(sdkConfiguration);
+              = new ListBankAccounts.Sync(sdkConfiguration);
         ListBankAccountsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

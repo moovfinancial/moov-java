@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListOnboardingInvitesOperation;
+import io.moov.sdk.operations.ListOnboardingInvites;
 import java.lang.Exception;
 
 public class ListOnboardingInvitesRequestBuilder {
@@ -28,7 +28,7 @@ public class ListOnboardingInvitesRequestBuilder {
     public ListOnboardingInvitesResponse call() throws Exception {
         
         RequestOperation<ListOnboardingInvitesRequest, ListOnboardingInvitesResponse> operation
-              = new ListOnboardingInvitesOperation(sdkConfiguration);
+              = new ListOnboardingInvites.Sync(sdkConfiguration);
         ListOnboardingInvitesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

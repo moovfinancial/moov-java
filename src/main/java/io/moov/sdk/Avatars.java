@@ -8,7 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.models.operations.GetAvatarRequest;
 import io.moov.sdk.models.operations.GetAvatarRequestBuilder;
 import io.moov.sdk.models.operations.GetAvatarResponse;
-import io.moov.sdk.operations.GetAvatarOperation;
+import io.moov.sdk.operations.GetAvatar;
 import java.lang.Exception;
 import java.lang.String;
 
@@ -49,7 +49,7 @@ public class Avatars {
                 .uniqueID(uniqueID)
                 .build();
         RequestOperation<GetAvatarRequest, GetAvatarResponse> operation
-              = new GetAvatarOperation(sdkConfiguration);
+              = new GetAvatar.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

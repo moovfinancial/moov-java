@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.DisableBankAccountOperation;
+import io.moov.sdk.operations.DisableBankAccount;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class DisableBankAccountRequestBuilder {
     public DisableBankAccountResponse call() throws Exception {
         
         RequestOperation<DisableBankAccountRequest, DisableBankAccountResponse> operation
-              = new DisableBankAccountOperation(sdkConfiguration);
+              = new DisableBankAccount.Sync(sdkConfiguration);
         DisableBankAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

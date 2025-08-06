@@ -7,7 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PatchAccount;
-import io.moov.sdk.operations.UpdateAccountOperation;
+import io.moov.sdk.operations.UpdateAccount;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -46,7 +46,7 @@ public class UpdateAccountRequestBuilder {
     public UpdateAccountResponse call() throws Exception {
         
         RequestOperation<UpdateAccountRequest, UpdateAccountResponse> operation
-              = new UpdateAccountOperation(sdkConfiguration);
+              = new UpdateAccount.Sync(sdkConfiguration);
         UpdateAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

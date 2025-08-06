@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListAdjustmentsOperation;
+import io.moov.sdk.operations.ListAdjustments;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -52,7 +52,7 @@ public class ListAdjustmentsRequestBuilder {
     public ListAdjustmentsResponse call() throws Exception {
         
         RequestOperation<ListAdjustmentsRequest, ListAdjustmentsResponse> operation
-              = new ListAdjustmentsOperation(sdkConfiguration);
+              = new ListAdjustments.Sync(sdkConfiguration);
         ListAdjustmentsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

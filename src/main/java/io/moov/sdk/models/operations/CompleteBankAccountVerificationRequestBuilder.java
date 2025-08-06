@@ -7,7 +7,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CompleteBankAccountVerification;
-import io.moov.sdk.operations.CompleteBankAccountVerificationOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -54,7 +53,7 @@ public class CompleteBankAccountVerificationRequestBuilder {
     public CompleteBankAccountVerificationResponse call() throws Exception {
         
         RequestOperation<CompleteBankAccountVerificationRequest, CompleteBankAccountVerificationResponse> operation
-              = new CompleteBankAccountVerificationOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CompleteBankAccountVerification.Sync(sdkConfiguration);
         CompleteBankAccountVerificationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

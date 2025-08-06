@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.ListRefundsOperation;
+import io.moov.sdk.operations.ListRefunds;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class ListRefundsRequestBuilder {
     public ListRefundsResponse call() throws Exception {
         
         RequestOperation<ListRefundsRequest, ListRefundsResponse> operation
-              = new ListRefundsOperation(sdkConfiguration);
+              = new ListRefunds.Sync(sdkConfiguration);
         ListRefundsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

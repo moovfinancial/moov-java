@@ -34,15 +34,14 @@ import io.moov.sdk.models.operations.ListAccountsResponse;
 import io.moov.sdk.models.operations.UpdateAccountRequest;
 import io.moov.sdk.models.operations.UpdateAccountRequestBuilder;
 import io.moov.sdk.models.operations.UpdateAccountResponse;
-import io.moov.sdk.operations.AssignAccountCountriesOperation;
-import io.moov.sdk.operations.CreateAccountOperation;
-import io.moov.sdk.operations.DisconnectAccountOperation;
-import io.moov.sdk.operations.GetAccountCountriesOperation;
-import io.moov.sdk.operations.GetAccountOperation;
-import io.moov.sdk.operations.GetMerchantProcessingAgreementOperation;
-import io.moov.sdk.operations.GetTermsOfServiceTokenOperation;
-import io.moov.sdk.operations.ListAccountsOperation;
-import io.moov.sdk.operations.UpdateAccountOperation;
+import io.moov.sdk.operations.AssignAccountCountries;
+import io.moov.sdk.operations.DisconnectAccount;
+import io.moov.sdk.operations.GetAccount;
+import io.moov.sdk.operations.GetAccountCountries;
+import io.moov.sdk.operations.GetMerchantProcessingAgreement;
+import io.moov.sdk.operations.GetTermsOfServiceToken;
+import io.moov.sdk.operations.ListAccounts;
+import io.moov.sdk.operations.UpdateAccount;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
@@ -101,7 +100,7 @@ public class Accounts {
      */
     public CreateAccountResponse create(CreateAccount request) throws Exception {
         RequestOperation<CreateAccount, CreateAccountResponse> operation
-              = new CreateAccountOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateAccount.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -137,7 +136,7 @@ public class Accounts {
      */
     public ListAccountsResponse list(ListAccountsRequest request) throws Exception {
         RequestOperation<ListAccountsRequest, ListAccountsResponse> operation
-              = new ListAccountsOperation(sdkConfiguration);
+              = new ListAccounts.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -170,7 +169,7 @@ public class Accounts {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetAccountRequest, GetAccountResponse> operation
-              = new GetAccountOperation(sdkConfiguration);
+              = new GetAccount.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -221,7 +220,7 @@ public class Accounts {
                 .patchAccount(patchAccount)
                 .build();
         RequestOperation<UpdateAccountRequest, UpdateAccountResponse> operation
-              = new UpdateAccountOperation(sdkConfiguration);
+              = new UpdateAccount.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -258,7 +257,7 @@ public class Accounts {
                 .accountID(accountID)
                 .build();
         RequestOperation<DisconnectAccountRequest, DisconnectAccountResponse> operation
-              = new DisconnectAccountOperation(sdkConfiguration);
+              = new DisconnectAccount.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -291,7 +290,7 @@ public class Accounts {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetAccountCountriesRequest, GetAccountCountriesResponse> operation
-              = new GetAccountCountriesOperation(sdkConfiguration);
+              = new GetAccountCountries.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -330,7 +329,7 @@ public class Accounts {
                 .accountCountries(accountCountries)
                 .build();
         RequestOperation<AssignAccountCountriesRequest, AssignAccountCountriesResponse> operation
-              = new AssignAccountCountriesOperation(sdkConfiguration);
+              = new AssignAccountCountries.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -363,7 +362,7 @@ public class Accounts {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetMerchantProcessingAgreementRequest, GetMerchantProcessingAgreementResponse> operation
-              = new GetMerchantProcessingAgreementOperation(sdkConfiguration);
+              = new GetMerchantProcessingAgreement.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -414,7 +413,7 @@ public class Accounts {
                 .referer(referer)
                 .build();
         RequestOperation<GetTermsOfServiceTokenRequest, GetTermsOfServiceTokenResponse> operation
-              = new GetTermsOfServiceTokenOperation(sdkConfiguration);
+              = new GetTermsOfServiceToken.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

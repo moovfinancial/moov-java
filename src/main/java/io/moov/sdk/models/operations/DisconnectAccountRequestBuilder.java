@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.DisconnectAccountOperation;
+import io.moov.sdk.operations.DisconnectAccount;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class DisconnectAccountRequestBuilder {
     public DisconnectAccountResponse call() throws Exception {
         
         RequestOperation<DisconnectAccountRequest, DisconnectAccountResponse> operation
-              = new DisconnectAccountOperation(sdkConfiguration);
+              = new DisconnectAccount.Sync(sdkConfiguration);
         DisconnectAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

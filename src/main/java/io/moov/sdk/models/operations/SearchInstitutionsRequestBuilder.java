@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.SearchInstitutionsOperation;
+import io.moov.sdk.operations.SearchInstitutions;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -73,7 +73,7 @@ public class SearchInstitutionsRequestBuilder {
     public SearchInstitutionsResponse call() throws Exception {
         
         RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
-              = new SearchInstitutionsOperation(sdkConfiguration);
+              = new SearchInstitutions.Sync(sdkConfiguration);
         SearchInstitutionsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

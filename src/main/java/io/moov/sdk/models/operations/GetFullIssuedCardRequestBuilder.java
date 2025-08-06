@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.operations.GetFullIssuedCardOperation;
+import io.moov.sdk.operations.GetFullIssuedCard;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -45,7 +45,7 @@ public class GetFullIssuedCardRequestBuilder {
     public GetFullIssuedCardResponse call() throws Exception {
         
         RequestOperation<GetFullIssuedCardRequest, GetFullIssuedCardResponse> operation
-              = new GetFullIssuedCardOperation(sdkConfiguration);
+              = new GetFullIssuedCard.Sync(sdkConfiguration);
         GetFullIssuedCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

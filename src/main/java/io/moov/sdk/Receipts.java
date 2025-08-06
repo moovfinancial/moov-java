@@ -11,8 +11,8 @@ import io.moov.sdk.models.operations.CreateReceiptsResponse;
 import io.moov.sdk.models.operations.ListReceiptsRequest;
 import io.moov.sdk.models.operations.ListReceiptsRequestBuilder;
 import io.moov.sdk.models.operations.ListReceiptsResponse;
-import io.moov.sdk.operations.CreateReceiptsOperation;
-import io.moov.sdk.operations.ListReceiptsOperation;
+import io.moov.sdk.operations.CreateReceipts;
+import io.moov.sdk.operations.ListReceipts;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.List;
@@ -49,7 +49,7 @@ public class Receipts {
      */
     public CreateReceiptsResponse create(List<ReceiptRequest> request) throws Exception {
         RequestOperation<List<ReceiptRequest>, CreateReceiptsResponse> operation
-              = new CreateReceiptsOperation(sdkConfiguration);
+              = new CreateReceipts.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -82,7 +82,7 @@ public class Receipts {
                 .id(id)
                 .build();
         RequestOperation<ListReceiptsRequest, ListReceiptsResponse> operation
-              = new ListReceiptsOperation(sdkConfiguration);
+              = new ListReceipts.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

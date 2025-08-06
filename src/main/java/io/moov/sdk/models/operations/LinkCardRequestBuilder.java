@@ -8,7 +8,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
-import io.moov.sdk.operations.LinkCardOperation;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -62,7 +61,7 @@ public class LinkCardRequestBuilder {
     public LinkCardResponse call() throws Exception {
         
         RequestOperation<LinkCardRequest, LinkCardResponse> operation
-              = new LinkCardOperation(sdkConfiguration);
+              = new io.moov.sdk.operations.LinkCard.Sync(sdkConfiguration);
         LinkCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

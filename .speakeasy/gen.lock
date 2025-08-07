@@ -3,10 +3,10 @@ id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
   docChecksum: de859895a9dade4eed2d78c14a7bebef
   docVersion: latest
-  speakeasyVersion: 1.598.0
-  generationVersion: 2.674.1
-  releaseVersion: 0.23.2
-  configChecksum: cf58054c3f950d5c4881d362c39f2bae
+  speakeasyVersion: 1.598.3
+  generationVersion: 2.674.3
+  releaseVersion: 0.23.3
+  configChecksum: 44e7b8454d6802208769511328576a5e
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:

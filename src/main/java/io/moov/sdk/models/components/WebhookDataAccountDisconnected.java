@@ -14,7 +14,7 @@ import java.lang.String;
 import java.util.Optional;
 
 
-public class WebhookDataAccountDeleted {
+public class WebhookDataAccountDisconnected {
 
     @JsonProperty("accountID")
     private String accountID;
@@ -25,7 +25,7 @@ public class WebhookDataAccountDeleted {
     private Optional<String> foreignID;
 
     @JsonCreator
-    public WebhookDataAccountDeleted(
+    public WebhookDataAccountDisconnected(
             @JsonProperty("accountID") String accountID,
             @JsonProperty("foreignID") Optional<String> foreignID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -34,7 +34,7 @@ public class WebhookDataAccountDeleted {
         this.foreignID = foreignID;
     }
     
-    public WebhookDataAccountDeleted(
+    public WebhookDataAccountDisconnected(
             String accountID) {
         this(accountID, Optional.empty());
     }
@@ -54,20 +54,20 @@ public class WebhookDataAccountDeleted {
     }
 
 
-    public WebhookDataAccountDeleted withAccountID(String accountID) {
+    public WebhookDataAccountDisconnected withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
         return this;
     }
 
-    public WebhookDataAccountDeleted withForeignID(String foreignID) {
+    public WebhookDataAccountDisconnected withForeignID(String foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
         this.foreignID = Optional.ofNullable(foreignID);
         return this;
     }
 
 
-    public WebhookDataAccountDeleted withForeignID(Optional<String> foreignID) {
+    public WebhookDataAccountDisconnected withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
         this.foreignID = foreignID;
         return this;
@@ -81,7 +81,7 @@ public class WebhookDataAccountDeleted {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WebhookDataAccountDeleted other = (WebhookDataAccountDeleted) o;
+        WebhookDataAccountDisconnected other = (WebhookDataAccountDisconnected) o;
         return 
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
@@ -95,7 +95,7 @@ public class WebhookDataAccountDeleted {
     
     @Override
     public String toString() {
-        return Utils.toString(WebhookDataAccountDeleted.class,
+        return Utils.toString(WebhookDataAccountDisconnected.class,
                 "accountID", accountID,
                 "foreignID", foreignID);
     }
@@ -131,9 +131,9 @@ public class WebhookDataAccountDeleted {
             return this;
         }
 
-        public WebhookDataAccountDeleted build() {
+        public WebhookDataAccountDisconnected build() {
 
-            return new WebhookDataAccountDeleted(
+            return new WebhookDataAccountDisconnected(
                 accountID, foreignID);
         }
 

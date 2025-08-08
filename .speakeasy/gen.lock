@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: de859895a9dade4eed2d78c14a7bebef
+  docChecksum: ff02dd66e55d4317f6fc5e5eb81d45f0
   docVersion: latest
-  speakeasyVersion: 1.598.3
-  generationVersion: 2.674.3
-  releaseVersion: 0.23.3
-  configChecksum: 44e7b8454d6802208769511328576a5e
+  speakeasyVersion: 1.599.0
+  generationVersion: 2.675.0
+  releaseVersion: 0.23.4
+  configChecksum: 0e1428aca23e84d7e37efacdbbbbadf0
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -504,7 +504,7 @@ generatedFiles:
   - docs/models/components/WalletTransactionType.md
   - docs/models/components/WebhookData.md
   - docs/models/components/WebhookDataAccountCreated.md
-  - docs/models/components/WebhookDataAccountDeleted.md
+  - docs/models/components/WebhookDataAccountDisconnected.md
   - docs/models/components/WebhookDataAccountUpdated.md
   - docs/models/components/WebhookDataBalanceUpdated.md
   - docs/models/components/WebhookDataBankAccountCreated.md
@@ -1409,7 +1409,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/WalletTransactionType.java
   - src/main/java/io/moov/sdk/models/components/WebhookData.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataAccountCreated.java
-  - src/main/java/io/moov/sdk/models/components/WebhookDataAccountDeleted.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataAccountDisconnected.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataAccountUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataBalanceUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataBankAccountCreated.java

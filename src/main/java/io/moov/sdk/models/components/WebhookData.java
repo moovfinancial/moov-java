@@ -40,9 +40,9 @@ public class WebhookData {
         return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataAccountUpdated>(){}));
     }
 
-    public static WebhookData of(WebhookDataAccountDeleted value) {
+    public static WebhookData of(WebhookDataAccountDisconnected value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataAccountDeleted>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataAccountDisconnected>(){}));
     }
 
     public static WebhookData of(WebhookDataBalanceUpdated value) {
@@ -180,7 +180,7 @@ public class WebhookData {
      * <ul>
      * <li>{@code io.moov.sdk.models.components.WebhookDataAccountCreated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataAccountUpdated}</li>
-     * <li>{@code io.moov.sdk.models.components.WebhookDataAccountDeleted}</li>
+     * <li>{@code io.moov.sdk.models.components.WebhookDataAccountDisconnected}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataBalanceUpdated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataBankAccountCreated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataBankAccountUpdated}</li>
@@ -272,7 +272,7 @@ public class WebhookData {
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataTerminalApplicationUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataBankAccountCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataBalanceUpdated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataAccountDeleted>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataAccountDisconnected>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataAccountUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataRepresentativeCreated>() {}, JsonShape.DEFAULT));
         }

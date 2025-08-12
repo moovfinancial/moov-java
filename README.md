@@ -46,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.23.4'
+implementation 'io.moov:sdk:0.23.5'
 ```
 
 Maven:
@@ -54,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.23.4</version>
+    <version>0.23.5</version>
 </dependency>
 ```
 
@@ -95,8 +95,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
+                    .username("")
+                    .password("")
                     .build())
             .build();
 
@@ -149,8 +149,8 @@ public class Application {
 
         Moov sdk = Moov.builder()
                 .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
+                    .username("")
+                    .password("")
                     .build())
                 .xMoovVersion("v2024.01.00")
             .build();
@@ -1116,8 +1116,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
+                    .username("")
+                    .password("")
                     .build())
             .build();
 
@@ -1166,8 +1166,8 @@ public class Application {
                 .serverURL("https://api.moov.io")
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
+                    .username("")
+                    .password("")
                     .build())
             .build();
 

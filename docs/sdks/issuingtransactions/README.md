@@ -52,8 +52,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
+                    .username("")
+                    .password("")
                     .build())
             .build();
 
@@ -115,8 +115,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
+                    .username("")
+                    .password("")
                     .build())
             .build();
 
@@ -174,8 +174,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
+                    .username("")
+                    .password("")
                     .build())
             .build();
 
@@ -238,8 +238,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
+                    .username("")
+                    .password("")
                     .build())
             .build();
 
@@ -301,8 +301,8 @@ public class Application {
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
                 .security(Security.builder()
-                    .username(System.getenv().getOrDefault("", ""))
-                    .password(System.getenv().getOrDefault("", ""))
+                    .username("")
+                    .password("")
                     .build())
             .build();
 

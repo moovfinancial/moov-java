@@ -17,7 +17,8 @@ public enum PrimaryRegulator {
     OCC("OCC"),
     FDIC("FDIC"),
     NCUA("NCUA"),
-    FRB("FRB");
+    FRB("FRB"),
+    STATE_CU_REGULATOR("state-cu-regulator");
 
     @JsonValue
     private final String value;

@@ -8,12 +8,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.CapabilitiesError;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -22,24 +22,37 @@ public class AddCapabilitiesError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("error")
-    private Optional<? extends CapabilitiesError> error;
+    private Optional<String> error;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("capabilities")
+    private Optional<? extends Map<String, String>> capabilities;
 
     @JsonCreator
     public AddCapabilitiesError(
-            @JsonProperty("error") Optional<? extends CapabilitiesError> error) {
+            @JsonProperty("error") Optional<String> error,
+            @JsonProperty("capabilities") Optional<? extends Map<String, String>> capabilities) {
         super("API error occurred");
         Utils.checkNotNull(error, "error");
+        Utils.checkNotNull(capabilities, "capabilities");
         this.error = error;
+        this.capabilities = capabilities;
     }
     
     public AddCapabilitiesError() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty());
+    }
+
+    @JsonIgnore
+    public Optional<String> error() {
+        return error;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CapabilitiesError> error() {
-        return (Optional<CapabilitiesError>) error;
+    public Optional<Map<String, String>> capabilities() {
+        return (Optional<Map<String, String>>) capabilities;
     }
 
     public static Builder builder() {
@@ -47,16 +60,29 @@ public class AddCapabilitiesError extends RuntimeException {
     }
 
 
-    public AddCapabilitiesError withError(CapabilitiesError error) {
+    public AddCapabilitiesError withError(String error) {
         Utils.checkNotNull(error, "error");
         this.error = Optional.ofNullable(error);
         return this;
     }
 
 
-    public AddCapabilitiesError withError(Optional<? extends CapabilitiesError> error) {
+    public AddCapabilitiesError withError(Optional<String> error) {
         Utils.checkNotNull(error, "error");
         this.error = error;
+        return this;
+    }
+
+    public AddCapabilitiesError withCapabilities(Map<String, String> capabilities) {
+        Utils.checkNotNull(capabilities, "capabilities");
+        this.capabilities = Optional.ofNullable(capabilities);
+        return this;
+    }
+
+
+    public AddCapabilitiesError withCapabilities(Optional<? extends Map<String, String>> capabilities) {
+        Utils.checkNotNull(capabilities, "capabilities");
+        this.capabilities = capabilities;
         return this;
     }
 
@@ -70,47 +96,64 @@ public class AddCapabilitiesError extends RuntimeException {
         }
         AddCapabilitiesError other = (AddCapabilitiesError) o;
         return 
-            Utils.enhancedDeepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.error, other.error) &&
+            Utils.enhancedDeepEquals(this.capabilities, other.capabilities);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            error);
+            error, capabilities);
     }
     
     @Override
     public String toString() {
         return Utils.toString(AddCapabilitiesError.class,
-                "error", error);
+                "error", error,
+                "capabilities", capabilities);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends CapabilitiesError> error = Optional.empty();
+        private Optional<String> error = Optional.empty();
+
+        private Optional<? extends Map<String, String>> capabilities = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder error(CapabilitiesError error) {
+        public Builder error(String error) {
             Utils.checkNotNull(error, "error");
             this.error = Optional.ofNullable(error);
             return this;
         }
 
-        public Builder error(Optional<? extends CapabilitiesError> error) {
+        public Builder error(Optional<String> error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
+            return this;
+        }
+
+
+        public Builder capabilities(Map<String, String> capabilities) {
+            Utils.checkNotNull(capabilities, "capabilities");
+            this.capabilities = Optional.ofNullable(capabilities);
+            return this;
+        }
+
+        public Builder capabilities(Optional<? extends Map<String, String>> capabilities) {
+            Utils.checkNotNull(capabilities, "capabilities");
+            this.capabilities = capabilities;
             return this;
         }
 
         public AddCapabilitiesError build() {
 
             return new AddCapabilitiesError(
-                error);
+                error, capabilities);
         }
 
     }

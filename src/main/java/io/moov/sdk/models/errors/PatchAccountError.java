@@ -52,6 +52,11 @@ public class PatchAccountError extends RuntimeException {
     @JsonProperty("settings")
     private Optional<? extends CreateAccountSettings> settings;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("error")
+    private Optional<String> error;
+
     @JsonCreator
     public PatchAccountError(
             @JsonProperty("profile") Optional<? extends CreateProfileError> profile,
@@ -59,7 +64,8 @@ public class PatchAccountError extends RuntimeException {
             @JsonProperty("termsOfService") Optional<? extends TermsOfServiceError> termsOfService,
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("customerSupport") Optional<? extends CustomerSupportError> customerSupport,
-            @JsonProperty("settings") Optional<? extends CreateAccountSettings> settings) {
+            @JsonProperty("settings") Optional<? extends CreateAccountSettings> settings,
+            @JsonProperty("error") Optional<String> error) {
         super("API error occurred");
         Utils.checkNotNull(profile, "profile");
         Utils.checkNotNull(metadata, "metadata");
@@ -67,17 +73,20 @@ public class PatchAccountError extends RuntimeException {
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(customerSupport, "customerSupport");
         Utils.checkNotNull(settings, "settings");
+        Utils.checkNotNull(error, "error");
         this.profile = profile;
         this.metadata = metadata;
         this.termsOfService = termsOfService;
         this.foreignID = foreignID;
         this.customerSupport = customerSupport;
         this.settings = settings;
+        this.error = error;
     }
     
     public PatchAccountError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -112,6 +121,11 @@ public class PatchAccountError extends RuntimeException {
     @JsonIgnore
     public Optional<CreateAccountSettings> settings() {
         return (Optional<CreateAccountSettings>) settings;
+    }
+
+    @JsonIgnore
+    public Optional<String> error() {
+        return error;
     }
 
     public static Builder builder() {
@@ -197,6 +211,19 @@ public class PatchAccountError extends RuntimeException {
         return this;
     }
 
+    public PatchAccountError withError(String error) {
+        Utils.checkNotNull(error, "error");
+        this.error = Optional.ofNullable(error);
+        return this;
+    }
+
+
+    public PatchAccountError withError(Optional<String> error) {
+        Utils.checkNotNull(error, "error");
+        this.error = error;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -212,14 +239,16 @@ public class PatchAccountError extends RuntimeException {
             Utils.enhancedDeepEquals(this.termsOfService, other.termsOfService) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.customerSupport, other.customerSupport) &&
-            Utils.enhancedDeepEquals(this.settings, other.settings);
+            Utils.enhancedDeepEquals(this.settings, other.settings) &&
+            Utils.enhancedDeepEquals(this.error, other.error);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             profile, metadata, termsOfService,
-            foreignID, customerSupport, settings);
+            foreignID, customerSupport, settings,
+            error);
     }
     
     @Override
@@ -230,7 +259,8 @@ public class PatchAccountError extends RuntimeException {
                 "termsOfService", termsOfService,
                 "foreignID", foreignID,
                 "customerSupport", customerSupport,
-                "settings", settings);
+                "settings", settings,
+                "error", error);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -247,6 +277,8 @@ public class PatchAccountError extends RuntimeException {
         private Optional<? extends CustomerSupportError> customerSupport = Optional.empty();
 
         private Optional<? extends CreateAccountSettings> settings = Optional.empty();
+
+        private Optional<String> error = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -330,11 +362,25 @@ public class PatchAccountError extends RuntimeException {
             return this;
         }
 
+
+        public Builder error(String error) {
+            Utils.checkNotNull(error, "error");
+            this.error = Optional.ofNullable(error);
+            return this;
+        }
+
+        public Builder error(Optional<String> error) {
+            Utils.checkNotNull(error, "error");
+            this.error = error;
+            return this;
+        }
+
         public PatchAccountError build() {
 
             return new PatchAccountError(
                 profile, metadata, termsOfService,
-                foreignID, customerSupport, settings);
+                foreignID, customerSupport, settings,
+                error);
         }
 
     }

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 1e8d979e777b083c248ff9a2dbf03e28
+  docChecksum: ea05a43791ad4269509c8393b48539e9
   docVersion: latest
-  speakeasyVersion: 1.603.0
-  generationVersion: 2.681.1
-  releaseVersion: 0.23.6
-  configChecksum: 07a8778e1fb38c21a141cae682b8b78f
+  speakeasyVersion: 1.603.2
+  generationVersion: 2.681.8
+  releaseVersion: 0.23.7
+  configChecksum: d9b70a717f7775ea032963fce5e1ec1a
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -110,7 +110,6 @@ generatedFiles:
   - docs/models/components/CallToAction.md
   - docs/models/components/Cancellation.md
   - docs/models/components/CancellationStatus.md
-  - docs/models/components/CapabilitiesError.md
   - docs/models/components/Capability.md
   - docs/models/components/CapabilityID.md
   - docs/models/components/CapabilityRequirement.md
@@ -157,7 +156,6 @@ generatedFiles:
   - docs/models/components/CompleteMicroDeposits.md
   - docs/models/components/CompletedMicroDeposits.md
   - docs/models/components/Contact.md
-  - docs/models/components/CountriesErrors.md
   - docs/models/components/CreateAccount.md
   - docs/models/components/CreateAccountSettings.md
   - docs/models/components/CreateAccountTermsOfService.md
@@ -1015,7 +1013,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/CallToAction.java
   - src/main/java/io/moov/sdk/models/components/Cancellation.java
   - src/main/java/io/moov/sdk/models/components/CancellationStatus.java
-  - src/main/java/io/moov/sdk/models/components/CapabilitiesError.java
   - src/main/java/io/moov/sdk/models/components/Capability.java
   - src/main/java/io/moov/sdk/models/components/CapabilityID.java
   - src/main/java/io/moov/sdk/models/components/CapabilityRequirement.java
@@ -1062,7 +1059,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/CompleteMicroDeposits.java
   - src/main/java/io/moov/sdk/models/components/CompletedMicroDeposits.java
   - src/main/java/io/moov/sdk/models/components/Contact.java
-  - src/main/java/io/moov/sdk/models/components/CountriesErrors.java
   - src/main/java/io/moov/sdk/models/components/CreateAccount.java
   - src/main/java/io/moov/sdk/models/components/CreateAccountSettings.java
   - src/main/java/io/moov/sdk/models/components/CreateAccountTermsOfService.java
@@ -2191,7 +2187,7 @@ examples:
         "400":
           application/json: {"error": "<value>"}
         "422":
-          application/json: {"error": {"countries": {"key": "<value>", "key1": "<value>"}}}
+          application/json: {"countries": {"key": "<value>"}}
   getMerchantProcessingAgreement:
     speakeasy-default-get-merchant-processing-agreement:
       parameters:

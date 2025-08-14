@@ -3,6 +3,7 @@
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `error`                                                                      | [Optional\<CapabilitiesError>](../../models/components/CapabilitiesError.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| Field                  | Type                   | Required               | Description            |
+| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
+| `error`                | *Optional\<String>*    | :heavy_minus_sign:     | N/A                    |
+| `capabilities`         | Map\<String, *String*> | :heavy_minus_sign:     | N/A                    |

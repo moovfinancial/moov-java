@@ -6,31 +6,32 @@ package io.moov.sdk.models.errors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.CountriesErrors;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.Map;
 
 
 @SuppressWarnings("serial")
 public class AssignCountriesError extends RuntimeException {
 
-    @JsonProperty("error")
-    private CountriesErrors error;
+    @JsonProperty("countries")
+    private Map<String, String> countries;
 
     @JsonCreator
     public AssignCountriesError(
-            @JsonProperty("error") CountriesErrors error) {
+            @JsonProperty("countries") Map<String, String> countries) {
         super("API error occurred");
-        Utils.checkNotNull(error, "error");
-        this.error = error;
+        countries = Utils.emptyMapIfNull(countries);
+        Utils.checkNotNull(countries, "countries");
+        this.countries = countries;
     }
 
     @JsonIgnore
-    public CountriesErrors error() {
-        return error;
+    public Map<String, String> countries() {
+        return countries;
     }
 
     public static Builder builder() {
@@ -38,9 +39,9 @@ public class AssignCountriesError extends RuntimeException {
     }
 
 
-    public AssignCountriesError withError(CountriesErrors error) {
-        Utils.checkNotNull(error, "error");
-        this.error = error;
+    public AssignCountriesError withCountries(Map<String, String> countries) {
+        Utils.checkNotNull(countries, "countries");
+        this.countries = countries;
         return this;
     }
 
@@ -54,41 +55,41 @@ public class AssignCountriesError extends RuntimeException {
         }
         AssignCountriesError other = (AssignCountriesError) o;
         return 
-            Utils.enhancedDeepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.countries, other.countries);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            error);
+            countries);
     }
     
     @Override
     public String toString() {
         return Utils.toString(AssignCountriesError.class,
-                "error", error);
+                "countries", countries);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private CountriesErrors error;
+        private Map<String, String> countries;
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder error(CountriesErrors error) {
-            Utils.checkNotNull(error, "error");
-            this.error = error;
+        public Builder countries(Map<String, String> countries) {
+            Utils.checkNotNull(countries, "countries");
+            this.countries = countries;
             return this;
         }
 
         public AssignCountriesError build() {
 
             return new AssignCountriesError(
-                error);
+                countries);
         }
 
     }

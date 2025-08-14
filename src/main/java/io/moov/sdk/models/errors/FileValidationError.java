@@ -30,6 +30,11 @@ public class FileValidationError extends RuntimeException {
 
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("FileName")
+    private Optional<String> fileName;
+
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filePurpose")
     private Optional<String> filePurpose;
 
@@ -42,22 +47,25 @@ public class FileValidationError extends RuntimeException {
     public FileValidationError(
             @JsonProperty("error") Optional<String> error,
             @JsonProperty("file") Optional<String> file,
+            @JsonProperty("FileName") Optional<String> fileName,
             @JsonProperty("filePurpose") Optional<String> filePurpose,
             @JsonProperty("metadata") Optional<String> metadata) {
         super("API error occurred");
         Utils.checkNotNull(error, "error");
         Utils.checkNotNull(file, "file");
+        Utils.checkNotNull(fileName, "fileName");
         Utils.checkNotNull(filePurpose, "filePurpose");
         Utils.checkNotNull(metadata, "metadata");
         this.error = error;
         this.file = file;
+        this.fileName = fileName;
         this.filePurpose = filePurpose;
         this.metadata = metadata;
     }
     
     public FileValidationError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -68,6 +76,11 @@ public class FileValidationError extends RuntimeException {
     @JsonIgnore
     public Optional<String> file() {
         return file;
+    }
+
+    @JsonIgnore
+    public Optional<String> fileName() {
+        return fileName;
     }
 
     @JsonIgnore
@@ -111,6 +124,19 @@ public class FileValidationError extends RuntimeException {
         return this;
     }
 
+    public FileValidationError withFileName(String fileName) {
+        Utils.checkNotNull(fileName, "fileName");
+        this.fileName = Optional.ofNullable(fileName);
+        return this;
+    }
+
+
+    public FileValidationError withFileName(Optional<String> fileName) {
+        Utils.checkNotNull(fileName, "fileName");
+        this.fileName = fileName;
+        return this;
+    }
+
     public FileValidationError withFilePurpose(String filePurpose) {
         Utils.checkNotNull(filePurpose, "filePurpose");
         this.filePurpose = Optional.ofNullable(filePurpose);
@@ -149,6 +175,7 @@ public class FileValidationError extends RuntimeException {
         return 
             Utils.enhancedDeepEquals(this.error, other.error) &&
             Utils.enhancedDeepEquals(this.file, other.file) &&
+            Utils.enhancedDeepEquals(this.fileName, other.fileName) &&
             Utils.enhancedDeepEquals(this.filePurpose, other.filePurpose) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
@@ -156,8 +183,8 @@ public class FileValidationError extends RuntimeException {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            error, file, filePurpose,
-            metadata);
+            error, file, fileName,
+            filePurpose, metadata);
     }
     
     @Override
@@ -165,6 +192,7 @@ public class FileValidationError extends RuntimeException {
         return Utils.toString(FileValidationError.class,
                 "error", error,
                 "file", file,
+                "fileName", fileName,
                 "filePurpose", filePurpose,
                 "metadata", metadata);
     }
@@ -175,6 +203,8 @@ public class FileValidationError extends RuntimeException {
         private Optional<String> error = Optional.empty();
 
         private Optional<String> file = Optional.empty();
+
+        private Optional<String> fileName = Optional.empty();
 
         private Optional<String> filePurpose = Optional.empty();
 
@@ -211,6 +241,19 @@ public class FileValidationError extends RuntimeException {
         }
 
 
+        public Builder fileName(String fileName) {
+            Utils.checkNotNull(fileName, "fileName");
+            this.fileName = Optional.ofNullable(fileName);
+            return this;
+        }
+
+        public Builder fileName(Optional<String> fileName) {
+            Utils.checkNotNull(fileName, "fileName");
+            this.fileName = fileName;
+            return this;
+        }
+
+
         public Builder filePurpose(String filePurpose) {
             Utils.checkNotNull(filePurpose, "filePurpose");
             this.filePurpose = Optional.ofNullable(filePurpose);
@@ -239,8 +282,8 @@ public class FileValidationError extends RuntimeException {
         public FileValidationError build() {
 
             return new FileValidationError(
-                error, file, filePurpose,
-                metadata);
+                error, file, fileName,
+                filePurpose, metadata);
         }
 
     }

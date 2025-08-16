@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: ea05a43791ad4269509c8393b48539e9
+  docChecksum: 9bfcf4de25d41aa9cb40f75c04d70c5f
   docVersion: latest
-  speakeasyVersion: 1.603.2
-  generationVersion: 2.681.8
-  releaseVersion: 0.23.7
-  configChecksum: d9b70a717f7775ea032963fce5e1ec1a
+  speakeasyVersion: 1.605.0
+  generationVersion: 2.684.0
+  releaseVersion: 0.23.8
+  configChecksum: a9b0dbfc0b3a33d2dc8c7db6d2459691
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -527,6 +527,9 @@ generatedFiles:
   - docs/models/components/WebhookDataSweepUpdated.md
   - docs/models/components/WebhookDataTerminalApplicationCreated.md
   - docs/models/components/WebhookDataTerminalApplicationUpdated.md
+  - docs/models/components/WebhookDataTicketCreated.md
+  - docs/models/components/WebhookDataTicketMessageAdded.md
+  - docs/models/components/WebhookDataTicketUpdated.md
   - docs/models/components/WebhookDataTransferCreated.md
   - docs/models/components/WebhookDataTransferStatus.md
   - docs/models/components/WebhookDataTransferUpdated.md
@@ -1430,6 +1433,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/WebhookDataSweepUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataTerminalApplicationCreated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataTerminalApplicationUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataTicketCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataTicketMessageAdded.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataTicketUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataTransferCreated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataTransferStatus.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataTransferUpdated.java

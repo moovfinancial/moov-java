@@ -178,7 +178,7 @@ public class Application {
 
 | Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `accountID`                                                 | *String*                                                    | :heavy_check_mark:                                          | N/A                                                         |
+| `accountID`                                                 | *String*                                                    | :heavy_check_mark:                                          | Account ID of the account that will run the transfer.       |
 | `upsertSchedule`                                            | [UpsertSchedule](../../models/components/UpsertSchedule.md) | :heavy_check_mark:                                          | N/A                                                         |
 
 ### Response
@@ -436,7 +436,7 @@ public class Application {
 
 | Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `accountID`                                                 | *String*                                                    | :heavy_check_mark:                                          | N/A                                                         |
+| `accountID`                                                 | *String*                                                    | :heavy_check_mark:                                          | Account ID of the account that will run the transfer.       |
 | `scheduleID`                                                | *String*                                                    | :heavy_check_mark:                                          | N/A                                                         |
 | `upsertSchedule`                                            | [UpsertSchedule](../../models/components/UpsertSchedule.md) | :heavy_check_mark:                                          | N/A                                                         |
 
@@ -554,10 +554,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter          | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
-| `scheduleID`       | *String*           | :heavy_check_mark: | N/A                |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `accountID`                                                | *String*                                                   | :heavy_check_mark:                                         | Your Moov account ID as the partner running the transfers. |
+| `scheduleID`                                               | *String*                                                   | :heavy_check_mark:                                         | N/A                                                        |
 
 ### Response
 

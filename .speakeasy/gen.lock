@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 9bfcf4de25d41aa9cb40f75c04d70c5f
+  docChecksum: 0ccaf86e03f5295757a44925a860e9c1
   docVersion: latest
-  speakeasyVersion: 1.605.0
-  generationVersion: 2.684.0
-  releaseVersion: 0.23.8
-  configChecksum: a9b0dbfc0b3a33d2dc8c7db6d2459691
+  speakeasyVersion: 1.606.0
+  generationVersion: 2.686.7
+  releaseVersion: 0.23.9
+  configChecksum: 7a2389cba5d33743e7f8244a89fa851c
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.45.3
+    core: 3.45.4
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     flattening: 2.81.1
@@ -2058,13 +2058,12 @@ generatedFiles:
   - src/main/java/io/moov/sdk/utils/BackoffStrategy.java
   - src/main/java/io/moov/sdk/utils/BigDecimalString.java
   - src/main/java/io/moov/sdk/utils/BigIntegerString.java
+  - src/main/java/io/moov/sdk/utils/BlockingParser.java
   - src/main/java/io/moov/sdk/utils/Constants.java
   - src/main/java/io/moov/sdk/utils/CopiableInputStream.java
   - src/main/java/io/moov/sdk/utils/Deserializers.java
   - src/main/java/io/moov/sdk/utils/EventStream.java
-  - src/main/java/io/moov/sdk/utils/EventStreamLineReader.java
   - src/main/java/io/moov/sdk/utils/EventStreamMessage.java
-  - src/main/java/io/moov/sdk/utils/EventStreamReader.java
   - src/main/java/io/moov/sdk/utils/Exceptions.java
   - src/main/java/io/moov/sdk/utils/FormMetadata.java
   - src/main/java/io/moov/sdk/utils/Globals.java
@@ -2101,6 +2100,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/utils/SessionManager.java
   - src/main/java/io/moov/sdk/utils/SpeakeasyHTTPClient.java
   - src/main/java/io/moov/sdk/utils/SpeakeasyMetadata.java
+  - src/main/java/io/moov/sdk/utils/StreamingParser.java
   - src/main/java/io/moov/sdk/utils/TypedObject.java
   - src/main/java/io/moov/sdk/utils/Types.java
   - src/main/java/io/moov/sdk/utils/Utf8UrlEncoder.java

@@ -62,7 +62,7 @@ public class Scheduling {
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param accountID 
+     * @param accountID Account ID of the account that will run the transfer.
      * @param upsertSchedule 
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -153,7 +153,7 @@ public class Scheduling {
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param accountID 
+     * @param accountID Account ID of the account that will run the transfer.
      * @param scheduleID 
      * @param upsertSchedule 
      * @return The response from the API call
@@ -227,7 +227,7 @@ public class Scheduling {
      * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param accountID 
+     * @param accountID Your Moov account ID as the partner running the transfers.
      * @param scheduleID 
      * @return The response from the API call
      * @throws Exception if the API call fails

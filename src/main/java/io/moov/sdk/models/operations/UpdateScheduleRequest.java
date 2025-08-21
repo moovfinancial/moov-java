@@ -13,7 +13,9 @@ import java.lang.String;
 
 
 public class UpdateScheduleRequest {
-
+    /**
+     * Account ID of the account that will run the transfer.
+     */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
@@ -38,6 +40,9 @@ public class UpdateScheduleRequest {
         this.upsertSchedule = upsertSchedule;
     }
 
+    /**
+     * Account ID of the account that will run the transfer.
+     */
     @JsonIgnore
     public String accountID() {
         return accountID;
@@ -58,6 +63,9 @@ public class UpdateScheduleRequest {
     }
 
 
+    /**
+     * Account ID of the account that will run the transfer.
+     */
     public UpdateScheduleRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -119,6 +127,9 @@ public class UpdateScheduleRequest {
         }
 
 
+        /**
+         * Account ID of the account that will run the transfer.
+         */
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;

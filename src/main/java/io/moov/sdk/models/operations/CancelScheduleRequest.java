@@ -12,7 +12,9 @@ import java.lang.String;
 
 
 public class CancelScheduleRequest {
-
+    /**
+     * Your Moov account ID as the partner running the transfers.
+     */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
@@ -30,6 +32,9 @@ public class CancelScheduleRequest {
         this.scheduleID = scheduleID;
     }
 
+    /**
+     * Your Moov account ID as the partner running the transfers.
+     */
     @JsonIgnore
     public String accountID() {
         return accountID;
@@ -45,6 +50,9 @@ public class CancelScheduleRequest {
     }
 
 
+    /**
+     * Your Moov account ID as the partner running the transfers.
+     */
     public CancelScheduleRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -96,6 +104,9 @@ public class CancelScheduleRequest {
         }
 
 
+        /**
+         * Your Moov account ID as the partner running the transfers.
+         */
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;

@@ -33,7 +33,8 @@ public enum WalletTransactionType {
     RTP_FAILURE("rtp-failure"),
     TOP_UP("top-up"),
     WALLET_TRANSFER("wallet-transfer"),
-    ADJUSTMENT("adjustment");
+    ADJUSTMENT("adjustment"),
+    FEE_REVENUE("fee-revenue");
 
     @JsonValue
     private final String value;

@@ -169,7 +169,7 @@ to specify the `/accounts.read` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.AccountType;
+import io.moov.sdk.models.components.CreateAccountType;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.operations.ListAccountsRequest;
 import io.moov.sdk.models.operations.ListAccountsResponse;
@@ -188,7 +188,7 @@ public class Application {
             .build();
 
         ListAccountsRequest req = ListAccountsRequest.builder()
-                .type(AccountType.BUSINESS)
+                .type(CreateAccountType.BUSINESS)
                 .skip(60L)
                 .count(20L)
                 .build();

@@ -5,9 +5,9 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.AccountType;
 import io.moov.sdk.models.components.CapabilityID;
 import io.moov.sdk.models.components.CapabilityStatus;
+import io.moov.sdk.models.components.CreateAccountType;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Boolean;
@@ -46,17 +46,11 @@ public class ListAccountsRequest {
      * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
      *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
      *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+     * 
+     * <p>  Filtering by `type=guest` is not currently supported.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=type")
-    private Optional<? extends AccountType> type;
-
-    /**
-     * Filter accounts with AccountType guest.
-     * 
-     * <p>  If true, the response will include guest accounts.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=includeGuest")
-    private Optional<Boolean> includeGuest;
+    private Optional<? extends CreateAccountType> type;
 
     /**
      * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
@@ -96,8 +90,7 @@ public class ListAccountsRequest {
     public ListAccountsRequest(
             Optional<String> name,
             Optional<String> email,
-            Optional<? extends AccountType> type,
-            Optional<Boolean> includeGuest,
+            Optional<? extends CreateAccountType> type,
             Optional<String> foreignID,
             Optional<Boolean> includeDisconnected,
             Optional<? extends CapabilityID> capability,
@@ -107,7 +100,6 @@ public class ListAccountsRequest {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(email, "email");
         Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(includeGuest, "includeGuest");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(includeDisconnected, "includeDisconnected");
         Utils.checkNotNull(capability, "capability");
@@ -117,7 +109,6 @@ public class ListAccountsRequest {
         this.name = name;
         this.email = email;
         this.type = type;
-        this.includeGuest = includeGuest;
         this.foreignID = foreignID;
         this.includeDisconnected = includeDisconnected;
         this.capability = capability;
@@ -129,8 +120,7 @@ public class ListAccountsRequest {
     public ListAccountsRequest() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -164,21 +154,13 @@ public class ListAccountsRequest {
      * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
      *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
      *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+     * 
+     * <p>  Filtering by `type=guest` is not currently supported.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AccountType> type() {
-        return (Optional<AccountType>) type;
-    }
-
-    /**
-     * Filter accounts with AccountType guest.
-     * 
-     * <p>  If true, the response will include guest accounts.
-     */
-    @JsonIgnore
-    public Optional<Boolean> includeGuest() {
-        return includeGuest;
+    public Optional<CreateAccountType> type() {
+        return (Optional<CreateAccountType>) type;
     }
 
     /**
@@ -294,8 +276,10 @@ public class ListAccountsRequest {
      * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
      *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
      *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+     * 
+     * <p>  Filtering by `type=guest` is not currently supported.
      */
-    public ListAccountsRequest withType(AccountType type) {
+    public ListAccountsRequest withType(CreateAccountType type) {
         Utils.checkNotNull(type, "type");
         this.type = Optional.ofNullable(type);
         return this;
@@ -308,33 +292,12 @@ public class ListAccountsRequest {
      * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
      *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
      *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+     * 
+     * <p>  Filtering by `type=guest` is not currently supported.
      */
-    public ListAccountsRequest withType(Optional<? extends AccountType> type) {
+    public ListAccountsRequest withType(Optional<? extends CreateAccountType> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
-        return this;
-    }
-
-    /**
-     * Filter accounts with AccountType guest.
-     * 
-     * <p>  If true, the response will include guest accounts.
-     */
-    public ListAccountsRequest withIncludeGuest(boolean includeGuest) {
-        Utils.checkNotNull(includeGuest, "includeGuest");
-        this.includeGuest = Optional.ofNullable(includeGuest);
-        return this;
-    }
-
-
-    /**
-     * Filter accounts with AccountType guest.
-     * 
-     * <p>  If true, the response will include guest accounts.
-     */
-    public ListAccountsRequest withIncludeGuest(Optional<Boolean> includeGuest) {
-        Utils.checkNotNull(includeGuest, "includeGuest");
-        this.includeGuest = includeGuest;
         return this;
     }
 
@@ -457,7 +420,6 @@ public class ListAccountsRequest {
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.email, other.email) &&
             Utils.enhancedDeepEquals(this.type, other.type) &&
-            Utils.enhancedDeepEquals(this.includeGuest, other.includeGuest) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.includeDisconnected, other.includeDisconnected) &&
             Utils.enhancedDeepEquals(this.capability, other.capability) &&
@@ -470,9 +432,8 @@ public class ListAccountsRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             name, email, type,
-            includeGuest, foreignID, includeDisconnected,
-            capability, capabilityStatus, skip,
-            count);
+            foreignID, includeDisconnected, capability,
+            capabilityStatus, skip, count);
     }
     
     @Override
@@ -481,7 +442,6 @@ public class ListAccountsRequest {
                 "name", name,
                 "email", email,
                 "type", type,
-                "includeGuest", includeGuest,
                 "foreignID", foreignID,
                 "includeDisconnected", includeDisconnected,
                 "capability", capability,
@@ -497,9 +457,7 @@ public class ListAccountsRequest {
 
         private Optional<String> email = Optional.empty();
 
-        private Optional<? extends AccountType> type = Optional.empty();
-
-        private Optional<Boolean> includeGuest = Optional.empty();
+        private Optional<? extends CreateAccountType> type = Optional.empty();
 
         private Optional<String> foreignID = Optional.empty();
 
@@ -580,8 +538,10 @@ public class ListAccountsRequest {
          * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
          *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
          *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+         * 
+         * <p>  Filtering by `type=guest` is not currently supported.
          */
-        public Builder type(AccountType type) {
+        public Builder type(CreateAccountType type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
             return this;
@@ -593,33 +553,12 @@ public class ListAccountsRequest {
          * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
          *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
          *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+         * 
+         * <p>  Filtering by `type=guest` is not currently supported.
          */
-        public Builder type(Optional<? extends AccountType> type) {
+        public Builder type(Optional<? extends CreateAccountType> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
-            return this;
-        }
-
-
-        /**
-         * Filter accounts with AccountType guest.
-         * 
-         * <p>  If true, the response will include guest accounts.
-         */
-        public Builder includeGuest(boolean includeGuest) {
-            Utils.checkNotNull(includeGuest, "includeGuest");
-            this.includeGuest = Optional.ofNullable(includeGuest);
-            return this;
-        }
-
-        /**
-         * Filter accounts with AccountType guest.
-         * 
-         * <p>  If true, the response will include guest accounts.
-         */
-        public Builder includeGuest(Optional<Boolean> includeGuest) {
-            Utils.checkNotNull(includeGuest, "includeGuest");
-            this.includeGuest = includeGuest;
             return this;
         }
 
@@ -733,9 +672,8 @@ public class ListAccountsRequest {
 
             return new ListAccountsRequest(
                 name, email, type,
-                includeGuest, foreignID, includeDisconnected,
-                capability, capabilityStatus, skip,
-                count);
+                foreignID, includeDisconnected, capability,
+                capabilityStatus, skip, count);
         }
 
     }

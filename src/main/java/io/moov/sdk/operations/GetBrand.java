@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetBrand {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetBrand {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetBrandRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetBrandRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/branding",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetBrand {
         }
 
         private HttpRequest onBuildRequest(GetBrandRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetBrandRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -29,7 +29,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class UpdateApplePayMerchantDomains {
 
     static abstract class Base {
@@ -75,10 +74,9 @@ public class UpdateApplePayMerchantDomains {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(UpdateApplePayMerchantDomainsRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    UpdateApplePayMerchantDomainsRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/apple-pay/domains",
                     request, this.sdkConfiguration.globals);
@@ -86,8 +84,7 @@ public class UpdateApplePayMerchantDomains {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "updateApplePayMerchantDomains",
@@ -113,7 +110,7 @@ public class UpdateApplePayMerchantDomains {
         }
 
         private HttpRequest onBuildRequest(UpdateApplePayMerchantDomainsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, UpdateApplePayMerchantDomainsRequest.class, new TypeReference<UpdateApplePayMerchantDomainsRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -5,22 +5,93 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.moov.sdk.models.components.WalletStatus;
+import io.moov.sdk.models.components.WalletType;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
 
 public class ListWalletsRequest {
+    /**
+     * Optional parameter for filtering wallets by status.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=status")
+    private Optional<? extends WalletStatus> status;
+
+    /**
+     * Optional parameter for filtering wallets by type.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=walletType")
+    private Optional<? extends WalletType> walletType;
+
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
+    private Optional<Long> skip;
+
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
+    private Optional<Long> count;
+
 
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
     @JsonCreator
     public ListWalletsRequest(
+            Optional<? extends WalletStatus> status,
+            Optional<? extends WalletType> walletType,
+            Optional<Long> skip,
+            Optional<Long> count,
             String accountID) {
+        Utils.checkNotNull(status, "status");
+        Utils.checkNotNull(walletType, "walletType");
+        Utils.checkNotNull(skip, "skip");
+        Utils.checkNotNull(count, "count");
         Utils.checkNotNull(accountID, "accountID");
+        this.status = status;
+        this.walletType = walletType;
+        this.skip = skip;
+        this.count = count;
         this.accountID = accountID;
+    }
+    
+    public ListWalletsRequest(
+            String accountID) {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), accountID);
+    }
+
+    /**
+     * Optional parameter for filtering wallets by status.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<WalletStatus> status() {
+        return (Optional<WalletStatus>) status;
+    }
+
+    /**
+     * Optional parameter for filtering wallets by type.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<WalletType> walletType() {
+        return (Optional<WalletType>) walletType;
+    }
+
+    @JsonIgnore
+    public Optional<Long> skip() {
+        return skip;
+    }
+
+    @JsonIgnore
+    public Optional<Long> count() {
+        return count;
     }
 
     @JsonIgnore
@@ -32,6 +103,70 @@ public class ListWalletsRequest {
         return new Builder();
     }
 
+
+    /**
+     * Optional parameter for filtering wallets by status.
+     */
+    public ListWalletsRequest withStatus(WalletStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
+        return this;
+    }
+
+
+    /**
+     * Optional parameter for filtering wallets by status.
+     */
+    public ListWalletsRequest withStatus(Optional<? extends WalletStatus> status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Optional parameter for filtering wallets by type.
+     */
+    public ListWalletsRequest withWalletType(WalletType walletType) {
+        Utils.checkNotNull(walletType, "walletType");
+        this.walletType = Optional.ofNullable(walletType);
+        return this;
+    }
+
+
+    /**
+     * Optional parameter for filtering wallets by type.
+     */
+    public ListWalletsRequest withWalletType(Optional<? extends WalletType> walletType) {
+        Utils.checkNotNull(walletType, "walletType");
+        this.walletType = walletType;
+        return this;
+    }
+
+    public ListWalletsRequest withSkip(long skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = Optional.ofNullable(skip);
+        return this;
+    }
+
+
+    public ListWalletsRequest withSkip(Optional<Long> skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = skip;
+        return this;
+    }
+
+    public ListWalletsRequest withCount(long count) {
+        Utils.checkNotNull(count, "count");
+        this.count = Optional.ofNullable(count);
+        return this;
+    }
+
+
+    public ListWalletsRequest withCount(Optional<Long> count) {
+        Utils.checkNotNull(count, "count");
+        this.count = count;
+        return this;
+    }
 
     public ListWalletsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -49,28 +184,109 @@ public class ListWalletsRequest {
         }
         ListWalletsRequest other = (ListWalletsRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.walletType, other.walletType) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID);
+            status, walletType, skip,
+            count, accountID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ListWalletsRequest.class,
+                "status", status,
+                "walletType", walletType,
+                "skip", skip,
+                "count", count,
                 "accountID", accountID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends WalletStatus> status = Optional.empty();
+
+        private Optional<? extends WalletType> walletType = Optional.empty();
+
+        private Optional<Long> skip = Optional.empty();
+
+        private Optional<Long> count = Optional.empty();
+
         private String accountID;
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        /**
+         * Optional parameter for filtering wallets by status.
+         */
+        public Builder status(WalletStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
+            return this;
+        }
+
+        /**
+         * Optional parameter for filtering wallets by status.
+         */
+        public Builder status(Optional<? extends WalletStatus> status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
+        }
+
+
+        /**
+         * Optional parameter for filtering wallets by type.
+         */
+        public Builder walletType(WalletType walletType) {
+            Utils.checkNotNull(walletType, "walletType");
+            this.walletType = Optional.ofNullable(walletType);
+            return this;
+        }
+
+        /**
+         * Optional parameter for filtering wallets by type.
+         */
+        public Builder walletType(Optional<? extends WalletType> walletType) {
+            Utils.checkNotNull(walletType, "walletType");
+            this.walletType = walletType;
+            return this;
+        }
+
+
+        public Builder skip(long skip) {
+            Utils.checkNotNull(skip, "skip");
+            this.skip = Optional.ofNullable(skip);
+            return this;
+        }
+
+        public Builder skip(Optional<Long> skip) {
+            Utils.checkNotNull(skip, "skip");
+            this.skip = skip;
+            return this;
+        }
+
+
+        public Builder count(long count) {
+            Utils.checkNotNull(count, "count");
+            this.count = Optional.ofNullable(count);
+            return this;
+        }
+
+        public Builder count(Optional<Long> count) {
+            Utils.checkNotNull(count, "count");
+            this.count = count;
+            return this;
         }
 
 
@@ -83,7 +299,8 @@ public class ListWalletsRequest {
         public ListWalletsRequest build() {
 
             return new ListWalletsRequest(
-                accountID);
+                status, walletType, skip,
+                count, accountID);
         }
 
     }

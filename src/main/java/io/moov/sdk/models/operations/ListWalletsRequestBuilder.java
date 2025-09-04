@@ -9,36 +9,26 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListWallets;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.String;
 
 public class ListWalletsRequestBuilder {
 
-    private String accountID;
+    private ListWalletsRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public ListWalletsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public ListWalletsRequestBuilder accountID(String accountID) {
-        Utils.checkNotNull(accountID, "accountID");
-        this.accountID = accountID;
+    public ListWalletsRequestBuilder request(ListWalletsRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private ListWalletsRequest buildRequest() {
-
-        ListWalletsRequest request = new ListWalletsRequest(accountID);
-
-        return request;
     }
 
     public ListWalletsResponse call() throws Exception {
         
         RequestOperation<ListWalletsRequest, ListWalletsResponse> operation
               = new ListWallets.Sync(sdkConfiguration);
-        ListWalletsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

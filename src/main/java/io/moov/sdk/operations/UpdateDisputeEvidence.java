@@ -30,7 +30,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class UpdateDisputeEvidence {
 
     static abstract class Base {
@@ -76,10 +75,9 @@ public class UpdateDisputeEvidence {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(UpdateDisputeEvidenceRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    UpdateDisputeEvidenceRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/disputes/{disputeID}/evidence/{evidenceID}",
                     request, this.sdkConfiguration.globals);
@@ -87,8 +85,7 @@ public class UpdateDisputeEvidence {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "updateEvidence",
@@ -114,7 +111,7 @@ public class UpdateDisputeEvidence {
         }
 
         private HttpRequest onBuildRequest(UpdateDisputeEvidenceRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, UpdateDisputeEvidenceRequest.class, new TypeReference<UpdateDisputeEvidenceRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

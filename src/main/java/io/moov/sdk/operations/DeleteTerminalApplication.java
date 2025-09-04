@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class DeleteTerminalApplication {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class DeleteTerminalApplication {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(DeleteTerminalApplicationRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    DeleteTerminalApplicationRequest.class,
+                    klass,
                     this.baseUrl,
                     "/terminal-applications/{terminalApplicationID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class DeleteTerminalApplication {
         }
 
         private HttpRequest onBuildRequest(DeleteTerminalApplicationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, DeleteTerminalApplicationRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

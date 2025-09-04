@@ -24,7 +24,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetMerchantProcessingAgreement {
 
     static abstract class Base {
@@ -70,10 +69,9 @@ public class GetMerchantProcessingAgreement {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetMerchantProcessingAgreementRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetMerchantProcessingAgreementRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/merchant-agreement",
                     request, this.sdkConfiguration.globals);
@@ -94,7 +92,7 @@ public class GetMerchantProcessingAgreement {
         }
 
         private HttpRequest onBuildRequest(GetMerchantProcessingAgreementRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetMerchantProcessingAgreementRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

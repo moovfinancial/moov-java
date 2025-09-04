@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class AssignAccountCountries {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class AssignAccountCountries {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(AssignAccountCountriesRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    AssignAccountCountriesRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/countries",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class AssignAccountCountries {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "accountCountries",
@@ -115,7 +112,7 @@ public class AssignAccountCountries {
         }
 
         private HttpRequest onBuildRequest(AssignAccountCountriesRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, AssignAccountCountriesRequest.class, new TypeReference<AssignAccountCountriesRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

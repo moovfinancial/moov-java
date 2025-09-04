@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListAccountTerminalApplications {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListAccountTerminalApplications {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListAccountTerminalApplicationsRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListAccountTerminalApplicationsRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/terminal-applications",
                     request, this.sdkConfiguration.globals);
@@ -97,7 +95,7 @@ public class ListAccountTerminalApplications {
         }
 
         private HttpRequest onBuildRequest(ListAccountTerminalApplicationsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListAccountTerminalApplicationsRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

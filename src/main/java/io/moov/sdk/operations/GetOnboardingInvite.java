@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetOnboardingInvite {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetOnboardingInvite {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetOnboardingInviteRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetOnboardingInviteRequest.class,
+                    klass,
                     this.baseUrl,
                     "/onboarding-invites/{code}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetOnboardingInvite {
         }
 
         private HttpRequest onBuildRequest(GetOnboardingInviteRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetOnboardingInviteRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

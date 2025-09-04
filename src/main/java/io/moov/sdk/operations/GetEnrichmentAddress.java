@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetEnrichmentAddress {
 
     static abstract class Base {
@@ -72,8 +71,7 @@ public class GetEnrichmentAddress {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetEnrichmentAddressRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/enrichment/address");
@@ -82,7 +80,7 @@ public class GetEnrichmentAddress {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
-                    GetEnrichmentAddressRequest.class,
+                    klass,
                     request,
                     this.sdkConfiguration.globals));
             req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -99,7 +97,7 @@ public class GetEnrichmentAddress {
         }
 
         private HttpRequest onBuildRequest(GetEnrichmentAddressRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetEnrichmentAddressRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -29,7 +29,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class TestEndToEndToken {
 
     static abstract class Base {
@@ -75,8 +74,7 @@ public class TestEndToEndToken {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(E2EEToken request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/debug/end-to-end-token");
@@ -84,8 +82,7 @@ public class TestEndToEndToken {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "request",
@@ -111,7 +108,7 @@ public class TestEndToEndToken {
         }
 
         private HttpRequest onBuildRequest(E2EEToken request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, new TypeReference<E2EEToken>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

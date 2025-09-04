@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetBankAccountVerification {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetBankAccountVerification {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetBankAccountVerificationRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetBankAccountVerificationRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/bank-accounts/{bankAccountID}/verify",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetBankAccountVerification {
         }
 
         private HttpRequest onBuildRequest(GetBankAccountVerificationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetBankAccountVerificationRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

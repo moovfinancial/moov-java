@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListRefunds {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListRefunds {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListRefundsRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListRefundsRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/transfers/{transferID}/refunds",
                     request, this.sdkConfiguration.globals);
@@ -97,7 +95,7 @@ public class ListRefunds {
         }
 
         private HttpRequest onBuildRequest(ListRefundsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListRefundsRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

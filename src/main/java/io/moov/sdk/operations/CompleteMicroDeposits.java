@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CompleteMicroDeposits {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class CompleteMicroDeposits {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(CompleteMicroDepositsRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    CompleteMicroDepositsRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/bank-accounts/{bankAccountID}/micro-deposits",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class CompleteMicroDeposits {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "completeMicroDeposits",
@@ -115,7 +112,7 @@ public class CompleteMicroDeposits {
         }
 
         private HttpRequest onBuildRequest(CompleteMicroDepositsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, CompleteMicroDepositsRequest.class, new TypeReference<CompleteMicroDepositsRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

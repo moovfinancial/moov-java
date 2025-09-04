@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class DisableCard {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class DisableCard {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(DisableCardRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    DisableCardRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/cards/{cardID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class DisableCard {
         }
 
         private HttpRequest onBuildRequest(DisableCardRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, DisableCardRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetRepresentative {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetRepresentative {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetRepresentativeRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetRepresentativeRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/representatives/{representativeID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetRepresentative {
         }
 
         private HttpRequest onBuildRequest(GetRepresentativeRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetRepresentativeRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

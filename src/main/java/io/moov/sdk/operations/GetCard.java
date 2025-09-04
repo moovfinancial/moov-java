@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetCard {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetCard {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetCardRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetCardRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/cards/{cardID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetCard {
         }
 
         private HttpRequest onBuildRequest(GetCardRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetCardRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

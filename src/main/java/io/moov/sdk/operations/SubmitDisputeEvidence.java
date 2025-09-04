@@ -27,7 +27,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class SubmitDisputeEvidence {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class SubmitDisputeEvidence {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(SubmitDisputeEvidenceRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    SubmitDisputeEvidenceRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/disputes/{disputeID}/evidence/submit",
                     request, this.sdkConfiguration.globals);
@@ -97,7 +95,7 @@ public class SubmitDisputeEvidence {
         }
 
         private HttpRequest onBuildRequest(SubmitDisputeEvidenceRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, SubmitDisputeEvidenceRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

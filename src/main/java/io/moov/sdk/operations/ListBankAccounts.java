@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListBankAccounts {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListBankAccounts {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListBankAccountsRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListBankAccountsRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/bank-accounts",
                     request, this.sdkConfiguration.globals);
@@ -97,7 +95,7 @@ public class ListBankAccounts {
         }
 
         private HttpRequest onBuildRequest(ListBankAccountsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListBankAccountsRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

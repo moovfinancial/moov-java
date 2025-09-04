@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class DeleteRepresentative {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class DeleteRepresentative {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(DeleteRepresentativeRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    DeleteRepresentativeRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/representatives/{representativeID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class DeleteRepresentative {
         }
 
         private HttpRequest onBuildRequest(DeleteRepresentativeRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, DeleteRepresentativeRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

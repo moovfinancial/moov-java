@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetAccountCountries {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetAccountCountries {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetAccountCountriesRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetAccountCountriesRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/countries",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetAccountCountries {
         }
 
         private HttpRequest onBuildRequest(GetAccountCountriesRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetAccountCountriesRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

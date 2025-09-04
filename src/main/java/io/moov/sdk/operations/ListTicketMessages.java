@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListTicketMessages {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListTicketMessages {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListTicketMessagesRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListTicketMessagesRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/tickets/{ticketID}/messages",
                     request, this.sdkConfiguration.globals);
@@ -97,7 +95,7 @@ public class ListTicketMessages {
         }
 
         private HttpRequest onBuildRequest(ListTicketMessagesRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListTicketMessagesRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

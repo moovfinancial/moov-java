@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetApplePayMerchantDomains {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetApplePayMerchantDomains {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetApplePayMerchantDomainsRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetApplePayMerchantDomainsRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/apple-pay/domains",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetApplePayMerchantDomains {
         }
 
         private HttpRequest onBuildRequest(GetApplePayMerchantDomainsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetApplePayMerchantDomainsRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

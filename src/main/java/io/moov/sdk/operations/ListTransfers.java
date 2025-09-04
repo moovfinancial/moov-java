@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListTransfers {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListTransfers {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListTransfersRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListTransfersRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/transfers",
                     request, this.sdkConfiguration.globals);
@@ -85,7 +83,7 @@ public class ListTransfers {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
-                    ListTransfersRequest.class,
+                    klass,
                     request,
                     this.sdkConfiguration.globals));
             req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -102,7 +100,7 @@ public class ListTransfers {
         }
 
         private HttpRequest onBuildRequest(ListTransfersRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListTransfersRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

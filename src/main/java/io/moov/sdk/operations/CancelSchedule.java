@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CancelSchedule {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class CancelSchedule {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(CancelScheduleRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    CancelScheduleRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/schedules/{scheduleID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class CancelSchedule {
         }
 
         private HttpRequest onBuildRequest(CancelScheduleRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, CancelScheduleRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -24,7 +24,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetDisputeEvidenceData {
 
     static abstract class Base {
@@ -70,10 +69,9 @@ public class GetDisputeEvidenceData {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetDisputeEvidenceDataRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetDisputeEvidenceDataRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/disputes/{disputeID}/evidence/{evidenceID}/data",
                     request, this.sdkConfiguration.globals);
@@ -94,7 +92,7 @@ public class GetDisputeEvidenceData {
         }
 
         private HttpRequest onBuildRequest(GetDisputeEvidenceDataRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetDisputeEvidenceDataRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class UpdateSchedule {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class UpdateSchedule {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(UpdateScheduleRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    UpdateScheduleRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/schedules/{scheduleID}",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class UpdateSchedule {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "upsertSchedule",
@@ -115,7 +112,7 @@ public class UpdateSchedule {
         }
 
         private HttpRequest onBuildRequest(UpdateScheduleRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, UpdateScheduleRequest.class, new TypeReference<UpdateScheduleRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

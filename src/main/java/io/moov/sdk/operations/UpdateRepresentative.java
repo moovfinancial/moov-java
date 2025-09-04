@@ -30,7 +30,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class UpdateRepresentative {
 
     static abstract class Base {
@@ -76,10 +75,9 @@ public class UpdateRepresentative {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(UpdateRepresentativeRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    UpdateRepresentativeRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/representatives/{representativeID}",
                     request, this.sdkConfiguration.globals);
@@ -87,8 +85,7 @@ public class UpdateRepresentative {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "updateRepresentative",
@@ -114,7 +111,7 @@ public class UpdateRepresentative {
         }
 
         private HttpRequest onBuildRequest(UpdateRepresentativeRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, UpdateRepresentativeRequest.class, new TypeReference<UpdateRepresentativeRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

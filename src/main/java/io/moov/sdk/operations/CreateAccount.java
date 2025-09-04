@@ -30,7 +30,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CreateAccount {
 
     static abstract class Base {
@@ -76,8 +75,7 @@ public class CreateAccount {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(io.moov.sdk.models.components.CreateAccount request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/accounts");
@@ -85,8 +83,7 @@ public class CreateAccount {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<io.moov.sdk.models.components.CreateAccount>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "request",
@@ -112,7 +109,7 @@ public class CreateAccount {
         }
 
         private HttpRequest onBuildRequest(io.moov.sdk.models.components.CreateAccount request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, new TypeReference<io.moov.sdk.models.components.CreateAccount>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

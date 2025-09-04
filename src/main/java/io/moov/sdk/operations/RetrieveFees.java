@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class RetrieveFees {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class RetrieveFees {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(RetrieveFeesRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    RetrieveFeesRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/fees",
                     request, this.sdkConfiguration.globals);
@@ -85,7 +83,7 @@ public class RetrieveFees {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
-                    RetrieveFeesRequest.class,
+                    klass,
                     request,
                     this.sdkConfiguration.globals));
             req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -102,7 +100,7 @@ public class RetrieveFees {
         }
 
         private HttpRequest onBuildRequest(RetrieveFeesRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, RetrieveFeesRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

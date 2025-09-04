@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListOnboardingInvites {
 
     static abstract class Base {
@@ -73,8 +72,7 @@ public class ListOnboardingInvites {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListOnboardingInvitesRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request) throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/onboarding-invites");

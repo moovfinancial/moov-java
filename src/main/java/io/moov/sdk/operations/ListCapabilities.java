@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListCapabilities {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListCapabilities {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListCapabilitiesRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListCapabilitiesRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/capabilities",
                     request, this.sdkConfiguration.globals);
@@ -97,7 +95,7 @@ public class ListCapabilities {
         }
 
         private HttpRequest onBuildRequest(ListCapabilitiesRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListCapabilitiesRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

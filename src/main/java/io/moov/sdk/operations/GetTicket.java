@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetTicket {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetTicket {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetTicketRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetTicketRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/tickets/{ticketID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetTicket {
         }
 
         private HttpRequest onBuildRequest(GetTicketRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetTicketRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetCancellation {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetCancellation {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetCancellationRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetCancellationRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetCancellation {
         }
 
         private HttpRequest onBuildRequest(GetCancellationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetCancellationRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

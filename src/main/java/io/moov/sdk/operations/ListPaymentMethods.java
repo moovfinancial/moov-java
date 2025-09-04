@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListPaymentMethods {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListPaymentMethods {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListPaymentMethodsRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListPaymentMethodsRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/payment-methods",
                     request, this.sdkConfiguration.globals);
@@ -85,7 +83,7 @@ public class ListPaymentMethods {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
-                    ListPaymentMethodsRequest.class,
+                    klass,
                     request,
                     this.sdkConfiguration.globals));
             req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -102,7 +100,7 @@ public class ListPaymentMethods {
         }
 
         private HttpRequest onBuildRequest(ListPaymentMethodsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListPaymentMethodsRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

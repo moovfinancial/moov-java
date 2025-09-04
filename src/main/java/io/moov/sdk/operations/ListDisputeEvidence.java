@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListDisputeEvidence {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListDisputeEvidence {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListDisputeEvidenceRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListDisputeEvidenceRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/disputes/{disputeID}/evidence",
                     request, this.sdkConfiguration.globals);
@@ -97,7 +95,7 @@ public class ListDisputeEvidence {
         }
 
         private HttpRequest onBuildRequest(ListDisputeEvidenceRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListDisputeEvidenceRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

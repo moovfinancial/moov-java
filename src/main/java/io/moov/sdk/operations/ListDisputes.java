@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListDisputes {
 
     static abstract class Base {
@@ -74,10 +73,9 @@ public class ListDisputes {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListDisputesRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListDisputesRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/disputes",
                     request, this.sdkConfiguration.globals);
@@ -86,7 +84,7 @@ public class ListDisputes {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
-                    ListDisputesRequest.class,
+                    klass,
                     request,
                     this.sdkConfiguration.globals));
             req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -103,7 +101,7 @@ public class ListDisputes {
         }
 
         private HttpRequest onBuildRequest(ListDisputesRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListDisputesRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -30,7 +30,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class UpdateIssuedCard {
 
     static abstract class Base {
@@ -76,10 +75,9 @@ public class UpdateIssuedCard {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(UpdateIssuedCardRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    UpdateIssuedCardRequest.class,
+                    klass,
                     this.baseUrl,
                     "/issuing/{accountID}/issued-cards/{issuedCardID}",
                     request, this.sdkConfiguration.globals);
@@ -87,8 +85,7 @@ public class UpdateIssuedCard {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "updateIssuedCard",
@@ -114,7 +111,7 @@ public class UpdateIssuedCard {
         }
 
         private HttpRequest onBuildRequest(UpdateIssuedCardRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, UpdateIssuedCardRequest.class, new TypeReference<UpdateIssuedCardRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

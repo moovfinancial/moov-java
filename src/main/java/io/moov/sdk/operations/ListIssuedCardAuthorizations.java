@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListIssuedCardAuthorizations {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListIssuedCardAuthorizations {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListIssuedCardAuthorizationsRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListIssuedCardAuthorizationsRequest.class,
+                    klass,
                     this.baseUrl,
                     "/issuing/{accountID}/authorizations",
                     request, this.sdkConfiguration.globals);
@@ -85,7 +83,7 @@ public class ListIssuedCardAuthorizations {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
-                    ListIssuedCardAuthorizationsRequest.class,
+                    klass,
                     request,
                     this.sdkConfiguration.globals));
             req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -102,7 +100,7 @@ public class ListIssuedCardAuthorizations {
         }
 
         private HttpRequest onBuildRequest(ListIssuedCardAuthorizationsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListIssuedCardAuthorizationsRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

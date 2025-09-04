@@ -24,7 +24,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetAvatar {
 
     static abstract class Base {
@@ -70,10 +69,9 @@ public class GetAvatar {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetAvatarRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetAvatarRequest.class,
+                    klass,
                     this.baseUrl,
                     "/avatars/{uniqueID}",
                     request, this.sdkConfiguration.globals);
@@ -94,7 +92,7 @@ public class GetAvatar {
         }
 
         private HttpRequest onBuildRequest(GetAvatarRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetAvatarRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetTermsOfServiceToken {
 
     static abstract class Base {
@@ -72,8 +71,7 @@ public class GetTermsOfServiceToken {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetTermsOfServiceTokenRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request) throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/tos-token");

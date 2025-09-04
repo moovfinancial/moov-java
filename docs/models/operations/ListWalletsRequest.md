@@ -3,6 +3,10 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `status`                                                           | [Optional\<WalletStatus>](../../models/components/WalletStatus.md) | :heavy_minus_sign:                                                 | Optional parameter for filtering wallets by status.                |                                                                    |
+| `walletType`                                                       | [Optional\<WalletType>](../../models/components/WalletType.md)     | :heavy_minus_sign:                                                 | Optional parameter for filtering wallets by type.                  |                                                                    |
+| `skip`                                                             | *Optional\<Long>*                                                  | :heavy_minus_sign:                                                 | N/A                                                                | 60                                                                 |
+| `count`                                                            | *Optional\<Long>*                                                  | :heavy_minus_sign:                                                 | N/A                                                                | 20                                                                 |
+| `accountID`                                                        | *String*                                                           | :heavy_check_mark:                                                 | N/A                                                                |                                                                    |

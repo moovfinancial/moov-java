@@ -46,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.24.0'
+implementation 'io.moov:sdk:0.25.0'
 ```
 
 Maven:
@@ -54,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.24.0</version>
+    <version>0.25.0</version>
 </dependency>
 ```
 
@@ -1053,6 +1053,12 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### [wallets()](docs/sdks/wallets/README.md)
 
+* [create](docs/sdks/wallets/README.md#create) - Create a new wallet for an account. You can specify optional attributes such as a display name and description to specify the intended use of the wallet. This will generate a new moov-wallet payment method.
+
+Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 * [list](docs/sdks/wallets/README.md#list) - List the wallets associated with a Moov account. 
 
 Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
@@ -1065,6 +1071,12 @@ Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to l
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+* [update](docs/sdks/wallets/README.md#update) - Update properties of an existing wallet such as name, description, status, or metadata.
+
+Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 
 ### [walletTransactions()](docs/sdks/wallettransactions/README.md)
 

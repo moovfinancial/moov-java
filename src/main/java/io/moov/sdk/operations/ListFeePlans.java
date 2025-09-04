@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListFeePlans {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListFeePlans {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListFeePlansRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListFeePlansRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/fee-plans",
                     request, this.sdkConfiguration.globals);
@@ -85,7 +83,7 @@ public class ListFeePlans {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
-                    ListFeePlansRequest.class,
+                    klass,
                     request,
                     this.sdkConfiguration.globals));
             req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -102,7 +100,7 @@ public class ListFeePlans {
         }
 
         private HttpRequest onBuildRequest(ListFeePlansRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListFeePlansRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class UploadFile {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class UploadFile {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(UploadFileRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    UploadFileRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/files",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class UploadFile {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "fileUploadRequestMultiPart",
@@ -115,7 +112,7 @@ public class UploadFile {
         }
 
         private HttpRequest onBuildRequest(UploadFileRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, UploadFileRequest.class, new TypeReference<UploadFileRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

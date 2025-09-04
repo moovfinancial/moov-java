@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class LinkAccountTerminalApplication {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class LinkAccountTerminalApplication {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(LinkAccountTerminalApplicationRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    LinkAccountTerminalApplicationRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/terminal-applications",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class LinkAccountTerminalApplication {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "linkAccountTerminalApplication",
@@ -115,7 +112,7 @@ public class LinkAccountTerminalApplication {
         }
 
         private HttpRequest onBuildRequest(LinkAccountTerminalApplicationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, LinkAccountTerminalApplicationRequest.class, new TypeReference<LinkAccountTerminalApplicationRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

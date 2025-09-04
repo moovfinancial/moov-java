@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CreateTicket {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class CreateTicket {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(CreateTicketRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    CreateTicketRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/tickets",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class CreateTicket {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "createTicket",
@@ -115,7 +112,7 @@ public class CreateTicket {
         }
 
         private HttpRequest onBuildRequest(CreateTicketRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, CreateTicketRequest.class, new TypeReference<CreateTicketRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

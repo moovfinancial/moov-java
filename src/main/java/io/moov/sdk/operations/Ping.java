@@ -24,7 +24,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class Ping {
 
     static abstract class Base {
@@ -70,8 +69,7 @@ public class Ping {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(PingRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request) throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/ping");

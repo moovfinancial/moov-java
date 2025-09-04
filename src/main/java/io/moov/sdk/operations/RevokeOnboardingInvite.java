@@ -24,7 +24,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class RevokeOnboardingInvite {
 
     static abstract class Base {
@@ -70,10 +69,9 @@ public class RevokeOnboardingInvite {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(RevokeOnboardingInviteRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    RevokeOnboardingInviteRequest.class,
+                    klass,
                     this.baseUrl,
                     "/onboarding-invites/{code}",
                     request, this.sdkConfiguration.globals);
@@ -94,7 +92,7 @@ public class RevokeOnboardingInvite {
         }
 
         private HttpRequest onBuildRequest(RevokeOnboardingInviteRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, RevokeOnboardingInviteRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

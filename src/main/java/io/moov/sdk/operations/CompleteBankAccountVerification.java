@@ -30,7 +30,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CompleteBankAccountVerification {
 
     static abstract class Base {
@@ -76,10 +75,9 @@ public class CompleteBankAccountVerification {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(CompleteBankAccountVerificationRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    CompleteBankAccountVerificationRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/bank-accounts/{bankAccountID}/verify",
                     request, this.sdkConfiguration.globals);
@@ -87,8 +85,7 @@ public class CompleteBankAccountVerification {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "completeBankAccountVerification",
@@ -114,7 +111,7 @@ public class CompleteBankAccountVerification {
         }
 
         private HttpRequest onBuildRequest(CompleteBankAccountVerificationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, CompleteBankAccountVerificationRequest.class, new TypeReference<CompleteBankAccountVerificationRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

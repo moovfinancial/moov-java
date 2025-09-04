@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class CreateReceipts {
 
     static abstract class Base {
@@ -77,8 +76,7 @@ public class CreateReceipts {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(List<ReceiptRequest> request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/receipts");
@@ -86,8 +84,7 @@ public class CreateReceipts {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<List<ReceiptRequest>>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "request",
@@ -113,7 +110,7 @@ public class CreateReceipts {
         }
 
         private HttpRequest onBuildRequest(List<ReceiptRequest> request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, new TypeReference<List<ReceiptRequest>>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

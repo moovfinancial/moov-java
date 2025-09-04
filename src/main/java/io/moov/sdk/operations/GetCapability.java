@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetCapability {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetCapability {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetCapabilityRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetCapabilityRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/capabilities/{capabilityID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetCapability {
         }
 
         private HttpRequest onBuildRequest(GetCapabilityRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetCapabilityRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

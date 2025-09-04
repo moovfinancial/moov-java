@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetWallet {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetWallet {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetWalletRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetWalletRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/wallets/{walletID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetWallet {
         }
 
         private HttpRequest onBuildRequest(GetWalletRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetWalletRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

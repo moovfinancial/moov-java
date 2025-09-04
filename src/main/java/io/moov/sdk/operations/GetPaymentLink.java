@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetPaymentLink {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetPaymentLink {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetPaymentLinkRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetPaymentLinkRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/payment-links/{paymentLinkCode}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetPaymentLink {
         }
 
         private HttpRequest onBuildRequest(GetPaymentLinkRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetPaymentLinkRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

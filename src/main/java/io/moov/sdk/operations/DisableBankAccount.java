@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class DisableBankAccount {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class DisableBankAccount {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(DisableBankAccountRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    DisableBankAccountRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/bank-accounts/{bankAccountID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class DisableBankAccount {
         }
 
         private HttpRequest onBuildRequest(DisableBankAccountRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, DisableBankAccountRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

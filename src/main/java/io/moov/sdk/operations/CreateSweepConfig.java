@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CreateSweepConfig {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class CreateSweepConfig {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(CreateSweepConfigRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    CreateSweepConfigRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/sweep-configs",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class CreateSweepConfig {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "createSweepConfig",
@@ -115,7 +112,7 @@ public class CreateSweepConfig {
         }
 
         private HttpRequest onBuildRequest(CreateSweepConfigRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, CreateSweepConfigRequest.class, new TypeReference<CreateSweepConfigRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

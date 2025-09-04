@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetAccountTerminalApplication {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetAccountTerminalApplication {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetAccountTerminalApplicationRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetAccountTerminalApplicationRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/terminal-applications/{terminalApplicationID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetAccountTerminalApplication {
         }
 
         private HttpRequest onBuildRequest(GetAccountTerminalApplicationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetAccountTerminalApplicationRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

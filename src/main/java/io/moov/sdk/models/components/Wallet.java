@@ -5,10 +5,16 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.time.OffsetDateTime;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Wallet
@@ -24,14 +30,101 @@ public class Wallet {
     @JsonProperty("availableBalance")
     private WalletAvailableBalance availableBalance;
 
+
+    @JsonProperty("partnerAccountID")
+    private String partnerAccountID;
+
+    /**
+     * Name of the wallet
+     */
+    @JsonProperty("name")
+    private String name;
+
+    /**
+     * Status of a wallet.
+     *   - `active`: The wallet is available for use and has an enabled payment method.
+     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     */
+    @JsonProperty("status")
+    private WalletStatus status;
+
+    /**
+     * Type of a wallet.
+     *   - `default`: The primary system-generated wallet automatically created by Moov when an account is granted the wallet capability. This generates a moov-wallet payment method that is available for use immediately. Only one default wallet exists per account.
+     *   - `general`: A user-defined wallet created via the API to segment funds for specific use cases. Users can create multiple general wallets per account to support internal business models or financial reporting needs.
+     */
+    @JsonProperty("walletType")
+    private WalletType walletType;
+
+    /**
+     * Description of the wallet
+     */
+    @JsonProperty("description")
+    private String description;
+
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("metadata")
+    private Optional<? extends Map<String, String>> metadata;
+
+
+    @JsonProperty("createdOn")
+    private OffsetDateTime createdOn;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("closedOn")
+    private Optional<OffsetDateTime> closedOn;
+
     @JsonCreator
     public Wallet(
             @JsonProperty("walletID") String walletID,
-            @JsonProperty("availableBalance") WalletAvailableBalance availableBalance) {
+            @JsonProperty("availableBalance") WalletAvailableBalance availableBalance,
+            @JsonProperty("partnerAccountID") String partnerAccountID,
+            @JsonProperty("name") String name,
+            @JsonProperty("status") WalletStatus status,
+            @JsonProperty("walletType") WalletType walletType,
+            @JsonProperty("description") String description,
+            @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
+            @JsonProperty("createdOn") OffsetDateTime createdOn,
+            @JsonProperty("closedOn") Optional<OffsetDateTime> closedOn) {
         Utils.checkNotNull(walletID, "walletID");
         Utils.checkNotNull(availableBalance, "availableBalance");
+        Utils.checkNotNull(partnerAccountID, "partnerAccountID");
+        Utils.checkNotNull(name, "name");
+        Utils.checkNotNull(status, "status");
+        Utils.checkNotNull(walletType, "walletType");
+        Utils.checkNotNull(description, "description");
+        Utils.checkNotNull(metadata, "metadata");
+        Utils.checkNotNull(createdOn, "createdOn");
+        Utils.checkNotNull(closedOn, "closedOn");
         this.walletID = walletID;
         this.availableBalance = availableBalance;
+        this.partnerAccountID = partnerAccountID;
+        this.name = name;
+        this.status = status;
+        this.walletType = walletType;
+        this.description = description;
+        this.metadata = metadata;
+        this.createdOn = createdOn;
+        this.closedOn = closedOn;
+    }
+    
+    public Wallet(
+            String walletID,
+            WalletAvailableBalance availableBalance,
+            String partnerAccountID,
+            String name,
+            WalletStatus status,
+            WalletType walletType,
+            String description,
+            OffsetDateTime createdOn) {
+        this(walletID, availableBalance, partnerAccountID,
+            name, status, walletType,
+            description, Optional.empty(), createdOn,
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -42,6 +135,66 @@ public class Wallet {
     @JsonIgnore
     public WalletAvailableBalance availableBalance() {
         return availableBalance;
+    }
+
+    @JsonIgnore
+    public String partnerAccountID() {
+        return partnerAccountID;
+    }
+
+    /**
+     * Name of the wallet
+     */
+    @JsonIgnore
+    public String name() {
+        return name;
+    }
+
+    /**
+     * Status of a wallet.
+     *   - `active`: The wallet is available for use and has an enabled payment method.
+     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     */
+    @JsonIgnore
+    public WalletStatus status() {
+        return status;
+    }
+
+    /**
+     * Type of a wallet.
+     *   - `default`: The primary system-generated wallet automatically created by Moov when an account is granted the wallet capability. This generates a moov-wallet payment method that is available for use immediately. Only one default wallet exists per account.
+     *   - `general`: A user-defined wallet created via the API to segment funds for specific use cases. Users can create multiple general wallets per account to support internal business models or financial reporting needs.
+     */
+    @JsonIgnore
+    public WalletType walletType() {
+        return walletType;
+    }
+
+    /**
+     * Description of the wallet
+     */
+    @JsonIgnore
+    public String description() {
+        return description;
+    }
+
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Map<String, String>> metadata() {
+        return (Optional<Map<String, String>>) metadata;
+    }
+
+    @JsonIgnore
+    public OffsetDateTime createdOn() {
+        return createdOn;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> closedOn() {
+        return closedOn;
     }
 
     public static Builder builder() {
@@ -61,6 +214,90 @@ public class Wallet {
         return this;
     }
 
+    public Wallet withPartnerAccountID(String partnerAccountID) {
+        Utils.checkNotNull(partnerAccountID, "partnerAccountID");
+        this.partnerAccountID = partnerAccountID;
+        return this;
+    }
+
+    /**
+     * Name of the wallet
+     */
+    public Wallet withName(String name) {
+        Utils.checkNotNull(name, "name");
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Status of a wallet.
+     *   - `active`: The wallet is available for use and has an enabled payment method.
+     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     */
+    public Wallet withStatus(WalletStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Type of a wallet.
+     *   - `default`: The primary system-generated wallet automatically created by Moov when an account is granted the wallet capability. This generates a moov-wallet payment method that is available for use immediately. Only one default wallet exists per account.
+     *   - `general`: A user-defined wallet created via the API to segment funds for specific use cases. Users can create multiple general wallets per account to support internal business models or financial reporting needs.
+     */
+    public Wallet withWalletType(WalletType walletType) {
+        Utils.checkNotNull(walletType, "walletType");
+        this.walletType = walletType;
+        return this;
+    }
+
+    /**
+     * Description of the wallet
+     */
+    public Wallet withDescription(String description) {
+        Utils.checkNotNull(description, "description");
+        this.description = description;
+        return this;
+    }
+
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
+    public Wallet withMetadata(Map<String, String> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+
+    /**
+     * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+     */
+    public Wallet withMetadata(Optional<? extends Map<String, String>> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
+        return this;
+    }
+
+    public Wallet withCreatedOn(OffsetDateTime createdOn) {
+        Utils.checkNotNull(createdOn, "createdOn");
+        this.createdOn = createdOn;
+        return this;
+    }
+
+    public Wallet withClosedOn(OffsetDateTime closedOn) {
+        Utils.checkNotNull(closedOn, "closedOn");
+        this.closedOn = Optional.ofNullable(closedOn);
+        return this;
+    }
+
+
+    public Wallet withClosedOn(Optional<OffsetDateTime> closedOn) {
+        Utils.checkNotNull(closedOn, "closedOn");
+        this.closedOn = closedOn;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -72,20 +309,39 @@ public class Wallet {
         Wallet other = (Wallet) o;
         return 
             Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
-            Utils.enhancedDeepEquals(this.availableBalance, other.availableBalance);
+            Utils.enhancedDeepEquals(this.availableBalance, other.availableBalance) &&
+            Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.walletType, other.walletType) &&
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+            Utils.enhancedDeepEquals(this.closedOn, other.closedOn);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID, availableBalance);
+            walletID, availableBalance, partnerAccountID,
+            name, status, walletType,
+            description, metadata, createdOn,
+            closedOn);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Wallet.class,
                 "walletID", walletID,
-                "availableBalance", availableBalance);
+                "availableBalance", availableBalance,
+                "partnerAccountID", partnerAccountID,
+                "name", name,
+                "status", status,
+                "walletType", walletType,
+                "description", description,
+                "metadata", metadata,
+                "createdOn", createdOn,
+                "closedOn", closedOn);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -94,6 +350,22 @@ public class Wallet {
         private String walletID;
 
         private WalletAvailableBalance availableBalance;
+
+        private String partnerAccountID;
+
+        private String name;
+
+        private WalletStatus status;
+
+        private WalletType walletType;
+
+        private String description;
+
+        private Optional<? extends Map<String, String>> metadata = Optional.empty();
+
+        private OffsetDateTime createdOn;
+
+        private Optional<OffsetDateTime> closedOn = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -113,10 +385,103 @@ public class Wallet {
             return this;
         }
 
+
+        public Builder partnerAccountID(String partnerAccountID) {
+            Utils.checkNotNull(partnerAccountID, "partnerAccountID");
+            this.partnerAccountID = partnerAccountID;
+            return this;
+        }
+
+
+        /**
+         * Name of the wallet
+         */
+        public Builder name(String name) {
+            Utils.checkNotNull(name, "name");
+            this.name = name;
+            return this;
+        }
+
+
+        /**
+         * Status of a wallet.
+         *   - `active`: The wallet is available for use and has an enabled payment method.
+         *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+         */
+        public Builder status(WalletStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = status;
+            return this;
+        }
+
+
+        /**
+         * Type of a wallet.
+         *   - `default`: The primary system-generated wallet automatically created by Moov when an account is granted the wallet capability. This generates a moov-wallet payment method that is available for use immediately. Only one default wallet exists per account.
+         *   - `general`: A user-defined wallet created via the API to segment funds for specific use cases. Users can create multiple general wallets per account to support internal business models or financial reporting needs.
+         */
+        public Builder walletType(WalletType walletType) {
+            Utils.checkNotNull(walletType, "walletType");
+            this.walletType = walletType;
+            return this;
+        }
+
+
+        /**
+         * Description of the wallet
+         */
+        public Builder description(String description) {
+            Utils.checkNotNull(description, "description");
+            this.description = description;
+            return this;
+        }
+
+
+        /**
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+         */
+        public Builder metadata(Map<String, String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
+            return this;
+        }
+
+        /**
+         * Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+         */
+        public Builder metadata(Optional<? extends Map<String, String>> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
+
+        public Builder createdOn(OffsetDateTime createdOn) {
+            Utils.checkNotNull(createdOn, "createdOn");
+            this.createdOn = createdOn;
+            return this;
+        }
+
+
+        public Builder closedOn(OffsetDateTime closedOn) {
+            Utils.checkNotNull(closedOn, "closedOn");
+            this.closedOn = Optional.ofNullable(closedOn);
+            return this;
+        }
+
+        public Builder closedOn(Optional<OffsetDateTime> closedOn) {
+            Utils.checkNotNull(closedOn, "closedOn");
+            this.closedOn = closedOn;
+            return this;
+        }
+
         public Wallet build() {
 
             return new Wallet(
-                walletID, availableBalance);
+                walletID, availableBalance, partnerAccountID,
+                name, status, walletType,
+                description, metadata, createdOn,
+                closedOn);
         }
 
     }

@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class ListRepresentatives {
 
     static abstract class Base {
@@ -73,10 +72,9 @@ public class ListRepresentatives {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListRepresentativesRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    ListRepresentativesRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/representatives",
                     request, this.sdkConfiguration.globals);
@@ -97,7 +95,7 @@ public class ListRepresentatives {
         }
 
         private HttpRequest onBuildRequest(ListRepresentativesRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListRepresentativesRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

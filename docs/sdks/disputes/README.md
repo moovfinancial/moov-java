@@ -349,6 +349,7 @@ import io.moov.sdk.models.errors.FileUploadValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadDisputeEvidenceFileResponse;
 import io.moov.sdk.utils.Utils;
+import java.io.FileInputStream;
 import java.lang.Exception;
 
 public class Application {
@@ -369,15 +370,12 @@ public class Application {
                 .createEvidenceFileMultiPart(CreateEvidenceFileMultiPart.builder()
                     .file(File.builder()
                         .fileName("example.file")
-                        .content(Utils.readBytes("example.file"))
+                        .content(Utils.readBytesAndClose(new FileInputStream("example.file")))
                         .build())
                     .evidenceType(EvidenceType.CANCELATION_POLICY)
                     .build())
                 .call();
 
-        if (res.evidenceUploadResponse().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

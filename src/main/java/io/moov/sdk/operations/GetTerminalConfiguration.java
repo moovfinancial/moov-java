@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetTerminalConfiguration {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetTerminalConfiguration {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetTerminalConfigurationRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetTerminalConfigurationRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/terminal-applications/{terminalApplicationID}/configuration",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetTerminalConfiguration {
         }
 
         private HttpRequest onBuildRequest(GetTerminalConfigurationRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetTerminalConfigurationRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

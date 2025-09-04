@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetTransfer {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetTransfer {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetTransferRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetTransferRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/transfers/{transferID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetTransfer {
         }
 
         private HttpRequest onBuildRequest(GetTransferRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetTransferRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

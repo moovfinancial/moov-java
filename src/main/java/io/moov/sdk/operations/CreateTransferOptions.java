@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CreateTransferOptions {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class CreateTransferOptions {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(CreateTransferOptionsRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    CreateTransferOptionsRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/transfer-options",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class CreateTransferOptions {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "createTransferOptions",
@@ -115,7 +112,7 @@ public class CreateTransferOptions {
         }
 
         private HttpRequest onBuildRequest(CreateTransferOptionsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, CreateTransferOptionsRequest.class, new TypeReference<CreateTransferOptionsRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

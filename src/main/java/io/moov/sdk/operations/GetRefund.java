@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetRefund {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetRefund {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetRefundRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetRefundRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/transfers/{transferID}/refunds/{refundID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetRefund {
         }
 
         private HttpRequest onBuildRequest(GetRefundRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetRefundRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

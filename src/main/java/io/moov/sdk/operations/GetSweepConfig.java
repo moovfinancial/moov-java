@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetSweepConfig {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetSweepConfig {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetSweepConfigRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetSweepConfigRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/sweep-configs/{sweepConfigID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetSweepConfig {
         }
 
         private HttpRequest onBuildRequest(GetSweepConfigRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetSweepConfigRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

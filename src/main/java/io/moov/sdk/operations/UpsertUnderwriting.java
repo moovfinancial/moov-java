@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class UpsertUnderwriting {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class UpsertUnderwriting {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(UpsertUnderwritingRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    UpsertUnderwritingRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/underwriting",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class UpsertUnderwriting {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "updateUnderwriting",
@@ -115,7 +112,7 @@ public class UpsertUnderwriting {
         }
 
         private HttpRequest onBuildRequest(UpsertUnderwritingRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, UpsertUnderwritingRequest.class, new TypeReference<UpsertUnderwritingRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

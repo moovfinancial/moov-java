@@ -29,7 +29,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CreateApplePaySession {
 
     static abstract class Base {
@@ -75,10 +74,9 @@ public class CreateApplePaySession {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(CreateApplePaySessionRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    CreateApplePaySessionRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/apple-pay/sessions",
                     request, this.sdkConfiguration.globals);
@@ -86,8 +84,7 @@ public class CreateApplePaySession {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "createApplePaySession",
@@ -113,7 +110,7 @@ public class CreateApplePaySession {
         }
 
         private HttpRequest onBuildRequest(CreateApplePaySessionRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, CreateApplePaySessionRequest.class, new TypeReference<CreateApplePaySessionRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

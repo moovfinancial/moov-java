@@ -26,7 +26,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class GetAdjustment {
 
     static abstract class Base {
@@ -72,10 +71,9 @@ public class GetAdjustment {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(GetAdjustmentRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
-                    GetAdjustmentRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/adjustments/{adjustmentID}",
                     request, this.sdkConfiguration.globals);
@@ -96,7 +94,7 @@ public class GetAdjustment {
         }
 
         private HttpRequest onBuildRequest(GetAdjustmentRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, GetAdjustmentRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

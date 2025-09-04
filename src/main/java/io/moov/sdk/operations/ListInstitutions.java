@@ -27,7 +27,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class ListInstitutions {
 
     static abstract class Base {
@@ -73,8 +72,7 @@ public class ListInstitutions {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(ListInstitutionsRequest request) throws Exception {
+        <T>HttpRequest buildRequest(T request, Class<T> klass) throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/institutions/ach/search");
@@ -83,7 +81,7 @@ public class ListInstitutions {
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
-                    ListInstitutionsRequest.class,
+                    klass,
                     request,
                     this.sdkConfiguration.globals));
             req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
@@ -100,7 +98,7 @@ public class ListInstitutions {
         }
 
         private HttpRequest onBuildRequest(ListInstitutionsRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, ListInstitutionsRequest.class);
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CreatePaymentLink {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class CreatePaymentLink {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(CreatePaymentLinkRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    CreatePaymentLinkRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/payment-links",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class CreatePaymentLink {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "createPaymentLink",
@@ -115,7 +112,7 @@ public class CreatePaymentLink {
         }
 
         private HttpRequest onBuildRequest(CreatePaymentLinkRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, CreatePaymentLinkRequest.class, new TypeReference<CreatePaymentLinkRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

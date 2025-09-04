@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class LinkCard {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class LinkCard {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(LinkCardRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    LinkCardRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/cards",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class LinkCard {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "linkCard",
@@ -115,7 +112,7 @@ public class LinkCard {
         }
 
         private HttpRequest onBuildRequest(LinkCardRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, LinkCardRequest.class, new TypeReference<LinkCardRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class CreateSchedule {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class CreateSchedule {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(CreateScheduleRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    CreateScheduleRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/schedules",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class CreateSchedule {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "upsertSchedule",
@@ -115,7 +112,7 @@ public class CreateSchedule {
         }
 
         private HttpRequest onBuildRequest(CreateScheduleRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, CreateScheduleRequest.class, new TypeReference<CreateScheduleRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

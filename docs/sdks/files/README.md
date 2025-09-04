@@ -43,6 +43,7 @@ import io.moov.sdk.models.errors.FileValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UploadFileResponse;
 import io.moov.sdk.utils.Utils;
+import java.io.FileInputStream;
 import java.lang.Exception;
 
 public class Application {
@@ -62,16 +63,13 @@ public class Application {
                 .fileUploadRequestMultiPart(FileUploadRequestMultiPart.builder()
                     .file(FileUploadRequestMultiPartFile.builder()
                         .fileName("example.file")
-                        .content(Utils.readBytes("example.file"))
+                        .content(Utils.readBytesAndClose(new FileInputStream("example.file")))
                         .build())
                     .filePurpose(FilePurpose.REPRESENTATIVE_VERIFICATION)
                     .metadata("{\"requirement_id\": \"document.individual.verification\"}")
                     .build())
                 .call();
 
-        if (res.fileDetails().isPresent()) {
-            // handle response
-        }
     }
 }
 ```

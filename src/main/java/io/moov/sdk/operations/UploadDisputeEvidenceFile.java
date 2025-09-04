@@ -31,7 +31,6 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-
 public class UploadDisputeEvidenceFile {
 
     static abstract class Base {
@@ -77,10 +76,9 @@ public class UploadDisputeEvidenceFile {
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
-
-        HttpRequest buildRequest(UploadDisputeEvidenceFileRequest request) throws Exception {
+        <T, U>HttpRequest buildRequest(T request, Class<T> klass, TypeReference<U> typeReference) throws Exception {
             String url = Utils.generateURL(
-                    UploadDisputeEvidenceFileRequest.class,
+                    klass,
                     this.baseUrl,
                     "/accounts/{accountID}/disputes/{disputeID}/evidence-file",
                     request, this.sdkConfiguration.globals);
@@ -88,8 +86,7 @@ public class UploadDisputeEvidenceFile {
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,
-                    new TypeReference<Object>() {
-                    });
+                    typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
                     "createEvidenceFileMultiPart",
@@ -115,7 +112,7 @@ public class UploadDisputeEvidenceFile {
         }
 
         private HttpRequest onBuildRequest(UploadDisputeEvidenceFileRequest request) throws Exception {
-            HttpRequest req = buildRequest(request);
+            HttpRequest req = buildRequest(request, UploadDisputeEvidenceFileRequest.class, new TypeReference<UploadDisputeEvidenceFileRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 

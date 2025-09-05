@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
@@ -20,20 +21,34 @@ public class PayoutRecipientError {
     @JsonProperty("email")
     private Optional<String> email;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("phone")
+    private Optional<? extends PhoneNumberError> phone;
+
     @JsonCreator
     public PayoutRecipientError(
-            @JsonProperty("email") Optional<String> email) {
+            @JsonProperty("email") Optional<String> email,
+            @JsonProperty("phone") Optional<? extends PhoneNumberError> phone) {
         Utils.checkNotNull(email, "email");
+        Utils.checkNotNull(phone, "phone");
         this.email = email;
+        this.phone = phone;
     }
     
     public PayoutRecipientError() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
     public Optional<String> email() {
         return email;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PhoneNumberError> phone() {
+        return (Optional<PhoneNumberError>) phone;
     }
 
     public static Builder builder() {
@@ -54,6 +69,19 @@ public class PayoutRecipientError {
         return this;
     }
 
+    public PayoutRecipientError withPhone(PhoneNumberError phone) {
+        Utils.checkNotNull(phone, "phone");
+        this.phone = Optional.ofNullable(phone);
+        return this;
+    }
+
+
+    public PayoutRecipientError withPhone(Optional<? extends PhoneNumberError> phone) {
+        Utils.checkNotNull(phone, "phone");
+        this.phone = phone;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -64,25 +92,29 @@ public class PayoutRecipientError {
         }
         PayoutRecipientError other = (PayoutRecipientError) o;
         return 
-            Utils.enhancedDeepEquals(this.email, other.email);
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.phone, other.phone);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            email);
+            email, phone);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PayoutRecipientError.class,
-                "email", email);
+                "email", email,
+                "phone", phone);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private Optional<String> email = Optional.empty();
+
+        private Optional<? extends PhoneNumberError> phone = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -101,10 +133,23 @@ public class PayoutRecipientError {
             return this;
         }
 
+
+        public Builder phone(PhoneNumberError phone) {
+            Utils.checkNotNull(phone, "phone");
+            this.phone = Optional.ofNullable(phone);
+            return this;
+        }
+
+        public Builder phone(Optional<? extends PhoneNumberError> phone) {
+            Utils.checkNotNull(phone, "phone");
+            this.phone = phone;
+            return this;
+        }
+
         public PayoutRecipientError build() {
 
             return new PayoutRecipientError(
-                email);
+                email, phone);
         }
 
     }

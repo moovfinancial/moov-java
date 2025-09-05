@@ -26,17 +26,18 @@ public class PaymentLinkPayoutDetailsUpdate {
 
     /**
      * Specify the intended recipient of the payout.
+     * Either `email` or `phone` must be specified, but not both.
      * 
      * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("recipient")
-    private Optional<? extends PayoutRecipientUpdate> recipient;
+    private Optional<? extends PayoutRecipient> recipient;
 
     @JsonCreator
     public PaymentLinkPayoutDetailsUpdate(
             @JsonProperty("allowedMethods") Optional<? extends List<DisbursementPaymentMethodType>> allowedMethods,
-            @JsonProperty("recipient") Optional<? extends PayoutRecipientUpdate> recipient) {
+            @JsonProperty("recipient") Optional<? extends PayoutRecipient> recipient) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(recipient, "recipient");
         this.allowedMethods = allowedMethods;
@@ -58,13 +59,14 @@ public class PaymentLinkPayoutDetailsUpdate {
 
     /**
      * Specify the intended recipient of the payout.
+     * Either `email` or `phone` must be specified, but not both.
      * 
      * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PayoutRecipientUpdate> recipient() {
-        return (Optional<PayoutRecipientUpdate>) recipient;
+    public Optional<PayoutRecipient> recipient() {
+        return (Optional<PayoutRecipient>) recipient;
     }
 
     public static Builder builder() {
@@ -93,10 +95,11 @@ public class PaymentLinkPayoutDetailsUpdate {
 
     /**
      * Specify the intended recipient of the payout.
+     * Either `email` or `phone` must be specified, but not both.
      * 
      * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
-    public PaymentLinkPayoutDetailsUpdate withRecipient(PayoutRecipientUpdate recipient) {
+    public PaymentLinkPayoutDetailsUpdate withRecipient(PayoutRecipient recipient) {
         Utils.checkNotNull(recipient, "recipient");
         this.recipient = Optional.ofNullable(recipient);
         return this;
@@ -105,10 +108,11 @@ public class PaymentLinkPayoutDetailsUpdate {
 
     /**
      * Specify the intended recipient of the payout.
+     * Either `email` or `phone` must be specified, but not both.
      * 
      * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
-    public PaymentLinkPayoutDetailsUpdate withRecipient(Optional<? extends PayoutRecipientUpdate> recipient) {
+    public PaymentLinkPayoutDetailsUpdate withRecipient(Optional<? extends PayoutRecipient> recipient) {
         Utils.checkNotNull(recipient, "recipient");
         this.recipient = recipient;
         return this;
@@ -146,7 +150,7 @@ public class PaymentLinkPayoutDetailsUpdate {
 
         private Optional<? extends List<DisbursementPaymentMethodType>> allowedMethods = Optional.empty();
 
-        private Optional<? extends PayoutRecipientUpdate> recipient = Optional.empty();
+        private Optional<? extends PayoutRecipient> recipient = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -174,10 +178,11 @@ public class PaymentLinkPayoutDetailsUpdate {
 
         /**
          * Specify the intended recipient of the payout.
+         * Either `email` or `phone` must be specified, but not both.
          * 
          * <p>This information will be used to authenticate the end user when they follow the payment link.
          */
-        public Builder recipient(PayoutRecipientUpdate recipient) {
+        public Builder recipient(PayoutRecipient recipient) {
             Utils.checkNotNull(recipient, "recipient");
             this.recipient = Optional.ofNullable(recipient);
             return this;
@@ -185,10 +190,11 @@ public class PaymentLinkPayoutDetailsUpdate {
 
         /**
          * Specify the intended recipient of the payout.
+         * Either `email` or `phone` must be specified, but not both.
          * 
          * <p>This information will be used to authenticate the end user when they follow the payment link.
          */
-        public Builder recipient(Optional<? extends PayoutRecipientUpdate> recipient) {
+        public Builder recipient(Optional<? extends PayoutRecipient> recipient) {
             Utils.checkNotNull(recipient, "recipient");
             this.recipient = recipient;
             return this;

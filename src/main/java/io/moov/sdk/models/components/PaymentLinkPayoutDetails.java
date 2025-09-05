@@ -21,6 +21,7 @@ public class PaymentLinkPayoutDetails {
 
     /**
      * Specify the intended recipient of the payout.
+     * Either `email` or `phone` must be specified, but not both.
      * 
      * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
@@ -47,6 +48,7 @@ public class PaymentLinkPayoutDetails {
 
     /**
      * Specify the intended recipient of the payout.
+     * Either `email` or `phone` must be specified, but not both.
      * 
      * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
@@ -71,6 +73,7 @@ public class PaymentLinkPayoutDetails {
 
     /**
      * Specify the intended recipient of the payout.
+     * Either `email` or `phone` must be specified, but not both.
      * 
      * <p>This information will be used to authenticate the end user when they follow the payment link.
      */
@@ -131,6 +134,7 @@ public class PaymentLinkPayoutDetails {
 
         /**
          * Specify the intended recipient of the payout.
+         * Either `email` or `phone` must be specified, but not both.
          * 
          * <p>This information will be used to authenticate the end user when they follow the payment link.
          */

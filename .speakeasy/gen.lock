@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 5a72644e08f436a5d8fbf67d8eb7e6ba
+  docChecksum: 3a6d10543306fd1e4273cd818e371997
   docVersion: latest
   speakeasyVersion: 1.609.0
   generationVersion: 2.692.0
-  releaseVersion: 0.25.0
-  configChecksum: b2bf48f29118289b72e48a82e3c55dcd
+  releaseVersion: 0.25.1
+  configChecksum: 0101628c4b5e122ff40ed62fe4c1031c
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -358,7 +358,6 @@ generatedFiles:
   - docs/models/components/PayoutDetailsError.md
   - docs/models/components/PayoutRecipient.md
   - docs/models/components/PayoutRecipientError.md
-  - docs/models/components/PayoutRecipientUpdate.md
   - docs/models/components/PendingLitigation.md
   - docs/models/components/Phone.md
   - docs/models/components/PhoneNumber.md
@@ -1276,7 +1275,6 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/PayoutDetailsError.java
   - src/main/java/io/moov/sdk/models/components/PayoutRecipient.java
   - src/main/java/io/moov/sdk/models/components/PayoutRecipientError.java
-  - src/main/java/io/moov/sdk/models/components/PayoutRecipientUpdate.java
   - src/main/java/io/moov/sdk/models/components/PendingLitigation.java
   - src/main/java/io/moov/sdk/models/components/Phone.java
   - src/main/java/io/moov/sdk/models/components/PhoneNumber.java
@@ -4235,4 +4233,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.wallets.list()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.[]` **Changed**\n* `moov.wallets.create()`: **Added**\n* `moov.wallets.update()`: **Added**\n* `moov.wallets.get()`:  `response` **Changed**\n"
+releaseNotes: "## Java SDK Changes Detected:\n* `moov.paymentLinks.create()`: \n  *  `request.createpaymentlink.payout.recipient` **Changed**\n  *  `response.payout.recipient` **Changed**\n  *  `error.payout.recipient.phone` **Added**\n* `moov.paymentLinks.list()`:  `response.[].payout.recipient` **Changed**\n* `moov.paymentLinks.get()`:  `response.payout.recipient` **Changed**\n* `moov.paymentLinks.update()`: \n  *  `request.updatepaymentlink.payout.recipient.phone` **Added**\n  *  `response.payout.recipient` **Changed**\n  *  `error.payout.recipient.phone` **Added**\n"

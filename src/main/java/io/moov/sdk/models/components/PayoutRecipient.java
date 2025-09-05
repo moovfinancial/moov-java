@@ -5,33 +5,57 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
 /**
  * PayoutRecipient
  * 
  * <p>Specify the intended recipient of the payout.
+ * Either `email` or `phone` must be specified, but not both.
  * 
  * <p>This information will be used to authenticate the end user when they follow the payment link.
  */
 public class PayoutRecipient {
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
-    private String email;
+    private Optional<String> email;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("phone")
+    private Optional<? extends PhoneNumber> phone;
 
     @JsonCreator
     public PayoutRecipient(
-            @JsonProperty("email") String email) {
+            @JsonProperty("email") Optional<String> email,
+            @JsonProperty("phone") Optional<? extends PhoneNumber> phone) {
         Utils.checkNotNull(email, "email");
+        Utils.checkNotNull(phone, "phone");
         this.email = email;
+        this.phone = phone;
+    }
+    
+    public PayoutRecipient() {
+        this(Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public String email() {
+    public Optional<String> email() {
         return email;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PhoneNumber> phone() {
+        return (Optional<PhoneNumber>) phone;
     }
 
     public static Builder builder() {
@@ -41,7 +65,27 @@ public class PayoutRecipient {
 
     public PayoutRecipient withEmail(String email) {
         Utils.checkNotNull(email, "email");
+        this.email = Optional.ofNullable(email);
+        return this;
+    }
+
+
+    public PayoutRecipient withEmail(Optional<String> email) {
+        Utils.checkNotNull(email, "email");
         this.email = email;
+        return this;
+    }
+
+    public PayoutRecipient withPhone(PhoneNumber phone) {
+        Utils.checkNotNull(phone, "phone");
+        this.phone = Optional.ofNullable(phone);
+        return this;
+    }
+
+
+    public PayoutRecipient withPhone(Optional<? extends PhoneNumber> phone) {
+        Utils.checkNotNull(phone, "phone");
+        this.phone = phone;
         return this;
     }
 
@@ -55,25 +99,29 @@ public class PayoutRecipient {
         }
         PayoutRecipient other = (PayoutRecipient) o;
         return 
-            Utils.enhancedDeepEquals(this.email, other.email);
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.phone, other.phone);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            email);
+            email, phone);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PayoutRecipient.class,
-                "email", email);
+                "email", email,
+                "phone", phone);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String email;
+        private Optional<String> email = Optional.empty();
+
+        private Optional<? extends PhoneNumber> phone = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -82,14 +130,33 @@ public class PayoutRecipient {
 
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
+            this.email = Optional.ofNullable(email);
+            return this;
+        }
+
+        public Builder email(Optional<String> email) {
+            Utils.checkNotNull(email, "email");
             this.email = email;
+            return this;
+        }
+
+
+        public Builder phone(PhoneNumber phone) {
+            Utils.checkNotNull(phone, "phone");
+            this.phone = Optional.ofNullable(phone);
+            return this;
+        }
+
+        public Builder phone(Optional<? extends PhoneNumber> phone) {
+            Utils.checkNotNull(phone, "phone");
+            this.phone = phone;
             return this;
         }
 
         public PayoutRecipient build() {
 
             return new PayoutRecipient(
-                email);
+                email, phone);
         }
 
     }

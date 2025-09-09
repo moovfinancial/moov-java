@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 3a6d10543306fd1e4273cd818e371997
+  docChecksum: 3ccc3cdd02f56987d2561611c54e6308
   docVersion: latest
-  speakeasyVersion: 1.609.0
-  generationVersion: 2.692.0
-  releaseVersion: 0.25.1
-  configChecksum: 0101628c4b5e122ff40ed62fe4c1031c
+  speakeasyVersion: 1.613.0
+  generationVersion: 2.696.0
+  releaseVersion: 0.25.2
+  configChecksum: 93a4af78246094a32ddec6a664fdd3b9
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.47.0
+    core: 3.47.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     flattening: 2.81.1
@@ -4233,4 +4233,6 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.paymentLinks.create()`: \n  *  `request.createpaymentlink.payout.recipient` **Changed**\n  *  `response.payout.recipient` **Changed**\n  *  `error.payout.recipient.phone` **Added**\n* `moov.paymentLinks.list()`:  `response.[].payout.recipient` **Changed**\n* `moov.paymentLinks.get()`:  `response.payout.recipient` **Changed**\n* `moov.paymentLinks.update()`: \n  *  `request.updatepaymentlink.payout.recipient.phone` **Added**\n  *  `response.payout.recipient` **Changed**\n  *  `error.payout.recipient.phone` **Added**\n"
+releaseNotes: |
+  ## Java SDK Changes Detected:
+  * `moov.walletTransactions.list()`:  `request` **Changed**

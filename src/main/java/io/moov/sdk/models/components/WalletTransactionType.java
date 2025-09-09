@@ -34,7 +34,8 @@ public enum WalletTransactionType {
     TOP_UP("top-up"),
     WALLET_TRANSFER("wallet-transfer"),
     ADJUSTMENT("adjustment"),
-    FEE_REVENUE("fee-revenue");
+    FEE_REVENUE("fee-revenue"),
+    RESIDUAL("residual");
 
     @JsonValue
     private final String value;

@@ -18,9 +18,9 @@ import java.util.Optional;
 public enum UnderwritingStatus {
     APPROVED("approved"),
     REJECTED("rejected"),
-    PENDING_REVIEW("pending_review"),
+    PENDING_REVIEW("pendingReview"),
     PENDING("pending"),
-    NOT_REQUESTED("not_requested");
+    NOT_REQUESTED("notRequested");
 
     @JsonValue
     private final String value;

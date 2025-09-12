@@ -55,6 +55,11 @@ public class Ticket {
     @JsonProperty("closedOn")
     private Optional<OffsetDateTime> closedOn;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
+
     @JsonCreator
     public Ticket(
             @JsonProperty("ticketID") String ticketID,
@@ -65,7 +70,8 @@ public class Ticket {
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
             @JsonProperty("latestMessageOn") Optional<OffsetDateTime> latestMessageOn,
-            @JsonProperty("closedOn") Optional<OffsetDateTime> closedOn) {
+            @JsonProperty("closedOn") Optional<OffsetDateTime> closedOn,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         Utils.checkNotNull(ticketID, "ticketID");
         Utils.checkNotNull(number, "number");
         Utils.checkNotNull(title, "title");
@@ -75,6 +81,7 @@ public class Ticket {
         Utils.checkNotNull(updatedOn, "updatedOn");
         Utils.checkNotNull(latestMessageOn, "latestMessageOn");
         Utils.checkNotNull(closedOn, "closedOn");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.ticketID = ticketID;
         this.number = number;
         this.title = title;
@@ -84,6 +91,7 @@ public class Ticket {
         this.updatedOn = updatedOn;
         this.latestMessageOn = latestMessageOn;
         this.closedOn = closedOn;
+        this.foreignID = foreignID;
     }
     
     public Ticket(
@@ -96,7 +104,8 @@ public class Ticket {
             OffsetDateTime updatedOn) {
         this(ticketID, number, title,
             contact, status, createdOn,
-            updatedOn, Optional.empty(), Optional.empty());
+            updatedOn, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -142,6 +151,11 @@ public class Ticket {
     @JsonIgnore
     public Optional<OffsetDateTime> closedOn() {
         return closedOn;
+    }
+
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     public static Builder builder() {
@@ -217,6 +231,19 @@ public class Ticket {
         return this;
     }
 
+    public Ticket withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+
+    public Ticket withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -235,7 +262,8 @@ public class Ticket {
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
             Utils.enhancedDeepEquals(this.latestMessageOn, other.latestMessageOn) &&
-            Utils.enhancedDeepEquals(this.closedOn, other.closedOn);
+            Utils.enhancedDeepEquals(this.closedOn, other.closedOn) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
@@ -243,7 +271,8 @@ public class Ticket {
         return Utils.enhancedHash(
             ticketID, number, title,
             contact, status, createdOn,
-            updatedOn, latestMessageOn, closedOn);
+            updatedOn, latestMessageOn, closedOn,
+            foreignID);
     }
     
     @Override
@@ -257,7 +286,8 @@ public class Ticket {
                 "createdOn", createdOn,
                 "updatedOn", updatedOn,
                 "latestMessageOn", latestMessageOn,
-                "closedOn", closedOn);
+                "closedOn", closedOn,
+                "foreignID", foreignID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -280,6 +310,8 @@ public class Ticket {
         private Optional<OffsetDateTime> latestMessageOn = Optional.empty();
 
         private Optional<OffsetDateTime> closedOn = Optional.empty();
+
+        private Optional<String> foreignID = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -360,12 +392,26 @@ public class Ticket {
             return this;
         }
 
+
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
+
         public Ticket build() {
 
             return new Ticket(
                 ticketID, number, title,
                 contact, status, createdOn,
-                updatedOn, latestMessageOn, closedOn);
+                updatedOn, latestMessageOn, closedOn,
+                foreignID);
         }
 
     }

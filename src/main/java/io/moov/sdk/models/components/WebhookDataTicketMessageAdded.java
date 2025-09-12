@@ -5,10 +5,13 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class WebhookDataTicketMessageAdded {
@@ -20,14 +23,28 @@ public class WebhookDataTicketMessageAdded {
     @JsonProperty("ticketID")
     private String ticketID;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
+
     @JsonCreator
     public WebhookDataTicketMessageAdded(
             @JsonProperty("accountID") String accountID,
-            @JsonProperty("ticketID") String ticketID) {
+            @JsonProperty("ticketID") String ticketID,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(ticketID, "ticketID");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.accountID = accountID;
         this.ticketID = ticketID;
+        this.foreignID = foreignID;
+    }
+    
+    public WebhookDataTicketMessageAdded(
+            String accountID,
+            String ticketID) {
+        this(accountID, ticketID, Optional.empty());
     }
 
     @JsonIgnore
@@ -38,6 +55,11 @@ public class WebhookDataTicketMessageAdded {
     @JsonIgnore
     public String ticketID() {
         return ticketID;
+    }
+
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     public static Builder builder() {
@@ -57,6 +79,19 @@ public class WebhookDataTicketMessageAdded {
         return this;
     }
 
+    public WebhookDataTicketMessageAdded withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+
+    public WebhookDataTicketMessageAdded withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -68,20 +103,22 @@ public class WebhookDataTicketMessageAdded {
         WebhookDataTicketMessageAdded other = (WebhookDataTicketMessageAdded) o;
         return 
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
-            Utils.enhancedDeepEquals(this.ticketID, other.ticketID);
+            Utils.enhancedDeepEquals(this.ticketID, other.ticketID) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID, ticketID);
+            accountID, ticketID, foreignID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(WebhookDataTicketMessageAdded.class,
                 "accountID", accountID,
-                "ticketID", ticketID);
+                "ticketID", ticketID,
+                "foreignID", foreignID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -90,6 +127,8 @@ public class WebhookDataTicketMessageAdded {
         private String accountID;
 
         private String ticketID;
+
+        private Optional<String> foreignID = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -109,10 +148,23 @@ public class WebhookDataTicketMessageAdded {
             return this;
         }
 
+
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
+
         public WebhookDataTicketMessageAdded build() {
 
             return new WebhookDataTicketMessageAdded(
-                accountID, ticketID);
+                accountID, ticketID, foreignID);
         }
 
     }

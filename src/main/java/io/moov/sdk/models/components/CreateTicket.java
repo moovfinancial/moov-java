@@ -5,10 +5,13 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Optional;
 
 /**
  * CreateTicket
@@ -25,20 +28,44 @@ public class CreateTicket {
     private String body;
 
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("author")
+    private Optional<String> author;
+
+
     @JsonProperty("contact")
     private TicketContact contact;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
 
     @JsonCreator
     public CreateTicket(
             @JsonProperty("title") String title,
             @JsonProperty("body") String body,
-            @JsonProperty("contact") TicketContact contact) {
+            @JsonProperty("author") Optional<String> author,
+            @JsonProperty("contact") TicketContact contact,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(body, "body");
+        Utils.checkNotNull(author, "author");
         Utils.checkNotNull(contact, "contact");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.title = title;
         this.body = body;
+        this.author = author;
         this.contact = contact;
+        this.foreignID = foreignID;
+    }
+    
+    public CreateTicket(
+            String title,
+            String body,
+            TicketContact contact) {
+        this(title, body, Optional.empty(),
+            contact, Optional.empty());
     }
 
     @JsonIgnore
@@ -52,8 +79,18 @@ public class CreateTicket {
     }
 
     @JsonIgnore
+    public Optional<String> author() {
+        return author;
+    }
+
+    @JsonIgnore
     public TicketContact contact() {
         return contact;
+    }
+
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     public static Builder builder() {
@@ -73,9 +110,35 @@ public class CreateTicket {
         return this;
     }
 
+    public CreateTicket withAuthor(String author) {
+        Utils.checkNotNull(author, "author");
+        this.author = Optional.ofNullable(author);
+        return this;
+    }
+
+
+    public CreateTicket withAuthor(Optional<String> author) {
+        Utils.checkNotNull(author, "author");
+        this.author = author;
+        return this;
+    }
+
     public CreateTicket withContact(TicketContact contact) {
         Utils.checkNotNull(contact, "contact");
         this.contact = contact;
+        return this;
+    }
+
+    public CreateTicket withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+
+    public CreateTicket withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
         return this;
     }
 
@@ -91,13 +154,16 @@ public class CreateTicket {
         return 
             Utils.enhancedDeepEquals(this.title, other.title) &&
             Utils.enhancedDeepEquals(this.body, other.body) &&
-            Utils.enhancedDeepEquals(this.contact, other.contact);
+            Utils.enhancedDeepEquals(this.author, other.author) &&
+            Utils.enhancedDeepEquals(this.contact, other.contact) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            title, body, contact);
+            title, body, author,
+            contact, foreignID);
     }
     
     @Override
@@ -105,7 +171,9 @@ public class CreateTicket {
         return Utils.toString(CreateTicket.class,
                 "title", title,
                 "body", body,
-                "contact", contact);
+                "author", author,
+                "contact", contact,
+                "foreignID", foreignID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -115,7 +183,11 @@ public class CreateTicket {
 
         private String body;
 
+        private Optional<String> author = Optional.empty();
+
         private TicketContact contact;
+
+        private Optional<String> foreignID = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -136,16 +208,43 @@ public class CreateTicket {
         }
 
 
+        public Builder author(String author) {
+            Utils.checkNotNull(author, "author");
+            this.author = Optional.ofNullable(author);
+            return this;
+        }
+
+        public Builder author(Optional<String> author) {
+            Utils.checkNotNull(author, "author");
+            this.author = author;
+            return this;
+        }
+
+
         public Builder contact(TicketContact contact) {
             Utils.checkNotNull(contact, "contact");
             this.contact = contact;
             return this;
         }
 
+
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
+
         public CreateTicket build() {
 
             return new CreateTicket(
-                title, body, contact);
+                title, body, author,
+                contact, foreignID);
         }
 
     }

@@ -131,6 +131,7 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListTicketsRequest;
 import io.moov.sdk.models.operations.ListTicketsResponse;
 import java.lang.Exception;
 
@@ -146,9 +147,13 @@ public class Application {
                     .build())
             .build();
 
-        ListTicketsResponse res = sdk.support().listTickets()
-                .count(20L)
+        ListTicketsRequest req = ListTicketsRequest.builder()
                 .accountID("8ef75c13-2a50-4438-b294-2a850eb4986d")
+                .count(20L)
+                .build();
+
+        ListTicketsResponse res = sdk.support().listTickets()
+                .request(req)
                 .call();
 
         if (res.object().isPresent()) {
@@ -160,12 +165,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `cursor`                                                           | *Optional\<String>*                                                | :heavy_minus_sign:                                                 | N/A                                                                |                                                                    |
-| `count`                                                            | *Optional\<Long>*                                                  | :heavy_minus_sign:                                                 | N/A                                                                | 20                                                                 |
-| `status`                                                           | [Optional\<TicketStatus>](../../models/components/TicketStatus.md) | :heavy_minus_sign:                                                 | N/A                                                                |                                                                    |
-| `accountID`                                                        | *String*                                                           | :heavy_check_mark:                                                 | N/A                                                                |                                                                    |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [ListTicketsRequest](../../models/operations/ListTicketsRequest.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
 
 ### Response
 

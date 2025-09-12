@@ -5,10 +5,13 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class WebhookDataTicketUpdated {
@@ -21,6 +24,11 @@ public class WebhookDataTicketUpdated {
     private String ticketID;
 
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
+
+
     @JsonProperty("status")
     private TicketStatus status;
 
@@ -28,13 +36,24 @@ public class WebhookDataTicketUpdated {
     public WebhookDataTicketUpdated(
             @JsonProperty("accountID") String accountID,
             @JsonProperty("ticketID") String ticketID,
+            @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("status") TicketStatus status) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(ticketID, "ticketID");
+        Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(status, "status");
         this.accountID = accountID;
         this.ticketID = ticketID;
+        this.foreignID = foreignID;
         this.status = status;
+    }
+    
+    public WebhookDataTicketUpdated(
+            String accountID,
+            String ticketID,
+            TicketStatus status) {
+        this(accountID, ticketID, Optional.empty(),
+            status);
     }
 
     @JsonIgnore
@@ -45,6 +64,11 @@ public class WebhookDataTicketUpdated {
     @JsonIgnore
     public String ticketID() {
         return ticketID;
+    }
+
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     @JsonIgnore
@@ -69,6 +93,19 @@ public class WebhookDataTicketUpdated {
         return this;
     }
 
+    public WebhookDataTicketUpdated withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+
+    public WebhookDataTicketUpdated withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     public WebhookDataTicketUpdated withStatus(TicketStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
@@ -87,13 +124,15 @@ public class WebhookDataTicketUpdated {
         return 
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.ticketID, other.ticketID) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.status, other.status);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID, ticketID, status);
+            accountID, ticketID, foreignID,
+            status);
     }
     
     @Override
@@ -101,6 +140,7 @@ public class WebhookDataTicketUpdated {
         return Utils.toString(WebhookDataTicketUpdated.class,
                 "accountID", accountID,
                 "ticketID", ticketID,
+                "foreignID", foreignID,
                 "status", status);
     }
 
@@ -110,6 +150,8 @@ public class WebhookDataTicketUpdated {
         private String accountID;
 
         private String ticketID;
+
+        private Optional<String> foreignID = Optional.empty();
 
         private TicketStatus status;
 
@@ -132,6 +174,19 @@ public class WebhookDataTicketUpdated {
         }
 
 
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
+
+
         public Builder status(TicketStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
@@ -141,7 +196,8 @@ public class WebhookDataTicketUpdated {
         public WebhookDataTicketUpdated build() {
 
             return new WebhookDataTicketUpdated(
-                accountID, ticketID, status);
+                accountID, ticketID, foreignID,
+                status);
         }
 
     }

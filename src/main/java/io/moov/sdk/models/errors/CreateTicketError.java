@@ -31,25 +31,42 @@ public class CreateTicketError extends RuntimeException {
 
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("author")
+    private Optional<String> author;
+
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contact")
     private Optional<? extends CreateTicketContactError> contact;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
 
     @JsonCreator
     public CreateTicketError(
             @JsonProperty("title") Optional<String> title,
             @JsonProperty("body") Optional<String> body,
-            @JsonProperty("contact") Optional<? extends CreateTicketContactError> contact) {
+            @JsonProperty("author") Optional<String> author,
+            @JsonProperty("contact") Optional<? extends CreateTicketContactError> contact,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         super("API error occurred");
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(body, "body");
+        Utils.checkNotNull(author, "author");
         Utils.checkNotNull(contact, "contact");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.title = title;
         this.body = body;
+        this.author = author;
         this.contact = contact;
+        this.foreignID = foreignID;
     }
     
     public CreateTicketError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -62,10 +79,20 @@ public class CreateTicketError extends RuntimeException {
         return body;
     }
 
+    @JsonIgnore
+    public Optional<String> author() {
+        return author;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<CreateTicketContactError> contact() {
         return (Optional<CreateTicketContactError>) contact;
+    }
+
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     public static Builder builder() {
@@ -99,6 +126,19 @@ public class CreateTicketError extends RuntimeException {
         return this;
     }
 
+    public CreateTicketError withAuthor(String author) {
+        Utils.checkNotNull(author, "author");
+        this.author = Optional.ofNullable(author);
+        return this;
+    }
+
+
+    public CreateTicketError withAuthor(Optional<String> author) {
+        Utils.checkNotNull(author, "author");
+        this.author = author;
+        return this;
+    }
+
     public CreateTicketError withContact(CreateTicketContactError contact) {
         Utils.checkNotNull(contact, "contact");
         this.contact = Optional.ofNullable(contact);
@@ -109,6 +149,19 @@ public class CreateTicketError extends RuntimeException {
     public CreateTicketError withContact(Optional<? extends CreateTicketContactError> contact) {
         Utils.checkNotNull(contact, "contact");
         this.contact = contact;
+        return this;
+    }
+
+    public CreateTicketError withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+
+    public CreateTicketError withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
         return this;
     }
 
@@ -124,13 +177,16 @@ public class CreateTicketError extends RuntimeException {
         return 
             Utils.enhancedDeepEquals(this.title, other.title) &&
             Utils.enhancedDeepEquals(this.body, other.body) &&
-            Utils.enhancedDeepEquals(this.contact, other.contact);
+            Utils.enhancedDeepEquals(this.author, other.author) &&
+            Utils.enhancedDeepEquals(this.contact, other.contact) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            title, body, contact);
+            title, body, author,
+            contact, foreignID);
     }
     
     @Override
@@ -138,7 +194,9 @@ public class CreateTicketError extends RuntimeException {
         return Utils.toString(CreateTicketError.class,
                 "title", title,
                 "body", body,
-                "contact", contact);
+                "author", author,
+                "contact", contact,
+                "foreignID", foreignID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -148,7 +206,11 @@ public class CreateTicketError extends RuntimeException {
 
         private Optional<String> body = Optional.empty();
 
+        private Optional<String> author = Optional.empty();
+
         private Optional<? extends CreateTicketContactError> contact = Optional.empty();
+
+        private Optional<String> foreignID = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -181,6 +243,19 @@ public class CreateTicketError extends RuntimeException {
         }
 
 
+        public Builder author(String author) {
+            Utils.checkNotNull(author, "author");
+            this.author = Optional.ofNullable(author);
+            return this;
+        }
+
+        public Builder author(Optional<String> author) {
+            Utils.checkNotNull(author, "author");
+            this.author = author;
+            return this;
+        }
+
+
         public Builder contact(CreateTicketContactError contact) {
             Utils.checkNotNull(contact, "contact");
             this.contact = Optional.ofNullable(contact);
@@ -193,10 +268,24 @@ public class CreateTicketError extends RuntimeException {
             return this;
         }
 
+
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
+
         public CreateTicketError build() {
 
             return new CreateTicketError(
-                title, body, contact);
+                title, body, author,
+                contact, foreignID);
         }
 
     }

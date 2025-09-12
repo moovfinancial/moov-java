@@ -6,7 +6,6 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.CreateTicket;
-import io.moov.sdk.models.components.TicketStatus;
 import io.moov.sdk.models.components.UpdateTicket;
 import io.moov.sdk.models.operations.CreateTicketRequest;
 import io.moov.sdk.models.operations.CreateTicketRequestBuilder;
@@ -27,9 +26,7 @@ import io.moov.sdk.operations.GetTicket;
 import io.moov.sdk.operations.ListTicketMessages;
 import io.moov.sdk.operations.ListTickets;
 import java.lang.Exception;
-import java.lang.Long;
 import java.lang.String;
-import java.util.Optional;
 
 
 public class Support {
@@ -104,42 +101,11 @@ public class Support {
      * <p>If you're listing another account's tickets, then you'll need to
      * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
      * 
-     * @param accountID 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ListTicketsResponse listTickets(String accountID) throws Exception {
-        return listTickets(Optional.empty(), Optional.empty(), Optional.empty(),
-            accountID);
-    }
-
-    /**
-     * List all the support tickets created under a Moov account.
-     * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
-     * 
-     * <p>If you're listing another account's tickets, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
-     * 
-     * @param cursor 
-     * @param count 
-     * @param status 
-     * @param accountID 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ListTicketsResponse listTickets(
-            Optional<String> cursor, Optional<Long> count,
-            Optional<? extends TicketStatus> status, String accountID) throws Exception {
-        ListTicketsRequest request =
-            ListTicketsRequest
-                .builder()
-                .cursor(cursor)
-                .count(count)
-                .status(status)
-                .accountID(accountID)
-                .build();
+    public ListTicketsResponse listTickets(ListTicketsRequest request) throws Exception {
         RequestOperation<ListTicketsRequest, ListTicketsResponse> operation
               = new ListTickets.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));

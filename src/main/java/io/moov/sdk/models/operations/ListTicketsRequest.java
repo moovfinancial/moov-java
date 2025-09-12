@@ -29,6 +29,10 @@ public class ListTicketsRequest {
     private Optional<? extends TicketStatus> status;
 
 
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=foreignID")
+    private Optional<String> foreignID;
+
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
@@ -37,21 +41,24 @@ public class ListTicketsRequest {
             Optional<String> cursor,
             Optional<Long> count,
             Optional<? extends TicketStatus> status,
+            Optional<String> foreignID,
             String accountID) {
         Utils.checkNotNull(cursor, "cursor");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(status, "status");
+        Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(accountID, "accountID");
         this.cursor = cursor;
         this.count = count;
         this.status = status;
+        this.foreignID = foreignID;
         this.accountID = accountID;
     }
     
     public ListTicketsRequest(
             String accountID) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            accountID);
+            Optional.empty(), accountID);
     }
 
     @JsonIgnore
@@ -68,6 +75,11 @@ public class ListTicketsRequest {
     @JsonIgnore
     public Optional<TicketStatus> status() {
         return (Optional<TicketStatus>) status;
+    }
+
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     @JsonIgnore
@@ -119,6 +131,19 @@ public class ListTicketsRequest {
         return this;
     }
 
+    public ListTicketsRequest withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+
+    public ListTicketsRequest withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
+        return this;
+    }
+
     public ListTicketsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -138,6 +163,7 @@ public class ListTicketsRequest {
             Utils.enhancedDeepEquals(this.cursor, other.cursor) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
     
@@ -145,7 +171,7 @@ public class ListTicketsRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             cursor, count, status,
-            accountID);
+            foreignID, accountID);
     }
     
     @Override
@@ -154,6 +180,7 @@ public class ListTicketsRequest {
                 "cursor", cursor,
                 "count", count,
                 "status", status,
+                "foreignID", foreignID,
                 "accountID", accountID);
     }
 
@@ -165,6 +192,8 @@ public class ListTicketsRequest {
         private Optional<Long> count = Optional.empty();
 
         private Optional<? extends TicketStatus> status = Optional.empty();
+
+        private Optional<String> foreignID = Optional.empty();
 
         private String accountID;
 
@@ -212,6 +241,19 @@ public class ListTicketsRequest {
         }
 
 
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
+            return this;
+        }
+
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
@@ -222,7 +264,7 @@ public class ListTicketsRequest {
 
             return new ListTicketsRequest(
                 cursor, count, status,
-                accountID);
+                foreignID, accountID);
         }
 
     }

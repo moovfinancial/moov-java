@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 9c8f4048149f57afc572f0a9eea04fe5
+  docChecksum: b38c95dc3134c77696632858228f53b6
   docVersion: latest
   speakeasyVersion: 1.615.2
   generationVersion: 2.698.4
-  releaseVersion: 0.25.4
-  configChecksum: 1a269303b8f34e3e10eaac85b6d65fdf
+  releaseVersion: 0.25.5
+  configChecksum: c15cccefacfb01727cf71d6be5395363
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -4233,4 +4233,3 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.support.listTickets()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.items.[].foreignId` **Added**\n* `moov.support.createTicket()`: \n  *  `request.createticket` **Changed**\n  *  `response.foreignid` **Added**\n  *  `error` **Changed**\n* `moov.support.getTicket()`:  `response.foreignid` **Added**\n* `moov.support.updateTicket()`:  `response.foreignid` **Added**\n"

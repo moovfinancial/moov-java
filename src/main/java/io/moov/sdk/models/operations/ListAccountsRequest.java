@@ -28,6 +28,8 @@ public class ListAccountsRequest {
      *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
      *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
      * &lt;/ul&gt;
+     * 
+     * <p>Filtering by Guest Profile `name` is not currently supported.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=name")
     private Optional<String> name;
@@ -132,6 +134,8 @@ public class ListAccountsRequest {
      *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
      *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
      * &lt;/ul&gt;
+     * 
+     * <p>Filtering by Guest Profile `name` is not currently supported.
      */
     @JsonIgnore
     public Optional<String> name() {
@@ -223,6 +227,8 @@ public class ListAccountsRequest {
      *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
      *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
      * &lt;/ul&gt;
+     * 
+     * <p>Filtering by Guest Profile `name` is not currently supported.
      */
     public ListAccountsRequest withName(String name) {
         Utils.checkNotNull(name, "name");
@@ -240,6 +246,8 @@ public class ListAccountsRequest {
      *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
      *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
      * &lt;/ul&gt;
+     * 
+     * <p>Filtering by Guest Profile `name` is not currently supported.
      */
     public ListAccountsRequest withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
@@ -485,6 +493,8 @@ public class ListAccountsRequest {
          *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
          *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
          * &lt;/ul&gt;
+         * 
+         * <p>Filtering by Guest Profile `name` is not currently supported.
          */
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
@@ -501,6 +511,8 @@ public class ListAccountsRequest {
          *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
          *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
          * &lt;/ul&gt;
+         * 
+         * <p>Filtering by Guest Profile `name` is not currently supported.
          */
         public Builder name(Optional<String> name) {
             Utils.checkNotNull(name, "name");

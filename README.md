@@ -46,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.25.5'
+implementation 'io.moov:sdk:0.25.6'
 ```
 
 Maven:
@@ -54,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.25.5</version>
+    <version>0.25.6</version>
 </dependency>
 ```
 
@@ -203,7 +203,7 @@ to specify the `/accounts.write` scope.
 
 All supported query parameters are optional. If none are provided the response will include all connected accounts.
 Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and 
-return results based on relevance.
+return results based on relevance. Accounts with AccountType `guest` will not be included in the response.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
 to specify the `/accounts.read` scope.

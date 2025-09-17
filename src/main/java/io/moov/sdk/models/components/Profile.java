@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  * Profile
  * 
- * <p>Describes a Moov account profile. A profile will have a business or an individual, depending on the account's type.
+ * <p>Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type.
  */
 public class Profile {
     /**

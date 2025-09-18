@@ -1,0 +1,22 @@
+description = 'sdk Spring Boot Starter'
+
+// Publishing configuration overrides
+ext {
+    publishingConfig = [
+        groupId: rootProject.group,
+        artifactId: 'sdk-spring-boot-starter',
+        version: rootProject.version,
+        name: 'Moov Java SDK - Spring Boot Starter',
+        description: 'Spring Boot starter for the Moov Java SDK.',
+    ]
+}
+
+dependencies {
+    api project(':')
+    api project(':sdk-spring-boot-autoconfigure')
+    api "org.springframework.boot:spring-boot-starter:${rootProject.springBootVersion}"
+}
+
+jar {
+    archiveBaseName = 'sdk-spring-boot-starter'
+}

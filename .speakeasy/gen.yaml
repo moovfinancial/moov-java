@@ -22,7 +22,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 0.25.6
+  version: 0.26.0
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk
@@ -35,6 +35,7 @@ java:
   enableCustomCodeRegions: false
   enableStreamingUploads: false
   flattenGlobalSecurity: true
+  generateSpringBootStarter: true
   githubURL: github.com/moovfinancial/moov-java
   groupID: io.moov
   imports:

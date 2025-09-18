@@ -18,8 +18,8 @@ public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "latest";
-    public static final String SDK_VERSION = "0.25.6";
-    public static final String GEN_VERSION = "2.701.8";
+    public static final String SDK_VERSION = "0.26.0";
+    public static final String GEN_VERSION = "2.706.1";
     private static final String BASE_PACKAGE = "io.moov.sdk";
     public static final String USER_AGENT = 
             String.format("speakeasy-sdk/%s %s %s %s %s",
@@ -107,6 +107,15 @@ public class SDKConfiguration {
 
     @SuppressWarnings("serial")
     public Globals globals = new Globals();
+    /**
+     * Sets the globals configuration. Used by Spring Boot auto-configuration.
+     *
+     * @param globals The globals configuration to set.
+     */
+    public void setGlobals(Globals globals) {
+        Utils.checkNotNull(globals, "globals");
+        this.globals = globals;
+    }
     
     private Optional<RetryConfig> retryConfig = Optional.empty();
     

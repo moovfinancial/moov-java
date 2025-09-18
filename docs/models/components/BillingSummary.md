@@ -1,0 +1,16 @@
+# BillingSummary
+
+A summary of all fees included in a statement.
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `cardAcquiring`                                                                      | [Optional\<CardAcquiring>](../../models/components/CardAcquiring.md)                 | :heavy_minus_sign:                                                                   | A summary of card acquiring volume and fees.                                         |
+| `ach`                                                                                | [Optional\<BillingSummaryDetails>](../../models/components/BillingSummaryDetails.md) | :heavy_minus_sign:                                                                   | A summary of ACH volume and fees.                                                    |
+| `instantPayments`                                                                    | [Optional\<BillingSummaryDetails>](../../models/components/BillingSummaryDetails.md) | :heavy_minus_sign:                                                                   | A summary of instant payment volume and fees.                                        |
+| `platformFees`                                                                       | [Optional\<AmountDecimal>](../../models/components/AmountDecimal.md)                 | :heavy_minus_sign:                                                                   | The total amount of platform fees.                                                   |
+| `adjustmentFees`                                                                     | [Optional\<AmountDecimal>](../../models/components/AmountDecimal.md)                 | :heavy_minus_sign:                                                                   | The total amount of adjustment fees.                                                 |
+| `otherFees`                                                                          | [Optional\<AmountDecimal>](../../models/components/AmountDecimal.md)                 | :heavy_minus_sign:                                                                   | The total amount of other fees.                                                      |
+| `total`                                                                              | [Optional\<AmountDecimal>](../../models/components/AmountDecimal.md)                 | :heavy_minus_sign:                                                                   | The total amount of all fees.                                                        |

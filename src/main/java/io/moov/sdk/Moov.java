@@ -26,7 +26,7 @@ public class Moov {
      * SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] SERVERS = {
-        /**
+        /*
          * Production API host
          */
         "https://api.moov.io",
@@ -73,6 +73,9 @@ public class Moov {
 
 
     private final Scheduling scheduling;
+
+
+    private final Statements statements;
 
 
     private final Sweeps sweeps;
@@ -202,6 +205,11 @@ public class Moov {
 
     public Scheduling scheduling() {
         return scheduling;
+    }
+
+
+    public Statements statements() {
+        return statements;
     }
 
 
@@ -415,6 +423,7 @@ public class Moov {
             return this;
         }
 
+
         /**
          * Allows setting the xMoovVersion parameter for all supported operations.
          *
@@ -425,7 +434,6 @@ public class Moov {
             this.sdkConfiguration.globals.putParam("header", "xMoovVersion", xMoovVersion);
             return this;
         }
-        
         // Visible for testing, may be accessed via reflection in tests
         Builder _hooks(io.moov.sdk.utils.Hooks hooks) {
             sdkConfiguration.setHooks(hooks);  
@@ -437,7 +445,7 @@ public class Moov {
             consumer.accept(sdkConfiguration.hooks());
             return this;    
         }
-        
+
         /**
          * Builds a new instance of the SDK.
          *
@@ -452,7 +460,7 @@ public class Moov {
             return new Moov(sdkConfiguration);
         }
     }
-    
+
     /**
      * Get a new instance of the SDK builder to configure a new instance of the SDK.
      *
@@ -462,7 +470,7 @@ public class Moov {
         return new Builder();
     }
 
-    private Moov(SDKConfiguration sdkConfiguration) {
+    public Moov(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
         this.sdkConfiguration.initialize();
         this.accounts = new Accounts(sdkConfiguration);
@@ -479,6 +487,7 @@ public class Moov {
         this.paymentMethods = new PaymentMethods(sdkConfiguration);
         this.representatives = new Representatives(sdkConfiguration);
         this.scheduling = new Scheduling(sdkConfiguration);
+        this.statements = new Statements(sdkConfiguration);
         this.sweeps = new Sweeps(sdkConfiguration);
         this.accountTerminalApplications = new AccountTerminalApplications(sdkConfiguration);
         this.support = new Support(sdkConfiguration);

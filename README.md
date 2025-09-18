@@ -46,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.25.6'
+implementation 'io.moov:sdk:0.26.0'
 ```
 
 Maven:
@@ -54,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.25.6</version>
+    <version>0.26.0</version>
 </dependency>
 ```
 
@@ -870,6 +870,19 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### [statements()](docs/sdks/statements/README.md)
+
+* [list](docs/sdks/statements/README.md#list) - Retrieve all statements associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [get](docs/sdks/statements/README.md#get) - Retrieve a statement by its ID.
+
+Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `application/pdf`.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### [support()](docs/sdks/support/README.md)
 

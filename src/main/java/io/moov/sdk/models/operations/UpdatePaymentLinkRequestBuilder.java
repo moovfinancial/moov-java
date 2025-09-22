@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdatePaymentLink;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class UpdatePaymentLinkRequestBuilder {
     private String paymentLinkCode;
     private UpdatePaymentLink updatePaymentLink;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public UpdatePaymentLinkRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -53,7 +55,7 @@ public class UpdatePaymentLinkRequestBuilder {
     public UpdatePaymentLinkResponse call() throws Exception {
         
         RequestOperation<UpdatePaymentLinkRequest, UpdatePaymentLinkResponse> operation
-              = new io.moov.sdk.operations.UpdatePaymentLink.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdatePaymentLink.Sync(sdkConfiguration, _headers);
         UpdatePaymentLinkRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

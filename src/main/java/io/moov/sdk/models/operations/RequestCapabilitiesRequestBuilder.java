@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.AddCapabilities;
 import io.moov.sdk.operations.RequestCapabilities;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class RequestCapabilitiesRequestBuilder {
     private String accountID;
     private AddCapabilities addCapabilities;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public RequestCapabilitiesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -46,7 +48,7 @@ public class RequestCapabilitiesRequestBuilder {
     public RequestCapabilitiesResponse call() throws Exception {
         
         RequestOperation<RequestCapabilitiesRequest, RequestCapabilitiesResponse> operation
-              = new RequestCapabilities.Sync(sdkConfiguration);
+              = new RequestCapabilities.Sync(sdkConfiguration, _headers);
         RequestCapabilitiesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

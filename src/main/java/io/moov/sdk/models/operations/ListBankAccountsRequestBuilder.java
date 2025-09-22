@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListBankAccounts;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -15,6 +16,7 @@ public class ListBankAccountsRequestBuilder {
 
     private String accountID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListBankAccountsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -37,7 +39,7 @@ public class ListBankAccountsRequestBuilder {
     public ListBankAccountsResponse call() throws Exception {
         
         RequestOperation<ListBankAccountsRequest, ListBankAccountsResponse> operation
-              = new ListBankAccounts.Sync(sdkConfiguration);
+              = new ListBankAccounts.Sync(sdkConfiguration, _headers);
         ListBankAccountsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

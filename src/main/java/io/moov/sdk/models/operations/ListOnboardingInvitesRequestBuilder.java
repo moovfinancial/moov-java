@@ -7,11 +7,13 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListOnboardingInvites;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 
 public class ListOnboardingInvitesRequestBuilder {
 
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListOnboardingInvitesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -28,7 +30,7 @@ public class ListOnboardingInvitesRequestBuilder {
     public ListOnboardingInvitesResponse call() throws Exception {
         
         RequestOperation<ListOnboardingInvitesRequest, ListOnboardingInvitesResponse> operation
-              = new ListOnboardingInvites.Sync(sdkConfiguration);
+              = new ListOnboardingInvites.Sync(sdkConfiguration, _headers);
         ListOnboardingInvitesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

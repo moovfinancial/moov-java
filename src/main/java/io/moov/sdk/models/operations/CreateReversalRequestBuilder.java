@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateReversal;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -19,6 +20,7 @@ public class CreateReversalRequestBuilder {
     private String transferID;
     private Optional<? extends CreateReversal> createReversal = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public CreateReversalRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -68,7 +70,7 @@ public class CreateReversalRequestBuilder {
     public CreateReversalResponse call() throws Exception {
         
         RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
-              = new io.moov.sdk.operations.CreateReversal.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateReversal.Sync(sdkConfiguration, _headers);
         CreateReversalRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

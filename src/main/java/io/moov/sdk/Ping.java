@@ -8,10 +8,12 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.models.operations.PingRequest;
 import io.moov.sdk.models.operations.PingRequestBuilder;
 import io.moov.sdk.models.operations.PingResponse;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 
 
 public class Ping {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Ping(SDKConfiguration sdkConfiguration) {
@@ -45,7 +47,7 @@ public class Ping {
                 .builder()
                 .build();
         RequestOperation<PingRequest, PingResponse> operation
-              = new io.moov.sdk.operations.Ping.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.Ping.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

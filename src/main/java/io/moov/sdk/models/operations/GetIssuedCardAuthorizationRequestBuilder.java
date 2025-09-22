@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetIssuedCardAuthorization;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class GetIssuedCardAuthorizationRequestBuilder {
     private String accountID;
     private String authorizationID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetIssuedCardAuthorizationRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class GetIssuedCardAuthorizationRequestBuilder {
     public GetIssuedCardAuthorizationResponse call() throws Exception {
         
         RequestOperation<GetIssuedCardAuthorizationRequest, GetIssuedCardAuthorizationResponse> operation
-              = new GetIssuedCardAuthorization.Sync(sdkConfiguration);
+              = new GetIssuedCardAuthorization.Sync(sdkConfiguration, _headers);
         GetIssuedCardAuthorizationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

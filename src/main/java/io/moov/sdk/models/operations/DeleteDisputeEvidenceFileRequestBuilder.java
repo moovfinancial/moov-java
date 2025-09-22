@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DeleteDisputeEvidenceFile;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class DeleteDisputeEvidenceFileRequestBuilder {
     private String disputeID;
     private String evidenceID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public DeleteDisputeEvidenceFileRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -53,7 +55,7 @@ public class DeleteDisputeEvidenceFileRequestBuilder {
     public DeleteDisputeEvidenceFileResponse call() throws Exception {
         
         RequestOperation<DeleteDisputeEvidenceFileRequest, DeleteDisputeEvidenceFileResponse> operation
-              = new DeleteDisputeEvidenceFile.Sync(sdkConfiguration);
+              = new DeleteDisputeEvidenceFile.Sync(sdkConfiguration, _headers);
         DeleteDisputeEvidenceFileRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -22,11 +22,13 @@ import io.moov.sdk.models.operations.UpsertBrandResponse;
 import io.moov.sdk.operations.CreateBrand;
 import io.moov.sdk.operations.GetBrand;
 import io.moov.sdk.operations.UpsertBrand;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class Branding {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Branding(SDKConfiguration sdkConfiguration) {
@@ -64,7 +66,7 @@ public class Branding {
                 .brandProperties(brandProperties)
                 .build();
         RequestOperation<CreateBrandRequest, CreateBrandResponse> operation
-              = new CreateBrand.Sync(sdkConfiguration);
+              = new CreateBrand.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -99,7 +101,7 @@ public class Branding {
                 .brandProperties(brandProperties)
                 .build();
         RequestOperation<UpsertBrandRequest, UpsertBrandResponse> operation
-              = new UpsertBrand.Sync(sdkConfiguration);
+              = new UpsertBrand.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -132,7 +134,7 @@ public class Branding {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetBrandRequest, GetBrandResponse> operation
-              = new GetBrand.Sync(sdkConfiguration);
+              = new GetBrand.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -167,7 +169,7 @@ public class Branding {
                 .updateBrand(updateBrand)
                 .build();
         RequestOperation<UpdateBrandRequest, UpdateBrandResponse> operation
-              = new io.moov.sdk.operations.UpdateBrand.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateBrand.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

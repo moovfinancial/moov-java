@@ -21,11 +21,13 @@ import io.moov.sdk.operations.CreateOnboardingInvite;
 import io.moov.sdk.operations.GetOnboardingInvite;
 import io.moov.sdk.operations.ListOnboardingInvites;
 import io.moov.sdk.operations.RevokeOnboardingInvite;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class Onboarding {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Onboarding(SDKConfiguration sdkConfiguration) {
@@ -56,7 +58,7 @@ public class Onboarding {
      */
     public CreateOnboardingInviteResponse createInvite(OnboardingInviteRequest request) throws Exception {
         RequestOperation<OnboardingInviteRequest, CreateOnboardingInviteResponse> operation
-              = new CreateOnboardingInvite.Sync(sdkConfiguration);
+              = new CreateOnboardingInvite.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -87,7 +89,7 @@ public class Onboarding {
                 .builder()
                 .build();
         RequestOperation<ListOnboardingInvitesRequest, ListOnboardingInvitesResponse> operation
-              = new ListOnboardingInvites.Sync(sdkConfiguration);
+              = new ListOnboardingInvites.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -120,7 +122,7 @@ public class Onboarding {
                 .code(code)
                 .build();
         RequestOperation<GetOnboardingInviteRequest, GetOnboardingInviteResponse> operation
-              = new GetOnboardingInvite.Sync(sdkConfiguration);
+              = new GetOnboardingInvite.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -153,7 +155,7 @@ public class Onboarding {
                 .code(code)
                 .build();
         RequestOperation<RevokeOnboardingInviteRequest, RevokeOnboardingInviteResponse> operation
-              = new RevokeOnboardingInvite.Sync(sdkConfiguration);
+              = new RevokeOnboardingInvite.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

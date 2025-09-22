@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetSweep;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class GetSweepRequestBuilder {
     private String walletID;
     private String sweepID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetSweepRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -53,7 +55,7 @@ public class GetSweepRequestBuilder {
     public GetSweepResponse call() throws Exception {
         
         RequestOperation<GetSweepRequest, GetSweepResponse> operation
-              = new GetSweep.Sync(sdkConfiguration);
+              = new GetSweep.Sync(sdkConfiguration, _headers);
         GetSweepRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListAccountTerminalApplications;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -15,6 +16,7 @@ public class ListAccountTerminalApplicationsRequestBuilder {
 
     private String accountID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListAccountTerminalApplicationsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -37,7 +39,7 @@ public class ListAccountTerminalApplicationsRequestBuilder {
     public ListAccountTerminalApplicationsResponse call() throws Exception {
         
         RequestOperation<ListAccountTerminalApplicationsRequest, ListAccountTerminalApplicationsResponse> operation
-              = new ListAccountTerminalApplications.Sync(sdkConfiguration);
+              = new ListAccountTerminalApplications.Sync(sdkConfiguration, _headers);
         ListAccountTerminalApplicationsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

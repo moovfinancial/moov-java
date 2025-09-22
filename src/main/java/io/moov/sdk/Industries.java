@@ -9,10 +9,12 @@ import io.moov.sdk.models.operations.ListIndustriesRequest;
 import io.moov.sdk.models.operations.ListIndustriesRequestBuilder;
 import io.moov.sdk.models.operations.ListIndustriesResponse;
 import io.moov.sdk.operations.ListIndustries;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 
 
 public class Industries {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Industries(SDKConfiguration sdkConfiguration) {
@@ -46,7 +48,7 @@ public class Industries {
                 .builder()
                 .build();
         RequestOperation<ListIndustriesRequest, ListIndustriesResponse> operation
-              = new ListIndustries.Sync(sdkConfiguration);
+              = new ListIndustries.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

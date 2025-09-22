@@ -18,11 +18,13 @@ import io.moov.sdk.models.operations.UploadFileResponse;
 import io.moov.sdk.operations.GetFileDetails;
 import io.moov.sdk.operations.ListFiles;
 import io.moov.sdk.operations.UploadFile;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class Files {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Files(SDKConfiguration sdkConfiguration) {
@@ -66,7 +68,7 @@ public class Files {
                 .fileUploadRequestMultiPart(fileUploadRequestMultiPart)
                 .build();
         RequestOperation<UploadFileRequest, UploadFileResponse> operation
-              = new UploadFile.Sync(sdkConfiguration);
+              = new UploadFile.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -99,7 +101,7 @@ public class Files {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListFilesRequest, ListFilesResponse> operation
-              = new ListFiles.Sync(sdkConfiguration);
+              = new ListFiles.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -134,7 +136,7 @@ public class Files {
                 .fileID(fileID)
                 .build();
         RequestOperation<GetFileDetailsRequest, GetFileDetailsResponse> operation
-              = new GetFileDetails.Sync(sdkConfiguration);
+              = new GetFileDetails.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

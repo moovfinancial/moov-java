@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetMerchantProcessingAgreement;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -15,6 +16,7 @@ public class GetMerchantProcessingAgreementRequestBuilder {
 
     private String accountID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetMerchantProcessingAgreementRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -37,7 +39,7 @@ public class GetMerchantProcessingAgreementRequestBuilder {
     public GetMerchantProcessingAgreementResponse call() throws Exception {
         
         RequestOperation<GetMerchantProcessingAgreementRequest, GetMerchantProcessingAgreementResponse> operation
-              = new GetMerchantProcessingAgreement.Sync(sdkConfiguration);
+              = new GetMerchantProcessingAgreement.Sync(sdkConfiguration, _headers);
         GetMerchantProcessingAgreementRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

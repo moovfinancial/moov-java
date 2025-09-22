@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetEnrichmentProfile;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -15,6 +16,7 @@ public class GetEnrichmentProfileRequestBuilder {
 
     private String email;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetEnrichmentProfileRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -37,7 +39,7 @@ public class GetEnrichmentProfileRequestBuilder {
     public GetEnrichmentProfileResponse call() throws Exception {
         
         RequestOperation<GetEnrichmentProfileRequest, GetEnrichmentProfileResponse> operation
-              = new GetEnrichmentProfile.Sync(sdkConfiguration);
+              = new GetEnrichmentProfile.Sync(sdkConfiguration, _headers);
         GetEnrichmentProfileRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.IssuedCardState;
 import io.moov.sdk.operations.ListIssuedCards;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -22,6 +23,7 @@ public class ListIssuedCardsRequestBuilder {
     private Optional<Long> count = Optional.empty();
     private Optional<? extends List<IssuedCardState>> states = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListIssuedCardsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -83,7 +85,7 @@ public class ListIssuedCardsRequestBuilder {
     public ListIssuedCardsResponse call() throws Exception {
         
         RequestOperation<ListIssuedCardsRequest, ListIssuedCardsResponse> operation
-              = new ListIssuedCards.Sync(sdkConfiguration);
+              = new ListIssuedCards.Sync(sdkConfiguration, _headers);
         ListIssuedCardsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

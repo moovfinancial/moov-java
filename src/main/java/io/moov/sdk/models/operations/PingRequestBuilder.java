@@ -7,11 +7,13 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.Ping;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 
 public class PingRequestBuilder {
 
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public PingRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -28,7 +30,7 @@ public class PingRequestBuilder {
     public PingResponse call() throws Exception {
         
         RequestOperation<PingRequest, PingResponse> operation
-              = new Ping.Sync(sdkConfiguration);
+              = new Ping.Sync(sdkConfiguration, _headers);
         PingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

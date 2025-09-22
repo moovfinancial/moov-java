@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PaymentMethodType;
 import io.moov.sdk.operations.ListPaymentMethods;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -19,6 +20,7 @@ public class ListPaymentMethodsRequestBuilder {
     private Optional<String> sourceID = Optional.empty();
     private Optional<? extends PaymentMethodType> paymentMethodType = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListPaymentMethodsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -67,7 +69,7 @@ public class ListPaymentMethodsRequestBuilder {
     public ListPaymentMethodsResponse call() throws Exception {
         
         RequestOperation<ListPaymentMethodsRequest, ListPaymentMethodsResponse> operation
-              = new ListPaymentMethods.Sync(sdkConfiguration);
+              = new ListPaymentMethods.Sync(sdkConfiguration, _headers);
         ListPaymentMethodsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

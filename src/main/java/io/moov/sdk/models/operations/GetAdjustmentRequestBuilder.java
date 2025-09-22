@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetAdjustment;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class GetAdjustmentRequestBuilder {
     private String accountID;
     private String adjustmentID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetAdjustmentRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class GetAdjustmentRequestBuilder {
     public GetAdjustmentResponse call() throws Exception {
         
         RequestOperation<GetAdjustmentRequest, GetAdjustmentResponse> operation
-              = new GetAdjustment.Sync(sdkConfiguration);
+              = new GetAdjustment.Sync(sdkConfiguration, _headers);
         GetAdjustmentRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

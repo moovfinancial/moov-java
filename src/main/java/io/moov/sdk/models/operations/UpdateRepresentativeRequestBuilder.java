@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateRepresentative;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class UpdateRepresentativeRequestBuilder {
     private String representativeID;
     private UpdateRepresentative updateRepresentative;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public UpdateRepresentativeRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -53,7 +55,7 @@ public class UpdateRepresentativeRequestBuilder {
     public UpdateRepresentativeResponse call() throws Exception {
         
         RequestOperation<UpdateRepresentativeRequest, UpdateRepresentativeResponse> operation
-              = new io.moov.sdk.operations.UpdateRepresentative.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateRepresentative.Sync(sdkConfiguration, _headers);
         UpdateRepresentativeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

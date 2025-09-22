@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetTerminalApplication;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -15,6 +16,7 @@ public class GetTerminalApplicationRequestBuilder {
 
     private String terminalApplicationID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetTerminalApplicationRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -37,7 +39,7 @@ public class GetTerminalApplicationRequestBuilder {
     public GetTerminalApplicationResponse call() throws Exception {
         
         RequestOperation<GetTerminalApplicationRequest, GetTerminalApplicationResponse> operation
-              = new GetTerminalApplication.Sync(sdkConfiguration);
+              = new GetTerminalApplication.Sync(sdkConfiguration, _headers);
         GetTerminalApplicationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

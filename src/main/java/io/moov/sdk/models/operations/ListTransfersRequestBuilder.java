@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListTransfers;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -14,6 +15,7 @@ public class ListTransfersRequestBuilder {
 
     private ListTransfersRequest request;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListTransfersRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -28,7 +30,7 @@ public class ListTransfersRequestBuilder {
     public ListTransfersResponse call() throws Exception {
         
         RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
-              = new ListTransfers.Sync(sdkConfiguration);
+              = new ListTransfers.Sync(sdkConfiguration, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

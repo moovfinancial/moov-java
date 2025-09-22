@@ -25,11 +25,13 @@ import io.moov.sdk.operations.CreateTerminalApplicationVersion;
 import io.moov.sdk.operations.DeleteTerminalApplication;
 import io.moov.sdk.operations.GetTerminalApplication;
 import io.moov.sdk.operations.ListTerminalApplications;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class TerminalApplications {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     TerminalApplications(SDKConfiguration sdkConfiguration) {
@@ -60,7 +62,7 @@ public class TerminalApplications {
      */
     public CreateTerminalApplicationResponse create(CreateTerminalApplication request) throws Exception {
         RequestOperation<CreateTerminalApplication, CreateTerminalApplicationResponse> operation
-              = new io.moov.sdk.operations.CreateTerminalApplication.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateTerminalApplication.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -91,7 +93,7 @@ public class TerminalApplications {
                 .builder()
                 .build();
         RequestOperation<ListTerminalApplicationsRequest, ListTerminalApplicationsResponse> operation
-              = new ListTerminalApplications.Sync(sdkConfiguration);
+              = new ListTerminalApplications.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -124,7 +126,7 @@ public class TerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetTerminalApplicationRequest, GetTerminalApplicationResponse> operation
-              = new GetTerminalApplication.Sync(sdkConfiguration);
+              = new GetTerminalApplication.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -157,7 +159,7 @@ public class TerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<DeleteTerminalApplicationRequest, DeleteTerminalApplicationResponse> operation
-              = new DeleteTerminalApplication.Sync(sdkConfiguration);
+              = new DeleteTerminalApplication.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -192,7 +194,7 @@ public class TerminalApplications {
                 .terminalApplicationVersion(terminalApplicationVersion)
                 .build();
         RequestOperation<CreateTerminalApplicationVersionRequest, CreateTerminalApplicationVersionResponse> operation
-              = new CreateTerminalApplicationVersion.Sync(sdkConfiguration);
+              = new CreateTerminalApplicationVersion.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -29,11 +29,13 @@ import io.moov.sdk.operations.DisablePaymentLink;
 import io.moov.sdk.operations.GetPaymentLink;
 import io.moov.sdk.operations.GetPaymentLinkQRCode;
 import io.moov.sdk.operations.ListPaymentLinks;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class PaymentLinks {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     PaymentLinks(SDKConfiguration sdkConfiguration) {
@@ -77,7 +79,7 @@ public class PaymentLinks {
                 .createPaymentLink(createPaymentLink)
                 .build();
         RequestOperation<CreatePaymentLinkRequest, CreatePaymentLinkResponse> operation
-              = new io.moov.sdk.operations.CreatePaymentLink.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreatePaymentLink.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -110,7 +112,7 @@ public class PaymentLinks {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
-              = new ListPaymentLinks.Sync(sdkConfiguration);
+              = new ListPaymentLinks.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -145,7 +147,7 @@ public class PaymentLinks {
                 .paymentLinkCode(paymentLinkCode)
                 .build();
         RequestOperation<GetPaymentLinkRequest, GetPaymentLinkResponse> operation
-              = new GetPaymentLink.Sync(sdkConfiguration);
+              = new GetPaymentLink.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -184,7 +186,7 @@ public class PaymentLinks {
                 .updatePaymentLink(updatePaymentLink)
                 .build();
         RequestOperation<UpdatePaymentLinkRequest, UpdatePaymentLinkResponse> operation
-              = new io.moov.sdk.operations.UpdatePaymentLink.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdatePaymentLink.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -219,7 +221,7 @@ public class PaymentLinks {
                 .paymentLinkCode(paymentLinkCode)
                 .build();
         RequestOperation<DisablePaymentLinkRequest, DisablePaymentLinkResponse> operation
-              = new DisablePaymentLink.Sync(sdkConfiguration);
+              = new DisablePaymentLink.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -258,7 +260,7 @@ public class PaymentLinks {
                 .paymentLinkCode(paymentLinkCode)
                 .build();
         RequestOperation<GetPaymentLinkQRCodeRequest, GetPaymentLinkQRCodeResponse> operation
-              = new GetPaymentLinkQRCode.Sync(sdkConfiguration);
+              = new GetPaymentLinkQRCode.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

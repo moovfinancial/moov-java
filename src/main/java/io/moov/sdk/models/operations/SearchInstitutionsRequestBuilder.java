@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.SearchInstitutions;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -19,6 +20,7 @@ public class SearchInstitutionsRequestBuilder {
     private Optional<String> routingNumber = Optional.empty();
     private Optional<Long> limit = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public SearchInstitutionsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -73,7 +75,7 @@ public class SearchInstitutionsRequestBuilder {
     public SearchInstitutionsResponse call() throws Exception {
         
         RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
-              = new SearchInstitutions.Sync(sdkConfiguration);
+              = new SearchInstitutions.Sync(sdkConfiguration, _headers);
         SearchInstitutionsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateTransfer;
 import io.moov.sdk.models.components.TransferWaitFor;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -20,6 +21,7 @@ public class CreateTransferRequestBuilder {
     private String accountID;
     private CreateTransfer createTransfer;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public CreateTransferRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -69,7 +71,7 @@ public class CreateTransferRequestBuilder {
     public CreateTransferResponse call() throws Exception {
         
         RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
-              = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration, _headers);
         CreateTransferRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

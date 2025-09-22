@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListSweeps;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -14,6 +15,7 @@ public class ListSweepsRequestBuilder {
 
     private ListSweepsRequest request;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListSweepsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -28,7 +30,7 @@ public class ListSweepsRequestBuilder {
     public ListSweepsResponse call() throws Exception {
         
         RequestOperation<ListSweepsRequest, ListSweepsResponse> operation
-              = new ListSweeps.Sync(sdkConfiguration);
+              = new ListSweeps.Sync(sdkConfiguration, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

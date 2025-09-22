@@ -22,11 +22,13 @@ import io.moov.sdk.models.operations.UpdateWalletResponse;
 import io.moov.sdk.operations.GetWallet;
 import io.moov.sdk.operations.ListWallets;
 import io.moov.sdk.operations.UpdateWallet;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class Wallets {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Wallets(SDKConfiguration sdkConfiguration) {
@@ -68,7 +70,7 @@ public class Wallets {
                 .createWallet(createWallet)
                 .build();
         RequestOperation<CreateWalletRequest, CreateWalletResponse> operation
-              = new io.moov.sdk.operations.CreateWallet.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateWallet.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -100,7 +102,7 @@ public class Wallets {
      */
     public ListWalletsResponse list(ListWalletsRequest request) throws Exception {
         RequestOperation<ListWalletsRequest, ListWalletsResponse> operation
-              = new ListWallets.Sync(sdkConfiguration);
+              = new ListWallets.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -139,7 +141,7 @@ public class Wallets {
                 .walletID(walletID)
                 .build();
         RequestOperation<GetWalletRequest, GetWalletResponse> operation
-              = new GetWallet.Sync(sdkConfiguration);
+              = new GetWallet.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -182,7 +184,7 @@ public class Wallets {
                 .patchWallet(patchWallet)
                 .build();
         RequestOperation<UpdateWalletRequest, UpdateWalletResponse> operation
-              = new UpdateWallet.Sync(sdkConfiguration);
+              = new UpdateWallet.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

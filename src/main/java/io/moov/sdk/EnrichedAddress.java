@@ -9,10 +9,12 @@ import io.moov.sdk.models.operations.GetEnrichmentAddressRequest;
 import io.moov.sdk.models.operations.GetEnrichmentAddressRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentAddressResponse;
 import io.moov.sdk.operations.GetEnrichmentAddress;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 
 
 public class EnrichedAddress {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     EnrichedAddress(SDKConfiguration sdkConfiguration) {
@@ -43,7 +45,7 @@ public class EnrichedAddress {
      */
     public GetEnrichmentAddressResponse get(GetEnrichmentAddressRequest request) throws Exception {
         RequestOperation<GetEnrichmentAddressRequest, GetEnrichmentAddressResponse> operation
-              = new GetEnrichmentAddress.Sync(sdkConfiguration);
+              = new GetEnrichmentAddress.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateFeePlanAgreement;
 import io.moov.sdk.operations.CreateFeePlanAgreements;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class CreateFeePlanAgreementsRequestBuilder {
     private String accountID;
     private CreateFeePlanAgreement createFeePlanAgreement;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public CreateFeePlanAgreementsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -46,7 +48,7 @@ public class CreateFeePlanAgreementsRequestBuilder {
     public CreateFeePlanAgreementsResponse call() throws Exception {
         
         RequestOperation<CreateFeePlanAgreementsRequest, CreateFeePlanAgreementsResponse> operation
-              = new CreateFeePlanAgreements.Sync(sdkConfiguration);
+              = new CreateFeePlanAgreements.Sync(sdkConfiguration, _headers);
         CreateFeePlanAgreementsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

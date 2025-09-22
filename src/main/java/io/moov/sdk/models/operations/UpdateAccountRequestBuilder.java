@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PatchAccount;
 import io.moov.sdk.operations.UpdateAccount;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class UpdateAccountRequestBuilder {
     private String accountID;
     private PatchAccount patchAccount;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public UpdateAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -46,7 +48,7 @@ public class UpdateAccountRequestBuilder {
     public UpdateAccountResponse call() throws Exception {
         
         RequestOperation<UpdateAccountRequest, UpdateAccountResponse> operation
-              = new UpdateAccount.Sync(sdkConfiguration);
+              = new UpdateAccount.Sync(sdkConfiguration, _headers);
         UpdateAccountRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

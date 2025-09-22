@@ -13,6 +13,7 @@ import io.moov.sdk.models.operations.SearchInstitutionsRequestBuilder;
 import io.moov.sdk.models.operations.SearchInstitutionsResponse;
 import io.moov.sdk.operations.ListInstitutions;
 import io.moov.sdk.operations.SearchInstitutions;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 
 public class Institutions {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Institutions(SDKConfiguration sdkConfiguration) {
@@ -86,7 +88,7 @@ public class Institutions {
                 .limit(limit)
                 .build();
         RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
-              = new SearchInstitutions.Sync(sdkConfiguration);
+              = new SearchInstitutions.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -141,7 +143,7 @@ public class Institutions {
                 .limit(limit)
                 .build();
         RequestOperation<ListInstitutionsRequest, ListInstitutionsResponse> operation
-              = new ListInstitutions.Sync(sdkConfiguration);
+              = new ListInstitutions.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

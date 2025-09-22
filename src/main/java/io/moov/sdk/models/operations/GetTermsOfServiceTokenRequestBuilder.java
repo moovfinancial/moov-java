@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetTermsOfServiceToken;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class GetTermsOfServiceTokenRequestBuilder {
     private Optional<String> origin = Optional.empty();
     private Optional<String> referer = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetTermsOfServiceTokenRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -58,7 +60,7 @@ public class GetTermsOfServiceTokenRequestBuilder {
     public GetTermsOfServiceTokenResponse call() throws Exception {
         
         RequestOperation<GetTermsOfServiceTokenRequest, GetTermsOfServiceTokenResponse> operation
-              = new GetTermsOfServiceToken.Sync(sdkConfiguration);
+              = new GetTermsOfServiceToken.Sync(sdkConfiguration, _headers);
         GetTermsOfServiceTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

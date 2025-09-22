@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.RetrieveFees;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -14,6 +15,7 @@ public class RetrieveFeesRequestBuilder {
 
     private RetrieveFeesRequest request;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public RetrieveFeesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -28,7 +30,7 @@ public class RetrieveFeesRequestBuilder {
     public RetrieveFeesResponse call() throws Exception {
         
         RequestOperation<RetrieveFeesRequest, RetrieveFeesResponse> operation
-              = new RetrieveFees.Sync(sdkConfiguration);
+              = new RetrieveFees.Sync(sdkConfiguration, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

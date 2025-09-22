@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateEvidenceText;
 import io.moov.sdk.operations.UploadDisputeEvidenceText;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -18,6 +19,7 @@ public class UploadDisputeEvidenceTextRequestBuilder {
     private String disputeID;
     private CreateEvidenceText createEvidenceText;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public UploadDisputeEvidenceTextRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -54,7 +56,7 @@ public class UploadDisputeEvidenceTextRequestBuilder {
     public UploadDisputeEvidenceTextResponse call() throws Exception {
         
         RequestOperation<UploadDisputeEvidenceTextRequest, UploadDisputeEvidenceTextResponse> operation
-              = new UploadDisputeEvidenceText.Sync(sdkConfiguration);
+              = new UploadDisputeEvidenceText.Sync(sdkConfiguration, _headers);
         UploadDisputeEvidenceTextRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

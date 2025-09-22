@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.ListFeesFetchRequest;
 import io.moov.sdk.operations.ListFeesFetch;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -18,6 +19,7 @@ public class ListFeesFetchRequestBuilder {
     private String accountID;
     private Optional<? extends ListFeesFetchRequest> listFeesFetchRequest = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListFeesFetchRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -53,7 +55,7 @@ public class ListFeesFetchRequestBuilder {
     public ListFeesFetchResponse call() throws Exception {
         
         RequestOperation<io.moov.sdk.models.operations.ListFeesFetchRequest, ListFeesFetchResponse> operation
-              = new ListFeesFetch.Sync(sdkConfiguration);
+              = new ListFeesFetch.Sync(sdkConfiguration, _headers);
         io.moov.sdk.models.operations.ListFeesFetchRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

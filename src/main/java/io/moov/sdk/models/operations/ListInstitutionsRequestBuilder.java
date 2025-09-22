@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListInstitutions;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -20,6 +21,7 @@ public class ListInstitutionsRequestBuilder {
     private Optional<String> state = Optional.empty();
     private Optional<Long> limit = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListInstitutionsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -87,7 +89,7 @@ public class ListInstitutionsRequestBuilder {
     public ListInstitutionsResponse call() throws Exception {
         
         RequestOperation<ListInstitutionsRequest, ListInstitutionsResponse> operation
-              = new ListInstitutions.Sync(sdkConfiguration);
+              = new ListInstitutions.Sync(sdkConfiguration, _headers);
         ListInstitutionsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

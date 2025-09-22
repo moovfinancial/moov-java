@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.CancelSchedule;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class CancelScheduleRequestBuilder {
     private String accountID;
     private String scheduleID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public CancelScheduleRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class CancelScheduleRequestBuilder {
     public CancelScheduleResponse call() throws Exception {
         
         RequestOperation<CancelScheduleRequest, CancelScheduleResponse> operation
-              = new CancelSchedule.Sync(sdkConfiguration);
+              = new CancelSchedule.Sync(sdkConfiguration, _headers);
         CancelScheduleRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

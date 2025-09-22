@@ -13,11 +13,13 @@ import io.moov.sdk.models.operations.ListStatementsRequestBuilder;
 import io.moov.sdk.models.operations.ListStatementsResponse;
 import io.moov.sdk.operations.GetStatement;
 import io.moov.sdk.operations.ListStatements;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class Statements {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Statements(SDKConfiguration sdkConfiguration) {
@@ -48,7 +50,7 @@ public class Statements {
      */
     public ListStatementsResponse list(ListStatementsRequest request) throws Exception {
         RequestOperation<ListStatementsRequest, ListStatementsResponse> operation
-              = new ListStatements.Sync(sdkConfiguration);
+              = new ListStatements.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -87,7 +89,7 @@ public class Statements {
                 .statementID(statementID)
                 .build();
         RequestOperation<GetStatementRequest, GetStatementResponse> operation
-              = new GetStatement.Sync(sdkConfiguration);
+              = new GetStatement.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

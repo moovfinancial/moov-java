@@ -14,6 +14,7 @@ import io.moov.sdk.models.operations.ListDisputeEvidenceRequest;
 import io.moov.sdk.models.operations.ListDisputeEvidenceResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Hook.AfterErrorContextImpl;
 import io.moov.sdk.utils.Hook.AfterSuccessContextImpl;
 import io.moov.sdk.utils.Hook.BeforeRequestContextImpl;
@@ -34,9 +35,11 @@ public class ListDisputeEvidence {
         final String baseUrl;
         final SecuritySource securitySource;
         final HTTPClient client;
+        final Headers _headers;
 
-        public Base(SDKConfiguration sdkConfiguration) {
+        public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
+            this._headers =_headers;
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
             this.client = this.sdkConfiguration.client();
@@ -81,6 +84,7 @@ public class ListDisputeEvidence {
             HTTPRequest req = new HTTPRequest(url, "GET");
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
+            _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
             req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
@@ -90,8 +94,8 @@ public class ListDisputeEvidence {
 
     public static class Sync extends Base
             implements RequestOperation<ListDisputeEvidenceRequest, ListDisputeEvidenceResponse> {
-        public Sync(SDKConfiguration sdkConfiguration) {
-            super(sdkConfiguration);
+        public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
+            super(sdkConfiguration, _headers);
         }
 
         private HttpRequest onBuildRequest(ListDisputeEvidenceRequest request) throws Exception {

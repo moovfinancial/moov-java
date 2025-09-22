@@ -25,6 +25,7 @@ import io.moov.sdk.operations.GetIssuedCardTransaction;
 import io.moov.sdk.operations.ListIssuedCardAuthorizationEvents;
 import io.moov.sdk.operations.ListIssuedCardAuthorizations;
 import io.moov.sdk.operations.ListIssuedCardTransactions;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
@@ -32,6 +33,7 @@ import java.util.Optional;
 
 
 public class IssuingTransactions {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     IssuingTransactions(SDKConfiguration sdkConfiguration) {
@@ -62,7 +64,7 @@ public class IssuingTransactions {
      */
     public ListIssuedCardAuthorizationsResponse listAuthorizations(ListIssuedCardAuthorizationsRequest request) throws Exception {
         RequestOperation<ListIssuedCardAuthorizationsRequest, ListIssuedCardAuthorizationsResponse> operation
-              = new ListIssuedCardAuthorizations.Sync(sdkConfiguration);
+              = new ListIssuedCardAuthorizations.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -97,7 +99,7 @@ public class IssuingTransactions {
                 .authorizationID(authorizationID)
                 .build();
         RequestOperation<GetIssuedCardAuthorizationRequest, GetIssuedCardAuthorizationResponse> operation
-              = new GetIssuedCardAuthorization.Sync(sdkConfiguration);
+              = new GetIssuedCardAuthorization.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -154,7 +156,7 @@ public class IssuingTransactions {
                 .count(count)
                 .build();
         RequestOperation<ListIssuedCardAuthorizationEventsRequest, ListIssuedCardAuthorizationEventsResponse> operation
-              = new ListIssuedCardAuthorizationEvents.Sync(sdkConfiguration);
+              = new ListIssuedCardAuthorizationEvents.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -182,7 +184,7 @@ public class IssuingTransactions {
      */
     public ListIssuedCardTransactionsResponse list(ListIssuedCardTransactionsRequest request) throws Exception {
         RequestOperation<ListIssuedCardTransactionsRequest, ListIssuedCardTransactionsResponse> operation
-              = new ListIssuedCardTransactions.Sync(sdkConfiguration);
+              = new ListIssuedCardTransactions.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -217,7 +219,7 @@ public class IssuingTransactions {
                 .cardTransactionID(cardTransactionID)
                 .build();
         RequestOperation<GetIssuedCardTransactionRequest, GetIssuedCardTransactionResponse> operation
-              = new GetIssuedCardTransaction.Sync(sdkConfiguration);
+              = new GetIssuedCardTransaction.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

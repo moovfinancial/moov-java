@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.FileUploadRequestMultiPart;
 import io.moov.sdk.operations.UploadFile;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class UploadFileRequestBuilder {
     private String accountID;
     private FileUploadRequestMultiPart fileUploadRequestMultiPart;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public UploadFileRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -46,7 +48,7 @@ public class UploadFileRequestBuilder {
     public UploadFileResponse call() throws Exception {
         
         RequestOperation<UploadFileRequest, UploadFileResponse> operation
-              = new UploadFile.Sync(sdkConfiguration);
+              = new UploadFile.Sync(sdkConfiguration, _headers);
         UploadFileRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

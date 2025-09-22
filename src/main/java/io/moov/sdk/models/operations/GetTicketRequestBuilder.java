@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetTicket;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class GetTicketRequestBuilder {
     private String accountID;
     private String ticketID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetTicketRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class GetTicketRequestBuilder {
     public GetTicketResponse call() throws Exception {
         
         RequestOperation<GetTicketRequest, GetTicketResponse> operation
-              = new GetTicket.Sync(sdkConfiguration);
+              = new GetTicket.Sync(sdkConfiguration, _headers);
         GetTicketRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

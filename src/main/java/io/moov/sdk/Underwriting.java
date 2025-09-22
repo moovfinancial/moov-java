@@ -18,11 +18,13 @@ import io.moov.sdk.models.operations.UpsertUnderwritingRequestBuilder;
 import io.moov.sdk.models.operations.UpsertUnderwritingResponse;
 import io.moov.sdk.operations.GetUnderwriting;
 import io.moov.sdk.operations.SaveUnderwriting;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class Underwriting {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Underwriting(SDKConfiguration sdkConfiguration) {
@@ -62,7 +64,7 @@ public class Underwriting {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetUnderwritingRequest, GetUnderwritingResponse> operation
-              = new GetUnderwriting.Sync(sdkConfiguration);
+              = new GetUnderwriting.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -101,7 +103,7 @@ public class Underwriting {
                 .upsertUnderwriting(upsertUnderwriting)
                 .build();
         RequestOperation<SaveUnderwritingRequest, SaveUnderwritingResponse> operation
-              = new SaveUnderwriting.Sync(sdkConfiguration);
+              = new SaveUnderwriting.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -140,7 +142,7 @@ public class Underwriting {
                 .updateUnderwriting(updateUnderwriting)
                 .build();
         RequestOperation<UpsertUnderwritingRequest, UpsertUnderwritingResponse> operation
-              = new io.moov.sdk.operations.UpsertUnderwriting.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.UpsertUnderwriting.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

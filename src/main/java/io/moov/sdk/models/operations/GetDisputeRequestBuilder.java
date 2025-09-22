@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetDispute;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class GetDisputeRequestBuilder {
     private String accountID;
     private String disputeID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetDisputeRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class GetDisputeRequestBuilder {
     public GetDisputeResponse call() throws Exception {
         
         RequestOperation<GetDisputeRequest, GetDisputeResponse> operation
-              = new GetDispute.Sync(sdkConfiguration);
+              = new GetDispute.Sync(sdkConfiguration, _headers);
         GetDisputeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

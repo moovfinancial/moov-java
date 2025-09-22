@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListSweepConfigs;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -15,6 +16,7 @@ public class ListSweepConfigsRequestBuilder {
 
     private String accountID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListSweepConfigsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -37,7 +39,7 @@ public class ListSweepConfigsRequestBuilder {
     public ListSweepConfigsResponse call() throws Exception {
         
         RequestOperation<ListSweepConfigsRequest, ListSweepConfigsResponse> operation
-              = new ListSweepConfigs.Sync(sdkConfiguration);
+              = new ListSweepConfigs.Sync(sdkConfiguration, _headers);
         ListSweepConfigsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

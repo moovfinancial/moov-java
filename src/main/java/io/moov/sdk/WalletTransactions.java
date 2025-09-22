@@ -13,11 +13,13 @@ import io.moov.sdk.models.operations.ListWalletTransactionsRequestBuilder;
 import io.moov.sdk.models.operations.ListWalletTransactionsResponse;
 import io.moov.sdk.operations.GetWalletTransaction;
 import io.moov.sdk.operations.ListWalletTransactions;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class WalletTransactions {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     WalletTransactions(SDKConfiguration sdkConfiguration) {
@@ -52,7 +54,7 @@ public class WalletTransactions {
      */
     public ListWalletTransactionsResponse list(ListWalletTransactionsRequest request) throws Exception {
         RequestOperation<ListWalletTransactionsRequest, ListWalletTransactionsResponse> operation
-              = new ListWalletTransactions.Sync(sdkConfiguration);
+              = new ListWalletTransactions.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -95,7 +97,7 @@ public class WalletTransactions {
                 .transactionID(transactionID)
                 .build();
         RequestOperation<GetWalletTransactionRequest, GetWalletTransactionResponse> operation
-              = new GetWalletTransaction.Sync(sdkConfiguration);
+              = new GetWalletTransaction.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

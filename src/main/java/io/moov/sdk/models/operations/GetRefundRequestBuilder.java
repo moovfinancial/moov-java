@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetRefund;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class GetRefundRequestBuilder {
     private String accountID;
     private String refundID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetRefundRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -53,7 +55,7 @@ public class GetRefundRequestBuilder {
     public GetRefundResponse call() throws Exception {
         
         RequestOperation<GetRefundRequest, GetRefundResponse> operation
-              = new GetRefund.Sync(sdkConfiguration);
+              = new GetRefund.Sync(sdkConfiguration, _headers);
         GetRefundRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

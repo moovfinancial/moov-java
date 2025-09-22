@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListFiles;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -15,6 +16,7 @@ public class ListFilesRequestBuilder {
 
     private String accountID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListFilesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -37,7 +39,7 @@ public class ListFilesRequestBuilder {
     public ListFilesResponse call() throws Exception {
         
         RequestOperation<ListFilesRequest, ListFilesResponse> operation
-              = new ListFiles.Sync(sdkConfiguration);
+              = new ListFiles.Sync(sdkConfiguration, _headers);
         ListFilesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

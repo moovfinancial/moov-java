@@ -34,6 +34,7 @@ import io.moov.sdk.operations.ListFeesFetch;
 import io.moov.sdk.operations.ListPartnerPricing;
 import io.moov.sdk.operations.ListPartnerPricingAgreements;
 import io.moov.sdk.operations.RetrieveFees;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.List;
@@ -41,6 +42,7 @@ import java.util.Optional;
 
 
 public class FeePlans {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     FeePlans(SDKConfiguration sdkConfiguration) {
@@ -71,7 +73,7 @@ public class FeePlans {
      */
     public ListFeePlanAgreementsResponse listFeePlanAgreements(ListFeePlanAgreementsRequest request) throws Exception {
         RequestOperation<ListFeePlanAgreementsRequest, ListFeePlanAgreementsResponse> operation
-              = new ListFeePlanAgreements.Sync(sdkConfiguration);
+              = new ListFeePlanAgreements.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -106,7 +108,7 @@ public class FeePlans {
                 .createFeePlanAgreement(createFeePlanAgreement)
                 .build();
         RequestOperation<CreateFeePlanAgreementsRequest, CreateFeePlanAgreementsResponse> operation
-              = new CreateFeePlanAgreements.Sync(sdkConfiguration);
+              = new CreateFeePlanAgreements.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -158,7 +160,7 @@ public class FeePlans {
                 .planIDs(planIDs)
                 .build();
         RequestOperation<ListFeePlansRequest, ListFeePlansResponse> operation
-              = new ListFeePlans.Sync(sdkConfiguration);
+              = new ListFeePlans.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -186,7 +188,7 @@ public class FeePlans {
      */
     public RetrieveFeesResponse retrieveFees(RetrieveFeesRequest request) throws Exception {
         RequestOperation<RetrieveFeesRequest, RetrieveFeesResponse> operation
-              = new RetrieveFees.Sync(sdkConfiguration);
+              = new RetrieveFees.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -235,7 +237,7 @@ public class FeePlans {
                 .listFeesFetchRequest(listFeesFetchRequest)
                 .build();
         RequestOperation<io.moov.sdk.models.operations.ListFeesFetchRequest, ListFeesFetchResponse> operation
-              = new ListFeesFetch.Sync(sdkConfiguration);
+              = new ListFeesFetch.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -284,7 +286,7 @@ public class FeePlans {
                 .planIDs(planIDs)
                 .build();
         RequestOperation<ListPartnerPricingRequest, ListPartnerPricingResponse> operation
-              = new ListPartnerPricing.Sync(sdkConfiguration);
+              = new ListPartnerPricing.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -312,7 +314,7 @@ public class FeePlans {
      */
     public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(ListPartnerPricingAgreementsRequest request) throws Exception {
         RequestOperation<ListPartnerPricingAgreementsRequest, ListPartnerPricingAgreementsResponse> operation
-              = new ListPartnerPricingAgreements.Sync(sdkConfiguration);
+              = new ListPartnerPricingAgreements.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

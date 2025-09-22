@@ -3,10 +3,10 @@ id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
   docChecksum: f65286a3880ae0dc0c2695a817d66800
   docVersion: latest
-  speakeasyVersion: 1.620.0
-  generationVersion: 2.706.1
-  releaseVersion: 0.26.0
-  configChecksum: 97c46917bbaf84551dfe11cfb304f2c6
+  speakeasyVersion: 1.622.1
+  generationVersion: 2.709.0
+  releaseVersion: 0.27.0
+  configChecksum: 52679f8368d4f3bf2be02f3f9fe8a251
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.49.0
+    core: 3.50.0
     decimal: 0.0.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
@@ -2150,6 +2150,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/utils/HTTPRequest.java
   - src/main/java/io/moov/sdk/utils/HasSecurity.java
   - src/main/java/io/moov/sdk/utils/HeaderMetadata.java
+  - src/main/java/io/moov/sdk/utils/Headers.java
   - src/main/java/io/moov/sdk/utils/Helpers.java
   - src/main/java/io/moov/sdk/utils/Hook.java
   - src/main/java/io/moov/sdk/utils/Hooks.java
@@ -4311,7 +4312,3 @@ examples:
           application/pdf: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Java SDK Changes Detected:
-  * `moov.statements.list()`: **Added**
-  * `moov.statements.get()`: **Added**

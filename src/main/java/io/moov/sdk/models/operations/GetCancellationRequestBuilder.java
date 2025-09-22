@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetCancellation;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class GetCancellationRequestBuilder {
     private String transferID;
     private String cancellationID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetCancellationRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -53,7 +55,7 @@ public class GetCancellationRequestBuilder {
     public GetCancellationResponse call() throws Exception {
         
         RequestOperation<GetCancellationRequest, GetCancellationResponse> operation
-              = new GetCancellation.Sync(sdkConfiguration);
+              = new GetCancellation.Sync(sdkConfiguration, _headers);
         GetCancellationRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

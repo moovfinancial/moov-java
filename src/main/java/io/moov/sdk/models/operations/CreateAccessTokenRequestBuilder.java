@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.AuthTokenRequest;
 import io.moov.sdk.operations.CreateAccessToken;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -15,6 +16,7 @@ public class CreateAccessTokenRequestBuilder {
 
     private AuthTokenRequest request;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public CreateAccessTokenRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -29,7 +31,7 @@ public class CreateAccessTokenRequestBuilder {
     public CreateAccessTokenResponse call() throws Exception {
         
         RequestOperation<AuthTokenRequest, CreateAccessTokenResponse> operation
-              = new CreateAccessToken.Sync(sdkConfiguration);
+              = new CreateAccessToken.Sync(sdkConfiguration, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

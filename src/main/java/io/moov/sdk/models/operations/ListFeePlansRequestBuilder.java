@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListFeePlans;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -18,6 +19,7 @@ public class ListFeePlansRequestBuilder {
     private String accountID;
     private Optional<? extends List<String>> planIDs = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListFeePlansRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -53,7 +55,7 @@ public class ListFeePlansRequestBuilder {
     public ListFeePlansResponse call() throws Exception {
         
         RequestOperation<ListFeePlansRequest, ListFeePlansResponse> operation
-              = new ListFeePlans.Sync(sdkConfiguration);
+              = new ListFeePlans.Sync(sdkConfiguration, _headers);
         ListFeePlansRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

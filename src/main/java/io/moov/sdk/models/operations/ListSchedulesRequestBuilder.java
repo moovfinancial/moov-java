@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListSchedules;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -20,6 +21,7 @@ public class ListSchedulesRequestBuilder {
     private Optional<? extends Hydrate> hydrate = Optional.empty();
     private String accountID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListSchedulesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -81,7 +83,7 @@ public class ListSchedulesRequestBuilder {
     public ListSchedulesResponse call() throws Exception {
         
         RequestOperation<ListSchedulesRequest, ListSchedulesResponse> operation
-              = new ListSchedules.Sync(sdkConfiguration);
+              = new ListSchedules.Sync(sdkConfiguration, _headers);
         ListSchedulesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

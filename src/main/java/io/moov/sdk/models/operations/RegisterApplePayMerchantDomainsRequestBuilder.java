@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.RegisterApplePayMerchantDomains;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class RegisterApplePayMerchantDomainsRequestBuilder {
     private String accountID;
     private RegisterApplePayMerchantDomains registerApplePayMerchantDomains;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public RegisterApplePayMerchantDomainsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class RegisterApplePayMerchantDomainsRequestBuilder {
     public RegisterApplePayMerchantDomainsResponse call() throws Exception {
         
         RequestOperation<RegisterApplePayMerchantDomainsRequest, RegisterApplePayMerchantDomainsResponse> operation
-              = new io.moov.sdk.operations.RegisterApplePayMerchantDomains.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.RegisterApplePayMerchantDomains.Sync(sdkConfiguration, _headers);
         RegisterApplePayMerchantDomainsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

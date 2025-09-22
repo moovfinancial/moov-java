@@ -26,11 +26,13 @@ import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsRequestBuilder
 import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsResponse;
 import io.moov.sdk.operations.GetApplePayMerchantDomains;
 import io.moov.sdk.operations.LinkApplePayToken;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class ApplePay {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     ApplePay(SDKConfiguration sdkConfiguration) {
@@ -74,7 +76,7 @@ public class ApplePay {
                 .registerApplePayMerchantDomains(registerApplePayMerchantDomains)
                 .build();
         RequestOperation<RegisterApplePayMerchantDomainsRequest, RegisterApplePayMerchantDomainsResponse> operation
-              = new io.moov.sdk.operations.RegisterApplePayMerchantDomains.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.RegisterApplePayMerchantDomains.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -115,7 +117,7 @@ public class ApplePay {
                 .updateApplePayMerchantDomains(updateApplePayMerchantDomains)
                 .build();
         RequestOperation<UpdateApplePayMerchantDomainsRequest, UpdateApplePayMerchantDomainsResponse> operation
-              = new io.moov.sdk.operations.UpdateApplePayMerchantDomains.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateApplePayMerchantDomains.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -152,7 +154,7 @@ public class ApplePay {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetApplePayMerchantDomainsRequest, GetApplePayMerchantDomainsResponse> operation
-              = new GetApplePayMerchantDomains.Sync(sdkConfiguration);
+              = new GetApplePayMerchantDomains.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -193,7 +195,7 @@ public class ApplePay {
                 .createApplePaySession(createApplePaySession)
                 .build();
         RequestOperation<CreateApplePaySessionRequest, CreateApplePaySessionResponse> operation
-              = new io.moov.sdk.operations.CreateApplePaySession.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateApplePaySession.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -237,7 +239,7 @@ public class ApplePay {
                 .linkApplePay(linkApplePay)
                 .build();
         RequestOperation<LinkApplePayTokenRequest, LinkApplePayTokenResponse> operation
-              = new LinkApplePayToken.Sync(sdkConfiguration);
+              = new LinkApplePayToken.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

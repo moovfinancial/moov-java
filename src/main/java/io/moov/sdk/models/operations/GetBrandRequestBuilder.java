@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetBrand;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -15,6 +16,7 @@ public class GetBrandRequestBuilder {
 
     private String accountID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetBrandRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -37,7 +39,7 @@ public class GetBrandRequestBuilder {
     public GetBrandResponse call() throws Exception {
         
         RequestOperation<GetBrandRequest, GetBrandResponse> operation
-              = new GetBrand.Sync(sdkConfiguration);
+              = new GetBrand.Sync(sdkConfiguration, _headers);
         GetBrandRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

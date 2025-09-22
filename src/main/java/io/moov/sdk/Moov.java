@@ -4,6 +4,7 @@
 package io.moov.sdk;
 
 import io.moov.sdk.utils.HTTPClient;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Hook.SdkInitData;
 import io.moov.sdk.utils.RetryConfig;
 import io.moov.sdk.utils.SpeakeasyHTTPClient;
@@ -20,6 +21,7 @@ import java.util.function.Consumer;
  * works at a high level, read our [concepts](https://docs.moov.io/guides/get-started/glossary/) guide.
  */
 public class Moov {
+    private static final Headers _headers = Headers.EMPTY;
 
 
     /**

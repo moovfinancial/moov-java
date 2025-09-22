@@ -13,11 +13,13 @@ import io.moov.sdk.models.operations.TestEndToEndTokenRequestBuilder;
 import io.moov.sdk.models.operations.TestEndToEndTokenResponse;
 import io.moov.sdk.operations.GenerateEndToEndKey;
 import io.moov.sdk.operations.TestEndToEndToken;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class EndToEndEncryption {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     EndToEndEncryption(SDKConfiguration sdkConfiguration) {
@@ -53,7 +55,7 @@ public class EndToEndEncryption {
                 .token(token)
                 .build();
         RequestOperation<E2EEToken, TestEndToEndTokenResponse> operation
-              = new TestEndToEndToken.Sync(sdkConfiguration);
+              = new TestEndToEndToken.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -78,7 +80,7 @@ public class EndToEndEncryption {
                 .builder()
                 .build();
         RequestOperation<GenerateEndToEndKeyRequest, GenerateEndToEndKeyResponse> operation
-              = new GenerateEndToEndKey.Sync(sdkConfiguration);
+              = new GenerateEndToEndKey.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

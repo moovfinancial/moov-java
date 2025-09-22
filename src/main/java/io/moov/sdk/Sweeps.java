@@ -30,11 +30,13 @@ import io.moov.sdk.operations.GetSweepConfig;
 import io.moov.sdk.operations.ListSweepConfigs;
 import io.moov.sdk.operations.ListSweeps;
 import io.moov.sdk.operations.UpdateSweepConfig;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class Sweeps {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Sweeps(SDKConfiguration sdkConfiguration) {
@@ -72,7 +74,7 @@ public class Sweeps {
                 .createSweepConfig(createSweepConfig)
                 .build();
         RequestOperation<CreateSweepConfigRequest, CreateSweepConfigResponse> operation
-              = new io.moov.sdk.operations.CreateSweepConfig.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateSweepConfig.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -105,7 +107,7 @@ public class Sweeps {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListSweepConfigsRequest, ListSweepConfigsResponse> operation
-              = new ListSweepConfigs.Sync(sdkConfiguration);
+              = new ListSweepConfigs.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -140,7 +142,7 @@ public class Sweeps {
                 .sweepConfigID(sweepConfigID)
                 .build();
         RequestOperation<GetSweepConfigRequest, GetSweepConfigResponse> operation
-              = new GetSweepConfig.Sync(sdkConfiguration);
+              = new GetSweepConfig.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -179,7 +181,7 @@ public class Sweeps {
                 .patchSweepConfig(patchSweepConfig)
                 .build();
         RequestOperation<UpdateSweepConfigRequest, UpdateSweepConfigResponse> operation
-              = new UpdateSweepConfig.Sync(sdkConfiguration);
+              = new UpdateSweepConfig.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -207,7 +209,7 @@ public class Sweeps {
      */
     public ListSweepsResponse list(ListSweepsRequest request) throws Exception {
         RequestOperation<ListSweepsRequest, ListSweepsResponse> operation
-              = new ListSweeps.Sync(sdkConfiguration);
+              = new ListSweeps.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -246,7 +248,7 @@ public class Sweeps {
                 .sweepID(sweepID)
                 .build();
         RequestOperation<GetSweepRequest, GetSweepResponse> operation
-              = new GetSweep.Sync(sdkConfiguration);
+              = new GetSweep.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

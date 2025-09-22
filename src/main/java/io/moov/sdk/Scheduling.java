@@ -31,6 +31,7 @@ import io.moov.sdk.operations.GetScheduledOccurrence;
 import io.moov.sdk.operations.GetSchedules;
 import io.moov.sdk.operations.ListSchedules;
 import io.moov.sdk.operations.UpdateSchedule;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
@@ -38,6 +39,7 @@ import java.util.Optional;
 
 
 public class Scheduling {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Scheduling(SDKConfiguration sdkConfiguration) {
@@ -75,7 +77,7 @@ public class Scheduling {
                 .upsertSchedule(upsertSchedule)
                 .build();
         RequestOperation<CreateScheduleRequest, CreateScheduleResponse> operation
-              = new CreateSchedule.Sync(sdkConfiguration);
+              = new CreateSchedule.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -131,7 +133,7 @@ public class Scheduling {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListSchedulesRequest, ListSchedulesResponse> operation
-              = new ListSchedules.Sync(sdkConfiguration);
+              = new ListSchedules.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -170,7 +172,7 @@ public class Scheduling {
                 .upsertSchedule(upsertSchedule)
                 .build();
         RequestOperation<UpdateScheduleRequest, UpdateScheduleResponse> operation
-              = new UpdateSchedule.Sync(sdkConfiguration);
+              = new UpdateSchedule.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -205,7 +207,7 @@ public class Scheduling {
                 .scheduleID(scheduleID)
                 .build();
         RequestOperation<GetSchedulesRequest, GetSchedulesResponse> operation
-              = new GetSchedules.Sync(sdkConfiguration);
+              = new GetSchedules.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -240,7 +242,7 @@ public class Scheduling {
                 .scheduleID(scheduleID)
                 .build();
         RequestOperation<CancelScheduleRequest, CancelScheduleResponse> operation
-              = new CancelSchedule.Sync(sdkConfiguration);
+              = new CancelSchedule.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -283,7 +285,7 @@ public class Scheduling {
                 .occurrenceFilter(occurrenceFilter)
                 .build();
         RequestOperation<GetScheduledOccurrenceRequest, GetScheduledOccurrenceResponse> operation
-              = new GetScheduledOccurrence.Sync(sdkConfiguration);
+              = new GetScheduledOccurrence.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

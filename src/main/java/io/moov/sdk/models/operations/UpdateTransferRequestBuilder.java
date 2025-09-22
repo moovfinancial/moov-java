@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.operations.UpdateTransfer;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -18,6 +19,7 @@ public class UpdateTransferRequestBuilder {
     private String accountID;
     private PatchTransfer patchTransfer;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public UpdateTransferRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -54,7 +56,7 @@ public class UpdateTransferRequestBuilder {
     public UpdateTransferResponse call() throws Exception {
         
         RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
-              = new UpdateTransfer.Sync(sdkConfiguration);
+              = new UpdateTransfer.Sync(sdkConfiguration, _headers);
         UpdateTransferRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

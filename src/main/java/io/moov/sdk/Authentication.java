@@ -14,12 +14,14 @@ import io.moov.sdk.models.operations.RevokeAccessTokenRequestBuilder;
 import io.moov.sdk.models.operations.RevokeAccessTokenResponse;
 import io.moov.sdk.operations.CreateAccessToken;
 import io.moov.sdk.operations.RevokeAccessToken;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
 
 public class Authentication {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Authentication(SDKConfiguration sdkConfiguration) {
@@ -75,7 +77,7 @@ public class Authentication {
                 .clientSecret(clientSecret)
                 .build();
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
-              = new RevokeAccessToken.Sync(sdkConfiguration);
+              = new RevokeAccessToken.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -97,7 +99,7 @@ public class Authentication {
      */
     public CreateAccessTokenResponse createAccessToken(AuthTokenRequest request) throws Exception {
         RequestOperation<AuthTokenRequest, CreateAccessTokenResponse> operation
-              = new CreateAccessToken.Sync(sdkConfiguration);
+              = new CreateAccessToken.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

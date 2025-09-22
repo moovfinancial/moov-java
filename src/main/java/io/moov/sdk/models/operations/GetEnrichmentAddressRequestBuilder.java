@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetEnrichmentAddress;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -14,6 +15,7 @@ public class GetEnrichmentAddressRequestBuilder {
 
     private GetEnrichmentAddressRequest request;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GetEnrichmentAddressRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -28,7 +30,7 @@ public class GetEnrichmentAddressRequestBuilder {
     public GetEnrichmentAddressResponse call() throws Exception {
         
         RequestOperation<GetEnrichmentAddressRequest, GetEnrichmentAddressResponse> operation
-              = new GetEnrichmentAddress.Sync(sdkConfiguration);
+              = new GetEnrichmentAddress.Sync(sdkConfiguration, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

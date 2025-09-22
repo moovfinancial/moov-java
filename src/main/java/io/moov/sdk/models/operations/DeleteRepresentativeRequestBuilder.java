@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DeleteRepresentative;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class DeleteRepresentativeRequestBuilder {
     private String accountID;
     private String representativeID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public DeleteRepresentativeRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class DeleteRepresentativeRequestBuilder {
     public DeleteRepresentativeResponse call() throws Exception {
         
         RequestOperation<DeleteRepresentativeRequest, DeleteRepresentativeResponse> operation
-              = new DeleteRepresentative.Sync(sdkConfiguration);
+              = new DeleteRepresentative.Sync(sdkConfiguration, _headers);
         DeleteRepresentativeRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

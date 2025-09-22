@@ -26,12 +26,14 @@ import io.moov.sdk.models.operations.UpdateCardResponse;
 import io.moov.sdk.operations.DisableCard;
 import io.moov.sdk.operations.GetCard;
 import io.moov.sdk.operations.ListCards;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
 
 public class Cards {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Cards(SDKConfiguration sdkConfiguration) {
@@ -130,7 +132,7 @@ public class Cards {
                 .linkCard(linkCard)
                 .build();
         RequestOperation<LinkCardRequest, LinkCardResponse> operation
-              = new io.moov.sdk.operations.LinkCard.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.LinkCard.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -167,7 +169,7 @@ public class Cards {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListCardsRequest, ListCardsResponse> operation
-              = new ListCards.Sync(sdkConfiguration);
+              = new ListCards.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -206,7 +208,7 @@ public class Cards {
                 .cardID(cardID)
                 .build();
         RequestOperation<GetCardRequest, GetCardResponse> operation
-              = new GetCard.Sync(sdkConfiguration);
+              = new GetCard.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -263,7 +265,7 @@ public class Cards {
                 .updateCard(updateCard)
                 .build();
         RequestOperation<UpdateCardRequest, UpdateCardResponse> operation
-              = new io.moov.sdk.operations.UpdateCard.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateCard.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -298,7 +300,7 @@ public class Cards {
                 .cardID(cardID)
                 .build();
         RequestOperation<DisableCardRequest, DisableCardResponse> operation
-              = new DisableCard.Sync(sdkConfiguration);
+              = new DisableCard.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

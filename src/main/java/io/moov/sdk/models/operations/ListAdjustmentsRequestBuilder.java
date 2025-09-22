@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListAdjustments;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class ListAdjustmentsRequestBuilder {
     private String accountID;
     private Optional<String> walletID = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListAdjustmentsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -52,7 +54,7 @@ public class ListAdjustmentsRequestBuilder {
     public ListAdjustmentsResponse call() throws Exception {
         
         RequestOperation<ListAdjustmentsRequest, ListAdjustmentsResponse> operation
-              = new ListAdjustments.Sync(sdkConfiguration);
+              = new ListAdjustments.Sync(sdkConfiguration, _headers);
         ListAdjustmentsRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

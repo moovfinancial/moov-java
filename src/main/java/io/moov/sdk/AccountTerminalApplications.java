@@ -21,11 +21,13 @@ import io.moov.sdk.models.operations.ListAccountTerminalApplicationsResponse;
 import io.moov.sdk.operations.GetAccountTerminalApplication;
 import io.moov.sdk.operations.GetTerminalConfiguration;
 import io.moov.sdk.operations.ListAccountTerminalApplications;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class AccountTerminalApplications {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     AccountTerminalApplications(SDKConfiguration sdkConfiguration) {
@@ -63,7 +65,7 @@ public class AccountTerminalApplications {
                 .linkAccountTerminalApplication(linkAccountTerminalApplication)
                 .build();
         RequestOperation<LinkAccountTerminalApplicationRequest, LinkAccountTerminalApplicationResponse> operation
-              = new io.moov.sdk.operations.LinkAccountTerminalApplication.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.LinkAccountTerminalApplication.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -96,7 +98,7 @@ public class AccountTerminalApplications {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListAccountTerminalApplicationsRequest, ListAccountTerminalApplicationsResponse> operation
-              = new ListAccountTerminalApplications.Sync(sdkConfiguration);
+              = new ListAccountTerminalApplications.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -131,7 +133,7 @@ public class AccountTerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetAccountTerminalApplicationRequest, GetAccountTerminalApplicationResponse> operation
-              = new GetAccountTerminalApplication.Sync(sdkConfiguration);
+              = new GetAccountTerminalApplication.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -166,7 +168,7 @@ public class AccountTerminalApplications {
                 .terminalApplicationID(terminalApplicationID)
                 .build();
         RequestOperation<GetTerminalConfigurationRequest, GetTerminalConfigurationResponse> operation
-              = new GetTerminalConfiguration.Sync(sdkConfiguration);
+              = new GetTerminalConfiguration.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.OnboardingInviteRequest;
 import io.moov.sdk.operations.CreateOnboardingInvite;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -15,6 +16,7 @@ public class CreateOnboardingInviteRequestBuilder {
 
     private OnboardingInviteRequest request;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public CreateOnboardingInviteRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -29,7 +31,7 @@ public class CreateOnboardingInviteRequestBuilder {
     public CreateOnboardingInviteResponse call() throws Exception {
         
         RequestOperation<OnboardingInviteRequest, CreateOnboardingInviteResponse> operation
-              = new CreateOnboardingInvite.Sync(sdkConfiguration);
+              = new CreateOnboardingInvite.Sync(sdkConfiguration, _headers);
 
         return operation.handleResponse(operation.doRequest(request));
     }

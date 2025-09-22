@@ -26,6 +26,7 @@ import io.moov.sdk.models.operations.UpdateIssuedCardResponse;
 import io.moov.sdk.operations.GetFullIssuedCard;
 import io.moov.sdk.operations.GetIssuedCard;
 import io.moov.sdk.operations.ListIssuedCards;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
@@ -34,6 +35,7 @@ import java.util.Optional;
 
 
 public class CardIssuing {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     CardIssuing(SDKConfiguration sdkConfiguration) {
@@ -71,7 +73,7 @@ public class CardIssuing {
                 .requestCard(requestCard)
                 .build();
         RequestOperation<RequestCardRequest, RequestCardResponse> operation
-              = new io.moov.sdk.operations.RequestCard.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.RequestCard.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -127,7 +129,7 @@ public class CardIssuing {
                 .states(states)
                 .build();
         RequestOperation<ListIssuedCardsRequest, ListIssuedCardsResponse> operation
-              = new ListIssuedCards.Sync(sdkConfiguration);
+              = new ListIssuedCards.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -162,7 +164,7 @@ public class CardIssuing {
                 .issuedCardID(issuedCardID)
                 .build();
         RequestOperation<GetIssuedCardRequest, GetIssuedCardResponse> operation
-              = new GetIssuedCard.Sync(sdkConfiguration);
+              = new GetIssuedCard.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -201,7 +203,7 @@ public class CardIssuing {
                 .updateIssuedCard(updateIssuedCard)
                 .build();
         RequestOperation<UpdateIssuedCardRequest, UpdateIssuedCardResponse> operation
-              = new io.moov.sdk.operations.UpdateIssuedCard.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateIssuedCard.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -240,7 +242,7 @@ public class CardIssuing {
                 .issuedCardID(issuedCardID)
                 .build();
         RequestOperation<GetFullIssuedCardRequest, GetFullIssuedCardResponse> operation
-              = new GetFullIssuedCard.Sync(sdkConfiguration);
+              = new GetFullIssuedCard.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

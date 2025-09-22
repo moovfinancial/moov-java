@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateApplePaySession;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class CreateApplePaySessionRequestBuilder {
     private String accountID;
     private CreateApplePaySession createApplePaySession;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public CreateApplePaySessionRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class CreateApplePaySessionRequestBuilder {
     public CreateApplePaySessionResponse call() throws Exception {
         
         RequestOperation<CreateApplePaySessionRequest, CreateApplePaySessionResponse> operation
-              = new io.moov.sdk.operations.CreateApplePaySession.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateApplePaySession.Sync(sdkConfiguration, _headers);
         CreateApplePaySessionRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

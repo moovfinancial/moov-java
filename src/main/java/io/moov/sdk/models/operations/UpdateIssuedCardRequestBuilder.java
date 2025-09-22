@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateIssuedCard;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class UpdateIssuedCardRequestBuilder {
     private String issuedCardID;
     private UpdateIssuedCard updateIssuedCard;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public UpdateIssuedCardRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -53,7 +55,7 @@ public class UpdateIssuedCardRequestBuilder {
     public UpdateIssuedCardResponse call() throws Exception {
         
         RequestOperation<UpdateIssuedCardRequest, UpdateIssuedCardResponse> operation
-              = new io.moov.sdk.operations.UpdateIssuedCard.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.UpdateIssuedCard.Sync(sdkConfiguration, _headers);
         UpdateIssuedCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

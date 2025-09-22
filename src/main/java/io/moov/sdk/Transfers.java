@@ -51,12 +51,14 @@ import io.moov.sdk.operations.InitiateRefund;
 import io.moov.sdk.operations.ListRefunds;
 import io.moov.sdk.operations.ListTransfers;
 import io.moov.sdk.operations.UpdateTransfer;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
 
 public class Transfers {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Transfers(SDKConfiguration sdkConfiguration) {
@@ -104,7 +106,7 @@ public class Transfers {
                 .createTransferOptions(createTransferOptions)
                 .build();
         RequestOperation<CreateTransferOptionsRequest, CreateTransferOptionsResponse> operation
-              = new io.moov.sdk.operations.CreateTransferOptions.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateTransferOptions.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -170,7 +172,7 @@ public class Transfers {
                 .createTransfer(createTransfer)
                 .build();
         RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
-              = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -212,7 +214,7 @@ public class Transfers {
      */
     public ListTransfersResponse list(ListTransfersRequest request) throws Exception {
         RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
-              = new ListTransfers.Sync(sdkConfiguration);
+              = new ListTransfers.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -253,7 +255,7 @@ public class Transfers {
                 .accountID(accountID)
                 .build();
         RequestOperation<GetTransferRequest, GetTransferResponse> operation
-              = new GetTransfer.Sync(sdkConfiguration);
+              = new GetTransfer.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -296,7 +298,7 @@ public class Transfers {
                 .patchTransfer(patchTransfer)
                 .build();
         RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
-              = new UpdateTransfer.Sync(sdkConfiguration);
+              = new UpdateTransfer.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -331,7 +333,7 @@ public class Transfers {
                 .transferID(transferID)
                 .build();
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
-              = new CreateCancellation.Sync(sdkConfiguration);
+              = new CreateCancellation.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -370,7 +372,7 @@ public class Transfers {
                 .cancellationID(cancellationID)
                 .build();
         RequestOperation<GetCancellationRequest, GetCancellationResponse> operation
-              = new GetCancellation.Sync(sdkConfiguration);
+              = new GetCancellation.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -404,7 +406,7 @@ public class Transfers {
      */
     public InitiateRefundResponse initiateRefund(InitiateRefundRequest request) throws Exception {
         RequestOperation<InitiateRefundRequest, InitiateRefundResponse> operation
-              = new InitiateRefund.Sync(sdkConfiguration);
+              = new InitiateRefund.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -439,7 +441,7 @@ public class Transfers {
                 .transferID(transferID)
                 .build();
         RequestOperation<ListRefundsRequest, ListRefundsResponse> operation
-              = new ListRefunds.Sync(sdkConfiguration);
+              = new ListRefunds.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -478,7 +480,7 @@ public class Transfers {
                 .refundID(refundID)
                 .build();
         RequestOperation<GetRefundRequest, GetRefundResponse> operation
-              = new GetRefund.Sync(sdkConfiguration);
+              = new GetRefund.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -544,7 +546,7 @@ public class Transfers {
                 .createReversal(createReversal)
                 .build();
         RequestOperation<CreateReversalRequest, CreateReversalResponse> operation
-              = new io.moov.sdk.operations.CreateReversal.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.CreateReversal.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

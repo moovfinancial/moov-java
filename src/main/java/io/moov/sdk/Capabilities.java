@@ -23,11 +23,13 @@ import io.moov.sdk.operations.DisableCapability;
 import io.moov.sdk.operations.GetCapability;
 import io.moov.sdk.operations.ListCapabilities;
 import io.moov.sdk.operations.RequestCapabilities;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 import java.lang.String;
 
 
 public class Capabilities {
+    private static final Headers _headers = Headers.EMPTY;
     private final SDKConfiguration sdkConfiguration;
 
     Capabilities(SDKConfiguration sdkConfiguration) {
@@ -67,7 +69,7 @@ public class Capabilities {
                 .accountID(accountID)
                 .build();
         RequestOperation<ListCapabilitiesRequest, ListCapabilitiesResponse> operation
-              = new ListCapabilities.Sync(sdkConfiguration);
+              = new ListCapabilities.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -102,7 +104,7 @@ public class Capabilities {
                 .addCapabilities(addCapabilities)
                 .build();
         RequestOperation<RequestCapabilitiesRequest, RequestCapabilitiesResponse> operation
-              = new RequestCapabilities.Sync(sdkConfiguration);
+              = new RequestCapabilities.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -139,7 +141,7 @@ public class Capabilities {
                 .capabilityID(capabilityID)
                 .build();
         RequestOperation<GetCapabilityRequest, GetCapabilityResponse> operation
-              = new GetCapability.Sync(sdkConfiguration);
+              = new GetCapability.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 
@@ -176,7 +178,7 @@ public class Capabilities {
                 .capabilityID(capabilityID)
                 .build();
         RequestOperation<DisableCapabilityRequest, DisableCapabilityResponse> operation
-              = new DisableCapability.Sync(sdkConfiguration);
+              = new DisableCapability.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

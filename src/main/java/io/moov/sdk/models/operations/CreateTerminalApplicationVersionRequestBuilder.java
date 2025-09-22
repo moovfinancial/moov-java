@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.TerminalApplicationVersion;
 import io.moov.sdk.operations.CreateTerminalApplicationVersion;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class CreateTerminalApplicationVersionRequestBuilder {
     private String terminalApplicationID;
     private TerminalApplicationVersion terminalApplicationVersion;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public CreateTerminalApplicationVersionRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -46,7 +48,7 @@ public class CreateTerminalApplicationVersionRequestBuilder {
     public CreateTerminalApplicationVersionResponse call() throws Exception {
         
         RequestOperation<CreateTerminalApplicationVersionRequest, CreateTerminalApplicationVersionResponse> operation
-              = new CreateTerminalApplicationVersion.Sync(sdkConfiguration);
+              = new CreateTerminalApplicationVersion.Sync(sdkConfiguration, _headers);
         CreateTerminalApplicationVersionRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

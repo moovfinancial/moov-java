@@ -7,11 +7,13 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GenerateEndToEndKey;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 
 public class GenerateEndToEndKeyRequestBuilder {
 
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public GenerateEndToEndKeyRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -28,7 +30,7 @@ public class GenerateEndToEndKeyRequestBuilder {
     public GenerateEndToEndKeyResponse call() throws Exception {
         
         RequestOperation<GenerateEndToEndKeyRequest, GenerateEndToEndKeyResponse> operation
-              = new GenerateEndToEndKey.Sync(sdkConfiguration);
+              = new GenerateEndToEndKey.Sync(sdkConfiguration, _headers);
         GenerateEndToEndKeyRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

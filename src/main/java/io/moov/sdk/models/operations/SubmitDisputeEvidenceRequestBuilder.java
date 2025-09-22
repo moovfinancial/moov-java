@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.SubmitDisputeEvidence;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class SubmitDisputeEvidenceRequestBuilder {
     private String accountID;
     private String disputeID;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public SubmitDisputeEvidenceRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class SubmitDisputeEvidenceRequestBuilder {
     public SubmitDisputeEvidenceResponse call() throws Exception {
         
         RequestOperation<SubmitDisputeEvidenceRequest, SubmitDisputeEvidenceResponse> operation
-              = new SubmitDisputeEvidence.Sync(sdkConfiguration);
+              = new SubmitDisputeEvidence.Sync(sdkConfiguration, _headers);
         SubmitDisputeEvidenceRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

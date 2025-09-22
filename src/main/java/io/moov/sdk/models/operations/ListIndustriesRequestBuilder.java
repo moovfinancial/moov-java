@@ -7,11 +7,13 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListIndustries;
+import io.moov.sdk.utils.Headers;
 import java.lang.Exception;
 
 public class ListIndustriesRequestBuilder {
 
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public ListIndustriesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -28,7 +30,7 @@ public class ListIndustriesRequestBuilder {
     public ListIndustriesResponse call() throws Exception {
         
         RequestOperation<ListIndustriesRequest, ListIndustriesResponse> operation
-              = new ListIndustries.Sync(sdkConfiguration);
+              = new ListIndustries.Sync(sdkConfiguration, _headers);
         ListIndustriesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

@@ -7,6 +7,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.RequestCard;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -16,6 +17,7 @@ public class RequestCardRequestBuilder {
     private String accountID;
     private RequestCard requestCard;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public RequestCardRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -45,7 +47,7 @@ public class RequestCardRequestBuilder {
     public RequestCardResponse call() throws Exception {
         
         RequestOperation<RequestCardRequest, RequestCardResponse> operation
-              = new io.moov.sdk.operations.RequestCard.Sync(sdkConfiguration);
+              = new io.moov.sdk.operations.RequestCard.Sync(sdkConfiguration, _headers);
         RequestCardRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

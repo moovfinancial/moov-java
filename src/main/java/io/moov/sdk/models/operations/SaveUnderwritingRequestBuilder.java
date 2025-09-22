@@ -8,6 +8,7 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpsertUnderwriting;
 import io.moov.sdk.operations.SaveUnderwriting;
+import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -17,6 +18,7 @@ public class SaveUnderwritingRequestBuilder {
     private String accountID;
     private UpsertUnderwriting upsertUnderwriting;
     private final SDKConfiguration sdkConfiguration;
+    private final Headers _headers = new Headers(); 
 
     public SaveUnderwritingRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
@@ -46,7 +48,7 @@ public class SaveUnderwritingRequestBuilder {
     public SaveUnderwritingResponse call() throws Exception {
         
         RequestOperation<SaveUnderwritingRequest, SaveUnderwritingResponse> operation
-              = new SaveUnderwriting.Sync(sdkConfiguration);
+              = new SaveUnderwriting.Sync(sdkConfiguration, _headers);
         SaveUnderwritingRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));

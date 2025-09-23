@@ -10,6 +10,7 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.components.WalletTransaction;
 import io.moov.sdk.models.errors.APIException;
+import io.moov.sdk.models.errors.ListWalletTransactionsValidationError;
 import io.moov.sdk.models.operations.ListWalletTransactionsRequest;
 import io.moov.sdk.models.operations.ListWalletTransactionsResponse;
 import io.moov.sdk.utils.HTTPClient;
@@ -125,7 +126,7 @@ public class ListWalletTransactions {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "401", "403", "429", "4XX", "500", "504", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "401", "403", "422", "429", "4XX", "500", "504", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -162,6 +163,23 @@ public class ListWalletTransactions {
                             });
                     res.withWalletTransactions(out);
                     return res;
+                } else {
+                    throw new APIException(
+                            response,
+                            response.statusCode(),
+                            "Unexpected content-type received: " + contentType,
+                            Utils.extractByteArrayFromBody(response));
+                }
+            }
+            
+            if (Utils.statusCodeMatches(response.statusCode(), "422")) {
+                res.withHeaders(response.headers().map());
+                if (Utils.contentTypeMatches(contentType, "application/json")) {
+                    ListWalletTransactionsValidationError out = Utils.mapper().readValue(
+                            response.body(),
+                            new TypeReference<>() {
+                            });
+                    throw out;
                 } else {
                     throw new APIException(
                             response,

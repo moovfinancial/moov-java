@@ -256,13 +256,14 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.ListTransfersValidationError;
 import io.moov.sdk.models.operations.ListTransfersRequest;
 import io.moov.sdk.models.operations.ListTransfersResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws ListTransfersValidationError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -301,9 +302,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| models/errors/ListTransfersValidationError | 422                                        | application/json                           |
+| models/errors/APIException                 | 4XX, 5XX                                   | \*/\*                                      |
 
 ## get
 
@@ -385,13 +387,14 @@ package hello.world;
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.PatchTransferValidationError;
 import io.moov.sdk.models.operations.UpdateTransferResponse;
 import java.lang.Exception;
 import java.util.Map;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws PatchTransferValidationError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -431,9 +434,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| models/errors/PatchTransferValidationError | 422                                        | application/json                           |
+| models/errors/APIException                 | 4XX, 5XX                                   | \*/\*                                      |
 
 ## createCancellation
 

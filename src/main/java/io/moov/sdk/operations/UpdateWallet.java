@@ -11,7 +11,7 @@ import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.components.Wallet;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.PatchWalletError;
+import io.moov.sdk.models.errors.PatchWalletValidationError;
 import io.moov.sdk.models.operations.UpdateWalletRequest;
 import io.moov.sdk.models.operations.UpdateWalletResponse;
 import io.moov.sdk.utils.HTTPClient;
@@ -203,7 +203,7 @@ public class UpdateWallet {
             if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    PatchWalletError out = Utils.mapper().readValue(
+                    PatchWalletValidationError out = Utils.mapper().readValue(
                             response.body(),
                             new TypeReference<>() {
                             });

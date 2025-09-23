@@ -48,7 +48,7 @@ package hello.world;
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.CreateWallet;
 import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.errors.CreateWalletError;
+import io.moov.sdk.models.errors.CreateWalletValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateWalletResponse;
 import java.lang.Exception;
@@ -56,7 +56,7 @@ import java.util.Map;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, CreateWalletError, Exception {
+    public static void main(String[] args) throws GenericError, CreateWalletValidationError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -96,11 +96,11 @@ public class Application {
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models/errors/GenericError      | 400, 409                        | application/json                |
-| models/errors/CreateWalletError | 422                             | application/json                |
-| models/errors/APIException      | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| models/errors/GenericError                | 400, 409                                  | application/json                          |
+| models/errors/CreateWalletValidationError | 422                                       | application/json                          |
+| models/errors/APIException                | 4XX, 5XX                                  | \*/\*                                     |
 
 ## list
 
@@ -119,13 +119,14 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.ListWalletsValidationError;
 import io.moov.sdk.models.operations.ListWalletsRequest;
 import io.moov.sdk.models.operations.ListWalletsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws ListWalletsValidationError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -164,9 +165,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                               | Status Code                              | Content Type                             |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| models/errors/ListWalletsValidationError | 422                                      | application/json                         |
+| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |
 
 ## get
 
@@ -248,14 +250,14 @@ import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.PatchWallet;
 import io.moov.sdk.models.components.Security;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.PatchWalletError;
+import io.moov.sdk.models.errors.PatchWalletValidationError;
 import io.moov.sdk.models.operations.UpdateWalletResponse;
 import java.lang.Exception;
 import java.util.Map;
 
 public class Application {
 
-    public static void main(String[] args) throws GenericError, PatchWalletError, Exception {
+    public static void main(String[] args) throws GenericError, PatchWalletValidationError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -297,8 +299,8 @@ public class Application {
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| models/errors/GenericError     | 400, 409                       | application/json               |
-| models/errors/PatchWalletError | 422                            | application/json               |
-| models/errors/APIException     | 4XX, 5XX                       | \*/\*                          |
+| Error Type                               | Status Code                              | Content Type                             |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| models/errors/GenericError               | 400, 409                                 | application/json                         |
+| models/errors/PatchWalletValidationError | 422                                      | application/json                         |
+| models/errors/APIException               | 4XX, 5XX                                 | \*/\*                                    |

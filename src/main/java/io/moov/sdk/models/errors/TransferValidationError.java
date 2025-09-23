@@ -20,11 +20,6 @@ import java.util.Optional;
 public class TransferValidationError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Transfer")
-    private Optional<String> transfer;
-
-
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("amount")
     private Optional<String> amount;
 
@@ -63,16 +58,18 @@ public class TransferValidationError extends RuntimeException {
     @JsonProperty("metadata")
     private Optional<String> metadata;
 
-    /**
-     * Used for generic errors when invalid request data isn't attributed to a single request field.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("error")
-    private Optional<String> error;
+    @JsonProperty("salesTaxAmount")
+    private Optional<String> salesTaxAmount;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("foreignID")
+    private Optional<String> foreignID;
 
     @JsonCreator
     public TransferValidationError(
-            @JsonProperty("Transfer") Optional<String> transfer,
             @JsonProperty("amount") Optional<String> amount,
             @JsonProperty("source") Optional<String> source,
             @JsonProperty("sourcePaymentMethodID") Optional<String> sourcePaymentMethodID,
@@ -81,9 +78,9 @@ public class TransferValidationError extends RuntimeException {
             @JsonProperty("FacilitatorFee.TotalDecimal") Optional<String> facilitatorFeeTotalDecimal,
             @JsonProperty("FacilitatorFee.MarkupDecimal") Optional<String> facilitatorFeeMarkupDecimal,
             @JsonProperty("metadata") Optional<String> metadata,
-            @JsonProperty("error") Optional<String> error) {
+            @JsonProperty("salesTaxAmount") Optional<String> salesTaxAmount,
+            @JsonProperty("foreignID") Optional<String> foreignID) {
         super("API error occurred");
-        Utils.checkNotNull(transfer, "transfer");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(sourcePaymentMethodID, "sourcePaymentMethodID");
@@ -92,8 +89,8 @@ public class TransferValidationError extends RuntimeException {
         Utils.checkNotNull(facilitatorFeeTotalDecimal, "facilitatorFeeTotalDecimal");
         Utils.checkNotNull(facilitatorFeeMarkupDecimal, "facilitatorFeeMarkupDecimal");
         Utils.checkNotNull(metadata, "metadata");
-        Utils.checkNotNull(error, "error");
-        this.transfer = transfer;
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        Utils.checkNotNull(foreignID, "foreignID");
         this.amount = amount;
         this.source = source;
         this.sourcePaymentMethodID = sourcePaymentMethodID;
@@ -102,7 +99,8 @@ public class TransferValidationError extends RuntimeException {
         this.facilitatorFeeTotalDecimal = facilitatorFeeTotalDecimal;
         this.facilitatorFeeMarkupDecimal = facilitatorFeeMarkupDecimal;
         this.metadata = metadata;
-        this.error = error;
+        this.salesTaxAmount = salesTaxAmount;
+        this.foreignID = foreignID;
     }
     
     public TransferValidationError() {
@@ -110,11 +108,6 @@ public class TransferValidationError extends RuntimeException {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
-    }
-
-    @JsonIgnore
-    public Optional<String> transfer() {
-        return transfer;
     }
 
     @JsonIgnore
@@ -157,31 +150,20 @@ public class TransferValidationError extends RuntimeException {
         return metadata;
     }
 
-    /**
-     * Used for generic errors when invalid request data isn't attributed to a single request field.
-     */
     @JsonIgnore
-    public Optional<String> error() {
-        return error;
+    public Optional<String> salesTaxAmount() {
+        return salesTaxAmount;
+    }
+
+    @JsonIgnore
+    public Optional<String> foreignID() {
+        return foreignID;
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-
-    public TransferValidationError withTransfer(String transfer) {
-        Utils.checkNotNull(transfer, "transfer");
-        this.transfer = Optional.ofNullable(transfer);
-        return this;
-    }
-
-
-    public TransferValidationError withTransfer(Optional<String> transfer) {
-        Utils.checkNotNull(transfer, "transfer");
-        this.transfer = transfer;
-        return this;
-    }
 
     public TransferValidationError withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
@@ -287,22 +269,29 @@ public class TransferValidationError extends RuntimeException {
         return this;
     }
 
-    /**
-     * Used for generic errors when invalid request data isn't attributed to a single request field.
-     */
-    public TransferValidationError withError(String error) {
-        Utils.checkNotNull(error, "error");
-        this.error = Optional.ofNullable(error);
+    public TransferValidationError withSalesTaxAmount(String salesTaxAmount) {
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
         return this;
     }
 
 
-    /**
-     * Used for generic errors when invalid request data isn't attributed to a single request field.
-     */
-    public TransferValidationError withError(Optional<String> error) {
-        Utils.checkNotNull(error, "error");
-        this.error = error;
+    public TransferValidationError withSalesTaxAmount(Optional<String> salesTaxAmount) {
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        this.salesTaxAmount = salesTaxAmount;
+        return this;
+    }
+
+    public TransferValidationError withForeignID(String foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = Optional.ofNullable(foreignID);
+        return this;
+    }
+
+
+    public TransferValidationError withForeignID(Optional<String> foreignID) {
+        Utils.checkNotNull(foreignID, "foreignID");
+        this.foreignID = foreignID;
         return this;
     }
 
@@ -316,7 +305,6 @@ public class TransferValidationError extends RuntimeException {
         }
         TransferValidationError other = (TransferValidationError) o;
         return 
-            Utils.enhancedDeepEquals(this.transfer, other.transfer) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.source, other.source) &&
             Utils.enhancedDeepEquals(this.sourcePaymentMethodID, other.sourcePaymentMethodID) &&
@@ -325,22 +313,22 @@ public class TransferValidationError extends RuntimeException {
             Utils.enhancedDeepEquals(this.facilitatorFeeTotalDecimal, other.facilitatorFeeTotalDecimal) &&
             Utils.enhancedDeepEquals(this.facilitatorFeeMarkupDecimal, other.facilitatorFeeMarkupDecimal) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.error, other.error);
+            Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            transfer, amount, source,
-            sourcePaymentMethodID, destinationPaymentMethodID, description,
-            facilitatorFeeTotalDecimal, facilitatorFeeMarkupDecimal, metadata,
-            error);
+            amount, source, sourcePaymentMethodID,
+            destinationPaymentMethodID, description, facilitatorFeeTotalDecimal,
+            facilitatorFeeMarkupDecimal, metadata, salesTaxAmount,
+            foreignID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(TransferValidationError.class,
-                "transfer", transfer,
                 "amount", amount,
                 "source", source,
                 "sourcePaymentMethodID", sourcePaymentMethodID,
@@ -349,13 +337,12 @@ public class TransferValidationError extends RuntimeException {
                 "facilitatorFeeTotalDecimal", facilitatorFeeTotalDecimal,
                 "facilitatorFeeMarkupDecimal", facilitatorFeeMarkupDecimal,
                 "metadata", metadata,
-                "error", error);
+                "salesTaxAmount", salesTaxAmount,
+                "foreignID", foreignID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
-
-        private Optional<String> transfer = Optional.empty();
 
         private Optional<String> amount = Optional.empty();
 
@@ -373,23 +360,12 @@ public class TransferValidationError extends RuntimeException {
 
         private Optional<String> metadata = Optional.empty();
 
-        private Optional<String> error = Optional.empty();
+        private Optional<String> salesTaxAmount = Optional.empty();
+
+        private Optional<String> foreignID = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        public Builder transfer(String transfer) {
-            Utils.checkNotNull(transfer, "transfer");
-            this.transfer = Optional.ofNullable(transfer);
-            return this;
-        }
-
-        public Builder transfer(Optional<String> transfer) {
-            Utils.checkNotNull(transfer, "transfer");
-            this.transfer = transfer;
-            return this;
         }
 
 
@@ -497,31 +473,38 @@ public class TransferValidationError extends RuntimeException {
         }
 
 
-        /**
-         * Used for generic errors when invalid request data isn't attributed to a single request field.
-         */
-        public Builder error(String error) {
-            Utils.checkNotNull(error, "error");
-            this.error = Optional.ofNullable(error);
+        public Builder salesTaxAmount(String salesTaxAmount) {
+            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
             return this;
         }
 
-        /**
-         * Used for generic errors when invalid request data isn't attributed to a single request field.
-         */
-        public Builder error(Optional<String> error) {
-            Utils.checkNotNull(error, "error");
-            this.error = error;
+        public Builder salesTaxAmount(Optional<String> salesTaxAmount) {
+            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+            this.salesTaxAmount = salesTaxAmount;
+            return this;
+        }
+
+
+        public Builder foreignID(String foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = Optional.ofNullable(foreignID);
+            return this;
+        }
+
+        public Builder foreignID(Optional<String> foreignID) {
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.foreignID = foreignID;
             return this;
         }
 
         public TransferValidationError build() {
 
             return new TransferValidationError(
-                transfer, amount, source,
-                sourcePaymentMethodID, destinationPaymentMethodID, description,
-                facilitatorFeeTotalDecimal, facilitatorFeeMarkupDecimal, metadata,
-                error);
+                amount, source, sourcePaymentMethodID,
+                destinationPaymentMethodID, description, facilitatorFeeTotalDecimal,
+                facilitatorFeeMarkupDecimal, metadata, salesTaxAmount,
+                foreignID);
         }
 
     }

@@ -17,7 +17,7 @@ import java.util.Optional;
 
 
 @SuppressWarnings("serial")
-public class PatchWalletError extends RuntimeException {
+public class PatchWalletValidationError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
@@ -39,7 +39,7 @@ public class PatchWalletError extends RuntimeException {
     private Optional<String> metadata;
 
     @JsonCreator
-    public PatchWalletError(
+    public PatchWalletValidationError(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("status") Optional<String> status,
             @JsonProperty("description") Optional<String> description,
@@ -55,7 +55,7 @@ public class PatchWalletError extends RuntimeException {
         this.metadata = metadata;
     }
     
-    public PatchWalletError() {
+    public PatchWalletValidationError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
@@ -85,53 +85,53 @@ public class PatchWalletError extends RuntimeException {
     }
 
 
-    public PatchWalletError withName(String name) {
+    public PatchWalletValidationError withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
 
 
-    public PatchWalletError withName(Optional<String> name) {
+    public PatchWalletValidationError withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
-    public PatchWalletError withStatus(String status) {
+    public PatchWalletValidationError withStatus(String status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
     }
 
 
-    public PatchWalletError withStatus(Optional<String> status) {
+    public PatchWalletValidationError withStatus(Optional<String> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
     }
 
-    public PatchWalletError withDescription(String description) {
+    public PatchWalletValidationError withDescription(String description) {
         Utils.checkNotNull(description, "description");
         this.description = Optional.ofNullable(description);
         return this;
     }
 
 
-    public PatchWalletError withDescription(Optional<String> description) {
+    public PatchWalletValidationError withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
     }
 
-    public PatchWalletError withMetadata(String metadata) {
+    public PatchWalletValidationError withMetadata(String metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = Optional.ofNullable(metadata);
         return this;
     }
 
 
-    public PatchWalletError withMetadata(Optional<String> metadata) {
+    public PatchWalletValidationError withMetadata(Optional<String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
@@ -145,7 +145,7 @@ public class PatchWalletError extends RuntimeException {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PatchWalletError other = (PatchWalletError) o;
+        PatchWalletValidationError other = (PatchWalletValidationError) o;
         return 
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
@@ -162,7 +162,7 @@ public class PatchWalletError extends RuntimeException {
     
     @Override
     public String toString() {
-        return Utils.toString(PatchWalletError.class,
+        return Utils.toString(PatchWalletValidationError.class,
                 "name", name,
                 "status", status,
                 "description", description,
@@ -236,9 +236,9 @@ public class PatchWalletError extends RuntimeException {
             return this;
         }
 
-        public PatchWalletError build() {
+        public PatchWalletValidationError build() {
 
-            return new PatchWalletError(
+            return new PatchWalletValidationError(
                 name, status, description,
                 metadata);
         }

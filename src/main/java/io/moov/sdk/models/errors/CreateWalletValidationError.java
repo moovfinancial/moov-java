@@ -17,7 +17,7 @@ import java.util.Optional;
 
 
 @SuppressWarnings("serial")
-public class CreateWalletError extends RuntimeException {
+public class CreateWalletValidationError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
@@ -34,7 +34,7 @@ public class CreateWalletError extends RuntimeException {
     private Optional<String> metadata;
 
     @JsonCreator
-    public CreateWalletError(
+    public CreateWalletValidationError(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("metadata") Optional<String> metadata) {
@@ -47,7 +47,7 @@ public class CreateWalletError extends RuntimeException {
         this.metadata = metadata;
     }
     
-    public CreateWalletError() {
+    public CreateWalletValidationError() {
         this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -71,40 +71,40 @@ public class CreateWalletError extends RuntimeException {
     }
 
 
-    public CreateWalletError withName(String name) {
+    public CreateWalletValidationError withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
 
 
-    public CreateWalletError withName(Optional<String> name) {
+    public CreateWalletValidationError withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
-    public CreateWalletError withDescription(String description) {
+    public CreateWalletValidationError withDescription(String description) {
         Utils.checkNotNull(description, "description");
         this.description = Optional.ofNullable(description);
         return this;
     }
 
 
-    public CreateWalletError withDescription(Optional<String> description) {
+    public CreateWalletValidationError withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
     }
 
-    public CreateWalletError withMetadata(String metadata) {
+    public CreateWalletValidationError withMetadata(String metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = Optional.ofNullable(metadata);
         return this;
     }
 
 
-    public CreateWalletError withMetadata(Optional<String> metadata) {
+    public CreateWalletValidationError withMetadata(Optional<String> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
@@ -118,7 +118,7 @@ public class CreateWalletError extends RuntimeException {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreateWalletError other = (CreateWalletError) o;
+        CreateWalletValidationError other = (CreateWalletValidationError) o;
         return 
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
@@ -133,7 +133,7 @@ public class CreateWalletError extends RuntimeException {
     
     @Override
     public String toString() {
-        return Utils.toString(CreateWalletError.class,
+        return Utils.toString(CreateWalletValidationError.class,
                 "name", name,
                 "description", description,
                 "metadata", metadata);
@@ -191,9 +191,9 @@ public class CreateWalletError extends RuntimeException {
             return this;
         }
 
-        public CreateWalletError build() {
+        public CreateWalletValidationError build() {
 
-            return new CreateWalletError(
+            return new CreateWalletValidationError(
                 name, description, metadata);
         }
 

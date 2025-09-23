@@ -10,7 +10,7 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.components.Wallet;
 import io.moov.sdk.models.errors.APIException;
-import io.moov.sdk.models.errors.CreateWalletError;
+import io.moov.sdk.models.errors.CreateWalletValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateWalletRequest;
 import io.moov.sdk.models.operations.CreateWalletResponse;
@@ -203,7 +203,7 @@ public class CreateWallet {
             if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    CreateWalletError out = Utils.mapper().readValue(
+                    CreateWalletValidationError out = Utils.mapper().readValue(
                             response.body(),
                             new TypeReference<>() {
                             });

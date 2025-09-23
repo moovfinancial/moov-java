@@ -35,13 +35,14 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.ListWalletTransactionsValidationError;
 import io.moov.sdk.models.operations.ListWalletTransactionsRequest;
 import io.moov.sdk.models.operations.ListWalletTransactionsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws ListWalletTransactionsValidationError, Exception {
 
         Moov sdk = Moov.builder()
                 .xMoovVersion("v2024.01.00")
@@ -81,9 +82,10 @@ public class Application {
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| models/errors/ListWalletTransactionsValidationError | 422                                                 | application/json                                    |
+| models/errors/APIException                          | 4XX, 5XX                                            | \*/\*                                               |
 
 ## get
 

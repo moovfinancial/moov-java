@@ -3,10 +3,10 @@ id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
   docChecksum: 85feb4e8f3a7f1bfc249837668d45129
   docVersion: latest
-  speakeasyVersion: 1.622.1
-  generationVersion: 2.709.0
-  releaseVersion: 0.27.1
-  configChecksum: a74468a6916ab6ecf76951504af1eab7
+  speakeasyVersion: 1.628.4
+  generationVersion: 2.716.5
+  releaseVersion: 0.28.0
+  configChecksum: 0942d863ad4354635635565065935e53
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.50.0
+    core: 3.52.1
     decimal: 0.0.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
@@ -4328,10 +4328,3 @@ examples:
           application/pdf: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Java SDK Changes Detected:
-  * `moov.transfers.create()`:  `error` **Changed** **Breaking** :warning:
-  * `moov.transfers.list()`:  `error.status[422]` **Added**
-  * `moov.transfers.update()`:  `error.status[422]` **Added**
-  * `moov.wallets.list()`:  `error.status[422]` **Added**
-  * `moov.walletTransactions.list()`:  `error.status[422]` **Added**

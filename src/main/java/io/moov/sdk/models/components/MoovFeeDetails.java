@@ -20,21 +20,24 @@ import java.util.Optional;
  */
 public class MoovFeeDetails {
     /**
-     * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
+     * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
+     * to 9 decimal place precision.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardScheme")
     private Optional<String> cardScheme;
 
     /**
-     * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to 9 decimal place precision.
+     * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
+     * 9 decimal place precision.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("interchange")
     private Optional<String> interchange;
 
     /**
-     * Network discount fee for American Express. String type represents dollars with up to 9 decimal place precision.
+     * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
+     * precision.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("discount")
@@ -69,7 +72,8 @@ public class MoovFeeDetails {
     }
 
     /**
-     * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
+     * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
+     * to 9 decimal place precision.
      */
     @JsonIgnore
     public Optional<String> cardScheme() {
@@ -77,7 +81,8 @@ public class MoovFeeDetails {
     }
 
     /**
-     * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to 9 decimal place precision.
+     * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
+     * 9 decimal place precision.
      */
     @JsonIgnore
     public Optional<String> interchange() {
@@ -85,7 +90,8 @@ public class MoovFeeDetails {
     }
 
     /**
-     * Network discount fee for American Express. String type represents dollars with up to 9 decimal place precision.
+     * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
+     * precision.
      */
     @JsonIgnore
     public Optional<String> discount() {
@@ -106,7 +112,8 @@ public class MoovFeeDetails {
 
 
     /**
-     * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
+     * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
+     * to 9 decimal place precision.
      */
     public MoovFeeDetails withCardScheme(String cardScheme) {
         Utils.checkNotNull(cardScheme, "cardScheme");
@@ -116,7 +123,8 @@ public class MoovFeeDetails {
 
 
     /**
-     * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
+     * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
+     * to 9 decimal place precision.
      */
     public MoovFeeDetails withCardScheme(Optional<String> cardScheme) {
         Utils.checkNotNull(cardScheme, "cardScheme");
@@ -125,7 +133,8 @@ public class MoovFeeDetails {
     }
 
     /**
-     * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to 9 decimal place precision.
+     * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
+     * 9 decimal place precision.
      */
     public MoovFeeDetails withInterchange(String interchange) {
         Utils.checkNotNull(interchange, "interchange");
@@ -135,7 +144,8 @@ public class MoovFeeDetails {
 
 
     /**
-     * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to 9 decimal place precision.
+     * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
+     * 9 decimal place precision.
      */
     public MoovFeeDetails withInterchange(Optional<String> interchange) {
         Utils.checkNotNull(interchange, "interchange");
@@ -144,7 +154,8 @@ public class MoovFeeDetails {
     }
 
     /**
-     * Network discount fee for American Express. String type represents dollars with up to 9 decimal place precision.
+     * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
+     * precision.
      */
     public MoovFeeDetails withDiscount(String discount) {
         Utils.checkNotNull(discount, "discount");
@@ -154,7 +165,8 @@ public class MoovFeeDetails {
 
 
     /**
-     * Network discount fee for American Express. String type represents dollars with up to 9 decimal place precision.
+     * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
+     * precision.
      */
     public MoovFeeDetails withDiscount(Optional<String> discount) {
         Utils.checkNotNull(discount, "discount");
@@ -220,7 +232,8 @@ public class MoovFeeDetails {
 
 
         /**
-         * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
+         * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
+         * to 9 decimal place precision.
          */
         public Builder cardScheme(String cardScheme) {
             Utils.checkNotNull(cardScheme, "cardScheme");
@@ -229,7 +242,8 @@ public class MoovFeeDetails {
         }
 
         /**
-         * Card scheme fees accrued during authorization and settlement. String type represents dollars with up to 9 decimal place precision.
+         * Card scheme fees accrued during authorization and settlement. String type represents dollars with up
+         * to 9 decimal place precision.
          */
         public Builder cardScheme(Optional<String> cardScheme) {
             Utils.checkNotNull(cardScheme, "cardScheme");
@@ -239,7 +253,8 @@ public class MoovFeeDetails {
 
 
         /**
-         * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to 9 decimal place precision.
+         * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
+         * 9 decimal place precision.
          */
         public Builder interchange(String interchange) {
             Utils.checkNotNull(interchange, "interchange");
@@ -248,7 +263,8 @@ public class MoovFeeDetails {
         }
 
         /**
-         * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to 9 decimal place precision.
+         * Network interchange fee for Visa, Mastercard, or Discover. String type represents dollars with up to
+         * 9 decimal place precision.
          */
         public Builder interchange(Optional<String> interchange) {
             Utils.checkNotNull(interchange, "interchange");
@@ -258,7 +274,8 @@ public class MoovFeeDetails {
 
 
         /**
-         * Network discount fee for American Express. String type represents dollars with up to 9 decimal place precision.
+         * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
+         * precision.
          */
         public Builder discount(String discount) {
             Utils.checkNotNull(discount, "discount");
@@ -267,7 +284,8 @@ public class MoovFeeDetails {
         }
 
         /**
-         * Network discount fee for American Express. String type represents dollars with up to 9 decimal place precision.
+         * Network discount fee for American Express. String type represents dollars with up to 9 decimal place
+         * precision.
          */
         public Builder discount(Optional<String> discount) {
             Utils.checkNotNull(discount, "discount");

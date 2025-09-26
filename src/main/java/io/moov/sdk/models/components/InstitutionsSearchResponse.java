@@ -32,21 +32,30 @@ public class InstitutionsSearchResponse {
     @JsonProperty("wire")
     private Optional<? extends List<WireInstitution>> wire;
 
+
+    @JsonInclude(Include.ALWAYS)
+    @JsonProperty("fednow")
+    private Optional<? extends List<FedNowInstitution>> fednow;
+
     @JsonCreator
     public InstitutionsSearchResponse(
             @JsonProperty("ach") Optional<? extends List<ACHInstitution>> ach,
             @JsonProperty("rtp") Optional<? extends List<RTPInstitution>> rtp,
-            @JsonProperty("wire") Optional<? extends List<WireInstitution>> wire) {
+            @JsonProperty("wire") Optional<? extends List<WireInstitution>> wire,
+            @JsonProperty("fednow") Optional<? extends List<FedNowInstitution>> fednow) {
         Utils.checkNotNull(ach, "ach");
         Utils.checkNotNull(rtp, "rtp");
         Utils.checkNotNull(wire, "wire");
+        Utils.checkNotNull(fednow, "fednow");
         this.ach = ach;
         this.rtp = rtp;
         this.wire = wire;
+        this.fednow = fednow;
     }
     
     public InstitutionsSearchResponse() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -65,6 +74,12 @@ public class InstitutionsSearchResponse {
     @JsonIgnore
     public Optional<List<WireInstitution>> wire() {
         return (Optional<List<WireInstitution>>) wire;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<FedNowInstitution>> fednow() {
+        return (Optional<List<FedNowInstitution>>) fednow;
     }
 
     public static Builder builder() {
@@ -111,6 +126,19 @@ public class InstitutionsSearchResponse {
         return this;
     }
 
+    public InstitutionsSearchResponse withFednow(List<FedNowInstitution> fednow) {
+        Utils.checkNotNull(fednow, "fednow");
+        this.fednow = Optional.ofNullable(fednow);
+        return this;
+    }
+
+
+    public InstitutionsSearchResponse withFednow(Optional<? extends List<FedNowInstitution>> fednow) {
+        Utils.checkNotNull(fednow, "fednow");
+        this.fednow = fednow;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -123,13 +151,15 @@ public class InstitutionsSearchResponse {
         return 
             Utils.enhancedDeepEquals(this.ach, other.ach) &&
             Utils.enhancedDeepEquals(this.rtp, other.rtp) &&
-            Utils.enhancedDeepEquals(this.wire, other.wire);
+            Utils.enhancedDeepEquals(this.wire, other.wire) &&
+            Utils.enhancedDeepEquals(this.fednow, other.fednow);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ach, rtp, wire);
+            ach, rtp, wire,
+            fednow);
     }
     
     @Override
@@ -137,7 +167,8 @@ public class InstitutionsSearchResponse {
         return Utils.toString(InstitutionsSearchResponse.class,
                 "ach", ach,
                 "rtp", rtp,
-                "wire", wire);
+                "wire", wire,
+                "fednow", fednow);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -148,6 +179,8 @@ public class InstitutionsSearchResponse {
         private Optional<? extends List<RTPInstitution>> rtp = Optional.empty();
 
         private Optional<? extends List<WireInstitution>> wire = Optional.empty();
+
+        private Optional<? extends List<FedNowInstitution>> fednow = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -192,10 +225,24 @@ public class InstitutionsSearchResponse {
             return this;
         }
 
+
+        public Builder fednow(List<FedNowInstitution> fednow) {
+            Utils.checkNotNull(fednow, "fednow");
+            this.fednow = Optional.ofNullable(fednow);
+            return this;
+        }
+
+        public Builder fednow(Optional<? extends List<FedNowInstitution>> fednow) {
+            Utils.checkNotNull(fednow, "fednow");
+            this.fednow = fednow;
+            return this;
+        }
+
         public InstitutionsSearchResponse build() {
 
             return new InstitutionsSearchResponse(
-                ach, rtp, wire);
+                ach, rtp, wire,
+                fednow);
         }
 
     }

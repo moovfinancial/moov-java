@@ -20,9 +20,10 @@ public class ListPaymentMethodsRequest {
     private String accountID;
 
     /**
-     * Optional parameter to filter the account's payment methods by source ID. 
+     * Optional parameter to filter the account's payment methods by source ID.
      * 
-     * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+     * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/),
+     * [cardID](https://docs.moov.io/api/sources/cards/list/),
      * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=sourceID")
@@ -58,9 +59,10 @@ public class ListPaymentMethodsRequest {
     }
 
     /**
-     * Optional parameter to filter the account's payment methods by source ID. 
+     * Optional parameter to filter the account's payment methods by source ID.
      * 
-     * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+     * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/),
+     * [cardID](https://docs.moov.io/api/sources/cards/list/),
      * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      */
     @JsonIgnore
@@ -89,9 +91,10 @@ public class ListPaymentMethodsRequest {
     }
 
     /**
-     * Optional parameter to filter the account's payment methods by source ID. 
+     * Optional parameter to filter the account's payment methods by source ID.
      * 
-     * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+     * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/),
+     * [cardID](https://docs.moov.io/api/sources/cards/list/),
      * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      */
     public ListPaymentMethodsRequest withSourceID(String sourceID) {
@@ -102,9 +105,10 @@ public class ListPaymentMethodsRequest {
 
 
     /**
-     * Optional parameter to filter the account's payment methods by source ID. 
+     * Optional parameter to filter the account's payment methods by source ID.
      * 
-     * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+     * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/),
+     * [cardID](https://docs.moov.io/api/sources/cards/list/),
      * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      */
     public ListPaymentMethodsRequest withSourceID(Optional<String> sourceID) {
@@ -183,9 +187,10 @@ public class ListPaymentMethodsRequest {
 
 
         /**
-         * Optional parameter to filter the account's payment methods by source ID. 
+         * Optional parameter to filter the account's payment methods by source ID.
          * 
-         * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+         * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/),
+         * [cardID](https://docs.moov.io/api/sources/cards/list/),
          * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
          */
         public Builder sourceID(String sourceID) {
@@ -195,9 +200,10 @@ public class ListPaymentMethodsRequest {
         }
 
         /**
-         * Optional parameter to filter the account's payment methods by source ID. 
+         * Optional parameter to filter the account's payment methods by source ID.
          * 
-         * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), 
+         * <p>A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/),
+         * [cardID](https://docs.moov.io/api/sources/cards/list/),
          * or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
          */
         public Builder sourceID(Optional<String> sourceID) {

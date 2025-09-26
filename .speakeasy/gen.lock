@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 85feb4e8f3a7f1bfc249837668d45129
+  docChecksum: 7dc79326b3050538f6425d6826bc535d
   docVersion: latest
-  speakeasyVersion: 1.628.4
-  generationVersion: 2.716.5
-  releaseVersion: 0.28.0
-  configChecksum: 0942d863ad4354635635565065935e53
+  speakeasyVersion: 1.629.1
+  generationVersion: 2.716.10
+  releaseVersion: 0.28.1
+  configChecksum: 0a4dc81996678ac7a763065a130dab7a
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.52.1
+    core: 3.52.2
     decimal: 0.0.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
@@ -241,6 +241,8 @@ generatedFiles:
   - docs/models/components/EvidenceType.md
   - docs/models/components/EvidenceUploadResponse.md
   - docs/models/components/FacilitatorFee.md
+  - docs/models/components/FedNowInstitution.md
+  - docs/models/components/FedNowServices.md
   - docs/models/components/FeeCategory.md
   - docs/models/components/FeeModel.md
   - docs/models/components/FeePlan.md
@@ -1190,6 +1192,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/EvidenceType.java
   - src/main/java/io/moov/sdk/models/components/EvidenceUploadResponse.java
   - src/main/java/io/moov/sdk/models/components/FacilitatorFee.java
+  - src/main/java/io/moov/sdk/models/components/FedNowInstitution.java
+  - src/main/java/io/moov/sdk/models/components/FedNowServices.java
   - src/main/java/io/moov/sdk/models/components/FeeCategory.java
   - src/main/java/io/moov/sdk/models/components/FeeModel.java
   - src/main/java/io/moov/sdk/models/components/FeePlan.java
@@ -4146,7 +4150,7 @@ examples:
           x-moov-version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"ach": [{"name": "First Citizens", "routingNumber": "123456789", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "contact": {"phone": {"number": "8185551212", "countryCode": "1"}}}], "rtp": [], "wire": [{"name": "First Citizens", "routingNumber": "123456789", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "services": {"fundsTransferStatus": true, "fundsSettlementOnlyStatus": false, "bookEntrySecuritiesTransferStatus": false}}]}
+          application/json: {"ach": [{"name": "First Citizens", "routingNumber": "123456789", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "contact": {"phone": {"number": "8185551212", "countryCode": "1"}}}], "rtp": [], "wire": [{"name": "First Citizens", "routingNumber": "123456789", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "services": {"fundsTransferStatus": true, "fundsSettlementOnlyStatus": false, "bookEntrySecuritiesTransferStatus": false}}], "fednow": []}
   createTransferOptionsForAccount:
     speakeasy-default-create-transfer-options-for-account:
       parameters:
@@ -4328,3 +4332,6 @@ examples:
           application/pdf: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Java SDK Changes Detected:
+  * `moov.institutions.searchInstitutions()`:  `response.fednow` **Added**

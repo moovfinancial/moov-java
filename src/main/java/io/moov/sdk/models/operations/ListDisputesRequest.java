@@ -37,7 +37,8 @@ public class ListDisputesRequest {
     private Optional<OffsetDateTime> startDateTime;
 
     /**
-     * Optional date-time parameter to filter all disputes created on and before the provided date and time.
+     * Optional date-time parameter to filter all disputes created on and before the provided date and
+     * time.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=endDateTime")
     private Optional<OffsetDateTime> endDateTime;
@@ -164,7 +165,8 @@ public class ListDisputesRequest {
     }
 
     /**
-     * Optional date-time parameter to filter all disputes created on and before the provided date and time.
+     * Optional date-time parameter to filter all disputes created on and before the provided date and
+     * time.
      */
     @JsonIgnore
     public Optional<OffsetDateTime> endDateTime() {
@@ -292,7 +294,8 @@ public class ListDisputesRequest {
     }
 
     /**
-     * Optional date-time parameter to filter all disputes created on and before the provided date and time.
+     * Optional date-time parameter to filter all disputes created on and before the provided date and
+     * time.
      */
     public ListDisputesRequest withEndDateTime(OffsetDateTime endDateTime) {
         Utils.checkNotNull(endDateTime, "endDateTime");
@@ -302,7 +305,8 @@ public class ListDisputesRequest {
 
 
     /**
-     * Optional date-time parameter to filter all disputes created on and before the provided date and time.
+     * Optional date-time parameter to filter all disputes created on and before the provided date and
+     * time.
      */
     public ListDisputesRequest withEndDateTime(Optional<OffsetDateTime> endDateTime) {
         Utils.checkNotNull(endDateTime, "endDateTime");
@@ -596,7 +600,8 @@ public class ListDisputesRequest {
 
 
         /**
-         * Optional date-time parameter to filter all disputes created on and before the provided date and time.
+         * Optional date-time parameter to filter all disputes created on and before the provided date and
+         * time.
          */
         public Builder endDateTime(OffsetDateTime endDateTime) {
             Utils.checkNotNull(endDateTime, "endDateTime");
@@ -605,7 +610,8 @@ public class ListDisputesRequest {
         }
 
         /**
-         * Optional date-time parameter to filter all disputes created on and before the provided date and time.
+         * Optional date-time parameter to filter all disputes created on and before the provided date and
+         * time.
          */
         public Builder endDateTime(Optional<OffsetDateTime> endDateTime) {
             Utils.checkNotNull(endDateTime, "endDateTime");

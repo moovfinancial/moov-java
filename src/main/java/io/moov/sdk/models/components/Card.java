@@ -30,8 +30,10 @@ public class Card {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     @JsonProperty("fingerprint")
     private String fingerprint;
@@ -50,7 +52,8 @@ public class Card {
 
     /**
      * The category or level of the card defined by the issuer.
-     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
+     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+     * PURCHASING".
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardCategory")
@@ -63,7 +66,8 @@ public class Card {
     private String lastFourCardNumber;
 
     /**
-     * The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+     * The first six to eight digits of the card number, which identifies the financial institution that
+     * issued the card.
      */
     @JsonProperty("bin")
     private String bin;
@@ -128,7 +132,8 @@ public class Card {
     private Optional<Boolean> commercial;
 
     /**
-     * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be limited based on the Durbin Amendment.
+     * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be
+     * limited based on the Durbin Amendment.
      * If false, the card issuing bank is not regulated, and the scheme fees will not be limited.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -169,9 +174,10 @@ public class Card {
     private Optional<? extends DomesticPullFromCard> domesticPullFromCard;
 
     /**
-     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set
+     * to `payment-method`.
      * 
-     * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+     * <p>Only returned by the link card endpoint; not included when getting or listing cards.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentMethods")
@@ -280,8 +286,10 @@ public class Card {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     @JsonIgnore
     public String fingerprint() {
@@ -306,7 +314,8 @@ public class Card {
 
     /**
      * The category or level of the card defined by the issuer.
-     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
+     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+     * PURCHASING".
      */
     @JsonIgnore
     public Optional<String> cardCategory() {
@@ -322,7 +331,8 @@ public class Card {
     }
 
     /**
-     * The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+     * The first six to eight digits of the card number, which identifies the financial institution that
+     * issued the card.
      */
     @JsonIgnore
     public String bin() {
@@ -400,7 +410,8 @@ public class Card {
     }
 
     /**
-     * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be limited based on the Durbin Amendment.
+     * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be
+     * limited based on the Durbin Amendment.
      * If false, the card issuing bank is not regulated, and the scheme fees will not be limited.
      */
     @JsonIgnore
@@ -449,9 +460,10 @@ public class Card {
     }
 
     /**
-     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set
+     * to `payment-method`.
      * 
-     * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+     * <p>Only returned by the link card endpoint; not included when getting or listing cards.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -475,8 +487,10 @@ public class Card {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     public Card withFingerprint(String fingerprint) {
         Utils.checkNotNull(fingerprint, "fingerprint");
@@ -504,7 +518,8 @@ public class Card {
 
     /**
      * The category or level of the card defined by the issuer.
-     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
+     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+     * PURCHASING".
      */
     public Card withCardCategory(String cardCategory) {
         Utils.checkNotNull(cardCategory, "cardCategory");
@@ -515,7 +530,8 @@ public class Card {
 
     /**
      * The category or level of the card defined by the issuer.
-     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
+     * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+     * PURCHASING".
      */
     public Card withCardCategory(Optional<String> cardCategory) {
         Utils.checkNotNull(cardCategory, "cardCategory");
@@ -533,7 +549,8 @@ public class Card {
     }
 
     /**
-     * The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+     * The first six to eight digits of the card number, which identifies the financial institution that
+     * issued the card.
      */
     public Card withBin(String bin) {
         Utils.checkNotNull(bin, "bin");
@@ -682,7 +699,8 @@ public class Card {
     }
 
     /**
-     * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be limited based on the Durbin Amendment.
+     * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be
+     * limited based on the Durbin Amendment.
      * If false, the card issuing bank is not regulated, and the scheme fees will not be limited.
      */
     public Card withRegulated(boolean regulated) {
@@ -693,7 +711,8 @@ public class Card {
 
 
     /**
-     * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be limited based on the Durbin Amendment.
+     * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be
+     * limited based on the Durbin Amendment.
      * If false, the card issuing bank is not regulated, and the scheme fees will not be limited.
      */
     public Card withRegulated(Optional<Boolean> regulated) {
@@ -792,9 +811,10 @@ public class Card {
     }
 
     /**
-     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set
+     * to `payment-method`.
      * 
-     * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+     * <p>Only returned by the link card endpoint; not included when getting or listing cards.
      */
     public Card withPaymentMethods(List<BasicPaymentMethod> paymentMethods) {
         Utils.checkNotNull(paymentMethods, "paymentMethods");
@@ -804,9 +824,10 @@ public class Card {
 
 
     /**
-     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+     * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set
+     * to `payment-method`.
      * 
-     * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+     * <p>Only returned by the link card endpoint; not included when getting or listing cards.
      */
     public Card withPaymentMethods(Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
         Utils.checkNotNull(paymentMethods, "paymentMethods");
@@ -956,8 +977,10 @@ public class Card {
 
         /**
          * Uniquely identifies a linked payment card or token.
-         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-         * This field can be used to identify specific payment methods across multiple accounts on your platform.
+         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+         * user's device.
+         * This field can be used to identify specific payment methods across multiple accounts on your
+         * platform.
          */
         public Builder fingerprint(String fingerprint) {
             Utils.checkNotNull(fingerprint, "fingerprint");
@@ -988,7 +1011,8 @@ public class Card {
 
         /**
          * The category or level of the card defined by the issuer.
-         * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
+         * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+         * PURCHASING".
          */
         public Builder cardCategory(String cardCategory) {
             Utils.checkNotNull(cardCategory, "cardCategory");
@@ -998,7 +1022,8 @@ public class Card {
 
         /**
          * The category or level of the card defined by the issuer.
-         * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE PURCHASING".
+         * Examples include, but not limited to, "REWARDS", "TRADITIONAL REWARDS", "CLASSIC", and "CORPORATE
+         * PURCHASING".
          */
         public Builder cardCategory(Optional<String> cardCategory) {
             Utils.checkNotNull(cardCategory, "cardCategory");
@@ -1018,7 +1043,8 @@ public class Card {
 
 
         /**
-         * The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+         * The first six to eight digits of the card number, which identifies the financial institution that
+         * issued the card.
          */
         public Builder bin(String bin) {
             Utils.checkNotNull(bin, "bin");
@@ -1171,7 +1197,8 @@ public class Card {
 
 
         /**
-         * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be limited based on the Durbin Amendment.
+         * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be
+         * limited based on the Durbin Amendment.
          * If false, the card issuing bank is not regulated, and the scheme fees will not be limited.
          */
         public Builder regulated(boolean regulated) {
@@ -1181,7 +1208,8 @@ public class Card {
         }
 
         /**
-         * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be limited based on the Durbin Amendment.
+         * If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be
+         * limited based on the Durbin Amendment.
          * If false, the card issuing bank is not regulated, and the scheme fees will not be limited.
          */
         public Builder regulated(Optional<Boolean> regulated) {
@@ -1281,9 +1309,10 @@ public class Card {
 
 
         /**
-         * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+         * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set
+         * to `payment-method`.
          * 
-         * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+         * <p>Only returned by the link card endpoint; not included when getting or listing cards.
          */
         public Builder paymentMethods(List<BasicPaymentMethod> paymentMethods) {
             Utils.checkNotNull(paymentMethods, "paymentMethods");
@@ -1292,9 +1321,10 @@ public class Card {
         }
 
         /**
-         * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+         * Includes any payment methods created as a result of linking a card with the `x-wait-for` header set
+         * to `payment-method`.
          * 
-         * <p>  Only returned by the link card endpoint; not included when getting or listing cards.
+         * <p>Only returned by the link card endpoint; not included when getting or listing cards.
          */
         public Builder paymentMethods(Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
             Utils.checkNotNull(paymentMethods, "paymentMethods");

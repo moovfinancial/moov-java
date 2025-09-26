@@ -14,7 +14,8 @@ import java.time.OffsetDateTime;
 /**
  * WebhookEvent
  * 
- * <p>Webhook events are sent to your webhook URL when certain actions occur in the Moov API. You can subscribe to these events to receive real-time notifications.
+ * <p>Webhook events are sent to your webhook URL when certain actions occur in the Moov API. You can
+ * subscribe to these events to receive real-time notifications.
  */
 public class WebhookEvent {
     /**

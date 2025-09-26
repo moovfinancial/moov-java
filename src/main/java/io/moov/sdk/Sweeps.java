@@ -46,7 +46,8 @@ public class Sweeps {
     /**
      * Create a sweep config for a wallet.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * 
      * @return The call builder
@@ -58,7 +59,8 @@ public class Sweeps {
     /**
      * Create a sweep config for a wallet.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * 
      * @param accountID 
@@ -81,7 +83,8 @@ public class Sweeps {
     /**
      * List sweep configs associated with an account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -93,7 +96,8 @@ public class Sweeps {
     /**
      * List sweep configs associated with an account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param accountID 
@@ -114,7 +118,8 @@ public class Sweeps {
     /**
      * Get a sweep config associated with a wallet.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -126,7 +131,8 @@ public class Sweeps {
     /**
      * Get a sweep config associated with a wallet.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param accountID 
@@ -149,7 +155,8 @@ public class Sweeps {
     /**
      * Update settings on a sweep config.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * 
      * @return The call builder
@@ -161,7 +168,8 @@ public class Sweeps {
     /**
      * Update settings on a sweep config.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * 
      * @param accountID 
@@ -188,7 +196,8 @@ public class Sweeps {
     /**
      * List sweeps associated with a wallet.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -200,7 +209,8 @@ public class Sweeps {
     /**
      * List sweeps associated with a wallet.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -216,7 +226,8 @@ public class Sweeps {
     /**
      * Get details on a specific sweep.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -228,7 +239,8 @@ public class Sweeps {
     /**
      * Get details on a specific sweep.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param accountID 

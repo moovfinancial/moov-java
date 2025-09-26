@@ -88,7 +88,8 @@ public class BankAccount {
      * Includes any payment methods generated for a newly created bank account, removing the need to
      * call the List Payment Methods endpoint following a successful Create BankAccount request.
      * 
-     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For`
+     * header.**
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("paymentMethods")
@@ -238,7 +239,8 @@ public class BankAccount {
      * Includes any payment methods generated for a newly created bank account, removing the need to
      * call the List Payment Methods endpoint following a successful Create BankAccount request.
      * 
-     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For`
+     * header.**
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -364,7 +366,8 @@ public class BankAccount {
      * Includes any payment methods generated for a newly created bank account, removing the need to
      * call the List Payment Methods endpoint following a successful Create BankAccount request.
      * 
-     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For`
+     * header.**
      */
     public BankAccount withPaymentMethods(List<BasicPaymentMethod> paymentMethods) {
         Utils.checkNotNull(paymentMethods, "paymentMethods");
@@ -377,7 +380,8 @@ public class BankAccount {
      * Includes any payment methods generated for a newly created bank account, removing the need to
      * call the List Payment Methods endpoint following a successful Create BankAccount request.
      * 
-     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+     * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For`
+     * header.**
      */
     public BankAccount withPaymentMethods(Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
         Utils.checkNotNull(paymentMethods, "paymentMethods");
@@ -595,7 +599,8 @@ public class BankAccount {
          * Includes any payment methods generated for a newly created bank account, removing the need to
          * call the List Payment Methods endpoint following a successful Create BankAccount request.
          * 
-         * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+         * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For`
+         * header.**
          */
         public Builder paymentMethods(List<BasicPaymentMethod> paymentMethods) {
             Utils.checkNotNull(paymentMethods, "paymentMethods");
@@ -607,7 +612,8 @@ public class BankAccount {
          * Includes any payment methods generated for a newly created bank account, removing the need to
          * call the List Payment Methods endpoint following a successful Create BankAccount request.
          * 
-         * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+         * <p>**NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For`
+         * header.**
          */
         public Builder paymentMethods(Optional<? extends List<BasicPaymentMethod>> paymentMethods) {
             Utils.checkNotNull(paymentMethods, "paymentMethods");

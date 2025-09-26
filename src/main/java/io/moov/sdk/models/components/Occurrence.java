@@ -23,15 +23,16 @@ import java.util.Optional;
  */
 public class Occurrence {
     /**
-     * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
+     * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves
+     * the value unchanged.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canceled")
     private Optional<Boolean> canceled;
 
     /**
-     * If set this defines what occurrence to modify, if invalid will fail the request. 
-     *   If null or "" it defines to add a new occurrence.
+     * If set this defines what occurrence to modify, if invalid will fail the request.
+     * If null or "" it defines to add a new occurrence.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("occurrenceID")
@@ -73,7 +74,8 @@ public class Occurrence {
     }
 
     /**
-     * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
+     * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves
+     * the value unchanged.
      */
     @JsonIgnore
     public Optional<Boolean> canceled() {
@@ -81,8 +83,8 @@ public class Occurrence {
     }
 
     /**
-     * If set this defines what occurrence to modify, if invalid will fail the request. 
-     *   If null or "" it defines to add a new occurrence.
+     * If set this defines what occurrence to modify, if invalid will fail the request.
+     * If null or "" it defines to add a new occurrence.
      */
     @JsonIgnore
     public Optional<String> occurrenceID() {
@@ -112,7 +114,8 @@ public class Occurrence {
 
 
     /**
-     * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
+     * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves
+     * the value unchanged.
      */
     public Occurrence withCanceled(boolean canceled) {
         Utils.checkNotNull(canceled, "canceled");
@@ -122,7 +125,8 @@ public class Occurrence {
 
 
     /**
-     * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
+     * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves
+     * the value unchanged.
      */
     public Occurrence withCanceled(Optional<Boolean> canceled) {
         Utils.checkNotNull(canceled, "canceled");
@@ -131,8 +135,8 @@ public class Occurrence {
     }
 
     /**
-     * If set this defines what occurrence to modify, if invalid will fail the request. 
-     *   If null or "" it defines to add a new occurrence.
+     * If set this defines what occurrence to modify, if invalid will fail the request.
+     * If null or "" it defines to add a new occurrence.
      */
     public Occurrence withOccurrenceID(String occurrenceID) {
         Utils.checkNotNull(occurrenceID, "occurrenceID");
@@ -142,8 +146,8 @@ public class Occurrence {
 
 
     /**
-     * If set this defines what occurrence to modify, if invalid will fail the request. 
-     *   If null or "" it defines to add a new occurrence.
+     * If set this defines what occurrence to modify, if invalid will fail the request.
+     * If null or "" it defines to add a new occurrence.
      */
     public Occurrence withOccurrenceID(Optional<String> occurrenceID) {
         Utils.checkNotNull(occurrenceID, "occurrenceID");
@@ -238,7 +242,8 @@ public class Occurrence {
 
 
         /**
-         * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
+         * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves
+         * the value unchanged.
          */
         public Builder canceled(boolean canceled) {
             Utils.checkNotNull(canceled, "canceled");
@@ -247,7 +252,8 @@ public class Occurrence {
         }
 
         /**
-         * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves the value unchanged.
+         * If set to true, will cancel the occurrence. If set false will resume the occurrence. If unset leaves
+         * the value unchanged.
          */
         public Builder canceled(Optional<Boolean> canceled) {
             Utils.checkNotNull(canceled, "canceled");
@@ -257,8 +263,8 @@ public class Occurrence {
 
 
         /**
-         * If set this defines what occurrence to modify, if invalid will fail the request. 
-         *   If null or "" it defines to add a new occurrence.
+         * If set this defines what occurrence to modify, if invalid will fail the request.
+         * If null or "" it defines to add a new occurrence.
          */
         public Builder occurrenceID(String occurrenceID) {
             Utils.checkNotNull(occurrenceID, "occurrenceID");
@@ -267,8 +273,8 @@ public class Occurrence {
         }
 
         /**
-         * If set this defines what occurrence to modify, if invalid will fail the request. 
-         *   If null or "" it defines to add a new occurrence.
+         * If set this defines what occurrence to modify, if invalid will fail the request.
+         * If null or "" it defines to add a new occurrence.
          */
         public Builder occurrenceID(Optional<String> occurrenceID) {
             Utils.checkNotNull(occurrenceID, "occurrenceID");

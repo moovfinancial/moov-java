@@ -22,9 +22,11 @@ public class Industries {
     }
 
     /**
-     * Returns a list of industries relevant to merchant profile enrichment.  Results are ordered by industry name.
+     * Returns a list of industries relevant to merchant profile enrichment. Results are ordered by
+     * industry name.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/),
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @return The call builder
@@ -34,9 +36,11 @@ public class Industries {
     }
 
     /**
-     * Returns a list of industries relevant to merchant profile enrichment.  Results are ordered by industry name.
+     * Returns a list of industries relevant to merchant profile enrichment. Results are ordered by
+     * industry name.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/),
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @return The response from the API call

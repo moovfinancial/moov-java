@@ -21,14 +21,16 @@ import java.util.Optional;
  */
 public class FeeProperties {
     /**
-     * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
+     * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee
+     * models.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fixedAmount")
     private Optional<? extends AmountDecimal> fixedAmount;
 
     /**
-     * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
+     * A percentage fee that is applied to the amount of each transaction in the `blended` fee model,
+     * expressed as a decimal.
      * 
      * <p>For example, 0.05% is '0.05'.
      */
@@ -72,7 +74,8 @@ public class FeeProperties {
     }
 
     /**
-     * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
+     * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee
+     * models.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -81,7 +84,8 @@ public class FeeProperties {
     }
 
     /**
-     * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
+     * A percentage fee that is applied to the amount of each transaction in the `blended` fee model,
+     * expressed as a decimal.
      * 
      * <p>For example, 0.05% is '0.05'.
      */
@@ -114,7 +118,8 @@ public class FeeProperties {
 
 
     /**
-     * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
+     * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee
+     * models.
      */
     public FeeProperties withFixedAmount(AmountDecimal fixedAmount) {
         Utils.checkNotNull(fixedAmount, "fixedAmount");
@@ -124,7 +129,8 @@ public class FeeProperties {
 
 
     /**
-     * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
+     * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee
+     * models.
      */
     public FeeProperties withFixedAmount(Optional<? extends AmountDecimal> fixedAmount) {
         Utils.checkNotNull(fixedAmount, "fixedAmount");
@@ -133,7 +139,8 @@ public class FeeProperties {
     }
 
     /**
-     * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
+     * A percentage fee that is applied to the amount of each transaction in the `blended` fee model,
+     * expressed as a decimal.
      * 
      * <p>For example, 0.05% is '0.05'.
      */
@@ -145,7 +152,8 @@ public class FeeProperties {
 
 
     /**
-     * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
+     * A percentage fee that is applied to the amount of each transaction in the `blended` fee model,
+     * expressed as a decimal.
      * 
      * <p>For example, 0.05% is '0.05'.
      */
@@ -242,7 +250,8 @@ public class FeeProperties {
 
 
         /**
-         * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
+         * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee
+         * models.
          */
         public Builder fixedAmount(AmountDecimal fixedAmount) {
             Utils.checkNotNull(fixedAmount, "fixedAmount");
@@ -251,7 +260,8 @@ public class FeeProperties {
         }
 
         /**
-         * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models.
+         * A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee
+         * models.
          */
         public Builder fixedAmount(Optional<? extends AmountDecimal> fixedAmount) {
             Utils.checkNotNull(fixedAmount, "fixedAmount");
@@ -261,7 +271,8 @@ public class FeeProperties {
 
 
         /**
-         * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
+         * A percentage fee that is applied to the amount of each transaction in the `blended` fee model,
+         * expressed as a decimal.
          * 
          * <p>For example, 0.05% is '0.05'.
          */
@@ -272,7 +283,8 @@ public class FeeProperties {
         }
 
         /**
-         * A percentage fee that is applied to the amount of each transaction in the `blended` fee model, expressed as a decimal. 
+         * A percentage fee that is applied to the amount of each transaction in the `blended` fee model,
+         * expressed as a decimal.
          * 
          * <p>For example, 0.05% is '0.05'.
          */

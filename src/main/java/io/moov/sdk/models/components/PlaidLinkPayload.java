@@ -13,20 +13,25 @@ import java.lang.String;
 /**
  * PlaidLinkPayload
  * 
- * <p>This is used by Moov.js with a Plaid reseller relationship. 
+ * <p>This is used by Moov.js with a Plaid reseller relationship.
  * 
  * <p>Describes the account to link to the Moov account using a Plaid using a Plaid public token.
  */
 public class PlaidLinkPayload {
     /**
-     * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration for a linked funding source.
+     * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration
+     * for a linked funding source.
      * 
-     * <p>You can simulate linking bank accounts with Plaid in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#plaid)
+     * <p>You can simulate linking bank accounts with Plaid in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode/#plaid)
      * guide for more information.
      * 
-     * <p>Plaid's `sandbox` environment - (requires Plaid reseller setup with Moov). When linking a bank account to a `sandbox` account using a Plaid 
-     * public token it will utilize Plaid's sandbox environment. The Plaid public token provided must be generated from Plaid's sandbox environment. 
-     * Please see &lt;a href="https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate" target="_blank"&gt;Plaid's sandbox documentation&lt;/a&gt; for more 
+     * <p>Plaid's `sandbox` environment - (requires Plaid reseller setup with Moov). When linking a bank
+     * account to a `sandbox` account using a Plaid
+     * public token it will utilize Plaid's sandbox environment. The Plaid public token provided must be
+     * generated from Plaid's sandbox environment.
+     * Please see <a href="https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate">Plaid's sandbox
+     * documentation</a> for more
      * details.
      */
     @JsonProperty("plaidLink")
@@ -40,14 +45,19 @@ public class PlaidLinkPayload {
     }
 
     /**
-     * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration for a linked funding source.
+     * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration
+     * for a linked funding source.
      * 
-     * <p>You can simulate linking bank accounts with Plaid in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#plaid)
+     * <p>You can simulate linking bank accounts with Plaid in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode/#plaid)
      * guide for more information.
      * 
-     * <p>Plaid's `sandbox` environment - (requires Plaid reseller setup with Moov). When linking a bank account to a `sandbox` account using a Plaid 
-     * public token it will utilize Plaid's sandbox environment. The Plaid public token provided must be generated from Plaid's sandbox environment. 
-     * Please see &lt;a href="https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate" target="_blank"&gt;Plaid's sandbox documentation&lt;/a&gt; for more 
+     * <p>Plaid's `sandbox` environment - (requires Plaid reseller setup with Moov). When linking a bank
+     * account to a `sandbox` account using a Plaid
+     * public token it will utilize Plaid's sandbox environment. The Plaid public token provided must be
+     * generated from Plaid's sandbox environment.
+     * Please see <a href="https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate">Plaid's sandbox
+     * documentation</a> for more
      * details.
      */
     @JsonIgnore
@@ -61,14 +71,19 @@ public class PlaidLinkPayload {
 
 
     /**
-     * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration for a linked funding source.
+     * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration
+     * for a linked funding source.
      * 
-     * <p>You can simulate linking bank accounts with Plaid in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#plaid)
+     * <p>You can simulate linking bank accounts with Plaid in test mode. See our [test
+     * mode](https://docs.moov.io/guides/get-started/test-mode/#plaid)
      * guide for more information.
      * 
-     * <p>Plaid's `sandbox` environment - (requires Plaid reseller setup with Moov). When linking a bank account to a `sandbox` account using a Plaid 
-     * public token it will utilize Plaid's sandbox environment. The Plaid public token provided must be generated from Plaid's sandbox environment. 
-     * Please see &lt;a href="https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate" target="_blank"&gt;Plaid's sandbox documentation&lt;/a&gt; for more 
+     * <p>Plaid's `sandbox` environment - (requires Plaid reseller setup with Moov). When linking a bank
+     * account to a `sandbox` account using a Plaid
+     * public token it will utilize Plaid's sandbox environment. The Plaid public token provided must be
+     * generated from Plaid's sandbox environment.
+     * Please see <a href="https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate">Plaid's sandbox
+     * documentation</a> for more
      * details.
      */
     public PlaidLinkPayload withPlaidLink(PlaidLinkIntegration plaidLink) {
@@ -113,14 +128,19 @@ public class PlaidLinkPayload {
 
 
         /**
-         * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration for a linked funding source.
+         * This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration
+         * for a linked funding source.
          * 
-         * <p>You can simulate linking bank accounts with Plaid in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#plaid)
+         * <p>You can simulate linking bank accounts with Plaid in test mode. See our [test
+         * mode](https://docs.moov.io/guides/get-started/test-mode/#plaid)
          * guide for more information.
          * 
-         * <p>Plaid's `sandbox` environment - (requires Plaid reseller setup with Moov). When linking a bank account to a `sandbox` account using a Plaid 
-         * public token it will utilize Plaid's sandbox environment. The Plaid public token provided must be generated from Plaid's sandbox environment. 
-         * Please see &lt;a href="https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate" target="_blank"&gt;Plaid's sandbox documentation&lt;/a&gt; for more 
+         * <p>Plaid's `sandbox` environment - (requires Plaid reseller setup with Moov). When linking a bank
+         * account to a `sandbox` account using a Plaid
+         * public token it will utilize Plaid's sandbox environment. The Plaid public token provided must be
+         * generated from Plaid's sandbox environment.
+         * Please see <a href="https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate">Plaid's sandbox
+         * documentation</a> for more
          * details.
          */
         public Builder plaidLink(PlaidLinkIntegration plaidLink) {

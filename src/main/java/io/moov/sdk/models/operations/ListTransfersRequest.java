@@ -20,7 +20,8 @@ import java.util.Optional;
 
 public class ListTransfersRequest {
     /**
-     * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
+     * Optional, comma-separated account IDs by which the response is filtered based on whether the account
+     * ID is the source or destination.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=accountIDs")
     private Optional<? extends List<String>> accountIDs;
@@ -144,7 +145,8 @@ public class ListTransfersRequest {
     }
 
     /**
-     * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
+     * Optional, comma-separated account IDs by which the response is filtered based on whether the account
+     * ID is the source or destination.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -246,7 +248,8 @@ public class ListTransfersRequest {
 
 
     /**
-     * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
+     * Optional, comma-separated account IDs by which the response is filtered based on whether the account
+     * ID is the source or destination.
      */
     public ListTransfersRequest withAccountIDs(List<String> accountIDs) {
         Utils.checkNotNull(accountIDs, "accountIDs");
@@ -256,7 +259,8 @@ public class ListTransfersRequest {
 
 
     /**
-     * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
+     * Optional, comma-separated account IDs by which the response is filtered based on whether the account
+     * ID is the source or destination.
      */
     public ListTransfersRequest withAccountIDs(Optional<? extends List<String>> accountIDs) {
         Utils.checkNotNull(accountIDs, "accountIDs");
@@ -555,7 +559,8 @@ public class ListTransfersRequest {
 
 
         /**
-         * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
+         * Optional, comma-separated account IDs by which the response is filtered based on whether the account
+         * ID is the source or destination.
          */
         public Builder accountIDs(List<String> accountIDs) {
             Utils.checkNotNull(accountIDs, "accountIDs");
@@ -564,7 +569,8 @@ public class ListTransfersRequest {
         }
 
         /**
-         * Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
+         * Optional, comma-separated account IDs by which the response is filtered based on whether the account
+         * ID is the source or destination.
          */
         public Builder accountIDs(Optional<? extends List<String>> accountIDs) {
             Utils.checkNotNull(accountIDs, "accountIDs");

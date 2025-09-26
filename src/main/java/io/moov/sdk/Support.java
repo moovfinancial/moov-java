@@ -41,11 +41,13 @@ public class Support {
     /**
      * Create a support ticket for a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
      * 
      * <p>If you're creating the ticket on behalf of another account, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @return The call builder
      */
@@ -56,11 +58,13 @@ public class Support {
     /**
      * Create a support ticket for a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
      * 
      * <p>If you're creating the ticket on behalf of another account, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @param accountID 
      * @param createTicket Request to create a new support ticket.
@@ -82,11 +86,13 @@ public class Support {
     /**
      * List all the support tickets created under a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * <p>If you're listing another account's tickets, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @return The call builder
      */
@@ -97,11 +103,13 @@ public class Support {
     /**
      * List all the support tickets created under a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * <p>If you're listing another account's tickets, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
@@ -116,11 +124,13 @@ public class Support {
     /**
      * Retrieve a support ticket by ID.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * <p>If you're retrieving another account's ticket, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @return The call builder
      */
@@ -131,11 +141,13 @@ public class Support {
     /**
      * Retrieve a support ticket by ID.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * <p>If you're retrieving another account's ticket, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @param accountID 
      * @param ticketID 
@@ -157,11 +169,13 @@ public class Support {
     /**
      * Updates a support ticket.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
      * 
      * <p>If you're updating the ticket on behalf of another account, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @return The call builder
      */
@@ -172,11 +186,13 @@ public class Support {
     /**
      * Updates a support ticket.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
      * 
      * <p>If you're updating the ticket on behalf of another account, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @param accountID 
      * @param ticketID 
@@ -202,11 +218,13 @@ public class Support {
     /**
      * List all the messages for a support ticket.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * <p>If you're listing another account's messages, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @return The call builder
      */
@@ -217,11 +235,13 @@ public class Support {
     /**
      * List all the messages for a support ticket.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
      * 
      * <p>If you're listing another account's messages, then you'll need to
-     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+     * specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read`
+     * scopes.
      * 
      * @param accountID 
      * @param ticketID 

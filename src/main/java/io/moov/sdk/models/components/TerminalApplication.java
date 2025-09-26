@@ -52,7 +52,8 @@ public class TerminalApplication {
     private Optional<String> packageName;
 
     /**
-     * A cryptographic hash of the signing key for the application. Will be returned if platform is `android`.
+     * A cryptographic hash of the signing key for the application. Will be returned if platform is
+     * `android`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sha256Digest")
@@ -140,7 +141,8 @@ public class TerminalApplication {
     }
 
     /**
-     * A cryptographic hash of the signing key for the application. Will be returned if platform is `android`.
+     * A cryptographic hash of the signing key for the application. Will be returned if platform is
+     * `android`.
      */
     @JsonIgnore
     public Optional<String> sha256Digest() {
@@ -226,7 +228,8 @@ public class TerminalApplication {
     }
 
     /**
-     * A cryptographic hash of the signing key for the application. Will be returned if platform is `android`.
+     * A cryptographic hash of the signing key for the application. Will be returned if platform is
+     * `android`.
      */
     public TerminalApplication withSha256Digest(String sha256Digest) {
         Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -236,7 +239,8 @@ public class TerminalApplication {
 
 
     /**
-     * A cryptographic hash of the signing key for the application. Will be returned if platform is `android`.
+     * A cryptographic hash of the signing key for the application. Will be returned if platform is
+     * `android`.
      */
     public TerminalApplication withSha256Digest(Optional<String> sha256Digest) {
         Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -393,7 +397,8 @@ public class TerminalApplication {
 
 
         /**
-         * A cryptographic hash of the signing key for the application. Will be returned if platform is `android`.
+         * A cryptographic hash of the signing key for the application. Will be returned if platform is
+         * `android`.
          */
         public Builder sha256Digest(String sha256Digest) {
             Utils.checkNotNull(sha256Digest, "sha256Digest");
@@ -402,7 +407,8 @@ public class TerminalApplication {
         }
 
         /**
-         * A cryptographic hash of the signing key for the application. Will be returned if platform is `android`.
+         * A cryptographic hash of the signing key for the application. Will be returned if platform is
+         * `android`.
          */
         public Builder sha256Digest(Optional<String> sha256Digest) {
             Utils.checkNotNull(sha256Digest, "sha256Digest");

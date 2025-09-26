@@ -41,7 +41,8 @@ public class TerminalApplications {
     /**
      * Create a new terminal application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.write` scope.
      * 
      * @return The call builder
@@ -53,7 +54,8 @@ public class TerminalApplications {
     /**
      * Create a new terminal application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.write` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -69,7 +71,8 @@ public class TerminalApplications {
     /**
      * List all the terminal applications for a Moov Account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.read` scope.
      * 
      * @return The call builder
@@ -81,7 +84,8 @@ public class TerminalApplications {
     /**
      * List all the terminal applications for a Moov Account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.read` scope.
      * 
      * @return The response from the API call
@@ -100,7 +104,8 @@ public class TerminalApplications {
     /**
      * Fetch a specific terminal application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.read` scope.
      * 
      * @return The call builder
@@ -112,7 +117,8 @@ public class TerminalApplications {
     /**
      * Fetch a specific terminal application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.read` scope.
      * 
      * @param terminalApplicationID 
@@ -133,7 +139,8 @@ public class TerminalApplications {
     /**
      * Delete a specific terminal application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.write` scope.
      * 
      * @return The call builder
@@ -145,7 +152,8 @@ public class TerminalApplications {
     /**
      * Delete a specific terminal application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.write` scope.
      * 
      * @param terminalApplicationID 
@@ -164,9 +172,11 @@ public class TerminalApplications {
     }
 
     /**
-     * Register a new version of a terminal application. For Android applications, this is used to register a new version code of the application.
+     * Register a new version of a terminal application. For Android applications, this is used to register
+     * a new version code of the application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.write` scope.
      * 
      * @return The call builder
@@ -176,9 +186,11 @@ public class TerminalApplications {
     }
 
     /**
-     * Register a new version of a terminal application. For Android applications, this is used to register a new version code of the application.
+     * Register a new version of a terminal application. For Android applications, this is used to register
+     * a new version code of the application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/terminal-applications.write` scope.
      * 
      * @param terminalApplicationID 

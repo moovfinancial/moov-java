@@ -11,7 +11,8 @@ import java.util.Optional;
 /**
  * DebitHoldPeriod
  * 
- * <p>An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
+ * <p>An optional override of your default ACH hold period in banking days. The hold period must be longer
+ * than or equal to your default setting.
  */
 public enum DebitHoldPeriod {
     NO_HOLD("no-hold"),

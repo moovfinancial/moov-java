@@ -42,16 +42,20 @@ public class Wallet {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     @JsonProperty("status")
     private WalletStatus status;
 
     /**
      * Type of a wallet.
-     *   - `default`: The primary system-generated wallet automatically created by Moov when an account is granted the wallet capability. This generates a moov-wallet payment method that is available for use immediately. Only one default wallet exists per account.
-     *   - `general`: A user-defined wallet created via the API to segment funds for specific use cases. Users can create multiple general wallets per account to support internal business models or financial reporting needs.
+     * - `default`: The primary system-generated wallet automatically created by Moov when an account is
+     * granted the wallet capability. This generates a moov-wallet payment method that is available for use
+     * immediately. Only one default wallet exists per account.
+     * - `general`: A user-defined wallet created via the API to segment funds for specific use cases.
+     * Users can create multiple general wallets per account to support internal business models or
+     * financial reporting needs.
      */
     @JsonProperty("walletType")
     private WalletType walletType;
@@ -152,8 +156,8 @@ public class Wallet {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     @JsonIgnore
     public WalletStatus status() {
@@ -162,8 +166,12 @@ public class Wallet {
 
     /**
      * Type of a wallet.
-     *   - `default`: The primary system-generated wallet automatically created by Moov when an account is granted the wallet capability. This generates a moov-wallet payment method that is available for use immediately. Only one default wallet exists per account.
-     *   - `general`: A user-defined wallet created via the API to segment funds for specific use cases. Users can create multiple general wallets per account to support internal business models or financial reporting needs.
+     * - `default`: The primary system-generated wallet automatically created by Moov when an account is
+     * granted the wallet capability. This generates a moov-wallet payment method that is available for use
+     * immediately. Only one default wallet exists per account.
+     * - `general`: A user-defined wallet created via the API to segment funds for specific use cases.
+     * Users can create multiple general wallets per account to support internal business models or
+     * financial reporting needs.
      */
     @JsonIgnore
     public WalletType walletType() {
@@ -231,8 +239,8 @@ public class Wallet {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     public Wallet withStatus(WalletStatus status) {
         Utils.checkNotNull(status, "status");
@@ -242,8 +250,12 @@ public class Wallet {
 
     /**
      * Type of a wallet.
-     *   - `default`: The primary system-generated wallet automatically created by Moov when an account is granted the wallet capability. This generates a moov-wallet payment method that is available for use immediately. Only one default wallet exists per account.
-     *   - `general`: A user-defined wallet created via the API to segment funds for specific use cases. Users can create multiple general wallets per account to support internal business models or financial reporting needs.
+     * - `default`: The primary system-generated wallet automatically created by Moov when an account is
+     * granted the wallet capability. This generates a moov-wallet payment method that is available for use
+     * immediately. Only one default wallet exists per account.
+     * - `general`: A user-defined wallet created via the API to segment funds for specific use cases.
+     * Users can create multiple general wallets per account to support internal business models or
+     * financial reporting needs.
      */
     public Wallet withWalletType(WalletType walletType) {
         Utils.checkNotNull(walletType, "walletType");
@@ -405,8 +417,8 @@ public class Wallet {
 
         /**
          * Status of a wallet.
-         *   - `active`: The wallet is available for use and has an enabled payment method.
-         *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+         * - `active`: The wallet is available for use and has an enabled payment method.
+         * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
          */
         public Builder status(WalletStatus status) {
             Utils.checkNotNull(status, "status");
@@ -417,8 +429,12 @@ public class Wallet {
 
         /**
          * Type of a wallet.
-         *   - `default`: The primary system-generated wallet automatically created by Moov when an account is granted the wallet capability. This generates a moov-wallet payment method that is available for use immediately. Only one default wallet exists per account.
-         *   - `general`: A user-defined wallet created via the API to segment funds for specific use cases. Users can create multiple general wallets per account to support internal business models or financial reporting needs.
+         * - `default`: The primary system-generated wallet automatically created by Moov when an account is
+         * granted the wallet capability. This generates a moov-wallet payment method that is available for use
+         * immediately. Only one default wallet exists per account.
+         * - `general`: A user-defined wallet created via the API to segment funds for specific use cases.
+         * Users can create multiple general wallets per account to support internal business models or
+         * financial reporting needs.
          */
         public Builder walletType(WalletType walletType) {
             Utils.checkNotNull(walletType, "walletType");

@@ -23,9 +23,10 @@ public class Avatars {
     }
 
     /**
-     * Get avatar image for an account using a unique ID.    
+     * Get avatar image for an account using a unique ID.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @return The call builder
@@ -35,9 +36,10 @@ public class Avatars {
     }
 
     /**
-     * Get avatar image for an account using a unique ID.    
+     * Get avatar image for an account using a unique ID.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @param uniqueID Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.

@@ -22,8 +22,8 @@ public class WebhookDataWalletUpdated {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     @JsonProperty("status")
     private WalletStatus status;
@@ -53,8 +53,8 @@ public class WebhookDataWalletUpdated {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     @JsonIgnore
     public WalletStatus status() {
@@ -80,8 +80,8 @@ public class WebhookDataWalletUpdated {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     public WebhookDataWalletUpdated withStatus(WalletStatus status) {
         Utils.checkNotNull(status, "status");
@@ -148,8 +148,8 @@ public class WebhookDataWalletUpdated {
 
         /**
          * Status of a wallet.
-         *   - `active`: The wallet is available for use and has an enabled payment method.
-         *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+         * - `active`: The wallet is available for use and has an enabled payment method.
+         * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
          */
         public Builder status(WalletStatus status) {
             Utils.checkNotNull(status, "status");

@@ -71,19 +71,23 @@ public class WalletTransaction {
     private String currency;
 
     /**
-     * The total transaction amount. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * The total transaction amount. The amount is in the smallest unit of the specified currency. In USD
+     * this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
     @JsonProperty("grossAmount")
     private long grossAmount;
 
     /**
-     * The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that
+     * represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and
+     * 0.9987634521 is $0.9987634521.
      */
     @JsonProperty("grossAmountDecimal")
     private String grossAmountDecimal;
 
     /**
-     * Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In
+     * USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
     @JsonProperty("fee")
     private long fee;
@@ -96,32 +100,42 @@ public class WalletTransaction {
     private Optional<? extends List<String>> feeIDs;
 
     /**
-     * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that
+     * represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and
+     * 0.9987634521 is $0.9987634521.
      */
     @JsonProperty("feeDecimal")
     private String feeDecimal;
 
     /**
-     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The
+     * amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04
+     * is 1204 and $0.99 is 99.
      */
     @JsonProperty("netAmount")
     private long netAmount;
 
     /**
-     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance.
+     * Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
     @JsonProperty("netAmountDecimal")
     private String netAmountDecimal;
 
     /**
-     * The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * The wallet's total available balance after recording a completed transaction. The value is in the
+     * smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99
+     * is 99.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("availableBalance")
     private Optional<Long> availableBalance;
 
     /**
-     * The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * The wallet's total available balance after recording a completed transaction. Same as
+     * `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("availableBalanceDecimal")
@@ -281,7 +295,8 @@ public class WalletTransaction {
     }
 
     /**
-     * The total transaction amount. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * The total transaction amount. The amount is in the smallest unit of the specified currency. In USD
+     * this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
     @JsonIgnore
     public long grossAmount() {
@@ -289,7 +304,9 @@ public class WalletTransaction {
     }
 
     /**
-     * The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that
+     * represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and
+     * 0.9987634521 is $0.9987634521.
      */
     @JsonIgnore
     public String grossAmountDecimal() {
@@ -297,7 +314,8 @@ public class WalletTransaction {
     }
 
     /**
-     * Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In
+     * USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
     @JsonIgnore
     public long fee() {
@@ -314,7 +332,9 @@ public class WalletTransaction {
     }
 
     /**
-     * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that
+     * represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and
+     * 0.9987634521 is $0.9987634521.
      */
     @JsonIgnore
     public String feeDecimal() {
@@ -322,7 +342,9 @@ public class WalletTransaction {
     }
 
     /**
-     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The
+     * amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04
+     * is 1204 and $0.99 is 99.
      */
     @JsonIgnore
     public long netAmount() {
@@ -330,7 +352,9 @@ public class WalletTransaction {
     }
 
     /**
-     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance.
+     * Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
     @JsonIgnore
     public String netAmountDecimal() {
@@ -338,7 +362,9 @@ public class WalletTransaction {
     }
 
     /**
-     * The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * The wallet's total available balance after recording a completed transaction. The value is in the
+     * smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99
+     * is 99.
      */
     @JsonIgnore
     public Optional<Long> availableBalance() {
@@ -346,7 +372,9 @@ public class WalletTransaction {
     }
 
     /**
-     * The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * The wallet's total available balance after recording a completed transaction. Same as
+     * `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
     @JsonIgnore
     public Optional<String> availableBalanceDecimal() {
@@ -440,7 +468,8 @@ public class WalletTransaction {
     }
 
     /**
-     * The total transaction amount. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * The total transaction amount. The amount is in the smallest unit of the specified currency. In USD
+     * this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
     public WalletTransaction withGrossAmount(long grossAmount) {
         Utils.checkNotNull(grossAmount, "grossAmount");
@@ -449,7 +478,9 @@ public class WalletTransaction {
     }
 
     /**
-     * The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that
+     * represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and
+     * 0.9987634521 is $0.9987634521.
      */
     public WalletTransaction withGrossAmountDecimal(String grossAmountDecimal) {
         Utils.checkNotNull(grossAmountDecimal, "grossAmountDecimal");
@@ -458,7 +489,8 @@ public class WalletTransaction {
     }
 
     /**
-     * Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In
+     * USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
     public WalletTransaction withFee(long fee) {
         Utils.checkNotNull(fee, "fee");
@@ -486,7 +518,9 @@ public class WalletTransaction {
     }
 
     /**
-     * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that
+     * represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and
+     * 0.9987634521 is $0.9987634521.
      */
     public WalletTransaction withFeeDecimal(String feeDecimal) {
         Utils.checkNotNull(feeDecimal, "feeDecimal");
@@ -495,7 +529,9 @@ public class WalletTransaction {
     }
 
     /**
-     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The
+     * amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04
+     * is 1204 and $0.99 is 99.
      */
     public WalletTransaction withNetAmount(long netAmount) {
         Utils.checkNotNull(netAmount, "netAmount");
@@ -504,7 +540,9 @@ public class WalletTransaction {
     }
 
     /**
-     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance.
+     * Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
     public WalletTransaction withNetAmountDecimal(String netAmountDecimal) {
         Utils.checkNotNull(netAmountDecimal, "netAmountDecimal");
@@ -513,7 +551,9 @@ public class WalletTransaction {
     }
 
     /**
-     * The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * The wallet's total available balance after recording a completed transaction. The value is in the
+     * smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99
+     * is 99.
      */
     public WalletTransaction withAvailableBalance(long availableBalance) {
         Utils.checkNotNull(availableBalance, "availableBalance");
@@ -523,7 +563,9 @@ public class WalletTransaction {
 
 
     /**
-     * The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+     * The wallet's total available balance after recording a completed transaction. The value is in the
+     * smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99
+     * is 99.
      */
     public WalletTransaction withAvailableBalance(Optional<Long> availableBalance) {
         Utils.checkNotNull(availableBalance, "availableBalance");
@@ -532,7 +574,9 @@ public class WalletTransaction {
     }
 
     /**
-     * The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * The wallet's total available balance after recording a completed transaction. Same as
+     * `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
     public WalletTransaction withAvailableBalanceDecimal(String availableBalanceDecimal) {
         Utils.checkNotNull(availableBalanceDecimal, "availableBalanceDecimal");
@@ -542,7 +586,9 @@ public class WalletTransaction {
 
 
     /**
-     * The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+     * The wallet's total available balance after recording a completed transaction. Same as
+     * `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
      */
     public WalletTransaction withAvailableBalanceDecimal(Optional<String> availableBalanceDecimal) {
         Utils.checkNotNull(availableBalanceDecimal, "availableBalanceDecimal");
@@ -766,7 +812,8 @@ public class WalletTransaction {
 
 
         /**
-         * The total transaction amount. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+         * The total transaction amount. The amount is in the smallest unit of the specified currency. In USD
+         * this is cents, for example, $12.04 is 1204 and $0.99 is 99.
          */
         public Builder grossAmount(long grossAmount) {
             Utils.checkNotNull(grossAmount, "grossAmount");
@@ -776,7 +823,9 @@ public class WalletTransaction {
 
 
         /**
-         * The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+         * The total transaction amount. Same as `grossAmount`, but a decimal-formatted numerical string that
+         * represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and
+         * 0.9987634521 is $0.9987634521.
          */
         public Builder grossAmountDecimal(String grossAmountDecimal) {
             Utils.checkNotNull(grossAmountDecimal, "grossAmountDecimal");
@@ -786,7 +835,8 @@ public class WalletTransaction {
 
 
         /**
-         * Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+         * Total fees paid for the transaction. The value is in the smallest unit of the specified currency. In
+         * USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
          */
         public Builder fee(long fee) {
             Utils.checkNotNull(fee, "fee");
@@ -815,7 +865,9 @@ public class WalletTransaction {
 
 
         /**
-         * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+         * Total fees paid for the transaction. Same as `fee`, but a decimal-formatted numerical string that
+         * represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and
+         * 0.9987634521 is $0.9987634521.
          */
         public Builder feeDecimal(String feeDecimal) {
             Utils.checkNotNull(feeDecimal, "feeDecimal");
@@ -825,7 +877,9 @@ public class WalletTransaction {
 
 
         /**
-         * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+         * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. The
+         * amount is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04
+         * is 1204 and $0.99 is 99.
          */
         public Builder netAmount(long netAmount) {
             Utils.checkNotNull(netAmount, "netAmount");
@@ -835,7 +889,9 @@ public class WalletTransaction {
 
 
         /**
-         * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+         * Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance.
+         * Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
          */
         public Builder netAmountDecimal(String netAmountDecimal) {
             Utils.checkNotNull(netAmountDecimal, "netAmountDecimal");
@@ -845,7 +901,9 @@ public class WalletTransaction {
 
 
         /**
-         * The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+         * The wallet's total available balance after recording a completed transaction. The value is in the
+         * smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99
+         * is 99.
          */
         public Builder availableBalance(long availableBalance) {
             Utils.checkNotNull(availableBalance, "availableBalance");
@@ -854,7 +912,9 @@ public class WalletTransaction {
         }
 
         /**
-         * The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
+         * The wallet's total available balance after recording a completed transaction. The value is in the
+         * smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99
+         * is 99.
          */
         public Builder availableBalance(Optional<Long> availableBalance) {
             Utils.checkNotNull(availableBalance, "availableBalance");
@@ -864,7 +924,9 @@ public class WalletTransaction {
 
 
         /**
-         * The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+         * The wallet's total available balance after recording a completed transaction. Same as
+         * `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
          */
         public Builder availableBalanceDecimal(String availableBalanceDecimal) {
             Utils.checkNotNull(availableBalanceDecimal, "availableBalanceDecimal");
@@ -873,7 +935,9 @@ public class WalletTransaction {
         }
 
         /**
-         * The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
+         * The wallet's total available balance after recording a completed transaction. Same as
+         * `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521.
          */
         public Builder availableBalanceDecimal(Optional<String> availableBalanceDecimal) {
             Utils.checkNotNull(availableBalanceDecimal, "availableBalanceDecimal");

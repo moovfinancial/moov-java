@@ -32,7 +32,8 @@ public class ListIssuedCardsRequest {
     private Optional<Long> count;
 
     /**
-     * Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+     * Optional, comma-separated states to filter the Moov list issued cards response. For example
+     * `active,pending-verification`
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=states")
     private Optional<? extends List<IssuedCardState>> states;
@@ -78,7 +79,8 @@ public class ListIssuedCardsRequest {
     }
 
     /**
-     * Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+     * Optional, comma-separated states to filter the Moov list issued cards response. For example
+     * `active,pending-verification`
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -127,7 +129,8 @@ public class ListIssuedCardsRequest {
     }
 
     /**
-     * Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+     * Optional, comma-separated states to filter the Moov list issued cards response. For example
+     * `active,pending-verification`
      */
     public ListIssuedCardsRequest withStates(List<IssuedCardState> states) {
         Utils.checkNotNull(states, "states");
@@ -137,7 +140,8 @@ public class ListIssuedCardsRequest {
 
 
     /**
-     * Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+     * Optional, comma-separated states to filter the Moov list issued cards response. For example
+     * `active,pending-verification`
      */
     public ListIssuedCardsRequest withStates(Optional<? extends List<IssuedCardState>> states) {
         Utils.checkNotNull(states, "states");
@@ -230,7 +234,8 @@ public class ListIssuedCardsRequest {
 
 
         /**
-         * Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+         * Optional, comma-separated states to filter the Moov list issued cards response. For example
+         * `active,pending-verification`
          */
         public Builder states(List<IssuedCardState> states) {
             Utils.checkNotNull(states, "states");
@@ -239,7 +244,8 @@ public class ListIssuedCardsRequest {
         }
 
         /**
-         * Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+         * Optional, comma-separated states to filter the Moov list issued cards response. For example
+         * `active,pending-verification`
          */
         public Builder states(Optional<? extends List<IssuedCardState>> states) {
             Utils.checkNotNull(states, "states");

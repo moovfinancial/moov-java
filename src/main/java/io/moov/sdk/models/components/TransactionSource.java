@@ -11,9 +11,9 @@ import java.util.Optional;
 /**
  * TransactionSource
  * 
- * <p>Specifies the nature and initiator of a transaction. 
+ * <p>Specifies the nature and initiator of a transaction.
  * 
- * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+ * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules.
  * Omit for customer-initiated e-commerce transactions.
  */
 public enum TransactionSource {

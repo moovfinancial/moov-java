@@ -42,7 +42,8 @@ public class Account {
     private String displayName;
 
     /**
-     * Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type.
+     * Describes a Moov account profile. A profile will have a business, individual, or guest depending on
+     * the account's type.
      */
     @JsonProperty("profile")
     private Profile profile;
@@ -80,7 +81,8 @@ public class Account {
     private Optional<String> foreignID;
 
     /**
-     * User-provided information that can be displayed on credit card transactions for customers to use when
+     * User-provided information that can be displayed on credit card transactions for customers to use
+     * when
      * contacting a customer support team. This data is only allowed on a business account.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -202,7 +204,8 @@ public class Account {
     }
 
     /**
-     * Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type.
+     * Describes a Moov account profile. A profile will have a business, individual, or guest depending on
+     * the account's type.
      */
     @JsonIgnore
     public Profile profile() {
@@ -250,7 +253,8 @@ public class Account {
     }
 
     /**
-     * User-provided information that can be displayed on credit card transactions for customers to use when
+     * User-provided information that can be displayed on credit card transactions for customers to use
+     * when
      * contacting a customer support team. This data is only allowed on a business account.
      */
     @SuppressWarnings("unchecked")
@@ -322,7 +326,8 @@ public class Account {
     }
 
     /**
-     * Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type.
+     * Describes a Moov account profile. A profile will have a business, individual, or guest depending on
+     * the account's type.
      */
     public Account withProfile(Profile profile) {
         Utils.checkNotNull(profile, "profile");
@@ -410,7 +415,8 @@ public class Account {
     }
 
     /**
-     * User-provided information that can be displayed on credit card transactions for customers to use when
+     * User-provided information that can be displayed on credit card transactions for customers to use
+     * when
      * contacting a customer support team. This data is only allowed on a business account.
      */
     public Account withCustomerSupport(CustomerSupport customerSupport) {
@@ -421,7 +427,8 @@ public class Account {
 
 
     /**
-     * User-provided information that can be displayed on credit card transactions for customers to use when
+     * User-provided information that can be displayed on credit card transactions for customers to use
+     * when
      * contacting a customer support team. This data is only allowed on a business account.
      */
     public Account withCustomerSupport(Optional<? extends CustomerSupport> customerSupport) {
@@ -607,7 +614,8 @@ public class Account {
 
 
         /**
-         * Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type.
+         * Describes a Moov account profile. A profile will have a business, individual, or guest depending on
+         * the account's type.
          */
         public Builder profile(Profile profile) {
             Utils.checkNotNull(profile, "profile");
@@ -697,7 +705,8 @@ public class Account {
 
 
         /**
-         * User-provided information that can be displayed on credit card transactions for customers to use when
+         * User-provided information that can be displayed on credit card transactions for customers to use
+         * when
          * contacting a customer support team. This data is only allowed on a business account.
          */
         public Builder customerSupport(CustomerSupport customerSupport) {
@@ -707,7 +716,8 @@ public class Account {
         }
 
         /**
-         * User-provided information that can be displayed on credit card transactions for customers to use when
+         * User-provided information that can be displayed on credit card transactions for customers to use
+         * when
          * contacting a customer support team. This data is only allowed on a business account.
          */
         public Builder customerSupport(Optional<? extends CustomerSupport> customerSupport) {

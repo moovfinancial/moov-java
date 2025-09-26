@@ -17,7 +17,8 @@ import java.util.Optional;
 /**
  * PatchAccountCustomerSupport
  * 
- * <p>User-provided information that can be displayed on credit card transactions for customers to use when
+ * <p>User-provided information that can be displayed on credit card transactions for customers to use
+ * when
  * contacting a customer support team. This data is only allowed on a business account.
  */
 public class PatchAccountCustomerSupport {

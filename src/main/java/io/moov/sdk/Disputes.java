@@ -66,11 +66,14 @@ public class Disputes {
     }
 
     /**
-     * Returns the list of disputes. 
+     * Returns the list of disputes.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -80,11 +83,14 @@ public class Disputes {
     }
 
     /**
-     * Returns the list of disputes. 
+     * Returns the list of disputes.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -98,11 +104,14 @@ public class Disputes {
     }
 
     /**
-     * Get a dispute by ID. 
+     * Get a dispute by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -112,11 +121,14 @@ public class Disputes {
     }
 
     /**
-     * Get a dispute by ID. 
+     * Get a dispute by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 
@@ -137,11 +149,14 @@ public class Disputes {
     }
 
     /**
-     * Accepts liability for a dispute. 
+     * Accepts liability for a dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -151,11 +166,14 @@ public class Disputes {
     }
 
     /**
-     * Accepts liability for a dispute. 
+     * Accepts liability for a dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 
@@ -176,11 +194,14 @@ public class Disputes {
     }
 
     /**
-     * Returns a dispute's public evidence by its ID. 
+     * Returns a dispute's public evidence by its ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -190,11 +211,14 @@ public class Disputes {
     }
 
     /**
-     * Returns a dispute's public evidence by its ID. 
+     * Returns a dispute's public evidence by its ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 
@@ -215,11 +239,14 @@ public class Disputes {
     }
 
     /**
-     * Uploads a file as evidence for a dispute. 
+     * Uploads a file as evidence for a dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -229,11 +256,14 @@ public class Disputes {
     }
 
     /**
-     * Uploads a file as evidence for a dispute. 
+     * Uploads a file as evidence for a dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID 
@@ -260,9 +290,12 @@ public class Disputes {
     /**
      * Uploads text as evidence for a dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -274,9 +307,12 @@ public class Disputes {
     /**
      * Uploads text as evidence for a dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID 
@@ -303,12 +339,16 @@ public class Disputes {
     /**
      * Submit the evidence associated with a dispute.
      * 
-     * <p>Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only
+     * <p>Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to
+     * submit it. **Evidence can only
      * be submitted once per dispute.**
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -320,12 +360,16 @@ public class Disputes {
     /**
      * Submit the evidence associated with a dispute.
      * 
-     * <p>Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only
+     * <p>Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to
+     * submit it. **Evidence can only
      * be submitted once per dispute.**
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID 
@@ -348,9 +392,12 @@ public class Disputes {
     /**
      * Get dispute evidence by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -362,9 +409,12 @@ public class Disputes {
     /**
      * Get dispute evidence by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 
@@ -391,9 +441,12 @@ public class Disputes {
     /**
      * Updates dispute evidence by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -405,9 +458,12 @@ public class Disputes {
     /**
      * Updates dispute evidence by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID 
@@ -434,11 +490,14 @@ public class Disputes {
     }
 
     /**
-     * Deletes dispute evidence by ID. 
+     * Deletes dispute evidence by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -448,11 +507,14 @@ public class Disputes {
     }
 
     /**
-     * Deletes dispute evidence by ID. 
+     * Deletes dispute evidence by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID 
@@ -479,9 +541,12 @@ public class Disputes {
     /**
      * Downloads dispute evidence data by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -493,9 +558,12 @@ public class Disputes {
     /**
      * Downloads dispute evidence data by ID.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 

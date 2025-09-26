@@ -30,8 +30,9 @@ public class Receipts {
     /**
      * Create receipts for transfers and scheduled transfers.
      * 
-     * <p> To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     *  you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
      */
@@ -42,8 +43,9 @@ public class Receipts {
     /**
      * Create receipts for transfers and scheduled transfers.
      * 
-     * <p> To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-     *  you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
@@ -58,7 +60,8 @@ public class Receipts {
     /**
      * List receipts by transferID, scheduleID, or occurrenceID.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -70,7 +73,8 @@ public class Receipts {
     /**
      * List receipts by transferID, scheduleID, or occurrenceID.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param id The transfer, schedule, or transfer occurrence ID to filter receipts by.

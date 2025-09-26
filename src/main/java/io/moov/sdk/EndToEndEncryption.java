@@ -27,9 +27,10 @@ public class EndToEndEncryption {
     }
 
     /**
-     * Allows for testing a JWE token to ensure it's acceptable by Moov. 
+     * Allows for testing a JWE token to ensure it's acceptable by Moov.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/ping.read` scope.
      * 
      * @return The call builder
@@ -39,9 +40,10 @@ public class EndToEndEncryption {
     }
 
     /**
-     * Allows for testing a JWE token to ensure it's acceptable by Moov. 
+     * Allows for testing a JWE token to ensure it's acceptable by Moov.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/ping.read` scope.
      * 
      * @param token 
@@ -60,7 +62,8 @@ public class EndToEndEncryption {
     }
 
     /**
-     * Generates a public key used to create a JWE token for passing secure authentication data through non-PCI compliant intermediaries.
+     * Generates a public key used to create a JWE token for passing secure authentication data through
+     * non-PCI compliant intermediaries.
      * 
      * @return The call builder
      */
@@ -69,7 +72,8 @@ public class EndToEndEncryption {
     }
 
     /**
-     * Generates a public key used to create a JWE token for passing secure authentication data through non-PCI compliant intermediaries.
+     * Generates a public key used to create a JWE token for passing secure authentication data through
+     * non-PCI compliant intermediaries.
      * 
      * @return The response from the API call
      * @throws Exception if the API call fails

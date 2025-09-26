@@ -37,7 +37,8 @@ public class IssuedCardAuthorization {
     private CardIssuingNetwork network;
 
     /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+     * example, 12.34 is $12.34 and 0.99 is $0.99.
      */
     @JsonProperty("authorizedAmount")
     private String authorizedAmount;
@@ -132,7 +133,8 @@ public class IssuedCardAuthorization {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+     * example, 12.34 is $12.34 and 0.99 is $0.99.
      */
     @JsonIgnore
     public String authorizedAmount() {
@@ -199,7 +201,8 @@ public class IssuedCardAuthorization {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+     * example, 12.34 is $12.34 and 0.99 is $0.99.
      */
     public IssuedCardAuthorization withAuthorizedAmount(String authorizedAmount) {
         Utils.checkNotNull(authorizedAmount, "authorizedAmount");
@@ -348,7 +351,8 @@ public class IssuedCardAuthorization {
 
 
         /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+         * example, 12.34 is $12.34 and 0.99 is $0.99.
          */
         public Builder authorizedAmount(String authorizedAmount) {
             Utils.checkNotNull(authorizedAmount, "authorizedAmount");

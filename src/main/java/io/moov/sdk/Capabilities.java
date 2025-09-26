@@ -41,7 +41,8 @@ public class Capabilities {
      * 
      * <p>Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
      * 
      * @return The call builder
@@ -55,7 +56,8 @@ public class Capabilities {
      * 
      * <p>Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
      * 
      * @param accountID 
@@ -74,9 +76,11 @@ public class Capabilities {
     }
 
     /**
-     * Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * Request capabilities for a specific account. Read our [capabilities
+     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
      * 
      * @return The call builder
@@ -86,9 +90,11 @@ public class Capabilities {
     }
 
     /**
-     * Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * Request capabilities for a specific account. Read our [capabilities
+     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
      * 
      * @param accountID 
@@ -109,9 +115,11 @@ public class Capabilities {
     }
 
     /**
-     * Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * Retrieve a specific capability that an account has requested. Read our [capabilities
+     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
      * 
      * @return The call builder
@@ -121,9 +129,11 @@ public class Capabilities {
     }
 
     /**
-     * Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * Retrieve a specific capability that an account has requested. Read our [capabilities
+     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
      * 
      * @param accountID 
@@ -146,9 +156,11 @@ public class Capabilities {
     }
 
     /**
-     * Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * Disable a specific capability that an account has requested. Read our [capabilities
+     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
      * 
-     * <p>  To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
      * 
      * @return The call builder
@@ -158,9 +170,11 @@ public class Capabilities {
     }
 
     /**
-     * Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+     * Disable a specific capability that an account has requested. Read our [capabilities
+     * guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
      * 
-     * <p>  To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
      * 
      * @param accountID 

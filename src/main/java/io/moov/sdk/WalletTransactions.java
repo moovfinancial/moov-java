@@ -27,11 +27,13 @@ public class WalletTransactions {
     }
 
     /**
-     * List all the transactions associated with a particular Moov wallet. 
+     * List all the transactions associated with a particular Moov wallet.
      * 
-     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -41,11 +43,13 @@ public class WalletTransactions {
     }
 
     /**
-     * List all the transactions associated with a particular Moov wallet. 
+     * List all the transactions associated with a particular Moov wallet.
      * 
-     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -59,11 +63,13 @@ public class WalletTransactions {
     }
 
     /**
-     * Get details on a specific wallet transaction. 
+     * Get details on a specific wallet transaction.
      * 
-     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -73,11 +79,13 @@ public class WalletTransactions {
     }
 
     /**
-     * Get details on a specific wallet transaction. 
+     * Get details on a specific wallet transaction.
      * 
-     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+     * <p>Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param accountID 

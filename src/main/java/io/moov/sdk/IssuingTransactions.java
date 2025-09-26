@@ -43,7 +43,8 @@ public class IssuingTransactions {
     /**
      * List issued card authorizations associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @return The call builder
@@ -55,7 +56,8 @@ public class IssuingTransactions {
     /**
      * List issued card authorizations associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -71,7 +73,8 @@ public class IssuingTransactions {
     /**
      * Retrieves details of an authorization associated with a specific Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @return The call builder
@@ -83,7 +86,8 @@ public class IssuingTransactions {
     /**
      * Retrieves details of an authorization associated with a specific Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @param accountID The Moov business account for which cards have been issued.
@@ -104,9 +108,11 @@ public class IssuingTransactions {
     }
 
     /**
-     * List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
+     * List card network and Moov platform events that affect the authorization and its hold on a wallet
+     * balance.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @return The call builder
@@ -116,9 +122,11 @@ public class IssuingTransactions {
     }
 
     /**
-     * List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
+     * List card network and Moov platform events that affect the authorization and its hold on a wallet
+     * balance.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @param accountID The Moov business account for which cards have been issued.
@@ -132,9 +140,11 @@ public class IssuingTransactions {
     }
 
     /**
-     * List card network and Moov platform events that affect the authorization and its hold on a wallet balance.
+     * List card network and Moov platform events that affect the authorization and its hold on a wallet
+     * balance.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @param accountID The Moov business account for which cards have been issued.
@@ -163,7 +173,8 @@ public class IssuingTransactions {
     /**
      * List issued card transactions associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @return The call builder
@@ -175,7 +186,8 @@ public class IssuingTransactions {
     /**
      * List issued card transactions associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -191,7 +203,8 @@ public class IssuingTransactions {
     /**
      * Retrieves details of an issued card transaction associated with a specific Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @return The call builder
@@ -203,7 +216,8 @@ public class IssuingTransactions {
     /**
      * Retrieves details of an issued card transaction associated with a specific Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
      * 
      * @param accountID The Moov business account for which cards have been issued.

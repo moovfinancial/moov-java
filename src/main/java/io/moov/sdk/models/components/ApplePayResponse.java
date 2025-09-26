@@ -34,16 +34,18 @@ public class ApplePayResponse {
     /**
      * User-friendly name of the tokenized card returned by Apple.
      * 
-     * <p>  It usually contains the brand and the last four digits of the underlying card.
-     *   There is no standard format.
+     * <p>It usually contains the brand and the last four digits of the underlying card.
+     * There is no standard format.
      */
     @JsonProperty("cardDisplayName")
     private String cardDisplayName;
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     @JsonProperty("fingerprint")
     private String fingerprint;
@@ -55,7 +57,8 @@ public class ApplePayResponse {
     private CardExpiration expiration;
 
     /**
-     * The last four digits of the Apple Pay token, which may differ from the tokenized card's last four digits.
+     * The last four digits of the Apple Pay token, which may differ from the tokenized card's last four
+     * digits.
      */
     @JsonProperty("dynamicLastFour")
     private String dynamicLastFour;
@@ -123,8 +126,8 @@ public class ApplePayResponse {
     /**
      * User-friendly name of the tokenized card returned by Apple.
      * 
-     * <p>  It usually contains the brand and the last four digits of the underlying card.
-     *   There is no standard format.
+     * <p>It usually contains the brand and the last four digits of the underlying card.
+     * There is no standard format.
      */
     @JsonIgnore
     public String cardDisplayName() {
@@ -133,8 +136,10 @@ public class ApplePayResponse {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     @JsonIgnore
     public String fingerprint() {
@@ -150,7 +155,8 @@ public class ApplePayResponse {
     }
 
     /**
-     * The last four digits of the Apple Pay token, which may differ from the tokenized card's last four digits.
+     * The last four digits of the Apple Pay token, which may differ from the tokenized card's last four
+     * digits.
      */
     @JsonIgnore
     public String dynamicLastFour() {
@@ -191,8 +197,8 @@ public class ApplePayResponse {
     /**
      * User-friendly name of the tokenized card returned by Apple.
      * 
-     * <p>  It usually contains the brand and the last four digits of the underlying card.
-     *   There is no standard format.
+     * <p>It usually contains the brand and the last four digits of the underlying card.
+     * There is no standard format.
      */
     public ApplePayResponse withCardDisplayName(String cardDisplayName) {
         Utils.checkNotNull(cardDisplayName, "cardDisplayName");
@@ -202,8 +208,10 @@ public class ApplePayResponse {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     public ApplePayResponse withFingerprint(String fingerprint) {
         Utils.checkNotNull(fingerprint, "fingerprint");
@@ -221,7 +229,8 @@ public class ApplePayResponse {
     }
 
     /**
-     * The last four digits of the Apple Pay token, which may differ from the tokenized card's last four digits.
+     * The last four digits of the Apple Pay token, which may differ from the tokenized card's last four
+     * digits.
      */
     public ApplePayResponse withDynamicLastFour(String dynamicLastFour) {
         Utils.checkNotNull(dynamicLastFour, "dynamicLastFour");
@@ -332,8 +341,8 @@ public class ApplePayResponse {
         /**
          * User-friendly name of the tokenized card returned by Apple.
          * 
-         * <p>  It usually contains the brand and the last four digits of the underlying card.
-         *   There is no standard format.
+         * <p>It usually contains the brand and the last four digits of the underlying card.
+         * There is no standard format.
          */
         public Builder cardDisplayName(String cardDisplayName) {
             Utils.checkNotNull(cardDisplayName, "cardDisplayName");
@@ -344,8 +353,10 @@ public class ApplePayResponse {
 
         /**
          * Uniquely identifies a linked payment card or token.
-         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-         * This field can be used to identify specific payment methods across multiple accounts on your platform.
+         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+         * user's device.
+         * This field can be used to identify specific payment methods across multiple accounts on your
+         * platform.
          */
         public Builder fingerprint(String fingerprint) {
             Utils.checkNotNull(fingerprint, "fingerprint");
@@ -365,7 +376,8 @@ public class ApplePayResponse {
 
 
         /**
-         * The last four digits of the Apple Pay token, which may differ from the tokenized card's last four digits.
+         * The last four digits of the Apple Pay token, which may differ from the tokenized card's last four
+         * digits.
          */
         public Builder dynamicLastFour(String dynamicLastFour) {
             Utils.checkNotNull(dynamicLastFour, "dynamicLastFour");

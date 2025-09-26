@@ -57,20 +57,34 @@ public class Accounts {
     }
 
     /**
-     * You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
-     * information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
+     * You can create **business** or **individual** accounts for your users (i.e., customers, merchants)
+     * by passing the required
+     * information to Moov. Requirements differ per account type and requested
+     * [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
      * 
-     * <p>If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities, you'll need to:
-     *   + Send Moov the user [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance.
-     *     This can be done upon account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field.
-     * If you're creating a business account with the business type `llc`, `partnership`, or `privateCorporation`, you'll need to:
-     *   + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after creating the account.
-     *   + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that business representative ownership information is complete.
+     * <p>If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities,
+     * you'll need to:
+     * + Send Moov the user [platform terms of service
+     * agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance.
+     * This can be done upon account creation, or by
+     * [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the
+     * `termsOfService` field.
+     * If you're creating a business account with the business type `llc`, `partnership`, or
+     * `privateCorporation`, you'll need to:
+     * + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after
+     * creating the account.
+     * + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that
+     * business representative ownership information is complete.
      * 
-     * <p>Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/).
-     * Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode.
+     * <p>Visit our documentation to read more about [creating
+     * accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification
+     * requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/).
+     * Note that the `mode` field (for production or sandbox) is only required when creating a
+     * _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to
+     * the calling facilitator's mode.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
      * to specify the `/accounts.write` scope.
      * 
      * @return The call builder
@@ -80,20 +94,34 @@ public class Accounts {
     }
 
     /**
-     * You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
-     * information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
+     * You can create **business** or **individual** accounts for your users (i.e., customers, merchants)
+     * by passing the required
+     * information to Moov. Requirements differ per account type and requested
+     * [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
      * 
-     * <p>If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities, you'll need to:
-     *   + Send Moov the user [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance.
-     *     This can be done upon account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field.
-     * If you're creating a business account with the business type `llc`, `partnership`, or `privateCorporation`, you'll need to:
-     *   + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after creating the account.
-     *   + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that business representative ownership information is complete.
+     * <p>If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities,
+     * you'll need to:
+     * + Send Moov the user [platform terms of service
+     * agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance.
+     * This can be done upon account creation, or by
+     * [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the
+     * `termsOfService` field.
+     * If you're creating a business account with the business type `llc`, `partnership`, or
+     * `privateCorporation`, you'll need to:
+     * + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after
+     * creating the account.
+     * + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that
+     * business representative ownership information is complete.
      * 
-     * <p>Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/).
-     * Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode.
+     * <p>Visit our documentation to read more about [creating
+     * accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification
+     * requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/).
+     * Note that the `mode` field (for production or sandbox) is only required when creating a
+     * _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to
+     * the calling facilitator's mode.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
      * to specify the `/accounts.write` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -109,11 +137,15 @@ public class Accounts {
     /**
      * List or search accounts to which the caller is connected.
      * 
-     * <p>All supported query parameters are optional. If none are provided the response will include all connected accounts.
-     * Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and 
-     * return results based on relevance. Accounts with AccountType `guest` will not be included in the response.
+     * <p>All supported query parameters are optional. If none are provided the response will include all
+     * connected accounts.
+     * Pagination is supported via the `skip` and `count` query parameters. Searching by name and email
+     * will overlap and
+     * return results based on relevance. Accounts with AccountType `guest` will not be included in the
+     * response.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
      * to specify the `/accounts.read` scope.
      * 
      * @return The call builder
@@ -125,11 +157,15 @@ public class Accounts {
     /**
      * List or search accounts to which the caller is connected.
      * 
-     * <p>All supported query parameters are optional. If none are provided the response will include all connected accounts.
-     * Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and 
-     * return results based on relevance. Accounts with AccountType `guest` will not be included in the response.
+     * <p>All supported query parameters are optional. If none are provided the response will include all
+     * connected accounts.
+     * Pagination is supported via the `skip` and `count` query parameters. Searching by name and email
+     * will overlap and
+     * return results based on relevance. Accounts with AccountType `guest` will not be included in the
+     * response.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
      * to specify the `/accounts.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -145,7 +181,8 @@ public class Accounts {
     /**
      * Retrieves details for the account with the specified ID.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
      * to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @return The call builder
@@ -157,7 +194,8 @@ public class Accounts {
     /**
      * Retrieves details for the account with the specified ID.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
      * to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @param accountID 
@@ -177,16 +215,17 @@ public class Accounts {
 
     /**
      * When **can** profile data be updated:
-     *   + For unverified accounts, all profile data can be edited.
-     *   + During the verification process, missing or incomplete profile data can be edited.
-     *   + Verified accounts can only add missing profile data.
+     * + For unverified accounts, all profile data can be edited.
+     * + During the verification process, missing or incomplete profile data can be edited.
+     * + Verified accounts can only add missing profile data.
      * 
-     * <p>  When **can't** profile data be updated:
-     *   + Verified accounts cannot change any existing profile data.
+     * <p>When **can't** profile data be updated:
+     * + Verified accounts cannot change any existing profile data.
      * 
      * <p>If you need to update information in a locked state, please contact Moov support.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
      * to specify the `/accounts/{accountID}/profile.write` scope.
      * 
      * @return The call builder
@@ -197,16 +236,17 @@ public class Accounts {
 
     /**
      * When **can** profile data be updated:
-     *   + For unverified accounts, all profile data can be edited.
-     *   + During the verification process, missing or incomplete profile data can be edited.
-     *   + Verified accounts can only add missing profile data.
+     * + For unverified accounts, all profile data can be edited.
+     * + During the verification process, missing or incomplete profile data can be edited.
+     * + Verified accounts can only add missing profile data.
      * 
-     * <p>  When **can't** profile data be updated:
-     *   + Verified accounts cannot change any existing profile data.
+     * <p>When **can't** profile data be updated:
+     * + Verified accounts cannot change any existing profile data.
      * 
      * <p>If you need to update information in a locked state, please contact Moov support.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
      * to specify the `/accounts/{accountID}/profile.write` scope.
      * 
      * @param accountID 
@@ -227,11 +267,14 @@ public class Accounts {
     }
 
     /**
-     * This will sever the connection between you and the account specified and it will no longer be listed as 
-     * active in the list of accounts. This also means you'll only have read-only access to the account going 
+     * This will sever the connection between you and the account specified and it will no longer be listed
+     * as
+     * active in the list of accounts. This also means you'll only have read-only access to the account
+     * going
      * forward for reporting purposes.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
      * 
      * @return The call builder
@@ -241,11 +284,14 @@ public class Accounts {
     }
 
     /**
-     * This will sever the connection between you and the account specified and it will no longer be listed as 
-     * active in the list of accounts. This also means you'll only have read-only access to the account going 
+     * This will sever the connection between you and the account specified and it will no longer be listed
+     * as
+     * active in the list of accounts. This also means you'll only have read-only access to the account
+     * going
      * forward for reporting purposes.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
      * 
      * @param accountID 
@@ -264,9 +310,10 @@ public class Accounts {
     }
 
     /**
-     * Retrieve the specified countries of operation for an account. 
+     * Retrieve the specified countries of operation for an account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @return The call builder
@@ -276,9 +323,10 @@ public class Accounts {
     }
 
     /**
-     * Retrieve the specified countries of operation for an account. 
+     * Retrieve the specified countries of operation for an account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @param accountID 
@@ -299,9 +347,10 @@ public class Accounts {
     /**
      * Assign the countries of operation for an account.
      * 
-     * <p>This endpoint will always overwrite the previously assigned values. 
+     * <p>This endpoint will always overwrite the previously assigned values.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * 
      * @return The call builder
@@ -313,9 +362,10 @@ public class Accounts {
     /**
      * Assign the countries of operation for an account.
      * 
-     * <p>This endpoint will always overwrite the previously assigned values. 
+     * <p>This endpoint will always overwrite the previously assigned values.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * 
      * @param accountID 
@@ -338,7 +388,8 @@ public class Accounts {
     /**
      * Retrieve a merchant account's processing agreement.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @return The call builder
@@ -350,7 +401,8 @@ public class Accounts {
     /**
      * Retrieve a merchant account's processing agreement.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @param accountID 
@@ -369,11 +421,14 @@ public class Accounts {
     }
 
     /**
-     * Generates a non-expiring token that can then be used to accept Moov's terms of service. 
+     * Generates a non-expiring token that can then be used to accept Moov's terms of service.
      * 
-     * <p>This token can only be generated via API. Any Moov account requesting the collect funds, send funds, wallet, 
-     * or card issuing capabilities must accept Moov's terms of service, then have the generated terms of service 
-     * token patched to the account. Read more in our [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
+     * <p>This token can only be generated via API. Any Moov account requesting the collect funds, send funds,
+     * wallet,
+     * or card issuing capabilities must accept Moov's terms of service, then have the generated terms of
+     * service
+     * token patched to the account. Read more in our
+     * [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
      * 
      * @return The call builder
      */
@@ -382,11 +437,14 @@ public class Accounts {
     }
 
     /**
-     * Generates a non-expiring token that can then be used to accept Moov's terms of service. 
+     * Generates a non-expiring token that can then be used to accept Moov's terms of service.
      * 
-     * <p>This token can only be generated via API. Any Moov account requesting the collect funds, send funds, wallet, 
-     * or card issuing capabilities must accept Moov's terms of service, then have the generated terms of service 
-     * token patched to the account. Read more in our [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
+     * <p>This token can only be generated via API. Any Moov account requesting the collect funds, send funds,
+     * wallet,
+     * or card issuing capabilities must accept Moov's terms of service, then have the generated terms of
+     * service
+     * token patched to the account. Read more in our
+     * [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
      * 
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -396,11 +454,14 @@ public class Accounts {
     }
 
     /**
-     * Generates a non-expiring token that can then be used to accept Moov's terms of service. 
+     * Generates a non-expiring token that can then be used to accept Moov's terms of service.
      * 
-     * <p>This token can only be generated via API. Any Moov account requesting the collect funds, send funds, wallet, 
-     * or card issuing capabilities must accept Moov's terms of service, then have the generated terms of service 
-     * token patched to the account. Read more in our [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
+     * <p>This token can only be generated via API. Any Moov account requesting the collect funds, send funds,
+     * wallet,
+     * or card issuing capabilities must accept Moov's terms of service, then have the generated terms of
+     * service
+     * token patched to the account. Read more in our
+     * [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
      * 
      * @param origin Indicates the domain from which the request originated. Required if referer header is not present.
      * @param referer Specifies the URL of the resource from which the request originated. Required if origin header is not present.

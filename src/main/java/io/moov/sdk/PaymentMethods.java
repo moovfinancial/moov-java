@@ -29,10 +29,11 @@ public class PaymentMethods {
     }
 
     /**
-     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods 
+     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods
      * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * 
      * @return The call builder
@@ -42,10 +43,11 @@ public class PaymentMethods {
     }
 
     /**
-     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods 
+     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods
      * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * 
      * @param accountID 
@@ -57,10 +59,11 @@ public class PaymentMethods {
     }
 
     /**
-     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods 
+     * Retrieve a list of payment methods associated with a Moov account. Read our [payment methods
      * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * 
      * @param accountID 
@@ -88,9 +91,11 @@ public class PaymentMethods {
     }
 
     /**
-     * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
+     * Get the specified payment method associated with a Moov account. Read our [payment methods
+     * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * 
      * @return The call builder
@@ -100,9 +105,11 @@ public class PaymentMethods {
     }
 
     /**
-     * Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
+     * Get the specified payment method associated with a Moov account. Read our [payment methods
+     * guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
      * 
      * @param accountID 

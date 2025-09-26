@@ -11,9 +11,11 @@ import java.util.Optional;
 /**
  * DisputeStatus
  * 
- * <p>The status of a particular dispute. 
+ * <p>The status of a particular dispute.
  * 
- * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
+ * <p>Read our [disputes
+ * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
+ * to learn what each status means.
  */
 public enum DisputeStatus {
     RESPONSE_NEEDED("response-needed"),

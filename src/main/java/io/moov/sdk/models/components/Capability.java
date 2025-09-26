@@ -20,7 +20,10 @@ public class Capability {
     /**
      * Moov account capabilities.
      * 
-     * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+     * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
+     * might appear in your list. These are read-only capabilities that Moov requests and uses for account
+     * verification purposes. These capabilities remains active with your account and require no additional
+     * action.
      */
     @JsonProperty("capability")
     private CapabilityID capability;
@@ -36,7 +39,8 @@ public class Capability {
     private CapabilityStatus status;
 
     /**
-     * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+     * Represents individual and business data necessary to facilitate the enabling of a capability for an
+     * account.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("requirements")
@@ -102,7 +106,10 @@ public class Capability {
     /**
      * Moov account capabilities.
      * 
-     * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+     * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
+     * might appear in your list. These are read-only capabilities that Moov requests and uses for account
+     * verification purposes. These capabilities remains active with your account and require no additional
+     * action.
      */
     @JsonIgnore
     public CapabilityID capability() {
@@ -123,7 +130,8 @@ public class Capability {
     }
 
     /**
-     * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+     * Represents individual and business data necessary to facilitate the enabling of a capability for an
+     * account.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -159,7 +167,10 @@ public class Capability {
     /**
      * Moov account capabilities.
      * 
-     * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+     * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
+     * might appear in your list. These are read-only capabilities that Moov requests and uses for account
+     * verification purposes. These capabilities remains active with your account and require no additional
+     * action.
      */
     public Capability withCapability(CapabilityID capability) {
         Utils.checkNotNull(capability, "capability");
@@ -183,7 +194,8 @@ public class Capability {
     }
 
     /**
-     * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+     * Represents individual and business data necessary to facilitate the enabling of a capability for an
+     * account.
      */
     public Capability withRequirements(CapabilityRequirement requirements) {
         Utils.checkNotNull(requirements, "requirements");
@@ -193,7 +205,8 @@ public class Capability {
 
 
     /**
-     * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+     * Represents individual and business data necessary to facilitate the enabling of a capability for an
+     * account.
      */
     public Capability withRequirements(Optional<? extends CapabilityRequirement> requirements) {
         Utils.checkNotNull(requirements, "requirements");
@@ -307,7 +320,10 @@ public class Capability {
         /**
          * Moov account capabilities.
          * 
-         * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+         * <p>The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities
+         * might appear in your list. These are read-only capabilities that Moov requests and uses for account
+         * verification purposes. These capabilities remains active with your account and require no additional
+         * action.
          */
         public Builder capability(CapabilityID capability) {
             Utils.checkNotNull(capability, "capability");
@@ -334,7 +350,8 @@ public class Capability {
 
 
         /**
-         * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+         * Represents individual and business data necessary to facilitate the enabling of a capability for an
+         * account.
          */
         public Builder requirements(CapabilityRequirement requirements) {
             Utils.checkNotNull(requirements, "requirements");
@@ -343,7 +360,8 @@ public class Capability {
         }
 
         /**
-         * Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+         * Represents individual and business data necessary to facilitate the enabling of a capability for an
+         * account.
          */
         public Builder requirements(Optional<? extends CapabilityRequirement> requirements) {
             Utils.checkNotNull(requirements, "requirements");

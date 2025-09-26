@@ -22,9 +22,10 @@ public class EnrichedAddress {
     }
 
     /**
-     * Fetch enriched address suggestions. Requires a partial address. 
+     * Fetch enriched address suggestions. Requires a partial address.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @return The call builder
@@ -34,9 +35,10 @@ public class EnrichedAddress {
     }
 
     /**
-     * Fetch enriched address suggestions. Requires a partial address. 
+     * Fetch enriched address suggestions. Requires a partial address.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.

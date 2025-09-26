@@ -19,7 +19,7 @@ public class AmountDecimal {
     private String currency;
 
     /**
-     * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
+     * A decimal-formatted numerical string that represents up to 9 decimal place precision.
      * 
      * <p>For example, $12.987654321 is '12.987654321'.
      */
@@ -45,7 +45,7 @@ public class AmountDecimal {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
+     * A decimal-formatted numerical string that represents up to 9 decimal place precision.
      * 
      * <p>For example, $12.987654321 is '12.987654321'.
      */
@@ -69,7 +69,7 @@ public class AmountDecimal {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
+     * A decimal-formatted numerical string that represents up to 9 decimal place precision.
      * 
      * <p>For example, $12.987654321 is '12.987654321'.
      */
@@ -129,7 +129,7 @@ public class AmountDecimal {
 
 
         /**
-         * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
+         * A decimal-formatted numerical string that represents up to 9 decimal place precision.
          * 
          * <p>For example, $12.987654321 is '12.987654321'.
          */

@@ -45,7 +45,8 @@ public class PaymentLinks {
     /**
      * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -57,7 +58,8 @@ public class PaymentLinks {
     /**
      * Create a payment link that allows an end user to make a payment on Moov's hosted payment link page.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID 
@@ -86,7 +88,8 @@ public class PaymentLinks {
     /**
      * List all the payment links created under a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -98,7 +101,8 @@ public class PaymentLinks {
     /**
      * List all the payment links created under a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 
@@ -119,7 +123,8 @@ public class PaymentLinks {
     /**
      * Retrieve a payment link by code.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -131,7 +136,8 @@ public class PaymentLinks {
     /**
      * Retrieve a payment link by code.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 
@@ -154,7 +160,8 @@ public class PaymentLinks {
     /**
      * Update a payment link.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -166,7 +173,8 @@ public class PaymentLinks {
     /**
      * Update a payment link.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID 
@@ -193,7 +201,8 @@ public class PaymentLinks {
     /**
      * Disable a payment link.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -205,7 +214,8 @@ public class PaymentLinks {
     /**
      * Disable a payment link.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID 
@@ -226,11 +236,13 @@ public class PaymentLinks {
     }
 
     /**
-     * Retrieve the payment link encoded in a QR code. 
+     * Retrieve the payment link encoded in a QR code.
      * 
-     * <p>Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`.
+     * <p>Use the `Accept` header to specify the format of the response. Supported formats are
+     * `application/json` and `image/png`.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -240,11 +252,13 @@ public class PaymentLinks {
     }
 
     /**
-     * Retrieve the payment link encoded in a QR code. 
+     * Retrieve the payment link encoded in a QR code.
      * 
-     * <p>Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `image/png`.
+     * <p>Use the `Accept` header to specify the format of the response. Supported formats are
+     * `application/json` and `image/png`.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID 

@@ -20,7 +20,7 @@ public class WalletAvailableBalance {
     private String currency;
 
     /**
-     * Quantity in the smallest unit of the specified currency. 
+     * Quantity in the smallest unit of the specified currency.
      * 
      * <p>In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
@@ -53,7 +53,7 @@ public class WalletAvailableBalance {
     }
 
     /**
-     * Quantity in the smallest unit of the specified currency. 
+     * Quantity in the smallest unit of the specified currency.
      * 
      * <p>In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
@@ -82,7 +82,7 @@ public class WalletAvailableBalance {
     }
 
     /**
-     * Quantity in the smallest unit of the specified currency. 
+     * Quantity in the smallest unit of the specified currency.
      * 
      * <p>In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
      */
@@ -152,7 +152,7 @@ public class WalletAvailableBalance {
 
 
         /**
-         * Quantity in the smallest unit of the specified currency. 
+         * Quantity in the smallest unit of the specified currency.
          * 
          * <p>In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99.
          */

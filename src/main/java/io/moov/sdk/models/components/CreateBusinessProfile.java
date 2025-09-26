@@ -62,7 +62,8 @@ public class CreateBusinessProfile {
     private Optional<String> description;
 
     /**
-     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+     * as the EIN.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("taxID")
@@ -178,7 +179,8 @@ public class CreateBusinessProfile {
     }
 
     /**
-     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+     * as the EIN.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -319,7 +321,8 @@ public class CreateBusinessProfile {
     }
 
     /**
-     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+     * as the EIN.
      */
     public CreateBusinessProfile withTaxID(TaxID taxID) {
         Utils.checkNotNull(taxID, "taxID");
@@ -329,7 +332,8 @@ public class CreateBusinessProfile {
 
 
     /**
-     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+     * as the EIN.
      */
     public CreateBusinessProfile withTaxID(Optional<? extends TaxID> taxID) {
         Utils.checkNotNull(taxID, "taxID");
@@ -561,7 +565,8 @@ public class CreateBusinessProfile {
 
 
         /**
-         * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+         * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+         * as the EIN.
          */
         public Builder taxID(TaxID taxID) {
             Utils.checkNotNull(taxID, "taxID");
@@ -570,7 +575,8 @@ public class CreateBusinessProfile {
         }
 
         /**
-         * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+         * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+         * as the EIN.
          */
         public Builder taxID(Optional<? extends TaxID> taxID) {
             Utils.checkNotNull(taxID, "taxID");

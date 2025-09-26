@@ -15,15 +15,17 @@ import java.lang.String;
  * 
  * <p>Contains the user's payment information as returned from Apple Pay.
  * 
- * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken) 
- *   for more information.
+ * <p>Refer to [Apple's
+ * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)
+ * for more information.
  */
 public class LinkApplePayToken {
     /**
      * Contains the encrypted payment data.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata)
+     * for more information.
      */
     @JsonProperty("paymentData")
     private LinkApplePaymentData paymentData;
@@ -31,8 +33,9 @@ public class LinkApplePayToken {
     /**
      * Provides information about the underlying card.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod)
+     * for more information.
      */
     @JsonProperty("paymentMethod")
     private LinkApplePaymentMethod paymentMethod;
@@ -59,8 +62,9 @@ public class LinkApplePayToken {
     /**
      * Contains the encrypted payment data.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata)
+     * for more information.
      */
     @JsonIgnore
     public LinkApplePaymentData paymentData() {
@@ -70,8 +74,9 @@ public class LinkApplePayToken {
     /**
      * Provides information about the underlying card.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod)
+     * for more information.
      */
     @JsonIgnore
     public LinkApplePaymentMethod paymentMethod() {
@@ -94,8 +99,9 @@ public class LinkApplePayToken {
     /**
      * Contains the encrypted payment data.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata)
+     * for more information.
      */
     public LinkApplePayToken withPaymentData(LinkApplePaymentData paymentData) {
         Utils.checkNotNull(paymentData, "paymentData");
@@ -106,8 +112,9 @@ public class LinkApplePayToken {
     /**
      * Provides information about the underlying card.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod)
+     * for more information.
      */
     public LinkApplePayToken withPaymentMethod(LinkApplePaymentMethod paymentMethod) {
         Utils.checkNotNull(paymentMethod, "paymentMethod");
@@ -170,8 +177,9 @@ public class LinkApplePayToken {
         /**
          * Contains the encrypted payment data.
          * 
-         * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata) 
-         *   for more information.
+         * <p>Refer to [Apple's
+         * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916115-paymentdata)
+         * for more information.
          */
         public Builder paymentData(LinkApplePaymentData paymentData) {
             Utils.checkNotNull(paymentData, "paymentData");
@@ -183,8 +191,9 @@ public class LinkApplePayToken {
         /**
          * Provides information about the underlying card.
          * 
-         * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod) 
-         *   for more information.
+         * <p>Refer to [Apple's
+         * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod)
+         * for more information.
          */
         public Builder paymentMethod(LinkApplePaymentMethod paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");

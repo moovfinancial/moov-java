@@ -20,7 +20,8 @@ import java.util.Optional;
  */
 public class CardPaymentDetails {
     /**
-     * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+     * An optional override of the default card statement descriptor for a transfer. Accounts must be
+     * enabled by Moov to set this field.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("dynamicDescriptor")
@@ -38,7 +39,8 @@ public class CardPaymentDetails {
     }
 
     /**
-     * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+     * An optional override of the default card statement descriptor for a transfer. Accounts must be
+     * enabled by Moov to set this field.
      */
     @JsonIgnore
     public Optional<String> dynamicDescriptor() {
@@ -51,7 +53,8 @@ public class CardPaymentDetails {
 
 
     /**
-     * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+     * An optional override of the default card statement descriptor for a transfer. Accounts must be
+     * enabled by Moov to set this field.
      */
     public CardPaymentDetails withDynamicDescriptor(String dynamicDescriptor) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
@@ -61,7 +64,8 @@ public class CardPaymentDetails {
 
 
     /**
-     * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+     * An optional override of the default card statement descriptor for a transfer. Accounts must be
+     * enabled by Moov to set this field.
      */
     public CardPaymentDetails withDynamicDescriptor(Optional<String> dynamicDescriptor) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
@@ -105,7 +109,8 @@ public class CardPaymentDetails {
 
 
         /**
-         * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+         * An optional override of the default card statement descriptor for a transfer. Accounts must be
+         * enabled by Moov to set this field.
          */
         public Builder dynamicDescriptor(String dynamicDescriptor) {
             Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
@@ -114,7 +119,8 @@ public class CardPaymentDetails {
         }
 
         /**
-         * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+         * An optional override of the default card statement descriptor for a transfer. Accounts must be
+         * enabled by Moov to set this field.
          */
         public Builder dynamicDescriptor(Optional<String> dynamicDescriptor) {
             Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");

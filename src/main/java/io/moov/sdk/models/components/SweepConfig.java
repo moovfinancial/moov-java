@@ -32,27 +32,34 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The
+     * pull payment method can only be ach-debit-fund.
      */
     @JsonProperty("pushPaymentMethod")
     private SweepConfigPaymentMethod pushPaymentMethod;
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The
+     * pull payment method can only be ach-debit-fund.
      */
     @JsonProperty("pullPaymentMethod")
     private SweepConfigPaymentMethod pullPaymentMethod;
 
     /**
-     * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00.
+     * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted
+     * numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is
+     * $12.34 and 0.99 is $0.99.
+     * 
+     * <p>If not supplied, the default is 0.00.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minimumBalance")
     private Optional<String> minimumBalance;
 
     /**
-     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+     * override is not set in the sweep configs statementDescriptor.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("statementDescriptor")
@@ -138,7 +145,8 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The
+     * pull payment method can only be ach-debit-fund.
      */
     @JsonIgnore
     public SweepConfigPaymentMethod pushPaymentMethod() {
@@ -147,7 +155,8 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The
+     * pull payment method can only be ach-debit-fund.
      */
     @JsonIgnore
     public SweepConfigPaymentMethod pullPaymentMethod() {
@@ -155,7 +164,11 @@ public class SweepConfig {
     }
 
     /**
-     * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00.
+     * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted
+     * numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is
+     * $12.34 and 0.99 is $0.99.
+     * 
+     * <p>If not supplied, the default is 0.00.
      */
     @JsonIgnore
     public Optional<String> minimumBalance() {
@@ -163,7 +176,8 @@ public class SweepConfig {
     }
 
     /**
-     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+     * override is not set in the sweep configs statementDescriptor.
      */
     @JsonIgnore
     public Optional<String> statementDescriptor() {
@@ -214,7 +228,8 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The
+     * pull payment method can only be ach-debit-fund.
      */
     public SweepConfig withPushPaymentMethod(SweepConfigPaymentMethod pushPaymentMethod) {
         Utils.checkNotNull(pushPaymentMethod, "pushPaymentMethod");
@@ -224,7 +239,8 @@ public class SweepConfig {
 
     /**
      * The payment method used to push or pull funds to a bank account.
-     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+     * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The
+     * pull payment method can only be ach-debit-fund.
      */
     public SweepConfig withPullPaymentMethod(SweepConfigPaymentMethod pullPaymentMethod) {
         Utils.checkNotNull(pullPaymentMethod, "pullPaymentMethod");
@@ -233,7 +249,11 @@ public class SweepConfig {
     }
 
     /**
-     * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00.
+     * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted
+     * numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is
+     * $12.34 and 0.99 is $0.99.
+     * 
+     * <p>If not supplied, the default is 0.00.
      */
     public SweepConfig withMinimumBalance(String minimumBalance) {
         Utils.checkNotNull(minimumBalance, "minimumBalance");
@@ -243,7 +263,11 @@ public class SweepConfig {
 
 
     /**
-     * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00.
+     * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted
+     * numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is
+     * $12.34 and 0.99 is $0.99.
+     * 
+     * <p>If not supplied, the default is 0.00.
      */
     public SweepConfig withMinimumBalance(Optional<String> minimumBalance) {
         Utils.checkNotNull(minimumBalance, "minimumBalance");
@@ -252,7 +276,8 @@ public class SweepConfig {
     }
 
     /**
-     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+     * override is not set in the sweep configs statementDescriptor.
      */
     public SweepConfig withStatementDescriptor(String statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -262,7 +287,8 @@ public class SweepConfig {
 
 
     /**
-     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+     * override is not set in the sweep configs statementDescriptor.
      */
     public SweepConfig withStatementDescriptor(Optional<String> statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -398,7 +424,8 @@ public class SweepConfig {
 
         /**
          * The payment method used to push or pull funds to a bank account.
-         * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+         * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The
+         * pull payment method can only be ach-debit-fund.
          */
         public Builder pushPaymentMethod(SweepConfigPaymentMethod pushPaymentMethod) {
             Utils.checkNotNull(pushPaymentMethod, "pushPaymentMethod");
@@ -409,7 +436,8 @@ public class SweepConfig {
 
         /**
          * The payment method used to push or pull funds to a bank account.
-         * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+         * The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The
+         * pull payment method can only be ach-debit-fund.
          */
         public Builder pullPaymentMethod(SweepConfigPaymentMethod pullPaymentMethod) {
             Utils.checkNotNull(pullPaymentMethod, "pullPaymentMethod");
@@ -419,7 +447,11 @@ public class SweepConfig {
 
 
         /**
-         * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00.
+         * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted
+         * numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is
+         * $12.34 and 0.99 is $0.99.
+         * 
+         * <p>If not supplied, the default is 0.00.
          */
         public Builder minimumBalance(String minimumBalance) {
             Utils.checkNotNull(minimumBalance, "minimumBalance");
@@ -428,7 +460,11 @@ public class SweepConfig {
         }
 
         /**
-         * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00.
+         * An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted
+         * numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is
+         * $12.34 and 0.99 is $0.99.
+         * 
+         * <p>If not supplied, the default is 0.00.
          */
         public Builder minimumBalance(Optional<String> minimumBalance) {
             Utils.checkNotNull(minimumBalance, "minimumBalance");
@@ -438,7 +474,8 @@ public class SweepConfig {
 
 
         /**
-         * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+         * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+         * override is not set in the sweep configs statementDescriptor.
          */
         public Builder statementDescriptor(String statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -447,7 +484,8 @@ public class SweepConfig {
         }
 
         /**
-         * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+         * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+         * override is not set in the sweep configs statementDescriptor.
          */
         public Builder statementDescriptor(Optional<String> statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");

@@ -36,11 +36,14 @@ public class Wallets {
     }
 
     /**
-     * Create a new wallet for an account. You can specify optional attributes such as a display name and description to specify the intended use of the wallet. This will generate a new moov-wallet payment method.
+     * Create a new wallet for an account. You can specify optional attributes such as a display name and
+     * description to specify the intended use of the wallet. This will generate a new moov-wallet payment
+     * method.
      * 
      * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * 
      * @return The call builder
@@ -50,11 +53,14 @@ public class Wallets {
     }
 
     /**
-     * Create a new wallet for an account. You can specify optional attributes such as a display name and description to specify the intended use of the wallet. This will generate a new moov-wallet payment method.
+     * Create a new wallet for an account. You can specify optional attributes such as a display name and
+     * description to specify the intended use of the wallet. This will generate a new moov-wallet payment
+     * method.
      * 
      * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * 
      * @param accountID The Moov account ID the wallet belongs to.
@@ -75,11 +81,12 @@ public class Wallets {
     }
 
     /**
-     * List the wallets associated with a Moov account. 
+     * List the wallets associated with a Moov account.
      * 
      * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -89,11 +96,12 @@ public class Wallets {
     }
 
     /**
-     * List the wallets associated with a Moov account. 
+     * List the wallets associated with a Moov account.
      * 
      * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -107,11 +115,12 @@ public class Wallets {
     }
 
     /**
-     * Get information on a specific wallet (e.g., the available balance). 
+     * Get information on a specific wallet (e.g., the available balance).
      * 
      * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -121,11 +130,12 @@ public class Wallets {
     }
 
     /**
-     * Get information on a specific wallet (e.g., the available balance). 
+     * Get information on a specific wallet (e.g., the available balance).
      * 
      * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param accountID 
@@ -150,7 +160,8 @@ public class Wallets {
      * 
      * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * 
      * @return The call builder
@@ -164,7 +175,8 @@ public class Wallets {
      * 
      * <p>Read our [Moov wallets guide](https://docs.moov.io/guides/sources/wallets/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
      * 
      * @param walletID Identifier for the wallet.

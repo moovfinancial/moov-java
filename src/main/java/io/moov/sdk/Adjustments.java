@@ -30,7 +30,8 @@ public class Adjustments {
     /**
      * List adjustments associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -42,7 +43,8 @@ public class Adjustments {
     /**
      * List adjustments associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param accountID 
@@ -56,7 +58,8 @@ public class Adjustments {
     /**
      * List adjustments associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param accountID 
@@ -79,7 +82,8 @@ public class Adjustments {
     /**
      * Retrieve a specific adjustment associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @return The call builder
@@ -91,7 +95,8 @@ public class Adjustments {
     /**
      * Retrieve a specific adjustment associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
      * 
      * @param accountID 

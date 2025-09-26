@@ -29,8 +29,10 @@ public class PaymentMethodsCard {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     @JsonProperty("fingerprint")
     private String fingerprint;
@@ -54,7 +56,8 @@ public class PaymentMethodsCard {
     private String lastFourCardNumber;
 
     /**
-     * The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+     * The first six to eight digits of the card number, which identifies the financial institution that
+     * issued the card.
      */
     @JsonProperty("bin")
     private String bin;
@@ -212,8 +215,10 @@ public class PaymentMethodsCard {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     @JsonIgnore
     public String fingerprint() {
@@ -245,7 +250,8 @@ public class PaymentMethodsCard {
     }
 
     /**
-     * The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+     * The first six to eight digits of the card number, which identifies the financial institution that
+     * issued the card.
      */
     @JsonIgnore
     public String bin() {
@@ -353,8 +359,10 @@ public class PaymentMethodsCard {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     public PaymentMethodsCard withFingerprint(String fingerprint) {
         Utils.checkNotNull(fingerprint, "fingerprint");
@@ -390,7 +398,8 @@ public class PaymentMethodsCard {
     }
 
     /**
-     * The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+     * The first six to eight digits of the card number, which identifies the financial institution that
+     * issued the card.
      */
     public PaymentMethodsCard withBin(String bin) {
         Utils.checkNotNull(bin, "bin");
@@ -684,8 +693,10 @@ public class PaymentMethodsCard {
 
         /**
          * Uniquely identifies a linked payment card or token.
-         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-         * This field can be used to identify specific payment methods across multiple accounts on your platform.
+         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+         * user's device.
+         * This field can be used to identify specific payment methods across multiple accounts on your
+         * platform.
          */
         public Builder fingerprint(String fingerprint) {
             Utils.checkNotNull(fingerprint, "fingerprint");
@@ -725,7 +736,8 @@ public class PaymentMethodsCard {
 
 
         /**
-         * The first six to eight digits of the card number, which identifies the financial institution that issued the card.
+         * The first six to eight digits of the card number, which identifies the financial institution that
+         * issued the card.
          */
         public Builder bin(String bin) {
             Utils.checkNotNull(bin, "bin");

@@ -42,10 +42,12 @@ public class ApplePay {
     /**
      * Add domains to be registered with Apple Pay.
      * 
-     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * <p>Any domains that will be used to accept payments must first be
+     * [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
      * with Apple.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
      * 
      * @return The call builder
@@ -57,10 +59,12 @@ public class ApplePay {
     /**
      * Add domains to be registered with Apple Pay.
      * 
-     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * <p>Any domains that will be used to accept payments must first be
+     * [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
      * with Apple.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
      * 
      * @param accountID ID of the Moov account representing the merchant.
@@ -81,12 +85,14 @@ public class ApplePay {
     }
 
     /**
-     * Add or remove domains to be registered with Apple Pay. 
+     * Add or remove domains to be registered with Apple Pay.
      * 
-     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * <p>Any domains that will be used to accept payments must first be
+     * [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
      * with Apple.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
      * 
      * @return The call builder
@@ -96,12 +102,14 @@ public class ApplePay {
     }
 
     /**
-     * Add or remove domains to be registered with Apple Pay. 
+     * Add or remove domains to be registered with Apple Pay.
      * 
-     * <p>Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
+     * <p>Any domains that will be used to accept payments must first be
+     * [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
      * with Apple.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
      * 
      * @param accountID ID of the Moov account representing the merchant.
@@ -122,11 +130,13 @@ public class ApplePay {
     }
 
     /**
-     * Get domains registered with Apple Pay. 
+     * Get domains registered with Apple Pay.
      * 
-     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * <p>Read our [Apple Pay
+     * tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
      * 
      * @return The call builder
@@ -136,11 +146,13 @@ public class ApplePay {
     }
 
     /**
-     * Get domains registered with Apple Pay. 
+     * Get domains registered with Apple Pay.
      * 
-     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
+     * <p>Read our [Apple Pay
+     * tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
      * 
      * @param accountID ID of the Moov account representing the merchant.
@@ -159,12 +171,14 @@ public class ApplePay {
     }
 
     /**
-     * Create a session with Apple Pay to facilitate a payment. 
+     * Create a session with Apple Pay to facilitate a payment.
      * 
-     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-     * A successful response from this endpoint should be passed through to Apple Pay unchanged. 
+     * <p>Read our [Apple Pay
+     * tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
+     * A successful response from this endpoint should be passed through to Apple Pay unchanged.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
      * 
      * @return The call builder
@@ -174,12 +188,14 @@ public class ApplePay {
     }
 
     /**
-     * Create a session with Apple Pay to facilitate a payment. 
+     * Create a session with Apple Pay to facilitate a payment.
      * 
-     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-     * A successful response from this endpoint should be passed through to Apple Pay unchanged. 
+     * <p>Read our [Apple Pay
+     * tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
+     * A successful response from this endpoint should be passed through to Apple Pay unchanged.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
      * 
      * @param accountID ID of the Moov account representing the merchant.
@@ -200,12 +216,15 @@ public class ApplePay {
     }
 
     /**
-     * Connect an Apple Pay token to the specified account. 
+     * Connect an Apple Pay token to the specified account.
      * 
-     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-     * The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
+     * <p>Read our [Apple Pay
+     * tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
+     * The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response
+     * unmodified.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @return The call builder
@@ -215,12 +234,15 @@ public class ApplePay {
     }
 
     /**
-     * Connect an Apple Pay token to the specified account. 
+     * Connect an Apple Pay token to the specified account.
      * 
-     * <p>Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-     * The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
+     * <p>Read our [Apple Pay
+     * tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
+     * The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response
+     * unmodified.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @param accountID ID of the Moov account representing the cardholder.

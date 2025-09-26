@@ -35,9 +35,11 @@ public class Onboarding {
     }
 
     /**
-     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
+     * Create an invitation containing a unique link that allows the recipient to onboard their
+     * organization with Moov.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts.write` scope.
      * 
      * @return The call builder
@@ -47,9 +49,11 @@ public class Onboarding {
     }
 
     /**
-     * Create an invitation containing a unique link that allows the recipient to onboard their organization with Moov.
+     * Create an invitation containing a unique link that allows the recipient to onboard their
+     * organization with Moov.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts.write` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -65,7 +69,8 @@ public class Onboarding {
     /**
      * List all the onboarding invites created by the caller's account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts.read` scope.
      * 
      * @return The call builder
@@ -77,7 +82,8 @@ public class Onboarding {
     /**
      * List all the onboarding invites created by the caller's account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts.read` scope.
      * 
      * @return The response from the API call
@@ -96,7 +102,8 @@ public class Onboarding {
     /**
      * Retrieve details about an onboarding invite.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts.read` scope.
      * 
      * @return The call builder
@@ -108,7 +115,8 @@ public class Onboarding {
     /**
      * Retrieve details about an onboarding invite.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts.read` scope.
      * 
      * @param code 
@@ -129,7 +137,8 @@ public class Onboarding {
     /**
      * Revoke an onboarding invite, rendering the invitation link unusable.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts.write` scope.
      * 
      * @return The call builder
@@ -141,7 +150,8 @@ public class Onboarding {
     /**
      * Revoke an onboarding invite, rendering the invitation link unusable.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts.write` scope.
      * 
      * @param code 

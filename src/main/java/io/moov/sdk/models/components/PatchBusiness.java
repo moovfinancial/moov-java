@@ -60,7 +60,8 @@ public class PatchBusiness {
     private Optional<String> description;
 
     /**
-     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+     * as the EIN.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("taxID")
@@ -177,7 +178,8 @@ public class PatchBusiness {
     }
 
     /**
-     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+     * as the EIN.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -321,7 +323,8 @@ public class PatchBusiness {
     }
 
     /**
-     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+     * as the EIN.
      */
     public PatchBusiness withTaxID(TaxIDUpdate taxID) {
         Utils.checkNotNull(taxID, "taxID");
@@ -331,7 +334,8 @@ public class PatchBusiness {
 
 
     /**
-     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+     * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+     * as the EIN.
      */
     public PatchBusiness withTaxID(Optional<? extends TaxIDUpdate> taxID) {
         Utils.checkNotNull(taxID, "taxID");
@@ -577,7 +581,8 @@ public class PatchBusiness {
 
 
         /**
-         * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+         * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+         * as the EIN.
          */
         public Builder taxID(TaxIDUpdate taxID) {
             Utils.checkNotNull(taxID, "taxID");
@@ -586,7 +591,8 @@ public class PatchBusiness {
         }
 
         /**
-         * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+         * An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+         * as the EIN.
          */
         public Builder taxID(Optional<? extends TaxIDUpdate> taxID) {
             Utils.checkNotNull(taxID, "taxID");

@@ -55,8 +55,10 @@ public class TerminalCard {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fingerprint")
@@ -194,8 +196,10 @@ public class TerminalCard {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     @JsonIgnore
     public Optional<String> fingerprint() {
@@ -346,8 +350,10 @@ public class TerminalCard {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     public TerminalCard withFingerprint(String fingerprint) {
         Utils.checkNotNull(fingerprint, "fingerprint");
@@ -358,8 +364,10 @@ public class TerminalCard {
 
     /**
      * Uniquely identifies a linked payment card or token.
-     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-     * This field can be used to identify specific payment methods across multiple accounts on your platform.
+     * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+     * user's device.
+     * This field can be used to identify specific payment methods across multiple accounts on your
+     * platform.
      */
     public TerminalCard withFingerprint(Optional<String> fingerprint) {
         Utils.checkNotNull(fingerprint, "fingerprint");
@@ -654,8 +662,10 @@ public class TerminalCard {
 
         /**
          * Uniquely identifies a linked payment card or token.
-         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-         * This field can be used to identify specific payment methods across multiple accounts on your platform.
+         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+         * user's device.
+         * This field can be used to identify specific payment methods across multiple accounts on your
+         * platform.
          */
         public Builder fingerprint(String fingerprint) {
             Utils.checkNotNull(fingerprint, "fingerprint");
@@ -665,8 +675,10 @@ public class TerminalCard {
 
         /**
          * Uniquely identifies a linked payment card or token.
-         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
-         * This field can be used to identify specific payment methods across multiple accounts on your platform.
+         * For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the
+         * user's device.
+         * This field can be used to identify specific payment methods across multiple accounts on your
+         * platform.
          */
         public Builder fingerprint(Optional<String> fingerprint) {
             Utils.checkNotNull(fingerprint, "fingerprint");

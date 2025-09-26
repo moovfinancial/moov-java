@@ -49,7 +49,8 @@ public class Scheduling {
     /**
      * Describes the schedule to create or modify.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -61,7 +62,8 @@ public class Scheduling {
     /**
      * Describes the schedule to create or modify.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID Account ID of the account that will run the transfer.
@@ -82,9 +84,11 @@ public class Scheduling {
     }
 
     /**
-     * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response.
+     * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query
+     * parameter to include partial account details in the response.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -94,9 +98,11 @@ public class Scheduling {
     }
 
     /**
-     * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response.
+     * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query
+     * parameter to include partial account details in the response.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 
@@ -109,9 +115,11 @@ public class Scheduling {
     }
 
     /**
-     * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response.
+     * Describes a list of schedules associated with an account. Append the `hydrate=accounts` query
+     * parameter to include partial account details in the response.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param skip 
@@ -140,7 +148,8 @@ public class Scheduling {
     /**
      * Describes the schedule to modify.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -152,7 +161,8 @@ public class Scheduling {
     /**
      * Describes the schedule to modify.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID Account ID of the account that will run the transfer.
@@ -177,9 +187,11 @@ public class Scheduling {
     }
 
     /**
-     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to
+     * be specified.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -189,9 +201,11 @@ public class Scheduling {
     }
 
     /**
-     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+     * Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to
+     * be specified.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 
@@ -214,7 +228,8 @@ public class Scheduling {
     /**
      * Describes the schedule to cancel.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -226,7 +241,8 @@ public class Scheduling {
     /**
      * Describes the schedule to cancel.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID Your Moov account ID as the partner running the transfers.
@@ -249,7 +265,8 @@ public class Scheduling {
     /**
      * Gets a specific occurrence.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -261,7 +278,8 @@ public class Scheduling {
     /**
      * Gets a specific occurrence.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 

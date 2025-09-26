@@ -31,11 +31,15 @@ public class Institutions {
     /**
      * Search for financial institutions by name or routing number.
      * 
-     * <p>This endpoint returns metadata about each matched institution, including basic identifying details (such as name, routing number, and address) and information about which payment services they support (e.g., ACH, RTP, and Wire).
+     * <p>This endpoint returns metadata about each matched institution, including basic identifying details
+     * (such as name, routing number, and address) and information about which payment services they
+     * support (e.g., ACH, RTP, and Wire).
      * 
-     * <p>This can be used to validate a financial institution before initiating payment activity, or to check which payment rails are available for a given routing number.
+     * <p>This can be used to validate a financial institution before initiating payment activity, or to check
+     * which payment rails are available for a given routing number.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/institutions.read` scope.
      * 
      * @return The call builder
@@ -47,11 +51,15 @@ public class Institutions {
     /**
      * Search for financial institutions by name or routing number.
      * 
-     * <p>This endpoint returns metadata about each matched institution, including basic identifying details (such as name, routing number, and address) and information about which payment services they support (e.g., ACH, RTP, and Wire).
+     * <p>This endpoint returns metadata about each matched institution, including basic identifying details
+     * (such as name, routing number, and address) and information about which payment services they
+     * support (e.g., ACH, RTP, and Wire).
      * 
-     * <p>This can be used to validate a financial institution before initiating payment activity, or to check which payment rails are available for a given routing number.
+     * <p>This can be used to validate a financial institution before initiating payment activity, or to check
+     * which payment rails are available for a given routing number.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/institutions.read` scope.
      * 
      * @return The response from the API call
@@ -64,11 +72,15 @@ public class Institutions {
     /**
      * Search for financial institutions by name or routing number.
      * 
-     * <p>This endpoint returns metadata about each matched institution, including basic identifying details (such as name, routing number, and address) and information about which payment services they support (e.g., ACH, RTP, and Wire).
+     * <p>This endpoint returns metadata about each matched institution, including basic identifying details
+     * (such as name, routing number, and address) and information about which payment services they
+     * support (e.g., ACH, RTP, and Wire).
      * 
-     * <p>This can be used to validate a financial institution before initiating payment activity, or to check which payment rails are available for a given routing number.
+     * <p>This can be used to validate a financial institution before initiating payment activity, or to check
+     * which payment rails are available for a given routing number.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/institutions.read` scope.
      * 
      * @param name Name of the financial institution. Either `name` or `routingNumber` is required.
@@ -95,7 +107,8 @@ public class Institutions {
     /**
      * Search for institutions by either their name or routing number.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/fed.read` scope.
      * 
      * @return The call builder
@@ -107,7 +120,8 @@ public class Institutions {
     /**
      * Search for institutions by either their name or routing number.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/fed.read` scope.
      * 
      * @return The response from the API call
@@ -121,7 +135,8 @@ public class Institutions {
     /**
      * Search for institutions by either their name or routing number.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/fed.read` scope.
      * 
      * @param name Name of the financial institution. Either `name` or `routingNumber` is required.

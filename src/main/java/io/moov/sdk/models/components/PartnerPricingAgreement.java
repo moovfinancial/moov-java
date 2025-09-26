@@ -63,7 +63,8 @@ public class PartnerPricingAgreement {
     private List<BillableFee> billableFees;
 
     /**
-     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the
+     * minimum amount, account is charged the difference.
      */
     @JsonProperty("minimumCommitment")
     private MinimumCommitment minimumCommitment;
@@ -192,7 +193,8 @@ public class PartnerPricingAgreement {
     }
 
     /**
-     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the
+     * minimum amount, account is charged the difference.
      */
     @JsonIgnore
     public MinimumCommitment minimumCommitment() {
@@ -301,7 +303,8 @@ public class PartnerPricingAgreement {
     }
 
     /**
-     * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+     * The minimum spending amount that must be met in the billing period. If actual usage is below the
+     * minimum amount, account is charged the difference.
      */
     public PartnerPricingAgreement withMinimumCommitment(MinimumCommitment minimumCommitment) {
         Utils.checkNotNull(minimumCommitment, "minimumCommitment");
@@ -497,7 +500,8 @@ public class PartnerPricingAgreement {
 
 
         /**
-         * The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+         * The minimum spending amount that must be met in the billing period. If actual usage is below the
+         * minimum amount, account is charged the difference.
          */
         public Builder minimumCommitment(MinimumCommitment minimumCommitment) {
             Utils.checkNotNull(minimumCommitment, "minimumCommitment");

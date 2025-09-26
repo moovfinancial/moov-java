@@ -20,8 +20,9 @@ import java.util.Optional;
  * 
  * <p>Billing contact information as returned from Apple Pay.
  * 
- * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) 
- *   for more information.
+ * <p>Refer to [Apple's
+ * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)
+ * for more information.
  */
 public class AppleBillingContact {
     /**

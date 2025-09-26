@@ -13,7 +13,8 @@ import java.lang.String;
 /**
  * MinimumCommitment
  * 
- * <p>The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference.
+ * <p>The minimum spending amount that must be met in the billing period. If actual usage is below the
+ * minimum amount, account is charged the difference.
  */
 public class MinimumCommitment {
     /**
@@ -23,7 +24,7 @@ public class MinimumCommitment {
     private String currency;
 
     /**
-     * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
+     * A decimal-formatted numerical string that represents up to 9 decimal place precision.
      * 
      * <p>For example, $12.987654321 is '12.987654321'.
      */
@@ -49,7 +50,7 @@ public class MinimumCommitment {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
+     * A decimal-formatted numerical string that represents up to 9 decimal place precision.
      * 
      * <p>For example, $12.987654321 is '12.987654321'.
      */
@@ -73,7 +74,7 @@ public class MinimumCommitment {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
+     * A decimal-formatted numerical string that represents up to 9 decimal place precision.
      * 
      * <p>For example, $12.987654321 is '12.987654321'.
      */
@@ -133,7 +134,7 @@ public class MinimumCommitment {
 
 
         /**
-         * A decimal-formatted numerical string that represents up to 9 decimal place precision. 
+         * A decimal-formatted numerical string that represents up to 9 decimal place precision.
          * 
          * <p>For example, $12.987654321 is '12.987654321'.
          */

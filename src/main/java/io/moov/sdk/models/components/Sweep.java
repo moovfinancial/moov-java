@@ -85,7 +85,8 @@ public class Sweep {
     private Optional<String> transferAmount;
 
     /**
-     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+     * override is not set in the sweep configs statementDescriptor.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("statementDescriptor")
@@ -234,7 +235,8 @@ public class Sweep {
     }
 
     /**
-     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+     * override is not set in the sweep configs statementDescriptor.
      */
     @JsonIgnore
     public Optional<String> statementDescriptor() {
@@ -403,7 +405,8 @@ public class Sweep {
     }
 
     /**
-     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+     * override is not set in the sweep configs statementDescriptor.
      */
     public Sweep withStatementDescriptor(String statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -413,7 +416,8 @@ public class Sweep {
 
 
     /**
-     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+     * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+     * override is not set in the sweep configs statementDescriptor.
      */
     public Sweep withStatementDescriptor(Optional<String> statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -680,7 +684,8 @@ public class Sweep {
 
 
         /**
-         * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+         * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+         * override is not set in the sweep configs statementDescriptor.
          */
         public Builder statementDescriptor(String statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -689,7 +694,8 @@ public class Sweep {
         }
 
         /**
-         * The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+         * The text that appears on the banking statement. The default descriptor is a 10 character ID if an
+         * override is not set in the sweep configs statementDescriptor.
          */
         public Builder statementDescriptor(Optional<String> statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");

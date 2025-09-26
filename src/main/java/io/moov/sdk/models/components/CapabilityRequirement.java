@@ -18,7 +18,8 @@ import java.util.Optional;
 /**
  * CapabilityRequirement
  * 
- * <p>Represents individual and business data necessary to facilitate the enabling of a capability for an account.
+ * <p>Represents individual and business data necessary to facilitate the enabling of a capability for an
+ * account.
  */
 public class CapabilityRequirement {
 

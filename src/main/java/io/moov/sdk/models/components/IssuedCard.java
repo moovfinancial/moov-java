@@ -57,18 +57,24 @@ public class IssuedCard {
     private String fundingWalletID;
 
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+     * The `state` represents the operational status of an issued card. A card can only approve incoming
+     * authorizations if it is in an active state.
      * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+     * after card creation.
+     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+     * post-creation during the activation process.
+     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+     * closed by request or when it expires.
+     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+     * activated.
      */
     @JsonProperty("state")
     private IssuedCardState state;
 
     /**
-     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
+     * number without a physical card.
      */
     @JsonProperty("formFactor")
     private IssuedCardFormFactor formFactor;
@@ -186,12 +192,17 @@ public class IssuedCard {
     }
 
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+     * The `state` represents the operational status of an issued card. A card can only approve incoming
+     * authorizations if it is in an active state.
      * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+     * after card creation.
+     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+     * post-creation during the activation process.
+     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+     * closed by request or when it expires.
+     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+     * activated.
      */
     @JsonIgnore
     public IssuedCardState state() {
@@ -199,7 +210,8 @@ public class IssuedCard {
     }
 
     /**
-     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
+     * number without a physical card.
      */
     @JsonIgnore
     public IssuedCardFormFactor formFactor() {
@@ -290,12 +302,17 @@ public class IssuedCard {
     }
 
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+     * The `state` represents the operational status of an issued card. A card can only approve incoming
+     * authorizations if it is in an active state.
      * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+     * after card creation.
+     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+     * post-creation during the activation process.
+     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+     * closed by request or when it expires.
+     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+     * activated.
      */
     public IssuedCard withState(IssuedCardState state) {
         Utils.checkNotNull(state, "state");
@@ -304,7 +321,8 @@ public class IssuedCard {
     }
 
     /**
-     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
+     * number without a physical card.
      */
     public IssuedCard withFormFactor(IssuedCardFormFactor formFactor) {
         Utils.checkNotNull(formFactor, "formFactor");
@@ -483,12 +501,17 @@ public class IssuedCard {
 
 
         /**
-         * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+         * The `state` represents the operational status of an issued card. A card can only approve incoming
+         * authorizations if it is in an active state.
          * 
-         * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-         * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-         * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-         * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+         * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+         * after card creation.
+         * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+         * post-creation during the activation process.
+         * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+         * closed by request or when it expires.
+         * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+         * activated.
          */
         public Builder state(IssuedCardState state) {
             Utils.checkNotNull(state, "state");
@@ -498,7 +521,8 @@ public class IssuedCard {
 
 
         /**
-         * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+         * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
+         * number without a physical card.
          */
         public Builder formFactor(IssuedCardFormFactor formFactor) {
             Utils.checkNotNull(formFactor, "formFactor");

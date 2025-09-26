@@ -22,8 +22,9 @@ import java.util.Optional;
  */
 public class Recur {
     /**
-     * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10). 
-     *   Generators available online at the following sites - https://freetools.textmagic.com/rrule-generator, https://jkbrzt.github.io/rrule/
+     * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10).
+     * Generators available online at the following sites -
+     * https://freetools.textmagic.com/rrule-generator, https://jkbrzt.github.io/rrule/
      */
     @JsonProperty("recurrenceRule")
     private String recurrenceRule;
@@ -70,8 +71,9 @@ public class Recur {
     }
 
     /**
-     * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10). 
-     *   Generators available online at the following sites - https://freetools.textmagic.com/rrule-generator, https://jkbrzt.github.io/rrule/
+     * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10).
+     * Generators available online at the following sites -
+     * https://freetools.textmagic.com/rrule-generator, https://jkbrzt.github.io/rrule/
      */
     @JsonIgnore
     public String recurrenceRule() {
@@ -105,8 +107,9 @@ public class Recur {
 
 
     /**
-     * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10). 
-     *   Generators available online at the following sites - https://freetools.textmagic.com/rrule-generator, https://jkbrzt.github.io/rrule/
+     * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10).
+     * Generators available online at the following sites -
+     * https://freetools.textmagic.com/rrule-generator, https://jkbrzt.github.io/rrule/
      */
     public Recur withRecurrenceRule(String recurrenceRule) {
         Utils.checkNotNull(recurrenceRule, "recurrenceRule");
@@ -204,8 +207,9 @@ public class Recur {
 
 
         /**
-         * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10). 
-         *   Generators available online at the following sites - https://freetools.textmagic.com/rrule-generator, https://jkbrzt.github.io/rrule/
+         * RRule as defined by RFC 5545 (https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10).
+         * Generators available online at the following sites -
+         * https://freetools.textmagic.com/rrule-generator, https://jkbrzt.github.io/rrule/
          */
         public Builder recurrenceRule(String recurrenceRule) {
             Utils.checkNotNull(recurrenceRule, "recurrenceRule");

@@ -23,8 +23,10 @@ public class InitiateRefundRequest {
     private String xIdempotencyKey;
 
     /**
-     * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
-     * asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+     * Optional header that indicates whether to return a synchronous response that includes full transfer
+     * and rail-specific details or an
+     * asynchronous response indicating the transfer was created (this is the default response if the
+     * header is omitted). A timeout will occur after 15 seconds.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
     private Optional<? extends TransferWaitFor> xWaitFor;
@@ -81,8 +83,10 @@ public class InitiateRefundRequest {
     }
 
     /**
-     * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
-     * asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+     * Optional header that indicates whether to return a synchronous response that includes full transfer
+     * and rail-specific details or an
+     * asynchronous response indicating the transfer was created (this is the default response if the
+     * header is omitted). A timeout will occur after 15 seconds.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -127,8 +131,10 @@ public class InitiateRefundRequest {
     }
 
     /**
-     * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
-     * asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+     * Optional header that indicates whether to return a synchronous response that includes full transfer
+     * and rail-specific details or an
+     * asynchronous response indicating the transfer was created (this is the default response if the
+     * header is omitted). A timeout will occur after 15 seconds.
      */
     public InitiateRefundRequest withXWaitFor(TransferWaitFor xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -138,8 +144,10 @@ public class InitiateRefundRequest {
 
 
     /**
-     * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
-     * asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+     * Optional header that indicates whether to return a synchronous response that includes full transfer
+     * and rail-specific details or an
+     * asynchronous response indicating the transfer was created (this is the default response if the
+     * header is omitted). A timeout will occur after 15 seconds.
      */
     public InitiateRefundRequest withXWaitFor(Optional<? extends TransferWaitFor> xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -241,8 +249,10 @@ public class InitiateRefundRequest {
 
 
         /**
-         * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
-         * asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+         * Optional header that indicates whether to return a synchronous response that includes full transfer
+         * and rail-specific details or an
+         * asynchronous response indicating the transfer was created (this is the default response if the
+         * header is omitted). A timeout will occur after 15 seconds.
          */
         public Builder xWaitFor(TransferWaitFor xWaitFor) {
             Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -251,8 +261,10 @@ public class InitiateRefundRequest {
         }
 
         /**
-         * Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an 
-         * asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+         * Optional header that indicates whether to return a synchronous response that includes full transfer
+         * and rail-specific details or an
+         * asynchronous response indicating the transfer was created (this is the default response if the
+         * header is omitted). A timeout will occur after 15 seconds.
          */
         public Builder xWaitFor(Optional<? extends TransferWaitFor> xWaitFor) {
             Utils.checkNotNull(xWaitFor, "xWaitFor");

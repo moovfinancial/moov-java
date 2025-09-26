@@ -13,7 +13,7 @@ import java.util.Optional;
  * 
  * <p>The text to be displayed on web form's submit button.
  * 
- * <p>If set to "auto" the UI will automatically select between 
+ * <p>If set to "auto" the UI will automatically select between
  * "pay" and "confirm" for payments and payouts respectively.
  */
 public enum CallToAction {

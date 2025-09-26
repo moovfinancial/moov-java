@@ -13,7 +13,8 @@ import java.lang.String;
 
 public class CreateApplePaySession {
     /**
-     * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include "https".
+     * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include
+     * "https".
      */
     @JsonProperty("domain")
     private String domain;
@@ -35,7 +36,8 @@ public class CreateApplePaySession {
     }
 
     /**
-     * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include "https".
+     * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include
+     * "https".
      */
     @JsonIgnore
     public String domain() {
@@ -56,7 +58,8 @@ public class CreateApplePaySession {
 
 
     /**
-     * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include "https".
+     * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include
+     * "https".
      */
     public CreateApplePaySession withDomain(String domain) {
         Utils.checkNotNull(domain, "domain");
@@ -113,7 +116,8 @@ public class CreateApplePaySession {
 
 
         /**
-         * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include "https".
+         * A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include
+         * "https".
          */
         public Builder domain(String domain) {
             Utils.checkNotNull(domain, "domain");

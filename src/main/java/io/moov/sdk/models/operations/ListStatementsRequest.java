@@ -16,13 +16,15 @@ import java.util.Optional;
 
 public class ListStatementsRequest {
     /**
-     * Optional date-time which inclusively filters all statements where billing period is on or after this date-time.
+     * Optional date-time which inclusively filters all statements where billing period is on or after this
+     * date-time.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=billingPeriodStartDateTime")
     private Optional<OffsetDateTime> billingPeriodStartDateTime;
 
     /**
-     * Optional date-time which exclusively filters all statements where billing period is before this date-time.
+     * Optional date-time which exclusively filters all statements where billing period is before this
+     * date-time.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=billingPeriodEndDateTime")
     private Optional<OffsetDateTime> billingPeriodEndDateTime;
@@ -65,7 +67,8 @@ public class ListStatementsRequest {
     }
 
     /**
-     * Optional date-time which inclusively filters all statements where billing period is on or after this date-time.
+     * Optional date-time which inclusively filters all statements where billing period is on or after this
+     * date-time.
      */
     @JsonIgnore
     public Optional<OffsetDateTime> billingPeriodStartDateTime() {
@@ -73,7 +76,8 @@ public class ListStatementsRequest {
     }
 
     /**
-     * Optional date-time which exclusively filters all statements where billing period is before this date-time.
+     * Optional date-time which exclusively filters all statements where billing period is before this
+     * date-time.
      */
     @JsonIgnore
     public Optional<OffsetDateTime> billingPeriodEndDateTime() {
@@ -101,7 +105,8 @@ public class ListStatementsRequest {
 
 
     /**
-     * Optional date-time which inclusively filters all statements where billing period is on or after this date-time.
+     * Optional date-time which inclusively filters all statements where billing period is on or after this
+     * date-time.
      */
     public ListStatementsRequest withBillingPeriodStartDateTime(OffsetDateTime billingPeriodStartDateTime) {
         Utils.checkNotNull(billingPeriodStartDateTime, "billingPeriodStartDateTime");
@@ -111,7 +116,8 @@ public class ListStatementsRequest {
 
 
     /**
-     * Optional date-time which inclusively filters all statements where billing period is on or after this date-time.
+     * Optional date-time which inclusively filters all statements where billing period is on or after this
+     * date-time.
      */
     public ListStatementsRequest withBillingPeriodStartDateTime(Optional<OffsetDateTime> billingPeriodStartDateTime) {
         Utils.checkNotNull(billingPeriodStartDateTime, "billingPeriodStartDateTime");
@@ -120,7 +126,8 @@ public class ListStatementsRequest {
     }
 
     /**
-     * Optional date-time which exclusively filters all statements where billing period is before this date-time.
+     * Optional date-time which exclusively filters all statements where billing period is before this
+     * date-time.
      */
     public ListStatementsRequest withBillingPeriodEndDateTime(OffsetDateTime billingPeriodEndDateTime) {
         Utils.checkNotNull(billingPeriodEndDateTime, "billingPeriodEndDateTime");
@@ -130,7 +137,8 @@ public class ListStatementsRequest {
 
 
     /**
-     * Optional date-time which exclusively filters all statements where billing period is before this date-time.
+     * Optional date-time which exclusively filters all statements where billing period is before this
+     * date-time.
      */
     public ListStatementsRequest withBillingPeriodEndDateTime(Optional<OffsetDateTime> billingPeriodEndDateTime) {
         Utils.checkNotNull(billingPeriodEndDateTime, "billingPeriodEndDateTime");
@@ -223,7 +231,8 @@ public class ListStatementsRequest {
 
 
         /**
-         * Optional date-time which inclusively filters all statements where billing period is on or after this date-time.
+         * Optional date-time which inclusively filters all statements where billing period is on or after this
+         * date-time.
          */
         public Builder billingPeriodStartDateTime(OffsetDateTime billingPeriodStartDateTime) {
             Utils.checkNotNull(billingPeriodStartDateTime, "billingPeriodStartDateTime");
@@ -232,7 +241,8 @@ public class ListStatementsRequest {
         }
 
         /**
-         * Optional date-time which inclusively filters all statements where billing period is on or after this date-time.
+         * Optional date-time which inclusively filters all statements where billing period is on or after this
+         * date-time.
          */
         public Builder billingPeriodStartDateTime(Optional<OffsetDateTime> billingPeriodStartDateTime) {
             Utils.checkNotNull(billingPeriodStartDateTime, "billingPeriodStartDateTime");
@@ -242,7 +252,8 @@ public class ListStatementsRequest {
 
 
         /**
-         * Optional date-time which exclusively filters all statements where billing period is before this date-time.
+         * Optional date-time which exclusively filters all statements where billing period is before this
+         * date-time.
          */
         public Builder billingPeriodEndDateTime(OffsetDateTime billingPeriodEndDateTime) {
             Utils.checkNotNull(billingPeriodEndDateTime, "billingPeriodEndDateTime");
@@ -251,7 +262,8 @@ public class ListStatementsRequest {
         }
 
         /**
-         * Optional date-time which exclusively filters all statements where billing period is before this date-time.
+         * Optional date-time which exclusively filters all statements where billing period is before this
+         * date-time.
          */
         public Builder billingPeriodEndDateTime(Optional<OffsetDateTime> billingPeriodEndDateTime) {
             Utils.checkNotNull(billingPeriodEndDateTime, "billingPeriodEndDateTime");

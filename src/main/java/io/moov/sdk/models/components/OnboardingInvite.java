@@ -52,8 +52,10 @@ public class OnboardingInvite {
     private List<ApplicationScope> scopes;
 
     /**
-     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
-     *   account. These values are used to determine what information to collect from the user during onboarding.
+     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
+     * this
+     * account. These values are used to determine what information to collect from the user during
+     * onboarding.
      */
     @JsonProperty("capabilities")
     private List<CapabilityID> capabilities;
@@ -196,8 +198,10 @@ public class OnboardingInvite {
     }
 
     /**
-     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
-     *   account. These values are used to determine what information to collect from the user during onboarding.
+     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
+     * this
+     * account. These values are used to determine what information to collect from the user during
+     * onboarding.
      */
     @JsonIgnore
     public List<CapabilityID> capabilities() {
@@ -322,8 +326,10 @@ public class OnboardingInvite {
     }
 
     /**
-     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
-     *   account. These values are used to determine what information to collect from the user during onboarding.
+     * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
+     * this
+     * account. These values are used to determine what information to collect from the user during
+     * onboarding.
      */
     public OnboardingInvite withCapabilities(List<CapabilityID> capabilities) {
         Utils.checkNotNull(capabilities, "capabilities");
@@ -580,8 +586,10 @@ public class OnboardingInvite {
 
 
         /**
-         * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
-         *   account. These values are used to determine what information to collect from the user during onboarding.
+         * List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for
+         * this
+         * account. These values are used to determine what information to collect from the user during
+         * onboarding.
          */
         public Builder capabilities(List<CapabilityID> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");

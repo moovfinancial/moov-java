@@ -104,7 +104,8 @@ public class Transfer extends RuntimeException {
     private Optional<Long> moovFee;
 
     /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("moovFeeDecimal")
@@ -175,7 +176,8 @@ public class Transfer extends RuntimeException {
     private Optional<String> paymentLinkCode;
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("salesTaxAmount")
@@ -374,7 +376,8 @@ public class Transfer extends RuntimeException {
     }
 
     /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      */
     @JsonIgnore
     public Optional<String> moovFeeDecimal() {
@@ -455,7 +458,8 @@ public class Transfer extends RuntimeException {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -624,7 +628,8 @@ public class Transfer extends RuntimeException {
     }
 
     /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      */
     public Transfer withMoovFeeDecimal(String moovFeeDecimal) {
         Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
@@ -634,7 +639,8 @@ public class Transfer extends RuntimeException {
 
 
     /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      */
     public Transfer withMoovFeeDecimal(Optional<String> moovFeeDecimal) {
         Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
@@ -811,7 +817,8 @@ public class Transfer extends RuntimeException {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     public Transfer withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -821,7 +828,8 @@ public class Transfer extends RuntimeException {
 
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     public Transfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -1149,7 +1157,8 @@ public class Transfer extends RuntimeException {
 
 
         /**
-         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision.
          */
         public Builder moovFeeDecimal(String moovFeeDecimal) {
             Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
@@ -1158,7 +1167,8 @@ public class Transfer extends RuntimeException {
         }
 
         /**
-         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision.
          */
         public Builder moovFeeDecimal(Optional<String> moovFeeDecimal) {
             Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
@@ -1336,7 +1346,8 @@ public class Transfer extends RuntimeException {
 
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+         * represents the total amount charged.
          */
         public Builder salesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -1345,7 +1356,8 @@ public class Transfer extends RuntimeException {
         }
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+         * represents the total amount charged.
          */
         public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");

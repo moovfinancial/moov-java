@@ -38,7 +38,8 @@ public class AuthToken {
     private int expiresIn;
 
     /**
-     * A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are allowed.
+     * A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are
+     * allowed.
      */
     @JsonProperty("scope")
     private String scope;
@@ -95,7 +96,8 @@ public class AuthToken {
     }
 
     /**
-     * A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are allowed.
+     * A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are
+     * allowed.
      */
     @JsonIgnore
     public String scope() {
@@ -144,7 +146,8 @@ public class AuthToken {
     }
 
     /**
-     * A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are allowed.
+     * A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are
+     * allowed.
      */
     public AuthToken withScope(String scope) {
         Utils.checkNotNull(scope, "scope");
@@ -245,7 +248,8 @@ public class AuthToken {
 
 
         /**
-         * A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are allowed.
+         * A space-delimited list of [scopes](https://docs.moov.io/api/authentication/scopes/) that are
+         * allowed.
          */
         public Builder scope(String scope) {
             Utils.checkNotNull(scope, "scope");

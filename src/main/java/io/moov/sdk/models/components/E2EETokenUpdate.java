@@ -16,13 +16,16 @@ import java.util.Optional;
 /**
  * E2EETokenUpdate
  * 
- * <p>Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
- * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
+ * <p>Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive
+ * data (e.g., PCI information) through intermediaries.
+ * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details
+ * and examples, refer to our
  * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
  */
 public class E2EETokenUpdate {
     /**
-     * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
+     * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE)
+     * token.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("token")
@@ -40,7 +43,8 @@ public class E2EETokenUpdate {
     }
 
     /**
-     * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
+     * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE)
+     * token.
      */
     @JsonIgnore
     public Optional<String> token() {
@@ -53,7 +57,8 @@ public class E2EETokenUpdate {
 
 
     /**
-     * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
+     * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE)
+     * token.
      */
     public E2EETokenUpdate withToken(String token) {
         Utils.checkNotNull(token, "token");
@@ -63,7 +68,8 @@ public class E2EETokenUpdate {
 
 
     /**
-     * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
+     * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE)
+     * token.
      */
     public E2EETokenUpdate withToken(Optional<String> token) {
         Utils.checkNotNull(token, "token");
@@ -107,7 +113,8 @@ public class E2EETokenUpdate {
 
 
         /**
-         * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
+         * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE)
+         * token.
          */
         public Builder token(String token) {
             Utils.checkNotNull(token, "token");
@@ -116,7 +123,8 @@ public class E2EETokenUpdate {
         }
 
         /**
-         * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token.
+         * An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE)
+         * token.
          */
         public Builder token(Optional<String> token) {
             Utils.checkNotNull(token, "token");

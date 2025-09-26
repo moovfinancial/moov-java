@@ -20,7 +20,8 @@ import java.util.Optional;
  */
 public class CardPaymentSettings {
     /**
-     * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
+     * The description that shows up on credit card transactions. This will default to the accounts display
+     * name on account creation.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("statementDescriptor")
@@ -38,7 +39,8 @@ public class CardPaymentSettings {
     }
 
     /**
-     * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
+     * The description that shows up on credit card transactions. This will default to the accounts display
+     * name on account creation.
      */
     @JsonIgnore
     public Optional<String> statementDescriptor() {
@@ -51,7 +53,8 @@ public class CardPaymentSettings {
 
 
     /**
-     * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
+     * The description that shows up on credit card transactions. This will default to the accounts display
+     * name on account creation.
      */
     public CardPaymentSettings withStatementDescriptor(String statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -61,7 +64,8 @@ public class CardPaymentSettings {
 
 
     /**
-     * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
+     * The description that shows up on credit card transactions. This will default to the accounts display
+     * name on account creation.
      */
     public CardPaymentSettings withStatementDescriptor(Optional<String> statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -105,7 +109,8 @@ public class CardPaymentSettings {
 
 
         /**
-         * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
+         * The description that shows up on credit card transactions. This will default to the accounts display
+         * name on account creation.
          */
         public Builder statementDescriptor(String statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
@@ -114,7 +119,8 @@ public class CardPaymentSettings {
         }
 
         /**
-         * The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
+         * The description that shows up on credit card transactions. This will default to the accounts display
+         * name on account creation.
          */
         public Builder statementDescriptor(Optional<String> statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");

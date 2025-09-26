@@ -98,7 +98,8 @@ public class ACHTransactionDetails {
     private Optional<OffsetDateTime> completedOn;
 
     /**
-     * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
+     * An optional override of your default ACH hold period in banking days. The hold period must be longer
+     * than or equal to your default setting.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("debitHoldPeriod")
@@ -249,7 +250,8 @@ public class ACHTransactionDetails {
     }
 
     /**
-     * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
+     * An optional override of your default ACH hold period in banking days. The hold period must be longer
+     * than or equal to your default setting.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -452,7 +454,8 @@ public class ACHTransactionDetails {
     }
 
     /**
-     * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
+     * An optional override of your default ACH hold period in banking days. The hold period must be longer
+     * than or equal to your default setting.
      */
     public ACHTransactionDetails withDebitHoldPeriod(DebitHoldPeriod debitHoldPeriod) {
         Utils.checkNotNull(debitHoldPeriod, "debitHoldPeriod");
@@ -462,7 +465,8 @@ public class ACHTransactionDetails {
 
 
     /**
-     * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
+     * An optional override of your default ACH hold period in banking days. The hold period must be longer
+     * than or equal to your default setting.
      */
     public ACHTransactionDetails withDebitHoldPeriod(Optional<? extends DebitHoldPeriod> debitHoldPeriod) {
         Utils.checkNotNull(debitHoldPeriod, "debitHoldPeriod");
@@ -757,7 +761,8 @@ public class ACHTransactionDetails {
 
 
         /**
-         * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
+         * An optional override of your default ACH hold period in banking days. The hold period must be longer
+         * than or equal to your default setting.
          */
         public Builder debitHoldPeriod(DebitHoldPeriod debitHoldPeriod) {
             Utils.checkNotNull(debitHoldPeriod, "debitHoldPeriod");
@@ -766,7 +771,8 @@ public class ACHTransactionDetails {
         }
 
         /**
-         * An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
+         * An optional override of your default ACH hold period in banking days. The hold period must be longer
+         * than or equal to your default setting.
          */
         public Builder debitHoldPeriod(Optional<? extends DebitHoldPeriod> debitHoldPeriod) {
             Utils.checkNotNull(debitHoldPeriod, "debitHoldPeriod");

@@ -31,7 +31,8 @@ public class Authentication {
     /**
      * Revoke an auth token.
      * 
-     * <p>Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed.
+     * <p>Allows clients to notify the authorization server that a previously obtained refresh or access token
+     * is no longer needed.
      * 
      * @return The call builder
      */
@@ -42,7 +43,8 @@ public class Authentication {
     /**
      * Revoke an auth token.
      * 
-     * <p>Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed.
+     * <p>Allows clients to notify the authorization server that a previously obtained refresh or access token
+     * is no longer needed.
      * 
      * @param token 
      * @return The response from the API call
@@ -56,7 +58,8 @@ public class Authentication {
     /**
      * Revoke an auth token.
      * 
-     * <p>Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed.
+     * <p>Allows clients to notify the authorization server that a previously obtained refresh or access token
+     * is no longer needed.
      * 
      * @param token 
      * @param tokenTypeHint The type of token being revoked.

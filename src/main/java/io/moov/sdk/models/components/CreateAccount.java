@@ -46,7 +46,8 @@ public class CreateAccount {
     private Optional<String> foreignID;
 
     /**
-     * User-provided information that can be displayed on credit card transactions for customers to use when
+     * User-provided information that can be displayed on credit card transactions for customers to use
+     * when
      * contacting a customer support team. This data is only allowed on a business account.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -145,7 +146,8 @@ public class CreateAccount {
     }
 
     /**
-     * User-provided information that can be displayed on credit card transactions for customers to use when
+     * User-provided information that can be displayed on credit card transactions for customers to use
+     * when
      * contacting a customer support team. This data is only allowed on a business account.
      */
     @SuppressWarnings("unchecked")
@@ -247,7 +249,8 @@ public class CreateAccount {
     }
 
     /**
-     * User-provided information that can be displayed on credit card transactions for customers to use when
+     * User-provided information that can be displayed on credit card transactions for customers to use
+     * when
      * contacting a customer support team. This data is only allowed on a business account.
      */
     public CreateAccount withCustomerSupport(CustomerSupport customerSupport) {
@@ -258,7 +261,8 @@ public class CreateAccount {
 
 
     /**
-     * User-provided information that can be displayed on credit card transactions for customers to use when
+     * User-provided information that can be displayed on credit card transactions for customers to use
+     * when
      * contacting a customer support team. This data is only allowed on a business account.
      */
     public CreateAccount withCustomerSupport(Optional<? extends CustomerSupport> customerSupport) {
@@ -453,7 +457,8 @@ public class CreateAccount {
 
 
         /**
-         * User-provided information that can be displayed on credit card transactions for customers to use when
+         * User-provided information that can be displayed on credit card transactions for customers to use
+         * when
          * contacting a customer support team. This data is only allowed on a business account.
          */
         public Builder customerSupport(CustomerSupport customerSupport) {
@@ -463,7 +468,8 @@ public class CreateAccount {
         }
 
         /**
-         * User-provided information that can be displayed on credit card transactions for customers to use when
+         * User-provided information that can be displayed on credit card transactions for customers to use
+         * when
          * contacting a customer support team. This data is only allowed on a business account.
          */
         public Builder customerSupport(Optional<? extends CustomerSupport> customerSupport) {

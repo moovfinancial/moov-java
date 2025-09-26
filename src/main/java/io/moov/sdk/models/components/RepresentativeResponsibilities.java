@@ -29,8 +29,10 @@ public class RepresentativeResponsibilities {
     private Optional<Boolean> isController;
 
     /**
-     * If `true`, this field indicates that the individual has a business ownership stake of at least 25% in the
-     * business. If the representative does not own at least 25% of the business, this field should be `false`.
+     * If `true`, this field indicates that the individual has a business ownership stake of at least 25%
+     * in the
+     * business. If the representative does not own at least 25% of the business, this field should be
+     * `false`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("isOwner")
@@ -78,8 +80,10 @@ public class RepresentativeResponsibilities {
     }
 
     /**
-     * If `true`, this field indicates that the individual has a business ownership stake of at least 25% in the
-     * business. If the representative does not own at least 25% of the business, this field should be `false`.
+     * If `true`, this field indicates that the individual has a business ownership stake of at least 25%
+     * in the
+     * business. If the representative does not own at least 25% of the business, this field should be
+     * `false`.
      */
     @JsonIgnore
     public Optional<Boolean> isOwner() {
@@ -124,8 +128,10 @@ public class RepresentativeResponsibilities {
     }
 
     /**
-     * If `true`, this field indicates that the individual has a business ownership stake of at least 25% in the
-     * business. If the representative does not own at least 25% of the business, this field should be `false`.
+     * If `true`, this field indicates that the individual has a business ownership stake of at least 25%
+     * in the
+     * business. If the representative does not own at least 25% of the business, this field should be
+     * `false`.
      */
     public RepresentativeResponsibilities withIsOwner(boolean isOwner) {
         Utils.checkNotNull(isOwner, "isOwner");
@@ -135,8 +141,10 @@ public class RepresentativeResponsibilities {
 
 
     /**
-     * If `true`, this field indicates that the individual has a business ownership stake of at least 25% in the
-     * business. If the representative does not own at least 25% of the business, this field should be `false`.
+     * If `true`, this field indicates that the individual has a business ownership stake of at least 25%
+     * in the
+     * business. If the representative does not own at least 25% of the business, this field should be
+     * `false`.
      */
     public RepresentativeResponsibilities withIsOwner(Optional<Boolean> isOwner) {
         Utils.checkNotNull(isOwner, "isOwner");
@@ -244,8 +252,10 @@ public class RepresentativeResponsibilities {
 
 
         /**
-         * If `true`, this field indicates that the individual has a business ownership stake of at least 25% in the
-         * business. If the representative does not own at least 25% of the business, this field should be `false`.
+         * If `true`, this field indicates that the individual has a business ownership stake of at least 25%
+         * in the
+         * business. If the representative does not own at least 25% of the business, this field should be
+         * `false`.
          */
         public Builder isOwner(boolean isOwner) {
             Utils.checkNotNull(isOwner, "isOwner");
@@ -254,8 +264,10 @@ public class RepresentativeResponsibilities {
         }
 
         /**
-         * If `true`, this field indicates that the individual has a business ownership stake of at least 25% in the
-         * business. If the representative does not own at least 25% of the business, this field should be `false`.
+         * If `true`, this field indicates that the individual has a business ownership stake of at least 25%
+         * in the
+         * business. If the representative does not own at least 25% of the business, this field should be
+         * `false`.
          */
         public Builder isOwner(Optional<Boolean> isOwner) {
             Utils.checkNotNull(isOwner, "isOwner");

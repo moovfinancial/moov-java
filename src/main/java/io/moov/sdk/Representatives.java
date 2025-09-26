@@ -39,11 +39,15 @@ public class Representatives {
     }
 
     /**
-     * Moov accounts associated with businesses require information regarding individuals who represent the business. 
-     * You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
-     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * Moov accounts associated with businesses require information regarding individuals who represent the
+     * business.
+     * You can provide this information by creating a representative. Each account is allowed a maximum of
+     * 7 representatives.
+     * Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
      * 
      * @return The call builder
@@ -53,11 +57,15 @@ public class Representatives {
     }
 
     /**
-     * Moov accounts associated with businesses require information regarding individuals who represent the business. 
-     * You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
-     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * Moov accounts associated with businesses require information regarding individuals who represent the
+     * business.
+     * You can provide this information by creating a representative. Each account is allowed a maximum of
+     * 7 representatives.
+     * Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
      * 
      * @param accountID ID of the account.
@@ -78,12 +86,15 @@ public class Representatives {
     }
 
     /**
-     * A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
-     * You can use this method to list all the representatives for a given Moov account. 
-     * Note that Moov accounts associated with an individual do not have representatives. 
-     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * A Moov account may have multiple representatives depending on the associated business's ownership
+     * and management structure.
+     * You can use this method to list all the representatives for a given Moov account.
+     * Note that Moov accounts associated with an individual do not have representatives.
+     * Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
      * 
      * @return The call builder
@@ -93,12 +104,15 @@ public class Representatives {
     }
 
     /**
-     * A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
-     * You can use this method to list all the representatives for a given Moov account. 
-     * Note that Moov accounts associated with an individual do not have representatives. 
-     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * A Moov account may have multiple representatives depending on the associated business's ownership
+     * and management structure.
+     * You can use this method to list all the representatives for a given Moov account.
+     * Note that Moov accounts associated with an individual do not have representatives.
+     * Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
      * 
      * @param accountID ID of the account.
@@ -117,9 +131,11 @@ public class Representatives {
     }
 
     /**
-     * Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * Deletes a business representative associated with a Moov account. Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
      * 
      * @return The call builder
@@ -129,9 +145,11 @@ public class Representatives {
     }
 
     /**
-     * Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * Deletes a business representative associated with a Moov account. Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
      * 
      * @param accountID ID of the account.
@@ -152,9 +170,12 @@ public class Representatives {
     }
 
     /**
-     * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * Retrieve a specific representative associated with a given Moov account. Read our [business
+     * representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/)
+     * to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
      * 
      * @return The call builder
@@ -164,9 +185,12 @@ public class Representatives {
     }
 
     /**
-     * Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * Retrieve a specific representative associated with a given Moov account. Read our [business
+     * representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/)
+     * to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
      * 
      * @param accountID ID of the account.
@@ -187,8 +211,10 @@ public class Representatives {
     }
 
     /**
-     * If a representative's information has changed you can patch the information associated with a specific representative ID. 
-     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * If a representative's information has changed you can patch the information associated with a
+     * specific representative ID.
+     * Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
      * 
      * <p>When **can** profile data be updated:
      * 
@@ -202,7 +228,8 @@ public class Representatives {
      * 
      * <p>If you need to update information in a locked state, please contact Moov support.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
      * 
      * @return The call builder
@@ -212,8 +239,10 @@ public class Representatives {
     }
 
     /**
-     * If a representative's information has changed you can patch the information associated with a specific representative ID. 
-     * Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+     * If a representative's information has changed you can patch the information associated with a
+     * specific representative ID.
+     * Read our [business representatives
+     * guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
      * 
      * <p>When **can** profile data be updated:
      * 
@@ -227,7 +256,8 @@ public class Representatives {
      * 
      * <p>If you need to update information in a locked state, please contact Moov support.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
      * 
      * @param accountID ID of the account.

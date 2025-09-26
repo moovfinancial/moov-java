@@ -29,9 +29,11 @@ public class WebhookDataDisputeCreated {
     private String disputeID;
 
     /**
-     * The status of a particular dispute. 
+     * The status of a particular dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
+     * to learn what each status means.
      */
     @JsonProperty("status")
     private DisputeStatus status;
@@ -85,9 +87,11 @@ public class WebhookDataDisputeCreated {
     }
 
     /**
-     * The status of a particular dispute. 
+     * The status of a particular dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
+     * to learn what each status means.
      */
     @JsonIgnore
     public DisputeStatus status() {
@@ -132,9 +136,11 @@ public class WebhookDataDisputeCreated {
     }
 
     /**
-     * The status of a particular dispute. 
+     * The status of a particular dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
+     * to learn what each status means.
      */
     public WebhookDataDisputeCreated withStatus(DisputeStatus status) {
         Utils.checkNotNull(status, "status");
@@ -236,9 +242,11 @@ public class WebhookDataDisputeCreated {
 
 
         /**
-         * The status of a particular dispute. 
+         * The status of a particular dispute.
          * 
-         * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
+         * <p>Read our [disputes
+         * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
+         * to learn what each status means.
          */
         public Builder status(DisputeStatus status) {
             Utils.checkNotNull(status, "status");

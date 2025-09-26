@@ -19,8 +19,8 @@ public class AuthTokenRequest {
     /**
      * The type of grant being requested.
      * 
-     * <p>  - `client_credentials`: A grant type used by clients to obtain an access token
-     *   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
+     * <p>- `client_credentials`: A grant type used by clients to obtain an access token
+     * - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
      */
     @JsonProperty("grant_type")
     @SpeakeasyMetadata("form:name=grant_type")
@@ -51,7 +51,8 @@ public class AuthTokenRequest {
     private Optional<String> scope;
 
     /**
-     * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
+     * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is
+     * `refresh_token`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refresh_token")
@@ -86,8 +87,8 @@ public class AuthTokenRequest {
     /**
      * The type of grant being requested.
      * 
-     * <p>  - `client_credentials`: A grant type used by clients to obtain an access token
-     *   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
+     * <p>- `client_credentials`: A grant type used by clients to obtain an access token
+     * - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
      */
     @JsonIgnore
     public GrantType grantType() {
@@ -119,7 +120,8 @@ public class AuthTokenRequest {
     }
 
     /**
-     * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
+     * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is
+     * `refresh_token`.
      */
     @JsonIgnore
     public Optional<String> refreshToken() {
@@ -134,8 +136,8 @@ public class AuthTokenRequest {
     /**
      * The type of grant being requested.
      * 
-     * <p>  - `client_credentials`: A grant type used by clients to obtain an access token
-     *   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
+     * <p>- `client_credentials`: A grant type used by clients to obtain an access token
+     * - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
      */
     public AuthTokenRequest withGrantType(GrantType grantType) {
         Utils.checkNotNull(grantType, "grantType");
@@ -201,7 +203,8 @@ public class AuthTokenRequest {
     }
 
     /**
-     * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
+     * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is
+     * `refresh_token`.
      */
     public AuthTokenRequest withRefreshToken(String refreshToken) {
         Utils.checkNotNull(refreshToken, "refreshToken");
@@ -211,7 +214,8 @@ public class AuthTokenRequest {
 
 
     /**
-     * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
+     * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is
+     * `refresh_token`.
      */
     public AuthTokenRequest withRefreshToken(Optional<String> refreshToken) {
         Utils.checkNotNull(refreshToken, "refreshToken");
@@ -274,8 +278,8 @@ public class AuthTokenRequest {
         /**
          * The type of grant being requested.
          * 
-         * <p>  - `client_credentials`: A grant type used by clients to obtain an access token
-         *   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
+         * <p>- `client_credentials`: A grant type used by clients to obtain an access token
+         * - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
          */
         public Builder grantType(GrantType grantType) {
             Utils.checkNotNull(grantType, "grantType");
@@ -342,7 +346,8 @@ public class AuthTokenRequest {
 
 
         /**
-         * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
+         * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is
+         * `refresh_token`.
          */
         public Builder refreshToken(String refreshToken) {
             Utils.checkNotNull(refreshToken, "refreshToken");
@@ -351,7 +356,8 @@ public class AuthTokenRequest {
         }
 
         /**
-         * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
+         * The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is
+         * `refresh_token`.
          */
         public Builder refreshToken(Optional<String> refreshToken) {
             Utils.checkNotNull(refreshToken, "refreshToken");

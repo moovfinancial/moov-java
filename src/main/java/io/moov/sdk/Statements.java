@@ -29,7 +29,8 @@ public class Statements {
     /**
      * Retrieve all statements associated with an account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @return The call builder
@@ -41,7 +42,8 @@ public class Statements {
     /**
      * Retrieve all statements associated with an account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -57,9 +59,11 @@ public class Statements {
     /**
      * Retrieve a statement by its ID.
      * 
-     * <p>Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `application/pdf`.
+     * <p>Use the `Accept` header to specify the format of the response. Supported formats are
+     * `application/json` and `application/pdf`.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @return The call builder
@@ -71,9 +75,11 @@ public class Statements {
     /**
      * Retrieve a statement by its ID.
      * 
-     * <p>Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `application/pdf`.
+     * <p>Use the `Accept` header to specify the format of the response. Supported formats are
+     * `application/json` and `application/pdf`.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @param accountID 

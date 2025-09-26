@@ -23,7 +23,8 @@ public class Ping {
     /**
      * A simple endpoint to check auth.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/ping.read` scope.
      * 
      * @return The call builder
@@ -35,7 +36,8 @@ public class Ping {
     /**
      * A simple endpoint to check auth.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/ping.read` scope.
      * 
      * @return The response from the API call

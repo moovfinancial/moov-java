@@ -16,9 +16,9 @@ public class CreateEvidenceFileMultiPart {
      * The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
      * 
      * <p>The `Content-Type` header for this form part must be one of the following:
-     *   - `image/jpeg`
-     *   - `image/tiff`
-     *   - `application/pdf`
+     * - `image/jpeg`
+     * - `image/tiff`
+     * - `application/pdf`
      */
     @SpeakeasyMetadata("multipartForm:file,name=file")
     private File file;
@@ -41,9 +41,9 @@ public class CreateEvidenceFileMultiPart {
      * The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
      * 
      * <p>The `Content-Type` header for this form part must be one of the following:
-     *   - `image/jpeg`
-     *   - `image/tiff`
-     *   - `application/pdf`
+     * - `image/jpeg`
+     * - `image/tiff`
+     * - `application/pdf`
      */
     @JsonIgnore
     public File file() {
@@ -64,9 +64,9 @@ public class CreateEvidenceFileMultiPart {
      * The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
      * 
      * <p>The `Content-Type` header for this form part must be one of the following:
-     *   - `image/jpeg`
-     *   - `image/tiff`
-     *   - `application/pdf`
+     * - `image/jpeg`
+     * - `image/tiff`
+     * - `application/pdf`
      */
     public CreateEvidenceFileMultiPart withFile(File file) {
         Utils.checkNotNull(file, "file");
@@ -123,9 +123,9 @@ public class CreateEvidenceFileMultiPart {
          * The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
          * 
          * <p>The `Content-Type` header for this form part must be one of the following:
-         *   - `image/jpeg`
-         *   - `image/tiff`
-         *   - `application/pdf`
+         * - `image/jpeg`
+         * - `image/tiff`
+         * - `application/pdf`
          */
         public Builder file(File file) {
             Utils.checkNotNull(file, "file");

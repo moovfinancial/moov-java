@@ -17,9 +17,10 @@ import java.util.Optional;
 /**
  * CreateRefund
  * 
- * <p>Specifies a partial amount to refund. 
+ * <p>Specifies a partial amount to refund.
  * 
- * <p>This request body is optional, an empty body will issue a refund for the full amount of the original transfer.
+ * <p>This request body is optional, an empty body will issue a refund for the full amount of the original
+ * transfer.
  */
 public class CreateRefund {
     /**

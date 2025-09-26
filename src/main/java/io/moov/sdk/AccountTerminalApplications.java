@@ -37,7 +37,8 @@ public class AccountTerminalApplications {
     /**
      * Link an account with a terminal application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
      * 
      * @return The call builder
@@ -49,7 +50,8 @@ public class AccountTerminalApplications {
     /**
      * Link an account with a terminal application.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
      * 
      * @param accountID 
@@ -72,7 +74,8 @@ public class AccountTerminalApplications {
     /**
      * Retrieve all terminal applications linked to a specific account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
      * @return The call builder
@@ -84,7 +87,8 @@ public class AccountTerminalApplications {
     /**
      * Retrieve all terminal applications linked to a specific account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
      * @param accountID 
@@ -103,9 +107,11 @@ public class AccountTerminalApplications {
     }
 
     /**
-     * Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
+     * Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a
+     * validation check for the link's existence.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
      * @return The call builder
@@ -115,9 +121,11 @@ public class AccountTerminalApplications {
     }
 
     /**
-     * Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
+     * Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a
+     * validation check for the link's existence.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
      * 
      * @param accountID 
@@ -140,7 +148,8 @@ public class AccountTerminalApplications {
     /**
      * Fetch the configuration for a given Terminal Application linked to a specific Account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
      * 
      * @return The call builder
@@ -152,7 +161,8 @@ public class AccountTerminalApplications {
     /**
      * Fetch the configuration for a given Terminal Application linked to a specific Account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
      * 
      * @param accountID 

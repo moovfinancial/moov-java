@@ -32,12 +32,14 @@ public class Files {
     }
 
     /**
-     * Upload a file and link it to the specified Moov account. 
+     * Upload a file and link it to the specified Moov account.
      * 
-     * <p>The maximum file size is 20MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf, 
-     * and png. 
+     * <p>The maximum file size is 20MB. Each account is allowed a maximum of 50 files. Acceptable file types
+     * include csv, jpg, pdf,
+     * and png.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/files.write` scope.
      * 
      * @return The call builder
@@ -47,12 +49,14 @@ public class Files {
     }
 
     /**
-     * Upload a file and link it to the specified Moov account. 
+     * Upload a file and link it to the specified Moov account.
      * 
-     * <p>The maximum file size is 20MB. Each account is allowed a maximum of 50 files. Acceptable file types include csv, jpg, pdf, 
-     * and png. 
+     * <p>The maximum file size is 20MB. Each account is allowed a maximum of 50 files. Acceptable file types
+     * include csv, jpg, pdf,
+     * and png.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/files.write` scope.
      * 
      * @param accountID 
@@ -75,7 +79,8 @@ public class Files {
     /**
      * List all the files associated with a particular Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * 
      * @return The call builder
@@ -87,7 +92,8 @@ public class Files {
     /**
      * List all the files associated with a particular Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * 
      * @param accountID 
@@ -108,7 +114,8 @@ public class Files {
     /**
      * Retrieve file details associated with a specific Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * 
      * @return The call builder
@@ -120,7 +127,8 @@ public class Files {
     /**
      * Retrieve file details associated with a specific Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/files.read` scope.
      * 
      * @param accountID 

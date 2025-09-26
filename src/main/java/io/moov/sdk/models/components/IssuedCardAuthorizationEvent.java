@@ -14,7 +14,8 @@ import java.time.OffsetDateTime;
 
 public class IssuedCardAuthorizationEvent {
     /**
-     * The identifier for this event. Use the `eventType` field to determine what resource is identified by this ID (`authorization`, `reversal`, etc.).
+     * The identifier for this event. Use the `eventType` field to determine what resource is identified by
+     * this ID (`authorization`, `reversal`, etc.).
      */
     @JsonProperty("eventID")
     private String eventID;
@@ -26,7 +27,8 @@ public class IssuedCardAuthorizationEvent {
     private IssuedCardEventType eventType;
 
     /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+     * example, 12.34 is $12.34 and 0.99 is $0.99.
      */
     @JsonProperty("amount")
     private String amount;
@@ -61,7 +63,8 @@ public class IssuedCardAuthorizationEvent {
     }
 
     /**
-     * The identifier for this event. Use the `eventType` field to determine what resource is identified by this ID (`authorization`, `reversal`, etc.).
+     * The identifier for this event. Use the `eventType` field to determine what resource is identified by
+     * this ID (`authorization`, `reversal`, etc.).
      */
     @JsonIgnore
     public String eventID() {
@@ -77,7 +80,8 @@ public class IssuedCardAuthorizationEvent {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+     * example, 12.34 is $12.34 and 0.99 is $0.99.
      */
     @JsonIgnore
     public String amount() {
@@ -103,7 +107,8 @@ public class IssuedCardAuthorizationEvent {
 
 
     /**
-     * The identifier for this event. Use the `eventType` field to determine what resource is identified by this ID (`authorization`, `reversal`, etc.).
+     * The identifier for this event. Use the `eventType` field to determine what resource is identified by
+     * this ID (`authorization`, `reversal`, etc.).
      */
     public IssuedCardAuthorizationEvent withEventID(String eventID) {
         Utils.checkNotNull(eventID, "eventID");
@@ -121,7 +126,8 @@ public class IssuedCardAuthorizationEvent {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+     * example, 12.34 is $12.34 and 0.99 is $0.99.
      */
     public IssuedCardAuthorizationEvent withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
@@ -197,7 +203,8 @@ public class IssuedCardAuthorizationEvent {
 
 
         /**
-         * The identifier for this event. Use the `eventType` field to determine what resource is identified by this ID (`authorization`, `reversal`, etc.).
+         * The identifier for this event. Use the `eventType` field to determine what resource is identified by
+         * this ID (`authorization`, `reversal`, etc.).
          */
         public Builder eventID(String eventID) {
             Utils.checkNotNull(eventID, "eventID");
@@ -217,7 +224,8 @@ public class IssuedCardAuthorizationEvent {
 
 
         /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+         * example, 12.34 is $12.34 and 0.99 is $0.99.
          */
         public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");

@@ -38,7 +38,8 @@ public class Branding {
     /**
      * Create brand properties for the specified account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * 
      * @return The call builder
@@ -50,7 +51,8 @@ public class Branding {
     /**
      * Create brand properties for the specified account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * 
      * @param accountID 
@@ -73,7 +75,8 @@ public class Branding {
     /**
      * Create or replace brand properties for the specified account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * 
      * @return The call builder
@@ -85,7 +88,8 @@ public class Branding {
     /**
      * Create or replace brand properties for the specified account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * 
      * @param accountID 
@@ -108,7 +112,8 @@ public class Branding {
     /**
      * Get brand properties for the specified account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/branding.read` scope.
      * 
      * @return The call builder
@@ -120,7 +125,8 @@ public class Branding {
     /**
      * Get brand properties for the specified account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/branding.read` scope.
      * 
      * @param accountID 
@@ -141,7 +147,8 @@ public class Branding {
     /**
      * Updates the brand properties for the specified account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * 
      * @return The call builder
@@ -153,7 +160,8 @@ public class Branding {
     /**
      * Updates the brand properties for the specified account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
      * 
      * @param accountID 

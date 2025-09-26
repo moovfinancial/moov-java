@@ -41,23 +41,30 @@ public class Cards {
     }
 
     /**
-     * Link a card to an existing Moov account. 
+     * Link a card to an existing Moov account.
      * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
      * 
-     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
      * 
-     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request. 
-     * If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address. 
-     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will 
+     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account
+     * verification) request.
+     * If `merchantAccountID` is provided, the authorization request will contain that account's statement
+     * descriptor and address.
+     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the
+     * authorization will
      * use the account's name instead.
      * 
-     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked 
-     * card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment 
+     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if
+     * the newly linked
+     * card is intended to be used right away. If this header is not included, the caller will need to poll
+     * the [List Payment
      * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
      * endpoint to wait for the new payment methods to be available for use.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @return The call builder
@@ -67,23 +74,30 @@ public class Cards {
     }
 
     /**
-     * Link a card to an existing Moov account. 
+     * Link a card to an existing Moov account.
      * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
      * 
-     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
      * 
-     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request. 
-     * If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address. 
-     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will 
+     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account
+     * verification) request.
+     * If `merchantAccountID` is provided, the authorization request will contain that account's statement
+     * descriptor and address.
+     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the
+     * authorization will
      * use the account's name instead.
      * 
-     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked 
-     * card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment 
+     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if
+     * the newly linked
+     * card is intended to be used right away. If this header is not included, the caller will need to poll
+     * the [List Payment
      * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
      * endpoint to wait for the new payment methods to be available for use.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @param accountID 
@@ -96,23 +110,30 @@ public class Cards {
     }
 
     /**
-     * Link a card to an existing Moov account. 
+     * Link a card to an existing Moov account.
      * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
      * 
-     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
      * 
-     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account verification) request. 
-     * If `merchantAccountID` is provided, the authorization request will contain that account's statement descriptor and address. 
-     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the authorization will 
+     * <p>During card linking, the provided data will be verified by submitting a $0 authorization (account
+     * verification) request.
+     * If `merchantAccountID` is provided, the authorization request will contain that account's statement
+     * descriptor and address.
+     * Otherwise, the platform account's profile will be used. If no statement descriptor has been set, the
+     * authorization will
      * use the account's name instead.
      * 
-     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked 
-     * card is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment 
+     * <p>It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if
+     * the newly linked
+     * card is intended to be used right away. If this header is not included, the caller will need to poll
+     * the [List Payment
      * Methods](https://docs.moov.io/api/sources/payment-methods/list/)
      * endpoint to wait for the new payment methods to be available for use.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @param xWaitFor 
@@ -137,11 +158,13 @@ public class Cards {
     }
 
     /**
-     * List all the active cards associated with a Moov account. 
+     * List all the active cards associated with a Moov account.
      * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
      * 
      * @return The call builder
@@ -151,11 +174,13 @@ public class Cards {
     }
 
     /**
-     * List all the active cards associated with a Moov account. 
+     * List all the active cards associated with a Moov account.
      * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
      * 
      * @param accountID 
@@ -174,11 +199,13 @@ public class Cards {
     }
 
     /**
-     * Fetch a specific card associated with a Moov account. 
+     * Fetch a specific card associated with a Moov account.
      * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
      * 
      * @return The call builder
@@ -188,11 +215,13 @@ public class Cards {
     }
 
     /**
-     * Fetch a specific card associated with a Moov account. 
+     * Fetch a specific card associated with a Moov account.
      * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.read` scope.
      * 
      * @param accountID 
@@ -213,18 +242,21 @@ public class Cards {
     }
 
     /**
-     * Update a linked card and/or resubmit it for verification. 
+     * Update a linked card and/or resubmit it for verification.
      * 
-     * <p>If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration 
-     * date or 
+     * <p>If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the
+     * card. Updating the expiration
+     * date or
      * address will update the information stored on file for the card but will not be verified.
      * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn 
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn
      * more.
      * 
-     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @return The call builder
@@ -234,18 +266,21 @@ public class Cards {
     }
 
     /**
-     * Update a linked card and/or resubmit it for verification. 
+     * Update a linked card and/or resubmit it for verification.
      * 
-     * <p>If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration 
-     * date or 
+     * <p>If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the
+     * card. Updating the expiration
+     * date or
      * address will update the information stored on file for the card but will not be verified.
      * 
-     * <p>Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn 
+     * <p>Read our [accept card payments
+     * guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#reverify-a-card) to learn
      * more.
      * 
-     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
+     * <p>Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @param accountID 
@@ -272,7 +307,8 @@ public class Cards {
     /**
      * Disables a card associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @return The call builder
@@ -284,7 +320,8 @@ public class Cards {
     /**
      * Disables a card associated with a Moov account.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/cards.write` scope.
      * 
      * @param accountID 

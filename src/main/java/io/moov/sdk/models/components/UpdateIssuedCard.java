@@ -17,12 +17,17 @@ import java.util.Optional;
 
 public class UpdateIssuedCard {
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+     * The `state` represents the operational status of an issued card. A card can only approve incoming
+     * authorizations if it is in an active state.
      * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+     * after card creation.
+     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+     * post-creation during the activation process.
+     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+     * closed by request or when it expires.
+     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+     * activated.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("state")
@@ -58,12 +63,17 @@ public class UpdateIssuedCard {
     }
 
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+     * The `state` represents the operational status of an issued card. A card can only approve incoming
+     * authorizations if it is in an active state.
      * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+     * after card creation.
+     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+     * post-creation during the activation process.
+     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+     * closed by request or when it expires.
+     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+     * activated.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -91,12 +101,17 @@ public class UpdateIssuedCard {
 
 
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+     * The `state` represents the operational status of an issued card. A card can only approve incoming
+     * authorizations if it is in an active state.
      * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+     * after card creation.
+     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+     * post-creation during the activation process.
+     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+     * closed by request or when it expires.
+     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+     * activated.
      */
     public UpdateIssuedCard withState(IssuedCardState state) {
         Utils.checkNotNull(state, "state");
@@ -106,12 +121,17 @@ public class UpdateIssuedCard {
 
 
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+     * The `state` represents the operational status of an issued card. A card can only approve incoming
+     * authorizations if it is in an active state.
      * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+     * after card creation.
+     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+     * post-creation during the activation process.
+     * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+     * closed by request or when it expires.
+     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+     * activated.
      */
     public UpdateIssuedCard withState(Optional<? extends IssuedCardState> state) {
         Utils.checkNotNull(state, "state");
@@ -195,12 +215,17 @@ public class UpdateIssuedCard {
 
 
         /**
-         * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+         * The `state` represents the operational status of an issued card. A card can only approve incoming
+         * authorizations if it is in an active state.
          * 
-         * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-         * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-         * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-         * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+         * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+         * after card creation.
+         * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+         * post-creation during the activation process.
+         * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+         * closed by request or when it expires.
+         * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+         * activated.
          */
         public Builder state(IssuedCardState state) {
             Utils.checkNotNull(state, "state");
@@ -209,12 +234,17 @@ public class UpdateIssuedCard {
         }
 
         /**
-         * The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+         * The `state` represents the operational status of an issued card. A card can only approve incoming
+         * authorizations if it is in an active state.
          * 
-         * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-         * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
-         * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-         * - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+         * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
+         * after card creation.
+         * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
+         * post-creation during the activation process.
+         * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
+         * closed by request or when it expires.
+         * - `pending-verification`: Awaiting additional authorized user verification before the card can be
+         * activated.
          */
         public Builder state(Optional<? extends IssuedCardState> state) {
             Utils.checkNotNull(state, "state");

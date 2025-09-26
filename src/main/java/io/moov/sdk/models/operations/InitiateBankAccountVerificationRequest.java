@@ -16,9 +16,11 @@ import java.util.Optional;
 
 public class InitiateBankAccountVerificationRequest {
     /**
-     * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+     * Optional header to wait for certain events, such as the rail response, to occur before returning a
+     * response.
      * 
-     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed
+     * status from the payment rail.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-wait-for")
     private Optional<? extends BankAccountWaitFor> xWaitFor;
@@ -51,9 +53,11 @@ public class InitiateBankAccountVerificationRequest {
     }
 
     /**
-     * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+     * Optional header to wait for certain events, such as the rail response, to occur before returning a
+     * response.
      * 
-     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed
+     * status from the payment rail.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -77,9 +81,11 @@ public class InitiateBankAccountVerificationRequest {
 
 
     /**
-     * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+     * Optional header to wait for certain events, such as the rail response, to occur before returning a
+     * response.
      * 
-     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed
+     * status from the payment rail.
      */
     public InitiateBankAccountVerificationRequest withXWaitFor(BankAccountWaitFor xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -89,9 +95,11 @@ public class InitiateBankAccountVerificationRequest {
 
 
     /**
-     * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+     * Optional header to wait for certain events, such as the rail response, to occur before returning a
+     * response.
      * 
-     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+     * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed
+     * status from the payment rail.
      */
     public InitiateBankAccountVerificationRequest withXWaitFor(Optional<? extends BankAccountWaitFor> xWaitFor) {
         Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -155,9 +163,11 @@ public class InitiateBankAccountVerificationRequest {
 
 
         /**
-         * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+         * Optional header to wait for certain events, such as the rail response, to occur before returning a
+         * response.
          * 
-         * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+         * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed
+         * status from the payment rail.
          */
         public Builder xWaitFor(BankAccountWaitFor xWaitFor) {
             Utils.checkNotNull(xWaitFor, "xWaitFor");
@@ -166,9 +176,11 @@ public class InitiateBankAccountVerificationRequest {
         }
 
         /**
-         * Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+         * Optional header to wait for certain events, such as the rail response, to occur before returning a
+         * response.
          * 
-         * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+         * <p>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed
+         * status from the payment rail.
          */
         public Builder xWaitFor(Optional<? extends BankAccountWaitFor> xWaitFor) {
             Utils.checkNotNull(xWaitFor, "xWaitFor");

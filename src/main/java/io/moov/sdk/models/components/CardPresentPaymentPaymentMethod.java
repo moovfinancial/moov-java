@@ -17,7 +17,8 @@ import java.util.Optional;
 /**
  * CardPresentPaymentPaymentMethod
  * 
- * <p>A card used at point of sale terminal for a card present transaction as contained within a payment method.
+ * <p>A card used at point of sale terminal for a card present transaction as contained within a payment
+ * method.
  */
 public class CardPresentPaymentPaymentMethod implements PaymentMethod {
     /**

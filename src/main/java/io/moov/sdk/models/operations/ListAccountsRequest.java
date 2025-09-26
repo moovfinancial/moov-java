@@ -22,11 +22,12 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by name.
      * 
-     * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
-     * &lt;ul&gt;
-     *   &lt;li&gt;Account `displayName`&lt;/li&gt;
-     *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
-     *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
+     * <p>If provided, this query will attempt to find matches against the following Account and Profile
+     * fields:
+     * <ul>
+     * <li>Account `displayName`</li>
+     * <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+     * <li>Business Profile `legalBusinessName`</li>
      * &lt;/ul&gt;
      * 
      * <p>Filtering by Guest Profile `name` is not currently supported.
@@ -37,7 +38,7 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by email address.
      * 
-     * <p>  Provide the full email address to filter by email.
+     * <p>Provide the full email address to filter by email.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=email")
     private Optional<String> email;
@@ -45,17 +46,20 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by AccountType.
      * 
-     * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
-     *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
-     *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+     * <p>If the `type` parameter is used in combination with `name`, only the corresponding type's name
+     * fields will
+     * be searched. For example, if `type=business` and `name=moov`, the search will attempt to find
+     * matches against
+     * the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
      * 
-     * <p>  Filtering by `type=guest` is not currently supported.
+     * <p>Filtering by `type=guest` is not currently supported.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=type")
     private Optional<? extends CreateAccountType> type;
 
     /**
-     * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+     * Serves as an optional alias from a foreign/external system which can be used to reference this
+     * resource.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=foreignID")
     private Optional<String> foreignID;
@@ -128,11 +132,12 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by name.
      * 
-     * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
-     * &lt;ul&gt;
-     *   &lt;li&gt;Account `displayName`&lt;/li&gt;
-     *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
-     *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
+     * <p>If provided, this query will attempt to find matches against the following Account and Profile
+     * fields:
+     * <ul>
+     * <li>Account `displayName`</li>
+     * <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+     * <li>Business Profile `legalBusinessName`</li>
      * &lt;/ul&gt;
      * 
      * <p>Filtering by Guest Profile `name` is not currently supported.
@@ -145,7 +150,7 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by email address.
      * 
-     * <p>  Provide the full email address to filter by email.
+     * <p>Provide the full email address to filter by email.
      */
     @JsonIgnore
     public Optional<String> email() {
@@ -155,11 +160,13 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by AccountType.
      * 
-     * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
-     *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
-     *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+     * <p>If the `type` parameter is used in combination with `name`, only the corresponding type's name
+     * fields will
+     * be searched. For example, if `type=business` and `name=moov`, the search will attempt to find
+     * matches against
+     * the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
      * 
-     * <p>  Filtering by `type=guest` is not currently supported.
+     * <p>Filtering by `type=guest` is not currently supported.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -168,7 +175,8 @@ public class ListAccountsRequest {
     }
 
     /**
-     * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+     * Serves as an optional alias from a foreign/external system which can be used to reference this
+     * resource.
      */
     @JsonIgnore
     public Optional<String> foreignID() {
@@ -221,11 +229,12 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by name.
      * 
-     * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
-     * &lt;ul&gt;
-     *   &lt;li&gt;Account `displayName`&lt;/li&gt;
-     *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
-     *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
+     * <p>If provided, this query will attempt to find matches against the following Account and Profile
+     * fields:
+     * <ul>
+     * <li>Account `displayName`</li>
+     * <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+     * <li>Business Profile `legalBusinessName`</li>
      * &lt;/ul&gt;
      * 
      * <p>Filtering by Guest Profile `name` is not currently supported.
@@ -240,11 +249,12 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by name.
      * 
-     * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
-     * &lt;ul&gt;
-     *   &lt;li&gt;Account `displayName`&lt;/li&gt;
-     *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
-     *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
+     * <p>If provided, this query will attempt to find matches against the following Account and Profile
+     * fields:
+     * <ul>
+     * <li>Account `displayName`</li>
+     * <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+     * <li>Business Profile `legalBusinessName`</li>
      * &lt;/ul&gt;
      * 
      * <p>Filtering by Guest Profile `name` is not currently supported.
@@ -258,7 +268,7 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by email address.
      * 
-     * <p>  Provide the full email address to filter by email.
+     * <p>Provide the full email address to filter by email.
      */
     public ListAccountsRequest withEmail(String email) {
         Utils.checkNotNull(email, "email");
@@ -270,7 +280,7 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by email address.
      * 
-     * <p>  Provide the full email address to filter by email.
+     * <p>Provide the full email address to filter by email.
      */
     public ListAccountsRequest withEmail(Optional<String> email) {
         Utils.checkNotNull(email, "email");
@@ -281,11 +291,13 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by AccountType.
      * 
-     * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
-     *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
-     *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+     * <p>If the `type` parameter is used in combination with `name`, only the corresponding type's name
+     * fields will
+     * be searched. For example, if `type=business` and `name=moov`, the search will attempt to find
+     * matches against
+     * the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
      * 
-     * <p>  Filtering by `type=guest` is not currently supported.
+     * <p>Filtering by `type=guest` is not currently supported.
      */
     public ListAccountsRequest withType(CreateAccountType type) {
         Utils.checkNotNull(type, "type");
@@ -297,11 +309,13 @@ public class ListAccountsRequest {
     /**
      * Filter connected accounts by AccountType.
      * 
-     * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
-     *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
-     *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+     * <p>If the `type` parameter is used in combination with `name`, only the corresponding type's name
+     * fields will
+     * be searched. For example, if `type=business` and `name=moov`, the search will attempt to find
+     * matches against
+     * the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
      * 
-     * <p>  Filtering by `type=guest` is not currently supported.
+     * <p>Filtering by `type=guest` is not currently supported.
      */
     public ListAccountsRequest withType(Optional<? extends CreateAccountType> type) {
         Utils.checkNotNull(type, "type");
@@ -310,7 +324,8 @@ public class ListAccountsRequest {
     }
 
     /**
-     * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+     * Serves as an optional alias from a foreign/external system which can be used to reference this
+     * resource.
      */
     public ListAccountsRequest withForeignID(String foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
@@ -320,7 +335,8 @@ public class ListAccountsRequest {
 
 
     /**
-     * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+     * Serves as an optional alias from a foreign/external system which can be used to reference this
+     * resource.
      */
     public ListAccountsRequest withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
@@ -487,11 +503,12 @@ public class ListAccountsRequest {
         /**
          * Filter connected accounts by name.
          * 
-         * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
-         * &lt;ul&gt;
-         *   &lt;li&gt;Account `displayName`&lt;/li&gt;
-         *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
-         *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
+         * <p>If provided, this query will attempt to find matches against the following Account and Profile
+         * fields:
+         * <ul>
+         * <li>Account `displayName`</li>
+         * <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+         * <li>Business Profile `legalBusinessName`</li>
          * &lt;/ul&gt;
          * 
          * <p>Filtering by Guest Profile `name` is not currently supported.
@@ -505,11 +522,12 @@ public class ListAccountsRequest {
         /**
          * Filter connected accounts by name.
          * 
-         * <p>If provided, this query will attempt to find matches against the following Account and Profile fields:
-         * &lt;ul&gt;
-         *   &lt;li&gt;Account `displayName`&lt;/li&gt;
-         *   &lt;li&gt;Individual Profile `firstName`, `middleName`, and `lastName`&lt;/li&gt;
-         *   &lt;li&gt;Business Profile `legalBusinessName`&lt;/li&gt;
+         * <p>If provided, this query will attempt to find matches against the following Account and Profile
+         * fields:
+         * <ul>
+         * <li>Account `displayName`</li>
+         * <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+         * <li>Business Profile `legalBusinessName`</li>
          * &lt;/ul&gt;
          * 
          * <p>Filtering by Guest Profile `name` is not currently supported.
@@ -524,7 +542,7 @@ public class ListAccountsRequest {
         /**
          * Filter connected accounts by email address.
          * 
-         * <p>  Provide the full email address to filter by email.
+         * <p>Provide the full email address to filter by email.
          */
         public Builder email(String email) {
             Utils.checkNotNull(email, "email");
@@ -535,7 +553,7 @@ public class ListAccountsRequest {
         /**
          * Filter connected accounts by email address.
          * 
-         * <p>  Provide the full email address to filter by email.
+         * <p>Provide the full email address to filter by email.
          */
         public Builder email(Optional<String> email) {
             Utils.checkNotNull(email, "email");
@@ -547,11 +565,13 @@ public class ListAccountsRequest {
         /**
          * Filter connected accounts by AccountType.
          * 
-         * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
-         *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
-         *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+         * <p>If the `type` parameter is used in combination with `name`, only the corresponding type's name
+         * fields will
+         * be searched. For example, if `type=business` and `name=moov`, the search will attempt to find
+         * matches against
+         * the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
          * 
-         * <p>  Filtering by `type=guest` is not currently supported.
+         * <p>Filtering by `type=guest` is not currently supported.
          */
         public Builder type(CreateAccountType type) {
             Utils.checkNotNull(type, "type");
@@ -562,11 +582,13 @@ public class ListAccountsRequest {
         /**
          * Filter connected accounts by AccountType.
          * 
-         * <p>  If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
-         *   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
-         *   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+         * <p>If the `type` parameter is used in combination with `name`, only the corresponding type's name
+         * fields will
+         * be searched. For example, if `type=business` and `name=moov`, the search will attempt to find
+         * matches against
+         * the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
          * 
-         * <p>  Filtering by `type=guest` is not currently supported.
+         * <p>Filtering by `type=guest` is not currently supported.
          */
         public Builder type(Optional<? extends CreateAccountType> type) {
             Utils.checkNotNull(type, "type");
@@ -576,7 +598,8 @@ public class ListAccountsRequest {
 
 
         /**
-         * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+         * Serves as an optional alias from a foreign/external system which can be used to reference this
+         * resource.
          */
         public Builder foreignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
@@ -585,7 +608,8 @@ public class ListAccountsRequest {
         }
 
         /**
-         * Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+         * Serves as an optional alias from a foreign/external system which can be used to reference this
+         * resource.
          */
         public Builder foreignID(Optional<String> foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");

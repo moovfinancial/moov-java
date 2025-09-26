@@ -13,7 +13,8 @@ import java.lang.String;
 /**
  * TaxID
  * 
- * <p>An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+ * <p>An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used
+ * as the EIN.
  */
 public class TaxID {
 

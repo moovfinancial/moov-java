@@ -33,9 +33,10 @@ public class Dispute {
     private Amount amount;
 
     /**
-     * Indicates the card network's category for the dispute. 
+     * Indicates the card network's category for the dispute.
      * 
-     * <p>These codes may differ between card brands. You can find more information on the code from the networkReasonDescription field.
+     * <p>These codes may differ between card brands. You can find more information on the code from the
+     * networkReasonDescription field.
      */
     @JsonProperty("networkReasonCode")
     private String networkReasonCode;
@@ -56,9 +57,11 @@ public class Dispute {
     private OffsetDateTime respondBy;
 
     /**
-     * The status of a particular dispute. 
+     * The status of a particular dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
+     * to learn what each status means.
      */
     @JsonProperty("status")
     private DisputeStatus status;
@@ -147,9 +150,10 @@ public class Dispute {
     }
 
     /**
-     * Indicates the card network's category for the dispute. 
+     * Indicates the card network's category for the dispute.
      * 
-     * <p>These codes may differ between card brands. You can find more information on the code from the networkReasonDescription field.
+     * <p>These codes may differ between card brands. You can find more information on the code from the
+     * networkReasonDescription field.
      */
     @JsonIgnore
     public String networkReasonCode() {
@@ -175,9 +179,11 @@ public class Dispute {
     }
 
     /**
-     * The status of a particular dispute. 
+     * The status of a particular dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
+     * to learn what each status means.
      */
     @JsonIgnore
     public DisputeStatus status() {
@@ -226,9 +232,10 @@ public class Dispute {
     }
 
     /**
-     * Indicates the card network's category for the dispute. 
+     * Indicates the card network's category for the dispute.
      * 
-     * <p>These codes may differ between card brands. You can find more information on the code from the networkReasonDescription field.
+     * <p>These codes may differ between card brands. You can find more information on the code from the
+     * networkReasonDescription field.
      */
     public Dispute withNetworkReasonCode(String networkReasonCode) {
         Utils.checkNotNull(networkReasonCode, "networkReasonCode");
@@ -268,9 +275,11 @@ public class Dispute {
     }
 
     /**
-     * The status of a particular dispute. 
+     * The status of a particular dispute.
      * 
-     * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
+     * <p>Read our [disputes
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
+     * to learn what each status means.
      */
     public Dispute withStatus(DisputeStatus status) {
         Utils.checkNotNull(status, "status");
@@ -406,9 +415,10 @@ public class Dispute {
 
 
         /**
-         * Indicates the card network's category for the dispute. 
+         * Indicates the card network's category for the dispute.
          * 
-         * <p>These codes may differ between card brands. You can find more information on the code from the networkReasonDescription field.
+         * <p>These codes may differ between card brands. You can find more information on the code from the
+         * networkReasonDescription field.
          */
         public Builder networkReasonCode(String networkReasonCode) {
             Utils.checkNotNull(networkReasonCode, "networkReasonCode");
@@ -451,9 +461,11 @@ public class Dispute {
 
 
         /**
-         * The status of a particular dispute. 
+         * The status of a particular dispute.
          * 
-         * <p>Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
+         * <p>Read our [disputes
+         * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses)
+         * to learn what each status means.
          */
         public Builder status(DisputeStatus status) {
             Utils.checkNotNull(status, "status");

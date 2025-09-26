@@ -23,9 +23,11 @@ public class EnrichedProfile {
     }
 
     /**
-     * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
+     * Fetch enriched profile data. Requires a valid email address. This service is offered in
+     * collaboration with Clearbit.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @return The call builder
@@ -35,9 +37,11 @@ public class EnrichedProfile {
     }
 
     /**
-     * Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
+     * Fetch enriched profile data. Requires a valid email address. This service is offered in
+     * collaboration with Clearbit.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @param email 

@@ -27,7 +27,8 @@ public class RequestCard {
     private CreateAuthorizedUser authorizedUser;
 
     /**
-     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
+     * number without a physical card.
      */
     @JsonProperty("formFactor")
     private IssuedCardFormFactor formFactor;
@@ -95,7 +96,8 @@ public class RequestCard {
     }
 
     /**
-     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
+     * number without a physical card.
      */
     @JsonIgnore
     public IssuedCardFormFactor formFactor() {
@@ -146,7 +148,8 @@ public class RequestCard {
     }
 
     /**
-     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+     * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
+     * number without a physical card.
      */
     public RequestCard withFormFactor(IssuedCardFormFactor formFactor) {
         Utils.checkNotNull(formFactor, "formFactor");
@@ -279,7 +282,8 @@ public class RequestCard {
 
 
         /**
-         * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
+         * Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital
+         * number without a physical card.
          */
         public Builder formFactor(IssuedCardFormFactor formFactor) {
             Utils.checkNotNull(formFactor, "formFactor");

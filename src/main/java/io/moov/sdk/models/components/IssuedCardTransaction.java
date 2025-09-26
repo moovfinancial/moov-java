@@ -29,7 +29,8 @@ public class IssuedCardTransaction {
     private String fundingWalletID;
 
     /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+     * example, 12.34 is $12.34 and 0.99 is $0.99.
      */
     @JsonProperty("amount")
     private String amount;
@@ -108,7 +109,8 @@ public class IssuedCardTransaction {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+     * example, 12.34 is $12.34 and 0.99 is $0.99.
      */
     @JsonIgnore
     public String amount() {
@@ -159,7 +161,8 @@ public class IssuedCardTransaction {
     }
 
     /**
-     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+     * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+     * example, 12.34 is $12.34 and 0.99 is $0.99.
      */
     public IssuedCardTransaction withAmount(String amount) {
         Utils.checkNotNull(amount, "amount");
@@ -285,7 +288,8 @@ public class IssuedCardTransaction {
 
 
         /**
-         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99.
+         * A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for
+         * example, 12.34 is $12.34 and 0.99 is $0.99.
          */
         public Builder amount(String amount) {
             Utils.checkNotNull(amount, "amount");

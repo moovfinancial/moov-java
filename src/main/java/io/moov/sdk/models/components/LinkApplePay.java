@@ -19,15 +19,17 @@ import java.util.Optional;
  * 
  * <p>The JSON structure returned from Apple Pay when authorizing a payment session.
  * 
- * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment) 
- *   for more information.
+ * <p>Refer to [Apple's
+ * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment)
+ * for more information.
  */
 public class LinkApplePay {
     /**
      * Contains the user's payment information as returned from Apple Pay.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)
+     * for more information.
      */
     @JsonProperty("token")
     private LinkApplePayToken token;
@@ -35,8 +37,9 @@ public class LinkApplePay {
     /**
      * Billing contact information as returned from Apple Pay.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)
+     * for more information.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("billingContact")
@@ -60,8 +63,9 @@ public class LinkApplePay {
     /**
      * Contains the user's payment information as returned from Apple Pay.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)
+     * for more information.
      */
     @JsonIgnore
     public LinkApplePayToken token() {
@@ -71,8 +75,9 @@ public class LinkApplePay {
     /**
      * Billing contact information as returned from Apple Pay.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)
+     * for more information.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -88,8 +93,9 @@ public class LinkApplePay {
     /**
      * Contains the user's payment information as returned from Apple Pay.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)
+     * for more information.
      */
     public LinkApplePay withToken(LinkApplePayToken token) {
         Utils.checkNotNull(token, "token");
@@ -100,8 +106,9 @@ public class LinkApplePay {
     /**
      * Billing contact information as returned from Apple Pay.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)
+     * for more information.
      */
     public LinkApplePay withBillingContact(AppleBillingContact billingContact) {
         Utils.checkNotNull(billingContact, "billingContact");
@@ -113,8 +120,9 @@ public class LinkApplePay {
     /**
      * Billing contact information as returned from Apple Pay.
      * 
-     * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) 
-     *   for more information.
+     * <p>Refer to [Apple's
+     * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)
+     * for more information.
      */
     public LinkApplePay withBillingContact(Optional<? extends AppleBillingContact> billingContact) {
         Utils.checkNotNull(billingContact, "billingContact");
@@ -164,8 +172,9 @@ public class LinkApplePay {
         /**
          * Contains the user's payment information as returned from Apple Pay.
          * 
-         * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken) 
-         *   for more information.
+         * <p>Refer to [Apple's
+         * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)
+         * for more information.
          */
         public Builder token(LinkApplePayToken token) {
             Utils.checkNotNull(token, "token");
@@ -177,8 +186,9 @@ public class LinkApplePay {
         /**
          * Billing contact information as returned from Apple Pay.
          * 
-         * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) 
-         *   for more information.
+         * <p>Refer to [Apple's
+         * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)
+         * for more information.
          */
         public Builder billingContact(AppleBillingContact billingContact) {
             Utils.checkNotNull(billingContact, "billingContact");
@@ -189,8 +199,9 @@ public class LinkApplePay {
         /**
          * Billing contact information as returned from Apple Pay.
          * 
-         * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) 
-         *   for more information.
+         * <p>Refer to [Apple's
+         * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)
+         * for more information.
          */
         public Builder billingContact(Optional<? extends AppleBillingContact> billingContact) {
             Utils.checkNotNull(billingContact, "billingContact");

@@ -32,11 +32,13 @@ public class Underwriting {
     }
 
     /**
-     * Retrieve underwriting associated with a given Moov account. 
+     * Retrieve underwriting associated with a given Moov account.
      * 
-     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @return The call builder
@@ -46,11 +48,13 @@ public class Underwriting {
     }
 
     /**
-     * Retrieve underwriting associated with a given Moov account. 
+     * Retrieve underwriting associated with a given Moov account.
      * 
-     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. 
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
      * 
      * @param accountID 
@@ -71,9 +75,11 @@ public class Underwriting {
     /**
      * Create or update the account's underwriting.
      * 
-     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * 
      * @return The call builder
@@ -85,9 +91,11 @@ public class Underwriting {
     /**
      * Create or update the account's underwriting.
      * 
-     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * 
      * @param accountID 
@@ -110,9 +118,11 @@ public class Underwriting {
     /**
      * Create or update the account's underwriting.
      * 
-     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * 
      * @return The call builder
@@ -124,9 +134,11 @@ public class Underwriting {
     /**
      * Create or update the account's underwriting.
      * 
-     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
+     * <p>Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to
+     * learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/profile.write` scope.
      * 
      * @param accountID 

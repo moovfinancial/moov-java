@@ -91,7 +91,8 @@ public class CreatedTransfer {
     private Optional<Long> moovFee;
 
     /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("moovFeeDecimal")
@@ -155,7 +156,8 @@ public class CreatedTransfer {
     private Optional<String> paymentLinkCode;
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("salesTaxAmount")
@@ -350,7 +352,8 @@ public class CreatedTransfer {
     }
 
     /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      */
     @JsonIgnore
     public Optional<String> moovFeeDecimal() {
@@ -422,7 +425,8 @@ public class CreatedTransfer {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -622,7 +626,8 @@ public class CreatedTransfer {
     }
 
     /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      */
     public CreatedTransfer withMoovFeeDecimal(String moovFeeDecimal) {
         Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
@@ -632,7 +637,8 @@ public class CreatedTransfer {
 
 
     /**
-     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      */
     public CreatedTransfer withMoovFeeDecimal(Optional<String> moovFeeDecimal) {
         Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
@@ -790,7 +796,8 @@ public class CreatedTransfer {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     public CreatedTransfer withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -800,7 +807,8 @@ public class CreatedTransfer {
 
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     public CreatedTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -1151,7 +1159,8 @@ public class CreatedTransfer {
 
 
         /**
-         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision.
          */
         public Builder moovFeeDecimal(String moovFeeDecimal) {
             Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
@@ -1160,7 +1169,8 @@ public class CreatedTransfer {
         }
 
         /**
-         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+         * Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision.
          */
         public Builder moovFeeDecimal(Optional<String> moovFeeDecimal) {
             Utils.checkNotNull(moovFeeDecimal, "moovFeeDecimal");
@@ -1319,7 +1329,8 @@ public class CreatedTransfer {
 
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+         * represents the total amount charged.
          */
         public Builder salesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -1328,7 +1339,8 @@ public class CreatedTransfer {
         }
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+         * represents the total amount charged.
          */
         public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");

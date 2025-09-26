@@ -69,7 +69,7 @@ public class PaymentLink {
     private long uses;
 
     /**
-     * An optional limit on the number of times this payment link can be used. 
+     * An optional limit on the number of times this payment link can be used.
      * 
      * <p>**For payouts, `maxUses` is always 1.**
      */
@@ -277,7 +277,7 @@ public class PaymentLink {
     }
 
     /**
-     * An optional limit on the number of times this payment link can be used. 
+     * An optional limit on the number of times this payment link can be used.
      * 
      * <p>**For payouts, `maxUses` is always 1.**
      */
@@ -426,7 +426,7 @@ public class PaymentLink {
     }
 
     /**
-     * An optional limit on the number of times this payment link can be used. 
+     * An optional limit on the number of times this payment link can be used.
      * 
      * <p>**For payouts, `maxUses` is always 1.**
      */
@@ -438,7 +438,7 @@ public class PaymentLink {
 
 
     /**
-     * An optional limit on the number of times this payment link can be used. 
+     * An optional limit on the number of times this payment link can be used.
      * 
      * <p>**For payouts, `maxUses` is always 1.**
      */
@@ -756,7 +756,7 @@ public class PaymentLink {
 
 
         /**
-         * An optional limit on the number of times this payment link can be used. 
+         * An optional limit on the number of times this payment link can be used.
          * 
          * <p>**For payouts, `maxUses` is always 1.**
          */
@@ -767,7 +767,7 @@ public class PaymentLink {
         }
 
         /**
-         * An optional limit on the number of times this payment link can be used. 
+         * An optional limit on the number of times this payment link can be used.
          * 
          * <p>**For payouts, `maxUses` is always 1.**
          */

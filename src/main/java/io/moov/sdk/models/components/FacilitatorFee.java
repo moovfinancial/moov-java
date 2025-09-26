@@ -28,9 +28,11 @@ public class FacilitatorFee {
     private Optional<Long> total;
 
     /**
-     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      * 
-     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
+     * fractions of a cent.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("totalDecimal")
@@ -44,8 +46,10 @@ public class FacilitatorFee {
     private Optional<Long> markup;
 
     /**
-     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
-     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
+     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
+     * fractions of a cent.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("markupDecimal")
@@ -81,9 +85,11 @@ public class FacilitatorFee {
     }
 
     /**
-     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      * 
-     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
+     * fractions of a cent.
      */
     @JsonIgnore
     public Optional<String> totalDecimal() {
@@ -99,8 +105,10 @@ public class FacilitatorFee {
     }
 
     /**
-     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
-     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
+     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
+     * fractions of a cent.
      */
     @JsonIgnore
     public Optional<String> markupDecimal() {
@@ -132,9 +140,11 @@ public class FacilitatorFee {
     }
 
     /**
-     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      * 
-     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
+     * fractions of a cent.
      */
     public FacilitatorFee withTotalDecimal(String totalDecimal) {
         Utils.checkNotNull(totalDecimal, "totalDecimal");
@@ -144,9 +154,11 @@ public class FacilitatorFee {
 
 
     /**
-     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+     * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
      * 
-     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+     * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
+     * fractions of a cent.
      */
     public FacilitatorFee withTotalDecimal(Optional<String> totalDecimal) {
         Utils.checkNotNull(totalDecimal, "totalDecimal");
@@ -174,8 +186,10 @@ public class FacilitatorFee {
     }
 
     /**
-     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
-     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
+     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
+     * fractions of a cent.
      */
     public FacilitatorFee withMarkupDecimal(String markupDecimal) {
         Utils.checkNotNull(markupDecimal, "markupDecimal");
@@ -185,8 +199,10 @@ public class FacilitatorFee {
 
 
     /**
-     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
-     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+     * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
+     * precision.
+     * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
+     * fractions of a cent.
      */
     public FacilitatorFee withMarkupDecimal(Optional<String> markupDecimal) {
         Utils.checkNotNull(markupDecimal, "markupDecimal");
@@ -262,9 +278,11 @@ public class FacilitatorFee {
 
 
         /**
-         * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+         * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision.
          * 
-         * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+         * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
+         * fractions of a cent.
          */
         public Builder totalDecimal(String totalDecimal) {
             Utils.checkNotNull(totalDecimal, "totalDecimal");
@@ -273,9 +291,11 @@ public class FacilitatorFee {
         }
 
         /**
-         * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
+         * Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision.
          * 
-         * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+         * <p>Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in
+         * fractions of a cent.
          */
         public Builder totalDecimal(Optional<String> totalDecimal) {
             Utils.checkNotNull(totalDecimal, "totalDecimal");
@@ -304,8 +324,10 @@ public class FacilitatorFee {
 
 
         /**
-         * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
-         * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+         * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision.
+         * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
+         * fractions of a cent.
          */
         public Builder markupDecimal(String markupDecimal) {
             Utils.checkNotNull(markupDecimal, "markupDecimal");
@@ -314,8 +336,10 @@ public class FacilitatorFee {
         }
 
         /**
-         * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
-         * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
+         * Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place
+         * precision.
+         * Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in
+         * fractions of a cent.
          */
         public Builder markupDecimal(Optional<String> markupDecimal) {
             Utils.checkNotNull(markupDecimal, "markupDecimal");

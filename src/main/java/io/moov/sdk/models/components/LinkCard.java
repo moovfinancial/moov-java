@@ -18,8 +18,10 @@ import java.util.Optional;
 
 public class LinkCard {
     /**
-     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
+     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive
+     * data (e.g., PCI information) through intermediaries.
+     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details
+     * and examples, refer to our
      * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -106,8 +108,10 @@ public class LinkCard {
     }
 
     /**
-     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
+     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive
+     * data (e.g., PCI information) through intermediaries.
+     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details
+     * and examples, refer to our
      * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
      */
     @SuppressWarnings("unchecked")
@@ -165,8 +169,10 @@ public class LinkCard {
 
 
     /**
-     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
+     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive
+     * data (e.g., PCI information) through intermediaries.
+     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details
+     * and examples, refer to our
      * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
      */
     public LinkCard withE2ee(E2EEToken e2ee) {
@@ -177,8 +183,10 @@ public class LinkCard {
 
 
     /**
-     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
+     * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive
+     * data (e.g., PCI information) through intermediaries.
+     * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details
+     * and examples, refer to our
      * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
      */
     public LinkCard withE2ee(Optional<? extends E2EEToken> e2ee) {
@@ -336,8 +344,10 @@ public class LinkCard {
 
 
         /**
-         * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-         * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
+         * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive
+         * data (e.g., PCI information) through intermediaries.
+         * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details
+         * and examples, refer to our
          * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
          */
         public Builder e2ee(E2EEToken e2ee) {
@@ -347,8 +357,10 @@ public class LinkCard {
         }
 
         /**
-         * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. 
-         * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our 
+         * Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive
+         * data (e.g., PCI information) through intermediaries.
+         * This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details
+         * and examples, refer to our
          * [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
          */
         public Builder e2ee(Optional<? extends E2EEToken> e2ee) {

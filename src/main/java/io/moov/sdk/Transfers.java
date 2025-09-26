@@ -66,14 +66,17 @@ public class Transfers {
     }
 
     /**
-     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+     * Generate available payment method options for one or multiple transfer participants depending on the
+     * accountID or paymentMethodID you
      * supply in the request body.
      * 
      * <p>The accountID in the route should the partner's accountID.
      * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -83,14 +86,17 @@ public class Transfers {
     }
 
     /**
-     * Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+     * Generate available payment method options for one or multiple transfer participants depending on the
+     * accountID or paymentMethodID you
      * supply in the request body.
      * 
      * <p>The accountID in the route should the partner's accountID.
      * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID The partner's Moov account ID.
@@ -113,9 +119,11 @@ public class Transfers {
     /**
      * Move money by providing the source, destination, and amount in the request body.
      * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -127,9 +135,11 @@ public class Transfers {
     /**
      * Move money by providing the source, destination, and amount in the request body.
      * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param xIdempotencyKey Prevents duplicate transfers from being created.
@@ -148,9 +158,11 @@ public class Transfers {
     /**
      * Move money by providing the source, destination, and amount in the request body.
      * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param xIdempotencyKey Prevents duplicate transfers from being created.
@@ -177,16 +189,22 @@ public class Transfers {
     }
 
     /**
-     * List all the transfers associated with a particular Moov account. 
+     * List all the transfers associated with a particular Moov account.
      * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
      * 
-     * <p>When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example, 
-     * if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely 
-     * process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited 
-     * period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
+     * <p>When you run this request, you retrieve 200 transfers at a time. You can advance past a results set
+     * of 200 transfers by using the `skip` parameter (for example,
+     * if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are
+     * searching a high volume of transfers, the request will likely
+     * process very slowly. To achieve faster performance, restrict the data as much as you can by using
+     * the `StartDateTime` and `EndDateTime` parameters for a limited
+     * period of time. You can run multiple requests in smaller time window increments until you've
+     * retrieved all the transfers you need.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -196,16 +214,22 @@ public class Transfers {
     }
 
     /**
-     * List all the transfers associated with a particular Moov account. 
+     * List all the transfers associated with a particular Moov account.
      * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
      * 
-     * <p>When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example, 
-     * if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely 
-     * process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited 
-     * period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
+     * <p>When you run this request, you retrieve 200 transfers at a time. You can advance past a results set
+     * of 200 transfers by using the `skip` parameter (for example,
+     * if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are
+     * searching a high volume of transfers, the request will likely
+     * process very slowly. To achieve faster performance, restrict the data as much as you can by using
+     * the `StartDateTime` and `EndDateTime` parameters for a limited
+     * period of time. You can run multiple requests in smaller time window increments until you've
+     * retrieved all the transfers you need.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -219,12 +243,14 @@ public class Transfers {
     }
 
     /**
-     * Retrieve full transfer details for an individual transfer of a particular Moov account. 
+     * Retrieve full transfer details for an individual transfer of a particular Moov account.
      * 
-     * <p>Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) 
+     * <p>Payment rail-specific details are included in the source and destination. Read our [transfers
+     * overview guide](https://docs.moov.io/guides/money-movement/overview/)
      * to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -234,12 +260,14 @@ public class Transfers {
     }
 
     /**
-     * Retrieve full transfer details for an individual transfer of a particular Moov account. 
+     * Retrieve full transfer details for an individual transfer of a particular Moov account.
      * 
-     * <p>Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) 
+     * <p>Payment rail-specific details are included in the source and destination. Read our [transfers
+     * overview guide](https://docs.moov.io/guides/money-movement/overview/)
      * to learn more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param transferID Identifier for the transfer.
@@ -260,11 +288,13 @@ public class Transfers {
     }
 
     /**
-     * Update the metadata contained on a transfer. 
+     * Update the metadata contained on a transfer.
      * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -274,11 +304,13 @@ public class Transfers {
     }
 
     /**
-     * Update the metadata contained on a transfer. 
+     * Update the metadata contained on a transfer.
      * 
-     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
+     * <p>Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn
+     * more.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param transferID Identifier for the transfer.
@@ -305,8 +337,9 @@ public class Transfers {
     /**
      * Initiate a cancellation for a card, ACH, or queued transfer.
      * 
-     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-     *   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
      */
@@ -317,8 +350,9 @@ public class Transfers {
     /**
      * Initiate a cancellation for a card, ACH, or queued transfer.
      * 
-     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-     *   to specify the `/accounts/{accountID}/transfers.write` scope.
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param accountID The partner's Moov account ID.
      * @param transferID The transfer ID to cancel.
@@ -340,8 +374,9 @@ public class Transfers {
     /**
      * Get details of a cancellation for a transfer.
      * 
-     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-     *   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
      */
@@ -352,8 +387,9 @@ public class Transfers {
     /**
      * Get details of a cancellation for a transfer.
      * 
-     * <p>  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-     *   to specify the `/accounts/{accountID}/transfers.read` scope.
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
+     * to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID Moov account ID of the partner or transfer's source or destination.
      * @param transferID Identifier for the transfer.
@@ -379,10 +415,15 @@ public class Transfers {
     /**
      * Initiate a refund for a card transfer.
      * 
-     * <p>**Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
-     * See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information. 
+     * <p>**Use the [Cancel or refund a card
+     * transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive
+     * cancel and refund options.**
+     * See the
+     * [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
+     * guide for more information.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -394,10 +435,15 @@ public class Transfers {
     /**
      * Initiate a refund for a card transfer.
      * 
-     * <p>**Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
-     * See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information. 
+     * <p>**Use the [Cancel or refund a card
+     * transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive
+     * cancel and refund options.**
+     * See the
+     * [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
+     * guide for more information.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param request The request object containing all the parameters for the API call.
@@ -413,7 +459,8 @@ public class Transfers {
     /**
      * Get a list of refunds for a card transfer.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -425,7 +472,8 @@ public class Transfers {
     /**
      * Get a list of refunds for a card transfer.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param accountID 
@@ -448,7 +496,8 @@ public class Transfers {
     /**
      * Get details of a refund for a card transfer.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @return The call builder
@@ -460,7 +509,8 @@ public class Transfers {
     /**
      * Get details of a refund for a card transfer.
      * 
-     * <p>To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
      * @param transferID Identifier for the transfer.
@@ -485,11 +535,13 @@ public class Transfers {
     }
 
     /**
-     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
-     * Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
+     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
+     * Read our [reversals
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
      * to learn more.
      * 
-     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
      * to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @return The call builder
@@ -499,11 +551,13 @@ public class Transfers {
     }
 
     /**
-     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
-     * Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
+     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
+     * Read our [reversals
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
      * to learn more.
      * 
-     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
      * to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param xIdempotencyKey Prevents duplicate reversals from being created.
@@ -520,11 +574,13 @@ public class Transfers {
     }
 
     /**
-     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
-     * Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
+     * Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
+     * Read our [reversals
+     * guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
      * to learn more.
      * 
-     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+     * <p>To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need
      * to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
      * @param xIdempotencyKey Prevents duplicate reversals from being created.

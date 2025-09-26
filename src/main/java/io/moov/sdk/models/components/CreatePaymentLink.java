@@ -21,11 +21,13 @@ import java.util.Optional;
  * 
  * <p>Request to create a new payment link.
  * 
- * <p>A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
+ * <p>A payment link must include either `payment` or `payout` details, but not both. For payout payment
+ * links,
  * `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
  * to a specific recipient.
  * 
- * <p>**Note:** The `payout` option is currently under development and is not yet available for general use.
+ * <p>**Note:** The `payout` option is currently under development and is not yet available for general
+ * use.
  */
 public class CreatePaymentLink {
     /**
@@ -45,7 +47,7 @@ public class CreatePaymentLink {
     private Amount amount;
 
     /**
-     * An optional limit on the number of times this payment link can be used. 
+     * An optional limit on the number of times this payment link can be used.
      * 
      * <p>**For payouts, `maxUses` is always 1.**
      */
@@ -146,7 +148,7 @@ public class CreatePaymentLink {
     }
 
     /**
-     * An optional limit on the number of times this payment link can be used. 
+     * An optional limit on the number of times this payment link can be used.
      * 
      * <p>**For payouts, `maxUses` is always 1.**
      */
@@ -222,7 +224,7 @@ public class CreatePaymentLink {
     }
 
     /**
-     * An optional limit on the number of times this payment link can be used. 
+     * An optional limit on the number of times this payment link can be used.
      * 
      * <p>**For payouts, `maxUses` is always 1.**
      */
@@ -234,7 +236,7 @@ public class CreatePaymentLink {
 
 
     /**
-     * An optional limit on the number of times this payment link can be used. 
+     * An optional limit on the number of times this payment link can be used.
      * 
      * <p>**For payouts, `maxUses` is always 1.**
      */
@@ -414,7 +416,7 @@ public class CreatePaymentLink {
 
 
         /**
-         * An optional limit on the number of times this payment link can be used. 
+         * An optional limit on the number of times this payment link can be used.
          * 
          * <p>**For payouts, `maxUses` is always 1.**
          */
@@ -425,7 +427,7 @@ public class CreatePaymentLink {
         }
 
         /**
-         * An optional limit on the number of times this payment link can be used. 
+         * An optional limit on the number of times this payment link can be used.
          * 
          * <p>**For payouts, `maxUses` is always 1.**
          */

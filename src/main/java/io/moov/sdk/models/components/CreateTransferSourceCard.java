@@ -17,16 +17,17 @@ import java.util.Optional;
 
 public class CreateTransferSourceCard {
     /**
-     * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+     * An optional override of the default card statement descriptor for a transfer. Accounts must be
+     * enabled by Moov to set this field.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("dynamicDescriptor")
     private Optional<String> dynamicDescriptor;
 
     /**
-     * Specifies the nature and initiator of a transaction. 
+     * Specifies the nature and initiator of a transaction.
      * 
-     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules.
      * Omit for customer-initiated e-commerce transactions.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -48,7 +49,8 @@ public class CreateTransferSourceCard {
     }
 
     /**
-     * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+     * An optional override of the default card statement descriptor for a transfer. Accounts must be
+     * enabled by Moov to set this field.
      */
     @JsonIgnore
     public Optional<String> dynamicDescriptor() {
@@ -56,9 +58,9 @@ public class CreateTransferSourceCard {
     }
 
     /**
-     * Specifies the nature and initiator of a transaction. 
+     * Specifies the nature and initiator of a transaction.
      * 
-     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules.
      * Omit for customer-initiated e-commerce transactions.
      */
     @SuppressWarnings("unchecked")
@@ -73,7 +75,8 @@ public class CreateTransferSourceCard {
 
 
     /**
-     * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+     * An optional override of the default card statement descriptor for a transfer. Accounts must be
+     * enabled by Moov to set this field.
      */
     public CreateTransferSourceCard withDynamicDescriptor(String dynamicDescriptor) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
@@ -83,7 +86,8 @@ public class CreateTransferSourceCard {
 
 
     /**
-     * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+     * An optional override of the default card statement descriptor for a transfer. Accounts must be
+     * enabled by Moov to set this field.
      */
     public CreateTransferSourceCard withDynamicDescriptor(Optional<String> dynamicDescriptor) {
         Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
@@ -92,9 +96,9 @@ public class CreateTransferSourceCard {
     }
 
     /**
-     * Specifies the nature and initiator of a transaction. 
+     * Specifies the nature and initiator of a transaction.
      * 
-     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules.
      * Omit for customer-initiated e-commerce transactions.
      */
     public CreateTransferSourceCard withTransactionSource(TransactionSource transactionSource) {
@@ -105,9 +109,9 @@ public class CreateTransferSourceCard {
 
 
     /**
-     * Specifies the nature and initiator of a transaction. 
+     * Specifies the nature and initiator of a transaction.
      * 
-     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+     * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules.
      * Omit for customer-initiated e-commerce transactions.
      */
     public CreateTransferSourceCard withTransactionSource(Optional<? extends TransactionSource> transactionSource) {
@@ -156,7 +160,8 @@ public class CreateTransferSourceCard {
 
 
         /**
-         * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+         * An optional override of the default card statement descriptor for a transfer. Accounts must be
+         * enabled by Moov to set this field.
          */
         public Builder dynamicDescriptor(String dynamicDescriptor) {
             Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
@@ -165,7 +170,8 @@ public class CreateTransferSourceCard {
         }
 
         /**
-         * An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field.
+         * An optional override of the default card statement descriptor for a transfer. Accounts must be
+         * enabled by Moov to set this field.
          */
         public Builder dynamicDescriptor(Optional<String> dynamicDescriptor) {
             Utils.checkNotNull(dynamicDescriptor, "dynamicDescriptor");
@@ -175,9 +181,9 @@ public class CreateTransferSourceCard {
 
 
         /**
-         * Specifies the nature and initiator of a transaction. 
+         * Specifies the nature and initiator of a transaction.
          * 
-         * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+         * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules.
          * Omit for customer-initiated e-commerce transactions.
          */
         public Builder transactionSource(TransactionSource transactionSource) {
@@ -187,9 +193,9 @@ public class CreateTransferSourceCard {
         }
 
         /**
-         * Specifies the nature and initiator of a transaction. 
+         * Specifies the nature and initiator of a transaction.
          * 
-         * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules. 
+         * <p>Crucial for recurring and merchant-initiated transactions as per card scheme rules.
          * Omit for customer-initiated e-commerce transactions.
          */
         public Builder transactionSource(Optional<? extends TransactionSource> transactionSource) {

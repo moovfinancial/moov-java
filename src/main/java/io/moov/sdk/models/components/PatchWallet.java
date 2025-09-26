@@ -24,8 +24,8 @@ public class PatchWallet {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
@@ -71,8 +71,8 @@ public class PatchWallet {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -114,8 +114,8 @@ public class PatchWallet {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     public PatchWallet withStatus(WalletStatus status) {
         Utils.checkNotNull(status, "status");
@@ -126,8 +126,8 @@ public class PatchWallet {
 
     /**
      * Status of a wallet.
-     *   - `active`: The wallet is available for use and has an enabled payment method.
-     *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+     * - `active`: The wallet is available for use and has an enabled payment method.
+     * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
      */
     public PatchWallet withStatus(Optional<? extends WalletStatus> status) {
         Utils.checkNotNull(status, "status");
@@ -230,8 +230,8 @@ public class PatchWallet {
 
         /**
          * Status of a wallet.
-         *   - `active`: The wallet is available for use and has an enabled payment method.
-         *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+         * - `active`: The wallet is available for use and has an enabled payment method.
+         * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
          */
         public Builder status(WalletStatus status) {
             Utils.checkNotNull(status, "status");
@@ -241,8 +241,8 @@ public class PatchWallet {
 
         /**
          * Status of a wallet.
-         *   - `active`: The wallet is available for use and has an enabled payment method.
-         *   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+         * - `active`: The wallet is available for use and has an enabled payment method.
+         * - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
          */
         public Builder status(Optional<? extends WalletStatus> status) {
             Utils.checkNotNull(status, "status");

@@ -15,8 +15,9 @@ import java.lang.String;
  * 
  * <p>Provides information about the underlying card.
  * 
- * <p>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod) 
- *   for more information.
+ * <p>Refer to [Apple's
+ * documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken/1916113-paymentmethod)
+ * for more information.
  */
 public class LinkApplePaymentMethod {
     /**

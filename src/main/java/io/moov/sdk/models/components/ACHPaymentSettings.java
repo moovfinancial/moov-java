@@ -13,7 +13,8 @@ import java.lang.String;
 
 public class ACHPaymentSettings {
     /**
-     * The description that shows up on ACH transactions. This will default to the account's display name on account creation.
+     * The description that shows up on ACH transactions. This will default to the account's display name
+     * on account creation.
      */
     @JsonProperty("companyName")
     private String companyName;
@@ -26,7 +27,8 @@ public class ACHPaymentSettings {
     }
 
     /**
-     * The description that shows up on ACH transactions. This will default to the account's display name on account creation.
+     * The description that shows up on ACH transactions. This will default to the account's display name
+     * on account creation.
      */
     @JsonIgnore
     public String companyName() {
@@ -39,7 +41,8 @@ public class ACHPaymentSettings {
 
 
     /**
-     * The description that shows up on ACH transactions. This will default to the account's display name on account creation.
+     * The description that shows up on ACH transactions. This will default to the account's display name
+     * on account creation.
      */
     public ACHPaymentSettings withCompanyName(String companyName) {
         Utils.checkNotNull(companyName, "companyName");
@@ -83,7 +86,8 @@ public class ACHPaymentSettings {
 
 
         /**
-         * The description that shows up on ACH transactions. This will default to the account's display name on account creation.
+         * The description that shows up on ACH transactions. This will default to the account's display name
+         * on account creation.
          */
         public Builder companyName(String companyName) {
             Utils.checkNotNull(companyName, "companyName");

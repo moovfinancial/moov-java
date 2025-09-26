@@ -13,7 +13,8 @@ import java.lang.String;
 
 public class GetAvatarRequest {
     /**
-     * Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
+     * Any unique ID associated with an account such as accountID, representativeID, routing number, or
+     * userID.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=uniqueID")
     private String uniqueID;
@@ -26,7 +27,8 @@ public class GetAvatarRequest {
     }
 
     /**
-     * Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
+     * Any unique ID associated with an account such as accountID, representativeID, routing number, or
+     * userID.
      */
     @JsonIgnore
     public String uniqueID() {
@@ -39,7 +41,8 @@ public class GetAvatarRequest {
 
 
     /**
-     * Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
+     * Any unique ID associated with an account such as accountID, representativeID, routing number, or
+     * userID.
      */
     public GetAvatarRequest withUniqueID(String uniqueID) {
         Utils.checkNotNull(uniqueID, "uniqueID");
@@ -83,7 +86,8 @@ public class GetAvatarRequest {
 
 
         /**
-         * Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
+         * Any unique ID associated with an account such as accountID, representativeID, routing number, or
+         * userID.
          */
         public Builder uniqueID(String uniqueID) {
             Utils.checkNotNull(uniqueID, "uniqueID");

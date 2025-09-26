@@ -20,7 +20,8 @@ public class GetTermsOfServiceTokenRequest {
     private Optional<String> origin;
 
     /**
-     * Specifies the URL of the resource from which the request originated. Required if origin header is not present.
+     * Specifies the URL of the resource from which the request originated. Required if origin header is
+     * not present.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=referer")
     private Optional<String> referer;
@@ -48,7 +49,8 @@ public class GetTermsOfServiceTokenRequest {
     }
 
     /**
-     * Specifies the URL of the resource from which the request originated. Required if origin header is not present.
+     * Specifies the URL of the resource from which the request originated. Required if origin header is
+     * not present.
      */
     @JsonIgnore
     public Optional<String> referer() {
@@ -80,7 +82,8 @@ public class GetTermsOfServiceTokenRequest {
     }
 
     /**
-     * Specifies the URL of the resource from which the request originated. Required if origin header is not present.
+     * Specifies the URL of the resource from which the request originated. Required if origin header is
+     * not present.
      */
     public GetTermsOfServiceTokenRequest withReferer(String referer) {
         Utils.checkNotNull(referer, "referer");
@@ -90,7 +93,8 @@ public class GetTermsOfServiceTokenRequest {
 
 
     /**
-     * Specifies the URL of the resource from which the request originated. Required if origin header is not present.
+     * Specifies the URL of the resource from which the request originated. Required if origin header is
+     * not present.
      */
     public GetTermsOfServiceTokenRequest withReferer(Optional<String> referer) {
         Utils.checkNotNull(referer, "referer");
@@ -157,7 +161,8 @@ public class GetTermsOfServiceTokenRequest {
 
 
         /**
-         * Specifies the URL of the resource from which the request originated. Required if origin header is not present.
+         * Specifies the URL of the resource from which the request originated. Required if origin header is
+         * not present.
          */
         public Builder referer(String referer) {
             Utils.checkNotNull(referer, "referer");
@@ -166,7 +171,8 @@ public class GetTermsOfServiceTokenRequest {
         }
 
         /**
-         * Specifies the URL of the resource from which the request originated. Required if origin header is not present.
+         * Specifies the URL of the resource from which the request originated. Required if origin header is
+         * not present.
          */
         public Builder referer(Optional<String> referer) {
             Utils.checkNotNull(referer, "referer");

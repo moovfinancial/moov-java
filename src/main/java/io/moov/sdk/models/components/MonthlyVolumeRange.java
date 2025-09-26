@@ -15,12 +15,12 @@ import java.util.Optional;
  */
 public enum MonthlyVolumeRange {
     UNDER10K("under-10k"),
-    TEN_K50_K("10K-50K"),
-    FIFTY_K100_K("50K-100K"),
-    ONE_HUNDRED_K250_K("100K-250K"),
-    TWO_HUNDRED_AND_FIFTY_K500_K("250K-500K"),
-    FIVE_HUNDRED_K1_M("500K-1M"),
-    ONE_M5_M("1M-5M"),
+    TENK50K("10k-50k"),
+    FIFTYK100K("50k-100k"),
+    ONE_HUNDREDK250K("100k-250k"),
+    TWO_HUNDRED_AND_FIFTYK500K("250k-500k"),
+    FIVE_HUNDREDK1M("500k-1m"),
+    ONEM5M("1m-5m"),
     OVER5M("over-5m");
 
     @JsonValue

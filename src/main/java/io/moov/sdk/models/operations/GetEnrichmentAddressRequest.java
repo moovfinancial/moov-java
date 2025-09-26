@@ -69,27 +69,32 @@ public class GetEnrichmentAddressRequest {
     private Optional<String> preferZipcodes;
 
     /**
-     * Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
+     * Specifies the percentage of address suggestions that should be preferred and will appear at the top
+     * of the results.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=preferRatio")
     private Optional<Long> preferRatio;
 
     /**
-     * If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
-     *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
-     *   not set to `none`, you may see addresses from areas you do not wish to see.
+     * If omitted or set to `city`, it uses the sender's IP address to determine location, then
+     * automatically adds the city and state
+     * to the preferCities value. This parameter takes precedence over other `include` or `exclude`
+     * parameters meaning that if it is
+     * not set to `none`, you may see addresses from areas you do not wish to see.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=preferGeolocation")
     private Optional<String> preferGeolocation;
 
     /**
-     * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
+     * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment
+     * building with multiple residences).
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=selected")
     private Optional<String> selected;
 
     /**
-     * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
+     * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or
+     * `postal` (postal addresses only).
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=source")
     private Optional<String> source;
@@ -219,7 +224,8 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     * Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
+     * Specifies the percentage of address suggestions that should be preferred and will appear at the top
+     * of the results.
      */
     @JsonIgnore
     public Optional<Long> preferRatio() {
@@ -227,9 +233,11 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     * If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
-     *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
-     *   not set to `none`, you may see addresses from areas you do not wish to see.
+     * If omitted or set to `city`, it uses the sender's IP address to determine location, then
+     * automatically adds the city and state
+     * to the preferCities value. This parameter takes precedence over other `include` or `exclude`
+     * parameters meaning that if it is
+     * not set to `none`, you may see addresses from areas you do not wish to see.
      */
     @JsonIgnore
     public Optional<String> preferGeolocation() {
@@ -237,7 +245,8 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
+     * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment
+     * building with multiple residences).
      */
     @JsonIgnore
     public Optional<String> selected() {
@@ -245,7 +254,8 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
+     * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or
+     * `postal` (postal addresses only).
      */
     @JsonIgnore
     public Optional<String> source() {
@@ -419,7 +429,8 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     * Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
+     * Specifies the percentage of address suggestions that should be preferred and will appear at the top
+     * of the results.
      */
     public GetEnrichmentAddressRequest withPreferRatio(long preferRatio) {
         Utils.checkNotNull(preferRatio, "preferRatio");
@@ -429,7 +440,8 @@ public class GetEnrichmentAddressRequest {
 
 
     /**
-     * Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
+     * Specifies the percentage of address suggestions that should be preferred and will appear at the top
+     * of the results.
      */
     public GetEnrichmentAddressRequest withPreferRatio(Optional<Long> preferRatio) {
         Utils.checkNotNull(preferRatio, "preferRatio");
@@ -438,9 +450,11 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     * If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
-     *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
-     *   not set to `none`, you may see addresses from areas you do not wish to see.
+     * If omitted or set to `city`, it uses the sender's IP address to determine location, then
+     * automatically adds the city and state
+     * to the preferCities value. This parameter takes precedence over other `include` or `exclude`
+     * parameters meaning that if it is
+     * not set to `none`, you may see addresses from areas you do not wish to see.
      */
     public GetEnrichmentAddressRequest withPreferGeolocation(String preferGeolocation) {
         Utils.checkNotNull(preferGeolocation, "preferGeolocation");
@@ -450,9 +464,11 @@ public class GetEnrichmentAddressRequest {
 
 
     /**
-     * If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
-     *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
-     *   not set to `none`, you may see addresses from areas you do not wish to see.
+     * If omitted or set to `city`, it uses the sender's IP address to determine location, then
+     * automatically adds the city and state
+     * to the preferCities value. This parameter takes precedence over other `include` or `exclude`
+     * parameters meaning that if it is
+     * not set to `none`, you may see addresses from areas you do not wish to see.
      */
     public GetEnrichmentAddressRequest withPreferGeolocation(Optional<String> preferGeolocation) {
         Utils.checkNotNull(preferGeolocation, "preferGeolocation");
@@ -461,7 +477,8 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
+     * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment
+     * building with multiple residences).
      */
     public GetEnrichmentAddressRequest withSelected(String selected) {
         Utils.checkNotNull(selected, "selected");
@@ -471,7 +488,8 @@ public class GetEnrichmentAddressRequest {
 
 
     /**
-     * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
+     * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment
+     * building with multiple residences).
      */
     public GetEnrichmentAddressRequest withSelected(Optional<String> selected) {
         Utils.checkNotNull(selected, "selected");
@@ -480,7 +498,8 @@ public class GetEnrichmentAddressRequest {
     }
 
     /**
-     * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
+     * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or
+     * `postal` (postal addresses only).
      */
     public GetEnrichmentAddressRequest withSource(String source) {
         Utils.checkNotNull(source, "source");
@@ -490,7 +509,8 @@ public class GetEnrichmentAddressRequest {
 
 
     /**
-     * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
+     * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or
+     * `postal` (postal addresses only).
      */
     public GetEnrichmentAddressRequest withSource(Optional<String> source) {
         Utils.checkNotNull(source, "source");
@@ -748,7 +768,8 @@ public class GetEnrichmentAddressRequest {
 
 
         /**
-         * Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
+         * Specifies the percentage of address suggestions that should be preferred and will appear at the top
+         * of the results.
          */
         public Builder preferRatio(long preferRatio) {
             Utils.checkNotNull(preferRatio, "preferRatio");
@@ -757,7 +778,8 @@ public class GetEnrichmentAddressRequest {
         }
 
         /**
-         * Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
+         * Specifies the percentage of address suggestions that should be preferred and will appear at the top
+         * of the results.
          */
         public Builder preferRatio(Optional<Long> preferRatio) {
             Utils.checkNotNull(preferRatio, "preferRatio");
@@ -767,9 +789,11 @@ public class GetEnrichmentAddressRequest {
 
 
         /**
-         * If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
-         *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
-         *   not set to `none`, you may see addresses from areas you do not wish to see.
+         * If omitted or set to `city`, it uses the sender's IP address to determine location, then
+         * automatically adds the city and state
+         * to the preferCities value. This parameter takes precedence over other `include` or `exclude`
+         * parameters meaning that if it is
+         * not set to `none`, you may see addresses from areas you do not wish to see.
          */
         public Builder preferGeolocation(String preferGeolocation) {
             Utils.checkNotNull(preferGeolocation, "preferGeolocation");
@@ -778,9 +802,11 @@ public class GetEnrichmentAddressRequest {
         }
 
         /**
-         * If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state 
-         *   to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is 
-         *   not set to `none`, you may see addresses from areas you do not wish to see.
+         * If omitted or set to `city`, it uses the sender's IP address to determine location, then
+         * automatically adds the city and state
+         * to the preferCities value. This parameter takes precedence over other `include` or `exclude`
+         * parameters meaning that if it is
+         * not set to `none`, you may see addresses from areas you do not wish to see.
          */
         public Builder preferGeolocation(Optional<String> preferGeolocation) {
             Utils.checkNotNull(preferGeolocation, "preferGeolocation");
@@ -790,7 +816,8 @@ public class GetEnrichmentAddressRequest {
 
 
         /**
-         * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
+         * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment
+         * building with multiple residences).
          */
         public Builder selected(String selected) {
             Utils.checkNotNull(selected, "selected");
@@ -799,7 +826,8 @@ public class GetEnrichmentAddressRequest {
         }
 
         /**
-         * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
+         * Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment
+         * building with multiple residences).
          */
         public Builder selected(Optional<String> selected) {
             Utils.checkNotNull(selected, "selected");
@@ -809,7 +837,8 @@ public class GetEnrichmentAddressRequest {
 
 
         /**
-         * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
+         * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or
+         * `postal` (postal addresses only).
          */
         public Builder source(String source) {
             Utils.checkNotNull(source, "source");
@@ -818,7 +847,8 @@ public class GetEnrichmentAddressRequest {
         }
 
         /**
-         * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
+         * Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or
+         * `postal` (postal addresses only).
          */
         public Builder source(Optional<String> source) {
             Utils.checkNotNull(source, "source");

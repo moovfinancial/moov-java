@@ -43,12 +43,14 @@ public class CreateTransferResponse implements Response {
     private Optional<? extends CreatedTransfer> createdTransfer;
 
     /**
-     * A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
+     * A transfer was successfully created but an error occurred while generating the synchronous response.
+     * The asynchronous response object will be returned.
      */
     private Optional<? extends AsyncTransfer> asyncTransfer;
 
     /**
-     * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
+     * The transfer was created, but rail-specific details may not be available within the 15 second
+     * timeout window.
      */
     private Optional<? extends Transfer> transfer;
 
@@ -125,7 +127,8 @@ public class CreateTransferResponse implements Response {
     }
 
     /**
-     * A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
+     * A transfer was successfully created but an error occurred while generating the synchronous response.
+     * The asynchronous response object will be returned.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -134,7 +137,8 @@ public class CreateTransferResponse implements Response {
     }
 
     /**
-     * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
+     * The transfer was created, but rail-specific details may not be available within the 15 second
+     * timeout window.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -199,7 +203,8 @@ public class CreateTransferResponse implements Response {
     }
 
     /**
-     * A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
+     * A transfer was successfully created but an error occurred while generating the synchronous response.
+     * The asynchronous response object will be returned.
      */
     public CreateTransferResponse withAsyncTransfer(AsyncTransfer asyncTransfer) {
         Utils.checkNotNull(asyncTransfer, "asyncTransfer");
@@ -209,7 +214,8 @@ public class CreateTransferResponse implements Response {
 
 
     /**
-     * A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
+     * A transfer was successfully created but an error occurred while generating the synchronous response.
+     * The asynchronous response object will be returned.
      */
     public CreateTransferResponse withAsyncTransfer(Optional<? extends AsyncTransfer> asyncTransfer) {
         Utils.checkNotNull(asyncTransfer, "asyncTransfer");
@@ -218,7 +224,8 @@ public class CreateTransferResponse implements Response {
     }
 
     /**
-     * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
+     * The transfer was created, but rail-specific details may not be available within the 15 second
+     * timeout window.
      */
     public CreateTransferResponse withTransfer(Transfer transfer) {
         Utils.checkNotNull(transfer, "transfer");
@@ -228,7 +235,8 @@ public class CreateTransferResponse implements Response {
 
 
     /**
-     * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
+     * The transfer was created, but rail-specific details may not be available within the 15 second
+     * timeout window.
      */
     public CreateTransferResponse withTransfer(Optional<? extends Transfer> transfer) {
         Utils.checkNotNull(transfer, "transfer");
@@ -353,7 +361,8 @@ public class CreateTransferResponse implements Response {
 
 
         /**
-         * A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
+         * A transfer was successfully created but an error occurred while generating the synchronous response.
+         * The asynchronous response object will be returned.
          */
         public Builder asyncTransfer(AsyncTransfer asyncTransfer) {
             Utils.checkNotNull(asyncTransfer, "asyncTransfer");
@@ -362,7 +371,8 @@ public class CreateTransferResponse implements Response {
         }
 
         /**
-         * A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
+         * A transfer was successfully created but an error occurred while generating the synchronous response.
+         * The asynchronous response object will be returned.
          */
         public Builder asyncTransfer(Optional<? extends AsyncTransfer> asyncTransfer) {
             Utils.checkNotNull(asyncTransfer, "asyncTransfer");
@@ -372,7 +382,8 @@ public class CreateTransferResponse implements Response {
 
 
         /**
-         * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
+         * The transfer was created, but rail-specific details may not be available within the 15 second
+         * timeout window.
          */
         public Builder transfer(Transfer transfer) {
             Utils.checkNotNull(transfer, "transfer");
@@ -381,7 +392,8 @@ public class CreateTransferResponse implements Response {
         }
 
         /**
-         * The transfer was created, but rail-specific details may not be available within the 15 second timeout window.
+         * The transfer was created, but rail-specific details may not be available within the 15 second
+         * timeout window.
          */
         public Builder transfer(Optional<? extends Transfer> transfer) {
             Utils.checkNotNull(transfer, "transfer");

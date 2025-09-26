@@ -37,7 +37,7 @@ public class PaymentLinkDisplayOptionsUpdate {
     /**
      * The text to be displayed on web form's submit button.
      * 
-     * <p>If set to "auto" the UI will automatically select between 
+     * <p>If set to "auto" the UI will automatically select between
      * "pay" and "confirm" for payments and payouts respectively.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -80,7 +80,7 @@ public class PaymentLinkDisplayOptionsUpdate {
     /**
      * The text to be displayed on web form's submit button.
      * 
-     * <p>If set to "auto" the UI will automatically select between 
+     * <p>If set to "auto" the UI will automatically select between
      * "pay" and "confirm" for payments and payouts respectively.
      */
     @SuppressWarnings("unchecked")
@@ -135,7 +135,7 @@ public class PaymentLinkDisplayOptionsUpdate {
     /**
      * The text to be displayed on web form's submit button.
      * 
-     * <p>If set to "auto" the UI will automatically select between 
+     * <p>If set to "auto" the UI will automatically select between
      * "pay" and "confirm" for payments and payouts respectively.
      */
     public PaymentLinkDisplayOptionsUpdate withCallToAction(CallToAction callToAction) {
@@ -148,7 +148,7 @@ public class PaymentLinkDisplayOptionsUpdate {
     /**
      * The text to be displayed on web form's submit button.
      * 
-     * <p>If set to "auto" the UI will automatically select between 
+     * <p>If set to "auto" the UI will automatically select between
      * "pay" and "confirm" for payments and payouts respectively.
      */
     public PaymentLinkDisplayOptionsUpdate withCallToAction(Optional<? extends CallToAction> callToAction) {
@@ -241,7 +241,7 @@ public class PaymentLinkDisplayOptionsUpdate {
         /**
          * The text to be displayed on web form's submit button.
          * 
-         * <p>If set to "auto" the UI will automatically select between 
+         * <p>If set to "auto" the UI will automatically select between
          * "pay" and "confirm" for payments and payouts respectively.
          */
         public Builder callToAction(CallToAction callToAction) {
@@ -253,7 +253,7 @@ public class PaymentLinkDisplayOptionsUpdate {
         /**
          * The text to be displayed on web form's submit button.
          * 
-         * <p>If set to "auto" the UI will automatically select between 
+         * <p>If set to "auto" the UI will automatically select between
          * "pay" and "confirm" for payments and payouts respectively.
          */
         public Builder callToAction(Optional<? extends CallToAction> callToAction) {

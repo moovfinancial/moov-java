@@ -18,7 +18,8 @@ import java.util.Optional;
 
 public class CreateTransfer {
     /**
-     * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
+     * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or
+     * a `transferID`.
      */
     @JsonProperty("source")
     private CreateTransferSource source;
@@ -55,7 +56,8 @@ public class CreateTransfer {
     private Optional<? extends Map<String, String>> metadata;
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("salesTaxAmount")
@@ -106,7 +108,8 @@ public class CreateTransfer {
     }
 
     /**
-     * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
+     * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or
+     * a `transferID`.
      */
     @JsonIgnore
     public CreateTransferSource source() {
@@ -153,7 +156,8 @@ public class CreateTransfer {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -175,7 +179,8 @@ public class CreateTransfer {
 
 
     /**
-     * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
+     * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or
+     * a `transferID`.
      */
     public CreateTransfer withSource(CreateTransferSource source) {
         Utils.checkNotNull(source, "source");
@@ -256,7 +261,8 @@ public class CreateTransfer {
     }
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     public CreateTransfer withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -266,7 +272,8 @@ public class CreateTransfer {
 
 
     /**
-     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+     * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+     * represents the total amount charged.
      */
     public CreateTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -359,7 +366,8 @@ public class CreateTransfer {
 
 
         /**
-         * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
+         * Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or
+         * a `transferID`.
          */
         public Builder source(CreateTransferSource source) {
             Utils.checkNotNull(source, "source");
@@ -443,7 +451,8 @@ public class CreateTransfer {
 
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+         * represents the total amount charged.
          */
         public Builder salesTaxAmount(Amount salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
@@ -452,7 +461,8 @@ public class CreateTransfer {
         }
 
         /**
-         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+         * Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and
+         * represents the total amount charged.
          */
         public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");

@@ -3,10 +3,10 @@ id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
   docChecksum: 7dc79326b3050538f6425d6826bc535d
   docVersion: latest
-  speakeasyVersion: 1.629.1
-  generationVersion: 2.716.10
-  releaseVersion: 0.28.1
-  configChecksum: 0a4dc81996678ac7a763065a130dab7a
+  speakeasyVersion: 1.631.4
+  generationVersion: 2.716.16
+  releaseVersion: 0.28.2
+  configChecksum: c5610490dd6c668794d019e0b4839c67
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.52.2
+    core: 3.52.3
     decimal: 0.0.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
@@ -4332,6 +4332,3 @@ examples:
           application/pdf: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Java SDK Changes Detected:
-  * `moov.institutions.searchInstitutions()`:  `response.fednow` **Added**

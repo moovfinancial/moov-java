@@ -16,16 +16,57 @@ public class PaymentMethodsWallet {
     @JsonProperty("walletID")
     private String walletID;
 
+
+    @JsonProperty("partnerAccountID")
+    private String partnerAccountID;
+
+    /**
+     * Type of a wallet.
+     * - `default`: The primary system-generated wallet automatically created by Moov when an account is
+     * granted the wallet capability. This generates a moov-wallet payment method that is available for use
+     * immediately. Only one default wallet exists per account.
+     * - `general`: A user-defined wallet created via the API to segment funds for specific use cases.
+     * Users can create multiple general wallets per account to support internal business models or
+     * financial reporting needs.
+     */
+    @JsonProperty("walletType")
+    private WalletType walletType;
+
     @JsonCreator
     public PaymentMethodsWallet(
-            @JsonProperty("walletID") String walletID) {
+            @JsonProperty("walletID") String walletID,
+            @JsonProperty("partnerAccountID") String partnerAccountID,
+            @JsonProperty("walletType") WalletType walletType) {
         Utils.checkNotNull(walletID, "walletID");
+        Utils.checkNotNull(partnerAccountID, "partnerAccountID");
+        Utils.checkNotNull(walletType, "walletType");
         this.walletID = walletID;
+        this.partnerAccountID = partnerAccountID;
+        this.walletType = walletType;
     }
 
     @JsonIgnore
     public String walletID() {
         return walletID;
+    }
+
+    @JsonIgnore
+    public String partnerAccountID() {
+        return partnerAccountID;
+    }
+
+    /**
+     * Type of a wallet.
+     * - `default`: The primary system-generated wallet automatically created by Moov when an account is
+     * granted the wallet capability. This generates a moov-wallet payment method that is available for use
+     * immediately. Only one default wallet exists per account.
+     * - `general`: A user-defined wallet created via the API to segment funds for specific use cases.
+     * Users can create multiple general wallets per account to support internal business models or
+     * financial reporting needs.
+     */
+    @JsonIgnore
+    public WalletType walletType() {
+        return walletType;
     }
 
     public static Builder builder() {
@@ -39,6 +80,27 @@ public class PaymentMethodsWallet {
         return this;
     }
 
+    public PaymentMethodsWallet withPartnerAccountID(String partnerAccountID) {
+        Utils.checkNotNull(partnerAccountID, "partnerAccountID");
+        this.partnerAccountID = partnerAccountID;
+        return this;
+    }
+
+    /**
+     * Type of a wallet.
+     * - `default`: The primary system-generated wallet automatically created by Moov when an account is
+     * granted the wallet capability. This generates a moov-wallet payment method that is available for use
+     * immediately. Only one default wallet exists per account.
+     * - `general`: A user-defined wallet created via the API to segment funds for specific use cases.
+     * Users can create multiple general wallets per account to support internal business models or
+     * financial reporting needs.
+     */
+    public PaymentMethodsWallet withWalletType(WalletType walletType) {
+        Utils.checkNotNull(walletType, "walletType");
+        this.walletType = walletType;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -49,25 +111,33 @@ public class PaymentMethodsWallet {
         }
         PaymentMethodsWallet other = (PaymentMethodsWallet) o;
         return 
-            Utils.enhancedDeepEquals(this.walletID, other.walletID);
+            Utils.enhancedDeepEquals(this.walletID, other.walletID) &&
+            Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
+            Utils.enhancedDeepEquals(this.walletType, other.walletType);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            walletID);
+            walletID, partnerAccountID, walletType);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PaymentMethodsWallet.class,
-                "walletID", walletID);
+                "walletID", walletID,
+                "partnerAccountID", partnerAccountID,
+                "walletType", walletType);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private String walletID;
+
+        private String partnerAccountID;
+
+        private WalletType walletType;
 
         private Builder() {
           // force use of static builder() method
@@ -80,10 +150,33 @@ public class PaymentMethodsWallet {
             return this;
         }
 
+
+        public Builder partnerAccountID(String partnerAccountID) {
+            Utils.checkNotNull(partnerAccountID, "partnerAccountID");
+            this.partnerAccountID = partnerAccountID;
+            return this;
+        }
+
+
+        /**
+         * Type of a wallet.
+         * - `default`: The primary system-generated wallet automatically created by Moov when an account is
+         * granted the wallet capability. This generates a moov-wallet payment method that is available for use
+         * immediately. Only one default wallet exists per account.
+         * - `general`: A user-defined wallet created via the API to segment funds for specific use cases.
+         * Users can create multiple general wallets per account to support internal business models or
+         * financial reporting needs.
+         */
+        public Builder walletType(WalletType walletType) {
+            Utils.checkNotNull(walletType, "walletType");
+            this.walletType = walletType;
+            return this;
+        }
+
         public PaymentMethodsWallet build() {
 
             return new PaymentMethodsWallet(
-                walletID);
+                walletID, partnerAccountID, walletType);
         }
 
     }

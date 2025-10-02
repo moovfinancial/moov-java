@@ -334,6 +334,17 @@ public class SDKAutoConfig {
         return moov.files();
     }
     /**
+     * Creates a Images sub-SDK bean if none exists.
+     *
+     * @param moov the main SDK instance
+     * @return A configured Images instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public Images images(Moov moov) {
+        return moov.images();
+    }
+    /**
      * Creates a PaymentLinks sub-SDK bean if none exists.
      *
      * @param moov the main SDK instance

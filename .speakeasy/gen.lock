@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 7b557388cd13740e724f823588034529
+  docChecksum: 1f371581f1584d31aeee30db4ee8e497
   docVersion: latest
-  speakeasyVersion: 1.631.5
-  generationVersion: 2.716.16
-  releaseVersion: 0.28.3
-  configChecksum: c659ed912ba7e30bb13f0d502616d38b
+  speakeasyVersion: 1.633.1
+  generationVersion: 2.720.1
+  releaseVersion: 0.28.4
+  configChecksum: bda5cae70c44625715f5da6bedf6c3a6
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -276,6 +276,7 @@ generatedFiles:
   - docs/models/components/GovernmentIDErrorSsn.md
   - docs/models/components/GrantType.md
   - docs/models/components/GuestProfile.md
+  - docs/models/components/ImageMetadata.md
   - docs/models/components/IncurredFee.md
   - docs/models/components/IndividualName.md
   - docs/models/components/IndividualNameError.md
@@ -653,6 +654,8 @@ generatedFiles:
   - docs/models/operations/CreateWalletResponse.md
   - docs/models/operations/DeleteDisputeEvidenceFileRequest.md
   - docs/models/operations/DeleteDisputeEvidenceFileResponse.md
+  - docs/models/operations/DeleteImageRequest.md
+  - docs/models/operations/DeleteImageResponse.md
   - docs/models/operations/DeleteRepresentativeRequest.md
   - docs/models/operations/DeleteRepresentativeResponse.md
   - docs/models/operations/DeleteTerminalApplicationRequest.md
@@ -707,6 +710,8 @@ generatedFiles:
   - docs/models/operations/GetFileDetailsResponse.md
   - docs/models/operations/GetFullIssuedCardRequest.md
   - docs/models/operations/GetFullIssuedCardResponse.md
+  - docs/models/operations/GetImageMetadataRequest.md
+  - docs/models/operations/GetImageMetadataResponse.md
   - docs/models/operations/GetIssuedCardAuthorizationRequest.md
   - docs/models/operations/GetIssuedCardAuthorizationResponse.md
   - docs/models/operations/GetIssuedCardRequest.md
@@ -723,6 +728,8 @@ generatedFiles:
   - docs/models/operations/GetPaymentLinkResponse.md
   - docs/models/operations/GetPaymentMethodRequest.md
   - docs/models/operations/GetPaymentMethodResponse.md
+  - docs/models/operations/GetPublicImageRequest.md
+  - docs/models/operations/GetPublicImageResponse.md
   - docs/models/operations/GetRefundRequest.md
   - docs/models/operations/GetRefundResponse.md
   - docs/models/operations/GetRepresentativeRequest.md
@@ -792,6 +799,8 @@ generatedFiles:
   - docs/models/operations/ListFeesFetchResponse.md
   - docs/models/operations/ListFilesRequest.md
   - docs/models/operations/ListFilesResponse.md
+  - docs/models/operations/ListImageMetadataRequest.md
+  - docs/models/operations/ListImageMetadataResponse.md
   - docs/models/operations/ListIndustriesRequest.md
   - docs/models/operations/ListIndustriesResponse.md
   - docs/models/operations/ListInstitutionsRequest.md
@@ -914,6 +923,7 @@ generatedFiles:
   - docs/sdks/enrichedprofile/README.md
   - docs/sdks/feeplans/README.md
   - docs/sdks/files/README.md
+  - docs/sdks/images/README.md
   - docs/sdks/industries/README.md
   - docs/sdks/institutions/README.md
   - docs/sdks/issuingtransactions/README.md
@@ -964,6 +974,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/EnrichedProfile.java
   - src/main/java/io/moov/sdk/FeePlans.java
   - src/main/java/io/moov/sdk/Files.java
+  - src/main/java/io/moov/sdk/Images.java
   - src/main/java/io/moov/sdk/Industries.java
   - src/main/java/io/moov/sdk/Institutions.java
   - src/main/java/io/moov/sdk/IssuingTransactions.java
@@ -1227,6 +1238,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/GovernmentIDErrorSsn.java
   - src/main/java/io/moov/sdk/models/components/GrantType.java
   - src/main/java/io/moov/sdk/models/components/GuestProfile.java
+  - src/main/java/io/moov/sdk/models/components/ImageMetadata.java
   - src/main/java/io/moov/sdk/models/components/IncurredFee.java
   - src/main/java/io/moov/sdk/models/components/IndividualName.java
   - src/main/java/io/moov/sdk/models/components/IndividualNameError.java
@@ -1631,6 +1643,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/DeleteDisputeEvidenceFileRequest.java
   - src/main/java/io/moov/sdk/models/operations/DeleteDisputeEvidenceFileRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/DeleteDisputeEvidenceFileResponse.java
+  - src/main/java/io/moov/sdk/models/operations/DeleteImageRequest.java
+  - src/main/java/io/moov/sdk/models/operations/DeleteImageRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/DeleteImageResponse.java
   - src/main/java/io/moov/sdk/models/operations/DeleteRepresentativeRequest.java
   - src/main/java/io/moov/sdk/models/operations/DeleteRepresentativeRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/DeleteRepresentativeResponse.java
@@ -1712,6 +1727,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/GetFullIssuedCardRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetFullIssuedCardRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetFullIssuedCardResponse.java
+  - src/main/java/io/moov/sdk/models/operations/GetImageMetadataRequest.java
+  - src/main/java/io/moov/sdk/models/operations/GetImageMetadataRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/GetImageMetadataResponse.java
   - src/main/java/io/moov/sdk/models/operations/GetIssuedCardAuthorizationRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetIssuedCardAuthorizationRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetIssuedCardAuthorizationResponse.java
@@ -1736,6 +1754,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/GetPaymentMethodRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetPaymentMethodRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetPaymentMethodResponse.java
+  - src/main/java/io/moov/sdk/models/operations/GetPublicImageRequest.java
+  - src/main/java/io/moov/sdk/models/operations/GetPublicImageRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/GetPublicImageResponse.java
   - src/main/java/io/moov/sdk/models/operations/GetRefundRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetRefundRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetRefundResponse.java
@@ -1839,6 +1860,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/ListFilesRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListFilesRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListFilesResponse.java
+  - src/main/java/io/moov/sdk/models/operations/ListImageMetadataRequest.java
+  - src/main/java/io/moov/sdk/models/operations/ListImageMetadataRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/ListImageMetadataResponse.java
   - src/main/java/io/moov/sdk/models/operations/ListIndustriesRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListIndustriesRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListIndustriesResponse.java
@@ -2022,6 +2046,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/CreateTransferOptions.java
   - src/main/java/io/moov/sdk/operations/CreateWallet.java
   - src/main/java/io/moov/sdk/operations/DeleteDisputeEvidenceFile.java
+  - src/main/java/io/moov/sdk/operations/DeleteImage.java
   - src/main/java/io/moov/sdk/operations/DeleteRepresentative.java
   - src/main/java/io/moov/sdk/operations/DeleteTerminalApplication.java
   - src/main/java/io/moov/sdk/operations/DisableBankAccount.java
@@ -2049,6 +2074,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/GetEnrichmentProfile.java
   - src/main/java/io/moov/sdk/operations/GetFileDetails.java
   - src/main/java/io/moov/sdk/operations/GetFullIssuedCard.java
+  - src/main/java/io/moov/sdk/operations/GetImageMetadata.java
   - src/main/java/io/moov/sdk/operations/GetIssuedCard.java
   - src/main/java/io/moov/sdk/operations/GetIssuedCardAuthorization.java
   - src/main/java/io/moov/sdk/operations/GetIssuedCardTransaction.java
@@ -2057,6 +2083,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/GetPaymentLink.java
   - src/main/java/io/moov/sdk/operations/GetPaymentLinkQRCode.java
   - src/main/java/io/moov/sdk/operations/GetPaymentMethod.java
+  - src/main/java/io/moov/sdk/operations/GetPublicImage.java
   - src/main/java/io/moov/sdk/operations/GetRefund.java
   - src/main/java/io/moov/sdk/operations/GetRepresentative.java
   - src/main/java/io/moov/sdk/operations/GetScheduledOccurrence.java
@@ -2091,6 +2118,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/ListFeePlans.java
   - src/main/java/io/moov/sdk/operations/ListFeesFetch.java
   - src/main/java/io/moov/sdk/operations/ListFiles.java
+  - src/main/java/io/moov/sdk/operations/ListImageMetadata.java
   - src/main/java/io/moov/sdk/operations/ListIndustries.java
   - src/main/java/io/moov/sdk/operations/ListInstitutions.java
   - src/main/java/io/moov/sdk/operations/ListIssuedCardAuthorizationEvents.java
@@ -4330,6 +4358,55 @@ examples:
         "200":
           application/json: {"statementID": "6fcce0d9-75c1-4c2f-b04e-ce0f1cecf736", "statementName": "<value>", "fileName": "example.file", "fileSize": 491710, "billingPeriodStartDateTime": "2025-01-30T13:15:52.427Z", "billingPeriodEndDateTime": "2024-03-15T11:54:00.098Z", "subscriptionIDs": ["<value 1>", "<value 2>", "<value 3>"], "summary": {"cardAcquiring": {"volumeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "interchangeFees": {"visa": {"currency": "USD", "valueDecimal": "12.987654321"}, "mastercard": {"currency": "USD", "valueDecimal": "12.987654321"}, "discover": {"currency": "USD", "valueDecimal": "12.987654321"}, "americanExpress": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "ach": {"volumeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "instantPayments": {"volumeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "platformFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "adjustmentFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "otherFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}}, "cardAcquiringFees": {"visa": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "mastercard": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "discover": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "americanExpress": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}}, "achFees": {"standardCredit": {"count": 178500, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "sameDayCredit": {"count": 231593, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "debits": {"count": 940652, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "return": {"count": 437920, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "unauthorizedReturn": {"count": 476712, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "noticeOfChange": {"count": 950531, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "instantPaymentFees": {"rtpCreditTransaction": {"count": 497959, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "rtpDecline": {"count": 84081, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pushToCardTransaction": {"count": 933887, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pushToCardDecline": {"count": 148596, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pullFromCardTransaction": {"count": 186879, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pullFromCardDecline": {"count": 32245, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pullFromCardRefund": {"count": 815075, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "platformFees": {"walletFee": {"currency": "USD", "valueDecimal": "12.987654321"}, "merchantPCIFee": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}}, "otherCardFees": {"disputes": {"count": 979998, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "cardAccountUpdater": {"count": 589185, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "cardVerification": {"count": 477464, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "nameVerification": {"count": 854516, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "createdOn": "2023-03-21T23:03:13.806Z", "updatedOn": "2025-12-26T06:16:23.912Z"}
           application/pdf: "x-file: example.file"
+  listImageMetadata:
+    speakeasy-default-list-image-metadata:
+      parameters:
+        path:
+          accountID: "3a4ed2d9-03e1-4b0e-b45f-2a9ca72f8adb"
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: [{"imageID": "5edf802b-5f6a-484d-aa0a-3f149b6a2175", "link": "https://api.moov.io/images/qJRAaAwwF5hmfeAFdHjIb", "createdOn": "2023-10-10T02:58:48.051Z", "updatedOn": "2025-08-12T02:08:56.107Z"}]
+  getImageMetadata:
+    speakeasy-default-get-image-metadata:
+      parameters:
+        path:
+          accountID: "6cf66a43-31ce-4d27-8dd4-130fa57f0a6f"
+          imageID: "7cec5bd3-6340-4de4-a923-bf6ec0f7e921"
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: {"imageID": "7608515e-9698-402b-8007-402711de1c6a", "link": "https://api.moov.io/images/qJRAaAwwF5hmfeAFdHjIb", "createdOn": "2024-09-02T01:01:36.892Z", "updatedOn": "2023-12-31T15:25:36.864Z"}
+  deleteImage:
+    speakeasy-default-delete-image:
+      parameters:
+        path:
+          accountID: "866c32ce-2536-4b21-8e12-f8c474fb2a9b"
+          imageID: "ca048253-31d2-4bfb-9077-1f07a2a09f26"
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "400":
+          application/json: {"error": "<value>"}
+  getPublicImage:
+    speakeasy-default-get-public-image:
+      parameters:
+        path:
+          publicID: "<id>"
+        query:
+          size: "400x400"
+      responses:
+        "200":
+          image/webp: "x-file: example.file"
+          image/png: "x-file: example.file"
+          image/jpeg: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.paymentMethods.list()`:  `response.[].[moov-wallet].wallet` **Changed**\n* `moov.paymentMethods.get()`:  `response.[moov-wallet].wallet` **Changed**\n* `moov.transfers.generateOptions()`:  `response.sourceoptions.[].[moov-wallet].wallet` **Changed**\n* `moov.transfers.create()`: \n  *  `response.source.wallet` **Changed**\n  *  `error.source.wallet` **Changed**\n* `moov.transfers.list()`:  `response.[].source.wallet` **Changed**\n* `moov.transfers.get()`:  `response.source.wallet` **Changed**\n* `moov.transfers.update()`:  `response.source.wallet` **Changed**\n"
+releaseNotes: |
+  ## Java SDK Changes Detected:
+  * `moov.images.list()`: **Added**
+  * `moov.images.getMetadata()`: **Added**
+  * `moov.images.delete()`: **Added**
+  * `moov.images.getPublic()`: **Added**

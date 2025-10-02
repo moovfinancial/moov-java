@@ -69,6 +69,9 @@ public class Moov {
     private final Files files;
 
 
+    private final Images images;
+
+
     private final PaymentLinks paymentLinks;
 
 
@@ -191,6 +194,11 @@ public class Moov {
 
     public Files files() {
         return files;
+    }
+
+
+    public Images images() {
+        return images;
     }
 
 
@@ -486,6 +494,7 @@ public class Moov {
         this.disputes = new Disputes(sdkConfiguration);
         this.feePlans = new FeePlans(sdkConfiguration);
         this.files = new Files(sdkConfiguration);
+        this.images = new Images(sdkConfiguration);
         this.paymentLinks = new PaymentLinks(sdkConfiguration);
         this.paymentMethods = new PaymentMethods(sdkConfiguration);
         this.representatives = new Representatives(sdkConfiguration);

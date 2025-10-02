@@ -46,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.28.3'
+implementation 'io.moov:sdk:0.28.4'
 ```
 
 Maven:
@@ -54,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.28.3</version>
+    <version>0.28.4</version>
 </dependency>
 ```
 
@@ -678,6 +678,13 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/files.read` scope.
+
+### [images()](docs/sdks/images/README.md)
+
+* [list](docs/sdks/images/README.md#list) - List metadata for all images in the specified account.
+* [getMetadata](docs/sdks/images/README.md#getmetadata) - Retrieve metadata for a specific image by its ID.
+* [delete](docs/sdks/images/README.md#delete) - Permanently delete an image by its ID.
+* [getPublic](docs/sdks/images/README.md#getpublic) - Get an image by its public ID.
 
 ### [industries()](docs/sdks/industries/README.md)
 

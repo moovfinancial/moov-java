@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 1f371581f1584d31aeee30db4ee8e497
+  docChecksum: e8d4c50c0b49dd161728d4f2e40c9892
   docVersion: latest
-  speakeasyVersion: 1.633.1
-  generationVersion: 2.720.1
-  releaseVersion: 0.28.4
-  configChecksum: bda5cae70c44625715f5da6bedf6c3a6
+  speakeasyVersion: 1.634.2
+  generationVersion: 2.721.3
+  releaseVersion: 0.28.5
+  configChecksum: 7f40ba567749f5e8747fe28082ba49bf
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -4404,9 +4404,3 @@ examples:
           image/jpeg: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Java SDK Changes Detected:
-  * `moov.images.list()`: **Added**
-  * `moov.images.getMetadata()`: **Added**
-  * `moov.images.delete()`: **Added**
-  * `moov.images.getPublic()`: **Added**

@@ -3,10 +3,10 @@ id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
   docChecksum: e8d4c50c0b49dd161728d4f2e40c9892
   docVersion: latest
-  speakeasyVersion: 1.634.2
-  generationVersion: 2.721.3
-  releaseVersion: 0.28.5
-  configChecksum: 7f40ba567749f5e8747fe28082ba49bf
+  speakeasyVersion: 1.635.2
+  generationVersion: 2.722.5
+  releaseVersion: 0.28.6
+  configChecksum: 9a85c8bdf9f42e56bad4d9e78c4a5975
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -927,7 +927,6 @@ generatedFiles:
   - docs/sdks/industries/README.md
   - docs/sdks/institutions/README.md
   - docs/sdks/issuingtransactions/README.md
-  - docs/sdks/moov/README.md
   - docs/sdks/onboarding/README.md
   - docs/sdks/paymentlinks/README.md
   - docs/sdks/paymentmethods/README.md

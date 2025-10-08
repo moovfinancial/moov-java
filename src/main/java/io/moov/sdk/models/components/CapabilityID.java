@@ -25,6 +25,7 @@ public enum CapabilityID {
     MONEY_TRANSFER_PUSH_TO_CARD("money-transfer.push-to-card"),
     SEND_FUNDS_ACH("send-funds.ach"),
     SEND_FUNDS_RTP("send-funds.rtp"),
+    SEND_FUNDS_INSTANT_BANK("send-funds.instant-bank"),
     COLLECT_FUNDS("collect-funds"),
     COLLECT_FUNDS_CARD_PAYMENTS("collect-funds.card-payments"),
     MONEY_TRANSFER_PULL_FROM_CARD("money-transfer.pull-from-card"),

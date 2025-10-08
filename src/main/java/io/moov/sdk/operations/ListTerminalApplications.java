@@ -54,7 +54,7 @@ public class ListTerminalApplications {
                     this.sdkConfiguration,
                     this.baseUrl,
                     "listTerminalApplications",
-                    java.util.Optional.of(java.util.List.of()),
+                    java.util.Optional.empty(),
                     securitySource());
         }
 
@@ -63,7 +63,7 @@ public class ListTerminalApplications {
                     this.sdkConfiguration,
                     this.baseUrl,
                     "listTerminalApplications",
-                    java.util.Optional.of(java.util.List.of()),
+                    java.util.Optional.empty(),
                     securitySource());
         }
 
@@ -72,7 +72,7 @@ public class ListTerminalApplications {
                     this.sdkConfiguration,
                     this.baseUrl,
                     "listTerminalApplications",
-                    java.util.Optional.of(java.util.List.of()),
+                    java.util.Optional.empty(),
                     securitySource());
         }
         <T>HttpRequest buildRequest(T request) throws Exception {

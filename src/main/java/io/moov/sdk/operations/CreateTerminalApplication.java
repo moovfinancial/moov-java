@@ -57,7 +57,7 @@ public class CreateTerminalApplication {
                     this.sdkConfiguration,
                     this.baseUrl,
                     "createTerminalApplication",
-                    java.util.Optional.of(java.util.List.of()),
+                    java.util.Optional.empty(),
                     securitySource());
         }
 
@@ -66,7 +66,7 @@ public class CreateTerminalApplication {
                     this.sdkConfiguration,
                     this.baseUrl,
                     "createTerminalApplication",
-                    java.util.Optional.of(java.util.List.of()),
+                    java.util.Optional.empty(),
                     securitySource());
         }
 
@@ -75,7 +75,7 @@ public class CreateTerminalApplication {
                     this.sdkConfiguration,
                     this.baseUrl,
                     "createTerminalApplication",
-                    java.util.Optional.of(java.util.List.of()),
+                    java.util.Optional.empty(),
                     securitySource());
         }
         <T, U>HttpRequest buildRequest(T request, TypeReference<U> typeReference) throws Exception {

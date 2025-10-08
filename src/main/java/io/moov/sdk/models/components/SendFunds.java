@@ -31,21 +31,30 @@ public class SendFunds {
     @JsonProperty("rtp")
     private Optional<? extends SendFundsRtp> rtp;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("instantBank")
+    private Optional<? extends SendFundsInstantBank> instantBank;
+
     @JsonCreator
     public SendFunds(
             @JsonProperty("ach") Optional<? extends SendFundsAch> ach,
             @JsonProperty("pushToCard") Optional<? extends SendFundsPushToCard> pushToCard,
-            @JsonProperty("rtp") Optional<? extends SendFundsRtp> rtp) {
+            @JsonProperty("rtp") Optional<? extends SendFundsRtp> rtp,
+            @JsonProperty("instantBank") Optional<? extends SendFundsInstantBank> instantBank) {
         Utils.checkNotNull(ach, "ach");
         Utils.checkNotNull(pushToCard, "pushToCard");
         Utils.checkNotNull(rtp, "rtp");
+        Utils.checkNotNull(instantBank, "instantBank");
         this.ach = ach;
         this.pushToCard = pushToCard;
         this.rtp = rtp;
+        this.instantBank = instantBank;
     }
     
     public SendFunds() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -64,6 +73,12 @@ public class SendFunds {
     @JsonIgnore
     public Optional<SendFundsRtp> rtp() {
         return (Optional<SendFundsRtp>) rtp;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<SendFundsInstantBank> instantBank() {
+        return (Optional<SendFundsInstantBank>) instantBank;
     }
 
     public static Builder builder() {
@@ -110,6 +125,19 @@ public class SendFunds {
         return this;
     }
 
+    public SendFunds withInstantBank(SendFundsInstantBank instantBank) {
+        Utils.checkNotNull(instantBank, "instantBank");
+        this.instantBank = Optional.ofNullable(instantBank);
+        return this;
+    }
+
+
+    public SendFunds withInstantBank(Optional<? extends SendFundsInstantBank> instantBank) {
+        Utils.checkNotNull(instantBank, "instantBank");
+        this.instantBank = instantBank;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -122,13 +150,15 @@ public class SendFunds {
         return 
             Utils.enhancedDeepEquals(this.ach, other.ach) &&
             Utils.enhancedDeepEquals(this.pushToCard, other.pushToCard) &&
-            Utils.enhancedDeepEquals(this.rtp, other.rtp);
+            Utils.enhancedDeepEquals(this.rtp, other.rtp) &&
+            Utils.enhancedDeepEquals(this.instantBank, other.instantBank);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            ach, pushToCard, rtp);
+            ach, pushToCard, rtp,
+            instantBank);
     }
     
     @Override
@@ -136,7 +166,8 @@ public class SendFunds {
         return Utils.toString(SendFunds.class,
                 "ach", ach,
                 "pushToCard", pushToCard,
-                "rtp", rtp);
+                "rtp", rtp,
+                "instantBank", instantBank);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -147,6 +178,8 @@ public class SendFunds {
         private Optional<? extends SendFundsPushToCard> pushToCard = Optional.empty();
 
         private Optional<? extends SendFundsRtp> rtp = Optional.empty();
+
+        private Optional<? extends SendFundsInstantBank> instantBank = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -191,10 +224,24 @@ public class SendFunds {
             return this;
         }
 
+
+        public Builder instantBank(SendFundsInstantBank instantBank) {
+            Utils.checkNotNull(instantBank, "instantBank");
+            this.instantBank = Optional.ofNullable(instantBank);
+            return this;
+        }
+
+        public Builder instantBank(Optional<? extends SendFundsInstantBank> instantBank) {
+            Utils.checkNotNull(instantBank, "instantBank");
+            this.instantBank = instantBank;
+            return this;
+        }
+
         public SendFunds build() {
 
             return new SendFunds(
-                ach, pushToCard, rtp);
+                ach, pushToCard, rtp,
+                instantBank);
         }
 
     }

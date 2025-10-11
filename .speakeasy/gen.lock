@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: e12b3c5ec4648286eacc58b1fd45f8d7
+  docChecksum: e45218d1b27d88ac724dc53d0b68c87e
   docVersion: latest
-  speakeasyVersion: 1.636.0
-  generationVersion: 2.723.2
-  releaseVersion: 0.28.7
-  configChecksum: 2d2ea4338e46cdda20a41aefa8211895
+  speakeasyVersion: 1.636.3
+  generationVersion: 2.723.11
+  releaseVersion: 0.28.8
+  configChecksum: feb9c29831f94a5261a2f622fb92864e
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -4407,4 +4407,3 @@ examples:
           image/jpeg: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.accounts.list()`: \n  *  `request.capability` **Changed**\n* `moov.capabilities.get()`:  `request.capabilityid` **Changed**\n* `moov.capabilities.disable()`:  `request.capabilityid` **Changed**\n* `moov.underwriting.get()`:  `response.sendfunds.instantBank` **Added**\n* `moov.underwriting.save()`: \n  *  `request.upsertunderwriting.sendFunds.instantBank` **Added**\n  *  `response.sendfunds.instantBank` **Added**\n  *  `error.sendfunds.instantBank` **Added**\n* `moov.underwriting.upsert()`:  `response.sendfunds.instantBank` **Added**\n"

@@ -12,6 +12,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -52,25 +53,35 @@ public class FeeProperties {
     @JsonProperty("maxPerTransaction")
     private Optional<? extends AmountDecimal> maxPerTransaction;
 
+    /**
+     * Defines the volume ranges for tiered pricing models.
+     */
+    @JsonProperty("volumeRanges")
+    private List<VolumeRange> volumeRanges;
+
     @JsonCreator
     public FeeProperties(
             @JsonProperty("fixedAmount") Optional<? extends AmountDecimal> fixedAmount,
             @JsonProperty("variableRate") Optional<String> variableRate,
             @JsonProperty("minPerTransaction") Optional<? extends AmountDecimal> minPerTransaction,
-            @JsonProperty("maxPerTransaction") Optional<? extends AmountDecimal> maxPerTransaction) {
+            @JsonProperty("maxPerTransaction") Optional<? extends AmountDecimal> maxPerTransaction,
+            @JsonProperty("volumeRanges") List<VolumeRange> volumeRanges) {
         Utils.checkNotNull(fixedAmount, "fixedAmount");
         Utils.checkNotNull(variableRate, "variableRate");
         Utils.checkNotNull(minPerTransaction, "minPerTransaction");
         Utils.checkNotNull(maxPerTransaction, "maxPerTransaction");
+        Utils.checkNotNull(volumeRanges, "volumeRanges");
         this.fixedAmount = fixedAmount;
         this.variableRate = variableRate;
         this.minPerTransaction = minPerTransaction;
         this.maxPerTransaction = maxPerTransaction;
+        this.volumeRanges = volumeRanges;
     }
     
-    public FeeProperties() {
+    public FeeProperties(
+            List<VolumeRange> volumeRanges) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), volumeRanges);
     }
 
     /**
@@ -110,6 +121,14 @@ public class FeeProperties {
     @JsonIgnore
     public Optional<AmountDecimal> maxPerTransaction() {
         return (Optional<AmountDecimal>) maxPerTransaction;
+    }
+
+    /**
+     * Defines the volume ranges for tiered pricing models.
+     */
+    @JsonIgnore
+    public List<VolumeRange> volumeRanges() {
+        return volumeRanges;
     }
 
     public static Builder builder() {
@@ -201,6 +220,15 @@ public class FeeProperties {
         return this;
     }
 
+    /**
+     * Defines the volume ranges for tiered pricing models.
+     */
+    public FeeProperties withVolumeRanges(List<VolumeRange> volumeRanges) {
+        Utils.checkNotNull(volumeRanges, "volumeRanges");
+        this.volumeRanges = volumeRanges;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -214,14 +242,15 @@ public class FeeProperties {
             Utils.enhancedDeepEquals(this.fixedAmount, other.fixedAmount) &&
             Utils.enhancedDeepEquals(this.variableRate, other.variableRate) &&
             Utils.enhancedDeepEquals(this.minPerTransaction, other.minPerTransaction) &&
-            Utils.enhancedDeepEquals(this.maxPerTransaction, other.maxPerTransaction);
+            Utils.enhancedDeepEquals(this.maxPerTransaction, other.maxPerTransaction) &&
+            Utils.enhancedDeepEquals(this.volumeRanges, other.volumeRanges);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             fixedAmount, variableRate, minPerTransaction,
-            maxPerTransaction);
+            maxPerTransaction, volumeRanges);
     }
     
     @Override
@@ -230,7 +259,8 @@ public class FeeProperties {
                 "fixedAmount", fixedAmount,
                 "variableRate", variableRate,
                 "minPerTransaction", minPerTransaction,
-                "maxPerTransaction", maxPerTransaction);
+                "maxPerTransaction", maxPerTransaction,
+                "volumeRanges", volumeRanges);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -243,6 +273,8 @@ public class FeeProperties {
         private Optional<? extends AmountDecimal> minPerTransaction = Optional.empty();
 
         private Optional<? extends AmountDecimal> maxPerTransaction = Optional.empty();
+
+        private List<VolumeRange> volumeRanges;
 
         private Builder() {
           // force use of static builder() method
@@ -332,11 +364,21 @@ public class FeeProperties {
             return this;
         }
 
+
+        /**
+         * Defines the volume ranges for tiered pricing models.
+         */
+        public Builder volumeRanges(List<VolumeRange> volumeRanges) {
+            Utils.checkNotNull(volumeRanges, "volumeRanges");
+            this.volumeRanges = volumeRanges;
+            return this;
+        }
+
         public FeeProperties build() {
 
             return new FeeProperties(
                 fixedAmount, variableRate, minPerTransaction,
-                maxPerTransaction);
+                maxPerTransaction, volumeRanges);
         }
 
     }

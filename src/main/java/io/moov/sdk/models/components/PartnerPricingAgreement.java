@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
@@ -76,10 +75,12 @@ public class PartnerPricingAgreement {
     private MonthlyPlatformFee monthlyPlatformFee;
 
     /**
-     * The integer percentage value of the revenue split for partner.
+     * The decimal-formatted numerical string of the revenue split for partner.
+     * 
+     * <p>For example, 2.25% is '2.25'.
      */
     @JsonProperty("revenueShare")
-    private long revenueShare;
+    private String revenueShare;
 
     @JsonCreator
     public PartnerPricingAgreement(
@@ -94,7 +95,7 @@ public class PartnerPricingAgreement {
             @JsonProperty("billableFees") List<BillableFee> billableFees,
             @JsonProperty("minimumCommitment") MinimumCommitment minimumCommitment,
             @JsonProperty("monthlyPlatformFee") MonthlyPlatformFee monthlyPlatformFee,
-            @JsonProperty("revenueShare") long revenueShare) {
+            @JsonProperty("revenueShare") String revenueShare) {
         Utils.checkNotNull(agreementID, "agreementID");
         Utils.checkNotNull(planID, "planID");
         Utils.checkNotNull(accountID, "accountID");
@@ -131,7 +132,7 @@ public class PartnerPricingAgreement {
             List<BillableFee> billableFees,
             MinimumCommitment minimumCommitment,
             MonthlyPlatformFee monthlyPlatformFee,
-            long revenueShare) {
+            String revenueShare) {
         this(agreementID, planID, Optional.empty(),
             name, Optional.empty(), acceptedOn,
             status, cardAcquiringModel, billableFees,
@@ -210,10 +211,12 @@ public class PartnerPricingAgreement {
     }
 
     /**
-     * The integer percentage value of the revenue split for partner.
+     * The decimal-formatted numerical string of the revenue split for partner.
+     * 
+     * <p>For example, 2.25% is '2.25'.
      */
     @JsonIgnore
-    public long revenueShare() {
+    public String revenueShare() {
         return revenueShare;
     }
 
@@ -322,9 +325,11 @@ public class PartnerPricingAgreement {
     }
 
     /**
-     * The integer percentage value of the revenue split for partner.
+     * The decimal-formatted numerical string of the revenue split for partner.
+     * 
+     * <p>For example, 2.25% is '2.25'.
      */
-    public PartnerPricingAgreement withRevenueShare(long revenueShare) {
+    public PartnerPricingAgreement withRevenueShare(String revenueShare) {
         Utils.checkNotNull(revenueShare, "revenueShare");
         this.revenueShare = revenueShare;
         return this;
@@ -405,7 +410,7 @@ public class PartnerPricingAgreement {
 
         private MonthlyPlatformFee monthlyPlatformFee;
 
-        private Long revenueShare;
+        private String revenueShare;
 
         private Builder() {
           // force use of static builder() method
@@ -521,9 +526,11 @@ public class PartnerPricingAgreement {
 
 
         /**
-         * The integer percentage value of the revenue split for partner.
+         * The decimal-formatted numerical string of the revenue split for partner.
+         * 
+         * <p>For example, 2.25% is '2.25'.
          */
-        public Builder revenueShare(long revenueShare) {
+        public Builder revenueShare(String revenueShare) {
             Utils.checkNotNull(revenueShare, "revenueShare");
             this.revenueShare = revenueShare;
             return this;

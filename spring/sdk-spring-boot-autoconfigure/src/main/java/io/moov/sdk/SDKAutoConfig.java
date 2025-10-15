@@ -367,6 +367,17 @@ public class SDKAutoConfig {
         return moov.paymentMethods();
     }
     /**
+     * Creates a Products sub-SDK bean if none exists.
+     *
+     * @param moov the main SDK instance
+     * @return A configured Products instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public Products products(Moov moov) {
+        return moov.products();
+    }
+    /**
      * Creates a Representatives sub-SDK bean if none exists.
      *
      * @param moov the main SDK instance

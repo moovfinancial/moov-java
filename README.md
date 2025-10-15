@@ -46,7 +46,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.28.9'
+implementation 'io.moov:sdk:0.28.10'
 ```
 
 Maven:
@@ -54,7 +54,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.28.9</version>
+    <version>0.28.10</version>
 </dependency>
 ```
 
@@ -797,6 +797,16 @@ you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/ping.read` scope.
+
+### [products()](docs/sdks/products/README.md)
+
+* [list](docs/sdks/products/README.md#list) - List active (non-disabled) products for an account.
+* [create](docs/sdks/products/README.md#create) - Creates a new product for the specified account.
+* [get](docs/sdks/products/README.md#get) - Retrieve a product by ID.
+* [update](docs/sdks/products/README.md#update) - Update a product and its options.
+* [disable](docs/sdks/products/README.md#disable) - Disable a product by ID.
+
+The product will no longer be available, but will remain in the system for historical and reporting purposes.
 
 ### [receipts()](docs/sdks/receipts/README.md)
 

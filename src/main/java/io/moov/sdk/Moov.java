@@ -78,6 +78,9 @@ public class Moov {
     private final PaymentMethods paymentMethods;
 
 
+    private final Products products;
+
+
     private final Representatives representatives;
 
 
@@ -209,6 +212,11 @@ public class Moov {
 
     public PaymentMethods paymentMethods() {
         return paymentMethods;
+    }
+
+
+    public Products products() {
+        return products;
     }
 
 
@@ -497,6 +505,7 @@ public class Moov {
         this.images = new Images(sdkConfiguration);
         this.paymentLinks = new PaymentLinks(sdkConfiguration);
         this.paymentMethods = new PaymentMethods(sdkConfiguration);
+        this.products = new Products(sdkConfiguration);
         this.representatives = new Representatives(sdkConfiguration);
         this.scheduling = new Scheduling(sdkConfiguration);
         this.statements = new Statements(sdkConfiguration);

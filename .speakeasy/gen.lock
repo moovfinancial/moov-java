@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 6503b7b7d6dfebd7246fb56141fb4061
+  docChecksum: a9fda11f6edaf028012401e174f3bd79
   docVersion: latest
   speakeasyVersion: 1.636.3
   generationVersion: 2.723.11
-  releaseVersion: 0.28.9
-  configChecksum: 8af3f24aec401cf1f40246068d7253bd
+  releaseVersion: 0.28.10
+  configChecksum: 0ca3ed4b2d63d8c3c4d106d2bb1a0c4c
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -70,6 +70,7 @@ generatedFiles:
   - docs/models/components/Adjustment.md
   - docs/models/components/Amount.md
   - docs/models/components/AmountDecimal.md
+  - docs/models/components/AmountDecimalValidationError.md
   - docs/models/components/AmountUpdate.md
   - docs/models/components/AmountValidationError.md
   - docs/models/components/AppleBillingContact.md
@@ -79,6 +80,8 @@ generatedFiles:
   - docs/models/components/ApplePayPaymentMethodPaymentMethodType.md
   - docs/models/components/ApplePayResponse.md
   - docs/models/components/ApplicationScope.md
+  - docs/models/components/AssignProductImage.md
+  - docs/models/components/AssignProductImageValidationError.md
   - docs/models/components/AsyncCreatedRefund.md
   - docs/models/components/AsyncTransfer.md
   - docs/models/components/AuthToken.md
@@ -189,6 +192,8 @@ generatedFiles:
   - docs/models/components/CreateIndividualErrorSsn.md
   - docs/models/components/CreateIndividualProfile.md
   - docs/models/components/CreatePaymentLink.md
+  - docs/models/components/CreateProductOption.md
+  - docs/models/components/CreateProductOptionGroup.md
   - docs/models/components/CreateProfile.md
   - docs/models/components/CreateProfileError.md
   - docs/models/components/CreateRefund.md
@@ -383,6 +388,13 @@ generatedFiles:
   - docs/models/components/PlaidPayload.md
   - docs/models/components/PlatformFees.md
   - docs/models/components/PrimaryRegulator.md
+  - docs/models/components/Product.md
+  - docs/models/components/ProductImageMetadata.md
+  - docs/models/components/ProductOption.md
+  - docs/models/components/ProductOptionGroup.md
+  - docs/models/components/ProductOptionGroupValidationError.md
+  - docs/models/components/ProductOptionValidationError.md
+  - docs/models/components/ProductRequest.md
   - docs/models/components/Profile.md
   - docs/models/components/PullFromCardPaymentMethod.md
   - docs/models/components/PullFromCardPaymentMethodPaymentMethodType.md
@@ -595,6 +607,7 @@ generatedFiles:
   - docs/models/errors/PatchSweepConfigError.md
   - docs/models/errors/PatchTransferValidationError.md
   - docs/models/errors/PatchWalletValidationError.md
+  - docs/models/errors/ProductRequestValidationError.md
   - docs/models/errors/RefundValidationError.md
   - docs/models/errors/RepresentativeValidationError.md
   - docs/models/errors/RequestCardError.md
@@ -635,6 +648,8 @@ generatedFiles:
   - docs/models/operations/CreateOnboardingInviteResponse.md
   - docs/models/operations/CreatePaymentLinkRequest.md
   - docs/models/operations/CreatePaymentLinkResponse.md
+  - docs/models/operations/CreateProductRequest.md
+  - docs/models/operations/CreateProductResponse.md
   - docs/models/operations/CreateReceiptsResponse.md
   - docs/models/operations/CreateRepresentativeRequest.md
   - docs/models/operations/CreateRepresentativeResponse.md
@@ -671,6 +686,8 @@ generatedFiles:
   - docs/models/operations/DisableCardResponse.md
   - docs/models/operations/DisablePaymentLinkRequest.md
   - docs/models/operations/DisablePaymentLinkResponse.md
+  - docs/models/operations/DisableProductRequest.md
+  - docs/models/operations/DisableProductResponse.md
   - docs/models/operations/DisconnectAccountRequest.md
   - docs/models/operations/DisconnectAccountResponse.md
   - docs/models/operations/GenerateEndToEndKeyRequest.md
@@ -731,6 +748,8 @@ generatedFiles:
   - docs/models/operations/GetPaymentLinkResponse.md
   - docs/models/operations/GetPaymentMethodRequest.md
   - docs/models/operations/GetPaymentMethodResponse.md
+  - docs/models/operations/GetProductRequest.md
+  - docs/models/operations/GetProductResponse.md
   - docs/models/operations/GetPublicImageRequest.md
   - docs/models/operations/GetPublicImageResponse.md
   - docs/models/operations/GetRefundRequest.md
@@ -826,6 +845,8 @@ generatedFiles:
   - docs/models/operations/ListPaymentLinksResponse.md
   - docs/models/operations/ListPaymentMethodsRequest.md
   - docs/models/operations/ListPaymentMethodsResponse.md
+  - docs/models/operations/ListProductsRequest.md
+  - docs/models/operations/ListProductsResponse.md
   - docs/models/operations/ListReceiptsRequest.md
   - docs/models/operations/ListReceiptsResponse.md
   - docs/models/operations/ListRefundsRequest.md
@@ -887,6 +908,8 @@ generatedFiles:
   - docs/models/operations/UpdateIssuedCardResponse.md
   - docs/models/operations/UpdatePaymentLinkRequest.md
   - docs/models/operations/UpdatePaymentLinkResponse.md
+  - docs/models/operations/UpdateProductRequest.md
+  - docs/models/operations/UpdateProductResponse.md
   - docs/models/operations/UpdateRepresentativeRequest.md
   - docs/models/operations/UpdateRepresentativeResponse.md
   - docs/models/operations/UpdateScheduleRequest.md
@@ -934,6 +957,7 @@ generatedFiles:
   - docs/sdks/paymentlinks/README.md
   - docs/sdks/paymentmethods/README.md
   - docs/sdks/ping/README.md
+  - docs/sdks/products/README.md
   - docs/sdks/receipts/README.md
   - docs/sdks/representatives/README.md
   - docs/sdks/scheduling/README.md
@@ -985,6 +1009,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/PaymentLinks.java
   - src/main/java/io/moov/sdk/PaymentMethods.java
   - src/main/java/io/moov/sdk/Ping.java
+  - src/main/java/io/moov/sdk/Products.java
   - src/main/java/io/moov/sdk/Receipts.java
   - src/main/java/io/moov/sdk/Representatives.java
   - src/main/java/io/moov/sdk/SDKConfiguration.java
@@ -1034,6 +1059,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/Adjustment.java
   - src/main/java/io/moov/sdk/models/components/Amount.java
   - src/main/java/io/moov/sdk/models/components/AmountDecimal.java
+  - src/main/java/io/moov/sdk/models/components/AmountDecimalValidationError.java
   - src/main/java/io/moov/sdk/models/components/AmountUpdate.java
   - src/main/java/io/moov/sdk/models/components/AmountValidationError.java
   - src/main/java/io/moov/sdk/models/components/AppleBillingContact.java
@@ -1043,6 +1069,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/ApplePayPaymentMethodPaymentMethodType.java
   - src/main/java/io/moov/sdk/models/components/ApplePayResponse.java
   - src/main/java/io/moov/sdk/models/components/ApplicationScope.java
+  - src/main/java/io/moov/sdk/models/components/AssignProductImage.java
+  - src/main/java/io/moov/sdk/models/components/AssignProductImageValidationError.java
   - src/main/java/io/moov/sdk/models/components/AsyncCreatedRefund.java
   - src/main/java/io/moov/sdk/models/components/AsyncTransfer.java
   - src/main/java/io/moov/sdk/models/components/AuthToken.java
@@ -1153,6 +1181,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/CreateIndividualErrorSsn.java
   - src/main/java/io/moov/sdk/models/components/CreateIndividualProfile.java
   - src/main/java/io/moov/sdk/models/components/CreatePaymentLink.java
+  - src/main/java/io/moov/sdk/models/components/CreateProductOption.java
+  - src/main/java/io/moov/sdk/models/components/CreateProductOptionGroup.java
   - src/main/java/io/moov/sdk/models/components/CreateProfile.java
   - src/main/java/io/moov/sdk/models/components/CreateProfileError.java
   - src/main/java/io/moov/sdk/models/components/CreateRefund.java
@@ -1347,6 +1377,13 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/PlaidPayload.java
   - src/main/java/io/moov/sdk/models/components/PlatformFees.java
   - src/main/java/io/moov/sdk/models/components/PrimaryRegulator.java
+  - src/main/java/io/moov/sdk/models/components/Product.java
+  - src/main/java/io/moov/sdk/models/components/ProductImageMetadata.java
+  - src/main/java/io/moov/sdk/models/components/ProductOption.java
+  - src/main/java/io/moov/sdk/models/components/ProductOptionGroup.java
+  - src/main/java/io/moov/sdk/models/components/ProductOptionGroupValidationError.java
+  - src/main/java/io/moov/sdk/models/components/ProductOptionValidationError.java
+  - src/main/java/io/moov/sdk/models/components/ProductRequest.java
   - src/main/java/io/moov/sdk/models/components/Profile.java
   - src/main/java/io/moov/sdk/models/components/PullFromCardPaymentMethod.java
   - src/main/java/io/moov/sdk/models/components/PullFromCardPaymentMethodPaymentMethodType.java
@@ -1561,6 +1598,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/PatchSweepConfigError.java
   - src/main/java/io/moov/sdk/models/errors/PatchTransferValidationError.java
   - src/main/java/io/moov/sdk/models/errors/PatchWalletValidationError.java
+  - src/main/java/io/moov/sdk/models/errors/ProductRequestValidationError.java
   - src/main/java/io/moov/sdk/models/errors/RefundValidationError.java
   - src/main/java/io/moov/sdk/models/errors/RepresentativeValidationError.java
   - src/main/java/io/moov/sdk/models/errors/RequestCardError.java
@@ -1614,6 +1652,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/CreatePaymentLinkRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreatePaymentLinkRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreatePaymentLinkResponse.java
+  - src/main/java/io/moov/sdk/models/operations/CreateProductRequest.java
+  - src/main/java/io/moov/sdk/models/operations/CreateProductRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/CreateProductResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreateReceiptsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateReceiptsResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreateRepresentativeRequest.java
@@ -1669,6 +1710,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/DisablePaymentLinkRequest.java
   - src/main/java/io/moov/sdk/models/operations/DisablePaymentLinkRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/DisablePaymentLinkResponse.java
+  - src/main/java/io/moov/sdk/models/operations/DisableProductRequest.java
+  - src/main/java/io/moov/sdk/models/operations/DisableProductRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/DisableProductResponse.java
   - src/main/java/io/moov/sdk/models/operations/DisconnectAccountRequest.java
   - src/main/java/io/moov/sdk/models/operations/DisconnectAccountRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/DisconnectAccountResponse.java
@@ -1759,6 +1803,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/GetPaymentMethodRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetPaymentMethodRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetPaymentMethodResponse.java
+  - src/main/java/io/moov/sdk/models/operations/GetProductRequest.java
+  - src/main/java/io/moov/sdk/models/operations/GetProductRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/GetProductResponse.java
   - src/main/java/io/moov/sdk/models/operations/GetPublicImageRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetPublicImageRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetPublicImageResponse.java
@@ -1901,6 +1948,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/ListPaymentMethodsRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListPaymentMethodsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListPaymentMethodsResponse.java
+  - src/main/java/io/moov/sdk/models/operations/ListProductsRequest.java
+  - src/main/java/io/moov/sdk/models/operations/ListProductsRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/ListProductsResponse.java
   - src/main/java/io/moov/sdk/models/operations/ListReceiptsRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListReceiptsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListReceiptsResponse.java
@@ -1993,6 +2043,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/UpdatePaymentLinkRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpdatePaymentLinkRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpdatePaymentLinkResponse.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateProductRequest.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateProductRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateProductResponse.java
   - src/main/java/io/moov/sdk/models/operations/UpdateRepresentativeRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpdateRepresentativeRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpdateRepresentativeResponse.java
@@ -2039,6 +2092,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/CreateFeePlanAgreements.java
   - src/main/java/io/moov/sdk/operations/CreateOnboardingInvite.java
   - src/main/java/io/moov/sdk/operations/CreatePaymentLink.java
+  - src/main/java/io/moov/sdk/operations/CreateProduct.java
   - src/main/java/io/moov/sdk/operations/CreateReceipts.java
   - src/main/java/io/moov/sdk/operations/CreateRepresentative.java
   - src/main/java/io/moov/sdk/operations/CreateReversal.java
@@ -2058,6 +2112,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/DisableCapability.java
   - src/main/java/io/moov/sdk/operations/DisableCard.java
   - src/main/java/io/moov/sdk/operations/DisablePaymentLink.java
+  - src/main/java/io/moov/sdk/operations/DisableProduct.java
   - src/main/java/io/moov/sdk/operations/DisconnectAccount.java
   - src/main/java/io/moov/sdk/operations/GenerateEndToEndKey.java
   - src/main/java/io/moov/sdk/operations/GetAccount.java
@@ -2088,6 +2143,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/GetPaymentLink.java
   - src/main/java/io/moov/sdk/operations/GetPaymentLinkQRCode.java
   - src/main/java/io/moov/sdk/operations/GetPaymentMethod.java
+  - src/main/java/io/moov/sdk/operations/GetProduct.java
   - src/main/java/io/moov/sdk/operations/GetPublicImage.java
   - src/main/java/io/moov/sdk/operations/GetRefund.java
   - src/main/java/io/moov/sdk/operations/GetRepresentative.java
@@ -2135,6 +2191,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/ListPartnerPricingAgreements.java
   - src/main/java/io/moov/sdk/operations/ListPaymentLinks.java
   - src/main/java/io/moov/sdk/operations/ListPaymentMethods.java
+  - src/main/java/io/moov/sdk/operations/ListProducts.java
   - src/main/java/io/moov/sdk/operations/ListReceipts.java
   - src/main/java/io/moov/sdk/operations/ListRefunds.java
   - src/main/java/io/moov/sdk/operations/ListRepresentatives.java
@@ -2167,6 +2224,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/UpdateDisputeEvidence.java
   - src/main/java/io/moov/sdk/operations/UpdateIssuedCard.java
   - src/main/java/io/moov/sdk/operations/UpdatePaymentLink.java
+  - src/main/java/io/moov/sdk/operations/UpdateProduct.java
   - src/main/java/io/moov/sdk/operations/UpdateRepresentative.java
   - src/main/java/io/moov/sdk/operations/UpdateSchedule.java
   - src/main/java/io/moov/sdk/operations/UpdateSweepConfig.java
@@ -4407,12 +4465,80 @@ examples:
           image/webp: "x-file: example.file"
           image/png: "x-file: example.file"
           image/jpeg: "x-file: example.file"
+  listProducts:
+    speakeasy-default-list-products:
+      parameters:
+        path:
+          accountID: "cd696219-4308-446c-b0d8-1759254995c2"
+        query:
+          skip: 60
+          count: 20
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: [{"productID": "1e229a22-6396-4efa-beac-d18ff5c58ab7", "title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 29985, "maxSelect": 247517, "options": [{"name": "<value>", "priceModifier": "-14.89", "images": [{"imageID": "47269bb9-c8c6-4c76-8933-0d6ce87d2946", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}]}]}], "images": [{"imageID": "47269bb9-c8c6-4c76-8933-0d6ce87d2946", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}], "createdOn": "2023-01-22T10:49:40.225Z", "updatedOn": "2023-11-19T10:02:46.267Z"}]
+  createProduct:
+    speakeasy-default-create-product:
+      parameters:
+        path:
+          accountID: "27cd3181-7c1c-4d81-b020-e7d55c33941f"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        application/json: {"title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 798807, "maxSelect": 321505, "options": [{"name": "<value>", "priceModifier": "-14.89"}]}]}
+      responses:
+        "201":
+          application/json: {"productID": "c7657b6a-06b3-4972-805a-6c4111175af2", "title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 659263, "maxSelect": 854821, "options": [{"name": "<value>", "priceModifier": "-14.89", "images": [{"imageID": "ee6b4549-0292-47f9-a2bc-ea0a521ac908", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}]}]}], "images": [{"imageID": "ee6b4549-0292-47f9-a2bc-ea0a521ac908", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}], "createdOn": "2023-01-19T08:35:48.193Z", "updatedOn": "2024-02-14T05:19:14.970Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  getProduct:
+    speakeasy-default-get-product:
+      parameters:
+        path:
+          accountID: "a749d848-5ebc-42a4-9ae6-555804317835"
+          productID: "dd0b4873-5cf5-4aa8-aa86-e31d86f7e38a"
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: {"productID": "3c2445e7-f0c4-45d5-bd2a-88bcdc056c20", "title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 197351, "maxSelect": 515143, "options": []}], "images": [{"imageID": "33c05564-9e61-48d6-b69e-269a48a62a9e", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}], "createdOn": "2024-11-12T09:31:50.113Z", "updatedOn": "2025-11-08T13:39:00.825Z"}
+  updateProduct:
+    speakeasy-default-update-product:
+      parameters:
+        path:
+          accountID: "7a7b55ed-d90d-4e83-a8f6-f146eaebd0cc"
+          productID: "fa407877-3b46-4484-814e-65b147d76a9e"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        application/json: {"title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 328576, "maxSelect": 430951, "options": []}]}
+      responses:
+        "200":
+          application/json: {"productID": "c0c48b06-a2e8-4b60-8ff4-13050279bce9", "title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 918880, "maxSelect": 680367, "options": [{"name": "<value>", "priceModifier": "-14.89", "images": [{"imageID": "b76b32e6-bc87-46f5-bdcb-e1737416539d", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}]}]}], "images": [{"imageID": "b76b32e6-bc87-46f5-bdcb-e1737416539d", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}], "createdOn": "2025-06-13T16:49:57.138Z", "updatedOn": "2023-11-04T10:58:23.378Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  disableProduct:
+    speakeasy-default-disable-product:
+      parameters:
+        path:
+          accountID: "9fbe72c0-abba-4bb7-b1d0-d15ee702fe62"
+          productID: "1e11a7dc-4e86-41ed-b256-55c22f3bfd38"
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "400":
+          application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Java SDK Changes Detected:
-  * `moov.feePlans.listPartnerPricing()`:  `response.[]` **Changed** **Breaking** :warning:
-  * `moov.feePlans.listPartnerPricingAgreements()`:  `response.[]` **Changed** **Breaking** :warning:
-  * `moov.feePlans.listFeePlanAgreements()`:  `response.[].billableFees.[].feeProperties.volumeRanges` **Added**
-  * `moov.feePlans.createFeePlanAgreements()`:  `response.billablefees.[].feeProperties.volumeRanges` **Added**
-  * `moov.feePlans.listFeePlans()`:  `response.[].billableFees.[].feeProperties.volumeRanges` **Added**
+  * `moov.products.list()`: **Added**
+  * `moov.products.create()`: **Added**
+  * `moov.products.get()`: **Added**
+  * `moov.products.update()`: **Added**
+  * `moov.products.disable()`: **Added**

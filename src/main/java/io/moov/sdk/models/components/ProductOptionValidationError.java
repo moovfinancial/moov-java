@@ -30,7 +30,7 @@ public class ProductOptionValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("priceModifier")
-    private Optional<String> priceModifier;
+    private Optional<? extends AmountDecimalValidationError> priceModifier;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -41,7 +41,7 @@ public class ProductOptionValidationError {
     public ProductOptionValidationError(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("description") Optional<String> description,
-            @JsonProperty("priceModifier") Optional<String> priceModifier,
+            @JsonProperty("priceModifier") Optional<? extends AmountDecimalValidationError> priceModifier,
             @JsonProperty("images") Optional<? extends Map<String, AssignProductImageValidationError>> images) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(description, "description");
@@ -68,9 +68,10 @@ public class ProductOptionValidationError {
         return description;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> priceModifier() {
-        return priceModifier;
+    public Optional<AmountDecimalValidationError> priceModifier() {
+        return (Optional<AmountDecimalValidationError>) priceModifier;
     }
 
     @SuppressWarnings("unchecked")
@@ -110,14 +111,14 @@ public class ProductOptionValidationError {
         return this;
     }
 
-    public ProductOptionValidationError withPriceModifier(String priceModifier) {
+    public ProductOptionValidationError withPriceModifier(AmountDecimalValidationError priceModifier) {
         Utils.checkNotNull(priceModifier, "priceModifier");
         this.priceModifier = Optional.ofNullable(priceModifier);
         return this;
     }
 
 
-    public ProductOptionValidationError withPriceModifier(Optional<String> priceModifier) {
+    public ProductOptionValidationError withPriceModifier(Optional<? extends AmountDecimalValidationError> priceModifier) {
         Utils.checkNotNull(priceModifier, "priceModifier");
         this.priceModifier = priceModifier;
         return this;
@@ -175,7 +176,7 @@ public class ProductOptionValidationError {
 
         private Optional<String> description = Optional.empty();
 
-        private Optional<String> priceModifier = Optional.empty();
+        private Optional<? extends AmountDecimalValidationError> priceModifier = Optional.empty();
 
         private Optional<? extends Map<String, AssignProductImageValidationError>> images = Optional.empty();
 
@@ -210,13 +211,13 @@ public class ProductOptionValidationError {
         }
 
 
-        public Builder priceModifier(String priceModifier) {
+        public Builder priceModifier(AmountDecimalValidationError priceModifier) {
             Utils.checkNotNull(priceModifier, "priceModifier");
             this.priceModifier = Optional.ofNullable(priceModifier);
             return this;
         }
 
-        public Builder priceModifier(Optional<String> priceModifier) {
+        public Builder priceModifier(Optional<? extends AmountDecimalValidationError> priceModifier) {
             Utils.checkNotNull(priceModifier, "priceModifier");
             this.priceModifier = priceModifier;
             return this;

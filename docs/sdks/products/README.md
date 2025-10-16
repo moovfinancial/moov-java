@@ -126,7 +126,10 @@ public class Application {
                                 CreateProductOption.builder()
                                     .name("Strawberry puree")
                                     .description("Fresh and fruity.")
-                                    .priceModifier("0.99")
+                                    .priceModifier(AmountDecimal.builder()
+                                        .currency("USD")
+                                        .valueDecimal("0.99")
+                                        .build())
                                     .images(List.of(
                                         AssignProductImage.builder()
                                             .imageID("d359808d-9896-4414-8d17-dac43f35842d")
@@ -134,11 +137,17 @@ public class Application {
                                     .build(),
                                 CreateProductOption.builder()
                                     .name("Passionfruit syrup")
-                                    .priceModifier("0.49")
+                                    .priceModifier(AmountDecimal.builder()
+                                        .currency("USD")
+                                        .valueDecimal("0.49")
+                                        .build())
                                     .build(),
                                 CreateProductOption.builder()
                                     .name("Cherry syrup")
-                                    .priceModifier("0.49")
+                                    .priceModifier(AmountDecimal.builder()
+                                        .currency("USD")
+                                        .valueDecimal("0.49")
+                                        .build())
                                     .build()))
                             .description("Choose up to 3 flavor add-ins to enhance your lemonade.")
                             .build(),
@@ -152,7 +161,10 @@ public class Application {
                                     .build(),
                                 CreateProductOption.builder()
                                     .name("Honey")
-                                    .priceModifier("0.99")
+                                    .priceModifier(AmountDecimal.builder()
+                                        .currency("USD")
+                                        .valueDecimal("0.99")
+                                        .build())
                                     .build(),
                                 CreateProductOption.builder()
                                     .name("Stevia")

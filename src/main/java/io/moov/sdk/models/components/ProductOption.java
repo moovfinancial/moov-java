@@ -43,7 +43,7 @@ public class ProductOption {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("priceModifier")
-    private Optional<String> priceModifier;
+    private Optional<? extends AmountDecimal> priceModifier;
 
     /**
      * The images associated with this option.
@@ -56,7 +56,7 @@ public class ProductOption {
     public ProductOption(
             @JsonProperty("name") String name,
             @JsonProperty("description") Optional<String> description,
-            @JsonProperty("priceModifier") Optional<String> priceModifier,
+            @JsonProperty("priceModifier") Optional<? extends AmountDecimal> priceModifier,
             @JsonProperty("images") Optional<? extends List<ProductImageMetadata>> images) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(description, "description");
@@ -97,9 +97,10 @@ public class ProductOption {
     /**
      * The adjustment applied to a product's base price by this option. Can be negative, positive, or zero.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> priceModifier() {
-        return priceModifier;
+    public Optional<AmountDecimal> priceModifier() {
+        return (Optional<AmountDecimal>) priceModifier;
     }
 
     /**
@@ -155,7 +156,7 @@ public class ProductOption {
     /**
      * The adjustment applied to a product's base price by this option. Can be negative, positive, or zero.
      */
-    public ProductOption withPriceModifier(String priceModifier) {
+    public ProductOption withPriceModifier(AmountDecimal priceModifier) {
         Utils.checkNotNull(priceModifier, "priceModifier");
         this.priceModifier = Optional.ofNullable(priceModifier);
         return this;
@@ -165,7 +166,7 @@ public class ProductOption {
     /**
      * The adjustment applied to a product's base price by this option. Can be negative, positive, or zero.
      */
-    public ProductOption withPriceModifier(Optional<String> priceModifier) {
+    public ProductOption withPriceModifier(Optional<? extends AmountDecimal> priceModifier) {
         Utils.checkNotNull(priceModifier, "priceModifier");
         this.priceModifier = priceModifier;
         return this;
@@ -229,7 +230,7 @@ public class ProductOption {
 
         private Optional<String> description = Optional.empty();
 
-        private Optional<String> priceModifier = Optional.empty();
+        private Optional<? extends AmountDecimal> priceModifier = Optional.empty();
 
         private Optional<? extends List<ProductImageMetadata>> images = Optional.empty();
 
@@ -278,7 +279,7 @@ public class ProductOption {
         /**
          * The adjustment applied to a product's base price by this option. Can be negative, positive, or zero.
          */
-        public Builder priceModifier(String priceModifier) {
+        public Builder priceModifier(AmountDecimal priceModifier) {
             Utils.checkNotNull(priceModifier, "priceModifier");
             this.priceModifier = Optional.ofNullable(priceModifier);
             return this;
@@ -287,7 +288,7 @@ public class ProductOption {
         /**
          * The adjustment applied to a product's base price by this option. Can be negative, positive, or zero.
          */
-        public Builder priceModifier(Optional<String> priceModifier) {
+        public Builder priceModifier(Optional<? extends AmountDecimal> priceModifier) {
             Utils.checkNotNull(priceModifier, "priceModifier");
             this.priceModifier = priceModifier;
             return this;

@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetIssuedCardTransaction;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetIssuedCardTransactionRequestBuilder {
@@ -44,7 +43,7 @@ public class GetIssuedCardTransactionRequestBuilder {
         return request;
     }
 
-    public GetIssuedCardTransactionResponse call() throws Exception {
+    public GetIssuedCardTransactionResponse call() {
         
         RequestOperation<GetIssuedCardTransactionRequest, GetIssuedCardTransactionResponse> operation
               = new GetIssuedCardTransaction.Sync(sdkConfiguration, _headers);

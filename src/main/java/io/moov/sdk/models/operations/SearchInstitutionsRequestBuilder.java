@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.SearchInstitutions;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -72,7 +71,7 @@ public class SearchInstitutionsRequestBuilder {
         return request;
     }
 
-    public SearchInstitutionsResponse call() throws Exception {
+    public SearchInstitutionsResponse call() {
         
         RequestOperation<SearchInstitutionsRequest, SearchInstitutionsResponse> operation
               = new SearchInstitutions.Sync(sdkConfiguration, _headers);

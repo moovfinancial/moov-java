@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.CreateCancellation;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class CreateCancellationRequestBuilder {
@@ -44,7 +43,7 @@ public class CreateCancellationRequestBuilder {
         return request;
     }
 
-    public CreateCancellationResponse call() throws Exception {
+    public CreateCancellationResponse call() {
         
         RequestOperation<CreateCancellationRequest, CreateCancellationResponse> operation
               = new CreateCancellation.Sync(sdkConfiguration, _headers);

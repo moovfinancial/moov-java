@@ -10,195 +10,258 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.CreateAuthorizedUserError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class UpdateIssuedCardError extends RuntimeException {
+public class UpdateIssuedCardError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("state")
-    private Optional<String> state;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("memo")
-    private Optional<String> memo;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("authorizedUser")
-    private Optional<? extends CreateAuthorizedUserError> authorizedUser;
-
-    @JsonCreator
     public UpdateIssuedCardError(
-            @JsonProperty("state") Optional<String> state,
-            @JsonProperty("memo") Optional<String> memo,
-            @JsonProperty("authorizedUser") Optional<? extends CreateAuthorizedUserError> authorizedUser) {
-        super("API error occurred");
-        Utils.checkNotNull(state, "state");
-        Utils.checkNotNull(memo, "memo");
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        this.state = state;
-        this.memo = memo;
-        this.authorizedUser = authorizedUser;
-    }
-    
-    public UpdateIssuedCardError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of UpdateIssuedCardError. If deserialization of the response body fails,
+    * the resulting UpdateIssuedCardError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static UpdateIssuedCardError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new UpdateIssuedCardError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new UpdateIssuedCardError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> state() {
-        return state;
+        return data().flatMap(Data::state);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> memo() {
-        return memo;
+        return data().flatMap(Data::memo);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<CreateAuthorizedUserError> authorizedUser() {
-        return (Optional<CreateAuthorizedUserError>) authorizedUser;
+        return data().flatMap(Data::authorizedUser);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public UpdateIssuedCardError withState(String state) {
-        Utils.checkNotNull(state, "state");
-        this.state = Optional.ofNullable(state);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public UpdateIssuedCardError withState(Optional<String> state) {
-        Utils.checkNotNull(state, "state");
-        this.state = state;
-        return this;
-    }
-
-    public UpdateIssuedCardError withMemo(String memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = Optional.ofNullable(memo);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("state")
+        private Optional<String> state;
 
 
-    public UpdateIssuedCardError withMemo(Optional<String> memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = memo;
-        return this;
-    }
-
-    public UpdateIssuedCardError withAuthorizedUser(CreateAuthorizedUserError authorizedUser) {
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        this.authorizedUser = Optional.ofNullable(authorizedUser);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("memo")
+        private Optional<String> memo;
 
 
-    public UpdateIssuedCardError withAuthorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        this.authorizedUser = authorizedUser;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("authorizedUser")
+        private Optional<? extends CreateAuthorizedUserError> authorizedUser;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("state") Optional<String> state,
+                @JsonProperty("memo") Optional<String> memo,
+                @JsonProperty("authorizedUser") Optional<? extends CreateAuthorizedUserError> authorizedUser) {
+            Utils.checkNotNull(state, "state");
+            Utils.checkNotNull(memo, "memo");
+            Utils.checkNotNull(authorizedUser, "authorizedUser");
+            this.state = state;
+            this.memo = memo;
+            this.authorizedUser = authorizedUser;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty());
         }
-        UpdateIssuedCardError other = (UpdateIssuedCardError) o;
-        return 
-            Utils.enhancedDeepEquals(this.state, other.state) &&
-            Utils.enhancedDeepEquals(this.memo, other.memo) &&
-            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            state, memo, authorizedUser);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(UpdateIssuedCardError.class,
-                "state", state,
-                "memo", memo,
-                "authorizedUser", authorizedUser);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> state() {
+            return state;
+        }
 
-        private Optional<String> state = Optional.empty();
+        @JsonIgnore
+        public Optional<String> memo() {
+            return memo;
+        }
 
-        private Optional<String> memo = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CreateAuthorizedUserError> authorizedUser() {
+            return (Optional<CreateAuthorizedUserError>) authorizedUser;
+        }
 
-        private Optional<? extends CreateAuthorizedUserError> authorizedUser = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder state(String state) {
+        public Data withState(String state) {
             Utils.checkNotNull(state, "state");
             this.state = Optional.ofNullable(state);
             return this;
         }
 
-        public Builder state(Optional<String> state) {
+
+        public Data withState(Optional<String> state) {
             Utils.checkNotNull(state, "state");
             this.state = state;
             return this;
         }
 
-
-        public Builder memo(String memo) {
+        public Data withMemo(String memo) {
             Utils.checkNotNull(memo, "memo");
             this.memo = Optional.ofNullable(memo);
             return this;
         }
 
-        public Builder memo(Optional<String> memo) {
+
+        public Data withMemo(Optional<String> memo) {
             Utils.checkNotNull(memo, "memo");
             this.memo = memo;
             return this;
         }
 
-
-        public Builder authorizedUser(CreateAuthorizedUserError authorizedUser) {
+        public Data withAuthorizedUser(CreateAuthorizedUserError authorizedUser) {
             Utils.checkNotNull(authorizedUser, "authorizedUser");
             this.authorizedUser = Optional.ofNullable(authorizedUser);
             return this;
         }
 
-        public Builder authorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
+
+        public Data withAuthorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
             Utils.checkNotNull(authorizedUser, "authorizedUser");
             this.authorizedUser = authorizedUser;
             return this;
         }
 
-        public UpdateIssuedCardError build() {
-
-            return new UpdateIssuedCardError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.state, other.state) &&
+                Utils.enhancedDeepEquals(this.memo, other.memo) &&
+                Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 state, memo, authorizedUser);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "state", state,
+                    "memo", memo,
+                    "authorizedUser", authorizedUser);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> state = Optional.empty();
+
+            private Optional<String> memo = Optional.empty();
+
+            private Optional<? extends CreateAuthorizedUserError> authorizedUser = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder state(String state) {
+                Utils.checkNotNull(state, "state");
+                this.state = Optional.ofNullable(state);
+                return this;
+            }
+
+            public Builder state(Optional<String> state) {
+                Utils.checkNotNull(state, "state");
+                this.state = state;
+                return this;
+            }
+
+
+            public Builder memo(String memo) {
+                Utils.checkNotNull(memo, "memo");
+                this.memo = Optional.ofNullable(memo);
+                return this;
+            }
+
+            public Builder memo(Optional<String> memo) {
+                Utils.checkNotNull(memo, "memo");
+                this.memo = memo;
+                return this;
+            }
+
+
+            public Builder authorizedUser(CreateAuthorizedUserError authorizedUser) {
+                Utils.checkNotNull(authorizedUser, "authorizedUser");
+                this.authorizedUser = Optional.ofNullable(authorizedUser);
+                return this;
+            }
+
+            public Builder authorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
+                Utils.checkNotNull(authorizedUser, "authorizedUser");
+                this.authorizedUser = authorizedUser;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    state, memo, authorizedUser);
+            }
+
+        }
     }
+
 }
 

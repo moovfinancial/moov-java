@@ -9,283 +9,356 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class FileValidationError extends RuntimeException {
+public class FileValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("error")
-    private Optional<String> error;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("file")
-    private Optional<String> file;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("FileName")
-    private Optional<String> fileName;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("filePurpose")
-    private Optional<String> filePurpose;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("metadata")
-    private Optional<String> metadata;
-
-    @JsonCreator
     public FileValidationError(
-            @JsonProperty("error") Optional<String> error,
-            @JsonProperty("file") Optional<String> file,
-            @JsonProperty("FileName") Optional<String> fileName,
-            @JsonProperty("filePurpose") Optional<String> filePurpose,
-            @JsonProperty("metadata") Optional<String> metadata) {
-        super("API error occurred");
-        Utils.checkNotNull(error, "error");
-        Utils.checkNotNull(file, "file");
-        Utils.checkNotNull(fileName, "fileName");
-        Utils.checkNotNull(filePurpose, "filePurpose");
-        Utils.checkNotNull(metadata, "metadata");
-        this.error = error;
-        this.file = file;
-        this.fileName = fileName;
-        this.filePurpose = filePurpose;
-        this.metadata = metadata;
-    }
-    
-    public FileValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of FileValidationError. If deserialization of the response body fails,
+    * the resulting FileValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static FileValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new FileValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new FileValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> error() {
-        return error;
+        return data().flatMap(Data::error);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> file() {
-        return file;
+        return data().flatMap(Data::file);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> fileName() {
-        return fileName;
+        return data().flatMap(Data::fileName);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> filePurpose() {
-        return filePurpose;
+        return data().flatMap(Data::filePurpose);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> metadata() {
-        return metadata;
+        return data().flatMap(Data::metadata);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public FileValidationError withError(String error) {
-        Utils.checkNotNull(error, "error");
-        this.error = Optional.ofNullable(error);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public FileValidationError withError(Optional<String> error) {
-        Utils.checkNotNull(error, "error");
-        this.error = error;
-        return this;
-    }
-
-    public FileValidationError withFile(String file) {
-        Utils.checkNotNull(file, "file");
-        this.file = Optional.ofNullable(file);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("error")
+        private Optional<String> error;
 
 
-    public FileValidationError withFile(Optional<String> file) {
-        Utils.checkNotNull(file, "file");
-        this.file = file;
-        return this;
-    }
-
-    public FileValidationError withFileName(String fileName) {
-        Utils.checkNotNull(fileName, "fileName");
-        this.fileName = Optional.ofNullable(fileName);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("file")
+        private Optional<String> file;
 
 
-    public FileValidationError withFileName(Optional<String> fileName) {
-        Utils.checkNotNull(fileName, "fileName");
-        this.fileName = fileName;
-        return this;
-    }
-
-    public FileValidationError withFilePurpose(String filePurpose) {
-        Utils.checkNotNull(filePurpose, "filePurpose");
-        this.filePurpose = Optional.ofNullable(filePurpose);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("FileName")
+        private Optional<String> fileName;
 
 
-    public FileValidationError withFilePurpose(Optional<String> filePurpose) {
-        Utils.checkNotNull(filePurpose, "filePurpose");
-        this.filePurpose = filePurpose;
-        return this;
-    }
-
-    public FileValidationError withMetadata(String metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = Optional.ofNullable(metadata);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("filePurpose")
+        private Optional<String> filePurpose;
 
 
-    public FileValidationError withMetadata(Optional<String> metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = metadata;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("metadata")
+        private Optional<String> metadata;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("error") Optional<String> error,
+                @JsonProperty("file") Optional<String> file,
+                @JsonProperty("FileName") Optional<String> fileName,
+                @JsonProperty("filePurpose") Optional<String> filePurpose,
+                @JsonProperty("metadata") Optional<String> metadata) {
+            Utils.checkNotNull(error, "error");
+            Utils.checkNotNull(file, "file");
+            Utils.checkNotNull(fileName, "fileName");
+            Utils.checkNotNull(filePurpose, "filePurpose");
+            Utils.checkNotNull(metadata, "metadata");
+            this.error = error;
+            this.file = file;
+            this.fileName = fileName;
+            this.filePurpose = filePurpose;
+            this.metadata = metadata;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        FileValidationError other = (FileValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.error, other.error) &&
-            Utils.enhancedDeepEquals(this.file, other.file) &&
-            Utils.enhancedDeepEquals(this.fileName, other.fileName) &&
-            Utils.enhancedDeepEquals(this.filePurpose, other.filePurpose) &&
-            Utils.enhancedDeepEquals(this.metadata, other.metadata);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            error, file, fileName,
-            filePurpose, metadata);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(FileValidationError.class,
-                "error", error,
-                "file", file,
-                "fileName", fileName,
-                "filePurpose", filePurpose,
-                "metadata", metadata);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> error() {
+            return error;
+        }
 
-        private Optional<String> error = Optional.empty();
+        @JsonIgnore
+        public Optional<String> file() {
+            return file;
+        }
 
-        private Optional<String> file = Optional.empty();
+        @JsonIgnore
+        public Optional<String> fileName() {
+            return fileName;
+        }
 
-        private Optional<String> fileName = Optional.empty();
+        @JsonIgnore
+        public Optional<String> filePurpose() {
+            return filePurpose;
+        }
 
-        private Optional<String> filePurpose = Optional.empty();
+        @JsonIgnore
+        public Optional<String> metadata() {
+            return metadata;
+        }
 
-        private Optional<String> metadata = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder error(String error) {
+        public Data withError(String error) {
             Utils.checkNotNull(error, "error");
             this.error = Optional.ofNullable(error);
             return this;
         }
 
-        public Builder error(Optional<String> error) {
+
+        public Data withError(Optional<String> error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
 
-
-        public Builder file(String file) {
+        public Data withFile(String file) {
             Utils.checkNotNull(file, "file");
             this.file = Optional.ofNullable(file);
             return this;
         }
 
-        public Builder file(Optional<String> file) {
+
+        public Data withFile(Optional<String> file) {
             Utils.checkNotNull(file, "file");
             this.file = file;
             return this;
         }
 
-
-        public Builder fileName(String fileName) {
+        public Data withFileName(String fileName) {
             Utils.checkNotNull(fileName, "fileName");
             this.fileName = Optional.ofNullable(fileName);
             return this;
         }
 
-        public Builder fileName(Optional<String> fileName) {
+
+        public Data withFileName(Optional<String> fileName) {
             Utils.checkNotNull(fileName, "fileName");
             this.fileName = fileName;
             return this;
         }
 
-
-        public Builder filePurpose(String filePurpose) {
+        public Data withFilePurpose(String filePurpose) {
             Utils.checkNotNull(filePurpose, "filePurpose");
             this.filePurpose = Optional.ofNullable(filePurpose);
             return this;
         }
 
-        public Builder filePurpose(Optional<String> filePurpose) {
+
+        public Data withFilePurpose(Optional<String> filePurpose) {
             Utils.checkNotNull(filePurpose, "filePurpose");
             this.filePurpose = filePurpose;
             return this;
         }
 
-
-        public Builder metadata(String metadata) {
+        public Data withMetadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
-        public Builder metadata(Optional<String> metadata) {
+
+        public Data withMetadata(Optional<String> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;
         }
 
-        public FileValidationError build() {
-
-            return new FileValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.error, other.error) &&
+                Utils.enhancedDeepEquals(this.file, other.file) &&
+                Utils.enhancedDeepEquals(this.fileName, other.fileName) &&
+                Utils.enhancedDeepEquals(this.filePurpose, other.filePurpose) &&
+                Utils.enhancedDeepEquals(this.metadata, other.metadata);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 error, file, fileName,
                 filePurpose, metadata);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "error", error,
+                    "file", file,
+                    "fileName", fileName,
+                    "filePurpose", filePurpose,
+                    "metadata", metadata);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> error = Optional.empty();
+
+            private Optional<String> file = Optional.empty();
+
+            private Optional<String> fileName = Optional.empty();
+
+            private Optional<String> filePurpose = Optional.empty();
+
+            private Optional<String> metadata = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder error(String error) {
+                Utils.checkNotNull(error, "error");
+                this.error = Optional.ofNullable(error);
+                return this;
+            }
+
+            public Builder error(Optional<String> error) {
+                Utils.checkNotNull(error, "error");
+                this.error = error;
+                return this;
+            }
+
+
+            public Builder file(String file) {
+                Utils.checkNotNull(file, "file");
+                this.file = Optional.ofNullable(file);
+                return this;
+            }
+
+            public Builder file(Optional<String> file) {
+                Utils.checkNotNull(file, "file");
+                this.file = file;
+                return this;
+            }
+
+
+            public Builder fileName(String fileName) {
+                Utils.checkNotNull(fileName, "fileName");
+                this.fileName = Optional.ofNullable(fileName);
+                return this;
+            }
+
+            public Builder fileName(Optional<String> fileName) {
+                Utils.checkNotNull(fileName, "fileName");
+                this.fileName = fileName;
+                return this;
+            }
+
+
+            public Builder filePurpose(String filePurpose) {
+                Utils.checkNotNull(filePurpose, "filePurpose");
+                this.filePurpose = Optional.ofNullable(filePurpose);
+                return this;
+            }
+
+            public Builder filePurpose(Optional<String> filePurpose) {
+                Utils.checkNotNull(filePurpose, "filePurpose");
+                this.filePurpose = filePurpose;
+                return this;
+            }
+
+
+            public Builder metadata(String metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = Optional.ofNullable(metadata);
+                return this;
+            }
+
+            public Builder metadata(Optional<String> metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = metadata;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    error, file, fileName,
+                    filePurpose, metadata);
+            }
+
+        }
     }
+
 }
 

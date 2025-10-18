@@ -10,7 +10,6 @@ import io.moov.sdk.models.operations.GetEnrichmentProfileRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentProfileResponse;
 import io.moov.sdk.operations.GetEnrichmentProfile;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -46,9 +45,9 @@ public class EnrichedProfile {
      * 
      * @param email 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetEnrichmentProfileResponse get(String email) throws Exception {
+    public GetEnrichmentProfileResponse get(String email) {
         GetEnrichmentProfileRequest request =
             GetEnrichmentProfileRequest
                 .builder()

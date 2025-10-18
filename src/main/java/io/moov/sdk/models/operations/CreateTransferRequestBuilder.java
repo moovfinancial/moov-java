@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.CreateTransfer;
 import io.moov.sdk.models.components.TransferWaitFor;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -68,7 +67,7 @@ public class CreateTransferRequestBuilder {
         return request;
     }
 
-    public CreateTransferResponse call() throws Exception {
+    public CreateTransferResponse call() {
         
         RequestOperation<CreateTransferRequest, CreateTransferResponse> operation
               = new io.moov.sdk.operations.CreateTransfer.Sync(sdkConfiguration, _headers);

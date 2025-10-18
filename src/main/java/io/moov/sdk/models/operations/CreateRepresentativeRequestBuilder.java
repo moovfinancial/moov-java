@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateRepresentative;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class CreateRepresentativeRequestBuilder {
@@ -44,7 +43,7 @@ public class CreateRepresentativeRequestBuilder {
         return request;
     }
 
-    public CreateRepresentativeResponse call() throws Exception {
+    public CreateRepresentativeResponse call() {
         
         RequestOperation<CreateRepresentativeRequest, CreateRepresentativeResponse> operation
               = new io.moov.sdk.operations.CreateRepresentative.Sync(sdkConfiguration, _headers);

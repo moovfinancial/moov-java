@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.PaymentMethodType;
 import io.moov.sdk.operations.ListPaymentMethods;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -66,7 +65,7 @@ public class ListPaymentMethodsRequestBuilder {
         return request;
     }
 
-    public ListPaymentMethodsResponse call() throws Exception {
+    public ListPaymentMethodsResponse call() {
         
         RequestOperation<ListPaymentMethodsRequest, ListPaymentMethodsResponse> operation
               = new ListPaymentMethods.Sync(sdkConfiguration, _headers);

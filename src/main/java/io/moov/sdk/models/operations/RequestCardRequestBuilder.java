@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.RequestCard;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class RequestCardRequestBuilder {
@@ -44,7 +43,7 @@ public class RequestCardRequestBuilder {
         return request;
     }
 
-    public RequestCardResponse call() throws Exception {
+    public RequestCardResponse call() {
         
         RequestOperation<RequestCardRequest, RequestCardResponse> operation
               = new io.moov.sdk.operations.RequestCard.Sync(sdkConfiguration, _headers);

@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetSchedules;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetSchedulesRequestBuilder {
@@ -44,7 +43,7 @@ public class GetSchedulesRequestBuilder {
         return request;
     }
 
-    public GetSchedulesResponse call() throws Exception {
+    public GetSchedulesResponse call() {
         
         RequestOperation<GetSchedulesRequest, GetSchedulesResponse> operation
               = new GetSchedules.Sync(sdkConfiguration, _headers);

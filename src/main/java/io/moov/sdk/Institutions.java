@@ -14,7 +14,6 @@ import io.moov.sdk.models.operations.SearchInstitutionsResponse;
 import io.moov.sdk.operations.ListInstitutions;
 import io.moov.sdk.operations.SearchInstitutions;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -63,9 +62,9 @@ public class Institutions {
      * you'll need to specify the `/institutions.read` scope.
      * 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public SearchInstitutionsResponse searchInstitutionsDirect() throws Exception {
+    public SearchInstitutionsResponse searchInstitutionsDirect() {
         return searchInstitutions(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -87,11 +86,11 @@ public class Institutions {
      * @param routingNumber Routing number for a financial institution. Either `routingNumber` or `name` is required.
      * @param limit Maximum results returned by a search.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public SearchInstitutionsResponse searchInstitutions(
             Optional<String> name, Optional<String> routingNumber,
-            Optional<Long> limit) throws Exception {
+            Optional<Long> limit) {
         SearchInstitutionsRequest request =
             SearchInstitutionsRequest
                 .builder()
@@ -125,9 +124,9 @@ public class Institutions {
      * you'll need to specify the `/fed.read` scope.
      * 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListInstitutionsResponse searchDirect() throws Exception {
+    public ListInstitutionsResponse searchDirect() {
         return search(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
@@ -144,11 +143,11 @@ public class Institutions {
      * @param state The state where a financial institution is based.
      * @param limit Maximum results returned by a search.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public ListInstitutionsResponse search(
             Optional<String> name, Optional<String> routingNumber,
-            Optional<String> state, Optional<Long> limit) throws Exception {
+            Optional<String> state, Optional<Long> limit) {
         ListInstitutionsRequest request =
             ListInstitutionsRequest
                 .builder()

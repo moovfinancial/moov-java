@@ -9,151 +9,209 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class RevokeTokenRequestError extends RuntimeException {
+public class RevokeTokenRequestError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("token")
-    private Optional<String> token;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("token_type_hint")
-    private Optional<String> tokenTypeHint;
-
-    @JsonCreator
     public RevokeTokenRequestError(
-            @JsonProperty("token") Optional<String> token,
-            @JsonProperty("token_type_hint") Optional<String> tokenTypeHint) {
-        super("API error occurred");
-        Utils.checkNotNull(token, "token");
-        Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
-        this.token = token;
-        this.tokenTypeHint = tokenTypeHint;
-    }
-    
-    public RevokeTokenRequestError() {
-        this(Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of RevokeTokenRequestError. If deserialization of the response body fails,
+    * the resulting RevokeTokenRequestError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static RevokeTokenRequestError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new RevokeTokenRequestError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new RevokeTokenRequestError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> token() {
-        return token;
+        return data().flatMap(Data::token);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> tokenTypeHint() {
-        return tokenTypeHint;
+        return data().flatMap(Data::tokenTypeHint);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public RevokeTokenRequestError withToken(String token) {
-        Utils.checkNotNull(token, "token");
-        this.token = Optional.ofNullable(token);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public RevokeTokenRequestError withToken(Optional<String> token) {
-        Utils.checkNotNull(token, "token");
-        this.token = token;
-        return this;
-    }
-
-    public RevokeTokenRequestError withTokenTypeHint(String tokenTypeHint) {
-        Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
-        this.tokenTypeHint = Optional.ofNullable(tokenTypeHint);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("token")
+        private Optional<String> token;
 
 
-    public RevokeTokenRequestError withTokenTypeHint(Optional<String> tokenTypeHint) {
-        Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
-        this.tokenTypeHint = tokenTypeHint;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("token_type_hint")
+        private Optional<String> tokenTypeHint;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("token") Optional<String> token,
+                @JsonProperty("token_type_hint") Optional<String> tokenTypeHint) {
+            Utils.checkNotNull(token, "token");
+            Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
+            this.token = token;
+            this.tokenTypeHint = tokenTypeHint;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty());
         }
-        RevokeTokenRequestError other = (RevokeTokenRequestError) o;
-        return 
-            Utils.enhancedDeepEquals(this.token, other.token) &&
-            Utils.enhancedDeepEquals(this.tokenTypeHint, other.tokenTypeHint);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            token, tokenTypeHint);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(RevokeTokenRequestError.class,
-                "token", token,
-                "tokenTypeHint", tokenTypeHint);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> token() {
+            return token;
+        }
 
-        private Optional<String> token = Optional.empty();
+        @JsonIgnore
+        public Optional<String> tokenTypeHint() {
+            return tokenTypeHint;
+        }
 
-        private Optional<String> tokenTypeHint = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder token(String token) {
+        public Data withToken(String token) {
             Utils.checkNotNull(token, "token");
             this.token = Optional.ofNullable(token);
             return this;
         }
 
-        public Builder token(Optional<String> token) {
+
+        public Data withToken(Optional<String> token) {
             Utils.checkNotNull(token, "token");
             this.token = token;
             return this;
         }
 
-
-        public Builder tokenTypeHint(String tokenTypeHint) {
+        public Data withTokenTypeHint(String tokenTypeHint) {
             Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
             this.tokenTypeHint = Optional.ofNullable(tokenTypeHint);
             return this;
         }
 
-        public Builder tokenTypeHint(Optional<String> tokenTypeHint) {
+
+        public Data withTokenTypeHint(Optional<String> tokenTypeHint) {
             Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
             this.tokenTypeHint = tokenTypeHint;
             return this;
         }
 
-        public RevokeTokenRequestError build() {
-
-            return new RevokeTokenRequestError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.token, other.token) &&
+                Utils.enhancedDeepEquals(this.tokenTypeHint, other.tokenTypeHint);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 token, tokenTypeHint);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "token", token,
+                    "tokenTypeHint", tokenTypeHint);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> token = Optional.empty();
+
+            private Optional<String> tokenTypeHint = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder token(String token) {
+                Utils.checkNotNull(token, "token");
+                this.token = Optional.ofNullable(token);
+                return this;
+            }
+
+            public Builder token(Optional<String> token) {
+                Utils.checkNotNull(token, "token");
+                this.token = token;
+                return this;
+            }
+
+
+            public Builder tokenTypeHint(String tokenTypeHint) {
+                Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
+                this.tokenTypeHint = Optional.ofNullable(tokenTypeHint);
+                return this;
+            }
+
+            public Builder tokenTypeHint(Optional<String> tokenTypeHint) {
+                Utils.checkNotNull(tokenTypeHint, "tokenTypeHint");
+                this.tokenTypeHint = tokenTypeHint;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    token, tokenTypeHint);
+            }
+
+        }
     }
+
 }
 

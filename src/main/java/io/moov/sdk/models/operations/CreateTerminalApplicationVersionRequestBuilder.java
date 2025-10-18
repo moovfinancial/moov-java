@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.TerminalApplicationVersion;
 import io.moov.sdk.operations.CreateTerminalApplicationVersion;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class CreateTerminalApplicationVersionRequestBuilder {
@@ -45,7 +44,7 @@ public class CreateTerminalApplicationVersionRequestBuilder {
         return request;
     }
 
-    public CreateTerminalApplicationVersionResponse call() throws Exception {
+    public CreateTerminalApplicationVersionResponse call() {
         
         RequestOperation<CreateTerminalApplicationVersionRequest, CreateTerminalApplicationVersionResponse> operation
               = new CreateTerminalApplicationVersion.Sync(sdkConfiguration, _headers);

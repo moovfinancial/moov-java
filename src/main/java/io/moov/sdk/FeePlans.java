@@ -35,7 +35,6 @@ import io.moov.sdk.operations.ListPartnerPricing;
 import io.moov.sdk.operations.ListPartnerPricingAgreements;
 import io.moov.sdk.operations.RetrieveFees;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.List;
 import java.util.Optional;
@@ -71,9 +70,9 @@ public class FeePlans {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListFeePlanAgreementsResponse listFeePlanAgreements(ListFeePlanAgreementsRequest request) throws Exception {
+    public ListFeePlanAgreementsResponse listFeePlanAgreements(ListFeePlanAgreementsRequest request) {
         RequestOperation<ListFeePlanAgreementsRequest, ListFeePlanAgreementsResponse> operation
               = new ListFeePlanAgreements.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -104,9 +103,9 @@ public class FeePlans {
      * @param accountID 
      * @param createFeePlanAgreement 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateFeePlanAgreementsResponse createFeePlanAgreements(String accountID, CreateFeePlanAgreement createFeePlanAgreement) throws Exception {
+    public CreateFeePlanAgreementsResponse createFeePlanAgreements(String accountID, CreateFeePlanAgreement createFeePlanAgreement) {
         CreateFeePlanAgreementsRequest request =
             CreateFeePlanAgreementsRequest
                 .builder()
@@ -142,9 +141,9 @@ public class FeePlans {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListFeePlansResponse listFeePlans(String accountID) throws Exception {
+    public ListFeePlansResponse listFeePlans(String accountID) {
         return listFeePlans(accountID, Optional.empty());
     }
 
@@ -159,9 +158,9 @@ public class FeePlans {
      * @param accountID 
      * @param planIDs A comma-separated list of plan IDs to filter the results by.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListFeePlansResponse listFeePlans(String accountID, Optional<? extends List<String>> planIDs) throws Exception {
+    public ListFeePlansResponse listFeePlans(String accountID, Optional<? extends List<String>> planIDs) {
         ListFeePlansRequest request =
             ListFeePlansRequest
                 .builder()
@@ -195,9 +194,9 @@ public class FeePlans {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public RetrieveFeesResponse retrieveFees(RetrieveFeesRequest request) throws Exception {
+    public RetrieveFeesResponse retrieveFees(RetrieveFeesRequest request) {
         RequestOperation<RetrieveFeesRequest, RetrieveFeesResponse> operation
               = new RetrieveFees.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -225,9 +224,9 @@ public class FeePlans {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListFeesFetchResponse listFeesFetch(String accountID) throws Exception {
+    public ListFeesFetchResponse listFeesFetch(String accountID) {
         return listFeesFetch(accountID, Optional.empty());
     }
 
@@ -241,9 +240,9 @@ public class FeePlans {
      * @param accountID 
      * @param listFeesFetchRequest Array of fee IDs to fetch.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListFeesFetchResponse listFeesFetch(String accountID, Optional<? extends ListFeesFetchRequest> listFeesFetchRequest) throws Exception {
+    public ListFeesFetchResponse listFeesFetch(String accountID, Optional<? extends ListFeesFetchRequest> listFeesFetchRequest) {
         io.moov.sdk.models.operations.ListFeesFetchRequest request =
             io.moov.sdk.models.operations.ListFeesFetchRequest
                 .builder()
@@ -277,9 +276,9 @@ public class FeePlans {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListPartnerPricingResponse listPartnerPricing(String accountID) throws Exception {
+    public ListPartnerPricingResponse listPartnerPricing(String accountID) {
         return listPartnerPricing(accountID, Optional.empty());
     }
 
@@ -293,9 +292,9 @@ public class FeePlans {
      * @param accountID 
      * @param planIDs A comma-separated list of plan IDs to filter the results by.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListPartnerPricingResponse listPartnerPricing(String accountID, Optional<? extends List<String>> planIDs) throws Exception {
+    public ListPartnerPricingResponse listPartnerPricing(String accountID, Optional<? extends List<String>> planIDs) {
         ListPartnerPricingRequest request =
             ListPartnerPricingRequest
                 .builder()
@@ -329,9 +328,9 @@ public class FeePlans {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(ListPartnerPricingAgreementsRequest request) throws Exception {
+    public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(ListPartnerPricingAgreementsRequest request) {
         RequestOperation<ListPartnerPricingAgreementsRequest, ListPartnerPricingAgreementsResponse> operation
               = new ListPartnerPricingAgreements.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));

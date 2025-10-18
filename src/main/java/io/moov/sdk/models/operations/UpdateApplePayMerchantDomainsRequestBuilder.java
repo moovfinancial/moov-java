@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateApplePayMerchantDomains;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class UpdateApplePayMerchantDomainsRequestBuilder {
@@ -44,7 +43,7 @@ public class UpdateApplePayMerchantDomainsRequestBuilder {
         return request;
     }
 
-    public UpdateApplePayMerchantDomainsResponse call() throws Exception {
+    public UpdateApplePayMerchantDomainsResponse call() {
         
         RequestOperation<UpdateApplePayMerchantDomainsRequest, UpdateApplePayMerchantDomainsResponse> operation
               = new io.moov.sdk.operations.UpdateApplePayMerchantDomains.Sync(sdkConfiguration, _headers);

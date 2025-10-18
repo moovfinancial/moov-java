@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetAccountTerminalApplication;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetAccountTerminalApplicationRequestBuilder {
@@ -44,7 +43,7 @@ public class GetAccountTerminalApplicationRequestBuilder {
         return request;
     }
 
-    public GetAccountTerminalApplicationResponse call() throws Exception {
+    public GetAccountTerminalApplicationResponse call() {
         
         RequestOperation<GetAccountTerminalApplicationRequest, GetAccountTerminalApplicationResponse> operation
               = new GetAccountTerminalApplication.Sync(sdkConfiguration, _headers);

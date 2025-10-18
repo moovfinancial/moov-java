@@ -26,7 +26,6 @@ import io.moov.sdk.operations.ListIssuedCardAuthorizationEvents;
 import io.moov.sdk.operations.ListIssuedCardAuthorizations;
 import io.moov.sdk.operations.ListIssuedCardTransactions;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -62,9 +61,9 @@ public class IssuingTransactions {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListIssuedCardAuthorizationsResponse listAuthorizations(ListIssuedCardAuthorizationsRequest request) throws Exception {
+    public ListIssuedCardAuthorizationsResponse listAuthorizations(ListIssuedCardAuthorizationsRequest request) {
         RequestOperation<ListIssuedCardAuthorizationsRequest, ListIssuedCardAuthorizationsResponse> operation
               = new ListIssuedCardAuthorizations.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -93,9 +92,9 @@ public class IssuingTransactions {
      * @param accountID The Moov business account for which cards have been issued.
      * @param authorizationID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetIssuedCardAuthorizationResponse getAuthorization(String accountID, String authorizationID) throws Exception {
+    public GetIssuedCardAuthorizationResponse getAuthorization(String accountID, String authorizationID) {
         GetIssuedCardAuthorizationRequest request =
             GetIssuedCardAuthorizationRequest
                 .builder()
@@ -132,9 +131,9 @@ public class IssuingTransactions {
      * @param accountID The Moov business account for which cards have been issued.
      * @param authorizationID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(String accountID, String authorizationID) throws Exception {
+    public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(String accountID, String authorizationID) {
         return listAuthorizationEvents(accountID, authorizationID, Optional.empty(),
             Optional.empty());
     }
@@ -152,11 +151,11 @@ public class IssuingTransactions {
      * @param skip 
      * @param count 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public ListIssuedCardAuthorizationEventsResponse listAuthorizationEvents(
             String accountID, String authorizationID,
-            Optional<Long> skip, Optional<Long> count) throws Exception {
+            Optional<Long> skip, Optional<Long> count) {
         ListIssuedCardAuthorizationEventsRequest request =
             ListIssuedCardAuthorizationEventsRequest
                 .builder()
@@ -192,9 +191,9 @@ public class IssuingTransactions {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListIssuedCardTransactionsResponse list(ListIssuedCardTransactionsRequest request) throws Exception {
+    public ListIssuedCardTransactionsResponse list(ListIssuedCardTransactionsRequest request) {
         RequestOperation<ListIssuedCardTransactionsRequest, ListIssuedCardTransactionsResponse> operation
               = new ListIssuedCardTransactions.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -223,9 +222,9 @@ public class IssuingTransactions {
      * @param accountID The Moov business account for which cards have been issued.
      * @param cardTransactionID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetIssuedCardTransactionResponse get(String accountID, String cardTransactionID) throws Exception {
+    public GetIssuedCardTransactionResponse get(String accountID, String cardTransactionID) {
         GetIssuedCardTransactionRequest request =
             GetIssuedCardTransactionRequest
                 .builder()

@@ -43,7 +43,6 @@ import io.moov.sdk.operations.GetTermsOfServiceToken;
 import io.moov.sdk.operations.ListAccounts;
 import io.moov.sdk.operations.UpdateAccount;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -126,9 +125,9 @@ public class Accounts {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateAccountResponse create(CreateAccount request) throws Exception {
+    public CreateAccountResponse create(CreateAccount request) {
         RequestOperation<CreateAccount, CreateAccountResponse> operation
               = new io.moov.sdk.operations.CreateAccount.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -170,9 +169,9 @@ public class Accounts {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListAccountsResponse list(ListAccountsRequest request) throws Exception {
+    public ListAccountsResponse list(ListAccountsRequest request) {
         RequestOperation<ListAccountsRequest, ListAccountsResponse> operation
               = new ListAccounts.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -200,9 +199,9 @@ public class Accounts {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetAccountResponse get(String accountID) throws Exception {
+    public GetAccountResponse get(String accountID) {
         GetAccountRequest request =
             GetAccountRequest
                 .builder()
@@ -252,9 +251,9 @@ public class Accounts {
      * @param accountID 
      * @param patchAccount Describes the fields available when patching a Moov account.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public UpdateAccountResponse update(String accountID, PatchAccount patchAccount) throws Exception {
+    public UpdateAccountResponse update(String accountID, PatchAccount patchAccount) {
         UpdateAccountRequest request =
             UpdateAccountRequest
                 .builder()
@@ -296,9 +295,9 @@ public class Accounts {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public DisconnectAccountResponse disconnect(String accountID) throws Exception {
+    public DisconnectAccountResponse disconnect(String accountID) {
         DisconnectAccountRequest request =
             DisconnectAccountRequest
                 .builder()
@@ -331,9 +330,9 @@ public class Accounts {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetAccountCountriesResponse getCountries(String accountID) throws Exception {
+    public GetAccountCountriesResponse getCountries(String accountID) {
         GetAccountCountriesRequest request =
             GetAccountCountriesRequest
                 .builder()
@@ -371,9 +370,9 @@ public class Accounts {
      * @param accountID 
      * @param accountCountries The countries in which an account operates.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public AssignAccountCountriesResponse assignCountries(String accountID, AccountCountries accountCountries) throws Exception {
+    public AssignAccountCountriesResponse assignCountries(String accountID, AccountCountries accountCountries) {
         AssignAccountCountriesRequest request =
             AssignAccountCountriesRequest
                 .builder()
@@ -407,9 +406,9 @@ public class Accounts {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetMerchantProcessingAgreementResponse getMerchantProcessingAgreement(String accountID) throws Exception {
+    public GetMerchantProcessingAgreementResponse getMerchantProcessingAgreement(String accountID) {
         GetMerchantProcessingAgreementRequest request =
             GetMerchantProcessingAgreementRequest
                 .builder()
@@ -447,9 +446,9 @@ public class Accounts {
      * [documentation](https://docs.moov.io/guides/accounts/requirements/platform-agreement/).
      * 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetTermsOfServiceTokenResponse getTermsOfServiceTokenDirect() throws Exception {
+    public GetTermsOfServiceTokenResponse getTermsOfServiceTokenDirect() {
         return getTermsOfServiceToken(Optional.empty(), Optional.empty());
     }
 
@@ -466,9 +465,9 @@ public class Accounts {
      * @param origin Indicates the domain from which the request originated. Required if referer header is not present.
      * @param referer Specifies the URL of the resource from which the request originated. Required if origin header is not present.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetTermsOfServiceTokenResponse getTermsOfServiceToken(Optional<String> origin, Optional<String> referer) throws Exception {
+    public GetTermsOfServiceTokenResponse getTermsOfServiceToken(Optional<String> origin, Optional<String> referer) {
         GetTermsOfServiceTokenRequest request =
             GetTermsOfServiceTokenRequest
                 .builder()

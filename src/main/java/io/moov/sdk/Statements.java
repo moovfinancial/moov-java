@@ -14,7 +14,6 @@ import io.moov.sdk.models.operations.ListStatementsResponse;
 import io.moov.sdk.operations.GetStatement;
 import io.moov.sdk.operations.ListStatements;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -48,9 +47,9 @@ public class Statements {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListStatementsResponse list(ListStatementsRequest request) throws Exception {
+    public ListStatementsResponse list(ListStatementsRequest request) {
         RequestOperation<ListStatementsRequest, ListStatementsResponse> operation
               = new ListStatements.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -85,9 +84,9 @@ public class Statements {
      * @param accountID 
      * @param statementID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetStatementResponse get(String accountID, String statementID) throws Exception {
+    public GetStatementResponse get(String accountID, String statementID) {
         GetStatementRequest request =
             GetStatementRequest
                 .builder()

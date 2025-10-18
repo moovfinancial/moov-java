@@ -52,7 +52,6 @@ import io.moov.sdk.operations.ListRefunds;
 import io.moov.sdk.operations.ListTransfers;
 import io.moov.sdk.operations.UpdateTransfer;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -102,9 +101,9 @@ public class Transfers {
      * @param accountID The partner's Moov account ID.
      * @param createTransferOptions 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateTransferOptionsResponse generateOptions(String accountID, CreateTransferOptions createTransferOptions) throws Exception {
+    public CreateTransferOptionsResponse generateOptions(String accountID, CreateTransferOptions createTransferOptions) {
         CreateTransferOptionsRequest request =
             CreateTransferOptionsRequest
                 .builder()
@@ -146,11 +145,11 @@ public class Transfers {
      * @param accountID Your Moov account ID.
      * @param createTransfer 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public CreateTransferResponse create(
             String xIdempotencyKey, String accountID,
-            CreateTransfer createTransfer) throws Exception {
+            CreateTransfer createTransfer) {
         return create(xIdempotencyKey, Optional.empty(), accountID,
             createTransfer);
     }
@@ -170,11 +169,11 @@ public class Transfers {
      * @param accountID Your Moov account ID.
      * @param createTransfer 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public CreateTransferResponse create(
             String xIdempotencyKey, Optional<? extends TransferWaitFor> xWaitFor,
-            String accountID, CreateTransfer createTransfer) throws Exception {
+            String accountID, CreateTransfer createTransfer) {
         CreateTransferRequest request =
             CreateTransferRequest
                 .builder()
@@ -234,9 +233,9 @@ public class Transfers {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListTransfersResponse list(ListTransfersRequest request) throws Exception {
+    public ListTransfersResponse list(ListTransfersRequest request) {
         RequestOperation<ListTransfersRequest, ListTransfersResponse> operation
               = new ListTransfers.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -273,9 +272,9 @@ public class Transfers {
      * @param transferID Identifier for the transfer.
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetTransferResponse get(String transferID, String accountID) throws Exception {
+    public GetTransferResponse get(String transferID, String accountID) {
         GetTransferRequest request =
             GetTransferRequest
                 .builder()
@@ -317,11 +316,11 @@ public class Transfers {
      * @param accountID 
      * @param patchTransfer 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateTransferResponse update(
             String transferID, String accountID,
-            PatchTransfer patchTransfer) throws Exception {
+            PatchTransfer patchTransfer) {
         UpdateTransferRequest request =
             UpdateTransferRequest
                 .builder()
@@ -357,9 +356,9 @@ public class Transfers {
      * @param accountID The partner's Moov account ID.
      * @param transferID The transfer ID to cancel.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateCancellationResponse createCancellation(String accountID, String transferID) throws Exception {
+    public CreateCancellationResponse createCancellation(String accountID, String transferID) {
         CreateCancellationRequest request =
             CreateCancellationRequest
                 .builder()
@@ -395,11 +394,11 @@ public class Transfers {
      * @param transferID Identifier for the transfer.
      * @param cancellationID Identifier for the cancellation.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public GetCancellationResponse getCancellation(
             String accountID, String transferID,
-            String cancellationID) throws Exception {
+            String cancellationID) {
         GetCancellationRequest request =
             GetCancellationRequest
                 .builder()
@@ -448,9 +447,9 @@ public class Transfers {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public InitiateRefundResponse initiateRefund(InitiateRefundRequest request) throws Exception {
+    public InitiateRefundResponse initiateRefund(InitiateRefundRequest request) {
         RequestOperation<InitiateRefundRequest, InitiateRefundResponse> operation
               = new InitiateRefund.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -479,9 +478,9 @@ public class Transfers {
      * @param accountID 
      * @param transferID Identifier for the transfer.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListRefundsResponse listRefunds(String accountID, String transferID) throws Exception {
+    public ListRefundsResponse listRefunds(String accountID, String transferID) {
         ListRefundsRequest request =
             ListRefundsRequest
                 .builder()
@@ -517,11 +516,11 @@ public class Transfers {
      * @param accountID 
      * @param refundID Identifier for the refund.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public GetRefundResponse getRefund(
             String transferID, String accountID,
-            String refundID) throws Exception {
+            String refundID) {
         GetRefundRequest request =
             GetRefundRequest
                 .builder()
@@ -564,11 +563,11 @@ public class Transfers {
      * @param accountID The Moov account ID.
      * @param transferID The transfer ID to reverse.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public CreateReversalResponse createReversal(
             String xIdempotencyKey, String accountID,
-            String transferID) throws Exception {
+            String transferID) {
         return createReversal(xIdempotencyKey, accountID, transferID,
             Optional.empty());
     }
@@ -588,11 +587,11 @@ public class Transfers {
      * @param transferID The transfer ID to reverse.
      * @param createReversal 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public CreateReversalResponse createReversal(
             String xIdempotencyKey, String accountID,
-            String transferID, Optional<? extends CreateReversal> createReversal) throws Exception {
+            String transferID, Optional<? extends CreateReversal> createReversal) {
         CreateReversalRequest request =
             CreateReversalRequest
                 .builder()

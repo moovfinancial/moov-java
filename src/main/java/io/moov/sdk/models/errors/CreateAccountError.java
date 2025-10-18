@@ -13,421 +13,509 @@ import io.moov.sdk.models.components.CreateProfileError;
 import io.moov.sdk.models.components.CustomerSupportError;
 import io.moov.sdk.models.components.TermsOfServiceError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class CreateAccountError extends RuntimeException {
+public class CreateAccountError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("accountType")
-    private Optional<String> accountType;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("profile")
-    private Optional<? extends CreateProfileError> profile;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("metadata")
-    private Optional<String> metadata;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("termsOfService")
-    private Optional<? extends TermsOfServiceError> termsOfService;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("foreignID")
-    private Optional<String> foreignID;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("customerSupport")
-    private Optional<? extends CustomerSupportError> customerSupport;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("settings")
-    private Optional<? extends CreateAccountSettings> settings;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("capabilities")
-    private Optional<? extends Map<String, String>> capabilities;
-
-    @JsonCreator
     public CreateAccountError(
-            @JsonProperty("accountType") Optional<String> accountType,
-            @JsonProperty("profile") Optional<? extends CreateProfileError> profile,
-            @JsonProperty("metadata") Optional<String> metadata,
-            @JsonProperty("termsOfService") Optional<? extends TermsOfServiceError> termsOfService,
-            @JsonProperty("foreignID") Optional<String> foreignID,
-            @JsonProperty("customerSupport") Optional<? extends CustomerSupportError> customerSupport,
-            @JsonProperty("settings") Optional<? extends CreateAccountSettings> settings,
-            @JsonProperty("capabilities") Optional<? extends Map<String, String>> capabilities) {
-        super("API error occurred");
-        Utils.checkNotNull(accountType, "accountType");
-        Utils.checkNotNull(profile, "profile");
-        Utils.checkNotNull(metadata, "metadata");
-        Utils.checkNotNull(termsOfService, "termsOfService");
-        Utils.checkNotNull(foreignID, "foreignID");
-        Utils.checkNotNull(customerSupport, "customerSupport");
-        Utils.checkNotNull(settings, "settings");
-        Utils.checkNotNull(capabilities, "capabilities");
-        this.accountType = accountType;
-        this.profile = profile;
-        this.metadata = metadata;
-        this.termsOfService = termsOfService;
-        this.foreignID = foreignID;
-        this.customerSupport = customerSupport;
-        this.settings = settings;
-        this.capabilities = capabilities;
-    }
-    
-    public CreateAccountError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of CreateAccountError. If deserialization of the response body fails,
+    * the resulting CreateAccountError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static CreateAccountError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new CreateAccountError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new CreateAccountError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> accountType() {
-        return accountType;
+        return data().flatMap(Data::accountType);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<CreateProfileError> profile() {
-        return (Optional<CreateProfileError>) profile;
+        return data().flatMap(Data::profile);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> metadata() {
-        return metadata;
+        return data().flatMap(Data::metadata);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<TermsOfServiceError> termsOfService() {
-        return (Optional<TermsOfServiceError>) termsOfService;
+        return data().flatMap(Data::termsOfService);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> foreignID() {
-        return foreignID;
+        return data().flatMap(Data::foreignID);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<CustomerSupportError> customerSupport() {
-        return (Optional<CustomerSupportError>) customerSupport;
+        return data().flatMap(Data::customerSupport);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<CreateAccountSettings> settings() {
-        return (Optional<CreateAccountSettings>) settings;
+        return data().flatMap(Data::settings);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<Map<String, String>> capabilities() {
-        return (Optional<Map<String, String>>) capabilities;
+        return data().flatMap(Data::capabilities);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public CreateAccountError withAccountType(String accountType) {
-        Utils.checkNotNull(accountType, "accountType");
-        this.accountType = Optional.ofNullable(accountType);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public CreateAccountError withAccountType(Optional<String> accountType) {
-        Utils.checkNotNull(accountType, "accountType");
-        this.accountType = accountType;
-        return this;
-    }
-
-    public CreateAccountError withProfile(CreateProfileError profile) {
-        Utils.checkNotNull(profile, "profile");
-        this.profile = Optional.ofNullable(profile);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("accountType")
+        private Optional<String> accountType;
 
 
-    public CreateAccountError withProfile(Optional<? extends CreateProfileError> profile) {
-        Utils.checkNotNull(profile, "profile");
-        this.profile = profile;
-        return this;
-    }
-
-    public CreateAccountError withMetadata(String metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = Optional.ofNullable(metadata);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("profile")
+        private Optional<? extends CreateProfileError> profile;
 
 
-    public CreateAccountError withMetadata(Optional<String> metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = metadata;
-        return this;
-    }
-
-    public CreateAccountError withTermsOfService(TermsOfServiceError termsOfService) {
-        Utils.checkNotNull(termsOfService, "termsOfService");
-        this.termsOfService = Optional.ofNullable(termsOfService);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("metadata")
+        private Optional<String> metadata;
 
 
-    public CreateAccountError withTermsOfService(Optional<? extends TermsOfServiceError> termsOfService) {
-        Utils.checkNotNull(termsOfService, "termsOfService");
-        this.termsOfService = termsOfService;
-        return this;
-    }
-
-    public CreateAccountError withForeignID(String foreignID) {
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.foreignID = Optional.ofNullable(foreignID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("termsOfService")
+        private Optional<? extends TermsOfServiceError> termsOfService;
 
 
-    public CreateAccountError withForeignID(Optional<String> foreignID) {
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.foreignID = foreignID;
-        return this;
-    }
-
-    public CreateAccountError withCustomerSupport(CustomerSupportError customerSupport) {
-        Utils.checkNotNull(customerSupport, "customerSupport");
-        this.customerSupport = Optional.ofNullable(customerSupport);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("foreignID")
+        private Optional<String> foreignID;
 
 
-    public CreateAccountError withCustomerSupport(Optional<? extends CustomerSupportError> customerSupport) {
-        Utils.checkNotNull(customerSupport, "customerSupport");
-        this.customerSupport = customerSupport;
-        return this;
-    }
-
-    public CreateAccountError withSettings(CreateAccountSettings settings) {
-        Utils.checkNotNull(settings, "settings");
-        this.settings = Optional.ofNullable(settings);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("customerSupport")
+        private Optional<? extends CustomerSupportError> customerSupport;
 
 
-    public CreateAccountError withSettings(Optional<? extends CreateAccountSettings> settings) {
-        Utils.checkNotNull(settings, "settings");
-        this.settings = settings;
-        return this;
-    }
-
-    public CreateAccountError withCapabilities(Map<String, String> capabilities) {
-        Utils.checkNotNull(capabilities, "capabilities");
-        this.capabilities = Optional.ofNullable(capabilities);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("settings")
+        private Optional<? extends CreateAccountSettings> settings;
 
 
-    public CreateAccountError withCapabilities(Optional<? extends Map<String, String>> capabilities) {
-        Utils.checkNotNull(capabilities, "capabilities");
-        this.capabilities = capabilities;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("capabilities")
+        private Optional<? extends Map<String, String>> capabilities;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("accountType") Optional<String> accountType,
+                @JsonProperty("profile") Optional<? extends CreateProfileError> profile,
+                @JsonProperty("metadata") Optional<String> metadata,
+                @JsonProperty("termsOfService") Optional<? extends TermsOfServiceError> termsOfService,
+                @JsonProperty("foreignID") Optional<String> foreignID,
+                @JsonProperty("customerSupport") Optional<? extends CustomerSupportError> customerSupport,
+                @JsonProperty("settings") Optional<? extends CreateAccountSettings> settings,
+                @JsonProperty("capabilities") Optional<? extends Map<String, String>> capabilities) {
+            Utils.checkNotNull(accountType, "accountType");
+            Utils.checkNotNull(profile, "profile");
+            Utils.checkNotNull(metadata, "metadata");
+            Utils.checkNotNull(termsOfService, "termsOfService");
+            Utils.checkNotNull(foreignID, "foreignID");
+            Utils.checkNotNull(customerSupport, "customerSupport");
+            Utils.checkNotNull(settings, "settings");
+            Utils.checkNotNull(capabilities, "capabilities");
+            this.accountType = accountType;
+            this.profile = profile;
+            this.metadata = metadata;
+            this.termsOfService = termsOfService;
+            this.foreignID = foreignID;
+            this.customerSupport = customerSupport;
+            this.settings = settings;
+            this.capabilities = capabilities;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        CreateAccountError other = (CreateAccountError) o;
-        return 
-            Utils.enhancedDeepEquals(this.accountType, other.accountType) &&
-            Utils.enhancedDeepEquals(this.profile, other.profile) &&
-            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.termsOfService, other.termsOfService) &&
-            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
-            Utils.enhancedDeepEquals(this.customerSupport, other.customerSupport) &&
-            Utils.enhancedDeepEquals(this.settings, other.settings) &&
-            Utils.enhancedDeepEquals(this.capabilities, other.capabilities);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            accountType, profile, metadata,
-            termsOfService, foreignID, customerSupport,
-            settings, capabilities);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(CreateAccountError.class,
-                "accountType", accountType,
-                "profile", profile,
-                "metadata", metadata,
-                "termsOfService", termsOfService,
-                "foreignID", foreignID,
-                "customerSupport", customerSupport,
-                "settings", settings,
-                "capabilities", capabilities);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> accountType() {
+            return accountType;
+        }
 
-        private Optional<String> accountType = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CreateProfileError> profile() {
+            return (Optional<CreateProfileError>) profile;
+        }
 
-        private Optional<? extends CreateProfileError> profile = Optional.empty();
+        @JsonIgnore
+        public Optional<String> metadata() {
+            return metadata;
+        }
 
-        private Optional<String> metadata = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<TermsOfServiceError> termsOfService() {
+            return (Optional<TermsOfServiceError>) termsOfService;
+        }
 
-        private Optional<? extends TermsOfServiceError> termsOfService = Optional.empty();
+        @JsonIgnore
+        public Optional<String> foreignID() {
+            return foreignID;
+        }
 
-        private Optional<String> foreignID = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CustomerSupportError> customerSupport() {
+            return (Optional<CustomerSupportError>) customerSupport;
+        }
 
-        private Optional<? extends CustomerSupportError> customerSupport = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CreateAccountSettings> settings() {
+            return (Optional<CreateAccountSettings>) settings;
+        }
 
-        private Optional<? extends CreateAccountSettings> settings = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<Map<String, String>> capabilities() {
+            return (Optional<Map<String, String>>) capabilities;
+        }
 
-        private Optional<? extends Map<String, String>> capabilities = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder accountType(String accountType) {
+        public Data withAccountType(String accountType) {
             Utils.checkNotNull(accountType, "accountType");
             this.accountType = Optional.ofNullable(accountType);
             return this;
         }
 
-        public Builder accountType(Optional<String> accountType) {
+
+        public Data withAccountType(Optional<String> accountType) {
             Utils.checkNotNull(accountType, "accountType");
             this.accountType = accountType;
             return this;
         }
 
-
-        public Builder profile(CreateProfileError profile) {
+        public Data withProfile(CreateProfileError profile) {
             Utils.checkNotNull(profile, "profile");
             this.profile = Optional.ofNullable(profile);
             return this;
         }
 
-        public Builder profile(Optional<? extends CreateProfileError> profile) {
+
+        public Data withProfile(Optional<? extends CreateProfileError> profile) {
             Utils.checkNotNull(profile, "profile");
             this.profile = profile;
             return this;
         }
 
-
-        public Builder metadata(String metadata) {
+        public Data withMetadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
-        public Builder metadata(Optional<String> metadata) {
+
+        public Data withMetadata(Optional<String> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;
         }
 
-
-        public Builder termsOfService(TermsOfServiceError termsOfService) {
+        public Data withTermsOfService(TermsOfServiceError termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
             this.termsOfService = Optional.ofNullable(termsOfService);
             return this;
         }
 
-        public Builder termsOfService(Optional<? extends TermsOfServiceError> termsOfService) {
+
+        public Data withTermsOfService(Optional<? extends TermsOfServiceError> termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
             this.termsOfService = termsOfService;
             return this;
         }
 
-
-        public Builder foreignID(String foreignID) {
+        public Data withForeignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = Optional.ofNullable(foreignID);
             return this;
         }
 
-        public Builder foreignID(Optional<String> foreignID) {
+
+        public Data withForeignID(Optional<String> foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = foreignID;
             return this;
         }
 
-
-        public Builder customerSupport(CustomerSupportError customerSupport) {
+        public Data withCustomerSupport(CustomerSupportError customerSupport) {
             Utils.checkNotNull(customerSupport, "customerSupport");
             this.customerSupport = Optional.ofNullable(customerSupport);
             return this;
         }
 
-        public Builder customerSupport(Optional<? extends CustomerSupportError> customerSupport) {
+
+        public Data withCustomerSupport(Optional<? extends CustomerSupportError> customerSupport) {
             Utils.checkNotNull(customerSupport, "customerSupport");
             this.customerSupport = customerSupport;
             return this;
         }
 
-
-        public Builder settings(CreateAccountSettings settings) {
+        public Data withSettings(CreateAccountSettings settings) {
             Utils.checkNotNull(settings, "settings");
             this.settings = Optional.ofNullable(settings);
             return this;
         }
 
-        public Builder settings(Optional<? extends CreateAccountSettings> settings) {
+
+        public Data withSettings(Optional<? extends CreateAccountSettings> settings) {
             Utils.checkNotNull(settings, "settings");
             this.settings = settings;
             return this;
         }
 
-
-        public Builder capabilities(Map<String, String> capabilities) {
+        public Data withCapabilities(Map<String, String> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = Optional.ofNullable(capabilities);
             return this;
         }
 
-        public Builder capabilities(Optional<? extends Map<String, String>> capabilities) {
+
+        public Data withCapabilities(Optional<? extends Map<String, String>> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = capabilities;
             return this;
         }
 
-        public CreateAccountError build() {
-
-            return new CreateAccountError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.accountType, other.accountType) &&
+                Utils.enhancedDeepEquals(this.profile, other.profile) &&
+                Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+                Utils.enhancedDeepEquals(this.termsOfService, other.termsOfService) &&
+                Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+                Utils.enhancedDeepEquals(this.customerSupport, other.customerSupport) &&
+                Utils.enhancedDeepEquals(this.settings, other.settings) &&
+                Utils.enhancedDeepEquals(this.capabilities, other.capabilities);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 accountType, profile, metadata,
                 termsOfService, foreignID, customerSupport,
                 settings, capabilities);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "accountType", accountType,
+                    "profile", profile,
+                    "metadata", metadata,
+                    "termsOfService", termsOfService,
+                    "foreignID", foreignID,
+                    "customerSupport", customerSupport,
+                    "settings", settings,
+                    "capabilities", capabilities);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> accountType = Optional.empty();
+
+            private Optional<? extends CreateProfileError> profile = Optional.empty();
+
+            private Optional<String> metadata = Optional.empty();
+
+            private Optional<? extends TermsOfServiceError> termsOfService = Optional.empty();
+
+            private Optional<String> foreignID = Optional.empty();
+
+            private Optional<? extends CustomerSupportError> customerSupport = Optional.empty();
+
+            private Optional<? extends CreateAccountSettings> settings = Optional.empty();
+
+            private Optional<? extends Map<String, String>> capabilities = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder accountType(String accountType) {
+                Utils.checkNotNull(accountType, "accountType");
+                this.accountType = Optional.ofNullable(accountType);
+                return this;
+            }
+
+            public Builder accountType(Optional<String> accountType) {
+                Utils.checkNotNull(accountType, "accountType");
+                this.accountType = accountType;
+                return this;
+            }
+
+
+            public Builder profile(CreateProfileError profile) {
+                Utils.checkNotNull(profile, "profile");
+                this.profile = Optional.ofNullable(profile);
+                return this;
+            }
+
+            public Builder profile(Optional<? extends CreateProfileError> profile) {
+                Utils.checkNotNull(profile, "profile");
+                this.profile = profile;
+                return this;
+            }
+
+
+            public Builder metadata(String metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = Optional.ofNullable(metadata);
+                return this;
+            }
+
+            public Builder metadata(Optional<String> metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = metadata;
+                return this;
+            }
+
+
+            public Builder termsOfService(TermsOfServiceError termsOfService) {
+                Utils.checkNotNull(termsOfService, "termsOfService");
+                this.termsOfService = Optional.ofNullable(termsOfService);
+                return this;
+            }
+
+            public Builder termsOfService(Optional<? extends TermsOfServiceError> termsOfService) {
+                Utils.checkNotNull(termsOfService, "termsOfService");
+                this.termsOfService = termsOfService;
+                return this;
+            }
+
+
+            public Builder foreignID(String foreignID) {
+                Utils.checkNotNull(foreignID, "foreignID");
+                this.foreignID = Optional.ofNullable(foreignID);
+                return this;
+            }
+
+            public Builder foreignID(Optional<String> foreignID) {
+                Utils.checkNotNull(foreignID, "foreignID");
+                this.foreignID = foreignID;
+                return this;
+            }
+
+
+            public Builder customerSupport(CustomerSupportError customerSupport) {
+                Utils.checkNotNull(customerSupport, "customerSupport");
+                this.customerSupport = Optional.ofNullable(customerSupport);
+                return this;
+            }
+
+            public Builder customerSupport(Optional<? extends CustomerSupportError> customerSupport) {
+                Utils.checkNotNull(customerSupport, "customerSupport");
+                this.customerSupport = customerSupport;
+                return this;
+            }
+
+
+            public Builder settings(CreateAccountSettings settings) {
+                Utils.checkNotNull(settings, "settings");
+                this.settings = Optional.ofNullable(settings);
+                return this;
+            }
+
+            public Builder settings(Optional<? extends CreateAccountSettings> settings) {
+                Utils.checkNotNull(settings, "settings");
+                this.settings = settings;
+                return this;
+            }
+
+
+            public Builder capabilities(Map<String, String> capabilities) {
+                Utils.checkNotNull(capabilities, "capabilities");
+                this.capabilities = Optional.ofNullable(capabilities);
+                return this;
+            }
+
+            public Builder capabilities(Optional<? extends Map<String, String>> capabilities) {
+                Utils.checkNotNull(capabilities, "capabilities");
+                this.capabilities = capabilities;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    accountType, profile, metadata,
+                    termsOfService, foreignID, customerSupport,
+                    settings, capabilities);
+            }
+
+        }
     }
+
 }
 

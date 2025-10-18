@@ -9,636 +9,749 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class ListWalletTransactionsValidationError extends RuntimeException {
+public class ListWalletTransactionsValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("transactionType")
-    private Optional<String> transactionType;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("transactionTypes")
-    private Optional<String> transactionTypes;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("sourceType")
-    private Optional<String> sourceType;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("sourceID")
-    private Optional<String> sourceID;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("status")
-    private Optional<String> status;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("sweepID")
-    private Optional<String> sweepID;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("createdStartDateTime")
-    private Optional<String> createdStartDateTime;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("createdEndDateTime")
-    private Optional<String> createdEndDateTime;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("completedStartDateTime")
-    private Optional<String> completedStartDateTime;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("completedEndDateTime")
-    private Optional<String> completedEndDateTime;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("statementDescriptor")
-    private Optional<String> statementDescriptor;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("skip")
-    private Optional<String> skip;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("count")
-    private Optional<String> count;
-
-    @JsonCreator
     public ListWalletTransactionsValidationError(
-            @JsonProperty("transactionType") Optional<String> transactionType,
-            @JsonProperty("transactionTypes") Optional<String> transactionTypes,
-            @JsonProperty("sourceType") Optional<String> sourceType,
-            @JsonProperty("sourceID") Optional<String> sourceID,
-            @JsonProperty("status") Optional<String> status,
-            @JsonProperty("sweepID") Optional<String> sweepID,
-            @JsonProperty("createdStartDateTime") Optional<String> createdStartDateTime,
-            @JsonProperty("createdEndDateTime") Optional<String> createdEndDateTime,
-            @JsonProperty("completedStartDateTime") Optional<String> completedStartDateTime,
-            @JsonProperty("completedEndDateTime") Optional<String> completedEndDateTime,
-            @JsonProperty("statementDescriptor") Optional<String> statementDescriptor,
-            @JsonProperty("skip") Optional<String> skip,
-            @JsonProperty("count") Optional<String> count) {
-        super("API error occurred");
-        Utils.checkNotNull(transactionType, "transactionType");
-        Utils.checkNotNull(transactionTypes, "transactionTypes");
-        Utils.checkNotNull(sourceType, "sourceType");
-        Utils.checkNotNull(sourceID, "sourceID");
-        Utils.checkNotNull(status, "status");
-        Utils.checkNotNull(sweepID, "sweepID");
-        Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
-        Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
-        Utils.checkNotNull(completedStartDateTime, "completedStartDateTime");
-        Utils.checkNotNull(completedEndDateTime, "completedEndDateTime");
-        Utils.checkNotNull(statementDescriptor, "statementDescriptor");
-        Utils.checkNotNull(skip, "skip");
-        Utils.checkNotNull(count, "count");
-        this.transactionType = transactionType;
-        this.transactionTypes = transactionTypes;
-        this.sourceType = sourceType;
-        this.sourceID = sourceID;
-        this.status = status;
-        this.sweepID = sweepID;
-        this.createdStartDateTime = createdStartDateTime;
-        this.createdEndDateTime = createdEndDateTime;
-        this.completedStartDateTime = completedStartDateTime;
-        this.completedEndDateTime = completedEndDateTime;
-        this.statementDescriptor = statementDescriptor;
-        this.skip = skip;
-        this.count = count;
-    }
-    
-    public ListWalletTransactionsValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of ListWalletTransactionsValidationError. If deserialization of the response body fails,
+    * the resulting ListWalletTransactionsValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static ListWalletTransactionsValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new ListWalletTransactionsValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new ListWalletTransactionsValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> transactionType() {
-        return transactionType;
+        return data().flatMap(Data::transactionType);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> transactionTypes() {
-        return transactionTypes;
+        return data().flatMap(Data::transactionTypes);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> sourceType() {
-        return sourceType;
+        return data().flatMap(Data::sourceType);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> sourceID() {
-        return sourceID;
+        return data().flatMap(Data::sourceID);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> status() {
-        return status;
+        return data().flatMap(Data::status);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> sweepID() {
-        return sweepID;
+        return data().flatMap(Data::sweepID);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> createdStartDateTime() {
-        return createdStartDateTime;
+        return data().flatMap(Data::createdStartDateTime);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> createdEndDateTime() {
-        return createdEndDateTime;
+        return data().flatMap(Data::createdEndDateTime);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> completedStartDateTime() {
-        return completedStartDateTime;
+        return data().flatMap(Data::completedStartDateTime);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> completedEndDateTime() {
-        return completedEndDateTime;
+        return data().flatMap(Data::completedEndDateTime);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> statementDescriptor() {
-        return statementDescriptor;
+        return data().flatMap(Data::statementDescriptor);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> skip() {
-        return skip;
+        return data().flatMap(Data::skip);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> count() {
-        return count;
+        return data().flatMap(Data::count);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public ListWalletTransactionsValidationError withTransactionType(String transactionType) {
-        Utils.checkNotNull(transactionType, "transactionType");
-        this.transactionType = Optional.ofNullable(transactionType);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public ListWalletTransactionsValidationError withTransactionType(Optional<String> transactionType) {
-        Utils.checkNotNull(transactionType, "transactionType");
-        this.transactionType = transactionType;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withTransactionTypes(String transactionTypes) {
-        Utils.checkNotNull(transactionTypes, "transactionTypes");
-        this.transactionTypes = Optional.ofNullable(transactionTypes);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("transactionType")
+        private Optional<String> transactionType;
 
 
-    public ListWalletTransactionsValidationError withTransactionTypes(Optional<String> transactionTypes) {
-        Utils.checkNotNull(transactionTypes, "transactionTypes");
-        this.transactionTypes = transactionTypes;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withSourceType(String sourceType) {
-        Utils.checkNotNull(sourceType, "sourceType");
-        this.sourceType = Optional.ofNullable(sourceType);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("transactionTypes")
+        private Optional<String> transactionTypes;
 
 
-    public ListWalletTransactionsValidationError withSourceType(Optional<String> sourceType) {
-        Utils.checkNotNull(sourceType, "sourceType");
-        this.sourceType = sourceType;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withSourceID(String sourceID) {
-        Utils.checkNotNull(sourceID, "sourceID");
-        this.sourceID = Optional.ofNullable(sourceID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("sourceType")
+        private Optional<String> sourceType;
 
 
-    public ListWalletTransactionsValidationError withSourceID(Optional<String> sourceID) {
-        Utils.checkNotNull(sourceID, "sourceID");
-        this.sourceID = sourceID;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withStatus(String status) {
-        Utils.checkNotNull(status, "status");
-        this.status = Optional.ofNullable(status);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("sourceID")
+        private Optional<String> sourceID;
 
 
-    public ListWalletTransactionsValidationError withStatus(Optional<String> status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withSweepID(String sweepID) {
-        Utils.checkNotNull(sweepID, "sweepID");
-        this.sweepID = Optional.ofNullable(sweepID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("status")
+        private Optional<String> status;
 
 
-    public ListWalletTransactionsValidationError withSweepID(Optional<String> sweepID) {
-        Utils.checkNotNull(sweepID, "sweepID");
-        this.sweepID = sweepID;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withCreatedStartDateTime(String createdStartDateTime) {
-        Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
-        this.createdStartDateTime = Optional.ofNullable(createdStartDateTime);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("sweepID")
+        private Optional<String> sweepID;
 
 
-    public ListWalletTransactionsValidationError withCreatedStartDateTime(Optional<String> createdStartDateTime) {
-        Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
-        this.createdStartDateTime = createdStartDateTime;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withCreatedEndDateTime(String createdEndDateTime) {
-        Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
-        this.createdEndDateTime = Optional.ofNullable(createdEndDateTime);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("createdStartDateTime")
+        private Optional<String> createdStartDateTime;
 
 
-    public ListWalletTransactionsValidationError withCreatedEndDateTime(Optional<String> createdEndDateTime) {
-        Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
-        this.createdEndDateTime = createdEndDateTime;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withCompletedStartDateTime(String completedStartDateTime) {
-        Utils.checkNotNull(completedStartDateTime, "completedStartDateTime");
-        this.completedStartDateTime = Optional.ofNullable(completedStartDateTime);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("createdEndDateTime")
+        private Optional<String> createdEndDateTime;
 
 
-    public ListWalletTransactionsValidationError withCompletedStartDateTime(Optional<String> completedStartDateTime) {
-        Utils.checkNotNull(completedStartDateTime, "completedStartDateTime");
-        this.completedStartDateTime = completedStartDateTime;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withCompletedEndDateTime(String completedEndDateTime) {
-        Utils.checkNotNull(completedEndDateTime, "completedEndDateTime");
-        this.completedEndDateTime = Optional.ofNullable(completedEndDateTime);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("completedStartDateTime")
+        private Optional<String> completedStartDateTime;
 
 
-    public ListWalletTransactionsValidationError withCompletedEndDateTime(Optional<String> completedEndDateTime) {
-        Utils.checkNotNull(completedEndDateTime, "completedEndDateTime");
-        this.completedEndDateTime = completedEndDateTime;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withStatementDescriptor(String statementDescriptor) {
-        Utils.checkNotNull(statementDescriptor, "statementDescriptor");
-        this.statementDescriptor = Optional.ofNullable(statementDescriptor);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("completedEndDateTime")
+        private Optional<String> completedEndDateTime;
 
 
-    public ListWalletTransactionsValidationError withStatementDescriptor(Optional<String> statementDescriptor) {
-        Utils.checkNotNull(statementDescriptor, "statementDescriptor");
-        this.statementDescriptor = statementDescriptor;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withSkip(String skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = Optional.ofNullable(skip);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("statementDescriptor")
+        private Optional<String> statementDescriptor;
 
 
-    public ListWalletTransactionsValidationError withSkip(Optional<String> skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = skip;
-        return this;
-    }
-
-    public ListWalletTransactionsValidationError withCount(String count) {
-        Utils.checkNotNull(count, "count");
-        this.count = Optional.ofNullable(count);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("skip")
+        private Optional<String> skip;
 
 
-    public ListWalletTransactionsValidationError withCount(Optional<String> count) {
-        Utils.checkNotNull(count, "count");
-        this.count = count;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("count")
+        private Optional<String> count;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("transactionType") Optional<String> transactionType,
+                @JsonProperty("transactionTypes") Optional<String> transactionTypes,
+                @JsonProperty("sourceType") Optional<String> sourceType,
+                @JsonProperty("sourceID") Optional<String> sourceID,
+                @JsonProperty("status") Optional<String> status,
+                @JsonProperty("sweepID") Optional<String> sweepID,
+                @JsonProperty("createdStartDateTime") Optional<String> createdStartDateTime,
+                @JsonProperty("createdEndDateTime") Optional<String> createdEndDateTime,
+                @JsonProperty("completedStartDateTime") Optional<String> completedStartDateTime,
+                @JsonProperty("completedEndDateTime") Optional<String> completedEndDateTime,
+                @JsonProperty("statementDescriptor") Optional<String> statementDescriptor,
+                @JsonProperty("skip") Optional<String> skip,
+                @JsonProperty("count") Optional<String> count) {
+            Utils.checkNotNull(transactionType, "transactionType");
+            Utils.checkNotNull(transactionTypes, "transactionTypes");
+            Utils.checkNotNull(sourceType, "sourceType");
+            Utils.checkNotNull(sourceID, "sourceID");
+            Utils.checkNotNull(status, "status");
+            Utils.checkNotNull(sweepID, "sweepID");
+            Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+            Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+            Utils.checkNotNull(completedStartDateTime, "completedStartDateTime");
+            Utils.checkNotNull(completedEndDateTime, "completedEndDateTime");
+            Utils.checkNotNull(statementDescriptor, "statementDescriptor");
+            Utils.checkNotNull(skip, "skip");
+            Utils.checkNotNull(count, "count");
+            this.transactionType = transactionType;
+            this.transactionTypes = transactionTypes;
+            this.sourceType = sourceType;
+            this.sourceID = sourceID;
+            this.status = status;
+            this.sweepID = sweepID;
+            this.createdStartDateTime = createdStartDateTime;
+            this.createdEndDateTime = createdEndDateTime;
+            this.completedStartDateTime = completedStartDateTime;
+            this.completedEndDateTime = completedEndDateTime;
+            this.statementDescriptor = statementDescriptor;
+            this.skip = skip;
+            this.count = count;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
-        ListWalletTransactionsValidationError other = (ListWalletTransactionsValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.transactionType, other.transactionType) &&
-            Utils.enhancedDeepEquals(this.transactionTypes, other.transactionTypes) &&
-            Utils.enhancedDeepEquals(this.sourceType, other.sourceType) &&
-            Utils.enhancedDeepEquals(this.sourceID, other.sourceID) &&
-            Utils.enhancedDeepEquals(this.status, other.status) &&
-            Utils.enhancedDeepEquals(this.sweepID, other.sweepID) &&
-            Utils.enhancedDeepEquals(this.createdStartDateTime, other.createdStartDateTime) &&
-            Utils.enhancedDeepEquals(this.createdEndDateTime, other.createdEndDateTime) &&
-            Utils.enhancedDeepEquals(this.completedStartDateTime, other.completedStartDateTime) &&
-            Utils.enhancedDeepEquals(this.completedEndDateTime, other.completedEndDateTime) &&
-            Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
-            Utils.enhancedDeepEquals(this.skip, other.skip) &&
-            Utils.enhancedDeepEquals(this.count, other.count);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            transactionType, transactionTypes, sourceType,
-            sourceID, status, sweepID,
-            createdStartDateTime, createdEndDateTime, completedStartDateTime,
-            completedEndDateTime, statementDescriptor, skip,
-            count);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(ListWalletTransactionsValidationError.class,
-                "transactionType", transactionType,
-                "transactionTypes", transactionTypes,
-                "sourceType", sourceType,
-                "sourceID", sourceID,
-                "status", status,
-                "sweepID", sweepID,
-                "createdStartDateTime", createdStartDateTime,
-                "createdEndDateTime", createdEndDateTime,
-                "completedStartDateTime", completedStartDateTime,
-                "completedEndDateTime", completedEndDateTime,
-                "statementDescriptor", statementDescriptor,
-                "skip", skip,
-                "count", count);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> transactionType() {
+            return transactionType;
+        }
 
-        private Optional<String> transactionType = Optional.empty();
+        @JsonIgnore
+        public Optional<String> transactionTypes() {
+            return transactionTypes;
+        }
 
-        private Optional<String> transactionTypes = Optional.empty();
+        @JsonIgnore
+        public Optional<String> sourceType() {
+            return sourceType;
+        }
 
-        private Optional<String> sourceType = Optional.empty();
+        @JsonIgnore
+        public Optional<String> sourceID() {
+            return sourceID;
+        }
 
-        private Optional<String> sourceID = Optional.empty();
+        @JsonIgnore
+        public Optional<String> status() {
+            return status;
+        }
 
-        private Optional<String> status = Optional.empty();
+        @JsonIgnore
+        public Optional<String> sweepID() {
+            return sweepID;
+        }
 
-        private Optional<String> sweepID = Optional.empty();
+        @JsonIgnore
+        public Optional<String> createdStartDateTime() {
+            return createdStartDateTime;
+        }
 
-        private Optional<String> createdStartDateTime = Optional.empty();
+        @JsonIgnore
+        public Optional<String> createdEndDateTime() {
+            return createdEndDateTime;
+        }
 
-        private Optional<String> createdEndDateTime = Optional.empty();
+        @JsonIgnore
+        public Optional<String> completedStartDateTime() {
+            return completedStartDateTime;
+        }
 
-        private Optional<String> completedStartDateTime = Optional.empty();
+        @JsonIgnore
+        public Optional<String> completedEndDateTime() {
+            return completedEndDateTime;
+        }
 
-        private Optional<String> completedEndDateTime = Optional.empty();
+        @JsonIgnore
+        public Optional<String> statementDescriptor() {
+            return statementDescriptor;
+        }
 
-        private Optional<String> statementDescriptor = Optional.empty();
+        @JsonIgnore
+        public Optional<String> skip() {
+            return skip;
+        }
 
-        private Optional<String> skip = Optional.empty();
+        @JsonIgnore
+        public Optional<String> count() {
+            return count;
+        }
 
-        private Optional<String> count = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder transactionType(String transactionType) {
+        public Data withTransactionType(String transactionType) {
             Utils.checkNotNull(transactionType, "transactionType");
             this.transactionType = Optional.ofNullable(transactionType);
             return this;
         }
 
-        public Builder transactionType(Optional<String> transactionType) {
+
+        public Data withTransactionType(Optional<String> transactionType) {
             Utils.checkNotNull(transactionType, "transactionType");
             this.transactionType = transactionType;
             return this;
         }
 
-
-        public Builder transactionTypes(String transactionTypes) {
+        public Data withTransactionTypes(String transactionTypes) {
             Utils.checkNotNull(transactionTypes, "transactionTypes");
             this.transactionTypes = Optional.ofNullable(transactionTypes);
             return this;
         }
 
-        public Builder transactionTypes(Optional<String> transactionTypes) {
+
+        public Data withTransactionTypes(Optional<String> transactionTypes) {
             Utils.checkNotNull(transactionTypes, "transactionTypes");
             this.transactionTypes = transactionTypes;
             return this;
         }
 
-
-        public Builder sourceType(String sourceType) {
+        public Data withSourceType(String sourceType) {
             Utils.checkNotNull(sourceType, "sourceType");
             this.sourceType = Optional.ofNullable(sourceType);
             return this;
         }
 
-        public Builder sourceType(Optional<String> sourceType) {
+
+        public Data withSourceType(Optional<String> sourceType) {
             Utils.checkNotNull(sourceType, "sourceType");
             this.sourceType = sourceType;
             return this;
         }
 
-
-        public Builder sourceID(String sourceID) {
+        public Data withSourceID(String sourceID) {
             Utils.checkNotNull(sourceID, "sourceID");
             this.sourceID = Optional.ofNullable(sourceID);
             return this;
         }
 
-        public Builder sourceID(Optional<String> sourceID) {
+
+        public Data withSourceID(Optional<String> sourceID) {
             Utils.checkNotNull(sourceID, "sourceID");
             this.sourceID = sourceID;
             return this;
         }
 
-
-        public Builder status(String status) {
+        public Data withStatus(String status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
         }
 
-        public Builder status(Optional<String> status) {
+
+        public Data withStatus(Optional<String> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
-
-        public Builder sweepID(String sweepID) {
+        public Data withSweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = Optional.ofNullable(sweepID);
             return this;
         }
 
-        public Builder sweepID(Optional<String> sweepID) {
+
+        public Data withSweepID(Optional<String> sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = sweepID;
             return this;
         }
 
-
-        public Builder createdStartDateTime(String createdStartDateTime) {
+        public Data withCreatedStartDateTime(String createdStartDateTime) {
             Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
             this.createdStartDateTime = Optional.ofNullable(createdStartDateTime);
             return this;
         }
 
-        public Builder createdStartDateTime(Optional<String> createdStartDateTime) {
+
+        public Data withCreatedStartDateTime(Optional<String> createdStartDateTime) {
             Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
             this.createdStartDateTime = createdStartDateTime;
             return this;
         }
 
-
-        public Builder createdEndDateTime(String createdEndDateTime) {
+        public Data withCreatedEndDateTime(String createdEndDateTime) {
             Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
             this.createdEndDateTime = Optional.ofNullable(createdEndDateTime);
             return this;
         }
 
-        public Builder createdEndDateTime(Optional<String> createdEndDateTime) {
+
+        public Data withCreatedEndDateTime(Optional<String> createdEndDateTime) {
             Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
             this.createdEndDateTime = createdEndDateTime;
             return this;
         }
 
-
-        public Builder completedStartDateTime(String completedStartDateTime) {
+        public Data withCompletedStartDateTime(String completedStartDateTime) {
             Utils.checkNotNull(completedStartDateTime, "completedStartDateTime");
             this.completedStartDateTime = Optional.ofNullable(completedStartDateTime);
             return this;
         }
 
-        public Builder completedStartDateTime(Optional<String> completedStartDateTime) {
+
+        public Data withCompletedStartDateTime(Optional<String> completedStartDateTime) {
             Utils.checkNotNull(completedStartDateTime, "completedStartDateTime");
             this.completedStartDateTime = completedStartDateTime;
             return this;
         }
 
-
-        public Builder completedEndDateTime(String completedEndDateTime) {
+        public Data withCompletedEndDateTime(String completedEndDateTime) {
             Utils.checkNotNull(completedEndDateTime, "completedEndDateTime");
             this.completedEndDateTime = Optional.ofNullable(completedEndDateTime);
             return this;
         }
 
-        public Builder completedEndDateTime(Optional<String> completedEndDateTime) {
+
+        public Data withCompletedEndDateTime(Optional<String> completedEndDateTime) {
             Utils.checkNotNull(completedEndDateTime, "completedEndDateTime");
             this.completedEndDateTime = completedEndDateTime;
             return this;
         }
 
-
-        public Builder statementDescriptor(String statementDescriptor) {
+        public Data withStatementDescriptor(String statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
             this.statementDescriptor = Optional.ofNullable(statementDescriptor);
             return this;
         }
 
-        public Builder statementDescriptor(Optional<String> statementDescriptor) {
+
+        public Data withStatementDescriptor(Optional<String> statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
             this.statementDescriptor = statementDescriptor;
             return this;
         }
 
-
-        public Builder skip(String skip) {
+        public Data withSkip(String skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
             return this;
         }
 
-        public Builder skip(Optional<String> skip) {
+
+        public Data withSkip(Optional<String> skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = skip;
             return this;
         }
 
-
-        public Builder count(String count) {
+        public Data withCount(String count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
             return this;
         }
 
-        public Builder count(Optional<String> count) {
+
+        public Data withCount(Optional<String> count) {
             Utils.checkNotNull(count, "count");
             this.count = count;
             return this;
         }
 
-        public ListWalletTransactionsValidationError build() {
-
-            return new ListWalletTransactionsValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.transactionType, other.transactionType) &&
+                Utils.enhancedDeepEquals(this.transactionTypes, other.transactionTypes) &&
+                Utils.enhancedDeepEquals(this.sourceType, other.sourceType) &&
+                Utils.enhancedDeepEquals(this.sourceID, other.sourceID) &&
+                Utils.enhancedDeepEquals(this.status, other.status) &&
+                Utils.enhancedDeepEquals(this.sweepID, other.sweepID) &&
+                Utils.enhancedDeepEquals(this.createdStartDateTime, other.createdStartDateTime) &&
+                Utils.enhancedDeepEquals(this.createdEndDateTime, other.createdEndDateTime) &&
+                Utils.enhancedDeepEquals(this.completedStartDateTime, other.completedStartDateTime) &&
+                Utils.enhancedDeepEquals(this.completedEndDateTime, other.completedEndDateTime) &&
+                Utils.enhancedDeepEquals(this.statementDescriptor, other.statementDescriptor) &&
+                Utils.enhancedDeepEquals(this.skip, other.skip) &&
+                Utils.enhancedDeepEquals(this.count, other.count);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 transactionType, transactionTypes, sourceType,
                 sourceID, status, sweepID,
                 createdStartDateTime, createdEndDateTime, completedStartDateTime,
                 completedEndDateTime, statementDescriptor, skip,
                 count);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "transactionType", transactionType,
+                    "transactionTypes", transactionTypes,
+                    "sourceType", sourceType,
+                    "sourceID", sourceID,
+                    "status", status,
+                    "sweepID", sweepID,
+                    "createdStartDateTime", createdStartDateTime,
+                    "createdEndDateTime", createdEndDateTime,
+                    "completedStartDateTime", completedStartDateTime,
+                    "completedEndDateTime", completedEndDateTime,
+                    "statementDescriptor", statementDescriptor,
+                    "skip", skip,
+                    "count", count);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> transactionType = Optional.empty();
+
+            private Optional<String> transactionTypes = Optional.empty();
+
+            private Optional<String> sourceType = Optional.empty();
+
+            private Optional<String> sourceID = Optional.empty();
+
+            private Optional<String> status = Optional.empty();
+
+            private Optional<String> sweepID = Optional.empty();
+
+            private Optional<String> createdStartDateTime = Optional.empty();
+
+            private Optional<String> createdEndDateTime = Optional.empty();
+
+            private Optional<String> completedStartDateTime = Optional.empty();
+
+            private Optional<String> completedEndDateTime = Optional.empty();
+
+            private Optional<String> statementDescriptor = Optional.empty();
+
+            private Optional<String> skip = Optional.empty();
+
+            private Optional<String> count = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder transactionType(String transactionType) {
+                Utils.checkNotNull(transactionType, "transactionType");
+                this.transactionType = Optional.ofNullable(transactionType);
+                return this;
+            }
+
+            public Builder transactionType(Optional<String> transactionType) {
+                Utils.checkNotNull(transactionType, "transactionType");
+                this.transactionType = transactionType;
+                return this;
+            }
+
+
+            public Builder transactionTypes(String transactionTypes) {
+                Utils.checkNotNull(transactionTypes, "transactionTypes");
+                this.transactionTypes = Optional.ofNullable(transactionTypes);
+                return this;
+            }
+
+            public Builder transactionTypes(Optional<String> transactionTypes) {
+                Utils.checkNotNull(transactionTypes, "transactionTypes");
+                this.transactionTypes = transactionTypes;
+                return this;
+            }
+
+
+            public Builder sourceType(String sourceType) {
+                Utils.checkNotNull(sourceType, "sourceType");
+                this.sourceType = Optional.ofNullable(sourceType);
+                return this;
+            }
+
+            public Builder sourceType(Optional<String> sourceType) {
+                Utils.checkNotNull(sourceType, "sourceType");
+                this.sourceType = sourceType;
+                return this;
+            }
+
+
+            public Builder sourceID(String sourceID) {
+                Utils.checkNotNull(sourceID, "sourceID");
+                this.sourceID = Optional.ofNullable(sourceID);
+                return this;
+            }
+
+            public Builder sourceID(Optional<String> sourceID) {
+                Utils.checkNotNull(sourceID, "sourceID");
+                this.sourceID = sourceID;
+                return this;
+            }
+
+
+            public Builder status(String status) {
+                Utils.checkNotNull(status, "status");
+                this.status = Optional.ofNullable(status);
+                return this;
+            }
+
+            public Builder status(Optional<String> status) {
+                Utils.checkNotNull(status, "status");
+                this.status = status;
+                return this;
+            }
+
+
+            public Builder sweepID(String sweepID) {
+                Utils.checkNotNull(sweepID, "sweepID");
+                this.sweepID = Optional.ofNullable(sweepID);
+                return this;
+            }
+
+            public Builder sweepID(Optional<String> sweepID) {
+                Utils.checkNotNull(sweepID, "sweepID");
+                this.sweepID = sweepID;
+                return this;
+            }
+
+
+            public Builder createdStartDateTime(String createdStartDateTime) {
+                Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+                this.createdStartDateTime = Optional.ofNullable(createdStartDateTime);
+                return this;
+            }
+
+            public Builder createdStartDateTime(Optional<String> createdStartDateTime) {
+                Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+                this.createdStartDateTime = createdStartDateTime;
+                return this;
+            }
+
+
+            public Builder createdEndDateTime(String createdEndDateTime) {
+                Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+                this.createdEndDateTime = Optional.ofNullable(createdEndDateTime);
+                return this;
+            }
+
+            public Builder createdEndDateTime(Optional<String> createdEndDateTime) {
+                Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+                this.createdEndDateTime = createdEndDateTime;
+                return this;
+            }
+
+
+            public Builder completedStartDateTime(String completedStartDateTime) {
+                Utils.checkNotNull(completedStartDateTime, "completedStartDateTime");
+                this.completedStartDateTime = Optional.ofNullable(completedStartDateTime);
+                return this;
+            }
+
+            public Builder completedStartDateTime(Optional<String> completedStartDateTime) {
+                Utils.checkNotNull(completedStartDateTime, "completedStartDateTime");
+                this.completedStartDateTime = completedStartDateTime;
+                return this;
+            }
+
+
+            public Builder completedEndDateTime(String completedEndDateTime) {
+                Utils.checkNotNull(completedEndDateTime, "completedEndDateTime");
+                this.completedEndDateTime = Optional.ofNullable(completedEndDateTime);
+                return this;
+            }
+
+            public Builder completedEndDateTime(Optional<String> completedEndDateTime) {
+                Utils.checkNotNull(completedEndDateTime, "completedEndDateTime");
+                this.completedEndDateTime = completedEndDateTime;
+                return this;
+            }
+
+
+            public Builder statementDescriptor(String statementDescriptor) {
+                Utils.checkNotNull(statementDescriptor, "statementDescriptor");
+                this.statementDescriptor = Optional.ofNullable(statementDescriptor);
+                return this;
+            }
+
+            public Builder statementDescriptor(Optional<String> statementDescriptor) {
+                Utils.checkNotNull(statementDescriptor, "statementDescriptor");
+                this.statementDescriptor = statementDescriptor;
+                return this;
+            }
+
+
+            public Builder skip(String skip) {
+                Utils.checkNotNull(skip, "skip");
+                this.skip = Optional.ofNullable(skip);
+                return this;
+            }
+
+            public Builder skip(Optional<String> skip) {
+                Utils.checkNotNull(skip, "skip");
+                this.skip = skip;
+                return this;
+            }
+
+
+            public Builder count(String count) {
+                Utils.checkNotNull(count, "count");
+                this.count = Optional.ofNullable(count);
+                return this;
+            }
+
+            public Builder count(Optional<String> count) {
+                Utils.checkNotNull(count, "count");
+                this.count = count;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    transactionType, transactionTypes, sourceType,
+                    sourceID, status, sweepID,
+                    createdStartDateTime, createdEndDateTime, completedStartDateTime,
+                    completedEndDateTime, statementDescriptor, skip,
+                    count);
+            }
+
+        }
     }
+
 }
 

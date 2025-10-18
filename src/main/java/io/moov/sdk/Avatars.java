@@ -10,7 +10,6 @@ import io.moov.sdk.models.operations.GetAvatarRequestBuilder;
 import io.moov.sdk.models.operations.GetAvatarResponse;
 import io.moov.sdk.operations.GetAvatar;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -44,9 +43,9 @@ public class Avatars {
      * 
      * @param uniqueID Any unique ID associated with an account such as accountID, representativeID, routing number, or userID.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetAvatarResponse get(String uniqueID) throws Exception {
+    public GetAvatarResponse get(String uniqueID) {
         GetAvatarRequest request =
             GetAvatarRequest
                 .builder()

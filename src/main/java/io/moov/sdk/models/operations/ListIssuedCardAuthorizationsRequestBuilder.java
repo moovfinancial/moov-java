@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListIssuedCardAuthorizations;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 
 public class ListIssuedCardAuthorizationsRequestBuilder {
 
@@ -27,7 +26,7 @@ public class ListIssuedCardAuthorizationsRequestBuilder {
         return this;
     }
 
-    public ListIssuedCardAuthorizationsResponse call() throws Exception {
+    public ListIssuedCardAuthorizationsResponse call() {
         
         RequestOperation<ListIssuedCardAuthorizationsRequest, ListIssuedCardAuthorizationsResponse> operation
               = new ListIssuedCardAuthorizations.Sync(sdkConfiguration, _headers);

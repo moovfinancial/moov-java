@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetOnboardingInvite;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetOnboardingInviteRequestBuilder {
@@ -36,7 +35,7 @@ public class GetOnboardingInviteRequestBuilder {
         return request;
     }
 
-    public GetOnboardingInviteResponse call() throws Exception {
+    public GetOnboardingInviteResponse call() {
         
         RequestOperation<GetOnboardingInviteRequest, GetOnboardingInviteResponse> operation
               = new GetOnboardingInvite.Sync(sdkConfiguration, _headers);

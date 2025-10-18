@@ -22,7 +22,6 @@ import io.moov.sdk.operations.GetAccountTerminalApplication;
 import io.moov.sdk.operations.GetTerminalConfiguration;
 import io.moov.sdk.operations.ListAccountTerminalApplications;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -57,9 +56,9 @@ public class AccountTerminalApplications {
      * @param accountID 
      * @param linkAccountTerminalApplication Describes a request to link an account with a terminal application.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public LinkAccountTerminalApplicationResponse link(String accountID, LinkAccountTerminalApplication linkAccountTerminalApplication) throws Exception {
+    public LinkAccountTerminalApplicationResponse link(String accountID, LinkAccountTerminalApplication linkAccountTerminalApplication) {
         LinkAccountTerminalApplicationRequest request =
             LinkAccountTerminalApplicationRequest
                 .builder()
@@ -93,9 +92,9 @@ public class AccountTerminalApplications {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListAccountTerminalApplicationsResponse list(String accountID) throws Exception {
+    public ListAccountTerminalApplicationsResponse list(String accountID) {
         ListAccountTerminalApplicationsRequest request =
             ListAccountTerminalApplicationsRequest
                 .builder()
@@ -131,9 +130,9 @@ public class AccountTerminalApplications {
      * @param accountID 
      * @param terminalApplicationID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetAccountTerminalApplicationResponse get(String accountID, String terminalApplicationID) throws Exception {
+    public GetAccountTerminalApplicationResponse get(String accountID, String terminalApplicationID) {
         GetAccountTerminalApplicationRequest request =
             GetAccountTerminalApplicationRequest
                 .builder()
@@ -168,9 +167,9 @@ public class AccountTerminalApplications {
      * @param accountID 
      * @param terminalApplicationID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetTerminalConfigurationResponse getConfiguration(String accountID, String terminalApplicationID) throws Exception {
+    public GetTerminalConfigurationResponse getConfiguration(String accountID, String terminalApplicationID) {
         GetTerminalConfigurationRequest request =
             GetTerminalConfigurationRequest
                 .builder()

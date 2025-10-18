@@ -9,308 +9,388 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class LinkApplePayError extends RuntimeException {
-    /**
-     * Describes an error that wasn't attributable to a single request field.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("error")
-    private Optional<String> error;
+public class LinkApplePayError extends MoovError {
 
-    /**
-     * Describes an error within the `token.paymentData` request field.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("paymentData")
-    private Optional<String> paymentData;
+    @Nullable
+    private final Data data;
 
-    /**
-     * Describes an error within the `token.paymentMethod` request field.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("paymentMethod")
-    private Optional<String> paymentMethod;
+    @Nullable
+    private final Throwable deserializationException;
 
-    /**
-     * Describes an error within the `token.transactionIdentifier` request field.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("transactionIdentifier")
-    private Optional<String> transactionIdentifier;
-
-    @JsonCreator
     public LinkApplePayError(
-            @JsonProperty("error") Optional<String> error,
-            @JsonProperty("paymentData") Optional<String> paymentData,
-            @JsonProperty("paymentMethod") Optional<String> paymentMethod,
-            @JsonProperty("transactionIdentifier") Optional<String> transactionIdentifier) {
-        super("API error occurred");
-        Utils.checkNotNull(error, "error");
-        Utils.checkNotNull(paymentData, "paymentData");
-        Utils.checkNotNull(paymentMethod, "paymentMethod");
-        Utils.checkNotNull(transactionIdentifier, "transactionIdentifier");
-        this.error = error;
-        this.paymentData = paymentData;
-        this.paymentMethod = paymentMethod;
-        this.transactionIdentifier = transactionIdentifier;
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
-    
-    public LinkApplePayError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+
+    /**
+    * Parse a response into an instance of LinkApplePayError. If deserialization of the response body fails,
+    * the resulting LinkApplePayError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static LinkApplePayError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new LinkApplePayError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new LinkApplePayError(response.statusCode(), null, response, null, e);
+        }
     }
 
     /**
      * Describes an error that wasn't attributable to a single request field.
      */
-    @JsonIgnore
+    @Deprecated
     public Optional<String> error() {
-        return error;
+        return data().flatMap(Data::error);
     }
 
     /**
      * Describes an error within the `token.paymentData` request field.
      */
-    @JsonIgnore
+    @Deprecated
     public Optional<String> paymentData() {
-        return paymentData;
+        return data().flatMap(Data::paymentData);
     }
 
     /**
      * Describes an error within the `token.paymentMethod` request field.
      */
-    @JsonIgnore
+    @Deprecated
     public Optional<String> paymentMethod() {
-        return paymentMethod;
+        return data().flatMap(Data::paymentMethod);
     }
 
     /**
      * Describes an error within the `token.transactionIdentifier` request field.
      */
-    @JsonIgnore
+    @Deprecated
     public Optional<String> transactionIdentifier() {
-        return transactionIdentifier;
+        return data().flatMap(Data::transactionIdentifier);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-
-    /**
-     * Describes an error that wasn't attributable to a single request field.
-     */
-    public LinkApplePayError withError(String error) {
-        Utils.checkNotNull(error, "error");
-        this.error = Optional.ofNullable(error);
-        return this;
-    }
-
-
-    /**
-     * Describes an error that wasn't attributable to a single request field.
-     */
-    public LinkApplePayError withError(Optional<String> error) {
-        Utils.checkNotNull(error, "error");
-        this.error = error;
-        return this;
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
     /**
-     * Describes an error within the `token.paymentData` request field.
+     * Returns the exception if an error occurs while deserializing the response body.
      */
-    public LinkApplePayError withPaymentData(String paymentData) {
-        Utils.checkNotNull(paymentData, "paymentData");
-        this.paymentData = Optional.ofNullable(paymentData);
-        return this;
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
+        /**
+         * Describes an error that wasn't attributable to a single request field.
+         */
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("error")
+        private Optional<String> error;
 
-    /**
-     * Describes an error within the `token.paymentData` request field.
-     */
-    public LinkApplePayError withPaymentData(Optional<String> paymentData) {
-        Utils.checkNotNull(paymentData, "paymentData");
-        this.paymentData = paymentData;
-        return this;
-    }
+        /**
+         * Describes an error within the `token.paymentData` request field.
+         */
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("paymentData")
+        private Optional<String> paymentData;
 
-    /**
-     * Describes an error within the `token.paymentMethod` request field.
-     */
-    public LinkApplePayError withPaymentMethod(String paymentMethod) {
-        Utils.checkNotNull(paymentMethod, "paymentMethod");
-        this.paymentMethod = Optional.ofNullable(paymentMethod);
-        return this;
-    }
+        /**
+         * Describes an error within the `token.paymentMethod` request field.
+         */
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("paymentMethod")
+        private Optional<String> paymentMethod;
 
+        /**
+         * Describes an error within the `token.transactionIdentifier` request field.
+         */
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("transactionIdentifier")
+        private Optional<String> transactionIdentifier;
 
-    /**
-     * Describes an error within the `token.paymentMethod` request field.
-     */
-    public LinkApplePayError withPaymentMethod(Optional<String> paymentMethod) {
-        Utils.checkNotNull(paymentMethod, "paymentMethod");
-        this.paymentMethod = paymentMethod;
-        return this;
-    }
-
-    /**
-     * Describes an error within the `token.transactionIdentifier` request field.
-     */
-    public LinkApplePayError withTransactionIdentifier(String transactionIdentifier) {
-        Utils.checkNotNull(transactionIdentifier, "transactionIdentifier");
-        this.transactionIdentifier = Optional.ofNullable(transactionIdentifier);
-        return this;
-    }
-
-
-    /**
-     * Describes an error within the `token.transactionIdentifier` request field.
-     */
-    public LinkApplePayError withTransactionIdentifier(Optional<String> transactionIdentifier) {
-        Utils.checkNotNull(transactionIdentifier, "transactionIdentifier");
-        this.transactionIdentifier = transactionIdentifier;
-        return this;
-    }
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("error") Optional<String> error,
+                @JsonProperty("paymentData") Optional<String> paymentData,
+                @JsonProperty("paymentMethod") Optional<String> paymentMethod,
+                @JsonProperty("transactionIdentifier") Optional<String> transactionIdentifier) {
+            Utils.checkNotNull(error, "error");
+            Utils.checkNotNull(paymentData, "paymentData");
+            Utils.checkNotNull(paymentMethod, "paymentMethod");
+            Utils.checkNotNull(transactionIdentifier, "transactionIdentifier");
+            this.error = error;
+            this.paymentData = paymentData;
+            this.paymentMethod = paymentMethod;
+            this.transactionIdentifier = transactionIdentifier;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
-        LinkApplePayError other = (LinkApplePayError) o;
-        return 
-            Utils.enhancedDeepEquals(this.error, other.error) &&
-            Utils.enhancedDeepEquals(this.paymentData, other.paymentData) &&
-            Utils.enhancedDeepEquals(this.paymentMethod, other.paymentMethod) &&
-            Utils.enhancedDeepEquals(this.transactionIdentifier, other.transactionIdentifier);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            error, paymentData, paymentMethod,
-            transactionIdentifier);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(LinkApplePayError.class,
-                "error", error,
-                "paymentData", paymentData,
-                "paymentMethod", paymentMethod,
-                "transactionIdentifier", transactionIdentifier);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        /**
+         * Describes an error that wasn't attributable to a single request field.
+         */
+        @JsonIgnore
+        public Optional<String> error() {
+            return error;
+        }
 
-        private Optional<String> error = Optional.empty();
+        /**
+         * Describes an error within the `token.paymentData` request field.
+         */
+        @JsonIgnore
+        public Optional<String> paymentData() {
+            return paymentData;
+        }
 
-        private Optional<String> paymentData = Optional.empty();
+        /**
+         * Describes an error within the `token.paymentMethod` request field.
+         */
+        @JsonIgnore
+        public Optional<String> paymentMethod() {
+            return paymentMethod;
+        }
 
-        private Optional<String> paymentMethod = Optional.empty();
+        /**
+         * Describes an error within the `token.transactionIdentifier` request field.
+         */
+        @JsonIgnore
+        public Optional<String> transactionIdentifier() {
+            return transactionIdentifier;
+        }
 
-        private Optional<String> transactionIdentifier = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
         /**
          * Describes an error that wasn't attributable to a single request field.
          */
-        public Builder error(String error) {
+        public Data withError(String error) {
             Utils.checkNotNull(error, "error");
             this.error = Optional.ofNullable(error);
             return this;
         }
 
+
         /**
          * Describes an error that wasn't attributable to a single request field.
          */
-        public Builder error(Optional<String> error) {
+        public Data withError(Optional<String> error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
 
-
         /**
          * Describes an error within the `token.paymentData` request field.
          */
-        public Builder paymentData(String paymentData) {
+        public Data withPaymentData(String paymentData) {
             Utils.checkNotNull(paymentData, "paymentData");
             this.paymentData = Optional.ofNullable(paymentData);
             return this;
         }
 
+
         /**
          * Describes an error within the `token.paymentData` request field.
          */
-        public Builder paymentData(Optional<String> paymentData) {
+        public Data withPaymentData(Optional<String> paymentData) {
             Utils.checkNotNull(paymentData, "paymentData");
             this.paymentData = paymentData;
             return this;
         }
 
-
         /**
          * Describes an error within the `token.paymentMethod` request field.
          */
-        public Builder paymentMethod(String paymentMethod) {
+        public Data withPaymentMethod(String paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");
             this.paymentMethod = Optional.ofNullable(paymentMethod);
             return this;
         }
 
+
         /**
          * Describes an error within the `token.paymentMethod` request field.
          */
-        public Builder paymentMethod(Optional<String> paymentMethod) {
+        public Data withPaymentMethod(Optional<String> paymentMethod) {
             Utils.checkNotNull(paymentMethod, "paymentMethod");
             this.paymentMethod = paymentMethod;
             return this;
         }
 
-
         /**
          * Describes an error within the `token.transactionIdentifier` request field.
          */
-        public Builder transactionIdentifier(String transactionIdentifier) {
+        public Data withTransactionIdentifier(String transactionIdentifier) {
             Utils.checkNotNull(transactionIdentifier, "transactionIdentifier");
             this.transactionIdentifier = Optional.ofNullable(transactionIdentifier);
             return this;
         }
 
+
         /**
          * Describes an error within the `token.transactionIdentifier` request field.
          */
-        public Builder transactionIdentifier(Optional<String> transactionIdentifier) {
+        public Data withTransactionIdentifier(Optional<String> transactionIdentifier) {
             Utils.checkNotNull(transactionIdentifier, "transactionIdentifier");
             this.transactionIdentifier = transactionIdentifier;
             return this;
         }
 
-        public LinkApplePayError build() {
-
-            return new LinkApplePayError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.error, other.error) &&
+                Utils.enhancedDeepEquals(this.paymentData, other.paymentData) &&
+                Utils.enhancedDeepEquals(this.paymentMethod, other.paymentMethod) &&
+                Utils.enhancedDeepEquals(this.transactionIdentifier, other.transactionIdentifier);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 error, paymentData, paymentMethod,
                 transactionIdentifier);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "error", error,
+                    "paymentData", paymentData,
+                    "paymentMethod", paymentMethod,
+                    "transactionIdentifier", transactionIdentifier);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> error = Optional.empty();
+
+            private Optional<String> paymentData = Optional.empty();
+
+            private Optional<String> paymentMethod = Optional.empty();
+
+            private Optional<String> transactionIdentifier = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            /**
+             * Describes an error that wasn't attributable to a single request field.
+             */
+            public Builder error(String error) {
+                Utils.checkNotNull(error, "error");
+                this.error = Optional.ofNullable(error);
+                return this;
+            }
+
+            /**
+             * Describes an error that wasn't attributable to a single request field.
+             */
+            public Builder error(Optional<String> error) {
+                Utils.checkNotNull(error, "error");
+                this.error = error;
+                return this;
+            }
+
+
+            /**
+             * Describes an error within the `token.paymentData` request field.
+             */
+            public Builder paymentData(String paymentData) {
+                Utils.checkNotNull(paymentData, "paymentData");
+                this.paymentData = Optional.ofNullable(paymentData);
+                return this;
+            }
+
+            /**
+             * Describes an error within the `token.paymentData` request field.
+             */
+            public Builder paymentData(Optional<String> paymentData) {
+                Utils.checkNotNull(paymentData, "paymentData");
+                this.paymentData = paymentData;
+                return this;
+            }
+
+
+            /**
+             * Describes an error within the `token.paymentMethod` request field.
+             */
+            public Builder paymentMethod(String paymentMethod) {
+                Utils.checkNotNull(paymentMethod, "paymentMethod");
+                this.paymentMethod = Optional.ofNullable(paymentMethod);
+                return this;
+            }
+
+            /**
+             * Describes an error within the `token.paymentMethod` request field.
+             */
+            public Builder paymentMethod(Optional<String> paymentMethod) {
+                Utils.checkNotNull(paymentMethod, "paymentMethod");
+                this.paymentMethod = paymentMethod;
+                return this;
+            }
+
+
+            /**
+             * Describes an error within the `token.transactionIdentifier` request field.
+             */
+            public Builder transactionIdentifier(String transactionIdentifier) {
+                Utils.checkNotNull(transactionIdentifier, "transactionIdentifier");
+                this.transactionIdentifier = Optional.ofNullable(transactionIdentifier);
+                return this;
+            }
+
+            /**
+             * Describes an error within the `token.transactionIdentifier` request field.
+             */
+            public Builder transactionIdentifier(Optional<String> transactionIdentifier) {
+                Utils.checkNotNull(transactionIdentifier, "transactionIdentifier");
+                this.transactionIdentifier = transactionIdentifier;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    error, paymentData, paymentMethod,
+                    transactionIdentifier);
+            }
+
+        }
     }
+
 }
 

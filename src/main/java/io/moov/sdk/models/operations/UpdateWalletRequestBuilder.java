@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.PatchWallet;
 import io.moov.sdk.operations.UpdateWallet;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class UpdateWalletRequestBuilder {
@@ -53,7 +52,7 @@ public class UpdateWalletRequestBuilder {
         return request;
     }
 
-    public UpdateWalletResponse call() throws Exception {
+    public UpdateWalletResponse call() {
         
         RequestOperation<UpdateWalletRequest, UpdateWalletResponse> operation
               = new UpdateWallet.Sync(sdkConfiguration, _headers);

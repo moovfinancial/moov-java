@@ -8,7 +8,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListIndustries;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 
 public class ListIndustriesRequestBuilder {
 
@@ -27,7 +26,7 @@ public class ListIndustriesRequestBuilder {
         return request;
     }
 
-    public ListIndustriesResponse call() throws Exception {
+    public ListIndustriesResponse call() {
         
         RequestOperation<ListIndustriesRequest, ListIndustriesResponse> operation
               = new ListIndustries.Sync(sdkConfiguration, _headers);

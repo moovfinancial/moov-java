@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.AddCapabilities;
 import io.moov.sdk.operations.RequestCapabilities;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class RequestCapabilitiesRequestBuilder {
@@ -45,7 +44,7 @@ public class RequestCapabilitiesRequestBuilder {
         return request;
     }
 
-    public RequestCapabilitiesResponse call() throws Exception {
+    public RequestCapabilitiesResponse call() {
         
         RequestOperation<RequestCapabilitiesRequest, RequestCapabilitiesResponse> operation
               = new RequestCapabilities.Sync(sdkConfiguration, _headers);

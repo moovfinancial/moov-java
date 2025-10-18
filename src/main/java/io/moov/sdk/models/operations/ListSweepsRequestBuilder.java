@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListSweeps;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 
 public class ListSweepsRequestBuilder {
 
@@ -27,7 +26,7 @@ public class ListSweepsRequestBuilder {
         return this;
     }
 
-    public ListSweepsResponse call() throws Exception {
+    public ListSweepsResponse call() {
         
         RequestOperation<ListSweepsRequest, ListSweepsResponse> operation
               = new ListSweeps.Sync(sdkConfiguration, _headers);

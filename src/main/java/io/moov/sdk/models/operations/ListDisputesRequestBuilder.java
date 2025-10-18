@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListDisputes;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 
 public class ListDisputesRequestBuilder {
 
@@ -27,7 +26,7 @@ public class ListDisputesRequestBuilder {
         return this;
     }
 
-    public ListDisputesResponse call() throws Exception {
+    public ListDisputesResponse call() {
         
         RequestOperation<ListDisputesRequest, ListDisputesResponse> operation
               = new ListDisputes.Sync(sdkConfiguration, _headers);

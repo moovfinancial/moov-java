@@ -9,194 +9,257 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class TransferOptionsValidationError extends RuntimeException {
+public class TransferOptionsValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amount")
-    private Optional<String> amount;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("source")
-    private Optional<String> source;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("destination")
-    private Optional<String> destination;
-
-    @JsonCreator
     public TransferOptionsValidationError(
-            @JsonProperty("amount") Optional<String> amount,
-            @JsonProperty("source") Optional<String> source,
-            @JsonProperty("destination") Optional<String> destination) {
-        super("API error occurred");
-        Utils.checkNotNull(amount, "amount");
-        Utils.checkNotNull(source, "source");
-        Utils.checkNotNull(destination, "destination");
-        this.amount = amount;
-        this.source = source;
-        this.destination = destination;
-    }
-    
-    public TransferOptionsValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of TransferOptionsValidationError. If deserialization of the response body fails,
+    * the resulting TransferOptionsValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static TransferOptionsValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new TransferOptionsValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new TransferOptionsValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> amount() {
-        return amount;
+        return data().flatMap(Data::amount);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> source() {
-        return source;
+        return data().flatMap(Data::source);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> destination() {
-        return destination;
+        return data().flatMap(Data::destination);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public TransferOptionsValidationError withAmount(String amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = Optional.ofNullable(amount);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public TransferOptionsValidationError withAmount(Optional<String> amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = amount;
-        return this;
-    }
-
-    public TransferOptionsValidationError withSource(String source) {
-        Utils.checkNotNull(source, "source");
-        this.source = Optional.ofNullable(source);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amount")
+        private Optional<String> amount;
 
 
-    public TransferOptionsValidationError withSource(Optional<String> source) {
-        Utils.checkNotNull(source, "source");
-        this.source = source;
-        return this;
-    }
-
-    public TransferOptionsValidationError withDestination(String destination) {
-        Utils.checkNotNull(destination, "destination");
-        this.destination = Optional.ofNullable(destination);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("source")
+        private Optional<String> source;
 
 
-    public TransferOptionsValidationError withDestination(Optional<String> destination) {
-        Utils.checkNotNull(destination, "destination");
-        this.destination = destination;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("destination")
+        private Optional<String> destination;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("amount") Optional<String> amount,
+                @JsonProperty("source") Optional<String> source,
+                @JsonProperty("destination") Optional<String> destination) {
+            Utils.checkNotNull(amount, "amount");
+            Utils.checkNotNull(source, "source");
+            Utils.checkNotNull(destination, "destination");
+            this.amount = amount;
+            this.source = source;
+            this.destination = destination;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty());
         }
-        TransferOptionsValidationError other = (TransferOptionsValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.source, other.source) &&
-            Utils.enhancedDeepEquals(this.destination, other.destination);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            amount, source, destination);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(TransferOptionsValidationError.class,
-                "amount", amount,
-                "source", source,
-                "destination", destination);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> amount() {
+            return amount;
+        }
 
-        private Optional<String> amount = Optional.empty();
+        @JsonIgnore
+        public Optional<String> source() {
+            return source;
+        }
 
-        private Optional<String> source = Optional.empty();
+        @JsonIgnore
+        public Optional<String> destination() {
+            return destination;
+        }
 
-        private Optional<String> destination = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder amount(String amount) {
+        public Data withAmount(String amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
-        public Builder amount(Optional<String> amount) {
+
+        public Data withAmount(Optional<String> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
 
-
-        public Builder source(String source) {
+        public Data withSource(String source) {
             Utils.checkNotNull(source, "source");
             this.source = Optional.ofNullable(source);
             return this;
         }
 
-        public Builder source(Optional<String> source) {
+
+        public Data withSource(Optional<String> source) {
             Utils.checkNotNull(source, "source");
             this.source = source;
             return this;
         }
 
-
-        public Builder destination(String destination) {
+        public Data withDestination(String destination) {
             Utils.checkNotNull(destination, "destination");
             this.destination = Optional.ofNullable(destination);
             return this;
         }
 
-        public Builder destination(Optional<String> destination) {
+
+        public Data withDestination(Optional<String> destination) {
             Utils.checkNotNull(destination, "destination");
             this.destination = destination;
             return this;
         }
 
-        public TransferOptionsValidationError build() {
-
-            return new TransferOptionsValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.amount, other.amount) &&
+                Utils.enhancedDeepEquals(this.source, other.source) &&
+                Utils.enhancedDeepEquals(this.destination, other.destination);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 amount, source, destination);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "amount", amount,
+                    "source", source,
+                    "destination", destination);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> amount = Optional.empty();
+
+            private Optional<String> source = Optional.empty();
+
+            private Optional<String> destination = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder amount(String amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = Optional.ofNullable(amount);
+                return this;
+            }
+
+            public Builder amount(Optional<String> amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = amount;
+                return this;
+            }
+
+
+            public Builder source(String source) {
+                Utils.checkNotNull(source, "source");
+                this.source = Optional.ofNullable(source);
+                return this;
+            }
+
+            public Builder source(Optional<String> source) {
+                Utils.checkNotNull(source, "source");
+                this.source = source;
+                return this;
+            }
+
+
+            public Builder destination(String destination) {
+                Utils.checkNotNull(destination, "destination");
+                this.destination = Optional.ofNullable(destination);
+                return this;
+            }
+
+            public Builder destination(Optional<String> destination) {
+                Utils.checkNotNull(destination, "destination");
+                this.destination = destination;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    amount, source, destination);
+            }
+
+        }
     }
+
 }
 

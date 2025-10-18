@@ -10,284 +10,352 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.CreateTicketContactError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class CreateTicketError extends RuntimeException {
+public class CreateTicketError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("title")
-    private Optional<String> title;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("body")
-    private Optional<String> body;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("author")
-    private Optional<String> author;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("contact")
-    private Optional<? extends CreateTicketContactError> contact;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("foreignID")
-    private Optional<String> foreignID;
-
-    @JsonCreator
     public CreateTicketError(
-            @JsonProperty("title") Optional<String> title,
-            @JsonProperty("body") Optional<String> body,
-            @JsonProperty("author") Optional<String> author,
-            @JsonProperty("contact") Optional<? extends CreateTicketContactError> contact,
-            @JsonProperty("foreignID") Optional<String> foreignID) {
-        super("API error occurred");
-        Utils.checkNotNull(title, "title");
-        Utils.checkNotNull(body, "body");
-        Utils.checkNotNull(author, "author");
-        Utils.checkNotNull(contact, "contact");
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.title = title;
-        this.body = body;
-        this.author = author;
-        this.contact = contact;
-        this.foreignID = foreignID;
-    }
-    
-    public CreateTicketError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of CreateTicketError. If deserialization of the response body fails,
+    * the resulting CreateTicketError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static CreateTicketError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new CreateTicketError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new CreateTicketError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> title() {
-        return title;
+        return data().flatMap(Data::title);
     }
 
-    @JsonIgnore
-    public Optional<String> body() {
-        return body;
-    }
-
-    @JsonIgnore
+    @Deprecated
     public Optional<String> author() {
-        return author;
+        return data().flatMap(Data::author);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<CreateTicketContactError> contact() {
-        return (Optional<CreateTicketContactError>) contact;
+        return data().flatMap(Data::contact);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> foreignID() {
-        return foreignID;
+        return data().flatMap(Data::foreignID);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public CreateTicketError withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public CreateTicketError withTitle(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
-        return this;
-    }
-
-    public CreateTicketError withBody(String body) {
-        Utils.checkNotNull(body, "body");
-        this.body = Optional.ofNullable(body);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("title")
+        private Optional<String> title;
 
 
-    public CreateTicketError withBody(Optional<String> body) {
-        Utils.checkNotNull(body, "body");
-        this.body = body;
-        return this;
-    }
-
-    public CreateTicketError withAuthor(String author) {
-        Utils.checkNotNull(author, "author");
-        this.author = Optional.ofNullable(author);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("body")
+        private Optional<String> body;
 
 
-    public CreateTicketError withAuthor(Optional<String> author) {
-        Utils.checkNotNull(author, "author");
-        this.author = author;
-        return this;
-    }
-
-    public CreateTicketError withContact(CreateTicketContactError contact) {
-        Utils.checkNotNull(contact, "contact");
-        this.contact = Optional.ofNullable(contact);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("author")
+        private Optional<String> author;
 
 
-    public CreateTicketError withContact(Optional<? extends CreateTicketContactError> contact) {
-        Utils.checkNotNull(contact, "contact");
-        this.contact = contact;
-        return this;
-    }
-
-    public CreateTicketError withForeignID(String foreignID) {
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.foreignID = Optional.ofNullable(foreignID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("contact")
+        private Optional<? extends CreateTicketContactError> contact;
 
 
-    public CreateTicketError withForeignID(Optional<String> foreignID) {
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.foreignID = foreignID;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("foreignID")
+        private Optional<String> foreignID;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("title") Optional<String> title,
+                @JsonProperty("body") Optional<String> body,
+                @JsonProperty("author") Optional<String> author,
+                @JsonProperty("contact") Optional<? extends CreateTicketContactError> contact,
+                @JsonProperty("foreignID") Optional<String> foreignID) {
+            Utils.checkNotNull(title, "title");
+            Utils.checkNotNull(body, "body");
+            Utils.checkNotNull(author, "author");
+            Utils.checkNotNull(contact, "contact");
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.title = title;
+            this.body = body;
+            this.author = author;
+            this.contact = contact;
+            this.foreignID = foreignID;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        CreateTicketError other = (CreateTicketError) o;
-        return 
-            Utils.enhancedDeepEquals(this.title, other.title) &&
-            Utils.enhancedDeepEquals(this.body, other.body) &&
-            Utils.enhancedDeepEquals(this.author, other.author) &&
-            Utils.enhancedDeepEquals(this.contact, other.contact) &&
-            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            title, body, author,
-            contact, foreignID);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(CreateTicketError.class,
-                "title", title,
-                "body", body,
-                "author", author,
-                "contact", contact,
-                "foreignID", foreignID);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> title() {
+            return title;
+        }
 
-        private Optional<String> title = Optional.empty();
+        @JsonIgnore
+        public Optional<String> body() {
+            return body;
+        }
 
-        private Optional<String> body = Optional.empty();
+        @JsonIgnore
+        public Optional<String> author() {
+            return author;
+        }
 
-        private Optional<String> author = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CreateTicketContactError> contact() {
+            return (Optional<CreateTicketContactError>) contact;
+        }
 
-        private Optional<? extends CreateTicketContactError> contact = Optional.empty();
+        @JsonIgnore
+        public Optional<String> foreignID() {
+            return foreignID;
+        }
 
-        private Optional<String> foreignID = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder title(String title) {
+        public Data withTitle(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
             return this;
         }
 
-        public Builder title(Optional<String> title) {
+
+        public Data withTitle(Optional<String> title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
-
-        public Builder body(String body) {
+        public Data withBody(String body) {
             Utils.checkNotNull(body, "body");
             this.body = Optional.ofNullable(body);
             return this;
         }
 
-        public Builder body(Optional<String> body) {
+
+        public Data withBody(Optional<String> body) {
             Utils.checkNotNull(body, "body");
             this.body = body;
             return this;
         }
 
-
-        public Builder author(String author) {
+        public Data withAuthor(String author) {
             Utils.checkNotNull(author, "author");
             this.author = Optional.ofNullable(author);
             return this;
         }
 
-        public Builder author(Optional<String> author) {
+
+        public Data withAuthor(Optional<String> author) {
             Utils.checkNotNull(author, "author");
             this.author = author;
             return this;
         }
 
-
-        public Builder contact(CreateTicketContactError contact) {
+        public Data withContact(CreateTicketContactError contact) {
             Utils.checkNotNull(contact, "contact");
             this.contact = Optional.ofNullable(contact);
             return this;
         }
 
-        public Builder contact(Optional<? extends CreateTicketContactError> contact) {
+
+        public Data withContact(Optional<? extends CreateTicketContactError> contact) {
             Utils.checkNotNull(contact, "contact");
             this.contact = contact;
             return this;
         }
 
-
-        public Builder foreignID(String foreignID) {
+        public Data withForeignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = Optional.ofNullable(foreignID);
             return this;
         }
 
-        public Builder foreignID(Optional<String> foreignID) {
+
+        public Data withForeignID(Optional<String> foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = foreignID;
             return this;
         }
 
-        public CreateTicketError build() {
-
-            return new CreateTicketError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.title, other.title) &&
+                Utils.enhancedDeepEquals(this.body, other.body) &&
+                Utils.enhancedDeepEquals(this.author, other.author) &&
+                Utils.enhancedDeepEquals(this.contact, other.contact) &&
+                Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 title, body, author,
                 contact, foreignID);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "title", title,
+                    "body", body,
+                    "author", author,
+                    "contact", contact,
+                    "foreignID", foreignID);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> title = Optional.empty();
+
+            private Optional<String> body = Optional.empty();
+
+            private Optional<String> author = Optional.empty();
+
+            private Optional<? extends CreateTicketContactError> contact = Optional.empty();
+
+            private Optional<String> foreignID = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder title(String title) {
+                Utils.checkNotNull(title, "title");
+                this.title = Optional.ofNullable(title);
+                return this;
+            }
+
+            public Builder title(Optional<String> title) {
+                Utils.checkNotNull(title, "title");
+                this.title = title;
+                return this;
+            }
+
+
+            public Builder body(String body) {
+                Utils.checkNotNull(body, "body");
+                this.body = Optional.ofNullable(body);
+                return this;
+            }
+
+            public Builder body(Optional<String> body) {
+                Utils.checkNotNull(body, "body");
+                this.body = body;
+                return this;
+            }
+
+
+            public Builder author(String author) {
+                Utils.checkNotNull(author, "author");
+                this.author = Optional.ofNullable(author);
+                return this;
+            }
+
+            public Builder author(Optional<String> author) {
+                Utils.checkNotNull(author, "author");
+                this.author = author;
+                return this;
+            }
+
+
+            public Builder contact(CreateTicketContactError contact) {
+                Utils.checkNotNull(contact, "contact");
+                this.contact = Optional.ofNullable(contact);
+                return this;
+            }
+
+            public Builder contact(Optional<? extends CreateTicketContactError> contact) {
+                Utils.checkNotNull(contact, "contact");
+                this.contact = contact;
+                return this;
+            }
+
+
+            public Builder foreignID(String foreignID) {
+                Utils.checkNotNull(foreignID, "foreignID");
+                this.foreignID = Optional.ofNullable(foreignID);
+                return this;
+            }
+
+            public Builder foreignID(Optional<String> foreignID) {
+                Utils.checkNotNull(foreignID, "foreignID");
+                this.foreignID = foreignID;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    title, body, author,
+                    contact, foreignID);
+            }
+
+        }
     }
+
 }
 

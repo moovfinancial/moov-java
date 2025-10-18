@@ -19,7 +19,6 @@ import io.moov.sdk.operations.GetFileDetails;
 import io.moov.sdk.operations.ListFiles;
 import io.moov.sdk.operations.UploadFile;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -62,9 +61,9 @@ public class Files {
      * @param accountID 
      * @param fileUploadRequestMultiPart Request to upload a file for an account.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public UploadFileResponse upload(String accountID, FileUploadRequestMultiPart fileUploadRequestMultiPart) throws Exception {
+    public UploadFileResponse upload(String accountID, FileUploadRequestMultiPart fileUploadRequestMultiPart) {
         UploadFileRequest request =
             UploadFileRequest
                 .builder()
@@ -98,9 +97,9 @@ public class Files {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListFilesResponse list(String accountID) throws Exception {
+    public ListFilesResponse list(String accountID) {
         ListFilesRequest request =
             ListFilesRequest
                 .builder()
@@ -134,9 +133,9 @@ public class Files {
      * @param accountID 
      * @param fileID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetFileDetailsResponse get(String accountID, String fileID) throws Exception {
+    public GetFileDetailsResponse get(String accountID, String fileID) {
         GetFileDetailsRequest request =
             GetFileDetailsRequest
                 .builder()

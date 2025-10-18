@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.LinkCard;
 import io.moov.sdk.models.components.LinkCardWaitFor;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -60,7 +59,7 @@ public class LinkCardRequestBuilder {
         return request;
     }
 
-    public LinkCardResponse call() throws Exception {
+    public LinkCardResponse call() {
         
         RequestOperation<LinkCardRequest, LinkCardResponse> operation
               = new io.moov.sdk.operations.LinkCard.Sync(sdkConfiguration, _headers);

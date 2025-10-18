@@ -9,240 +9,308 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class ListWalletsValidationError extends RuntimeException {
+public class ListWalletsValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("status")
-    private Optional<String> status;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("walletType")
-    private Optional<String> walletType;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("skip")
-    private Optional<String> skip;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("count")
-    private Optional<String> count;
-
-    @JsonCreator
     public ListWalletsValidationError(
-            @JsonProperty("status") Optional<String> status,
-            @JsonProperty("walletType") Optional<String> walletType,
-            @JsonProperty("skip") Optional<String> skip,
-            @JsonProperty("count") Optional<String> count) {
-        super("API error occurred");
-        Utils.checkNotNull(status, "status");
-        Utils.checkNotNull(walletType, "walletType");
-        Utils.checkNotNull(skip, "skip");
-        Utils.checkNotNull(count, "count");
-        this.status = status;
-        this.walletType = walletType;
-        this.skip = skip;
-        this.count = count;
-    }
-    
-    public ListWalletsValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of ListWalletsValidationError. If deserialization of the response body fails,
+    * the resulting ListWalletsValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static ListWalletsValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new ListWalletsValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new ListWalletsValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> status() {
-        return status;
+        return data().flatMap(Data::status);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> walletType() {
-        return walletType;
+        return data().flatMap(Data::walletType);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> skip() {
-        return skip;
+        return data().flatMap(Data::skip);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> count() {
-        return count;
+        return data().flatMap(Data::count);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public ListWalletsValidationError withStatus(String status) {
-        Utils.checkNotNull(status, "status");
-        this.status = Optional.ofNullable(status);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public ListWalletsValidationError withStatus(Optional<String> status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
-        return this;
-    }
-
-    public ListWalletsValidationError withWalletType(String walletType) {
-        Utils.checkNotNull(walletType, "walletType");
-        this.walletType = Optional.ofNullable(walletType);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("status")
+        private Optional<String> status;
 
 
-    public ListWalletsValidationError withWalletType(Optional<String> walletType) {
-        Utils.checkNotNull(walletType, "walletType");
-        this.walletType = walletType;
-        return this;
-    }
-
-    public ListWalletsValidationError withSkip(String skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = Optional.ofNullable(skip);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("walletType")
+        private Optional<String> walletType;
 
 
-    public ListWalletsValidationError withSkip(Optional<String> skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = skip;
-        return this;
-    }
-
-    public ListWalletsValidationError withCount(String count) {
-        Utils.checkNotNull(count, "count");
-        this.count = Optional.ofNullable(count);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("skip")
+        private Optional<String> skip;
 
 
-    public ListWalletsValidationError withCount(Optional<String> count) {
-        Utils.checkNotNull(count, "count");
-        this.count = count;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("count")
+        private Optional<String> count;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("status") Optional<String> status,
+                @JsonProperty("walletType") Optional<String> walletType,
+                @JsonProperty("skip") Optional<String> skip,
+                @JsonProperty("count") Optional<String> count) {
+            Utils.checkNotNull(status, "status");
+            Utils.checkNotNull(walletType, "walletType");
+            Utils.checkNotNull(skip, "skip");
+            Utils.checkNotNull(count, "count");
+            this.status = status;
+            this.walletType = walletType;
+            this.skip = skip;
+            this.count = count;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
-        ListWalletsValidationError other = (ListWalletsValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.status, other.status) &&
-            Utils.enhancedDeepEquals(this.walletType, other.walletType) &&
-            Utils.enhancedDeepEquals(this.skip, other.skip) &&
-            Utils.enhancedDeepEquals(this.count, other.count);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            status, walletType, skip,
-            count);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(ListWalletsValidationError.class,
-                "status", status,
-                "walletType", walletType,
-                "skip", skip,
-                "count", count);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> status() {
+            return status;
+        }
 
-        private Optional<String> status = Optional.empty();
+        @JsonIgnore
+        public Optional<String> walletType() {
+            return walletType;
+        }
 
-        private Optional<String> walletType = Optional.empty();
+        @JsonIgnore
+        public Optional<String> skip() {
+            return skip;
+        }
 
-        private Optional<String> skip = Optional.empty();
+        @JsonIgnore
+        public Optional<String> count() {
+            return count;
+        }
 
-        private Optional<String> count = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder status(String status) {
+        public Data withStatus(String status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
         }
 
-        public Builder status(Optional<String> status) {
+
+        public Data withStatus(Optional<String> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
-
-        public Builder walletType(String walletType) {
+        public Data withWalletType(String walletType) {
             Utils.checkNotNull(walletType, "walletType");
             this.walletType = Optional.ofNullable(walletType);
             return this;
         }
 
-        public Builder walletType(Optional<String> walletType) {
+
+        public Data withWalletType(Optional<String> walletType) {
             Utils.checkNotNull(walletType, "walletType");
             this.walletType = walletType;
             return this;
         }
 
-
-        public Builder skip(String skip) {
+        public Data withSkip(String skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
             return this;
         }
 
-        public Builder skip(Optional<String> skip) {
+
+        public Data withSkip(Optional<String> skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = skip;
             return this;
         }
 
-
-        public Builder count(String count) {
+        public Data withCount(String count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
             return this;
         }
 
-        public Builder count(Optional<String> count) {
+
+        public Data withCount(Optional<String> count) {
             Utils.checkNotNull(count, "count");
             this.count = count;
             return this;
         }
 
-        public ListWalletsValidationError build() {
-
-            return new ListWalletsValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.status, other.status) &&
+                Utils.enhancedDeepEquals(this.walletType, other.walletType) &&
+                Utils.enhancedDeepEquals(this.skip, other.skip) &&
+                Utils.enhancedDeepEquals(this.count, other.count);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 status, walletType, skip,
                 count);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "status", status,
+                    "walletType", walletType,
+                    "skip", skip,
+                    "count", count);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> status = Optional.empty();
+
+            private Optional<String> walletType = Optional.empty();
+
+            private Optional<String> skip = Optional.empty();
+
+            private Optional<String> count = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder status(String status) {
+                Utils.checkNotNull(status, "status");
+                this.status = Optional.ofNullable(status);
+                return this;
+            }
+
+            public Builder status(Optional<String> status) {
+                Utils.checkNotNull(status, "status");
+                this.status = status;
+                return this;
+            }
+
+
+            public Builder walletType(String walletType) {
+                Utils.checkNotNull(walletType, "walletType");
+                this.walletType = Optional.ofNullable(walletType);
+                return this;
+            }
+
+            public Builder walletType(Optional<String> walletType) {
+                Utils.checkNotNull(walletType, "walletType");
+                this.walletType = walletType;
+                return this;
+            }
+
+
+            public Builder skip(String skip) {
+                Utils.checkNotNull(skip, "skip");
+                this.skip = Optional.ofNullable(skip);
+                return this;
+            }
+
+            public Builder skip(Optional<String> skip) {
+                Utils.checkNotNull(skip, "skip");
+                this.skip = skip;
+                return this;
+            }
+
+
+            public Builder count(String count) {
+                Utils.checkNotNull(count, "count");
+                this.count = Optional.ofNullable(count);
+                return this;
+            }
+
+            public Builder count(Optional<String> count) {
+                Utils.checkNotNull(count, "count");
+                this.count = count;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    status, walletType, skip,
+                    count);
+            }
+
+        }
     }
+
 }
 

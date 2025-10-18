@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetPaymentMethod;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetPaymentMethodRequestBuilder {
@@ -44,7 +43,7 @@ public class GetPaymentMethodRequestBuilder {
         return request;
     }
 
-    public GetPaymentMethodResponse call() throws Exception {
+    public GetPaymentMethodResponse call() {
         
         RequestOperation<GetPaymentMethodRequest, GetPaymentMethodResponse> operation
               = new GetPaymentMethod.Sync(sdkConfiguration, _headers);

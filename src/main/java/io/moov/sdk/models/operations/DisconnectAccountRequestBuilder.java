@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DisconnectAccount;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class DisconnectAccountRequestBuilder {
@@ -36,7 +35,7 @@ public class DisconnectAccountRequestBuilder {
         return request;
     }
 
-    public DisconnectAccountResponse call() throws Exception {
+    public DisconnectAccountResponse call() {
         
         RequestOperation<DisconnectAccountRequest, DisconnectAccountResponse> operation
               = new DisconnectAccount.Sync(sdkConfiguration, _headers);

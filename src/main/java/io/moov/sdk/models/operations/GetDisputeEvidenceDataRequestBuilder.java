@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetDisputeEvidenceData;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetDisputeEvidenceDataRequestBuilder {
@@ -52,7 +51,7 @@ public class GetDisputeEvidenceDataRequestBuilder {
         return request;
     }
 
-    public GetDisputeEvidenceDataResponse call() throws Exception {
+    public GetDisputeEvidenceDataResponse call() {
         
         RequestOperation<GetDisputeEvidenceDataRequest, GetDisputeEvidenceDataResponse> operation
               = new GetDisputeEvidenceData.Sync(sdkConfiguration, _headers);

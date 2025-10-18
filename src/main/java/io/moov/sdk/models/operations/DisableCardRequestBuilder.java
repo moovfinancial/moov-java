@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DisableCard;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class DisableCardRequestBuilder {
@@ -44,7 +43,7 @@ public class DisableCardRequestBuilder {
         return request;
     }
 
-    public DisableCardResponse call() throws Exception {
+    public DisableCardResponse call() {
         
         RequestOperation<DisableCardRequest, DisableCardResponse> operation
               = new DisableCard.Sync(sdkConfiguration, _headers);

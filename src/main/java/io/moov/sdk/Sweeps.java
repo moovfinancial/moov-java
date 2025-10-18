@@ -31,7 +31,6 @@ import io.moov.sdk.operations.ListSweepConfigs;
 import io.moov.sdk.operations.ListSweeps;
 import io.moov.sdk.operations.UpdateSweepConfig;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -66,9 +65,9 @@ public class Sweeps {
      * @param accountID 
      * @param createSweepConfig 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateSweepConfigResponse createConfig(String accountID, CreateSweepConfig createSweepConfig) throws Exception {
+    public CreateSweepConfigResponse createConfig(String accountID, CreateSweepConfig createSweepConfig) {
         CreateSweepConfigRequest request =
             CreateSweepConfigRequest
                 .builder()
@@ -102,9 +101,9 @@ public class Sweeps {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListSweepConfigsResponse listConfigs(String accountID) throws Exception {
+    public ListSweepConfigsResponse listConfigs(String accountID) {
         ListSweepConfigsRequest request =
             ListSweepConfigsRequest
                 .builder()
@@ -138,9 +137,9 @@ public class Sweeps {
      * @param accountID 
      * @param sweepConfigID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetSweepConfigResponse getConfig(String accountID, String sweepConfigID) throws Exception {
+    public GetSweepConfigResponse getConfig(String accountID, String sweepConfigID) {
         GetSweepConfigRequest request =
             GetSweepConfigRequest
                 .builder()
@@ -176,11 +175,11 @@ public class Sweeps {
      * @param sweepConfigID 
      * @param patchSweepConfig 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateSweepConfigResponse updateConfig(
             String accountID, String sweepConfigID,
-            PatchSweepConfig patchSweepConfig) throws Exception {
+            PatchSweepConfig patchSweepConfig) {
         UpdateSweepConfigRequest request =
             UpdateSweepConfigRequest
                 .builder()
@@ -215,9 +214,9 @@ public class Sweeps {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListSweepsResponse list(ListSweepsRequest request) throws Exception {
+    public ListSweepsResponse list(ListSweepsRequest request) {
         RequestOperation<ListSweepsRequest, ListSweepsResponse> operation
               = new ListSweeps.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -247,11 +246,11 @@ public class Sweeps {
      * @param walletID 
      * @param sweepID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public GetSweepResponse get(
             String accountID, String walletID,
-            String sweepID) throws Exception {
+            String sweepID) {
         GetSweepRequest request =
             GetSweepRequest
                 .builder()

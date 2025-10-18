@@ -14,7 +14,6 @@ import io.moov.sdk.models.operations.ListWalletTransactionsResponse;
 import io.moov.sdk.operations.GetWalletTransaction;
 import io.moov.sdk.operations.ListWalletTransactions;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -54,9 +53,9 @@ public class WalletTransactions {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListWalletTransactionsResponse list(ListWalletTransactionsRequest request) throws Exception {
+    public ListWalletTransactionsResponse list(ListWalletTransactionsRequest request) {
         RequestOperation<ListWalletTransactionsRequest, ListWalletTransactionsResponse> operation
               = new ListWalletTransactions.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -92,11 +91,11 @@ public class WalletTransactions {
      * @param walletID 
      * @param transactionID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public GetWalletTransactionResponse get(
             String accountID, String walletID,
-            String transactionID) throws Exception {
+            String transactionID) {
         GetWalletTransactionRequest request =
             GetWalletTransactionRequest
                 .builder()

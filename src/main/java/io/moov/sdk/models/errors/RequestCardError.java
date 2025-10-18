@@ -12,329 +12,407 @@ import io.moov.sdk.models.components.CardExpirationError;
 import io.moov.sdk.models.components.CreateAuthorizedUserError;
 import io.moov.sdk.models.components.IssuingControlsError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class RequestCardError extends RuntimeException {
+public class RequestCardError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("fundingWalletID")
-    private Optional<String> fundingWalletID;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("formFactor")
-    private Optional<String> formFactor;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("authorizedUser")
-    private Optional<? extends CreateAuthorizedUserError> authorizedUser;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("memo")
-    private Optional<String> memo;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("expiration")
-    private Optional<? extends CardExpirationError> expiration;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("controls")
-    private Optional<? extends IssuingControlsError> controls;
-
-    @JsonCreator
     public RequestCardError(
-            @JsonProperty("fundingWalletID") Optional<String> fundingWalletID,
-            @JsonProperty("formFactor") Optional<String> formFactor,
-            @JsonProperty("authorizedUser") Optional<? extends CreateAuthorizedUserError> authorizedUser,
-            @JsonProperty("memo") Optional<String> memo,
-            @JsonProperty("expiration") Optional<? extends CardExpirationError> expiration,
-            @JsonProperty("controls") Optional<? extends IssuingControlsError> controls) {
-        super("API error occurred");
-        Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-        Utils.checkNotNull(formFactor, "formFactor");
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        Utils.checkNotNull(memo, "memo");
-        Utils.checkNotNull(expiration, "expiration");
-        Utils.checkNotNull(controls, "controls");
-        this.fundingWalletID = fundingWalletID;
-        this.formFactor = formFactor;
-        this.authorizedUser = authorizedUser;
-        this.memo = memo;
-        this.expiration = expiration;
-        this.controls = controls;
-    }
-    
-    public RequestCardError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of RequestCardError. If deserialization of the response body fails,
+    * the resulting RequestCardError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static RequestCardError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new RequestCardError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new RequestCardError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> fundingWalletID() {
-        return fundingWalletID;
+        return data().flatMap(Data::fundingWalletID);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> formFactor() {
-        return formFactor;
+        return data().flatMap(Data::formFactor);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<CreateAuthorizedUserError> authorizedUser() {
-        return (Optional<CreateAuthorizedUserError>) authorizedUser;
+        return data().flatMap(Data::authorizedUser);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> memo() {
-        return memo;
+        return data().flatMap(Data::memo);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<CardExpirationError> expiration() {
-        return (Optional<CardExpirationError>) expiration;
+        return data().flatMap(Data::expiration);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<IssuingControlsError> controls() {
-        return (Optional<IssuingControlsError>) controls;
+        return data().flatMap(Data::controls);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public RequestCardError withFundingWalletID(String fundingWalletID) {
-        Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-        this.fundingWalletID = Optional.ofNullable(fundingWalletID);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public RequestCardError withFundingWalletID(Optional<String> fundingWalletID) {
-        Utils.checkNotNull(fundingWalletID, "fundingWalletID");
-        this.fundingWalletID = fundingWalletID;
-        return this;
-    }
-
-    public RequestCardError withFormFactor(String formFactor) {
-        Utils.checkNotNull(formFactor, "formFactor");
-        this.formFactor = Optional.ofNullable(formFactor);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("fundingWalletID")
+        private Optional<String> fundingWalletID;
 
 
-    public RequestCardError withFormFactor(Optional<String> formFactor) {
-        Utils.checkNotNull(formFactor, "formFactor");
-        this.formFactor = formFactor;
-        return this;
-    }
-
-    public RequestCardError withAuthorizedUser(CreateAuthorizedUserError authorizedUser) {
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        this.authorizedUser = Optional.ofNullable(authorizedUser);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("formFactor")
+        private Optional<String> formFactor;
 
 
-    public RequestCardError withAuthorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
-        Utils.checkNotNull(authorizedUser, "authorizedUser");
-        this.authorizedUser = authorizedUser;
-        return this;
-    }
-
-    public RequestCardError withMemo(String memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = Optional.ofNullable(memo);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("authorizedUser")
+        private Optional<? extends CreateAuthorizedUserError> authorizedUser;
 
 
-    public RequestCardError withMemo(Optional<String> memo) {
-        Utils.checkNotNull(memo, "memo");
-        this.memo = memo;
-        return this;
-    }
-
-    public RequestCardError withExpiration(CardExpirationError expiration) {
-        Utils.checkNotNull(expiration, "expiration");
-        this.expiration = Optional.ofNullable(expiration);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("memo")
+        private Optional<String> memo;
 
 
-    public RequestCardError withExpiration(Optional<? extends CardExpirationError> expiration) {
-        Utils.checkNotNull(expiration, "expiration");
-        this.expiration = expiration;
-        return this;
-    }
-
-    public RequestCardError withControls(IssuingControlsError controls) {
-        Utils.checkNotNull(controls, "controls");
-        this.controls = Optional.ofNullable(controls);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("expiration")
+        private Optional<? extends CardExpirationError> expiration;
 
 
-    public RequestCardError withControls(Optional<? extends IssuingControlsError> controls) {
-        Utils.checkNotNull(controls, "controls");
-        this.controls = controls;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("controls")
+        private Optional<? extends IssuingControlsError> controls;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("fundingWalletID") Optional<String> fundingWalletID,
+                @JsonProperty("formFactor") Optional<String> formFactor,
+                @JsonProperty("authorizedUser") Optional<? extends CreateAuthorizedUserError> authorizedUser,
+                @JsonProperty("memo") Optional<String> memo,
+                @JsonProperty("expiration") Optional<? extends CardExpirationError> expiration,
+                @JsonProperty("controls") Optional<? extends IssuingControlsError> controls) {
+            Utils.checkNotNull(fundingWalletID, "fundingWalletID");
+            Utils.checkNotNull(formFactor, "formFactor");
+            Utils.checkNotNull(authorizedUser, "authorizedUser");
+            Utils.checkNotNull(memo, "memo");
+            Utils.checkNotNull(expiration, "expiration");
+            Utils.checkNotNull(controls, "controls");
+            this.fundingWalletID = fundingWalletID;
+            this.formFactor = formFactor;
+            this.authorizedUser = authorizedUser;
+            this.memo = memo;
+            this.expiration = expiration;
+            this.controls = controls;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty());
         }
-        RequestCardError other = (RequestCardError) o;
-        return 
-            Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
-            Utils.enhancedDeepEquals(this.formFactor, other.formFactor) &&
-            Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser) &&
-            Utils.enhancedDeepEquals(this.memo, other.memo) &&
-            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
-            Utils.enhancedDeepEquals(this.controls, other.controls);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            fundingWalletID, formFactor, authorizedUser,
-            memo, expiration, controls);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(RequestCardError.class,
-                "fundingWalletID", fundingWalletID,
-                "formFactor", formFactor,
-                "authorizedUser", authorizedUser,
-                "memo", memo,
-                "expiration", expiration,
-                "controls", controls);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> fundingWalletID() {
+            return fundingWalletID;
+        }
 
-        private Optional<String> fundingWalletID = Optional.empty();
+        @JsonIgnore
+        public Optional<String> formFactor() {
+            return formFactor;
+        }
 
-        private Optional<String> formFactor = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CreateAuthorizedUserError> authorizedUser() {
+            return (Optional<CreateAuthorizedUserError>) authorizedUser;
+        }
 
-        private Optional<? extends CreateAuthorizedUserError> authorizedUser = Optional.empty();
+        @JsonIgnore
+        public Optional<String> memo() {
+            return memo;
+        }
 
-        private Optional<String> memo = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CardExpirationError> expiration() {
+            return (Optional<CardExpirationError>) expiration;
+        }
 
-        private Optional<? extends CardExpirationError> expiration = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<IssuingControlsError> controls() {
+            return (Optional<IssuingControlsError>) controls;
+        }
 
-        private Optional<? extends IssuingControlsError> controls = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder fundingWalletID(String fundingWalletID) {
+        public Data withFundingWalletID(String fundingWalletID) {
             Utils.checkNotNull(fundingWalletID, "fundingWalletID");
             this.fundingWalletID = Optional.ofNullable(fundingWalletID);
             return this;
         }
 
-        public Builder fundingWalletID(Optional<String> fundingWalletID) {
+
+        public Data withFundingWalletID(Optional<String> fundingWalletID) {
             Utils.checkNotNull(fundingWalletID, "fundingWalletID");
             this.fundingWalletID = fundingWalletID;
             return this;
         }
 
-
-        public Builder formFactor(String formFactor) {
+        public Data withFormFactor(String formFactor) {
             Utils.checkNotNull(formFactor, "formFactor");
             this.formFactor = Optional.ofNullable(formFactor);
             return this;
         }
 
-        public Builder formFactor(Optional<String> formFactor) {
+
+        public Data withFormFactor(Optional<String> formFactor) {
             Utils.checkNotNull(formFactor, "formFactor");
             this.formFactor = formFactor;
             return this;
         }
 
-
-        public Builder authorizedUser(CreateAuthorizedUserError authorizedUser) {
+        public Data withAuthorizedUser(CreateAuthorizedUserError authorizedUser) {
             Utils.checkNotNull(authorizedUser, "authorizedUser");
             this.authorizedUser = Optional.ofNullable(authorizedUser);
             return this;
         }
 
-        public Builder authorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
+
+        public Data withAuthorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
             Utils.checkNotNull(authorizedUser, "authorizedUser");
             this.authorizedUser = authorizedUser;
             return this;
         }
 
-
-        public Builder memo(String memo) {
+        public Data withMemo(String memo) {
             Utils.checkNotNull(memo, "memo");
             this.memo = Optional.ofNullable(memo);
             return this;
         }
 
-        public Builder memo(Optional<String> memo) {
+
+        public Data withMemo(Optional<String> memo) {
             Utils.checkNotNull(memo, "memo");
             this.memo = memo;
             return this;
         }
 
-
-        public Builder expiration(CardExpirationError expiration) {
+        public Data withExpiration(CardExpirationError expiration) {
             Utils.checkNotNull(expiration, "expiration");
             this.expiration = Optional.ofNullable(expiration);
             return this;
         }
 
-        public Builder expiration(Optional<? extends CardExpirationError> expiration) {
+
+        public Data withExpiration(Optional<? extends CardExpirationError> expiration) {
             Utils.checkNotNull(expiration, "expiration");
             this.expiration = expiration;
             return this;
         }
 
-
-        public Builder controls(IssuingControlsError controls) {
+        public Data withControls(IssuingControlsError controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = Optional.ofNullable(controls);
             return this;
         }
 
-        public Builder controls(Optional<? extends IssuingControlsError> controls) {
+
+        public Data withControls(Optional<? extends IssuingControlsError> controls) {
             Utils.checkNotNull(controls, "controls");
             this.controls = controls;
             return this;
         }
 
-        public RequestCardError build() {
-
-            return new RequestCardError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.fundingWalletID, other.fundingWalletID) &&
+                Utils.enhancedDeepEquals(this.formFactor, other.formFactor) &&
+                Utils.enhancedDeepEquals(this.authorizedUser, other.authorizedUser) &&
+                Utils.enhancedDeepEquals(this.memo, other.memo) &&
+                Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+                Utils.enhancedDeepEquals(this.controls, other.controls);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 fundingWalletID, formFactor, authorizedUser,
                 memo, expiration, controls);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "fundingWalletID", fundingWalletID,
+                    "formFactor", formFactor,
+                    "authorizedUser", authorizedUser,
+                    "memo", memo,
+                    "expiration", expiration,
+                    "controls", controls);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> fundingWalletID = Optional.empty();
+
+            private Optional<String> formFactor = Optional.empty();
+
+            private Optional<? extends CreateAuthorizedUserError> authorizedUser = Optional.empty();
+
+            private Optional<String> memo = Optional.empty();
+
+            private Optional<? extends CardExpirationError> expiration = Optional.empty();
+
+            private Optional<? extends IssuingControlsError> controls = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder fundingWalletID(String fundingWalletID) {
+                Utils.checkNotNull(fundingWalletID, "fundingWalletID");
+                this.fundingWalletID = Optional.ofNullable(fundingWalletID);
+                return this;
+            }
+
+            public Builder fundingWalletID(Optional<String> fundingWalletID) {
+                Utils.checkNotNull(fundingWalletID, "fundingWalletID");
+                this.fundingWalletID = fundingWalletID;
+                return this;
+            }
+
+
+            public Builder formFactor(String formFactor) {
+                Utils.checkNotNull(formFactor, "formFactor");
+                this.formFactor = Optional.ofNullable(formFactor);
+                return this;
+            }
+
+            public Builder formFactor(Optional<String> formFactor) {
+                Utils.checkNotNull(formFactor, "formFactor");
+                this.formFactor = formFactor;
+                return this;
+            }
+
+
+            public Builder authorizedUser(CreateAuthorizedUserError authorizedUser) {
+                Utils.checkNotNull(authorizedUser, "authorizedUser");
+                this.authorizedUser = Optional.ofNullable(authorizedUser);
+                return this;
+            }
+
+            public Builder authorizedUser(Optional<? extends CreateAuthorizedUserError> authorizedUser) {
+                Utils.checkNotNull(authorizedUser, "authorizedUser");
+                this.authorizedUser = authorizedUser;
+                return this;
+            }
+
+
+            public Builder memo(String memo) {
+                Utils.checkNotNull(memo, "memo");
+                this.memo = Optional.ofNullable(memo);
+                return this;
+            }
+
+            public Builder memo(Optional<String> memo) {
+                Utils.checkNotNull(memo, "memo");
+                this.memo = memo;
+                return this;
+            }
+
+
+            public Builder expiration(CardExpirationError expiration) {
+                Utils.checkNotNull(expiration, "expiration");
+                this.expiration = Optional.ofNullable(expiration);
+                return this;
+            }
+
+            public Builder expiration(Optional<? extends CardExpirationError> expiration) {
+                Utils.checkNotNull(expiration, "expiration");
+                this.expiration = expiration;
+                return this;
+            }
+
+
+            public Builder controls(IssuingControlsError controls) {
+                Utils.checkNotNull(controls, "controls");
+                this.controls = Optional.ofNullable(controls);
+                return this;
+            }
+
+            public Builder controls(Optional<? extends IssuingControlsError> controls) {
+                Utils.checkNotNull(controls, "controls");
+                this.controls = controls;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    fundingWalletID, formFactor, authorizedUser,
+                    memo, expiration, controls);
+            }
+
+        }
     }
+
 }
 

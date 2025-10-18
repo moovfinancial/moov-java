@@ -12,278 +12,360 @@ import io.moov.sdk.models.components.Amount;
 import io.moov.sdk.models.components.RefundCardDetails;
 import io.moov.sdk.models.components.RefundStatus;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
-/**
- * CardAcquiringRefund
- * 
- * <p>Details of a card refund.
- */
 @SuppressWarnings("serial")
-public class CardAcquiringRefund extends RuntimeException {
-    /**
-     * Identifier for the refund.
-     */
-    @JsonProperty("refundID")
-    private String refundID;
+public class CardAcquiringRefund extends MoovError {
 
+    @Nullable
+    private final Data data;
 
-    @JsonProperty("createdOn")
-    private OffsetDateTime createdOn;
+    @Nullable
+    private final Throwable deserializationException;
 
-
-    @JsonProperty("updatedOn")
-    private OffsetDateTime updatedOn;
-
-
-    @JsonProperty("status")
-    private RefundStatus status;
-
-
-    @JsonProperty("amount")
-    private Amount amount;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("cardDetails")
-    private Optional<? extends RefundCardDetails> cardDetails;
-
-    @JsonCreator
     public CardAcquiringRefund(
-            @JsonProperty("refundID") String refundID,
-            @JsonProperty("createdOn") OffsetDateTime createdOn,
-            @JsonProperty("updatedOn") OffsetDateTime updatedOn,
-            @JsonProperty("status") RefundStatus status,
-            @JsonProperty("amount") Amount amount,
-            @JsonProperty("cardDetails") Optional<? extends RefundCardDetails> cardDetails) {
-        super("API error occurred");
-        Utils.checkNotNull(refundID, "refundID");
-        Utils.checkNotNull(createdOn, "createdOn");
-        Utils.checkNotNull(updatedOn, "updatedOn");
-        Utils.checkNotNull(status, "status");
-        Utils.checkNotNull(amount, "amount");
-        Utils.checkNotNull(cardDetails, "cardDetails");
-        this.refundID = refundID;
-        this.createdOn = createdOn;
-        this.updatedOn = updatedOn;
-        this.status = status;
-        this.amount = amount;
-        this.cardDetails = cardDetails;
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
-    
-    public CardAcquiringRefund(
-            String refundID,
-            OffsetDateTime createdOn,
-            OffsetDateTime updatedOn,
-            RefundStatus status,
-            Amount amount) {
-        this(refundID, createdOn, updatedOn,
-            status, amount, Optional.empty());
+
+    /**
+    * Parse a response into an instance of CardAcquiringRefund. If deserialization of the response body fails,
+    * the resulting CardAcquiringRefund instance will have a null data() value and a non-null deserializationException().
+    */
+    public static CardAcquiringRefund from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new CardAcquiringRefund(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new CardAcquiringRefund(response.statusCode(), null, response, null, e);
+        }
     }
 
     /**
      * Identifier for the refund.
      */
-    @JsonIgnore
-    public String refundID() {
-        return refundID;
+    @Deprecated
+    public Optional<String> refundID() {
+        return data().map(Data::refundID);
     }
 
-    @JsonIgnore
-    public OffsetDateTime createdOn() {
-        return createdOn;
+    @Deprecated
+    public Optional<OffsetDateTime> createdOn() {
+        return data().map(Data::createdOn);
     }
 
-    @JsonIgnore
-    public OffsetDateTime updatedOn() {
-        return updatedOn;
+    @Deprecated
+    public Optional<OffsetDateTime> updatedOn() {
+        return data().map(Data::updatedOn);
     }
 
-    @JsonIgnore
-    public RefundStatus status() {
-        return status;
+    @Deprecated
+    public Optional<RefundStatus> status() {
+        return data().map(Data::status);
     }
 
-    @JsonIgnore
-    public Amount amount() {
-        return amount;
+    @Deprecated
+    public Optional<Amount> amount() {
+        return data().map(Data::amount);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<RefundCardDetails> cardDetails() {
-        return (Optional<RefundCardDetails>) cardDetails;
+        return data().flatMap(Data::cardDetails);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
-
 
     /**
-     * Identifier for the refund.
+     * Returns the exception if an error occurs while deserializing the response body.
      */
-    public CardAcquiringRefund withRefundID(String refundID) {
-        Utils.checkNotNull(refundID, "refundID");
-        this.refundID = refundID;
-        return this;
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
-
-    public CardAcquiringRefund withCreatedOn(OffsetDateTime createdOn) {
-        Utils.checkNotNull(createdOn, "createdOn");
-        this.createdOn = createdOn;
-        return this;
-    }
-
-    public CardAcquiringRefund withUpdatedOn(OffsetDateTime updatedOn) {
-        Utils.checkNotNull(updatedOn, "updatedOn");
-        this.updatedOn = updatedOn;
-        return this;
-    }
-
-    public CardAcquiringRefund withStatus(RefundStatus status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
-        return this;
-    }
-
-    public CardAcquiringRefund withAmount(Amount amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = amount;
-        return this;
-    }
-
-    public CardAcquiringRefund withCardDetails(RefundCardDetails cardDetails) {
-        Utils.checkNotNull(cardDetails, "cardDetails");
-        this.cardDetails = Optional.ofNullable(cardDetails);
-        return this;
-    }
-
-
-    public CardAcquiringRefund withCardDetails(Optional<? extends RefundCardDetails> cardDetails) {
-        Utils.checkNotNull(cardDetails, "cardDetails");
-        this.cardDetails = cardDetails;
-        return this;
-    }
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        CardAcquiringRefund other = (CardAcquiringRefund) o;
-        return 
-            Utils.enhancedDeepEquals(this.refundID, other.refundID) &&
-            Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
-            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
-            Utils.enhancedDeepEquals(this.status, other.status) &&
-            Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            refundID, createdOn, updatedOn,
-            status, amount, cardDetails);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(CardAcquiringRefund.class,
-                "refundID", refundID,
-                "createdOn", createdOn,
-                "updatedOn", updatedOn,
-                "status", status,
-                "amount", amount,
-                "cardDetails", cardDetails);
-    }
-
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
-
+    /**
+     * Data
+     * 
+     * <p>Details of a card refund.
+     */
+    public static class Data {
+        /**
+         * Identifier for the refund.
+         */
+        @JsonProperty("refundID")
         private String refundID;
 
+
+        @JsonProperty("createdOn")
         private OffsetDateTime createdOn;
 
+
+        @JsonProperty("updatedOn")
         private OffsetDateTime updatedOn;
 
+
+        @JsonProperty("status")
         private RefundStatus status;
 
+
+        @JsonProperty("amount")
         private Amount amount;
 
-        private Optional<? extends RefundCardDetails> cardDetails = Optional.empty();
 
-        private Builder() {
-          // force use of static builder() method
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("cardDetails")
+        private Optional<? extends RefundCardDetails> cardDetails;
+
+        @JsonCreator
+        public Data(
+                @JsonProperty("refundID") String refundID,
+                @JsonProperty("createdOn") OffsetDateTime createdOn,
+                @JsonProperty("updatedOn") OffsetDateTime updatedOn,
+                @JsonProperty("status") RefundStatus status,
+                @JsonProperty("amount") Amount amount,
+                @JsonProperty("cardDetails") Optional<? extends RefundCardDetails> cardDetails) {
+            Utils.checkNotNull(refundID, "refundID");
+            Utils.checkNotNull(createdOn, "createdOn");
+            Utils.checkNotNull(updatedOn, "updatedOn");
+            Utils.checkNotNull(status, "status");
+            Utils.checkNotNull(amount, "amount");
+            Utils.checkNotNull(cardDetails, "cardDetails");
+            this.refundID = refundID;
+            this.createdOn = createdOn;
+            this.updatedOn = updatedOn;
+            this.status = status;
+            this.amount = amount;
+            this.cardDetails = cardDetails;
+        }
+        
+        public Data(
+                String refundID,
+                OffsetDateTime createdOn,
+                OffsetDateTime updatedOn,
+                RefundStatus status,
+                Amount amount) {
+            this(refundID, createdOn, updatedOn,
+                status, amount, Optional.empty());
+        }
+
+        /**
+         * Identifier for the refund.
+         */
+        @JsonIgnore
+        public String refundID() {
+            return refundID;
+        }
+
+        @JsonIgnore
+        public OffsetDateTime createdOn() {
+            return createdOn;
+        }
+
+        @JsonIgnore
+        public OffsetDateTime updatedOn() {
+            return updatedOn;
+        }
+
+        @JsonIgnore
+        public RefundStatus status() {
+            return status;
+        }
+
+        @JsonIgnore
+        public Amount amount() {
+            return amount;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<RefundCardDetails> cardDetails() {
+            return (Optional<RefundCardDetails>) cardDetails;
+        }
+
+        public static Builder builder() {
+            return new Builder();
         }
 
 
         /**
          * Identifier for the refund.
          */
-        public Builder refundID(String refundID) {
+        public Data withRefundID(String refundID) {
             Utils.checkNotNull(refundID, "refundID");
             this.refundID = refundID;
             return this;
         }
 
-
-        public Builder createdOn(OffsetDateTime createdOn) {
+        public Data withCreatedOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
             return this;
         }
 
-
-        public Builder updatedOn(OffsetDateTime updatedOn) {
+        public Data withUpdatedOn(OffsetDateTime updatedOn) {
             Utils.checkNotNull(updatedOn, "updatedOn");
             this.updatedOn = updatedOn;
             return this;
         }
 
-
-        public Builder status(RefundStatus status) {
+        public Data withStatus(RefundStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
-
-        public Builder amount(Amount amount) {
+        public Data withAmount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
 
-
-        public Builder cardDetails(RefundCardDetails cardDetails) {
+        public Data withCardDetails(RefundCardDetails cardDetails) {
             Utils.checkNotNull(cardDetails, "cardDetails");
             this.cardDetails = Optional.ofNullable(cardDetails);
             return this;
         }
 
-        public Builder cardDetails(Optional<? extends RefundCardDetails> cardDetails) {
+
+        public Data withCardDetails(Optional<? extends RefundCardDetails> cardDetails) {
             Utils.checkNotNull(cardDetails, "cardDetails");
             this.cardDetails = cardDetails;
             return this;
         }
 
-        public CardAcquiringRefund build() {
-
-            return new CardAcquiringRefund(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.refundID, other.refundID) &&
+                Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
+                Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+                Utils.enhancedDeepEquals(this.status, other.status) &&
+                Utils.enhancedDeepEquals(this.amount, other.amount) &&
+                Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 refundID, createdOn, updatedOn,
                 status, amount, cardDetails);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "refundID", refundID,
+                    "createdOn", createdOn,
+                    "updatedOn", updatedOn,
+                    "status", status,
+                    "amount", amount,
+                    "cardDetails", cardDetails);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private String refundID;
+
+            private OffsetDateTime createdOn;
+
+            private OffsetDateTime updatedOn;
+
+            private RefundStatus status;
+
+            private Amount amount;
+
+            private Optional<? extends RefundCardDetails> cardDetails = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            /**
+             * Identifier for the refund.
+             */
+            public Builder refundID(String refundID) {
+                Utils.checkNotNull(refundID, "refundID");
+                this.refundID = refundID;
+                return this;
+            }
+
+
+            public Builder createdOn(OffsetDateTime createdOn) {
+                Utils.checkNotNull(createdOn, "createdOn");
+                this.createdOn = createdOn;
+                return this;
+            }
+
+
+            public Builder updatedOn(OffsetDateTime updatedOn) {
+                Utils.checkNotNull(updatedOn, "updatedOn");
+                this.updatedOn = updatedOn;
+                return this;
+            }
+
+
+            public Builder status(RefundStatus status) {
+                Utils.checkNotNull(status, "status");
+                this.status = status;
+                return this;
+            }
+
+
+            public Builder amount(Amount amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = amount;
+                return this;
+            }
+
+
+            public Builder cardDetails(RefundCardDetails cardDetails) {
+                Utils.checkNotNull(cardDetails, "cardDetails");
+                this.cardDetails = Optional.ofNullable(cardDetails);
+                return this;
+            }
+
+            public Builder cardDetails(Optional<? extends RefundCardDetails> cardDetails) {
+                Utils.checkNotNull(cardDetails, "cardDetails");
+                this.cardDetails = cardDetails;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    refundID, createdOn, updatedOn,
+                    status, amount, cardDetails);
+            }
+
+        }
     }
+
 }
 

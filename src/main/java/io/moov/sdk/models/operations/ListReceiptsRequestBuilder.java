@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListReceipts;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class ListReceiptsRequestBuilder {
@@ -36,7 +35,7 @@ public class ListReceiptsRequestBuilder {
         return request;
     }
 
-    public ListReceiptsResponse call() throws Exception {
+    public ListReceiptsResponse call() {
         
         RequestOperation<ListReceiptsRequest, ListReceiptsResponse> operation
               = new ListReceipts.Sync(sdkConfiguration, _headers);

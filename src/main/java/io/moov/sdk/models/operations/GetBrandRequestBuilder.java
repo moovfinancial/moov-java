@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetBrand;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetBrandRequestBuilder {
@@ -36,7 +35,7 @@ public class GetBrandRequestBuilder {
         return request;
     }
 
-    public GetBrandResponse call() throws Exception {
+    public GetBrandResponse call() {
         
         RequestOperation<GetBrandRequest, GetBrandResponse> operation
               = new GetBrand.Sync(sdkConfiguration, _headers);

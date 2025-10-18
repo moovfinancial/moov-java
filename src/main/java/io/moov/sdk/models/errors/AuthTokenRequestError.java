@@ -9,151 +9,209 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class AuthTokenRequestError extends RuntimeException {
+public class AuthTokenRequestError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("scope")
-    private Optional<String> scope;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("refresh_token")
-    private Optional<String> refreshToken;
-
-    @JsonCreator
     public AuthTokenRequestError(
-            @JsonProperty("scope") Optional<String> scope,
-            @JsonProperty("refresh_token") Optional<String> refreshToken) {
-        super("API error occurred");
-        Utils.checkNotNull(scope, "scope");
-        Utils.checkNotNull(refreshToken, "refreshToken");
-        this.scope = scope;
-        this.refreshToken = refreshToken;
-    }
-    
-    public AuthTokenRequestError() {
-        this(Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of AuthTokenRequestError. If deserialization of the response body fails,
+    * the resulting AuthTokenRequestError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static AuthTokenRequestError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new AuthTokenRequestError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new AuthTokenRequestError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> scope() {
-        return scope;
+        return data().flatMap(Data::scope);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> refreshToken() {
-        return refreshToken;
+        return data().flatMap(Data::refreshToken);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public AuthTokenRequestError withScope(String scope) {
-        Utils.checkNotNull(scope, "scope");
-        this.scope = Optional.ofNullable(scope);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public AuthTokenRequestError withScope(Optional<String> scope) {
-        Utils.checkNotNull(scope, "scope");
-        this.scope = scope;
-        return this;
-    }
-
-    public AuthTokenRequestError withRefreshToken(String refreshToken) {
-        Utils.checkNotNull(refreshToken, "refreshToken");
-        this.refreshToken = Optional.ofNullable(refreshToken);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("scope")
+        private Optional<String> scope;
 
 
-    public AuthTokenRequestError withRefreshToken(Optional<String> refreshToken) {
-        Utils.checkNotNull(refreshToken, "refreshToken");
-        this.refreshToken = refreshToken;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("refresh_token")
+        private Optional<String> refreshToken;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("scope") Optional<String> scope,
+                @JsonProperty("refresh_token") Optional<String> refreshToken) {
+            Utils.checkNotNull(scope, "scope");
+            Utils.checkNotNull(refreshToken, "refreshToken");
+            this.scope = scope;
+            this.refreshToken = refreshToken;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty());
         }
-        AuthTokenRequestError other = (AuthTokenRequestError) o;
-        return 
-            Utils.enhancedDeepEquals(this.scope, other.scope) &&
-            Utils.enhancedDeepEquals(this.refreshToken, other.refreshToken);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            scope, refreshToken);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(AuthTokenRequestError.class,
-                "scope", scope,
-                "refreshToken", refreshToken);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> scope() {
+            return scope;
+        }
 
-        private Optional<String> scope = Optional.empty();
+        @JsonIgnore
+        public Optional<String> refreshToken() {
+            return refreshToken;
+        }
 
-        private Optional<String> refreshToken = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder scope(String scope) {
+        public Data withScope(String scope) {
             Utils.checkNotNull(scope, "scope");
             this.scope = Optional.ofNullable(scope);
             return this;
         }
 
-        public Builder scope(Optional<String> scope) {
+
+        public Data withScope(Optional<String> scope) {
             Utils.checkNotNull(scope, "scope");
             this.scope = scope;
             return this;
         }
 
-
-        public Builder refreshToken(String refreshToken) {
+        public Data withRefreshToken(String refreshToken) {
             Utils.checkNotNull(refreshToken, "refreshToken");
             this.refreshToken = Optional.ofNullable(refreshToken);
             return this;
         }
 
-        public Builder refreshToken(Optional<String> refreshToken) {
+
+        public Data withRefreshToken(Optional<String> refreshToken) {
             Utils.checkNotNull(refreshToken, "refreshToken");
             this.refreshToken = refreshToken;
             return this;
         }
 
-        public AuthTokenRequestError build() {
-
-            return new AuthTokenRequestError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.scope, other.scope) &&
+                Utils.enhancedDeepEquals(this.refreshToken, other.refreshToken);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 scope, refreshToken);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "scope", scope,
+                    "refreshToken", refreshToken);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> scope = Optional.empty();
+
+            private Optional<String> refreshToken = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder scope(String scope) {
+                Utils.checkNotNull(scope, "scope");
+                this.scope = Optional.ofNullable(scope);
+                return this;
+            }
+
+            public Builder scope(Optional<String> scope) {
+                Utils.checkNotNull(scope, "scope");
+                this.scope = scope;
+                return this;
+            }
+
+
+            public Builder refreshToken(String refreshToken) {
+                Utils.checkNotNull(refreshToken, "refreshToken");
+                this.refreshToken = Optional.ofNullable(refreshToken);
+                return this;
+            }
+
+            public Builder refreshToken(Optional<String> refreshToken) {
+                Utils.checkNotNull(refreshToken, "refreshToken");
+                this.refreshToken = refreshToken;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    scope, refreshToken);
+            }
+
+        }
     }
+
 }
 

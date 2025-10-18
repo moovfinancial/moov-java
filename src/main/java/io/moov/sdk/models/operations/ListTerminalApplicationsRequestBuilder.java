@@ -8,7 +8,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListTerminalApplications;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 
 public class ListTerminalApplicationsRequestBuilder {
 
@@ -27,7 +26,7 @@ public class ListTerminalApplicationsRequestBuilder {
         return request;
     }
 
-    public ListTerminalApplicationsResponse call() throws Exception {
+    public ListTerminalApplicationsResponse call() {
         
         RequestOperation<ListTerminalApplicationsRequest, ListTerminalApplicationsResponse> operation
               = new ListTerminalApplications.Sync(sdkConfiguration, _headers);

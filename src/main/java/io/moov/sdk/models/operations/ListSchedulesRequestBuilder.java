@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListSchedules;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -80,7 +79,7 @@ public class ListSchedulesRequestBuilder {
         return request;
     }
 
-    public ListSchedulesResponse call() throws Exception {
+    public ListSchedulesResponse call() {
         
         RequestOperation<ListSchedulesRequest, ListSchedulesResponse> operation
               = new ListSchedules.Sync(sdkConfiguration, _headers);

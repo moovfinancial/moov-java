@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.PatchTransfer;
 import io.moov.sdk.operations.UpdateTransfer;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class UpdateTransferRequestBuilder {
@@ -53,7 +52,7 @@ public class UpdateTransferRequestBuilder {
         return request;
     }
 
-    public UpdateTransferResponse call() throws Exception {
+    public UpdateTransferResponse call() {
         
         RequestOperation<UpdateTransferRequest, UpdateTransferResponse> operation
               = new UpdateTransfer.Sync(sdkConfiguration, _headers);

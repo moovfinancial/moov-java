@@ -7,89 +7,144 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
+import java.util.Optional;
 
 @SuppressWarnings("serial")
-public class RepresentativeValidationError extends RuntimeException {
+public class RepresentativeValidationError extends MoovError {
 
-    @JsonProperty("error")
-    private Error error;
+    @Nullable
+    private final Data data;
 
-    @JsonCreator
+    @Nullable
+    private final Throwable deserializationException;
+
     public RepresentativeValidationError(
-            @JsonProperty("error") Error error) {
-        super("API error occurred");
-        Utils.checkNotNull(error, "error");
-        this.error = error;
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
-    public Error error() {
-        return error;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-
-    public RepresentativeValidationError withError(Error error) {
-        Utils.checkNotNull(error, "error");
-        this.error = error;
-        return this;
-    }
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+    /**
+    * Parse a response into an instance of RepresentativeValidationError. If deserialization of the response body fails,
+    * the resulting RepresentativeValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static RepresentativeValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new RepresentativeValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new RepresentativeValidationError(response.statusCode(), null, response, null, e);
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        RepresentativeValidationError other = (RepresentativeValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.error, other.error);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            error);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(RepresentativeValidationError.class,
-                "error", error);
     }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    @Deprecated
+    public Optional<Error> error() {
+        return data().map(Data::error);
+    }
 
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
+    }
+
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
+    }
+
+    public static class Data {
+
+        @JsonProperty("error")
         private Error error;
 
-        private Builder() {
-          // force use of static builder() method
+        @JsonCreator
+        public Data(
+                @JsonProperty("error") Error error) {
+            Utils.checkNotNull(error, "error");
+            this.error = error;
+        }
+
+        @JsonIgnore
+        public Error error() {
+            return error;
+        }
+
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder error(Error error) {
+        public Data withError(Error error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
 
-        public RepresentativeValidationError build() {
-
-            return new RepresentativeValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.error, other.error);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 error);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "error", error);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Error error;
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder error(Error error) {
+                Utils.checkNotNull(error, "error");
+                this.error = error;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    error);
+            }
+
+        }
     }
+
 }
 

@@ -9,240 +9,308 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class PatchWalletValidationError extends RuntimeException {
+public class PatchWalletValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("name")
-    private Optional<String> name;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("status")
-    private Optional<String> status;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("description")
-    private Optional<String> description;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("metadata")
-    private Optional<String> metadata;
-
-    @JsonCreator
     public PatchWalletValidationError(
-            @JsonProperty("name") Optional<String> name,
-            @JsonProperty("status") Optional<String> status,
-            @JsonProperty("description") Optional<String> description,
-            @JsonProperty("metadata") Optional<String> metadata) {
-        super("API error occurred");
-        Utils.checkNotNull(name, "name");
-        Utils.checkNotNull(status, "status");
-        Utils.checkNotNull(description, "description");
-        Utils.checkNotNull(metadata, "metadata");
-        this.name = name;
-        this.status = status;
-        this.description = description;
-        this.metadata = metadata;
-    }
-    
-    public PatchWalletValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of PatchWalletValidationError. If deserialization of the response body fails,
+    * the resulting PatchWalletValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static PatchWalletValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new PatchWalletValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new PatchWalletValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> name() {
-        return name;
+        return data().flatMap(Data::name);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> status() {
-        return status;
+        return data().flatMap(Data::status);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> description() {
-        return description;
+        return data().flatMap(Data::description);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> metadata() {
-        return metadata;
+        return data().flatMap(Data::metadata);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public PatchWalletValidationError withName(String name) {
-        Utils.checkNotNull(name, "name");
-        this.name = Optional.ofNullable(name);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public PatchWalletValidationError withName(Optional<String> name) {
-        Utils.checkNotNull(name, "name");
-        this.name = name;
-        return this;
-    }
-
-    public PatchWalletValidationError withStatus(String status) {
-        Utils.checkNotNull(status, "status");
-        this.status = Optional.ofNullable(status);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("name")
+        private Optional<String> name;
 
 
-    public PatchWalletValidationError withStatus(Optional<String> status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
-        return this;
-    }
-
-    public PatchWalletValidationError withDescription(String description) {
-        Utils.checkNotNull(description, "description");
-        this.description = Optional.ofNullable(description);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("status")
+        private Optional<String> status;
 
 
-    public PatchWalletValidationError withDescription(Optional<String> description) {
-        Utils.checkNotNull(description, "description");
-        this.description = description;
-        return this;
-    }
-
-    public PatchWalletValidationError withMetadata(String metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = Optional.ofNullable(metadata);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("description")
+        private Optional<String> description;
 
 
-    public PatchWalletValidationError withMetadata(Optional<String> metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = metadata;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("metadata")
+        private Optional<String> metadata;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("name") Optional<String> name,
+                @JsonProperty("status") Optional<String> status,
+                @JsonProperty("description") Optional<String> description,
+                @JsonProperty("metadata") Optional<String> metadata) {
+            Utils.checkNotNull(name, "name");
+            Utils.checkNotNull(status, "status");
+            Utils.checkNotNull(description, "description");
+            Utils.checkNotNull(metadata, "metadata");
+            this.name = name;
+            this.status = status;
+            this.description = description;
+            this.metadata = metadata;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
         }
-        PatchWalletValidationError other = (PatchWalletValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.name, other.name) &&
-            Utils.enhancedDeepEquals(this.status, other.status) &&
-            Utils.enhancedDeepEquals(this.description, other.description) &&
-            Utils.enhancedDeepEquals(this.metadata, other.metadata);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            name, status, description,
-            metadata);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(PatchWalletValidationError.class,
-                "name", name,
-                "status", status,
-                "description", description,
-                "metadata", metadata);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> name() {
+            return name;
+        }
 
-        private Optional<String> name = Optional.empty();
+        @JsonIgnore
+        public Optional<String> status() {
+            return status;
+        }
 
-        private Optional<String> status = Optional.empty();
+        @JsonIgnore
+        public Optional<String> description() {
+            return description;
+        }
 
-        private Optional<String> description = Optional.empty();
+        @JsonIgnore
+        public Optional<String> metadata() {
+            return metadata;
+        }
 
-        private Optional<String> metadata = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder name(String name) {
+        public Data withName(String name) {
             Utils.checkNotNull(name, "name");
             this.name = Optional.ofNullable(name);
             return this;
         }
 
-        public Builder name(Optional<String> name) {
+
+        public Data withName(Optional<String> name) {
             Utils.checkNotNull(name, "name");
             this.name = name;
             return this;
         }
 
-
-        public Builder status(String status) {
+        public Data withStatus(String status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
         }
 
-        public Builder status(Optional<String> status) {
+
+        public Data withStatus(Optional<String> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
-
-        public Builder description(String description) {
+        public Data withDescription(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
             return this;
         }
 
-        public Builder description(Optional<String> description) {
+
+        public Data withDescription(Optional<String> description) {
             Utils.checkNotNull(description, "description");
             this.description = description;
             return this;
         }
 
-
-        public Builder metadata(String metadata) {
+        public Data withMetadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
-        public Builder metadata(Optional<String> metadata) {
+
+        public Data withMetadata(Optional<String> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;
         }
 
-        public PatchWalletValidationError build() {
-
-            return new PatchWalletValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.name, other.name) &&
+                Utils.enhancedDeepEquals(this.status, other.status) &&
+                Utils.enhancedDeepEquals(this.description, other.description) &&
+                Utils.enhancedDeepEquals(this.metadata, other.metadata);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 name, status, description,
                 metadata);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "name", name,
+                    "status", status,
+                    "description", description,
+                    "metadata", metadata);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> name = Optional.empty();
+
+            private Optional<String> status = Optional.empty();
+
+            private Optional<String> description = Optional.empty();
+
+            private Optional<String> metadata = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder name(String name) {
+                Utils.checkNotNull(name, "name");
+                this.name = Optional.ofNullable(name);
+                return this;
+            }
+
+            public Builder name(Optional<String> name) {
+                Utils.checkNotNull(name, "name");
+                this.name = name;
+                return this;
+            }
+
+
+            public Builder status(String status) {
+                Utils.checkNotNull(status, "status");
+                this.status = Optional.ofNullable(status);
+                return this;
+            }
+
+            public Builder status(Optional<String> status) {
+                Utils.checkNotNull(status, "status");
+                this.status = status;
+                return this;
+            }
+
+
+            public Builder description(String description) {
+                Utils.checkNotNull(description, "description");
+                this.description = Optional.ofNullable(description);
+                return this;
+            }
+
+            public Builder description(Optional<String> description) {
+                Utils.checkNotNull(description, "description");
+                this.description = description;
+                return this;
+            }
+
+
+            public Builder metadata(String metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = Optional.ofNullable(metadata);
+                return this;
+            }
+
+            public Builder metadata(Optional<String> metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = metadata;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    name, status, description,
+                    metadata);
+            }
+
+        }
     }
+
 }
 

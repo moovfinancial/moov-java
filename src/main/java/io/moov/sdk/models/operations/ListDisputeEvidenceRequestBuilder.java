@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListDisputeEvidence;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class ListDisputeEvidenceRequestBuilder {
@@ -44,7 +43,7 @@ public class ListDisputeEvidenceRequestBuilder {
         return request;
     }
 
-    public ListDisputeEvidenceResponse call() throws Exception {
+    public ListDisputeEvidenceResponse call() {
         
         RequestOperation<ListDisputeEvidenceRequest, ListDisputeEvidenceResponse> operation
               = new ListDisputeEvidence.Sync(sdkConfiguration, _headers);

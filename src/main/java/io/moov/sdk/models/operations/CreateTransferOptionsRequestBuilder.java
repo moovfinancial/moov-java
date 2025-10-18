@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateTransferOptions;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class CreateTransferOptionsRequestBuilder {
@@ -44,7 +43,7 @@ public class CreateTransferOptionsRequestBuilder {
         return request;
     }
 
-    public CreateTransferOptionsResponse call() throws Exception {
+    public CreateTransferOptionsResponse call() {
         
         RequestOperation<CreateTransferOptionsRequest, CreateTransferOptionsResponse> operation
               = new io.moov.sdk.operations.CreateTransferOptions.Sync(sdkConfiguration, _headers);

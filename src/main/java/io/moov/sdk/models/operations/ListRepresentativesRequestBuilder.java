@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListRepresentatives;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class ListRepresentativesRequestBuilder {
@@ -36,7 +35,7 @@ public class ListRepresentativesRequestBuilder {
         return request;
     }
 
-    public ListRepresentativesResponse call() throws Exception {
+    public ListRepresentativesResponse call() {
         
         RequestOperation<ListRepresentativesRequest, ListRepresentativesResponse> operation
               = new ListRepresentatives.Sync(sdkConfiguration, _headers);

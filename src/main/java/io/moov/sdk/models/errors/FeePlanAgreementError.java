@@ -9,108 +9,161 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class FeePlanAgreementError extends RuntimeException {
+public class FeePlanAgreementError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("planID")
-    private Optional<String> planID;
+    @Nullable
+    private final Data data;
 
-    @JsonCreator
+    @Nullable
+    private final Throwable deserializationException;
+
     public FeePlanAgreementError(
-            @JsonProperty("planID") Optional<String> planID) {
-        super("API error occurred");
-        Utils.checkNotNull(planID, "planID");
-        this.planID = planID;
-    }
-    
-    public FeePlanAgreementError() {
-        this(Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of FeePlanAgreementError. If deserialization of the response body fails,
+    * the resulting FeePlanAgreementError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static FeePlanAgreementError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new FeePlanAgreementError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new FeePlanAgreementError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> planID() {
-        return planID;
+        return data().flatMap(Data::planID);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public FeePlanAgreementError withPlanID(String planID) {
-        Utils.checkNotNull(planID, "planID");
-        this.planID = Optional.ofNullable(planID);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public FeePlanAgreementError withPlanID(Optional<String> planID) {
-        Utils.checkNotNull(planID, "planID");
-        this.planID = planID;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("planID")
+        private Optional<String> planID;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("planID") Optional<String> planID) {
+            Utils.checkNotNull(planID, "planID");
+            this.planID = planID;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty());
         }
-        FeePlanAgreementError other = (FeePlanAgreementError) o;
-        return 
-            Utils.enhancedDeepEquals(this.planID, other.planID);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            planID);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(FeePlanAgreementError.class,
-                "planID", planID);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> planID() {
+            return planID;
+        }
 
-        private Optional<String> planID = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder planID(String planID) {
+        public Data withPlanID(String planID) {
             Utils.checkNotNull(planID, "planID");
             this.planID = Optional.ofNullable(planID);
             return this;
         }
 
-        public Builder planID(Optional<String> planID) {
+
+        public Data withPlanID(Optional<String> planID) {
             Utils.checkNotNull(planID, "planID");
             this.planID = planID;
             return this;
         }
 
-        public FeePlanAgreementError build() {
-
-            return new FeePlanAgreementError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.planID, other.planID);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 planID);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "planID", planID);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> planID = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder planID(String planID) {
+                Utils.checkNotNull(planID, "planID");
+                this.planID = Optional.ofNullable(planID);
+                return this;
+            }
+
+            public Builder planID(Optional<String> planID) {
+                Utils.checkNotNull(planID, "planID");
+                this.planID = planID;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    planID);
+            }
+
+        }
     }
+
 }
 

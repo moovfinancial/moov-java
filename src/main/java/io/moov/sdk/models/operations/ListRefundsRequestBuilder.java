@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListRefunds;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class ListRefundsRequestBuilder {
@@ -44,7 +43,7 @@ public class ListRefundsRequestBuilder {
         return request;
     }
 
-    public ListRefundsResponse call() throws Exception {
+    public ListRefundsResponse call() {
         
         RequestOperation<ListRefundsRequest, ListRefundsResponse> operation
               = new ListRefunds.Sync(sdkConfiguration, _headers);

@@ -13,287 +13,360 @@ import io.moov.sdk.models.components.DisplayOptionsError;
 import io.moov.sdk.models.components.PaymentDetailsError;
 import io.moov.sdk.models.components.PayoutDetailsError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class UpdatePaymentLinkError extends RuntimeException {
+public class UpdatePaymentLinkError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amount")
-    private Optional<? extends AmountValidationError> amount;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("expiresOn")
-    private Optional<String> expiresOn;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("display")
-    private Optional<? extends DisplayOptionsError> display;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("payment")
-    private Optional<? extends PaymentDetailsError> payment;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("payout")
-    private Optional<? extends PayoutDetailsError> payout;
-
-    @JsonCreator
     public UpdatePaymentLinkError(
-            @JsonProperty("amount") Optional<? extends AmountValidationError> amount,
-            @JsonProperty("expiresOn") Optional<String> expiresOn,
-            @JsonProperty("display") Optional<? extends DisplayOptionsError> display,
-            @JsonProperty("payment") Optional<? extends PaymentDetailsError> payment,
-            @JsonProperty("payout") Optional<? extends PayoutDetailsError> payout) {
-        super("API error occurred");
-        Utils.checkNotNull(amount, "amount");
-        Utils.checkNotNull(expiresOn, "expiresOn");
-        Utils.checkNotNull(display, "display");
-        Utils.checkNotNull(payment, "payment");
-        Utils.checkNotNull(payout, "payout");
-        this.amount = amount;
-        this.expiresOn = expiresOn;
-        this.display = display;
-        this.payment = payment;
-        this.payout = payout;
-    }
-    
-    public UpdatePaymentLinkError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of UpdatePaymentLinkError. If deserialization of the response body fails,
+    * the resulting UpdatePaymentLinkError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static UpdatePaymentLinkError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new UpdatePaymentLinkError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new UpdatePaymentLinkError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<AmountValidationError> amount() {
-        return (Optional<AmountValidationError>) amount;
+        return data().flatMap(Data::amount);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> expiresOn() {
-        return expiresOn;
+        return data().flatMap(Data::expiresOn);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<DisplayOptionsError> display() {
-        return (Optional<DisplayOptionsError>) display;
+        return data().flatMap(Data::display);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<PaymentDetailsError> payment() {
-        return (Optional<PaymentDetailsError>) payment;
+        return data().flatMap(Data::payment);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<PayoutDetailsError> payout() {
-        return (Optional<PayoutDetailsError>) payout;
+        return data().flatMap(Data::payout);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public UpdatePaymentLinkError withAmount(AmountValidationError amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = Optional.ofNullable(amount);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public UpdatePaymentLinkError withAmount(Optional<? extends AmountValidationError> amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = amount;
-        return this;
-    }
-
-    public UpdatePaymentLinkError withExpiresOn(String expiresOn) {
-        Utils.checkNotNull(expiresOn, "expiresOn");
-        this.expiresOn = Optional.ofNullable(expiresOn);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amount")
+        private Optional<? extends AmountValidationError> amount;
 
 
-    public UpdatePaymentLinkError withExpiresOn(Optional<String> expiresOn) {
-        Utils.checkNotNull(expiresOn, "expiresOn");
-        this.expiresOn = expiresOn;
-        return this;
-    }
-
-    public UpdatePaymentLinkError withDisplay(DisplayOptionsError display) {
-        Utils.checkNotNull(display, "display");
-        this.display = Optional.ofNullable(display);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("expiresOn")
+        private Optional<String> expiresOn;
 
 
-    public UpdatePaymentLinkError withDisplay(Optional<? extends DisplayOptionsError> display) {
-        Utils.checkNotNull(display, "display");
-        this.display = display;
-        return this;
-    }
-
-    public UpdatePaymentLinkError withPayment(PaymentDetailsError payment) {
-        Utils.checkNotNull(payment, "payment");
-        this.payment = Optional.ofNullable(payment);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("display")
+        private Optional<? extends DisplayOptionsError> display;
 
 
-    public UpdatePaymentLinkError withPayment(Optional<? extends PaymentDetailsError> payment) {
-        Utils.checkNotNull(payment, "payment");
-        this.payment = payment;
-        return this;
-    }
-
-    public UpdatePaymentLinkError withPayout(PayoutDetailsError payout) {
-        Utils.checkNotNull(payout, "payout");
-        this.payout = Optional.ofNullable(payout);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("payment")
+        private Optional<? extends PaymentDetailsError> payment;
 
 
-    public UpdatePaymentLinkError withPayout(Optional<? extends PayoutDetailsError> payout) {
-        Utils.checkNotNull(payout, "payout");
-        this.payout = payout;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("payout")
+        private Optional<? extends PayoutDetailsError> payout;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("amount") Optional<? extends AmountValidationError> amount,
+                @JsonProperty("expiresOn") Optional<String> expiresOn,
+                @JsonProperty("display") Optional<? extends DisplayOptionsError> display,
+                @JsonProperty("payment") Optional<? extends PaymentDetailsError> payment,
+                @JsonProperty("payout") Optional<? extends PayoutDetailsError> payout) {
+            Utils.checkNotNull(amount, "amount");
+            Utils.checkNotNull(expiresOn, "expiresOn");
+            Utils.checkNotNull(display, "display");
+            Utils.checkNotNull(payment, "payment");
+            Utils.checkNotNull(payout, "payout");
+            this.amount = amount;
+            this.expiresOn = expiresOn;
+            this.display = display;
+            this.payment = payment;
+            this.payout = payout;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        UpdatePaymentLinkError other = (UpdatePaymentLinkError) o;
-        return 
-            Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
-            Utils.enhancedDeepEquals(this.display, other.display) &&
-            Utils.enhancedDeepEquals(this.payment, other.payment) &&
-            Utils.enhancedDeepEquals(this.payout, other.payout);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            amount, expiresOn, display,
-            payment, payout);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(UpdatePaymentLinkError.class,
-                "amount", amount,
-                "expiresOn", expiresOn,
-                "display", display,
-                "payment", payment,
-                "payout", payout);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<AmountValidationError> amount() {
+            return (Optional<AmountValidationError>) amount;
+        }
 
-        private Optional<? extends AmountValidationError> amount = Optional.empty();
+        @JsonIgnore
+        public Optional<String> expiresOn() {
+            return expiresOn;
+        }
 
-        private Optional<String> expiresOn = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<DisplayOptionsError> display() {
+            return (Optional<DisplayOptionsError>) display;
+        }
 
-        private Optional<? extends DisplayOptionsError> display = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<PaymentDetailsError> payment() {
+            return (Optional<PaymentDetailsError>) payment;
+        }
 
-        private Optional<? extends PaymentDetailsError> payment = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<PayoutDetailsError> payout() {
+            return (Optional<PayoutDetailsError>) payout;
+        }
 
-        private Optional<? extends PayoutDetailsError> payout = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder amount(AmountValidationError amount) {
+        public Data withAmount(AmountValidationError amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
-        public Builder amount(Optional<? extends AmountValidationError> amount) {
+
+        public Data withAmount(Optional<? extends AmountValidationError> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
 
-
-        public Builder expiresOn(String expiresOn) {
+        public Data withExpiresOn(String expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
             this.expiresOn = Optional.ofNullable(expiresOn);
             return this;
         }
 
-        public Builder expiresOn(Optional<String> expiresOn) {
+
+        public Data withExpiresOn(Optional<String> expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
             this.expiresOn = expiresOn;
             return this;
         }
 
-
-        public Builder display(DisplayOptionsError display) {
+        public Data withDisplay(DisplayOptionsError display) {
             Utils.checkNotNull(display, "display");
             this.display = Optional.ofNullable(display);
             return this;
         }
 
-        public Builder display(Optional<? extends DisplayOptionsError> display) {
+
+        public Data withDisplay(Optional<? extends DisplayOptionsError> display) {
             Utils.checkNotNull(display, "display");
             this.display = display;
             return this;
         }
 
-
-        public Builder payment(PaymentDetailsError payment) {
+        public Data withPayment(PaymentDetailsError payment) {
             Utils.checkNotNull(payment, "payment");
             this.payment = Optional.ofNullable(payment);
             return this;
         }
 
-        public Builder payment(Optional<? extends PaymentDetailsError> payment) {
+
+        public Data withPayment(Optional<? extends PaymentDetailsError> payment) {
             Utils.checkNotNull(payment, "payment");
             this.payment = payment;
             return this;
         }
 
-
-        public Builder payout(PayoutDetailsError payout) {
+        public Data withPayout(PayoutDetailsError payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = Optional.ofNullable(payout);
             return this;
         }
 
-        public Builder payout(Optional<? extends PayoutDetailsError> payout) {
+
+        public Data withPayout(Optional<? extends PayoutDetailsError> payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = payout;
             return this;
         }
 
-        public UpdatePaymentLinkError build() {
-
-            return new UpdatePaymentLinkError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.amount, other.amount) &&
+                Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
+                Utils.enhancedDeepEquals(this.display, other.display) &&
+                Utils.enhancedDeepEquals(this.payment, other.payment) &&
+                Utils.enhancedDeepEquals(this.payout, other.payout);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 amount, expiresOn, display,
                 payment, payout);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "amount", amount,
+                    "expiresOn", expiresOn,
+                    "display", display,
+                    "payment", payment,
+                    "payout", payout);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<? extends AmountValidationError> amount = Optional.empty();
+
+            private Optional<String> expiresOn = Optional.empty();
+
+            private Optional<? extends DisplayOptionsError> display = Optional.empty();
+
+            private Optional<? extends PaymentDetailsError> payment = Optional.empty();
+
+            private Optional<? extends PayoutDetailsError> payout = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder amount(AmountValidationError amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = Optional.ofNullable(amount);
+                return this;
+            }
+
+            public Builder amount(Optional<? extends AmountValidationError> amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = amount;
+                return this;
+            }
+
+
+            public Builder expiresOn(String expiresOn) {
+                Utils.checkNotNull(expiresOn, "expiresOn");
+                this.expiresOn = Optional.ofNullable(expiresOn);
+                return this;
+            }
+
+            public Builder expiresOn(Optional<String> expiresOn) {
+                Utils.checkNotNull(expiresOn, "expiresOn");
+                this.expiresOn = expiresOn;
+                return this;
+            }
+
+
+            public Builder display(DisplayOptionsError display) {
+                Utils.checkNotNull(display, "display");
+                this.display = Optional.ofNullable(display);
+                return this;
+            }
+
+            public Builder display(Optional<? extends DisplayOptionsError> display) {
+                Utils.checkNotNull(display, "display");
+                this.display = display;
+                return this;
+            }
+
+
+            public Builder payment(PaymentDetailsError payment) {
+                Utils.checkNotNull(payment, "payment");
+                this.payment = Optional.ofNullable(payment);
+                return this;
+            }
+
+            public Builder payment(Optional<? extends PaymentDetailsError> payment) {
+                Utils.checkNotNull(payment, "payment");
+                this.payment = payment;
+                return this;
+            }
+
+
+            public Builder payout(PayoutDetailsError payout) {
+                Utils.checkNotNull(payout, "payout");
+                this.payout = Optional.ofNullable(payout);
+                return this;
+            }
+
+            public Builder payout(Optional<? extends PayoutDetailsError> payout) {
+                Utils.checkNotNull(payout, "payout");
+                this.payout = payout;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    amount, expiresOn, display,
+                    payment, payout);
+            }
+
+        }
     }
+
 }
 

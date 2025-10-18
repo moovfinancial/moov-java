@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DeleteImage;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class DeleteImageRequestBuilder {
@@ -44,7 +43,7 @@ public class DeleteImageRequestBuilder {
         return request;
     }
 
-    public DeleteImageResponse call() throws Exception {
+    public DeleteImageResponse call() {
         
         RequestOperation<DeleteImageRequest, DeleteImageResponse> operation
               = new DeleteImage.Sync(sdkConfiguration, _headers);

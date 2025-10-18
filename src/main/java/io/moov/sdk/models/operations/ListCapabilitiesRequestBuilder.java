@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListCapabilities;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class ListCapabilitiesRequestBuilder {
@@ -36,7 +35,7 @@ public class ListCapabilitiesRequestBuilder {
         return request;
     }
 
-    public ListCapabilitiesResponse call() throws Exception {
+    public ListCapabilitiesResponse call() {
         
         RequestOperation<ListCapabilitiesRequest, ListCapabilitiesResponse> operation
               = new ListCapabilities.Sync(sdkConfiguration, _headers);

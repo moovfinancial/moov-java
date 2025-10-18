@@ -23,7 +23,6 @@ import io.moov.sdk.operations.GetWallet;
 import io.moov.sdk.operations.ListWallets;
 import io.moov.sdk.operations.UpdateWallet;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -66,9 +65,9 @@ public class Wallets {
      * @param accountID The Moov account ID the wallet belongs to.
      * @param createWallet 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateWalletResponse create(String accountID, CreateWallet createWallet) throws Exception {
+    public CreateWalletResponse create(String accountID, CreateWallet createWallet) {
         CreateWalletRequest request =
             CreateWalletRequest
                 .builder()
@@ -106,9 +105,9 @@ public class Wallets {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListWalletsResponse list(ListWalletsRequest request) throws Exception {
+    public ListWalletsResponse list(ListWalletsRequest request) {
         RequestOperation<ListWalletsRequest, ListWalletsResponse> operation
               = new ListWallets.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -141,9 +140,9 @@ public class Wallets {
      * @param accountID 
      * @param walletID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetWalletResponse get(String accountID, String walletID) throws Exception {
+    public GetWalletResponse get(String accountID, String walletID) {
         GetWalletRequest request =
             GetWalletRequest
                 .builder()
@@ -183,11 +182,11 @@ public class Wallets {
      * @param accountID The Moov account ID the wallet belongs to.
      * @param patchWallet 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateWalletResponse update(
             String walletID, String accountID,
-            PatchWallet patchWallet) throws Exception {
+            PatchWallet patchWallet) {
         UpdateWalletRequest request =
             UpdateWalletRequest
                 .builder()

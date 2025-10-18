@@ -6,7 +6,14 @@
 ### Available Operations
 
 * [list](#list) - List metadata for all images in the specified account.
+* [upload](#upload) -   Upload a new PNG, JPEG, or WebP image with optional metadata. 
+  Duplicate images, and requests larger than 16MB will be rejected.
 * [getMetadata](#getmetadata) - Retrieve metadata for a specific image by its ID.
+* [update](#update) - Update an existing image and/or its metadata.
+
+Duplicate images, and requests larger than 16MB will be rejected. Omit any
+form parts you do not wish to update. Existing metadata can be cleared by
+sending `null` for the `metadata` form part.
 * [delete](#delete) - Permanently delete an image by its ID.
 * [getPublic](#getpublic) - Get an image by its public ID.
 
@@ -64,6 +71,71 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
+## upload
+
+  Upload a new PNG, JPEG, or WebP image with optional metadata. 
+  Duplicate images, and requests larger than 16MB will be rejected.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="uploadImage" method="post" path="/accounts/{accountID}/images" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.*;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.ImageRequestValidationError;
+import io.moov.sdk.models.operations.UploadImageResponse;
+import io.moov.sdk.utils.Utils;
+import java.io.FileInputStream;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, ImageRequestValidationError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        UploadImageResponse res = sdk.images().upload()
+                .accountID("c0971a52-1f1c-4511-876a-f45c4cfd6154")
+                .imageUploadRequestMultiPart(ImageUploadRequestMultiPart.builder()
+                    .image(Image.builder()
+                        .fileName("example.file")
+                        .content(Utils.readBytesAndClose(new FileInputStream("example.file")))
+                        .build())
+                    .build())
+                .call();
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `accountID`                                                                           | *String*                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `imageUploadRequestMultiPart`                                                         | [ImageUploadRequestMultiPart](../../models/components/ImageUploadRequestMultiPart.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+
+### Response
+
+**[UploadImageResponse](../../models/operations/UploadImageResponse.md)**
+
+### Errors
+
+| Error Type                                | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| models/errors/GenericError                | 400, 409                                  | application/json                          |
+| models/errors/ImageRequestValidationError | 422                                       | application/json                          |
+| models/errors/APIException                | 4XX, 5XX                                  | \*/\*                                     |
+
 ## getMetadata
 
 Retrieve metadata for a specific image by its ID.
@@ -119,6 +191,71 @@ public class Application {
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## update
+
+Update an existing image and/or its metadata.
+
+Duplicate images, and requests larger than 16MB will be rejected. Omit any
+form parts you do not wish to update. Existing metadata can be cleared by
+sending `null` for the `metadata` form part.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="updateImage" method="patch" path="/accounts/{accountID}/images/{imageID}" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.ImageUpdateRequestMultiPart;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.ImageRequestValidationError;
+import io.moov.sdk.models.operations.UpdateImageResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, ImageRequestValidationError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        UpdateImageResponse res = sdk.images().update()
+                .accountID("310f4f19-45cf-4429-9aae-8e93827ecb0d")
+                .imageID("8ef109f8-5a61-4355-b2e4-b8ac2f6f6f47")
+                .imageUpdateRequestMultiPart(ImageUpdateRequestMultiPart.builder()
+                    .build())
+                .call();
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `accountID`                                                                           | *String*                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `imageID`                                                                             | *String*                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `imageUpdateRequestMultiPart`                                                         | [ImageUpdateRequestMultiPart](../../models/components/ImageUpdateRequestMultiPart.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+
+### Response
+
+**[UpdateImageResponse](../../models/operations/UpdateImageResponse.md)**
+
+### Errors
+
+| Error Type                                | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| models/errors/GenericError                | 400, 409                                  | application/json                          |
+| models/errors/ImageRequestValidationError | 422                                       | application/json                          |
+| models/errors/APIException                | 4XX, 5XX                                  | \*/\*                                     |
 
 ## delete
 

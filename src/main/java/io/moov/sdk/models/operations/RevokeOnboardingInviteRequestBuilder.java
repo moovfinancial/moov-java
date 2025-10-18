@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.RevokeOnboardingInvite;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class RevokeOnboardingInviteRequestBuilder {
@@ -36,7 +35,7 @@ public class RevokeOnboardingInviteRequestBuilder {
         return request;
     }
 
-    public RevokeOnboardingInviteResponse call() throws Exception {
+    public RevokeOnboardingInviteResponse call() {
         
         RequestOperation<RevokeOnboardingInviteRequest, RevokeOnboardingInviteResponse> operation
               = new RevokeOnboardingInvite.Sync(sdkConfiguration, _headers);

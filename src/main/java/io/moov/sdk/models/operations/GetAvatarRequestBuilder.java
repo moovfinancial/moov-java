@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetAvatar;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetAvatarRequestBuilder {
@@ -36,7 +35,7 @@ public class GetAvatarRequestBuilder {
         return request;
     }
 
-    public GetAvatarResponse call() throws Exception {
+    public GetAvatarResponse call() {
         
         RequestOperation<GetAvatarRequest, GetAvatarResponse> operation
               = new GetAvatar.Sync(sdkConfiguration, _headers);

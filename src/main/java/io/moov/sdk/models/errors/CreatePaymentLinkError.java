@@ -13,419 +13,507 @@ import io.moov.sdk.models.components.DisplayOptionsError;
 import io.moov.sdk.models.components.PaymentDetailsError;
 import io.moov.sdk.models.components.PayoutDetailsError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class CreatePaymentLinkError extends RuntimeException {
+public class CreatePaymentLinkError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("partnerAccountID")
-    private Optional<String> partnerAccountID;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("merchantPaymentMethodID")
-    private Optional<String> merchantPaymentMethodID;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amount")
-    private Optional<? extends AmountValidationError> amount;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("maxUses")
-    private Optional<String> maxUses;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("expiresOn")
-    private Optional<String> expiresOn;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("display")
-    private Optional<? extends DisplayOptionsError> display;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("payment")
-    private Optional<? extends PaymentDetailsError> payment;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("payout")
-    private Optional<? extends PayoutDetailsError> payout;
-
-    @JsonCreator
     public CreatePaymentLinkError(
-            @JsonProperty("partnerAccountID") Optional<String> partnerAccountID,
-            @JsonProperty("merchantPaymentMethodID") Optional<String> merchantPaymentMethodID,
-            @JsonProperty("amount") Optional<? extends AmountValidationError> amount,
-            @JsonProperty("maxUses") Optional<String> maxUses,
-            @JsonProperty("expiresOn") Optional<String> expiresOn,
-            @JsonProperty("display") Optional<? extends DisplayOptionsError> display,
-            @JsonProperty("payment") Optional<? extends PaymentDetailsError> payment,
-            @JsonProperty("payout") Optional<? extends PayoutDetailsError> payout) {
-        super("API error occurred");
-        Utils.checkNotNull(partnerAccountID, "partnerAccountID");
-        Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
-        Utils.checkNotNull(amount, "amount");
-        Utils.checkNotNull(maxUses, "maxUses");
-        Utils.checkNotNull(expiresOn, "expiresOn");
-        Utils.checkNotNull(display, "display");
-        Utils.checkNotNull(payment, "payment");
-        Utils.checkNotNull(payout, "payout");
-        this.partnerAccountID = partnerAccountID;
-        this.merchantPaymentMethodID = merchantPaymentMethodID;
-        this.amount = amount;
-        this.maxUses = maxUses;
-        this.expiresOn = expiresOn;
-        this.display = display;
-        this.payment = payment;
-        this.payout = payout;
-    }
-    
-    public CreatePaymentLinkError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of CreatePaymentLinkError. If deserialization of the response body fails,
+    * the resulting CreatePaymentLinkError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static CreatePaymentLinkError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new CreatePaymentLinkError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new CreatePaymentLinkError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> partnerAccountID() {
-        return partnerAccountID;
+        return data().flatMap(Data::partnerAccountID);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> merchantPaymentMethodID() {
-        return merchantPaymentMethodID;
+        return data().flatMap(Data::merchantPaymentMethodID);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<AmountValidationError> amount() {
-        return (Optional<AmountValidationError>) amount;
+        return data().flatMap(Data::amount);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> maxUses() {
-        return maxUses;
+        return data().flatMap(Data::maxUses);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> expiresOn() {
-        return expiresOn;
+        return data().flatMap(Data::expiresOn);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<DisplayOptionsError> display() {
-        return (Optional<DisplayOptionsError>) display;
+        return data().flatMap(Data::display);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<PaymentDetailsError> payment() {
-        return (Optional<PaymentDetailsError>) payment;
+        return data().flatMap(Data::payment);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<PayoutDetailsError> payout() {
-        return (Optional<PayoutDetailsError>) payout;
+        return data().flatMap(Data::payout);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public CreatePaymentLinkError withPartnerAccountID(String partnerAccountID) {
-        Utils.checkNotNull(partnerAccountID, "partnerAccountID");
-        this.partnerAccountID = Optional.ofNullable(partnerAccountID);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public CreatePaymentLinkError withPartnerAccountID(Optional<String> partnerAccountID) {
-        Utils.checkNotNull(partnerAccountID, "partnerAccountID");
-        this.partnerAccountID = partnerAccountID;
-        return this;
-    }
-
-    public CreatePaymentLinkError withMerchantPaymentMethodID(String merchantPaymentMethodID) {
-        Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
-        this.merchantPaymentMethodID = Optional.ofNullable(merchantPaymentMethodID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("partnerAccountID")
+        private Optional<String> partnerAccountID;
 
 
-    public CreatePaymentLinkError withMerchantPaymentMethodID(Optional<String> merchantPaymentMethodID) {
-        Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
-        this.merchantPaymentMethodID = merchantPaymentMethodID;
-        return this;
-    }
-
-    public CreatePaymentLinkError withAmount(AmountValidationError amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = Optional.ofNullable(amount);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("merchantPaymentMethodID")
+        private Optional<String> merchantPaymentMethodID;
 
 
-    public CreatePaymentLinkError withAmount(Optional<? extends AmountValidationError> amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = amount;
-        return this;
-    }
-
-    public CreatePaymentLinkError withMaxUses(String maxUses) {
-        Utils.checkNotNull(maxUses, "maxUses");
-        this.maxUses = Optional.ofNullable(maxUses);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amount")
+        private Optional<? extends AmountValidationError> amount;
 
 
-    public CreatePaymentLinkError withMaxUses(Optional<String> maxUses) {
-        Utils.checkNotNull(maxUses, "maxUses");
-        this.maxUses = maxUses;
-        return this;
-    }
-
-    public CreatePaymentLinkError withExpiresOn(String expiresOn) {
-        Utils.checkNotNull(expiresOn, "expiresOn");
-        this.expiresOn = Optional.ofNullable(expiresOn);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("maxUses")
+        private Optional<String> maxUses;
 
 
-    public CreatePaymentLinkError withExpiresOn(Optional<String> expiresOn) {
-        Utils.checkNotNull(expiresOn, "expiresOn");
-        this.expiresOn = expiresOn;
-        return this;
-    }
-
-    public CreatePaymentLinkError withDisplay(DisplayOptionsError display) {
-        Utils.checkNotNull(display, "display");
-        this.display = Optional.ofNullable(display);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("expiresOn")
+        private Optional<String> expiresOn;
 
 
-    public CreatePaymentLinkError withDisplay(Optional<? extends DisplayOptionsError> display) {
-        Utils.checkNotNull(display, "display");
-        this.display = display;
-        return this;
-    }
-
-    public CreatePaymentLinkError withPayment(PaymentDetailsError payment) {
-        Utils.checkNotNull(payment, "payment");
-        this.payment = Optional.ofNullable(payment);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("display")
+        private Optional<? extends DisplayOptionsError> display;
 
 
-    public CreatePaymentLinkError withPayment(Optional<? extends PaymentDetailsError> payment) {
-        Utils.checkNotNull(payment, "payment");
-        this.payment = payment;
-        return this;
-    }
-
-    public CreatePaymentLinkError withPayout(PayoutDetailsError payout) {
-        Utils.checkNotNull(payout, "payout");
-        this.payout = Optional.ofNullable(payout);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("payment")
+        private Optional<? extends PaymentDetailsError> payment;
 
 
-    public CreatePaymentLinkError withPayout(Optional<? extends PayoutDetailsError> payout) {
-        Utils.checkNotNull(payout, "payout");
-        this.payout = payout;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("payout")
+        private Optional<? extends PayoutDetailsError> payout;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("partnerAccountID") Optional<String> partnerAccountID,
+                @JsonProperty("merchantPaymentMethodID") Optional<String> merchantPaymentMethodID,
+                @JsonProperty("amount") Optional<? extends AmountValidationError> amount,
+                @JsonProperty("maxUses") Optional<String> maxUses,
+                @JsonProperty("expiresOn") Optional<String> expiresOn,
+                @JsonProperty("display") Optional<? extends DisplayOptionsError> display,
+                @JsonProperty("payment") Optional<? extends PaymentDetailsError> payment,
+                @JsonProperty("payout") Optional<? extends PayoutDetailsError> payout) {
+            Utils.checkNotNull(partnerAccountID, "partnerAccountID");
+            Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
+            Utils.checkNotNull(amount, "amount");
+            Utils.checkNotNull(maxUses, "maxUses");
+            Utils.checkNotNull(expiresOn, "expiresOn");
+            Utils.checkNotNull(display, "display");
+            Utils.checkNotNull(payment, "payment");
+            Utils.checkNotNull(payout, "payout");
+            this.partnerAccountID = partnerAccountID;
+            this.merchantPaymentMethodID = merchantPaymentMethodID;
+            this.amount = amount;
+            this.maxUses = maxUses;
+            this.expiresOn = expiresOn;
+            this.display = display;
+            this.payment = payment;
+            this.payout = payout;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        CreatePaymentLinkError other = (CreatePaymentLinkError) o;
-        return 
-            Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
-            Utils.enhancedDeepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
-            Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.maxUses, other.maxUses) &&
-            Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
-            Utils.enhancedDeepEquals(this.display, other.display) &&
-            Utils.enhancedDeepEquals(this.payment, other.payment) &&
-            Utils.enhancedDeepEquals(this.payout, other.payout);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            partnerAccountID, merchantPaymentMethodID, amount,
-            maxUses, expiresOn, display,
-            payment, payout);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(CreatePaymentLinkError.class,
-                "partnerAccountID", partnerAccountID,
-                "merchantPaymentMethodID", merchantPaymentMethodID,
-                "amount", amount,
-                "maxUses", maxUses,
-                "expiresOn", expiresOn,
-                "display", display,
-                "payment", payment,
-                "payout", payout);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> partnerAccountID() {
+            return partnerAccountID;
+        }
 
-        private Optional<String> partnerAccountID = Optional.empty();
+        @JsonIgnore
+        public Optional<String> merchantPaymentMethodID() {
+            return merchantPaymentMethodID;
+        }
 
-        private Optional<String> merchantPaymentMethodID = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<AmountValidationError> amount() {
+            return (Optional<AmountValidationError>) amount;
+        }
 
-        private Optional<? extends AmountValidationError> amount = Optional.empty();
+        @JsonIgnore
+        public Optional<String> maxUses() {
+            return maxUses;
+        }
 
-        private Optional<String> maxUses = Optional.empty();
+        @JsonIgnore
+        public Optional<String> expiresOn() {
+            return expiresOn;
+        }
 
-        private Optional<String> expiresOn = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<DisplayOptionsError> display() {
+            return (Optional<DisplayOptionsError>) display;
+        }
 
-        private Optional<? extends DisplayOptionsError> display = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<PaymentDetailsError> payment() {
+            return (Optional<PaymentDetailsError>) payment;
+        }
 
-        private Optional<? extends PaymentDetailsError> payment = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<PayoutDetailsError> payout() {
+            return (Optional<PayoutDetailsError>) payout;
+        }
 
-        private Optional<? extends PayoutDetailsError> payout = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder partnerAccountID(String partnerAccountID) {
+        public Data withPartnerAccountID(String partnerAccountID) {
             Utils.checkNotNull(partnerAccountID, "partnerAccountID");
             this.partnerAccountID = Optional.ofNullable(partnerAccountID);
             return this;
         }
 
-        public Builder partnerAccountID(Optional<String> partnerAccountID) {
+
+        public Data withPartnerAccountID(Optional<String> partnerAccountID) {
             Utils.checkNotNull(partnerAccountID, "partnerAccountID");
             this.partnerAccountID = partnerAccountID;
             return this;
         }
 
-
-        public Builder merchantPaymentMethodID(String merchantPaymentMethodID) {
+        public Data withMerchantPaymentMethodID(String merchantPaymentMethodID) {
             Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
             this.merchantPaymentMethodID = Optional.ofNullable(merchantPaymentMethodID);
             return this;
         }
 
-        public Builder merchantPaymentMethodID(Optional<String> merchantPaymentMethodID) {
+
+        public Data withMerchantPaymentMethodID(Optional<String> merchantPaymentMethodID) {
             Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
             this.merchantPaymentMethodID = merchantPaymentMethodID;
             return this;
         }
 
-
-        public Builder amount(AmountValidationError amount) {
+        public Data withAmount(AmountValidationError amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
-        public Builder amount(Optional<? extends AmountValidationError> amount) {
+
+        public Data withAmount(Optional<? extends AmountValidationError> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
 
-
-        public Builder maxUses(String maxUses) {
+        public Data withMaxUses(String maxUses) {
             Utils.checkNotNull(maxUses, "maxUses");
             this.maxUses = Optional.ofNullable(maxUses);
             return this;
         }
 
-        public Builder maxUses(Optional<String> maxUses) {
+
+        public Data withMaxUses(Optional<String> maxUses) {
             Utils.checkNotNull(maxUses, "maxUses");
             this.maxUses = maxUses;
             return this;
         }
 
-
-        public Builder expiresOn(String expiresOn) {
+        public Data withExpiresOn(String expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
             this.expiresOn = Optional.ofNullable(expiresOn);
             return this;
         }
 
-        public Builder expiresOn(Optional<String> expiresOn) {
+
+        public Data withExpiresOn(Optional<String> expiresOn) {
             Utils.checkNotNull(expiresOn, "expiresOn");
             this.expiresOn = expiresOn;
             return this;
         }
 
-
-        public Builder display(DisplayOptionsError display) {
+        public Data withDisplay(DisplayOptionsError display) {
             Utils.checkNotNull(display, "display");
             this.display = Optional.ofNullable(display);
             return this;
         }
 
-        public Builder display(Optional<? extends DisplayOptionsError> display) {
+
+        public Data withDisplay(Optional<? extends DisplayOptionsError> display) {
             Utils.checkNotNull(display, "display");
             this.display = display;
             return this;
         }
 
-
-        public Builder payment(PaymentDetailsError payment) {
+        public Data withPayment(PaymentDetailsError payment) {
             Utils.checkNotNull(payment, "payment");
             this.payment = Optional.ofNullable(payment);
             return this;
         }
 
-        public Builder payment(Optional<? extends PaymentDetailsError> payment) {
+
+        public Data withPayment(Optional<? extends PaymentDetailsError> payment) {
             Utils.checkNotNull(payment, "payment");
             this.payment = payment;
             return this;
         }
 
-
-        public Builder payout(PayoutDetailsError payout) {
+        public Data withPayout(PayoutDetailsError payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = Optional.ofNullable(payout);
             return this;
         }
 
-        public Builder payout(Optional<? extends PayoutDetailsError> payout) {
+
+        public Data withPayout(Optional<? extends PayoutDetailsError> payout) {
             Utils.checkNotNull(payout, "payout");
             this.payout = payout;
             return this;
         }
 
-        public CreatePaymentLinkError build() {
-
-            return new CreatePaymentLinkError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
+                Utils.enhancedDeepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
+                Utils.enhancedDeepEquals(this.amount, other.amount) &&
+                Utils.enhancedDeepEquals(this.maxUses, other.maxUses) &&
+                Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
+                Utils.enhancedDeepEquals(this.display, other.display) &&
+                Utils.enhancedDeepEquals(this.payment, other.payment) &&
+                Utils.enhancedDeepEquals(this.payout, other.payout);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 partnerAccountID, merchantPaymentMethodID, amount,
                 maxUses, expiresOn, display,
                 payment, payout);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "partnerAccountID", partnerAccountID,
+                    "merchantPaymentMethodID", merchantPaymentMethodID,
+                    "amount", amount,
+                    "maxUses", maxUses,
+                    "expiresOn", expiresOn,
+                    "display", display,
+                    "payment", payment,
+                    "payout", payout);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> partnerAccountID = Optional.empty();
+
+            private Optional<String> merchantPaymentMethodID = Optional.empty();
+
+            private Optional<? extends AmountValidationError> amount = Optional.empty();
+
+            private Optional<String> maxUses = Optional.empty();
+
+            private Optional<String> expiresOn = Optional.empty();
+
+            private Optional<? extends DisplayOptionsError> display = Optional.empty();
+
+            private Optional<? extends PaymentDetailsError> payment = Optional.empty();
+
+            private Optional<? extends PayoutDetailsError> payout = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder partnerAccountID(String partnerAccountID) {
+                Utils.checkNotNull(partnerAccountID, "partnerAccountID");
+                this.partnerAccountID = Optional.ofNullable(partnerAccountID);
+                return this;
+            }
+
+            public Builder partnerAccountID(Optional<String> partnerAccountID) {
+                Utils.checkNotNull(partnerAccountID, "partnerAccountID");
+                this.partnerAccountID = partnerAccountID;
+                return this;
+            }
+
+
+            public Builder merchantPaymentMethodID(String merchantPaymentMethodID) {
+                Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
+                this.merchantPaymentMethodID = Optional.ofNullable(merchantPaymentMethodID);
+                return this;
+            }
+
+            public Builder merchantPaymentMethodID(Optional<String> merchantPaymentMethodID) {
+                Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
+                this.merchantPaymentMethodID = merchantPaymentMethodID;
+                return this;
+            }
+
+
+            public Builder amount(AmountValidationError amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = Optional.ofNullable(amount);
+                return this;
+            }
+
+            public Builder amount(Optional<? extends AmountValidationError> amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = amount;
+                return this;
+            }
+
+
+            public Builder maxUses(String maxUses) {
+                Utils.checkNotNull(maxUses, "maxUses");
+                this.maxUses = Optional.ofNullable(maxUses);
+                return this;
+            }
+
+            public Builder maxUses(Optional<String> maxUses) {
+                Utils.checkNotNull(maxUses, "maxUses");
+                this.maxUses = maxUses;
+                return this;
+            }
+
+
+            public Builder expiresOn(String expiresOn) {
+                Utils.checkNotNull(expiresOn, "expiresOn");
+                this.expiresOn = Optional.ofNullable(expiresOn);
+                return this;
+            }
+
+            public Builder expiresOn(Optional<String> expiresOn) {
+                Utils.checkNotNull(expiresOn, "expiresOn");
+                this.expiresOn = expiresOn;
+                return this;
+            }
+
+
+            public Builder display(DisplayOptionsError display) {
+                Utils.checkNotNull(display, "display");
+                this.display = Optional.ofNullable(display);
+                return this;
+            }
+
+            public Builder display(Optional<? extends DisplayOptionsError> display) {
+                Utils.checkNotNull(display, "display");
+                this.display = display;
+                return this;
+            }
+
+
+            public Builder payment(PaymentDetailsError payment) {
+                Utils.checkNotNull(payment, "payment");
+                this.payment = Optional.ofNullable(payment);
+                return this;
+            }
+
+            public Builder payment(Optional<? extends PaymentDetailsError> payment) {
+                Utils.checkNotNull(payment, "payment");
+                this.payment = payment;
+                return this;
+            }
+
+
+            public Builder payout(PayoutDetailsError payout) {
+                Utils.checkNotNull(payout, "payout");
+                this.payout = Optional.ofNullable(payout);
+                return this;
+            }
+
+            public Builder payout(Optional<? extends PayoutDetailsError> payout) {
+                Utils.checkNotNull(payout, "payout");
+                this.payout = payout;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    partnerAccountID, merchantPaymentMethodID, amount,
+                    maxUses, expiresOn, display,
+                    payment, payout);
+            }
+
+        }
     }
+
 }
 

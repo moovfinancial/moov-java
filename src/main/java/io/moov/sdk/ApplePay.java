@@ -27,7 +27,6 @@ import io.moov.sdk.models.operations.UpdateApplePayMerchantDomainsResponse;
 import io.moov.sdk.operations.GetApplePayMerchantDomains;
 import io.moov.sdk.operations.LinkApplePayToken;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -70,9 +69,9 @@ public class ApplePay {
      * @param accountID ID of the Moov account representing the merchant.
      * @param registerApplePayMerchantDomains 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public RegisterApplePayMerchantDomainsResponse registerMerchantDomains(String accountID, RegisterApplePayMerchantDomains registerApplePayMerchantDomains) throws Exception {
+    public RegisterApplePayMerchantDomainsResponse registerMerchantDomains(String accountID, RegisterApplePayMerchantDomains registerApplePayMerchantDomains) {
         RegisterApplePayMerchantDomainsRequest request =
             RegisterApplePayMerchantDomainsRequest
                 .builder()
@@ -115,9 +114,9 @@ public class ApplePay {
      * @param accountID ID of the Moov account representing the merchant.
      * @param updateApplePayMerchantDomains 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public UpdateApplePayMerchantDomainsResponse updateMerchantDomains(String accountID, UpdateApplePayMerchantDomains updateApplePayMerchantDomains) throws Exception {
+    public UpdateApplePayMerchantDomainsResponse updateMerchantDomains(String accountID, UpdateApplePayMerchantDomains updateApplePayMerchantDomains) {
         UpdateApplePayMerchantDomainsRequest request =
             UpdateApplePayMerchantDomainsRequest
                 .builder()
@@ -157,9 +156,9 @@ public class ApplePay {
      * 
      * @param accountID ID of the Moov account representing the merchant.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetApplePayMerchantDomainsResponse getMerchantDomains(String accountID) throws Exception {
+    public GetApplePayMerchantDomainsResponse getMerchantDomains(String accountID) {
         GetApplePayMerchantDomainsRequest request =
             GetApplePayMerchantDomainsRequest
                 .builder()
@@ -201,9 +200,9 @@ public class ApplePay {
      * @param accountID ID of the Moov account representing the merchant.
      * @param createApplePaySession 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateApplePaySessionResponse createSession(String accountID, CreateApplePaySession createApplePaySession) throws Exception {
+    public CreateApplePaySessionResponse createSession(String accountID, CreateApplePaySession createApplePaySession) {
         CreateApplePaySessionRequest request =
             CreateApplePaySessionRequest
                 .builder()
@@ -251,9 +250,9 @@ public class ApplePay {
      *           Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment) 
      *           for more information.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public LinkApplePayTokenResponse linkToken(String accountID, LinkApplePay linkApplePay) throws Exception {
+    public LinkApplePayTokenResponse linkToken(String accountID, LinkApplePay linkApplePay) {
         LinkApplePayTokenRequest request =
             LinkApplePayTokenRequest
                 .builder()

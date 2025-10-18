@@ -10,7 +10,6 @@ import io.moov.sdk.models.operations.GetEnrichmentAddressRequestBuilder;
 import io.moov.sdk.models.operations.GetEnrichmentAddressResponse;
 import io.moov.sdk.operations.GetEnrichmentAddress;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 
 
 public class EnrichedAddress {
@@ -43,9 +42,9 @@ public class EnrichedAddress {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetEnrichmentAddressResponse get(GetEnrichmentAddressRequest request) throws Exception {
+    public GetEnrichmentAddressResponse get(GetEnrichmentAddressRequest request) {
         RequestOperation<GetEnrichmentAddressRequest, GetEnrichmentAddressResponse> operation
               = new GetEnrichmentAddress.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));

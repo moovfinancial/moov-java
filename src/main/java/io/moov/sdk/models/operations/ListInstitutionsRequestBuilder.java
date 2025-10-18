@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListInstitutions;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -86,7 +85,7 @@ public class ListInstitutionsRequestBuilder {
         return request;
     }
 
-    public ListInstitutionsResponse call() throws Exception {
+    public ListInstitutionsResponse call() {
         
         RequestOperation<ListInstitutionsRequest, ListInstitutionsResponse> operation
               = new ListInstitutions.Sync(sdkConfiguration, _headers);

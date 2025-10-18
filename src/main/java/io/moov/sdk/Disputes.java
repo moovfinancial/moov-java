@@ -53,7 +53,6 @@ import io.moov.sdk.operations.UpdateDisputeEvidence;
 import io.moov.sdk.operations.UploadDisputeEvidenceFile;
 import io.moov.sdk.operations.UploadDisputeEvidenceText;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -95,9 +94,9 @@ public class Disputes {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListDisputesResponse list(ListDisputesRequest request) throws Exception {
+    public ListDisputesResponse list(ListDisputesRequest request) {
         RequestOperation<ListDisputesRequest, ListDisputesResponse> operation
               = new ListDisputes.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -134,9 +133,9 @@ public class Disputes {
      * @param accountID 
      * @param disputeID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetDisputeResponse get(String accountID, String disputeID) throws Exception {
+    public GetDisputeResponse get(String accountID, String disputeID) {
         GetDisputeRequest request =
             GetDisputeRequest
                 .builder()
@@ -179,9 +178,9 @@ public class Disputes {
      * @param accountID 
      * @param disputeID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public AcceptDisputeResponse accept(String accountID, String disputeID) throws Exception {
+    public AcceptDisputeResponse accept(String accountID, String disputeID) {
         AcceptDisputeRequest request =
             AcceptDisputeRequest
                 .builder()
@@ -224,9 +223,9 @@ public class Disputes {
      * @param accountID 
      * @param disputeID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListDisputeEvidenceResponse listEvidence(String accountID, String disputeID) throws Exception {
+    public ListDisputeEvidenceResponse listEvidence(String accountID, String disputeID) {
         ListDisputeEvidenceRequest request =
             ListDisputeEvidenceRequest
                 .builder()
@@ -270,11 +269,11 @@ public class Disputes {
      * @param disputeID 
      * @param createEvidenceFileMultiPart 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UploadDisputeEvidenceFileResponse uploadEvidenceFile(
             String accountID, String disputeID,
-            CreateEvidenceFileMultiPart createEvidenceFileMultiPart) throws Exception {
+            CreateEvidenceFileMultiPart createEvidenceFileMultiPart) {
         UploadDisputeEvidenceFileRequest request =
             UploadDisputeEvidenceFileRequest
                 .builder()
@@ -319,11 +318,11 @@ public class Disputes {
      * @param disputeID 
      * @param createEvidenceText 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UploadDisputeEvidenceTextResponse uploadEvidenceText(
             String accountID, String disputeID,
-            CreateEvidenceText createEvidenceText) throws Exception {
+            CreateEvidenceText createEvidenceText) {
         UploadDisputeEvidenceTextRequest request =
             UploadDisputeEvidenceTextRequest
                 .builder()
@@ -375,9 +374,9 @@ public class Disputes {
      * @param accountID 
      * @param disputeID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public SubmitDisputeEvidenceResponse submitEvidence(String accountID, String disputeID) throws Exception {
+    public SubmitDisputeEvidenceResponse submitEvidence(String accountID, String disputeID) {
         SubmitDisputeEvidenceRequest request =
             SubmitDisputeEvidenceRequest
                 .builder()
@@ -421,11 +420,11 @@ public class Disputes {
      * @param disputeID 
      * @param evidenceID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public GetDisputeEvidenceResponse getEvidence(
             String accountID, String disputeID,
-            String evidenceID) throws Exception {
+            String evidenceID) {
         GetDisputeEvidenceRequest request =
             GetDisputeEvidenceRequest
                 .builder()
@@ -471,11 +470,11 @@ public class Disputes {
      * @param evidenceID 
      * @param updateEvidence 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateDisputeEvidenceResponse updateEvidence(
             String accountID, String disputeID,
-            String evidenceID, UpdateEvidence updateEvidence) throws Exception {
+            String evidenceID, UpdateEvidence updateEvidence) {
         UpdateDisputeEvidenceRequest request =
             UpdateDisputeEvidenceRequest
                 .builder()
@@ -521,11 +520,11 @@ public class Disputes {
      * @param disputeID 
      * @param evidenceID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public DeleteDisputeEvidenceFileResponse deleteEvidence(
             String accountID, String disputeID,
-            String evidenceID) throws Exception {
+            String evidenceID) {
         DeleteDisputeEvidenceFileRequest request =
             DeleteDisputeEvidenceFileRequest
                 .builder()
@@ -570,11 +569,11 @@ public class Disputes {
      * @param disputeID 
      * @param evidenceID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public GetDisputeEvidenceDataResponse getEvidenceData(
             String accountID, String disputeID,
-            String evidenceID) throws Exception {
+            String evidenceID) {
         GetDisputeEvidenceDataRequest request =
             GetDisputeEvidenceDataRequest
                 .builder()

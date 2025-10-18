@@ -22,7 +22,6 @@ import io.moov.sdk.operations.GetOnboardingInvite;
 import io.moov.sdk.operations.ListOnboardingInvites;
 import io.moov.sdk.operations.RevokeOnboardingInvite;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -58,9 +57,9 @@ public class Onboarding {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateOnboardingInviteResponse createInvite(OnboardingInviteRequest request) throws Exception {
+    public CreateOnboardingInviteResponse createInvite(OnboardingInviteRequest request) {
         RequestOperation<OnboardingInviteRequest, CreateOnboardingInviteResponse> operation
               = new CreateOnboardingInvite.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -87,9 +86,9 @@ public class Onboarding {
      * you'll need to specify the `/accounts.read` scope.
      * 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListOnboardingInvitesResponse listInvitesDirect() throws Exception {
+    public ListOnboardingInvitesResponse listInvitesDirect() {
         ListOnboardingInvitesRequest request =
             ListOnboardingInvitesRequest
                 .builder()
@@ -121,9 +120,9 @@ public class Onboarding {
      * 
      * @param code 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetOnboardingInviteResponse getInvite(String code) throws Exception {
+    public GetOnboardingInviteResponse getInvite(String code) {
         GetOnboardingInviteRequest request =
             GetOnboardingInviteRequest
                 .builder()
@@ -156,9 +155,9 @@ public class Onboarding {
      * 
      * @param code 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public RevokeOnboardingInviteResponse revokeInvite(String code) throws Exception {
+    public RevokeOnboardingInviteResponse revokeInvite(String code) {
         RevokeOnboardingInviteRequest request =
             RevokeOnboardingInviteRequest
                 .builder()

@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.InitiateMicroDeposits;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class InitiateMicroDepositsRequestBuilder {
@@ -44,7 +43,7 @@ public class InitiateMicroDepositsRequestBuilder {
         return request;
     }
 
-    public InitiateMicroDepositsResponse call() throws Exception {
+    public InitiateMicroDepositsResponse call() {
         
         RequestOperation<InitiateMicroDepositsRequest, InitiateMicroDepositsResponse> operation
               = new InitiateMicroDeposits.Sync(sdkConfiguration, _headers);

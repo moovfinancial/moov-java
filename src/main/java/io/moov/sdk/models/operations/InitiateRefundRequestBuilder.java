@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.InitiateRefund;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 
 public class InitiateRefundRequestBuilder {
 
@@ -27,7 +26,7 @@ public class InitiateRefundRequestBuilder {
         return this;
     }
 
-    public InitiateRefundResponse call() throws Exception {
+    public InitiateRefundResponse call() {
         
         RequestOperation<InitiateRefundRequest, InitiateRefundResponse> operation
               = new InitiateRefund.Sync(sdkConfiguration, _headers);

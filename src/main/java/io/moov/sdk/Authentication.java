@@ -15,7 +15,6 @@ import io.moov.sdk.models.operations.RevokeAccessTokenResponse;
 import io.moov.sdk.operations.CreateAccessToken;
 import io.moov.sdk.operations.RevokeAccessToken;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -48,9 +47,9 @@ public class Authentication {
      * 
      * @param token 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public RevokeAccessTokenResponse revokeAccessToken(String token) throws Exception {
+    public RevokeAccessTokenResponse revokeAccessToken(String token) {
         return revokeAccessToken(token, Optional.empty(), Optional.empty(),
             Optional.empty());
     }
@@ -66,11 +65,11 @@ public class Authentication {
      * @param clientId 
      * @param clientSecret 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public RevokeAccessTokenResponse revokeAccessToken(
             String token, Optional<? extends TokenTypeHint> tokenTypeHint,
-            Optional<String> clientId, Optional<String> clientSecret) throws Exception {
+            Optional<String> clientId, Optional<String> clientSecret) {
         RevokeTokenRequest request =
             RevokeTokenRequest
                 .builder()
@@ -98,9 +97,9 @@ public class Authentication {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateAccessTokenResponse createAccessToken(AuthTokenRequest request) throws Exception {
+    public CreateAccessTokenResponse createAccessToken(AuthTokenRequest request) {
         RequestOperation<AuthTokenRequest, CreateAccessTokenResponse> operation
               = new CreateAccessToken.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));

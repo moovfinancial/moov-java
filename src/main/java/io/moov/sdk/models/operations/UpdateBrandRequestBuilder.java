@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateBrand;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class UpdateBrandRequestBuilder {
@@ -44,7 +43,7 @@ public class UpdateBrandRequestBuilder {
         return request;
     }
 
-    public UpdateBrandResponse call() throws Exception {
+    public UpdateBrandResponse call() {
         
         RequestOperation<UpdateBrandRequest, UpdateBrandResponse> operation
               = new io.moov.sdk.operations.UpdateBrand.Sync(sdkConfiguration, _headers);

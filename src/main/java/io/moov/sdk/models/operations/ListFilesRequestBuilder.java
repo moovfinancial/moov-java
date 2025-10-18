@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListFiles;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class ListFilesRequestBuilder {
@@ -36,7 +35,7 @@ public class ListFilesRequestBuilder {
         return request;
     }
 
-    public ListFilesResponse call() throws Exception {
+    public ListFilesResponse call() {
         
         RequestOperation<ListFilesRequest, ListFilesResponse> operation
               = new ListFiles.Sync(sdkConfiguration, _headers);

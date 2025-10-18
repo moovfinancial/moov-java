@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetFileDetails;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetFileDetailsRequestBuilder {
@@ -44,7 +43,7 @@ public class GetFileDetailsRequestBuilder {
         return request;
     }
 
-    public GetFileDetailsResponse call() throws Exception {
+    public GetFileDetailsResponse call() {
         
         RequestOperation<GetFileDetailsRequest, GetFileDetailsResponse> operation
               = new GetFileDetails.Sync(sdkConfiguration, _headers);

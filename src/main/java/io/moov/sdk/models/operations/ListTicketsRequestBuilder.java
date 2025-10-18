@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListTickets;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 
 public class ListTicketsRequestBuilder {
 
@@ -27,7 +26,7 @@ public class ListTicketsRequestBuilder {
         return this;
     }
 
-    public ListTicketsResponse call() throws Exception {
+    public ListTicketsResponse call() {
         
         RequestOperation<ListTicketsRequest, ListTicketsResponse> operation
               = new ListTickets.Sync(sdkConfiguration, _headers);

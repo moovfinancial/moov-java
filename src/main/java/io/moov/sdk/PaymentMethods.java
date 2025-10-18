@@ -15,7 +15,6 @@ import io.moov.sdk.models.operations.ListPaymentMethodsResponse;
 import io.moov.sdk.operations.GetPaymentMethod;
 import io.moov.sdk.operations.ListPaymentMethods;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -52,9 +51,9 @@ public class PaymentMethods {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListPaymentMethodsResponse list(String accountID) throws Exception {
+    public ListPaymentMethodsResponse list(String accountID) {
         return list(accountID, Optional.empty(), Optional.empty());
     }
 
@@ -73,11 +72,11 @@ public class PaymentMethods {
      *         or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
      * @param paymentMethodType The payment method type that represents a payment rail and directionality
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public ListPaymentMethodsResponse list(
             String accountID, Optional<String> sourceID,
-            Optional<? extends PaymentMethodType> paymentMethodType) throws Exception {
+            Optional<? extends PaymentMethodType> paymentMethodType) {
         ListPaymentMethodsRequest request =
             ListPaymentMethodsRequest
                 .builder()
@@ -115,9 +114,9 @@ public class PaymentMethods {
      * @param accountID 
      * @param paymentMethodID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetPaymentMethodResponse get(String accountID, String paymentMethodID) throws Exception {
+    public GetPaymentMethodResponse get(String accountID, String paymentMethodID) {
         GetPaymentMethodRequest request =
             GetPaymentMethodRequest
                 .builder()

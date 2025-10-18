@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.BankAccountWaitFor;
 import io.moov.sdk.operations.InitiateBankAccountVerification;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -60,7 +59,7 @@ public class InitiateBankAccountVerificationRequestBuilder {
         return request;
     }
 
-    public InitiateBankAccountVerificationResponse call() throws Exception {
+    public InitiateBankAccountVerificationResponse call() {
         
         RequestOperation<InitiateBankAccountVerificationRequest, InitiateBankAccountVerificationResponse> operation
               = new InitiateBankAccountVerification.Sync(sdkConfiguration, _headers);

@@ -8,7 +8,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GenerateEndToEndKey;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 
 public class GenerateEndToEndKeyRequestBuilder {
 
@@ -27,7 +26,7 @@ public class GenerateEndToEndKeyRequestBuilder {
         return request;
     }
 
-    public GenerateEndToEndKeyResponse call() throws Exception {
+    public GenerateEndToEndKeyResponse call() {
         
         RequestOperation<GenerateEndToEndKeyRequest, GenerateEndToEndKeyResponse> operation
               = new GenerateEndToEndKey.Sync(sdkConfiguration, _headers);

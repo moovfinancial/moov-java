@@ -32,7 +32,6 @@ import io.moov.sdk.operations.GetSchedules;
 import io.moov.sdk.operations.ListSchedules;
 import io.moov.sdk.operations.UpdateSchedule;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -69,9 +68,9 @@ public class Scheduling {
      * @param accountID Account ID of the account that will run the transfer.
      * @param upsertSchedule 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateScheduleResponse create(String accountID, UpsertSchedule upsertSchedule) throws Exception {
+    public CreateScheduleResponse create(String accountID, UpsertSchedule upsertSchedule) {
         CreateScheduleRequest request =
             CreateScheduleRequest
                 .builder()
@@ -107,9 +106,9 @@ public class Scheduling {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListSchedulesResponse list(String accountID) throws Exception {
+    public ListSchedulesResponse list(String accountID) {
         return list(Optional.empty(), Optional.empty(), Optional.empty(),
             accountID);
     }
@@ -127,11 +126,11 @@ public class Scheduling {
      * @param hydrate 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public ListSchedulesResponse list(
             Optional<Long> skip, Optional<Long> count,
-            Optional<? extends Hydrate> hydrate, String accountID) throws Exception {
+            Optional<? extends Hydrate> hydrate, String accountID) {
         ListSchedulesRequest request =
             ListSchedulesRequest
                 .builder()
@@ -169,11 +168,11 @@ public class Scheduling {
      * @param scheduleID 
      * @param upsertSchedule 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateScheduleResponse update(
             String accountID, String scheduleID,
-            UpsertSchedule upsertSchedule) throws Exception {
+            UpsertSchedule upsertSchedule) {
         UpdateScheduleRequest request =
             UpdateScheduleRequest
                 .builder()
@@ -211,9 +210,9 @@ public class Scheduling {
      * @param accountID 
      * @param scheduleID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetSchedulesResponse get(String accountID, String scheduleID) throws Exception {
+    public GetSchedulesResponse get(String accountID, String scheduleID) {
         GetSchedulesRequest request =
             GetSchedulesRequest
                 .builder()
@@ -248,9 +247,9 @@ public class Scheduling {
      * @param accountID Your Moov account ID as the partner running the transfers.
      * @param scheduleID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CancelScheduleResponse cancel(String accountID, String scheduleID) throws Exception {
+    public CancelScheduleResponse cancel(String accountID, String scheduleID) {
         CancelScheduleRequest request =
             CancelScheduleRequest
                 .builder()
@@ -290,11 +289,11 @@ public class Scheduling {
      *         Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
      *         Specifying `latest` returns the latest occurrence at or before now.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public GetScheduledOccurrenceResponse getOccurrance(
             String accountID, String scheduleID,
-            String occurrenceFilter) throws Exception {
+            String occurrenceFilter) {
         GetScheduledOccurrenceRequest request =
             GetScheduledOccurrenceRequest
                 .builder()

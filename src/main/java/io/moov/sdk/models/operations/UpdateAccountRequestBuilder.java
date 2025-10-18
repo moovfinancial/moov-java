@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.PatchAccount;
 import io.moov.sdk.operations.UpdateAccount;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class UpdateAccountRequestBuilder {
@@ -45,7 +44,7 @@ public class UpdateAccountRequestBuilder {
         return request;
     }
 
-    public UpdateAccountResponse call() throws Exception {
+    public UpdateAccountResponse call() {
         
         RequestOperation<UpdateAccountRequest, UpdateAccountResponse> operation
               = new UpdateAccount.Sync(sdkConfiguration, _headers);

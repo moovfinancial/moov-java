@@ -43,7 +43,6 @@ import io.moov.sdk.operations.InitiateBankAccountVerification;
 import io.moov.sdk.operations.InitiateMicroDeposits;
 import io.moov.sdk.operations.ListBankAccounts;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -95,9 +94,9 @@ public class BankAccounts {
      * @param accountID 
      * @param linkBankAccount 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public LinkBankAccountResponse link(String accountID, LinkBankAccount linkBankAccount) throws Exception {
+    public LinkBankAccountResponse link(String accountID, LinkBankAccount linkBankAccount) {
         return link(Optional.empty(), accountID, linkBankAccount);
     }
 
@@ -120,11 +119,11 @@ public class BankAccounts {
      * @param accountID 
      * @param linkBankAccount 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public LinkBankAccountResponse link(
             Optional<? extends BankAccountWaitFor> xWaitFor, String accountID,
-            LinkBankAccount linkBankAccount) throws Exception {
+            LinkBankAccount linkBankAccount) {
         LinkBankAccountRequest request =
             LinkBankAccountRequest
                 .builder()
@@ -163,9 +162,9 @@ public class BankAccounts {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListBankAccountsResponse list(String accountID) throws Exception {
+    public ListBankAccountsResponse list(String accountID) {
         ListBankAccountsRequest request =
             ListBankAccountsRequest
                 .builder()
@@ -205,9 +204,9 @@ public class BankAccounts {
      * @param accountID 
      * @param bankAccountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetBankAccountResponse get(String accountID, String bankAccountID) throws Exception {
+    public GetBankAccountResponse get(String accountID, String bankAccountID) {
         GetBankAccountRequest request =
             GetBankAccountRequest
                 .builder()
@@ -242,9 +241,9 @@ public class BankAccounts {
      * @param accountID 
      * @param bankAccountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public DisableBankAccountResponse disable(String accountID, String bankAccountID) throws Exception {
+    public DisableBankAccountResponse disable(String accountID, String bankAccountID) {
         DisableBankAccountRequest request =
             DisableBankAccountRequest
                 .builder()
@@ -313,9 +312,9 @@ public class BankAccounts {
      * @param accountID 
      * @param bankAccountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public InitiateMicroDepositsResponse initiateMicroDeposits(String accountID, String bankAccountID) throws Exception {
+    public InitiateMicroDepositsResponse initiateMicroDeposits(String accountID, String bankAccountID) {
         InitiateMicroDepositsRequest request =
             InitiateMicroDepositsRequest
                 .builder()
@@ -353,11 +352,11 @@ public class BankAccounts {
      * @param bankAccountID 
      * @param completeMicroDeposits Request to complete the micro-deposit verification workflow.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public CompleteMicroDepositsResponse completeMicroDeposits(
             String accountID, String bankAccountID,
-            CompleteMicroDeposits completeMicroDeposits) throws Exception {
+            CompleteMicroDeposits completeMicroDeposits) {
         CompleteMicroDepositsRequest request =
             CompleteMicroDepositsRequest
                 .builder()
@@ -415,9 +414,9 @@ public class BankAccounts {
      * @param accountID 
      * @param bankAccountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetBankAccountVerificationResponse getVerification(String accountID, String bankAccountID) throws Exception {
+    public GetBankAccountVerificationResponse getVerification(String accountID, String bankAccountID) {
         GetBankAccountVerificationRequest request =
             GetBankAccountVerificationRequest
                 .builder()
@@ -490,9 +489,9 @@ public class BankAccounts {
      * @param accountID 
      * @param bankAccountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public InitiateBankAccountVerificationResponse initiateVerification(String accountID, String bankAccountID) throws Exception {
+    public InitiateBankAccountVerificationResponse initiateVerification(String accountID, String bankAccountID) {
         return initiateVerification(Optional.empty(), accountID, bankAccountID);
     }
 
@@ -526,11 +525,11 @@ public class BankAccounts {
      * @param accountID 
      * @param bankAccountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public InitiateBankAccountVerificationResponse initiateVerification(
             Optional<? extends BankAccountWaitFor> xWaitFor, String accountID,
-            String bankAccountID) throws Exception {
+            String bankAccountID) {
         InitiateBankAccountVerificationRequest request =
             InitiateBankAccountVerificationRequest
                 .builder()
@@ -585,11 +584,11 @@ public class BankAccounts {
      * @param bankAccountID 
      * @param completeBankAccountVerification 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public CompleteBankAccountVerificationResponse completeVerification(
             String accountID, String bankAccountID,
-            CompleteBankAccountVerification completeBankAccountVerification) throws Exception {
+            CompleteBankAccountVerification completeBankAccountVerification) {
         CompleteBankAccountVerificationRequest request =
             CompleteBankAccountVerificationRequest
                 .builder()

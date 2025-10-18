@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListStatements;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 
 public class ListStatementsRequestBuilder {
 
@@ -27,7 +26,7 @@ public class ListStatementsRequestBuilder {
         return this;
     }
 
-    public ListStatementsResponse call() throws Exception {
+    public ListStatementsResponse call() {
         
         RequestOperation<ListStatementsRequest, ListStatementsResponse> operation
               = new ListStatements.Sync(sdkConfiguration, _headers);

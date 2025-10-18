@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.ProductRequest;
 import io.moov.sdk.operations.UpdateProduct;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class UpdateProductRequestBuilder {
@@ -53,7 +52,7 @@ public class UpdateProductRequestBuilder {
         return request;
     }
 
-    public UpdateProductResponse call() throws Exception {
+    public UpdateProductResponse call() {
         
         RequestOperation<UpdateProductRequest, UpdateProductResponse> operation
               = new UpdateProduct.Sync(sdkConfiguration, _headers);

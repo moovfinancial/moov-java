@@ -10,416 +10,504 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.End2EndEncryptionError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class UpdateCardError extends RuntimeException {
+public class UpdateCardError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("e2ee")
-    private Optional<? extends End2EndEncryptionError> e2ee;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("billingAddress")
-    private Optional<String> billingAddress;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("expiration")
-    private Optional<String> expiration;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("cardCvv")
-    private Optional<String> cardCvv;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("cardOnFile")
-    private Optional<String> cardOnFile;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("merchantAccountID")
-    private Optional<String> merchantAccountID;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("verifyName")
-    private Optional<String> verifyName;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("holderName")
-    private Optional<String> holderName;
-
-    @JsonCreator
     public UpdateCardError(
-            @JsonProperty("e2ee") Optional<? extends End2EndEncryptionError> e2ee,
-            @JsonProperty("billingAddress") Optional<String> billingAddress,
-            @JsonProperty("expiration") Optional<String> expiration,
-            @JsonProperty("cardCvv") Optional<String> cardCvv,
-            @JsonProperty("cardOnFile") Optional<String> cardOnFile,
-            @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
-            @JsonProperty("verifyName") Optional<String> verifyName,
-            @JsonProperty("holderName") Optional<String> holderName) {
-        super("API error occurred");
-        Utils.checkNotNull(e2ee, "e2ee");
-        Utils.checkNotNull(billingAddress, "billingAddress");
-        Utils.checkNotNull(expiration, "expiration");
-        Utils.checkNotNull(cardCvv, "cardCvv");
-        Utils.checkNotNull(cardOnFile, "cardOnFile");
-        Utils.checkNotNull(merchantAccountID, "merchantAccountID");
-        Utils.checkNotNull(verifyName, "verifyName");
-        Utils.checkNotNull(holderName, "holderName");
-        this.e2ee = e2ee;
-        this.billingAddress = billingAddress;
-        this.expiration = expiration;
-        this.cardCvv = cardCvv;
-        this.cardOnFile = cardOnFile;
-        this.merchantAccountID = merchantAccountID;
-        this.verifyName = verifyName;
-        this.holderName = holderName;
-    }
-    
-    public UpdateCardError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of UpdateCardError. If deserialization of the response body fails,
+    * the resulting UpdateCardError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static UpdateCardError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new UpdateCardError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new UpdateCardError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<End2EndEncryptionError> e2ee() {
-        return (Optional<End2EndEncryptionError>) e2ee;
+        return data().flatMap(Data::e2ee);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> billingAddress() {
-        return billingAddress;
+        return data().flatMap(Data::billingAddress);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> expiration() {
-        return expiration;
+        return data().flatMap(Data::expiration);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> cardCvv() {
-        return cardCvv;
+        return data().flatMap(Data::cardCvv);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> cardOnFile() {
-        return cardOnFile;
+        return data().flatMap(Data::cardOnFile);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> merchantAccountID() {
-        return merchantAccountID;
+        return data().flatMap(Data::merchantAccountID);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> verifyName() {
-        return verifyName;
+        return data().flatMap(Data::verifyName);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> holderName() {
-        return holderName;
+        return data().flatMap(Data::holderName);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public UpdateCardError withE2ee(End2EndEncryptionError e2ee) {
-        Utils.checkNotNull(e2ee, "e2ee");
-        this.e2ee = Optional.ofNullable(e2ee);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public UpdateCardError withE2ee(Optional<? extends End2EndEncryptionError> e2ee) {
-        Utils.checkNotNull(e2ee, "e2ee");
-        this.e2ee = e2ee;
-        return this;
-    }
-
-    public UpdateCardError withBillingAddress(String billingAddress) {
-        Utils.checkNotNull(billingAddress, "billingAddress");
-        this.billingAddress = Optional.ofNullable(billingAddress);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("e2ee")
+        private Optional<? extends End2EndEncryptionError> e2ee;
 
 
-    public UpdateCardError withBillingAddress(Optional<String> billingAddress) {
-        Utils.checkNotNull(billingAddress, "billingAddress");
-        this.billingAddress = billingAddress;
-        return this;
-    }
-
-    public UpdateCardError withExpiration(String expiration) {
-        Utils.checkNotNull(expiration, "expiration");
-        this.expiration = Optional.ofNullable(expiration);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("billingAddress")
+        private Optional<String> billingAddress;
 
 
-    public UpdateCardError withExpiration(Optional<String> expiration) {
-        Utils.checkNotNull(expiration, "expiration");
-        this.expiration = expiration;
-        return this;
-    }
-
-    public UpdateCardError withCardCvv(String cardCvv) {
-        Utils.checkNotNull(cardCvv, "cardCvv");
-        this.cardCvv = Optional.ofNullable(cardCvv);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("expiration")
+        private Optional<String> expiration;
 
 
-    public UpdateCardError withCardCvv(Optional<String> cardCvv) {
-        Utils.checkNotNull(cardCvv, "cardCvv");
-        this.cardCvv = cardCvv;
-        return this;
-    }
-
-    public UpdateCardError withCardOnFile(String cardOnFile) {
-        Utils.checkNotNull(cardOnFile, "cardOnFile");
-        this.cardOnFile = Optional.ofNullable(cardOnFile);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("cardCvv")
+        private Optional<String> cardCvv;
 
 
-    public UpdateCardError withCardOnFile(Optional<String> cardOnFile) {
-        Utils.checkNotNull(cardOnFile, "cardOnFile");
-        this.cardOnFile = cardOnFile;
-        return this;
-    }
-
-    public UpdateCardError withMerchantAccountID(String merchantAccountID) {
-        Utils.checkNotNull(merchantAccountID, "merchantAccountID");
-        this.merchantAccountID = Optional.ofNullable(merchantAccountID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("cardOnFile")
+        private Optional<String> cardOnFile;
 
 
-    public UpdateCardError withMerchantAccountID(Optional<String> merchantAccountID) {
-        Utils.checkNotNull(merchantAccountID, "merchantAccountID");
-        this.merchantAccountID = merchantAccountID;
-        return this;
-    }
-
-    public UpdateCardError withVerifyName(String verifyName) {
-        Utils.checkNotNull(verifyName, "verifyName");
-        this.verifyName = Optional.ofNullable(verifyName);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("merchantAccountID")
+        private Optional<String> merchantAccountID;
 
 
-    public UpdateCardError withVerifyName(Optional<String> verifyName) {
-        Utils.checkNotNull(verifyName, "verifyName");
-        this.verifyName = verifyName;
-        return this;
-    }
-
-    public UpdateCardError withHolderName(String holderName) {
-        Utils.checkNotNull(holderName, "holderName");
-        this.holderName = Optional.ofNullable(holderName);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("verifyName")
+        private Optional<String> verifyName;
 
 
-    public UpdateCardError withHolderName(Optional<String> holderName) {
-        Utils.checkNotNull(holderName, "holderName");
-        this.holderName = holderName;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("holderName")
+        private Optional<String> holderName;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("e2ee") Optional<? extends End2EndEncryptionError> e2ee,
+                @JsonProperty("billingAddress") Optional<String> billingAddress,
+                @JsonProperty("expiration") Optional<String> expiration,
+                @JsonProperty("cardCvv") Optional<String> cardCvv,
+                @JsonProperty("cardOnFile") Optional<String> cardOnFile,
+                @JsonProperty("merchantAccountID") Optional<String> merchantAccountID,
+                @JsonProperty("verifyName") Optional<String> verifyName,
+                @JsonProperty("holderName") Optional<String> holderName) {
+            Utils.checkNotNull(e2ee, "e2ee");
+            Utils.checkNotNull(billingAddress, "billingAddress");
+            Utils.checkNotNull(expiration, "expiration");
+            Utils.checkNotNull(cardCvv, "cardCvv");
+            Utils.checkNotNull(cardOnFile, "cardOnFile");
+            Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+            Utils.checkNotNull(verifyName, "verifyName");
+            Utils.checkNotNull(holderName, "holderName");
+            this.e2ee = e2ee;
+            this.billingAddress = billingAddress;
+            this.expiration = expiration;
+            this.cardCvv = cardCvv;
+            this.cardOnFile = cardOnFile;
+            this.merchantAccountID = merchantAccountID;
+            this.verifyName = verifyName;
+            this.holderName = holderName;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        UpdateCardError other = (UpdateCardError) o;
-        return 
-            Utils.enhancedDeepEquals(this.e2ee, other.e2ee) &&
-            Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
-            Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
-            Utils.enhancedDeepEquals(this.cardCvv, other.cardCvv) &&
-            Utils.enhancedDeepEquals(this.cardOnFile, other.cardOnFile) &&
-            Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
-            Utils.enhancedDeepEquals(this.verifyName, other.verifyName) &&
-            Utils.enhancedDeepEquals(this.holderName, other.holderName);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            e2ee, billingAddress, expiration,
-            cardCvv, cardOnFile, merchantAccountID,
-            verifyName, holderName);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(UpdateCardError.class,
-                "e2ee", e2ee,
-                "billingAddress", billingAddress,
-                "expiration", expiration,
-                "cardCvv", cardCvv,
-                "cardOnFile", cardOnFile,
-                "merchantAccountID", merchantAccountID,
-                "verifyName", verifyName,
-                "holderName", holderName);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<End2EndEncryptionError> e2ee() {
+            return (Optional<End2EndEncryptionError>) e2ee;
+        }
 
-        private Optional<? extends End2EndEncryptionError> e2ee = Optional.empty();
+        @JsonIgnore
+        public Optional<String> billingAddress() {
+            return billingAddress;
+        }
 
-        private Optional<String> billingAddress = Optional.empty();
+        @JsonIgnore
+        public Optional<String> expiration() {
+            return expiration;
+        }
 
-        private Optional<String> expiration = Optional.empty();
+        @JsonIgnore
+        public Optional<String> cardCvv() {
+            return cardCvv;
+        }
 
-        private Optional<String> cardCvv = Optional.empty();
+        @JsonIgnore
+        public Optional<String> cardOnFile() {
+            return cardOnFile;
+        }
 
-        private Optional<String> cardOnFile = Optional.empty();
+        @JsonIgnore
+        public Optional<String> merchantAccountID() {
+            return merchantAccountID;
+        }
 
-        private Optional<String> merchantAccountID = Optional.empty();
+        @JsonIgnore
+        public Optional<String> verifyName() {
+            return verifyName;
+        }
 
-        private Optional<String> verifyName = Optional.empty();
+        @JsonIgnore
+        public Optional<String> holderName() {
+            return holderName;
+        }
 
-        private Optional<String> holderName = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder e2ee(End2EndEncryptionError e2ee) {
+        public Data withE2ee(End2EndEncryptionError e2ee) {
             Utils.checkNotNull(e2ee, "e2ee");
             this.e2ee = Optional.ofNullable(e2ee);
             return this;
         }
 
-        public Builder e2ee(Optional<? extends End2EndEncryptionError> e2ee) {
+
+        public Data withE2ee(Optional<? extends End2EndEncryptionError> e2ee) {
             Utils.checkNotNull(e2ee, "e2ee");
             this.e2ee = e2ee;
             return this;
         }
 
-
-        public Builder billingAddress(String billingAddress) {
+        public Data withBillingAddress(String billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = Optional.ofNullable(billingAddress);
             return this;
         }
 
-        public Builder billingAddress(Optional<String> billingAddress) {
+
+        public Data withBillingAddress(Optional<String> billingAddress) {
             Utils.checkNotNull(billingAddress, "billingAddress");
             this.billingAddress = billingAddress;
             return this;
         }
 
-
-        public Builder expiration(String expiration) {
+        public Data withExpiration(String expiration) {
             Utils.checkNotNull(expiration, "expiration");
             this.expiration = Optional.ofNullable(expiration);
             return this;
         }
 
-        public Builder expiration(Optional<String> expiration) {
+
+        public Data withExpiration(Optional<String> expiration) {
             Utils.checkNotNull(expiration, "expiration");
             this.expiration = expiration;
             return this;
         }
 
-
-        public Builder cardCvv(String cardCvv) {
+        public Data withCardCvv(String cardCvv) {
             Utils.checkNotNull(cardCvv, "cardCvv");
             this.cardCvv = Optional.ofNullable(cardCvv);
             return this;
         }
 
-        public Builder cardCvv(Optional<String> cardCvv) {
+
+        public Data withCardCvv(Optional<String> cardCvv) {
             Utils.checkNotNull(cardCvv, "cardCvv");
             this.cardCvv = cardCvv;
             return this;
         }
 
-
-        public Builder cardOnFile(String cardOnFile) {
+        public Data withCardOnFile(String cardOnFile) {
             Utils.checkNotNull(cardOnFile, "cardOnFile");
             this.cardOnFile = Optional.ofNullable(cardOnFile);
             return this;
         }
 
-        public Builder cardOnFile(Optional<String> cardOnFile) {
+
+        public Data withCardOnFile(Optional<String> cardOnFile) {
             Utils.checkNotNull(cardOnFile, "cardOnFile");
             this.cardOnFile = cardOnFile;
             return this;
         }
 
-
-        public Builder merchantAccountID(String merchantAccountID) {
+        public Data withMerchantAccountID(String merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = Optional.ofNullable(merchantAccountID);
             return this;
         }
 
-        public Builder merchantAccountID(Optional<String> merchantAccountID) {
+
+        public Data withMerchantAccountID(Optional<String> merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = merchantAccountID;
             return this;
         }
 
-
-        public Builder verifyName(String verifyName) {
+        public Data withVerifyName(String verifyName) {
             Utils.checkNotNull(verifyName, "verifyName");
             this.verifyName = Optional.ofNullable(verifyName);
             return this;
         }
 
-        public Builder verifyName(Optional<String> verifyName) {
+
+        public Data withVerifyName(Optional<String> verifyName) {
             Utils.checkNotNull(verifyName, "verifyName");
             this.verifyName = verifyName;
             return this;
         }
 
-
-        public Builder holderName(String holderName) {
+        public Data withHolderName(String holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = Optional.ofNullable(holderName);
             return this;
         }
 
-        public Builder holderName(Optional<String> holderName) {
+
+        public Data withHolderName(Optional<String> holderName) {
             Utils.checkNotNull(holderName, "holderName");
             this.holderName = holderName;
             return this;
         }
 
-        public UpdateCardError build() {
-
-            return new UpdateCardError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.e2ee, other.e2ee) &&
+                Utils.enhancedDeepEquals(this.billingAddress, other.billingAddress) &&
+                Utils.enhancedDeepEquals(this.expiration, other.expiration) &&
+                Utils.enhancedDeepEquals(this.cardCvv, other.cardCvv) &&
+                Utils.enhancedDeepEquals(this.cardOnFile, other.cardOnFile) &&
+                Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+                Utils.enhancedDeepEquals(this.verifyName, other.verifyName) &&
+                Utils.enhancedDeepEquals(this.holderName, other.holderName);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 e2ee, billingAddress, expiration,
                 cardCvv, cardOnFile, merchantAccountID,
                 verifyName, holderName);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "e2ee", e2ee,
+                    "billingAddress", billingAddress,
+                    "expiration", expiration,
+                    "cardCvv", cardCvv,
+                    "cardOnFile", cardOnFile,
+                    "merchantAccountID", merchantAccountID,
+                    "verifyName", verifyName,
+                    "holderName", holderName);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<? extends End2EndEncryptionError> e2ee = Optional.empty();
+
+            private Optional<String> billingAddress = Optional.empty();
+
+            private Optional<String> expiration = Optional.empty();
+
+            private Optional<String> cardCvv = Optional.empty();
+
+            private Optional<String> cardOnFile = Optional.empty();
+
+            private Optional<String> merchantAccountID = Optional.empty();
+
+            private Optional<String> verifyName = Optional.empty();
+
+            private Optional<String> holderName = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder e2ee(End2EndEncryptionError e2ee) {
+                Utils.checkNotNull(e2ee, "e2ee");
+                this.e2ee = Optional.ofNullable(e2ee);
+                return this;
+            }
+
+            public Builder e2ee(Optional<? extends End2EndEncryptionError> e2ee) {
+                Utils.checkNotNull(e2ee, "e2ee");
+                this.e2ee = e2ee;
+                return this;
+            }
+
+
+            public Builder billingAddress(String billingAddress) {
+                Utils.checkNotNull(billingAddress, "billingAddress");
+                this.billingAddress = Optional.ofNullable(billingAddress);
+                return this;
+            }
+
+            public Builder billingAddress(Optional<String> billingAddress) {
+                Utils.checkNotNull(billingAddress, "billingAddress");
+                this.billingAddress = billingAddress;
+                return this;
+            }
+
+
+            public Builder expiration(String expiration) {
+                Utils.checkNotNull(expiration, "expiration");
+                this.expiration = Optional.ofNullable(expiration);
+                return this;
+            }
+
+            public Builder expiration(Optional<String> expiration) {
+                Utils.checkNotNull(expiration, "expiration");
+                this.expiration = expiration;
+                return this;
+            }
+
+
+            public Builder cardCvv(String cardCvv) {
+                Utils.checkNotNull(cardCvv, "cardCvv");
+                this.cardCvv = Optional.ofNullable(cardCvv);
+                return this;
+            }
+
+            public Builder cardCvv(Optional<String> cardCvv) {
+                Utils.checkNotNull(cardCvv, "cardCvv");
+                this.cardCvv = cardCvv;
+                return this;
+            }
+
+
+            public Builder cardOnFile(String cardOnFile) {
+                Utils.checkNotNull(cardOnFile, "cardOnFile");
+                this.cardOnFile = Optional.ofNullable(cardOnFile);
+                return this;
+            }
+
+            public Builder cardOnFile(Optional<String> cardOnFile) {
+                Utils.checkNotNull(cardOnFile, "cardOnFile");
+                this.cardOnFile = cardOnFile;
+                return this;
+            }
+
+
+            public Builder merchantAccountID(String merchantAccountID) {
+                Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+                this.merchantAccountID = Optional.ofNullable(merchantAccountID);
+                return this;
+            }
+
+            public Builder merchantAccountID(Optional<String> merchantAccountID) {
+                Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+                this.merchantAccountID = merchantAccountID;
+                return this;
+            }
+
+
+            public Builder verifyName(String verifyName) {
+                Utils.checkNotNull(verifyName, "verifyName");
+                this.verifyName = Optional.ofNullable(verifyName);
+                return this;
+            }
+
+            public Builder verifyName(Optional<String> verifyName) {
+                Utils.checkNotNull(verifyName, "verifyName");
+                this.verifyName = verifyName;
+                return this;
+            }
+
+
+            public Builder holderName(String holderName) {
+                Utils.checkNotNull(holderName, "holderName");
+                this.holderName = Optional.ofNullable(holderName);
+                return this;
+            }
+
+            public Builder holderName(Optional<String> holderName) {
+                Utils.checkNotNull(holderName, "holderName");
+                this.holderName = holderName;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    e2ee, billingAddress, expiration,
+                    cardCvv, cardOnFile, merchantAccountID,
+                    verifyName, holderName);
+            }
+
+        }
     }
+
 }
 

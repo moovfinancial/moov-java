@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetProduct;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetProductRequestBuilder {
@@ -44,7 +43,7 @@ public class GetProductRequestBuilder {
         return request;
     }
 
-    public GetProductResponse call() throws Exception {
+    public GetProductResponse call() {
         
         RequestOperation<GetProductRequest, GetProductResponse> operation
               = new GetProduct.Sync(sdkConfiguration, _headers);

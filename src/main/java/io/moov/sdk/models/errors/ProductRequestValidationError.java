@@ -12,287 +12,360 @@ import io.moov.sdk.models.components.AmountDecimalValidationError;
 import io.moov.sdk.models.components.AssignProductImageValidationError;
 import io.moov.sdk.models.components.ProductOptionGroupValidationError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class ProductRequestValidationError extends RuntimeException {
+public class ProductRequestValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("title")
-    private Optional<String> title;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("description")
-    private Optional<String> description;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("basePrice")
-    private Optional<? extends AmountDecimalValidationError> basePrice;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("images")
-    private Optional<? extends Map<String, AssignProductImageValidationError>> images;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("optionGroups")
-    private Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups;
-
-    @JsonCreator
     public ProductRequestValidationError(
-            @JsonProperty("title") Optional<String> title,
-            @JsonProperty("description") Optional<String> description,
-            @JsonProperty("basePrice") Optional<? extends AmountDecimalValidationError> basePrice,
-            @JsonProperty("images") Optional<? extends Map<String, AssignProductImageValidationError>> images,
-            @JsonProperty("optionGroups") Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups) {
-        super("API error occurred");
-        Utils.checkNotNull(title, "title");
-        Utils.checkNotNull(description, "description");
-        Utils.checkNotNull(basePrice, "basePrice");
-        Utils.checkNotNull(images, "images");
-        Utils.checkNotNull(optionGroups, "optionGroups");
-        this.title = title;
-        this.description = description;
-        this.basePrice = basePrice;
-        this.images = images;
-        this.optionGroups = optionGroups;
-    }
-    
-    public ProductRequestValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of ProductRequestValidationError. If deserialization of the response body fails,
+    * the resulting ProductRequestValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static ProductRequestValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new ProductRequestValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new ProductRequestValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> title() {
-        return title;
+        return data().flatMap(Data::title);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> description() {
-        return description;
+        return data().flatMap(Data::description);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<AmountDecimalValidationError> basePrice() {
-        return (Optional<AmountDecimalValidationError>) basePrice;
+        return data().flatMap(Data::basePrice);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<Map<String, AssignProductImageValidationError>> images() {
-        return (Optional<Map<String, AssignProductImageValidationError>>) images;
+        return data().flatMap(Data::images);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<Map<String, ProductOptionGroupValidationError>> optionGroups() {
-        return (Optional<Map<String, ProductOptionGroupValidationError>>) optionGroups;
+        return data().flatMap(Data::optionGroups);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public ProductRequestValidationError withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public ProductRequestValidationError withTitle(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
-        return this;
-    }
-
-    public ProductRequestValidationError withDescription(String description) {
-        Utils.checkNotNull(description, "description");
-        this.description = Optional.ofNullable(description);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("title")
+        private Optional<String> title;
 
 
-    public ProductRequestValidationError withDescription(Optional<String> description) {
-        Utils.checkNotNull(description, "description");
-        this.description = description;
-        return this;
-    }
-
-    public ProductRequestValidationError withBasePrice(AmountDecimalValidationError basePrice) {
-        Utils.checkNotNull(basePrice, "basePrice");
-        this.basePrice = Optional.ofNullable(basePrice);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("description")
+        private Optional<String> description;
 
 
-    public ProductRequestValidationError withBasePrice(Optional<? extends AmountDecimalValidationError> basePrice) {
-        Utils.checkNotNull(basePrice, "basePrice");
-        this.basePrice = basePrice;
-        return this;
-    }
-
-    public ProductRequestValidationError withImages(Map<String, AssignProductImageValidationError> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = Optional.ofNullable(images);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("basePrice")
+        private Optional<? extends AmountDecimalValidationError> basePrice;
 
 
-    public ProductRequestValidationError withImages(Optional<? extends Map<String, AssignProductImageValidationError>> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = images;
-        return this;
-    }
-
-    public ProductRequestValidationError withOptionGroups(Map<String, ProductOptionGroupValidationError> optionGroups) {
-        Utils.checkNotNull(optionGroups, "optionGroups");
-        this.optionGroups = Optional.ofNullable(optionGroups);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("images")
+        private Optional<? extends Map<String, AssignProductImageValidationError>> images;
 
 
-    public ProductRequestValidationError withOptionGroups(Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups) {
-        Utils.checkNotNull(optionGroups, "optionGroups");
-        this.optionGroups = optionGroups;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("optionGroups")
+        private Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("title") Optional<String> title,
+                @JsonProperty("description") Optional<String> description,
+                @JsonProperty("basePrice") Optional<? extends AmountDecimalValidationError> basePrice,
+                @JsonProperty("images") Optional<? extends Map<String, AssignProductImageValidationError>> images,
+                @JsonProperty("optionGroups") Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups) {
+            Utils.checkNotNull(title, "title");
+            Utils.checkNotNull(description, "description");
+            Utils.checkNotNull(basePrice, "basePrice");
+            Utils.checkNotNull(images, "images");
+            Utils.checkNotNull(optionGroups, "optionGroups");
+            this.title = title;
+            this.description = description;
+            this.basePrice = basePrice;
+            this.images = images;
+            this.optionGroups = optionGroups;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        ProductRequestValidationError other = (ProductRequestValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.title, other.title) &&
-            Utils.enhancedDeepEquals(this.description, other.description) &&
-            Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
-            Utils.enhancedDeepEquals(this.images, other.images) &&
-            Utils.enhancedDeepEquals(this.optionGroups, other.optionGroups);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            title, description, basePrice,
-            images, optionGroups);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(ProductRequestValidationError.class,
-                "title", title,
-                "description", description,
-                "basePrice", basePrice,
-                "images", images,
-                "optionGroups", optionGroups);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> title() {
+            return title;
+        }
 
-        private Optional<String> title = Optional.empty();
+        @JsonIgnore
+        public Optional<String> description() {
+            return description;
+        }
 
-        private Optional<String> description = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<AmountDecimalValidationError> basePrice() {
+            return (Optional<AmountDecimalValidationError>) basePrice;
+        }
 
-        private Optional<? extends AmountDecimalValidationError> basePrice = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<Map<String, AssignProductImageValidationError>> images() {
+            return (Optional<Map<String, AssignProductImageValidationError>>) images;
+        }
 
-        private Optional<? extends Map<String, AssignProductImageValidationError>> images = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<Map<String, ProductOptionGroupValidationError>> optionGroups() {
+            return (Optional<Map<String, ProductOptionGroupValidationError>>) optionGroups;
+        }
 
-        private Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder title(String title) {
+        public Data withTitle(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
             return this;
         }
 
-        public Builder title(Optional<String> title) {
+
+        public Data withTitle(Optional<String> title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
-
-        public Builder description(String description) {
+        public Data withDescription(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
             return this;
         }
 
-        public Builder description(Optional<String> description) {
+
+        public Data withDescription(Optional<String> description) {
             Utils.checkNotNull(description, "description");
             this.description = description;
             return this;
         }
 
-
-        public Builder basePrice(AmountDecimalValidationError basePrice) {
+        public Data withBasePrice(AmountDecimalValidationError basePrice) {
             Utils.checkNotNull(basePrice, "basePrice");
             this.basePrice = Optional.ofNullable(basePrice);
             return this;
         }
 
-        public Builder basePrice(Optional<? extends AmountDecimalValidationError> basePrice) {
+
+        public Data withBasePrice(Optional<? extends AmountDecimalValidationError> basePrice) {
             Utils.checkNotNull(basePrice, "basePrice");
             this.basePrice = basePrice;
             return this;
         }
 
-
-        public Builder images(Map<String, AssignProductImageValidationError> images) {
+        public Data withImages(Map<String, AssignProductImageValidationError> images) {
             Utils.checkNotNull(images, "images");
             this.images = Optional.ofNullable(images);
             return this;
         }
 
-        public Builder images(Optional<? extends Map<String, AssignProductImageValidationError>> images) {
+
+        public Data withImages(Optional<? extends Map<String, AssignProductImageValidationError>> images) {
             Utils.checkNotNull(images, "images");
             this.images = images;
             return this;
         }
 
-
-        public Builder optionGroups(Map<String, ProductOptionGroupValidationError> optionGroups) {
+        public Data withOptionGroups(Map<String, ProductOptionGroupValidationError> optionGroups) {
             Utils.checkNotNull(optionGroups, "optionGroups");
             this.optionGroups = Optional.ofNullable(optionGroups);
             return this;
         }
 
-        public Builder optionGroups(Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups) {
+
+        public Data withOptionGroups(Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups) {
             Utils.checkNotNull(optionGroups, "optionGroups");
             this.optionGroups = optionGroups;
             return this;
         }
 
-        public ProductRequestValidationError build() {
-
-            return new ProductRequestValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.title, other.title) &&
+                Utils.enhancedDeepEquals(this.description, other.description) &&
+                Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
+                Utils.enhancedDeepEquals(this.images, other.images) &&
+                Utils.enhancedDeepEquals(this.optionGroups, other.optionGroups);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 title, description, basePrice,
                 images, optionGroups);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "title", title,
+                    "description", description,
+                    "basePrice", basePrice,
+                    "images", images,
+                    "optionGroups", optionGroups);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> title = Optional.empty();
+
+            private Optional<String> description = Optional.empty();
+
+            private Optional<? extends AmountDecimalValidationError> basePrice = Optional.empty();
+
+            private Optional<? extends Map<String, AssignProductImageValidationError>> images = Optional.empty();
+
+            private Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder title(String title) {
+                Utils.checkNotNull(title, "title");
+                this.title = Optional.ofNullable(title);
+                return this;
+            }
+
+            public Builder title(Optional<String> title) {
+                Utils.checkNotNull(title, "title");
+                this.title = title;
+                return this;
+            }
+
+
+            public Builder description(String description) {
+                Utils.checkNotNull(description, "description");
+                this.description = Optional.ofNullable(description);
+                return this;
+            }
+
+            public Builder description(Optional<String> description) {
+                Utils.checkNotNull(description, "description");
+                this.description = description;
+                return this;
+            }
+
+
+            public Builder basePrice(AmountDecimalValidationError basePrice) {
+                Utils.checkNotNull(basePrice, "basePrice");
+                this.basePrice = Optional.ofNullable(basePrice);
+                return this;
+            }
+
+            public Builder basePrice(Optional<? extends AmountDecimalValidationError> basePrice) {
+                Utils.checkNotNull(basePrice, "basePrice");
+                this.basePrice = basePrice;
+                return this;
+            }
+
+
+            public Builder images(Map<String, AssignProductImageValidationError> images) {
+                Utils.checkNotNull(images, "images");
+                this.images = Optional.ofNullable(images);
+                return this;
+            }
+
+            public Builder images(Optional<? extends Map<String, AssignProductImageValidationError>> images) {
+                Utils.checkNotNull(images, "images");
+                this.images = images;
+                return this;
+            }
+
+
+            public Builder optionGroups(Map<String, ProductOptionGroupValidationError> optionGroups) {
+                Utils.checkNotNull(optionGroups, "optionGroups");
+                this.optionGroups = Optional.ofNullable(optionGroups);
+                return this;
+            }
+
+            public Builder optionGroups(Optional<? extends Map<String, ProductOptionGroupValidationError>> optionGroups) {
+                Utils.checkNotNull(optionGroups, "optionGroups");
+                this.optionGroups = optionGroups;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    title, description, basePrice,
+                    images, optionGroups);
+            }
+
+        }
     }
+
 }
 

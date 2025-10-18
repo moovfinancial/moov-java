@@ -9,152 +9,210 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class FileUploadValidationError extends RuntimeException {
+public class FileUploadValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("evidenceType")
-    private Optional<String> evidenceType;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("file")
-    private Optional<? extends File> file;
-
-    @JsonCreator
     public FileUploadValidationError(
-            @JsonProperty("evidenceType") Optional<String> evidenceType,
-            @JsonProperty("file") Optional<? extends File> file) {
-        super("API error occurred");
-        Utils.checkNotNull(evidenceType, "evidenceType");
-        Utils.checkNotNull(file, "file");
-        this.evidenceType = evidenceType;
-        this.file = file;
-    }
-    
-    public FileUploadValidationError() {
-        this(Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of FileUploadValidationError. If deserialization of the response body fails,
+    * the resulting FileUploadValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static FileUploadValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new FileUploadValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new FileUploadValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> evidenceType() {
-        return evidenceType;
+        return data().flatMap(Data::evidenceType);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<File> file() {
-        return (Optional<File>) file;
+        return data().flatMap(Data::file);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public FileUploadValidationError withEvidenceType(String evidenceType) {
-        Utils.checkNotNull(evidenceType, "evidenceType");
-        this.evidenceType = Optional.ofNullable(evidenceType);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public FileUploadValidationError withEvidenceType(Optional<String> evidenceType) {
-        Utils.checkNotNull(evidenceType, "evidenceType");
-        this.evidenceType = evidenceType;
-        return this;
-    }
-
-    public FileUploadValidationError withFile(File file) {
-        Utils.checkNotNull(file, "file");
-        this.file = Optional.ofNullable(file);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("evidenceType")
+        private Optional<String> evidenceType;
 
 
-    public FileUploadValidationError withFile(Optional<? extends File> file) {
-        Utils.checkNotNull(file, "file");
-        this.file = file;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("file")
+        private Optional<? extends File> file;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("evidenceType") Optional<String> evidenceType,
+                @JsonProperty("file") Optional<? extends File> file) {
+            Utils.checkNotNull(evidenceType, "evidenceType");
+            Utils.checkNotNull(file, "file");
+            this.evidenceType = evidenceType;
+            this.file = file;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty());
         }
-        FileUploadValidationError other = (FileUploadValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.evidenceType, other.evidenceType) &&
-            Utils.enhancedDeepEquals(this.file, other.file);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            evidenceType, file);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(FileUploadValidationError.class,
-                "evidenceType", evidenceType,
-                "file", file);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> evidenceType() {
+            return evidenceType;
+        }
 
-        private Optional<String> evidenceType = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<File> file() {
+            return (Optional<File>) file;
+        }
 
-        private Optional<? extends File> file = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder evidenceType(String evidenceType) {
+        public Data withEvidenceType(String evidenceType) {
             Utils.checkNotNull(evidenceType, "evidenceType");
             this.evidenceType = Optional.ofNullable(evidenceType);
             return this;
         }
 
-        public Builder evidenceType(Optional<String> evidenceType) {
+
+        public Data withEvidenceType(Optional<String> evidenceType) {
             Utils.checkNotNull(evidenceType, "evidenceType");
             this.evidenceType = evidenceType;
             return this;
         }
 
-
-        public Builder file(File file) {
+        public Data withFile(File file) {
             Utils.checkNotNull(file, "file");
             this.file = Optional.ofNullable(file);
             return this;
         }
 
-        public Builder file(Optional<? extends File> file) {
+
+        public Data withFile(Optional<? extends File> file) {
             Utils.checkNotNull(file, "file");
             this.file = file;
             return this;
         }
 
-        public FileUploadValidationError build() {
-
-            return new FileUploadValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.evidenceType, other.evidenceType) &&
+                Utils.enhancedDeepEquals(this.file, other.file);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 evidenceType, file);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "evidenceType", evidenceType,
+                    "file", file);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> evidenceType = Optional.empty();
+
+            private Optional<? extends File> file = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder evidenceType(String evidenceType) {
+                Utils.checkNotNull(evidenceType, "evidenceType");
+                this.evidenceType = Optional.ofNullable(evidenceType);
+                return this;
+            }
+
+            public Builder evidenceType(Optional<String> evidenceType) {
+                Utils.checkNotNull(evidenceType, "evidenceType");
+                this.evidenceType = evidenceType;
+                return this;
+            }
+
+
+            public Builder file(File file) {
+                Utils.checkNotNull(file, "file");
+                this.file = Optional.ofNullable(file);
+                return this;
+            }
+
+            public Builder file(Optional<? extends File> file) {
+                Utils.checkNotNull(file, "file");
+                this.file = file;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    evidenceType, file);
+            }
+
+        }
     }
+
 }
 

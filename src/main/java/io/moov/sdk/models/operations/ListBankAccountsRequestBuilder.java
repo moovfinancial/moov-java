@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListBankAccounts;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class ListBankAccountsRequestBuilder {
@@ -36,7 +35,7 @@ public class ListBankAccountsRequestBuilder {
         return request;
     }
 
-    public ListBankAccountsResponse call() throws Exception {
+    public ListBankAccountsResponse call() {
         
         RequestOperation<ListBankAccountsRequest, ListBankAccountsResponse> operation
               = new ListBankAccounts.Sync(sdkConfiguration, _headers);

@@ -8,7 +8,6 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.Ping;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 
 public class PingRequestBuilder {
 
@@ -27,7 +26,7 @@ public class PingRequestBuilder {
         return request;
     }
 
-    public PingResponse call() throws Exception {
+    public PingResponse call() {
         
         RequestOperation<PingRequest, PingResponse> operation
               = new Ping.Sync(sdkConfiguration, _headers);

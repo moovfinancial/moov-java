@@ -9,108 +9,161 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class MicroDepositValidationError extends RuntimeException {
+public class MicroDepositValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amounts")
-    private Optional<String> amounts;
+    @Nullable
+    private final Data data;
 
-    @JsonCreator
+    @Nullable
+    private final Throwable deserializationException;
+
     public MicroDepositValidationError(
-            @JsonProperty("amounts") Optional<String> amounts) {
-        super("API error occurred");
-        Utils.checkNotNull(amounts, "amounts");
-        this.amounts = amounts;
-    }
-    
-    public MicroDepositValidationError() {
-        this(Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of MicroDepositValidationError. If deserialization of the response body fails,
+    * the resulting MicroDepositValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static MicroDepositValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new MicroDepositValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new MicroDepositValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> amounts() {
-        return amounts;
+        return data().flatMap(Data::amounts);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public MicroDepositValidationError withAmounts(String amounts) {
-        Utils.checkNotNull(amounts, "amounts");
-        this.amounts = Optional.ofNullable(amounts);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public MicroDepositValidationError withAmounts(Optional<String> amounts) {
-        Utils.checkNotNull(amounts, "amounts");
-        this.amounts = amounts;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amounts")
+        private Optional<String> amounts;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("amounts") Optional<String> amounts) {
+            Utils.checkNotNull(amounts, "amounts");
+            this.amounts = amounts;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty());
         }
-        MicroDepositValidationError other = (MicroDepositValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.amounts, other.amounts);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            amounts);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(MicroDepositValidationError.class,
-                "amounts", amounts);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> amounts() {
+            return amounts;
+        }
 
-        private Optional<String> amounts = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder amounts(String amounts) {
+        public Data withAmounts(String amounts) {
             Utils.checkNotNull(amounts, "amounts");
             this.amounts = Optional.ofNullable(amounts);
             return this;
         }
 
-        public Builder amounts(Optional<String> amounts) {
+
+        public Data withAmounts(Optional<String> amounts) {
             Utils.checkNotNull(amounts, "amounts");
             this.amounts = amounts;
             return this;
         }
 
-        public MicroDepositValidationError build() {
-
-            return new MicroDepositValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.amounts, other.amounts);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 amounts);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "amounts", amounts);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> amounts = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder amounts(String amounts) {
+                Utils.checkNotNull(amounts, "amounts");
+                this.amounts = Optional.ofNullable(amounts);
+                return this;
+            }
+
+            public Builder amounts(Optional<String> amounts) {
+                Utils.checkNotNull(amounts, "amounts");
+                this.amounts = amounts;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    amounts);
+            }
+
+        }
     }
+
 }
 

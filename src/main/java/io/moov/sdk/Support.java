@@ -26,7 +26,6 @@ import io.moov.sdk.operations.GetTicket;
 import io.moov.sdk.operations.ListTicketMessages;
 import io.moov.sdk.operations.ListTickets;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -69,9 +68,9 @@ public class Support {
      * @param accountID 
      * @param createTicket Request to create a new support ticket.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateTicketResponse createTicket(String accountID, CreateTicket createTicket) throws Exception {
+    public CreateTicketResponse createTicket(String accountID, CreateTicket createTicket) {
         CreateTicketRequest request =
             CreateTicketRequest
                 .builder()
@@ -113,9 +112,9 @@ public class Support {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListTicketsResponse listTickets(ListTicketsRequest request) throws Exception {
+    public ListTicketsResponse listTickets(ListTicketsRequest request) {
         RequestOperation<ListTicketsRequest, ListTicketsResponse> operation
               = new ListTickets.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -152,9 +151,9 @@ public class Support {
      * @param accountID 
      * @param ticketID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetTicketResponse getTicket(String accountID, String ticketID) throws Exception {
+    public GetTicketResponse getTicket(String accountID, String ticketID) {
         GetTicketRequest request =
             GetTicketRequest
                 .builder()
@@ -198,11 +197,11 @@ public class Support {
      * @param ticketID 
      * @param updateTicket Request to update a support ticket.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateTicketResponse updateTicket(
             String accountID, String ticketID,
-            UpdateTicket updateTicket) throws Exception {
+            UpdateTicket updateTicket) {
         UpdateTicketRequest request =
             UpdateTicketRequest
                 .builder()
@@ -246,9 +245,9 @@ public class Support {
      * @param accountID 
      * @param ticketID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListTicketMessagesResponse listTicketMessages(String accountID, String ticketID) throws Exception {
+    public ListTicketMessagesResponse listTicketMessages(String accountID, String ticketID) {
         ListTicketMessagesRequest request =
             ListTicketMessagesRequest
                 .builder()

@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DisableProduct;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class DisableProductRequestBuilder {
@@ -44,7 +43,7 @@ public class DisableProductRequestBuilder {
         return request;
     }
 
-    public DisableProductResponse call() throws Exception {
+    public DisableProductResponse call() {
         
         RequestOperation<DisableProductRequest, DisableProductResponse> operation
               = new DisableProduct.Sync(sdkConfiguration, _headers);

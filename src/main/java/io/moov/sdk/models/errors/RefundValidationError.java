@@ -9,168 +9,229 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class RefundValidationError extends RuntimeException {
+public class RefundValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amount")
-    private Optional<String> amount;
+    @Nullable
+    private final Data data;
 
-    /**
-     * Used for generic errors when invalid request data isn't attributed to a single request field.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("error")
-    private Optional<String> error;
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonCreator
     public RefundValidationError(
-            @JsonProperty("amount") Optional<String> amount,
-            @JsonProperty("error") Optional<String> error) {
-        super("API error occurred");
-        Utils.checkNotNull(amount, "amount");
-        Utils.checkNotNull(error, "error");
-        this.amount = amount;
-        this.error = error;
-    }
-    
-    public RefundValidationError() {
-        this(Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of RefundValidationError. If deserialization of the response body fails,
+    * the resulting RefundValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static RefundValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new RefundValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new RefundValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> amount() {
-        return amount;
+        return data().flatMap(Data::amount);
     }
 
     /**
      * Used for generic errors when invalid request data isn't attributed to a single request field.
      */
-    @JsonIgnore
+    @Deprecated
     public Optional<String> error() {
-        return error;
+        return data().flatMap(Data::error);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-
-    public RefundValidationError withAmount(String amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = Optional.ofNullable(amount);
-        return this;
-    }
-
-
-    public RefundValidationError withAmount(Optional<String> amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = amount;
-        return this;
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
     /**
-     * Used for generic errors when invalid request data isn't attributed to a single request field.
+     * Returns the exception if an error occurs while deserializing the response body.
      */
-    public RefundValidationError withError(String error) {
-        Utils.checkNotNull(error, "error");
-        this.error = Optional.ofNullable(error);
-        return this;
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    /**
-     * Used for generic errors when invalid request data isn't attributed to a single request field.
-     */
-    public RefundValidationError withError(Optional<String> error) {
-        Utils.checkNotNull(error, "error");
-        this.error = error;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amount")
+        private Optional<String> amount;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        /**
+         * Used for generic errors when invalid request data isn't attributed to a single request field.
+         */
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("error")
+        private Optional<String> error;
+
+        @JsonCreator
+        public Data(
+                @JsonProperty("amount") Optional<String> amount,
+                @JsonProperty("error") Optional<String> error) {
+            Utils.checkNotNull(amount, "amount");
+            Utils.checkNotNull(error, "error");
+            this.amount = amount;
+            this.error = error;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty());
         }
-        RefundValidationError other = (RefundValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.error, other.error);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            amount, error);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(RefundValidationError.class,
-                "amount", amount,
-                "error", error);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> amount() {
+            return amount;
+        }
 
-        private Optional<String> amount = Optional.empty();
+        /**
+         * Used for generic errors when invalid request data isn't attributed to a single request field.
+         */
+        @JsonIgnore
+        public Optional<String> error() {
+            return error;
+        }
 
-        private Optional<String> error = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder amount(String amount) {
+        public Data withAmount(String amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
-        public Builder amount(Optional<String> amount) {
+
+        public Data withAmount(Optional<String> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
 
-
         /**
          * Used for generic errors when invalid request data isn't attributed to a single request field.
          */
-        public Builder error(String error) {
+        public Data withError(String error) {
             Utils.checkNotNull(error, "error");
             this.error = Optional.ofNullable(error);
             return this;
         }
 
+
         /**
          * Used for generic errors when invalid request data isn't attributed to a single request field.
          */
-        public Builder error(Optional<String> error) {
+        public Data withError(Optional<String> error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
 
-        public RefundValidationError build() {
-
-            return new RefundValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.amount, other.amount) &&
+                Utils.enhancedDeepEquals(this.error, other.error);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 amount, error);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "amount", amount,
+                    "error", error);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> amount = Optional.empty();
+
+            private Optional<String> error = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder amount(String amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = Optional.ofNullable(amount);
+                return this;
+            }
+
+            public Builder amount(Optional<String> amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = amount;
+                return this;
+            }
+
+
+            /**
+             * Used for generic errors when invalid request data isn't attributed to a single request field.
+             */
+            public Builder error(String error) {
+                Utils.checkNotNull(error, "error");
+                this.error = Optional.ofNullable(error);
+                return this;
+            }
+
+            /**
+             * Used for generic errors when invalid request data isn't attributed to a single request field.
+             */
+            public Builder error(Optional<String> error) {
+                Utils.checkNotNull(error, "error");
+                this.error = error;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    amount, error);
+            }
+
+        }
     }
+
 }
 

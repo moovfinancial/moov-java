@@ -9,108 +9,161 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class AccountTerminalApplicationError extends RuntimeException {
+public class AccountTerminalApplicationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("terminalApplicationID")
-    private Optional<String> terminalApplicationID;
+    @Nullable
+    private final Data data;
 
-    @JsonCreator
+    @Nullable
+    private final Throwable deserializationException;
+
     public AccountTerminalApplicationError(
-            @JsonProperty("terminalApplicationID") Optional<String> terminalApplicationID) {
-        super("API error occurred");
-        Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
-        this.terminalApplicationID = terminalApplicationID;
-    }
-    
-    public AccountTerminalApplicationError() {
-        this(Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of AccountTerminalApplicationError. If deserialization of the response body fails,
+    * the resulting AccountTerminalApplicationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static AccountTerminalApplicationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new AccountTerminalApplicationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new AccountTerminalApplicationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> terminalApplicationID() {
-        return terminalApplicationID;
+        return data().flatMap(Data::terminalApplicationID);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public AccountTerminalApplicationError withTerminalApplicationID(String terminalApplicationID) {
-        Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
-        this.terminalApplicationID = Optional.ofNullable(terminalApplicationID);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public AccountTerminalApplicationError withTerminalApplicationID(Optional<String> terminalApplicationID) {
-        Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
-        this.terminalApplicationID = terminalApplicationID;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("terminalApplicationID")
+        private Optional<String> terminalApplicationID;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("terminalApplicationID") Optional<String> terminalApplicationID) {
+            Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
+            this.terminalApplicationID = terminalApplicationID;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty());
         }
-        AccountTerminalApplicationError other = (AccountTerminalApplicationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.terminalApplicationID, other.terminalApplicationID);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            terminalApplicationID);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(AccountTerminalApplicationError.class,
-                "terminalApplicationID", terminalApplicationID);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> terminalApplicationID() {
+            return terminalApplicationID;
+        }
 
-        private Optional<String> terminalApplicationID = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder terminalApplicationID(String terminalApplicationID) {
+        public Data withTerminalApplicationID(String terminalApplicationID) {
             Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
             this.terminalApplicationID = Optional.ofNullable(terminalApplicationID);
             return this;
         }
 
-        public Builder terminalApplicationID(Optional<String> terminalApplicationID) {
+
+        public Data withTerminalApplicationID(Optional<String> terminalApplicationID) {
             Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
             this.terminalApplicationID = terminalApplicationID;
             return this;
         }
 
-        public AccountTerminalApplicationError build() {
-
-            return new AccountTerminalApplicationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.terminalApplicationID, other.terminalApplicationID);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 terminalApplicationID);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "terminalApplicationID", terminalApplicationID);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> terminalApplicationID = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder terminalApplicationID(String terminalApplicationID) {
+                Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
+                this.terminalApplicationID = Optional.ofNullable(terminalApplicationID);
+                return this;
+            }
+
+            public Builder terminalApplicationID(Optional<String> terminalApplicationID) {
+                Utils.checkNotNull(terminalApplicationID, "terminalApplicationID");
+                this.terminalApplicationID = terminalApplicationID;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    terminalApplicationID);
+            }
+
+        }
     }
+
 }
 

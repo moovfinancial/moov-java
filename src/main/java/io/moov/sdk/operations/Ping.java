@@ -4,6 +4,7 @@
 package io.moov.sdk.operations;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.utils.Exceptions.unchecked;
 
 import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.SecuritySource;
@@ -110,8 +111,8 @@ public class Ping {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(PingRequest request) throws Exception {
-            HttpRequest r = onBuildRequest(request);
+        public HttpResponse<InputStream> doRequest(PingRequest request) {
+            HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
@@ -121,7 +122,7 @@ public class Ping {
                     httpRes = onSuccess(httpRes);
                 }
             } catch (Exception e) {
-                httpRes = onError(null, e);
+                httpRes = unchecked(() -> onError(null, e)).get();
             }
 
             return httpRes;
@@ -129,7 +130,7 @@ public class Ping {
 
 
         @Override
-        public PingResponse handleResponse(HttpResponse<InputStream> response) throws Exception {
+        public PingResponse handleResponse(HttpResponse<InputStream> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
@@ -148,50 +149,25 @@ public class Ping {
                 // no content
                 return res;
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "404", "429")) {
                 res.withHeaders(response.headers().map());
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "500")) {
                 res.withHeaders(response.headers().map());
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "5XX")) {
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
-            throw new APIException(
-                    response,
-                    response.statusCode(),
-                    "Unexpected status code received: " + response.statusCode(),
-                    Utils.extractByteArrayFromBody(response));
+            throw APIException.from("Unexpected status code received: " + response.statusCode(), response);
         }
     }
 }

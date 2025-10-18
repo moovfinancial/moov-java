@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.IssuedCardState;
 import io.moov.sdk.operations.ListIssuedCards;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.List;
@@ -82,7 +81,7 @@ public class ListIssuedCardsRequestBuilder {
         return request;
     }
 
-    public ListIssuedCardsResponse call() throws Exception {
+    public ListIssuedCardsResponse call() {
         
         RequestOperation<ListIssuedCardsRequest, ListIssuedCardsResponse> operation
               = new ListIssuedCards.Sync(sdkConfiguration, _headers);

@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateIssuedCard;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class UpdateIssuedCardRequestBuilder {
@@ -52,7 +51,7 @@ public class UpdateIssuedCardRequestBuilder {
         return request;
     }
 
-    public UpdateIssuedCardResponse call() throws Exception {
+    public UpdateIssuedCardResponse call() {
         
         RequestOperation<UpdateIssuedCardRequest, UpdateIssuedCardResponse> operation
               = new io.moov.sdk.operations.UpdateIssuedCard.Sync(sdkConfiguration, _headers);

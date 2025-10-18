@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListAdjustments;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -51,7 +50,7 @@ public class ListAdjustmentsRequestBuilder {
         return request;
     }
 
-    public ListAdjustmentsResponse call() throws Exception {
+    public ListAdjustmentsResponse call() {
         
         RequestOperation<ListAdjustmentsRequest, ListAdjustmentsResponse> operation
               = new ListAdjustments.Sync(sdkConfiguration, _headers);

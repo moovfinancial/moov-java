@@ -14,7 +14,6 @@ import io.moov.sdk.models.operations.TestEndToEndTokenResponse;
 import io.moov.sdk.operations.GenerateEndToEndKey;
 import io.moov.sdk.operations.TestEndToEndToken;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -48,9 +47,9 @@ public class EndToEndEncryption {
      * 
      * @param token 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public TestEndToEndTokenResponse testEncryptedToken(String token) throws Exception {
+    public TestEndToEndTokenResponse testEncryptedToken(String token) {
         E2EEToken request =
             E2EEToken
                 .builder()
@@ -76,9 +75,9 @@ public class EndToEndEncryption {
      * non-PCI compliant intermediaries.
      * 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GenerateEndToEndKeyResponse generateKeyDirect() throws Exception {
+    public GenerateEndToEndKeyResponse generateKeyDirect() {
         GenerateEndToEndKeyRequest request =
             GenerateEndToEndKeyRequest
                 .builder()

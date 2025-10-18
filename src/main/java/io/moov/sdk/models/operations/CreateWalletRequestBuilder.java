@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateWallet;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class CreateWalletRequestBuilder {
@@ -44,7 +43,7 @@ public class CreateWalletRequestBuilder {
         return request;
     }
 
-    public CreateWalletResponse call() throws Exception {
+    public CreateWalletResponse call() {
         
         RequestOperation<CreateWalletRequest, CreateWalletResponse> operation
               = new io.moov.sdk.operations.CreateWallet.Sync(sdkConfiguration, _headers);

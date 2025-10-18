@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetPaymentLinkQRCode;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetPaymentLinkQRCodeRequestBuilder {
@@ -44,7 +43,7 @@ public class GetPaymentLinkQRCodeRequestBuilder {
         return request;
     }
 
-    public GetPaymentLinkQRCodeResponse call() throws Exception {
+    public GetPaymentLinkQRCodeResponse call() {
         
         RequestOperation<GetPaymentLinkQRCodeRequest, GetPaymentLinkQRCodeResponse> operation
               = new GetPaymentLinkQRCode.Sync(sdkConfiguration, _headers);

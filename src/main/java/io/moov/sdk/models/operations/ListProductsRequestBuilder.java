@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListProducts;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -66,7 +65,7 @@ public class ListProductsRequestBuilder {
         return request;
     }
 
-    public ListProductsResponse call() throws Exception {
+    public ListProductsResponse call() {
         
         RequestOperation<ListProductsRequest, ListProductsResponse> operation
               = new ListProducts.Sync(sdkConfiguration, _headers);

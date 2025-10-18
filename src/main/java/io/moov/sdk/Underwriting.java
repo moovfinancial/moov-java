@@ -19,7 +19,6 @@ import io.moov.sdk.models.operations.UpsertUnderwritingResponse;
 import io.moov.sdk.operations.GetUnderwriting;
 import io.moov.sdk.operations.SaveUnderwriting;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -59,9 +58,9 @@ public class Underwriting {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetUnderwritingResponse get(String accountID) throws Exception {
+    public GetUnderwritingResponse get(String accountID) {
         GetUnderwritingRequest request =
             GetUnderwritingRequest
                 .builder()
@@ -101,9 +100,9 @@ public class Underwriting {
      * @param accountID 
      * @param upsertUnderwriting 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public SaveUnderwritingResponse save(String accountID, UpsertUnderwriting upsertUnderwriting) throws Exception {
+    public SaveUnderwritingResponse save(String accountID, UpsertUnderwriting upsertUnderwriting) {
         SaveUnderwritingRequest request =
             SaveUnderwritingRequest
                 .builder()
@@ -144,9 +143,9 @@ public class Underwriting {
      * @param accountID 
      * @param updateUnderwriting 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public UpsertUnderwritingResponse upsert(String accountID, UpdateUnderwriting updateUnderwriting) throws Exception {
+    public UpsertUnderwritingResponse upsert(String accountID, UpdateUnderwriting updateUnderwriting) {
         UpsertUnderwritingRequest request =
             UpsertUnderwritingRequest
                 .builder()

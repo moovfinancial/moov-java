@@ -9,196 +9,259 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class ScheduleValidationError extends RuntimeException {
+public class ScheduleValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("occurrences")
-    private Optional<? extends Map<String, String>> occurrences;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("recur")
-    private Optional<String> recur;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("description")
-    private Optional<String> description;
-
-    @JsonCreator
     public ScheduleValidationError(
-            @JsonProperty("occurrences") Optional<? extends Map<String, String>> occurrences,
-            @JsonProperty("recur") Optional<String> recur,
-            @JsonProperty("description") Optional<String> description) {
-        super("API error occurred");
-        Utils.checkNotNull(occurrences, "occurrences");
-        Utils.checkNotNull(recur, "recur");
-        Utils.checkNotNull(description, "description");
-        this.occurrences = occurrences;
-        this.recur = recur;
-        this.description = description;
-    }
-    
-    public ScheduleValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of ScheduleValidationError. If deserialization of the response body fails,
+    * the resulting ScheduleValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static ScheduleValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new ScheduleValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new ScheduleValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<Map<String, String>> occurrences() {
-        return (Optional<Map<String, String>>) occurrences;
+        return data().flatMap(Data::occurrences);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> recur() {
-        return recur;
+        return data().flatMap(Data::recur);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> description() {
-        return description;
+        return data().flatMap(Data::description);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public ScheduleValidationError withOccurrences(Map<String, String> occurrences) {
-        Utils.checkNotNull(occurrences, "occurrences");
-        this.occurrences = Optional.ofNullable(occurrences);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public ScheduleValidationError withOccurrences(Optional<? extends Map<String, String>> occurrences) {
-        Utils.checkNotNull(occurrences, "occurrences");
-        this.occurrences = occurrences;
-        return this;
-    }
-
-    public ScheduleValidationError withRecur(String recur) {
-        Utils.checkNotNull(recur, "recur");
-        this.recur = Optional.ofNullable(recur);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("occurrences")
+        private Optional<? extends Map<String, String>> occurrences;
 
 
-    public ScheduleValidationError withRecur(Optional<String> recur) {
-        Utils.checkNotNull(recur, "recur");
-        this.recur = recur;
-        return this;
-    }
-
-    public ScheduleValidationError withDescription(String description) {
-        Utils.checkNotNull(description, "description");
-        this.description = Optional.ofNullable(description);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("recur")
+        private Optional<String> recur;
 
 
-    public ScheduleValidationError withDescription(Optional<String> description) {
-        Utils.checkNotNull(description, "description");
-        this.description = description;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("description")
+        private Optional<String> description;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("occurrences") Optional<? extends Map<String, String>> occurrences,
+                @JsonProperty("recur") Optional<String> recur,
+                @JsonProperty("description") Optional<String> description) {
+            Utils.checkNotNull(occurrences, "occurrences");
+            Utils.checkNotNull(recur, "recur");
+            Utils.checkNotNull(description, "description");
+            this.occurrences = occurrences;
+            this.recur = recur;
+            this.description = description;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty());
         }
-        ScheduleValidationError other = (ScheduleValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.occurrences, other.occurrences) &&
-            Utils.enhancedDeepEquals(this.recur, other.recur) &&
-            Utils.enhancedDeepEquals(this.description, other.description);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            occurrences, recur, description);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(ScheduleValidationError.class,
-                "occurrences", occurrences,
-                "recur", recur,
-                "description", description);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<Map<String, String>> occurrences() {
+            return (Optional<Map<String, String>>) occurrences;
+        }
 
-        private Optional<? extends Map<String, String>> occurrences = Optional.empty();
+        @JsonIgnore
+        public Optional<String> recur() {
+            return recur;
+        }
 
-        private Optional<String> recur = Optional.empty();
+        @JsonIgnore
+        public Optional<String> description() {
+            return description;
+        }
 
-        private Optional<String> description = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder occurrences(Map<String, String> occurrences) {
+        public Data withOccurrences(Map<String, String> occurrences) {
             Utils.checkNotNull(occurrences, "occurrences");
             this.occurrences = Optional.ofNullable(occurrences);
             return this;
         }
 
-        public Builder occurrences(Optional<? extends Map<String, String>> occurrences) {
+
+        public Data withOccurrences(Optional<? extends Map<String, String>> occurrences) {
             Utils.checkNotNull(occurrences, "occurrences");
             this.occurrences = occurrences;
             return this;
         }
 
-
-        public Builder recur(String recur) {
+        public Data withRecur(String recur) {
             Utils.checkNotNull(recur, "recur");
             this.recur = Optional.ofNullable(recur);
             return this;
         }
 
-        public Builder recur(Optional<String> recur) {
+
+        public Data withRecur(Optional<String> recur) {
             Utils.checkNotNull(recur, "recur");
             this.recur = recur;
             return this;
         }
 
-
-        public Builder description(String description) {
+        public Data withDescription(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
             return this;
         }
 
-        public Builder description(Optional<String> description) {
+
+        public Data withDescription(Optional<String> description) {
             Utils.checkNotNull(description, "description");
             this.description = description;
             return this;
         }
 
-        public ScheduleValidationError build() {
-
-            return new ScheduleValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.occurrences, other.occurrences) &&
+                Utils.enhancedDeepEquals(this.recur, other.recur) &&
+                Utils.enhancedDeepEquals(this.description, other.description);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 occurrences, recur, description);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "occurrences", occurrences,
+                    "recur", recur,
+                    "description", description);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<? extends Map<String, String>> occurrences = Optional.empty();
+
+            private Optional<String> recur = Optional.empty();
+
+            private Optional<String> description = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder occurrences(Map<String, String> occurrences) {
+                Utils.checkNotNull(occurrences, "occurrences");
+                this.occurrences = Optional.ofNullable(occurrences);
+                return this;
+            }
+
+            public Builder occurrences(Optional<? extends Map<String, String>> occurrences) {
+                Utils.checkNotNull(occurrences, "occurrences");
+                this.occurrences = occurrences;
+                return this;
+            }
+
+
+            public Builder recur(String recur) {
+                Utils.checkNotNull(recur, "recur");
+                this.recur = Optional.ofNullable(recur);
+                return this;
+            }
+
+            public Builder recur(Optional<String> recur) {
+                Utils.checkNotNull(recur, "recur");
+                this.recur = recur;
+                return this;
+            }
+
+
+            public Builder description(String description) {
+                Utils.checkNotNull(description, "description");
+                this.description = Optional.ofNullable(description);
+                return this;
+            }
+
+            public Builder description(Optional<String> description) {
+                Utils.checkNotNull(description, "description");
+                this.description = description;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    occurrences, recur, description);
+            }
+
+        }
     }
+
 }
 

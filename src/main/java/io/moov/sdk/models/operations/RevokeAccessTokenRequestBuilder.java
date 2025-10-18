@@ -11,7 +11,6 @@ import io.moov.sdk.models.components.TokenTypeHint;
 import io.moov.sdk.operations.RevokeAccessToken;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -81,7 +80,7 @@ public class RevokeAccessTokenRequestBuilder {
         return request;
     }
 
-    public RevokeAccessTokenResponse call() throws Exception {
+    public RevokeAccessTokenResponse call() {
         
         RequestOperation<RevokeTokenRequest, RevokeAccessTokenResponse> operation
               = new RevokeAccessToken.Sync(sdkConfiguration, _headers);

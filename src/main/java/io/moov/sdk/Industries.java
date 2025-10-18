@@ -10,7 +10,6 @@ import io.moov.sdk.models.operations.ListIndustriesRequestBuilder;
 import io.moov.sdk.models.operations.ListIndustriesResponse;
 import io.moov.sdk.operations.ListIndustries;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 
 
 public class Industries {
@@ -44,9 +43,9 @@ public class Industries {
      * you'll need to specify the `/profile-enrichment.read` scope.
      * 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListIndustriesResponse listDirect() throws Exception {
+    public ListIndustriesResponse listDirect() {
         ListIndustriesRequest request =
             ListIndustriesRequest
                 .builder()

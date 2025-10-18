@@ -9,108 +9,161 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class ReversalValidationError extends RuntimeException {
+public class ReversalValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("amount")
-    private Optional<String> amount;
+    @Nullable
+    private final Data data;
 
-    @JsonCreator
+    @Nullable
+    private final Throwable deserializationException;
+
     public ReversalValidationError(
-            @JsonProperty("amount") Optional<String> amount) {
-        super("API error occurred");
-        Utils.checkNotNull(amount, "amount");
-        this.amount = amount;
-    }
-    
-    public ReversalValidationError() {
-        this(Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of ReversalValidationError. If deserialization of the response body fails,
+    * the resulting ReversalValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static ReversalValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new ReversalValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new ReversalValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> amount() {
-        return amount;
+        return data().flatMap(Data::amount);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public ReversalValidationError withAmount(String amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = Optional.ofNullable(amount);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public ReversalValidationError withAmount(Optional<String> amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = amount;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amount")
+        private Optional<String> amount;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("amount") Optional<String> amount) {
+            Utils.checkNotNull(amount, "amount");
+            this.amount = amount;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty());
         }
-        ReversalValidationError other = (ReversalValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.amount, other.amount);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            amount);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(ReversalValidationError.class,
-                "amount", amount);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> amount() {
+            return amount;
+        }
 
-        private Optional<String> amount = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder amount(String amount) {
+        public Data withAmount(String amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = Optional.ofNullable(amount);
             return this;
         }
 
-        public Builder amount(Optional<String> amount) {
+
+        public Data withAmount(Optional<String> amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
             return this;
         }
 
-        public ReversalValidationError build() {
-
-            return new ReversalValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.amount, other.amount);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 amount);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "amount", amount);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> amount = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder amount(String amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = Optional.ofNullable(amount);
+                return this;
+            }
+
+            public Builder amount(Optional<String> amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = amount;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    amount);
+            }
+
+        }
     }
+
 }
 

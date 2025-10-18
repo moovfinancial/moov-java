@@ -30,7 +30,6 @@ import io.moov.sdk.operations.GetPaymentLink;
 import io.moov.sdk.operations.GetPaymentLinkQRCode;
 import io.moov.sdk.operations.ListPaymentLinks;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -71,9 +70,9 @@ public class PaymentLinks {
      *         
      *         **Note:** The `payout` option is currently under development and is not yet available for general use.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreatePaymentLinkResponse create(String accountID, CreatePaymentLink createPaymentLink) throws Exception {
+    public CreatePaymentLinkResponse create(String accountID, CreatePaymentLink createPaymentLink) {
         CreatePaymentLinkRequest request =
             CreatePaymentLinkRequest
                 .builder()
@@ -107,9 +106,9 @@ public class PaymentLinks {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListPaymentLinksResponse list(String accountID) throws Exception {
+    public ListPaymentLinksResponse list(String accountID) {
         ListPaymentLinksRequest request =
             ListPaymentLinksRequest
                 .builder()
@@ -143,9 +142,9 @@ public class PaymentLinks {
      * @param accountID 
      * @param paymentLinkCode 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetPaymentLinkResponse get(String accountID, String paymentLinkCode) throws Exception {
+    public GetPaymentLinkResponse get(String accountID, String paymentLinkCode) {
         GetPaymentLinkRequest request =
             GetPaymentLinkRequest
                 .builder()
@@ -181,11 +180,11 @@ public class PaymentLinks {
      * @param paymentLinkCode 
      * @param updatePaymentLink 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdatePaymentLinkResponse update(
             String accountID, String paymentLinkCode,
-            UpdatePaymentLink updatePaymentLink) throws Exception {
+            UpdatePaymentLink updatePaymentLink) {
         UpdatePaymentLinkRequest request =
             UpdatePaymentLinkRequest
                 .builder()
@@ -221,9 +220,9 @@ public class PaymentLinks {
      * @param accountID 
      * @param paymentLinkCode 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public DisablePaymentLinkResponse disable(String accountID, String paymentLinkCode) throws Exception {
+    public DisablePaymentLinkResponse disable(String accountID, String paymentLinkCode) {
         DisablePaymentLinkRequest request =
             DisablePaymentLinkRequest
                 .builder()
@@ -264,9 +263,9 @@ public class PaymentLinks {
      * @param accountID 
      * @param paymentLinkCode 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetPaymentLinkQRCodeResponse getQRCode(String accountID, String paymentLinkCode) throws Exception {
+    public GetPaymentLinkQRCodeResponse getQRCode(String accountID, String paymentLinkCode) {
         GetPaymentLinkQRCodeRequest request =
             GetPaymentLinkQRCodeRequest
                 .builder()

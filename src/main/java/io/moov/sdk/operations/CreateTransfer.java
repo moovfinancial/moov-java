@@ -4,6 +4,7 @@
 package io.moov.sdk.operations;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.utils.Exceptions.unchecked;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
@@ -27,6 +28,7 @@ import io.moov.sdk.utils.Utils.JsonShape;
 import io.moov.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
+import java.lang.IllegalArgumentException;
 import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
@@ -98,7 +100,7 @@ public class CreateTransfer {
                     "json",
                     false);
             if (serializedRequestBody == null) {
-                throw new Exception("Request body is required");
+                throw new IllegalArgumentException("Request body is required");
             }
             req.setBody(Optional.ofNullable(serializedRequestBody));
             req.addHeader("Accept", "application/json")
@@ -134,8 +136,8 @@ public class CreateTransfer {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(CreateTransferRequest request) throws Exception {
-            HttpRequest r = onBuildRequest(request);
+        public HttpResponse<InputStream> doRequest(CreateTransferRequest request) {
+            HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
@@ -145,7 +147,7 @@ public class CreateTransfer {
                     httpRes = onSuccess(httpRes);
                 }
             } catch (Exception e) {
-                httpRes = onError(null, e);
+                httpRes = unchecked(() -> onError(null, e)).get();
             }
 
             return httpRes;
@@ -153,7 +155,7 @@ public class CreateTransfer {
 
 
         @Override
-        public CreateTransferResponse handleResponse(HttpResponse<InputStream> response) throws Exception {
+        public CreateTransferResponse handleResponse(HttpResponse<InputStream> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
@@ -170,151 +172,70 @@ public class CreateTransfer {
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    CreatedTransfer out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                    res.withCreatedTransfer(out);
-                    return res;
+                    return res.withCreatedTransfer(Utils.unmarshal(response, new TypeReference<CreatedTransfer>() {}));
                 } else {
-                    throw new APIException(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "201")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    AsyncTransfer out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                    res.withAsyncTransfer(out);
-                    return res;
+                    return res.withAsyncTransfer(Utils.unmarshal(response, new TypeReference<AsyncTransfer>() {}));
                 } else {
-                    throw new APIException(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "202")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    Transfer out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                    res.withTransfer(out);
-                    return res;
+                    return res.withTransfer(Utils.unmarshal(response, new TypeReference<Transfer>() {}));
                 } else {
-                    throw new APIException(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "400")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GenericError out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                    throw out;
+                    throw GenericError.from(response);
                 } else {
-                    throw new APIException(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "409")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    io.moov.sdk.models.errors.Transfer out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                    throw out;
+                    throw io.moov.sdk.models.errors.Transfer.from(response);
                 } else {
-                    throw new APIException(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    TransferValidationError out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                    throw out;
+                    throw TransferValidationError.from(response);
                 } else {
-                    throw new APIException(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "404", "429")) {
                 res.withHeaders(response.headers().map());
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "500", "504")) {
                 res.withHeaders(response.headers().map());
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "5XX")) {
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
-            throw new APIException(
-                    response,
-                    response.statusCode(),
-                    "Unexpected status code received: " + response.statusCode(),
-                    Utils.extractByteArrayFromBody(response));
+            throw APIException.from("Unexpected status code received: " + response.statusCode(), response);
         }
     }
 }

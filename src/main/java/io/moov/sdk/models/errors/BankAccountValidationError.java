@@ -9,283 +9,356 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class BankAccountValidationError extends RuntimeException {
+public class BankAccountValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("account")
-    private Optional<String> account;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("plaid")
-    private Optional<String> plaid;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("plaidLink")
-    private Optional<String> plaidLink;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("mx")
-    private Optional<String> mx;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("error")
-    private Optional<String> error;
-
-    @JsonCreator
     public BankAccountValidationError(
-            @JsonProperty("account") Optional<String> account,
-            @JsonProperty("plaid") Optional<String> plaid,
-            @JsonProperty("plaidLink") Optional<String> plaidLink,
-            @JsonProperty("mx") Optional<String> mx,
-            @JsonProperty("error") Optional<String> error) {
-        super("API error occurred");
-        Utils.checkNotNull(account, "account");
-        Utils.checkNotNull(plaid, "plaid");
-        Utils.checkNotNull(plaidLink, "plaidLink");
-        Utils.checkNotNull(mx, "mx");
-        Utils.checkNotNull(error, "error");
-        this.account = account;
-        this.plaid = plaid;
-        this.plaidLink = plaidLink;
-        this.mx = mx;
-        this.error = error;
-    }
-    
-    public BankAccountValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of BankAccountValidationError. If deserialization of the response body fails,
+    * the resulting BankAccountValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static BankAccountValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new BankAccountValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new BankAccountValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> account() {
-        return account;
+        return data().flatMap(Data::account);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> plaid() {
-        return plaid;
+        return data().flatMap(Data::plaid);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> plaidLink() {
-        return plaidLink;
+        return data().flatMap(Data::plaidLink);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> mx() {
-        return mx;
+        return data().flatMap(Data::mx);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> error() {
-        return error;
+        return data().flatMap(Data::error);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public BankAccountValidationError withAccount(String account) {
-        Utils.checkNotNull(account, "account");
-        this.account = Optional.ofNullable(account);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public BankAccountValidationError withAccount(Optional<String> account) {
-        Utils.checkNotNull(account, "account");
-        this.account = account;
-        return this;
-    }
-
-    public BankAccountValidationError withPlaid(String plaid) {
-        Utils.checkNotNull(plaid, "plaid");
-        this.plaid = Optional.ofNullable(plaid);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("account")
+        private Optional<String> account;
 
 
-    public BankAccountValidationError withPlaid(Optional<String> plaid) {
-        Utils.checkNotNull(plaid, "plaid");
-        this.plaid = plaid;
-        return this;
-    }
-
-    public BankAccountValidationError withPlaidLink(String plaidLink) {
-        Utils.checkNotNull(plaidLink, "plaidLink");
-        this.plaidLink = Optional.ofNullable(plaidLink);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("plaid")
+        private Optional<String> plaid;
 
 
-    public BankAccountValidationError withPlaidLink(Optional<String> plaidLink) {
-        Utils.checkNotNull(plaidLink, "plaidLink");
-        this.plaidLink = plaidLink;
-        return this;
-    }
-
-    public BankAccountValidationError withMx(String mx) {
-        Utils.checkNotNull(mx, "mx");
-        this.mx = Optional.ofNullable(mx);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("plaidLink")
+        private Optional<String> plaidLink;
 
 
-    public BankAccountValidationError withMx(Optional<String> mx) {
-        Utils.checkNotNull(mx, "mx");
-        this.mx = mx;
-        return this;
-    }
-
-    public BankAccountValidationError withError(String error) {
-        Utils.checkNotNull(error, "error");
-        this.error = Optional.ofNullable(error);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("mx")
+        private Optional<String> mx;
 
 
-    public BankAccountValidationError withError(Optional<String> error) {
-        Utils.checkNotNull(error, "error");
-        this.error = error;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("error")
+        private Optional<String> error;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("account") Optional<String> account,
+                @JsonProperty("plaid") Optional<String> plaid,
+                @JsonProperty("plaidLink") Optional<String> plaidLink,
+                @JsonProperty("mx") Optional<String> mx,
+                @JsonProperty("error") Optional<String> error) {
+            Utils.checkNotNull(account, "account");
+            Utils.checkNotNull(plaid, "plaid");
+            Utils.checkNotNull(plaidLink, "plaidLink");
+            Utils.checkNotNull(mx, "mx");
+            Utils.checkNotNull(error, "error");
+            this.account = account;
+            this.plaid = plaid;
+            this.plaidLink = plaidLink;
+            this.mx = mx;
+            this.error = error;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        BankAccountValidationError other = (BankAccountValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.account, other.account) &&
-            Utils.enhancedDeepEquals(this.plaid, other.plaid) &&
-            Utils.enhancedDeepEquals(this.plaidLink, other.plaidLink) &&
-            Utils.enhancedDeepEquals(this.mx, other.mx) &&
-            Utils.enhancedDeepEquals(this.error, other.error);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            account, plaid, plaidLink,
-            mx, error);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(BankAccountValidationError.class,
-                "account", account,
-                "plaid", plaid,
-                "plaidLink", plaidLink,
-                "mx", mx,
-                "error", error);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> account() {
+            return account;
+        }
 
-        private Optional<String> account = Optional.empty();
+        @JsonIgnore
+        public Optional<String> plaid() {
+            return plaid;
+        }
 
-        private Optional<String> plaid = Optional.empty();
+        @JsonIgnore
+        public Optional<String> plaidLink() {
+            return plaidLink;
+        }
 
-        private Optional<String> plaidLink = Optional.empty();
+        @JsonIgnore
+        public Optional<String> mx() {
+            return mx;
+        }
 
-        private Optional<String> mx = Optional.empty();
+        @JsonIgnore
+        public Optional<String> error() {
+            return error;
+        }
 
-        private Optional<String> error = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder account(String account) {
+        public Data withAccount(String account) {
             Utils.checkNotNull(account, "account");
             this.account = Optional.ofNullable(account);
             return this;
         }
 
-        public Builder account(Optional<String> account) {
+
+        public Data withAccount(Optional<String> account) {
             Utils.checkNotNull(account, "account");
             this.account = account;
             return this;
         }
 
-
-        public Builder plaid(String plaid) {
+        public Data withPlaid(String plaid) {
             Utils.checkNotNull(plaid, "plaid");
             this.plaid = Optional.ofNullable(plaid);
             return this;
         }
 
-        public Builder plaid(Optional<String> plaid) {
+
+        public Data withPlaid(Optional<String> plaid) {
             Utils.checkNotNull(plaid, "plaid");
             this.plaid = plaid;
             return this;
         }
 
-
-        public Builder plaidLink(String plaidLink) {
+        public Data withPlaidLink(String plaidLink) {
             Utils.checkNotNull(plaidLink, "plaidLink");
             this.plaidLink = Optional.ofNullable(plaidLink);
             return this;
         }
 
-        public Builder plaidLink(Optional<String> plaidLink) {
+
+        public Data withPlaidLink(Optional<String> plaidLink) {
             Utils.checkNotNull(plaidLink, "plaidLink");
             this.plaidLink = plaidLink;
             return this;
         }
 
-
-        public Builder mx(String mx) {
+        public Data withMx(String mx) {
             Utils.checkNotNull(mx, "mx");
             this.mx = Optional.ofNullable(mx);
             return this;
         }
 
-        public Builder mx(Optional<String> mx) {
+
+        public Data withMx(Optional<String> mx) {
             Utils.checkNotNull(mx, "mx");
             this.mx = mx;
             return this;
         }
 
-
-        public Builder error(String error) {
+        public Data withError(String error) {
             Utils.checkNotNull(error, "error");
             this.error = Optional.ofNullable(error);
             return this;
         }
 
-        public Builder error(Optional<String> error) {
+
+        public Data withError(Optional<String> error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
 
-        public BankAccountValidationError build() {
-
-            return new BankAccountValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.account, other.account) &&
+                Utils.enhancedDeepEquals(this.plaid, other.plaid) &&
+                Utils.enhancedDeepEquals(this.plaidLink, other.plaidLink) &&
+                Utils.enhancedDeepEquals(this.mx, other.mx) &&
+                Utils.enhancedDeepEquals(this.error, other.error);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 account, plaid, plaidLink,
                 mx, error);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "account", account,
+                    "plaid", plaid,
+                    "plaidLink", plaidLink,
+                    "mx", mx,
+                    "error", error);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> account = Optional.empty();
+
+            private Optional<String> plaid = Optional.empty();
+
+            private Optional<String> plaidLink = Optional.empty();
+
+            private Optional<String> mx = Optional.empty();
+
+            private Optional<String> error = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder account(String account) {
+                Utils.checkNotNull(account, "account");
+                this.account = Optional.ofNullable(account);
+                return this;
+            }
+
+            public Builder account(Optional<String> account) {
+                Utils.checkNotNull(account, "account");
+                this.account = account;
+                return this;
+            }
+
+
+            public Builder plaid(String plaid) {
+                Utils.checkNotNull(plaid, "plaid");
+                this.plaid = Optional.ofNullable(plaid);
+                return this;
+            }
+
+            public Builder plaid(Optional<String> plaid) {
+                Utils.checkNotNull(plaid, "plaid");
+                this.plaid = plaid;
+                return this;
+            }
+
+
+            public Builder plaidLink(String plaidLink) {
+                Utils.checkNotNull(plaidLink, "plaidLink");
+                this.plaidLink = Optional.ofNullable(plaidLink);
+                return this;
+            }
+
+            public Builder plaidLink(Optional<String> plaidLink) {
+                Utils.checkNotNull(plaidLink, "plaidLink");
+                this.plaidLink = plaidLink;
+                return this;
+            }
+
+
+            public Builder mx(String mx) {
+                Utils.checkNotNull(mx, "mx");
+                this.mx = Optional.ofNullable(mx);
+                return this;
+            }
+
+            public Builder mx(Optional<String> mx) {
+                Utils.checkNotNull(mx, "mx");
+                this.mx = mx;
+                return this;
+            }
+
+
+            public Builder error(String error) {
+                Utils.checkNotNull(error, "error");
+                this.error = Optional.ofNullable(error);
+                return this;
+            }
+
+            public Builder error(Optional<String> error) {
+                Utils.checkNotNull(error, "error");
+                this.error = error;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    account, plaid, plaidLink,
+                    mx, error);
+            }
+
+        }
     }
+
 }
 

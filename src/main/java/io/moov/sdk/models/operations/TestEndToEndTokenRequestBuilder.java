@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.E2EEToken;
 import io.moov.sdk.operations.TestEndToEndToken;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class TestEndToEndTokenRequestBuilder {
@@ -37,7 +36,7 @@ public class TestEndToEndTokenRequestBuilder {
         return request;
     }
 
-    public TestEndToEndTokenResponse call() throws Exception {
+    public TestEndToEndTokenResponse call() {
         
         RequestOperation<E2EEToken, TestEndToEndTokenResponse> operation
               = new TestEndToEndToken.Sync(sdkConfiguration, _headers);

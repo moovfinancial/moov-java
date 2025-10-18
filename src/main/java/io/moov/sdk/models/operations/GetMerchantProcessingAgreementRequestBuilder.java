@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetMerchantProcessingAgreement;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetMerchantProcessingAgreementRequestBuilder {
@@ -36,7 +35,7 @@ public class GetMerchantProcessingAgreementRequestBuilder {
         return request;
     }
 
-    public GetMerchantProcessingAgreementResponse call() throws Exception {
+    public GetMerchantProcessingAgreementResponse call() {
         
         RequestOperation<GetMerchantProcessingAgreementRequest, GetMerchantProcessingAgreementResponse> operation
               = new GetMerchantProcessingAgreement.Sync(sdkConfiguration, _headers);

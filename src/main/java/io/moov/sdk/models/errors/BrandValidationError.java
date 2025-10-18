@@ -10,109 +10,162 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.ColorsValidationError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class BrandValidationError extends RuntimeException {
+public class BrandValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("colors")
-    private Optional<? extends ColorsValidationError> colors;
+    @Nullable
+    private final Data data;
 
-    @JsonCreator
+    @Nullable
+    private final Throwable deserializationException;
+
     public BrandValidationError(
-            @JsonProperty("colors") Optional<? extends ColorsValidationError> colors) {
-        super("API error occurred");
-        Utils.checkNotNull(colors, "colors");
-        this.colors = colors;
-    }
-    
-    public BrandValidationError() {
-        this(Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of BrandValidationError. If deserialization of the response body fails,
+    * the resulting BrandValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static BrandValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new BrandValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new BrandValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<ColorsValidationError> colors() {
-        return (Optional<ColorsValidationError>) colors;
+        return data().flatMap(Data::colors);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public BrandValidationError withColors(ColorsValidationError colors) {
-        Utils.checkNotNull(colors, "colors");
-        this.colors = Optional.ofNullable(colors);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public BrandValidationError withColors(Optional<? extends ColorsValidationError> colors) {
-        Utils.checkNotNull(colors, "colors");
-        this.colors = colors;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("colors")
+        private Optional<? extends ColorsValidationError> colors;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("colors") Optional<? extends ColorsValidationError> colors) {
+            Utils.checkNotNull(colors, "colors");
+            this.colors = colors;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty());
         }
-        BrandValidationError other = (BrandValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.colors, other.colors);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            colors);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(BrandValidationError.class,
-                "colors", colors);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<ColorsValidationError> colors() {
+            return (Optional<ColorsValidationError>) colors;
+        }
 
-        private Optional<? extends ColorsValidationError> colors = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder colors(ColorsValidationError colors) {
+        public Data withColors(ColorsValidationError colors) {
             Utils.checkNotNull(colors, "colors");
             this.colors = Optional.ofNullable(colors);
             return this;
         }
 
-        public Builder colors(Optional<? extends ColorsValidationError> colors) {
+
+        public Data withColors(Optional<? extends ColorsValidationError> colors) {
             Utils.checkNotNull(colors, "colors");
             this.colors = colors;
             return this;
         }
 
-        public BrandValidationError build() {
-
-            return new BrandValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.colors, other.colors);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 colors);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "colors", colors);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<? extends ColorsValidationError> colors = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder colors(ColorsValidationError colors) {
+                Utils.checkNotNull(colors, "colors");
+                this.colors = Optional.ofNullable(colors);
+                return this;
+            }
+
+            public Builder colors(Optional<? extends ColorsValidationError> colors) {
+                Utils.checkNotNull(colors, "colors");
+                this.colors = colors;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    colors);
+            }
+
+        }
     }
+
 }
 

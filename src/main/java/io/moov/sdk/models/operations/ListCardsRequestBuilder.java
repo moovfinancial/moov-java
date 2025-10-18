@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListCards;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class ListCardsRequestBuilder {
@@ -36,7 +35,7 @@ public class ListCardsRequestBuilder {
         return request;
     }
 
-    public ListCardsResponse call() throws Exception {
+    public ListCardsResponse call() {
         
         RequestOperation<ListCardsRequest, ListCardsResponse> operation
               = new ListCards.Sync(sdkConfiguration, _headers);

@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.FileUploadRequestMultiPart;
 import io.moov.sdk.operations.UploadFile;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class UploadFileRequestBuilder {
@@ -45,7 +44,7 @@ public class UploadFileRequestBuilder {
         return request;
     }
 
-    public UploadFileResponse call() throws Exception {
+    public UploadFileResponse call() {
         
         RequestOperation<UploadFileRequest, UploadFileResponse> operation
               = new UploadFile.Sync(sdkConfiguration, _headers);

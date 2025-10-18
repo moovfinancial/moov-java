@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetSweep;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetSweepRequestBuilder {
@@ -52,7 +51,7 @@ public class GetSweepRequestBuilder {
         return request;
     }
 
-    public GetSweepResponse call() throws Exception {
+    public GetSweepResponse call() {
         
         RequestOperation<GetSweepRequest, GetSweepResponse> operation
               = new GetSweep.Sync(sdkConfiguration, _headers);

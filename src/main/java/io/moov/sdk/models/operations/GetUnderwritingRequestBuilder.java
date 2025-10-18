@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetUnderwriting;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetUnderwritingRequestBuilder {
@@ -36,7 +35,7 @@ public class GetUnderwritingRequestBuilder {
         return request;
     }
 
-    public GetUnderwritingResponse call() throws Exception {
+    public GetUnderwritingResponse call() {
         
         RequestOperation<GetUnderwritingRequest, GetUnderwritingResponse> operation
               = new GetUnderwriting.Sync(sdkConfiguration, _headers);

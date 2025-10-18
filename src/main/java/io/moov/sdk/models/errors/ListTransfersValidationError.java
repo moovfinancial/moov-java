@@ -9,590 +9,698 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class ListTransfersValidationError extends RuntimeException {
+public class ListTransfersValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("accountIDs")
-    private Optional<String> accountIDs;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("status")
-    private Optional<String> status;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("startDateTime")
-    private Optional<String> startDateTime;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("endDateTime")
-    private Optional<String> endDateTime;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("skip")
-    private Optional<String> skip;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("count")
-    private Optional<String> count;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("groupID")
-    private Optional<String> groupID;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("foreignID")
-    private Optional<String> foreignID;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("scheduleID")
-    private Optional<String> scheduleID;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("paymentLinkCode")
-    private Optional<String> paymentLinkCode;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("refunded")
-    private Optional<String> refunded;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("disputed")
-    private Optional<String> disputed;
-
-    @JsonCreator
     public ListTransfersValidationError(
-            @JsonProperty("accountIDs") Optional<String> accountIDs,
-            @JsonProperty("status") Optional<String> status,
-            @JsonProperty("startDateTime") Optional<String> startDateTime,
-            @JsonProperty("endDateTime") Optional<String> endDateTime,
-            @JsonProperty("skip") Optional<String> skip,
-            @JsonProperty("count") Optional<String> count,
-            @JsonProperty("groupID") Optional<String> groupID,
-            @JsonProperty("foreignID") Optional<String> foreignID,
-            @JsonProperty("scheduleID") Optional<String> scheduleID,
-            @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
-            @JsonProperty("refunded") Optional<String> refunded,
-            @JsonProperty("disputed") Optional<String> disputed) {
-        super("API error occurred");
-        Utils.checkNotNull(accountIDs, "accountIDs");
-        Utils.checkNotNull(status, "status");
-        Utils.checkNotNull(startDateTime, "startDateTime");
-        Utils.checkNotNull(endDateTime, "endDateTime");
-        Utils.checkNotNull(skip, "skip");
-        Utils.checkNotNull(count, "count");
-        Utils.checkNotNull(groupID, "groupID");
-        Utils.checkNotNull(foreignID, "foreignID");
-        Utils.checkNotNull(scheduleID, "scheduleID");
-        Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
-        Utils.checkNotNull(refunded, "refunded");
-        Utils.checkNotNull(disputed, "disputed");
-        this.accountIDs = accountIDs;
-        this.status = status;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
-        this.skip = skip;
-        this.count = count;
-        this.groupID = groupID;
-        this.foreignID = foreignID;
-        this.scheduleID = scheduleID;
-        this.paymentLinkCode = paymentLinkCode;
-        this.refunded = refunded;
-        this.disputed = disputed;
-    }
-    
-    public ListTransfersValidationError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of ListTransfersValidationError. If deserialization of the response body fails,
+    * the resulting ListTransfersValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static ListTransfersValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new ListTransfersValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new ListTransfersValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> accountIDs() {
-        return accountIDs;
+        return data().flatMap(Data::accountIDs);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> status() {
-        return status;
+        return data().flatMap(Data::status);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> startDateTime() {
-        return startDateTime;
+        return data().flatMap(Data::startDateTime);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> endDateTime() {
-        return endDateTime;
+        return data().flatMap(Data::endDateTime);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> skip() {
-        return skip;
+        return data().flatMap(Data::skip);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> count() {
-        return count;
+        return data().flatMap(Data::count);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> groupID() {
-        return groupID;
+        return data().flatMap(Data::groupID);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> foreignID() {
-        return foreignID;
+        return data().flatMap(Data::foreignID);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> scheduleID() {
-        return scheduleID;
+        return data().flatMap(Data::scheduleID);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> paymentLinkCode() {
-        return paymentLinkCode;
+        return data().flatMap(Data::paymentLinkCode);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> refunded() {
-        return refunded;
+        return data().flatMap(Data::refunded);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> disputed() {
-        return disputed;
+        return data().flatMap(Data::disputed);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public ListTransfersValidationError withAccountIDs(String accountIDs) {
-        Utils.checkNotNull(accountIDs, "accountIDs");
-        this.accountIDs = Optional.ofNullable(accountIDs);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public ListTransfersValidationError withAccountIDs(Optional<String> accountIDs) {
-        Utils.checkNotNull(accountIDs, "accountIDs");
-        this.accountIDs = accountIDs;
-        return this;
-    }
-
-    public ListTransfersValidationError withStatus(String status) {
-        Utils.checkNotNull(status, "status");
-        this.status = Optional.ofNullable(status);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("accountIDs")
+        private Optional<String> accountIDs;
 
 
-    public ListTransfersValidationError withStatus(Optional<String> status) {
-        Utils.checkNotNull(status, "status");
-        this.status = status;
-        return this;
-    }
-
-    public ListTransfersValidationError withStartDateTime(String startDateTime) {
-        Utils.checkNotNull(startDateTime, "startDateTime");
-        this.startDateTime = Optional.ofNullable(startDateTime);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("status")
+        private Optional<String> status;
 
 
-    public ListTransfersValidationError withStartDateTime(Optional<String> startDateTime) {
-        Utils.checkNotNull(startDateTime, "startDateTime");
-        this.startDateTime = startDateTime;
-        return this;
-    }
-
-    public ListTransfersValidationError withEndDateTime(String endDateTime) {
-        Utils.checkNotNull(endDateTime, "endDateTime");
-        this.endDateTime = Optional.ofNullable(endDateTime);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("startDateTime")
+        private Optional<String> startDateTime;
 
 
-    public ListTransfersValidationError withEndDateTime(Optional<String> endDateTime) {
-        Utils.checkNotNull(endDateTime, "endDateTime");
-        this.endDateTime = endDateTime;
-        return this;
-    }
-
-    public ListTransfersValidationError withSkip(String skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = Optional.ofNullable(skip);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("endDateTime")
+        private Optional<String> endDateTime;
 
 
-    public ListTransfersValidationError withSkip(Optional<String> skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = skip;
-        return this;
-    }
-
-    public ListTransfersValidationError withCount(String count) {
-        Utils.checkNotNull(count, "count");
-        this.count = Optional.ofNullable(count);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("skip")
+        private Optional<String> skip;
 
 
-    public ListTransfersValidationError withCount(Optional<String> count) {
-        Utils.checkNotNull(count, "count");
-        this.count = count;
-        return this;
-    }
-
-    public ListTransfersValidationError withGroupID(String groupID) {
-        Utils.checkNotNull(groupID, "groupID");
-        this.groupID = Optional.ofNullable(groupID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("count")
+        private Optional<String> count;
 
 
-    public ListTransfersValidationError withGroupID(Optional<String> groupID) {
-        Utils.checkNotNull(groupID, "groupID");
-        this.groupID = groupID;
-        return this;
-    }
-
-    public ListTransfersValidationError withForeignID(String foreignID) {
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.foreignID = Optional.ofNullable(foreignID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("groupID")
+        private Optional<String> groupID;
 
 
-    public ListTransfersValidationError withForeignID(Optional<String> foreignID) {
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.foreignID = foreignID;
-        return this;
-    }
-
-    public ListTransfersValidationError withScheduleID(String scheduleID) {
-        Utils.checkNotNull(scheduleID, "scheduleID");
-        this.scheduleID = Optional.ofNullable(scheduleID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("foreignID")
+        private Optional<String> foreignID;
 
 
-    public ListTransfersValidationError withScheduleID(Optional<String> scheduleID) {
-        Utils.checkNotNull(scheduleID, "scheduleID");
-        this.scheduleID = scheduleID;
-        return this;
-    }
-
-    public ListTransfersValidationError withPaymentLinkCode(String paymentLinkCode) {
-        Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
-        this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("scheduleID")
+        private Optional<String> scheduleID;
 
 
-    public ListTransfersValidationError withPaymentLinkCode(Optional<String> paymentLinkCode) {
-        Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
-        this.paymentLinkCode = paymentLinkCode;
-        return this;
-    }
-
-    public ListTransfersValidationError withRefunded(String refunded) {
-        Utils.checkNotNull(refunded, "refunded");
-        this.refunded = Optional.ofNullable(refunded);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("paymentLinkCode")
+        private Optional<String> paymentLinkCode;
 
 
-    public ListTransfersValidationError withRefunded(Optional<String> refunded) {
-        Utils.checkNotNull(refunded, "refunded");
-        this.refunded = refunded;
-        return this;
-    }
-
-    public ListTransfersValidationError withDisputed(String disputed) {
-        Utils.checkNotNull(disputed, "disputed");
-        this.disputed = Optional.ofNullable(disputed);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("refunded")
+        private Optional<String> refunded;
 
 
-    public ListTransfersValidationError withDisputed(Optional<String> disputed) {
-        Utils.checkNotNull(disputed, "disputed");
-        this.disputed = disputed;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("disputed")
+        private Optional<String> disputed;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("accountIDs") Optional<String> accountIDs,
+                @JsonProperty("status") Optional<String> status,
+                @JsonProperty("startDateTime") Optional<String> startDateTime,
+                @JsonProperty("endDateTime") Optional<String> endDateTime,
+                @JsonProperty("skip") Optional<String> skip,
+                @JsonProperty("count") Optional<String> count,
+                @JsonProperty("groupID") Optional<String> groupID,
+                @JsonProperty("foreignID") Optional<String> foreignID,
+                @JsonProperty("scheduleID") Optional<String> scheduleID,
+                @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
+                @JsonProperty("refunded") Optional<String> refunded,
+                @JsonProperty("disputed") Optional<String> disputed) {
+            Utils.checkNotNull(accountIDs, "accountIDs");
+            Utils.checkNotNull(status, "status");
+            Utils.checkNotNull(startDateTime, "startDateTime");
+            Utils.checkNotNull(endDateTime, "endDateTime");
+            Utils.checkNotNull(skip, "skip");
+            Utils.checkNotNull(count, "count");
+            Utils.checkNotNull(groupID, "groupID");
+            Utils.checkNotNull(foreignID, "foreignID");
+            Utils.checkNotNull(scheduleID, "scheduleID");
+            Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+            Utils.checkNotNull(refunded, "refunded");
+            Utils.checkNotNull(disputed, "disputed");
+            this.accountIDs = accountIDs;
+            this.status = status;
+            this.startDateTime = startDateTime;
+            this.endDateTime = endDateTime;
+            this.skip = skip;
+            this.count = count;
+            this.groupID = groupID;
+            this.foreignID = foreignID;
+            this.scheduleID = scheduleID;
+            this.paymentLinkCode = paymentLinkCode;
+            this.refunded = refunded;
+            this.disputed = disputed;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty());
         }
-        ListTransfersValidationError other = (ListTransfersValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.accountIDs, other.accountIDs) &&
-            Utils.enhancedDeepEquals(this.status, other.status) &&
-            Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
-            Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime) &&
-            Utils.enhancedDeepEquals(this.skip, other.skip) &&
-            Utils.enhancedDeepEquals(this.count, other.count) &&
-            Utils.enhancedDeepEquals(this.groupID, other.groupID) &&
-            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
-            Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
-            Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
-            Utils.enhancedDeepEquals(this.refunded, other.refunded) &&
-            Utils.enhancedDeepEquals(this.disputed, other.disputed);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            accountIDs, status, startDateTime,
-            endDateTime, skip, count,
-            groupID, foreignID, scheduleID,
-            paymentLinkCode, refunded, disputed);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(ListTransfersValidationError.class,
-                "accountIDs", accountIDs,
-                "status", status,
-                "startDateTime", startDateTime,
-                "endDateTime", endDateTime,
-                "skip", skip,
-                "count", count,
-                "groupID", groupID,
-                "foreignID", foreignID,
-                "scheduleID", scheduleID,
-                "paymentLinkCode", paymentLinkCode,
-                "refunded", refunded,
-                "disputed", disputed);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> accountIDs() {
+            return accountIDs;
+        }
 
-        private Optional<String> accountIDs = Optional.empty();
+        @JsonIgnore
+        public Optional<String> status() {
+            return status;
+        }
 
-        private Optional<String> status = Optional.empty();
+        @JsonIgnore
+        public Optional<String> startDateTime() {
+            return startDateTime;
+        }
 
-        private Optional<String> startDateTime = Optional.empty();
+        @JsonIgnore
+        public Optional<String> endDateTime() {
+            return endDateTime;
+        }
 
-        private Optional<String> endDateTime = Optional.empty();
+        @JsonIgnore
+        public Optional<String> skip() {
+            return skip;
+        }
 
-        private Optional<String> skip = Optional.empty();
+        @JsonIgnore
+        public Optional<String> count() {
+            return count;
+        }
 
-        private Optional<String> count = Optional.empty();
+        @JsonIgnore
+        public Optional<String> groupID() {
+            return groupID;
+        }
 
-        private Optional<String> groupID = Optional.empty();
+        @JsonIgnore
+        public Optional<String> foreignID() {
+            return foreignID;
+        }
 
-        private Optional<String> foreignID = Optional.empty();
+        @JsonIgnore
+        public Optional<String> scheduleID() {
+            return scheduleID;
+        }
 
-        private Optional<String> scheduleID = Optional.empty();
+        @JsonIgnore
+        public Optional<String> paymentLinkCode() {
+            return paymentLinkCode;
+        }
 
-        private Optional<String> paymentLinkCode = Optional.empty();
+        @JsonIgnore
+        public Optional<String> refunded() {
+            return refunded;
+        }
 
-        private Optional<String> refunded = Optional.empty();
+        @JsonIgnore
+        public Optional<String> disputed() {
+            return disputed;
+        }
 
-        private Optional<String> disputed = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder accountIDs(String accountIDs) {
+        public Data withAccountIDs(String accountIDs) {
             Utils.checkNotNull(accountIDs, "accountIDs");
             this.accountIDs = Optional.ofNullable(accountIDs);
             return this;
         }
 
-        public Builder accountIDs(Optional<String> accountIDs) {
+
+        public Data withAccountIDs(Optional<String> accountIDs) {
             Utils.checkNotNull(accountIDs, "accountIDs");
             this.accountIDs = accountIDs;
             return this;
         }
 
-
-        public Builder status(String status) {
+        public Data withStatus(String status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
         }
 
-        public Builder status(Optional<String> status) {
+
+        public Data withStatus(Optional<String> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
-
-        public Builder startDateTime(String startDateTime) {
+        public Data withStartDateTime(String startDateTime) {
             Utils.checkNotNull(startDateTime, "startDateTime");
             this.startDateTime = Optional.ofNullable(startDateTime);
             return this;
         }
 
-        public Builder startDateTime(Optional<String> startDateTime) {
+
+        public Data withStartDateTime(Optional<String> startDateTime) {
             Utils.checkNotNull(startDateTime, "startDateTime");
             this.startDateTime = startDateTime;
             return this;
         }
 
-
-        public Builder endDateTime(String endDateTime) {
+        public Data withEndDateTime(String endDateTime) {
             Utils.checkNotNull(endDateTime, "endDateTime");
             this.endDateTime = Optional.ofNullable(endDateTime);
             return this;
         }
 
-        public Builder endDateTime(Optional<String> endDateTime) {
+
+        public Data withEndDateTime(Optional<String> endDateTime) {
             Utils.checkNotNull(endDateTime, "endDateTime");
             this.endDateTime = endDateTime;
             return this;
         }
 
-
-        public Builder skip(String skip) {
+        public Data withSkip(String skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
             return this;
         }
 
-        public Builder skip(Optional<String> skip) {
+
+        public Data withSkip(Optional<String> skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = skip;
             return this;
         }
 
-
-        public Builder count(String count) {
+        public Data withCount(String count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
             return this;
         }
 
-        public Builder count(Optional<String> count) {
+
+        public Data withCount(Optional<String> count) {
             Utils.checkNotNull(count, "count");
             this.count = count;
             return this;
         }
 
-
-        public Builder groupID(String groupID) {
+        public Data withGroupID(String groupID) {
             Utils.checkNotNull(groupID, "groupID");
             this.groupID = Optional.ofNullable(groupID);
             return this;
         }
 
-        public Builder groupID(Optional<String> groupID) {
+
+        public Data withGroupID(Optional<String> groupID) {
             Utils.checkNotNull(groupID, "groupID");
             this.groupID = groupID;
             return this;
         }
 
-
-        public Builder foreignID(String foreignID) {
+        public Data withForeignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = Optional.ofNullable(foreignID);
             return this;
         }
 
-        public Builder foreignID(Optional<String> foreignID) {
+
+        public Data withForeignID(Optional<String> foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = foreignID;
             return this;
         }
 
-
-        public Builder scheduleID(String scheduleID) {
+        public Data withScheduleID(String scheduleID) {
             Utils.checkNotNull(scheduleID, "scheduleID");
             this.scheduleID = Optional.ofNullable(scheduleID);
             return this;
         }
 
-        public Builder scheduleID(Optional<String> scheduleID) {
+
+        public Data withScheduleID(Optional<String> scheduleID) {
             Utils.checkNotNull(scheduleID, "scheduleID");
             this.scheduleID = scheduleID;
             return this;
         }
 
-
-        public Builder paymentLinkCode(String paymentLinkCode) {
+        public Data withPaymentLinkCode(String paymentLinkCode) {
             Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
             this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
             return this;
         }
 
-        public Builder paymentLinkCode(Optional<String> paymentLinkCode) {
+
+        public Data withPaymentLinkCode(Optional<String> paymentLinkCode) {
             Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
             this.paymentLinkCode = paymentLinkCode;
             return this;
         }
 
-
-        public Builder refunded(String refunded) {
+        public Data withRefunded(String refunded) {
             Utils.checkNotNull(refunded, "refunded");
             this.refunded = Optional.ofNullable(refunded);
             return this;
         }
 
-        public Builder refunded(Optional<String> refunded) {
+
+        public Data withRefunded(Optional<String> refunded) {
             Utils.checkNotNull(refunded, "refunded");
             this.refunded = refunded;
             return this;
         }
 
-
-        public Builder disputed(String disputed) {
+        public Data withDisputed(String disputed) {
             Utils.checkNotNull(disputed, "disputed");
             this.disputed = Optional.ofNullable(disputed);
             return this;
         }
 
-        public Builder disputed(Optional<String> disputed) {
+
+        public Data withDisputed(Optional<String> disputed) {
             Utils.checkNotNull(disputed, "disputed");
             this.disputed = disputed;
             return this;
         }
 
-        public ListTransfersValidationError build() {
-
-            return new ListTransfersValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.accountIDs, other.accountIDs) &&
+                Utils.enhancedDeepEquals(this.status, other.status) &&
+                Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
+                Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime) &&
+                Utils.enhancedDeepEquals(this.skip, other.skip) &&
+                Utils.enhancedDeepEquals(this.count, other.count) &&
+                Utils.enhancedDeepEquals(this.groupID, other.groupID) &&
+                Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+                Utils.enhancedDeepEquals(this.scheduleID, other.scheduleID) &&
+                Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
+                Utils.enhancedDeepEquals(this.refunded, other.refunded) &&
+                Utils.enhancedDeepEquals(this.disputed, other.disputed);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 accountIDs, status, startDateTime,
                 endDateTime, skip, count,
                 groupID, foreignID, scheduleID,
                 paymentLinkCode, refunded, disputed);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "accountIDs", accountIDs,
+                    "status", status,
+                    "startDateTime", startDateTime,
+                    "endDateTime", endDateTime,
+                    "skip", skip,
+                    "count", count,
+                    "groupID", groupID,
+                    "foreignID", foreignID,
+                    "scheduleID", scheduleID,
+                    "paymentLinkCode", paymentLinkCode,
+                    "refunded", refunded,
+                    "disputed", disputed);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> accountIDs = Optional.empty();
+
+            private Optional<String> status = Optional.empty();
+
+            private Optional<String> startDateTime = Optional.empty();
+
+            private Optional<String> endDateTime = Optional.empty();
+
+            private Optional<String> skip = Optional.empty();
+
+            private Optional<String> count = Optional.empty();
+
+            private Optional<String> groupID = Optional.empty();
+
+            private Optional<String> foreignID = Optional.empty();
+
+            private Optional<String> scheduleID = Optional.empty();
+
+            private Optional<String> paymentLinkCode = Optional.empty();
+
+            private Optional<String> refunded = Optional.empty();
+
+            private Optional<String> disputed = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder accountIDs(String accountIDs) {
+                Utils.checkNotNull(accountIDs, "accountIDs");
+                this.accountIDs = Optional.ofNullable(accountIDs);
+                return this;
+            }
+
+            public Builder accountIDs(Optional<String> accountIDs) {
+                Utils.checkNotNull(accountIDs, "accountIDs");
+                this.accountIDs = accountIDs;
+                return this;
+            }
+
+
+            public Builder status(String status) {
+                Utils.checkNotNull(status, "status");
+                this.status = Optional.ofNullable(status);
+                return this;
+            }
+
+            public Builder status(Optional<String> status) {
+                Utils.checkNotNull(status, "status");
+                this.status = status;
+                return this;
+            }
+
+
+            public Builder startDateTime(String startDateTime) {
+                Utils.checkNotNull(startDateTime, "startDateTime");
+                this.startDateTime = Optional.ofNullable(startDateTime);
+                return this;
+            }
+
+            public Builder startDateTime(Optional<String> startDateTime) {
+                Utils.checkNotNull(startDateTime, "startDateTime");
+                this.startDateTime = startDateTime;
+                return this;
+            }
+
+
+            public Builder endDateTime(String endDateTime) {
+                Utils.checkNotNull(endDateTime, "endDateTime");
+                this.endDateTime = Optional.ofNullable(endDateTime);
+                return this;
+            }
+
+            public Builder endDateTime(Optional<String> endDateTime) {
+                Utils.checkNotNull(endDateTime, "endDateTime");
+                this.endDateTime = endDateTime;
+                return this;
+            }
+
+
+            public Builder skip(String skip) {
+                Utils.checkNotNull(skip, "skip");
+                this.skip = Optional.ofNullable(skip);
+                return this;
+            }
+
+            public Builder skip(Optional<String> skip) {
+                Utils.checkNotNull(skip, "skip");
+                this.skip = skip;
+                return this;
+            }
+
+
+            public Builder count(String count) {
+                Utils.checkNotNull(count, "count");
+                this.count = Optional.ofNullable(count);
+                return this;
+            }
+
+            public Builder count(Optional<String> count) {
+                Utils.checkNotNull(count, "count");
+                this.count = count;
+                return this;
+            }
+
+
+            public Builder groupID(String groupID) {
+                Utils.checkNotNull(groupID, "groupID");
+                this.groupID = Optional.ofNullable(groupID);
+                return this;
+            }
+
+            public Builder groupID(Optional<String> groupID) {
+                Utils.checkNotNull(groupID, "groupID");
+                this.groupID = groupID;
+                return this;
+            }
+
+
+            public Builder foreignID(String foreignID) {
+                Utils.checkNotNull(foreignID, "foreignID");
+                this.foreignID = Optional.ofNullable(foreignID);
+                return this;
+            }
+
+            public Builder foreignID(Optional<String> foreignID) {
+                Utils.checkNotNull(foreignID, "foreignID");
+                this.foreignID = foreignID;
+                return this;
+            }
+
+
+            public Builder scheduleID(String scheduleID) {
+                Utils.checkNotNull(scheduleID, "scheduleID");
+                this.scheduleID = Optional.ofNullable(scheduleID);
+                return this;
+            }
+
+            public Builder scheduleID(Optional<String> scheduleID) {
+                Utils.checkNotNull(scheduleID, "scheduleID");
+                this.scheduleID = scheduleID;
+                return this;
+            }
+
+
+            public Builder paymentLinkCode(String paymentLinkCode) {
+                Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+                this.paymentLinkCode = Optional.ofNullable(paymentLinkCode);
+                return this;
+            }
+
+            public Builder paymentLinkCode(Optional<String> paymentLinkCode) {
+                Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
+                this.paymentLinkCode = paymentLinkCode;
+                return this;
+            }
+
+
+            public Builder refunded(String refunded) {
+                Utils.checkNotNull(refunded, "refunded");
+                this.refunded = Optional.ofNullable(refunded);
+                return this;
+            }
+
+            public Builder refunded(Optional<String> refunded) {
+                Utils.checkNotNull(refunded, "refunded");
+                this.refunded = refunded;
+                return this;
+            }
+
+
+            public Builder disputed(String disputed) {
+                Utils.checkNotNull(disputed, "disputed");
+                this.disputed = Optional.ofNullable(disputed);
+                return this;
+            }
+
+            public Builder disputed(Optional<String> disputed) {
+                Utils.checkNotNull(disputed, "disputed");
+                this.disputed = disputed;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    accountIDs, status, startDateTime,
+                    endDateTime, skip, count,
+                    groupID, foreignID, scheduleID,
+                    paymentLinkCode, refunded, disputed);
+            }
+
+        }
     }
+
 }
 

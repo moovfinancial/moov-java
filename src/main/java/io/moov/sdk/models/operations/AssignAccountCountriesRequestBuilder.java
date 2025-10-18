@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.AccountCountries;
 import io.moov.sdk.operations.AssignAccountCountries;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class AssignAccountCountriesRequestBuilder {
@@ -45,7 +44,7 @@ public class AssignAccountCountriesRequestBuilder {
         return request;
     }
 
-    public AssignAccountCountriesResponse call() throws Exception {
+    public AssignAccountCountriesResponse call() {
         
         RequestOperation<AssignAccountCountriesRequest, AssignAccountCountriesResponse> operation
               = new AssignAccountCountries.Sync(sdkConfiguration, _headers);

@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetTerminalConfiguration;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetTerminalConfigurationRequestBuilder {
@@ -44,7 +43,7 @@ public class GetTerminalConfigurationRequestBuilder {
         return request;
     }
 
-    public GetTerminalConfigurationResponse call() throws Exception {
+    public GetTerminalConfigurationResponse call() {
         
         RequestOperation<GetTerminalConfigurationRequest, GetTerminalConfigurationResponse> operation
               = new GetTerminalConfiguration.Sync(sdkConfiguration, _headers);

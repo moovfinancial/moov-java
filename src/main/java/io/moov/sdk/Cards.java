@@ -27,7 +27,6 @@ import io.moov.sdk.operations.DisableCard;
 import io.moov.sdk.operations.GetCard;
 import io.moov.sdk.operations.ListCards;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -103,9 +102,9 @@ public class Cards {
      * @param accountID 
      * @param linkCard 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public LinkCardResponse link(String accountID, LinkCard linkCard) throws Exception {
+    public LinkCardResponse link(String accountID, LinkCard linkCard) {
         return link(Optional.empty(), accountID, linkCard);
     }
 
@@ -140,11 +139,11 @@ public class Cards {
      * @param accountID 
      * @param linkCard 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public LinkCardResponse link(
             Optional<? extends LinkCardWaitFor> xWaitFor, String accountID,
-            LinkCard linkCard) throws Exception {
+            LinkCard linkCard) {
         LinkCardRequest request =
             LinkCardRequest
                 .builder()
@@ -185,9 +184,9 @@ public class Cards {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListCardsResponse list(String accountID) throws Exception {
+    public ListCardsResponse list(String accountID) {
         ListCardsRequest request =
             ListCardsRequest
                 .builder()
@@ -227,9 +226,9 @@ public class Cards {
      * @param accountID 
      * @param cardID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetCardResponse get(String accountID, String cardID) throws Exception {
+    public GetCardResponse get(String accountID, String cardID) {
         GetCardRequest request =
             GetCardRequest
                 .builder()
@@ -287,11 +286,11 @@ public class Cards {
      * @param cardID 
      * @param updateCard 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateCardResponse update(
             String accountID, String cardID,
-            UpdateCard updateCard) throws Exception {
+            UpdateCard updateCard) {
         UpdateCardRequest request =
             UpdateCardRequest
                 .builder()
@@ -327,9 +326,9 @@ public class Cards {
      * @param accountID 
      * @param cardID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public DisableCardResponse disable(String accountID, String cardID) throws Exception {
+    public DisableCardResponse disable(String accountID, String cardID) {
         DisableCardRequest request =
             DisableCardRequest
                 .builder()

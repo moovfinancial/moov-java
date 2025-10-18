@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.AuthTokenRequest;
 import io.moov.sdk.operations.CreateAccessToken;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 
 public class CreateAccessTokenRequestBuilder {
 
@@ -28,7 +27,7 @@ public class CreateAccessTokenRequestBuilder {
         return this;
     }
 
-    public CreateAccessTokenResponse call() throws Exception {
+    public CreateAccessTokenResponse call() {
         
         RequestOperation<AuthTokenRequest, CreateAccessTokenResponse> operation
               = new CreateAccessToken.Sync(sdkConfiguration, _headers);

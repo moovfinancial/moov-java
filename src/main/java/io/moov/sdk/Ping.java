@@ -9,7 +9,6 @@ import io.moov.sdk.models.operations.PingRequest;
 import io.moov.sdk.models.operations.PingRequestBuilder;
 import io.moov.sdk.models.operations.PingResponse;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 
 
 public class Ping {
@@ -41,9 +40,9 @@ public class Ping {
      * you'll need to specify the `/ping.read` scope.
      * 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public PingResponse pingDirect() throws Exception {
+    public PingResponse pingDirect() {
         PingRequest request =
             PingRequest
                 .builder()

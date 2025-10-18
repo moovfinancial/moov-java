@@ -27,7 +27,6 @@ import io.moov.sdk.operations.GetFullIssuedCard;
 import io.moov.sdk.operations.GetIssuedCard;
 import io.moov.sdk.operations.ListIssuedCards;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.List;
@@ -65,9 +64,9 @@ public class CardIssuing {
      * @param accountID The Moov business account for which the card is to be issued.
      * @param requestCard 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public RequestCardResponse request(String accountID, RequestCard requestCard) throws Exception {
+    public RequestCardResponse request(String accountID, RequestCard requestCard) {
         RequestCardRequest request =
             RequestCardRequest
                 .builder()
@@ -101,9 +100,9 @@ public class CardIssuing {
      * 
      * @param accountID The Moov business account for which the cards have been issued.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListIssuedCardsResponse list(String accountID) throws Exception {
+    public ListIssuedCardsResponse list(String accountID) {
         return list(accountID, Optional.empty(), Optional.empty(),
             Optional.empty());
     }
@@ -120,11 +119,11 @@ public class CardIssuing {
      * @param count 
      * @param states Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public ListIssuedCardsResponse list(
             String accountID, Optional<Long> skip,
-            Optional<Long> count, Optional<? extends List<IssuedCardState>> states) throws Exception {
+            Optional<Long> count, Optional<? extends List<IssuedCardState>> states) {
         ListIssuedCardsRequest request =
             ListIssuedCardsRequest
                 .builder()
@@ -161,9 +160,9 @@ public class CardIssuing {
      * @param accountID The Moov business account for which the card was issued.
      * @param issuedCardID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetIssuedCardResponse get(String accountID, String issuedCardID) throws Exception {
+    public GetIssuedCardResponse get(String accountID, String issuedCardID) {
         GetIssuedCardRequest request =
             GetIssuedCardRequest
                 .builder()
@@ -199,11 +198,11 @@ public class CardIssuing {
      * @param issuedCardID 
      * @param updateIssuedCard 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateIssuedCardResponse update(
             String accountID, String issuedCardID,
-            UpdateIssuedCard updateIssuedCard) throws Exception {
+            UpdateIssuedCard updateIssuedCard) {
         UpdateIssuedCardRequest request =
             UpdateIssuedCardRequest
                 .builder()
@@ -243,9 +242,9 @@ public class CardIssuing {
      * @param accountID The Moov business account for which the card was issued.
      * @param issuedCardID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetFullIssuedCardResponse getFull(String accountID, String issuedCardID) throws Exception {
+    public GetFullIssuedCardResponse getFull(String accountID, String issuedCardID) {
         GetFullIssuedCardRequest request =
             GetFullIssuedCardRequest
                 .builder()

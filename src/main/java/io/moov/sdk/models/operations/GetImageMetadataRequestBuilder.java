@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetImageMetadata;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetImageMetadataRequestBuilder {
@@ -44,7 +43,7 @@ public class GetImageMetadataRequestBuilder {
         return request;
     }
 
-    public GetImageMetadataResponse call() throws Exception {
+    public GetImageMetadataResponse call() {
         
         RequestOperation<GetImageMetadataRequest, GetImageMetadataResponse> operation
               = new GetImageMetadata.Sync(sdkConfiguration, _headers);

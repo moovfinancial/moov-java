@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetScheduledOccurrence;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetScheduledOccurrenceRequestBuilder {
@@ -52,7 +51,7 @@ public class GetScheduledOccurrenceRequestBuilder {
         return request;
     }
 
-    public GetScheduledOccurrenceResponse call() throws Exception {
+    public GetScheduledOccurrenceResponse call() {
         
         RequestOperation<GetScheduledOccurrenceRequest, GetScheduledOccurrenceResponse> operation
               = new GetScheduledOccurrence.Sync(sdkConfiguration, _headers);

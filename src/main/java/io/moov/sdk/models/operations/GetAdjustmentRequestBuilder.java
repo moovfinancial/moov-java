@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetAdjustment;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetAdjustmentRequestBuilder {
@@ -44,7 +43,7 @@ public class GetAdjustmentRequestBuilder {
         return request;
     }
 
-    public GetAdjustmentResponse call() throws Exception {
+    public GetAdjustmentResponse call() {
         
         RequestOperation<GetAdjustmentRequest, GetAdjustmentResponse> operation
               = new GetAdjustment.Sync(sdkConfiguration, _headers);

@@ -27,7 +27,6 @@ import io.moov.sdk.operations.GetProduct;
 import io.moov.sdk.operations.ListProducts;
 import io.moov.sdk.operations.UpdateProduct;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -55,9 +54,9 @@ public class Products {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListProductsResponse list(String accountID) throws Exception {
+    public ListProductsResponse list(String accountID) {
         return list(accountID, Optional.empty(), Optional.empty());
     }
 
@@ -68,11 +67,11 @@ public class Products {
      * @param skip 
      * @param count 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public ListProductsResponse list(
             String accountID, Optional<Long> skip,
-            Optional<Long> count) throws Exception {
+            Optional<Long> count) {
         ListProductsRequest request =
             ListProductsRequest
                 .builder()
@@ -100,9 +99,9 @@ public class Products {
      * @param accountID 
      * @param productRequest Request to create or update a product.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateProductResponse create(String accountID, ProductRequest productRequest) throws Exception {
+    public CreateProductResponse create(String accountID, ProductRequest productRequest) {
         CreateProductRequest request =
             CreateProductRequest
                 .builder()
@@ -129,9 +128,9 @@ public class Products {
      * @param accountID 
      * @param productID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetProductResponse get(String accountID, String productID) throws Exception {
+    public GetProductResponse get(String accountID, String productID) {
         GetProductRequest request =
             GetProductRequest
                 .builder()
@@ -159,11 +158,11 @@ public class Products {
      * @param productID 
      * @param productRequest Request to create or update a product.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateProductResponse update(
             String accountID, String productID,
-            ProductRequest productRequest) throws Exception {
+            ProductRequest productRequest) {
         UpdateProductRequest request =
             UpdateProductRequest
                 .builder()
@@ -197,9 +196,9 @@ public class Products {
      * @param accountID 
      * @param productID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public DisableProductResponse disable(String accountID, String productID) throws Exception {
+    public DisableProductResponse disable(String accountID, String productID) {
         DisableProductRequest request =
             DisableProductRequest
                 .builder()

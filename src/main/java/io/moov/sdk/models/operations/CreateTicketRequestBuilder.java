@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.CreateTicket;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class CreateTicketRequestBuilder {
@@ -44,7 +43,7 @@ public class CreateTicketRequestBuilder {
         return request;
     }
 
-    public CreateTicketResponse call() throws Exception {
+    public CreateTicketResponse call() {
         
         RequestOperation<CreateTicketRequest, CreateTicketResponse> operation
               = new io.moov.sdk.operations.CreateTicket.Sync(sdkConfiguration, _headers);

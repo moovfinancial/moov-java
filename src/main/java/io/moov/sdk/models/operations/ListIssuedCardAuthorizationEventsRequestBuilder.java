@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListIssuedCardAuthorizationEvents;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -74,7 +73,7 @@ public class ListIssuedCardAuthorizationEventsRequestBuilder {
         return request;
     }
 
-    public ListIssuedCardAuthorizationEventsResponse call() throws Exception {
+    public ListIssuedCardAuthorizationEventsResponse call() {
         
         RequestOperation<ListIssuedCardAuthorizationEventsRequest, ListIssuedCardAuthorizationEventsResponse> operation
               = new ListIssuedCardAuthorizationEvents.Sync(sdkConfiguration, _headers);

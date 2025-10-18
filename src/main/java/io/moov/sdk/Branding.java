@@ -23,7 +23,6 @@ import io.moov.sdk.operations.CreateBrand;
 import io.moov.sdk.operations.GetBrand;
 import io.moov.sdk.operations.UpsertBrand;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -58,9 +57,9 @@ public class Branding {
      * @param accountID 
      * @param brandProperties 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateBrandResponse create(String accountID, BrandProperties brandProperties) throws Exception {
+    public CreateBrandResponse create(String accountID, BrandProperties brandProperties) {
         CreateBrandRequest request =
             CreateBrandRequest
                 .builder()
@@ -95,9 +94,9 @@ public class Branding {
      * @param accountID 
      * @param brandProperties 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public UpsertBrandResponse upsert(String accountID, BrandProperties brandProperties) throws Exception {
+    public UpsertBrandResponse upsert(String accountID, BrandProperties brandProperties) {
         UpsertBrandRequest request =
             UpsertBrandRequest
                 .builder()
@@ -131,9 +130,9 @@ public class Branding {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetBrandResponse get(String accountID) throws Exception {
+    public GetBrandResponse get(String accountID) {
         GetBrandRequest request =
             GetBrandRequest
                 .builder()
@@ -167,9 +166,9 @@ public class Branding {
      * @param accountID 
      * @param updateBrand 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public UpdateBrandResponse update(String accountID, UpdateBrand updateBrand) throws Exception {
+    public UpdateBrandResponse update(String accountID, UpdateBrand updateBrand) {
         UpdateBrandRequest request =
             UpdateBrandRequest
                 .builder()

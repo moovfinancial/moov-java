@@ -14,7 +14,6 @@ import io.moov.sdk.models.operations.ListAdjustmentsResponse;
 import io.moov.sdk.operations.GetAdjustment;
 import io.moov.sdk.operations.ListAdjustments;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -49,9 +48,9 @@ public class Adjustments {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListAdjustmentsResponse list(String accountID) throws Exception {
+    public ListAdjustmentsResponse list(String accountID) {
         return list(accountID, Optional.empty());
     }
 
@@ -65,9 +64,9 @@ public class Adjustments {
      * @param accountID 
      * @param walletID A wallet ID to filter adjustments by.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListAdjustmentsResponse list(String accountID, Optional<String> walletID) throws Exception {
+    public ListAdjustmentsResponse list(String accountID, Optional<String> walletID) {
         ListAdjustmentsRequest request =
             ListAdjustmentsRequest
                 .builder()
@@ -102,9 +101,9 @@ public class Adjustments {
      * @param accountID 
      * @param adjustmentID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetAdjustmentResponse get(String accountID, String adjustmentID) throws Exception {
+    public GetAdjustmentResponse get(String accountID, String adjustmentID) {
         GetAdjustmentRequest request =
             GetAdjustmentRequest
                 .builder()

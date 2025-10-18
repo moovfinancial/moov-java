@@ -14,7 +14,6 @@ import io.moov.sdk.models.operations.ListReceiptsResponse;
 import io.moov.sdk.operations.CreateReceipts;
 import io.moov.sdk.operations.ListReceipts;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.List;
 
@@ -49,9 +48,9 @@ public class Receipts {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateReceiptsResponse create(List<ReceiptRequest> request) throws Exception {
+    public CreateReceiptsResponse create(List<ReceiptRequest> request) {
         RequestOperation<List<ReceiptRequest>, CreateReceiptsResponse> operation
               = new CreateReceipts.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -79,9 +78,9 @@ public class Receipts {
      * 
      * @param id The transfer, schedule, or transfer occurrence ID to filter receipts by.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListReceiptsResponse list(String id) throws Exception {
+    public ListReceiptsResponse list(String id) {
         ListReceiptsRequest request =
             ListReceiptsRequest
                 .builder()

@@ -4,6 +4,7 @@
 package io.moov.sdk.operations;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
+import static io.moov.sdk.utils.Exceptions.unchecked;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.moov.sdk.SDKConfiguration;
@@ -120,8 +121,8 @@ public class ListFeePlanAgreements {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(ListFeePlanAgreementsRequest request) throws Exception {
-            HttpRequest r = onBuildRequest(request);
+        public HttpResponse<InputStream> doRequest(ListFeePlanAgreementsRequest request) {
+            HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
@@ -131,7 +132,7 @@ public class ListFeePlanAgreements {
                     httpRes = onSuccess(httpRes);
                 }
             } catch (Exception e) {
-                httpRes = onError(null, e);
+                httpRes = unchecked(() -> onError(null, e)).get();
             }
 
             return httpRes;
@@ -139,7 +140,7 @@ public class ListFeePlanAgreements {
 
 
         @Override
-        public ListFeePlanAgreementsResponse handleResponse(HttpResponse<InputStream> response) throws Exception {
+        public ListFeePlanAgreementsResponse handleResponse(HttpResponse<InputStream> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
@@ -156,64 +157,30 @@ public class ListFeePlanAgreements {
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    List<FeePlanAgreement> out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                    res.withFeePlanAgreements(out);
-                    return res;
+                    return res.withFeePlanAgreements(Utils.unmarshal(response, new TypeReference<List<FeePlanAgreement>>() {}));
                 } else {
-                    throw new APIException(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
+                    throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "401", "403", "429")) {
                 res.withHeaders(response.headers().map());
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "500", "504")) {
                 res.withHeaders(response.headers().map());
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
             if (Utils.statusCodeMatches(response.statusCode(), "5XX")) {
                 // no content
-                throw new APIException(
-                        response,
-                        response.statusCode(),
-                        "API error occurred",
-                        Utils.extractByteArrayFromBody(response));
+                throw APIException.from("API error occurred", response);
             }
-            
-            throw new APIException(
-                    response,
-                    response.statusCode(),
-                    "Unexpected status code received: " + response.statusCode(),
-                    Utils.extractByteArrayFromBody(response));
+            throw APIException.from("Unexpected status code received: " + response.statusCode(), response);
         }
     }
 }

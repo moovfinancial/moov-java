@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetBankAccount;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetBankAccountRequestBuilder {
@@ -44,7 +43,7 @@ public class GetBankAccountRequestBuilder {
         return request;
     }
 
-    public GetBankAccountResponse call() throws Exception {
+    public GetBankAccountResponse call() {
         
         RequestOperation<GetBankAccountRequest, GetBankAccountResponse> operation
               = new GetBankAccount.Sync(sdkConfiguration, _headers);

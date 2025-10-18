@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetTransfer;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetTransferRequestBuilder {
@@ -44,7 +43,7 @@ public class GetTransferRequestBuilder {
         return request;
     }
 
-    public GetTransferResponse call() throws Exception {
+    public GetTransferResponse call() {
         
         RequestOperation<GetTransferRequest, GetTransferResponse> operation
               = new GetTransfer.Sync(sdkConfiguration, _headers);

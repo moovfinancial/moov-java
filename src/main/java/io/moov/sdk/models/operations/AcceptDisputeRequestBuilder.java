@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.AcceptDispute;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class AcceptDisputeRequestBuilder {
@@ -44,7 +43,7 @@ public class AcceptDisputeRequestBuilder {
         return request;
     }
 
-    public AcceptDisputeResponse call() throws Exception {
+    public AcceptDisputeResponse call() {
         
         RequestOperation<AcceptDisputeRequest, AcceptDisputeResponse> operation
               = new AcceptDispute.Sync(sdkConfiguration, _headers);

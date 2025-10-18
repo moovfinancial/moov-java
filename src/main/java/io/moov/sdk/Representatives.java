@@ -26,7 +26,6 @@ import io.moov.sdk.operations.DeleteRepresentative;
 import io.moov.sdk.operations.GetRepresentative;
 import io.moov.sdk.operations.ListRepresentatives;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -71,9 +70,9 @@ public class Representatives {
      * @param accountID ID of the account.
      * @param createRepresentative Describes a business representative to create.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateRepresentativeResponse create(String accountID, CreateRepresentative createRepresentative) throws Exception {
+    public CreateRepresentativeResponse create(String accountID, CreateRepresentative createRepresentative) {
         CreateRepresentativeRequest request =
             CreateRepresentativeRequest
                 .builder()
@@ -117,9 +116,9 @@ public class Representatives {
      * 
      * @param accountID ID of the account.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListRepresentativesResponse list(String accountID) throws Exception {
+    public ListRepresentativesResponse list(String accountID) {
         ListRepresentativesRequest request =
             ListRepresentativesRequest
                 .builder()
@@ -155,9 +154,9 @@ public class Representatives {
      * @param accountID ID of the account.
      * @param representativeID ID of the representative.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public DeleteRepresentativeResponse delete(String accountID, String representativeID) throws Exception {
+    public DeleteRepresentativeResponse delete(String accountID, String representativeID) {
         DeleteRepresentativeRequest request =
             DeleteRepresentativeRequest
                 .builder()
@@ -196,9 +195,9 @@ public class Representatives {
      * @param accountID ID of the account.
      * @param representativeID ID of the representative.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetRepresentativeResponse get(String accountID, String representativeID) throws Exception {
+    public GetRepresentativeResponse get(String accountID, String representativeID) {
         GetRepresentativeRequest request =
             GetRepresentativeRequest
                 .builder()
@@ -264,11 +263,11 @@ public class Representatives {
      * @param representativeID ID of the representative.
      * @param updateRepresentative 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
     public UpdateRepresentativeResponse update(
             String accountID, String representativeID,
-            UpdateRepresentative updateRepresentative) throws Exception {
+            UpdateRepresentative updateRepresentative) {
         UpdateRepresentativeRequest request =
             UpdateRepresentativeRequest
                 .builder()

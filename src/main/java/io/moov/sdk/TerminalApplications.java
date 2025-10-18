@@ -26,7 +26,6 @@ import io.moov.sdk.operations.DeleteTerminalApplication;
 import io.moov.sdk.operations.GetTerminalApplication;
 import io.moov.sdk.operations.ListTerminalApplications;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -60,9 +59,9 @@ public class TerminalApplications {
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateTerminalApplicationResponse create(CreateTerminalApplication request) throws Exception {
+    public CreateTerminalApplicationResponse create(CreateTerminalApplication request) {
         RequestOperation<CreateTerminalApplication, CreateTerminalApplicationResponse> operation
               = new io.moov.sdk.operations.CreateTerminalApplication.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
@@ -89,9 +88,9 @@ public class TerminalApplications {
      * you'll need to specify the `/terminal-applications.read` scope.
      * 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListTerminalApplicationsResponse listDirect() throws Exception {
+    public ListTerminalApplicationsResponse listDirect() {
         ListTerminalApplicationsRequest request =
             ListTerminalApplicationsRequest
                 .builder()
@@ -123,9 +122,9 @@ public class TerminalApplications {
      * 
      * @param terminalApplicationID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetTerminalApplicationResponse get(String terminalApplicationID) throws Exception {
+    public GetTerminalApplicationResponse get(String terminalApplicationID) {
         GetTerminalApplicationRequest request =
             GetTerminalApplicationRequest
                 .builder()
@@ -158,9 +157,9 @@ public class TerminalApplications {
      * 
      * @param terminalApplicationID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public DeleteTerminalApplicationResponse delete(String terminalApplicationID) throws Exception {
+    public DeleteTerminalApplicationResponse delete(String terminalApplicationID) {
         DeleteTerminalApplicationRequest request =
             DeleteTerminalApplicationRequest
                 .builder()
@@ -196,9 +195,9 @@ public class TerminalApplications {
      * @param terminalApplicationID 
      * @param terminalApplicationVersion Describes a terminal application version.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public CreateTerminalApplicationVersionResponse createVersion(String terminalApplicationID, TerminalApplicationVersion terminalApplicationVersion) throws Exception {
+    public CreateTerminalApplicationVersionResponse createVersion(String terminalApplicationID, TerminalApplicationVersion terminalApplicationVersion) {
         CreateTerminalApplicationVersionRequest request =
             CreateTerminalApplicationVersionRequest
                 .builder()

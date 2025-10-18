@@ -24,7 +24,6 @@ import io.moov.sdk.operations.GetCapability;
 import io.moov.sdk.operations.ListCapabilities;
 import io.moov.sdk.operations.RequestCapabilities;
 import io.moov.sdk.utils.Headers;
-import java.lang.Exception;
 import java.lang.String;
 
 
@@ -62,9 +61,9 @@ public class Capabilities {
      * 
      * @param accountID 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public ListCapabilitiesResponse list(String accountID) throws Exception {
+    public ListCapabilitiesResponse list(String accountID) {
         ListCapabilitiesRequest request =
             ListCapabilitiesRequest
                 .builder()
@@ -100,9 +99,9 @@ public class Capabilities {
      * @param accountID 
      * @param addCapabilities 
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public RequestCapabilitiesResponse request(String accountID, AddCapabilities addCapabilities) throws Exception {
+    public RequestCapabilitiesResponse request(String accountID, AddCapabilities addCapabilities) {
         RequestCapabilitiesRequest request =
             RequestCapabilitiesRequest
                 .builder()
@@ -141,9 +140,9 @@ public class Capabilities {
      *         
      *         The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public GetCapabilityResponse get(String accountID, CapabilityID capabilityID) throws Exception {
+    public GetCapabilityResponse get(String accountID, CapabilityID capabilityID) {
         GetCapabilityRequest request =
             GetCapabilityRequest
                 .builder()
@@ -182,9 +181,9 @@ public class Capabilities {
      *         
      *         The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
      * @return The response from the API call
-     * @throws Exception if the API call fails
+     * @throws RuntimeException subclass if the API call fails
      */
-    public DisableCapabilityResponse disable(String accountID, CapabilityID capabilityID) throws Exception {
+    public DisableCapabilityResponse disable(String accountID, CapabilityID capabilityID) {
         DisableCapabilityRequest request =
             DisableCapabilityRequest
                 .builder()

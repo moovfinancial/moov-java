@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.models.components.UpdateCard;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class UpdateCardRequestBuilder {
@@ -52,7 +51,7 @@ public class UpdateCardRequestBuilder {
         return request;
     }
 
-    public UpdateCardResponse call() throws Exception {
+    public UpdateCardResponse call() {
         
         RequestOperation<UpdateCardRequest, UpdateCardResponse> operation
               = new io.moov.sdk.operations.UpdateCard.Sync(sdkConfiguration, _headers);

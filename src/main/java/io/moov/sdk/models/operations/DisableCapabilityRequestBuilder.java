@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.CapabilityID;
 import io.moov.sdk.operations.DisableCapability;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class DisableCapabilityRequestBuilder {
@@ -45,7 +44,7 @@ public class DisableCapabilityRequestBuilder {
         return request;
     }
 
-    public DisableCapabilityResponse call() throws Exception {
+    public DisableCapabilityResponse call() {
         
         RequestOperation<DisableCapabilityRequest, DisableCapabilityResponse> operation
               = new DisableCapability.Sync(sdkConfiguration, _headers);

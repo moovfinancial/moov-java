@@ -16,686 +16,804 @@ import io.moov.sdk.models.components.SendFundsError;
 import io.moov.sdk.models.components.VolumeByCustomerTypeError;
 import io.moov.sdk.models.components.VolumeShareByCustomerTypeError;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class UpsertUnderwritingError extends RuntimeException {
+public class UpsertUnderwritingError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("geographicReach")
-    private Optional<String> geographicReach;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("businessPresence")
-    private Optional<String> businessPresence;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("pendingLitigation")
-    private Optional<String> pendingLitigation;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("volumeShareByCustomerType")
-    private Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("collectFunds")
-    private Optional<? extends CollectFundsError> collectFunds;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("moneyTransfer")
-    private Optional<? extends MoneyTransferError> moneyTransfer;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("sendFunds")
-    private Optional<? extends SendFundsError> sendFunds;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("averageMonthlyTransactionVolume")
-    private Optional<String> averageMonthlyTransactionVolume;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("error")
-    private Optional<String> error;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("averageTransactionSize")
-    private Optional<String> averageTransactionSize;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("maxTransactionSize")
-    private Optional<String> maxTransactionSize;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("volumeByCustomerType")
-    private Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("cardVolumeDistribution")
-    private Optional<? extends CardVolumeDistributionError> cardVolumeDistribution;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("fulfillment")
-    private Optional<? extends FulfillmentDetailsError> fulfillment;
-
-    @JsonCreator
     public UpsertUnderwritingError(
-            @JsonProperty("geographicReach") Optional<String> geographicReach,
-            @JsonProperty("businessPresence") Optional<String> businessPresence,
-            @JsonProperty("pendingLitigation") Optional<String> pendingLitigation,
-            @JsonProperty("volumeShareByCustomerType") Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType,
-            @JsonProperty("collectFunds") Optional<? extends CollectFundsError> collectFunds,
-            @JsonProperty("moneyTransfer") Optional<? extends MoneyTransferError> moneyTransfer,
-            @JsonProperty("sendFunds") Optional<? extends SendFundsError> sendFunds,
-            @JsonProperty("averageMonthlyTransactionVolume") Optional<String> averageMonthlyTransactionVolume,
-            @JsonProperty("error") Optional<String> error,
-            @JsonProperty("averageTransactionSize") Optional<String> averageTransactionSize,
-            @JsonProperty("maxTransactionSize") Optional<String> maxTransactionSize,
-            @JsonProperty("volumeByCustomerType") Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType,
-            @JsonProperty("cardVolumeDistribution") Optional<? extends CardVolumeDistributionError> cardVolumeDistribution,
-            @JsonProperty("fulfillment") Optional<? extends FulfillmentDetailsError> fulfillment) {
-        super("API error occurred");
-        Utils.checkNotNull(geographicReach, "geographicReach");
-        Utils.checkNotNull(businessPresence, "businessPresence");
-        Utils.checkNotNull(pendingLitigation, "pendingLitigation");
-        Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
-        Utils.checkNotNull(collectFunds, "collectFunds");
-        Utils.checkNotNull(moneyTransfer, "moneyTransfer");
-        Utils.checkNotNull(sendFunds, "sendFunds");
-        Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
-        Utils.checkNotNull(error, "error");
-        Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
-        Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
-        Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
-        Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
-        Utils.checkNotNull(fulfillment, "fulfillment");
-        this.geographicReach = geographicReach;
-        this.businessPresence = businessPresence;
-        this.pendingLitigation = pendingLitigation;
-        this.volumeShareByCustomerType = volumeShareByCustomerType;
-        this.collectFunds = collectFunds;
-        this.moneyTransfer = moneyTransfer;
-        this.sendFunds = sendFunds;
-        this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
-        this.error = error;
-        this.averageTransactionSize = averageTransactionSize;
-        this.maxTransactionSize = maxTransactionSize;
-        this.volumeByCustomerType = volumeByCustomerType;
-        this.cardVolumeDistribution = cardVolumeDistribution;
-        this.fulfillment = fulfillment;
-    }
-    
-    public UpsertUnderwritingError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of UpsertUnderwritingError. If deserialization of the response body fails,
+    * the resulting UpsertUnderwritingError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static UpsertUnderwritingError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new UpsertUnderwritingError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new UpsertUnderwritingError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> geographicReach() {
-        return geographicReach;
+        return data().flatMap(Data::geographicReach);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> businessPresence() {
-        return businessPresence;
+        return data().flatMap(Data::businessPresence);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> pendingLitigation() {
-        return pendingLitigation;
+        return data().flatMap(Data::pendingLitigation);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<VolumeShareByCustomerTypeError> volumeShareByCustomerType() {
-        return (Optional<VolumeShareByCustomerTypeError>) volumeShareByCustomerType;
+        return data().flatMap(Data::volumeShareByCustomerType);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<CollectFundsError> collectFunds() {
-        return (Optional<CollectFundsError>) collectFunds;
+        return data().flatMap(Data::collectFunds);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<MoneyTransferError> moneyTransfer() {
-        return (Optional<MoneyTransferError>) moneyTransfer;
+        return data().flatMap(Data::moneyTransfer);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<SendFundsError> sendFunds() {
-        return (Optional<SendFundsError>) sendFunds;
+        return data().flatMap(Data::sendFunds);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> averageMonthlyTransactionVolume() {
-        return averageMonthlyTransactionVolume;
+        return data().flatMap(Data::averageMonthlyTransactionVolume);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> error() {
-        return error;
+        return data().flatMap(Data::error);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> averageTransactionSize() {
-        return averageTransactionSize;
+        return data().flatMap(Data::averageTransactionSize);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> maxTransactionSize() {
-        return maxTransactionSize;
+        return data().flatMap(Data::maxTransactionSize);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<VolumeByCustomerTypeError> volumeByCustomerType() {
-        return (Optional<VolumeByCustomerTypeError>) volumeByCustomerType;
+        return data().flatMap(Data::volumeByCustomerType);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<CardVolumeDistributionError> cardVolumeDistribution() {
-        return (Optional<CardVolumeDistributionError>) cardVolumeDistribution;
+        return data().flatMap(Data::cardVolumeDistribution);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<FulfillmentDetailsError> fulfillment() {
-        return (Optional<FulfillmentDetailsError>) fulfillment;
+        return data().flatMap(Data::fulfillment);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public UpsertUnderwritingError withGeographicReach(String geographicReach) {
-        Utils.checkNotNull(geographicReach, "geographicReach");
-        this.geographicReach = Optional.ofNullable(geographicReach);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public UpsertUnderwritingError withGeographicReach(Optional<String> geographicReach) {
-        Utils.checkNotNull(geographicReach, "geographicReach");
-        this.geographicReach = geographicReach;
-        return this;
-    }
-
-    public UpsertUnderwritingError withBusinessPresence(String businessPresence) {
-        Utils.checkNotNull(businessPresence, "businessPresence");
-        this.businessPresence = Optional.ofNullable(businessPresence);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("geographicReach")
+        private Optional<String> geographicReach;
 
 
-    public UpsertUnderwritingError withBusinessPresence(Optional<String> businessPresence) {
-        Utils.checkNotNull(businessPresence, "businessPresence");
-        this.businessPresence = businessPresence;
-        return this;
-    }
-
-    public UpsertUnderwritingError withPendingLitigation(String pendingLitigation) {
-        Utils.checkNotNull(pendingLitigation, "pendingLitigation");
-        this.pendingLitigation = Optional.ofNullable(pendingLitigation);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("businessPresence")
+        private Optional<String> businessPresence;
 
 
-    public UpsertUnderwritingError withPendingLitigation(Optional<String> pendingLitigation) {
-        Utils.checkNotNull(pendingLitigation, "pendingLitigation");
-        this.pendingLitigation = pendingLitigation;
-        return this;
-    }
-
-    public UpsertUnderwritingError withVolumeShareByCustomerType(VolumeShareByCustomerTypeError volumeShareByCustomerType) {
-        Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
-        this.volumeShareByCustomerType = Optional.ofNullable(volumeShareByCustomerType);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("pendingLitigation")
+        private Optional<String> pendingLitigation;
 
 
-    public UpsertUnderwritingError withVolumeShareByCustomerType(Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType) {
-        Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
-        this.volumeShareByCustomerType = volumeShareByCustomerType;
-        return this;
-    }
-
-    public UpsertUnderwritingError withCollectFunds(CollectFundsError collectFunds) {
-        Utils.checkNotNull(collectFunds, "collectFunds");
-        this.collectFunds = Optional.ofNullable(collectFunds);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("volumeShareByCustomerType")
+        private Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType;
 
 
-    public UpsertUnderwritingError withCollectFunds(Optional<? extends CollectFundsError> collectFunds) {
-        Utils.checkNotNull(collectFunds, "collectFunds");
-        this.collectFunds = collectFunds;
-        return this;
-    }
-
-    public UpsertUnderwritingError withMoneyTransfer(MoneyTransferError moneyTransfer) {
-        Utils.checkNotNull(moneyTransfer, "moneyTransfer");
-        this.moneyTransfer = Optional.ofNullable(moneyTransfer);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("collectFunds")
+        private Optional<? extends CollectFundsError> collectFunds;
 
 
-    public UpsertUnderwritingError withMoneyTransfer(Optional<? extends MoneyTransferError> moneyTransfer) {
-        Utils.checkNotNull(moneyTransfer, "moneyTransfer");
-        this.moneyTransfer = moneyTransfer;
-        return this;
-    }
-
-    public UpsertUnderwritingError withSendFunds(SendFundsError sendFunds) {
-        Utils.checkNotNull(sendFunds, "sendFunds");
-        this.sendFunds = Optional.ofNullable(sendFunds);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("moneyTransfer")
+        private Optional<? extends MoneyTransferError> moneyTransfer;
 
 
-    public UpsertUnderwritingError withSendFunds(Optional<? extends SendFundsError> sendFunds) {
-        Utils.checkNotNull(sendFunds, "sendFunds");
-        this.sendFunds = sendFunds;
-        return this;
-    }
-
-    public UpsertUnderwritingError withAverageMonthlyTransactionVolume(String averageMonthlyTransactionVolume) {
-        Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
-        this.averageMonthlyTransactionVolume = Optional.ofNullable(averageMonthlyTransactionVolume);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("sendFunds")
+        private Optional<? extends SendFundsError> sendFunds;
 
 
-    public UpsertUnderwritingError withAverageMonthlyTransactionVolume(Optional<String> averageMonthlyTransactionVolume) {
-        Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
-        this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
-        return this;
-    }
-
-    public UpsertUnderwritingError withError(String error) {
-        Utils.checkNotNull(error, "error");
-        this.error = Optional.ofNullable(error);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("averageMonthlyTransactionVolume")
+        private Optional<String> averageMonthlyTransactionVolume;
 
 
-    public UpsertUnderwritingError withError(Optional<String> error) {
-        Utils.checkNotNull(error, "error");
-        this.error = error;
-        return this;
-    }
-
-    public UpsertUnderwritingError withAverageTransactionSize(String averageTransactionSize) {
-        Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
-        this.averageTransactionSize = Optional.ofNullable(averageTransactionSize);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("error")
+        private Optional<String> error;
 
 
-    public UpsertUnderwritingError withAverageTransactionSize(Optional<String> averageTransactionSize) {
-        Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
-        this.averageTransactionSize = averageTransactionSize;
-        return this;
-    }
-
-    public UpsertUnderwritingError withMaxTransactionSize(String maxTransactionSize) {
-        Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
-        this.maxTransactionSize = Optional.ofNullable(maxTransactionSize);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("averageTransactionSize")
+        private Optional<String> averageTransactionSize;
 
 
-    public UpsertUnderwritingError withMaxTransactionSize(Optional<String> maxTransactionSize) {
-        Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
-        this.maxTransactionSize = maxTransactionSize;
-        return this;
-    }
-
-    public UpsertUnderwritingError withVolumeByCustomerType(VolumeByCustomerTypeError volumeByCustomerType) {
-        Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
-        this.volumeByCustomerType = Optional.ofNullable(volumeByCustomerType);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("maxTransactionSize")
+        private Optional<String> maxTransactionSize;
 
 
-    public UpsertUnderwritingError withVolumeByCustomerType(Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType) {
-        Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
-        this.volumeByCustomerType = volumeByCustomerType;
-        return this;
-    }
-
-    public UpsertUnderwritingError withCardVolumeDistribution(CardVolumeDistributionError cardVolumeDistribution) {
-        Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
-        this.cardVolumeDistribution = Optional.ofNullable(cardVolumeDistribution);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("volumeByCustomerType")
+        private Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType;
 
 
-    public UpsertUnderwritingError withCardVolumeDistribution(Optional<? extends CardVolumeDistributionError> cardVolumeDistribution) {
-        Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
-        this.cardVolumeDistribution = cardVolumeDistribution;
-        return this;
-    }
-
-    public UpsertUnderwritingError withFulfillment(FulfillmentDetailsError fulfillment) {
-        Utils.checkNotNull(fulfillment, "fulfillment");
-        this.fulfillment = Optional.ofNullable(fulfillment);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("cardVolumeDistribution")
+        private Optional<? extends CardVolumeDistributionError> cardVolumeDistribution;
 
 
-    public UpsertUnderwritingError withFulfillment(Optional<? extends FulfillmentDetailsError> fulfillment) {
-        Utils.checkNotNull(fulfillment, "fulfillment");
-        this.fulfillment = fulfillment;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("fulfillment")
+        private Optional<? extends FulfillmentDetailsError> fulfillment;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("geographicReach") Optional<String> geographicReach,
+                @JsonProperty("businessPresence") Optional<String> businessPresence,
+                @JsonProperty("pendingLitigation") Optional<String> pendingLitigation,
+                @JsonProperty("volumeShareByCustomerType") Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType,
+                @JsonProperty("collectFunds") Optional<? extends CollectFundsError> collectFunds,
+                @JsonProperty("moneyTransfer") Optional<? extends MoneyTransferError> moneyTransfer,
+                @JsonProperty("sendFunds") Optional<? extends SendFundsError> sendFunds,
+                @JsonProperty("averageMonthlyTransactionVolume") Optional<String> averageMonthlyTransactionVolume,
+                @JsonProperty("error") Optional<String> error,
+                @JsonProperty("averageTransactionSize") Optional<String> averageTransactionSize,
+                @JsonProperty("maxTransactionSize") Optional<String> maxTransactionSize,
+                @JsonProperty("volumeByCustomerType") Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType,
+                @JsonProperty("cardVolumeDistribution") Optional<? extends CardVolumeDistributionError> cardVolumeDistribution,
+                @JsonProperty("fulfillment") Optional<? extends FulfillmentDetailsError> fulfillment) {
+            Utils.checkNotNull(geographicReach, "geographicReach");
+            Utils.checkNotNull(businessPresence, "businessPresence");
+            Utils.checkNotNull(pendingLitigation, "pendingLitigation");
+            Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
+            Utils.checkNotNull(collectFunds, "collectFunds");
+            Utils.checkNotNull(moneyTransfer, "moneyTransfer");
+            Utils.checkNotNull(sendFunds, "sendFunds");
+            Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
+            Utils.checkNotNull(error, "error");
+            Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
+            Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
+            Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
+            Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
+            Utils.checkNotNull(fulfillment, "fulfillment");
+            this.geographicReach = geographicReach;
+            this.businessPresence = businessPresence;
+            this.pendingLitigation = pendingLitigation;
+            this.volumeShareByCustomerType = volumeShareByCustomerType;
+            this.collectFunds = collectFunds;
+            this.moneyTransfer = moneyTransfer;
+            this.sendFunds = sendFunds;
+            this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
+            this.error = error;
+            this.averageTransactionSize = averageTransactionSize;
+            this.maxTransactionSize = maxTransactionSize;
+            this.volumeByCustomerType = volumeByCustomerType;
+            this.cardVolumeDistribution = cardVolumeDistribution;
+            this.fulfillment = fulfillment;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        UpsertUnderwritingError other = (UpsertUnderwritingError) o;
-        return 
-            Utils.enhancedDeepEquals(this.geographicReach, other.geographicReach) &&
-            Utils.enhancedDeepEquals(this.businessPresence, other.businessPresence) &&
-            Utils.enhancedDeepEquals(this.pendingLitigation, other.pendingLitigation) &&
-            Utils.enhancedDeepEquals(this.volumeShareByCustomerType, other.volumeShareByCustomerType) &&
-            Utils.enhancedDeepEquals(this.collectFunds, other.collectFunds) &&
-            Utils.enhancedDeepEquals(this.moneyTransfer, other.moneyTransfer) &&
-            Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds) &&
-            Utils.enhancedDeepEquals(this.averageMonthlyTransactionVolume, other.averageMonthlyTransactionVolume) &&
-            Utils.enhancedDeepEquals(this.error, other.error) &&
-            Utils.enhancedDeepEquals(this.averageTransactionSize, other.averageTransactionSize) &&
-            Utils.enhancedDeepEquals(this.maxTransactionSize, other.maxTransactionSize) &&
-            Utils.enhancedDeepEquals(this.volumeByCustomerType, other.volumeByCustomerType) &&
-            Utils.enhancedDeepEquals(this.cardVolumeDistribution, other.cardVolumeDistribution) &&
-            Utils.enhancedDeepEquals(this.fulfillment, other.fulfillment);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            geographicReach, businessPresence, pendingLitigation,
-            volumeShareByCustomerType, collectFunds, moneyTransfer,
-            sendFunds, averageMonthlyTransactionVolume, error,
-            averageTransactionSize, maxTransactionSize, volumeByCustomerType,
-            cardVolumeDistribution, fulfillment);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(UpsertUnderwritingError.class,
-                "geographicReach", geographicReach,
-                "businessPresence", businessPresence,
-                "pendingLitigation", pendingLitigation,
-                "volumeShareByCustomerType", volumeShareByCustomerType,
-                "collectFunds", collectFunds,
-                "moneyTransfer", moneyTransfer,
-                "sendFunds", sendFunds,
-                "averageMonthlyTransactionVolume", averageMonthlyTransactionVolume,
-                "error", error,
-                "averageTransactionSize", averageTransactionSize,
-                "maxTransactionSize", maxTransactionSize,
-                "volumeByCustomerType", volumeByCustomerType,
-                "cardVolumeDistribution", cardVolumeDistribution,
-                "fulfillment", fulfillment);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> geographicReach() {
+            return geographicReach;
+        }
 
-        private Optional<String> geographicReach = Optional.empty();
+        @JsonIgnore
+        public Optional<String> businessPresence() {
+            return businessPresence;
+        }
 
-        private Optional<String> businessPresence = Optional.empty();
+        @JsonIgnore
+        public Optional<String> pendingLitigation() {
+            return pendingLitigation;
+        }
 
-        private Optional<String> pendingLitigation = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<VolumeShareByCustomerTypeError> volumeShareByCustomerType() {
+            return (Optional<VolumeShareByCustomerTypeError>) volumeShareByCustomerType;
+        }
 
-        private Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CollectFundsError> collectFunds() {
+            return (Optional<CollectFundsError>) collectFunds;
+        }
 
-        private Optional<? extends CollectFundsError> collectFunds = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<MoneyTransferError> moneyTransfer() {
+            return (Optional<MoneyTransferError>) moneyTransfer;
+        }
 
-        private Optional<? extends MoneyTransferError> moneyTransfer = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<SendFundsError> sendFunds() {
+            return (Optional<SendFundsError>) sendFunds;
+        }
 
-        private Optional<? extends SendFundsError> sendFunds = Optional.empty();
+        @JsonIgnore
+        public Optional<String> averageMonthlyTransactionVolume() {
+            return averageMonthlyTransactionVolume;
+        }
 
-        private Optional<String> averageMonthlyTransactionVolume = Optional.empty();
+        @JsonIgnore
+        public Optional<String> error() {
+            return error;
+        }
 
-        private Optional<String> error = Optional.empty();
+        @JsonIgnore
+        public Optional<String> averageTransactionSize() {
+            return averageTransactionSize;
+        }
 
-        private Optional<String> averageTransactionSize = Optional.empty();
+        @JsonIgnore
+        public Optional<String> maxTransactionSize() {
+            return maxTransactionSize;
+        }
 
-        private Optional<String> maxTransactionSize = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<VolumeByCustomerTypeError> volumeByCustomerType() {
+            return (Optional<VolumeByCustomerTypeError>) volumeByCustomerType;
+        }
 
-        private Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<CardVolumeDistributionError> cardVolumeDistribution() {
+            return (Optional<CardVolumeDistributionError>) cardVolumeDistribution;
+        }
 
-        private Optional<? extends CardVolumeDistributionError> cardVolumeDistribution = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<FulfillmentDetailsError> fulfillment() {
+            return (Optional<FulfillmentDetailsError>) fulfillment;
+        }
 
-        private Optional<? extends FulfillmentDetailsError> fulfillment = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder geographicReach(String geographicReach) {
+        public Data withGeographicReach(String geographicReach) {
             Utils.checkNotNull(geographicReach, "geographicReach");
             this.geographicReach = Optional.ofNullable(geographicReach);
             return this;
         }
 
-        public Builder geographicReach(Optional<String> geographicReach) {
+
+        public Data withGeographicReach(Optional<String> geographicReach) {
             Utils.checkNotNull(geographicReach, "geographicReach");
             this.geographicReach = geographicReach;
             return this;
         }
 
-
-        public Builder businessPresence(String businessPresence) {
+        public Data withBusinessPresence(String businessPresence) {
             Utils.checkNotNull(businessPresence, "businessPresence");
             this.businessPresence = Optional.ofNullable(businessPresence);
             return this;
         }
 
-        public Builder businessPresence(Optional<String> businessPresence) {
+
+        public Data withBusinessPresence(Optional<String> businessPresence) {
             Utils.checkNotNull(businessPresence, "businessPresence");
             this.businessPresence = businessPresence;
             return this;
         }
 
-
-        public Builder pendingLitigation(String pendingLitigation) {
+        public Data withPendingLitigation(String pendingLitigation) {
             Utils.checkNotNull(pendingLitigation, "pendingLitigation");
             this.pendingLitigation = Optional.ofNullable(pendingLitigation);
             return this;
         }
 
-        public Builder pendingLitigation(Optional<String> pendingLitigation) {
+
+        public Data withPendingLitigation(Optional<String> pendingLitigation) {
             Utils.checkNotNull(pendingLitigation, "pendingLitigation");
             this.pendingLitigation = pendingLitigation;
             return this;
         }
 
-
-        public Builder volumeShareByCustomerType(VolumeShareByCustomerTypeError volumeShareByCustomerType) {
+        public Data withVolumeShareByCustomerType(VolumeShareByCustomerTypeError volumeShareByCustomerType) {
             Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
             this.volumeShareByCustomerType = Optional.ofNullable(volumeShareByCustomerType);
             return this;
         }
 
-        public Builder volumeShareByCustomerType(Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType) {
+
+        public Data withVolumeShareByCustomerType(Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType) {
             Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
             this.volumeShareByCustomerType = volumeShareByCustomerType;
             return this;
         }
 
-
-        public Builder collectFunds(CollectFundsError collectFunds) {
+        public Data withCollectFunds(CollectFundsError collectFunds) {
             Utils.checkNotNull(collectFunds, "collectFunds");
             this.collectFunds = Optional.ofNullable(collectFunds);
             return this;
         }
 
-        public Builder collectFunds(Optional<? extends CollectFundsError> collectFunds) {
+
+        public Data withCollectFunds(Optional<? extends CollectFundsError> collectFunds) {
             Utils.checkNotNull(collectFunds, "collectFunds");
             this.collectFunds = collectFunds;
             return this;
         }
 
-
-        public Builder moneyTransfer(MoneyTransferError moneyTransfer) {
+        public Data withMoneyTransfer(MoneyTransferError moneyTransfer) {
             Utils.checkNotNull(moneyTransfer, "moneyTransfer");
             this.moneyTransfer = Optional.ofNullable(moneyTransfer);
             return this;
         }
 
-        public Builder moneyTransfer(Optional<? extends MoneyTransferError> moneyTransfer) {
+
+        public Data withMoneyTransfer(Optional<? extends MoneyTransferError> moneyTransfer) {
             Utils.checkNotNull(moneyTransfer, "moneyTransfer");
             this.moneyTransfer = moneyTransfer;
             return this;
         }
 
-
-        public Builder sendFunds(SendFundsError sendFunds) {
+        public Data withSendFunds(SendFundsError sendFunds) {
             Utils.checkNotNull(sendFunds, "sendFunds");
             this.sendFunds = Optional.ofNullable(sendFunds);
             return this;
         }
 
-        public Builder sendFunds(Optional<? extends SendFundsError> sendFunds) {
+
+        public Data withSendFunds(Optional<? extends SendFundsError> sendFunds) {
             Utils.checkNotNull(sendFunds, "sendFunds");
             this.sendFunds = sendFunds;
             return this;
         }
 
-
-        public Builder averageMonthlyTransactionVolume(String averageMonthlyTransactionVolume) {
+        public Data withAverageMonthlyTransactionVolume(String averageMonthlyTransactionVolume) {
             Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
             this.averageMonthlyTransactionVolume = Optional.ofNullable(averageMonthlyTransactionVolume);
             return this;
         }
 
-        public Builder averageMonthlyTransactionVolume(Optional<String> averageMonthlyTransactionVolume) {
+
+        public Data withAverageMonthlyTransactionVolume(Optional<String> averageMonthlyTransactionVolume) {
             Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
             this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
             return this;
         }
 
-
-        public Builder error(String error) {
+        public Data withError(String error) {
             Utils.checkNotNull(error, "error");
             this.error = Optional.ofNullable(error);
             return this;
         }
 
-        public Builder error(Optional<String> error) {
+
+        public Data withError(Optional<String> error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
 
-
-        public Builder averageTransactionSize(String averageTransactionSize) {
+        public Data withAverageTransactionSize(String averageTransactionSize) {
             Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
             this.averageTransactionSize = Optional.ofNullable(averageTransactionSize);
             return this;
         }
 
-        public Builder averageTransactionSize(Optional<String> averageTransactionSize) {
+
+        public Data withAverageTransactionSize(Optional<String> averageTransactionSize) {
             Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
             this.averageTransactionSize = averageTransactionSize;
             return this;
         }
 
-
-        public Builder maxTransactionSize(String maxTransactionSize) {
+        public Data withMaxTransactionSize(String maxTransactionSize) {
             Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
             this.maxTransactionSize = Optional.ofNullable(maxTransactionSize);
             return this;
         }
 
-        public Builder maxTransactionSize(Optional<String> maxTransactionSize) {
+
+        public Data withMaxTransactionSize(Optional<String> maxTransactionSize) {
             Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
             this.maxTransactionSize = maxTransactionSize;
             return this;
         }
 
-
-        public Builder volumeByCustomerType(VolumeByCustomerTypeError volumeByCustomerType) {
+        public Data withVolumeByCustomerType(VolumeByCustomerTypeError volumeByCustomerType) {
             Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
             this.volumeByCustomerType = Optional.ofNullable(volumeByCustomerType);
             return this;
         }
 
-        public Builder volumeByCustomerType(Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType) {
+
+        public Data withVolumeByCustomerType(Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType) {
             Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
             this.volumeByCustomerType = volumeByCustomerType;
             return this;
         }
 
-
-        public Builder cardVolumeDistribution(CardVolumeDistributionError cardVolumeDistribution) {
+        public Data withCardVolumeDistribution(CardVolumeDistributionError cardVolumeDistribution) {
             Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
             this.cardVolumeDistribution = Optional.ofNullable(cardVolumeDistribution);
             return this;
         }
 
-        public Builder cardVolumeDistribution(Optional<? extends CardVolumeDistributionError> cardVolumeDistribution) {
+
+        public Data withCardVolumeDistribution(Optional<? extends CardVolumeDistributionError> cardVolumeDistribution) {
             Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
             this.cardVolumeDistribution = cardVolumeDistribution;
             return this;
         }
 
-
-        public Builder fulfillment(FulfillmentDetailsError fulfillment) {
+        public Data withFulfillment(FulfillmentDetailsError fulfillment) {
             Utils.checkNotNull(fulfillment, "fulfillment");
             this.fulfillment = Optional.ofNullable(fulfillment);
             return this;
         }
 
-        public Builder fulfillment(Optional<? extends FulfillmentDetailsError> fulfillment) {
+
+        public Data withFulfillment(Optional<? extends FulfillmentDetailsError> fulfillment) {
             Utils.checkNotNull(fulfillment, "fulfillment");
             this.fulfillment = fulfillment;
             return this;
         }
 
-        public UpsertUnderwritingError build() {
-
-            return new UpsertUnderwritingError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.geographicReach, other.geographicReach) &&
+                Utils.enhancedDeepEquals(this.businessPresence, other.businessPresence) &&
+                Utils.enhancedDeepEquals(this.pendingLitigation, other.pendingLitigation) &&
+                Utils.enhancedDeepEquals(this.volumeShareByCustomerType, other.volumeShareByCustomerType) &&
+                Utils.enhancedDeepEquals(this.collectFunds, other.collectFunds) &&
+                Utils.enhancedDeepEquals(this.moneyTransfer, other.moneyTransfer) &&
+                Utils.enhancedDeepEquals(this.sendFunds, other.sendFunds) &&
+                Utils.enhancedDeepEquals(this.averageMonthlyTransactionVolume, other.averageMonthlyTransactionVolume) &&
+                Utils.enhancedDeepEquals(this.error, other.error) &&
+                Utils.enhancedDeepEquals(this.averageTransactionSize, other.averageTransactionSize) &&
+                Utils.enhancedDeepEquals(this.maxTransactionSize, other.maxTransactionSize) &&
+                Utils.enhancedDeepEquals(this.volumeByCustomerType, other.volumeByCustomerType) &&
+                Utils.enhancedDeepEquals(this.cardVolumeDistribution, other.cardVolumeDistribution) &&
+                Utils.enhancedDeepEquals(this.fulfillment, other.fulfillment);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 geographicReach, businessPresence, pendingLitigation,
                 volumeShareByCustomerType, collectFunds, moneyTransfer,
                 sendFunds, averageMonthlyTransactionVolume, error,
                 averageTransactionSize, maxTransactionSize, volumeByCustomerType,
                 cardVolumeDistribution, fulfillment);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "geographicReach", geographicReach,
+                    "businessPresence", businessPresence,
+                    "pendingLitigation", pendingLitigation,
+                    "volumeShareByCustomerType", volumeShareByCustomerType,
+                    "collectFunds", collectFunds,
+                    "moneyTransfer", moneyTransfer,
+                    "sendFunds", sendFunds,
+                    "averageMonthlyTransactionVolume", averageMonthlyTransactionVolume,
+                    "error", error,
+                    "averageTransactionSize", averageTransactionSize,
+                    "maxTransactionSize", maxTransactionSize,
+                    "volumeByCustomerType", volumeByCustomerType,
+                    "cardVolumeDistribution", cardVolumeDistribution,
+                    "fulfillment", fulfillment);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> geographicReach = Optional.empty();
+
+            private Optional<String> businessPresence = Optional.empty();
+
+            private Optional<String> pendingLitigation = Optional.empty();
+
+            private Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType = Optional.empty();
+
+            private Optional<? extends CollectFundsError> collectFunds = Optional.empty();
+
+            private Optional<? extends MoneyTransferError> moneyTransfer = Optional.empty();
+
+            private Optional<? extends SendFundsError> sendFunds = Optional.empty();
+
+            private Optional<String> averageMonthlyTransactionVolume = Optional.empty();
+
+            private Optional<String> error = Optional.empty();
+
+            private Optional<String> averageTransactionSize = Optional.empty();
+
+            private Optional<String> maxTransactionSize = Optional.empty();
+
+            private Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType = Optional.empty();
+
+            private Optional<? extends CardVolumeDistributionError> cardVolumeDistribution = Optional.empty();
+
+            private Optional<? extends FulfillmentDetailsError> fulfillment = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder geographicReach(String geographicReach) {
+                Utils.checkNotNull(geographicReach, "geographicReach");
+                this.geographicReach = Optional.ofNullable(geographicReach);
+                return this;
+            }
+
+            public Builder geographicReach(Optional<String> geographicReach) {
+                Utils.checkNotNull(geographicReach, "geographicReach");
+                this.geographicReach = geographicReach;
+                return this;
+            }
+
+
+            public Builder businessPresence(String businessPresence) {
+                Utils.checkNotNull(businessPresence, "businessPresence");
+                this.businessPresence = Optional.ofNullable(businessPresence);
+                return this;
+            }
+
+            public Builder businessPresence(Optional<String> businessPresence) {
+                Utils.checkNotNull(businessPresence, "businessPresence");
+                this.businessPresence = businessPresence;
+                return this;
+            }
+
+
+            public Builder pendingLitigation(String pendingLitigation) {
+                Utils.checkNotNull(pendingLitigation, "pendingLitigation");
+                this.pendingLitigation = Optional.ofNullable(pendingLitigation);
+                return this;
+            }
+
+            public Builder pendingLitigation(Optional<String> pendingLitigation) {
+                Utils.checkNotNull(pendingLitigation, "pendingLitigation");
+                this.pendingLitigation = pendingLitigation;
+                return this;
+            }
+
+
+            public Builder volumeShareByCustomerType(VolumeShareByCustomerTypeError volumeShareByCustomerType) {
+                Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
+                this.volumeShareByCustomerType = Optional.ofNullable(volumeShareByCustomerType);
+                return this;
+            }
+
+            public Builder volumeShareByCustomerType(Optional<? extends VolumeShareByCustomerTypeError> volumeShareByCustomerType) {
+                Utils.checkNotNull(volumeShareByCustomerType, "volumeShareByCustomerType");
+                this.volumeShareByCustomerType = volumeShareByCustomerType;
+                return this;
+            }
+
+
+            public Builder collectFunds(CollectFundsError collectFunds) {
+                Utils.checkNotNull(collectFunds, "collectFunds");
+                this.collectFunds = Optional.ofNullable(collectFunds);
+                return this;
+            }
+
+            public Builder collectFunds(Optional<? extends CollectFundsError> collectFunds) {
+                Utils.checkNotNull(collectFunds, "collectFunds");
+                this.collectFunds = collectFunds;
+                return this;
+            }
+
+
+            public Builder moneyTransfer(MoneyTransferError moneyTransfer) {
+                Utils.checkNotNull(moneyTransfer, "moneyTransfer");
+                this.moneyTransfer = Optional.ofNullable(moneyTransfer);
+                return this;
+            }
+
+            public Builder moneyTransfer(Optional<? extends MoneyTransferError> moneyTransfer) {
+                Utils.checkNotNull(moneyTransfer, "moneyTransfer");
+                this.moneyTransfer = moneyTransfer;
+                return this;
+            }
+
+
+            public Builder sendFunds(SendFundsError sendFunds) {
+                Utils.checkNotNull(sendFunds, "sendFunds");
+                this.sendFunds = Optional.ofNullable(sendFunds);
+                return this;
+            }
+
+            public Builder sendFunds(Optional<? extends SendFundsError> sendFunds) {
+                Utils.checkNotNull(sendFunds, "sendFunds");
+                this.sendFunds = sendFunds;
+                return this;
+            }
+
+
+            public Builder averageMonthlyTransactionVolume(String averageMonthlyTransactionVolume) {
+                Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
+                this.averageMonthlyTransactionVolume = Optional.ofNullable(averageMonthlyTransactionVolume);
+                return this;
+            }
+
+            public Builder averageMonthlyTransactionVolume(Optional<String> averageMonthlyTransactionVolume) {
+                Utils.checkNotNull(averageMonthlyTransactionVolume, "averageMonthlyTransactionVolume");
+                this.averageMonthlyTransactionVolume = averageMonthlyTransactionVolume;
+                return this;
+            }
+
+
+            public Builder error(String error) {
+                Utils.checkNotNull(error, "error");
+                this.error = Optional.ofNullable(error);
+                return this;
+            }
+
+            public Builder error(Optional<String> error) {
+                Utils.checkNotNull(error, "error");
+                this.error = error;
+                return this;
+            }
+
+
+            public Builder averageTransactionSize(String averageTransactionSize) {
+                Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
+                this.averageTransactionSize = Optional.ofNullable(averageTransactionSize);
+                return this;
+            }
+
+            public Builder averageTransactionSize(Optional<String> averageTransactionSize) {
+                Utils.checkNotNull(averageTransactionSize, "averageTransactionSize");
+                this.averageTransactionSize = averageTransactionSize;
+                return this;
+            }
+
+
+            public Builder maxTransactionSize(String maxTransactionSize) {
+                Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
+                this.maxTransactionSize = Optional.ofNullable(maxTransactionSize);
+                return this;
+            }
+
+            public Builder maxTransactionSize(Optional<String> maxTransactionSize) {
+                Utils.checkNotNull(maxTransactionSize, "maxTransactionSize");
+                this.maxTransactionSize = maxTransactionSize;
+                return this;
+            }
+
+
+            public Builder volumeByCustomerType(VolumeByCustomerTypeError volumeByCustomerType) {
+                Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
+                this.volumeByCustomerType = Optional.ofNullable(volumeByCustomerType);
+                return this;
+            }
+
+            public Builder volumeByCustomerType(Optional<? extends VolumeByCustomerTypeError> volumeByCustomerType) {
+                Utils.checkNotNull(volumeByCustomerType, "volumeByCustomerType");
+                this.volumeByCustomerType = volumeByCustomerType;
+                return this;
+            }
+
+
+            public Builder cardVolumeDistribution(CardVolumeDistributionError cardVolumeDistribution) {
+                Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
+                this.cardVolumeDistribution = Optional.ofNullable(cardVolumeDistribution);
+                return this;
+            }
+
+            public Builder cardVolumeDistribution(Optional<? extends CardVolumeDistributionError> cardVolumeDistribution) {
+                Utils.checkNotNull(cardVolumeDistribution, "cardVolumeDistribution");
+                this.cardVolumeDistribution = cardVolumeDistribution;
+                return this;
+            }
+
+
+            public Builder fulfillment(FulfillmentDetailsError fulfillment) {
+                Utils.checkNotNull(fulfillment, "fulfillment");
+                this.fulfillment = Optional.ofNullable(fulfillment);
+                return this;
+            }
+
+            public Builder fulfillment(Optional<? extends FulfillmentDetailsError> fulfillment) {
+                Utils.checkNotNull(fulfillment, "fulfillment");
+                this.fulfillment = fulfillment;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    geographicReach, businessPresence, pendingLitigation,
+                    volumeShareByCustomerType, collectFunds, moneyTransfer,
+                    sendFunds, averageMonthlyTransactionVolume, error,
+                    averageTransactionSize, maxTransactionSize, volumeByCustomerType,
+                    cardVolumeDistribution, fulfillment);
+            }
+
+        }
     }
+
 }
 

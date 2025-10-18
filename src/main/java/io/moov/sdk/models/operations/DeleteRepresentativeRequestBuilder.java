@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.DeleteRepresentative;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class DeleteRepresentativeRequestBuilder {
@@ -44,7 +43,7 @@ public class DeleteRepresentativeRequestBuilder {
         return request;
     }
 
-    public DeleteRepresentativeResponse call() throws Exception {
+    public DeleteRepresentativeResponse call() {
         
         RequestOperation<DeleteRepresentativeRequest, DeleteRepresentativeResponse> operation
               = new DeleteRepresentative.Sync(sdkConfiguration, _headers);

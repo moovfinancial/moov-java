@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetTermsOfServiceToken;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -57,7 +56,7 @@ public class GetTermsOfServiceTokenRequestBuilder {
         return request;
     }
 
-    public GetTermsOfServiceTokenResponse call() throws Exception {
+    public GetTermsOfServiceTokenResponse call() {
         
         RequestOperation<GetTermsOfServiceTokenRequest, GetTermsOfServiceTokenResponse> operation
               = new GetTermsOfServiceToken.Sync(sdkConfiguration, _headers);

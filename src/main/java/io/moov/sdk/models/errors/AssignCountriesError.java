@@ -7,91 +7,146 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Map;
-
+import java.util.Optional;
 
 @SuppressWarnings("serial")
-public class AssignCountriesError extends RuntimeException {
+public class AssignCountriesError extends MoovError {
 
-    @JsonProperty("countries")
-    private Map<String, String> countries;
+    @Nullable
+    private final Data data;
 
-    @JsonCreator
+    @Nullable
+    private final Throwable deserializationException;
+
     public AssignCountriesError(
-            @JsonProperty("countries") Map<String, String> countries) {
-        super("API error occurred");
-        countries = Utils.emptyMapIfNull(countries);
-        Utils.checkNotNull(countries, "countries");
-        this.countries = countries;
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
-    public Map<String, String> countries() {
-        return countries;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-
-    public AssignCountriesError withCountries(Map<String, String> countries) {
-        Utils.checkNotNull(countries, "countries");
-        this.countries = countries;
-        return this;
-    }
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+    /**
+    * Parse a response into an instance of AssignCountriesError. If deserialization of the response body fails,
+    * the resulting AssignCountriesError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static AssignCountriesError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new AssignCountriesError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new AssignCountriesError(response.statusCode(), null, response, null, e);
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        AssignCountriesError other = (AssignCountriesError) o;
-        return 
-            Utils.enhancedDeepEquals(this.countries, other.countries);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            countries);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(AssignCountriesError.class,
-                "countries", countries);
     }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    @Deprecated
+    public Optional<Map<String, String>> countries() {
+        return data().map(Data::countries);
+    }
 
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
+    }
+
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
+    }
+
+    public static class Data {
+
+        @JsonProperty("countries")
         private Map<String, String> countries;
 
-        private Builder() {
-          // force use of static builder() method
+        @JsonCreator
+        public Data(
+                @JsonProperty("countries") Map<String, String> countries) {
+            countries = Utils.emptyMapIfNull(countries);
+            Utils.checkNotNull(countries, "countries");
+            this.countries = countries;
+        }
+
+        @JsonIgnore
+        public Map<String, String> countries() {
+            return countries;
+        }
+
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder countries(Map<String, String> countries) {
+        public Data withCountries(Map<String, String> countries) {
             Utils.checkNotNull(countries, "countries");
             this.countries = countries;
             return this;
         }
 
-        public AssignCountriesError build() {
-
-            return new AssignCountriesError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.countries, other.countries);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 countries);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "countries", countries);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Map<String, String> countries;
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder countries(Map<String, String> countries) {
+                Utils.checkNotNull(countries, "countries");
+                this.countries = countries;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    countries);
+            }
+
+        }
     }
+
 }
 

@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListTicketMessages;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class ListTicketMessagesRequestBuilder {
@@ -44,7 +43,7 @@ public class ListTicketMessagesRequestBuilder {
         return request;
     }
 
-    public ListTicketMessagesResponse call() throws Exception {
+    public ListTicketMessagesResponse call() {
         
         RequestOperation<ListTicketMessagesRequest, ListTicketMessagesResponse> operation
               = new ListTicketMessages.Sync(sdkConfiguration, _headers);

@@ -9,287 +9,360 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class OnboardingInviteError extends RuntimeException {
+public class OnboardingInviteError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("returnURL")
-    private Optional<String> returnURL;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("termsOfServiceURL")
-    private Optional<String> termsOfServiceURL;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("scopes")
-    private Optional<? extends Map<String, String>> scopes;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("capabilities")
-    private Optional<? extends Map<String, String>> capabilities;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("feePlanCodes")
-    private Optional<? extends Map<String, String>> feePlanCodes;
-
-    @JsonCreator
     public OnboardingInviteError(
-            @JsonProperty("returnURL") Optional<String> returnURL,
-            @JsonProperty("termsOfServiceURL") Optional<String> termsOfServiceURL,
-            @JsonProperty("scopes") Optional<? extends Map<String, String>> scopes,
-            @JsonProperty("capabilities") Optional<? extends Map<String, String>> capabilities,
-            @JsonProperty("feePlanCodes") Optional<? extends Map<String, String>> feePlanCodes) {
-        super("API error occurred");
-        Utils.checkNotNull(returnURL, "returnURL");
-        Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
-        Utils.checkNotNull(scopes, "scopes");
-        Utils.checkNotNull(capabilities, "capabilities");
-        Utils.checkNotNull(feePlanCodes, "feePlanCodes");
-        this.returnURL = returnURL;
-        this.termsOfServiceURL = termsOfServiceURL;
-        this.scopes = scopes;
-        this.capabilities = capabilities;
-        this.feePlanCodes = feePlanCodes;
-    }
-    
-    public OnboardingInviteError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of OnboardingInviteError. If deserialization of the response body fails,
+    * the resulting OnboardingInviteError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static OnboardingInviteError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new OnboardingInviteError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new OnboardingInviteError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> returnURL() {
-        return returnURL;
+        return data().flatMap(Data::returnURL);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> termsOfServiceURL() {
-        return termsOfServiceURL;
+        return data().flatMap(Data::termsOfServiceURL);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<Map<String, String>> scopes() {
-        return (Optional<Map<String, String>>) scopes;
+        return data().flatMap(Data::scopes);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<Map<String, String>> capabilities() {
-        return (Optional<Map<String, String>>) capabilities;
+        return data().flatMap(Data::capabilities);
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
+    @Deprecated
     public Optional<Map<String, String>> feePlanCodes() {
-        return (Optional<Map<String, String>>) feePlanCodes;
+        return data().flatMap(Data::feePlanCodes);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public OnboardingInviteError withReturnURL(String returnURL) {
-        Utils.checkNotNull(returnURL, "returnURL");
-        this.returnURL = Optional.ofNullable(returnURL);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public OnboardingInviteError withReturnURL(Optional<String> returnURL) {
-        Utils.checkNotNull(returnURL, "returnURL");
-        this.returnURL = returnURL;
-        return this;
-    }
-
-    public OnboardingInviteError withTermsOfServiceURL(String termsOfServiceURL) {
-        Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
-        this.termsOfServiceURL = Optional.ofNullable(termsOfServiceURL);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("returnURL")
+        private Optional<String> returnURL;
 
 
-    public OnboardingInviteError withTermsOfServiceURL(Optional<String> termsOfServiceURL) {
-        Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
-        this.termsOfServiceURL = termsOfServiceURL;
-        return this;
-    }
-
-    public OnboardingInviteError withScopes(Map<String, String> scopes) {
-        Utils.checkNotNull(scopes, "scopes");
-        this.scopes = Optional.ofNullable(scopes);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("termsOfServiceURL")
+        private Optional<String> termsOfServiceURL;
 
 
-    public OnboardingInviteError withScopes(Optional<? extends Map<String, String>> scopes) {
-        Utils.checkNotNull(scopes, "scopes");
-        this.scopes = scopes;
-        return this;
-    }
-
-    public OnboardingInviteError withCapabilities(Map<String, String> capabilities) {
-        Utils.checkNotNull(capabilities, "capabilities");
-        this.capabilities = Optional.ofNullable(capabilities);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("scopes")
+        private Optional<? extends Map<String, String>> scopes;
 
 
-    public OnboardingInviteError withCapabilities(Optional<? extends Map<String, String>> capabilities) {
-        Utils.checkNotNull(capabilities, "capabilities");
-        this.capabilities = capabilities;
-        return this;
-    }
-
-    public OnboardingInviteError withFeePlanCodes(Map<String, String> feePlanCodes) {
-        Utils.checkNotNull(feePlanCodes, "feePlanCodes");
-        this.feePlanCodes = Optional.ofNullable(feePlanCodes);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("capabilities")
+        private Optional<? extends Map<String, String>> capabilities;
 
 
-    public OnboardingInviteError withFeePlanCodes(Optional<? extends Map<String, String>> feePlanCodes) {
-        Utils.checkNotNull(feePlanCodes, "feePlanCodes");
-        this.feePlanCodes = feePlanCodes;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("feePlanCodes")
+        private Optional<? extends Map<String, String>> feePlanCodes;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("returnURL") Optional<String> returnURL,
+                @JsonProperty("termsOfServiceURL") Optional<String> termsOfServiceURL,
+                @JsonProperty("scopes") Optional<? extends Map<String, String>> scopes,
+                @JsonProperty("capabilities") Optional<? extends Map<String, String>> capabilities,
+                @JsonProperty("feePlanCodes") Optional<? extends Map<String, String>> feePlanCodes) {
+            Utils.checkNotNull(returnURL, "returnURL");
+            Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
+            Utils.checkNotNull(scopes, "scopes");
+            Utils.checkNotNull(capabilities, "capabilities");
+            Utils.checkNotNull(feePlanCodes, "feePlanCodes");
+            this.returnURL = returnURL;
+            this.termsOfServiceURL = termsOfServiceURL;
+            this.scopes = scopes;
+            this.capabilities = capabilities;
+            this.feePlanCodes = feePlanCodes;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
-        OnboardingInviteError other = (OnboardingInviteError) o;
-        return 
-            Utils.enhancedDeepEquals(this.returnURL, other.returnURL) &&
-            Utils.enhancedDeepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
-            Utils.enhancedDeepEquals(this.scopes, other.scopes) &&
-            Utils.enhancedDeepEquals(this.capabilities, other.capabilities) &&
-            Utils.enhancedDeepEquals(this.feePlanCodes, other.feePlanCodes);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            returnURL, termsOfServiceURL, scopes,
-            capabilities, feePlanCodes);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(OnboardingInviteError.class,
-                "returnURL", returnURL,
-                "termsOfServiceURL", termsOfServiceURL,
-                "scopes", scopes,
-                "capabilities", capabilities,
-                "feePlanCodes", feePlanCodes);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> returnURL() {
+            return returnURL;
+        }
 
-        private Optional<String> returnURL = Optional.empty();
+        @JsonIgnore
+        public Optional<String> termsOfServiceURL() {
+            return termsOfServiceURL;
+        }
 
-        private Optional<String> termsOfServiceURL = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<Map<String, String>> scopes() {
+            return (Optional<Map<String, String>>) scopes;
+        }
 
-        private Optional<? extends Map<String, String>> scopes = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<Map<String, String>> capabilities() {
+            return (Optional<Map<String, String>>) capabilities;
+        }
 
-        private Optional<? extends Map<String, String>> capabilities = Optional.empty();
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<Map<String, String>> feePlanCodes() {
+            return (Optional<Map<String, String>>) feePlanCodes;
+        }
 
-        private Optional<? extends Map<String, String>> feePlanCodes = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder returnURL(String returnURL) {
+        public Data withReturnURL(String returnURL) {
             Utils.checkNotNull(returnURL, "returnURL");
             this.returnURL = Optional.ofNullable(returnURL);
             return this;
         }
 
-        public Builder returnURL(Optional<String> returnURL) {
+
+        public Data withReturnURL(Optional<String> returnURL) {
             Utils.checkNotNull(returnURL, "returnURL");
             this.returnURL = returnURL;
             return this;
         }
 
-
-        public Builder termsOfServiceURL(String termsOfServiceURL) {
+        public Data withTermsOfServiceURL(String termsOfServiceURL) {
             Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
             this.termsOfServiceURL = Optional.ofNullable(termsOfServiceURL);
             return this;
         }
 
-        public Builder termsOfServiceURL(Optional<String> termsOfServiceURL) {
+
+        public Data withTermsOfServiceURL(Optional<String> termsOfServiceURL) {
             Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
             this.termsOfServiceURL = termsOfServiceURL;
             return this;
         }
 
-
-        public Builder scopes(Map<String, String> scopes) {
+        public Data withScopes(Map<String, String> scopes) {
             Utils.checkNotNull(scopes, "scopes");
             this.scopes = Optional.ofNullable(scopes);
             return this;
         }
 
-        public Builder scopes(Optional<? extends Map<String, String>> scopes) {
+
+        public Data withScopes(Optional<? extends Map<String, String>> scopes) {
             Utils.checkNotNull(scopes, "scopes");
             this.scopes = scopes;
             return this;
         }
 
-
-        public Builder capabilities(Map<String, String> capabilities) {
+        public Data withCapabilities(Map<String, String> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = Optional.ofNullable(capabilities);
             return this;
         }
 
-        public Builder capabilities(Optional<? extends Map<String, String>> capabilities) {
+
+        public Data withCapabilities(Optional<? extends Map<String, String>> capabilities) {
             Utils.checkNotNull(capabilities, "capabilities");
             this.capabilities = capabilities;
             return this;
         }
 
-
-        public Builder feePlanCodes(Map<String, String> feePlanCodes) {
+        public Data withFeePlanCodes(Map<String, String> feePlanCodes) {
             Utils.checkNotNull(feePlanCodes, "feePlanCodes");
             this.feePlanCodes = Optional.ofNullable(feePlanCodes);
             return this;
         }
 
-        public Builder feePlanCodes(Optional<? extends Map<String, String>> feePlanCodes) {
+
+        public Data withFeePlanCodes(Optional<? extends Map<String, String>> feePlanCodes) {
             Utils.checkNotNull(feePlanCodes, "feePlanCodes");
             this.feePlanCodes = feePlanCodes;
             return this;
         }
 
-        public OnboardingInviteError build() {
-
-            return new OnboardingInviteError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.returnURL, other.returnURL) &&
+                Utils.enhancedDeepEquals(this.termsOfServiceURL, other.termsOfServiceURL) &&
+                Utils.enhancedDeepEquals(this.scopes, other.scopes) &&
+                Utils.enhancedDeepEquals(this.capabilities, other.capabilities) &&
+                Utils.enhancedDeepEquals(this.feePlanCodes, other.feePlanCodes);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 returnURL, termsOfServiceURL, scopes,
                 capabilities, feePlanCodes);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "returnURL", returnURL,
+                    "termsOfServiceURL", termsOfServiceURL,
+                    "scopes", scopes,
+                    "capabilities", capabilities,
+                    "feePlanCodes", feePlanCodes);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> returnURL = Optional.empty();
+
+            private Optional<String> termsOfServiceURL = Optional.empty();
+
+            private Optional<? extends Map<String, String>> scopes = Optional.empty();
+
+            private Optional<? extends Map<String, String>> capabilities = Optional.empty();
+
+            private Optional<? extends Map<String, String>> feePlanCodes = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder returnURL(String returnURL) {
+                Utils.checkNotNull(returnURL, "returnURL");
+                this.returnURL = Optional.ofNullable(returnURL);
+                return this;
+            }
+
+            public Builder returnURL(Optional<String> returnURL) {
+                Utils.checkNotNull(returnURL, "returnURL");
+                this.returnURL = returnURL;
+                return this;
+            }
+
+
+            public Builder termsOfServiceURL(String termsOfServiceURL) {
+                Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
+                this.termsOfServiceURL = Optional.ofNullable(termsOfServiceURL);
+                return this;
+            }
+
+            public Builder termsOfServiceURL(Optional<String> termsOfServiceURL) {
+                Utils.checkNotNull(termsOfServiceURL, "termsOfServiceURL");
+                this.termsOfServiceURL = termsOfServiceURL;
+                return this;
+            }
+
+
+            public Builder scopes(Map<String, String> scopes) {
+                Utils.checkNotNull(scopes, "scopes");
+                this.scopes = Optional.ofNullable(scopes);
+                return this;
+            }
+
+            public Builder scopes(Optional<? extends Map<String, String>> scopes) {
+                Utils.checkNotNull(scopes, "scopes");
+                this.scopes = scopes;
+                return this;
+            }
+
+
+            public Builder capabilities(Map<String, String> capabilities) {
+                Utils.checkNotNull(capabilities, "capabilities");
+                this.capabilities = Optional.ofNullable(capabilities);
+                return this;
+            }
+
+            public Builder capabilities(Optional<? extends Map<String, String>> capabilities) {
+                Utils.checkNotNull(capabilities, "capabilities");
+                this.capabilities = capabilities;
+                return this;
+            }
+
+
+            public Builder feePlanCodes(Map<String, String> feePlanCodes) {
+                Utils.checkNotNull(feePlanCodes, "feePlanCodes");
+                this.feePlanCodes = Optional.ofNullable(feePlanCodes);
+                return this;
+            }
+
+            public Builder feePlanCodes(Optional<? extends Map<String, String>> feePlanCodes) {
+                Utils.checkNotNull(feePlanCodes, "feePlanCodes");
+                this.feePlanCodes = feePlanCodes;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    returnURL, termsOfServiceURL, scopes,
+                    capabilities, feePlanCodes);
+            }
+
+        }
     }
+
 }
 

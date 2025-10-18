@@ -7,89 +7,144 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
+import java.util.Optional;
 
 @SuppressWarnings("serial")
-public class GenericError extends RuntimeException {
+public class GenericError extends MoovError {
 
-    @JsonProperty("error")
-    private String error;
+    @Nullable
+    private final Data data;
 
-    @JsonCreator
+    @Nullable
+    private final Throwable deserializationException;
+
     public GenericError(
-            @JsonProperty("error") String error) {
-        super("API error occurred");
-        Utils.checkNotNull(error, "error");
-        this.error = error;
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
-    public String error() {
-        return error;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-
-    public GenericError withError(String error) {
-        Utils.checkNotNull(error, "error");
-        this.error = error;
-        return this;
-    }
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+    /**
+    * Parse a response into an instance of GenericError. If deserialization of the response body fails,
+    * the resulting GenericError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static GenericError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new GenericError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new GenericError(response.statusCode(), null, response, null, e);
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        GenericError other = (GenericError) o;
-        return 
-            Utils.enhancedDeepEquals(this.error, other.error);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            error);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(GenericError.class,
-                "error", error);
     }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+    @Deprecated
+    public Optional<String> error() {
+        return data().map(Data::error);
+    }
 
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
+    }
+
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
+    }
+
+    public static class Data {
+
+        @JsonProperty("error")
         private String error;
 
-        private Builder() {
-          // force use of static builder() method
+        @JsonCreator
+        public Data(
+                @JsonProperty("error") String error) {
+            Utils.checkNotNull(error, "error");
+            this.error = error;
+        }
+
+        @JsonIgnore
+        public String error() {
+            return error;
+        }
+
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder error(String error) {
+        public Data withError(String error) {
             Utils.checkNotNull(error, "error");
             this.error = error;
             return this;
         }
 
-        public GenericError build() {
-
-            return new GenericError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.error, other.error);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 error);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "error", error);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private String error;
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder error(String error) {
+                Utils.checkNotNull(error, "error");
+                this.error = error;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    error);
+            }
+
+        }
     }
+
 }
 

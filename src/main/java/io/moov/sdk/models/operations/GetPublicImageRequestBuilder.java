@@ -11,7 +11,6 @@ import io.moov.sdk.operations.GetPublicImage;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.LazySingletonValue;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 import java.util.Optional;
 
@@ -73,7 +72,7 @@ public class GetPublicImageRequestBuilder {
         return request;
     }
 
-    public GetPublicImageResponse call() throws Exception {
+    public GetPublicImageResponse call() {
         
         RequestOperation<GetPublicImageRequest, GetPublicImageResponse> operation
               = new GetPublicImage.Sync(sdkConfiguration, _headers);

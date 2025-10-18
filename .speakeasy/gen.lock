@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: e6cd524e55b1972bf8717ee2de4f9b92
+  docChecksum: 518adb2711be85935478344536fce985
   docVersion: latest
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 0.28.11
-  configChecksum: 918477581849140cfb0ddd4397f993d1
+  speakeasyVersion: 1.637.0
+  generationVersion: 2.727.4
+  releaseVersion: 0.29.0
+  configChecksum: 938d3f3d69fff8fc12feb19d9cf37509
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.52.3
+    core: 3.53.0
     decimal: 0.0.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
@@ -281,7 +281,13 @@ generatedFiles:
   - docs/models/components/GovernmentIDErrorSsn.md
   - docs/models/components/GrantType.md
   - docs/models/components/GuestProfile.md
+  - docs/models/components/Image.md
   - docs/models/components/ImageMetadata.md
+  - docs/models/components/ImageMetadataRequest.md
+  - docs/models/components/ImageMetadataValidationError.md
+  - docs/models/components/ImageUpdateRequestMultiPart.md
+  - docs/models/components/ImageUpdateRequestMultiPartImage.md
+  - docs/models/components/ImageUploadRequestMultiPart.md
   - docs/models/components/IncurredFee.md
   - docs/models/components/IndividualName.md
   - docs/models/components/IndividualNameError.md
@@ -325,6 +331,7 @@ generatedFiles:
   - docs/models/components/Manual.md
   - docs/models/components/ManualTermsOfService.md
   - docs/models/components/ManualTermsOfServiceUpdate.md
+  - docs/models/components/Metadata.md
   - docs/models/components/MicroDepositStatus.md
   - docs/models/components/MinimumCommitment.md
   - docs/models/components/Mode.md
@@ -596,6 +603,7 @@ generatedFiles:
   - docs/models/errors/FileUploadValidationError.md
   - docs/models/errors/FileValidationError.md
   - docs/models/errors/GenericError.md
+  - docs/models/errors/ImageRequestValidationError.md
   - docs/models/errors/LinkApplePayError.md
   - docs/models/errors/LinkCardError.md
   - docs/models/errors/ListTransfersValidationError.md
@@ -904,6 +912,8 @@ generatedFiles:
   - docs/models/operations/UpdateCardResponse.md
   - docs/models/operations/UpdateDisputeEvidenceRequest.md
   - docs/models/operations/UpdateDisputeEvidenceResponse.md
+  - docs/models/operations/UpdateImageRequest.md
+  - docs/models/operations/UpdateImageResponse.md
   - docs/models/operations/UpdateIssuedCardRequest.md
   - docs/models/operations/UpdateIssuedCardResponse.md
   - docs/models/operations/UpdatePaymentLinkRequest.md
@@ -928,6 +938,8 @@ generatedFiles:
   - docs/models/operations/UploadDisputeEvidenceTextResponse.md
   - docs/models/operations/UploadFileRequest.md
   - docs/models/operations/UploadFileResponse.md
+  - docs/models/operations/UploadImageRequest.md
+  - docs/models/operations/UploadImageResponse.md
   - docs/models/operations/UpsertBrandRequest.md
   - docs/models/operations/UpsertBrandResponse.md
   - docs/models/operations/UpsertUnderwritingRequest.md
@@ -1270,7 +1282,13 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/GovernmentIDErrorSsn.java
   - src/main/java/io/moov/sdk/models/components/GrantType.java
   - src/main/java/io/moov/sdk/models/components/GuestProfile.java
+  - src/main/java/io/moov/sdk/models/components/Image.java
   - src/main/java/io/moov/sdk/models/components/ImageMetadata.java
+  - src/main/java/io/moov/sdk/models/components/ImageMetadataRequest.java
+  - src/main/java/io/moov/sdk/models/components/ImageMetadataValidationError.java
+  - src/main/java/io/moov/sdk/models/components/ImageUpdateRequestMultiPart.java
+  - src/main/java/io/moov/sdk/models/components/ImageUpdateRequestMultiPartImage.java
+  - src/main/java/io/moov/sdk/models/components/ImageUploadRequestMultiPart.java
   - src/main/java/io/moov/sdk/models/components/IncurredFee.java
   - src/main/java/io/moov/sdk/models/components/IndividualName.java
   - src/main/java/io/moov/sdk/models/components/IndividualNameError.java
@@ -1314,6 +1332,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/Manual.java
   - src/main/java/io/moov/sdk/models/components/ManualTermsOfService.java
   - src/main/java/io/moov/sdk/models/components/ManualTermsOfServiceUpdate.java
+  - src/main/java/io/moov/sdk/models/components/Metadata.java
   - src/main/java/io/moov/sdk/models/components/MicroDepositStatus.java
   - src/main/java/io/moov/sdk/models/components/MinimumCommitment.java
   - src/main/java/io/moov/sdk/models/components/Mode.java
@@ -1571,6 +1590,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/AccountTerminalApplicationError.java
   - src/main/java/io/moov/sdk/models/errors/AddCapabilitiesError.java
   - src/main/java/io/moov/sdk/models/errors/AssignCountriesError.java
+  - src/main/java/io/moov/sdk/models/errors/AsyncAPIException.java
   - src/main/java/io/moov/sdk/models/errors/AuthException.java
   - src/main/java/io/moov/sdk/models/errors/AuthTokenRequestError.java
   - src/main/java/io/moov/sdk/models/errors/BankAccountValidationError.java
@@ -1587,12 +1607,14 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/FileUploadValidationError.java
   - src/main/java/io/moov/sdk/models/errors/FileValidationError.java
   - src/main/java/io/moov/sdk/models/errors/GenericError.java
+  - src/main/java/io/moov/sdk/models/errors/ImageRequestValidationError.java
   - src/main/java/io/moov/sdk/models/errors/LinkApplePayError.java
   - src/main/java/io/moov/sdk/models/errors/LinkCardError.java
   - src/main/java/io/moov/sdk/models/errors/ListTransfersValidationError.java
   - src/main/java/io/moov/sdk/models/errors/ListWalletTransactionsValidationError.java
   - src/main/java/io/moov/sdk/models/errors/ListWalletsValidationError.java
   - src/main/java/io/moov/sdk/models/errors/MicroDepositValidationError.java
+  - src/main/java/io/moov/sdk/models/errors/MoovError.java
   - src/main/java/io/moov/sdk/models/errors/OnboardingInviteError.java
   - src/main/java/io/moov/sdk/models/errors/PatchAccountError.java
   - src/main/java/io/moov/sdk/models/errors/PatchSweepConfigError.java
@@ -2037,6 +2059,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/UpdateDisputeEvidenceRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpdateDisputeEvidenceRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpdateDisputeEvidenceResponse.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateImageRequest.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateImageRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateImageResponse.java
   - src/main/java/io/moov/sdk/models/operations/UpdateIssuedCardRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpdateIssuedCardRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpdateIssuedCardResponse.java
@@ -2073,6 +2098,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/UploadFileRequest.java
   - src/main/java/io/moov/sdk/models/operations/UploadFileRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UploadFileResponse.java
+  - src/main/java/io/moov/sdk/models/operations/UploadImageRequest.java
+  - src/main/java/io/moov/sdk/models/operations/UploadImageRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/UploadImageResponse.java
   - src/main/java/io/moov/sdk/models/operations/UpsertBrandRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpsertBrandRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpsertBrandResponse.java
@@ -2222,6 +2250,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/UpdateBrand.java
   - src/main/java/io/moov/sdk/operations/UpdateCard.java
   - src/main/java/io/moov/sdk/operations/UpdateDisputeEvidence.java
+  - src/main/java/io/moov/sdk/operations/UpdateImage.java
   - src/main/java/io/moov/sdk/operations/UpdateIssuedCard.java
   - src/main/java/io/moov/sdk/operations/UpdatePaymentLink.java
   - src/main/java/io/moov/sdk/operations/UpdateProduct.java
@@ -2234,6 +2263,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/UploadDisputeEvidenceFile.java
   - src/main/java/io/moov/sdk/operations/UploadDisputeEvidenceText.java
   - src/main/java/io/moov/sdk/operations/UploadFile.java
+  - src/main/java/io/moov/sdk/operations/UploadImage.java
   - src/main/java/io/moov/sdk/operations/UpsertBrand.java
   - src/main/java/io/moov/sdk/operations/UpsertUnderwriting.java
   - src/main/java/io/moov/sdk/utils/BackoffStrategy.java
@@ -4533,6 +4563,42 @@ examples:
       responses:
         "400":
           application/json: {"error": "<value>"}
+  uploadImage:
+    speakeasy-default-upload-image:
+      parameters:
+        path:
+          accountID: "c0971a52-1f1c-4511-876a-f45c4cfd6154"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        multipart/form-data: {"image": "x-file: example.file"}
+      responses:
+        "201":
+          application/json: {"imageID": "533aadc1-0389-4da9-9c87-92bd49469db5", "link": "https://api.moov.io/images/qJRAaAwwF5hmfeAFdHjIb", "createdOn": "2023-03-14T15:49:36.140Z", "updatedOn": "2024-08-18T16:45:51.667Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  updateImage:
+    speakeasy-default-update-image:
+      parameters:
+        path:
+          accountID: "310f4f19-45cf-4429-9aae-8e93827ecb0d"
+          imageID: "8ef109f8-5a61-4355-b2e4-b8ac2f6f6f47"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        multipart/form-data: {}
+      responses:
+        "200":
+          application/json: {"imageID": "37d44505-cb7b-46de-8995-9c6633aaa305", "link": "https://api.moov.io/images/qJRAaAwwF5hmfeAFdHjIb", "createdOn": "2023-07-27T04:09:13.260Z", "updatedOn": "2025-11-20T16:38:12.638Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.products.list()`:  `response.[].optionGroups.[].options.[].priceModifier` **Changed** **Breaking** :warning:\n* `moov.products.create()`: \n  *  `request.productrequest.optionGroups.[].options.[].priceModifier` **Changed** **Breaking** :warning:\n  *  `response.optiongroups.[].options.[].priceModifier` **Changed** **Breaking** :warning:\n  *  `error.optiongroups.{}.options.{}.priceModifier` **Changed** **Breaking** :warning:\n* `moov.products.get()`:  `response.optiongroups.[].options.[].priceModifier` **Changed** **Breaking** :warning:\n* `moov.products.update()`: \n  *  `request.productrequest.optionGroups.[].options.[].priceModifier` **Changed** **Breaking** :warning:\n  *  `response.optiongroups.[].options.[].priceModifier` **Changed** **Breaking** :warning:\n  *  `error.optiongroups.{}.options.{}.priceModifier` **Changed** **Breaking** :warning:\n"
+releaseNotes: |
+  ## Java SDK Changes Detected:
+  * `moov.images.upload()`: **Added**
+  * `moov.images.update()`: **Added**

@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.ProductRequest;
 import io.moov.sdk.operations.CreateProduct;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class CreateProductRequestBuilder {
@@ -45,7 +44,7 @@ public class CreateProductRequestBuilder {
         return request;
     }
 
-    public CreateProductResponse call() throws Exception {
+    public CreateProductResponse call() {
         
         RequestOperation<CreateProductRequest, CreateProductResponse> operation
               = new CreateProduct.Sync(sdkConfiguration, _headers);

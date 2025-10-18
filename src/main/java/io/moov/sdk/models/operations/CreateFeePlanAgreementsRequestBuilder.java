@@ -10,7 +10,6 @@ import io.moov.sdk.models.components.CreateFeePlanAgreement;
 import io.moov.sdk.operations.CreateFeePlanAgreements;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class CreateFeePlanAgreementsRequestBuilder {
@@ -45,7 +44,7 @@ public class CreateFeePlanAgreementsRequestBuilder {
         return request;
     }
 
-    public CreateFeePlanAgreementsResponse call() throws Exception {
+    public CreateFeePlanAgreementsResponse call() {
         
         RequestOperation<CreateFeePlanAgreementsRequest, CreateFeePlanAgreementsResponse> operation
               = new CreateFeePlanAgreements.Sync(sdkConfiguration, _headers);

@@ -9,7 +9,6 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.GetStatement;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.Exception;
 import java.lang.String;
 
 public class GetStatementRequestBuilder {
@@ -44,7 +43,7 @@ public class GetStatementRequestBuilder {
         return request;
     }
 
-    public GetStatementResponse call() throws Exception {
+    public GetStatementResponse call() {
         
         RequestOperation<GetStatementRequest, GetStatementResponse> operation
               = new GetStatement.Sync(sdkConfiguration, _headers);

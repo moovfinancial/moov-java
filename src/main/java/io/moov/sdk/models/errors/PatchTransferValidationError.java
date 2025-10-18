@@ -9,151 +9,209 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import jakarta.annotation.Nullable;
+import java.io.InputStream;
+import java.lang.Deprecated;
 import java.lang.Override;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.lang.Throwable;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 @SuppressWarnings("serial")
-public class PatchTransferValidationError extends RuntimeException {
+public class PatchTransferValidationError extends MoovError {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("metadata")
-    private Optional<String> metadata;
+    @Nullable
+    private final Data data;
 
+    @Nullable
+    private final Throwable deserializationException;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("foreignID")
-    private Optional<String> foreignID;
-
-    @JsonCreator
     public PatchTransferValidationError(
-            @JsonProperty("metadata") Optional<String> metadata,
-            @JsonProperty("foreignID") Optional<String> foreignID) {
-        super("API error occurred");
-        Utils.checkNotNull(metadata, "metadata");
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.metadata = metadata;
-        this.foreignID = foreignID;
-    }
-    
-    public PatchTransferValidationError() {
-        this(Optional.empty(), Optional.empty());
+                int code,
+                byte[] body,
+                HttpResponse<?> rawResponse,
+                @Nullable Data data,
+                @Nullable Throwable deserializationException) {
+        super("API error occurred", code, body, rawResponse, null);
+        this.data = data;
+        this.deserializationException = deserializationException;
     }
 
-    @JsonIgnore
+    /**
+    * Parse a response into an instance of PatchTransferValidationError. If deserialization of the response body fails,
+    * the resulting PatchTransferValidationError instance will have a null data() value and a non-null deserializationException().
+    */
+    public static PatchTransferValidationError from(HttpResponse<InputStream> response) {
+        try {
+            byte[] bytes = Utils.extractByteArrayFromBody(response);
+            Data data = Utils.mapper().readValue(bytes, Data.class);
+            return new PatchTransferValidationError(response.statusCode(), bytes, response, data, null);
+        } catch (Exception e) {
+            return new PatchTransferValidationError(response.statusCode(), null, response, null, e);
+        }
+    }
+
+    @Deprecated
     public Optional<String> metadata() {
-        return metadata;
+        return data().flatMap(Data::metadata);
     }
 
-    @JsonIgnore
+    @Deprecated
     public Optional<String> foreignID() {
-        return foreignID;
+        return data().flatMap(Data::foreignID);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Optional<Data> data() {
+        return Optional.ofNullable(data);
     }
 
-
-    public PatchTransferValidationError withMetadata(String metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = Optional.ofNullable(metadata);
-        return this;
+    /**
+     * Returns the exception if an error occurs while deserializing the response body.
+     */
+    public Optional<Throwable> deserializationException() {
+        return Optional.ofNullable(deserializationException);
     }
 
+    public static class Data {
 
-    public PatchTransferValidationError withMetadata(Optional<String> metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = metadata;
-        return this;
-    }
-
-    public PatchTransferValidationError withForeignID(String foreignID) {
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.foreignID = Optional.ofNullable(foreignID);
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("metadata")
+        private Optional<String> metadata;
 
 
-    public PatchTransferValidationError withForeignID(Optional<String> foreignID) {
-        Utils.checkNotNull(foreignID, "foreignID");
-        this.foreignID = foreignID;
-        return this;
-    }
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("foreignID")
+        private Optional<String> foreignID;
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+        @JsonCreator
+        public Data(
+                @JsonProperty("metadata") Optional<String> metadata,
+                @JsonProperty("foreignID") Optional<String> foreignID) {
+            Utils.checkNotNull(metadata, "metadata");
+            Utils.checkNotNull(foreignID, "foreignID");
+            this.metadata = metadata;
+            this.foreignID = foreignID;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        
+        public Data() {
+            this(Optional.empty(), Optional.empty());
         }
-        PatchTransferValidationError other = (PatchTransferValidationError) o;
-        return 
-            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
-            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            metadata, foreignID);
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(PatchTransferValidationError.class,
-                "metadata", metadata,
-                "foreignID", foreignID);
-    }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
+        @JsonIgnore
+        public Optional<String> metadata() {
+            return metadata;
+        }
 
-        private Optional<String> metadata = Optional.empty();
+        @JsonIgnore
+        public Optional<String> foreignID() {
+            return foreignID;
+        }
 
-        private Optional<String> foreignID = Optional.empty();
-
-        private Builder() {
-          // force use of static builder() method
+        public static Builder builder() {
+            return new Builder();
         }
 
 
-        public Builder metadata(String metadata) {
+        public Data withMetadata(String metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
-        public Builder metadata(Optional<String> metadata) {
+
+        public Data withMetadata(Optional<String> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;
         }
 
-
-        public Builder foreignID(String foreignID) {
+        public Data withForeignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = Optional.ofNullable(foreignID);
             return this;
         }
 
-        public Builder foreignID(Optional<String> foreignID) {
+
+        public Data withForeignID(Optional<String> foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = foreignID;
             return this;
         }
 
-        public PatchTransferValidationError build() {
-
-            return new PatchTransferValidationError(
+        @Override
+        public boolean equals(java.lang.Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Data other = (Data) o;
+            return 
+                Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+                Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
+        }
+        
+        @Override
+        public int hashCode() {
+            return Utils.enhancedHash(
                 metadata, foreignID);
         }
+        
+        @Override
+        public String toString() {
+            return Utils.toString(Data.class,
+                    "metadata", metadata,
+                    "foreignID", foreignID);
+        }
 
+        @SuppressWarnings("UnusedReturnValue")
+        public final static class Builder {
+
+            private Optional<String> metadata = Optional.empty();
+
+            private Optional<String> foreignID = Optional.empty();
+
+            private Builder() {
+              // force use of static builder() method
+            }
+
+
+            public Builder metadata(String metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = Optional.ofNullable(metadata);
+                return this;
+            }
+
+            public Builder metadata(Optional<String> metadata) {
+                Utils.checkNotNull(metadata, "metadata");
+                this.metadata = metadata;
+                return this;
+            }
+
+
+            public Builder foreignID(String foreignID) {
+                Utils.checkNotNull(foreignID, "foreignID");
+                this.foreignID = Optional.ofNullable(foreignID);
+                return this;
+            }
+
+            public Builder foreignID(Optional<String> foreignID) {
+                Utils.checkNotNull(foreignID, "foreignID");
+                this.foreignID = foreignID;
+                return this;
+            }
+
+            public Data build() {
+
+                return new Data(
+                    metadata, foreignID);
+            }
+
+        }
     }
+
 }
 

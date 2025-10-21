@@ -17,12 +17,12 @@ import java.util.Optional;
 public class GeneratedByDisputeID {
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("DisputeID")
+    @JsonProperty("disputeID")
     private Optional<String> disputeID;
 
     @JsonCreator
     public GeneratedByDisputeID(
-            @JsonProperty("DisputeID") Optional<String> disputeID) {
+            @JsonProperty("disputeID") Optional<String> disputeID) {
         Utils.checkNotNull(disputeID, "disputeID");
         this.disputeID = disputeID;
     }

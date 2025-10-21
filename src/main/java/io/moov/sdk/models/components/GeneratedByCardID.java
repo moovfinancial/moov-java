@@ -17,12 +17,12 @@ import java.util.Optional;
 public class GeneratedByCardID {
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("CardID")
+    @JsonProperty("cardID")
     private Optional<String> cardID;
 
     @JsonCreator
     public GeneratedByCardID(
-            @JsonProperty("CardID") Optional<String> cardID) {
+            @JsonProperty("cardID") Optional<String> cardID) {
         Utils.checkNotNull(cardID, "cardID");
         this.cardID = cardID;
     }

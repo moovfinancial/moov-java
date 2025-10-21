@@ -17,12 +17,12 @@ import java.util.Optional;
 public class GeneratedByBankAccountID {
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("BankAccountID")
+    @JsonProperty("bankAccountID")
     private Optional<String> bankAccountID;
 
     @JsonCreator
     public GeneratedByBankAccountID(
-            @JsonProperty("BankAccountID") Optional<String> bankAccountID) {
+            @JsonProperty("bankAccountID") Optional<String> bankAccountID) {
         Utils.checkNotNull(bankAccountID, "bankAccountID");
         this.bankAccountID = bankAccountID;
     }

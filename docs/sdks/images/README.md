@@ -46,6 +46,8 @@ public class Application {
 
         ListImageMetadataResponse res = sdk.images().list()
                 .accountID("3a4ed2d9-03e1-4b0e-b45f-2a9ca72f8adb")
+                .skip(60L)
+                .count(20L)
                 .call();
 
         if (res.imageMetadata().isPresent()) {
@@ -57,9 +59,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter          | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
+| Parameter          | Type               | Required           | Description        | Example            |
+| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+| `accountID`        | *String*           | :heavy_check_mark: | N/A                |                    |
+| `skip`             | *Optional\<Long>*  | :heavy_minus_sign: | N/A                | 60                 |
+| `count`            | *Optional\<Long>*  | :heavy_minus_sign: | N/A                | 20                 |
 
 ### Response
 

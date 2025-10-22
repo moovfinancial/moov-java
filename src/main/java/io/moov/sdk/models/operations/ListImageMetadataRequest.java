@@ -7,8 +7,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class ListImageMetadataRequest {
@@ -16,16 +18,45 @@ public class ListImageMetadataRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
+    private Optional<Long> skip;
+
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=count")
+    private Optional<Long> count;
+
     @JsonCreator
     public ListImageMetadataRequest(
-            String accountID) {
+            String accountID,
+            Optional<Long> skip,
+            Optional<Long> count) {
         Utils.checkNotNull(accountID, "accountID");
+        Utils.checkNotNull(skip, "skip");
+        Utils.checkNotNull(count, "count");
         this.accountID = accountID;
+        this.skip = skip;
+        this.count = count;
+    }
+    
+    public ListImageMetadataRequest(
+            String accountID) {
+        this(accountID, Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
     public String accountID() {
         return accountID;
+    }
+
+    @JsonIgnore
+    public Optional<Long> skip() {
+        return skip;
+    }
+
+    @JsonIgnore
+    public Optional<Long> count() {
+        return count;
     }
 
     public static Builder builder() {
@@ -39,6 +70,32 @@ public class ListImageMetadataRequest {
         return this;
     }
 
+    public ListImageMetadataRequest withSkip(long skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = Optional.ofNullable(skip);
+        return this;
+    }
+
+
+    public ListImageMetadataRequest withSkip(Optional<Long> skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = skip;
+        return this;
+    }
+
+    public ListImageMetadataRequest withCount(long count) {
+        Utils.checkNotNull(count, "count");
+        this.count = Optional.ofNullable(count);
+        return this;
+    }
+
+
+    public ListImageMetadataRequest withCount(Optional<Long> count) {
+        Utils.checkNotNull(count, "count");
+        this.count = count;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -49,25 +106,33 @@ public class ListImageMetadataRequest {
         }
         ListImageMetadataRequest other = (ListImageMetadataRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.accountID, other.accountID);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip) &&
+            Utils.enhancedDeepEquals(this.count, other.count);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID);
+            accountID, skip, count);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ListImageMetadataRequest.class,
-                "accountID", accountID);
+                "accountID", accountID,
+                "skip", skip,
+                "count", count);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
         private String accountID;
+
+        private Optional<Long> skip = Optional.empty();
+
+        private Optional<Long> count = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -80,10 +145,36 @@ public class ListImageMetadataRequest {
             return this;
         }
 
+
+        public Builder skip(long skip) {
+            Utils.checkNotNull(skip, "skip");
+            this.skip = Optional.ofNullable(skip);
+            return this;
+        }
+
+        public Builder skip(Optional<Long> skip) {
+            Utils.checkNotNull(skip, "skip");
+            this.skip = skip;
+            return this;
+        }
+
+
+        public Builder count(long count) {
+            Utils.checkNotNull(count, "count");
+            this.count = Optional.ofNullable(count);
+            return this;
+        }
+
+        public Builder count(Optional<Long> count) {
+            Utils.checkNotNull(count, "count");
+            this.count = count;
+            return this;
+        }
+
         public ListImageMetadataRequest build() {
 
             return new ListImageMetadataRequest(
-                accountID);
+                accountID, skip, count);
         }
 
     }

@@ -9,11 +9,15 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListImageMetadata;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
+import java.lang.Long;
 import java.lang.String;
+import java.util.Optional;
 
 public class ListImageMetadataRequestBuilder {
 
     private String accountID;
+    private Optional<Long> skip = Optional.empty();
+    private Optional<Long> count = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -26,11 +30,37 @@ public class ListImageMetadataRequestBuilder {
         this.accountID = accountID;
         return this;
     }
+                
+    public ListImageMetadataRequestBuilder skip(long skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = Optional.of(skip);
+        return this;
+    }
+
+    public ListImageMetadataRequestBuilder skip(Optional<Long> skip) {
+        Utils.checkNotNull(skip, "skip");
+        this.skip = skip;
+        return this;
+    }
+                
+    public ListImageMetadataRequestBuilder count(long count) {
+        Utils.checkNotNull(count, "count");
+        this.count = Optional.of(count);
+        return this;
+    }
+
+    public ListImageMetadataRequestBuilder count(Optional<Long> count) {
+        Utils.checkNotNull(count, "count");
+        this.count = count;
+        return this;
+    }
 
 
     private ListImageMetadataRequest buildRequest() {
 
-        ListImageMetadataRequest request = new ListImageMetadataRequest(accountID);
+        ListImageMetadataRequest request = new ListImageMetadataRequest(accountID,
+            skip,
+            count);
 
         return request;
     }

@@ -32,6 +32,7 @@ import io.moov.sdk.operations.ListImageMetadata;
 import io.moov.sdk.operations.UpdateImage;
 import io.moov.sdk.operations.UploadImage;
 import io.moov.sdk.utils.Headers;
+import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
 
@@ -61,10 +62,27 @@ public class Images {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListImageMetadataResponse list(String accountID) {
+        return list(accountID, Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * List metadata for all images in the specified account.
+     * 
+     * @param accountID 
+     * @param skip 
+     * @param count 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListImageMetadataResponse list(
+            String accountID, Optional<Long> skip,
+            Optional<Long> count) {
         ListImageMetadataRequest request =
             ListImageMetadataRequest
                 .builder()
                 .accountID(accountID)
+                .skip(skip)
+                .count(count)
                 .build();
         RequestOperation<ListImageMetadataRequest, ListImageMetadataResponse> operation
               = new ListImageMetadata.Sync(sdkConfiguration, _headers);

@@ -122,7 +122,7 @@ public class GetPublicImage {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "404", "429", "4XX", "500", "502", "504", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "404", "429", "4XX", "500", "502", "503", "504", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -181,7 +181,7 @@ public class GetPublicImage {
                 // no content
                 throw APIException.from("API error occurred", response);
             }
-            if (Utils.statusCodeMatches(response.statusCode(), "500", "502", "504")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "500", "502", "503", "504")) {
                 res.withHeaders(response.headers().map());
                 // no content
                 throw APIException.from("API error occurred", response);

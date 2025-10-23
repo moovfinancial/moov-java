@@ -5,6 +5,7 @@ package io.moov.sdk;
 
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
+import io.moov.sdk.models.components.ImageMetadataRequest;
 import io.moov.sdk.models.components.ImageUpdateRequestMultiPart;
 import io.moov.sdk.models.components.ImageUploadRequestMultiPart;
 import io.moov.sdk.models.operations.DeleteImageRequest;
@@ -19,6 +20,9 @@ import io.moov.sdk.models.operations.GetPublicImageResponse;
 import io.moov.sdk.models.operations.ListImageMetadataRequest;
 import io.moov.sdk.models.operations.ListImageMetadataRequestBuilder;
 import io.moov.sdk.models.operations.ListImageMetadataResponse;
+import io.moov.sdk.models.operations.UpdateImageMetadataRequest;
+import io.moov.sdk.models.operations.UpdateImageMetadataRequestBuilder;
+import io.moov.sdk.models.operations.UpdateImageMetadataResponse;
 import io.moov.sdk.models.operations.UpdateImageRequest;
 import io.moov.sdk.models.operations.UpdateImageRequestBuilder;
 import io.moov.sdk.models.operations.UpdateImageResponse;
@@ -30,6 +34,7 @@ import io.moov.sdk.operations.GetImageMetadata;
 import io.moov.sdk.operations.GetPublicImage;
 import io.moov.sdk.operations.ListImageMetadata;
 import io.moov.sdk.operations.UpdateImage;
+import io.moov.sdk.operations.UpdateImageMetadata;
 import io.moov.sdk.operations.UploadImage;
 import io.moov.sdk.utils.Headers;
 import java.lang.Long;
@@ -150,11 +155,11 @@ public class Images {
     }
 
     /**
-     * Update an existing image and/or its metadata.
+     * Replace an existing image and, optionally, its metadata.
      * 
-     * <p>Duplicate images, and requests larger than 16MB will be rejected. Omit any
-     * form parts you do not wish to update. Existing metadata can be cleared by
-     * sending `null` for the `metadata` form part.
+     * <p>This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
+     * the metadata form section to keep existing metadata, or send `null` to clear it.
+     * Duplicate images, and requests larger than 16MB will be rejected.
      * 
      * @return The call builder
      */
@@ -163,11 +168,11 @@ public class Images {
     }
 
     /**
-     * Update an existing image and/or its metadata.
+     * Replace an existing image and, optionally, its metadata.
      * 
-     * <p>Duplicate images, and requests larger than 16MB will be rejected. Omit any
-     * form parts you do not wish to update. Existing metadata can be cleared by
-     * sending `null` for the `metadata` form part.
+     * <p>This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
+     * the metadata form section to keep existing metadata, or send `null` to clear it.
+     * Duplicate images, and requests larger than 16MB will be rejected.
      * 
      * @param accountID 
      * @param imageID 
@@ -216,6 +221,39 @@ public class Images {
                 .build();
         RequestOperation<DeleteImageRequest, DeleteImageResponse> operation
               = new DeleteImage.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Replace the metadata for an existing image.
+     * 
+     * @return The call builder
+     */
+    public UpdateImageMetadataRequestBuilder updateMetadata() {
+        return new UpdateImageMetadataRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Replace the metadata for an existing image.
+     * 
+     * @param accountID 
+     * @param imageID 
+     * @param imageMetadataRequest Request body for creating or updating image metadata.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public UpdateImageMetadataResponse updateMetadata(
+            String accountID, String imageID,
+            ImageMetadataRequest imageMetadataRequest) {
+        UpdateImageMetadataRequest request =
+            UpdateImageMetadataRequest
+                .builder()
+                .accountID(accountID)
+                .imageID(imageID)
+                .imageMetadataRequest(imageMetadataRequest)
+                .build();
+        RequestOperation<UpdateImageMetadataRequest, UpdateImageMetadataResponse> operation
+              = new UpdateImageMetadata.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

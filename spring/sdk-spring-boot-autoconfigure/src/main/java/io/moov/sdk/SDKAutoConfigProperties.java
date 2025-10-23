@@ -471,18 +471,18 @@ public class SDKAutoConfigProperties {
         private String xMoovVersion;
 
         /**
-         * Gets the global x-moov-version parameter.
+         * Gets the global X-Moov-Version parameter.
          *
-         * @return the x-moov-version value
+         * @return the X-Moov-Version value
          */
         public String getXMoovVersion() {
             return xMoovVersion;
         }
 
         /**
-         * Sets the global x-moov-version parameter.
+         * Sets the global X-Moov-Version parameter.
          *
-         * @param xMoovVersion the x-moov-version value to use
+         * @param xMoovVersion the X-Moov-Version value to use
          */
         public void setXMoovVersion(String xMoovVersion) {
             this.xMoovVersion = xMoovVersion;

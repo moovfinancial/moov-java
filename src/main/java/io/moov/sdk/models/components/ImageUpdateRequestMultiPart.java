@@ -10,7 +10,6 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
@@ -21,7 +20,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class ImageUpdateRequestMultiPart {
 
     @SpeakeasyMetadata("multipartForm:file,name=image")
-    private Optional<? extends ImageUpdateRequestMultiPartImage> image;
+    private ImageUpdateRequestMultiPartImage image;
 
     /**
      * JSON-encoded metadata to update for the image.
@@ -33,7 +32,7 @@ public class ImageUpdateRequestMultiPart {
 
     @JsonCreator
     public ImageUpdateRequestMultiPart(
-            Optional<? extends ImageUpdateRequestMultiPartImage> image,
+            ImageUpdateRequestMultiPartImage image,
             JsonNullable<? extends Metadata> metadata) {
         Utils.checkNotNull(image, "image");
         Utils.checkNotNull(metadata, "metadata");
@@ -41,14 +40,14 @@ public class ImageUpdateRequestMultiPart {
         this.metadata = metadata;
     }
     
-    public ImageUpdateRequestMultiPart() {
-        this(Optional.empty(), JsonNullable.undefined());
+    public ImageUpdateRequestMultiPart(
+            ImageUpdateRequestMultiPartImage image) {
+        this(image, JsonNullable.undefined());
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ImageUpdateRequestMultiPartImage> image() {
-        return (Optional<ImageUpdateRequestMultiPartImage>) image;
+    public ImageUpdateRequestMultiPartImage image() {
+        return image;
     }
 
     /**
@@ -68,13 +67,6 @@ public class ImageUpdateRequestMultiPart {
 
 
     public ImageUpdateRequestMultiPart withImage(ImageUpdateRequestMultiPartImage image) {
-        Utils.checkNotNull(image, "image");
-        this.image = Optional.ofNullable(image);
-        return this;
-    }
-
-
-    public ImageUpdateRequestMultiPart withImage(Optional<? extends ImageUpdateRequestMultiPartImage> image) {
         Utils.checkNotNull(image, "image");
         this.image = image;
         return this;
@@ -132,7 +124,7 @@ public class ImageUpdateRequestMultiPart {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends ImageUpdateRequestMultiPartImage> image = Optional.empty();
+        private ImageUpdateRequestMultiPartImage image;
 
         private JsonNullable<? extends Metadata> metadata = JsonNullable.undefined();
 
@@ -142,12 +134,6 @@ public class ImageUpdateRequestMultiPart {
 
 
         public Builder image(ImageUpdateRequestMultiPartImage image) {
-            Utils.checkNotNull(image, "image");
-            this.image = Optional.ofNullable(image);
-            return this;
-        }
-
-        public Builder image(Optional<? extends ImageUpdateRequestMultiPartImage> image) {
             Utils.checkNotNull(image, "image");
             this.image = image;
             return this;

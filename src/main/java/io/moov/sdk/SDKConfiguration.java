@@ -18,8 +18,8 @@ public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "latest";
-    public static final String SDK_VERSION = "0.29.2";
-    public static final String GEN_VERSION = "2.728.0";
+    public static final String SDK_VERSION = "0.29.3";
+    public static final String GEN_VERSION = "2.729.2";
     private static final String BASE_PACKAGE = "io.moov.sdk";
     public static final String USER_AGENT = 
             String.format("speakeasy-sdk/%s %s %s %s %s",

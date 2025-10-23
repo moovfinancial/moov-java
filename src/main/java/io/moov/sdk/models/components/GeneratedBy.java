@@ -3,83 +3,166 @@
  */
 package io.moov.sdk.models.components;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.moov.sdk.utils.OneOfDeserializer;
-import io.moov.sdk.utils.TypedObject;
-import io.moov.sdk.utils.Utils.JsonShape;
-import io.moov.sdk.utils.Utils.TypeReferenceWithShape;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
+import java.util.Optional;
 
 /**
  * GeneratedBy
  * 
  * <p>The entity that generated the fee.
  */
-@JsonDeserialize(using = GeneratedBy._Deserializer.class)
 public class GeneratedBy {
 
-    @JsonValue
-    private TypedObject value;
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("transferID")
+    private Optional<String> transferID;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("cardID")
+    private Optional<String> cardID;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("disputeID")
+    private Optional<String> disputeID;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("accountID")
+    private Optional<String> accountID;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("bankAccountID")
+    private Optional<String> bankAccountID;
+
+    @JsonCreator
+    public GeneratedBy(
+            @JsonProperty("transferID") Optional<String> transferID,
+            @JsonProperty("cardID") Optional<String> cardID,
+            @JsonProperty("disputeID") Optional<String> disputeID,
+            @JsonProperty("accountID") Optional<String> accountID,
+            @JsonProperty("bankAccountID") Optional<String> bankAccountID) {
+        Utils.checkNotNull(transferID, "transferID");
+        Utils.checkNotNull(cardID, "cardID");
+        Utils.checkNotNull(disputeID, "disputeID");
+        Utils.checkNotNull(accountID, "accountID");
+        Utils.checkNotNull(bankAccountID, "bankAccountID");
+        this.transferID = transferID;
+        this.cardID = cardID;
+        this.disputeID = disputeID;
+        this.accountID = accountID;
+        this.bankAccountID = bankAccountID;
+    }
     
-    private GeneratedBy(TypedObject value) {
-        this.value = value;
+    public GeneratedBy() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
-    public static GeneratedBy of(GeneratedByTransferID value) {
-        Utils.checkNotNull(value, "value");
-        return new GeneratedBy(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<GeneratedByTransferID>(){}));
+    @JsonIgnore
+    public Optional<String> transferID() {
+        return transferID;
     }
 
-    public static GeneratedBy of(GeneratedByCardID value) {
-        Utils.checkNotNull(value, "value");
-        return new GeneratedBy(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<GeneratedByCardID>(){}));
+    @JsonIgnore
+    public Optional<String> cardID() {
+        return cardID;
     }
 
-    public static GeneratedBy of(GeneratedByDisputeID value) {
-        Utils.checkNotNull(value, "value");
-        return new GeneratedBy(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<GeneratedByDisputeID>(){}));
+    @JsonIgnore
+    public Optional<String> disputeID() {
+        return disputeID;
     }
 
-    public static GeneratedBy of(GeneratedByAccountID value) {
-        Utils.checkNotNull(value, "value");
-        return new GeneratedBy(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<GeneratedByAccountID>(){}));
+    @JsonIgnore
+    public Optional<String> accountID() {
+        return accountID;
     }
 
-    public static GeneratedBy of(GeneratedByBankAccountID value) {
-        Utils.checkNotNull(value, "value");
-        return new GeneratedBy(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<GeneratedByBankAccountID>(){}));
+    @JsonIgnore
+    public Optional<String> bankAccountID() {
+        return bankAccountID;
     }
-    
-    /**
-     * Returns an instance of one of these types:
-     * <ul>
-     * <li>{@code io.moov.sdk.models.components.GeneratedByTransferID}</li>
-     * <li>{@code io.moov.sdk.models.components.GeneratedByCardID}</li>
-     * <li>{@code io.moov.sdk.models.components.GeneratedByDisputeID}</li>
-     * <li>{@code io.moov.sdk.models.components.GeneratedByAccountID}</li>
-     * <li>{@code io.moov.sdk.models.components.GeneratedByBankAccountID}</li>
-     * </ul>
-     * 
-     * <p>Use {@code instanceof} to determine what type is returned. For example:
-     * 
-     * <pre>
-     * if (obj.value() instanceof String) {
-     *     String answer = (String) obj.value();
-     *     System.out.println("answer=" + answer);
-     * }
-     * </pre>
-     * 
-     * @return value of oneOf type
-     **/ 
-    public java.lang.Object value() {
-        return value.value();
-    }    
-    
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
+    public GeneratedBy withTransferID(String transferID) {
+        Utils.checkNotNull(transferID, "transferID");
+        this.transferID = Optional.ofNullable(transferID);
+        return this;
+    }
+
+
+    public GeneratedBy withTransferID(Optional<String> transferID) {
+        Utils.checkNotNull(transferID, "transferID");
+        this.transferID = transferID;
+        return this;
+    }
+
+    public GeneratedBy withCardID(String cardID) {
+        Utils.checkNotNull(cardID, "cardID");
+        this.cardID = Optional.ofNullable(cardID);
+        return this;
+    }
+
+
+    public GeneratedBy withCardID(Optional<String> cardID) {
+        Utils.checkNotNull(cardID, "cardID");
+        this.cardID = cardID;
+        return this;
+    }
+
+    public GeneratedBy withDisputeID(String disputeID) {
+        Utils.checkNotNull(disputeID, "disputeID");
+        this.disputeID = Optional.ofNullable(disputeID);
+        return this;
+    }
+
+
+    public GeneratedBy withDisputeID(Optional<String> disputeID) {
+        Utils.checkNotNull(disputeID, "disputeID");
+        this.disputeID = disputeID;
+        return this;
+    }
+
+    public GeneratedBy withAccountID(String accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = Optional.ofNullable(accountID);
+        return this;
+    }
+
+
+    public GeneratedBy withAccountID(Optional<String> accountID) {
+        Utils.checkNotNull(accountID, "accountID");
+        this.accountID = accountID;
+        return this;
+    }
+
+    public GeneratedBy withBankAccountID(String bankAccountID) {
+        Utils.checkNotNull(bankAccountID, "bankAccountID");
+        this.bankAccountID = Optional.ofNullable(bankAccountID);
+        return this;
+    }
+
+
+    public GeneratedBy withBankAccountID(Optional<String> bankAccountID) {
+        Utils.checkNotNull(bankAccountID, "bankAccountID");
+        this.bankAccountID = bankAccountID;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -89,32 +172,119 @@ public class GeneratedBy {
             return false;
         }
         GeneratedBy other = (GeneratedBy) o;
-        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
+        return 
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.cardID, other.cardID) &&
+            Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.bankAccountID, other.bankAccountID);
     }
     
     @Override
     public int hashCode() {
-        return Utils.enhancedHash(value.value());
-    }
-    
-    @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<GeneratedBy> {
-
-        public _Deserializer() {
-            super(GeneratedBy.class, false,
-                  TypeReferenceWithShape.of(new TypeReference<GeneratedByBankAccountID>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<GeneratedByAccountID>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<GeneratedByDisputeID>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<GeneratedByCardID>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<GeneratedByTransferID>() {}, JsonShape.DEFAULT));
-        }
+        return Utils.enhancedHash(
+            transferID, cardID, disputeID,
+            accountID, bankAccountID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GeneratedBy.class,
-                "value", value);
+                "transferID", transferID,
+                "cardID", cardID,
+                "disputeID", disputeID,
+                "accountID", accountID,
+                "bankAccountID", bankAccountID);
     }
- 
-}
 
+    @SuppressWarnings("UnusedReturnValue")
+    public final static class Builder {
+
+        private Optional<String> transferID = Optional.empty();
+
+        private Optional<String> cardID = Optional.empty();
+
+        private Optional<String> disputeID = Optional.empty();
+
+        private Optional<String> accountID = Optional.empty();
+
+        private Optional<String> bankAccountID = Optional.empty();
+
+        private Builder() {
+          // force use of static builder() method
+        }
+
+
+        public Builder transferID(String transferID) {
+            Utils.checkNotNull(transferID, "transferID");
+            this.transferID = Optional.ofNullable(transferID);
+            return this;
+        }
+
+        public Builder transferID(Optional<String> transferID) {
+            Utils.checkNotNull(transferID, "transferID");
+            this.transferID = transferID;
+            return this;
+        }
+
+
+        public Builder cardID(String cardID) {
+            Utils.checkNotNull(cardID, "cardID");
+            this.cardID = Optional.ofNullable(cardID);
+            return this;
+        }
+
+        public Builder cardID(Optional<String> cardID) {
+            Utils.checkNotNull(cardID, "cardID");
+            this.cardID = cardID;
+            return this;
+        }
+
+
+        public Builder disputeID(String disputeID) {
+            Utils.checkNotNull(disputeID, "disputeID");
+            this.disputeID = Optional.ofNullable(disputeID);
+            return this;
+        }
+
+        public Builder disputeID(Optional<String> disputeID) {
+            Utils.checkNotNull(disputeID, "disputeID");
+            this.disputeID = disputeID;
+            return this;
+        }
+
+
+        public Builder accountID(String accountID) {
+            Utils.checkNotNull(accountID, "accountID");
+            this.accountID = Optional.ofNullable(accountID);
+            return this;
+        }
+
+        public Builder accountID(Optional<String> accountID) {
+            Utils.checkNotNull(accountID, "accountID");
+            this.accountID = accountID;
+            return this;
+        }
+
+
+        public Builder bankAccountID(String bankAccountID) {
+            Utils.checkNotNull(bankAccountID, "bankAccountID");
+            this.bankAccountID = Optional.ofNullable(bankAccountID);
+            return this;
+        }
+
+        public Builder bankAccountID(Optional<String> bankAccountID) {
+            Utils.checkNotNull(bankAccountID, "bankAccountID");
+            this.bankAccountID = bankAccountID;
+            return this;
+        }
+
+        public GeneratedBy build() {
+
+            return new GeneratedBy(
+                transferID, cardID, disputeID,
+                accountID, bankAccountID);
+        }
+
+    }
+}

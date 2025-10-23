@@ -9,12 +9,13 @@
 * [upload](#upload) -   Upload a new PNG, JPEG, or WebP image with optional metadata. 
   Duplicate images, and requests larger than 16MB will be rejected.
 * [getMetadata](#getmetadata) - Retrieve metadata for a specific image by its ID.
-* [update](#update) - Update an existing image and/or its metadata.
+* [update](#update) - Replace an existing image and, optionally, its metadata.
 
-Duplicate images, and requests larger than 16MB will be rejected. Omit any
-form parts you do not wish to update. Existing metadata can be cleared by
-sending `null` for the `metadata` form part.
+This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
+the metadata form section to keep existing metadata, or send `null` to clear it. 
+Duplicate images, and requests larger than 16MB will be rejected.
 * [delete](#delete) - Permanently delete an image by its ID.
+* [updateMetadata](#updatemetadata) - Replace the metadata for an existing image.
 * [getPublic](#getpublic) - Get an image by its public ID.
 
 ## list
@@ -198,24 +199,25 @@ public class Application {
 
 ## update
 
-Update an existing image and/or its metadata.
+Replace an existing image and, optionally, its metadata.
 
-Duplicate images, and requests larger than 16MB will be rejected. Omit any
-form parts you do not wish to update. Existing metadata can be cleared by
-sending `null` for the `metadata` form part.
+This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
+the metadata form section to keep existing metadata, or send `null` to clear it. 
+Duplicate images, and requests larger than 16MB will be rejected.
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="updateImage" method="patch" path="/accounts/{accountID}/images/{imageID}" -->
+<!-- UsageSnippet language="java" operationID="updateImage" method="put" path="/accounts/{accountID}/images/{imageID}" -->
 ```java
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.ImageUpdateRequestMultiPart;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.ImageRequestValidationError;
 import io.moov.sdk.models.operations.UpdateImageResponse;
+import io.moov.sdk.utils.Utils;
+import java.io.FileInputStream;
 import java.lang.Exception;
 
 public class Application {
@@ -234,6 +236,10 @@ public class Application {
                 .accountID("310f4f19-45cf-4429-9aae-8e93827ecb0d")
                 .imageID("8ef109f8-5a61-4355-b2e4-b8ac2f6f6f47")
                 .imageUpdateRequestMultiPart(ImageUpdateRequestMultiPart.builder()
+                    .image(ImageUpdateRequestMultiPartImage.builder()
+                        .fileName("example.file")
+                        .content(Utils.readBytesAndClose(new FileInputStream("example.file")))
+                        .build())
                     .build())
                 .call();
 
@@ -316,6 +322,70 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/GenericError | 400, 409                   | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## updateMetadata
+
+Replace the metadata for an existing image.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="updateImageMetadata" method="put" path="/accounts/{accountID}/images/{imageID}/metadata" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.ImageMetadataRequest;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.ImageMetadataValidationError;
+import io.moov.sdk.models.operations.UpdateImageMetadataResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, ImageMetadataValidationError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        UpdateImageMetadataResponse res = sdk.images().updateMetadata()
+                .accountID("58c3c937-e648-49c5-88be-6225cca35af1")
+                .imageID("d957e703-ecd4-48ac-9c14-c0ecf1b496f0")
+                .imageMetadataRequest(ImageMetadataRequest.builder()
+                    .build())
+                .call();
+
+        if (res.imageMetadata().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `accountID`                                                             | *String*                                                                | :heavy_check_mark:                                                      | N/A                                                                     |
+| `imageID`                                                               | *String*                                                                | :heavy_check_mark:                                                      | N/A                                                                     |
+| `imageMetadataRequest`                                                  | [ImageMetadataRequest](../../models/components/ImageMetadataRequest.md) | :heavy_check_mark:                                                      | N/A                                                                     |
+
+### Response
+
+**[UpdateImageMetadataResponse](../../models/operations/UpdateImageMetadataResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| models/errors/GenericError                 | 400, 409                                   | application/json                           |
+| models/errors/ImageMetadataValidationError | 422                                        | application/json                           |
+| models/errors/APIException                 | 4XX, 5XX                                   | \*/\*                                      |
 
 ## getPublic
 

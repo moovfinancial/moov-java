@@ -12,9 +12,9 @@ import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.components.ImageMetadata;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.ImageRequestValidationError;
-import io.moov.sdk.models.operations.UpdateImageRequest;
-import io.moov.sdk.models.operations.UpdateImageResponse;
+import io.moov.sdk.models.errors.ImageMetadataValidationError;
+import io.moov.sdk.models.operations.UpdateImageMetadataRequest;
+import io.moov.sdk.models.operations.UpdateImageMetadataResponse;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -34,7 +34,7 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-public class UpdateImage {
+public class UpdateImageMetadata {
 
     static abstract class Base {
         final SDKConfiguration sdkConfiguration;
@@ -59,7 +59,7 @@ public class UpdateImage {
             return new BeforeRequestContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "updateImage",
+                    "updateImageMetadata",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -68,7 +68,7 @@ public class UpdateImage {
             return new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "updateImage",
+                    "updateImageMetadata",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -77,7 +77,7 @@ public class UpdateImage {
             return new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "updateImage",
+                    "updateImageMetadata",
                     java.util.Optional.empty(),
                     securitySource());
         }
@@ -85,7 +85,7 @@ public class UpdateImage {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/accounts/{accountID}/images/{imageID}",
+                    "/accounts/{accountID}/images/{imageID}/metadata",
                     request, this.sdkConfiguration.globals);
             HTTPRequest req = new HTTPRequest(url, "PUT");
             Object convertedRequest = Utils.convertToShape(
@@ -94,8 +94,8 @@ public class UpdateImage {
                     typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
-                    "imageUpdateRequestMultiPart",
-                    "multipart",
+                    "imageMetadataRequest",
+                    "json",
                     false);
             if (serializedRequestBody == null) {
                 throw new IllegalArgumentException("Request body is required");
@@ -112,13 +112,13 @@ public class UpdateImage {
     }
 
     public static class Sync extends Base
-            implements RequestOperation<UpdateImageRequest, UpdateImageResponse> {
+            implements RequestOperation<UpdateImageMetadataRequest, UpdateImageMetadataResponse> {
         public Sync(SDKConfiguration sdkConfiguration, Headers _headers) {
             super(sdkConfiguration, _headers);
         }
 
-        private HttpRequest onBuildRequest(UpdateImageRequest request) throws Exception {
-            HttpRequest req = buildRequest(request, UpdateImageRequest.class, new TypeReference<UpdateImageRequest>() {});
+        private HttpRequest onBuildRequest(UpdateImageMetadataRequest request) throws Exception {
+            HttpRequest req = buildRequest(request, UpdateImageMetadataRequest.class, new TypeReference<UpdateImageMetadataRequest>() {});
             return sdkConfiguration.hooks().beforeRequest(createBeforeRequestContext(), req);
         }
 
@@ -134,7 +134,7 @@ public class UpdateImage {
         }
 
         @Override
-        public HttpResponse<InputStream> doRequest(UpdateImageRequest request) {
+        public HttpResponse<InputStream> doRequest(UpdateImageMetadataRequest request) {
             HttpRequest r = unchecked(() -> onBuildRequest(request)).get();
             HttpResponse<InputStream> httpRes;
             try {
@@ -153,19 +153,19 @@ public class UpdateImage {
 
 
         @Override
-        public UpdateImageResponse handleResponse(HttpResponse<InputStream> response) {
+        public UpdateImageMetadataResponse handleResponse(HttpResponse<InputStream> response) {
             String contentType = response
                     .headers()
                     .firstValue("Content-Type")
                     .orElse("application/octet-stream");
-            UpdateImageResponse.Builder resBuilder =
-                    UpdateImageResponse
+            UpdateImageMetadataResponse.Builder resBuilder =
+                    UpdateImageMetadataResponse
                             .builder()
                             .contentType(contentType)
                             .statusCode(response.statusCode())
                             .rawResponse(response);
 
-            UpdateImageResponse res = resBuilder.build();
+            UpdateImageMetadataResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 res.withHeaders(response.headers().map());
@@ -186,7 +186,7 @@ public class UpdateImage {
             if (Utils.statusCodeMatches(response.statusCode(), "422")) {
                 res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    throw ImageRequestValidationError.from(response);
+                    throw ImageMetadataValidationError.from(response);
                 } else {
                     throw APIException.from("Unexpected content-type received: " + contentType, response);
                 }

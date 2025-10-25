@@ -17,7 +17,7 @@ import java.lang.String;
  */
 public class IndustryTaxonomy {
     /**
-     * URL-safe identifier for the industry
+     * Classification identifier for the industry.
      */
     @JsonProperty("industry")
     private String industry;
@@ -66,7 +66,7 @@ public class IndustryTaxonomy {
     }
 
     /**
-     * URL-safe identifier for the industry
+     * Classification identifier for the industry.
      */
     @JsonIgnore
     public String industry() {
@@ -111,7 +111,7 @@ public class IndustryTaxonomy {
 
 
     /**
-     * URL-safe identifier for the industry
+     * Classification identifier for the industry.
      */
     public IndustryTaxonomy withIndustry(String industry) {
         Utils.checkNotNull(industry, "industry");
@@ -208,7 +208,7 @@ public class IndustryTaxonomy {
 
 
         /**
-         * URL-safe identifier for the industry
+         * Classification identifier for the industry.
          */
         public Builder industry(String industry) {
             Utils.checkNotNull(industry, "industry");

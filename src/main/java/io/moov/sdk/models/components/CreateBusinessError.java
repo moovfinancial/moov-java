@@ -66,6 +66,15 @@ public class CreateBusinessError {
     @JsonProperty("industryCodes")
     private Optional<? extends CreateBusinessErrorIndustryCodes> industryCodes;
 
+    /**
+     * Classification identifier for the industry. Use the [GET
+     * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+     * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("industry")
+    private Optional<String> industry;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("primaryRegulator")
@@ -83,6 +92,7 @@ public class CreateBusinessError {
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("taxID") Optional<? extends CreateBusinessErrorTaxID> taxID,
             @JsonProperty("industryCodes") Optional<? extends CreateBusinessErrorIndustryCodes> industryCodes,
+            @JsonProperty("industry") Optional<String> industry,
             @JsonProperty("primaryRegulator") Optional<String> primaryRegulator) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
         Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
@@ -94,6 +104,7 @@ public class CreateBusinessError {
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(taxID, "taxID");
         Utils.checkNotNull(industryCodes, "industryCodes");
+        Utils.checkNotNull(industry, "industry");
         Utils.checkNotNull(primaryRegulator, "primaryRegulator");
         this.legalBusinessName = legalBusinessName;
         this.doingBusinessAs = doingBusinessAs;
@@ -105,6 +116,7 @@ public class CreateBusinessError {
         this.description = description;
         this.taxID = taxID;
         this.industryCodes = industryCodes;
+        this.industry = industry;
         this.primaryRegulator = primaryRegulator;
     }
     
@@ -112,7 +124,7 @@ public class CreateBusinessError {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -167,6 +179,16 @@ public class CreateBusinessError {
     @JsonIgnore
     public Optional<CreateBusinessErrorIndustryCodes> industryCodes() {
         return (Optional<CreateBusinessErrorIndustryCodes>) industryCodes;
+    }
+
+    /**
+     * Classification identifier for the industry. Use the [GET
+     * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+     * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+     */
+    @JsonIgnore
+    public Optional<String> industry() {
+        return industry;
     }
 
     @JsonIgnore
@@ -309,6 +331,29 @@ public class CreateBusinessError {
         return this;
     }
 
+    /**
+     * Classification identifier for the industry. Use the [GET
+     * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+     * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+     */
+    public CreateBusinessError withIndustry(String industry) {
+        Utils.checkNotNull(industry, "industry");
+        this.industry = Optional.ofNullable(industry);
+        return this;
+    }
+
+
+    /**
+     * Classification identifier for the industry. Use the [GET
+     * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+     * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+     */
+    public CreateBusinessError withIndustry(Optional<String> industry) {
+        Utils.checkNotNull(industry, "industry");
+        this.industry = industry;
+        return this;
+    }
+
     public CreateBusinessError withPrimaryRegulator(String primaryRegulator) {
         Utils.checkNotNull(primaryRegulator, "primaryRegulator");
         this.primaryRegulator = Optional.ofNullable(primaryRegulator);
@@ -342,6 +387,7 @@ public class CreateBusinessError {
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.taxID, other.taxID) &&
             Utils.enhancedDeepEquals(this.industryCodes, other.industryCodes) &&
+            Utils.enhancedDeepEquals(this.industry, other.industry) &&
             Utils.enhancedDeepEquals(this.primaryRegulator, other.primaryRegulator);
     }
     
@@ -351,7 +397,7 @@ public class CreateBusinessError {
             legalBusinessName, doingBusinessAs, businessType,
             address, phone, email,
             website, description, taxID,
-            industryCodes, primaryRegulator);
+            industryCodes, industry, primaryRegulator);
     }
     
     @Override
@@ -367,6 +413,7 @@ public class CreateBusinessError {
                 "description", description,
                 "taxID", taxID,
                 "industryCodes", industryCodes,
+                "industry", industry,
                 "primaryRegulator", primaryRegulator);
     }
 
@@ -392,6 +439,8 @@ public class CreateBusinessError {
         private Optional<? extends CreateBusinessErrorTaxID> taxID = Optional.empty();
 
         private Optional<? extends CreateBusinessErrorIndustryCodes> industryCodes = Optional.empty();
+
+        private Optional<String> industry = Optional.empty();
 
         private Optional<String> primaryRegulator = Optional.empty();
 
@@ -530,6 +579,29 @@ public class CreateBusinessError {
         }
 
 
+        /**
+         * Classification identifier for the industry. Use the [GET
+         * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+         * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+         */
+        public Builder industry(String industry) {
+            Utils.checkNotNull(industry, "industry");
+            this.industry = Optional.ofNullable(industry);
+            return this;
+        }
+
+        /**
+         * Classification identifier for the industry. Use the [GET
+         * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+         * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+         */
+        public Builder industry(Optional<String> industry) {
+            Utils.checkNotNull(industry, "industry");
+            this.industry = industry;
+            return this;
+        }
+
+
         public Builder primaryRegulator(String primaryRegulator) {
             Utils.checkNotNull(primaryRegulator, "primaryRegulator");
             this.primaryRegulator = Optional.ofNullable(primaryRegulator);
@@ -548,7 +620,7 @@ public class CreateBusinessError {
                 legalBusinessName, doingBusinessAs, businessType,
                 address, phone, email,
                 website, description, taxID,
-                industryCodes, primaryRegulator);
+                industryCodes, industry, primaryRegulator);
         }
 
     }

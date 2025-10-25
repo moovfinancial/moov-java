@@ -373,6 +373,7 @@ public class Application {
                                 .sic("7991")
                                 .mcc("7997")
                                 .build())
+                            .industry("electronics-appliances")
                             .build())
                         .build())
                     .metadata(Map.ofEntries(

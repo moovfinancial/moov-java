@@ -78,6 +78,15 @@ public class PatchBusiness {
     private Optional<? extends IndustryCodes> industryCodes;
 
     /**
+     * Classification identifier for the industry. Use the [GET
+     * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+     * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("industry")
+    private Optional<String> industry;
+
+    /**
      * If the business is a financial institution, this field describes its primary regulator.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -97,6 +106,7 @@ public class PatchBusiness {
             @JsonProperty("taxID") Optional<? extends TaxIDUpdate> taxID,
             @JsonProperty("ownersProvided") Optional<Boolean> ownersProvided,
             @JsonProperty("industryCodes") Optional<? extends IndustryCodes> industryCodes,
+            @JsonProperty("industry") Optional<String> industry,
             @JsonProperty("primaryRegulator") Optional<? extends PrimaryRegulator> primaryRegulator) {
         Utils.checkNotNull(legalBusinessName, "legalBusinessName");
         Utils.checkNotNull(doingBusinessAs, "doingBusinessAs");
@@ -109,6 +119,7 @@ public class PatchBusiness {
         Utils.checkNotNull(taxID, "taxID");
         Utils.checkNotNull(ownersProvided, "ownersProvided");
         Utils.checkNotNull(industryCodes, "industryCodes");
+        Utils.checkNotNull(industry, "industry");
         Utils.checkNotNull(primaryRegulator, "primaryRegulator");
         this.legalBusinessName = legalBusinessName;
         this.doingBusinessAs = doingBusinessAs;
@@ -121,6 +132,7 @@ public class PatchBusiness {
         this.taxID = taxID;
         this.ownersProvided = ownersProvided;
         this.industryCodes = industryCodes;
+        this.industry = industry;
         this.primaryRegulator = primaryRegulator;
     }
     
@@ -128,7 +140,8 @@ public class PatchBusiness {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -196,6 +209,16 @@ public class PatchBusiness {
     @JsonIgnore
     public Optional<IndustryCodes> industryCodes() {
         return (Optional<IndustryCodes>) industryCodes;
+    }
+
+    /**
+     * Classification identifier for the industry. Use the [GET
+     * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+     * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+     */
+    @JsonIgnore
+    public Optional<String> industry() {
+        return industry;
     }
 
     /**
@@ -370,6 +393,29 @@ public class PatchBusiness {
     }
 
     /**
+     * Classification identifier for the industry. Use the [GET
+     * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+     * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+     */
+    public PatchBusiness withIndustry(String industry) {
+        Utils.checkNotNull(industry, "industry");
+        this.industry = Optional.ofNullable(industry);
+        return this;
+    }
+
+
+    /**
+     * Classification identifier for the industry. Use the [GET
+     * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+     * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+     */
+    public PatchBusiness withIndustry(Optional<String> industry) {
+        Utils.checkNotNull(industry, "industry");
+        this.industry = industry;
+        return this;
+    }
+
+    /**
      * If the business is a financial institution, this field describes its primary regulator.
      */
     public PatchBusiness withPrimaryRegulator(PrimaryRegulator primaryRegulator) {
@@ -409,6 +455,7 @@ public class PatchBusiness {
             Utils.enhancedDeepEquals(this.taxID, other.taxID) &&
             Utils.enhancedDeepEquals(this.ownersProvided, other.ownersProvided) &&
             Utils.enhancedDeepEquals(this.industryCodes, other.industryCodes) &&
+            Utils.enhancedDeepEquals(this.industry, other.industry) &&
             Utils.enhancedDeepEquals(this.primaryRegulator, other.primaryRegulator);
     }
     
@@ -418,7 +465,8 @@ public class PatchBusiness {
             legalBusinessName, doingBusinessAs, businessType,
             address, phone, email,
             website, description, taxID,
-            ownersProvided, industryCodes, primaryRegulator);
+            ownersProvided, industryCodes, industry,
+            primaryRegulator);
     }
     
     @Override
@@ -435,6 +483,7 @@ public class PatchBusiness {
                 "taxID", taxID,
                 "ownersProvided", ownersProvided,
                 "industryCodes", industryCodes,
+                "industry", industry,
                 "primaryRegulator", primaryRegulator);
     }
 
@@ -462,6 +511,8 @@ public class PatchBusiness {
         private Optional<Boolean> ownersProvided = Optional.empty();
 
         private Optional<? extends IndustryCodes> industryCodes = Optional.empty();
+
+        private Optional<String> industry = Optional.empty();
 
         private Optional<? extends PrimaryRegulator> primaryRegulator = Optional.empty();
 
@@ -628,6 +679,29 @@ public class PatchBusiness {
 
 
         /**
+         * Classification identifier for the industry. Use the [GET
+         * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+         * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+         */
+        public Builder industry(String industry) {
+            Utils.checkNotNull(industry, "industry");
+            this.industry = Optional.ofNullable(industry);
+            return this;
+        }
+
+        /**
+         * Classification identifier for the industry. Use the [GET
+         * industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to
+         * retrieve an array of valid industry details for a merchant, inducing all industry field values.
+         */
+        public Builder industry(Optional<String> industry) {
+            Utils.checkNotNull(industry, "industry");
+            this.industry = industry;
+            return this;
+        }
+
+
+        /**
          * If the business is a financial institution, this field describes its primary regulator.
          */
         public Builder primaryRegulator(PrimaryRegulator primaryRegulator) {
@@ -651,7 +725,8 @@ public class PatchBusiness {
                 legalBusinessName, doingBusinessAs, businessType,
                 address, phone, email,
                 website, description, taxID,
-                ownersProvided, industryCodes, primaryRegulator);
+                ownersProvided, industryCodes, industry,
+                primaryRegulator);
         }
 
     }

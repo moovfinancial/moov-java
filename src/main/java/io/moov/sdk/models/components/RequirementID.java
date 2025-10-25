@@ -37,6 +37,7 @@ public enum RequirementID {
     BUSINESS_OWNERS("business.owners"),
     BUSINESS_CLASSIFICATION("business.classification"),
     BUSINESS_INDUSTRY_CODE_MCC("business.industry-code-mcc"),
+    BUSINESS_INDUSTRY("business.industry"),
     BUSINESS_INDICATE_OWNERS_PROVIDED("business.indicate-owners-provided"),
     BUSINESS_AVERAGE_TRANSACTION_SIZE("business.average-transaction-size"),
     BUSINESS_MAX_TRANSACTION_SIZE("business.max-transaction-size"),

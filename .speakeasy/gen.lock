@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: c744ed8ad01a50c30ae656f1467f0d16
+  docChecksum: 16e74a23655421653a8a77a79bf725e5
   docVersion: latest
-  speakeasyVersion: 1.639.3
+  speakeasyVersion: 1.640.0
   generationVersion: 2.730.5
-  releaseVersion: 0.29.4
-  configChecksum: 4e590c7c7f00a1eb33cec5fd551ccf10
+  releaseVersion: 0.29.5
+  configChecksum: ae1d257ca0e51a146074a3fa91b3324d
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -4777,4 +4777,3 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.accounts.create()`: \n  *  `request.profile.business.industry` **Added**\n  *  `response.profile.business.industry` **Added**\n  *  `error.profile.business.industry` **Added**\n* `moov.accounts.list()`:  `response.[].profile.business.industry` **Added**\n* `moov.accounts.get()`:  `response.profile.business.industry` **Added**\n* `moov.accounts.update()`: \n  *  `request.patchaccount.profile.business.industry` **Added**\n  *  `response.profile.business.industry` **Added**\n  *  `error.profile.business.industry` **Added**\n* `moov.onboarding.createInvite()`: \n  *  `request.prefill.profile.business.industry` **Added**\n  *  `response.prefill.profile.business.industry` **Added**\n* `moov.onboarding.listInvites()`:  `response.[].prefill.profile.business.industry` **Added**\n* `moov.onboarding.getInvite()`:  `response.prefill.profile.business.industry` **Added**\n"

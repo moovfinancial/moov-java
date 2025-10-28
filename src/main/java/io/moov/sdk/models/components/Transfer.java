@@ -142,7 +142,9 @@ public class Transfer {
     @JsonProperty("disputes")
     private Optional<? extends List<CardAcquiringDispute>> disputes;
 
-
+    /**
+     * ID of the sweep that created this transfer.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sweepID")
     private Optional<String> sweepID;
@@ -423,6 +425,9 @@ public class Transfer {
         return (Optional<List<CardAcquiringDispute>>) disputes;
     }
 
+    /**
+     * ID of the sweep that created this transfer.
+     */
     @JsonIgnore
     public Optional<String> sweepID() {
         return sweepID;
@@ -750,6 +755,9 @@ public class Transfer {
         return this;
     }
 
+    /**
+     * ID of the sweep that created this transfer.
+     */
     public Transfer withSweepID(String sweepID) {
         Utils.checkNotNull(sweepID, "sweepID");
         this.sweepID = Optional.ofNullable(sweepID);
@@ -757,6 +765,9 @@ public class Transfer {
     }
 
 
+    /**
+     * ID of the sweep that created this transfer.
+     */
     public Transfer withSweepID(Optional<String> sweepID) {
         Utils.checkNotNull(sweepID, "sweepID");
         this.sweepID = sweepID;
@@ -1279,12 +1290,18 @@ public class Transfer {
         }
 
 
+        /**
+         * ID of the sweep that created this transfer.
+         */
         public Builder sweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = Optional.ofNullable(sweepID);
             return this;
         }
 
+        /**
+         * ID of the sweep that created this transfer.
+         */
         public Builder sweepID(Optional<String> sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = sweepID;

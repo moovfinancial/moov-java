@@ -202,6 +202,9 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::disputes);
     }
 
+    /**
+     * ID of the sweep that created this transfer.
+     */
     @Deprecated
     public Optional<String> sweepID() {
         return data().flatMap(Data::sweepID);
@@ -373,7 +376,9 @@ public class Transfer extends MoovError {
         @JsonProperty("disputes")
         private Optional<? extends List<CardAcquiringDispute>> disputes;
 
-
+        /**
+         * ID of the sweep that created this transfer.
+         */
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("sweepID")
         private Optional<String> sweepID;
@@ -654,6 +659,9 @@ public class Transfer extends MoovError {
             return (Optional<List<CardAcquiringDispute>>) disputes;
         }
 
+        /**
+         * ID of the sweep that created this transfer.
+         */
         @JsonIgnore
         public Optional<String> sweepID() {
             return sweepID;
@@ -981,6 +989,9 @@ public class Transfer extends MoovError {
             return this;
         }
 
+        /**
+         * ID of the sweep that created this transfer.
+         */
         public Data withSweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = Optional.ofNullable(sweepID);
@@ -988,6 +999,9 @@ public class Transfer extends MoovError {
         }
 
 
+        /**
+         * ID of the sweep that created this transfer.
+         */
         public Data withSweepID(Optional<String> sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = sweepID;
@@ -1510,12 +1524,18 @@ public class Transfer extends MoovError {
             }
 
 
+            /**
+             * ID of the sweep that created this transfer.
+             */
             public Builder sweepID(String sweepID) {
                 Utils.checkNotNull(sweepID, "sweepID");
                 this.sweepID = Optional.ofNullable(sweepID);
                 return this;
             }
 
+            /**
+             * ID of the sweep that created this transfer.
+             */
             public Builder sweepID(Optional<String> sweepID) {
                 Utils.checkNotNull(sweepID, "sweepID");
                 this.sweepID = sweepID;

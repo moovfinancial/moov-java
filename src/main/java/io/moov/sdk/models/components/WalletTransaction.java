@@ -141,7 +141,9 @@ public class WalletTransaction {
     @JsonProperty("availableBalanceDecimal")
     private Optional<String> availableBalanceDecimal;
 
-
+    /**
+     * ID of the sweep this transaction accrued in.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sweepID")
     private Optional<String> sweepID;
@@ -381,6 +383,9 @@ public class WalletTransaction {
         return availableBalanceDecimal;
     }
 
+    /**
+     * ID of the sweep this transaction accrued in.
+     */
     @JsonIgnore
     public Optional<String> sweepID() {
         return sweepID;
@@ -596,6 +601,9 @@ public class WalletTransaction {
         return this;
     }
 
+    /**
+     * ID of the sweep this transaction accrued in.
+     */
     public WalletTransaction withSweepID(String sweepID) {
         Utils.checkNotNull(sweepID, "sweepID");
         this.sweepID = Optional.ofNullable(sweepID);
@@ -603,6 +611,9 @@ public class WalletTransaction {
     }
 
 
+    /**
+     * ID of the sweep this transaction accrued in.
+     */
     public WalletTransaction withSweepID(Optional<String> sweepID) {
         Utils.checkNotNull(sweepID, "sweepID");
         this.sweepID = sweepID;
@@ -946,12 +957,18 @@ public class WalletTransaction {
         }
 
 
+        /**
+         * ID of the sweep this transaction accrued in.
+         */
         public Builder sweepID(String sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = Optional.ofNullable(sweepID);
             return this;
         }
 
+        /**
+         * ID of the sweep this transaction accrued in.
+         */
         public Builder sweepID(Optional<String> sweepID) {
             Utils.checkNotNull(sweepID, "sweepID");
             this.sweepID = sweepID;

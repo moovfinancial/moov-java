@@ -25,6 +25,12 @@ public class ImageMetadata {
     private String imageID;
 
     /**
+     * The ID used to get an image with the public endpoint.
+     */
+    @JsonProperty("publicID")
+    private String publicID;
+
+    /**
      * Alternative text for the image.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -49,16 +55,19 @@ public class ImageMetadata {
     @JsonCreator
     public ImageMetadata(
             @JsonProperty("imageID") String imageID,
+            @JsonProperty("publicID") String publicID,
             @JsonProperty("altText") Optional<String> altText,
             @JsonProperty("link") String link,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
         Utils.checkNotNull(imageID, "imageID");
+        Utils.checkNotNull(publicID, "publicID");
         Utils.checkNotNull(altText, "altText");
         Utils.checkNotNull(link, "link");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
         this.imageID = imageID;
+        this.publicID = publicID;
         this.altText = altText;
         this.link = link;
         this.createdOn = createdOn;
@@ -67,16 +76,25 @@ public class ImageMetadata {
     
     public ImageMetadata(
             String imageID,
+            String publicID,
             String link,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(imageID, Optional.empty(), link,
-            createdOn, updatedOn);
+        this(imageID, publicID, Optional.empty(),
+            link, createdOn, updatedOn);
     }
 
     @JsonIgnore
     public String imageID() {
         return imageID;
+    }
+
+    /**
+     * The ID used to get an image with the public endpoint.
+     */
+    @JsonIgnore
+    public String publicID() {
+        return publicID;
     }
 
     /**
@@ -114,6 +132,15 @@ public class ImageMetadata {
     public ImageMetadata withImageID(String imageID) {
         Utils.checkNotNull(imageID, "imageID");
         this.imageID = imageID;
+        return this;
+    }
+
+    /**
+     * The ID used to get an image with the public endpoint.
+     */
+    public ImageMetadata withPublicID(String publicID) {
+        Utils.checkNotNull(publicID, "publicID");
+        this.publicID = publicID;
         return this;
     }
 
@@ -169,6 +196,7 @@ public class ImageMetadata {
         ImageMetadata other = (ImageMetadata) o;
         return 
             Utils.enhancedDeepEquals(this.imageID, other.imageID) &&
+            Utils.enhancedDeepEquals(this.publicID, other.publicID) &&
             Utils.enhancedDeepEquals(this.altText, other.altText) &&
             Utils.enhancedDeepEquals(this.link, other.link) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
@@ -178,14 +206,15 @@ public class ImageMetadata {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            imageID, altText, link,
-            createdOn, updatedOn);
+            imageID, publicID, altText,
+            link, createdOn, updatedOn);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ImageMetadata.class,
                 "imageID", imageID,
+                "publicID", publicID,
                 "altText", altText,
                 "link", link,
                 "createdOn", createdOn,
@@ -196,6 +225,8 @@ public class ImageMetadata {
     public final static class Builder {
 
         private String imageID;
+
+        private String publicID;
 
         private Optional<String> altText = Optional.empty();
 
@@ -213,6 +244,16 @@ public class ImageMetadata {
         public Builder imageID(String imageID) {
             Utils.checkNotNull(imageID, "imageID");
             this.imageID = imageID;
+            return this;
+        }
+
+
+        /**
+         * The ID used to get an image with the public endpoint.
+         */
+        public Builder publicID(String publicID) {
+            Utils.checkNotNull(publicID, "publicID");
+            this.publicID = publicID;
             return this;
         }
 
@@ -263,8 +304,8 @@ public class ImageMetadata {
         public ImageMetadata build() {
 
             return new ImageMetadata(
-                imageID, altText, link,
-                createdOn, updatedOn);
+                imageID, publicID, altText,
+                link, createdOn, updatedOn);
         }
 
     }

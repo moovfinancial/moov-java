@@ -58,6 +58,11 @@ public class IncurredFee {
     @JsonProperty("generatedBy")
     private Optional<? extends GeneratedBy> generatedBy;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("feeGroup")
+    private Optional<String> feeGroup;
+
     @JsonCreator
     public IncurredFee(
             @JsonProperty("feeID") Optional<String> feeID,
@@ -66,7 +71,8 @@ public class IncurredFee {
             @JsonProperty("createdOn") Optional<OffsetDateTime> createdOn,
             @JsonProperty("feeName") Optional<String> feeName,
             @JsonProperty("amount") Optional<? extends AmountDecimal> amount,
-            @JsonProperty("generatedBy") Optional<? extends GeneratedBy> generatedBy) {
+            @JsonProperty("generatedBy") Optional<? extends GeneratedBy> generatedBy,
+            @JsonProperty("feeGroup") Optional<String> feeGroup) {
         Utils.checkNotNull(feeID, "feeID");
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(walletID, "walletID");
@@ -74,6 +80,7 @@ public class IncurredFee {
         Utils.checkNotNull(feeName, "feeName");
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(generatedBy, "generatedBy");
+        Utils.checkNotNull(feeGroup, "feeGroup");
         this.feeID = feeID;
         this.accountID = accountID;
         this.walletID = walletID;
@@ -81,12 +88,13 @@ public class IncurredFee {
         this.feeName = feeName;
         this.amount = amount;
         this.generatedBy = generatedBy;
+        this.feeGroup = feeGroup;
     }
     
     public IncurredFee() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -127,6 +135,11 @@ public class IncurredFee {
     @JsonIgnore
     public Optional<GeneratedBy> generatedBy() {
         return (Optional<GeneratedBy>) generatedBy;
+    }
+
+    @JsonIgnore
+    public Optional<String> feeGroup() {
+        return feeGroup;
     }
 
     public static Builder builder() {
@@ -231,6 +244,19 @@ public class IncurredFee {
         return this;
     }
 
+    public IncurredFee withFeeGroup(String feeGroup) {
+        Utils.checkNotNull(feeGroup, "feeGroup");
+        this.feeGroup = Optional.ofNullable(feeGroup);
+        return this;
+    }
+
+
+    public IncurredFee withFeeGroup(Optional<String> feeGroup) {
+        Utils.checkNotNull(feeGroup, "feeGroup");
+        this.feeGroup = feeGroup;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -247,7 +273,8 @@ public class IncurredFee {
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.feeName, other.feeName) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
-            Utils.enhancedDeepEquals(this.generatedBy, other.generatedBy);
+            Utils.enhancedDeepEquals(this.generatedBy, other.generatedBy) &&
+            Utils.enhancedDeepEquals(this.feeGroup, other.feeGroup);
     }
     
     @Override
@@ -255,7 +282,7 @@ public class IncurredFee {
         return Utils.enhancedHash(
             feeID, accountID, walletID,
             createdOn, feeName, amount,
-            generatedBy);
+            generatedBy, feeGroup);
     }
     
     @Override
@@ -267,7 +294,8 @@ public class IncurredFee {
                 "createdOn", createdOn,
                 "feeName", feeName,
                 "amount", amount,
-                "generatedBy", generatedBy);
+                "generatedBy", generatedBy,
+                "feeGroup", feeGroup);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -286,6 +314,8 @@ public class IncurredFee {
         private Optional<? extends AmountDecimal> amount = Optional.empty();
 
         private Optional<? extends GeneratedBy> generatedBy = Optional.empty();
+
+        private Optional<String> feeGroup = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -388,12 +418,25 @@ public class IncurredFee {
             return this;
         }
 
+
+        public Builder feeGroup(String feeGroup) {
+            Utils.checkNotNull(feeGroup, "feeGroup");
+            this.feeGroup = Optional.ofNullable(feeGroup);
+            return this;
+        }
+
+        public Builder feeGroup(Optional<String> feeGroup) {
+            Utils.checkNotNull(feeGroup, "feeGroup");
+            this.feeGroup = feeGroup;
+            return this;
+        }
+
         public IncurredFee build() {
 
             return new IncurredFee(
                 feeID, accountID, walletID,
                 createdOn, feeName, amount,
-                generatedBy);
+                generatedBy, feeGroup);
         }
 
     }

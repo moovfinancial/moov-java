@@ -10,6 +10,9 @@ import io.moov.sdk.models.components.ListFeesFetchRequest;
 import io.moov.sdk.models.operations.CreateFeePlanAgreementsRequest;
 import io.moov.sdk.models.operations.CreateFeePlanAgreementsRequestBuilder;
 import io.moov.sdk.models.operations.CreateFeePlanAgreementsResponse;
+import io.moov.sdk.models.operations.GetResidualRequest;
+import io.moov.sdk.models.operations.GetResidualRequestBuilder;
+import io.moov.sdk.models.operations.GetResidualResponse;
 import io.moov.sdk.models.operations.ListFeePlanAgreementsRequest;
 import io.moov.sdk.models.operations.ListFeePlanAgreementsRequestBuilder;
 import io.moov.sdk.models.operations.ListFeePlanAgreementsResponse;
@@ -24,15 +27,24 @@ import io.moov.sdk.models.operations.ListPartnerPricingAgreementsResponse;
 import io.moov.sdk.models.operations.ListPartnerPricingRequest;
 import io.moov.sdk.models.operations.ListPartnerPricingRequestBuilder;
 import io.moov.sdk.models.operations.ListPartnerPricingResponse;
+import io.moov.sdk.models.operations.ListResidualFeesRequest;
+import io.moov.sdk.models.operations.ListResidualFeesRequestBuilder;
+import io.moov.sdk.models.operations.ListResidualFeesResponse;
+import io.moov.sdk.models.operations.ListResidualsRequest;
+import io.moov.sdk.models.operations.ListResidualsRequestBuilder;
+import io.moov.sdk.models.operations.ListResidualsResponse;
 import io.moov.sdk.models.operations.RetrieveFeesRequest;
 import io.moov.sdk.models.operations.RetrieveFeesRequestBuilder;
 import io.moov.sdk.models.operations.RetrieveFeesResponse;
 import io.moov.sdk.operations.CreateFeePlanAgreements;
+import io.moov.sdk.operations.GetResidual;
 import io.moov.sdk.operations.ListFeePlanAgreements;
 import io.moov.sdk.operations.ListFeePlans;
 import io.moov.sdk.operations.ListFeesFetch;
 import io.moov.sdk.operations.ListPartnerPricing;
 import io.moov.sdk.operations.ListPartnerPricingAgreements;
+import io.moov.sdk.operations.ListResidualFees;
+import io.moov.sdk.operations.ListResiduals;
 import io.moov.sdk.operations.RetrieveFees;
 import io.moov.sdk.utils.Headers;
 import java.lang.String;
@@ -333,6 +345,103 @@ public class FeePlans {
     public ListPartnerPricingAgreementsResponse listPartnerPricingAgreements(ListPartnerPricingAgreementsRequest request) {
         RequestOperation<ListPartnerPricingAgreementsRequest, ListPartnerPricingAgreementsResponse> operation
               = new ListPartnerPricingAgreements.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * List all residuals associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListResidualsRequestBuilder listResiduals() {
+        return new ListResidualsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * List all residuals associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListResidualsResponse listResiduals(ListResidualsRequest request) {
+        RequestOperation<ListResidualsRequest, ListResidualsResponse> operation
+              = new ListResiduals.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a residual associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @return The call builder
+     */
+    public GetResidualRequestBuilder getResidual() {
+        return new GetResidualRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a residual associated with an account.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param accountID 
+     * @param residualID 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public GetResidualResponse getResidual(String accountID, String residualID) {
+        GetResidualRequest request =
+            GetResidualRequest
+                .builder()
+                .accountID(accountID)
+                .residualID(residualID)
+                .build();
+        RequestOperation<GetResidualRequest, GetResidualResponse> operation
+              = new GetResidual.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * List all fees associated with a residual.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListResidualFeesRequestBuilder listResidualFees() {
+        return new ListResidualFeesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * List all fees associated with a residual.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListResidualFeesResponse listResidualFees(ListResidualFeesRequest request) {
+        RequestOperation<ListResidualFeesRequest, ListResidualFeesResponse> operation
+              = new ListResidualFees.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

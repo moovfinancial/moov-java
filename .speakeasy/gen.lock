@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 49b684e5b846a25668721accff7f1f24
+  docChecksum: 945e15373063a10a87573932ee10e0c4
   docVersion: latest
-  speakeasyVersion: 1.642.2
-  generationVersion: 2.731.6
-  releaseVersion: 0.29.6
-  configChecksum: 9a12c649c74921d073e374052d156017
+  speakeasyVersion: 1.644.0
+  generationVersion: 2.733.1
+  releaseVersion: 0.30.0
+  configChecksum: 0c5f6f4fbb9c33260dcdc91cf113c74c
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,14 +14,14 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.53.0
+    core: 3.53.1
     decimal: 0.0.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     flattening: 2.81.1
     globalSecurity: 2.83.1
     globalSecurityCallbacks: 0.1.0
-    globalServerURLs: 2.82.2
+    globalServerURLs: 2.83.0
     globals: 2.82.2
     hiddenGlobals: 0.1.0
     includes: 2.81.1
@@ -429,6 +429,7 @@ generatedFiles:
   - docs/models/components/RequirementError.md
   - docs/models/components/RequirementErrorCode.md
   - docs/models/components/RequirementID.md
+  - docs/models/components/Residual.md
   - docs/models/components/Responsibilities.md
   - docs/models/components/ReturnPolicyType.md
   - docs/models/components/Reversal.md
@@ -760,6 +761,8 @@ generatedFiles:
   - docs/models/operations/GetRefundResponse.md
   - docs/models/operations/GetRepresentativeRequest.md
   - docs/models/operations/GetRepresentativeResponse.md
+  - docs/models/operations/GetResidualRequest.md
+  - docs/models/operations/GetResidualResponse.md
   - docs/models/operations/GetScheduledOccurrenceRequest.md
   - docs/models/operations/GetScheduledOccurrenceResponse.md
   - docs/models/operations/GetSchedulesRequest.md
@@ -857,6 +860,10 @@ generatedFiles:
   - docs/models/operations/ListRefundsResponse.md
   - docs/models/operations/ListRepresentativesRequest.md
   - docs/models/operations/ListRepresentativesResponse.md
+  - docs/models/operations/ListResidualFeesRequest.md
+  - docs/models/operations/ListResidualFeesResponse.md
+  - docs/models/operations/ListResidualsRequest.md
+  - docs/models/operations/ListResidualsResponse.md
   - docs/models/operations/ListSchedulesRequest.md
   - docs/models/operations/ListSchedulesResponse.md
   - docs/models/operations/ListStatementsRequest.md
@@ -1428,6 +1435,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/RequirementError.java
   - src/main/java/io/moov/sdk/models/components/RequirementErrorCode.java
   - src/main/java/io/moov/sdk/models/components/RequirementID.java
+  - src/main/java/io/moov/sdk/models/components/Residual.java
   - src/main/java/io/moov/sdk/models/components/Responsibilities.java
   - src/main/java/io/moov/sdk/models/components/ReturnPolicyType.java
   - src/main/java/io/moov/sdk/models/components/Reversal.java
@@ -1831,6 +1839,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/GetRepresentativeRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetRepresentativeRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetRepresentativeResponse.java
+  - src/main/java/io/moov/sdk/models/operations/GetResidualRequest.java
+  - src/main/java/io/moov/sdk/models/operations/GetResidualRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/GetResidualResponse.java
   - src/main/java/io/moov/sdk/models/operations/GetScheduledOccurrenceRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetScheduledOccurrenceRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetScheduledOccurrenceResponse.java
@@ -1976,6 +1987,12 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/ListRepresentativesRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListRepresentativesRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListRepresentativesResponse.java
+  - src/main/java/io/moov/sdk/models/operations/ListResidualFeesRequest.java
+  - src/main/java/io/moov/sdk/models/operations/ListResidualFeesRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/ListResidualFeesResponse.java
+  - src/main/java/io/moov/sdk/models/operations/ListResidualsRequest.java
+  - src/main/java/io/moov/sdk/models/operations/ListResidualsRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/ListResidualsResponse.java
   - src/main/java/io/moov/sdk/models/operations/ListSchedulesRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListSchedulesRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListSchedulesResponse.java
@@ -2172,6 +2189,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/GetPublicImage.java
   - src/main/java/io/moov/sdk/operations/GetRefund.java
   - src/main/java/io/moov/sdk/operations/GetRepresentative.java
+  - src/main/java/io/moov/sdk/operations/GetResidual.java
   - src/main/java/io/moov/sdk/operations/GetScheduledOccurrence.java
   - src/main/java/io/moov/sdk/operations/GetSchedules.java
   - src/main/java/io/moov/sdk/operations/GetStatement.java
@@ -2220,6 +2238,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/ListReceipts.java
   - src/main/java/io/moov/sdk/operations/ListRefunds.java
   - src/main/java/io/moov/sdk/operations/ListRepresentatives.java
+  - src/main/java/io/moov/sdk/operations/ListResidualFees.java
+  - src/main/java/io/moov/sdk/operations/ListResiduals.java
   - src/main/java/io/moov/sdk/operations/ListSchedules.java
   - src/main/java/io/moov/sdk/operations/ListStatements.java
   - src/main/java/io/moov/sdk/operations/ListSweepConfigs.java
@@ -4775,14 +4795,48 @@ examples:
           application/json: {"error": "<value>"}
         "422":
           application/json: {}
+  listResiduals:
+    speakeasy-default-list-residuals:
+      parameters:
+        path:
+          accountID: "8b40b967-ae12-4851-8be2-7b0c39978ce7"
+        query:
+          skip: 60
+          count: 20
+        header:
+          X-Moov-Version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: [{"residualID": "e0bcab02-96d4-4555-9535-fff6f9fac05c", "partnerAccountID": "59fad78d-485c-4aa0-95e0-b6723b4489a3", "periodStart": "2025-08-23T18:39:55.611Z", "periodEnd": "2024-06-17T17:54:17.689Z", "merchantFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerCost": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}, "revenueShare": "2.25", "residualAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "moovShare": {"currency": "USD", "valueDecimal": "12.987654321"}, "createdOn": "2023-11-11T13:56:49.759Z", "updatedOn": "2024-07-25T04:59:02.000Z"}]
+  getResidual:
+    speakeasy-default-get-residual:
+      parameters:
+        path:
+          accountID: "4c308842-45d1-49c1-98be-7299848b1e20"
+          residualID: "5f30e43d-1fa8-4834-8788-05a3c27a40d4"
+        header:
+          X-Moov-Version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: {"residualID": "6969e439-dfcd-42de-bfb2-5c66b1163e3a", "partnerAccountID": "35af6ebf-647d-4b63-b996-dc1bfb4ac6d2", "periodStart": "2025-10-12T20:03:24.360Z", "periodEnd": "2024-10-08T00:08:30.005Z", "merchantFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerCost": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}, "revenueShare": "2.25", "residualAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "moovShare": {"currency": "USD", "valueDecimal": "12.987654321"}, "createdOn": "2025-05-15T10:09:57.129Z", "updatedOn": "2023-05-10T01:27:08.185Z"}
+  listResidualFees:
+    speakeasy-default-list-residual-fees:
+      parameters:
+        path:
+          accountID: "6b95293f-c3e7-42b5-98b7-fd9cc8d49685"
+          residualID: "8ecb1a63-25e0-41e7-a9c7-bb8a1cf63d1c"
+        query:
+          skip: 60
+          count: 20
+        header:
+          X-Moov-Version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Java SDK Changes Detected:
-  * `moov.feePlans.retrieveFees()`:  `response.[].feeGroup` **Added**
-  * `moov.feePlans.listFeesFetch()`:  `response.[].feeGroup` **Added**
-  * `moov.images.list()`:  `response.[].publicId` **Added**
-  * `moov.images.upload()`:  `response.publicid` **Added**
-  * `moov.images.getMetadata()`:  `response.publicid` **Added**
-  * `moov.images.update()`:  `response.publicid` **Added**
-  * `moov.images.updateMetadata()`:  `response.publicid` **Added**
+  * `moov.feePlans.listResiduals()`: **Added**
+  * `moov.feePlans.getResidual()`: **Added**
+  * `moov.feePlans.listResidualFees()`: **Added**

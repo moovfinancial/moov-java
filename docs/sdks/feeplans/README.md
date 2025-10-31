@@ -34,6 +34,18 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [listResiduals](#listresiduals) - List all residuals associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [getResidual](#getresidual) - Get a residual associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [listResidualFees](#listresidualfees) - List all fees associated with a residual.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ## listFeePlanAgreements
 
@@ -461,6 +473,194 @@ public class Application {
 ### Response
 
 **[ListPartnerPricingAgreementsResponse](../../models/operations/ListPartnerPricingAgreementsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## listResiduals
+
+List all residuals associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listResiduals" method="get" path="/accounts/{accountID}/residuals" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListResidualsRequest;
+import io.moov.sdk.models.operations.ListResidualsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListResidualsRequest req = ListResidualsRequest.builder()
+                .accountID("8b40b967-ae12-4851-8be2-7b0c39978ce7")
+                .skip(60L)
+                .count(20L)
+                .build();
+
+        ListResidualsResponse res = sdk.feePlans().listResiduals()
+                .request(req)
+                .call();
+
+        if (res.residuals().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `request`                                                               | [ListResidualsRequest](../../models/operations/ListResidualsRequest.md) | :heavy_check_mark:                                                      | The request object to use for the request.                              |
+
+### Response
+
+**[ListResidualsResponse](../../models/operations/ListResidualsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## getResidual
+
+Get a residual associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="getResidual" method="get" path="/accounts/{accountID}/residuals/{residualID}" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.GetResidualResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        GetResidualResponse res = sdk.feePlans().getResidual()
+                .accountID("4c308842-45d1-49c1-98be-7299848b1e20")
+                .residualID("5f30e43d-1fa8-4834-8788-05a3c27a40d4")
+                .call();
+
+        if (res.residual().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter          | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
+| `residualID`       | *String*           | :heavy_check_mark: | N/A                |
+
+### Response
+
+**[GetResidualResponse](../../models/operations/GetResidualResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## listResidualFees
+
+List all fees associated with a residual.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listResidualFees" method="get" path="/accounts/{accountID}/residuals/{residualID}/fees" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListResidualFeesRequest;
+import io.moov.sdk.models.operations.ListResidualFeesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("v2024.01.00")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListResidualFeesRequest req = ListResidualFeesRequest.builder()
+                .accountID("6b95293f-c3e7-42b5-98b7-fd9cc8d49685")
+                .residualID("8ecb1a63-25e0-41e7-a9c7-bb8a1cf63d1c")
+                .skip(60L)
+                .count(20L)
+                .build();
+
+        ListResidualFeesResponse res = sdk.feePlans().listResidualFees()
+                .request(req)
+                .call();
+
+        if (res.incurredFees().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `request`                                                                     | [ListResidualFeesRequest](../../models/operations/ListResidualFeesRequest.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
+
+### Response
+
+**[ListResidualFeesResponse](../../models/operations/ListResidualFeesResponse.md)**
 
 ### Errors
 

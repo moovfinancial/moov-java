@@ -266,41 +266,23 @@ public final class Hook {
         };
     }
     
-    public static final class SdkInitData {
-         private final String baseUrl;
-         private final HTTPClient client;
-         
-         public SdkInitData(String baseUrl, HTTPClient client) {
-             this.baseUrl = baseUrl;
-             this.client = client;
-         }
-         
-         public String baseUrl() {
-             return baseUrl;
-         }
-         
-         public HTTPClient client() {
-             return client;
-         }
-    }
-    
     /**
      * Transforms the HTTPClient before use.
      */
     public interface SdkInit {
         
         /**
-         * Returns a transformed {@link HTTPClient} and {@code baseUrl} for use in requests.
+         * Returns a transformed {@link SDKConfiguration} for use in initialized SDKs.
          * 
-         * @param data data to transform
-         * @return the transformed data
+         * @param config config to transform
+         * @return the transformed config
          */
-        SdkInitData sdkInit(SdkInitData data);
-
+        SDKConfiguration sdkInit(SDKConfiguration config); 
+        
         /**
-         * The default action is to return the client untouched.
+         * The default action is to return the config untouched.
          */
-        static SdkInit DEFAULT = data -> data;
+        static SdkInit DEFAULT = config -> config;       
         
 
     }

@@ -17,7 +17,7 @@ import io.moov.sdk.utils.Hook.AfterSuccessContext;
 import io.moov.sdk.utils.Hook.BeforeRequest;
 import io.moov.sdk.utils.Hook.BeforeRequestContext;
 import io.moov.sdk.utils.Hook.SdkInit;
-import io.moov.sdk.utils.Hook.SdkInitData;
+import io.moov.sdk.SDKConfiguration;
 
 /**
  * Registers hooks for use at runtime by an end-user or for use by a customer
@@ -175,15 +175,15 @@ public class Hooks implements BeforeRequest, AfterSuccess, AfterError, SdkInit {
     }
 
     @Override
-    public SdkInitData sdkInit(SdkInitData data) {
-        Utils.checkNotNull(data, "data");
+    public SDKConfiguration sdkInit(SDKConfiguration config) {
         for (SdkInit hook : SdkInitHooks) {
-            data = hook.sdkInit(data);
-            if (data == null) {
+            config = hook.sdkInit(config);
+            if (config == null) {
                 throw new IllegalStateException("sdkInit cannot return null");
             }
         }
-        return data;
+
+        return config;
     }
 
     @SuppressWarnings("serial")

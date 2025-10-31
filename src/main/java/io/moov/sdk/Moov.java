@@ -6,7 +6,6 @@ package io.moov.sdk;
 
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.Headers;
-import io.moov.sdk.utils.Hook.SdkInitData;
 import io.moov.sdk.utils.RetryConfig;
 import io.moov.sdk.utils.SpeakeasyHTTPClient;
 import io.moov.sdk.utils.Utils;
@@ -529,11 +528,6 @@ public class Moov {
         this.ping = new Ping(sdkConfiguration);
         this.receipts = new Receipts(sdkConfiguration);
         this.terminalApplications = new TerminalApplications(sdkConfiguration);
-        SdkInitData data = sdkConfiguration.hooks().sdkInit(
-                new SdkInitData(
-                        sdkConfiguration.resolvedServerUrl(), 
-                        sdkConfiguration.client()));
-        sdkConfiguration.setServerUrl(data.baseUrl());
-        sdkConfiguration.setClient(data.client());
+        sdkConfiguration = sdkConfiguration.hooks().sdkInit(sdkConfiguration);
     }
 }

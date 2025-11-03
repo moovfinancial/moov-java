@@ -3,10 +3,10 @@ id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
   docChecksum: 945e15373063a10a87573932ee10e0c4
   docVersion: latest
-  speakeasyVersion: 1.644.0
-  generationVersion: 2.733.1
-  releaseVersion: 0.30.0
-  configChecksum: 0c5f6f4fbb9c33260dcdc91cf113c74c
+  speakeasyVersion: 1.645.0
+  generationVersion: 2.735.0
+  releaseVersion: 0.30.1
+  configChecksum: be5e49e906e5ad1bc4efaa7f374e8559
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -4835,8 +4835,3 @@ examples:
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Java SDK Changes Detected:
-  * `moov.feePlans.listResiduals()`: **Added**
-  * `moov.feePlans.getResidual()`: **Added**
-  * `moov.feePlans.listResidualFees()`: **Added**

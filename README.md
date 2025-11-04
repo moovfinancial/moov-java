@@ -47,7 +47,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.30.2'
+implementation 'io.moov:sdk:0.31.0'
 ```
 
 Maven:
@@ -55,7 +55,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.30.2</version>
+    <version>0.31.0</version>
 </dependency>
 ```
 
@@ -1169,10 +1169,12 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.*;
-import io.moov.sdk.models.errors.CreateAccountError;
-import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.errors.*;
 import io.moov.sdk.models.operations.CreateAccountResponse;
+import java.io.UncheckedIOException;
 import java.lang.Exception;
+import java.lang.String;
+import java.util.Optional;
 
 public class Application {
 
@@ -1185,24 +1187,56 @@ public class Application {
                     .password("")
                     .build())
             .build();
+        try {
 
-        CreateAccount req = CreateAccount.builder()
-                .accountType(CreateAccountType.BUSINESS)
-                .profile(CreateProfile.builder()
-                    .business(CreateBusinessProfile.builder()
-                        .legalBusinessName("Whole Body Fitness LLC")
+            CreateAccount req = CreateAccount.builder()
+                    .accountType(CreateAccountType.BUSINESS)
+                    .profile(CreateProfile.builder()
+                        .business(CreateBusinessProfile.builder()
+                            .legalBusinessName("Whole Body Fitness LLC")
+                            .build())
                         .build())
-                    .build())
-                .build();
+                    .build();
 
-        CreateAccountResponse res = sdk.accounts().create()
-                .request(req)
-                .call();
+            CreateAccountResponse res = sdk.accounts().create()
+                    .request(req)
+                    .call();
 
-        if (res.account().isPresent()) {
-            // handle response
-        }
-    }
+            if (res.account().isPresent()) {
+                // handle response
+            }
+        } catch (MoovError ex) { // all SDK exceptions inherit from MoovError
+
+            // ex.ToString() provides a detailed error message including
+            // HTTP status code, headers, and error payload (if any)
+            System.out.println(ex);
+
+            // Base exception fields
+            var rawResponse = ex.rawResponse();
+            var headers = ex.headers();
+            var contentType = headers.first("Content-Type");
+            int statusCode = ex.code();
+            Optional<byte[]> responseBody = ex.body();
+
+            // different error subclasses may be thrown 
+            // depending on the service call
+            if (ex instanceof GenericError) {
+                var e = (GenericError) ex;
+                // Check error data fields
+                e.data().ifPresent(payload -> {
+                      String error = payload.error();
+                });
+            }
+
+            // An underlying cause may be provided. If the error payload 
+            // cannot be deserialized then the deserialization exception 
+            // will be set as the cause.
+            if (ex.getCause() != null) {
+                var cause = ex.getCause();
+            }
+        } catch (UncheckedIOException ex) {
+            // handle IO error (connection, timeout, etc)
+        }    }
 }
 ```
 

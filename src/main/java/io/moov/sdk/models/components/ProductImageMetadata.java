@@ -34,23 +34,34 @@ public class ProductImageMetadata {
     @JsonProperty("link")
     private String link;
 
+    /**
+     * The public ID used to access the image.
+     */
+    @JsonProperty("publicID")
+    private String publicID;
+
     @JsonCreator
     public ProductImageMetadata(
             @JsonProperty("imageID") String imageID,
             @JsonProperty("altText") Optional<String> altText,
-            @JsonProperty("link") String link) {
+            @JsonProperty("link") String link,
+            @JsonProperty("publicID") String publicID) {
         Utils.checkNotNull(imageID, "imageID");
         Utils.checkNotNull(altText, "altText");
         Utils.checkNotNull(link, "link");
+        Utils.checkNotNull(publicID, "publicID");
         this.imageID = imageID;
         this.altText = altText;
         this.link = link;
+        this.publicID = publicID;
     }
     
     public ProductImageMetadata(
             String imageID,
-            String link) {
-        this(imageID, Optional.empty(), link);
+            String link,
+            String publicID) {
+        this(imageID, Optional.empty(), link,
+            publicID);
     }
 
     /**
@@ -75,6 +86,14 @@ public class ProductImageMetadata {
     @JsonIgnore
     public String link() {
         return link;
+    }
+
+    /**
+     * The public ID used to access the image.
+     */
+    @JsonIgnore
+    public String publicID() {
+        return publicID;
     }
 
     public static Builder builder() {
@@ -119,6 +138,15 @@ public class ProductImageMetadata {
         return this;
     }
 
+    /**
+     * The public ID used to access the image.
+     */
+    public ProductImageMetadata withPublicID(String publicID) {
+        Utils.checkNotNull(publicID, "publicID");
+        this.publicID = publicID;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -131,13 +159,15 @@ public class ProductImageMetadata {
         return 
             Utils.enhancedDeepEquals(this.imageID, other.imageID) &&
             Utils.enhancedDeepEquals(this.altText, other.altText) &&
-            Utils.enhancedDeepEquals(this.link, other.link);
+            Utils.enhancedDeepEquals(this.link, other.link) &&
+            Utils.enhancedDeepEquals(this.publicID, other.publicID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            imageID, altText, link);
+            imageID, altText, link,
+            publicID);
     }
     
     @Override
@@ -145,7 +175,8 @@ public class ProductImageMetadata {
         return Utils.toString(ProductImageMetadata.class,
                 "imageID", imageID,
                 "altText", altText,
-                "link", link);
+                "link", link,
+                "publicID", publicID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -156,6 +187,8 @@ public class ProductImageMetadata {
         private Optional<String> altText = Optional.empty();
 
         private String link;
+
+        private String publicID;
 
         private Builder() {
           // force use of static builder() method
@@ -200,10 +233,21 @@ public class ProductImageMetadata {
             return this;
         }
 
+
+        /**
+         * The public ID used to access the image.
+         */
+        public Builder publicID(String publicID) {
+            Utils.checkNotNull(publicID, "publicID");
+            this.publicID = publicID;
+            return this;
+        }
+
         public ProductImageMetadata build() {
 
             return new ProductImageMetadata(
-                imageID, altText, link);
+                imageID, altText, link,
+                publicID);
         }
 
     }

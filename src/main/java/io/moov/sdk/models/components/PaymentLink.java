@@ -113,6 +113,14 @@ public class PaymentLink {
     @JsonProperty("payout")
     private Optional<? extends PaymentLinkPayoutDetails> payout;
 
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lineItems")
+    private Optional<? extends PaymentLinkLineItems> lineItems;
+
 
     @JsonProperty("createdOn")
     private OffsetDateTime createdOn;
@@ -144,6 +152,7 @@ public class PaymentLink {
             @JsonProperty("customer") PaymentLinkCustomerOptions customer,
             @JsonProperty("payment") Optional<? extends PaymentLinkPaymentDetails> payment,
             @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetails> payout,
+            @JsonProperty("lineItems") Optional<? extends PaymentLinkLineItems> lineItems,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
             @JsonProperty("disabledOn") Optional<OffsetDateTime> disabledOn) {
@@ -163,6 +172,7 @@ public class PaymentLink {
         Utils.checkNotNull(customer, "customer");
         Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(payout, "payout");
+        Utils.checkNotNull(lineItems, "lineItems");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
         Utils.checkNotNull(disabledOn, "disabledOn");
@@ -182,6 +192,7 @@ public class PaymentLink {
         this.customer = customer;
         this.payment = payment;
         this.payout = payout;
+        this.lineItems = lineItems;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
         this.disabledOn = disabledOn;
@@ -206,8 +217,8 @@ public class PaymentLink {
             link, amount, uses,
             Optional.empty(), Optional.empty(), Optional.empty(),
             display, customer, Optional.empty(),
-            Optional.empty(), createdOn, updatedOn,
-            Optional.empty());
+            Optional.empty(), Optional.empty(), createdOn,
+            updatedOn, Optional.empty());
     }
 
     /**
@@ -328,6 +339,16 @@ public class PaymentLink {
     @JsonIgnore
     public Optional<PaymentLinkPayoutDetails> payout() {
         return (Optional<PaymentLinkPayoutDetails>) payout;
+    }
+
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PaymentLinkLineItems> lineItems() {
+        return (Optional<PaymentLinkLineItems>) lineItems;
     }
 
     @JsonIgnore
@@ -533,6 +554,27 @@ public class PaymentLink {
         return this;
     }
 
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    public PaymentLink withLineItems(PaymentLinkLineItems lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = Optional.ofNullable(lineItems);
+        return this;
+    }
+
+
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    public PaymentLink withLineItems(Optional<? extends PaymentLinkLineItems> lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = lineItems;
+        return this;
+    }
+
     public PaymentLink withCreatedOn(OffsetDateTime createdOn) {
         Utils.checkNotNull(createdOn, "createdOn");
         this.createdOn = createdOn;
@@ -584,6 +626,7 @@ public class PaymentLink {
             Utils.enhancedDeepEquals(this.customer, other.customer) &&
             Utils.enhancedDeepEquals(this.payment, other.payment) &&
             Utils.enhancedDeepEquals(this.payout, other.payout) &&
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
             Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn);
@@ -597,8 +640,8 @@ public class PaymentLink {
             link, amount, uses,
             maxUses, lastUsedOn, expiresOn,
             display, customer, payment,
-            payout, createdOn, updatedOn,
-            disabledOn);
+            payout, lineItems, createdOn,
+            updatedOn, disabledOn);
     }
     
     @Override
@@ -620,6 +663,7 @@ public class PaymentLink {
                 "customer", customer,
                 "payment", payment,
                 "payout", payout,
+                "lineItems", lineItems,
                 "createdOn", createdOn,
                 "updatedOn", updatedOn,
                 "disabledOn", disabledOn);
@@ -659,6 +703,8 @@ public class PaymentLink {
         private Optional<? extends PaymentLinkPaymentDetails> payment = Optional.empty();
 
         private Optional<? extends PaymentLinkPayoutDetails> payout = Optional.empty();
+
+        private Optional<? extends PaymentLinkLineItems> lineItems = Optional.empty();
 
         private OffsetDateTime createdOn;
 
@@ -865,6 +911,27 @@ public class PaymentLink {
         }
 
 
+        /**
+         * An optional collection of line items for a payment link.
+         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         */
+        public Builder lineItems(PaymentLinkLineItems lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = Optional.ofNullable(lineItems);
+            return this;
+        }
+
+        /**
+         * An optional collection of line items for a payment link.
+         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         */
+        public Builder lineItems(Optional<? extends PaymentLinkLineItems> lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = lineItems;
+            return this;
+        }
+
+
         public Builder createdOn(OffsetDateTime createdOn) {
             Utils.checkNotNull(createdOn, "createdOn");
             this.createdOn = createdOn;
@@ -899,8 +966,8 @@ public class PaymentLink {
                 link, amount, uses,
                 maxUses, lastUsedOn, expiresOn,
                 display, customer, payment,
-                payout, createdOn, updatedOn,
-                disabledOn);
+                payout, lineItems, createdOn,
+                updatedOn, disabledOn);
         }
 
     }

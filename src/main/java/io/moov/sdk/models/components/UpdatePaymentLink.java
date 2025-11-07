@@ -52,6 +52,14 @@ public class UpdatePaymentLink {
     @JsonProperty("payout")
     private Optional<? extends PaymentLinkPayoutDetailsUpdate> payout;
 
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lineItems")
+    private Optional<? extends PaymentLinkLineItemsUpdate> lineItems;
+
     @JsonCreator
     public UpdatePaymentLink(
             @JsonProperty("amount") Optional<? extends AmountUpdate> amount,
@@ -59,24 +67,28 @@ public class UpdatePaymentLink {
             @JsonProperty("display") Optional<? extends PaymentLinkDisplayOptionsUpdate> display,
             @JsonProperty("customer") Optional<? extends PaymentLinkCustomerOptions> customer,
             @JsonProperty("payment") Optional<? extends PaymentLinkPaymentDetailsUpdate> payment,
-            @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetailsUpdate> payout) {
+            @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetailsUpdate> payout,
+            @JsonProperty("lineItems") Optional<? extends PaymentLinkLineItemsUpdate> lineItems) {
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(expiresOn, "expiresOn");
         Utils.checkNotNull(display, "display");
         Utils.checkNotNull(customer, "customer");
         Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(payout, "payout");
+        Utils.checkNotNull(lineItems, "lineItems");
         this.amount = amount;
         this.expiresOn = expiresOn;
         this.display = display;
         this.customer = customer;
         this.payment = payment;
         this.payout = payout;
+        this.lineItems = lineItems;
     }
     
     public UpdatePaymentLink() {
         this(Optional.empty(), JsonNullable.undefined(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -118,6 +130,16 @@ public class UpdatePaymentLink {
     @JsonIgnore
     public Optional<PaymentLinkPayoutDetailsUpdate> payout() {
         return (Optional<PaymentLinkPayoutDetailsUpdate>) payout;
+    }
+
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PaymentLinkLineItemsUpdate> lineItems() {
+        return (Optional<PaymentLinkLineItemsUpdate>) lineItems;
     }
 
     public static Builder builder() {
@@ -214,6 +236,27 @@ public class UpdatePaymentLink {
         return this;
     }
 
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    public UpdatePaymentLink withLineItems(PaymentLinkLineItemsUpdate lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = Optional.ofNullable(lineItems);
+        return this;
+    }
+
+
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    public UpdatePaymentLink withLineItems(Optional<? extends PaymentLinkLineItemsUpdate> lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = lineItems;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -229,14 +272,16 @@ public class UpdatePaymentLink {
             Utils.enhancedDeepEquals(this.display, other.display) &&
             Utils.enhancedDeepEquals(this.customer, other.customer) &&
             Utils.enhancedDeepEquals(this.payment, other.payment) &&
-            Utils.enhancedDeepEquals(this.payout, other.payout);
+            Utils.enhancedDeepEquals(this.payout, other.payout) &&
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             amount, expiresOn, display,
-            customer, payment, payout);
+            customer, payment, payout,
+            lineItems);
     }
     
     @Override
@@ -247,7 +292,8 @@ public class UpdatePaymentLink {
                 "display", display,
                 "customer", customer,
                 "payment", payment,
-                "payout", payout);
+                "payout", payout,
+                "lineItems", lineItems);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -264,6 +310,8 @@ public class UpdatePaymentLink {
         private Optional<? extends PaymentLinkPaymentDetailsUpdate> payment = Optional.empty();
 
         private Optional<? extends PaymentLinkPayoutDetailsUpdate> payout = Optional.empty();
+
+        private Optional<? extends PaymentLinkLineItemsUpdate> lineItems = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -359,11 +407,33 @@ public class UpdatePaymentLink {
             return this;
         }
 
+
+        /**
+         * An optional collection of line items for a payment link.
+         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         */
+        public Builder lineItems(PaymentLinkLineItemsUpdate lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = Optional.ofNullable(lineItems);
+            return this;
+        }
+
+        /**
+         * An optional collection of line items for a payment link.
+         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         */
+        public Builder lineItems(Optional<? extends PaymentLinkLineItemsUpdate> lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = lineItems;
+            return this;
+        }
+
         public UpdatePaymentLink build() {
 
             return new UpdatePaymentLink(
                 amount, expiresOn, display,
-                customer, payment, payout);
+                customer, payment, payout,
+                lineItems);
         }
 
     }

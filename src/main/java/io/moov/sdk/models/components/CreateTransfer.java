@@ -70,6 +70,14 @@ public class CreateTransfer {
     @JsonProperty("foreignID")
     private Optional<String> foreignID;
 
+    /**
+     * An optional collection of line items for a transfer.
+     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lineItems")
+    private Optional<? extends TransferLineItems> lineItems;
+
     @JsonCreator
     public CreateTransfer(
             @JsonProperty("source") CreateTransferSource source,
@@ -79,7 +87,8 @@ public class CreateTransfer {
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
-            @JsonProperty("foreignID") Optional<String> foreignID) {
+            @JsonProperty("foreignID") Optional<String> foreignID,
+            @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems) {
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(destination, "destination");
         Utils.checkNotNull(amount, "amount");
@@ -88,6 +97,7 @@ public class CreateTransfer {
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(foreignID, "foreignID");
+        Utils.checkNotNull(lineItems, "lineItems");
         this.source = source;
         this.destination = destination;
         this.amount = amount;
@@ -96,6 +106,7 @@ public class CreateTransfer {
         this.metadata = metadata;
         this.salesTaxAmount = salesTaxAmount;
         this.foreignID = foreignID;
+        this.lineItems = lineItems;
     }
     
     public CreateTransfer(
@@ -104,7 +115,7 @@ public class CreateTransfer {
             Amount amount) {
         this(source, destination, amount,
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -171,6 +182,16 @@ public class CreateTransfer {
     @JsonIgnore
     public Optional<String> foreignID() {
         return foreignID;
+    }
+
+    /**
+     * An optional collection of line items for a transfer.
+     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TransferLineItems> lineItems() {
+        return (Optional<TransferLineItems>) lineItems;
     }
 
     public static Builder builder() {
@@ -300,6 +321,27 @@ public class CreateTransfer {
         return this;
     }
 
+    /**
+     * An optional collection of line items for a transfer.
+     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     */
+    public CreateTransfer withLineItems(TransferLineItems lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = Optional.ofNullable(lineItems);
+        return this;
+    }
+
+
+    /**
+     * An optional collection of line items for a transfer.
+     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     */
+    public CreateTransfer withLineItems(Optional<? extends TransferLineItems> lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = lineItems;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -317,7 +359,8 @@ public class CreateTransfer {
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
             Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
-            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
     }
     
     @Override
@@ -325,7 +368,7 @@ public class CreateTransfer {
         return Utils.enhancedHash(
             source, destination, amount,
             facilitatorFee, description, metadata,
-            salesTaxAmount, foreignID);
+            salesTaxAmount, foreignID, lineItems);
     }
     
     @Override
@@ -338,7 +381,8 @@ public class CreateTransfer {
                 "description", description,
                 "metadata", metadata,
                 "salesTaxAmount", salesTaxAmount,
-                "foreignID", foreignID);
+                "foreignID", foreignID,
+                "lineItems", lineItems);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -359,6 +403,8 @@ public class CreateTransfer {
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
 
         private Optional<String> foreignID = Optional.empty();
+
+        private Optional<? extends TransferLineItems> lineItems = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -489,12 +535,33 @@ public class CreateTransfer {
             return this;
         }
 
+
+        /**
+         * An optional collection of line items for a transfer.
+         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         */
+        public Builder lineItems(TransferLineItems lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = Optional.ofNullable(lineItems);
+            return this;
+        }
+
+        /**
+         * An optional collection of line items for a transfer.
+         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         */
+        public Builder lineItems(Optional<? extends TransferLineItems> lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = lineItems;
+            return this;
+        }
+
         public CreateTransfer build() {
 
             return new CreateTransfer(
                 source, destination, amount,
                 facilitatorFee, description, metadata,
-                salesTaxAmount, foreignID);
+                salesTaxAmount, foreignID, lineItems);
         }
 
     }

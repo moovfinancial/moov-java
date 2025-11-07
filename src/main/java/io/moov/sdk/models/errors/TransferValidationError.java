@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.moov.sdk.models.components.TransferLineItemsValidationError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -103,6 +104,11 @@ public class TransferValidationError extends MoovError {
         return data().flatMap(Data::foreignID);
     }
 
+    @Deprecated
+    public Optional<TransferLineItemsValidationError> lineItems() {
+        return data().flatMap(Data::lineItems);
+    }
+
     public Optional<Data> data() {
         return Optional.ofNullable(data);
     }
@@ -165,6 +171,11 @@ public class TransferValidationError extends MoovError {
         @JsonProperty("foreignID")
         private Optional<String> foreignID;
 
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("lineItems")
+        private Optional<? extends TransferLineItemsValidationError> lineItems;
+
         @JsonCreator
         public Data(
                 @JsonProperty("amount") Optional<String> amount,
@@ -176,7 +187,8 @@ public class TransferValidationError extends MoovError {
                 @JsonProperty("FacilitatorFee.MarkupDecimal") Optional<String> facilitatorFeeMarkupDecimal,
                 @JsonProperty("metadata") Optional<String> metadata,
                 @JsonProperty("salesTaxAmount") Optional<String> salesTaxAmount,
-                @JsonProperty("foreignID") Optional<String> foreignID) {
+                @JsonProperty("foreignID") Optional<String> foreignID,
+                @JsonProperty("lineItems") Optional<? extends TransferLineItemsValidationError> lineItems) {
             Utils.checkNotNull(amount, "amount");
             Utils.checkNotNull(source, "source");
             Utils.checkNotNull(sourcePaymentMethodID, "sourcePaymentMethodID");
@@ -187,6 +199,7 @@ public class TransferValidationError extends MoovError {
             Utils.checkNotNull(metadata, "metadata");
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             Utils.checkNotNull(foreignID, "foreignID");
+            Utils.checkNotNull(lineItems, "lineItems");
             this.amount = amount;
             this.source = source;
             this.sourcePaymentMethodID = sourcePaymentMethodID;
@@ -197,13 +210,14 @@ public class TransferValidationError extends MoovError {
             this.metadata = metadata;
             this.salesTaxAmount = salesTaxAmount;
             this.foreignID = foreignID;
+            this.lineItems = lineItems;
         }
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty());
+                Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -254,6 +268,12 @@ public class TransferValidationError extends MoovError {
         @JsonIgnore
         public Optional<String> foreignID() {
             return foreignID;
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<TransferLineItemsValidationError> lineItems() {
+            return (Optional<TransferLineItemsValidationError>) lineItems;
         }
 
         public static Builder builder() {
@@ -391,6 +411,19 @@ public class TransferValidationError extends MoovError {
             return this;
         }
 
+        public Data withLineItems(TransferLineItemsValidationError lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = Optional.ofNullable(lineItems);
+            return this;
+        }
+
+
+        public Data withLineItems(Optional<? extends TransferLineItemsValidationError> lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = lineItems;
+            return this;
+        }
+
         @Override
         public boolean equals(java.lang.Object o) {
             if (this == o) {
@@ -410,7 +443,8 @@ public class TransferValidationError extends MoovError {
                 Utils.enhancedDeepEquals(this.facilitatorFeeMarkupDecimal, other.facilitatorFeeMarkupDecimal) &&
                 Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
                 Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
-                Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
+                Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+                Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
         }
         
         @Override
@@ -419,7 +453,7 @@ public class TransferValidationError extends MoovError {
                 amount, source, sourcePaymentMethodID,
                 destinationPaymentMethodID, description, facilitatorFeeTotalDecimal,
                 facilitatorFeeMarkupDecimal, metadata, salesTaxAmount,
-                foreignID);
+                foreignID, lineItems);
         }
         
         @Override
@@ -434,7 +468,8 @@ public class TransferValidationError extends MoovError {
                     "facilitatorFeeMarkupDecimal", facilitatorFeeMarkupDecimal,
                     "metadata", metadata,
                     "salesTaxAmount", salesTaxAmount,
-                    "foreignID", foreignID);
+                    "foreignID", foreignID,
+                    "lineItems", lineItems);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -459,6 +494,8 @@ public class TransferValidationError extends MoovError {
             private Optional<String> salesTaxAmount = Optional.empty();
 
             private Optional<String> foreignID = Optional.empty();
+
+            private Optional<? extends TransferLineItemsValidationError> lineItems = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -594,13 +631,26 @@ public class TransferValidationError extends MoovError {
                 return this;
             }
 
+
+            public Builder lineItems(TransferLineItemsValidationError lineItems) {
+                Utils.checkNotNull(lineItems, "lineItems");
+                this.lineItems = Optional.ofNullable(lineItems);
+                return this;
+            }
+
+            public Builder lineItems(Optional<? extends TransferLineItemsValidationError> lineItems) {
+                Utils.checkNotNull(lineItems, "lineItems");
+                this.lineItems = lineItems;
+                return this;
+            }
+
             public Data build() {
 
                 return new Data(
                     amount, source, sourcePaymentMethodID,
                     destinationPaymentMethodID, description, facilitatorFeeTotalDecimal,
                     facilitatorFeeMarkupDecimal, metadata, salesTaxAmount,
-                    foreignID);
+                    foreignID, lineItems);
             }
 
         }

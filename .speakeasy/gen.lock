@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 8a70d30406942d1412fc9f4ffd98b091
+  docChecksum: 22576d60ca0dc7105c72c376773c2a56
   docVersion: latest
-  speakeasyVersion: 1.648.1
-  generationVersion: 2.739.1
-  releaseVersion: 0.31.0
-  configChecksum: 45014cef3f6fbd704fe0653995c7b710
+  speakeasyVersion: 1.650.0
+  generationVersion: 2.743.2
+  releaseVersion: 0.31.1
+  configChecksum: a8badbb9fe032bebe8f85643defc3abe
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.55.0
+    core: 3.55.1
     decimal: 0.0.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
@@ -367,6 +367,13 @@ generatedFiles:
   - docs/models/components/PaymentLinkCustomerOptions.md
   - docs/models/components/PaymentLinkDisplayOptions.md
   - docs/models/components/PaymentLinkDisplayOptionsUpdate.md
+  - docs/models/components/PaymentLinkLineItem.md
+  - docs/models/components/PaymentLinkLineItemOption.md
+  - docs/models/components/PaymentLinkLineItemOptionValidationError.md
+  - docs/models/components/PaymentLinkLineItemValidationError.md
+  - docs/models/components/PaymentLinkLineItems.md
+  - docs/models/components/PaymentLinkLineItemsUpdate.md
+  - docs/models/components/PaymentLinkLineItemsValidationError.md
   - docs/models/components/PaymentLinkPaymentDetails.md
   - docs/models/components/PaymentLinkPaymentDetailsUpdate.md
   - docs/models/components/PaymentLinkPayoutDetails.md
@@ -493,6 +500,12 @@ generatedFiles:
   - docs/models/components/TransferAccount.md
   - docs/models/components/TransferDestination.md
   - docs/models/components/TransferFailureReason.md
+  - docs/models/components/TransferLineItem.md
+  - docs/models/components/TransferLineItemOption.md
+  - docs/models/components/TransferLineItemOptionValidationError.md
+  - docs/models/components/TransferLineItemValidationError.md
+  - docs/models/components/TransferLineItems.md
+  - docs/models/components/TransferLineItemsValidationError.md
   - docs/models/components/TransferOptions.md
   - docs/models/components/TransferParty.md
   - docs/models/components/TransferSource.md
@@ -1373,6 +1386,13 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/PaymentLinkCustomerOptions.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkDisplayOptions.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkDisplayOptionsUpdate.java
+  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItem.java
+  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemOption.java
+  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemOptionValidationError.java
+  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemValidationError.java
+  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItems.java
+  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemsUpdate.java
+  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemsValidationError.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkPaymentDetails.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkPaymentDetailsUpdate.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkPayoutDetails.java
@@ -1499,6 +1519,12 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/TransferAccount.java
   - src/main/java/io/moov/sdk/models/components/TransferDestination.java
   - src/main/java/io/moov/sdk/models/components/TransferFailureReason.java
+  - src/main/java/io/moov/sdk/models/components/TransferLineItem.java
+  - src/main/java/io/moov/sdk/models/components/TransferLineItemOption.java
+  - src/main/java/io/moov/sdk/models/components/TransferLineItemOptionValidationError.java
+  - src/main/java/io/moov/sdk/models/components/TransferLineItemValidationError.java
+  - src/main/java/io/moov/sdk/models/components/TransferLineItems.java
+  - src/main/java/io/moov/sdk/models/components/TransferLineItemsValidationError.java
   - src/main/java/io/moov/sdk/models/components/TransferOptions.java
   - src/main/java/io/moov/sdk/models/components/TransferParty.java
   - src/main/java/io/moov/sdk/models/components/TransferSource.java
@@ -4835,3 +4861,4 @@ examples:
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Java SDK Changes Detected:\n* `moov.paymentLinks.create()`: \n  *  `request.createpaymentlink.lineItems` **Added**\n  *  `response.lineitems` **Added**\n  *  `error.lineitems` **Added**\n* `moov.paymentLinks.list()`:  `response.[].lineItems` **Added**\n* `moov.paymentLinks.get()`:  `response.lineitems` **Added**\n* `moov.paymentLinks.update()`: \n  *  `request.updatepaymentlink.lineItems` **Added**\n  *  `response.lineitems` **Added**\n  *  `error.lineitems` **Added**\n* `moov.transfers.create()`: \n  *  `request.createtransfer.lineItems` **Added**\n  *  `response.lineitems` **Added**\n  *  `error.lineitems` **Added**\n* `moov.transfers.list()`:  `response.[].lineItems` **Added**\n* `moov.transfers.get()`:  `response.lineitems` **Added**\n* `moov.transfers.update()`:  `response.lineitems` **Added**\n"

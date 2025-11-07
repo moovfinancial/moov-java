@@ -85,6 +85,14 @@ public class CreatePaymentLink {
     @JsonProperty("payout")
     private Optional<? extends PaymentLinkPayoutDetails> payout;
 
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lineItems")
+    private Optional<? extends PaymentLinkLineItems> lineItems;
+
     @JsonCreator
     public CreatePaymentLink(
             @JsonProperty("partnerAccountID") String partnerAccountID,
@@ -95,7 +103,8 @@ public class CreatePaymentLink {
             @JsonProperty("display") PaymentLinkDisplayOptions display,
             @JsonProperty("customer") Optional<? extends PaymentLinkCustomerOptions> customer,
             @JsonProperty("payment") Optional<? extends PaymentLinkPaymentDetails> payment,
-            @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetails> payout) {
+            @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetails> payout,
+            @JsonProperty("lineItems") Optional<? extends PaymentLinkLineItems> lineItems) {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
         Utils.checkNotNull(amount, "amount");
@@ -105,6 +114,7 @@ public class CreatePaymentLink {
         Utils.checkNotNull(customer, "customer");
         Utils.checkNotNull(payment, "payment");
         Utils.checkNotNull(payout, "payout");
+        Utils.checkNotNull(lineItems, "lineItems");
         this.partnerAccountID = partnerAccountID;
         this.merchantPaymentMethodID = merchantPaymentMethodID;
         this.amount = amount;
@@ -114,6 +124,7 @@ public class CreatePaymentLink {
         this.customer = customer;
         this.payment = payment;
         this.payout = payout;
+        this.lineItems = lineItems;
     }
     
     public CreatePaymentLink(
@@ -123,7 +134,8 @@ public class CreatePaymentLink {
             PaymentLinkDisplayOptions display) {
         this(partnerAccountID, merchantPaymentMethodID, amount,
             Optional.empty(), Optional.empty(), display,
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -192,6 +204,16 @@ public class CreatePaymentLink {
     @JsonIgnore
     public Optional<PaymentLinkPayoutDetails> payout() {
         return (Optional<PaymentLinkPayoutDetails>) payout;
+    }
+
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PaymentLinkLineItems> lineItems() {
+        return (Optional<PaymentLinkLineItems>) lineItems;
     }
 
     public static Builder builder() {
@@ -319,6 +341,27 @@ public class CreatePaymentLink {
         return this;
     }
 
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    public CreatePaymentLink withLineItems(PaymentLinkLineItems lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = Optional.ofNullable(lineItems);
+        return this;
+    }
+
+
+    /**
+     * An optional collection of line items for a payment link.
+     * When line items are provided, their total plus sales tax must equal the payment link amount.
+     */
+    public CreatePaymentLink withLineItems(Optional<? extends PaymentLinkLineItems> lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = lineItems;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -337,7 +380,8 @@ public class CreatePaymentLink {
             Utils.enhancedDeepEquals(this.display, other.display) &&
             Utils.enhancedDeepEquals(this.customer, other.customer) &&
             Utils.enhancedDeepEquals(this.payment, other.payment) &&
-            Utils.enhancedDeepEquals(this.payout, other.payout);
+            Utils.enhancedDeepEquals(this.payout, other.payout) &&
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
     }
     
     @Override
@@ -345,7 +389,8 @@ public class CreatePaymentLink {
         return Utils.enhancedHash(
             partnerAccountID, merchantPaymentMethodID, amount,
             maxUses, expiresOn, display,
-            customer, payment, payout);
+            customer, payment, payout,
+            lineItems);
     }
     
     @Override
@@ -359,7 +404,8 @@ public class CreatePaymentLink {
                 "display", display,
                 "customer", customer,
                 "payment", payment,
-                "payout", payout);
+                "payout", payout,
+                "lineItems", lineItems);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -382,6 +428,8 @@ public class CreatePaymentLink {
         private Optional<? extends PaymentLinkPaymentDetails> payment = Optional.empty();
 
         private Optional<? extends PaymentLinkPayoutDetails> payout = Optional.empty();
+
+        private Optional<? extends PaymentLinkLineItems> lineItems = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -511,12 +559,34 @@ public class CreatePaymentLink {
             return this;
         }
 
+
+        /**
+         * An optional collection of line items for a payment link.
+         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         */
+        public Builder lineItems(PaymentLinkLineItems lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = Optional.ofNullable(lineItems);
+            return this;
+        }
+
+        /**
+         * An optional collection of line items for a payment link.
+         * When line items are provided, their total plus sales tax must equal the payment link amount.
+         */
+        public Builder lineItems(Optional<? extends PaymentLinkLineItems> lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = lineItems;
+            return this;
+        }
+
         public CreatePaymentLink build() {
 
             return new CreatePaymentLink(
                 partnerAccountID, merchantPaymentMethodID, amount,
                 maxUses, expiresOn, display,
-                customer, payment, payout);
+                customer, payment, payout,
+                lineItems);
         }
 
     }

@@ -1,0 +1,14 @@
+# PaymentLinkLineItem
+
+Represents a single line item in a payment link, including optional modifiers and quantity.
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `name`                                                                                      | *String*                                                                                    | :heavy_check_mark:                                                                          | The name of the item.                                                                       |
+| `basePrice`                                                                                 | [AmountDecimal](../../models/components/AmountDecimal.md)                                   | :heavy_check_mark:                                                                          | The base price of the item before applying option modifiers.                                |
+| `quantity`                                                                                  | *int*                                                                                       | :heavy_check_mark:                                                                          | The quantity of this item.                                                                  |
+| `options`                                                                                   | List\<[PaymentLinkLineItemOption](../../models/components/PaymentLinkLineItemOption.md)>    | :heavy_minus_sign:                                                                          | Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations). |
+| `productID`                                                                                 | *Optional\<String>*                                                                         | :heavy_minus_sign:                                                                          | Optional unique identifier associating the line item with a product.                        |

@@ -170,6 +170,14 @@ public class CreatedTransfer {
     @JsonProperty("foreignID")
     private Optional<String> foreignID;
 
+    /**
+     * An optional collection of line items for a transfer.
+     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lineItems")
+    private Optional<? extends TransferLineItems> lineItems;
+
     @JsonCreator
     public CreatedTransfer(
             @JsonProperty("transferID") String transferID,
@@ -197,7 +205,8 @@ public class CreatedTransfer {
             @JsonProperty("occurrenceID") Optional<String> occurrenceID,
             @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
-            @JsonProperty("foreignID") Optional<String> foreignID) {
+            @JsonProperty("foreignID") Optional<String> foreignID,
+            @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(source, "source");
@@ -224,6 +233,7 @@ public class CreatedTransfer {
         Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(foreignID, "foreignID");
+        Utils.checkNotNull(lineItems, "lineItems");
         this.transferID = transferID;
         this.createdOn = createdOn;
         this.source = source;
@@ -250,6 +260,7 @@ public class CreatedTransfer {
         this.paymentLinkCode = paymentLinkCode;
         this.salesTaxAmount = salesTaxAmount;
         this.foreignID = foreignID;
+        this.lineItems = lineItems;
     }
     
     public CreatedTransfer(
@@ -263,7 +274,7 @@ public class CreatedTransfer {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -440,6 +451,16 @@ public class CreatedTransfer {
     @JsonIgnore
     public Optional<String> foreignID() {
         return foreignID;
+    }
+
+    /**
+     * An optional collection of line items for a transfer.
+     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<TransferLineItems> lineItems() {
+        return (Optional<TransferLineItems>) lineItems;
     }
 
     public static Builder builder() {
@@ -835,6 +856,27 @@ public class CreatedTransfer {
         return this;
     }
 
+    /**
+     * An optional collection of line items for a transfer.
+     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     */
+    public CreatedTransfer withLineItems(TransferLineItems lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = Optional.ofNullable(lineItems);
+        return this;
+    }
+
+
+    /**
+     * An optional collection of line items for a transfer.
+     * When line items are provided, their total plus sales tax must equal the transfer amount.
+     */
+    public CreatedTransfer withLineItems(Optional<? extends TransferLineItems> lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = lineItems;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -870,7 +912,8 @@ public class CreatedTransfer {
             Utils.enhancedDeepEquals(this.occurrenceID, other.occurrenceID) &&
             Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
             Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
-            Utils.enhancedDeepEquals(this.foreignID, other.foreignID);
+            Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
     }
     
     @Override
@@ -884,7 +927,7 @@ public class CreatedTransfer {
             cancellations, refundedAmount, refunds,
             disputedAmount, disputes, sweepID,
             scheduleID, occurrenceID, paymentLinkCode,
-            salesTaxAmount, foreignID);
+            salesTaxAmount, foreignID, lineItems);
     }
     
     @Override
@@ -915,7 +958,8 @@ public class CreatedTransfer {
                 "occurrenceID", occurrenceID,
                 "paymentLinkCode", paymentLinkCode,
                 "salesTaxAmount", salesTaxAmount,
-                "foreignID", foreignID);
+                "foreignID", foreignID,
+                "lineItems", lineItems);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -972,6 +1016,8 @@ public class CreatedTransfer {
         private Optional<? extends Amount> salesTaxAmount = Optional.empty();
 
         private Optional<String> foreignID = Optional.empty();
+
+        private Optional<? extends TransferLineItems> lineItems = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -1367,6 +1413,27 @@ public class CreatedTransfer {
             return this;
         }
 
+
+        /**
+         * An optional collection of line items for a transfer.
+         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         */
+        public Builder lineItems(TransferLineItems lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = Optional.ofNullable(lineItems);
+            return this;
+        }
+
+        /**
+         * An optional collection of line items for a transfer.
+         * When line items are provided, their total plus sales tax must equal the transfer amount.
+         */
+        public Builder lineItems(Optional<? extends TransferLineItems> lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = lineItems;
+            return this;
+        }
+
         public CreatedTransfer build() {
 
             return new CreatedTransfer(
@@ -1378,7 +1445,7 @@ public class CreatedTransfer {
                 cancellations, refundedAmount, refunds,
                 disputedAmount, disputes, sweepID,
                 scheduleID, occurrenceID, paymentLinkCode,
-                salesTaxAmount, foreignID);
+                salesTaxAmount, foreignID, lineItems);
         }
 
     }

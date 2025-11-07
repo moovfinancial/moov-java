@@ -20,12 +20,13 @@ generation:
   sdkHooksConfigAccess: true
   schemas:
     allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 0.31.0
+  version: 0.31.1
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk

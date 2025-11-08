@@ -26,18 +26,26 @@ public class PayoutDetailsError {
     @JsonProperty("recipient")
     private Optional<? extends PayoutRecipientError> recipient;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("metadata")
+    private Optional<String> metadata;
+
     @JsonCreator
     public PayoutDetailsError(
             @JsonProperty("allowedMethods") Optional<String> allowedMethods,
-            @JsonProperty("recipient") Optional<? extends PayoutRecipientError> recipient) {
+            @JsonProperty("recipient") Optional<? extends PayoutRecipientError> recipient,
+            @JsonProperty("metadata") Optional<String> metadata) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(recipient, "recipient");
+        Utils.checkNotNull(metadata, "metadata");
         this.allowedMethods = allowedMethods;
         this.recipient = recipient;
+        this.metadata = metadata;
     }
     
     public PayoutDetailsError() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -49,6 +57,11 @@ public class PayoutDetailsError {
     @JsonIgnore
     public Optional<PayoutRecipientError> recipient() {
         return (Optional<PayoutRecipientError>) recipient;
+    }
+
+    @JsonIgnore
+    public Optional<String> metadata() {
+        return metadata;
     }
 
     public static Builder builder() {
@@ -82,6 +95,19 @@ public class PayoutDetailsError {
         return this;
     }
 
+    public PayoutDetailsError withMetadata(String metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+
+    public PayoutDetailsError withMetadata(Optional<String> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -93,20 +119,22 @@ public class PayoutDetailsError {
         PayoutDetailsError other = (PayoutDetailsError) o;
         return 
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
-            Utils.enhancedDeepEquals(this.recipient, other.recipient);
+            Utils.enhancedDeepEquals(this.recipient, other.recipient) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods, recipient);
+            allowedMethods, recipient, metadata);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PayoutDetailsError.class,
                 "allowedMethods", allowedMethods,
-                "recipient", recipient);
+                "recipient", recipient,
+                "metadata", metadata);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -115,6 +143,8 @@ public class PayoutDetailsError {
         private Optional<String> allowedMethods = Optional.empty();
 
         private Optional<? extends PayoutRecipientError> recipient = Optional.empty();
+
+        private Optional<String> metadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -146,10 +176,23 @@ public class PayoutDetailsError {
             return this;
         }
 
+
+        public Builder metadata(String metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
+            return this;
+        }
+
+        public Builder metadata(Optional<String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
         public PayoutDetailsError build() {
 
             return new PayoutDetailsError(
-                allowedMethods, recipient);
+                allowedMethods, recipient, metadata);
         }
 
     }

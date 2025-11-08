@@ -24,6 +24,10 @@ public class PaymentLink {
     @JsonProperty("code")
     private String code;
 
+
+    @JsonProperty("paymentLinkType")
+    private PaymentLinkType paymentLinkType;
+
     /**
      * The operating mode for an account.
      */
@@ -137,6 +141,7 @@ public class PaymentLink {
     @JsonCreator
     public PaymentLink(
             @JsonProperty("code") String code,
+            @JsonProperty("paymentLinkType") PaymentLinkType paymentLinkType,
             @JsonProperty("mode") Mode mode,
             @JsonProperty("status") PaymentLinkStatus status,
             @JsonProperty("partnerAccountID") String partnerAccountID,
@@ -157,6 +162,7 @@ public class PaymentLink {
             @JsonProperty("updatedOn") OffsetDateTime updatedOn,
             @JsonProperty("disabledOn") Optional<OffsetDateTime> disabledOn) {
         Utils.checkNotNull(code, "code");
+        Utils.checkNotNull(paymentLinkType, "paymentLinkType");
         Utils.checkNotNull(mode, "mode");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
@@ -177,6 +183,7 @@ public class PaymentLink {
         Utils.checkNotNull(updatedOn, "updatedOn");
         Utils.checkNotNull(disabledOn, "disabledOn");
         this.code = code;
+        this.paymentLinkType = paymentLinkType;
         this.mode = mode;
         this.status = status;
         this.partnerAccountID = partnerAccountID;
@@ -200,6 +207,7 @@ public class PaymentLink {
     
     public PaymentLink(
             String code,
+            PaymentLinkType paymentLinkType,
             Mode mode,
             PaymentLinkStatus status,
             String partnerAccountID,
@@ -212,13 +220,13 @@ public class PaymentLink {
             PaymentLinkCustomerOptions customer,
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
-        this(code, mode, status,
-            partnerAccountID, merchantAccountID, merchantPaymentMethodID,
-            link, amount, uses,
+        this(code, paymentLinkType, mode,
+            status, partnerAccountID, merchantAccountID,
+            merchantPaymentMethodID, link, amount,
+            uses, Optional.empty(), Optional.empty(),
+            Optional.empty(), display, customer,
             Optional.empty(), Optional.empty(), Optional.empty(),
-            display, customer, Optional.empty(),
-            Optional.empty(), Optional.empty(), createdOn,
-            updatedOn, Optional.empty());
+            createdOn, updatedOn, Optional.empty());
     }
 
     /**
@@ -227,6 +235,11 @@ public class PaymentLink {
     @JsonIgnore
     public String code() {
         return code;
+    }
+
+    @JsonIgnore
+    public PaymentLinkType paymentLinkType() {
+        return paymentLinkType;
     }
 
     /**
@@ -377,6 +390,12 @@ public class PaymentLink {
     public PaymentLink withCode(String code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
+        return this;
+    }
+
+    public PaymentLink withPaymentLinkType(PaymentLinkType paymentLinkType) {
+        Utils.checkNotNull(paymentLinkType, "paymentLinkType");
+        this.paymentLinkType = paymentLinkType;
         return this;
     }
 
@@ -611,6 +630,7 @@ public class PaymentLink {
         PaymentLink other = (PaymentLink) o;
         return 
             Utils.enhancedDeepEquals(this.code, other.code) &&
+            Utils.enhancedDeepEquals(this.paymentLinkType, other.paymentLinkType) &&
             Utils.enhancedDeepEquals(this.mode, other.mode) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
@@ -635,19 +655,20 @@ public class PaymentLink {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            code, mode, status,
-            partnerAccountID, merchantAccountID, merchantPaymentMethodID,
-            link, amount, uses,
-            maxUses, lastUsedOn, expiresOn,
-            display, customer, payment,
-            payout, lineItems, createdOn,
-            updatedOn, disabledOn);
+            code, paymentLinkType, mode,
+            status, partnerAccountID, merchantAccountID,
+            merchantPaymentMethodID, link, amount,
+            uses, maxUses, lastUsedOn,
+            expiresOn, display, customer,
+            payment, payout, lineItems,
+            createdOn, updatedOn, disabledOn);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PaymentLink.class,
                 "code", code,
+                "paymentLinkType", paymentLinkType,
                 "mode", mode,
                 "status", status,
                 "partnerAccountID", partnerAccountID,
@@ -673,6 +694,8 @@ public class PaymentLink {
     public final static class Builder {
 
         private String code;
+
+        private PaymentLinkType paymentLinkType;
 
         private Mode mode;
 
@@ -723,6 +746,13 @@ public class PaymentLink {
         public Builder code(String code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
+            return this;
+        }
+
+
+        public Builder paymentLinkType(PaymentLinkType paymentLinkType) {
+            Utils.checkNotNull(paymentLinkType, "paymentLinkType");
+            this.paymentLinkType = paymentLinkType;
             return this;
         }
 
@@ -961,13 +991,13 @@ public class PaymentLink {
         public PaymentLink build() {
 
             return new PaymentLink(
-                code, mode, status,
-                partnerAccountID, merchantAccountID, merchantPaymentMethodID,
-                link, amount, uses,
-                maxUses, lastUsedOn, expiresOn,
-                display, customer, payment,
-                payout, lineItems, createdOn,
-                updatedOn, disabledOn);
+                code, paymentLinkType, mode,
+                status, partnerAccountID, merchantAccountID,
+                merchantPaymentMethodID, link, amount,
+                uses, maxUses, lastUsedOn,
+                expiresOn, display, customer,
+                payment, payout, lineItems,
+                createdOn, updatedOn, disabledOn);
         }
 
     }

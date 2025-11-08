@@ -131,6 +131,7 @@ package hello.world;
 
 import io.moov.sdk.Moov;
 import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListPaymentLinksRequest;
 import io.moov.sdk.models.operations.ListPaymentLinksResponse;
 import java.lang.Exception;
 
@@ -146,8 +147,14 @@ public class Application {
                     .build())
             .build();
 
-        ListPaymentLinksResponse res = sdk.paymentLinks().list()
+        ListPaymentLinksRequest req = ListPaymentLinksRequest.builder()
                 .accountID("d1039e6d-21ee-4a29-8adf-1dd2a6625a0d")
+                .skip(60L)
+                .count(20L)
+                .build();
+
+        ListPaymentLinksResponse res = sdk.paymentLinks().list()
+                .request(req)
                 .call();
 
         if (res.paymentLinks().isPresent()) {
@@ -159,9 +166,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter          | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `request`                                                                     | [ListPaymentLinksRequest](../../models/operations/ListPaymentLinksRequest.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
 
 ### Response
 

@@ -19,7 +19,7 @@ import java.lang.SuppressWarnings;
 public class LinkBankAccount {
 
     @JsonValue
-    private TypedObject value;
+    private final TypedObject value;
     
     private LinkBankAccount(TypedObject value) {
         this.value = value;
@@ -27,22 +27,22 @@ public class LinkBankAccount {
 
     public static LinkBankAccount of(BankAccountPayload value) {
         Utils.checkNotNull(value, "value");
-        return new LinkBankAccount(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<BankAccountPayload>(){}));
+        return new LinkBankAccount(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static LinkBankAccount of(PlaidPayload value) {
         Utils.checkNotNull(value, "value");
-        return new LinkBankAccount(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<PlaidPayload>(){}));
+        return new LinkBankAccount(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static LinkBankAccount of(PlaidLinkPayload value) {
         Utils.checkNotNull(value, "value");
-        return new LinkBankAccount(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<PlaidLinkPayload>(){}));
+        return new LinkBankAccount(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static LinkBankAccount of(MxPayload value) {
         Utils.checkNotNull(value, "value");
-        return new LinkBankAccount(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<MxPayload>(){}));
+        return new LinkBankAccount(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
     /**
@@ -67,7 +67,7 @@ public class LinkBankAccount {
      **/ 
     public java.lang.Object value() {
         return value.value();
-    }    
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {

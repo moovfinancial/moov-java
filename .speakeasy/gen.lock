@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 22576d60ca0dc7105c72c376773c2a56
+  docChecksum: 8cd740a1348d9290d3b9ffa8208e9e42
   docVersion: latest
-  speakeasyVersion: 1.650.0
-  generationVersion: 2.743.2
-  releaseVersion: 0.31.1
-  configChecksum: a8badbb9fe032bebe8f85643defc3abe
+  speakeasyVersion: 1.651.0
+  generationVersion: 2.745.2
+  releaseVersion: 0.32.0
+  configChecksum: 00bbcfd761c10eba65e4f518ec55147f
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -28,7 +28,7 @@ features:
     nameOverrides: 2.81.3
     nullables: 0.1.0
     sdkHooks: 1.1.0
-    unions: 0.0.6
+    unions: 0.1.0
     uploadStreams: 0.1.0
 generatedFiles:
   - .gitattributes
@@ -379,6 +379,7 @@ generatedFiles:
   - docs/models/components/PaymentLinkPayoutDetails.md
   - docs/models/components/PaymentLinkPayoutDetailsUpdate.md
   - docs/models/components/PaymentLinkStatus.md
+  - docs/models/components/PaymentLinkType.md
   - docs/models/components/PaymentMethod.md
   - docs/models/components/PaymentMethodType.md
   - docs/models/components/PaymentMethodsBankAccount.md
@@ -1398,6 +1399,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/PaymentLinkPayoutDetails.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkPayoutDetailsUpdate.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkStatus.java
+  - src/main/java/io/moov/sdk/models/components/PaymentLinkType.java
   - src/main/java/io/moov/sdk/models/components/PaymentMethod.java
   - src/main/java/io/moov/sdk/models/components/PaymentMethodType.java
   - src/main/java/io/moov/sdk/models/components/PaymentMethodsBankAccount.java
@@ -3261,7 +3263,7 @@ examples:
         application/json: {"partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851", "merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", "amount": {"currency": "USD", "value": 10000}, "display": {"title": "Example Payment Link", "description": "This is an example payment link.", "callToAction": "pay"}, "customer": {"requirePhone": true}, "payment": {"allowedMethods": ["card-payment", "ach-debit-collect"]}}
       responses:
         "200":
-          application/json: {"code": "3QLHtONjd5", "mode": "sandbox", "status": "active", "partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851", "merchantAccountID": "34233b72-780c-4e0e-8b08-cbbe1bc878f8", "merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", "link": "https://moov.link/p/3QLHtONjd5", "amount": {"currency": "USD", "value": 10000}, "uses": 0, "display": {"title": "Example Payment Link", "description": "This is an example payment link.", "callToAction": "pay"}, "customer": {"requirePhone": true}, "payment": {"allowedMethods": ["card-payment", "ach-debit-collect"]}, "createdOn": "2025-01-09T17:09:13.33Z", "updatedOn": "2025-01-09T17:09:13.33Z"}
+          application/json: {"code": "3QLHtONjd5", "paymentLinkType": "payment", "mode": "sandbox", "status": "active", "partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851", "merchantAccountID": "34233b72-780c-4e0e-8b08-cbbe1bc878f8", "merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", "link": "https://moov.link/p/3QLHtONjd5", "amount": {"currency": "USD", "value": 10000}, "uses": 0, "display": {"title": "Example Payment Link", "description": "This is an example payment link.", "callToAction": "pay"}, "customer": {"requirePhone": true}, "payment": {"allowedMethods": ["card-payment", "ach-debit-collect"]}, "createdOn": "2025-01-09T17:09:13.33Z", "updatedOn": "2025-01-09T17:09:13.33Z"}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -3271,12 +3273,15 @@ examples:
       parameters:
         path:
           accountID: "d1039e6d-21ee-4a29-8adf-1dd2a6625a0d"
+        query:
+          skip: 60
+          count: 20
         header:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       responses:
         "200":
-          application/json: [{"code": "3QLHtONjd5", "mode": "sandbox", "status": "active", "partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851", "merchantAccountID": "34233b72-780c-4e0e-8b08-cbbe1bc878f8", "merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", "link": "https://moov.money/3QLHtONjd5", "amount": {"currency": "USD", "value": 10000}, "uses": 0, "display": {"title": "Example Payment Link", "description": "This is an example payment link.", "callToAction": "pay"}, "customer": {"requirePhone": true}, "payment": {"allowedMethods": ["card-payment", "ach-debit-collect"]}, "createdOn": "2025-01-09T17:09:13.33Z", "updatedOn": "2025-01-09T17:09:13.33Z"}]
+          application/json: [{"code": "3QLHtONjd5", "paymentLinkType": "payout", "mode": "sandbox", "status": "active", "partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851", "merchantAccountID": "34233b72-780c-4e0e-8b08-cbbe1bc878f8", "merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", "link": "https://moov.money/3QLHtONjd5", "amount": {"currency": "USD", "value": 10000}, "uses": 0, "display": {"title": "Example Payment Link", "description": "This is an example payment link.", "callToAction": "pay"}, "customer": {"requirePhone": true}, "payment": {"allowedMethods": ["card-payment", "ach-debit-collect"]}, "createdOn": "2025-01-09T17:09:13.33Z", "updatedOn": "2025-01-09T17:09:13.33Z"}]
   getPaymentLink:
     speakeasy-default-get-payment-link:
       parameters:
@@ -3288,7 +3293,7 @@ examples:
           X-Moov-Version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"code": "3QLHtONjd5", "mode": "sandbox", "status": "active", "partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851", "merchantAccountID": "34233b72-780c-4e0e-8b08-cbbe1bc878f8", "merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", "link": "https://moov.link/p/3QLHtONjd5", "amount": {"currency": "USD", "value": 10000}, "uses": 0, "display": {"title": "Example Payment Link", "description": "This is an example payment link.", "callToAction": "pay"}, "customer": {"requirePhone": true}, "payment": {"allowedMethods": ["card-payment", "ach-debit-collect"]}, "createdOn": "2025-01-09T17:09:13.33Z", "updatedOn": "2025-01-09T17:09:13.33Z"}
+          application/json: {"code": "3QLHtONjd5", "paymentLinkType": "payment", "mode": "sandbox", "status": "active", "partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851", "merchantAccountID": "34233b72-780c-4e0e-8b08-cbbe1bc878f8", "merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", "link": "https://moov.link/p/3QLHtONjd5", "amount": {"currency": "USD", "value": 10000}, "uses": 0, "display": {"title": "Example Payment Link", "description": "This is an example payment link.", "callToAction": "pay"}, "customer": {"requirePhone": true}, "payment": {"allowedMethods": ["card-payment", "ach-debit-collect"]}, "createdOn": "2025-01-09T17:09:13.33Z", "updatedOn": "2025-01-09T17:09:13.33Z"}
   updatePaymentLink:
     speakeasy-default-update-payment-link:
       parameters:
@@ -3302,7 +3307,7 @@ examples:
         application/json: {"amount": {"currency": "USD", "value": 12099}, "customer": {"requireAddress": true, "requirePhone": true}}
       responses:
         "200":
-          application/json: {"code": "3QLHtONjd5", "mode": "sandbox", "status": "active", "partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851", "merchantAccountID": "34233b72-780c-4e0e-8b08-cbbe1bc878f8", "merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", "link": "https://moov.link/p/3QLHtONjd5", "amount": {"currency": "USD", "value": 10000}, "uses": 0, "display": {"title": "Example Payment Link", "description": "This is an example payment link.", "callToAction": "pay"}, "customer": {"requirePhone": true}, "payment": {"allowedMethods": ["card-payment", "ach-debit-collect"]}, "createdOn": "2025-01-09T17:09:13.33Z", "updatedOn": "2025-01-09T17:09:13.33Z"}
+          application/json: {"code": "3QLHtONjd5", "paymentLinkType": "payment", "mode": "sandbox", "status": "active", "partnerAccountID": "d290f1ee-6c54-4b01-90e6-d701748f0851", "merchantAccountID": "34233b72-780c-4e0e-8b08-cbbe1bc878f8", "merchantPaymentMethodID": "4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", "link": "https://moov.link/p/3QLHtONjd5", "amount": {"currency": "USD", "value": 10000}, "uses": 0, "display": {"title": "Example Payment Link", "description": "This is an example payment link.", "callToAction": "pay"}, "customer": {"requirePhone": true}, "payment": {"allowedMethods": ["card-payment", "ach-debit-collect"]}, "createdOn": "2025-01-09T17:09:13.33Z", "updatedOn": "2025-01-09T17:09:13.33Z"}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -4861,4 +4866,4 @@ examples:
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.paymentLinks.create()`: \n  *  `request.createpaymentlink.lineItems` **Added**\n  *  `response.lineitems` **Added**\n  *  `error.lineitems` **Added**\n* `moov.paymentLinks.list()`:  `response.[].lineItems` **Added**\n* `moov.paymentLinks.get()`:  `response.lineitems` **Added**\n* `moov.paymentLinks.update()`: \n  *  `request.updatepaymentlink.lineItems` **Added**\n  *  `response.lineitems` **Added**\n  *  `error.lineitems` **Added**\n* `moov.transfers.create()`: \n  *  `request.createtransfer.lineItems` **Added**\n  *  `response.lineitems` **Added**\n  *  `error.lineitems` **Added**\n* `moov.transfers.list()`:  `response.[].lineItems` **Added**\n* `moov.transfers.get()`:  `response.lineitems` **Added**\n* `moov.transfers.update()`:  `response.lineitems` **Added**\n"
+releaseNotes: "## Java SDK Changes Detected:\n* `moov.paymentLinks.list()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.[]` **Changed**\n* `moov.paymentLinks.create()`: \n  *  `request.createpaymentlink` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `moov.paymentLinks.get()`:  `response` **Changed**\n* `moov.paymentLinks.update()`: \n  *  `request.updatepaymentlink` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n"

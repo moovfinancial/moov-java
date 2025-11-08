@@ -5,11 +5,16 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 public class PaymentLinkPayoutDetails {
@@ -28,14 +33,30 @@ public class PaymentLinkPayoutDetails {
     @JsonProperty("recipient")
     private PayoutRecipient recipient;
 
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("metadata")
+    private Optional<? extends Map<String, String>> metadata;
+
     @JsonCreator
     public PaymentLinkPayoutDetails(
             @JsonProperty("allowedMethods") List<DisbursementPaymentMethodType> allowedMethods,
-            @JsonProperty("recipient") PayoutRecipient recipient) {
+            @JsonProperty("recipient") PayoutRecipient recipient,
+            @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(recipient, "recipient");
+        Utils.checkNotNull(metadata, "metadata");
         this.allowedMethods = allowedMethods;
         this.recipient = recipient;
+        this.metadata = metadata;
+    }
+    
+    public PaymentLinkPayoutDetails(
+            List<DisbursementPaymentMethodType> allowedMethods,
+            PayoutRecipient recipient) {
+        this(allowedMethods, recipient, Optional.empty());
     }
 
     /**
@@ -55,6 +76,15 @@ public class PaymentLinkPayoutDetails {
     @JsonIgnore
     public PayoutRecipient recipient() {
         return recipient;
+    }
+
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Map<String, String>> metadata() {
+        return (Optional<Map<String, String>>) metadata;
     }
 
     public static Builder builder() {
@@ -83,6 +113,25 @@ public class PaymentLinkPayoutDetails {
         return this;
     }
 
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    public PaymentLinkPayoutDetails withMetadata(Map<String, String> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    public PaymentLinkPayoutDetails withMetadata(Optional<? extends Map<String, String>> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -94,20 +143,22 @@ public class PaymentLinkPayoutDetails {
         PaymentLinkPayoutDetails other = (PaymentLinkPayoutDetails) o;
         return 
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
-            Utils.enhancedDeepEquals(this.recipient, other.recipient);
+            Utils.enhancedDeepEquals(this.recipient, other.recipient) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods, recipient);
+            allowedMethods, recipient, metadata);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PaymentLinkPayoutDetails.class,
                 "allowedMethods", allowedMethods,
-                "recipient", recipient);
+                "recipient", recipient,
+                "metadata", metadata);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -116,6 +167,8 @@ public class PaymentLinkPayoutDetails {
         private List<DisbursementPaymentMethodType> allowedMethods;
 
         private PayoutRecipient recipient;
+
+        private Optional<? extends Map<String, String>> metadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -144,10 +197,29 @@ public class PaymentLinkPayoutDetails {
             return this;
         }
 
+
+        /**
+         * Optional free-form metadata for the transfer.
+         */
+        public Builder metadata(Map<String, String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
+            return this;
+        }
+
+        /**
+         * Optional free-form metadata for the transfer.
+         */
+        public Builder metadata(Optional<? extends Map<String, String>> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
         public PaymentLinkPayoutDetails build() {
 
             return new PaymentLinkPayoutDetails(
-                allowedMethods, recipient);
+                allowedMethods, recipient, metadata);
         }
 
     }

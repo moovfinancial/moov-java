@@ -19,7 +19,7 @@ import java.lang.SuppressWarnings;
 public class PatchAccountTermsOfService {
 
     @JsonValue
-    private TypedObject value;
+    private final TypedObject value;
     
     private PatchAccountTermsOfService(TypedObject value) {
         this.value = value;
@@ -27,12 +27,12 @@ public class PatchAccountTermsOfService {
 
     public static PatchAccountTermsOfService of(TermsOfServiceTokenUpdate value) {
         Utils.checkNotNull(value, "value");
-        return new PatchAccountTermsOfService(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<TermsOfServiceTokenUpdate>(){}));
+        return new PatchAccountTermsOfService(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static PatchAccountTermsOfService of(ManualTermsOfServiceUpdate value) {
         Utils.checkNotNull(value, "value");
-        return new PatchAccountTermsOfService(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<ManualTermsOfServiceUpdate>(){}));
+        return new PatchAccountTermsOfService(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
     /**
@@ -55,7 +55,7 @@ public class PatchAccountTermsOfService {
      **/ 
     public java.lang.Object value() {
         return value.value();
-    }    
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {

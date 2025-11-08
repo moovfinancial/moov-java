@@ -24,7 +24,7 @@ import java.lang.SuppressWarnings;
 public class WebhookData {
 
     @JsonValue
-    private TypedObject value;
+    private final TypedObject value;
     
     private WebhookData(TypedObject value) {
         this.value = value;
@@ -32,177 +32,177 @@ public class WebhookData {
 
     public static WebhookData of(WebhookDataAccountCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataAccountCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataAccountUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataAccountUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataAccountDisconnected value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataAccountDisconnected>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataBalanceUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataBalanceUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataBankAccountCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataBankAccountCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataBankAccountUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataBankAccountUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataBankAccountDeleted value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataBankAccountDeleted>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataCancellationCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataCancellationCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataCancellationUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataCancellationUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataCardAutoUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataCardAutoUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataCapabilityRequested value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataCapabilityRequested>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataCapabilityUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataCapabilityUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataDisputeCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataDisputeCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataDisputeUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataDisputeUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataNetworkIDUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataNetworkIDUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataPaymentMethodEnabled value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataPaymentMethodEnabled>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataPaymentMethodDisabled value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataPaymentMethodDisabled>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataRefundCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataRefundCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataRefundUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataRefundUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataRepresentativeCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataRepresentativeCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataRepresentativeUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataRepresentativeUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataRepresentativeDisabled value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataRepresentativeDisabled>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataSweepCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataSweepCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataSweepUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataSweepUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataTerminalApplicationCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataTerminalApplicationCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataTerminalApplicationUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataTerminalApplicationUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataTicketCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataTicketCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataTicketUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataTicketUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataTicketMessageAdded value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataTicketMessageAdded>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataTransferCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataTransferCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataTransferUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataTransferUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataWalletCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataWalletCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataWalletUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataWalletUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookDataWalletTransactionUpdated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookDataWalletTransactionUpdated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static WebhookData of(WebhookBillingStatementCreated value) {
         Utils.checkNotNull(value, "value");
-        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<WebhookBillingStatementCreated>(){}));
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
     /**
@@ -258,7 +258,7 @@ public class WebhookData {
      **/ 
     public java.lang.Object value() {
         return value.value();
-    }    
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {

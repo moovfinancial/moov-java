@@ -9,11 +9,10 @@ import io.moov.sdk.SDKConfiguration;
 import io.moov.sdk.operations.ListPaymentLinks;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
-import java.lang.String;
 
 public class ListPaymentLinksRequestBuilder {
 
-    private String accountID;
+    private ListPaymentLinksRequest request;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -21,25 +20,16 @@ public class ListPaymentLinksRequestBuilder {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public ListPaymentLinksRequestBuilder accountID(String accountID) {
-        Utils.checkNotNull(accountID, "accountID");
-        this.accountID = accountID;
+    public ListPaymentLinksRequestBuilder request(ListPaymentLinksRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private ListPaymentLinksRequest buildRequest() {
-
-        ListPaymentLinksRequest request = new ListPaymentLinksRequest(accountID);
-
-        return request;
     }
 
     public ListPaymentLinksResponse call() {
         
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
               = new ListPaymentLinks.Sync(sdkConfiguration, _headers);
-        ListPaymentLinksRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

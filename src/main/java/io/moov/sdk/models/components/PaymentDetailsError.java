@@ -31,21 +31,30 @@ public class PaymentDetailsError {
     @JsonProperty("achDetails")
     private Optional<? extends ACHPaymentDetailsError> achDetails;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("metadata")
+    private Optional<String> metadata;
+
     @JsonCreator
     public PaymentDetailsError(
             @JsonProperty("allowedMethods") Optional<String> allowedMethods,
             @JsonProperty("cardDetails") Optional<? extends CardPaymentDetailsError> cardDetails,
-            @JsonProperty("achDetails") Optional<? extends ACHPaymentDetailsError> achDetails) {
+            @JsonProperty("achDetails") Optional<? extends ACHPaymentDetailsError> achDetails,
+            @JsonProperty("metadata") Optional<String> metadata) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(achDetails, "achDetails");
+        Utils.checkNotNull(metadata, "metadata");
         this.allowedMethods = allowedMethods;
         this.cardDetails = cardDetails;
         this.achDetails = achDetails;
+        this.metadata = metadata;
     }
     
     public PaymentDetailsError() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -63,6 +72,11 @@ public class PaymentDetailsError {
     @JsonIgnore
     public Optional<ACHPaymentDetailsError> achDetails() {
         return (Optional<ACHPaymentDetailsError>) achDetails;
+    }
+
+    @JsonIgnore
+    public Optional<String> metadata() {
+        return metadata;
     }
 
     public static Builder builder() {
@@ -109,6 +123,19 @@ public class PaymentDetailsError {
         return this;
     }
 
+    public PaymentDetailsError withMetadata(String metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+
+    public PaymentDetailsError withMetadata(Optional<String> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -121,13 +148,15 @@ public class PaymentDetailsError {
         return 
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
-            Utils.enhancedDeepEquals(this.achDetails, other.achDetails);
+            Utils.enhancedDeepEquals(this.achDetails, other.achDetails) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods, cardDetails, achDetails);
+            allowedMethods, cardDetails, achDetails,
+            metadata);
     }
     
     @Override
@@ -135,7 +164,8 @@ public class PaymentDetailsError {
         return Utils.toString(PaymentDetailsError.class,
                 "allowedMethods", allowedMethods,
                 "cardDetails", cardDetails,
-                "achDetails", achDetails);
+                "achDetails", achDetails,
+                "metadata", metadata);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -146,6 +176,8 @@ public class PaymentDetailsError {
         private Optional<? extends CardPaymentDetailsError> cardDetails = Optional.empty();
 
         private Optional<? extends ACHPaymentDetailsError> achDetails = Optional.empty();
+
+        private Optional<String> metadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -190,10 +222,24 @@ public class PaymentDetailsError {
             return this;
         }
 
+
+        public Builder metadata(String metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
+            return this;
+        }
+
+        public Builder metadata(Optional<String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
         public PaymentDetailsError build() {
 
             return new PaymentDetailsError(
-                allowedMethods, cardDetails, achDetails);
+                allowedMethods, cardDetails, achDetails,
+                metadata);
         }
 
     }

@@ -24,7 +24,7 @@ import java.lang.SuppressWarnings;
 public class Reversal {
 
     @JsonValue
-    private TypedObject value;
+    private final TypedObject value;
     
     private Reversal(TypedObject value) {
         this.value = value;
@@ -32,12 +32,12 @@ public class Reversal {
 
     public static Reversal of(ReversedWithCancellation value) {
         Utils.checkNotNull(value, "value");
-        return new Reversal(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<ReversedWithCancellation>(){}));
+        return new Reversal(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static Reversal of(ReversedWithRefund value) {
         Utils.checkNotNull(value, "value");
-        return new Reversal(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<ReversedWithRefund>(){}));
+        return new Reversal(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
     /**
@@ -60,7 +60,7 @@ public class Reversal {
      **/ 
     public java.lang.Object value() {
         return value.value();
-    }    
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {

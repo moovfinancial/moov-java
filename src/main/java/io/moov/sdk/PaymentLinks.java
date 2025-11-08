@@ -104,16 +104,11 @@ public class PaymentLinks {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
-     * @param accountID 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
-    public ListPaymentLinksResponse list(String accountID) {
-        ListPaymentLinksRequest request =
-            ListPaymentLinksRequest
-                .builder()
-                .accountID(accountID)
-                .build();
+    public ListPaymentLinksResponse list(ListPaymentLinksRequest request) {
         RequestOperation<ListPaymentLinksRequest, ListPaymentLinksResponse> operation
               = new ListPaymentLinks.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));

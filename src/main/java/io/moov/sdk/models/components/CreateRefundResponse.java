@@ -19,7 +19,7 @@ import java.lang.SuppressWarnings;
 public class CreateRefundResponse {
 
     @JsonValue
-    private TypedObject value;
+    private final TypedObject value;
     
     private CreateRefundResponse(TypedObject value) {
         this.value = value;
@@ -27,12 +27,12 @@ public class CreateRefundResponse {
 
     public static CreateRefundResponse of(CardAcquiringRefund value) {
         Utils.checkNotNull(value, "value");
-        return new CreateRefundResponse(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<CardAcquiringRefund>(){}));
+        return new CreateRefundResponse(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static CreateRefundResponse of(AsyncCreatedRefund value) {
         Utils.checkNotNull(value, "value");
-        return new CreateRefundResponse(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<AsyncCreatedRefund>(){}));
+        return new CreateRefundResponse(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
     /**
@@ -55,7 +55,7 @@ public class CreateRefundResponse {
      **/ 
     public java.lang.Object value() {
         return value.value();
-    }    
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {

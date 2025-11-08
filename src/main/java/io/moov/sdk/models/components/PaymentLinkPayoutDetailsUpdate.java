@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -34,18 +35,28 @@ public class PaymentLinkPayoutDetailsUpdate {
     @JsonProperty("recipient")
     private Optional<? extends PayoutRecipient> recipient;
 
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("metadata")
+    private Optional<? extends Map<String, String>> metadata;
+
     @JsonCreator
     public PaymentLinkPayoutDetailsUpdate(
             @JsonProperty("allowedMethods") Optional<? extends List<DisbursementPaymentMethodType>> allowedMethods,
-            @JsonProperty("recipient") Optional<? extends PayoutRecipient> recipient) {
+            @JsonProperty("recipient") Optional<? extends PayoutRecipient> recipient,
+            @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(recipient, "recipient");
+        Utils.checkNotNull(metadata, "metadata");
         this.allowedMethods = allowedMethods;
         this.recipient = recipient;
+        this.metadata = metadata;
     }
     
     public PaymentLinkPayoutDetailsUpdate() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -67,6 +78,15 @@ public class PaymentLinkPayoutDetailsUpdate {
     @JsonIgnore
     public Optional<PayoutRecipient> recipient() {
         return (Optional<PayoutRecipient>) recipient;
+    }
+
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Map<String, String>> metadata() {
+        return (Optional<Map<String, String>>) metadata;
     }
 
     public static Builder builder() {
@@ -118,6 +138,25 @@ public class PaymentLinkPayoutDetailsUpdate {
         return this;
     }
 
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    public PaymentLinkPayoutDetailsUpdate withMetadata(Map<String, String> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    public PaymentLinkPayoutDetailsUpdate withMetadata(Optional<? extends Map<String, String>> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -129,20 +168,22 @@ public class PaymentLinkPayoutDetailsUpdate {
         PaymentLinkPayoutDetailsUpdate other = (PaymentLinkPayoutDetailsUpdate) o;
         return 
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
-            Utils.enhancedDeepEquals(this.recipient, other.recipient);
+            Utils.enhancedDeepEquals(this.recipient, other.recipient) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods, recipient);
+            allowedMethods, recipient, metadata);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PaymentLinkPayoutDetailsUpdate.class,
                 "allowedMethods", allowedMethods,
-                "recipient", recipient);
+                "recipient", recipient,
+                "metadata", metadata);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -151,6 +192,8 @@ public class PaymentLinkPayoutDetailsUpdate {
         private Optional<? extends List<DisbursementPaymentMethodType>> allowedMethods = Optional.empty();
 
         private Optional<? extends PayoutRecipient> recipient = Optional.empty();
+
+        private Optional<? extends Map<String, String>> metadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -200,10 +243,29 @@ public class PaymentLinkPayoutDetailsUpdate {
             return this;
         }
 
+
+        /**
+         * Optional free-form metadata for the transfer.
+         */
+        public Builder metadata(Map<String, String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
+            return this;
+        }
+
+        /**
+         * Optional free-form metadata for the transfer.
+         */
+        public Builder metadata(Optional<? extends Map<String, String>> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
         public PaymentLinkPayoutDetailsUpdate build() {
 
             return new PaymentLinkPayoutDetailsUpdate(
-                allowedMethods, recipient);
+                allowedMethods, recipient, metadata);
         }
 
     }

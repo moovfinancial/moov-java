@@ -19,7 +19,7 @@ import java.lang.SuppressWarnings;
 public class PullPaymentMethodID {
 
     @JsonValue
-    private TypedObject value;
+    private final TypedObject value;
     
     private PullPaymentMethodID(TypedObject value) {
         this.value = value;
@@ -27,12 +27,12 @@ public class PullPaymentMethodID {
 
     public static PullPaymentMethodID of(String value) {
         Utils.checkNotNull(value, "value");
-        return new PullPaymentMethodID(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<String>(){}));
+        return new PullPaymentMethodID(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static PullPaymentMethodID of(PullPaymentMethodID2 value) {
         Utils.checkNotNull(value, "value");
-        return new PullPaymentMethodID(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<PullPaymentMethodID2>(){}));
+        return new PullPaymentMethodID(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
     /**
@@ -55,7 +55,7 @@ public class PullPaymentMethodID {
      **/ 
     public java.lang.Object value() {
         return value.value();
-    }    
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {

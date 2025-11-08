@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -41,22 +42,33 @@ public class PaymentLinkPaymentDetails {
     @JsonProperty("achDetails")
     private Optional<? extends ACHPaymentDetails> achDetails;
 
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("metadata")
+    private Optional<? extends Map<String, String>> metadata;
+
     @JsonCreator
     public PaymentLinkPaymentDetails(
             @JsonProperty("allowedMethods") List<CollectionPaymentMethodType> allowedMethods,
             @JsonProperty("cardDetails") Optional<? extends CardPaymentDetails> cardDetails,
-            @JsonProperty("achDetails") Optional<? extends ACHPaymentDetails> achDetails) {
+            @JsonProperty("achDetails") Optional<? extends ACHPaymentDetails> achDetails,
+            @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata) {
         Utils.checkNotNull(allowedMethods, "allowedMethods");
         Utils.checkNotNull(cardDetails, "cardDetails");
         Utils.checkNotNull(achDetails, "achDetails");
+        Utils.checkNotNull(metadata, "metadata");
         this.allowedMethods = allowedMethods;
         this.cardDetails = cardDetails;
         this.achDetails = achDetails;
+        this.metadata = metadata;
     }
     
     public PaymentLinkPaymentDetails(
             List<CollectionPaymentMethodType> allowedMethods) {
-        this(allowedMethods, Optional.empty(), Optional.empty());
+        this(allowedMethods, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -83,6 +95,15 @@ public class PaymentLinkPaymentDetails {
     @JsonIgnore
     public Optional<ACHPaymentDetails> achDetails() {
         return (Optional<ACHPaymentDetails>) achDetails;
+    }
+
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Map<String, String>> metadata() {
+        return (Optional<Map<String, String>>) metadata;
     }
 
     public static Builder builder() {
@@ -137,6 +158,25 @@ public class PaymentLinkPaymentDetails {
         return this;
     }
 
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    public PaymentLinkPaymentDetails withMetadata(Map<String, String> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+
+    /**
+     * Optional free-form metadata for the transfer.
+     */
+    public PaymentLinkPaymentDetails withMetadata(Optional<? extends Map<String, String>> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = metadata;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -149,13 +189,15 @@ public class PaymentLinkPaymentDetails {
         return 
             Utils.enhancedDeepEquals(this.allowedMethods, other.allowedMethods) &&
             Utils.enhancedDeepEquals(this.cardDetails, other.cardDetails) &&
-            Utils.enhancedDeepEquals(this.achDetails, other.achDetails);
+            Utils.enhancedDeepEquals(this.achDetails, other.achDetails) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            allowedMethods, cardDetails, achDetails);
+            allowedMethods, cardDetails, achDetails,
+            metadata);
     }
     
     @Override
@@ -163,7 +205,8 @@ public class PaymentLinkPaymentDetails {
         return Utils.toString(PaymentLinkPaymentDetails.class,
                 "allowedMethods", allowedMethods,
                 "cardDetails", cardDetails,
-                "achDetails", achDetails);
+                "achDetails", achDetails,
+                "metadata", metadata);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -174,6 +217,8 @@ public class PaymentLinkPaymentDetails {
         private Optional<? extends CardPaymentDetails> cardDetails = Optional.empty();
 
         private Optional<? extends ACHPaymentDetails> achDetails = Optional.empty();
+
+        private Optional<? extends Map<String, String>> metadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -227,10 +272,30 @@ public class PaymentLinkPaymentDetails {
             return this;
         }
 
+
+        /**
+         * Optional free-form metadata for the transfer.
+         */
+        public Builder metadata(Map<String, String> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
+            return this;
+        }
+
+        /**
+         * Optional free-form metadata for the transfer.
+         */
+        public Builder metadata(Optional<? extends Map<String, String>> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = metadata;
+            return this;
+        }
+
         public PaymentLinkPaymentDetails build() {
 
             return new PaymentLinkPaymentDetails(
-                allowedMethods, cardDetails, achDetails);
+                allowedMethods, cardDetails, achDetails,
+                metadata);
         }
 
     }

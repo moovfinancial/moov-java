@@ -19,7 +19,7 @@ import java.lang.SuppressWarnings;
 public class StatementDescriptor {
 
     @JsonValue
-    private TypedObject value;
+    private final TypedObject value;
     
     private StatementDescriptor(TypedObject value) {
         this.value = value;
@@ -27,12 +27,12 @@ public class StatementDescriptor {
 
     public static StatementDescriptor of(String value) {
         Utils.checkNotNull(value, "value");
-        return new StatementDescriptor(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<String>(){}));
+        return new StatementDescriptor(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
     public static StatementDescriptor of(StatementDescriptor2 value) {
         Utils.checkNotNull(value, "value");
-        return new StatementDescriptor(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<StatementDescriptor2>(){}));
+        return new StatementDescriptor(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
     
     /**
@@ -55,7 +55,7 @@ public class StatementDescriptor {
      **/ 
     public java.lang.Object value() {
         return value.value();
-    }    
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {

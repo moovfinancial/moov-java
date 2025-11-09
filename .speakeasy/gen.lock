@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 8cd740a1348d9290d3b9ffa8208e9e42
+  docChecksum: 8ea265ae3f97eeb6abb5b00a4f9f70bf
   docVersion: latest
   speakeasyVersion: 1.651.0
   generationVersion: 2.745.2
-  releaseVersion: 0.32.0
-  configChecksum: 00bbcfd761c10eba65e4f518ec55147f
+  releaseVersion: 0.32.1
+  configChecksum: 36c3ed3a2e8d7a9713fe3604d1dce8a5
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -4866,4 +4866,3 @@ examples:
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.paymentLinks.list()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.[]` **Changed**\n* `moov.paymentLinks.create()`: \n  *  `request.createpaymentlink` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `moov.paymentLinks.get()`:  `response` **Changed**\n* `moov.paymentLinks.update()`: \n  *  `request.updatepaymentlink` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n"

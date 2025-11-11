@@ -71,7 +71,7 @@ public class Reversal {
             return false;
         }
         Reversal other = (Reversal) o;
-        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value());
     }
     
     @Override
@@ -94,6 +94,6 @@ public class Reversal {
         return Utils.toString(Reversal.class,
                 "value", value);
     }
- 
+
 }
 

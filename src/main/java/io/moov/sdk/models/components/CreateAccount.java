@@ -36,7 +36,7 @@ public class CreateAccount {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("termsOfService")
-    private Optional<? extends CreateAccountTermsOfService> termsOfService;
+    private Optional<? extends TermsOfServicePayload> termsOfService;
 
     /**
      * Optional alias from a foreign/external system which can be used to reference this resource.
@@ -78,7 +78,7 @@ public class CreateAccount {
             @JsonProperty("accountType") CreateAccountType accountType,
             @JsonProperty("profile") CreateProfile profile,
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
-            @JsonProperty("termsOfService") Optional<? extends CreateAccountTermsOfService> termsOfService,
+            @JsonProperty("termsOfService") Optional<? extends TermsOfServicePayload> termsOfService,
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("customerSupport") Optional<? extends CustomerSupport> customerSupport,
             @JsonProperty("settings") Optional<? extends Settings> settings,
@@ -133,8 +133,8 @@ public class CreateAccount {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<CreateAccountTermsOfService> termsOfService() {
-        return (Optional<CreateAccountTermsOfService>) termsOfService;
+    public Optional<TermsOfServicePayload> termsOfService() {
+        return (Optional<TermsOfServicePayload>) termsOfService;
     }
 
     /**
@@ -216,14 +216,14 @@ public class CreateAccount {
         return this;
     }
 
-    public CreateAccount withTermsOfService(CreateAccountTermsOfService termsOfService) {
+    public CreateAccount withTermsOfService(TermsOfServicePayload termsOfService) {
         Utils.checkNotNull(termsOfService, "termsOfService");
         this.termsOfService = Optional.ofNullable(termsOfService);
         return this;
     }
 
 
-    public CreateAccount withTermsOfService(Optional<? extends CreateAccountTermsOfService> termsOfService) {
+    public CreateAccount withTermsOfService(Optional<? extends TermsOfServicePayload> termsOfService) {
         Utils.checkNotNull(termsOfService, "termsOfService");
         this.termsOfService = termsOfService;
         return this;
@@ -374,7 +374,7 @@ public class CreateAccount {
 
         private Optional<? extends Map<String, String>> metadata = Optional.empty();
 
-        private Optional<? extends CreateAccountTermsOfService> termsOfService = Optional.empty();
+        private Optional<? extends TermsOfServicePayload> termsOfService = Optional.empty();
 
         private Optional<String> foreignID = Optional.empty();
 
@@ -424,13 +424,13 @@ public class CreateAccount {
         }
 
 
-        public Builder termsOfService(CreateAccountTermsOfService termsOfService) {
+        public Builder termsOfService(TermsOfServicePayload termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
             this.termsOfService = Optional.ofNullable(termsOfService);
             return this;
         }
 
-        public Builder termsOfService(Optional<? extends CreateAccountTermsOfService> termsOfService) {
+        public Builder termsOfService(Optional<? extends TermsOfServicePayload> termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
             this.termsOfService = termsOfService;
             return this;

@@ -66,7 +66,7 @@ public class PushPaymentMethodID {
             return false;
         }
         PushPaymentMethodID other = (PushPaymentMethodID) o;
-        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value());
     }
     
     @Override
@@ -89,6 +89,6 @@ public class PushPaymentMethodID {
         return Utils.toString(PushPaymentMethodID.class,
                 "value", value);
     }
- 
+
 }
 

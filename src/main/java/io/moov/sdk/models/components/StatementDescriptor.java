@@ -66,7 +66,7 @@ public class StatementDescriptor {
             return false;
         }
         StatementDescriptor other = (StatementDescriptor) o;
-        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value());
     }
     
     @Override
@@ -89,6 +89,6 @@ public class StatementDescriptor {
         return Utils.toString(StatementDescriptor.class,
                 "value", value);
     }
- 
+
 }
 

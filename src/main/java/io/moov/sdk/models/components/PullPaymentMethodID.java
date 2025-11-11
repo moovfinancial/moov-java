@@ -66,7 +66,7 @@ public class PullPaymentMethodID {
             return false;
         }
         PullPaymentMethodID other = (PullPaymentMethodID) o;
-        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value());
     }
     
     @Override
@@ -89,6 +89,6 @@ public class PullPaymentMethodID {
         return Utils.toString(PullPaymentMethodID.class,
                 "value", value);
     }
- 
+
 }
 

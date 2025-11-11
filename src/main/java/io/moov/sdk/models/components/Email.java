@@ -66,7 +66,7 @@ public class Email {
             return false;
         }
         Email other = (Email) o;
-        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value());
     }
     
     @Override
@@ -89,6 +89,6 @@ public class Email {
         return Utils.toString(Email.class,
                 "value", value);
     }
- 
+
 }
 

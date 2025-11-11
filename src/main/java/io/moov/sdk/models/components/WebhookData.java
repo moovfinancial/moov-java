@@ -269,7 +269,7 @@ public class WebhookData {
             return false;
         }
         WebhookData other = (WebhookData) o;
-        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value());
     }
     
     @Override
@@ -325,6 +325,6 @@ public class WebhookData {
         return Utils.toString(WebhookData.class,
                 "value", value);
     }
- 
+
 }
 

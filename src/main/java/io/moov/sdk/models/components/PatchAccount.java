@@ -38,7 +38,7 @@ public class PatchAccount {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("termsOfService")
-    private Optional<? extends PatchAccountTermsOfService> termsOfService;
+    private Optional<? extends TermsOfServicePayloadUpdate> termsOfService;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -59,7 +59,7 @@ public class PatchAccount {
     public PatchAccount(
             @JsonProperty("profile") Optional<? extends PatchProfile> profile,
             @JsonProperty("metadata") JsonNullable<? extends Map<String, String>> metadata,
-            @JsonProperty("termsOfService") Optional<? extends PatchAccountTermsOfService> termsOfService,
+            @JsonProperty("termsOfService") Optional<? extends TermsOfServicePayloadUpdate> termsOfService,
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("customerSupport") JsonNullable<? extends PatchAccountCustomerSupport> customerSupport,
             @JsonProperty("settings") Optional<? extends CreateAccountSettings> settings) {
@@ -100,8 +100,8 @@ public class PatchAccount {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PatchAccountTermsOfService> termsOfService() {
-        return (Optional<PatchAccountTermsOfService>) termsOfService;
+    public Optional<TermsOfServicePayloadUpdate> termsOfService() {
+        return (Optional<TermsOfServicePayloadUpdate>) termsOfService;
     }
 
     @JsonIgnore
@@ -159,14 +159,14 @@ public class PatchAccount {
         return this;
     }
 
-    public PatchAccount withTermsOfService(PatchAccountTermsOfService termsOfService) {
+    public PatchAccount withTermsOfService(TermsOfServicePayloadUpdate termsOfService) {
         Utils.checkNotNull(termsOfService, "termsOfService");
         this.termsOfService = Optional.ofNullable(termsOfService);
         return this;
     }
 
 
-    public PatchAccount withTermsOfService(Optional<? extends PatchAccountTermsOfService> termsOfService) {
+    public PatchAccount withTermsOfService(Optional<? extends TermsOfServicePayloadUpdate> termsOfService) {
         Utils.checkNotNull(termsOfService, "termsOfService");
         this.termsOfService = termsOfService;
         return this;
@@ -253,7 +253,7 @@ public class PatchAccount {
 
         private JsonNullable<? extends Map<String, String>> metadata = JsonNullable.undefined();
 
-        private Optional<? extends PatchAccountTermsOfService> termsOfService = Optional.empty();
+        private Optional<? extends TermsOfServicePayloadUpdate> termsOfService = Optional.empty();
 
         private Optional<String> foreignID = Optional.empty();
 
@@ -300,13 +300,13 @@ public class PatchAccount {
         }
 
 
-        public Builder termsOfService(PatchAccountTermsOfService termsOfService) {
+        public Builder termsOfService(TermsOfServicePayloadUpdate termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
             this.termsOfService = Optional.ofNullable(termsOfService);
             return this;
         }
 
-        public Builder termsOfService(Optional<? extends PatchAccountTermsOfService> termsOfService) {
+        public Builder termsOfService(Optional<? extends TermsOfServicePayloadUpdate> termsOfService) {
             Utils.checkNotNull(termsOfService, "termsOfService");
             this.termsOfService = termsOfService;
             return this;

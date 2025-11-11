@@ -66,7 +66,7 @@ public class CreateRefundResponse {
             return false;
         }
         CreateRefundResponse other = (CreateRefundResponse) o;
-        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value());
     }
     
     @Override
@@ -89,6 +89,6 @@ public class CreateRefundResponse {
         return Utils.toString(CreateRefundResponse.class,
                 "value", value);
     }
- 
+
 }
 

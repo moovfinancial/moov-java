@@ -3,10 +3,10 @@ id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
   docChecksum: b56d5bd7af7647cfaa486eec41482745
   docVersion: latest
-  speakeasyVersion: 1.656.2
-  generationVersion: 2.753.6
-  releaseVersion: 0.33.2
-  configChecksum: 454c30ece9956cf53862b0e760f36bed
+  speakeasyVersion: 1.656.3
+  generationVersion: 2.753.7
+  releaseVersion: 0.33.3
+  configChecksum: f1e13fef6215b578391e614f7fa4cb60
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -4870,7 +4870,3 @@ examples:
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Java SDK Changes Detected:
-  * `moov.statements.list()`:  `response.[].instantPaymentFees.instantVerification` **Added**
-  * `moov.statements.get()`:  `response.instantpaymentfees.instantVerification` **Added**

@@ -22,6 +22,8 @@ import java.util.function.Consumer;
  * principles, returns JSON responses, and uses standard HTTP response codes. To learn more about how
  * Moov
  * works at a high level, read our [concepts](https://docs.moov.io/guides/get-started/glossary/) guide.
+ * 
+ * <p><a href="https://docs.moov.io/">Moov Guides and API Documentation</a>
  */
 public class Moov {
     private static final Headers _headers = Headers.EMPTY;

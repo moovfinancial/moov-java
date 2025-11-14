@@ -67,6 +67,12 @@ public class InstantPaymentFees {
     private Optional<? extends BillingCountAndAmount> pullFromCardRefund;
 
     /**
+     * Fees for instant payment verifications.
+     */
+    @JsonProperty("instantVerification")
+    private BillingCountAndAmount instantVerification;
+
+    /**
      * Total instant payment fees.
      */
     @JsonProperty("total")
@@ -81,6 +87,7 @@ public class InstantPaymentFees {
             @JsonProperty("pullFromCardTransaction") BillingCountAndAmount pullFromCardTransaction,
             @JsonProperty("pullFromCardDecline") Optional<? extends BillingCountAndAmount> pullFromCardDecline,
             @JsonProperty("pullFromCardRefund") Optional<? extends BillingCountAndAmount> pullFromCardRefund,
+            @JsonProperty("instantVerification") BillingCountAndAmount instantVerification,
             @JsonProperty("total") BillingCountAndAmount total) {
         Utils.checkNotNull(rtpCreditTransaction, "rtpCreditTransaction");
         Utils.checkNotNull(rtpDecline, "rtpDecline");
@@ -89,6 +96,7 @@ public class InstantPaymentFees {
         Utils.checkNotNull(pullFromCardTransaction, "pullFromCardTransaction");
         Utils.checkNotNull(pullFromCardDecline, "pullFromCardDecline");
         Utils.checkNotNull(pullFromCardRefund, "pullFromCardRefund");
+        Utils.checkNotNull(instantVerification, "instantVerification");
         Utils.checkNotNull(total, "total");
         this.rtpCreditTransaction = rtpCreditTransaction;
         this.rtpDecline = rtpDecline;
@@ -97,6 +105,7 @@ public class InstantPaymentFees {
         this.pullFromCardTransaction = pullFromCardTransaction;
         this.pullFromCardDecline = pullFromCardDecline;
         this.pullFromCardRefund = pullFromCardRefund;
+        this.instantVerification = instantVerification;
         this.total = total;
     }
     
@@ -104,10 +113,11 @@ public class InstantPaymentFees {
             BillingCountAndAmount rtpCreditTransaction,
             BillingCountAndAmount pushToCardTransaction,
             BillingCountAndAmount pullFromCardTransaction,
+            BillingCountAndAmount instantVerification,
             BillingCountAndAmount total) {
         this(rtpCreditTransaction, Optional.empty(), pushToCardTransaction,
             Optional.empty(), pullFromCardTransaction, Optional.empty(),
-            Optional.empty(), total);
+            Optional.empty(), instantVerification, total);
     }
 
     /**
@@ -168,6 +178,14 @@ public class InstantPaymentFees {
     @JsonIgnore
     public Optional<BillingCountAndAmount> pullFromCardRefund() {
         return (Optional<BillingCountAndAmount>) pullFromCardRefund;
+    }
+
+    /**
+     * Fees for instant payment verifications.
+     */
+    @JsonIgnore
+    public BillingCountAndAmount instantVerification() {
+        return instantVerification;
     }
 
     /**
@@ -287,6 +305,15 @@ public class InstantPaymentFees {
     }
 
     /**
+     * Fees for instant payment verifications.
+     */
+    public InstantPaymentFees withInstantVerification(BillingCountAndAmount instantVerification) {
+        Utils.checkNotNull(instantVerification, "instantVerification");
+        this.instantVerification = instantVerification;
+        return this;
+    }
+
+    /**
      * Total instant payment fees.
      */
     public InstantPaymentFees withTotal(BillingCountAndAmount total) {
@@ -312,6 +339,7 @@ public class InstantPaymentFees {
             Utils.enhancedDeepEquals(this.pullFromCardTransaction, other.pullFromCardTransaction) &&
             Utils.enhancedDeepEquals(this.pullFromCardDecline, other.pullFromCardDecline) &&
             Utils.enhancedDeepEquals(this.pullFromCardRefund, other.pullFromCardRefund) &&
+            Utils.enhancedDeepEquals(this.instantVerification, other.instantVerification) &&
             Utils.enhancedDeepEquals(this.total, other.total);
     }
     
@@ -320,7 +348,7 @@ public class InstantPaymentFees {
         return Utils.enhancedHash(
             rtpCreditTransaction, rtpDecline, pushToCardTransaction,
             pushToCardDecline, pullFromCardTransaction, pullFromCardDecline,
-            pullFromCardRefund, total);
+            pullFromCardRefund, instantVerification, total);
     }
     
     @Override
@@ -333,6 +361,7 @@ public class InstantPaymentFees {
                 "pullFromCardTransaction", pullFromCardTransaction,
                 "pullFromCardDecline", pullFromCardDecline,
                 "pullFromCardRefund", pullFromCardRefund,
+                "instantVerification", instantVerification,
                 "total", total);
     }
 
@@ -352,6 +381,8 @@ public class InstantPaymentFees {
         private Optional<? extends BillingCountAndAmount> pullFromCardDecline = Optional.empty();
 
         private Optional<? extends BillingCountAndAmount> pullFromCardRefund = Optional.empty();
+
+        private BillingCountAndAmount instantVerification;
 
         private BillingCountAndAmount total;
 
@@ -467,6 +498,16 @@ public class InstantPaymentFees {
 
 
         /**
+         * Fees for instant payment verifications.
+         */
+        public Builder instantVerification(BillingCountAndAmount instantVerification) {
+            Utils.checkNotNull(instantVerification, "instantVerification");
+            this.instantVerification = instantVerification;
+            return this;
+        }
+
+
+        /**
          * Total instant payment fees.
          */
         public Builder total(BillingCountAndAmount total) {
@@ -480,7 +521,7 @@ public class InstantPaymentFees {
             return new InstantPaymentFees(
                 rtpCreditTransaction, rtpDecline, pushToCardTransaction,
                 pushToCardDecline, pullFromCardTransaction, pullFromCardDecline,
-                pullFromCardRefund, total);
+                pullFromCardRefund, instantVerification, total);
         }
 
     }

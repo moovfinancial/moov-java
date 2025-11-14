@@ -16,6 +16,8 @@ Moov API: Moov is a platform that enables developers to integrate all aspects of
 The Moov API makes it simple for platforms to send, receive, and store money. Our API is based upon REST
 principles, returns JSON responses, and uses standard HTTP response codes. To learn more about how Moov
 works at a high level, read our [concepts](https://docs.moov.io/guides/get-started/glossary/) guide.
+
+For more information about the API: [Moov Guides and API Documentation](https://docs.moov.io/)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -47,7 +49,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.33.1'
+implementation 'io.moov:sdk:0.33.2'
 ```
 
 Maven:
@@ -55,7 +57,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.33.1</version>
+    <version>0.33.2</version>
 </dependency>
 ```
 

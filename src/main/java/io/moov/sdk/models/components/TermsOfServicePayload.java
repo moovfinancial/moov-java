@@ -16,12 +16,10 @@ import java.util.Optional;
 
 
 public class TermsOfServicePayload {
-    /**
-     * An encrypted value used to record acceptance of Moov's Terms of Service.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("token")
-    private Optional<? extends TermsOfServiceToken> token;
+    private Optional<String> token;
 
     /**
      * Describes the acceptance of the Terms of Service. All data is required, and must be from the user.
@@ -32,7 +30,7 @@ public class TermsOfServicePayload {
 
     @JsonCreator
     public TermsOfServicePayload(
-            @JsonProperty("token") Optional<? extends TermsOfServiceToken> token,
+            @JsonProperty("token") Optional<String> token,
             @JsonProperty("manual") Optional<? extends ManualTermsOfService> manual) {
         Utils.checkNotNull(token, "token");
         Utils.checkNotNull(manual, "manual");
@@ -44,13 +42,9 @@ public class TermsOfServicePayload {
         this(Optional.empty(), Optional.empty());
     }
 
-    /**
-     * An encrypted value used to record acceptance of Moov's Terms of Service.
-     */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<TermsOfServiceToken> token() {
-        return (Optional<TermsOfServiceToken>) token;
+    public Optional<String> token() {
+        return token;
     }
 
     /**
@@ -67,20 +61,14 @@ public class TermsOfServicePayload {
     }
 
 
-    /**
-     * An encrypted value used to record acceptance of Moov's Terms of Service.
-     */
-    public TermsOfServicePayload withToken(TermsOfServiceToken token) {
+    public TermsOfServicePayload withToken(String token) {
         Utils.checkNotNull(token, "token");
         this.token = Optional.ofNullable(token);
         return this;
     }
 
 
-    /**
-     * An encrypted value used to record acceptance of Moov's Terms of Service.
-     */
-    public TermsOfServicePayload withToken(Optional<? extends TermsOfServiceToken> token) {
+    public TermsOfServicePayload withToken(Optional<String> token) {
         Utils.checkNotNull(token, "token");
         this.token = token;
         return this;
@@ -135,7 +123,7 @@ public class TermsOfServicePayload {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends TermsOfServiceToken> token = Optional.empty();
+        private Optional<String> token = Optional.empty();
 
         private Optional<? extends ManualTermsOfService> manual = Optional.empty();
 
@@ -144,19 +132,13 @@ public class TermsOfServicePayload {
         }
 
 
-        /**
-         * An encrypted value used to record acceptance of Moov's Terms of Service.
-         */
-        public Builder token(TermsOfServiceToken token) {
+        public Builder token(String token) {
             Utils.checkNotNull(token, "token");
             this.token = Optional.ofNullable(token);
             return this;
         }
 
-        /**
-         * An encrypted value used to record acceptance of Moov's Terms of Service.
-         */
-        public Builder token(Optional<? extends TermsOfServiceToken> token) {
+        public Builder token(Optional<String> token) {
             Utils.checkNotNull(token, "token");
             this.token = token;
             return this;

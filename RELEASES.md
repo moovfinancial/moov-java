@@ -1269,3 +1269,13 @@ Based on:
 - [java v0.33.3] .
 ### Releases
 - [Maven Central v0.33.3] https://central.sonatype.com/artifact/io.moov/sdk/0.33.3 - .
+
+## 2025-11-15 00:30:10
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.657.0 (2.755.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.33.4] .
+### Releases
+- [Maven Central v0.33.4] https://central.sonatype.com/artifact/io.moov/sdk/0.33.4 - .

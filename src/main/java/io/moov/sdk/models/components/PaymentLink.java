@@ -51,6 +51,12 @@ public class PaymentLink {
     private String merchantAccountID;
 
     /**
+     * The payment link's owner's Moov account ID.
+     */
+    @JsonProperty("ownerAccountID")
+    private String ownerAccountID;
+
+    /**
      * The merchant's preferred payment method ID. Must be a wallet payment method.
      */
     @JsonProperty("merchantPaymentMethodID")
@@ -146,6 +152,7 @@ public class PaymentLink {
             @JsonProperty("status") PaymentLinkStatus status,
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("merchantAccountID") String merchantAccountID,
+            @JsonProperty("ownerAccountID") String ownerAccountID,
             @JsonProperty("merchantPaymentMethodID") String merchantPaymentMethodID,
             @JsonProperty("link") String link,
             @JsonProperty("amount") Amount amount,
@@ -167,6 +174,7 @@ public class PaymentLink {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
+        Utils.checkNotNull(ownerAccountID, "ownerAccountID");
         Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
         Utils.checkNotNull(link, "link");
         Utils.checkNotNull(amount, "amount");
@@ -188,6 +196,7 @@ public class PaymentLink {
         this.status = status;
         this.partnerAccountID = partnerAccountID;
         this.merchantAccountID = merchantAccountID;
+        this.ownerAccountID = ownerAccountID;
         this.merchantPaymentMethodID = merchantPaymentMethodID;
         this.link = link;
         this.amount = amount;
@@ -212,6 +221,7 @@ public class PaymentLink {
             PaymentLinkStatus status,
             String partnerAccountID,
             String merchantAccountID,
+            String ownerAccountID,
             String merchantPaymentMethodID,
             String link,
             Amount amount,
@@ -222,11 +232,12 @@ public class PaymentLink {
             OffsetDateTime updatedOn) {
         this(code, paymentLinkType, mode,
             status, partnerAccountID, merchantAccountID,
-            merchantPaymentMethodID, link, amount,
-            uses, Optional.empty(), Optional.empty(),
-            Optional.empty(), display, customer,
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            createdOn, updatedOn, Optional.empty());
+            ownerAccountID, merchantPaymentMethodID, link,
+            amount, uses, Optional.empty(),
+            Optional.empty(), Optional.empty(), display,
+            customer, Optional.empty(), Optional.empty(),
+            Optional.empty(), createdOn, updatedOn,
+            Optional.empty());
     }
 
     /**
@@ -269,6 +280,14 @@ public class PaymentLink {
     @JsonIgnore
     public String merchantAccountID() {
         return merchantAccountID;
+    }
+
+    /**
+     * The payment link's owner's Moov account ID.
+     */
+    @JsonIgnore
+    public String ownerAccountID() {
+        return ownerAccountID;
     }
 
     /**
@@ -429,6 +448,15 @@ public class PaymentLink {
     public PaymentLink withMerchantAccountID(String merchantAccountID) {
         Utils.checkNotNull(merchantAccountID, "merchantAccountID");
         this.merchantAccountID = merchantAccountID;
+        return this;
+    }
+
+    /**
+     * The payment link's owner's Moov account ID.
+     */
+    public PaymentLink withOwnerAccountID(String ownerAccountID) {
+        Utils.checkNotNull(ownerAccountID, "ownerAccountID");
+        this.ownerAccountID = ownerAccountID;
         return this;
     }
 
@@ -635,6 +663,7 @@ public class PaymentLink {
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
             Utils.enhancedDeepEquals(this.merchantAccountID, other.merchantAccountID) &&
+            Utils.enhancedDeepEquals(this.ownerAccountID, other.ownerAccountID) &&
             Utils.enhancedDeepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
             Utils.enhancedDeepEquals(this.link, other.link) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
@@ -657,11 +686,12 @@ public class PaymentLink {
         return Utils.enhancedHash(
             code, paymentLinkType, mode,
             status, partnerAccountID, merchantAccountID,
-            merchantPaymentMethodID, link, amount,
-            uses, maxUses, lastUsedOn,
-            expiresOn, display, customer,
-            payment, payout, lineItems,
-            createdOn, updatedOn, disabledOn);
+            ownerAccountID, merchantPaymentMethodID, link,
+            amount, uses, maxUses,
+            lastUsedOn, expiresOn, display,
+            customer, payment, payout,
+            lineItems, createdOn, updatedOn,
+            disabledOn);
     }
     
     @Override
@@ -673,6 +703,7 @@ public class PaymentLink {
                 "status", status,
                 "partnerAccountID", partnerAccountID,
                 "merchantAccountID", merchantAccountID,
+                "ownerAccountID", ownerAccountID,
                 "merchantPaymentMethodID", merchantPaymentMethodID,
                 "link", link,
                 "amount", amount,
@@ -704,6 +735,8 @@ public class PaymentLink {
         private String partnerAccountID;
 
         private String merchantAccountID;
+
+        private String ownerAccountID;
 
         private String merchantPaymentMethodID;
 
@@ -790,6 +823,16 @@ public class PaymentLink {
         public Builder merchantAccountID(String merchantAccountID) {
             Utils.checkNotNull(merchantAccountID, "merchantAccountID");
             this.merchantAccountID = merchantAccountID;
+            return this;
+        }
+
+
+        /**
+         * The payment link's owner's Moov account ID.
+         */
+        public Builder ownerAccountID(String ownerAccountID) {
+            Utils.checkNotNull(ownerAccountID, "ownerAccountID");
+            this.ownerAccountID = ownerAccountID;
             return this;
         }
 
@@ -993,11 +1036,12 @@ public class PaymentLink {
             return new PaymentLink(
                 code, paymentLinkType, mode,
                 status, partnerAccountID, merchantAccountID,
-                merchantPaymentMethodID, link, amount,
-                uses, maxUses, lastUsedOn,
-                expiresOn, display, customer,
-                payment, payout, lineItems,
-                createdOn, updatedOn, disabledOn);
+                ownerAccountID, merchantPaymentMethodID, link,
+                amount, uses, maxUses,
+                lastUsedOn, expiresOn, display,
+                customer, payment, payout,
+                lineItems, createdOn, updatedOn,
+                disabledOn);
         }
 
     }

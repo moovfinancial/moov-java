@@ -18,7 +18,11 @@ selecting a fee plan to apply to a connected account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-* [retrieveFees](#retrievefees) - Retrieve fees associated with an account.
+* [listFeeRevenue](#listfeerevenue) - Used by a partner. Retrieve revenue generated from merchant fees.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [retrieveFees](#retrievefees) - Retrieve fees assessed to an account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -236,9 +240,73 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
 
+## listFeeRevenue
+
+Used by a partner. Retrieve revenue generated from merchant fees.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listFeeRevenue" method="get" path="/accounts/{accountID}/fee-revenue" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListFeeRevenueRequest;
+import io.moov.sdk.models.operations.ListFeeRevenueResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("<value>")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListFeeRevenueRequest req = ListFeeRevenueRequest.builder()
+                .accountID("795465fb-f955-40e7-9d48-4a6d6fbdbdf2")
+                .skip(60L)
+                .count(20L)
+                .build();
+
+        ListFeeRevenueResponse res = sdk.feePlans().listFeeRevenue()
+                .request(req)
+                .call();
+
+        if (res.incurredFees().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `request`                                                                 | [ListFeeRevenueRequest](../../models/operations/ListFeeRevenueRequest.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
+
+### Response
+
+**[ListFeeRevenueResponse](../../models/operations/ListFeeRevenueResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
 ## retrieveFees
 
-Retrieve fees associated with an account.
+Retrieve fees assessed to an account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.

@@ -19,6 +19,9 @@ import io.moov.sdk.models.operations.ListFeePlanAgreementsResponse;
 import io.moov.sdk.models.operations.ListFeePlansRequest;
 import io.moov.sdk.models.operations.ListFeePlansRequestBuilder;
 import io.moov.sdk.models.operations.ListFeePlansResponse;
+import io.moov.sdk.models.operations.ListFeeRevenueRequest;
+import io.moov.sdk.models.operations.ListFeeRevenueRequestBuilder;
+import io.moov.sdk.models.operations.ListFeeRevenueResponse;
 import io.moov.sdk.models.operations.ListFeesFetchRequestBuilder;
 import io.moov.sdk.models.operations.ListFeesFetchResponse;
 import io.moov.sdk.models.operations.ListPartnerPricingAgreementsRequest;
@@ -40,6 +43,7 @@ import io.moov.sdk.operations.CreateFeePlanAgreements;
 import io.moov.sdk.operations.GetResidual;
 import io.moov.sdk.operations.ListFeePlanAgreements;
 import io.moov.sdk.operations.ListFeePlans;
+import io.moov.sdk.operations.ListFeeRevenue;
 import io.moov.sdk.operations.ListFeesFetch;
 import io.moov.sdk.operations.ListPartnerPricing;
 import io.moov.sdk.operations.ListPartnerPricingAgreements;
@@ -185,7 +189,37 @@ public class FeePlans {
     }
 
     /**
-     * Retrieve fees associated with an account.
+     * Used by a partner. Retrieve revenue generated from merchant fees.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListFeeRevenueRequestBuilder listFeeRevenue() {
+        return new ListFeeRevenueRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Used by a partner. Retrieve revenue generated from merchant fees.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListFeeRevenueResponse listFeeRevenue(ListFeeRevenueRequest request) {
+        RequestOperation<ListFeeRevenueRequest, ListFeeRevenueResponse> operation
+              = new ListFeeRevenue.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Retrieve fees assessed to an account.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -198,7 +232,7 @@ public class FeePlans {
     }
 
     /**
-     * Retrieve fees associated with an account.
+     * Retrieve fees assessed to an account.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)

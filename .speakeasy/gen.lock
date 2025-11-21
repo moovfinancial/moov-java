@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 7e819af1320c3ccb843bdabe1ddf255c
+  docChecksum: 9debdf4d029f2d45c8703da3770d5954
   docVersion: latest
-  speakeasyVersion: 1.658.2
+  speakeasyVersion: 1.659.0
   generationVersion: 2.755.9
-  releaseVersion: 0.33.6
-  configChecksum: 10a132d5808eef30acf2db308d3316a6
+  releaseVersion: 0.33.7
+  configChecksum: 19e8a27948c48e4f9b104561ec4be68c
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -70,6 +70,7 @@ generatedFiles:
   - docs/models/components/Adjustment.md
   - docs/models/components/Amount.md
   - docs/models/components/AmountDecimal.md
+  - docs/models/components/AmountDecimalUpdate.md
   - docs/models/components/AmountDecimalValidationError.md
   - docs/models/components/AmountUpdate.md
   - docs/models/components/AmountValidationError.md
@@ -190,6 +191,7 @@ generatedFiles:
   - docs/models/components/CreateIndividualErrorItin.md
   - docs/models/components/CreateIndividualErrorSsn.md
   - docs/models/components/CreateIndividualProfile.md
+  - docs/models/components/CreateInvoice.md
   - docs/models/components/CreatePaymentLink.md
   - docs/models/components/CreateProductOption.md
   - docs/models/components/CreateProductOptionGroup.md
@@ -293,6 +295,19 @@ generatedFiles:
   - docs/models/components/InstantBankCreditPaymentMethodPaymentMethodType.md
   - docs/models/components/InstantPaymentFees.md
   - docs/models/components/InstitutionsSearchResponse.md
+  - docs/models/components/Invoice.md
+  - docs/models/components/InvoiceExternalPayment.md
+  - docs/models/components/InvoiceExternalPaymentPaymentType.md
+  - docs/models/components/InvoiceLineItem.md
+  - docs/models/components/InvoiceLineItemOption.md
+  - docs/models/components/InvoiceLineItemOptionValidationError.md
+  - docs/models/components/InvoiceLineItemValidationError.md
+  - docs/models/components/InvoiceLineItems.md
+  - docs/models/components/InvoiceLineItemsUpdate.md
+  - docs/models/components/InvoiceLineItemsValidationError.md
+  - docs/models/components/InvoicePayment.md
+  - docs/models/components/InvoiceStatus.md
+  - docs/models/components/InvoiceTransferPayment.md
   - docs/models/components/IssuedCard.md
   - docs/models/components/IssuedCardAuthorization.md
   - docs/models/components/IssuedCardAuthorizationEvent.md
@@ -327,6 +342,7 @@ generatedFiles:
   - docs/models/components/Manual.md
   - docs/models/components/ManualTermsOfService.md
   - docs/models/components/ManualTermsOfServiceUpdate.md
+  - docs/models/components/MarkInvoicePaid.md
   - docs/models/components/Metadata.md
   - docs/models/components/MicroDepositStatus.md
   - docs/models/components/MinimumCommitment.md
@@ -385,6 +401,7 @@ generatedFiles:
   - docs/models/components/PaymentMethodsBankAccount.md
   - docs/models/components/PaymentMethodsCard.md
   - docs/models/components/PaymentMethodsWallet.md
+  - docs/models/components/PaymentType.md
   - docs/models/components/PayoutDetailsError.md
   - docs/models/components/PayoutRecipient.md
   - docs/models/components/PayoutRecipientError.md
@@ -524,6 +541,7 @@ generatedFiles:
   - docs/models/components/UpdateColor.md
   - docs/models/components/UpdateColors.md
   - docs/models/components/UpdateEvidence.md
+  - docs/models/components/UpdateInvoice.md
   - docs/models/components/UpdateIssuedCard.md
   - docs/models/components/UpdatePaymentLink.md
   - docs/models/components/UpdateRepresentative.md
@@ -570,6 +588,8 @@ generatedFiles:
   - docs/models/components/WebhookDataCardAutoUpdated.md
   - docs/models/components/WebhookDataDisputeCreated.md
   - docs/models/components/WebhookDataDisputeUpdated.md
+  - docs/models/components/WebhookDataInvoiceCreated.md
+  - docs/models/components/WebhookDataInvoiceUpdated.md
   - docs/models/components/WebhookDataNetworkIDUpdated.md
   - docs/models/components/WebhookDataPaymentMethodDisabled.md
   - docs/models/components/WebhookDataPaymentMethodEnabled.md
@@ -604,6 +624,7 @@ generatedFiles:
   - docs/models/errors/BrandValidationError.md
   - docs/models/errors/CardAcquiringRefund.md
   - docs/models/errors/CreateAccountError.md
+  - docs/models/errors/CreateInvoiceError.md
   - docs/models/errors/CreatePaymentLinkError.md
   - docs/models/errors/CreateSweepConfigError.md
   - docs/models/errors/CreateTicketError.md
@@ -618,9 +639,11 @@ generatedFiles:
   - docs/models/errors/ImageRequestValidationError.md
   - docs/models/errors/LinkApplePayError.md
   - docs/models/errors/LinkCardError.md
+  - docs/models/errors/ListInvoicesValidationError.md
   - docs/models/errors/ListTransfersValidationError.md
   - docs/models/errors/ListWalletTransactionsValidationError.md
   - docs/models/errors/ListWalletsValidationError.md
+  - docs/models/errors/MarkInvoicePaidError.md
   - docs/models/errors/MicroDepositValidationError.md
   - docs/models/errors/OnboardingInviteError.md
   - docs/models/errors/PatchAccountError.md
@@ -639,6 +662,7 @@ generatedFiles:
   - docs/models/errors/TransferOptionsValidationError.md
   - docs/models/errors/TransferValidationError.md
   - docs/models/errors/UpdateCardError.md
+  - docs/models/errors/UpdateInvoiceError.md
   - docs/models/errors/UpdateIssuedCardError.md
   - docs/models/errors/UpdatePaymentLinkError.md
   - docs/models/errors/UpdateTicketError.md
@@ -665,6 +689,8 @@ generatedFiles:
   - docs/models/operations/CreateCancellationResponse.md
   - docs/models/operations/CreateFeePlanAgreementsRequest.md
   - docs/models/operations/CreateFeePlanAgreementsResponse.md
+  - docs/models/operations/CreateInvoiceRequest.md
+  - docs/models/operations/CreateInvoiceResponse.md
   - docs/models/operations/CreateOnboardingInviteResponse.md
   - docs/models/operations/CreatePaymentLinkRequest.md
   - docs/models/operations/CreatePaymentLinkResponse.md
@@ -752,6 +778,8 @@ generatedFiles:
   - docs/models/operations/GetFullIssuedCardResponse.md
   - docs/models/operations/GetImageMetadataRequest.md
   - docs/models/operations/GetImageMetadataResponse.md
+  - docs/models/operations/GetInvoiceRequest.md
+  - docs/models/operations/GetInvoiceResponse.md
   - docs/models/operations/GetIssuedCardAuthorizationRequest.md
   - docs/models/operations/GetIssuedCardAuthorizationResponse.md
   - docs/models/operations/GetIssuedCardRequest.md
@@ -851,6 +879,8 @@ generatedFiles:
   - docs/models/operations/ListIndustriesResponse.md
   - docs/models/operations/ListInstitutionsRequest.md
   - docs/models/operations/ListInstitutionsResponse.md
+  - docs/models/operations/ListInvoicesRequest.md
+  - docs/models/operations/ListInvoicesResponse.md
   - docs/models/operations/ListIssuedCardAuthorizationEventsRequest.md
   - docs/models/operations/ListIssuedCardAuthorizationEventsResponse.md
   - docs/models/operations/ListIssuedCardAuthorizationsRequest.md
@@ -902,6 +932,8 @@ generatedFiles:
   - docs/models/operations/ListWalletTransactionsResponse.md
   - docs/models/operations/ListWalletsRequest.md
   - docs/models/operations/ListWalletsResponse.md
+  - docs/models/operations/MarkPaidInvoiceRequest.md
+  - docs/models/operations/MarkPaidInvoiceResponse.md
   - docs/models/operations/PingRequest.md
   - docs/models/operations/PingResponse.md
   - docs/models/operations/RegisterApplePayMerchantDomainsRequest.md
@@ -936,6 +968,8 @@ generatedFiles:
   - docs/models/operations/UpdateImageMetadataResponse.md
   - docs/models/operations/UpdateImageRequest.md
   - docs/models/operations/UpdateImageResponse.md
+  - docs/models/operations/UpdateInvoiceRequest.md
+  - docs/models/operations/UpdateInvoiceResponse.md
   - docs/models/operations/UpdateIssuedCardRequest.md
   - docs/models/operations/UpdateIssuedCardResponse.md
   - docs/models/operations/UpdatePaymentLinkRequest.md
@@ -986,6 +1020,7 @@ generatedFiles:
   - docs/sdks/images/README.md
   - docs/sdks/industries/README.md
   - docs/sdks/institutions/README.md
+  - docs/sdks/invoices/README.md
   - docs/sdks/issuingtransactions/README.md
   - docs/sdks/onboarding/README.md
   - docs/sdks/paymentlinks/README.md
@@ -1037,6 +1072,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/Images.java
   - src/main/java/io/moov/sdk/Industries.java
   - src/main/java/io/moov/sdk/Institutions.java
+  - src/main/java/io/moov/sdk/Invoices.java
   - src/main/java/io/moov/sdk/IssuingTransactions.java
   - src/main/java/io/moov/sdk/Moov.java
   - src/main/java/io/moov/sdk/Onboarding.java
@@ -1093,6 +1129,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/Adjustment.java
   - src/main/java/io/moov/sdk/models/components/Amount.java
   - src/main/java/io/moov/sdk/models/components/AmountDecimal.java
+  - src/main/java/io/moov/sdk/models/components/AmountDecimalUpdate.java
   - src/main/java/io/moov/sdk/models/components/AmountDecimalValidationError.java
   - src/main/java/io/moov/sdk/models/components/AmountUpdate.java
   - src/main/java/io/moov/sdk/models/components/AmountValidationError.java
@@ -1213,6 +1250,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/CreateIndividualErrorItin.java
   - src/main/java/io/moov/sdk/models/components/CreateIndividualErrorSsn.java
   - src/main/java/io/moov/sdk/models/components/CreateIndividualProfile.java
+  - src/main/java/io/moov/sdk/models/components/CreateInvoice.java
   - src/main/java/io/moov/sdk/models/components/CreatePaymentLink.java
   - src/main/java/io/moov/sdk/models/components/CreateProductOption.java
   - src/main/java/io/moov/sdk/models/components/CreateProductOptionGroup.java
@@ -1316,6 +1354,20 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/InstantBankCreditPaymentMethodPaymentMethodType.java
   - src/main/java/io/moov/sdk/models/components/InstantPaymentFees.java
   - src/main/java/io/moov/sdk/models/components/InstitutionsSearchResponse.java
+  - src/main/java/io/moov/sdk/models/components/Invoice.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceExternalPayment.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceExternalPaymentPaymentType.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceLineItem.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceLineItemOption.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceLineItemOptionValidationError.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceLineItemValidationError.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceLineItems.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceLineItemsUpdate.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceLineItemsValidationError.java
+  - src/main/java/io/moov/sdk/models/components/InvoicePayment.java
+  - src/main/java/io/moov/sdk/models/components/InvoicePaymentTypeIdResolver.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceStatus.java
+  - src/main/java/io/moov/sdk/models/components/InvoiceTransferPayment.java
   - src/main/java/io/moov/sdk/models/components/IssuedCard.java
   - src/main/java/io/moov/sdk/models/components/IssuedCardAuthorization.java
   - src/main/java/io/moov/sdk/models/components/IssuedCardAuthorizationEvent.java
@@ -1350,6 +1402,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/Manual.java
   - src/main/java/io/moov/sdk/models/components/ManualTermsOfService.java
   - src/main/java/io/moov/sdk/models/components/ManualTermsOfServiceUpdate.java
+  - src/main/java/io/moov/sdk/models/components/MarkInvoicePaid.java
   - src/main/java/io/moov/sdk/models/components/Metadata.java
   - src/main/java/io/moov/sdk/models/components/MicroDepositStatus.java
   - src/main/java/io/moov/sdk/models/components/MinimumCommitment.java
@@ -1409,6 +1462,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/PaymentMethodsBankAccount.java
   - src/main/java/io/moov/sdk/models/components/PaymentMethodsCard.java
   - src/main/java/io/moov/sdk/models/components/PaymentMethodsWallet.java
+  - src/main/java/io/moov/sdk/models/components/PaymentType.java
   - src/main/java/io/moov/sdk/models/components/PayoutDetailsError.java
   - src/main/java/io/moov/sdk/models/components/PayoutRecipient.java
   - src/main/java/io/moov/sdk/models/components/PayoutRecipientError.java
@@ -1540,6 +1594,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/Two.java
   - src/main/java/io/moov/sdk/models/components/Underwriting.java
   - src/main/java/io/moov/sdk/models/components/UnderwritingStatus.java
+  - src/main/java/io/moov/sdk/models/components/UnknownInvoicePayment.java
   - src/main/java/io/moov/sdk/models/components/UnknownPaymentMethod.java
   - src/main/java/io/moov/sdk/models/components/UpdateApplePayMerchantDomains.java
   - src/main/java/io/moov/sdk/models/components/UpdateBrand.java
@@ -1549,6 +1604,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/UpdateColor.java
   - src/main/java/io/moov/sdk/models/components/UpdateColors.java
   - src/main/java/io/moov/sdk/models/components/UpdateEvidence.java
+  - src/main/java/io/moov/sdk/models/components/UpdateInvoice.java
   - src/main/java/io/moov/sdk/models/components/UpdateIssuedCard.java
   - src/main/java/io/moov/sdk/models/components/UpdatePaymentLink.java
   - src/main/java/io/moov/sdk/models/components/UpdateRepresentative.java
@@ -1595,6 +1651,8 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/WebhookDataCardAutoUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataDisputeCreated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataDisputeUpdated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataInvoiceCreated.java
+  - src/main/java/io/moov/sdk/models/components/WebhookDataInvoiceUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataNetworkIDUpdated.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataPaymentMethodDisabled.java
   - src/main/java/io/moov/sdk/models/components/WebhookDataPaymentMethodEnabled.java
@@ -1632,6 +1690,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/BrandValidationError.java
   - src/main/java/io/moov/sdk/models/errors/CardAcquiringRefund.java
   - src/main/java/io/moov/sdk/models/errors/CreateAccountError.java
+  - src/main/java/io/moov/sdk/models/errors/CreateInvoiceError.java
   - src/main/java/io/moov/sdk/models/errors/CreatePaymentLinkError.java
   - src/main/java/io/moov/sdk/models/errors/CreateSweepConfigError.java
   - src/main/java/io/moov/sdk/models/errors/CreateTicketError.java
@@ -1646,9 +1705,11 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/ImageRequestValidationError.java
   - src/main/java/io/moov/sdk/models/errors/LinkApplePayError.java
   - src/main/java/io/moov/sdk/models/errors/LinkCardError.java
+  - src/main/java/io/moov/sdk/models/errors/ListInvoicesValidationError.java
   - src/main/java/io/moov/sdk/models/errors/ListTransfersValidationError.java
   - src/main/java/io/moov/sdk/models/errors/ListWalletTransactionsValidationError.java
   - src/main/java/io/moov/sdk/models/errors/ListWalletsValidationError.java
+  - src/main/java/io/moov/sdk/models/errors/MarkInvoicePaidError.java
   - src/main/java/io/moov/sdk/models/errors/MicroDepositValidationError.java
   - src/main/java/io/moov/sdk/models/errors/MoovError.java
   - src/main/java/io/moov/sdk/models/errors/OnboardingInviteError.java
@@ -1668,6 +1729,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/errors/TransferOptionsValidationError.java
   - src/main/java/io/moov/sdk/models/errors/TransferValidationError.java
   - src/main/java/io/moov/sdk/models/errors/UpdateCardError.java
+  - src/main/java/io/moov/sdk/models/errors/UpdateInvoiceError.java
   - src/main/java/io/moov/sdk/models/errors/UpdateIssuedCardError.java
   - src/main/java/io/moov/sdk/models/errors/UpdatePaymentLinkError.java
   - src/main/java/io/moov/sdk/models/errors/UpdateTicketError.java
@@ -1705,6 +1767,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/CreateFeePlanAgreementsRequest.java
   - src/main/java/io/moov/sdk/models/operations/CreateFeePlanAgreementsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateFeePlanAgreementsResponse.java
+  - src/main/java/io/moov/sdk/models/operations/CreateInvoiceRequest.java
+  - src/main/java/io/moov/sdk/models/operations/CreateInvoiceRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/CreateInvoiceResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreateOnboardingInviteRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/CreateOnboardingInviteResponse.java
   - src/main/java/io/moov/sdk/models/operations/CreatePaymentLinkRequest.java
@@ -1837,6 +1902,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/GetImageMetadataRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetImageMetadataRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetImageMetadataResponse.java
+  - src/main/java/io/moov/sdk/models/operations/GetInvoiceRequest.java
+  - src/main/java/io/moov/sdk/models/operations/GetInvoiceRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/GetInvoiceResponse.java
   - src/main/java/io/moov/sdk/models/operations/GetIssuedCardAuthorizationRequest.java
   - src/main/java/io/moov/sdk/models/operations/GetIssuedCardAuthorizationRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/GetIssuedCardAuthorizationResponse.java
@@ -1985,6 +2053,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/ListInstitutionsRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListInstitutionsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListInstitutionsResponse.java
+  - src/main/java/io/moov/sdk/models/operations/ListInvoicesRequest.java
+  - src/main/java/io/moov/sdk/models/operations/ListInvoicesRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/ListInvoicesResponse.java
   - src/main/java/io/moov/sdk/models/operations/ListIssuedCardAuthorizationEventsRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListIssuedCardAuthorizationEventsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListIssuedCardAuthorizationEventsResponse.java
@@ -2061,6 +2132,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/ListWalletsRequest.java
   - src/main/java/io/moov/sdk/models/operations/ListWalletsRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/ListWalletsResponse.java
+  - src/main/java/io/moov/sdk/models/operations/MarkPaidInvoiceRequest.java
+  - src/main/java/io/moov/sdk/models/operations/MarkPaidInvoiceRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/MarkPaidInvoiceResponse.java
   - src/main/java/io/moov/sdk/models/operations/PingRequest.java
   - src/main/java/io/moov/sdk/models/operations/PingRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/PingResponse.java
@@ -2113,6 +2187,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/operations/UpdateImageRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpdateImageRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpdateImageResponse.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateInvoiceRequest.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateInvoiceRequestBuilder.java
+  - src/main/java/io/moov/sdk/models/operations/UpdateInvoiceResponse.java
   - src/main/java/io/moov/sdk/models/operations/UpdateIssuedCardRequest.java
   - src/main/java/io/moov/sdk/models/operations/UpdateIssuedCardRequestBuilder.java
   - src/main/java/io/moov/sdk/models/operations/UpdateIssuedCardResponse.java
@@ -2169,6 +2246,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/CreateBrand.java
   - src/main/java/io/moov/sdk/operations/CreateCancellation.java
   - src/main/java/io/moov/sdk/operations/CreateFeePlanAgreements.java
+  - src/main/java/io/moov/sdk/operations/CreateInvoice.java
   - src/main/java/io/moov/sdk/operations/CreateOnboardingInvite.java
   - src/main/java/io/moov/sdk/operations/CreatePaymentLink.java
   - src/main/java/io/moov/sdk/operations/CreateProduct.java
@@ -2214,6 +2292,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/GetFileDetails.java
   - src/main/java/io/moov/sdk/operations/GetFullIssuedCard.java
   - src/main/java/io/moov/sdk/operations/GetImageMetadata.java
+  - src/main/java/io/moov/sdk/operations/GetInvoice.java
   - src/main/java/io/moov/sdk/operations/GetIssuedCard.java
   - src/main/java/io/moov/sdk/operations/GetIssuedCardAuthorization.java
   - src/main/java/io/moov/sdk/operations/GetIssuedCardTransaction.java
@@ -2263,6 +2342,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/ListImageMetadata.java
   - src/main/java/io/moov/sdk/operations/ListIndustries.java
   - src/main/java/io/moov/sdk/operations/ListInstitutions.java
+  - src/main/java/io/moov/sdk/operations/ListInvoices.java
   - src/main/java/io/moov/sdk/operations/ListIssuedCardAuthorizationEvents.java
   - src/main/java/io/moov/sdk/operations/ListIssuedCardAuthorizations.java
   - src/main/java/io/moov/sdk/operations/ListIssuedCardTransactions.java
@@ -2288,6 +2368,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/ListTransfers.java
   - src/main/java/io/moov/sdk/operations/ListWalletTransactions.java
   - src/main/java/io/moov/sdk/operations/ListWallets.java
+  - src/main/java/io/moov/sdk/operations/MarkPaidInvoice.java
   - src/main/java/io/moov/sdk/operations/Operations.java
   - src/main/java/io/moov/sdk/operations/Ping.java
   - src/main/java/io/moov/sdk/operations/RegisterApplePayMerchantDomains.java
@@ -2307,6 +2388,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/operations/UpdateDisputeEvidence.java
   - src/main/java/io/moov/sdk/operations/UpdateImage.java
   - src/main/java/io/moov/sdk/operations/UpdateImageMetadata.java
+  - src/main/java/io/moov/sdk/operations/UpdateInvoice.java
   - src/main/java/io/moov/sdk/operations/UpdateIssuedCard.java
   - src/main/java/io/moov/sdk/operations/UpdatePaymentLink.java
   - src/main/java/io/moov/sdk/operations/UpdateProduct.java
@@ -4887,6 +4969,78 @@ examples:
       responses:
         "200":
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
+  createInvoice:
+    speakeasy-default-create-invoice:
+      parameters:
+        path:
+          accountID: "241bf524-e777-4941-a5e4-d7f3f34d7a00"
+      requestBody:
+        application/json: {"customerAccountID": "<id>", "description": "austere gah under ew failing provided repeatedly pick onto", "lineItems": {"items": []}, "taxAmount": {"currency": "USD", "valueDecimal": "12.987654321"}}
+      responses:
+        "201":
+          application/json: {"invoiceID": "8e7c319b-fa73-40ae-9f04-17e4465fccc2", "invoiceNumber": "INV-1001", "description": "accelerator meh abnormally ick", "customerAccountID": "a26bf1ea-761f-4cd3-8c65-05f167bba51c", "partnerAccountID": "a22cf011-2aa1-4b05-8b4e-458806d2e1e2", "status": "draft", "lineItems": {"items": []}, "subtotalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "taxAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "totalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "pendingAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "paidAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "refundedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "disputedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "payments": [{"paymentType": "transfer", "transferID": "3265f602-f2e9-4708-9152-2486cef62add"}], "createdOn": "2023-07-17T20:51:09.811Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  listInvoices:
+    speakeasy-default-list-invoices:
+      parameters:
+        path:
+          accountID: "114b02db-e4ca-47de-acc9-5624f4afccb5"
+        query:
+          skip: 60
+          count: 20
+      responses:
+        "200":
+          application/json: [{"invoiceID": "4ea1aef6-c3b1-4b1b-a992-2daf3b2f232a", "invoiceNumber": "INV-1001", "description": "pave hunt bouncy whereas briefly", "customerAccountID": "9cee1f88-2b2a-4265-9d7d-3192ed44f4f8", "partnerAccountID": "78c0d2bb-ff83-409d-8f3e-e52b7a2a05a2", "status": "payment-pending", "lineItems": {"items": []}, "subtotalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "taxAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "totalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "pendingAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "paidAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "refundedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "disputedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "payments": [{"paymentType": "transfer", "transferID": "a9fc2011-ea2b-475d-b7ac-86ab90640a29"}], "createdOn": "2023-02-27T11:12:32.243Z"}]
+        "422":
+          application/json: {}
+  getInvoice:
+    speakeasy-default-get-invoice:
+      parameters:
+        path:
+          accountID: "3ecce96f-a052-4c96-b389-98e880af1ab4"
+          invoiceID: "fc90d016-39ea-4110-b77a-2e1c95827f46"
+      responses:
+        "200":
+          application/json: {"invoiceID": "5fcf112b-06b3-4f44-8394-a461504011f7", "invoiceNumber": "INV-1001", "description": "shaft ha proselytise whether how confide aged unto wasabi icy", "customerAccountID": "4e393a28-a21b-4f47-b394-1fd5db5066a0", "partnerAccountID": "7e715f6d-8253-42ee-b960-d0681d232b1a", "status": "payment-pending", "lineItems": {"items": [{"name": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "quantity": 786047, "options": [{"name": "<value>", "quantity": 272007, "priceModifier": {"currency": "USD", "valueDecimal": "12.987654321"}}]}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "taxAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "totalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "pendingAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "paidAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "refundedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "disputedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "payments": [{"paymentType": "transfer", "transferID": "f7c8f786-bf4b-42b1-8eea-98f774af7b0a"}], "createdOn": "2023-09-25T12:40:16.566Z"}
+  updateInvoice:
+    speakeasy-default-update-invoice:
+      parameters:
+        path:
+          accountID: "ce46d65a-8504-4afa-b3f7-303401bd08b3"
+          invoiceID: "ef510999-370a-4350-87d5-bc81fc02a2ea"
+      requestBody:
+        application/json: {"lineItems": {"items": [{"name": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "quantity": 984515, "options": [{"name": "<value>", "quantity": 761923, "priceModifier": {"currency": "USD", "valueDecimal": "12.987654321"}}]}]}, "taxAmount": {"currency": "USD", "valueDecimal": "12.987654321"}}
+      responses:
+        "200":
+          application/json: {"invoiceID": "d07096dd-d765-4147-b39c-0a7b054e55da", "invoiceNumber": "INV-1001", "description": "near shakily um drat", "customerAccountID": "809dcb21-0671-43ee-8331-058d95d72d45", "partnerAccountID": "fe8f1be6-8486-498c-9748-1fa172596b35", "status": "overdue", "lineItems": {"items": [{"name": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "quantity": 984515, "options": [{"name": "<value>", "quantity": 761923, "priceModifier": {"currency": "USD", "valueDecimal": "12.987654321"}}]}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "taxAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "totalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "pendingAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "paidAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "refundedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "disputedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "payments": [{"paymentType": "transfer", "transferID": "72547143-8c7d-45dc-b9e0-406067afe10e"}], "createdOn": "2024-05-24T01:01:13.656Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  markPaidInvoice:
+    speakeasy-default-mark-paid-invoice:
+      parameters:
+        path:
+          accountID: "e270fffe-637f-4828-ace1-3813031d3274"
+          invoiceID: "9a08a44d-da9a-4385-8870-bb488c363e91"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"invoiceID": "f95d315a-9d47-41ac-a346-c4db88f8b415", "invoiceNumber": "INV-1001", "description": "sandy without atop milky tame forenenst via", "customerAccountID": "7b6946f3-21d8-404f-995f-5307e3776e5c", "partnerAccountID": "cd718ebe-5d23-44f6-9be9-2f5f4eb82789", "status": "draft", "lineItems": {"items": [{"name": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "quantity": 491045, "options": [{"name": "<value>", "quantity": 500070, "priceModifier": {"currency": "USD", "valueDecimal": "12.987654321"}}]}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "taxAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "totalAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "pendingAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "paidAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "refundedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "disputedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "payments": [{"paymentType": "external", "description": "which concerning investigate", "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}], "createdOn": "2023-05-24T17:08:07.949Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes Detected:\n* `moov.feePlans.listFeeRevenue()`: **Added**\n* `moov.paymentMethods.list()`: \n  *  `request.paymentmethodtype` **Changed**\n  *  `response.[].[instant-bank-credit]` **Added**\n* `moov.paymentMethods.get()`:  `response.[instant-bank-credit]` **Added**\n* `moov.transfers.generateOptions()`:  `response.sourceoptions.[].[instant-bank-credit]` **Added**\n"
+releaseNotes: |
+  ## Java SDK Changes Detected:
+  * `moov.invoices.createInvoice()`: **Added**
+  * `moov.invoices.listInvoices()`: **Added**
+  * `moov.invoices.getInvoice()`: **Added**
+  * `moov.invoices.updateInvoice()`: **Added**
+  * `moov.invoices.markPaidInvoice()`: **Added**

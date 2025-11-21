@@ -29,6 +29,8 @@ public enum WebhookEventType {
     CAPABILITY_UPDATED("capability.updated"),
     DISPUTE_CREATED("dispute.created"),
     DISPUTE_UPDATED("dispute.updated"),
+    INVOICE_CREATED("invoice.created"),
+    INVOICE_UPDATED("invoice.updated"),
     NETWORK_ID_UPDATED("networkID.updated"),
     PAYMENT_METHOD_ENABLED("paymentMethod.enabled"),
     PAYMENT_METHOD_DISABLED("paymentMethod.disabled"),

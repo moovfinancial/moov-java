@@ -100,6 +100,16 @@ public class WebhookData {
         return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
     }
 
+    public static WebhookData of(WebhookDataInvoiceCreated value) {
+        Utils.checkNotNull(value, "value");
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
+    }
+
+    public static WebhookData of(WebhookDataInvoiceUpdated value) {
+        Utils.checkNotNull(value, "value");
+        return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
+    }
+
     public static WebhookData of(WebhookDataNetworkIDUpdated value) {
         Utils.checkNotNull(value, "value");
         return new WebhookData(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<>(){}));
@@ -222,6 +232,8 @@ public class WebhookData {
      * <li>{@code io.moov.sdk.models.components.WebhookDataCapabilityUpdated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataDisputeCreated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataDisputeUpdated}</li>
+     * <li>{@code io.moov.sdk.models.components.WebhookDataInvoiceCreated}</li>
+     * <li>{@code io.moov.sdk.models.components.WebhookDataInvoiceUpdated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataNetworkIDUpdated}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataPaymentMethodEnabled}</li>
      * <li>{@code io.moov.sdk.models.components.WebhookDataPaymentMethodDisabled}</li>
@@ -282,39 +294,41 @@ public class WebhookData {
 
         public _Deserializer() {
             super(WebhookData.class, false,
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataNetworkIDUpdated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataDisputeCreated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataTransferUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataDisputeUpdated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataTransferUpdated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataDisputeCreated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataNetworkIDUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataBankAccountUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataWalletTransactionUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataRefundUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataTransferCreated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataTicketUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataCapabilityUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataSweepUpdated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataTicketUpdated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataCardAutoUpdated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataCancellationUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataTicketCreated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataCancellationCreated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataPaymentMethodEnabled>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataTicketMessageAdded>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataCancellationCreated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataInvoiceUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataWalletUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataRefundCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataPaymentMethodDisabled>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataPaymentMethodEnabled>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataCapabilityRequested>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataCancellationUpdated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataCardAutoUpdated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataInvoiceCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataRepresentativeUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataRepresentativeDisabled>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataSweepCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataTerminalApplicationCreated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataTerminalApplicationUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataAccountCreated>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataAccountDisconnected>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataWalletCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataRepresentativeCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataAccountUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataBankAccountCreated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataBalanceUpdated>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<WebhookDataAccountDisconnected>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<WebhookDataTerminalApplicationUpdated>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookDataBankAccountDeleted>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<WebhookBillingStatementCreated>() {}, JsonShape.DEFAULT));
         }

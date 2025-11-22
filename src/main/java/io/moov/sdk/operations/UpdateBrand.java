@@ -15,6 +15,7 @@ import io.moov.sdk.models.errors.BrandValidationError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.UpdateBrandRequest;
 import io.moov.sdk.models.operations.UpdateBrandResponse;
+import io.moov.sdk.utils.Globals;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -42,6 +43,7 @@ public class UpdateBrand {
         final SecuritySource securitySource;
         final HTTPClient client;
         final Headers _headers;
+        final Globals operationGlobals;
 
         public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
@@ -49,6 +51,9 @@ public class UpdateBrand {
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
             this.client = this.sdkConfiguration.client();
+            this.operationGlobals = new Globals();
+            this.sdkConfiguration.globals.getParam("header", "X-Moov-Version")
+                .ifPresent(param -> operationGlobals.putParam("header", "X-Moov-Version", param));
         }
 
         Optional<SecuritySource> securitySource() {
@@ -86,7 +91,7 @@ public class UpdateBrand {
                     klass,
                     this.baseUrl,
                     "/accounts/{accountID}/branding",
-                    request, this.sdkConfiguration.globals);
+                    request, this.operationGlobals);
             HTTPRequest req = new HTTPRequest(url, "PATCH");
             Object convertedRequest = Utils.convertToShape(
                     request,
@@ -104,7 +109,7 @@ public class UpdateBrand {
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
-            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.operationGlobals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();

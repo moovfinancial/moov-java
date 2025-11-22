@@ -12,41 +12,31 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-/**
- * PaymentLinkLineItemsUpdate
- * 
- * <p>An optional collection of line items for a payment link.
- * When line items are provided, their total plus sales tax must equal the payment link amount.
- */
-public class PaymentLinkLineItemsUpdate {
-    /**
-     * The list of line items.
-     */
+
+public class CreatePaymentLinkLineItemsValidationError {
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("items")
-    private Optional<? extends List<PaymentLinkLineItem>> items;
+    private Optional<? extends Map<String, CreatePaymentLinkLineItemValidationError>> items;
 
     @JsonCreator
-    public PaymentLinkLineItemsUpdate(
-            @JsonProperty("items") Optional<? extends List<PaymentLinkLineItem>> items) {
+    public CreatePaymentLinkLineItemsValidationError(
+            @JsonProperty("items") Optional<? extends Map<String, CreatePaymentLinkLineItemValidationError>> items) {
         Utils.checkNotNull(items, "items");
         this.items = items;
     }
     
-    public PaymentLinkLineItemsUpdate() {
+    public CreatePaymentLinkLineItemsValidationError() {
         this(Optional.empty());
     }
 
-    /**
-     * The list of line items.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PaymentLinkLineItem>> items() {
-        return (Optional<List<PaymentLinkLineItem>>) items;
+    public Optional<Map<String, CreatePaymentLinkLineItemValidationError>> items() {
+        return (Optional<Map<String, CreatePaymentLinkLineItemValidationError>>) items;
     }
 
     public static Builder builder() {
@@ -54,20 +44,14 @@ public class PaymentLinkLineItemsUpdate {
     }
 
 
-    /**
-     * The list of line items.
-     */
-    public PaymentLinkLineItemsUpdate withItems(List<PaymentLinkLineItem> items) {
+    public CreatePaymentLinkLineItemsValidationError withItems(Map<String, CreatePaymentLinkLineItemValidationError> items) {
         Utils.checkNotNull(items, "items");
         this.items = Optional.ofNullable(items);
         return this;
     }
 
 
-    /**
-     * The list of line items.
-     */
-    public PaymentLinkLineItemsUpdate withItems(Optional<? extends List<PaymentLinkLineItem>> items) {
+    public CreatePaymentLinkLineItemsValidationError withItems(Optional<? extends Map<String, CreatePaymentLinkLineItemValidationError>> items) {
         Utils.checkNotNull(items, "items");
         this.items = items;
         return this;
@@ -81,7 +65,7 @@ public class PaymentLinkLineItemsUpdate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PaymentLinkLineItemsUpdate other = (PaymentLinkLineItemsUpdate) o;
+        CreatePaymentLinkLineItemsValidationError other = (CreatePaymentLinkLineItemsValidationError) o;
         return 
             Utils.enhancedDeepEquals(this.items, other.items);
     }
@@ -94,41 +78,35 @@ public class PaymentLinkLineItemsUpdate {
     
     @Override
     public String toString() {
-        return Utils.toString(PaymentLinkLineItemsUpdate.class,
+        return Utils.toString(CreatePaymentLinkLineItemsValidationError.class,
                 "items", items);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends List<PaymentLinkLineItem>> items = Optional.empty();
+        private Optional<? extends Map<String, CreatePaymentLinkLineItemValidationError>> items = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        /**
-         * The list of line items.
-         */
-        public Builder items(List<PaymentLinkLineItem> items) {
+        public Builder items(Map<String, CreatePaymentLinkLineItemValidationError> items) {
             Utils.checkNotNull(items, "items");
             this.items = Optional.ofNullable(items);
             return this;
         }
 
-        /**
-         * The list of line items.
-         */
-        public Builder items(Optional<? extends List<PaymentLinkLineItem>> items) {
+        public Builder items(Optional<? extends Map<String, CreatePaymentLinkLineItemValidationError>> items) {
             Utils.checkNotNull(items, "items");
             this.items = items;
             return this;
         }
 
-        public PaymentLinkLineItemsUpdate build() {
+        public CreatePaymentLinkLineItemsValidationError build() {
 
-            return new PaymentLinkLineItemsUpdate(
+            return new CreatePaymentLinkLineItemsValidationError(
                 items);
         }
 

@@ -48,6 +48,13 @@ public class PaymentLinkLineItem {
     private Optional<? extends List<PaymentLinkLineItemOption>> options;
 
     /**
+     * Optional list of images associated with this line item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("images")
+    private Optional<? extends List<PaymentLinkLineItemImageMetadata>> images;
+
+    /**
      * Optional unique identifier associating the line item with a product.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -60,16 +67,19 @@ public class PaymentLinkLineItem {
             @JsonProperty("basePrice") AmountDecimal basePrice,
             @JsonProperty("quantity") int quantity,
             @JsonProperty("options") Optional<? extends List<PaymentLinkLineItemOption>> options,
+            @JsonProperty("images") Optional<? extends List<PaymentLinkLineItemImageMetadata>> images,
             @JsonProperty("productID") Optional<String> productID) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(basePrice, "basePrice");
         Utils.checkNotNull(quantity, "quantity");
         Utils.checkNotNull(options, "options");
+        Utils.checkNotNull(images, "images");
         Utils.checkNotNull(productID, "productID");
         this.name = name;
         this.basePrice = basePrice;
         this.quantity = quantity;
         this.options = options;
+        this.images = images;
         this.productID = productID;
     }
     
@@ -78,7 +88,7 @@ public class PaymentLinkLineItem {
             AmountDecimal basePrice,
             int quantity) {
         this(name, basePrice, quantity,
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -112,6 +122,15 @@ public class PaymentLinkLineItem {
     @JsonIgnore
     public Optional<List<PaymentLinkLineItemOption>> options() {
         return (Optional<List<PaymentLinkLineItemOption>>) options;
+    }
+
+    /**
+     * Optional list of images associated with this line item.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<PaymentLinkLineItemImageMetadata>> images() {
+        return (Optional<List<PaymentLinkLineItemImageMetadata>>) images;
     }
 
     /**
@@ -174,6 +193,25 @@ public class PaymentLinkLineItem {
     }
 
     /**
+     * Optional list of images associated with this line item.
+     */
+    public PaymentLinkLineItem withImages(List<PaymentLinkLineItemImageMetadata> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = Optional.ofNullable(images);
+        return this;
+    }
+
+
+    /**
+     * Optional list of images associated with this line item.
+     */
+    public PaymentLinkLineItem withImages(Optional<? extends List<PaymentLinkLineItemImageMetadata>> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = images;
+        return this;
+    }
+
+    /**
      * Optional unique identifier associating the line item with a product.
      */
     public PaymentLinkLineItem withProductID(String productID) {
@@ -206,6 +244,7 @@ public class PaymentLinkLineItem {
             Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
             Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
             Utils.enhancedDeepEquals(this.options, other.options) &&
+            Utils.enhancedDeepEquals(this.images, other.images) &&
             Utils.enhancedDeepEquals(this.productID, other.productID);
     }
     
@@ -213,7 +252,7 @@ public class PaymentLinkLineItem {
     public int hashCode() {
         return Utils.enhancedHash(
             name, basePrice, quantity,
-            options, productID);
+            options, images, productID);
     }
     
     @Override
@@ -223,6 +262,7 @@ public class PaymentLinkLineItem {
                 "basePrice", basePrice,
                 "quantity", quantity,
                 "options", options,
+                "images", images,
                 "productID", productID);
     }
 
@@ -236,6 +276,8 @@ public class PaymentLinkLineItem {
         private Integer quantity;
 
         private Optional<? extends List<PaymentLinkLineItemOption>> options = Optional.empty();
+
+        private Optional<? extends List<PaymentLinkLineItemImageMetadata>> images = Optional.empty();
 
         private Optional<String> productID = Optional.empty();
 
@@ -294,6 +336,25 @@ public class PaymentLinkLineItem {
 
 
         /**
+         * Optional list of images associated with this line item.
+         */
+        public Builder images(List<PaymentLinkLineItemImageMetadata> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = Optional.ofNullable(images);
+            return this;
+        }
+
+        /**
+         * Optional list of images associated with this line item.
+         */
+        public Builder images(Optional<? extends List<PaymentLinkLineItemImageMetadata>> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = images;
+            return this;
+        }
+
+
+        /**
          * Optional unique identifier associating the line item with a product.
          */
         public Builder productID(String productID) {
@@ -315,7 +376,7 @@ public class PaymentLinkLineItem {
 
             return new PaymentLinkLineItem(
                 name, basePrice, quantity,
-                options, productID);
+                options, images, productID);
         }
 
     }

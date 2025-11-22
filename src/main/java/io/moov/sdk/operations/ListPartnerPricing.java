@@ -13,6 +13,7 @@ import io.moov.sdk.models.components.PartnerPricing;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.ListPartnerPricingRequest;
 import io.moov.sdk.models.operations.ListPartnerPricingResponse;
+import io.moov.sdk.utils.Globals;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -37,6 +38,7 @@ public class ListPartnerPricing {
         final SecuritySource securitySource;
         final HTTPClient client;
         final Headers _headers;
+        final Globals operationGlobals;
 
         public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
@@ -44,6 +46,9 @@ public class ListPartnerPricing {
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
             this.client = this.sdkConfiguration.client();
+            this.operationGlobals = new Globals();
+            this.sdkConfiguration.globals.getParam("header", "X-Moov-Version")
+                .ifPresent(param -> operationGlobals.putParam("header", "X-Moov-Version", param));
         }
 
         Optional<SecuritySource> securitySource() {
@@ -81,7 +86,7 @@ public class ListPartnerPricing {
                     klass,
                     this.baseUrl,
                     "/accounts/{accountID}/partner-pricing",
-                    request, this.sdkConfiguration.globals);
+                    request, this.operationGlobals);
             HTTPRequest req = new HTTPRequest(url, "GET");
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
@@ -90,8 +95,8 @@ public class ListPartnerPricing {
             req.addQueryParams(Utils.getQueryParams(
                     klass,
                     request,
-                    this.sdkConfiguration.globals));
-            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+                    this.operationGlobals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.operationGlobals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();

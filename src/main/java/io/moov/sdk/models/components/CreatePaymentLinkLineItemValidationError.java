@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 
-public class PaymentLinkLineItemValidationError {
+public class CreatePaymentLinkLineItemValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("productID")
@@ -35,7 +35,7 @@ public class PaymentLinkLineItemValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("options")
-    private Optional<? extends Map<String, PaymentLinkLineItemOptionValidationError>> options;
+    private Optional<? extends Map<String, CreatePaymentLinkLineItemOptionValidationError>> options;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -43,11 +43,11 @@ public class PaymentLinkLineItemValidationError {
     private Optional<String> quantity;
 
     @JsonCreator
-    public PaymentLinkLineItemValidationError(
+    public CreatePaymentLinkLineItemValidationError(
             @JsonProperty("productID") Optional<String> productID,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("basePrice") Optional<? extends AmountDecimalValidationError> basePrice,
-            @JsonProperty("options") Optional<? extends Map<String, PaymentLinkLineItemOptionValidationError>> options,
+            @JsonProperty("options") Optional<? extends Map<String, CreatePaymentLinkLineItemOptionValidationError>> options,
             @JsonProperty("quantity") Optional<String> quantity) {
         Utils.checkNotNull(productID, "productID");
         Utils.checkNotNull(name, "name");
@@ -61,7 +61,7 @@ public class PaymentLinkLineItemValidationError {
         this.quantity = quantity;
     }
     
-    public PaymentLinkLineItemValidationError() {
+    public CreatePaymentLinkLineItemValidationError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty());
     }
@@ -84,8 +84,8 @@ public class PaymentLinkLineItemValidationError {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Map<String, PaymentLinkLineItemOptionValidationError>> options() {
-        return (Optional<Map<String, PaymentLinkLineItemOptionValidationError>>) options;
+    public Optional<Map<String, CreatePaymentLinkLineItemOptionValidationError>> options() {
+        return (Optional<Map<String, CreatePaymentLinkLineItemOptionValidationError>>) options;
     }
 
     @JsonIgnore
@@ -98,66 +98,66 @@ public class PaymentLinkLineItemValidationError {
     }
 
 
-    public PaymentLinkLineItemValidationError withProductID(String productID) {
+    public CreatePaymentLinkLineItemValidationError withProductID(String productID) {
         Utils.checkNotNull(productID, "productID");
         this.productID = Optional.ofNullable(productID);
         return this;
     }
 
 
-    public PaymentLinkLineItemValidationError withProductID(Optional<String> productID) {
+    public CreatePaymentLinkLineItemValidationError withProductID(Optional<String> productID) {
         Utils.checkNotNull(productID, "productID");
         this.productID = productID;
         return this;
     }
 
-    public PaymentLinkLineItemValidationError withName(String name) {
+    public CreatePaymentLinkLineItemValidationError withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
 
 
-    public PaymentLinkLineItemValidationError withName(Optional<String> name) {
+    public CreatePaymentLinkLineItemValidationError withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
-    public PaymentLinkLineItemValidationError withBasePrice(AmountDecimalValidationError basePrice) {
+    public CreatePaymentLinkLineItemValidationError withBasePrice(AmountDecimalValidationError basePrice) {
         Utils.checkNotNull(basePrice, "basePrice");
         this.basePrice = Optional.ofNullable(basePrice);
         return this;
     }
 
 
-    public PaymentLinkLineItemValidationError withBasePrice(Optional<? extends AmountDecimalValidationError> basePrice) {
+    public CreatePaymentLinkLineItemValidationError withBasePrice(Optional<? extends AmountDecimalValidationError> basePrice) {
         Utils.checkNotNull(basePrice, "basePrice");
         this.basePrice = basePrice;
         return this;
     }
 
-    public PaymentLinkLineItemValidationError withOptions(Map<String, PaymentLinkLineItemOptionValidationError> options) {
+    public CreatePaymentLinkLineItemValidationError withOptions(Map<String, CreatePaymentLinkLineItemOptionValidationError> options) {
         Utils.checkNotNull(options, "options");
         this.options = Optional.ofNullable(options);
         return this;
     }
 
 
-    public PaymentLinkLineItemValidationError withOptions(Optional<? extends Map<String, PaymentLinkLineItemOptionValidationError>> options) {
+    public CreatePaymentLinkLineItemValidationError withOptions(Optional<? extends Map<String, CreatePaymentLinkLineItemOptionValidationError>> options) {
         Utils.checkNotNull(options, "options");
         this.options = options;
         return this;
     }
 
-    public PaymentLinkLineItemValidationError withQuantity(String quantity) {
+    public CreatePaymentLinkLineItemValidationError withQuantity(String quantity) {
         Utils.checkNotNull(quantity, "quantity");
         this.quantity = Optional.ofNullable(quantity);
         return this;
     }
 
 
-    public PaymentLinkLineItemValidationError withQuantity(Optional<String> quantity) {
+    public CreatePaymentLinkLineItemValidationError withQuantity(Optional<String> quantity) {
         Utils.checkNotNull(quantity, "quantity");
         this.quantity = quantity;
         return this;
@@ -171,7 +171,7 @@ public class PaymentLinkLineItemValidationError {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PaymentLinkLineItemValidationError other = (PaymentLinkLineItemValidationError) o;
+        CreatePaymentLinkLineItemValidationError other = (CreatePaymentLinkLineItemValidationError) o;
         return 
             Utils.enhancedDeepEquals(this.productID, other.productID) &&
             Utils.enhancedDeepEquals(this.name, other.name) &&
@@ -189,7 +189,7 @@ public class PaymentLinkLineItemValidationError {
     
     @Override
     public String toString() {
-        return Utils.toString(PaymentLinkLineItemValidationError.class,
+        return Utils.toString(CreatePaymentLinkLineItemValidationError.class,
                 "productID", productID,
                 "name", name,
                 "basePrice", basePrice,
@@ -206,7 +206,7 @@ public class PaymentLinkLineItemValidationError {
 
         private Optional<? extends AmountDecimalValidationError> basePrice = Optional.empty();
 
-        private Optional<? extends Map<String, PaymentLinkLineItemOptionValidationError>> options = Optional.empty();
+        private Optional<? extends Map<String, CreatePaymentLinkLineItemOptionValidationError>> options = Optional.empty();
 
         private Optional<String> quantity = Optional.empty();
 
@@ -254,13 +254,13 @@ public class PaymentLinkLineItemValidationError {
         }
 
 
-        public Builder options(Map<String, PaymentLinkLineItemOptionValidationError> options) {
+        public Builder options(Map<String, CreatePaymentLinkLineItemOptionValidationError> options) {
             Utils.checkNotNull(options, "options");
             this.options = Optional.ofNullable(options);
             return this;
         }
 
-        public Builder options(Optional<? extends Map<String, PaymentLinkLineItemOptionValidationError>> options) {
+        public Builder options(Optional<? extends Map<String, CreatePaymentLinkLineItemOptionValidationError>> options) {
             Utils.checkNotNull(options, "options");
             this.options = options;
             return this;
@@ -279,9 +279,9 @@ public class PaymentLinkLineItemValidationError {
             return this;
         }
 
-        public PaymentLinkLineItemValidationError build() {
+        public CreatePaymentLinkLineItemValidationError build() {
 
-            return new PaymentLinkLineItemValidationError(
+            return new CreatePaymentLinkLineItemValidationError(
                 productID, name, basePrice,
                 options, quantity);
         }

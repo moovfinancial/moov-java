@@ -91,7 +91,7 @@ public class CreatePaymentLink {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
-    private Optional<? extends PaymentLinkLineItems> lineItems;
+    private Optional<? extends CreatePaymentLinkLineItems> lineItems;
 
     @JsonCreator
     public CreatePaymentLink(
@@ -104,7 +104,7 @@ public class CreatePaymentLink {
             @JsonProperty("customer") Optional<? extends PaymentLinkCustomerOptions> customer,
             @JsonProperty("payment") Optional<? extends PaymentLinkPaymentDetails> payment,
             @JsonProperty("payout") Optional<? extends PaymentLinkPayoutDetails> payout,
-            @JsonProperty("lineItems") Optional<? extends PaymentLinkLineItems> lineItems) {
+            @JsonProperty("lineItems") Optional<? extends CreatePaymentLinkLineItems> lineItems) {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
         Utils.checkNotNull(amount, "amount");
@@ -212,8 +212,8 @@ public class CreatePaymentLink {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<PaymentLinkLineItems> lineItems() {
-        return (Optional<PaymentLinkLineItems>) lineItems;
+    public Optional<CreatePaymentLinkLineItems> lineItems() {
+        return (Optional<CreatePaymentLinkLineItems>) lineItems;
     }
 
     public static Builder builder() {
@@ -345,7 +345,7 @@ public class CreatePaymentLink {
      * An optional collection of line items for a payment link.
      * When line items are provided, their total plus sales tax must equal the payment link amount.
      */
-    public CreatePaymentLink withLineItems(PaymentLinkLineItems lineItems) {
+    public CreatePaymentLink withLineItems(CreatePaymentLinkLineItems lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = Optional.ofNullable(lineItems);
         return this;
@@ -356,7 +356,7 @@ public class CreatePaymentLink {
      * An optional collection of line items for a payment link.
      * When line items are provided, their total plus sales tax must equal the payment link amount.
      */
-    public CreatePaymentLink withLineItems(Optional<? extends PaymentLinkLineItems> lineItems) {
+    public CreatePaymentLink withLineItems(Optional<? extends CreatePaymentLinkLineItems> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = lineItems;
         return this;
@@ -429,7 +429,7 @@ public class CreatePaymentLink {
 
         private Optional<? extends PaymentLinkPayoutDetails> payout = Optional.empty();
 
-        private Optional<? extends PaymentLinkLineItems> lineItems = Optional.empty();
+        private Optional<? extends CreatePaymentLinkLineItems> lineItems = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -564,7 +564,7 @@ public class CreatePaymentLink {
          * An optional collection of line items for a payment link.
          * When line items are provided, their total plus sales tax must equal the payment link amount.
          */
-        public Builder lineItems(PaymentLinkLineItems lineItems) {
+        public Builder lineItems(CreatePaymentLinkLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = Optional.ofNullable(lineItems);
             return this;
@@ -574,7 +574,7 @@ public class CreatePaymentLink {
          * An optional collection of line items for a payment link.
          * When line items are provided, their total plus sales tax must equal the payment link amount.
          */
-        public Builder lineItems(Optional<? extends PaymentLinkLineItems> lineItems) {
+        public Builder lineItems(Optional<? extends CreatePaymentLinkLineItems> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = lineItems;
             return this;

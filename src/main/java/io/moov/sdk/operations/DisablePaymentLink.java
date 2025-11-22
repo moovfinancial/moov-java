@@ -11,6 +11,7 @@ import io.moov.sdk.SecuritySource;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.DisablePaymentLinkRequest;
 import io.moov.sdk.models.operations.DisablePaymentLinkResponse;
+import io.moov.sdk.utils.Globals;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -34,6 +35,7 @@ public class DisablePaymentLink {
         final SecuritySource securitySource;
         final HTTPClient client;
         final Headers _headers;
+        final Globals operationGlobals;
 
         public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
@@ -41,6 +43,9 @@ public class DisablePaymentLink {
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
             this.client = this.sdkConfiguration.client();
+            this.operationGlobals = new Globals();
+            this.sdkConfiguration.globals.getParam("header", "X-Moov-Version")
+                .ifPresent(param -> operationGlobals.putParam("header", "X-Moov-Version", param));
         }
 
         Optional<SecuritySource> securitySource() {
@@ -78,12 +83,12 @@ public class DisablePaymentLink {
                     klass,
                     this.baseUrl,
                     "/accounts/{accountID}/payment-links/{paymentLinkCode}",
-                    request, this.sdkConfiguration.globals);
+                    request, this.operationGlobals);
             HTTPRequest req = new HTTPRequest(url, "DELETE");
             req.addHeader("Accept", "*/*")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
-            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.operationGlobals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();

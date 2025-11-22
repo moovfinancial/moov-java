@@ -460,7 +460,7 @@ public class Moov {
          * @return The builder instance.
          */
         public Builder xMoovVersion(String xMoovVersion) {
-            this.sdkConfiguration.globals.putParam("header", "xMoovVersion", xMoovVersion);
+            this.sdkConfiguration.globals.putParam("header", "X-Moov-Version", xMoovVersion);
             return this;
         }
         // Visible for testing, may be accessed via reflection in tests

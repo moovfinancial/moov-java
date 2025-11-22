@@ -15,7 +15,7 @@ import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
-public class PaymentLinkLineItemOptionValidationError {
+public class CreatePaymentLinkLineItemOptionValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
@@ -37,7 +37,7 @@ public class PaymentLinkLineItemOptionValidationError {
     private Optional<String> quantity;
 
     @JsonCreator
-    public PaymentLinkLineItemOptionValidationError(
+    public CreatePaymentLinkLineItemOptionValidationError(
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("group") Optional<String> group,
             @JsonProperty("priceModifier") Optional<? extends AmountDecimalValidationError> priceModifier,
@@ -52,7 +52,7 @@ public class PaymentLinkLineItemOptionValidationError {
         this.quantity = quantity;
     }
     
-    public PaymentLinkLineItemOptionValidationError() {
+    public CreatePaymentLinkLineItemOptionValidationError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
@@ -83,53 +83,53 @@ public class PaymentLinkLineItemOptionValidationError {
     }
 
 
-    public PaymentLinkLineItemOptionValidationError withName(String name) {
+    public CreatePaymentLinkLineItemOptionValidationError withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
 
 
-    public PaymentLinkLineItemOptionValidationError withName(Optional<String> name) {
+    public CreatePaymentLinkLineItemOptionValidationError withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
-    public PaymentLinkLineItemOptionValidationError withGroup(String group) {
+    public CreatePaymentLinkLineItemOptionValidationError withGroup(String group) {
         Utils.checkNotNull(group, "group");
         this.group = Optional.ofNullable(group);
         return this;
     }
 
 
-    public PaymentLinkLineItemOptionValidationError withGroup(Optional<String> group) {
+    public CreatePaymentLinkLineItemOptionValidationError withGroup(Optional<String> group) {
         Utils.checkNotNull(group, "group");
         this.group = group;
         return this;
     }
 
-    public PaymentLinkLineItemOptionValidationError withPriceModifier(AmountDecimalValidationError priceModifier) {
+    public CreatePaymentLinkLineItemOptionValidationError withPriceModifier(AmountDecimalValidationError priceModifier) {
         Utils.checkNotNull(priceModifier, "priceModifier");
         this.priceModifier = Optional.ofNullable(priceModifier);
         return this;
     }
 
 
-    public PaymentLinkLineItemOptionValidationError withPriceModifier(Optional<? extends AmountDecimalValidationError> priceModifier) {
+    public CreatePaymentLinkLineItemOptionValidationError withPriceModifier(Optional<? extends AmountDecimalValidationError> priceModifier) {
         Utils.checkNotNull(priceModifier, "priceModifier");
         this.priceModifier = priceModifier;
         return this;
     }
 
-    public PaymentLinkLineItemOptionValidationError withQuantity(String quantity) {
+    public CreatePaymentLinkLineItemOptionValidationError withQuantity(String quantity) {
         Utils.checkNotNull(quantity, "quantity");
         this.quantity = Optional.ofNullable(quantity);
         return this;
     }
 
 
-    public PaymentLinkLineItemOptionValidationError withQuantity(Optional<String> quantity) {
+    public CreatePaymentLinkLineItemOptionValidationError withQuantity(Optional<String> quantity) {
         Utils.checkNotNull(quantity, "quantity");
         this.quantity = quantity;
         return this;
@@ -143,7 +143,7 @@ public class PaymentLinkLineItemOptionValidationError {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PaymentLinkLineItemOptionValidationError other = (PaymentLinkLineItemOptionValidationError) o;
+        CreatePaymentLinkLineItemOptionValidationError other = (CreatePaymentLinkLineItemOptionValidationError) o;
         return 
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.group, other.group) &&
@@ -160,7 +160,7 @@ public class PaymentLinkLineItemOptionValidationError {
     
     @Override
     public String toString() {
-        return Utils.toString(PaymentLinkLineItemOptionValidationError.class,
+        return Utils.toString(CreatePaymentLinkLineItemOptionValidationError.class,
                 "name", name,
                 "group", group,
                 "priceModifier", priceModifier,
@@ -234,9 +234,9 @@ public class PaymentLinkLineItemOptionValidationError {
             return this;
         }
 
-        public PaymentLinkLineItemOptionValidationError build() {
+        public CreatePaymentLinkLineItemOptionValidationError build() {
 
-            return new PaymentLinkLineItemOptionValidationError(
+            return new CreatePaymentLinkLineItemOptionValidationError(
                 name, group, priceModifier,
                 quantity);
         }

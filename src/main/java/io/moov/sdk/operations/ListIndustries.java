@@ -13,6 +13,7 @@ import io.moov.sdk.models.components.EnrichedIndustries;
 import io.moov.sdk.models.errors.APIException;
 import io.moov.sdk.models.operations.ListIndustriesRequest;
 import io.moov.sdk.models.operations.ListIndustriesResponse;
+import io.moov.sdk.utils.Globals;
 import io.moov.sdk.utils.HTTPClient;
 import io.moov.sdk.utils.HTTPRequest;
 import io.moov.sdk.utils.Headers;
@@ -36,6 +37,7 @@ public class ListIndustries {
         final SecuritySource securitySource;
         final HTTPClient client;
         final Headers _headers;
+        final Globals operationGlobals;
 
         public Base(SDKConfiguration sdkConfiguration, Headers _headers) {
             this.sdkConfiguration = sdkConfiguration;
@@ -43,6 +45,9 @@ public class ListIndustries {
             this.baseUrl = this.sdkConfiguration.serverUrl();
             this.securitySource = this.sdkConfiguration.securitySource();
             this.client = this.sdkConfiguration.client();
+            this.operationGlobals = new Globals();
+            this.sdkConfiguration.globals.getParam("header", "X-Moov-Version")
+                .ifPresent(param -> operationGlobals.putParam("header", "X-Moov-Version", param));
         }
 
         Optional<SecuritySource> securitySource() {
@@ -83,7 +88,7 @@ public class ListIndustries {
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
             _headers.forEach((k, list) -> list.forEach(v -> req.addHeader(k, v)));
-            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.operationGlobals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();

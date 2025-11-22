@@ -13,6 +13,7 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -41,6 +42,13 @@ public class PaymentLinkLineItemOption {
     private Optional<? extends AmountDecimal> priceModifier;
 
     /**
+     * Optional list of images associated with this line item option.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("images")
+    private Optional<? extends List<PaymentLinkLineItemImageMetadata>> images;
+
+    /**
      * Optional group identifier to categorize related options (e.g., 'toppings').
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -52,14 +60,17 @@ public class PaymentLinkLineItemOption {
             @JsonProperty("name") String name,
             @JsonProperty("quantity") int quantity,
             @JsonProperty("priceModifier") Optional<? extends AmountDecimal> priceModifier,
+            @JsonProperty("images") Optional<? extends List<PaymentLinkLineItemImageMetadata>> images,
             @JsonProperty("group") Optional<String> group) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(quantity, "quantity");
         Utils.checkNotNull(priceModifier, "priceModifier");
+        Utils.checkNotNull(images, "images");
         Utils.checkNotNull(group, "group");
         this.name = name;
         this.quantity = quantity;
         this.priceModifier = priceModifier;
+        this.images = images;
         this.group = group;
     }
     
@@ -67,7 +78,7 @@ public class PaymentLinkLineItemOption {
             String name,
             int quantity) {
         this(name, quantity, Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -93,6 +104,15 @@ public class PaymentLinkLineItemOption {
     @JsonIgnore
     public Optional<AmountDecimal> priceModifier() {
         return (Optional<AmountDecimal>) priceModifier;
+    }
+
+    /**
+     * Optional list of images associated with this line item option.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<PaymentLinkLineItemImageMetadata>> images() {
+        return (Optional<List<PaymentLinkLineItemImageMetadata>>) images;
     }
 
     /**
@@ -146,6 +166,25 @@ public class PaymentLinkLineItemOption {
     }
 
     /**
+     * Optional list of images associated with this line item option.
+     */
+    public PaymentLinkLineItemOption withImages(List<PaymentLinkLineItemImageMetadata> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = Optional.ofNullable(images);
+        return this;
+    }
+
+
+    /**
+     * Optional list of images associated with this line item option.
+     */
+    public PaymentLinkLineItemOption withImages(Optional<? extends List<PaymentLinkLineItemImageMetadata>> images) {
+        Utils.checkNotNull(images, "images");
+        this.images = images;
+        return this;
+    }
+
+    /**
      * Optional group identifier to categorize related options (e.g., 'toppings').
      */
     public PaymentLinkLineItemOption withGroup(String group) {
@@ -177,6 +216,7 @@ public class PaymentLinkLineItemOption {
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
             Utils.enhancedDeepEquals(this.priceModifier, other.priceModifier) &&
+            Utils.enhancedDeepEquals(this.images, other.images) &&
             Utils.enhancedDeepEquals(this.group, other.group);
     }
     
@@ -184,7 +224,7 @@ public class PaymentLinkLineItemOption {
     public int hashCode() {
         return Utils.enhancedHash(
             name, quantity, priceModifier,
-            group);
+            images, group);
     }
     
     @Override
@@ -193,6 +233,7 @@ public class PaymentLinkLineItemOption {
                 "name", name,
                 "quantity", quantity,
                 "priceModifier", priceModifier,
+                "images", images,
                 "group", group);
     }
 
@@ -204,6 +245,8 @@ public class PaymentLinkLineItemOption {
         private Integer quantity;
 
         private Optional<? extends AmountDecimal> priceModifier = Optional.empty();
+
+        private Optional<? extends List<PaymentLinkLineItemImageMetadata>> images = Optional.empty();
 
         private Optional<String> group = Optional.empty();
 
@@ -252,6 +295,25 @@ public class PaymentLinkLineItemOption {
 
 
         /**
+         * Optional list of images associated with this line item option.
+         */
+        public Builder images(List<PaymentLinkLineItemImageMetadata> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = Optional.ofNullable(images);
+            return this;
+        }
+
+        /**
+         * Optional list of images associated with this line item option.
+         */
+        public Builder images(Optional<? extends List<PaymentLinkLineItemImageMetadata>> images) {
+            Utils.checkNotNull(images, "images");
+            this.images = images;
+            return this;
+        }
+
+
+        /**
          * Optional group identifier to categorize related options (e.g., 'toppings').
          */
         public Builder group(String group) {
@@ -273,7 +335,7 @@ public class PaymentLinkLineItemOption {
 
             return new PaymentLinkLineItemOption(
                 name, quantity, priceModifier,
-                group);
+                images, group);
         }
 
     }

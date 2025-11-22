@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 9debdf4d029f2d45c8703da3770d5954
+  docChecksum: 4118d9fa14f2cb49d8d7a649bffbb371
   docVersion: latest
-  speakeasyVersion: 1.659.0
-  generationVersion: 2.755.9
-  releaseVersion: 0.33.7
-  configChecksum: 19e8a27948c48e4f9b104561ec4be68c
+  speakeasyVersion: 1.660.0
+  generationVersion: 2.760.2
+  releaseVersion: 0.33.8
+  configChecksum: e8ccb85c81bebd07ebaca2974ac07ccf
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.55.2
+    core: 3.55.3
     decimal: 0.0.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
@@ -22,7 +22,7 @@ features:
     globalSecurity: 2.83.1
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.83.0
-    globals: 2.82.2
+    globals: 2.82.4
     hiddenGlobals: 0.1.0
     includes: 2.81.1
     nameOverrides: 2.81.3
@@ -193,6 +193,13 @@ generatedFiles:
   - docs/models/components/CreateIndividualProfile.md
   - docs/models/components/CreateInvoice.md
   - docs/models/components/CreatePaymentLink.md
+  - docs/models/components/CreatePaymentLinkLineItem.md
+  - docs/models/components/CreatePaymentLinkLineItemOption.md
+  - docs/models/components/CreatePaymentLinkLineItemOptionValidationError.md
+  - docs/models/components/CreatePaymentLinkLineItemValidationError.md
+  - docs/models/components/CreatePaymentLinkLineItems.md
+  - docs/models/components/CreatePaymentLinkLineItemsUpdate.md
+  - docs/models/components/CreatePaymentLinkLineItemsValidationError.md
   - docs/models/components/CreateProductOption.md
   - docs/models/components/CreateProductOptionGroup.md
   - docs/models/components/CreateProfile.md
@@ -384,12 +391,9 @@ generatedFiles:
   - docs/models/components/PaymentLinkDisplayOptions.md
   - docs/models/components/PaymentLinkDisplayOptionsUpdate.md
   - docs/models/components/PaymentLinkLineItem.md
+  - docs/models/components/PaymentLinkLineItemImageMetadata.md
   - docs/models/components/PaymentLinkLineItemOption.md
-  - docs/models/components/PaymentLinkLineItemOptionValidationError.md
-  - docs/models/components/PaymentLinkLineItemValidationError.md
   - docs/models/components/PaymentLinkLineItems.md
-  - docs/models/components/PaymentLinkLineItemsUpdate.md
-  - docs/models/components/PaymentLinkLineItemsValidationError.md
   - docs/models/components/PaymentLinkPaymentDetails.md
   - docs/models/components/PaymentLinkPaymentDetailsUpdate.md
   - docs/models/components/PaymentLinkPayoutDetails.md
@@ -1252,6 +1256,13 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/CreateIndividualProfile.java
   - src/main/java/io/moov/sdk/models/components/CreateInvoice.java
   - src/main/java/io/moov/sdk/models/components/CreatePaymentLink.java
+  - src/main/java/io/moov/sdk/models/components/CreatePaymentLinkLineItem.java
+  - src/main/java/io/moov/sdk/models/components/CreatePaymentLinkLineItemOption.java
+  - src/main/java/io/moov/sdk/models/components/CreatePaymentLinkLineItemOptionValidationError.java
+  - src/main/java/io/moov/sdk/models/components/CreatePaymentLinkLineItemValidationError.java
+  - src/main/java/io/moov/sdk/models/components/CreatePaymentLinkLineItems.java
+  - src/main/java/io/moov/sdk/models/components/CreatePaymentLinkLineItemsUpdate.java
+  - src/main/java/io/moov/sdk/models/components/CreatePaymentLinkLineItemsValidationError.java
   - src/main/java/io/moov/sdk/models/components/CreateProductOption.java
   - src/main/java/io/moov/sdk/models/components/CreateProductOptionGroup.java
   - src/main/java/io/moov/sdk/models/components/CreateProfile.java
@@ -1444,12 +1455,9 @@ generatedFiles:
   - src/main/java/io/moov/sdk/models/components/PaymentLinkDisplayOptions.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkDisplayOptionsUpdate.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItem.java
+  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemImageMetadata.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemOption.java
-  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemOptionValidationError.java
-  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemValidationError.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItems.java
-  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemsUpdate.java
-  - src/main/java/io/moov/sdk/models/components/PaymentLinkLineItemsValidationError.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkPaymentDetails.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkPaymentDetailsUpdate.java
   - src/main/java/io/moov/sdk/models/components/PaymentLinkPayoutDetails.java
@@ -2452,6 +2460,7 @@ generatedFiles:
   - src/main/java/io/moov/sdk/utils/SerializedBody.java
   - src/main/java/io/moov/sdk/utils/SessionManager.java
   - src/main/java/io/moov/sdk/utils/SpeakeasyHTTPClient.java
+  - src/main/java/io/moov/sdk/utils/SpeakeasyLogger.java
   - src/main/java/io/moov/sdk/utils/SpeakeasyMetadata.java
   - src/main/java/io/moov/sdk/utils/StreamingParser.java
   - src/main/java/io/moov/sdk/utils/TypedObject.java
@@ -5037,10 +5046,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Java SDK Changes Detected:
-  * `moov.invoices.createInvoice()`: **Added**
-  * `moov.invoices.listInvoices()`: **Added**
-  * `moov.invoices.getInvoice()`: **Added**
-  * `moov.invoices.updateInvoice()`: **Added**
-  * `moov.invoices.markPaidInvoice()`: **Added**
+releaseNotes: "## Java SDK Changes Detected:\n* `moov.paymentLinks.create()`: \n  *  `request.createpaymentlink.lineItems.items.[]` **Changed**\n  *  `response.lineitems.items.[]` **Changed**\n* `moov.paymentLinks.list()`:  `response.[].lineItems.items.[]` **Changed**\n* `moov.paymentLinks.get()`:  `response.lineitems.items.[]` **Changed**\n* `moov.paymentLinks.update()`: \n  *  `request.updatepaymentlink.lineItems.items.[]` **Changed**\n  *  `response.lineitems.items.[]` **Changed**\n"

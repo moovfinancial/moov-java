@@ -78,7 +78,7 @@ public class GetPublicImage {
                     klass,
                     this.baseUrl,
                     "/images/{publicID}",
-                    request, this.sdkConfiguration.globals);
+                    request, null);
             HTTPRequest req = new HTTPRequest(url, "GET");
             req.addHeader("Accept", "image/jpeg;q=1, image/png;q=0.7, image/webp;q=0")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
@@ -87,8 +87,8 @@ public class GetPublicImage {
             req.addQueryParams(Utils.getQueryParams(
                     klass,
                     request,
-                    this.sdkConfiguration.globals));
-            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
+                    null));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, null));
 
             return req.build();
         }

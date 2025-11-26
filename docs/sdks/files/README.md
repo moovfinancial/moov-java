@@ -66,7 +66,6 @@ public class Application {
                         .content(Utils.readBytesAndClose(new FileInputStream("example.file")))
                         .build())
                     .filePurpose(FilePurpose.REPRESENTATIVE_VERIFICATION)
-                    .metadata("{\"requirement_id\": \"document.individual.verification\"}")
                     .build())
                 .call();
 

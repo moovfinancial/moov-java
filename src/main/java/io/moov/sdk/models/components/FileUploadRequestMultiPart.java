@@ -11,11 +11,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
-/**
- * FileUploadRequestMultiPart
- * 
- * <p>Request to upload a file for an account.
- */
+
 public class FileUploadRequestMultiPart {
     /**
      * The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
@@ -24,7 +20,7 @@ public class FileUploadRequestMultiPart {
     private FileUploadRequestMultiPartFile file;
 
     /**
-     * The file's purpose.
+     * The purpose of the file being uploaded.
      */
     @SpeakeasyMetadata("multipartForm:name=filePurpose")
     private FilePurpose filePurpose;
@@ -65,7 +61,7 @@ public class FileUploadRequestMultiPart {
     }
 
     /**
-     * The file's purpose.
+     * The purpose of the file being uploaded.
      */
     @JsonIgnore
     public FilePurpose filePurpose() {
@@ -97,7 +93,7 @@ public class FileUploadRequestMultiPart {
     }
 
     /**
-     * The file's purpose.
+     * The purpose of the file being uploaded.
      */
     public FileUploadRequestMultiPart withFilePurpose(FilePurpose filePurpose) {
         Utils.checkNotNull(filePurpose, "filePurpose");
@@ -182,7 +178,7 @@ public class FileUploadRequestMultiPart {
 
 
         /**
-         * The file's purpose.
+         * The purpose of the file being uploaded.
          */
         public Builder filePurpose(FilePurpose filePurpose) {
             Utils.checkNotNull(filePurpose, "filePurpose");

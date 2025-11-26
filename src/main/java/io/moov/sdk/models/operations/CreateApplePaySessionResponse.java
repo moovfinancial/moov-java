@@ -34,7 +34,7 @@ public class CreateApplePaySessionResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * The request completed successfully.
+     * The request has succeeded.
      */
     private Optional<String> applePaySession;
 
@@ -95,7 +95,7 @@ public class CreateApplePaySessionResponse implements Response {
     }
 
     /**
-     * The request completed successfully.
+     * The request has succeeded.
      */
     @JsonIgnore
     public Optional<String> applePaySession() {
@@ -140,7 +140,7 @@ public class CreateApplePaySessionResponse implements Response {
     }
 
     /**
-     * The request completed successfully.
+     * The request has succeeded.
      */
     public CreateApplePaySessionResponse withApplePaySession(String applePaySession) {
         Utils.checkNotNull(applePaySession, "applePaySession");
@@ -150,7 +150,7 @@ public class CreateApplePaySessionResponse implements Response {
 
 
     /**
-     * The request completed successfully.
+     * The request has succeeded.
      */
     public CreateApplePaySessionResponse withApplePaySession(Optional<String> applePaySession) {
         Utils.checkNotNull(applePaySession, "applePaySession");
@@ -247,7 +247,7 @@ public class CreateApplePaySessionResponse implements Response {
 
 
         /**
-         * The request completed successfully.
+         * The request has succeeded.
          */
         public Builder applePaySession(String applePaySession) {
             Utils.checkNotNull(applePaySession, "applePaySession");
@@ -256,7 +256,7 @@ public class CreateApplePaySessionResponse implements Response {
         }
 
         /**
-         * The request completed successfully.
+         * The request has succeeded.
          */
         public Builder applePaySession(Optional<String> applePaySession) {
             Utils.checkNotNull(applePaySession, "applePaySession");

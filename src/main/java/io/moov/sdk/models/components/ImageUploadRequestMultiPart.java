@@ -12,13 +12,11 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-/**
- * ImageUploadRequestMultiPart
- * 
- * <p>Multipart request body for uploading an image with optional metadata.
- */
-public class ImageUploadRequestMultiPart {
 
+public class ImageUploadRequestMultiPart {
+    /**
+     * A PNG, JPEG, or WebP image file to upload.
+     */
     @SpeakeasyMetadata("multipartForm:file,name=image")
     private Image image;
 
@@ -43,6 +41,9 @@ public class ImageUploadRequestMultiPart {
         this(image, Optional.empty());
     }
 
+    /**
+     * A PNG, JPEG, or WebP image file to upload.
+     */
     @JsonIgnore
     public Image image() {
         return image;
@@ -62,6 +63,9 @@ public class ImageUploadRequestMultiPart {
     }
 
 
+    /**
+     * A PNG, JPEG, or WebP image file to upload.
+     */
     public ImageUploadRequestMultiPart withImage(Image image) {
         Utils.checkNotNull(image, "image");
         this.image = image;
@@ -126,6 +130,9 @@ public class ImageUploadRequestMultiPart {
         }
 
 
+        /**
+         * A PNG, JPEG, or WebP image file to upload.
+         */
         public Builder image(Image image) {
             Utils.checkNotNull(image, "image");
             this.image = image;

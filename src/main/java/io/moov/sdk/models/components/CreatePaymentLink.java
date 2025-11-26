@@ -25,9 +25,6 @@ import java.util.Optional;
  * links,
  * `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
  * to a specific recipient.
- * 
- * <p>**Note:** The `payout` option is currently under development and is not yet available for general
- * use.
  */
 public class CreatePaymentLink {
     /**

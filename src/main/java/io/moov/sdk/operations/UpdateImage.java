@@ -99,7 +99,7 @@ public class UpdateImage {
                     typeReference);
             SerializedBody serializedRequestBody = Utils.serializeRequestBody(
                     convertedRequest,
-                    "imageUpdateRequestMultiPart",
+                    "imageUploadRequestMultiPart",
                     "multipart",
                     false);
             if (serializedRequestBody == null) {

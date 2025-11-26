@@ -33,7 +33,9 @@ public class ListPaymentLinksRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=status")
     private Optional<? extends PaymentLinkStatus> status;
 
-
+    /**
+     * The merchant account ID.
+     */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
@@ -84,6 +86,9 @@ public class ListPaymentLinksRequest {
         return (Optional<PaymentLinkStatus>) status;
     }
 
+    /**
+     * The merchant account ID.
+     */
     @JsonIgnore
     public String accountID() {
         return accountID;
@@ -146,6 +151,9 @@ public class ListPaymentLinksRequest {
         return this;
     }
 
+    /**
+     * The merchant account ID.
+     */
     public ListPaymentLinksRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -256,6 +264,9 @@ public class ListPaymentLinksRequest {
         }
 
 
+        /**
+         * The merchant account ID.
+         */
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;

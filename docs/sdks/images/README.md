@@ -12,8 +12,7 @@
 * [update](#update) - Replace an existing image and, optionally, its metadata.
 
 This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
-the metadata form section to keep existing metadata, or send `null` to clear it. 
-Duplicate images, and requests larger than 16MB will be rejected.
+the metadata form section to keep existing metadata. Duplicate images, and requests larger than 16MB will be rejected.
 * [delete](#delete) - Permanently delete an image by its ID.
 * [updateMetadata](#updatemetadata) - Replace the metadata for an existing image.
 * [getPublic](#getpublic) - Get an image by its public ID.
@@ -202,8 +201,7 @@ public class Application {
 Replace an existing image and, optionally, its metadata.
 
 This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
-the metadata form section to keep existing metadata, or send `null` to clear it. 
-Duplicate images, and requests larger than 16MB will be rejected.
+the metadata form section to keep existing metadata. Duplicate images, and requests larger than 16MB will be rejected.
 
 ### Example Usage
 
@@ -235,8 +233,8 @@ public class Application {
         UpdateImageResponse res = sdk.images().update()
                 .accountID("310f4f19-45cf-4429-9aae-8e93827ecb0d")
                 .imageID("8ef109f8-5a61-4355-b2e4-b8ac2f6f6f47")
-                .imageUpdateRequestMultiPart(ImageUpdateRequestMultiPart.builder()
-                    .image(ImageUpdateRequestMultiPartImage.builder()
+                .imageUploadRequestMultiPart(ImageUploadRequestMultiPart.builder()
+                    .image(Image.builder()
                         .fileName("example.file")
                         .content(Utils.readBytesAndClose(new FileInputStream("example.file")))
                         .build())
@@ -253,7 +251,7 @@ public class Application {
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `accountID`                                                                           | *String*                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
 | `imageID`                                                                             | *String*                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `imageUpdateRequestMultiPart`                                                         | [ImageUpdateRequestMultiPart](../../models/components/ImageUpdateRequestMultiPart.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `imageUploadRequestMultiPart`                                                         | [ImageUploadRequestMultiPart](../../models/components/ImageUploadRequestMultiPart.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
 
 ### Response
 

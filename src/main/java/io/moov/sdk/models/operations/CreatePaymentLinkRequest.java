@@ -13,7 +13,9 @@ import java.lang.String;
 
 
 public class CreatePaymentLinkRequest {
-
+    /**
+     * The merchant account ID.
+     */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
@@ -31,6 +33,9 @@ public class CreatePaymentLinkRequest {
         this.createPaymentLink = createPaymentLink;
     }
 
+    /**
+     * The merchant account ID.
+     */
     @JsonIgnore
     public String accountID() {
         return accountID;
@@ -46,6 +51,9 @@ public class CreatePaymentLinkRequest {
     }
 
 
+    /**
+     * The merchant account ID.
+     */
     public CreatePaymentLinkRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -97,6 +105,9 @@ public class CreatePaymentLinkRequest {
         }
 
 
+        /**
+         * The merchant account ID.
+         */
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;

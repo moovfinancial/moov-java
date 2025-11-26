@@ -59,7 +59,7 @@ public class Files {
      * you'll need to specify the `/accounts/{accountID}/files.write` scope.
      * 
      * @param accountID 
-     * @param fileUploadRequestMultiPart Request to upload a file for an account.
+     * @param fileUploadRequestMultiPart 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */

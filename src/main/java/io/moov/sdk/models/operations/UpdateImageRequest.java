@@ -5,7 +5,7 @@ package io.moov.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.moov.sdk.models.components.ImageUpdateRequestMultiPart;
+import io.moov.sdk.models.components.ImageUploadRequestMultiPart;
 import io.moov.sdk.utils.SpeakeasyMetadata;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
@@ -23,19 +23,19 @@ public class UpdateImageRequest {
 
 
     @SpeakeasyMetadata("request:mediaType=multipart/form-data")
-    private ImageUpdateRequestMultiPart imageUpdateRequestMultiPart;
+    private ImageUploadRequestMultiPart imageUploadRequestMultiPart;
 
     @JsonCreator
     public UpdateImageRequest(
             String accountID,
             String imageID,
-            ImageUpdateRequestMultiPart imageUpdateRequestMultiPart) {
+            ImageUploadRequestMultiPart imageUploadRequestMultiPart) {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(imageID, "imageID");
-        Utils.checkNotNull(imageUpdateRequestMultiPart, "imageUpdateRequestMultiPart");
+        Utils.checkNotNull(imageUploadRequestMultiPart, "imageUploadRequestMultiPart");
         this.accountID = accountID;
         this.imageID = imageID;
-        this.imageUpdateRequestMultiPart = imageUpdateRequestMultiPart;
+        this.imageUploadRequestMultiPart = imageUploadRequestMultiPart;
     }
 
     @JsonIgnore
@@ -49,8 +49,8 @@ public class UpdateImageRequest {
     }
 
     @JsonIgnore
-    public ImageUpdateRequestMultiPart imageUpdateRequestMultiPart() {
-        return imageUpdateRequestMultiPart;
+    public ImageUploadRequestMultiPart imageUploadRequestMultiPart() {
+        return imageUploadRequestMultiPart;
     }
 
     public static Builder builder() {
@@ -70,9 +70,9 @@ public class UpdateImageRequest {
         return this;
     }
 
-    public UpdateImageRequest withImageUpdateRequestMultiPart(ImageUpdateRequestMultiPart imageUpdateRequestMultiPart) {
-        Utils.checkNotNull(imageUpdateRequestMultiPart, "imageUpdateRequestMultiPart");
-        this.imageUpdateRequestMultiPart = imageUpdateRequestMultiPart;
+    public UpdateImageRequest withImageUploadRequestMultiPart(ImageUploadRequestMultiPart imageUploadRequestMultiPart) {
+        Utils.checkNotNull(imageUploadRequestMultiPart, "imageUploadRequestMultiPart");
+        this.imageUploadRequestMultiPart = imageUploadRequestMultiPart;
         return this;
     }
 
@@ -88,13 +88,13 @@ public class UpdateImageRequest {
         return 
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.imageID, other.imageID) &&
-            Utils.enhancedDeepEquals(this.imageUpdateRequestMultiPart, other.imageUpdateRequestMultiPart);
+            Utils.enhancedDeepEquals(this.imageUploadRequestMultiPart, other.imageUploadRequestMultiPart);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID, imageID, imageUpdateRequestMultiPart);
+            accountID, imageID, imageUploadRequestMultiPart);
     }
     
     @Override
@@ -102,7 +102,7 @@ public class UpdateImageRequest {
         return Utils.toString(UpdateImageRequest.class,
                 "accountID", accountID,
                 "imageID", imageID,
-                "imageUpdateRequestMultiPart", imageUpdateRequestMultiPart);
+                "imageUploadRequestMultiPart", imageUploadRequestMultiPart);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -112,7 +112,7 @@ public class UpdateImageRequest {
 
         private String imageID;
 
-        private ImageUpdateRequestMultiPart imageUpdateRequestMultiPart;
+        private ImageUploadRequestMultiPart imageUploadRequestMultiPart;
 
         private Builder() {
           // force use of static builder() method
@@ -133,16 +133,16 @@ public class UpdateImageRequest {
         }
 
 
-        public Builder imageUpdateRequestMultiPart(ImageUpdateRequestMultiPart imageUpdateRequestMultiPart) {
-            Utils.checkNotNull(imageUpdateRequestMultiPart, "imageUpdateRequestMultiPart");
-            this.imageUpdateRequestMultiPart = imageUpdateRequestMultiPart;
+        public Builder imageUploadRequestMultiPart(ImageUploadRequestMultiPart imageUploadRequestMultiPart) {
+            Utils.checkNotNull(imageUploadRequestMultiPart, "imageUploadRequestMultiPart");
+            this.imageUploadRequestMultiPart = imageUploadRequestMultiPart;
             return this;
         }
 
         public UpdateImageRequest build() {
 
             return new UpdateImageRequest(
-                accountID, imageID, imageUpdateRequestMultiPart);
+                accountID, imageID, imageUploadRequestMultiPart);
         }
 
     }

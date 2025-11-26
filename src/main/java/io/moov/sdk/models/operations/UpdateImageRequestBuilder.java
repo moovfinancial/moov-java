@@ -6,7 +6,7 @@ package io.moov.sdk.models.operations;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.SDKConfiguration;
-import io.moov.sdk.models.components.ImageUpdateRequestMultiPart;
+import io.moov.sdk.models.components.ImageUploadRequestMultiPart;
 import io.moov.sdk.operations.UpdateImage;
 import io.moov.sdk.utils.Headers;
 import io.moov.sdk.utils.Utils;
@@ -16,7 +16,7 @@ public class UpdateImageRequestBuilder {
 
     private String accountID;
     private String imageID;
-    private ImageUpdateRequestMultiPart imageUpdateRequestMultiPart;
+    private ImageUploadRequestMultiPart imageUploadRequestMultiPart;
     private final SDKConfiguration sdkConfiguration;
     private final Headers _headers = new Headers(); 
 
@@ -36,9 +36,9 @@ public class UpdateImageRequestBuilder {
         return this;
     }
 
-    public UpdateImageRequestBuilder imageUpdateRequestMultiPart(ImageUpdateRequestMultiPart imageUpdateRequestMultiPart) {
-        Utils.checkNotNull(imageUpdateRequestMultiPart, "imageUpdateRequestMultiPart");
-        this.imageUpdateRequestMultiPart = imageUpdateRequestMultiPart;
+    public UpdateImageRequestBuilder imageUploadRequestMultiPart(ImageUploadRequestMultiPart imageUploadRequestMultiPart) {
+        Utils.checkNotNull(imageUploadRequestMultiPart, "imageUploadRequestMultiPart");
+        this.imageUploadRequestMultiPart = imageUploadRequestMultiPart;
         return this;
     }
 
@@ -47,7 +47,7 @@ public class UpdateImageRequestBuilder {
 
         UpdateImageRequest request = new UpdateImageRequest(accountID,
             imageID,
-            imageUpdateRequestMultiPart);
+            imageUploadRequestMultiPart);
 
         return request;
     }

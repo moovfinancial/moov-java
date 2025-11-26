@@ -30,7 +30,7 @@ public class UpdateRepresentative {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("email")
-    private JsonNullable<? extends Email> email;
+    private JsonNullable<String> email;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -56,7 +56,7 @@ public class UpdateRepresentative {
     public UpdateRepresentative(
             @JsonProperty("name") Optional<? extends IndividualNameUpdate> name,
             @JsonProperty("phone") JsonNullable<? extends Phone> phone,
-            @JsonProperty("email") JsonNullable<? extends Email> email,
+            @JsonProperty("email") JsonNullable<String> email,
             @JsonProperty("address") JsonNullable<? extends UpdateRepresentativeAddress> address,
             @JsonProperty("birthDate") JsonNullable<? extends UpdateRepresentativeBirthDate> birthDate,
             @JsonProperty("governmentID") JsonNullable<? extends UpdateRepresentativeGovernmentID> governmentID,
@@ -95,10 +95,9 @@ public class UpdateRepresentative {
         return (JsonNullable<Phone>) phone;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<Email> email() {
-        return (JsonNullable<Email>) email;
+    public JsonNullable<String> email() {
+        return email;
     }
 
     @SuppressWarnings("unchecked")
@@ -155,13 +154,13 @@ public class UpdateRepresentative {
         return this;
     }
 
-    public UpdateRepresentative withEmail(Email email) {
+    public UpdateRepresentative withEmail(String email) {
         Utils.checkNotNull(email, "email");
         this.email = JsonNullable.of(email);
         return this;
     }
 
-    public UpdateRepresentative withEmail(JsonNullable<? extends Email> email) {
+    public UpdateRepresentative withEmail(JsonNullable<String> email) {
         Utils.checkNotNull(email, "email");
         this.email = email;
         return this;
@@ -261,7 +260,7 @@ public class UpdateRepresentative {
 
         private JsonNullable<? extends Phone> phone = JsonNullable.undefined();
 
-        private JsonNullable<? extends Email> email = JsonNullable.undefined();
+        private JsonNullable<String> email = JsonNullable.undefined();
 
         private JsonNullable<? extends UpdateRepresentativeAddress> address = JsonNullable.undefined();
 
@@ -302,13 +301,13 @@ public class UpdateRepresentative {
         }
 
 
-        public Builder email(Email email) {
+        public Builder email(String email) {
             Utils.checkNotNull(email, "email");
             this.email = JsonNullable.of(email);
             return this;
         }
 
-        public Builder email(JsonNullable<? extends Email> email) {
+        public Builder email(JsonNullable<String> email) {
             Utils.checkNotNull(email, "email");
             this.email = email;
             return this;

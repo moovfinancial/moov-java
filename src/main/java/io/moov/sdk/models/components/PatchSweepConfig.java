@@ -24,17 +24,17 @@ public class PatchSweepConfig {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushPaymentMethodID")
-    private JsonNullable<? extends PushPaymentMethodID> pushPaymentMethodID;
+    private JsonNullable<String> pushPaymentMethodID;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pullPaymentMethodID")
-    private JsonNullable<? extends PullPaymentMethodID> pullPaymentMethodID;
+    private JsonNullable<String> pullPaymentMethodID;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("statementDescriptor")
-    private JsonNullable<? extends StatementDescriptor> statementDescriptor;
+    private JsonNullable<String> statementDescriptor;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -44,9 +44,9 @@ public class PatchSweepConfig {
     @JsonCreator
     public PatchSweepConfig(
             @JsonProperty("status") JsonNullable<? extends Status> status,
-            @JsonProperty("pushPaymentMethodID") JsonNullable<? extends PushPaymentMethodID> pushPaymentMethodID,
-            @JsonProperty("pullPaymentMethodID") JsonNullable<? extends PullPaymentMethodID> pullPaymentMethodID,
-            @JsonProperty("statementDescriptor") JsonNullable<? extends StatementDescriptor> statementDescriptor,
+            @JsonProperty("pushPaymentMethodID") JsonNullable<String> pushPaymentMethodID,
+            @JsonProperty("pullPaymentMethodID") JsonNullable<String> pullPaymentMethodID,
+            @JsonProperty("statementDescriptor") JsonNullable<String> statementDescriptor,
             @JsonProperty("minimumBalance") JsonNullable<String> minimumBalance) {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
@@ -71,22 +71,19 @@ public class PatchSweepConfig {
         return (JsonNullable<Status>) status;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<PushPaymentMethodID> pushPaymentMethodID() {
-        return (JsonNullable<PushPaymentMethodID>) pushPaymentMethodID;
+    public JsonNullable<String> pushPaymentMethodID() {
+        return pushPaymentMethodID;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<PullPaymentMethodID> pullPaymentMethodID() {
-        return (JsonNullable<PullPaymentMethodID>) pullPaymentMethodID;
+    public JsonNullable<String> pullPaymentMethodID() {
+        return pullPaymentMethodID;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<StatementDescriptor> statementDescriptor() {
-        return (JsonNullable<StatementDescriptor>) statementDescriptor;
+    public JsonNullable<String> statementDescriptor() {
+        return statementDescriptor;
     }
 
     @JsonIgnore
@@ -111,37 +108,37 @@ public class PatchSweepConfig {
         return this;
     }
 
-    public PatchSweepConfig withPushPaymentMethodID(PushPaymentMethodID pushPaymentMethodID) {
+    public PatchSweepConfig withPushPaymentMethodID(String pushPaymentMethodID) {
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
         this.pushPaymentMethodID = JsonNullable.of(pushPaymentMethodID);
         return this;
     }
 
-    public PatchSweepConfig withPushPaymentMethodID(JsonNullable<? extends PushPaymentMethodID> pushPaymentMethodID) {
+    public PatchSweepConfig withPushPaymentMethodID(JsonNullable<String> pushPaymentMethodID) {
         Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
         this.pushPaymentMethodID = pushPaymentMethodID;
         return this;
     }
 
-    public PatchSweepConfig withPullPaymentMethodID(PullPaymentMethodID pullPaymentMethodID) {
+    public PatchSweepConfig withPullPaymentMethodID(String pullPaymentMethodID) {
         Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
         this.pullPaymentMethodID = JsonNullable.of(pullPaymentMethodID);
         return this;
     }
 
-    public PatchSweepConfig withPullPaymentMethodID(JsonNullable<? extends PullPaymentMethodID> pullPaymentMethodID) {
+    public PatchSweepConfig withPullPaymentMethodID(JsonNullable<String> pullPaymentMethodID) {
         Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
         this.pullPaymentMethodID = pullPaymentMethodID;
         return this;
     }
 
-    public PatchSweepConfig withStatementDescriptor(StatementDescriptor statementDescriptor) {
+    public PatchSweepConfig withStatementDescriptor(String statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
         this.statementDescriptor = JsonNullable.of(statementDescriptor);
         return this;
     }
 
-    public PatchSweepConfig withStatementDescriptor(JsonNullable<? extends StatementDescriptor> statementDescriptor) {
+    public PatchSweepConfig withStatementDescriptor(JsonNullable<String> statementDescriptor) {
         Utils.checkNotNull(statementDescriptor, "statementDescriptor");
         this.statementDescriptor = statementDescriptor;
         return this;
@@ -198,11 +195,11 @@ public class PatchSweepConfig {
 
         private JsonNullable<? extends Status> status = JsonNullable.undefined();
 
-        private JsonNullable<? extends PushPaymentMethodID> pushPaymentMethodID = JsonNullable.undefined();
+        private JsonNullable<String> pushPaymentMethodID = JsonNullable.undefined();
 
-        private JsonNullable<? extends PullPaymentMethodID> pullPaymentMethodID = JsonNullable.undefined();
+        private JsonNullable<String> pullPaymentMethodID = JsonNullable.undefined();
 
-        private JsonNullable<? extends StatementDescriptor> statementDescriptor = JsonNullable.undefined();
+        private JsonNullable<String> statementDescriptor = JsonNullable.undefined();
 
         private JsonNullable<String> minimumBalance = JsonNullable.undefined();
 
@@ -224,39 +221,39 @@ public class PatchSweepConfig {
         }
 
 
-        public Builder pushPaymentMethodID(PushPaymentMethodID pushPaymentMethodID) {
+        public Builder pushPaymentMethodID(String pushPaymentMethodID) {
             Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
             this.pushPaymentMethodID = JsonNullable.of(pushPaymentMethodID);
             return this;
         }
 
-        public Builder pushPaymentMethodID(JsonNullable<? extends PushPaymentMethodID> pushPaymentMethodID) {
+        public Builder pushPaymentMethodID(JsonNullable<String> pushPaymentMethodID) {
             Utils.checkNotNull(pushPaymentMethodID, "pushPaymentMethodID");
             this.pushPaymentMethodID = pushPaymentMethodID;
             return this;
         }
 
 
-        public Builder pullPaymentMethodID(PullPaymentMethodID pullPaymentMethodID) {
+        public Builder pullPaymentMethodID(String pullPaymentMethodID) {
             Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
             this.pullPaymentMethodID = JsonNullable.of(pullPaymentMethodID);
             return this;
         }
 
-        public Builder pullPaymentMethodID(JsonNullable<? extends PullPaymentMethodID> pullPaymentMethodID) {
+        public Builder pullPaymentMethodID(JsonNullable<String> pullPaymentMethodID) {
             Utils.checkNotNull(pullPaymentMethodID, "pullPaymentMethodID");
             this.pullPaymentMethodID = pullPaymentMethodID;
             return this;
         }
 
 
-        public Builder statementDescriptor(StatementDescriptor statementDescriptor) {
+        public Builder statementDescriptor(String statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
             this.statementDescriptor = JsonNullable.of(statementDescriptor);
             return this;
         }
 
-        public Builder statementDescriptor(JsonNullable<? extends StatementDescriptor> statementDescriptor) {
+        public Builder statementDescriptor(JsonNullable<String> statementDescriptor) {
             Utils.checkNotNull(statementDescriptor, "statementDescriptor");
             this.statementDescriptor = statementDescriptor;
             return this;

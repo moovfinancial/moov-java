@@ -6,7 +6,6 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.ImageMetadataRequest;
-import io.moov.sdk.models.components.ImageUpdateRequestMultiPart;
 import io.moov.sdk.models.components.ImageUploadRequestMultiPart;
 import io.moov.sdk.models.operations.DeleteImageRequest;
 import io.moov.sdk.models.operations.DeleteImageRequestBuilder;
@@ -109,7 +108,7 @@ public class Images {
      * Duplicate images, and requests larger than 16MB will be rejected.
      * 
      * @param accountID 
-     * @param imageUploadRequestMultiPart Multipart request body for uploading an image with optional metadata.
+     * @param imageUploadRequestMultiPart 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -158,8 +157,8 @@ public class Images {
      * Replace an existing image and, optionally, its metadata.
      * 
      * <p>This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
-     * the metadata form section to keep existing metadata, or send `null` to clear it.
-     * Duplicate images, and requests larger than 16MB will be rejected.
+     * the metadata form section to keep existing metadata. Duplicate images, and requests larger than 16MB
+     * will be rejected.
      * 
      * @return The call builder
      */
@@ -171,24 +170,24 @@ public class Images {
      * Replace an existing image and, optionally, its metadata.
      * 
      * <p>This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
-     * the metadata form section to keep existing metadata, or send `null` to clear it.
-     * Duplicate images, and requests larger than 16MB will be rejected.
+     * the metadata form section to keep existing metadata. Duplicate images, and requests larger than 16MB
+     * will be rejected.
      * 
      * @param accountID 
      * @param imageID 
-     * @param imageUpdateRequestMultiPart Multipart request body for updating an image and/or its metadata.
+     * @param imageUploadRequestMultiPart 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public UpdateImageResponse update(
             String accountID, String imageID,
-            ImageUpdateRequestMultiPart imageUpdateRequestMultiPart) {
+            ImageUploadRequestMultiPart imageUploadRequestMultiPart) {
         UpdateImageRequest request =
             UpdateImageRequest
                 .builder()
                 .accountID(accountID)
                 .imageID(imageID)
-                .imageUpdateRequestMultiPart(imageUpdateRequestMultiPart)
+                .imageUploadRequestMultiPart(imageUploadRequestMultiPart)
                 .build();
         RequestOperation<UpdateImageRequest, UpdateImageResponse> operation
               = new UpdateImage.Sync(sdkConfiguration, _headers);

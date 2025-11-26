@@ -61,14 +61,13 @@ public class PaymentLinks {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param accountID 
+     * @param accountID The merchant account ID.
      * @param createPaymentLink Request to create a new payment link.
      *         
      *         A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
      *         `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
      *         to a specific recipient.
      *         
-     *         **Note:** The `payout` option is currently under development and is not yet available for general use.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
@@ -134,7 +133,7 @@ public class PaymentLinks {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
      * 
-     * @param accountID 
+     * @param accountID The merchant account ID.
      * @param paymentLinkCode 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
@@ -171,7 +170,7 @@ public class PaymentLinks {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param accountID 
+     * @param accountID The merchant account ID.
      * @param paymentLinkCode 
      * @param updatePaymentLink 
      * @return The response from the API call
@@ -212,7 +211,7 @@ public class PaymentLinks {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param accountID 
+     * @param accountID The merchant account ID.
      * @param paymentLinkCode 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
@@ -255,7 +254,7 @@ public class PaymentLinks {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param accountID 
+     * @param accountID The merchant account ID.
      * @param paymentLinkCode 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails

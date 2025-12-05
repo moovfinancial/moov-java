@@ -29,7 +29,7 @@ public class CreateInvoice {
      * A collection of line items for an invoice.
      */
     @JsonProperty("lineItems")
-    private InvoiceLineItems lineItems;
+    private CreateInvoiceLineItems lineItems;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -50,7 +50,7 @@ public class CreateInvoice {
     public CreateInvoice(
             @JsonProperty("customerAccountID") String customerAccountID,
             @JsonProperty("description") String description,
-            @JsonProperty("lineItems") InvoiceLineItems lineItems,
+            @JsonProperty("lineItems") CreateInvoiceLineItems lineItems,
             @JsonProperty("invoiceDate") Optional<OffsetDateTime> invoiceDate,
             @JsonProperty("dueDate") Optional<OffsetDateTime> dueDate,
             @JsonProperty("taxAmount") Optional<? extends AmountDecimal> taxAmount) {
@@ -71,7 +71,7 @@ public class CreateInvoice {
     public CreateInvoice(
             String customerAccountID,
             String description,
-            InvoiceLineItems lineItems) {
+            CreateInvoiceLineItems lineItems) {
         this(customerAccountID, description, lineItems,
             Optional.empty(), Optional.empty(), Optional.empty());
     }
@@ -90,7 +90,7 @@ public class CreateInvoice {
      * A collection of line items for an invoice.
      */
     @JsonIgnore
-    public InvoiceLineItems lineItems() {
+    public CreateInvoiceLineItems lineItems() {
         return lineItems;
     }
 
@@ -130,7 +130,7 @@ public class CreateInvoice {
     /**
      * A collection of line items for an invoice.
      */
-    public CreateInvoice withLineItems(InvoiceLineItems lineItems) {
+    public CreateInvoice withLineItems(CreateInvoiceLineItems lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = lineItems;
         return this;
@@ -218,7 +218,7 @@ public class CreateInvoice {
 
         private String description;
 
-        private InvoiceLineItems lineItems;
+        private CreateInvoiceLineItems lineItems;
 
         private Optional<OffsetDateTime> invoiceDate = Optional.empty();
 
@@ -248,7 +248,7 @@ public class CreateInvoice {
         /**
          * A collection of line items for an invoice.
          */
-        public Builder lineItems(InvoiceLineItems lineItems) {
+        public Builder lineItems(CreateInvoiceLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = lineItems;
             return this;

@@ -28,7 +28,7 @@ public class UpdateInvoice {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
-    private Optional<? extends InvoiceLineItemsUpdate> lineItems;
+    private Optional<? extends CreateInvoiceLineItemsUpdate> lineItems;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -55,7 +55,7 @@ public class UpdateInvoice {
     @JsonCreator
     public UpdateInvoice(
             @JsonProperty("description") Optional<String> description,
-            @JsonProperty("lineItems") Optional<? extends InvoiceLineItemsUpdate> lineItems,
+            @JsonProperty("lineItems") Optional<? extends CreateInvoiceLineItemsUpdate> lineItems,
             @JsonProperty("invoiceDate") JsonNullable<OffsetDateTime> invoiceDate,
             @JsonProperty("dueDate") JsonNullable<OffsetDateTime> dueDate,
             @JsonProperty("status") Optional<? extends InvoiceStatus> status,
@@ -89,8 +89,8 @@ public class UpdateInvoice {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<InvoiceLineItemsUpdate> lineItems() {
-        return (Optional<InvoiceLineItemsUpdate>) lineItems;
+    public Optional<CreateInvoiceLineItemsUpdate> lineItems() {
+        return (Optional<CreateInvoiceLineItemsUpdate>) lineItems;
     }
 
     @JsonIgnore
@@ -139,7 +139,7 @@ public class UpdateInvoice {
     /**
      * A collection of line items for an invoice.
      */
-    public UpdateInvoice withLineItems(InvoiceLineItemsUpdate lineItems) {
+    public UpdateInvoice withLineItems(CreateInvoiceLineItemsUpdate lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = Optional.ofNullable(lineItems);
         return this;
@@ -149,7 +149,7 @@ public class UpdateInvoice {
     /**
      * A collection of line items for an invoice.
      */
-    public UpdateInvoice withLineItems(Optional<? extends InvoiceLineItemsUpdate> lineItems) {
+    public UpdateInvoice withLineItems(Optional<? extends CreateInvoiceLineItemsUpdate> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = lineItems;
         return this;
@@ -252,7 +252,7 @@ public class UpdateInvoice {
 
         private Optional<String> description = Optional.empty();
 
-        private Optional<? extends InvoiceLineItemsUpdate> lineItems = Optional.empty();
+        private Optional<? extends CreateInvoiceLineItemsUpdate> lineItems = Optional.empty();
 
         private JsonNullable<OffsetDateTime> invoiceDate = JsonNullable.undefined();
 
@@ -283,7 +283,7 @@ public class UpdateInvoice {
         /**
          * A collection of line items for an invoice.
          */
-        public Builder lineItems(InvoiceLineItemsUpdate lineItems) {
+        public Builder lineItems(CreateInvoiceLineItemsUpdate lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = Optional.ofNullable(lineItems);
             return this;
@@ -292,7 +292,7 @@ public class UpdateInvoice {
         /**
          * A collection of line items for an invoice.
          */
-        public Builder lineItems(Optional<? extends InvoiceLineItemsUpdate> lineItems) {
+        public Builder lineItems(Optional<? extends CreateInvoiceLineItemsUpdate> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = lineItems;
             return this;

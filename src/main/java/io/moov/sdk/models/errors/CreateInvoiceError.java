@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.models.components.AmountDecimalValidationError;
-import io.moov.sdk.models.components.InvoiceLineItemsValidationError;
+import io.moov.sdk.models.components.CreateInvoiceLineItemsValidationError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -66,7 +66,7 @@ public class CreateInvoiceError extends MoovError {
     }
 
     @Deprecated
-    public Optional<InvoiceLineItemsValidationError> lineItems() {
+    public Optional<CreateInvoiceLineItemsValidationError> lineItems() {
         return data().flatMap(Data::lineItems);
     }
 
@@ -110,7 +110,7 @@ public class CreateInvoiceError extends MoovError {
 
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("lineItems")
-        private Optional<? extends InvoiceLineItemsValidationError> lineItems;
+        private Optional<? extends CreateInvoiceLineItemsValidationError> lineItems;
 
 
         @JsonInclude(Include.NON_ABSENT)
@@ -131,7 +131,7 @@ public class CreateInvoiceError extends MoovError {
         public Data(
                 @JsonProperty("customerAccountID") Optional<String> customerAccountID,
                 @JsonProperty("description") Optional<String> description,
-                @JsonProperty("lineItems") Optional<? extends InvoiceLineItemsValidationError> lineItems,
+                @JsonProperty("lineItems") Optional<? extends CreateInvoiceLineItemsValidationError> lineItems,
                 @JsonProperty("invoiceDate") Optional<String> invoiceDate,
                 @JsonProperty("dueDate") Optional<String> dueDate,
                 @JsonProperty("taxAmount") Optional<? extends AmountDecimalValidationError> taxAmount) {
@@ -166,8 +166,8 @@ public class CreateInvoiceError extends MoovError {
 
         @SuppressWarnings("unchecked")
         @JsonIgnore
-        public Optional<InvoiceLineItemsValidationError> lineItems() {
-            return (Optional<InvoiceLineItemsValidationError>) lineItems;
+        public Optional<CreateInvoiceLineItemsValidationError> lineItems() {
+            return (Optional<CreateInvoiceLineItemsValidationError>) lineItems;
         }
 
         @JsonIgnore
@@ -217,14 +217,14 @@ public class CreateInvoiceError extends MoovError {
             return this;
         }
 
-        public Data withLineItems(InvoiceLineItemsValidationError lineItems) {
+        public Data withLineItems(CreateInvoiceLineItemsValidationError lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = Optional.ofNullable(lineItems);
             return this;
         }
 
 
-        public Data withLineItems(Optional<? extends InvoiceLineItemsValidationError> lineItems) {
+        public Data withLineItems(Optional<? extends CreateInvoiceLineItemsValidationError> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = lineItems;
             return this;
@@ -312,7 +312,7 @@ public class CreateInvoiceError extends MoovError {
 
             private Optional<String> description = Optional.empty();
 
-            private Optional<? extends InvoiceLineItemsValidationError> lineItems = Optional.empty();
+            private Optional<? extends CreateInvoiceLineItemsValidationError> lineItems = Optional.empty();
 
             private Optional<String> invoiceDate = Optional.empty();
 
@@ -351,13 +351,13 @@ public class CreateInvoiceError extends MoovError {
             }
 
 
-            public Builder lineItems(InvoiceLineItemsValidationError lineItems) {
+            public Builder lineItems(CreateInvoiceLineItemsValidationError lineItems) {
                 Utils.checkNotNull(lineItems, "lineItems");
                 this.lineItems = Optional.ofNullable(lineItems);
                 return this;
             }
 
-            public Builder lineItems(Optional<? extends InvoiceLineItemsValidationError> lineItems) {
+            public Builder lineItems(Optional<? extends CreateInvoiceLineItemsValidationError> lineItems) {
                 Utils.checkNotNull(lineItems, "lineItems");
                 this.lineItems = lineItems;
                 return this;

@@ -16,26 +16,26 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * InvoiceLineItemsUpdate
+ * CreateInvoiceLineItemsUpdate
  * 
  * <p>A collection of line items for an invoice.
  */
-public class InvoiceLineItemsUpdate {
+public class CreateInvoiceLineItemsUpdate {
     /**
      * The list of line items.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("items")
-    private Optional<? extends List<InvoiceLineItem>> items;
+    private Optional<? extends List<CreateInvoiceLineItem>> items;
 
     @JsonCreator
-    public InvoiceLineItemsUpdate(
-            @JsonProperty("items") Optional<? extends List<InvoiceLineItem>> items) {
+    public CreateInvoiceLineItemsUpdate(
+            @JsonProperty("items") Optional<? extends List<CreateInvoiceLineItem>> items) {
         Utils.checkNotNull(items, "items");
         this.items = items;
     }
     
-    public InvoiceLineItemsUpdate() {
+    public CreateInvoiceLineItemsUpdate() {
         this(Optional.empty());
     }
 
@@ -44,8 +44,8 @@ public class InvoiceLineItemsUpdate {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<InvoiceLineItem>> items() {
-        return (Optional<List<InvoiceLineItem>>) items;
+    public Optional<List<CreateInvoiceLineItem>> items() {
+        return (Optional<List<CreateInvoiceLineItem>>) items;
     }
 
     public static Builder builder() {
@@ -56,7 +56,7 @@ public class InvoiceLineItemsUpdate {
     /**
      * The list of line items.
      */
-    public InvoiceLineItemsUpdate withItems(List<InvoiceLineItem> items) {
+    public CreateInvoiceLineItemsUpdate withItems(List<CreateInvoiceLineItem> items) {
         Utils.checkNotNull(items, "items");
         this.items = Optional.ofNullable(items);
         return this;
@@ -66,7 +66,7 @@ public class InvoiceLineItemsUpdate {
     /**
      * The list of line items.
      */
-    public InvoiceLineItemsUpdate withItems(Optional<? extends List<InvoiceLineItem>> items) {
+    public CreateInvoiceLineItemsUpdate withItems(Optional<? extends List<CreateInvoiceLineItem>> items) {
         Utils.checkNotNull(items, "items");
         this.items = items;
         return this;
@@ -80,7 +80,7 @@ public class InvoiceLineItemsUpdate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        InvoiceLineItemsUpdate other = (InvoiceLineItemsUpdate) o;
+        CreateInvoiceLineItemsUpdate other = (CreateInvoiceLineItemsUpdate) o;
         return 
             Utils.enhancedDeepEquals(this.items, other.items);
     }
@@ -93,14 +93,14 @@ public class InvoiceLineItemsUpdate {
     
     @Override
     public String toString() {
-        return Utils.toString(InvoiceLineItemsUpdate.class,
+        return Utils.toString(CreateInvoiceLineItemsUpdate.class,
                 "items", items);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends List<InvoiceLineItem>> items = Optional.empty();
+        private Optional<? extends List<CreateInvoiceLineItem>> items = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -110,7 +110,7 @@ public class InvoiceLineItemsUpdate {
         /**
          * The list of line items.
          */
-        public Builder items(List<InvoiceLineItem> items) {
+        public Builder items(List<CreateInvoiceLineItem> items) {
             Utils.checkNotNull(items, "items");
             this.items = Optional.ofNullable(items);
             return this;
@@ -119,15 +119,15 @@ public class InvoiceLineItemsUpdate {
         /**
          * The list of line items.
          */
-        public Builder items(Optional<? extends List<InvoiceLineItem>> items) {
+        public Builder items(Optional<? extends List<CreateInvoiceLineItem>> items) {
             Utils.checkNotNull(items, "items");
             this.items = items;
             return this;
         }
 
-        public InvoiceLineItemsUpdate build() {
+        public CreateInvoiceLineItemsUpdate build() {
 
-            return new InvoiceLineItemsUpdate(
+            return new CreateInvoiceLineItemsUpdate(
                 items);
         }
 

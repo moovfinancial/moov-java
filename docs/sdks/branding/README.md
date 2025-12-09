@@ -16,10 +16,6 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/branding.read` scope.
-* [update](#update) - Updates the brand properties for the specified account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ## create
 
@@ -221,68 +217,3 @@ public class Application {
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
-
-## update
-
-Updates the brand properties for the specified account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/branding.write` scope.
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="updateBrand" method="patch" path="/accounts/{accountID}/branding" -->
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.components.UpdateBrand;
-import io.moov.sdk.models.errors.BrandValidationError;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.operations.UpdateBrandResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, BrandValidationError, Exception {
-
-        Moov sdk = Moov.builder()
-                .xMoovVersion("v2024.01.00")
-                .security(Security.builder()
-                    .username("")
-                    .password("")
-                    .build())
-            .build();
-
-        UpdateBrandResponse res = sdk.branding().update()
-                .accountID("0c0dc4a5-ecd9-4223-810a-a71632980156")
-                .updateBrand(UpdateBrand.builder()
-                    .build())
-                .call();
-
-        if (res.brandProperties().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `accountID`                                           | *String*                                              | :heavy_check_mark:                                    | N/A                                                   |
-| `updateBrand`                                         | [UpdateBrand](../../models/components/UpdateBrand.md) | :heavy_check_mark:                                    | N/A                                                   |
-
-### Response
-
-**[UpdateBrandResponse](../../models/operations/UpdateBrandResponse.md)**
-
-### Errors
-
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| models/errors/GenericError         | 400, 409                           | application/json                   |
-| models/errors/BrandValidationError | 422                                | application/json                   |
-| models/errors/APIException         | 4XX, 5XX                           | \*/\*                              |

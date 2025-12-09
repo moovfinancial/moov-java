@@ -6,16 +6,12 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.BrandProperties;
-import io.moov.sdk.models.components.UpdateBrand;
 import io.moov.sdk.models.operations.CreateBrandRequest;
 import io.moov.sdk.models.operations.CreateBrandRequestBuilder;
 import io.moov.sdk.models.operations.CreateBrandResponse;
 import io.moov.sdk.models.operations.GetBrandRequest;
 import io.moov.sdk.models.operations.GetBrandRequestBuilder;
 import io.moov.sdk.models.operations.GetBrandResponse;
-import io.moov.sdk.models.operations.UpdateBrandRequest;
-import io.moov.sdk.models.operations.UpdateBrandRequestBuilder;
-import io.moov.sdk.models.operations.UpdateBrandResponse;
 import io.moov.sdk.models.operations.UpsertBrandRequest;
 import io.moov.sdk.models.operations.UpsertBrandRequestBuilder;
 import io.moov.sdk.models.operations.UpsertBrandResponse;
@@ -140,43 +136,6 @@ public class Branding {
                 .build();
         RequestOperation<GetBrandRequest, GetBrandResponse> operation
               = new GetBrand.Sync(sdkConfiguration, _headers);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Updates the brand properties for the specified account.
-     * 
-     * <p>To access this endpoint using an [access
-     * token](https://docs.moov.io/api/authentication/access-tokens/)
-     * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
-     * 
-     * @return The call builder
-     */
-    public UpdateBrandRequestBuilder update() {
-        return new UpdateBrandRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Updates the brand properties for the specified account.
-     * 
-     * <p>To access this endpoint using an [access
-     * token](https://docs.moov.io/api/authentication/access-tokens/)
-     * you'll need to specify the `/accounts/{accountID}/branding.write` scope.
-     * 
-     * @param accountID 
-     * @param updateBrand 
-     * @return The response from the API call
-     * @throws RuntimeException subclass if the API call fails
-     */
-    public UpdateBrandResponse update(String accountID, UpdateBrand updateBrand) {
-        UpdateBrandRequest request =
-            UpdateBrandRequest
-                .builder()
-                .accountID(accountID)
-                .updateBrand(updateBrand)
-                .build();
-        RequestOperation<UpdateBrandRequest, UpdateBrandResponse> operation
-              = new io.moov.sdk.operations.UpdateBrand.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

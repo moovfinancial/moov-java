@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 0a2cb2916deb5aa47d7f4aae34426ed7
+  docChecksum: 159b1e80d1b91eabe65e71617d701325
   docVersion: latest
-  speakeasyVersion: 1.669.1
-  generationVersion: 2.772.0
-  releaseVersion: 0.34.1
-  configChecksum: 5e1460ea417498d1040784454216b419
+  speakeasyVersion: 1.672.0
+  generationVersion: 2.774.0
+  releaseVersion: 0.34.2
+  configChecksum: dca78b3803c6bb419c04df4d9d76cf4a
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: 4eceac91-d362-4f66-9f2f-7bfb128829bc
-  pristine_commit_hash: c1a27ef87d132a764bff235354501b00349ee2da
-  pristine_tree_hash: 106e4d38eeb314ee49793c70ac2a1994fa6dc585
+  generation_id: 882a0659-b61f-450f-ad92-286b5162a634
+  pristine_commit_hash: ce5ed875a3e342763219b9cf66da806eb9af4d91
+  pristine_tree_hash: 7bc3e8009aa30f3684798d396eb2e607325427a1
 features:
   java:
     acceptHeaders: 2.81.2
@@ -2049,7 +2049,6 @@ trackedFiles:
     pristine_git_object: d1d633123d9853ee061f29f29f0f9bc06cb68d51
   docs/models/components/UpdateBrand.md:
     id: 4aba8efa077f
-    last_write_checksum: sha1:4037c264b6b9c03db38e882c21b353575facd0a8
     pristine_git_object: 266600bba61f1102ee253d095d3d0b1bcb5ae759
   docs/models/components/UpdateCard.md:
     id: 99b4a1cdb0dd
@@ -2065,11 +2064,9 @@ trackedFiles:
     pristine_git_object: 935faf1d94873865028ea2f95de50d0598c531fb
   docs/models/components/UpdateColor.md:
     id: "929705708648"
-    last_write_checksum: sha1:2d721744e4d568ce981f22649e27fc3fcdb8c43f
     pristine_git_object: 8b60055bf8f7b2ba190d8f37ad93ecf96b4a20d0
   docs/models/components/UpdateColors.md:
     id: 4d8966c383f4
-    last_write_checksum: sha1:7273088630b33cc30cba7006aaab423a64cb80e6
     pristine_git_object: a983554fab4d32c6b27bf253e4afcc1b7fda0672
   docs/models/components/UpdateEvidence.md:
     id: 8a2ca504b672
@@ -3745,11 +3742,9 @@ trackedFiles:
     pristine_git_object: c1dbd5827e11ec168665a1e3f60d48f33d27a2b2
   docs/models/operations/UpdateBrandRequest.md:
     id: 6d6d96dab13b
-    last_write_checksum: sha1:379eb32699924a30727cfb7a43d4d0a17b1bdfc0
     pristine_git_object: 0b89f4607de7b5777cb6bfc4eb80a8d3fbfcdeca
   docs/models/operations/UpdateBrandResponse.md:
     id: f57e31c1f6a4
-    last_write_checksum: sha1:afee2b9339f6a1506a277a73dc94ee03ab8fc9a9
     pristine_git_object: acb32a07c3a2d7890eb0b8bda06c2f6101462d41
   docs/models/operations/UpdateCardRequest.md:
     id: 3c072b83b630
@@ -3941,8 +3936,8 @@ trackedFiles:
     pristine_git_object: e272cf181d917169438bbc6367a73138811a42bf
   docs/sdks/branding/README.md:
     id: 6ec229bdfe5c
-    last_write_checksum: sha1:6fc3412f499ee26cdef0f75f19e4021a85b8c33e
-    pristine_git_object: 2bccb3c2ba81d3757ecb4be27ab70b0594bac610
+    last_write_checksum: sha1:3c1e53ce39b88a8f226994d50c335772ce6ec67d
+    pristine_git_object: 1acf178d6c4256517dd2dac00ec4d898de1ba6c2
   docs/sdks/capabilities/README.md:
     id: 551490ea0d3d
     last_write_checksum: sha1:aae69882d85508dec32ee872b2b7aa25b2a2aafd
@@ -4065,8 +4060,8 @@ trackedFiles:
     pristine_git_object: dcbab2e81d79a6a9b303f393270079410d6bcc67
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:2b24c28dd2df439ecd7967c81d6e2aedbb33746d
-    pristine_git_object: 97498768cd986380c783ad4a1d078f213a94b973
+    last_write_checksum: sha1:4c0c11342a223153768f36bf82117e308a6b0ed7
+    pristine_git_object: 1760e60f5889fd9d44da03d4223a01f7ef700d5e
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4149,8 +4144,8 @@ trackedFiles:
     pristine_git_object: 50ab7fb954a453a9b361ce542bb62365c8ea81cd
   src/main/java/io/moov/sdk/Branding.java:
     id: a7643496a0e0
-    last_write_checksum: sha1:7678a5da9d89df7633e0aa2fd93922ed2ba04514
-    pristine_git_object: 6b449413583a5ed0d4bfd0b8c7a265c01015d434
+    last_write_checksum: sha1:4260d97ba5d82e719cf8291c809093e10863f43f
+    pristine_git_object: 084d8b1dfb4c65594de14e017e1a21d3b9acf4ef
   src/main/java/io/moov/sdk/Capabilities.java:
     id: 617a1e964167
     last_write_checksum: sha1:6a1123338966769a22e56b67c906556f2d1f6fc6
@@ -4241,8 +4236,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:ff16a49ed4f0d6a3a3a0c2598a69c8007f5fe302
-    pristine_git_object: a28bfa3b195f78425f2fdbe7f37f76be0a03820d
+    last_write_checksum: sha1:ebe8b3660fae693be32734b00ee9af9c4b2a4c7e
+    pristine_git_object: 517e437fbecbb00e8147bdd7e263c6aebe227163
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:f2634b766e3dc03d4f3043aff0565c655dcf17be
@@ -6301,7 +6296,6 @@ trackedFiles:
     pristine_git_object: 9f55a85132b2387fc2e9db4ce8bab0fc69a1daa5
   src/main/java/io/moov/sdk/models/components/UpdateBrand.java:
     id: 794fc245dcd5
-    last_write_checksum: sha1:f767f024969535798cd0c225a866f5481cde2490
     pristine_git_object: bdfc036e6a892f5c46992a733000aa659f1684f0
   src/main/java/io/moov/sdk/models/components/UpdateCard.java:
     id: 0fd43da579ba
@@ -6317,11 +6311,9 @@ trackedFiles:
     pristine_git_object: 1273495abb6b925440f637a2eb9d36d8da7d871c
   src/main/java/io/moov/sdk/models/components/UpdateColor.java:
     id: ded3c73a7ede
-    last_write_checksum: sha1:6be4fd25bd84249a76bdcb6bc73c896097d03718
     pristine_git_object: cf26ac45ee318b93380d84e74c8a78435bc474d8
   src/main/java/io/moov/sdk/models/components/UpdateColors.java:
     id: f94e6a13c05b
-    last_write_checksum: sha1:5ea905c9360e0bb141559d2903b8f253fd353d29
     pristine_git_object: 9a794a26fa381dd9238329f87d7514777786a0ae
   src/main/java/io/moov/sdk/models/components/UpdateEvidence.java:
     id: 05d20a533904
@@ -8601,15 +8593,12 @@ trackedFiles:
     pristine_git_object: dec7004ed10618e4f3de649dc4934bd9d2691409
   src/main/java/io/moov/sdk/models/operations/UpdateBrandRequest.java:
     id: 3db46e1c820e
-    last_write_checksum: sha1:a147a40aff015c8efab7604c83bd6f9abb7328b0
     pristine_git_object: e6cedd2ea06ba64ea6d96fce891cb7a59ef277b6
   src/main/java/io/moov/sdk/models/operations/UpdateBrandRequestBuilder.java:
     id: 80f2bc1c67da
-    last_write_checksum: sha1:78808d2c184aad90dd359430a3f9b5403bf38d41
     pristine_git_object: 2947d71eaf360b9daac5043cb3b92a8488d88137
   src/main/java/io/moov/sdk/models/operations/UpdateBrandResponse.java:
     id: c1e85a6706b5
-    last_write_checksum: sha1:e555b38f1d5b9748c82fd880cadbddf01ee996a2
     pristine_git_object: 5e2a6ffcd29eaaf76c40e69bee02f35b24ea03e3
   src/main/java/io/moov/sdk/models/operations/UpdateCardRequest.java:
     id: "820557040379"
@@ -9445,7 +9434,6 @@ trackedFiles:
     pristine_git_object: b7870f32a4812016c654d1e01ea3bb59f9f813fd
   src/main/java/io/moov/sdk/operations/UpdateBrand.java:
     id: ec8183b0532b
-    last_write_checksum: sha1:76bfd55b923964da50499bb7f498a48d98e8c390
     pristine_git_object: 88e446a53a047ec0f4e173c690ebb817c2f5640d
   src/main/java/io/moov/sdk/operations/UpdateCard.java:
     id: a348de3fa4e5
@@ -12334,11 +12322,7 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Java SDK Changes:
-  * `moov.invoices.createInvoice()`:  `response.lineitems.items.[].options.[].images` **Added**
-  * `moov.invoices.listInvoices()`:  `response.[].lineItems.items.[].options.[].images` **Added**
-  * `moov.invoices.getInvoice()`:  `response.lineitems.items.[].options.[].images` **Added**
-  * `moov.invoices.updateInvoice()`:  `response.lineitems.items.[].options.[].images` **Added**
-  * `moov.invoices.markPaidInvoice()`:  `response.lineitems.items.[].options.[].images` **Added**
+  * `moov.branding.update()`: **Deleted** **Breaking** :warning:
 generatedFiles:
   - .gitattributes
   - USAGE.md

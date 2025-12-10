@@ -14,6 +14,7 @@ import io.moov.sdk.models.operations.SearchInstitutionsResponse;
 import io.moov.sdk.operations.ListInstitutions;
 import io.moov.sdk.operations.SearchInstitutions;
 import io.moov.sdk.utils.Headers;
+import java.lang.Deprecated;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -104,20 +105,28 @@ public class Institutions {
     }
 
     /**
-     * Search for institutions by either their name or routing number.
+     * This endpoint has been deprecated and will be removed in a future release. Use
+     * [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+     * 
+     * <p>Search for institutions by either their name or routing number.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/fed.read` scope.
      * 
      * @return The call builder
+     * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public ListInstitutionsRequestBuilder search() {
         return new ListInstitutionsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Search for institutions by either their name or routing number.
+     * This endpoint has been deprecated and will be removed in a future release. Use
+     * [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+     * 
+     * <p>Search for institutions by either their name or routing number.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -125,14 +134,19 @@ public class Institutions {
      * 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
+     * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public ListInstitutionsResponse searchDirect() {
         return search(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
 
     /**
-     * Search for institutions by either their name or routing number.
+     * This endpoint has been deprecated and will be removed in a future release. Use
+     * [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+     * 
+     * <p>Search for institutions by either their name or routing number.
      * 
      * <p>To access this endpoint using an [access
      * token](https://docs.moov.io/api/authentication/access-tokens/)
@@ -144,7 +158,9 @@ public class Institutions {
      * @param limit Maximum results returned by a search.
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
+     * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public ListInstitutionsResponse search(
             Optional<String> name, Optional<String> routingNumber,
             Optional<String> state, Optional<Long> limit) {

@@ -49,7 +49,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'io.moov:sdk:0.34.2'
+implementation 'io.moov:sdk:0.34.3'
 ```
 
 Maven:
@@ -57,7 +57,7 @@ Maven:
 <dependency>
     <groupId>io.moov</groupId>
     <artifactId>sdk</artifactId>
-    <version>0.34.2</version>
+    <version>0.34.3</version>
 </dependency>
 ```
 
@@ -725,10 +725,12 @@ This can be used to validate a financial institution before initiating payment a
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/institutions.read` scope.
-* [search](docs/sdks/institutions/README.md#search) - Search for institutions by either their name or routing number.
+* [~~search~~](docs/sdks/institutions/README.md#search) - This endpoint has been deprecated and will be removed in a future release. Use [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+
+Search for institutions by either their name or routing number.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/fed.read` scope.
+you'll need to specify the `/fed.read` scope. :warning: **Deprecated**
 
 ### [Invoices](docs/sdks/invoices/README.md)
 

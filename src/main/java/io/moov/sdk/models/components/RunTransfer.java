@@ -5,10 +5,14 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
 /**
  * RunTransfer
@@ -19,6 +23,13 @@ public class RunTransfer {
 
     @JsonProperty("amount")
     private Amount amount;
+
+    /**
+     * Optional sales tax amount. This amount is included in the total transfer amount.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("salesTaxAmount")
+    private Optional<? extends Amount> salesTaxAmount;
 
 
     @JsonProperty("destination")
@@ -41,25 +52,47 @@ public class RunTransfer {
     @JsonCreator
     public RunTransfer(
             @JsonProperty("amount") Amount amount,
+            @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("destination") SchedulePaymentMethod destination,
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("source") SchedulePaymentMethod source,
             @JsonProperty("description") String description) {
         Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(destination, "destination");
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(description, "description");
         this.amount = amount;
+        this.salesTaxAmount = salesTaxAmount;
         this.destination = destination;
         this.partnerAccountID = partnerAccountID;
         this.source = source;
         this.description = description;
     }
+    
+    public RunTransfer(
+            Amount amount,
+            SchedulePaymentMethod destination,
+            String partnerAccountID,
+            SchedulePaymentMethod source,
+            String description) {
+        this(amount, Optional.empty(), destination,
+            partnerAccountID, source, description);
+    }
 
     @JsonIgnore
     public Amount amount() {
         return amount;
+    }
+
+    /**
+     * Optional sales tax amount. This amount is included in the total transfer amount.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Amount> salesTaxAmount() {
+        return (Optional<Amount>) salesTaxAmount;
     }
 
     @JsonIgnore
@@ -93,6 +126,25 @@ public class RunTransfer {
     public RunTransfer withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
+        return this;
+    }
+
+    /**
+     * Optional sales tax amount. This amount is included in the total transfer amount.
+     */
+    public RunTransfer withSalesTaxAmount(Amount salesTaxAmount) {
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
+        return this;
+    }
+
+
+    /**
+     * Optional sales tax amount. This amount is included in the total transfer amount.
+     */
+    public RunTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        this.salesTaxAmount = salesTaxAmount;
         return this;
     }
 
@@ -134,6 +186,7 @@ public class RunTransfer {
         RunTransfer other = (RunTransfer) o;
         return 
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
             Utils.enhancedDeepEquals(this.destination, other.destination) &&
             Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
             Utils.enhancedDeepEquals(this.source, other.source) &&
@@ -143,14 +196,15 @@ public class RunTransfer {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            amount, destination, partnerAccountID,
-            source, description);
+            amount, salesTaxAmount, destination,
+            partnerAccountID, source, description);
     }
     
     @Override
     public String toString() {
         return Utils.toString(RunTransfer.class,
                 "amount", amount,
+                "salesTaxAmount", salesTaxAmount,
                 "destination", destination,
                 "partnerAccountID", partnerAccountID,
                 "source", source,
@@ -161,6 +215,8 @@ public class RunTransfer {
     public final static class Builder {
 
         private Amount amount;
+
+        private Optional<? extends Amount> salesTaxAmount = Optional.empty();
 
         private SchedulePaymentMethod destination;
 
@@ -178,6 +234,25 @@ public class RunTransfer {
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
+            return this;
+        }
+
+
+        /**
+         * Optional sales tax amount. This amount is included in the total transfer amount.
+         */
+        public Builder salesTaxAmount(Amount salesTaxAmount) {
+            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
+            return this;
+        }
+
+        /**
+         * Optional sales tax amount. This amount is included in the total transfer amount.
+         */
+        public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
+            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+            this.salesTaxAmount = salesTaxAmount;
             return this;
         }
 
@@ -215,8 +290,8 @@ public class RunTransfer {
         public RunTransfer build() {
 
             return new RunTransfer(
-                amount, destination, partnerAccountID,
-                source, description);
+                amount, salesTaxAmount, destination,
+                partnerAccountID, source, description);
         }
 
     }

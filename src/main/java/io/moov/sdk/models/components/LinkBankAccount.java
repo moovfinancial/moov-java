@@ -91,10 +91,10 @@ public class LinkBankAccount {
 
         public _Deserializer() {
             super(LinkBankAccount.class, false,
-                  TypeReferenceWithShape.of(new TypeReference<MxPayload>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<PlaidLinkPayload>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<BankAccountPayload>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<PlaidPayload>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<BankAccountPayload>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<PlaidLinkPayload>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<MxPayload>() {}, JsonShape.DEFAULT));
         }
     }
     

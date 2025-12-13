@@ -7,14 +7,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Deprecated;
 import java.lang.Override;
 import java.lang.String;
 
 /**
  * PlatformFees
  * 
- * <p>A detailed breakdown of platform fees.
+ * <p>A detailed breakdown of platform fees. This field is deprecated and will be removed in a future
+ * release. Use accountFees.
+ * 
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
+@Deprecated
 public class PlatformFees {
     /**
      * Fees associated with wallet services.

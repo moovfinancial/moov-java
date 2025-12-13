@@ -9,30 +9,34 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Deprecated;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-/**
- * BillingSummaryDetails
- * 
- * <p>Details of volume and fees for a specific payment method.
- */
+
 public class BillingSummaryDetails {
     /**
-     * The total transaction volume amount.
+     * The total transaction volume amount. This field is deprecated and will be removed in a future
+     * release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("volumeAmount")
-    private Optional<? extends AmountDecimal> volumeAmount;
+    @Deprecated
+    private Optional<? extends VolumeAmount> volumeAmount;
 
     /**
-     * The total number of transactions.
+     * The total number of transactions. This field is deprecated and will be removed in a future release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("volumeCount")
+    @Deprecated
     private Optional<Long> volumeCount;
 
     /**
@@ -42,35 +46,73 @@ public class BillingSummaryDetails {
     @JsonProperty("feeAmount")
     private Optional<? extends AmountDecimal> feeAmount;
 
+    /**
+     * Total fee revenue collected from merchants.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("merchantFeesCollected")
+    private Optional<? extends AmountDecimal> merchantFeesCollected;
+
+    /**
+     * Total fee costs incurred by the partner.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("partnerFeesAssessed")
+    private Optional<? extends AmountDecimal> partnerFeesAssessed;
+
+    /**
+     * Net revenue after deducting partner fee costs.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("netIncome")
+    private Optional<? extends AmountDecimal> netIncome;
+
     @JsonCreator
     public BillingSummaryDetails(
-            @JsonProperty("volumeAmount") Optional<? extends AmountDecimal> volumeAmount,
+            @JsonProperty("volumeAmount") Optional<? extends VolumeAmount> volumeAmount,
             @JsonProperty("volumeCount") Optional<Long> volumeCount,
-            @JsonProperty("feeAmount") Optional<? extends AmountDecimal> feeAmount) {
+            @JsonProperty("feeAmount") Optional<? extends AmountDecimal> feeAmount,
+            @JsonProperty("merchantFeesCollected") Optional<? extends AmountDecimal> merchantFeesCollected,
+            @JsonProperty("partnerFeesAssessed") Optional<? extends AmountDecimal> partnerFeesAssessed,
+            @JsonProperty("netIncome") Optional<? extends AmountDecimal> netIncome) {
         Utils.checkNotNull(volumeAmount, "volumeAmount");
         Utils.checkNotNull(volumeCount, "volumeCount");
         Utils.checkNotNull(feeAmount, "feeAmount");
+        Utils.checkNotNull(merchantFeesCollected, "merchantFeesCollected");
+        Utils.checkNotNull(partnerFeesAssessed, "partnerFeesAssessed");
+        Utils.checkNotNull(netIncome, "netIncome");
         this.volumeAmount = volumeAmount;
         this.volumeCount = volumeCount;
         this.feeAmount = feeAmount;
+        this.merchantFeesCollected = merchantFeesCollected;
+        this.partnerFeesAssessed = partnerFeesAssessed;
+        this.netIncome = netIncome;
     }
     
     public BillingSummaryDetails() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
-     * The total transaction volume amount.
+     * The total transaction volume amount. This field is deprecated and will be removed in a future
+     * release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AmountDecimal> volumeAmount() {
-        return (Optional<AmountDecimal>) volumeAmount;
+    public Optional<VolumeAmount> volumeAmount() {
+        return (Optional<VolumeAmount>) volumeAmount;
     }
 
     /**
-     * The total number of transactions.
+     * The total number of transactions. This field is deprecated and will be removed in a future release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     @JsonIgnore
     public Optional<Long> volumeCount() {
         return volumeCount;
@@ -85,15 +127,46 @@ public class BillingSummaryDetails {
         return (Optional<AmountDecimal>) feeAmount;
     }
 
+    /**
+     * Total fee revenue collected from merchants.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AmountDecimal> merchantFeesCollected() {
+        return (Optional<AmountDecimal>) merchantFeesCollected;
+    }
+
+    /**
+     * Total fee costs incurred by the partner.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AmountDecimal> partnerFeesAssessed() {
+        return (Optional<AmountDecimal>) partnerFeesAssessed;
+    }
+
+    /**
+     * Net revenue after deducting partner fee costs.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AmountDecimal> netIncome() {
+        return (Optional<AmountDecimal>) netIncome;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
 
     /**
-     * The total transaction volume amount.
+     * The total transaction volume amount. This field is deprecated and will be removed in a future
+     * release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    public BillingSummaryDetails withVolumeAmount(AmountDecimal volumeAmount) {
+    @Deprecated
+    public BillingSummaryDetails withVolumeAmount(VolumeAmount volumeAmount) {
         Utils.checkNotNull(volumeAmount, "volumeAmount");
         this.volumeAmount = Optional.ofNullable(volumeAmount);
         return this;
@@ -101,17 +174,24 @@ public class BillingSummaryDetails {
 
 
     /**
-     * The total transaction volume amount.
+     * The total transaction volume amount. This field is deprecated and will be removed in a future
+     * release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    public BillingSummaryDetails withVolumeAmount(Optional<? extends AmountDecimal> volumeAmount) {
+    @Deprecated
+    public BillingSummaryDetails withVolumeAmount(Optional<? extends VolumeAmount> volumeAmount) {
         Utils.checkNotNull(volumeAmount, "volumeAmount");
         this.volumeAmount = volumeAmount;
         return this;
     }
 
     /**
-     * The total number of transactions.
+     * The total number of transactions. This field is deprecated and will be removed in a future release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public BillingSummaryDetails withVolumeCount(long volumeCount) {
         Utils.checkNotNull(volumeCount, "volumeCount");
         this.volumeCount = Optional.ofNullable(volumeCount);
@@ -120,8 +200,11 @@ public class BillingSummaryDetails {
 
 
     /**
-     * The total number of transactions.
+     * The total number of transactions. This field is deprecated and will be removed in a future release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public BillingSummaryDetails withVolumeCount(Optional<Long> volumeCount) {
         Utils.checkNotNull(volumeCount, "volumeCount");
         this.volumeCount = volumeCount;
@@ -147,6 +230,63 @@ public class BillingSummaryDetails {
         return this;
     }
 
+    /**
+     * Total fee revenue collected from merchants.
+     */
+    public BillingSummaryDetails withMerchantFeesCollected(AmountDecimal merchantFeesCollected) {
+        Utils.checkNotNull(merchantFeesCollected, "merchantFeesCollected");
+        this.merchantFeesCollected = Optional.ofNullable(merchantFeesCollected);
+        return this;
+    }
+
+
+    /**
+     * Total fee revenue collected from merchants.
+     */
+    public BillingSummaryDetails withMerchantFeesCollected(Optional<? extends AmountDecimal> merchantFeesCollected) {
+        Utils.checkNotNull(merchantFeesCollected, "merchantFeesCollected");
+        this.merchantFeesCollected = merchantFeesCollected;
+        return this;
+    }
+
+    /**
+     * Total fee costs incurred by the partner.
+     */
+    public BillingSummaryDetails withPartnerFeesAssessed(AmountDecimal partnerFeesAssessed) {
+        Utils.checkNotNull(partnerFeesAssessed, "partnerFeesAssessed");
+        this.partnerFeesAssessed = Optional.ofNullable(partnerFeesAssessed);
+        return this;
+    }
+
+
+    /**
+     * Total fee costs incurred by the partner.
+     */
+    public BillingSummaryDetails withPartnerFeesAssessed(Optional<? extends AmountDecimal> partnerFeesAssessed) {
+        Utils.checkNotNull(partnerFeesAssessed, "partnerFeesAssessed");
+        this.partnerFeesAssessed = partnerFeesAssessed;
+        return this;
+    }
+
+    /**
+     * Net revenue after deducting partner fee costs.
+     */
+    public BillingSummaryDetails withNetIncome(AmountDecimal netIncome) {
+        Utils.checkNotNull(netIncome, "netIncome");
+        this.netIncome = Optional.ofNullable(netIncome);
+        return this;
+    }
+
+
+    /**
+     * Net revenue after deducting partner fee costs.
+     */
+    public BillingSummaryDetails withNetIncome(Optional<? extends AmountDecimal> netIncome) {
+        Utils.checkNotNull(netIncome, "netIncome");
+        this.netIncome = netIncome;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -159,13 +299,17 @@ public class BillingSummaryDetails {
         return 
             Utils.enhancedDeepEquals(this.volumeAmount, other.volumeAmount) &&
             Utils.enhancedDeepEquals(this.volumeCount, other.volumeCount) &&
-            Utils.enhancedDeepEquals(this.feeAmount, other.feeAmount);
+            Utils.enhancedDeepEquals(this.feeAmount, other.feeAmount) &&
+            Utils.enhancedDeepEquals(this.merchantFeesCollected, other.merchantFeesCollected) &&
+            Utils.enhancedDeepEquals(this.partnerFeesAssessed, other.partnerFeesAssessed) &&
+            Utils.enhancedDeepEquals(this.netIncome, other.netIncome);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            volumeAmount, volumeCount, feeAmount);
+            volumeAmount, volumeCount, feeAmount,
+            merchantFeesCollected, partnerFeesAssessed, netIncome);
     }
     
     @Override
@@ -173,17 +317,28 @@ public class BillingSummaryDetails {
         return Utils.toString(BillingSummaryDetails.class,
                 "volumeAmount", volumeAmount,
                 "volumeCount", volumeCount,
-                "feeAmount", feeAmount);
+                "feeAmount", feeAmount,
+                "merchantFeesCollected", merchantFeesCollected,
+                "partnerFeesAssessed", partnerFeesAssessed,
+                "netIncome", netIncome);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends AmountDecimal> volumeAmount = Optional.empty();
+        @Deprecated
+        private Optional<? extends VolumeAmount> volumeAmount = Optional.empty();
 
+        @Deprecated
         private Optional<Long> volumeCount = Optional.empty();
 
         private Optional<? extends AmountDecimal> feeAmount = Optional.empty();
+
+        private Optional<? extends AmountDecimal> merchantFeesCollected = Optional.empty();
+
+        private Optional<? extends AmountDecimal> partnerFeesAssessed = Optional.empty();
+
+        private Optional<? extends AmountDecimal> netIncome = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -191,18 +346,26 @@ public class BillingSummaryDetails {
 
 
         /**
-         * The total transaction volume amount.
+         * The total transaction volume amount. This field is deprecated and will be removed in a future
+         * release.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
-        public Builder volumeAmount(AmountDecimal volumeAmount) {
+        @Deprecated
+        public Builder volumeAmount(VolumeAmount volumeAmount) {
             Utils.checkNotNull(volumeAmount, "volumeAmount");
             this.volumeAmount = Optional.ofNullable(volumeAmount);
             return this;
         }
 
         /**
-         * The total transaction volume amount.
+         * The total transaction volume amount. This field is deprecated and will be removed in a future
+         * release.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
-        public Builder volumeAmount(Optional<? extends AmountDecimal> volumeAmount) {
+        @Deprecated
+        public Builder volumeAmount(Optional<? extends VolumeAmount> volumeAmount) {
             Utils.checkNotNull(volumeAmount, "volumeAmount");
             this.volumeAmount = volumeAmount;
             return this;
@@ -210,8 +373,11 @@ public class BillingSummaryDetails {
 
 
         /**
-         * The total number of transactions.
+         * The total number of transactions. This field is deprecated and will be removed in a future release.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder volumeCount(long volumeCount) {
             Utils.checkNotNull(volumeCount, "volumeCount");
             this.volumeCount = Optional.ofNullable(volumeCount);
@@ -219,8 +385,11 @@ public class BillingSummaryDetails {
         }
 
         /**
-         * The total number of transactions.
+         * The total number of transactions. This field is deprecated and will be removed in a future release.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder volumeCount(Optional<Long> volumeCount) {
             Utils.checkNotNull(volumeCount, "volumeCount");
             this.volumeCount = volumeCount;
@@ -246,10 +415,68 @@ public class BillingSummaryDetails {
             return this;
         }
 
+
+        /**
+         * Total fee revenue collected from merchants.
+         */
+        public Builder merchantFeesCollected(AmountDecimal merchantFeesCollected) {
+            Utils.checkNotNull(merchantFeesCollected, "merchantFeesCollected");
+            this.merchantFeesCollected = Optional.ofNullable(merchantFeesCollected);
+            return this;
+        }
+
+        /**
+         * Total fee revenue collected from merchants.
+         */
+        public Builder merchantFeesCollected(Optional<? extends AmountDecimal> merchantFeesCollected) {
+            Utils.checkNotNull(merchantFeesCollected, "merchantFeesCollected");
+            this.merchantFeesCollected = merchantFeesCollected;
+            return this;
+        }
+
+
+        /**
+         * Total fee costs incurred by the partner.
+         */
+        public Builder partnerFeesAssessed(AmountDecimal partnerFeesAssessed) {
+            Utils.checkNotNull(partnerFeesAssessed, "partnerFeesAssessed");
+            this.partnerFeesAssessed = Optional.ofNullable(partnerFeesAssessed);
+            return this;
+        }
+
+        /**
+         * Total fee costs incurred by the partner.
+         */
+        public Builder partnerFeesAssessed(Optional<? extends AmountDecimal> partnerFeesAssessed) {
+            Utils.checkNotNull(partnerFeesAssessed, "partnerFeesAssessed");
+            this.partnerFeesAssessed = partnerFeesAssessed;
+            return this;
+        }
+
+
+        /**
+         * Net revenue after deducting partner fee costs.
+         */
+        public Builder netIncome(AmountDecimal netIncome) {
+            Utils.checkNotNull(netIncome, "netIncome");
+            this.netIncome = Optional.ofNullable(netIncome);
+            return this;
+        }
+
+        /**
+         * Net revenue after deducting partner fee costs.
+         */
+        public Builder netIncome(Optional<? extends AmountDecimal> netIncome) {
+            Utils.checkNotNull(netIncome, "netIncome");
+            this.netIncome = netIncome;
+            return this;
+        }
+
         public BillingSummaryDetails build() {
 
             return new BillingSummaryDetails(
-                volumeAmount, volumeCount, feeAmount);
+                volumeAmount, volumeCount, feeAmount,
+                merchantFeesCollected, partnerFeesAssessed, netIncome);
         }
 
     }

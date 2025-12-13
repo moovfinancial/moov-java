@@ -15,11 +15,7 @@ import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * CardBrandFees
- * 
- * <p>A detailed breakdown of fees for a specific card brand.
- */
+
 public class CardBrandFees {
     /**
      * Details of interchange fees.

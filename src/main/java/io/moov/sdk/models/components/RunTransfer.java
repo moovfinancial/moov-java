@@ -49,6 +49,14 @@ public class RunTransfer {
     @JsonProperty("description")
     private String description;
 
+    /**
+     * An optional collection of line items for a scheduled transfer.
+     * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lineItems")
+    private Optional<? extends ScheduledTransferLineItems> lineItems;
+
     @JsonCreator
     public RunTransfer(
             @JsonProperty("amount") Amount amount,
@@ -56,19 +64,22 @@ public class RunTransfer {
             @JsonProperty("destination") SchedulePaymentMethod destination,
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("source") SchedulePaymentMethod source,
-            @JsonProperty("description") String description) {
+            @JsonProperty("description") String description,
+            @JsonProperty("lineItems") Optional<? extends ScheduledTransferLineItems> lineItems) {
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(destination, "destination");
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(description, "description");
+        Utils.checkNotNull(lineItems, "lineItems");
         this.amount = amount;
         this.salesTaxAmount = salesTaxAmount;
         this.destination = destination;
         this.partnerAccountID = partnerAccountID;
         this.source = source;
         this.description = description;
+        this.lineItems = lineItems;
     }
     
     public RunTransfer(
@@ -78,7 +89,8 @@ public class RunTransfer {
             SchedulePaymentMethod source,
             String description) {
         this(amount, Optional.empty(), destination,
-            partnerAccountID, source, description);
+            partnerAccountID, source, description,
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -116,6 +128,16 @@ public class RunTransfer {
     @JsonIgnore
     public String description() {
         return description;
+    }
+
+    /**
+     * An optional collection of line items for a scheduled transfer.
+     * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<ScheduledTransferLineItems> lineItems() {
+        return (Optional<ScheduledTransferLineItems>) lineItems;
     }
 
     public static Builder builder() {
@@ -175,6 +197,27 @@ public class RunTransfer {
         return this;
     }
 
+    /**
+     * An optional collection of line items for a scheduled transfer.
+     * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+     */
+    public RunTransfer withLineItems(ScheduledTransferLineItems lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = Optional.ofNullable(lineItems);
+        return this;
+    }
+
+
+    /**
+     * An optional collection of line items for a scheduled transfer.
+     * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+     */
+    public RunTransfer withLineItems(Optional<? extends ScheduledTransferLineItems> lineItems) {
+        Utils.checkNotNull(lineItems, "lineItems");
+        this.lineItems = lineItems;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -190,14 +233,16 @@ public class RunTransfer {
             Utils.enhancedDeepEquals(this.destination, other.destination) &&
             Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
             Utils.enhancedDeepEquals(this.source, other.source) &&
-            Utils.enhancedDeepEquals(this.description, other.description);
+            Utils.enhancedDeepEquals(this.description, other.description) &&
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             amount, salesTaxAmount, destination,
-            partnerAccountID, source, description);
+            partnerAccountID, source, description,
+            lineItems);
     }
     
     @Override
@@ -208,7 +253,8 @@ public class RunTransfer {
                 "destination", destination,
                 "partnerAccountID", partnerAccountID,
                 "source", source,
-                "description", description);
+                "description", description,
+                "lineItems", lineItems);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -225,6 +271,8 @@ public class RunTransfer {
         private SchedulePaymentMethod source;
 
         private String description;
+
+        private Optional<? extends ScheduledTransferLineItems> lineItems = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -287,11 +335,33 @@ public class RunTransfer {
             return this;
         }
 
+
+        /**
+         * An optional collection of line items for a scheduled transfer.
+         * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+         */
+        public Builder lineItems(ScheduledTransferLineItems lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = Optional.ofNullable(lineItems);
+            return this;
+        }
+
+        /**
+         * An optional collection of line items for a scheduled transfer.
+         * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+         */
+        public Builder lineItems(Optional<? extends ScheduledTransferLineItems> lineItems) {
+            Utils.checkNotNull(lineItems, "lineItems");
+            this.lineItems = lineItems;
+            return this;
+        }
+
         public RunTransfer build() {
 
             return new RunTransfer(
                 amount, salesTaxAmount, destination,
-                partnerAccountID, source, description);
+                partnerAccountID, source, description,
+                lineItems);
         }
 
     }

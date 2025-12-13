@@ -11,11 +11,7 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 
-/**
- * BillingCountAndAmount
- * 
- * <p>Represents a count of items and their total amount.
- */
+
 public class BillingCountAndAmount {
     /**
      * The number of items.

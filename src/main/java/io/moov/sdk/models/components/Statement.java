@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Deprecated;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -66,13 +67,13 @@ public class Statement {
     private List<String> subscriptionIDs;
 
     /**
-     * A summary of all fees included in this statement.
+     * A summary of all fees included in a statement.
      */
     @JsonProperty("summary")
     private BillingSummary summary;
 
     /**
-     * A detailed breakdown of card acquiring fees.
+     * A detailed breakdown of card acquiring fees by card brand.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardAcquiringFees")
@@ -93,11 +94,22 @@ public class Statement {
     private Optional<? extends InstantPaymentFees> instantPaymentFees;
 
     /**
-     * A detailed breakdown of platform fees.
+     * A detailed breakdown of platform fees. This field is deprecated and will be removed in a future
+     * release. Use accountFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("platformFees")
+    @Deprecated
     private Optional<? extends PlatformFees> platformFees;
+
+    /**
+     * A detailed breakdown of account fees.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("accountFees")
+    private Optional<? extends AccountFees> accountFees;
 
     /**
      * A detailed breakdown of other card-related fees.
@@ -105,6 +117,14 @@ public class Statement {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("otherCardFees")
     private Optional<? extends OtherCardFees> otherCardFees;
+
+    /**
+     * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+     * platform fees, minimums).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("partnerFees")
+    private Optional<? extends PartnerFees> partnerFees;
 
     /**
      * The date and time the statement was created.
@@ -132,7 +152,9 @@ public class Statement {
             @JsonProperty("achFees") Optional<? extends ACHFees> achFees,
             @JsonProperty("instantPaymentFees") Optional<? extends InstantPaymentFees> instantPaymentFees,
             @JsonProperty("platformFees") Optional<? extends PlatformFees> platformFees,
+            @JsonProperty("accountFees") Optional<? extends AccountFees> accountFees,
             @JsonProperty("otherCardFees") Optional<? extends OtherCardFees> otherCardFees,
+            @JsonProperty("partnerFees") Optional<? extends PartnerFees> partnerFees,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
         Utils.checkNotNull(statementID, "statementID");
@@ -147,7 +169,9 @@ public class Statement {
         Utils.checkNotNull(achFees, "achFees");
         Utils.checkNotNull(instantPaymentFees, "instantPaymentFees");
         Utils.checkNotNull(platformFees, "platformFees");
+        Utils.checkNotNull(accountFees, "accountFees");
         Utils.checkNotNull(otherCardFees, "otherCardFees");
+        Utils.checkNotNull(partnerFees, "partnerFees");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
         this.statementID = statementID;
@@ -162,7 +186,9 @@ public class Statement {
         this.achFees = achFees;
         this.instantPaymentFees = instantPaymentFees;
         this.platformFees = platformFees;
+        this.accountFees = accountFees;
         this.otherCardFees = otherCardFees;
+        this.partnerFees = partnerFees;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
     }
@@ -182,7 +208,8 @@ public class Statement {
             fileSize, billingPeriodStartDateTime, billingPeriodEndDateTime,
             subscriptionIDs, summary, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), createdOn, updatedOn);
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            createdOn, updatedOn);
     }
 
     /**
@@ -242,7 +269,7 @@ public class Statement {
     }
 
     /**
-     * A summary of all fees included in this statement.
+     * A summary of all fees included in a statement.
      */
     @JsonIgnore
     public BillingSummary summary() {
@@ -250,7 +277,7 @@ public class Statement {
     }
 
     /**
-     * A detailed breakdown of card acquiring fees.
+     * A detailed breakdown of card acquiring fees by card brand.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -277,12 +304,25 @@ public class Statement {
     }
 
     /**
-     * A detailed breakdown of platform fees.
+     * A detailed breakdown of platform fees. This field is deprecated and will be removed in a future
+     * release. Use accountFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PlatformFees> platformFees() {
         return (Optional<PlatformFees>) platformFees;
+    }
+
+    /**
+     * A detailed breakdown of account fees.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AccountFees> accountFees() {
+        return (Optional<AccountFees>) accountFees;
     }
 
     /**
@@ -292,6 +332,16 @@ public class Statement {
     @JsonIgnore
     public Optional<OtherCardFees> otherCardFees() {
         return (Optional<OtherCardFees>) otherCardFees;
+    }
+
+    /**
+     * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+     * platform fees, minimums).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PartnerFees> partnerFees() {
+        return (Optional<PartnerFees>) partnerFees;
     }
 
     /**
@@ -379,7 +429,7 @@ public class Statement {
     }
 
     /**
-     * A summary of all fees included in this statement.
+     * A summary of all fees included in a statement.
      */
     public Statement withSummary(BillingSummary summary) {
         Utils.checkNotNull(summary, "summary");
@@ -388,7 +438,7 @@ public class Statement {
     }
 
     /**
-     * A detailed breakdown of card acquiring fees.
+     * A detailed breakdown of card acquiring fees by card brand.
      */
     public Statement withCardAcquiringFees(CardAcquiringFees cardAcquiringFees) {
         Utils.checkNotNull(cardAcquiringFees, "cardAcquiringFees");
@@ -398,7 +448,7 @@ public class Statement {
 
 
     /**
-     * A detailed breakdown of card acquiring fees.
+     * A detailed breakdown of card acquiring fees by card brand.
      */
     public Statement withCardAcquiringFees(Optional<? extends CardAcquiringFees> cardAcquiringFees) {
         Utils.checkNotNull(cardAcquiringFees, "cardAcquiringFees");
@@ -445,8 +495,12 @@ public class Statement {
     }
 
     /**
-     * A detailed breakdown of platform fees.
+     * A detailed breakdown of platform fees. This field is deprecated and will be removed in a future
+     * release. Use accountFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public Statement withPlatformFees(PlatformFees platformFees) {
         Utils.checkNotNull(platformFees, "platformFees");
         this.platformFees = Optional.ofNullable(platformFees);
@@ -455,11 +509,34 @@ public class Statement {
 
 
     /**
-     * A detailed breakdown of platform fees.
+     * A detailed breakdown of platform fees. This field is deprecated and will be removed in a future
+     * release. Use accountFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     public Statement withPlatformFees(Optional<? extends PlatformFees> platformFees) {
         Utils.checkNotNull(platformFees, "platformFees");
         this.platformFees = platformFees;
+        return this;
+    }
+
+    /**
+     * A detailed breakdown of account fees.
+     */
+    public Statement withAccountFees(AccountFees accountFees) {
+        Utils.checkNotNull(accountFees, "accountFees");
+        this.accountFees = Optional.ofNullable(accountFees);
+        return this;
+    }
+
+
+    /**
+     * A detailed breakdown of account fees.
+     */
+    public Statement withAccountFees(Optional<? extends AccountFees> accountFees) {
+        Utils.checkNotNull(accountFees, "accountFees");
+        this.accountFees = accountFees;
         return this;
     }
 
@@ -479,6 +556,27 @@ public class Statement {
     public Statement withOtherCardFees(Optional<? extends OtherCardFees> otherCardFees) {
         Utils.checkNotNull(otherCardFees, "otherCardFees");
         this.otherCardFees = otherCardFees;
+        return this;
+    }
+
+    /**
+     * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+     * platform fees, minimums).
+     */
+    public Statement withPartnerFees(PartnerFees partnerFees) {
+        Utils.checkNotNull(partnerFees, "partnerFees");
+        this.partnerFees = Optional.ofNullable(partnerFees);
+        return this;
+    }
+
+
+    /**
+     * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+     * platform fees, minimums).
+     */
+    public Statement withPartnerFees(Optional<? extends PartnerFees> partnerFees) {
+        Utils.checkNotNull(partnerFees, "partnerFees");
+        this.partnerFees = partnerFees;
         return this;
     }
 
@@ -522,7 +620,9 @@ public class Statement {
             Utils.enhancedDeepEquals(this.achFees, other.achFees) &&
             Utils.enhancedDeepEquals(this.instantPaymentFees, other.instantPaymentFees) &&
             Utils.enhancedDeepEquals(this.platformFees, other.platformFees) &&
+            Utils.enhancedDeepEquals(this.accountFees, other.accountFees) &&
             Utils.enhancedDeepEquals(this.otherCardFees, other.otherCardFees) &&
+            Utils.enhancedDeepEquals(this.partnerFees, other.partnerFees) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
     }
@@ -534,7 +634,8 @@ public class Statement {
             fileSize, billingPeriodStartDateTime, billingPeriodEndDateTime,
             subscriptionIDs, summary, cardAcquiringFees,
             achFees, instantPaymentFees, platformFees,
-            otherCardFees, createdOn, updatedOn);
+            accountFees, otherCardFees, partnerFees,
+            createdOn, updatedOn);
     }
     
     @Override
@@ -552,7 +653,9 @@ public class Statement {
                 "achFees", achFees,
                 "instantPaymentFees", instantPaymentFees,
                 "platformFees", platformFees,
+                "accountFees", accountFees,
                 "otherCardFees", otherCardFees,
+                "partnerFees", partnerFees,
                 "createdOn", createdOn,
                 "updatedOn", updatedOn);
     }
@@ -582,9 +685,14 @@ public class Statement {
 
         private Optional<? extends InstantPaymentFees> instantPaymentFees = Optional.empty();
 
+        @Deprecated
         private Optional<? extends PlatformFees> platformFees = Optional.empty();
 
+        private Optional<? extends AccountFees> accountFees = Optional.empty();
+
         private Optional<? extends OtherCardFees> otherCardFees = Optional.empty();
+
+        private Optional<? extends PartnerFees> partnerFees = Optional.empty();
 
         private OffsetDateTime createdOn;
 
@@ -666,7 +774,7 @@ public class Statement {
 
 
         /**
-         * A summary of all fees included in this statement.
+         * A summary of all fees included in a statement.
          */
         public Builder summary(BillingSummary summary) {
             Utils.checkNotNull(summary, "summary");
@@ -676,7 +784,7 @@ public class Statement {
 
 
         /**
-         * A detailed breakdown of card acquiring fees.
+         * A detailed breakdown of card acquiring fees by card brand.
          */
         public Builder cardAcquiringFees(CardAcquiringFees cardAcquiringFees) {
             Utils.checkNotNull(cardAcquiringFees, "cardAcquiringFees");
@@ -685,7 +793,7 @@ public class Statement {
         }
 
         /**
-         * A detailed breakdown of card acquiring fees.
+         * A detailed breakdown of card acquiring fees by card brand.
          */
         public Builder cardAcquiringFees(Optional<? extends CardAcquiringFees> cardAcquiringFees) {
             Utils.checkNotNull(cardAcquiringFees, "cardAcquiringFees");
@@ -733,8 +841,12 @@ public class Statement {
 
 
         /**
-         * A detailed breakdown of platform fees.
+         * A detailed breakdown of platform fees. This field is deprecated and will be removed in a future
+         * release. Use accountFees.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder platformFees(PlatformFees platformFees) {
             Utils.checkNotNull(platformFees, "platformFees");
             this.platformFees = Optional.ofNullable(platformFees);
@@ -742,11 +854,34 @@ public class Statement {
         }
 
         /**
-         * A detailed breakdown of platform fees.
+         * A detailed breakdown of platform fees. This field is deprecated and will be removed in a future
+         * release. Use accountFees.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
+        @Deprecated
         public Builder platformFees(Optional<? extends PlatformFees> platformFees) {
             Utils.checkNotNull(platformFees, "platformFees");
             this.platformFees = platformFees;
+            return this;
+        }
+
+
+        /**
+         * A detailed breakdown of account fees.
+         */
+        public Builder accountFees(AccountFees accountFees) {
+            Utils.checkNotNull(accountFees, "accountFees");
+            this.accountFees = Optional.ofNullable(accountFees);
+            return this;
+        }
+
+        /**
+         * A detailed breakdown of account fees.
+         */
+        public Builder accountFees(Optional<? extends AccountFees> accountFees) {
+            Utils.checkNotNull(accountFees, "accountFees");
+            this.accountFees = accountFees;
             return this;
         }
 
@@ -766,6 +901,27 @@ public class Statement {
         public Builder otherCardFees(Optional<? extends OtherCardFees> otherCardFees) {
             Utils.checkNotNull(otherCardFees, "otherCardFees");
             this.otherCardFees = otherCardFees;
+            return this;
+        }
+
+
+        /**
+         * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+         * platform fees, minimums).
+         */
+        public Builder partnerFees(PartnerFees partnerFees) {
+            Utils.checkNotNull(partnerFees, "partnerFees");
+            this.partnerFees = Optional.ofNullable(partnerFees);
+            return this;
+        }
+
+        /**
+         * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+         * platform fees, minimums).
+         */
+        public Builder partnerFees(Optional<? extends PartnerFees> partnerFees) {
+            Utils.checkNotNull(partnerFees, "partnerFees");
+            this.partnerFees = partnerFees;
             return this;
         }
 
@@ -796,7 +952,8 @@ public class Statement {
                 fileSize, billingPeriodStartDateTime, billingPeriodEndDateTime,
                 subscriptionIDs, summary, cardAcquiringFees,
                 achFees, instantPaymentFees, platformFees,
-                otherCardFees, createdOn, updatedOn);
+                accountFees, otherCardFees, partnerFees,
+                createdOn, updatedOn);
         }
 
     }

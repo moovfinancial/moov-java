@@ -64,6 +64,33 @@ public class BankAccountException {
     private Optional<? extends RTPRejectionCode> rtpRejectionCode;
 
     /**
+     * The rejection code of a FedNow transaction that caused the bank account status to change.
+     * 
+     * <p>- AC02: Debtor account is invalid
+     * - AC03: Creditor account is invalid
+     * - AC04: Account closed
+     * - AC06: Account is blocked
+     * - AC07: Creditor account closed
+     * - AC10: Debtor account currency is invalid or missing
+     * - AC11: Creditor account currency is invalid or missing
+     * - AC13: Debtor account type missing or invalid
+     * - AC14: Creditor account type missing or invalid
+     * - AG01: Transaction is forbidden on this type of account
+     * - AG03: Transaction type is not supported/authorized on this account
+     * - BE06: End customer specified is not known at associated Sort/National Bank Code or no longer
+     * exists in the books
+     * - DUPL: Payment is a duplicate of another payment
+     * - MD07: End customer is deceased
+     * - NOAT: Receiving customer account does not support/accept this message type
+     * - RC02: Bank identifier is invalid or missing
+     * - RC03: Debtor FI identifier is invalid or missing
+     * - RC04: Creditor FI identifier is invalid or missing
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("fednowRejectionCode")
+    private Optional<String> fednowRejectionCode;
+
+    /**
      * Details related to an `errored` or `verificationFailed` bank account status.
      */
     @JsonProperty("description")
@@ -73,18 +100,22 @@ public class BankAccountException {
     public BankAccountException(
             @JsonProperty("achReturnCode") Optional<? extends ACHReturnCode> achReturnCode,
             @JsonProperty("rtpRejectionCode") Optional<? extends RTPRejectionCode> rtpRejectionCode,
+            @JsonProperty("fednowRejectionCode") Optional<String> fednowRejectionCode,
             @JsonProperty("description") String description) {
         Utils.checkNotNull(achReturnCode, "achReturnCode");
         Utils.checkNotNull(rtpRejectionCode, "rtpRejectionCode");
+        Utils.checkNotNull(fednowRejectionCode, "fednowRejectionCode");
         Utils.checkNotNull(description, "description");
         this.achReturnCode = achReturnCode;
         this.rtpRejectionCode = rtpRejectionCode;
+        this.fednowRejectionCode = fednowRejectionCode;
         this.description = description;
     }
     
     public BankAccountException(
             String description) {
-        this(Optional.empty(), Optional.empty(), description);
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            description);
     }
 
     /**
@@ -132,6 +163,34 @@ public class BankAccountException {
     @JsonIgnore
     public Optional<RTPRejectionCode> rtpRejectionCode() {
         return (Optional<RTPRejectionCode>) rtpRejectionCode;
+    }
+
+    /**
+     * The rejection code of a FedNow transaction that caused the bank account status to change.
+     * 
+     * <p>- AC02: Debtor account is invalid
+     * - AC03: Creditor account is invalid
+     * - AC04: Account closed
+     * - AC06: Account is blocked
+     * - AC07: Creditor account closed
+     * - AC10: Debtor account currency is invalid or missing
+     * - AC11: Creditor account currency is invalid or missing
+     * - AC13: Debtor account type missing or invalid
+     * - AC14: Creditor account type missing or invalid
+     * - AG01: Transaction is forbidden on this type of account
+     * - AG03: Transaction type is not supported/authorized on this account
+     * - BE06: End customer specified is not known at associated Sort/National Bank Code or no longer
+     * exists in the books
+     * - DUPL: Payment is a duplicate of another payment
+     * - MD07: End customer is deceased
+     * - NOAT: Receiving customer account does not support/accept this message type
+     * - RC02: Bank identifier is invalid or missing
+     * - RC03: Debtor FI identifier is invalid or missing
+     * - RC04: Creditor FI identifier is invalid or missing
+     */
+    @JsonIgnore
+    public Optional<String> fednowRejectionCode() {
+        return fednowRejectionCode;
     }
 
     /**
@@ -244,6 +303,65 @@ public class BankAccountException {
     }
 
     /**
+     * The rejection code of a FedNow transaction that caused the bank account status to change.
+     * 
+     * <p>- AC02: Debtor account is invalid
+     * - AC03: Creditor account is invalid
+     * - AC04: Account closed
+     * - AC06: Account is blocked
+     * - AC07: Creditor account closed
+     * - AC10: Debtor account currency is invalid or missing
+     * - AC11: Creditor account currency is invalid or missing
+     * - AC13: Debtor account type missing or invalid
+     * - AC14: Creditor account type missing or invalid
+     * - AG01: Transaction is forbidden on this type of account
+     * - AG03: Transaction type is not supported/authorized on this account
+     * - BE06: End customer specified is not known at associated Sort/National Bank Code or no longer
+     * exists in the books
+     * - DUPL: Payment is a duplicate of another payment
+     * - MD07: End customer is deceased
+     * - NOAT: Receiving customer account does not support/accept this message type
+     * - RC02: Bank identifier is invalid or missing
+     * - RC03: Debtor FI identifier is invalid or missing
+     * - RC04: Creditor FI identifier is invalid or missing
+     */
+    public BankAccountException withFednowRejectionCode(String fednowRejectionCode) {
+        Utils.checkNotNull(fednowRejectionCode, "fednowRejectionCode");
+        this.fednowRejectionCode = Optional.ofNullable(fednowRejectionCode);
+        return this;
+    }
+
+
+    /**
+     * The rejection code of a FedNow transaction that caused the bank account status to change.
+     * 
+     * <p>- AC02: Debtor account is invalid
+     * - AC03: Creditor account is invalid
+     * - AC04: Account closed
+     * - AC06: Account is blocked
+     * - AC07: Creditor account closed
+     * - AC10: Debtor account currency is invalid or missing
+     * - AC11: Creditor account currency is invalid or missing
+     * - AC13: Debtor account type missing or invalid
+     * - AC14: Creditor account type missing or invalid
+     * - AG01: Transaction is forbidden on this type of account
+     * - AG03: Transaction type is not supported/authorized on this account
+     * - BE06: End customer specified is not known at associated Sort/National Bank Code or no longer
+     * exists in the books
+     * - DUPL: Payment is a duplicate of another payment
+     * - MD07: End customer is deceased
+     * - NOAT: Receiving customer account does not support/accept this message type
+     * - RC02: Bank identifier is invalid or missing
+     * - RC03: Debtor FI identifier is invalid or missing
+     * - RC04: Creditor FI identifier is invalid or missing
+     */
+    public BankAccountException withFednowRejectionCode(Optional<String> fednowRejectionCode) {
+        Utils.checkNotNull(fednowRejectionCode, "fednowRejectionCode");
+        this.fednowRejectionCode = fednowRejectionCode;
+        return this;
+    }
+
+    /**
      * Details related to an `errored` or `verificationFailed` bank account status.
      */
     public BankAccountException withDescription(String description) {
@@ -264,13 +382,15 @@ public class BankAccountException {
         return 
             Utils.enhancedDeepEquals(this.achReturnCode, other.achReturnCode) &&
             Utils.enhancedDeepEquals(this.rtpRejectionCode, other.rtpRejectionCode) &&
+            Utils.enhancedDeepEquals(this.fednowRejectionCode, other.fednowRejectionCode) &&
             Utils.enhancedDeepEquals(this.description, other.description);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            achReturnCode, rtpRejectionCode, description);
+            achReturnCode, rtpRejectionCode, fednowRejectionCode,
+            description);
     }
     
     @Override
@@ -278,6 +398,7 @@ public class BankAccountException {
         return Utils.toString(BankAccountException.class,
                 "achReturnCode", achReturnCode,
                 "rtpRejectionCode", rtpRejectionCode,
+                "fednowRejectionCode", fednowRejectionCode,
                 "description", description);
     }
 
@@ -287,6 +408,8 @@ public class BankAccountException {
         private Optional<? extends ACHReturnCode> achReturnCode = Optional.empty();
 
         private Optional<? extends RTPRejectionCode> rtpRejectionCode = Optional.empty();
+
+        private Optional<String> fednowRejectionCode = Optional.empty();
 
         private String description;
 
@@ -392,6 +515,65 @@ public class BankAccountException {
 
 
         /**
+         * The rejection code of a FedNow transaction that caused the bank account status to change.
+         * 
+         * <p>- AC02: Debtor account is invalid
+         * - AC03: Creditor account is invalid
+         * - AC04: Account closed
+         * - AC06: Account is blocked
+         * - AC07: Creditor account closed
+         * - AC10: Debtor account currency is invalid or missing
+         * - AC11: Creditor account currency is invalid or missing
+         * - AC13: Debtor account type missing or invalid
+         * - AC14: Creditor account type missing or invalid
+         * - AG01: Transaction is forbidden on this type of account
+         * - AG03: Transaction type is not supported/authorized on this account
+         * - BE06: End customer specified is not known at associated Sort/National Bank Code or no longer
+         * exists in the books
+         * - DUPL: Payment is a duplicate of another payment
+         * - MD07: End customer is deceased
+         * - NOAT: Receiving customer account does not support/accept this message type
+         * - RC02: Bank identifier is invalid or missing
+         * - RC03: Debtor FI identifier is invalid or missing
+         * - RC04: Creditor FI identifier is invalid or missing
+         */
+        public Builder fednowRejectionCode(String fednowRejectionCode) {
+            Utils.checkNotNull(fednowRejectionCode, "fednowRejectionCode");
+            this.fednowRejectionCode = Optional.ofNullable(fednowRejectionCode);
+            return this;
+        }
+
+        /**
+         * The rejection code of a FedNow transaction that caused the bank account status to change.
+         * 
+         * <p>- AC02: Debtor account is invalid
+         * - AC03: Creditor account is invalid
+         * - AC04: Account closed
+         * - AC06: Account is blocked
+         * - AC07: Creditor account closed
+         * - AC10: Debtor account currency is invalid or missing
+         * - AC11: Creditor account currency is invalid or missing
+         * - AC13: Debtor account type missing or invalid
+         * - AC14: Creditor account type missing or invalid
+         * - AG01: Transaction is forbidden on this type of account
+         * - AG03: Transaction type is not supported/authorized on this account
+         * - BE06: End customer specified is not known at associated Sort/National Bank Code or no longer
+         * exists in the books
+         * - DUPL: Payment is a duplicate of another payment
+         * - MD07: End customer is deceased
+         * - NOAT: Receiving customer account does not support/accept this message type
+         * - RC02: Bank identifier is invalid or missing
+         * - RC03: Debtor FI identifier is invalid or missing
+         * - RC04: Creditor FI identifier is invalid or missing
+         */
+        public Builder fednowRejectionCode(Optional<String> fednowRejectionCode) {
+            Utils.checkNotNull(fednowRejectionCode, "fednowRejectionCode");
+            this.fednowRejectionCode = fednowRejectionCode;
+            return this;
+        }
+
+
+        /**
          * Details related to an `errored` or `verificationFailed` bank account status.
          */
         public Builder description(String description) {
@@ -403,7 +585,8 @@ public class BankAccountException {
         public BankAccountException build() {
 
             return new BankAccountException(
-                achReturnCode, rtpRejectionCode, description);
+                achReturnCode, rtpRejectionCode, fednowRejectionCode,
+                description);
         }
 
     }

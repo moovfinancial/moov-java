@@ -84,8 +84,8 @@ public class Reversal {
 
         public _Deserializer() {
             super(Reversal.class, false,
-                  TypeReferenceWithShape.of(new TypeReference<ReversedWithRefund>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<ReversedWithCancellation>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<ReversedWithCancellation>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<ReversedWithRefund>() {}, JsonShape.DEFAULT));
         }
     }
     

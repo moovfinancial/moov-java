@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 78baddc893e843c31e5471a2b91cd911
+  docChecksum: 0e91ff1203359dcf5057da81433247f6
   docVersion: latest
-  speakeasyVersion: 1.675.4
-  generationVersion: 2.779.2
-  releaseVersion: 0.34.4
-  configChecksum: 19270f5b2556e66712a6d0c7424fe218
+  speakeasyVersion: 1.676.1
+  generationVersion: 2.781.2
+  releaseVersion: 0.34.5
+  configChecksum: 6a93a5632cc0dc62e4d2218c2a13425a
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: eec103b9-7302-4213-b73b-36ae2454e894
-  pristine_commit_hash: c8fb9b40450717a322bdd919a57cbc70c61e526e
-  pristine_tree_hash: 3fb7b788d65823969f03b53a2db7ac9b2d8baef8
+  generation_id: 20dc1014-5d35-4db5-98a3-9e0a3412df4e
+  pristine_commit_hash: a6cc5b3ec75250bb60f3b8047bbbcb9dfd9296c8
+  pristine_tree_hash: 2e48a245ec99345c1987f7bcabf3eba01efc04d5
 features:
   java:
     acceptHeaders: 2.81.2
@@ -32,7 +32,7 @@ features:
     nameOverrides: 2.81.3
     nullables: 0.1.0
     sdkHooks: 1.2.0
-    unions: 0.3.0
+    unions: 0.3.1
     uploadStreams: 0.1.0
 trackedFiles:
   .gitattributes:
@@ -95,6 +95,10 @@ trackedFiles:
     id: 93be3d726a9b
     last_write_checksum: sha1:fde569077e9de5047563b9d71cdb02433fe68659
     pristine_git_object: 2fe04790340e432bb35a2adc71532e1079cef17b
+  docs/models/components/AccountFees.md:
+    id: d32003d7f18e
+    last_write_checksum: sha1:d37c481b580c1811a1246c688fe103c15284df69
+    pristine_git_object: fa2abdab5214bb44731aae401853da33bca337e3
   docs/models/components/AccountNameVerification.md:
     id: c9b696f5f691
     last_write_checksum: sha1:e3546a53e4f53e6c1c77f003b87924e3ca95ca36
@@ -183,6 +187,10 @@ trackedFiles:
     id: fcc6a76621d1
     last_write_checksum: sha1:08cc0493beedabd5b6d816fe99e7c25915e0e3d7
     pristine_git_object: 2509640b18906ded6c988bf69016854fcea11081
+  docs/models/components/AdjustmentFees.md:
+    id: 7f29ab3f31ad
+    last_write_checksum: sha1:f2b32158a63b3afe3a7ca717d21d2eda9afee975
+    pristine_git_object: 04b0db6e7c894017e8b3a9906c46a9eb74f563d6
   docs/models/components/Amount.md:
     id: 979e7d519592
     last_write_checksum: sha1:b569d601944cabf45c18c65996ad9e3f25a264ad
@@ -269,8 +277,8 @@ trackedFiles:
     pristine_git_object: ab9451531403d350be8fb2676b3040dbee82530d
   docs/models/components/BankAccountException.md:
     id: d8d7dace83da
-    last_write_checksum: sha1:df552364b9f9a7300544c1fbe8d3432fa0bb6c11
-    pristine_git_object: 61b4a59c86f3adf74f779a226d3e47cbcfdfad01
+    last_write_checksum: sha1:fd31527cf152475f9678a3962fc277aafdcd6bd8
+    pristine_git_object: 6b7489b34e1a79595ebef015c84751804e1c41e8
   docs/models/components/BankAccountHolderType.md:
     id: 12913e01124b
     last_write_checksum: sha1:1ec0bb8dfa6f6d4ec8ccd42e3360442a93e439a4
@@ -289,8 +297,8 @@ trackedFiles:
     pristine_git_object: c8b33cb5b8b59eda2dac735234a830a81453c5d3
   docs/models/components/BankAccountStatusReason.md:
     id: 518cc4ce6770
-    last_write_checksum: sha1:d3bf01f27b86622c6315719bca279f07d863d56c
-    pristine_git_object: 28cd4a030a0da70a93044013ccbfd42e2e9d56dd
+    last_write_checksum: sha1:ab5a1d6dff63d7df6da931e00e8ee41d275f83e3
+    pristine_git_object: d012160b14335b3d6e8b396e68f8c82017deef92
   docs/models/components/BankAccountType.md:
     id: c7445a4b97e2
     last_write_checksum: sha1:2bee7c862759810ec0a8dc947f121f1239d5b3f5
@@ -325,24 +333,32 @@ trackedFiles:
     pristine_git_object: a5aa8599ec5d1cd12e88c0370ed2a210ce811a6a
   docs/models/components/BillingCountAndAmount.md:
     id: 5b55bf9a1274
-    last_write_checksum: sha1:d207a637402dda82e2095761581008ce62b12f8d
-    pristine_git_object: 9301f450b07f212fdc6bb30cecf0c88e2a79ef16
+    last_write_checksum: sha1:07f4e03c48ed8e82969dc9e63cd9b47b38c64cd8
+    pristine_git_object: 96fac861e70e9ff967930fb724e813d40fc0c628
   docs/models/components/BillingInterchangeProgramFee.md:
     id: 79dbfbb3aa6c
     last_write_checksum: sha1:4e3d0cb28d983edb1fdeee9c0769fd40fb47108f
     pristine_git_object: 837d9ee81f4b0789d2893c4e130152cad8e3a0cb
   docs/models/components/BillingSummary.md:
     id: 5e79bf405093
-    last_write_checksum: sha1:ba9b853d1398755374c8bd5232ccc7ff3292efa0
-    pristine_git_object: 28d3ada8ecd303d2d8002d00b23d1ffbedddc842
+    last_write_checksum: sha1:52f36b7dee412fbd791cdabf81ca4ca034483c6e
+    pristine_git_object: 8b0a140871d628eca72c6cf0091d84b31031b9b1
   docs/models/components/BillingSummaryDetails.md:
     id: fbd305d7b03f
-    last_write_checksum: sha1:5f6c0406e558b4828926c37dcecb48d749d98846
-    pristine_git_object: 08edeff4fab2ee62c2289820975f4b0269f499cf
+    last_write_checksum: sha1:6a9d32a580184786011b7ff7367d4adb88a193e1
+    pristine_git_object: c989ae1e4a1e5f0bfac7e0a5056b2684c550fc20
   docs/models/components/BillingSummaryInterchange.md:
     id: 30a7699f3e4a
     last_write_checksum: sha1:770fa8c583383918b208c1624fa1e4e72edbf47e
     pristine_git_object: 688edc2868ff2e217ae35b6c3a3ec78a18f34fd5
+  docs/models/components/BillingSummaryPlatformFees.md:
+    id: aa7026a033e7
+    last_write_checksum: sha1:0075633a6161684e6868df3a9a205a1b611c9d2f
+    pristine_git_object: 453b1ba735c82f9d64094f2d23c82c637fd2cf0a
+  docs/models/components/BillingSummaryVolumeAmount.md:
+    id: 96c29162e2d6
+    last_write_checksum: sha1:e9c3e5c8732b02577e16dfc5aac2fd6a301d3a01
+    pristine_git_object: c68fb2d8c26eb01a00747f47ab6bb78d68cf8529
   docs/models/components/BirthDate.md:
     id: 12a1dc89d648
     last_write_checksum: sha1:709473fbe61691de18b3e32ec332df9421773e2b
@@ -433,8 +449,8 @@ trackedFiles:
     pristine_git_object: 86571ee6d9ee1cb69499b71d290db2a214bcd2bf
   docs/models/components/CardAcquiring.md:
     id: 325e67d616c0
-    last_write_checksum: sha1:24fb3a9b9dbb2e75ceff7f8008f01cfccb9ca086
-    pristine_git_object: e3e7e40c3e1f6dc88c37ba96e783913d47735731
+    last_write_checksum: sha1:d0a71b54d9b8da79f6905293ae112674501f094c
+    pristine_git_object: 1d9f82cdf5e01e3eb9b86e9a1ab1f8e6127be658
   docs/models/components/CardAcquiringDispute.md:
     id: 3fd966994488
     last_write_checksum: sha1:059cc3e9a44043acb5b6150f87b94adbe1bc2535
@@ -461,8 +477,8 @@ trackedFiles:
     pristine_git_object: 31727da0e019f77f48d3fc0afd166dfbd6574999
   docs/models/components/CardBrandFees.md:
     id: fbc2838dcb3a
-    last_write_checksum: sha1:0c9e163fa8853a4c57845e887f2af58c7c71c96a
-    pristine_git_object: b9b7c10b07da8e12fef8a9c77494cfacb7134c60
+    last_write_checksum: sha1:f8ad21779697db45622404dc8f07c9f7d4dc9001
+    pristine_git_object: 5e8d7b52de7281eb5a7a6c88371d1aabeed4e7a7
   docs/models/components/CardDetails.md:
     id: e6f3e8056195
     last_write_checksum: sha1:c77d589df0bcf9e9ec601a2897f4ce8e8720b3e1
@@ -1419,10 +1435,18 @@ trackedFiles:
     id: 3a693c456976
     last_write_checksum: sha1:e9693475cb599a1491a76848f06596bbdf221a6d
     pristine_git_object: 60f409cf570e024a61410600e5295fe34bacce72
+  docs/models/components/OtherFees.md:
+    id: d4818d875ade
+    last_write_checksum: sha1:97b6cd14371b6153ec2aec1fbd24891e8375e273
+    pristine_git_object: 17428f1b139ea6f95fdb48d94acf4c6fed9802f5
   docs/models/components/PartialScheduleAccount.md:
     id: a85415a4d35e
     last_write_checksum: sha1:7d6bb4bb8721cc7f9e1716f051e411e86d2e27b6
     pristine_git_object: b1236e0e0b15e6f001af7dec0a24103fd9e5252f
+  docs/models/components/PartnerFees.md:
+    id: dad70cb4d8d9
+    last_write_checksum: sha1:826e2ea79985f9e750edb9e41bcaa8abdff62d8b
+    pristine_git_object: a7a21e7bfc6667ab42a129f39c85a10c1d507a87
   docs/models/components/PartnerPricing.md:
     id: f74b7b6287fd
     last_write_checksum: sha1:bd063cb5e03ea0d570d53aa98fc7d549fe8e0847
@@ -1593,8 +1617,8 @@ trackedFiles:
     pristine_git_object: 9a3244a5a080b0491a82cf682563ed8de0ad15f4
   docs/models/components/PlatformFees.md:
     id: 937ff1ac867f
-    last_write_checksum: sha1:47b72d69dccc181cf78bdf998a4e8c9528c61394
-    pristine_git_object: 27f97dd62f65540eec4426a2cc92fb3e14d56797
+    last_write_checksum: sha1:9d2b20082d195d8da6be0e4527c49b8ece10e9f9
+    pristine_git_object: 53a705d3e2443b84248864b4f8dbaea79ac22225
   docs/models/components/PrimaryRegulator.md:
     id: 48a1c0e7d1ba
     last_write_checksum: sha1:9bcf7da44b8da30e7464a1fab9b2ff9974cd19bd
@@ -1777,8 +1801,8 @@ trackedFiles:
     pristine_git_object: d25ea9747ae22434d74463c34fd6a66585adb8df
   docs/models/components/RunTransfer.md:
     id: 23c0fd418571
-    last_write_checksum: sha1:98931ef166cce19fc3c1b6f4a726e5e76b504c21
-    pristine_git_object: f762d1d78252ba75ce234a94c1de2e4d5c717c8e
+    last_write_checksum: sha1:d283aea3e8230887d1ac5af99a0ed4143faddf0d
+    pristine_git_object: 3cd95df1b3a60ca2b5fa1356539382f12e62ee75
   docs/models/components/SECCode.md:
     id: 22a551234172
     last_write_checksum: sha1:f5fdc0690c44480054c5b540987d0aa4750eb0ee
@@ -1795,6 +1819,18 @@ trackedFiles:
     id: ecc1c169b517
     last_write_checksum: sha1:0ab4a66af18bf4f7504c321840a454f797118c71
     pristine_git_object: 3d4bcb52d4d31f1a627a037670a3fab437832b9d
+  docs/models/components/ScheduledTransferLineItem.md:
+    id: 9a4d7d764833
+    last_write_checksum: sha1:e7d23f8fdbcbe5a1259dcb794bb42d785279bca0
+    pristine_git_object: 6813cb2f7d6c88e7622023178633aae979f6ebdd
+  docs/models/components/ScheduledTransferLineItemOption.md:
+    id: 651dfc906888
+    last_write_checksum: sha1:d1ce15e4d7f6effdd154a5a9dbb3bd4f557b5d5a
+    pristine_git_object: 6e7e4e0393f080822b3ca974bddd5ba79a68ab30
+  docs/models/components/ScheduledTransferLineItems.md:
+    id: fe652233456f
+    last_write_checksum: sha1:de7c93d3822b461fef96d2216c6b54fa5696a9c4
+    pristine_git_object: e9374c170e9a03d00b6e9b53be982d97120476c0
   docs/models/components/Security.md:
     id: 3878f0f84029
     last_write_checksum: sha1:2838cc04b60d8c0ca5f7f1f54048a94231db1b72
@@ -1857,8 +1893,8 @@ trackedFiles:
     pristine_git_object: 9469df3e1d8b3da33b0b611218e920c3883cde71
   docs/models/components/Statement.md:
     id: 307d46b8e59c
-    last_write_checksum: sha1:64ebaf91108eb18d22269b73da72233bf9e53866
-    pristine_git_object: eae90549b36a8c77a6e77c5d734383e013801cb7
+    last_write_checksum: sha1:cfb5ce072d20a5b9b101ebdad18c65b323b1dda0
+    pristine_git_object: ae043fc795bf16c82646eb62b34c10c0cb001ca1
   docs/models/components/Status.md:
     id: dd05f949cb61
     last_write_checksum: sha1:e148b66f3c4c020d30356407aa33f57c4434ad48
@@ -2135,6 +2171,10 @@ trackedFiles:
     id: 67a411138b05
     last_write_checksum: sha1:d922746301d0ca5d44f5c46eb4bd40a4a4a651ab
     pristine_git_object: 4b7c1347b78dc8e849bd281ad42f1b3fdb5f2b1f
+  docs/models/components/VolumeAmount.md:
+    id: 2f858ce9bd02
+    last_write_checksum: sha1:3f7b9ec01a9fcbdd6b8a7bc92fab029704280c6d
+    pristine_git_object: 8380b67ef71cf8eb7ef4a43528a91b84de81ad47
   docs/models/components/VolumeByCustomerType.md:
     id: b86d38a18bb0
     last_write_checksum: sha1:7cf2a2b233e24c984df4f5b81222dbfc8a871a8c
@@ -3917,8 +3957,8 @@ trackedFiles:
     pristine_git_object: 7d7165e2c8980c709e2845aaaccfd4895d7e5a2e
   docs/sdks/bankaccounts/README.md:
     id: 510ffee224ea
-    last_write_checksum: sha1:a539aee842c48e210026e638338bec5c9177c34f
-    pristine_git_object: e272cf181d917169438bbc6367a73138811a42bf
+    last_write_checksum: sha1:3a981d6c57440dad5ef0798c76c321f7c9c8453d
+    pristine_git_object: bf89220b78dcace5a62a6a92a717311682cdbb8a
   docs/sdks/branding/README.md:
     id: 6ec229bdfe5c
     last_write_checksum: sha1:3c1e53ce39b88a8f226994d50c335772ce6ec67d
@@ -4009,8 +4049,8 @@ trackedFiles:
     pristine_git_object: 91dc3ac018f69fd74f0d70d9a3e9e58da015b227
   docs/sdks/scheduling/README.md:
     id: 0508024015b4
-    last_write_checksum: sha1:0d2bb0465070c8fe0ae3e15dfc29dc2f14dcde46
-    pristine_git_object: 1540a287ab3b0f7d2c40d34cfd53963f22dc10a8
+    last_write_checksum: sha1:fd766c4fcce2b663354d264db93f3e8522ac9911
+    pristine_git_object: f98a247024c81a1937851d6d3fbbd30edf38f18e
   docs/sdks/statements/README.md:
     id: 077d45e19c3c
     last_write_checksum: sha1:b0135e0f9a67822e3816eec48f2019faee99a284
@@ -4045,8 +4085,8 @@ trackedFiles:
     pristine_git_object: dcbab2e81d79a6a9b303f393270079410d6bcc67
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:a3253228551faf598297d09c0f167c12a5dbb5bf
-    pristine_git_object: d46d1f1501945ce296e1b1bebdc585b4f75a34cc
+    last_write_checksum: sha1:e72ea85368cc76dff69eb47d9390f61cd7a9c104
+    pristine_git_object: 72b39ab8ceb4173619c9b1314bb1c171bfdf3856
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4125,8 +4165,8 @@ trackedFiles:
     pristine_git_object: a40ce51c32dfc43076485515a4df734e25b9aa28
   src/main/java/io/moov/sdk/BankAccounts.java:
     id: 722b6d0e3683
-    last_write_checksum: sha1:1e602103586df8301c42cde87a9be1cf7aa63c7e
-    pristine_git_object: 50ab7fb954a453a9b361ce542bb62365c8ea81cd
+    last_write_checksum: sha1:0e765fc86dcbe38d73f3cbcd72ac2efae683af61
+    pristine_git_object: 56a0a71a6ce62018bf1658469db06c93b6b3922a
   src/main/java/io/moov/sdk/Branding.java:
     id: a7643496a0e0
     last_write_checksum: sha1:4260d97ba5d82e719cf8291c809093e10863f43f
@@ -4221,8 +4261,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:2316d38605266e85a8c271b83abfddb826adc73b
-    pristine_git_object: 4e8f12202d8c19a7dd820151d71a9b9d01bf0bfe
+    last_write_checksum: sha1:5348ed0e89481583c01eb48754351a65024e56e3
+    pristine_git_object: dd95e74ce2d7be05b113766f021b3bfed3469f64
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:f2634b766e3dc03d4f3043aff0565c655dcf17be
@@ -4311,6 +4351,10 @@ trackedFiles:
     id: 3fafd055352e
     last_write_checksum: sha1:0c35c04cff8b16230b9e6564c268fd0090abd7bd
     pristine_git_object: d2a56ccac10f68ec7db4f9273d46c59d39f3666e
+  src/main/java/io/moov/sdk/models/components/AccountFees.java:
+    id: d766e06f38cf
+    last_write_checksum: sha1:844b8cec231f04613f71da9c3d14a0b8a2100866
+    pristine_git_object: 3adb34702a50dfa39842fb3a4ea864f422b5d78c
   src/main/java/io/moov/sdk/models/components/AccountNameVerification.java:
     id: 908e6bbba15d
     last_write_checksum: sha1:4fc8c484078ccd62b59d0424cbc88a81c3c2d00e
@@ -4399,6 +4443,10 @@ trackedFiles:
     id: 253dd1276118
     last_write_checksum: sha1:89125a449662869daf770afb74a91b0fd2d8017b
     pristine_git_object: d23464c2b5eb5d068fb84e32d8e8dfb16ea344ee
+  src/main/java/io/moov/sdk/models/components/AdjustmentFees.java:
+    id: 0c8709f7887b
+    last_write_checksum: sha1:16d964f14350ba85437dacaadc9dacdd14a3f92a
+    pristine_git_object: ddbaf8fe8400fe2fce30fe24f8ec4c760504b5f5
   src/main/java/io/moov/sdk/models/components/Amount.java:
     id: 18b5b7cac9c7
     last_write_checksum: sha1:6c427cd51ca622d523bbfb778c98bc35e0e768c3
@@ -4485,8 +4533,8 @@ trackedFiles:
     pristine_git_object: a363181a4f9c390b8683e479e55c8d926ffd3f5e
   src/main/java/io/moov/sdk/models/components/BankAccountException.java:
     id: 1ee45afde86d
-    last_write_checksum: sha1:0d745d74b5ee2a03cb6ca5fea160a4e7cd06d95d
-    pristine_git_object: 0fa032adc23081ad690dcf692b5ac5de41b02843
+    last_write_checksum: sha1:18f5ba6b4e97dc08c9b85e9654fea3bcc5090368
+    pristine_git_object: dc79d6448b3e989e0e6f862c9161b0cab3b48e9f
   src/main/java/io/moov/sdk/models/components/BankAccountHolderType.java:
     id: 415d452424f8
     last_write_checksum: sha1:3d2402e49914ddfd96ba6f14b22c4bf83db0802d
@@ -4505,8 +4553,8 @@ trackedFiles:
     pristine_git_object: 4368a18d90e5526104b5d54e811557c59644893b
   src/main/java/io/moov/sdk/models/components/BankAccountStatusReason.java:
     id: d3dc66013fff
-    last_write_checksum: sha1:3387dc678bc0df71300b0bfb3a2e35ce561aab10
-    pristine_git_object: 18078c28fca6a1c9a6bc37dcc7cf6b14ff5b8c21
+    last_write_checksum: sha1:0bfd7acb4be36d226cb787c52cd99a1f519afbe2
+    pristine_git_object: ca0aafe21d67082c0d74c9a418ba014f81e5597c
   src/main/java/io/moov/sdk/models/components/BankAccountType.java:
     id: 6ae41d801ea6
     last_write_checksum: sha1:bd38affa589073b53ee10c5886b82082f29fcdc4
@@ -4541,24 +4589,32 @@ trackedFiles:
     pristine_git_object: da3941a5fa1fc939d050802aa75d02f14523f86a
   src/main/java/io/moov/sdk/models/components/BillingCountAndAmount.java:
     id: b5caddd127b3
-    last_write_checksum: sha1:c893f3485b9d99f802c17e3b5cce3d8bc4139bc8
-    pristine_git_object: 479ae68aba29d130a09655e0fb7a5603c4055555
+    last_write_checksum: sha1:5c5bcfe1db045264e9ed553a0fdfab40067ecb01
+    pristine_git_object: f0a5e70c02cdab88f3b6c6c3879f3c73d65bfbe7
   src/main/java/io/moov/sdk/models/components/BillingInterchangeProgramFee.java:
     id: ab4b18781872
     last_write_checksum: sha1:bef8536506244034d6cddd52175377f64dbfd186
     pristine_git_object: 277ba403fea815e6f4a11f84a1bf4847ff23d291
   src/main/java/io/moov/sdk/models/components/BillingSummary.java:
     id: a38483b37b19
-    last_write_checksum: sha1:07b164b5497b49c4ebb74a32953ecf139a52f395
-    pristine_git_object: 748c917d159b210793d3234e4dc08ce253db13f4
+    last_write_checksum: sha1:fe303787ce4bc3d91b9e675f20e6972aa56d917d
+    pristine_git_object: a02836c4ca95aef0b984b603282905d36cc334f4
   src/main/java/io/moov/sdk/models/components/BillingSummaryDetails.java:
     id: 31795b8853fe
-    last_write_checksum: sha1:56fb32e54a812ed1b52efa2604dc657eab07e247
-    pristine_git_object: ee69d9fd741703223b9d7905a4a73a37b5644574
+    last_write_checksum: sha1:f5b4458bfe2a998816ecb75dd8f28bfda1f7a9ba
+    pristine_git_object: b04f5caf681b6b324c7a586a53083320883857fe
   src/main/java/io/moov/sdk/models/components/BillingSummaryInterchange.java:
     id: 4530cba09d49
     last_write_checksum: sha1:103c5a3e6af965a6bdb94c6092c49b3dbdf8550d
     pristine_git_object: ecd9021038baa3bcd14533ed6420b3fe943ed4e5
+  src/main/java/io/moov/sdk/models/components/BillingSummaryPlatformFees.java:
+    id: b992d26be6b8
+    last_write_checksum: sha1:05e2586ef84048f71270ddca74656bbca0821de3
+    pristine_git_object: 2d091ffdc126bbe9c384100f6642cd60bf028f0f
+  src/main/java/io/moov/sdk/models/components/BillingSummaryVolumeAmount.java:
+    id: c29766891516
+    last_write_checksum: sha1:6e67b7c624c8c5013edf9b7275e72d9a46b8afc6
+    pristine_git_object: 6acad56e39f0ced6a04a9e817d16ad4652a2b53a
   src/main/java/io/moov/sdk/models/components/BirthDate.java:
     id: 1eec6bdac64f
     last_write_checksum: sha1:8eba1d3ac81c000299d99fcbbf9175f2afc0537f
@@ -4649,8 +4705,8 @@ trackedFiles:
     pristine_git_object: fc34f66c82d843086223caa3b00e4d49880b7b83
   src/main/java/io/moov/sdk/models/components/CardAcquiring.java:
     id: a36f9566b892
-    last_write_checksum: sha1:9cb5ec41106578f742c47c29c8ff045e75c7f9de
-    pristine_git_object: fa3a9ce9f9056c5e158596182ba6de0af77a9499
+    last_write_checksum: sha1:c1192c8d3d29231166c0d218810a0cae32a9b021
+    pristine_git_object: 6682063df8563fbe9072e47c54d11c9757d1d72a
   src/main/java/io/moov/sdk/models/components/CardAcquiringDispute.java:
     id: e0a31c485ad7
     last_write_checksum: sha1:2c94ccf965fe26f626e0383becc637aec90ec730
@@ -4677,8 +4733,8 @@ trackedFiles:
     pristine_git_object: 0cba65389930b3c70b066695a576b0ed90dd98b9
   src/main/java/io/moov/sdk/models/components/CardBrandFees.java:
     id: 52f69e84b9a8
-    last_write_checksum: sha1:b1556bf891a94a12df34feecb88b680274a37eb6
-    pristine_git_object: e69f520851744138eb3da5f1095c1b2a720387d0
+    last_write_checksum: sha1:1610aecb34a428aa382636ab5705a29af97bb5f3
+    pristine_git_object: ac9fe00db918715abd12b4a9987709b9ec43d856
   src/main/java/io/moov/sdk/models/components/CardDetails.java:
     id: 2f7478a5f298
     last_write_checksum: sha1:5ed977ebbecc1cbdf295b8fa607d88fd02099773
@@ -5505,8 +5561,8 @@ trackedFiles:
     pristine_git_object: eefaa5a28d1fbbec3f5ba7af0a27bd93d76baa96
   src/main/java/io/moov/sdk/models/components/LinkBankAccount.java:
     id: 284bef236f8d
-    last_write_checksum: sha1:2f70ccc7cd08594c243fd9d670846fdda626a4f8
-    pristine_git_object: ae95e2139d41987f1bba11ccbd36c0d91859030c
+    last_write_checksum: sha1:0f32f7ac657e8468a16a9bb75f64a30f85860795
+    pristine_git_object: 2b7b5941ab800d9fbd1dcbe82b7c7bde46b715c4
   src/main/java/io/moov/sdk/models/components/LinkCard.java:
     id: 1389d30fa8b9
     last_write_checksum: sha1:e01078ccdee542a61cda88791465305dcb0da428
@@ -5639,10 +5695,18 @@ trackedFiles:
     id: eebad8aa08ac
     last_write_checksum: sha1:6109752bd188cc908b6c444b25d4461d66984740
     pristine_git_object: 71d082a0dbc9f9eca71150bb116d90f75ef6eb79
+  src/main/java/io/moov/sdk/models/components/OtherFees.java:
+    id: 4cdcfb4f9d8f
+    last_write_checksum: sha1:1a27e0ea8dfc71b85db6915e2bca82adfc9af3b0
+    pristine_git_object: 856c2406ffe08c40bf54baa17f5e3fab705d69f5
   src/main/java/io/moov/sdk/models/components/PartialScheduleAccount.java:
     id: 40b07484bee4
     last_write_checksum: sha1:e54209022cd784ca9f564413c2ff9cc77bd22a4a
     pristine_git_object: a152b14c466223c52206959ab3e4cb3948c08d6c
+  src/main/java/io/moov/sdk/models/components/PartnerFees.java:
+    id: d1f9878d9299
+    last_write_checksum: sha1:d5d518fcf96ad07f434a24519f29dea9289e21c0
+    pristine_git_object: a862a90a511dceee1de643569be8fa2b2cbe86e3
   src/main/java/io/moov/sdk/models/components/PartnerPricing.java:
     id: 2b9a02623242
     last_write_checksum: sha1:ab962a7f435fa377c4cefa18aa1c0a3b535f8c23
@@ -5817,8 +5881,8 @@ trackedFiles:
     pristine_git_object: 5d219e39f25f619799b4a5c54f995cb184f6414e
   src/main/java/io/moov/sdk/models/components/PlatformFees.java:
     id: d8f95ef1c9ba
-    last_write_checksum: sha1:f64f8e6796d281f468301877599f34d264c6ed09
-    pristine_git_object: 918fe3c7cdf9a26a76d440eb42b9c36a36c751a7
+    last_write_checksum: sha1:63787b32b7a805266102739edcdc8192c72768e3
+    pristine_git_object: e5cb41d31551aec4a754cf6276396c5add425f18
   src/main/java/io/moov/sdk/models/components/PrimaryRegulator.java:
     id: 8ffa5fcb2288
     last_write_checksum: sha1:2d06f38aa449310985b13acb0c9662583717344b
@@ -5977,8 +6041,8 @@ trackedFiles:
     pristine_git_object: beec5c936ca6805e95aba88d0c7f5269cd6fb5f9
   src/main/java/io/moov/sdk/models/components/Reversal.java:
     id: 880d29d3ca48
-    last_write_checksum: sha1:0c5a88c2d6e778650e71b96274955ac524808c69
-    pristine_git_object: 1ba9ac48cf8bd518db330e880776bd743219393b
+    last_write_checksum: sha1:ce82be1a25eba48726001ad782b9dad74dcfed3f
+    pristine_git_object: f363f526a8a8f870ae46039e04b899820632ae06
   src/main/java/io/moov/sdk/models/components/ReversedWithCancellation.java:
     id: dc9e5c6c533a
     last_write_checksum: sha1:c2647e40c88827080d8af28bb1b64966678a1c8a
@@ -6001,8 +6065,8 @@ trackedFiles:
     pristine_git_object: 34274cc07b21dc6e20ac423f711bd27accdf0d2f
   src/main/java/io/moov/sdk/models/components/RunTransfer.java:
     id: 277f3db56928
-    last_write_checksum: sha1:bd1c804a39c43c84afc1a0a1c98023fd161fda35
-    pristine_git_object: db98d4b6d04eadd076d20cd1fb472b0638194c7d
+    last_write_checksum: sha1:fa699b544a96db27fc833949e980e165017b9e14
+    pristine_git_object: 2d0105b32bf0bda4aa21559a51809cbaea8695b6
   src/main/java/io/moov/sdk/models/components/SECCode.java:
     id: 22e7d336cbbc
     last_write_checksum: sha1:d3e228541bcc70b63efa526a80cf6c928e720584
@@ -6019,6 +6083,18 @@ trackedFiles:
     id: 51504ef2117a
     last_write_checksum: sha1:1450523b9165e679ae329125d48b0918b00ecb9e
     pristine_git_object: cfae2f2d7c3850267967ab2b19c68a287abfa2da
+  src/main/java/io/moov/sdk/models/components/ScheduledTransferLineItem.java:
+    id: 41f1a2a3b714
+    last_write_checksum: sha1:946717c1f4aa0319c7c578d7e1e76013125613c2
+    pristine_git_object: 4591d94f4a8c00775264a3bd791743d8947411e5
+  src/main/java/io/moov/sdk/models/components/ScheduledTransferLineItemOption.java:
+    id: 4b1d4f20e646
+    last_write_checksum: sha1:07600c3d283a89c7e1678242f44a0cdc73db811b
+    pristine_git_object: 725b9663c746c1708d12c06f84bf8183f31bc075
+  src/main/java/io/moov/sdk/models/components/ScheduledTransferLineItems.java:
+    id: 4c6fdd7b4602
+    last_write_checksum: sha1:043375ca767d54a96861b8f05a9e9647bdbe9893
+    pristine_git_object: 6f22071f2b65865b1489e7914b40b88f36d657bf
   src/main/java/io/moov/sdk/models/components/Security.java:
     id: 924f5517a56c
     last_write_checksum: sha1:ea9895f503d0be6ffa62b91d8caa978443c14feb
@@ -6081,8 +6157,8 @@ trackedFiles:
     pristine_git_object: bd03255bb929861c90fc5391358d2d4fa85901ef
   src/main/java/io/moov/sdk/models/components/Statement.java:
     id: a33978f0554c
-    last_write_checksum: sha1:ddf740794e6784b331696d83c2d3d815cc523af5
-    pristine_git_object: 0b84242dafcac984ece5ecb3509540d958e73ddd
+    last_write_checksum: sha1:0a41e1bc2e9e02cb17710dcbdd0eac0f1ddcc95e
+    pristine_git_object: 8616ba10cc80ea8ce0a746d55e707b5bf0665c80
   src/main/java/io/moov/sdk/models/components/Status.java:
     id: 0b1ffdc41d74
     last_write_checksum: sha1:92616257bd5f7a5d915f9f7f518eaf02849f825d
@@ -6367,6 +6443,10 @@ trackedFiles:
     id: 638827e67089
     last_write_checksum: sha1:91fe7c9f988b4808a967ed7f6c0d6b01a27e9d45
     pristine_git_object: ff56b5526724a03e5865e1cce1ba76e7fdd6cb9d
+  src/main/java/io/moov/sdk/models/components/VolumeAmount.java:
+    id: 3bad82823965
+    last_write_checksum: sha1:fecefc6c0346ca09e13e3d636453e3df5690d391
+    pristine_git_object: d513bcab6cc5dc6c1ad159e77570d768523cb28e
   src/main/java/io/moov/sdk/models/components/VolumeByCustomerType.java:
     id: 206f03757d66
     last_write_checksum: sha1:dd1069bc52cbedfa5424e482fd8e791d9ecdd185
@@ -6425,8 +6505,8 @@ trackedFiles:
     pristine_git_object: f33f95e299d56a21e6d5f161226708753cdcc026
   src/main/java/io/moov/sdk/models/components/WebhookData.java:
     id: a4995f7df2ac
-    last_write_checksum: sha1:fc780dd9555e0ae35413847fca9121b01ed2b617
-    pristine_git_object: fdfc800b800e4efa448fede773b4d0c9cfbab4b7
+    last_write_checksum: sha1:a73f3b80323f13099092189f947867b6048d39ca
+    pristine_git_object: 24fff681a612049c307460d410532281f9d6296e
   src/main/java/io/moov/sdk/models/components/WebhookDataAccountCreated.java:
     id: 4a69bb956b03
     last_write_checksum: sha1:cdfbefaf3612be4ad89d247a442e0120c8ff1302
@@ -9593,8 +9673,8 @@ trackedFiles:
     pristine_git_object: 2d440864fe0830fd3b25ead687703b68712f0a48
   src/main/java/io/moov/sdk/utils/OneOfDeserializer.java:
     id: b5c0ca257463
-    last_write_checksum: sha1:f867c5471f49e7a608b29d2434b94dbeed448ed0
-    pristine_git_object: 3e518b41f2c2c7fc8d4ba64d88f8c796a69718b1
+    last_write_checksum: sha1:73539d464834dcaa90f40b167418790dfdae30ec
+    pristine_git_object: ea3f6913b0bd24a47a3340f9aa62aa6cd505e1fc
   src/main/java/io/moov/sdk/utils/Options.java:
     id: 9f717306fb5e
     last_write_checksum: sha1:a2a747da26966dd4dbf26a96433be8076392d0e4
@@ -9613,8 +9693,8 @@ trackedFiles:
     pristine_git_object: 4420f538512e7b6ba261c6161beb12395c9b5f8f
   src/main/java/io/moov/sdk/utils/QueryParameters.java:
     id: 371b2d2740fd
-    last_write_checksum: sha1:639eba8ead7f3f8fdbd9130f44610c7bbdfd8edf
-    pristine_git_object: f43c839dd36b121e2d29cdad2a4c874dcc31b58b
+    last_write_checksum: sha1:1b42449047e5fbf86db165b3577b5098d7512296
+    pristine_git_object: be6c90330154211dbd5524d9f87c6b1288b1bf92
   src/main/java/io/moov/sdk/utils/QueryParamsMetadata.java:
     id: dc97cc045a01
     last_write_checksum: sha1:e40b2afadd1599a7be4ac9a794a21f66f3d273fa
@@ -9625,12 +9705,12 @@ trackedFiles:
     pristine_git_object: 30a6c006f9c174ec68c925a3b21c8afc631b1c18
   src/main/java/io/moov/sdk/utils/Reflections.java:
     id: cd9d402006d2
-    last_write_checksum: sha1:200ef9b1f62b1b3773b20bb376c3c94f0b0b29e7
-    pristine_git_object: 7e630685cac2c18c3e5a5cb9aed53e577f693306
+    last_write_checksum: sha1:189e7cb02ed8294f2fde4286392882b725bfa443
+    pristine_git_object: 5947c434b7885ec29d0068b90ddaffc91efe4870
   src/main/java/io/moov/sdk/utils/RequestBody.java:
     id: 3c3216f51eda
-    last_write_checksum: sha1:274e704a75b23345fc8c7e5b8e27c998aa6afa7e
-    pristine_git_object: a82e3e0042d35844e71dd08c5538d172ae59d214
+    last_write_checksum: sha1:769646e5b20df0b8ab9eda4e4dd6607769b98d2e
+    pristine_git_object: d846ef70faf6508f3d4e3fb380507f510dfa5b2c
   src/main/java/io/moov/sdk/utils/RequestMetadata.java:
     id: fe6e8d9671cb
     last_write_checksum: sha1:e65e3f4ecad8fc6fc2727f3b717a4bf00579aef5
@@ -9701,8 +9781,8 @@ trackedFiles:
     pristine_git_object: 5611f892781865134b1be3d5076b97926d68f286
   src/main/java/io/moov/sdk/utils/Utils.java:
     id: cce507ede3a8
-    last_write_checksum: sha1:b21abe52cd9f7bc4dbf9fa117d4e40653b62f7c7
-    pristine_git_object: 3561f4e40e47624e2a203b95f676fcad85199a11
+    last_write_checksum: sha1:3674eda1edcd93358b5b5f17259ea5143fe857e7
+    pristine_git_object: 0a922d3d37ef69c5c139a485eab8b66eaf4bc640
   src/main/java/io/moov/sdk/utils/reactive/ReactiveUtils.java:
     id: 9be5397d9f07
     last_write_checksum: sha1:ccdf7a2a6e5d1be017626f41f5b631fd61ac1ad4
@@ -10794,10 +10874,10 @@ examples:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       requestBody:
-        application/json: {"occurrences": [{"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}}, {"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}}], "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}, "start": "2009-11-10T23:00:00Z"}}
+        application/json: {"occurrences": [{"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}}, {"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}}], "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr", "lineItems": {"items": []}}, "start": "2009-11-10T23:00:00Z"}}
       responses:
         "200":
-          application/json: {"destinationAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "occurrences": [{"mode": "production", "runOn": "2023-04-19T15:03:20.255Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}}, {"mode": "production", "runOn": "2023-04-19T15:03:20.255Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}}], "ownerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}, "start": "2009-11-10T23:00:00Z"}, "scheduleID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "sourceAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "createdOn": "2024-01-29T08:37:03.908Z", "updatedOn": "2023-12-27T22:37:02.385Z"}
+          application/json: {"destinationAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "occurrences": [{"mode": "production", "runOn": "2023-04-19T15:03:20.255Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}}, {"mode": "production", "runOn": "2023-04-19T15:03:20.255Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr"}}], "ownerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "sediment yahoo a rudely mmm massive helpful brr", "lineItems": {"items": []}}, "start": "2009-11-10T23:00:00Z"}, "scheduleID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "sourceAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "createdOn": "2024-01-29T08:37:03.908Z", "updatedOn": "2023-12-27T22:37:02.385Z"}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -10826,10 +10906,10 @@ examples:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       requestBody:
-        application/json: {"occurrences": [{"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}}, {"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}}, {"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}}], "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}, "start": "2009-11-10T23:00:00Z"}}
+        application/json: {"occurrences": [{"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}}, {"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}}, {"occurrenceID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "runOn": "2009-11-10T23:00:00Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}}], "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now", "lineItems": {"items": [{"name": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "quantity": 973458, "options": [{"name": "<value>", "quantity": 221042, "priceModifier": {"currency": "USD", "valueDecimal": "12.987654321"}}]}]}}, "start": "2009-11-10T23:00:00Z"}}
       responses:
         "200":
-          application/json: {"destinationAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "occurrences": [{"mode": "production", "runOn": "2023-09-25T05:07:21.063Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}}], "ownerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}, "start": "2009-11-10T23:00:00Z"}, "scheduleID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "sourceAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "createdOn": "2025-07-23T19:50:37.461Z", "updatedOn": "2024-12-25T14:55:55.461Z"}
+          application/json: {"destinationAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "occurrences": [{"mode": "production", "runOn": "2023-09-25T05:07:21.063Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now"}}], "ownerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "er reasoning following veto oof fervently ha how till now", "lineItems": {"items": [{"name": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "quantity": 973458, "options": [{"name": "<value>", "quantity": 221042, "priceModifier": {"currency": "USD", "valueDecimal": "12.987654321"}}]}]}}, "start": "2009-11-10T23:00:00Z"}, "scheduleID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "sourceAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "createdOn": "2025-07-23T19:50:37.461Z", "updatedOn": "2024-12-25T14:55:55.461Z"}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -10845,7 +10925,7 @@ examples:
           X-Moov-Version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"destinationAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "occurrences": [{"mode": "production", "runOn": "2024-01-01T08:31:57.297Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "gently lest banish appertain resolve agile beyond drat psst"}}, {"mode": "production", "runOn": "2024-01-01T08:31:57.297Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "gently lest banish appertain resolve agile beyond drat psst"}}], "ownerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "gently lest banish appertain resolve agile beyond drat psst"}, "start": "2009-11-10T23:00:00Z"}, "scheduleID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "sourceAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "createdOn": "2025-01-10T05:23:46.948Z", "updatedOn": "2023-09-22T17:43:13.629Z"}
+          application/json: {"destinationAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "occurrences": [{"mode": "production", "runOn": "2024-01-01T08:31:57.297Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "gently lest banish appertain resolve agile beyond drat psst"}}, {"mode": "production", "runOn": "2024-01-01T08:31:57.297Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "gently lest banish appertain resolve agile beyond drat psst"}}], "ownerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "recur": {"recurrenceRule": "<value>", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "gently lest banish appertain resolve agile beyond drat psst", "lineItems": {"items": []}}, "start": "2009-11-10T23:00:00Z"}, "scheduleID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "sourceAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "createdOn": "2025-01-10T05:23:46.948Z", "updatedOn": "2023-09-22T17:43:13.629Z"}
   cancelSchedule:
     speakeasy-default-cancel-schedule:
       parameters:
@@ -10870,7 +10950,7 @@ examples:
           X-Moov-Version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"mode": "production", "runOn": "2024-08-28T12:44:49.769Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "and always opposite helplessly quaff"}}
+          application/json: {"mode": "production", "runOn": "2024-08-28T12:44:49.769Z", "runTransfer": {"amount": {"currency": "USD", "value": 1204}, "salesTaxAmount": {"currency": "USD", "value": 1204}, "destination": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "partnerAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "source": {"paymentMethodID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "achDetails": {"companyEntryDescription": "Gym dues", "originatingCompanyName": "Whole Body Fit"}, "cardDetails": {"dynamicDescriptor": "WhlBdy *Yoga 11-12"}}, "description": "and always opposite helplessly quaff", "lineItems": {"items": [{"name": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "quantity": 629581, "options": [{"name": "<value>", "quantity": 102231, "priceModifier": {"currency": "USD", "valueDecimal": "12.987654321"}}]}]}}}
   createSweepConfig:
     "":
       parameters:
@@ -11990,7 +12070,7 @@ examples:
           X-Moov-Version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"statementID": "6fcce0d9-75c1-4c2f-b04e-ce0f1cecf736", "statementName": "<value>", "fileName": "example.file", "fileSize": 491710, "billingPeriodStartDateTime": "2025-01-30T13:15:52.427Z", "billingPeriodEndDateTime": "2024-03-15T11:54:00.098Z", "subscriptionIDs": ["<value 1>", "<value 2>", "<value 3>"], "summary": {"cardAcquiring": {"volumeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "interchangeFees": {"visa": {"currency": "USD", "valueDecimal": "12.987654321"}, "mastercard": {"currency": "USD", "valueDecimal": "12.987654321"}, "discover": {"currency": "USD", "valueDecimal": "12.987654321"}, "americanExpress": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "ach": {"volumeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "instantPayments": {"volumeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "platformFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "adjustmentFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "otherFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}}, "cardAcquiringFees": {"visa": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "mastercard": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "discover": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "americanExpress": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}}, "achFees": {"standardCredit": {"count": 178500, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "sameDayCredit": {"count": 231593, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "debits": {"count": 940652, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "return": {"count": 437920, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "unauthorizedReturn": {"count": 476712, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "noticeOfChange": {"count": 950531, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "instantPaymentFees": {"rtpCreditTransaction": {"count": 497959, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "rtpDecline": {"count": 84081, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pushToCardTransaction": {"count": 933887, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pushToCardDecline": {"count": 148596, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pullFromCardTransaction": {"count": 186879, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pullFromCardDecline": {"count": 32245, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pullFromCardRefund": {"count": 815075, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "instantVerification": {"count": 336705, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "platformFees": {"walletFee": {"currency": "USD", "valueDecimal": "12.987654321"}, "merchantPCIFee": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}}, "otherCardFees": {"disputes": {"count": 979998, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "cardAccountUpdater": {"count": 589185, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "cardVerification": {"count": 477464, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "nameVerification": {"count": 854516, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 325636, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "createdOn": "2023-03-21T23:03:13.806Z", "updatedOn": "2025-12-26T06:16:23.912Z"}
+          application/json: {"statementID": "6fcce0d9-75c1-4c2f-b04e-ce0f1cecf736", "statementName": "<value>", "fileName": "example.file", "fileSize": 491710, "billingPeriodStartDateTime": "2025-01-30T13:15:52.427Z", "billingPeriodEndDateTime": "2024-03-15T11:54:00.098Z", "subscriptionIDs": ["<value 1>", "<value 2>", "<value 3>"], "summary": {"cardAcquiring": {"feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "merchantFeesCollected": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerFeesAssessed": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}, "interchangeFees": {"visa": {"currency": "USD", "valueDecimal": "12.987654321"}, "mastercard": {"currency": "USD", "valueDecimal": "12.987654321"}, "discover": {"currency": "USD", "valueDecimal": "12.987654321"}, "americanExpress": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "ach": {"feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "merchantFeesCollected": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerFeesAssessed": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}}, "instantPayments": {"feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "merchantFeesCollected": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerFeesAssessed": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}}, "accountFees": {"feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "merchantFeesCollected": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerFeesAssessed": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}}, "otherCardFees": {"feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "merchantFeesCollected": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerFeesAssessed": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncomeSubtotal": {"feeAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "merchantFeesCollected": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerFeesAssessed": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}}, "residualSubtotal": {"currency": "USD", "valueDecimal": "12.987654321"}, "monthlyPartnerCosts": {"minimumCommitment": {"count": 336705, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "monthlyPlatform": {"count": 388155, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 179729, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "netPartnerPayment": {"currency": "USD", "valueDecimal": "12.987654321"}}, "cardAcquiringFees": {"visa": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 179729, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "mastercard": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 179729, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "discover": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 179729, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "americanExpress": {"interchange": {"count": 566266, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "interchangePrograms": [{"programName": "<value>", "count": 311812, "percentageRate": 1208.53, "perItemRate": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}, "transferVolume": {"currency": "USD", "valueDecimal": "12.987654321"}}], "networkPassthrough": {"count": 314153, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticOnline": {"count": 830656, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedDomesticInPerson": {"count": 767457, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalOnline": {"count": 687826, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "completedInternationalInPerson": {"count": 141784, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "declines": {"count": 6447, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "refunds": {"count": 510292, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 179729, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}}, "achFees": {"standardCredit": {"count": 178500, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "sameDayCredit": {"count": 231593, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "debits": {"count": 940652, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "return": {"count": 437920, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "unauthorizedReturn": {"count": 476712, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "noticeOfChange": {"count": 950531, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 179729, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "instantPaymentFees": {"rtpCreditTransaction": {"count": 497959, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "rtpDecline": {"count": 84081, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pushToCardTransaction": {"count": 933887, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pushToCardDecline": {"count": 148596, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pullFromCardTransaction": {"count": 186879, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pullFromCardDecline": {"count": 32245, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "pullFromCardRefund": {"count": 815075, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "instantVerification": {"count": 336705, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 179729, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "accountFees": {"walletFee": {"currency": "USD", "valueDecimal": "12.987654321"}, "merchantPCIFee": {"currency": "USD", "valueDecimal": "12.987654321"}, "kybFee": {"currency": "USD", "valueDecimal": "12.987654321"}, "kycFee": {"currency": "USD", "valueDecimal": "12.987654321"}, "transactionMonitoringFee": {"currency": "USD", "valueDecimal": "12.987654321"}, "total": {"currency": "USD", "valueDecimal": "12.987654321"}}, "otherCardFees": {"disputes": {"count": 979998, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "cardAccountUpdater": {"count": 589185, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "cardVerification": {"count": 477464, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "nameVerification": {"count": 854516, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 179729, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "partnerFees": {"minimumCommitment": {"count": 336705, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "monthlyPlatform": {"count": 388155, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, "total": {"count": 179729, "amount": {"currency": "USD", "valueDecimal": "12.987654321"}}}, "createdOn": "2023-03-21T23:03:13.806Z", "updatedOn": "2025-12-26T06:16:23.912Z"}
           application/pdf: "x-file: example.file"
   listImageMetadata:
     speakeasy-default-list-image-metadata:
@@ -12284,7 +12364,7 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.scheduling.create()`: \n  *  `request.upsertschedule.occurrences.[].runTransfer.salesTaxAmount` **Added**\n  *  `response.occurrences.[].runTransfer.salesTaxAmount` **Added**\n* `moov.scheduling.list()`:  `response.[].occurrences.[].runTransfer.salesTaxAmount` **Added**\n* `moov.scheduling.update()`: \n  *  `request.upsertschedule.occurrences.[].runTransfer.salesTaxAmount` **Added**\n  *  `response.occurrences.[].runTransfer.salesTaxAmount` **Added**\n* `moov.scheduling.get()`:  `response.occurrences.[].runTransfer.salesTaxAmount` **Added**\n* `moov.scheduling.getOccurrance()`:  `response.runtransfer.salesTaxAmount` **Added**\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.bankAccounts.link()`:  `response.exceptiondetails.fednowRejectionCode` **Added**\n* `moov.bankAccounts.list()`:  `response.[].exceptionDetails.fednowRejectionCode` **Added**\n* `moov.bankAccounts.get()`:  `response.exceptiondetails.fednowRejectionCode` **Added**\n* `moov.bankAccounts.getVerification()`:  `response.exceptiondetails.fednowRejectionCode` **Added**\n* `moov.bankAccounts.completeVerification()`:  `response.exceptiondetails.fednowRejectionCode` **Added**\n* `moov.scheduling.create()`: \n  *  `request.upsertschedule.occurrences.[].runTransfer.lineItems` **Added**\n  *  `response.occurrences.[].runTransfer.lineItems` **Added**\n* `moov.scheduling.list()`:  `response.[].occurrences.[].runTransfer.lineItems` **Added**\n* `moov.scheduling.update()`: \n  *  `request.upsertschedule.occurrences.[].runTransfer.lineItems` **Added**\n  *  `response.occurrences.[].runTransfer.lineItems` **Added**\n* `moov.scheduling.get()`:  `response.occurrences.[].runTransfer.lineItems` **Added**\n* `moov.scheduling.getOccurrance()`:  `response.runtransfer.lineItems` **Added**\n* `moov.statements.list()`:  `response.[]` **Changed**\n* `moov.statements.get()`:  `response` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

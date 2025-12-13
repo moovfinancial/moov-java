@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
+import java.lang.Deprecated;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -21,46 +22,72 @@ import java.util.Optional;
  */
 public class BillingSummary {
     /**
-     * A summary of card acquiring volume and fees.
+     * A summary of card acquiring fees.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cardAcquiring")
     private Optional<? extends CardAcquiring> cardAcquiring;
 
     /**
-     * A summary of ACH volume and fees.
+     * A summary of ACH fees.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ach")
     private Optional<? extends BillingSummaryDetails> ach;
 
     /**
-     * A summary of instant payment volume and fees.
+     * A summary of instant payment fees.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("instantPayments")
     private Optional<? extends BillingSummaryDetails> instantPayments;
 
     /**
-     * The total amount of platform fees.
+     * The total amount of platform fees. This field is deprecated and will be removed in a future release.
+     * Use summary.accountFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("platformFees")
-    private Optional<? extends AmountDecimal> platformFees;
+    @Deprecated
+    private Optional<? extends BillingSummaryPlatformFees> platformFees;
 
     /**
-     * The total amount of adjustment fees.
+     * A summary of account fees.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("accountFees")
+    private Optional<? extends BillingSummaryDetails> accountFees;
+
+    /**
+     * The total amount of adjustment fees. This field is deprecated and will be removed in a future
+     * release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("adjustmentFees")
-    private Optional<? extends AmountDecimal> adjustmentFees;
+    @Deprecated
+    private Optional<? extends AdjustmentFees> adjustmentFees;
 
     /**
-     * The total amount of other fees.
+     * The total amount of other card fees. This field is deprecated and will be removed in a future
+     * release. Use summary.otherCardFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("otherFees")
-    private Optional<? extends AmountDecimal> otherFees;
+    @Deprecated
+    private Optional<? extends OtherFees> otherFees;
+
+    /**
+     * A summary of other card fees.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("otherCardFees")
+    private Optional<? extends BillingSummaryDetails> otherCardFees;
 
     /**
      * The total amount of all fees.
@@ -69,39 +96,98 @@ public class BillingSummary {
     @JsonProperty("total")
     private Optional<? extends AmountDecimal> total;
 
+    /**
+     * Total net revenue after deducting total partner fees.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("netIncomeSubtotal")
+    private Optional<? extends BillingSummaryDetails> netIncomeSubtotal;
+
+    /**
+     * Partner’s share of the net income, expressed as a percentage.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("revenueShare")
+    private Optional<String> revenueShare;
+
+    /**
+     * The portion of net income allocated to the partner before monthly partner costs.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("residualSubtotal")
+    private Optional<? extends AmountDecimal> residualSubtotal;
+
+    /**
+     * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+     * platform fees, minimums).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("monthlyPartnerCosts")
+    private Optional<? extends PartnerFees> monthlyPartnerCosts;
+
+    /**
+     * Final partner payment after deducting monthlyPartnerCosts.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("netPartnerPayment")
+    private Optional<? extends AmountDecimal> netPartnerPayment;
+
     @JsonCreator
     public BillingSummary(
             @JsonProperty("cardAcquiring") Optional<? extends CardAcquiring> cardAcquiring,
             @JsonProperty("ach") Optional<? extends BillingSummaryDetails> ach,
             @JsonProperty("instantPayments") Optional<? extends BillingSummaryDetails> instantPayments,
-            @JsonProperty("platformFees") Optional<? extends AmountDecimal> platformFees,
-            @JsonProperty("adjustmentFees") Optional<? extends AmountDecimal> adjustmentFees,
-            @JsonProperty("otherFees") Optional<? extends AmountDecimal> otherFees,
-            @JsonProperty("total") Optional<? extends AmountDecimal> total) {
+            @JsonProperty("platformFees") Optional<? extends BillingSummaryPlatformFees> platformFees,
+            @JsonProperty("accountFees") Optional<? extends BillingSummaryDetails> accountFees,
+            @JsonProperty("adjustmentFees") Optional<? extends AdjustmentFees> adjustmentFees,
+            @JsonProperty("otherFees") Optional<? extends OtherFees> otherFees,
+            @JsonProperty("otherCardFees") Optional<? extends BillingSummaryDetails> otherCardFees,
+            @JsonProperty("total") Optional<? extends AmountDecimal> total,
+            @JsonProperty("netIncomeSubtotal") Optional<? extends BillingSummaryDetails> netIncomeSubtotal,
+            @JsonProperty("revenueShare") Optional<String> revenueShare,
+            @JsonProperty("residualSubtotal") Optional<? extends AmountDecimal> residualSubtotal,
+            @JsonProperty("monthlyPartnerCosts") Optional<? extends PartnerFees> monthlyPartnerCosts,
+            @JsonProperty("netPartnerPayment") Optional<? extends AmountDecimal> netPartnerPayment) {
         Utils.checkNotNull(cardAcquiring, "cardAcquiring");
         Utils.checkNotNull(ach, "ach");
         Utils.checkNotNull(instantPayments, "instantPayments");
         Utils.checkNotNull(platformFees, "platformFees");
+        Utils.checkNotNull(accountFees, "accountFees");
         Utils.checkNotNull(adjustmentFees, "adjustmentFees");
         Utils.checkNotNull(otherFees, "otherFees");
+        Utils.checkNotNull(otherCardFees, "otherCardFees");
         Utils.checkNotNull(total, "total");
+        Utils.checkNotNull(netIncomeSubtotal, "netIncomeSubtotal");
+        Utils.checkNotNull(revenueShare, "revenueShare");
+        Utils.checkNotNull(residualSubtotal, "residualSubtotal");
+        Utils.checkNotNull(monthlyPartnerCosts, "monthlyPartnerCosts");
+        Utils.checkNotNull(netPartnerPayment, "netPartnerPayment");
         this.cardAcquiring = cardAcquiring;
         this.ach = ach;
         this.instantPayments = instantPayments;
         this.platformFees = platformFees;
+        this.accountFees = accountFees;
         this.adjustmentFees = adjustmentFees;
         this.otherFees = otherFees;
+        this.otherCardFees = otherCardFees;
         this.total = total;
+        this.netIncomeSubtotal = netIncomeSubtotal;
+        this.revenueShare = revenueShare;
+        this.residualSubtotal = residualSubtotal;
+        this.monthlyPartnerCosts = monthlyPartnerCosts;
+        this.netPartnerPayment = netPartnerPayment;
     }
     
     public BillingSummary() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
-     * A summary of card acquiring volume and fees.
+     * A summary of card acquiring fees.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -110,7 +196,7 @@ public class BillingSummary {
     }
 
     /**
-     * A summary of ACH volume and fees.
+     * A summary of ACH fees.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -119,7 +205,7 @@ public class BillingSummary {
     }
 
     /**
-     * A summary of instant payment volume and fees.
+     * A summary of instant payment fees.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,30 +214,60 @@ public class BillingSummary {
     }
 
     /**
-     * The total amount of platform fees.
+     * The total amount of platform fees. This field is deprecated and will be removed in a future release.
+     * Use summary.accountFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AmountDecimal> platformFees() {
-        return (Optional<AmountDecimal>) platformFees;
+    public Optional<BillingSummaryPlatformFees> platformFees() {
+        return (Optional<BillingSummaryPlatformFees>) platformFees;
     }
 
     /**
-     * The total amount of adjustment fees.
+     * A summary of account fees.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AmountDecimal> adjustmentFees() {
-        return (Optional<AmountDecimal>) adjustmentFees;
+    public Optional<BillingSummaryDetails> accountFees() {
+        return (Optional<BillingSummaryDetails>) accountFees;
     }
 
     /**
-     * The total amount of other fees.
+     * The total amount of adjustment fees. This field is deprecated and will be removed in a future
+     * release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+     */
+    @Deprecated
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AdjustmentFees> adjustmentFees() {
+        return (Optional<AdjustmentFees>) adjustmentFees;
+    }
+
+    /**
+     * The total amount of other card fees. This field is deprecated and will be removed in a future
+     * release. Use summary.otherCardFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+     */
+    @Deprecated
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<OtherFees> otherFees() {
+        return (Optional<OtherFees>) otherFees;
+    }
+
+    /**
+     * A summary of other card fees.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<AmountDecimal> otherFees() {
-        return (Optional<AmountDecimal>) otherFees;
+    public Optional<BillingSummaryDetails> otherCardFees() {
+        return (Optional<BillingSummaryDetails>) otherCardFees;
     }
 
     /**
@@ -163,13 +279,58 @@ public class BillingSummary {
         return (Optional<AmountDecimal>) total;
     }
 
+    /**
+     * Total net revenue after deducting total partner fees.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<BillingSummaryDetails> netIncomeSubtotal() {
+        return (Optional<BillingSummaryDetails>) netIncomeSubtotal;
+    }
+
+    /**
+     * Partner’s share of the net income, expressed as a percentage.
+     */
+    @JsonIgnore
+    public Optional<String> revenueShare() {
+        return revenueShare;
+    }
+
+    /**
+     * The portion of net income allocated to the partner before monthly partner costs.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AmountDecimal> residualSubtotal() {
+        return (Optional<AmountDecimal>) residualSubtotal;
+    }
+
+    /**
+     * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+     * platform fees, minimums).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PartnerFees> monthlyPartnerCosts() {
+        return (Optional<PartnerFees>) monthlyPartnerCosts;
+    }
+
+    /**
+     * Final partner payment after deducting monthlyPartnerCosts.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<AmountDecimal> netPartnerPayment() {
+        return (Optional<AmountDecimal>) netPartnerPayment;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
 
     /**
-     * A summary of card acquiring volume and fees.
+     * A summary of card acquiring fees.
      */
     public BillingSummary withCardAcquiring(CardAcquiring cardAcquiring) {
         Utils.checkNotNull(cardAcquiring, "cardAcquiring");
@@ -179,7 +340,7 @@ public class BillingSummary {
 
 
     /**
-     * A summary of card acquiring volume and fees.
+     * A summary of card acquiring fees.
      */
     public BillingSummary withCardAcquiring(Optional<? extends CardAcquiring> cardAcquiring) {
         Utils.checkNotNull(cardAcquiring, "cardAcquiring");
@@ -188,7 +349,7 @@ public class BillingSummary {
     }
 
     /**
-     * A summary of ACH volume and fees.
+     * A summary of ACH fees.
      */
     public BillingSummary withAch(BillingSummaryDetails ach) {
         Utils.checkNotNull(ach, "ach");
@@ -198,7 +359,7 @@ public class BillingSummary {
 
 
     /**
-     * A summary of ACH volume and fees.
+     * A summary of ACH fees.
      */
     public BillingSummary withAch(Optional<? extends BillingSummaryDetails> ach) {
         Utils.checkNotNull(ach, "ach");
@@ -207,7 +368,7 @@ public class BillingSummary {
     }
 
     /**
-     * A summary of instant payment volume and fees.
+     * A summary of instant payment fees.
      */
     public BillingSummary withInstantPayments(BillingSummaryDetails instantPayments) {
         Utils.checkNotNull(instantPayments, "instantPayments");
@@ -217,7 +378,7 @@ public class BillingSummary {
 
 
     /**
-     * A summary of instant payment volume and fees.
+     * A summary of instant payment fees.
      */
     public BillingSummary withInstantPayments(Optional<? extends BillingSummaryDetails> instantPayments) {
         Utils.checkNotNull(instantPayments, "instantPayments");
@@ -226,9 +387,13 @@ public class BillingSummary {
     }
 
     /**
-     * The total amount of platform fees.
+     * The total amount of platform fees. This field is deprecated and will be removed in a future release.
+     * Use summary.accountFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    public BillingSummary withPlatformFees(AmountDecimal platformFees) {
+    @Deprecated
+    public BillingSummary withPlatformFees(BillingSummaryPlatformFees platformFees) {
         Utils.checkNotNull(platformFees, "platformFees");
         this.platformFees = Optional.ofNullable(platformFees);
         return this;
@@ -236,18 +401,45 @@ public class BillingSummary {
 
 
     /**
-     * The total amount of platform fees.
+     * The total amount of platform fees. This field is deprecated and will be removed in a future release.
+     * Use summary.accountFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    public BillingSummary withPlatformFees(Optional<? extends AmountDecimal> platformFees) {
+    @Deprecated
+    public BillingSummary withPlatformFees(Optional<? extends BillingSummaryPlatformFees> platformFees) {
         Utils.checkNotNull(platformFees, "platformFees");
         this.platformFees = platformFees;
         return this;
     }
 
     /**
-     * The total amount of adjustment fees.
+     * A summary of account fees.
      */
-    public BillingSummary withAdjustmentFees(AmountDecimal adjustmentFees) {
+    public BillingSummary withAccountFees(BillingSummaryDetails accountFees) {
+        Utils.checkNotNull(accountFees, "accountFees");
+        this.accountFees = Optional.ofNullable(accountFees);
+        return this;
+    }
+
+
+    /**
+     * A summary of account fees.
+     */
+    public BillingSummary withAccountFees(Optional<? extends BillingSummaryDetails> accountFees) {
+        Utils.checkNotNull(accountFees, "accountFees");
+        this.accountFees = accountFees;
+        return this;
+    }
+
+    /**
+     * The total amount of adjustment fees. This field is deprecated and will be removed in a future
+     * release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+     */
+    @Deprecated
+    public BillingSummary withAdjustmentFees(AdjustmentFees adjustmentFees) {
         Utils.checkNotNull(adjustmentFees, "adjustmentFees");
         this.adjustmentFees = Optional.ofNullable(adjustmentFees);
         return this;
@@ -255,18 +447,26 @@ public class BillingSummary {
 
 
     /**
-     * The total amount of adjustment fees.
+     * The total amount of adjustment fees. This field is deprecated and will be removed in a future
+     * release.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    public BillingSummary withAdjustmentFees(Optional<? extends AmountDecimal> adjustmentFees) {
+    @Deprecated
+    public BillingSummary withAdjustmentFees(Optional<? extends AdjustmentFees> adjustmentFees) {
         Utils.checkNotNull(adjustmentFees, "adjustmentFees");
         this.adjustmentFees = adjustmentFees;
         return this;
     }
 
     /**
-     * The total amount of other fees.
+     * The total amount of other card fees. This field is deprecated and will be removed in a future
+     * release. Use summary.otherCardFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    public BillingSummary withOtherFees(AmountDecimal otherFees) {
+    @Deprecated
+    public BillingSummary withOtherFees(OtherFees otherFees) {
         Utils.checkNotNull(otherFees, "otherFees");
         this.otherFees = Optional.ofNullable(otherFees);
         return this;
@@ -274,11 +474,34 @@ public class BillingSummary {
 
 
     /**
-     * The total amount of other fees.
+     * The total amount of other card fees. This field is deprecated and will be removed in a future
+     * release. Use summary.otherCardFees.
+     * 
+     * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
      */
-    public BillingSummary withOtherFees(Optional<? extends AmountDecimal> otherFees) {
+    @Deprecated
+    public BillingSummary withOtherFees(Optional<? extends OtherFees> otherFees) {
         Utils.checkNotNull(otherFees, "otherFees");
         this.otherFees = otherFees;
+        return this;
+    }
+
+    /**
+     * A summary of other card fees.
+     */
+    public BillingSummary withOtherCardFees(BillingSummaryDetails otherCardFees) {
+        Utils.checkNotNull(otherCardFees, "otherCardFees");
+        this.otherCardFees = Optional.ofNullable(otherCardFees);
+        return this;
+    }
+
+
+    /**
+     * A summary of other card fees.
+     */
+    public BillingSummary withOtherCardFees(Optional<? extends BillingSummaryDetails> otherCardFees) {
+        Utils.checkNotNull(otherCardFees, "otherCardFees");
+        this.otherCardFees = otherCardFees;
         return this;
     }
 
@@ -301,6 +524,103 @@ public class BillingSummary {
         return this;
     }
 
+    /**
+     * Total net revenue after deducting total partner fees.
+     */
+    public BillingSummary withNetIncomeSubtotal(BillingSummaryDetails netIncomeSubtotal) {
+        Utils.checkNotNull(netIncomeSubtotal, "netIncomeSubtotal");
+        this.netIncomeSubtotal = Optional.ofNullable(netIncomeSubtotal);
+        return this;
+    }
+
+
+    /**
+     * Total net revenue after deducting total partner fees.
+     */
+    public BillingSummary withNetIncomeSubtotal(Optional<? extends BillingSummaryDetails> netIncomeSubtotal) {
+        Utils.checkNotNull(netIncomeSubtotal, "netIncomeSubtotal");
+        this.netIncomeSubtotal = netIncomeSubtotal;
+        return this;
+    }
+
+    /**
+     * Partner’s share of the net income, expressed as a percentage.
+     */
+    public BillingSummary withRevenueShare(String revenueShare) {
+        Utils.checkNotNull(revenueShare, "revenueShare");
+        this.revenueShare = Optional.ofNullable(revenueShare);
+        return this;
+    }
+
+
+    /**
+     * Partner’s share of the net income, expressed as a percentage.
+     */
+    public BillingSummary withRevenueShare(Optional<String> revenueShare) {
+        Utils.checkNotNull(revenueShare, "revenueShare");
+        this.revenueShare = revenueShare;
+        return this;
+    }
+
+    /**
+     * The portion of net income allocated to the partner before monthly partner costs.
+     */
+    public BillingSummary withResidualSubtotal(AmountDecimal residualSubtotal) {
+        Utils.checkNotNull(residualSubtotal, "residualSubtotal");
+        this.residualSubtotal = Optional.ofNullable(residualSubtotal);
+        return this;
+    }
+
+
+    /**
+     * The portion of net income allocated to the partner before monthly partner costs.
+     */
+    public BillingSummary withResidualSubtotal(Optional<? extends AmountDecimal> residualSubtotal) {
+        Utils.checkNotNull(residualSubtotal, "residualSubtotal");
+        this.residualSubtotal = residualSubtotal;
+        return this;
+    }
+
+    /**
+     * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+     * platform fees, minimums).
+     */
+    public BillingSummary withMonthlyPartnerCosts(PartnerFees monthlyPartnerCosts) {
+        Utils.checkNotNull(monthlyPartnerCosts, "monthlyPartnerCosts");
+        this.monthlyPartnerCosts = Optional.ofNullable(monthlyPartnerCosts);
+        return this;
+    }
+
+
+    /**
+     * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+     * platform fees, minimums).
+     */
+    public BillingSummary withMonthlyPartnerCosts(Optional<? extends PartnerFees> monthlyPartnerCosts) {
+        Utils.checkNotNull(monthlyPartnerCosts, "monthlyPartnerCosts");
+        this.monthlyPartnerCosts = monthlyPartnerCosts;
+        return this;
+    }
+
+    /**
+     * Final partner payment after deducting monthlyPartnerCosts.
+     */
+    public BillingSummary withNetPartnerPayment(AmountDecimal netPartnerPayment) {
+        Utils.checkNotNull(netPartnerPayment, "netPartnerPayment");
+        this.netPartnerPayment = Optional.ofNullable(netPartnerPayment);
+        return this;
+    }
+
+
+    /**
+     * Final partner payment after deducting monthlyPartnerCosts.
+     */
+    public BillingSummary withNetPartnerPayment(Optional<? extends AmountDecimal> netPartnerPayment) {
+        Utils.checkNotNull(netPartnerPayment, "netPartnerPayment");
+        this.netPartnerPayment = netPartnerPayment;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -315,17 +635,26 @@ public class BillingSummary {
             Utils.enhancedDeepEquals(this.ach, other.ach) &&
             Utils.enhancedDeepEquals(this.instantPayments, other.instantPayments) &&
             Utils.enhancedDeepEquals(this.platformFees, other.platformFees) &&
+            Utils.enhancedDeepEquals(this.accountFees, other.accountFees) &&
             Utils.enhancedDeepEquals(this.adjustmentFees, other.adjustmentFees) &&
             Utils.enhancedDeepEquals(this.otherFees, other.otherFees) &&
-            Utils.enhancedDeepEquals(this.total, other.total);
+            Utils.enhancedDeepEquals(this.otherCardFees, other.otherCardFees) &&
+            Utils.enhancedDeepEquals(this.total, other.total) &&
+            Utils.enhancedDeepEquals(this.netIncomeSubtotal, other.netIncomeSubtotal) &&
+            Utils.enhancedDeepEquals(this.revenueShare, other.revenueShare) &&
+            Utils.enhancedDeepEquals(this.residualSubtotal, other.residualSubtotal) &&
+            Utils.enhancedDeepEquals(this.monthlyPartnerCosts, other.monthlyPartnerCosts) &&
+            Utils.enhancedDeepEquals(this.netPartnerPayment, other.netPartnerPayment);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             cardAcquiring, ach, instantPayments,
-            platformFees, adjustmentFees, otherFees,
-            total);
+            platformFees, accountFees, adjustmentFees,
+            otherFees, otherCardFees, total,
+            netIncomeSubtotal, revenueShare, residualSubtotal,
+            monthlyPartnerCosts, netPartnerPayment);
     }
     
     @Override
@@ -335,9 +664,16 @@ public class BillingSummary {
                 "ach", ach,
                 "instantPayments", instantPayments,
                 "platformFees", platformFees,
+                "accountFees", accountFees,
                 "adjustmentFees", adjustmentFees,
                 "otherFees", otherFees,
-                "total", total);
+                "otherCardFees", otherCardFees,
+                "total", total,
+                "netIncomeSubtotal", netIncomeSubtotal,
+                "revenueShare", revenueShare,
+                "residualSubtotal", residualSubtotal,
+                "monthlyPartnerCosts", monthlyPartnerCosts,
+                "netPartnerPayment", netPartnerPayment);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -349,13 +685,30 @@ public class BillingSummary {
 
         private Optional<? extends BillingSummaryDetails> instantPayments = Optional.empty();
 
-        private Optional<? extends AmountDecimal> platformFees = Optional.empty();
+        @Deprecated
+        private Optional<? extends BillingSummaryPlatformFees> platformFees = Optional.empty();
 
-        private Optional<? extends AmountDecimal> adjustmentFees = Optional.empty();
+        private Optional<? extends BillingSummaryDetails> accountFees = Optional.empty();
 
-        private Optional<? extends AmountDecimal> otherFees = Optional.empty();
+        @Deprecated
+        private Optional<? extends AdjustmentFees> adjustmentFees = Optional.empty();
+
+        @Deprecated
+        private Optional<? extends OtherFees> otherFees = Optional.empty();
+
+        private Optional<? extends BillingSummaryDetails> otherCardFees = Optional.empty();
 
         private Optional<? extends AmountDecimal> total = Optional.empty();
+
+        private Optional<? extends BillingSummaryDetails> netIncomeSubtotal = Optional.empty();
+
+        private Optional<String> revenueShare = Optional.empty();
+
+        private Optional<? extends AmountDecimal> residualSubtotal = Optional.empty();
+
+        private Optional<? extends PartnerFees> monthlyPartnerCosts = Optional.empty();
+
+        private Optional<? extends AmountDecimal> netPartnerPayment = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -363,7 +716,7 @@ public class BillingSummary {
 
 
         /**
-         * A summary of card acquiring volume and fees.
+         * A summary of card acquiring fees.
          */
         public Builder cardAcquiring(CardAcquiring cardAcquiring) {
             Utils.checkNotNull(cardAcquiring, "cardAcquiring");
@@ -372,7 +725,7 @@ public class BillingSummary {
         }
 
         /**
-         * A summary of card acquiring volume and fees.
+         * A summary of card acquiring fees.
          */
         public Builder cardAcquiring(Optional<? extends CardAcquiring> cardAcquiring) {
             Utils.checkNotNull(cardAcquiring, "cardAcquiring");
@@ -382,7 +735,7 @@ public class BillingSummary {
 
 
         /**
-         * A summary of ACH volume and fees.
+         * A summary of ACH fees.
          */
         public Builder ach(BillingSummaryDetails ach) {
             Utils.checkNotNull(ach, "ach");
@@ -391,7 +744,7 @@ public class BillingSummary {
         }
 
         /**
-         * A summary of ACH volume and fees.
+         * A summary of ACH fees.
          */
         public Builder ach(Optional<? extends BillingSummaryDetails> ach) {
             Utils.checkNotNull(ach, "ach");
@@ -401,7 +754,7 @@ public class BillingSummary {
 
 
         /**
-         * A summary of instant payment volume and fees.
+         * A summary of instant payment fees.
          */
         public Builder instantPayments(BillingSummaryDetails instantPayments) {
             Utils.checkNotNull(instantPayments, "instantPayments");
@@ -410,7 +763,7 @@ public class BillingSummary {
         }
 
         /**
-         * A summary of instant payment volume and fees.
+         * A summary of instant payment fees.
          */
         public Builder instantPayments(Optional<? extends BillingSummaryDetails> instantPayments) {
             Utils.checkNotNull(instantPayments, "instantPayments");
@@ -420,18 +773,26 @@ public class BillingSummary {
 
 
         /**
-         * The total amount of platform fees.
+         * The total amount of platform fees. This field is deprecated and will be removed in a future release.
+         * Use summary.accountFees.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
-        public Builder platformFees(AmountDecimal platformFees) {
+        @Deprecated
+        public Builder platformFees(BillingSummaryPlatformFees platformFees) {
             Utils.checkNotNull(platformFees, "platformFees");
             this.platformFees = Optional.ofNullable(platformFees);
             return this;
         }
 
         /**
-         * The total amount of platform fees.
+         * The total amount of platform fees. This field is deprecated and will be removed in a future release.
+         * Use summary.accountFees.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
-        public Builder platformFees(Optional<? extends AmountDecimal> platformFees) {
+        @Deprecated
+        public Builder platformFees(Optional<? extends BillingSummaryPlatformFees> platformFees) {
             Utils.checkNotNull(platformFees, "platformFees");
             this.platformFees = platformFees;
             return this;
@@ -439,18 +800,45 @@ public class BillingSummary {
 
 
         /**
-         * The total amount of adjustment fees.
+         * A summary of account fees.
          */
-        public Builder adjustmentFees(AmountDecimal adjustmentFees) {
+        public Builder accountFees(BillingSummaryDetails accountFees) {
+            Utils.checkNotNull(accountFees, "accountFees");
+            this.accountFees = Optional.ofNullable(accountFees);
+            return this;
+        }
+
+        /**
+         * A summary of account fees.
+         */
+        public Builder accountFees(Optional<? extends BillingSummaryDetails> accountFees) {
+            Utils.checkNotNull(accountFees, "accountFees");
+            this.accountFees = accountFees;
+            return this;
+        }
+
+
+        /**
+         * The total amount of adjustment fees. This field is deprecated and will be removed in a future
+         * release.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+         */
+        @Deprecated
+        public Builder adjustmentFees(AdjustmentFees adjustmentFees) {
             Utils.checkNotNull(adjustmentFees, "adjustmentFees");
             this.adjustmentFees = Optional.ofNullable(adjustmentFees);
             return this;
         }
 
         /**
-         * The total amount of adjustment fees.
+         * The total amount of adjustment fees. This field is deprecated and will be removed in a future
+         * release.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
-        public Builder adjustmentFees(Optional<? extends AmountDecimal> adjustmentFees) {
+        @Deprecated
+        public Builder adjustmentFees(Optional<? extends AdjustmentFees> adjustmentFees) {
             Utils.checkNotNull(adjustmentFees, "adjustmentFees");
             this.adjustmentFees = adjustmentFees;
             return this;
@@ -458,20 +846,47 @@ public class BillingSummary {
 
 
         /**
-         * The total amount of other fees.
+         * The total amount of other card fees. This field is deprecated and will be removed in a future
+         * release. Use summary.otherCardFees.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
-        public Builder otherFees(AmountDecimal otherFees) {
+        @Deprecated
+        public Builder otherFees(OtherFees otherFees) {
             Utils.checkNotNull(otherFees, "otherFees");
             this.otherFees = Optional.ofNullable(otherFees);
             return this;
         }
 
         /**
-         * The total amount of other fees.
+         * The total amount of other card fees. This field is deprecated and will be removed in a future
+         * release. Use summary.otherCardFees.
+         * 
+         * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
          */
-        public Builder otherFees(Optional<? extends AmountDecimal> otherFees) {
+        @Deprecated
+        public Builder otherFees(Optional<? extends OtherFees> otherFees) {
             Utils.checkNotNull(otherFees, "otherFees");
             this.otherFees = otherFees;
+            return this;
+        }
+
+
+        /**
+         * A summary of other card fees.
+         */
+        public Builder otherCardFees(BillingSummaryDetails otherCardFees) {
+            Utils.checkNotNull(otherCardFees, "otherCardFees");
+            this.otherCardFees = Optional.ofNullable(otherCardFees);
+            return this;
+        }
+
+        /**
+         * A summary of other card fees.
+         */
+        public Builder otherCardFees(Optional<? extends BillingSummaryDetails> otherCardFees) {
+            Utils.checkNotNull(otherCardFees, "otherCardFees");
+            this.otherCardFees = otherCardFees;
             return this;
         }
 
@@ -494,12 +909,111 @@ public class BillingSummary {
             return this;
         }
 
+
+        /**
+         * Total net revenue after deducting total partner fees.
+         */
+        public Builder netIncomeSubtotal(BillingSummaryDetails netIncomeSubtotal) {
+            Utils.checkNotNull(netIncomeSubtotal, "netIncomeSubtotal");
+            this.netIncomeSubtotal = Optional.ofNullable(netIncomeSubtotal);
+            return this;
+        }
+
+        /**
+         * Total net revenue after deducting total partner fees.
+         */
+        public Builder netIncomeSubtotal(Optional<? extends BillingSummaryDetails> netIncomeSubtotal) {
+            Utils.checkNotNull(netIncomeSubtotal, "netIncomeSubtotal");
+            this.netIncomeSubtotal = netIncomeSubtotal;
+            return this;
+        }
+
+
+        /**
+         * Partner’s share of the net income, expressed as a percentage.
+         */
+        public Builder revenueShare(String revenueShare) {
+            Utils.checkNotNull(revenueShare, "revenueShare");
+            this.revenueShare = Optional.ofNullable(revenueShare);
+            return this;
+        }
+
+        /**
+         * Partner’s share of the net income, expressed as a percentage.
+         */
+        public Builder revenueShare(Optional<String> revenueShare) {
+            Utils.checkNotNull(revenueShare, "revenueShare");
+            this.revenueShare = revenueShare;
+            return this;
+        }
+
+
+        /**
+         * The portion of net income allocated to the partner before monthly partner costs.
+         */
+        public Builder residualSubtotal(AmountDecimal residualSubtotal) {
+            Utils.checkNotNull(residualSubtotal, "residualSubtotal");
+            this.residualSubtotal = Optional.ofNullable(residualSubtotal);
+            return this;
+        }
+
+        /**
+         * The portion of net income allocated to the partner before monthly partner costs.
+         */
+        public Builder residualSubtotal(Optional<? extends AmountDecimal> residualSubtotal) {
+            Utils.checkNotNull(residualSubtotal, "residualSubtotal");
+            this.residualSubtotal = residualSubtotal;
+            return this;
+        }
+
+
+        /**
+         * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+         * platform fees, minimums).
+         */
+        public Builder monthlyPartnerCosts(PartnerFees monthlyPartnerCosts) {
+            Utils.checkNotNull(monthlyPartnerCosts, "monthlyPartnerCosts");
+            this.monthlyPartnerCosts = Optional.ofNullable(monthlyPartnerCosts);
+            return this;
+        }
+
+        /**
+         * Monthly partner costs that are charged separately and not included in residual subtotal (e.g.
+         * platform fees, minimums).
+         */
+        public Builder monthlyPartnerCosts(Optional<? extends PartnerFees> monthlyPartnerCosts) {
+            Utils.checkNotNull(monthlyPartnerCosts, "monthlyPartnerCosts");
+            this.monthlyPartnerCosts = monthlyPartnerCosts;
+            return this;
+        }
+
+
+        /**
+         * Final partner payment after deducting monthlyPartnerCosts.
+         */
+        public Builder netPartnerPayment(AmountDecimal netPartnerPayment) {
+            Utils.checkNotNull(netPartnerPayment, "netPartnerPayment");
+            this.netPartnerPayment = Optional.ofNullable(netPartnerPayment);
+            return this;
+        }
+
+        /**
+         * Final partner payment after deducting monthlyPartnerCosts.
+         */
+        public Builder netPartnerPayment(Optional<? extends AmountDecimal> netPartnerPayment) {
+            Utils.checkNotNull(netPartnerPayment, "netPartnerPayment");
+            this.netPartnerPayment = netPartnerPayment;
+            return this;
+        }
+
         public BillingSummary build() {
 
             return new BillingSummary(
                 cardAcquiring, ach, instantPayments,
-                platformFees, adjustmentFees, otherFees,
-                total);
+                platformFees, accountFees, adjustmentFees,
+                otherFees, otherCardFees, total,
+                netIncomeSubtotal, revenueShare, residualSubtotal,
+                monthlyPartnerCosts, netPartnerPayment);
         }
 
     }

@@ -5,14 +5,10 @@ package io.moov.sdk.models.components;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
-import java.util.Optional;
 
 /**
  * PartnerFees
@@ -25,28 +21,26 @@ public class PartnerFees {
      * The minimum spending amount that must be met in the billing period. If actual usage is below the
      * minimum amount, account is charged the difference.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minimumCommitment")
-    private Optional<? extends BillingCountAndAmount> minimumCommitment;
+    private AmountDecimal minimumCommitment;
 
     /**
      * Fixed recurring fee for the billing period regardless of usage.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("monthlyPlatform")
-    private Optional<? extends BillingCountAndAmount> monthlyPlatform;
+    private AmountDecimal monthlyPlatform;
 
     /**
      * Total partner fees.
      */
     @JsonProperty("total")
-    private BillingCountAndAmount total;
+    private AmountDecimal total;
 
     @JsonCreator
     public PartnerFees(
-            @JsonProperty("minimumCommitment") Optional<? extends BillingCountAndAmount> minimumCommitment,
-            @JsonProperty("monthlyPlatform") Optional<? extends BillingCountAndAmount> monthlyPlatform,
-            @JsonProperty("total") BillingCountAndAmount total) {
+            @JsonProperty("minimumCommitment") AmountDecimal minimumCommitment,
+            @JsonProperty("monthlyPlatform") AmountDecimal monthlyPlatform,
+            @JsonProperty("total") AmountDecimal total) {
         Utils.checkNotNull(minimumCommitment, "minimumCommitment");
         Utils.checkNotNull(monthlyPlatform, "monthlyPlatform");
         Utils.checkNotNull(total, "total");
@@ -54,36 +48,29 @@ public class PartnerFees {
         this.monthlyPlatform = monthlyPlatform;
         this.total = total;
     }
-    
-    public PartnerFees(
-            BillingCountAndAmount total) {
-        this(Optional.empty(), Optional.empty(), total);
-    }
 
     /**
      * The minimum spending amount that must be met in the billing period. If actual usage is below the
      * minimum amount, account is charged the difference.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<BillingCountAndAmount> minimumCommitment() {
-        return (Optional<BillingCountAndAmount>) minimumCommitment;
+    public AmountDecimal minimumCommitment() {
+        return minimumCommitment;
     }
 
     /**
      * Fixed recurring fee for the billing period regardless of usage.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<BillingCountAndAmount> monthlyPlatform() {
-        return (Optional<BillingCountAndAmount>) monthlyPlatform;
+    public AmountDecimal monthlyPlatform() {
+        return monthlyPlatform;
     }
 
     /**
      * Total partner fees.
      */
     @JsonIgnore
-    public BillingCountAndAmount total() {
+    public AmountDecimal total() {
         return total;
     }
 
@@ -96,18 +83,7 @@ public class PartnerFees {
      * The minimum spending amount that must be met in the billing period. If actual usage is below the
      * minimum amount, account is charged the difference.
      */
-    public PartnerFees withMinimumCommitment(BillingCountAndAmount minimumCommitment) {
-        Utils.checkNotNull(minimumCommitment, "minimumCommitment");
-        this.minimumCommitment = Optional.ofNullable(minimumCommitment);
-        return this;
-    }
-
-
-    /**
-     * The minimum spending amount that must be met in the billing period. If actual usage is below the
-     * minimum amount, account is charged the difference.
-     */
-    public PartnerFees withMinimumCommitment(Optional<? extends BillingCountAndAmount> minimumCommitment) {
+    public PartnerFees withMinimumCommitment(AmountDecimal minimumCommitment) {
         Utils.checkNotNull(minimumCommitment, "minimumCommitment");
         this.minimumCommitment = minimumCommitment;
         return this;
@@ -116,17 +92,7 @@ public class PartnerFees {
     /**
      * Fixed recurring fee for the billing period regardless of usage.
      */
-    public PartnerFees withMonthlyPlatform(BillingCountAndAmount monthlyPlatform) {
-        Utils.checkNotNull(monthlyPlatform, "monthlyPlatform");
-        this.monthlyPlatform = Optional.ofNullable(monthlyPlatform);
-        return this;
-    }
-
-
-    /**
-     * Fixed recurring fee for the billing period regardless of usage.
-     */
-    public PartnerFees withMonthlyPlatform(Optional<? extends BillingCountAndAmount> monthlyPlatform) {
+    public PartnerFees withMonthlyPlatform(AmountDecimal monthlyPlatform) {
         Utils.checkNotNull(monthlyPlatform, "monthlyPlatform");
         this.monthlyPlatform = monthlyPlatform;
         return this;
@@ -135,7 +101,7 @@ public class PartnerFees {
     /**
      * Total partner fees.
      */
-    public PartnerFees withTotal(BillingCountAndAmount total) {
+    public PartnerFees withTotal(AmountDecimal total) {
         Utils.checkNotNull(total, "total");
         this.total = total;
         return this;
@@ -173,11 +139,11 @@ public class PartnerFees {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends BillingCountAndAmount> minimumCommitment = Optional.empty();
+        private AmountDecimal minimumCommitment;
 
-        private Optional<? extends BillingCountAndAmount> monthlyPlatform = Optional.empty();
+        private AmountDecimal monthlyPlatform;
 
-        private BillingCountAndAmount total;
+        private AmountDecimal total;
 
         private Builder() {
           // force use of static builder() method
@@ -188,17 +154,7 @@ public class PartnerFees {
          * The minimum spending amount that must be met in the billing period. If actual usage is below the
          * minimum amount, account is charged the difference.
          */
-        public Builder minimumCommitment(BillingCountAndAmount minimumCommitment) {
-            Utils.checkNotNull(minimumCommitment, "minimumCommitment");
-            this.minimumCommitment = Optional.ofNullable(minimumCommitment);
-            return this;
-        }
-
-        /**
-         * The minimum spending amount that must be met in the billing period. If actual usage is below the
-         * minimum amount, account is charged the difference.
-         */
-        public Builder minimumCommitment(Optional<? extends BillingCountAndAmount> minimumCommitment) {
+        public Builder minimumCommitment(AmountDecimal minimumCommitment) {
             Utils.checkNotNull(minimumCommitment, "minimumCommitment");
             this.minimumCommitment = minimumCommitment;
             return this;
@@ -208,16 +164,7 @@ public class PartnerFees {
         /**
          * Fixed recurring fee for the billing period regardless of usage.
          */
-        public Builder monthlyPlatform(BillingCountAndAmount monthlyPlatform) {
-            Utils.checkNotNull(monthlyPlatform, "monthlyPlatform");
-            this.monthlyPlatform = Optional.ofNullable(monthlyPlatform);
-            return this;
-        }
-
-        /**
-         * Fixed recurring fee for the billing period regardless of usage.
-         */
-        public Builder monthlyPlatform(Optional<? extends BillingCountAndAmount> monthlyPlatform) {
+        public Builder monthlyPlatform(AmountDecimal monthlyPlatform) {
             Utils.checkNotNull(monthlyPlatform, "monthlyPlatform");
             this.monthlyPlatform = monthlyPlatform;
             return this;
@@ -227,7 +174,7 @@ public class PartnerFees {
         /**
          * Total partner fees.
          */
-        public Builder total(BillingCountAndAmount total) {
+        public Builder total(AmountDecimal total) {
             Utils.checkNotNull(total, "total");
             this.total = total;
             return this;

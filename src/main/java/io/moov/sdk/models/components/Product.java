@@ -19,7 +19,7 @@ import java.util.Optional;
 /**
  * Product
  * 
- * <p>A product available for purchase, which may have optional configuration options.
+ * <p>A good or service offered by a merchant.
  */
 public class Product {
     /**

@@ -18,9 +18,8 @@ public class IssuingMerchantData {
     /**
      * External identifier used to identify the merchant with the card brand.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("networkID")
-    private Optional<String> networkID;
+    private String networkID;
 
     /**
      * Name of the merchant.
@@ -39,9 +38,8 @@ public class IssuingMerchantData {
     /**
      * Two-letter country code.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("country")
-    private Optional<String> country;
+    private String country;
 
     /**
      * The merchant's five-digit postal code.
@@ -60,19 +58,18 @@ public class IssuingMerchantData {
     /**
      * The Merchant Category Code.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mcc")
-    private Optional<String> mcc;
+    private String mcc;
 
     @JsonCreator
     public IssuingMerchantData(
-            @JsonProperty("networkID") Optional<String> networkID,
+            @JsonProperty("networkID") String networkID,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("city") Optional<String> city,
-            @JsonProperty("country") Optional<String> country,
+            @JsonProperty("country") String country,
             @JsonProperty("postalCode") Optional<String> postalCode,
             @JsonProperty("state") Optional<String> state,
-            @JsonProperty("mcc") Optional<String> mcc) {
+            @JsonProperty("mcc") String mcc) {
         Utils.checkNotNull(networkID, "networkID");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(city, "city");
@@ -89,17 +86,20 @@ public class IssuingMerchantData {
         this.mcc = mcc;
     }
     
-    public IssuingMerchantData() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+    public IssuingMerchantData(
+            String networkID,
+            String country,
+            String mcc) {
+        this(networkID, Optional.empty(), Optional.empty(),
+            country, Optional.empty(), Optional.empty(),
+            mcc);
     }
 
     /**
      * External identifier used to identify the merchant with the card brand.
      */
     @JsonIgnore
-    public Optional<String> networkID() {
+    public String networkID() {
         return networkID;
     }
 
@@ -123,7 +123,7 @@ public class IssuingMerchantData {
      * Two-letter country code.
      */
     @JsonIgnore
-    public Optional<String> country() {
+    public String country() {
         return country;
     }
 
@@ -147,7 +147,7 @@ public class IssuingMerchantData {
      * The Merchant Category Code.
      */
     @JsonIgnore
-    public Optional<String> mcc() {
+    public String mcc() {
         return mcc;
     }
 
@@ -160,16 +160,6 @@ public class IssuingMerchantData {
      * External identifier used to identify the merchant with the card brand.
      */
     public IssuingMerchantData withNetworkID(String networkID) {
-        Utils.checkNotNull(networkID, "networkID");
-        this.networkID = Optional.ofNullable(networkID);
-        return this;
-    }
-
-
-    /**
-     * External identifier used to identify the merchant with the card brand.
-     */
-    public IssuingMerchantData withNetworkID(Optional<String> networkID) {
         Utils.checkNotNull(networkID, "networkID");
         this.networkID = networkID;
         return this;
@@ -218,16 +208,6 @@ public class IssuingMerchantData {
      */
     public IssuingMerchantData withCountry(String country) {
         Utils.checkNotNull(country, "country");
-        this.country = Optional.ofNullable(country);
-        return this;
-    }
-
-
-    /**
-     * Two-letter country code.
-     */
-    public IssuingMerchantData withCountry(Optional<String> country) {
-        Utils.checkNotNull(country, "country");
         this.country = country;
         return this;
     }
@@ -275,16 +255,6 @@ public class IssuingMerchantData {
      */
     public IssuingMerchantData withMcc(String mcc) {
         Utils.checkNotNull(mcc, "mcc");
-        this.mcc = Optional.ofNullable(mcc);
-        return this;
-    }
-
-
-    /**
-     * The Merchant Category Code.
-     */
-    public IssuingMerchantData withMcc(Optional<String> mcc) {
-        Utils.checkNotNull(mcc, "mcc");
         this.mcc = mcc;
         return this;
     }
@@ -331,19 +301,19 @@ public class IssuingMerchantData {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> networkID = Optional.empty();
+        private String networkID;
 
         private Optional<String> name = Optional.empty();
 
         private Optional<String> city = Optional.empty();
 
-        private Optional<String> country = Optional.empty();
+        private String country;
 
         private Optional<String> postalCode = Optional.empty();
 
         private Optional<String> state = Optional.empty();
 
-        private Optional<String> mcc = Optional.empty();
+        private String mcc;
 
         private Builder() {
           // force use of static builder() method
@@ -354,15 +324,6 @@ public class IssuingMerchantData {
          * External identifier used to identify the merchant with the card brand.
          */
         public Builder networkID(String networkID) {
-            Utils.checkNotNull(networkID, "networkID");
-            this.networkID = Optional.ofNullable(networkID);
-            return this;
-        }
-
-        /**
-         * External identifier used to identify the merchant with the card brand.
-         */
-        public Builder networkID(Optional<String> networkID) {
             Utils.checkNotNull(networkID, "networkID");
             this.networkID = networkID;
             return this;
@@ -412,15 +373,6 @@ public class IssuingMerchantData {
          */
         public Builder country(String country) {
             Utils.checkNotNull(country, "country");
-            this.country = Optional.ofNullable(country);
-            return this;
-        }
-
-        /**
-         * Two-letter country code.
-         */
-        public Builder country(Optional<String> country) {
-            Utils.checkNotNull(country, "country");
             this.country = country;
             return this;
         }
@@ -468,15 +420,6 @@ public class IssuingMerchantData {
          * The Merchant Category Code.
          */
         public Builder mcc(String mcc) {
-            Utils.checkNotNull(mcc, "mcc");
-            this.mcc = Optional.ofNullable(mcc);
-            return this;
-        }
-
-        /**
-         * The Merchant Category Code.
-         */
-        public Builder mcc(Optional<String> mcc) {
             Utils.checkNotNull(mcc, "mcc");
             this.mcc = mcc;
             return this;

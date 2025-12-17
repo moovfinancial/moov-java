@@ -17,21 +17,13 @@ import java.util.Optional;
 
 public class UpdateIssuedCard {
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming
-     * authorizations if it is in an active state.
-     * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
-     * after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
-     * post-creation during the activation process.
+     * Updates the state of a Moov issued card.
      * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
      * closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
-     * activated.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("state")
-    private Optional<? extends IssuedCardState> state;
+    private Optional<? extends UpdateIssuedCardState> state;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -47,7 +39,7 @@ public class UpdateIssuedCard {
 
     @JsonCreator
     public UpdateIssuedCard(
-            @JsonProperty("state") Optional<? extends IssuedCardState> state,
+            @JsonProperty("state") Optional<? extends UpdateIssuedCardState> state,
             @JsonProperty("memo") Optional<String> memo,
             @JsonProperty("authorizedUser") Optional<? extends CreateAuthorizedUserUpdate> authorizedUser) {
         Utils.checkNotNull(state, "state");
@@ -63,22 +55,14 @@ public class UpdateIssuedCard {
     }
 
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming
-     * authorizations if it is in an active state.
-     * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
-     * after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
-     * post-creation during the activation process.
+     * Updates the state of a Moov issued card.
      * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
      * closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
-     * activated.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<IssuedCardState> state() {
-        return (Optional<IssuedCardState>) state;
+    public Optional<UpdateIssuedCardState> state() {
+        return (Optional<UpdateIssuedCardState>) state;
     }
 
     @JsonIgnore
@@ -101,19 +85,11 @@ public class UpdateIssuedCard {
 
 
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming
-     * authorizations if it is in an active state.
-     * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
-     * after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
-     * post-creation during the activation process.
+     * Updates the state of a Moov issued card.
      * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
      * closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
-     * activated.
      */
-    public UpdateIssuedCard withState(IssuedCardState state) {
+    public UpdateIssuedCard withState(UpdateIssuedCardState state) {
         Utils.checkNotNull(state, "state");
         this.state = Optional.ofNullable(state);
         return this;
@@ -121,19 +97,11 @@ public class UpdateIssuedCard {
 
 
     /**
-     * The `state` represents the operational status of an issued card. A card can only approve incoming
-     * authorizations if it is in an active state.
-     * 
-     * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
-     * after card creation.
-     * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
-     * post-creation during the activation process.
+     * Updates the state of a Moov issued card.
      * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
      * closed by request or when it expires.
-     * - `pending-verification`: Awaiting additional authorized user verification before the card can be
-     * activated.
      */
-    public UpdateIssuedCard withState(Optional<? extends IssuedCardState> state) {
+    public UpdateIssuedCard withState(Optional<? extends UpdateIssuedCardState> state) {
         Utils.checkNotNull(state, "state");
         this.state = state;
         return this;
@@ -203,7 +171,7 @@ public class UpdateIssuedCard {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends IssuedCardState> state = Optional.empty();
+        private Optional<? extends UpdateIssuedCardState> state = Optional.empty();
 
         private Optional<String> memo = Optional.empty();
 
@@ -215,38 +183,22 @@ public class UpdateIssuedCard {
 
 
         /**
-         * The `state` represents the operational status of an issued card. A card can only approve incoming
-         * authorizations if it is in an active state.
-         * 
-         * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
-         * after card creation.
-         * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
-         * post-creation during the activation process.
+         * Updates the state of a Moov issued card.
          * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
          * closed by request or when it expires.
-         * - `pending-verification`: Awaiting additional authorized user verification before the card can be
-         * activated.
          */
-        public Builder state(IssuedCardState state) {
+        public Builder state(UpdateIssuedCardState state) {
             Utils.checkNotNull(state, "state");
             this.state = Optional.ofNullable(state);
             return this;
         }
 
         /**
-         * The `state` represents the operational status of an issued card. A card can only approve incoming
-         * authorizations if it is in an active state.
-         * 
-         * <p>- `active`: The card is operational and approves authorizations. Generally becomes active shortly
-         * after card creation.
-         * - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned
-         * post-creation during the activation process.
+         * Updates the state of a Moov issued card.
          * - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be
          * closed by request or when it expires.
-         * - `pending-verification`: Awaiting additional authorized user verification before the card can be
-         * activated.
          */
-        public Builder state(Optional<? extends IssuedCardState> state) {
+        public Builder state(Optional<? extends UpdateIssuedCardState> state) {
             Utils.checkNotNull(state, "state");
             this.state = state;
             return this;

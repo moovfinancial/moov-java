@@ -11,7 +11,7 @@ import java.lang.Override;
 import java.lang.String;
 
 
-public class InvoiceTransferPayment implements InvoicePayment {
+public class InvoiceTransferPayment {
 
     @JsonProperty("paymentType")
     private PaymentType paymentType;
@@ -31,9 +31,8 @@ public class InvoiceTransferPayment implements InvoicePayment {
     }
 
     @JsonIgnore
-    @Override
-    public String paymentType() {
-        return Utils.discriminatorToString(paymentType);
+    public PaymentType paymentType() {
+        return paymentType;
     }
 
     @JsonIgnore

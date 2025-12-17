@@ -73,6 +73,13 @@ public class PaymentLink {
     private Amount amount;
 
     /**
+     * Optional sales tax amount.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("salesTaxAmount")
+    private Optional<? extends Amount> salesTaxAmount;
+
+    /**
      * The number of times this payment link has been used.
      */
     @JsonProperty("uses")
@@ -156,6 +163,7 @@ public class PaymentLink {
             @JsonProperty("merchantPaymentMethodID") String merchantPaymentMethodID,
             @JsonProperty("link") String link,
             @JsonProperty("amount") Amount amount,
+            @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("uses") long uses,
             @JsonProperty("maxUses") Optional<Long> maxUses,
             @JsonProperty("lastUsedOn") Optional<OffsetDateTime> lastUsedOn,
@@ -178,6 +186,7 @@ public class PaymentLink {
         Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
         Utils.checkNotNull(link, "link");
         Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(uses, "uses");
         Utils.checkNotNull(maxUses, "maxUses");
         Utils.checkNotNull(lastUsedOn, "lastUsedOn");
@@ -200,6 +209,7 @@ public class PaymentLink {
         this.merchantPaymentMethodID = merchantPaymentMethodID;
         this.link = link;
         this.amount = amount;
+        this.salesTaxAmount = salesTaxAmount;
         this.uses = uses;
         this.maxUses = maxUses;
         this.lastUsedOn = lastUsedOn;
@@ -233,11 +243,11 @@ public class PaymentLink {
         this(code, paymentLinkType, mode,
             status, partnerAccountID, merchantAccountID,
             ownerAccountID, merchantPaymentMethodID, link,
-            amount, uses, Optional.empty(),
-            Optional.empty(), Optional.empty(), display,
-            customer, Optional.empty(), Optional.empty(),
-            Optional.empty(), createdOn, updatedOn,
-            Optional.empty());
+            amount, Optional.empty(), uses,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            display, customer, Optional.empty(),
+            Optional.empty(), Optional.empty(), createdOn,
+            updatedOn, Optional.empty());
     }
 
     /**
@@ -309,6 +319,15 @@ public class PaymentLink {
     @JsonIgnore
     public Amount amount() {
         return amount;
+    }
+
+    /**
+     * Optional sales tax amount.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Amount> salesTaxAmount() {
+        return (Optional<Amount>) salesTaxAmount;
     }
 
     /**
@@ -481,6 +500,25 @@ public class PaymentLink {
     public PaymentLink withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
+        return this;
+    }
+
+    /**
+     * Optional sales tax amount.
+     */
+    public PaymentLink withSalesTaxAmount(Amount salesTaxAmount) {
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
+        return this;
+    }
+
+
+    /**
+     * Optional sales tax amount.
+     */
+    public PaymentLink withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        this.salesTaxAmount = salesTaxAmount;
         return this;
     }
 
@@ -667,6 +705,7 @@ public class PaymentLink {
             Utils.enhancedDeepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
             Utils.enhancedDeepEquals(this.link, other.link) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
             Utils.enhancedDeepEquals(this.uses, other.uses) &&
             Utils.enhancedDeepEquals(this.maxUses, other.maxUses) &&
             Utils.enhancedDeepEquals(this.lastUsedOn, other.lastUsedOn) &&
@@ -687,11 +726,11 @@ public class PaymentLink {
             code, paymentLinkType, mode,
             status, partnerAccountID, merchantAccountID,
             ownerAccountID, merchantPaymentMethodID, link,
-            amount, uses, maxUses,
-            lastUsedOn, expiresOn, display,
-            customer, payment, payout,
-            lineItems, createdOn, updatedOn,
-            disabledOn);
+            amount, salesTaxAmount, uses,
+            maxUses, lastUsedOn, expiresOn,
+            display, customer, payment,
+            payout, lineItems, createdOn,
+            updatedOn, disabledOn);
     }
     
     @Override
@@ -707,6 +746,7 @@ public class PaymentLink {
                 "merchantPaymentMethodID", merchantPaymentMethodID,
                 "link", link,
                 "amount", amount,
+                "salesTaxAmount", salesTaxAmount,
                 "uses", uses,
                 "maxUses", maxUses,
                 "lastUsedOn", lastUsedOn,
@@ -743,6 +783,8 @@ public class PaymentLink {
         private String link;
 
         private Amount amount;
+
+        private Optional<? extends Amount> salesTaxAmount = Optional.empty();
 
         private Long uses;
 
@@ -860,6 +902,25 @@ public class PaymentLink {
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
+            return this;
+        }
+
+
+        /**
+         * Optional sales tax amount.
+         */
+        public Builder salesTaxAmount(Amount salesTaxAmount) {
+            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
+            return this;
+        }
+
+        /**
+         * Optional sales tax amount.
+         */
+        public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
+            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+            this.salesTaxAmount = salesTaxAmount;
             return this;
         }
 
@@ -1037,11 +1098,11 @@ public class PaymentLink {
                 code, paymentLinkType, mode,
                 status, partnerAccountID, merchantAccountID,
                 ownerAccountID, merchantPaymentMethodID, link,
-                amount, uses, maxUses,
-                lastUsedOn, expiresOn, display,
-                customer, payment, payout,
-                lineItems, createdOn, updatedOn,
-                disabledOn);
+                amount, salesTaxAmount, uses,
+                maxUses, lastUsedOn, expiresOn,
+                display, customer, payment,
+                payout, lineItems, createdOn,
+                updatedOn, disabledOn);
         }
 
     }

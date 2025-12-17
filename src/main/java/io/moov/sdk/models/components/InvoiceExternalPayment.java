@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 
 
-public class InvoiceExternalPayment implements InvoicePayment {
+public class InvoiceExternalPayment {
 
     @JsonProperty("paymentType")
     private InvoiceExternalPaymentPaymentType paymentType;
@@ -66,9 +66,8 @@ public class InvoiceExternalPayment implements InvoicePayment {
     }
 
     @JsonIgnore
-    @Override
-    public String paymentType() {
-        return Utils.discriminatorToString(paymentType);
+    public InvoiceExternalPaymentPaymentType paymentType() {
+        return paymentType;
     }
 
     @JsonIgnore

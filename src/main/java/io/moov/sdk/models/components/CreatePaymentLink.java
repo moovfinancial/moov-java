@@ -43,6 +43,11 @@ public class CreatePaymentLink {
     @JsonProperty("amount")
     private Amount amount;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("salesTaxAmount")
+    private Optional<? extends Amount> salesTaxAmount;
+
     /**
      * An optional limit on the number of times this payment link can be used.
      * 
@@ -95,6 +100,7 @@ public class CreatePaymentLink {
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("merchantPaymentMethodID") String merchantPaymentMethodID,
             @JsonProperty("amount") Amount amount,
+            @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("maxUses") Optional<Long> maxUses,
             @JsonProperty("expiresOn") Optional<OffsetDateTime> expiresOn,
             @JsonProperty("display") PaymentLinkDisplayOptions display,
@@ -105,6 +111,7 @@ public class CreatePaymentLink {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         Utils.checkNotNull(merchantPaymentMethodID, "merchantPaymentMethodID");
         Utils.checkNotNull(amount, "amount");
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(maxUses, "maxUses");
         Utils.checkNotNull(expiresOn, "expiresOn");
         Utils.checkNotNull(display, "display");
@@ -115,6 +122,7 @@ public class CreatePaymentLink {
         this.partnerAccountID = partnerAccountID;
         this.merchantPaymentMethodID = merchantPaymentMethodID;
         this.amount = amount;
+        this.salesTaxAmount = salesTaxAmount;
         this.maxUses = maxUses;
         this.expiresOn = expiresOn;
         this.display = display;
@@ -130,9 +138,9 @@ public class CreatePaymentLink {
             Amount amount,
             PaymentLinkDisplayOptions display) {
         this(partnerAccountID, merchantPaymentMethodID, amount,
-            Optional.empty(), Optional.empty(), display,
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            display, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -154,6 +162,12 @@ public class CreatePaymentLink {
     @JsonIgnore
     public Amount amount() {
         return amount;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Amount> salesTaxAmount() {
+        return (Optional<Amount>) salesTaxAmount;
     }
 
     /**
@@ -239,6 +253,19 @@ public class CreatePaymentLink {
     public CreatePaymentLink withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
+        return this;
+    }
+
+    public CreatePaymentLink withSalesTaxAmount(Amount salesTaxAmount) {
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
+        return this;
+    }
+
+
+    public CreatePaymentLink withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
+        Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+        this.salesTaxAmount = salesTaxAmount;
         return this;
     }
 
@@ -372,6 +399,7 @@ public class CreatePaymentLink {
             Utils.enhancedDeepEquals(this.partnerAccountID, other.partnerAccountID) &&
             Utils.enhancedDeepEquals(this.merchantPaymentMethodID, other.merchantPaymentMethodID) &&
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
+            Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
             Utils.enhancedDeepEquals(this.maxUses, other.maxUses) &&
             Utils.enhancedDeepEquals(this.expiresOn, other.expiresOn) &&
             Utils.enhancedDeepEquals(this.display, other.display) &&
@@ -385,9 +413,9 @@ public class CreatePaymentLink {
     public int hashCode() {
         return Utils.enhancedHash(
             partnerAccountID, merchantPaymentMethodID, amount,
-            maxUses, expiresOn, display,
-            customer, payment, payout,
-            lineItems);
+            salesTaxAmount, maxUses, expiresOn,
+            display, customer, payment,
+            payout, lineItems);
     }
     
     @Override
@@ -396,6 +424,7 @@ public class CreatePaymentLink {
                 "partnerAccountID", partnerAccountID,
                 "merchantPaymentMethodID", merchantPaymentMethodID,
                 "amount", amount,
+                "salesTaxAmount", salesTaxAmount,
                 "maxUses", maxUses,
                 "expiresOn", expiresOn,
                 "display", display,
@@ -413,6 +442,8 @@ public class CreatePaymentLink {
         private String merchantPaymentMethodID;
 
         private Amount amount;
+
+        private Optional<? extends Amount> salesTaxAmount = Optional.empty();
 
         private Optional<Long> maxUses = Optional.empty();
 
@@ -456,6 +487,19 @@ public class CreatePaymentLink {
         public Builder amount(Amount amount) {
             Utils.checkNotNull(amount, "amount");
             this.amount = amount;
+            return this;
+        }
+
+
+        public Builder salesTaxAmount(Amount salesTaxAmount) {
+            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+            this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
+            return this;
+        }
+
+        public Builder salesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
+            Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
+            this.salesTaxAmount = salesTaxAmount;
             return this;
         }
 
@@ -581,9 +625,9 @@ public class CreatePaymentLink {
 
             return new CreatePaymentLink(
                 partnerAccountID, merchantPaymentMethodID, amount,
-                maxUses, expiresOn, display,
-                customer, payment, payout,
-                lineItems);
+                salesTaxAmount, maxUses, expiresOn,
+                display, customer, payment,
+                payout, lineItems);
         }
 
     }

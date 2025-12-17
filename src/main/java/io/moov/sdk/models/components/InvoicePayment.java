@@ -3,23 +3,189 @@
  */
 package io.moov.sdk.models.components;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.moov.sdk.utils.Utils;
+import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
-@JsonTypeInfo(
-        use = Id.CUSTOM,
-        property = "paymentType",
-        include = As.EXISTING_PROPERTY,
-        visible = true,
-        defaultImpl = UnknownInvoicePayment.class
-)
-@JsonTypeIdResolver(InvoicePaymentTypeIdResolver.class)
-public interface InvoicePayment {
+/**
+ * InvoicePayment
+ * 
+ * <p>Payment made towards an invoice, will be either a transfer or an external payment.
+ */
+public class InvoicePayment {
 
-    String paymentType();
+    @JsonProperty("paymentType")
+    private InvoicePaymentType paymentType;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("transfer")
+    private Optional<? extends InvoiceTransferPayment> transfer;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("external")
+    private Optional<? extends InvoiceExternalPayment> external;
+
+    @JsonCreator
+    public InvoicePayment(
+            @JsonProperty("paymentType") InvoicePaymentType paymentType,
+            @JsonProperty("transfer") Optional<? extends InvoiceTransferPayment> transfer,
+            @JsonProperty("external") Optional<? extends InvoiceExternalPayment> external) {
+        Utils.checkNotNull(paymentType, "paymentType");
+        Utils.checkNotNull(transfer, "transfer");
+        Utils.checkNotNull(external, "external");
+        this.paymentType = paymentType;
+        this.transfer = transfer;
+        this.external = external;
+    }
+    
+    public InvoicePayment(
+            InvoicePaymentType paymentType) {
+        this(paymentType, Optional.empty(), Optional.empty());
+    }
+
+    @JsonIgnore
+    public InvoicePaymentType paymentType() {
+        return paymentType;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<InvoiceTransferPayment> transfer() {
+        return (Optional<InvoiceTransferPayment>) transfer;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<InvoiceExternalPayment> external() {
+        return (Optional<InvoiceExternalPayment>) external;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
+    public InvoicePayment withPaymentType(InvoicePaymentType paymentType) {
+        Utils.checkNotNull(paymentType, "paymentType");
+        this.paymentType = paymentType;
+        return this;
+    }
+
+    public InvoicePayment withTransfer(InvoiceTransferPayment transfer) {
+        Utils.checkNotNull(transfer, "transfer");
+        this.transfer = Optional.ofNullable(transfer);
+        return this;
+    }
+
+
+    public InvoicePayment withTransfer(Optional<? extends InvoiceTransferPayment> transfer) {
+        Utils.checkNotNull(transfer, "transfer");
+        this.transfer = transfer;
+        return this;
+    }
+
+    public InvoicePayment withExternal(InvoiceExternalPayment external) {
+        Utils.checkNotNull(external, "external");
+        this.external = Optional.ofNullable(external);
+        return this;
+    }
+
+
+    public InvoicePayment withExternal(Optional<? extends InvoiceExternalPayment> external) {
+        Utils.checkNotNull(external, "external");
+        this.external = external;
+        return this;
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        InvoicePayment other = (InvoicePayment) o;
+        return 
+            Utils.enhancedDeepEquals(this.paymentType, other.paymentType) &&
+            Utils.enhancedDeepEquals(this.transfer, other.transfer) &&
+            Utils.enhancedDeepEquals(this.external, other.external);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Utils.enhancedHash(
+            paymentType, transfer, external);
+    }
+    
+    @Override
+    public String toString() {
+        return Utils.toString(InvoicePayment.class,
+                "paymentType", paymentType,
+                "transfer", transfer,
+                "external", external);
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public final static class Builder {
+
+        private InvoicePaymentType paymentType;
+
+        private Optional<? extends InvoiceTransferPayment> transfer = Optional.empty();
+
+        private Optional<? extends InvoiceExternalPayment> external = Optional.empty();
+
+        private Builder() {
+          // force use of static builder() method
+        }
+
+
+        public Builder paymentType(InvoicePaymentType paymentType) {
+            Utils.checkNotNull(paymentType, "paymentType");
+            this.paymentType = paymentType;
+            return this;
+        }
+
+
+        public Builder transfer(InvoiceTransferPayment transfer) {
+            Utils.checkNotNull(transfer, "transfer");
+            this.transfer = Optional.ofNullable(transfer);
+            return this;
+        }
+
+        public Builder transfer(Optional<? extends InvoiceTransferPayment> transfer) {
+            Utils.checkNotNull(transfer, "transfer");
+            this.transfer = transfer;
+            return this;
+        }
+
+
+        public Builder external(InvoiceExternalPayment external) {
+            Utils.checkNotNull(external, "external");
+            this.external = Optional.ofNullable(external);
+            return this;
+        }
+
+        public Builder external(Optional<? extends InvoiceExternalPayment> external) {
+            Utils.checkNotNull(external, "external");
+            this.external = external;
+            return this;
+        }
+
+        public InvoicePayment build() {
+
+            return new InvoicePayment(
+                paymentType, transfer, external);
+        }
+
+    }
 }
-

@@ -1,2 +1,12 @@
 # InvoicePayment
 
+Payment made towards an invoice, will be either a transfer or an external payment.
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `paymentType`                                                                          | [InvoicePaymentType](../../models/components/InvoicePaymentType.md)                    | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `transfer`                                                                             | [Optional\<InvoiceTransferPayment>](../../models/components/InvoiceTransferPayment.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `external`                                                                             | [Optional\<InvoiceExternalPayment>](../../models/components/InvoiceExternalPayment.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |

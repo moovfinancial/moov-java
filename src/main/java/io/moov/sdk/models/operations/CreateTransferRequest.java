@@ -17,7 +17,9 @@ import java.util.Optional;
 
 public class CreateTransferRequest {
     /**
-     * Prevents duplicate transfers from being created.
+     * Identifies a unique request to create a transfer.
+     * In order to avoid creating duplicate transfers, the same idempotency key should be reused when
+     * retrying a request.
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=x-idempotency-key")
     private String xIdempotencyKey;
@@ -66,7 +68,9 @@ public class CreateTransferRequest {
     }
 
     /**
-     * Prevents duplicate transfers from being created.
+     * Identifies a unique request to create a transfer.
+     * In order to avoid creating duplicate transfers, the same idempotency key should be reused when
+     * retrying a request.
      */
     @JsonIgnore
     public String xIdempotencyKey() {
@@ -104,7 +108,9 @@ public class CreateTransferRequest {
 
 
     /**
-     * Prevents duplicate transfers from being created.
+     * Identifies a unique request to create a transfer.
+     * In order to avoid creating duplicate transfers, the same idempotency key should be reused when
+     * retrying a request.
      */
     public CreateTransferRequest withXIdempotencyKey(String xIdempotencyKey) {
         Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");
@@ -201,7 +207,9 @@ public class CreateTransferRequest {
 
 
         /**
-         * Prevents duplicate transfers from being created.
+         * Identifies a unique request to create a transfer.
+         * In order to avoid creating duplicate transfers, the same idempotency key should be reused when
+         * retrying a request.
          */
         public Builder xIdempotencyKey(String xIdempotencyKey) {
             Utils.checkNotNull(xIdempotencyKey, "xIdempotencyKey");

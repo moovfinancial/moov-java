@@ -27,7 +27,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 0.34.7
+  version: 0.34.8
   additionalDependencies: []
   additionalPlugins: []
   artifactID: sdk

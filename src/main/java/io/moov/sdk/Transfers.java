@@ -141,7 +141,8 @@ public class Transfers {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param xIdempotencyKey Prevents duplicate transfers from being created.
+     * @param xIdempotencyKey Identifies a unique request to create a transfer.
+     *         In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.
      * @param accountID Your Moov account ID.
      * @param createTransfer 
      * @return The response from the API call
@@ -164,7 +165,8 @@ public class Transfers {
      * token](https://docs.moov.io/api/authentication/access-tokens/)
      * you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
      * 
-     * @param xIdempotencyKey Prevents duplicate transfers from being created.
+     * @param xIdempotencyKey Identifies a unique request to create a transfer.
+     *         In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.
      * @param xWaitFor 
      * @param accountID Your Moov account ID.
      * @param createTransfer 

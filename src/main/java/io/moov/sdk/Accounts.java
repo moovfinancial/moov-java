@@ -8,9 +8,13 @@ import static io.moov.sdk.operations.Operations.RequestOperation;
 import io.moov.sdk.models.components.AccountCountries;
 import io.moov.sdk.models.components.CreateAccount;
 import io.moov.sdk.models.components.PatchAccount;
+import io.moov.sdk.models.components.ShareScopes;
 import io.moov.sdk.models.operations.AssignAccountCountriesRequest;
 import io.moov.sdk.models.operations.AssignAccountCountriesRequestBuilder;
 import io.moov.sdk.models.operations.AssignAccountCountriesResponse;
+import io.moov.sdk.models.operations.ConnectAccountRequest;
+import io.moov.sdk.models.operations.ConnectAccountRequestBuilder;
+import io.moov.sdk.models.operations.ConnectAccountResponse;
 import io.moov.sdk.models.operations.CreateAccountRequestBuilder;
 import io.moov.sdk.models.operations.CreateAccountResponse;
 import io.moov.sdk.models.operations.DisconnectAccountRequest;
@@ -31,16 +35,21 @@ import io.moov.sdk.models.operations.GetTermsOfServiceTokenResponse;
 import io.moov.sdk.models.operations.ListAccountsRequest;
 import io.moov.sdk.models.operations.ListAccountsRequestBuilder;
 import io.moov.sdk.models.operations.ListAccountsResponse;
+import io.moov.sdk.models.operations.ListConnectedAccountsForAccountRequest;
+import io.moov.sdk.models.operations.ListConnectedAccountsForAccountRequestBuilder;
+import io.moov.sdk.models.operations.ListConnectedAccountsForAccountResponse;
 import io.moov.sdk.models.operations.UpdateAccountRequest;
 import io.moov.sdk.models.operations.UpdateAccountRequestBuilder;
 import io.moov.sdk.models.operations.UpdateAccountResponse;
 import io.moov.sdk.operations.AssignAccountCountries;
+import io.moov.sdk.operations.ConnectAccount;
 import io.moov.sdk.operations.DisconnectAccount;
 import io.moov.sdk.operations.GetAccount;
 import io.moov.sdk.operations.GetAccountCountries;
 import io.moov.sdk.operations.GetMerchantProcessingAgreement;
 import io.moov.sdk.operations.GetTermsOfServiceToken;
 import io.moov.sdk.operations.ListAccounts;
+import io.moov.sdk.operations.ListConnectedAccountsForAccount;
 import io.moov.sdk.operations.UpdateAccount;
 import io.moov.sdk.utils.Headers;
 import java.lang.String;
@@ -305,6 +314,81 @@ public class Accounts {
                 .build();
         RequestOperation<DisconnectAccountRequest, DisconnectAccountResponse> operation
               = new DisconnectAccount.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * List or search accounts to which the caller is connected.
+     * 
+     * <p>All supported query parameters are optional. If none are provided the response will include all
+     * connected accounts.
+     * Pagination is supported via the `skip` and `count` query parameters. Searching by name and email
+     * will overlap and
+     * return results based on relevance. Accounts with AccountType `guest` will not be included in the
+     * response.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+     * to specify the `/accounts.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListConnectedAccountsForAccountRequestBuilder listConnected() {
+        return new ListConnectedAccountsForAccountRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * List or search accounts to which the caller is connected.
+     * 
+     * <p>All supported query parameters are optional. If none are provided the response will include all
+     * connected accounts.
+     * Pagination is supported via the `skip` and `count` query parameters. Searching by name and email
+     * will overlap and
+     * return results based on relevance. Accounts with AccountType `guest` will not be included in the
+     * response.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+     * to specify the `/accounts.read` scope.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListConnectedAccountsForAccountResponse listConnected(ListConnectedAccountsForAccountRequest request) {
+        RequestOperation<ListConnectedAccountsForAccountRequest, ListConnectedAccountsForAccountResponse> operation
+              = new ListConnectedAccountsForAccount.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Shares access scopes from the account specified to the caller, establishing a connection
+     * between the two accounts with the specified permissions.
+     * 
+     * @return The call builder
+     */
+    public ConnectAccountRequestBuilder connect() {
+        return new ConnectAccountRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Shares access scopes from the account specified to the caller, establishing a connection
+     * between the two accounts with the specified permissions.
+     * 
+     * @param accountID 
+     * @param shareScopes Describes the scopes being shared from a subject account to a principal account.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ConnectAccountResponse connect(String accountID, ShareScopes shareScopes) {
+        ConnectAccountRequest request =
+            ConnectAccountRequest
+                .builder()
+                .accountID(accountID)
+                .shareScopes(shareScopes)
+                .build();
+        RequestOperation<ConnectAccountRequest, ConnectAccountResponse> operation
+              = new ConnectAccount.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

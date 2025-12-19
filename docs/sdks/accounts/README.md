@@ -49,6 +49,16 @@ forward for reporting purposes.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
+* [listConnected](#listconnected) - List or search accounts to which the caller is connected.
+
+All supported query parameters are optional. If none are provided the response will include all connected accounts.
+Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and 
+return results based on relevance. Accounts with AccountType `guest` will not be included in the response.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts.read` scope.
+* [connect](#connect) - Shares access scopes from the account specified to the caller, establishing a connection 
+between the two accounts with the specified permissions.
 * [getCountries](#getcountries) - Retrieve the specified countries of operation for an account. 
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -485,6 +495,139 @@ public class Application {
 | -------------------------- | -------------------------- | -------------------------- |
 | models/errors/GenericError | 400, 409                   | application/json           |
 | models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## listConnected
+
+List or search accounts to which the caller is connected.
+
+All supported query parameters are optional. If none are provided the response will include all connected accounts.
+Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and 
+return results based on relevance. Accounts with AccountType `guest` will not be included in the response.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+to specify the `/accounts.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listConnectedAccountsForAccount" method="get" path="/accounts/{accountID}/connected-accounts" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListConnectedAccountsForAccountRequest;
+import io.moov.sdk.models.operations.ListConnectedAccountsForAccountResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("<value>")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListConnectedAccountsForAccountRequest req = ListConnectedAccountsForAccountRequest.builder()
+                .accountID("7e09ffc8-e508-4fd4-a54e-21cff90a1824")
+                .skip(60L)
+                .count(20L)
+                .build();
+
+        ListConnectedAccountsForAccountResponse res = sdk.accounts().listConnected()
+                .request(req)
+                .call();
+
+        if (res.accounts().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                   | [ListConnectedAccountsForAccountRequest](../../models/operations/ListConnectedAccountsForAccountRequest.md) | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
+
+### Response
+
+**[ListConnectedAccountsForAccountResponse](../../models/operations/ListConnectedAccountsForAccountResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |
+
+## connect
+
+Shares access scopes from the account specified to the caller, establishing a connection 
+between the two accounts with the specified permissions.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="connectAccount" method="post" path="/accounts/{accountID}/connections" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.*;
+import io.moov.sdk.models.errors.ConnectAccountRequestValidationError;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.ConnectAccountResponse;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, ConnectAccountRequestValidationError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("<value>")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ConnectAccountResponse res = sdk.accounts().connect()
+                .accountID("456cb5b6-20dc-4585-97b4-745d013adb1f")
+                .shareScopes(ShareScopes.builder()
+                    .principalAccountID("c520f1b9-0ba7-42f5-b977-248cdbe41c69")
+                    .allowScopes(List.of(
+                        ApplicationScope.TRANSFERS_WRITE,
+                        ApplicationScope.PAYMENT_METHODS_READ))
+                    .build())
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `accountID`                                           | *String*                                              | :heavy_check_mark:                                    | N/A                                                   |
+| `shareScopes`                                         | [ShareScopes](../../models/components/ShareScopes.md) | :heavy_check_mark:                                    | N/A                                                   |
+
+### Response
+
+**[ConnectAccountResponse](../../models/operations/ConnectAccountResponse.md)**
+
+### Errors
+
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| models/errors/GenericError                         | 400, 409                                           | application/json                                   |
+| models/errors/ConnectAccountRequestValidationError | 422                                                | application/json                                   |
+| models/errors/APIException                         | 4XX, 5XX                                           | \*/\*                                              |
 
 ## getCountries
 

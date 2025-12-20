@@ -326,7 +326,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="markPaidInvoice" method="put" path="/accounts/{accountID}/invoices/{invoiceID}/mark-paid" -->
+<!-- UsageSnippet language="java" operationID="markPaidInvoice" method="post" path="/accounts/{accountID}/invoices/{invoiceID}/mark-paid" -->
 ```java
 package hello.world;
 

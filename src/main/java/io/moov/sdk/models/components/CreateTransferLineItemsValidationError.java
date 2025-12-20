@@ -16,27 +16,27 @@ import java.util.Map;
 import java.util.Optional;
 
 
-public class TransferLineItemsValidationError {
+public class CreateTransferLineItemsValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("items")
-    private Optional<? extends Map<String, TransferLineItemValidationError>> items;
+    private Optional<? extends Map<String, CreateTransferLineItemValidationError>> items;
 
     @JsonCreator
-    public TransferLineItemsValidationError(
-            @JsonProperty("items") Optional<? extends Map<String, TransferLineItemValidationError>> items) {
+    public CreateTransferLineItemsValidationError(
+            @JsonProperty("items") Optional<? extends Map<String, CreateTransferLineItemValidationError>> items) {
         Utils.checkNotNull(items, "items");
         this.items = items;
     }
     
-    public TransferLineItemsValidationError() {
+    public CreateTransferLineItemsValidationError() {
         this(Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Map<String, TransferLineItemValidationError>> items() {
-        return (Optional<Map<String, TransferLineItemValidationError>>) items;
+    public Optional<Map<String, CreateTransferLineItemValidationError>> items() {
+        return (Optional<Map<String, CreateTransferLineItemValidationError>>) items;
     }
 
     public static Builder builder() {
@@ -44,14 +44,14 @@ public class TransferLineItemsValidationError {
     }
 
 
-    public TransferLineItemsValidationError withItems(Map<String, TransferLineItemValidationError> items) {
+    public CreateTransferLineItemsValidationError withItems(Map<String, CreateTransferLineItemValidationError> items) {
         Utils.checkNotNull(items, "items");
         this.items = Optional.ofNullable(items);
         return this;
     }
 
 
-    public TransferLineItemsValidationError withItems(Optional<? extends Map<String, TransferLineItemValidationError>> items) {
+    public CreateTransferLineItemsValidationError withItems(Optional<? extends Map<String, CreateTransferLineItemValidationError>> items) {
         Utils.checkNotNull(items, "items");
         this.items = items;
         return this;
@@ -65,7 +65,7 @@ public class TransferLineItemsValidationError {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        TransferLineItemsValidationError other = (TransferLineItemsValidationError) o;
+        CreateTransferLineItemsValidationError other = (CreateTransferLineItemsValidationError) o;
         return 
             Utils.enhancedDeepEquals(this.items, other.items);
     }
@@ -78,35 +78,35 @@ public class TransferLineItemsValidationError {
     
     @Override
     public String toString() {
-        return Utils.toString(TransferLineItemsValidationError.class,
+        return Utils.toString(CreateTransferLineItemsValidationError.class,
                 "items", items);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends Map<String, TransferLineItemValidationError>> items = Optional.empty();
+        private Optional<? extends Map<String, CreateTransferLineItemValidationError>> items = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder items(Map<String, TransferLineItemValidationError> items) {
+        public Builder items(Map<String, CreateTransferLineItemValidationError> items) {
             Utils.checkNotNull(items, "items");
             this.items = Optional.ofNullable(items);
             return this;
         }
 
-        public Builder items(Optional<? extends Map<String, TransferLineItemValidationError>> items) {
+        public Builder items(Optional<? extends Map<String, CreateTransferLineItemValidationError>> items) {
             Utils.checkNotNull(items, "items");
             this.items = items;
             return this;
         }
 
-        public TransferLineItemsValidationError build() {
+        public CreateTransferLineItemsValidationError build() {
 
-            return new TransferLineItemsValidationError(
+            return new CreateTransferLineItemsValidationError(
                 items);
         }
 

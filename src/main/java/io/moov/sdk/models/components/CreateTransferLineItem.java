@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * TransferLineItem
+ * CreateTransferLineItem
  * 
  * <p>Represents a single item in a transfer, including optional modifiers and quantity.
  */
-public class TransferLineItem {
+public class CreateTransferLineItem {
     /**
      * The name of the item.
      */
@@ -45,14 +45,14 @@ public class TransferLineItem {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("options")
-    private Optional<? extends List<TransferLineItemOption>> options;
+    private Optional<? extends List<CreateTransferLineItemOption>> options;
 
     /**
      * Optional list of images associated with this line item.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("images")
-    private Optional<? extends List<TransferLineItemImageMetadata>> images;
+    @JsonProperty("imageIDs")
+    private Optional<? extends List<String>> imageIDs;
 
     /**
      * Optional unique identifier associating the line item with a product.
@@ -62,28 +62,28 @@ public class TransferLineItem {
     private Optional<String> productID;
 
     @JsonCreator
-    public TransferLineItem(
+    public CreateTransferLineItem(
             @JsonProperty("name") String name,
             @JsonProperty("basePrice") AmountDecimal basePrice,
             @JsonProperty("quantity") int quantity,
-            @JsonProperty("options") Optional<? extends List<TransferLineItemOption>> options,
-            @JsonProperty("images") Optional<? extends List<TransferLineItemImageMetadata>> images,
+            @JsonProperty("options") Optional<? extends List<CreateTransferLineItemOption>> options,
+            @JsonProperty("imageIDs") Optional<? extends List<String>> imageIDs,
             @JsonProperty("productID") Optional<String> productID) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(basePrice, "basePrice");
         Utils.checkNotNull(quantity, "quantity");
         Utils.checkNotNull(options, "options");
-        Utils.checkNotNull(images, "images");
+        Utils.checkNotNull(imageIDs, "imageIDs");
         Utils.checkNotNull(productID, "productID");
         this.name = name;
         this.basePrice = basePrice;
         this.quantity = quantity;
         this.options = options;
-        this.images = images;
+        this.imageIDs = imageIDs;
         this.productID = productID;
     }
     
-    public TransferLineItem(
+    public CreateTransferLineItem(
             String name,
             AmountDecimal basePrice,
             int quantity) {
@@ -120,8 +120,8 @@ public class TransferLineItem {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<TransferLineItemOption>> options() {
-        return (Optional<List<TransferLineItemOption>>) options;
+    public Optional<List<CreateTransferLineItemOption>> options() {
+        return (Optional<List<CreateTransferLineItemOption>>) options;
     }
 
     /**
@@ -129,8 +129,8 @@ public class TransferLineItem {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<TransferLineItemImageMetadata>> images() {
-        return (Optional<List<TransferLineItemImageMetadata>>) images;
+    public Optional<List<String>> imageIDs() {
+        return (Optional<List<String>>) imageIDs;
     }
 
     /**
@@ -149,7 +149,7 @@ public class TransferLineItem {
     /**
      * The name of the item.
      */
-    public TransferLineItem withName(String name) {
+    public CreateTransferLineItem withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
@@ -158,7 +158,7 @@ public class TransferLineItem {
     /**
      * The base price of the item before applying option modifiers.
      */
-    public TransferLineItem withBasePrice(AmountDecimal basePrice) {
+    public CreateTransferLineItem withBasePrice(AmountDecimal basePrice) {
         Utils.checkNotNull(basePrice, "basePrice");
         this.basePrice = basePrice;
         return this;
@@ -167,7 +167,7 @@ public class TransferLineItem {
     /**
      * The quantity of this item.
      */
-    public TransferLineItem withQuantity(int quantity) {
+    public CreateTransferLineItem withQuantity(int quantity) {
         Utils.checkNotNull(quantity, "quantity");
         this.quantity = quantity;
         return this;
@@ -176,7 +176,7 @@ public class TransferLineItem {
     /**
      * Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
      */
-    public TransferLineItem withOptions(List<TransferLineItemOption> options) {
+    public CreateTransferLineItem withOptions(List<CreateTransferLineItemOption> options) {
         Utils.checkNotNull(options, "options");
         this.options = Optional.ofNullable(options);
         return this;
@@ -186,7 +186,7 @@ public class TransferLineItem {
     /**
      * Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
      */
-    public TransferLineItem withOptions(Optional<? extends List<TransferLineItemOption>> options) {
+    public CreateTransferLineItem withOptions(Optional<? extends List<CreateTransferLineItemOption>> options) {
         Utils.checkNotNull(options, "options");
         this.options = options;
         return this;
@@ -195,9 +195,9 @@ public class TransferLineItem {
     /**
      * Optional list of images associated with this line item.
      */
-    public TransferLineItem withImages(List<TransferLineItemImageMetadata> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = Optional.ofNullable(images);
+    public CreateTransferLineItem withImageIDs(List<String> imageIDs) {
+        Utils.checkNotNull(imageIDs, "imageIDs");
+        this.imageIDs = Optional.ofNullable(imageIDs);
         return this;
     }
 
@@ -205,16 +205,16 @@ public class TransferLineItem {
     /**
      * Optional list of images associated with this line item.
      */
-    public TransferLineItem withImages(Optional<? extends List<TransferLineItemImageMetadata>> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = images;
+    public CreateTransferLineItem withImageIDs(Optional<? extends List<String>> imageIDs) {
+        Utils.checkNotNull(imageIDs, "imageIDs");
+        this.imageIDs = imageIDs;
         return this;
     }
 
     /**
      * Optional unique identifier associating the line item with a product.
      */
-    public TransferLineItem withProductID(String productID) {
+    public CreateTransferLineItem withProductID(String productID) {
         Utils.checkNotNull(productID, "productID");
         this.productID = Optional.ofNullable(productID);
         return this;
@@ -224,7 +224,7 @@ public class TransferLineItem {
     /**
      * Optional unique identifier associating the line item with a product.
      */
-    public TransferLineItem withProductID(Optional<String> productID) {
+    public CreateTransferLineItem withProductID(Optional<String> productID) {
         Utils.checkNotNull(productID, "productID");
         this.productID = productID;
         return this;
@@ -238,13 +238,13 @@ public class TransferLineItem {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        TransferLineItem other = (TransferLineItem) o;
+        CreateTransferLineItem other = (CreateTransferLineItem) o;
         return 
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
             Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
             Utils.enhancedDeepEquals(this.options, other.options) &&
-            Utils.enhancedDeepEquals(this.images, other.images) &&
+            Utils.enhancedDeepEquals(this.imageIDs, other.imageIDs) &&
             Utils.enhancedDeepEquals(this.productID, other.productID);
     }
     
@@ -252,17 +252,17 @@ public class TransferLineItem {
     public int hashCode() {
         return Utils.enhancedHash(
             name, basePrice, quantity,
-            options, images, productID);
+            options, imageIDs, productID);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(TransferLineItem.class,
+        return Utils.toString(CreateTransferLineItem.class,
                 "name", name,
                 "basePrice", basePrice,
                 "quantity", quantity,
                 "options", options,
-                "images", images,
+                "imageIDs", imageIDs,
                 "productID", productID);
     }
 
@@ -275,9 +275,9 @@ public class TransferLineItem {
 
         private Integer quantity;
 
-        private Optional<? extends List<TransferLineItemOption>> options = Optional.empty();
+        private Optional<? extends List<CreateTransferLineItemOption>> options = Optional.empty();
 
-        private Optional<? extends List<TransferLineItemImageMetadata>> images = Optional.empty();
+        private Optional<? extends List<String>> imageIDs = Optional.empty();
 
         private Optional<String> productID = Optional.empty();
 
@@ -319,7 +319,7 @@ public class TransferLineItem {
         /**
          * Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
          */
-        public Builder options(List<TransferLineItemOption> options) {
+        public Builder options(List<CreateTransferLineItemOption> options) {
             Utils.checkNotNull(options, "options");
             this.options = Optional.ofNullable(options);
             return this;
@@ -328,7 +328,7 @@ public class TransferLineItem {
         /**
          * Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
          */
-        public Builder options(Optional<? extends List<TransferLineItemOption>> options) {
+        public Builder options(Optional<? extends List<CreateTransferLineItemOption>> options) {
             Utils.checkNotNull(options, "options");
             this.options = options;
             return this;
@@ -338,18 +338,18 @@ public class TransferLineItem {
         /**
          * Optional list of images associated with this line item.
          */
-        public Builder images(List<TransferLineItemImageMetadata> images) {
-            Utils.checkNotNull(images, "images");
-            this.images = Optional.ofNullable(images);
+        public Builder imageIDs(List<String> imageIDs) {
+            Utils.checkNotNull(imageIDs, "imageIDs");
+            this.imageIDs = Optional.ofNullable(imageIDs);
             return this;
         }
 
         /**
          * Optional list of images associated with this line item.
          */
-        public Builder images(Optional<? extends List<TransferLineItemImageMetadata>> images) {
-            Utils.checkNotNull(images, "images");
-            this.images = images;
+        public Builder imageIDs(Optional<? extends List<String>> imageIDs) {
+            Utils.checkNotNull(imageIDs, "imageIDs");
+            this.imageIDs = imageIDs;
             return this;
         }
 
@@ -372,11 +372,11 @@ public class TransferLineItem {
             return this;
         }
 
-        public TransferLineItem build() {
+        public CreateTransferLineItem build() {
 
-            return new TransferLineItem(
+            return new CreateTransferLineItem(
                 name, basePrice, quantity,
-                options, images, productID);
+                options, imageIDs, productID);
         }
 
     }

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.moov.sdk.models.components.TransferLineItemsValidationError;
+import io.moov.sdk.models.components.CreateTransferLineItemsValidationError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -105,7 +105,7 @@ public class TransferValidationError extends MoovError {
     }
 
     @Deprecated
-    public Optional<TransferLineItemsValidationError> lineItems() {
+    public Optional<CreateTransferLineItemsValidationError> lineItems() {
         return data().flatMap(Data::lineItems);
     }
 
@@ -174,7 +174,7 @@ public class TransferValidationError extends MoovError {
 
         @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("lineItems")
-        private Optional<? extends TransferLineItemsValidationError> lineItems;
+        private Optional<? extends CreateTransferLineItemsValidationError> lineItems;
 
         @JsonCreator
         public Data(
@@ -188,7 +188,7 @@ public class TransferValidationError extends MoovError {
                 @JsonProperty("metadata") Optional<String> metadata,
                 @JsonProperty("salesTaxAmount") Optional<String> salesTaxAmount,
                 @JsonProperty("foreignID") Optional<String> foreignID,
-                @JsonProperty("lineItems") Optional<? extends TransferLineItemsValidationError> lineItems) {
+                @JsonProperty("lineItems") Optional<? extends CreateTransferLineItemsValidationError> lineItems) {
             Utils.checkNotNull(amount, "amount");
             Utils.checkNotNull(source, "source");
             Utils.checkNotNull(sourcePaymentMethodID, "sourcePaymentMethodID");
@@ -272,8 +272,8 @@ public class TransferValidationError extends MoovError {
 
         @SuppressWarnings("unchecked")
         @JsonIgnore
-        public Optional<TransferLineItemsValidationError> lineItems() {
-            return (Optional<TransferLineItemsValidationError>) lineItems;
+        public Optional<CreateTransferLineItemsValidationError> lineItems() {
+            return (Optional<CreateTransferLineItemsValidationError>) lineItems;
         }
 
         public static Builder builder() {
@@ -411,14 +411,14 @@ public class TransferValidationError extends MoovError {
             return this;
         }
 
-        public Data withLineItems(TransferLineItemsValidationError lineItems) {
+        public Data withLineItems(CreateTransferLineItemsValidationError lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = Optional.ofNullable(lineItems);
             return this;
         }
 
 
-        public Data withLineItems(Optional<? extends TransferLineItemsValidationError> lineItems) {
+        public Data withLineItems(Optional<? extends CreateTransferLineItemsValidationError> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = lineItems;
             return this;
@@ -495,7 +495,7 @@ public class TransferValidationError extends MoovError {
 
             private Optional<String> foreignID = Optional.empty();
 
-            private Optional<? extends TransferLineItemsValidationError> lineItems = Optional.empty();
+            private Optional<? extends CreateTransferLineItemsValidationError> lineItems = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -632,13 +632,13 @@ public class TransferValidationError extends MoovError {
             }
 
 
-            public Builder lineItems(TransferLineItemsValidationError lineItems) {
+            public Builder lineItems(CreateTransferLineItemsValidationError lineItems) {
                 Utils.checkNotNull(lineItems, "lineItems");
                 this.lineItems = Optional.ofNullable(lineItems);
                 return this;
             }
 
-            public Builder lineItems(Optional<? extends TransferLineItemsValidationError> lineItems) {
+            public Builder lineItems(Optional<? extends CreateTransferLineItemsValidationError> lineItems) {
                 Utils.checkNotNull(lineItems, "lineItems");
                 this.lineItems = lineItems;
                 return this;

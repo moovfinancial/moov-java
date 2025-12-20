@@ -92,7 +92,7 @@ public class MarkPaidInvoice {
                     this.baseUrl,
                     "/accounts/{accountID}/invoices/{invoiceID}/mark-paid",
                     request, this.operationGlobals);
-            HTTPRequest req = new HTTPRequest(url, "PUT");
+            HTTPRequest req = new HTTPRequest(url, "POST");
             Object convertedRequest = Utils.convertToShape(
                     request,
                     JsonShape.DEFAULT,

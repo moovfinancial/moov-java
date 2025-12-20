@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 
-public class TransferLineItemValidationError {
+public class CreateTransferLineItemValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("productID")
@@ -35,35 +35,43 @@ public class TransferLineItemValidationError {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("options")
-    private Optional<? extends Map<String, TransferLineItemOptionValidationError>> options;
+    private Optional<? extends Map<String, CreateTransferLineItemOptionValidationError>> options;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("quantity")
     private Optional<String> quantity;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("imageIDs")
+    private Optional<String> imageIDs;
+
     @JsonCreator
-    public TransferLineItemValidationError(
+    public CreateTransferLineItemValidationError(
             @JsonProperty("productID") Optional<String> productID,
             @JsonProperty("name") Optional<String> name,
             @JsonProperty("basePrice") Optional<? extends AmountDecimalValidationError> basePrice,
-            @JsonProperty("options") Optional<? extends Map<String, TransferLineItemOptionValidationError>> options,
-            @JsonProperty("quantity") Optional<String> quantity) {
+            @JsonProperty("options") Optional<? extends Map<String, CreateTransferLineItemOptionValidationError>> options,
+            @JsonProperty("quantity") Optional<String> quantity,
+            @JsonProperty("imageIDs") Optional<String> imageIDs) {
         Utils.checkNotNull(productID, "productID");
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(basePrice, "basePrice");
         Utils.checkNotNull(options, "options");
         Utils.checkNotNull(quantity, "quantity");
+        Utils.checkNotNull(imageIDs, "imageIDs");
         this.productID = productID;
         this.name = name;
         this.basePrice = basePrice;
         this.options = options;
         this.quantity = quantity;
+        this.imageIDs = imageIDs;
     }
     
-    public TransferLineItemValidationError() {
+    public CreateTransferLineItemValidationError() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -84,8 +92,8 @@ public class TransferLineItemValidationError {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Map<String, TransferLineItemOptionValidationError>> options() {
-        return (Optional<Map<String, TransferLineItemOptionValidationError>>) options;
+    public Optional<Map<String, CreateTransferLineItemOptionValidationError>> options() {
+        return (Optional<Map<String, CreateTransferLineItemOptionValidationError>>) options;
     }
 
     @JsonIgnore
@@ -93,73 +101,91 @@ public class TransferLineItemValidationError {
         return quantity;
     }
 
+    @JsonIgnore
+    public Optional<String> imageIDs() {
+        return imageIDs;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
 
-    public TransferLineItemValidationError withProductID(String productID) {
+    public CreateTransferLineItemValidationError withProductID(String productID) {
         Utils.checkNotNull(productID, "productID");
         this.productID = Optional.ofNullable(productID);
         return this;
     }
 
 
-    public TransferLineItemValidationError withProductID(Optional<String> productID) {
+    public CreateTransferLineItemValidationError withProductID(Optional<String> productID) {
         Utils.checkNotNull(productID, "productID");
         this.productID = productID;
         return this;
     }
 
-    public TransferLineItemValidationError withName(String name) {
+    public CreateTransferLineItemValidationError withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
 
 
-    public TransferLineItemValidationError withName(Optional<String> name) {
+    public CreateTransferLineItemValidationError withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
     }
 
-    public TransferLineItemValidationError withBasePrice(AmountDecimalValidationError basePrice) {
+    public CreateTransferLineItemValidationError withBasePrice(AmountDecimalValidationError basePrice) {
         Utils.checkNotNull(basePrice, "basePrice");
         this.basePrice = Optional.ofNullable(basePrice);
         return this;
     }
 
 
-    public TransferLineItemValidationError withBasePrice(Optional<? extends AmountDecimalValidationError> basePrice) {
+    public CreateTransferLineItemValidationError withBasePrice(Optional<? extends AmountDecimalValidationError> basePrice) {
         Utils.checkNotNull(basePrice, "basePrice");
         this.basePrice = basePrice;
         return this;
     }
 
-    public TransferLineItemValidationError withOptions(Map<String, TransferLineItemOptionValidationError> options) {
+    public CreateTransferLineItemValidationError withOptions(Map<String, CreateTransferLineItemOptionValidationError> options) {
         Utils.checkNotNull(options, "options");
         this.options = Optional.ofNullable(options);
         return this;
     }
 
 
-    public TransferLineItemValidationError withOptions(Optional<? extends Map<String, TransferLineItemOptionValidationError>> options) {
+    public CreateTransferLineItemValidationError withOptions(Optional<? extends Map<String, CreateTransferLineItemOptionValidationError>> options) {
         Utils.checkNotNull(options, "options");
         this.options = options;
         return this;
     }
 
-    public TransferLineItemValidationError withQuantity(String quantity) {
+    public CreateTransferLineItemValidationError withQuantity(String quantity) {
         Utils.checkNotNull(quantity, "quantity");
         this.quantity = Optional.ofNullable(quantity);
         return this;
     }
 
 
-    public TransferLineItemValidationError withQuantity(Optional<String> quantity) {
+    public CreateTransferLineItemValidationError withQuantity(Optional<String> quantity) {
         Utils.checkNotNull(quantity, "quantity");
         this.quantity = quantity;
+        return this;
+    }
+
+    public CreateTransferLineItemValidationError withImageIDs(String imageIDs) {
+        Utils.checkNotNull(imageIDs, "imageIDs");
+        this.imageIDs = Optional.ofNullable(imageIDs);
+        return this;
+    }
+
+
+    public CreateTransferLineItemValidationError withImageIDs(Optional<String> imageIDs) {
+        Utils.checkNotNull(imageIDs, "imageIDs");
+        this.imageIDs = imageIDs;
         return this;
     }
 
@@ -171,30 +197,32 @@ public class TransferLineItemValidationError {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        TransferLineItemValidationError other = (TransferLineItemValidationError) o;
+        CreateTransferLineItemValidationError other = (CreateTransferLineItemValidationError) o;
         return 
             Utils.enhancedDeepEquals(this.productID, other.productID) &&
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
             Utils.enhancedDeepEquals(this.options, other.options) &&
-            Utils.enhancedDeepEquals(this.quantity, other.quantity);
+            Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
+            Utils.enhancedDeepEquals(this.imageIDs, other.imageIDs);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             productID, name, basePrice,
-            options, quantity);
+            options, quantity, imageIDs);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(TransferLineItemValidationError.class,
+        return Utils.toString(CreateTransferLineItemValidationError.class,
                 "productID", productID,
                 "name", name,
                 "basePrice", basePrice,
                 "options", options,
-                "quantity", quantity);
+                "quantity", quantity,
+                "imageIDs", imageIDs);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -206,9 +234,11 @@ public class TransferLineItemValidationError {
 
         private Optional<? extends AmountDecimalValidationError> basePrice = Optional.empty();
 
-        private Optional<? extends Map<String, TransferLineItemOptionValidationError>> options = Optional.empty();
+        private Optional<? extends Map<String, CreateTransferLineItemOptionValidationError>> options = Optional.empty();
 
         private Optional<String> quantity = Optional.empty();
+
+        private Optional<String> imageIDs = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -254,13 +284,13 @@ public class TransferLineItemValidationError {
         }
 
 
-        public Builder options(Map<String, TransferLineItemOptionValidationError> options) {
+        public Builder options(Map<String, CreateTransferLineItemOptionValidationError> options) {
             Utils.checkNotNull(options, "options");
             this.options = Optional.ofNullable(options);
             return this;
         }
 
-        public Builder options(Optional<? extends Map<String, TransferLineItemOptionValidationError>> options) {
+        public Builder options(Optional<? extends Map<String, CreateTransferLineItemOptionValidationError>> options) {
             Utils.checkNotNull(options, "options");
             this.options = options;
             return this;
@@ -279,11 +309,24 @@ public class TransferLineItemValidationError {
             return this;
         }
 
-        public TransferLineItemValidationError build() {
 
-            return new TransferLineItemValidationError(
+        public Builder imageIDs(String imageIDs) {
+            Utils.checkNotNull(imageIDs, "imageIDs");
+            this.imageIDs = Optional.ofNullable(imageIDs);
+            return this;
+        }
+
+        public Builder imageIDs(Optional<String> imageIDs) {
+            Utils.checkNotNull(imageIDs, "imageIDs");
+            this.imageIDs = imageIDs;
+            return this;
+        }
+
+        public CreateTransferLineItemValidationError build() {
+
+            return new CreateTransferLineItemValidationError(
                 productID, name, basePrice,
-                options, quantity);
+                options, quantity, imageIDs);
         }
 
     }

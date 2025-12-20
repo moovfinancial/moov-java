@@ -76,7 +76,7 @@ public class CreateTransfer {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
-    private Optional<? extends TransferLineItems> lineItems;
+    private Optional<? extends CreateTransferLineItems> lineItems;
 
     @JsonCreator
     public CreateTransfer(
@@ -88,7 +88,7 @@ public class CreateTransfer {
             @JsonProperty("metadata") Optional<? extends Map<String, String>> metadata,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("foreignID") Optional<String> foreignID,
-            @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems) {
+            @JsonProperty("lineItems") Optional<? extends CreateTransferLineItems> lineItems) {
         Utils.checkNotNull(source, "source");
         Utils.checkNotNull(destination, "destination");
         Utils.checkNotNull(amount, "amount");
@@ -190,8 +190,8 @@ public class CreateTransfer {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<TransferLineItems> lineItems() {
-        return (Optional<TransferLineItems>) lineItems;
+    public Optional<CreateTransferLineItems> lineItems() {
+        return (Optional<CreateTransferLineItems>) lineItems;
     }
 
     public static Builder builder() {
@@ -325,7 +325,7 @@ public class CreateTransfer {
      * An optional collection of line items for a transfer.
      * When line items are provided, their total plus sales tax must equal the transfer amount.
      */
-    public CreateTransfer withLineItems(TransferLineItems lineItems) {
+    public CreateTransfer withLineItems(CreateTransferLineItems lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = Optional.ofNullable(lineItems);
         return this;
@@ -336,7 +336,7 @@ public class CreateTransfer {
      * An optional collection of line items for a transfer.
      * When line items are provided, their total plus sales tax must equal the transfer amount.
      */
-    public CreateTransfer withLineItems(Optional<? extends TransferLineItems> lineItems) {
+    public CreateTransfer withLineItems(Optional<? extends CreateTransferLineItems> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = lineItems;
         return this;
@@ -404,7 +404,7 @@ public class CreateTransfer {
 
         private Optional<String> foreignID = Optional.empty();
 
-        private Optional<? extends TransferLineItems> lineItems = Optional.empty();
+        private Optional<? extends CreateTransferLineItems> lineItems = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -540,7 +540,7 @@ public class CreateTransfer {
          * An optional collection of line items for a transfer.
          * When line items are provided, their total plus sales tax must equal the transfer amount.
          */
-        public Builder lineItems(TransferLineItems lineItems) {
+        public Builder lineItems(CreateTransferLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = Optional.ofNullable(lineItems);
             return this;
@@ -550,7 +550,7 @@ public class CreateTransfer {
          * An optional collection of line items for a transfer.
          * When line items are provided, their total plus sales tax must equal the transfer amount.
          */
-        public Builder lineItems(Optional<? extends TransferLineItems> lineItems) {
+        public Builder lineItems(Optional<? extends CreateTransferLineItems> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = lineItems;
             return this;

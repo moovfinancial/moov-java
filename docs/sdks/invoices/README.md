@@ -20,11 +20,6 @@ you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
-* [markPaidInvoice](#markpaidinvoice) - Marks an invoice as paid outside of the Moov platform.
-If a payment link was created, the corresponding payment link is canceled, but a receipt is still sent.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ## createInvoice
 
@@ -315,71 +310,3 @@ public class Application {
 | models/errors/GenericError       | 400, 409                         | application/json                 |
 | models/errors/UpdateInvoiceError | 422                              | application/json                 |
 | models/errors/APIException       | 4XX, 5XX                         | \*/\*                            |
-
-## markPaidInvoice
-
-Marks an invoice as paid outside of the Moov platform.
-If a payment link was created, the corresponding payment link is canceled, but a receipt is still sent.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="markPaidInvoice" method="post" path="/accounts/{accountID}/invoices/{invoiceID}/mark-paid" -->
-```java
-package hello.world;
-
-import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.MarkInvoicePaid;
-import io.moov.sdk.models.components.Security;
-import io.moov.sdk.models.errors.GenericError;
-import io.moov.sdk.models.errors.MarkInvoicePaidError;
-import io.moov.sdk.models.operations.MarkPaidInvoiceResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GenericError, MarkInvoicePaidError, Exception {
-
-        Moov sdk = Moov.builder()
-                .xMoovVersion("<value>")
-                .security(Security.builder()
-                    .username("")
-                    .password("")
-                    .build())
-            .build();
-
-        MarkPaidInvoiceResponse res = sdk.invoices().markPaidInvoice()
-                .accountID("e270fffe-637f-4828-ace1-3813031d3274")
-                .invoiceID("9a08a44d-da9a-4385-8870-bb488c363e91")
-                .markInvoicePaid(MarkInvoicePaid.builder()
-                    .build())
-                .call();
-
-        if (res.invoice().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                     | Type                                                          | Required                                                      | Description                                                   |
-| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| `accountID`                                                   | *String*                                                      | :heavy_check_mark:                                            | N/A                                                           |
-| `invoiceID`                                                   | *String*                                                      | :heavy_check_mark:                                            | N/A                                                           |
-| `markInvoicePaid`                                             | [MarkInvoicePaid](../../models/components/MarkInvoicePaid.md) | :heavy_check_mark:                                            | N/A                                                           |
-
-### Response
-
-**[MarkPaidInvoiceResponse](../../models/operations/MarkPaidInvoiceResponse.md)**
-
-### Errors
-
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| models/errors/GenericError         | 400, 409                           | application/json                   |
-| models/errors/MarkInvoicePaidError | 422                                | application/json                   |
-| models/errors/APIException         | 4XX, 5XX                           | \*/\*                              |

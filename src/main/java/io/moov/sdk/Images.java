@@ -195,7 +195,10 @@ public class Images {
     }
 
     /**
-     * Permanently delete an image by its ID.
+     * Disable an image by its ID.
+     * 
+     * <p>Disabled images are still be accessible via their public URL, and cannot be assigned
+     * to products or line-items.
      * 
      * @return The call builder
      */
@@ -204,7 +207,10 @@ public class Images {
     }
 
     /**
-     * Permanently delete an image by its ID.
+     * Disable an image by its ID.
+     * 
+     * <p>Disabled images are still be accessible via their public URL, and cannot be assigned
+     * to products or line-items.
      * 
      * @param accountID 
      * @param imageID 

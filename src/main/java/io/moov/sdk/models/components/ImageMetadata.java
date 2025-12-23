@@ -52,6 +52,11 @@ public class ImageMetadata {
     @JsonProperty("updatedOn")
     private OffsetDateTime updatedOn;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("disabledOn")
+    private Optional<OffsetDateTime> disabledOn;
+
     @JsonCreator
     public ImageMetadata(
             @JsonProperty("imageID") String imageID,
@@ -59,19 +64,22 @@ public class ImageMetadata {
             @JsonProperty("altText") Optional<String> altText,
             @JsonProperty("link") String link,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
-            @JsonProperty("updatedOn") OffsetDateTime updatedOn) {
+            @JsonProperty("updatedOn") OffsetDateTime updatedOn,
+            @JsonProperty("disabledOn") Optional<OffsetDateTime> disabledOn) {
         Utils.checkNotNull(imageID, "imageID");
         Utils.checkNotNull(publicID, "publicID");
         Utils.checkNotNull(altText, "altText");
         Utils.checkNotNull(link, "link");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(updatedOn, "updatedOn");
+        Utils.checkNotNull(disabledOn, "disabledOn");
         this.imageID = imageID;
         this.publicID = publicID;
         this.altText = altText;
         this.link = link;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
+        this.disabledOn = disabledOn;
     }
     
     public ImageMetadata(
@@ -81,7 +89,8 @@ public class ImageMetadata {
             OffsetDateTime createdOn,
             OffsetDateTime updatedOn) {
         this(imageID, publicID, Optional.empty(),
-            link, createdOn, updatedOn);
+            link, createdOn, updatedOn,
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -122,6 +131,11 @@ public class ImageMetadata {
     @JsonIgnore
     public OffsetDateTime updatedOn() {
         return updatedOn;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> disabledOn() {
+        return disabledOn;
     }
 
     public static Builder builder() {
@@ -185,6 +199,19 @@ public class ImageMetadata {
         return this;
     }
 
+    public ImageMetadata withDisabledOn(OffsetDateTime disabledOn) {
+        Utils.checkNotNull(disabledOn, "disabledOn");
+        this.disabledOn = Optional.ofNullable(disabledOn);
+        return this;
+    }
+
+
+    public ImageMetadata withDisabledOn(Optional<OffsetDateTime> disabledOn) {
+        Utils.checkNotNull(disabledOn, "disabledOn");
+        this.disabledOn = disabledOn;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -200,14 +227,16 @@ public class ImageMetadata {
             Utils.enhancedDeepEquals(this.altText, other.altText) &&
             Utils.enhancedDeepEquals(this.link, other.link) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
-            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn);
+            Utils.enhancedDeepEquals(this.updatedOn, other.updatedOn) &&
+            Utils.enhancedDeepEquals(this.disabledOn, other.disabledOn);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             imageID, publicID, altText,
-            link, createdOn, updatedOn);
+            link, createdOn, updatedOn,
+            disabledOn);
     }
     
     @Override
@@ -218,7 +247,8 @@ public class ImageMetadata {
                 "altText", altText,
                 "link", link,
                 "createdOn", createdOn,
-                "updatedOn", updatedOn);
+                "updatedOn", updatedOn,
+                "disabledOn", disabledOn);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -235,6 +265,8 @@ public class ImageMetadata {
         private OffsetDateTime createdOn;
 
         private OffsetDateTime updatedOn;
+
+        private Optional<OffsetDateTime> disabledOn = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -301,11 +333,25 @@ public class ImageMetadata {
             return this;
         }
 
+
+        public Builder disabledOn(OffsetDateTime disabledOn) {
+            Utils.checkNotNull(disabledOn, "disabledOn");
+            this.disabledOn = Optional.ofNullable(disabledOn);
+            return this;
+        }
+
+        public Builder disabledOn(Optional<OffsetDateTime> disabledOn) {
+            Utils.checkNotNull(disabledOn, "disabledOn");
+            this.disabledOn = disabledOn;
+            return this;
+        }
+
         public ImageMetadata build() {
 
             return new ImageMetadata(
                 imageID, publicID, altText,
-                link, createdOn, updatedOn);
+                link, createdOn, updatedOn,
+                disabledOn);
         }
 
     }

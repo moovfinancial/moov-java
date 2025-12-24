@@ -187,6 +187,13 @@ public class Transfer {
     @JsonProperty("lineItems")
     private Optional<? extends TransferLineItems> lineItems;
 
+    /**
+     * ID of the invoice that the transfer is associated with.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("invoiceID")
+    private Optional<String> invoiceID;
+
     @JsonCreator
     public Transfer(
             @JsonProperty("transferID") String transferID,
@@ -216,7 +223,8 @@ public class Transfer {
             @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("foreignID") Optional<String> foreignID,
-            @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems) {
+            @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
+            @JsonProperty("invoiceID") Optional<String> invoiceID) {
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(source, "source");
@@ -245,6 +253,7 @@ public class Transfer {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(lineItems, "lineItems");
+        Utils.checkNotNull(invoiceID, "invoiceID");
         this.transferID = transferID;
         this.createdOn = createdOn;
         this.source = source;
@@ -273,6 +282,7 @@ public class Transfer {
         this.salesTaxAmount = salesTaxAmount;
         this.foreignID = foreignID;
         this.lineItems = lineItems;
+        this.invoiceID = invoiceID;
     }
     
     public Transfer(
@@ -291,7 +301,7 @@ public class Transfer {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -486,6 +496,14 @@ public class Transfer {
     @JsonIgnore
     public Optional<TransferLineItems> lineItems() {
         return (Optional<TransferLineItems>) lineItems;
+    }
+
+    /**
+     * ID of the invoice that the transfer is associated with.
+     */
+    @JsonIgnore
+    public Optional<String> invoiceID() {
+        return invoiceID;
     }
 
     public static Builder builder() {
@@ -896,6 +914,25 @@ public class Transfer {
         return this;
     }
 
+    /**
+     * ID of the invoice that the transfer is associated with.
+     */
+    public Transfer withInvoiceID(String invoiceID) {
+        Utils.checkNotNull(invoiceID, "invoiceID");
+        this.invoiceID = Optional.ofNullable(invoiceID);
+        return this;
+    }
+
+
+    /**
+     * ID of the invoice that the transfer is associated with.
+     */
+    public Transfer withInvoiceID(Optional<String> invoiceID) {
+        Utils.checkNotNull(invoiceID, "invoiceID");
+        this.invoiceID = invoiceID;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -933,7 +970,8 @@ public class Transfer {
             Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
             Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
-            Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
+            Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
+            Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID);
     }
     
     @Override
@@ -948,7 +986,7 @@ public class Transfer {
             refunds, disputedAmount, disputes,
             sweepID, scheduleID, occurrenceID,
             paymentLinkCode, salesTaxAmount, foreignID,
-            lineItems);
+            lineItems, invoiceID);
     }
     
     @Override
@@ -981,7 +1019,8 @@ public class Transfer {
                 "paymentLinkCode", paymentLinkCode,
                 "salesTaxAmount", salesTaxAmount,
                 "foreignID", foreignID,
-                "lineItems", lineItems);
+                "lineItems", lineItems,
+                "invoiceID", invoiceID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -1042,6 +1081,8 @@ public class Transfer {
         private Optional<String> foreignID = Optional.empty();
 
         private Optional<? extends TransferLineItems> lineItems = Optional.empty();
+
+        private Optional<String> invoiceID = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -1456,6 +1497,25 @@ public class Transfer {
             return this;
         }
 
+
+        /**
+         * ID of the invoice that the transfer is associated with.
+         */
+        public Builder invoiceID(String invoiceID) {
+            Utils.checkNotNull(invoiceID, "invoiceID");
+            this.invoiceID = Optional.ofNullable(invoiceID);
+            return this;
+        }
+
+        /**
+         * ID of the invoice that the transfer is associated with.
+         */
+        public Builder invoiceID(Optional<String> invoiceID) {
+            Utils.checkNotNull(invoiceID, "invoiceID");
+            this.invoiceID = invoiceID;
+            return this;
+        }
+
         public Transfer build() {
 
             return new Transfer(
@@ -1468,7 +1528,7 @@ public class Transfer {
                 refunds, disputedAmount, disputes,
                 sweepID, scheduleID, occurrenceID,
                 paymentLinkCode, salesTaxAmount, foreignID,
-                lineItems);
+                lineItems, invoiceID);
         }
 
     }

@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 388aa387288b2574917d336712c424dd
+  docChecksum: 5d2c152edb26421d286c887757d23ac3
   docVersion: latest
-  speakeasyVersion: 1.680.4
+  speakeasyVersion: 1.680.5
   generationVersion: 2.788.7
-  releaseVersion: 0.34.11
-  configChecksum: 67409c1ede67955b8b41a94bd3ff0886
+  releaseVersion: 0.34.12
+  configChecksum: 6193230fcff80581b94bb4fd413da325
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: 8d381bc0-c629-4f62-a366-31ea9d2e6225
-  pristine_commit_hash: 6153205843ffc6d9993cdcee3b2968c88aa71055
-  pristine_tree_hash: a4b644ea3c84f6088a4b8224ee75a4b28fa85c1f
+  generation_id: fb775ebc-d62f-4dae-b7d0-8cef5077c3ef
+  pristine_commit_hash: d087d277f68c71da8d48f9dffd7300e4f0ba28c9
+  pristine_tree_hash: 4155d77238859d5aa161f8fc53374e126da0b23b
 features:
   java:
     acceptHeaders: 2.81.2
@@ -2041,8 +2041,8 @@ trackedFiles:
     pristine_git_object: 099dc06c52f20441347da8c2561997bb28ab6204
   docs/models/components/Transfer.md:
     id: 78c224258d94
-    last_write_checksum: sha1:9c566b114845dc0e716463cc833da9d1be27951c
-    pristine_git_object: c67381e49ca8f55308a8a9a0a8269fbb8b0f0714
+    last_write_checksum: sha1:1fef9cd73f9e1b187c56727880d64c379b4ee4ab
+    pristine_git_object: 202aad7b258117c9949bf8f5a0487a738faa6ef2
   docs/models/components/TransferAccount.md:
     id: 51c55af08638
     last_write_checksum: sha1:d853b099b949cfd709b3b85b4b03e1a21f404586
@@ -2121,8 +2121,8 @@ trackedFiles:
     pristine_git_object: bbe3c4af031c4b38e8e0c170d88708e256f404a3
   docs/models/components/UpdateInvoice.md:
     id: 29f763bb4508
-    last_write_checksum: sha1:927586f9e1f685606a5ed8f70fdb703eeaa57f76
-    pristine_git_object: 41fdc8761189450eba87fa291766ff57c2310d3e
+    last_write_checksum: sha1:2262379371480790fae540e956002a6c559f0a92
+    pristine_git_object: 431f18c79d2e08e62eb55b6ec47067412c4787cb
   docs/models/components/UpdateIssuedCard.md:
     id: afa72e93ecef
     last_write_checksum: sha1:de8ef039d3b70ee927cf02d6bbf338547f8938f2
@@ -2597,8 +2597,8 @@ trackedFiles:
     pristine_git_object: 2f7f6fe2b2c88cbaa5364a0e791cda00270dc394
   docs/models/errors/Transfer.md:
     id: a780b6294719
-    last_write_checksum: sha1:9c566b114845dc0e716463cc833da9d1be27951c
-    pristine_git_object: c67381e49ca8f55308a8a9a0a8269fbb8b0f0714
+    last_write_checksum: sha1:1fef9cd73f9e1b187c56727880d64c379b4ee4ab
+    pristine_git_object: 202aad7b258117c9949bf8f5a0487a738faa6ef2
   docs/models/errors/TransferOptionsValidationError.md:
     id: 6d33627ac865
     last_write_checksum: sha1:90d63f8b8e1bb7224b243df9046274edfb3ebbbd
@@ -4117,8 +4117,8 @@ trackedFiles:
     pristine_git_object: dcbab2e81d79a6a9b303f393270079410d6bcc67
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:a12cc24a0c5950b4265a34fafc78c30bbd23d3ae
-    pristine_git_object: b8e63ff6b1e1596c9b34fdb29e2c03b0797d4891
+    last_write_checksum: sha1:97a2a148fee594099fc02585f6e996bfc02863ab
+    pristine_git_object: ff935cd6983899aa5b41e64deca00cdd4201ae6d
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4293,8 +4293,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:9939e3bb86d70ea52cb4e41d32b567f46658a2dc
-    pristine_git_object: c16fd55a71abc24a9cdd98e0f5d8f245cb3ac6f0
+    last_write_checksum: sha1:3b0746ec9987fd74f75ae5cb66d27489b379d5aa
+    pristine_git_object: 3b69472bf6bd1f75e56b1ada1c8ed29c602a556b
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:f2634b766e3dc03d4f3043aff0565c655dcf17be
@@ -6333,8 +6333,8 @@ trackedFiles:
     pristine_git_object: 078c2248d2e34b88884c11b755bae5dc7b2f5ca8
   src/main/java/io/moov/sdk/models/components/Transfer.java:
     id: 8192fa1c33e4
-    last_write_checksum: sha1:b852898bde9aad6a866cafdf5fa6b7a543067481
-    pristine_git_object: a09baabc693e9eefba8b920b78793da6146d9d00
+    last_write_checksum: sha1:d42f6004ff09a1e27de5c99c2d3613c25eccd7e2
+    pristine_git_object: 33d6c3fc2566736332ec055acac24d98778aee0d
   src/main/java/io/moov/sdk/models/components/TransferAccount.java:
     id: c91a68d0dba7
     last_write_checksum: sha1:1a830b7ed2b470173be911093cb249fa45b217a4
@@ -6417,8 +6417,8 @@ trackedFiles:
     pristine_git_object: 159b9c11f5752d7710ee8a7b741d9e7c03f40ab7
   src/main/java/io/moov/sdk/models/components/UpdateInvoice.java:
     id: dc014dfbf86e
-    last_write_checksum: sha1:4cd3f0db19358f9bdae10d5b935c98ebb3969345
-    pristine_git_object: 6fd6835565e47048205d53108e249938faa4a976
+    last_write_checksum: sha1:74ba0c29113acaeeeeeca8ae2117a0cc8cbdec67
+    pristine_git_object: 08f979fe90413c86fb127e6eac958e65bed45c2b
   src/main/java/io/moov/sdk/models/components/UpdateIssuedCard.java:
     id: e1b8aab8627c
     last_write_checksum: sha1:c5d5784787315d60c85dc801e9802a6be8b4c076
@@ -6909,8 +6909,8 @@ trackedFiles:
     pristine_git_object: dd8959a08c9deac3f5bb971b732dad0bb232d48c
   src/main/java/io/moov/sdk/models/errors/Transfer.java:
     id: 9cbe5cc4020d
-    last_write_checksum: sha1:76f1328a5b9eaef5215de8f020531190f449bf31
-    pristine_git_object: fdae9f62ff60af15834dc409d45ceb7b1db4a348
+    last_write_checksum: sha1:ebe137580aa9e2a47257ebafeea6a0491fb4a035
+    pristine_git_object: a3babcf7efbc36266b6f878af736cbcc0f8ce600
   src/main/java/io/moov/sdk/models/errors/TransferOptionsValidationError.java:
     id: f897211ed4d3
     last_write_checksum: sha1:748c04ca59b2bae648c7e60c0e4f06115d50ea60
@@ -12451,14 +12451,7 @@ examples:
           application/json: {"allowScopes": {"0": "first element failed validation..."}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Java SDK Changes:
-  * `moov.invoices.markPaidInvoice()`: **Deleted** **Breaking** :warning:
-  * `moov.images.list()`:  `response.[].disabledOn` **Added**
-  * `moov.images.upload()`:  `response.disabledon` **Added**
-  * `moov.images.getMetadata()`:  `response.disabledon` **Added**
-  * `moov.images.update()`:  `response.disabledon` **Added**
-  * `moov.images.updateMetadata()`:  `response.disabledon` **Added**
+releaseNotes: "## Java SDK Changes:\n* `moov.transfers.create()`: \n  *  `response.invoiceid` **Added**\n  *  `error.invoiceid` **Added**\n* `moov.transfers.list()`:  `response.[].invoiceId` **Added**\n* `moov.transfers.get()`:  `response.invoiceid` **Added**\n* `moov.transfers.update()`:  `response.invoiceid` **Added**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

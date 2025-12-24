@@ -252,6 +252,14 @@ public class Transfer extends MoovError {
         return data().flatMap(Data::lineItems);
     }
 
+    /**
+     * ID of the invoice that the transfer is associated with.
+     */
+    @Deprecated
+    public Optional<String> invoiceID() {
+        return data().flatMap(Data::invoiceID);
+    }
+
     public Optional<Data> data() {
         return Optional.ofNullable(data);
     }
@@ -431,6 +439,13 @@ public class Transfer extends MoovError {
         @JsonProperty("lineItems")
         private Optional<? extends TransferLineItems> lineItems;
 
+        /**
+         * ID of the invoice that the transfer is associated with.
+         */
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("invoiceID")
+        private Optional<String> invoiceID;
+
         @JsonCreator
         public Data(
                 @JsonProperty("transferID") String transferID,
@@ -460,7 +475,8 @@ public class Transfer extends MoovError {
                 @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
                 @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
                 @JsonProperty("foreignID") Optional<String> foreignID,
-                @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems) {
+                @JsonProperty("lineItems") Optional<? extends TransferLineItems> lineItems,
+                @JsonProperty("invoiceID") Optional<String> invoiceID) {
             Utils.checkNotNull(transferID, "transferID");
             Utils.checkNotNull(createdOn, "createdOn");
             Utils.checkNotNull(source, "source");
@@ -489,6 +505,7 @@ public class Transfer extends MoovError {
             Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
             Utils.checkNotNull(foreignID, "foreignID");
             Utils.checkNotNull(lineItems, "lineItems");
+            Utils.checkNotNull(invoiceID, "invoiceID");
             this.transferID = transferID;
             this.createdOn = createdOn;
             this.source = source;
@@ -517,6 +534,7 @@ public class Transfer extends MoovError {
             this.salesTaxAmount = salesTaxAmount;
             this.foreignID = foreignID;
             this.lineItems = lineItems;
+            this.invoiceID = invoiceID;
         }
         
         public Data(
@@ -535,7 +553,7 @@ public class Transfer extends MoovError {
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty());
+                Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -730,6 +748,14 @@ public class Transfer extends MoovError {
         @JsonIgnore
         public Optional<TransferLineItems> lineItems() {
             return (Optional<TransferLineItems>) lineItems;
+        }
+
+        /**
+         * ID of the invoice that the transfer is associated with.
+         */
+        @JsonIgnore
+        public Optional<String> invoiceID() {
+            return invoiceID;
         }
 
         public static Builder builder() {
@@ -1140,6 +1166,25 @@ public class Transfer extends MoovError {
             return this;
         }
 
+        /**
+         * ID of the invoice that the transfer is associated with.
+         */
+        public Data withInvoiceID(String invoiceID) {
+            Utils.checkNotNull(invoiceID, "invoiceID");
+            this.invoiceID = Optional.ofNullable(invoiceID);
+            return this;
+        }
+
+
+        /**
+         * ID of the invoice that the transfer is associated with.
+         */
+        public Data withInvoiceID(Optional<String> invoiceID) {
+            Utils.checkNotNull(invoiceID, "invoiceID");
+            this.invoiceID = invoiceID;
+            return this;
+        }
+
         @Override
         public boolean equals(java.lang.Object o) {
             if (this == o) {
@@ -1177,7 +1222,8 @@ public class Transfer extends MoovError {
                 Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
                 Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
                 Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
-                Utils.enhancedDeepEquals(this.lineItems, other.lineItems);
+                Utils.enhancedDeepEquals(this.lineItems, other.lineItems) &&
+                Utils.enhancedDeepEquals(this.invoiceID, other.invoiceID);
         }
         
         @Override
@@ -1192,7 +1238,7 @@ public class Transfer extends MoovError {
                 refunds, disputedAmount, disputes,
                 sweepID, scheduleID, occurrenceID,
                 paymentLinkCode, salesTaxAmount, foreignID,
-                lineItems);
+                lineItems, invoiceID);
         }
         
         @Override
@@ -1225,7 +1271,8 @@ public class Transfer extends MoovError {
                     "paymentLinkCode", paymentLinkCode,
                     "salesTaxAmount", salesTaxAmount,
                     "foreignID", foreignID,
-                    "lineItems", lineItems);
+                    "lineItems", lineItems,
+                    "invoiceID", invoiceID);
         }
 
         @SuppressWarnings("UnusedReturnValue")
@@ -1286,6 +1333,8 @@ public class Transfer extends MoovError {
             private Optional<String> foreignID = Optional.empty();
 
             private Optional<? extends TransferLineItems> lineItems = Optional.empty();
+
+            private Optional<String> invoiceID = Optional.empty();
 
             private Builder() {
               // force use of static builder() method
@@ -1700,6 +1749,25 @@ public class Transfer extends MoovError {
                 return this;
             }
 
+
+            /**
+             * ID of the invoice that the transfer is associated with.
+             */
+            public Builder invoiceID(String invoiceID) {
+                Utils.checkNotNull(invoiceID, "invoiceID");
+                this.invoiceID = Optional.ofNullable(invoiceID);
+                return this;
+            }
+
+            /**
+             * ID of the invoice that the transfer is associated with.
+             */
+            public Builder invoiceID(Optional<String> invoiceID) {
+                Utils.checkNotNull(invoiceID, "invoiceID");
+                this.invoiceID = invoiceID;
+                return this;
+            }
+
             public Data build() {
 
                 return new Data(
@@ -1712,7 +1780,7 @@ public class Transfer extends MoovError {
                     refunds, disputedAmount, disputes,
                     sweepID, scheduleID, occurrenceID,
                     paymentLinkCode, salesTaxAmount, foreignID,
-                    lineItems);
+                    lineItems, invoiceID);
             }
 
         }

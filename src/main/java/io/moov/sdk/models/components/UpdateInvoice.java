@@ -41,7 +41,10 @@ public class UpdateInvoice {
     private JsonNullable<OffsetDateTime> dueDate;
 
     /**
-     * Status can only be updated to `canceled` when the status is either `draft`, `unpaid`,  or `overdue`.
+     * The status can be updated to one of the following values under specific conditions:
+     * - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+     * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
+     * finalizes the invoice and sends an email with a payment link to the customer.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
@@ -104,7 +107,10 @@ public class UpdateInvoice {
     }
 
     /**
-     * Status can only be updated to `canceled` when the status is either `draft`, `unpaid`,  or `overdue`.
+     * The status can be updated to one of the following values under specific conditions:
+     * - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+     * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
+     * finalizes the invoice and sends an email with a payment link to the customer.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -180,7 +186,10 @@ public class UpdateInvoice {
     }
 
     /**
-     * Status can only be updated to `canceled` when the status is either `draft`, `unpaid`,  or `overdue`.
+     * The status can be updated to one of the following values under specific conditions:
+     * - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+     * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
+     * finalizes the invoice and sends an email with a payment link to the customer.
      */
     public UpdateInvoice withStatus(InvoiceStatus status) {
         Utils.checkNotNull(status, "status");
@@ -190,7 +199,10 @@ public class UpdateInvoice {
 
 
     /**
-     * Status can only be updated to `canceled` when the status is either `draft`, `unpaid`,  or `overdue`.
+     * The status can be updated to one of the following values under specific conditions:
+     * - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+     * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
+     * finalizes the invoice and sends an email with a payment link to the customer.
      */
     public UpdateInvoice withStatus(Optional<? extends InvoiceStatus> status) {
         Utils.checkNotNull(status, "status");
@@ -326,7 +338,10 @@ public class UpdateInvoice {
 
 
         /**
-         * Status can only be updated to `canceled` when the status is either `draft`, `unpaid`,  or `overdue`.
+         * The status can be updated to one of the following values under specific conditions:
+         * - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+         * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
+         * finalizes the invoice and sends an email with a payment link to the customer.
          */
         public Builder status(InvoiceStatus status) {
             Utils.checkNotNull(status, "status");
@@ -335,7 +350,10 @@ public class UpdateInvoice {
         }
 
         /**
-         * Status can only be updated to `canceled` when the status is either `draft`, `unpaid`,  or `overdue`.
+         * The status can be updated to one of the following values under specific conditions:
+         * - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+         * - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid`
+         * finalizes the invoice and sends an email with a payment link to the customer.
          */
         public Builder status(Optional<? extends InvoiceStatus> status) {
             Utils.checkNotNull(status, "status");

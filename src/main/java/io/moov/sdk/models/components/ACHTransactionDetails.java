@@ -13,6 +13,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -105,6 +106,11 @@ public class ACHTransactionDetails {
     @JsonProperty("debitHoldPeriod")
     private Optional<? extends DebitHoldPeriod> debitHoldPeriod;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("addenda")
+    private Optional<? extends List<TransferACHAddendaRecord>> addenda;
+
     @JsonCreator
     public ACHTransactionDetails(
             @JsonProperty("status") ACHTransactionStatus status,
@@ -121,7 +127,8 @@ public class ACHTransactionDetails {
             @JsonProperty("returnedOn") Optional<OffsetDateTime> returnedOn,
             @JsonProperty("failedOn") Optional<OffsetDateTime> failedOn,
             @JsonProperty("completedOn") Optional<OffsetDateTime> completedOn,
-            @JsonProperty("debitHoldPeriod") Optional<? extends DebitHoldPeriod> debitHoldPeriod) {
+            @JsonProperty("debitHoldPeriod") Optional<? extends DebitHoldPeriod> debitHoldPeriod,
+            @JsonProperty("addenda") Optional<? extends List<TransferACHAddendaRecord>> addenda) {
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(traceNumber, "traceNumber");
         Utils.checkNotNull(return_, "return_");
@@ -137,6 +144,7 @@ public class ACHTransactionDetails {
         Utils.checkNotNull(failedOn, "failedOn");
         Utils.checkNotNull(completedOn, "completedOn");
         Utils.checkNotNull(debitHoldPeriod, "debitHoldPeriod");
+        Utils.checkNotNull(addenda, "addenda");
         this.status = status;
         this.traceNumber = traceNumber;
         this.return_ = return_;
@@ -152,6 +160,7 @@ public class ACHTransactionDetails {
         this.failedOn = failedOn;
         this.completedOn = completedOn;
         this.debitHoldPeriod = debitHoldPeriod;
+        this.addenda = addenda;
     }
     
     public ACHTransactionDetails(
@@ -161,7 +170,8 @@ public class ACHTransactionDetails {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -257,6 +267,12 @@ public class ACHTransactionDetails {
     @JsonIgnore
     public Optional<DebitHoldPeriod> debitHoldPeriod() {
         return (Optional<DebitHoldPeriod>) debitHoldPeriod;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<TransferACHAddendaRecord>> addenda() {
+        return (Optional<List<TransferACHAddendaRecord>>) addenda;
     }
 
     public static Builder builder() {
@@ -474,6 +490,19 @@ public class ACHTransactionDetails {
         return this;
     }
 
+    public ACHTransactionDetails withAddenda(List<TransferACHAddendaRecord> addenda) {
+        Utils.checkNotNull(addenda, "addenda");
+        this.addenda = Optional.ofNullable(addenda);
+        return this;
+    }
+
+
+    public ACHTransactionDetails withAddenda(Optional<? extends List<TransferACHAddendaRecord>> addenda) {
+        Utils.checkNotNull(addenda, "addenda");
+        this.addenda = addenda;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -498,7 +527,8 @@ public class ACHTransactionDetails {
             Utils.enhancedDeepEquals(this.returnedOn, other.returnedOn) &&
             Utils.enhancedDeepEquals(this.failedOn, other.failedOn) &&
             Utils.enhancedDeepEquals(this.completedOn, other.completedOn) &&
-            Utils.enhancedDeepEquals(this.debitHoldPeriod, other.debitHoldPeriod);
+            Utils.enhancedDeepEquals(this.debitHoldPeriod, other.debitHoldPeriod) &&
+            Utils.enhancedDeepEquals(this.addenda, other.addenda);
     }
     
     @Override
@@ -508,7 +538,8 @@ public class ACHTransactionDetails {
             correction, companyEntryDescription, originatingCompanyName,
             secCode, canceledOn, initiatedOn,
             originatedOn, correctedOn, returnedOn,
-            failedOn, completedOn, debitHoldPeriod);
+            failedOn, completedOn, debitHoldPeriod,
+            addenda);
     }
     
     @Override
@@ -528,7 +559,8 @@ public class ACHTransactionDetails {
                 "returnedOn", returnedOn,
                 "failedOn", failedOn,
                 "completedOn", completedOn,
-                "debitHoldPeriod", debitHoldPeriod);
+                "debitHoldPeriod", debitHoldPeriod,
+                "addenda", addenda);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -563,6 +595,8 @@ public class ACHTransactionDetails {
         private Optional<OffsetDateTime> completedOn = Optional.empty();
 
         private Optional<? extends DebitHoldPeriod> debitHoldPeriod = Optional.empty();
+
+        private Optional<? extends List<TransferACHAddendaRecord>> addenda = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -780,6 +814,19 @@ public class ACHTransactionDetails {
             return this;
         }
 
+
+        public Builder addenda(List<TransferACHAddendaRecord> addenda) {
+            Utils.checkNotNull(addenda, "addenda");
+            this.addenda = Optional.ofNullable(addenda);
+            return this;
+        }
+
+        public Builder addenda(Optional<? extends List<TransferACHAddendaRecord>> addenda) {
+            Utils.checkNotNull(addenda, "addenda");
+            this.addenda = addenda;
+            return this;
+        }
+
         public ACHTransactionDetails build() {
 
             return new ACHTransactionDetails(
@@ -787,7 +834,8 @@ public class ACHTransactionDetails {
                 correction, companyEntryDescription, originatingCompanyName,
                 secCode, canceledOn, initiatedOn,
                 originatedOn, correctedOn, returnedOn,
-                failedOn, completedOn, debitHoldPeriod);
+                failedOn, completedOn, debitHoldPeriod,
+                addenda);
         }
 
     }

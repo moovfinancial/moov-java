@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -29,18 +31,26 @@ public class CreateTransferDestinationACH {
     @JsonProperty("originatingCompanyName")
     private Optional<String> originatingCompanyName;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("addenda")
+    private Optional<? extends List<CreateTransferACHAddendaRecord>> addenda;
+
     @JsonCreator
     public CreateTransferDestinationACH(
             @JsonProperty("companyEntryDescription") Optional<String> companyEntryDescription,
-            @JsonProperty("originatingCompanyName") Optional<String> originatingCompanyName) {
+            @JsonProperty("originatingCompanyName") Optional<String> originatingCompanyName,
+            @JsonProperty("addenda") Optional<? extends List<CreateTransferACHAddendaRecord>> addenda) {
         Utils.checkNotNull(companyEntryDescription, "companyEntryDescription");
         Utils.checkNotNull(originatingCompanyName, "originatingCompanyName");
+        Utils.checkNotNull(addenda, "addenda");
         this.companyEntryDescription = companyEntryDescription;
         this.originatingCompanyName = originatingCompanyName;
+        this.addenda = addenda;
     }
     
     public CreateTransferDestinationACH() {
-        this(Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -57,6 +67,12 @@ public class CreateTransferDestinationACH {
     @JsonIgnore
     public Optional<String> originatingCompanyName() {
         return originatingCompanyName;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<CreateTransferACHAddendaRecord>> addenda() {
+        return (Optional<List<CreateTransferACHAddendaRecord>>) addenda;
     }
 
     public static Builder builder() {
@@ -102,6 +118,19 @@ public class CreateTransferDestinationACH {
         return this;
     }
 
+    public CreateTransferDestinationACH withAddenda(List<CreateTransferACHAddendaRecord> addenda) {
+        Utils.checkNotNull(addenda, "addenda");
+        this.addenda = Optional.ofNullable(addenda);
+        return this;
+    }
+
+
+    public CreateTransferDestinationACH withAddenda(Optional<? extends List<CreateTransferACHAddendaRecord>> addenda) {
+        Utils.checkNotNull(addenda, "addenda");
+        this.addenda = addenda;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -113,20 +142,22 @@ public class CreateTransferDestinationACH {
         CreateTransferDestinationACH other = (CreateTransferDestinationACH) o;
         return 
             Utils.enhancedDeepEquals(this.companyEntryDescription, other.companyEntryDescription) &&
-            Utils.enhancedDeepEquals(this.originatingCompanyName, other.originatingCompanyName);
+            Utils.enhancedDeepEquals(this.originatingCompanyName, other.originatingCompanyName) &&
+            Utils.enhancedDeepEquals(this.addenda, other.addenda);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            companyEntryDescription, originatingCompanyName);
+            companyEntryDescription, originatingCompanyName, addenda);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateTransferDestinationACH.class,
                 "companyEntryDescription", companyEntryDescription,
-                "originatingCompanyName", originatingCompanyName);
+                "originatingCompanyName", originatingCompanyName,
+                "addenda", addenda);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -135,6 +166,8 @@ public class CreateTransferDestinationACH {
         private Optional<String> companyEntryDescription = Optional.empty();
 
         private Optional<String> originatingCompanyName = Optional.empty();
+
+        private Optional<? extends List<CreateTransferACHAddendaRecord>> addenda = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -178,10 +211,23 @@ public class CreateTransferDestinationACH {
             return this;
         }
 
+
+        public Builder addenda(List<CreateTransferACHAddendaRecord> addenda) {
+            Utils.checkNotNull(addenda, "addenda");
+            this.addenda = Optional.ofNullable(addenda);
+            return this;
+        }
+
+        public Builder addenda(Optional<? extends List<CreateTransferACHAddendaRecord>> addenda) {
+            Utils.checkNotNull(addenda, "addenda");
+            this.addenda = addenda;
+            return this;
+        }
+
         public CreateTransferDestinationACH build() {
 
             return new CreateTransferDestinationACH(
-                companyEntryDescription, originatingCompanyName);
+                companyEntryDescription, originatingCompanyName, addenda);
         }
 
     }

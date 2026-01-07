@@ -12,6 +12,7 @@ import io.moov.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -45,25 +46,33 @@ public class CreateTransferSourceACH {
     @JsonProperty("secCode")
     private Optional<? extends SECCode> secCode;
 
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("addenda")
+    private Optional<? extends List<CreateTransferACHAddendaRecord>> addenda;
+
     @JsonCreator
     public CreateTransferSourceACH(
             @JsonProperty("companyEntryDescription") Optional<String> companyEntryDescription,
             @JsonProperty("originatingCompanyName") Optional<String> originatingCompanyName,
             @JsonProperty("debitHoldPeriod") Optional<? extends DebitHoldPeriod> debitHoldPeriod,
-            @JsonProperty("secCode") Optional<? extends SECCode> secCode) {
+            @JsonProperty("secCode") Optional<? extends SECCode> secCode,
+            @JsonProperty("addenda") Optional<? extends List<CreateTransferACHAddendaRecord>> addenda) {
         Utils.checkNotNull(companyEntryDescription, "companyEntryDescription");
         Utils.checkNotNull(originatingCompanyName, "originatingCompanyName");
         Utils.checkNotNull(debitHoldPeriod, "debitHoldPeriod");
         Utils.checkNotNull(secCode, "secCode");
+        Utils.checkNotNull(addenda, "addenda");
         this.companyEntryDescription = companyEntryDescription;
         this.originatingCompanyName = originatingCompanyName;
         this.debitHoldPeriod = debitHoldPeriod;
         this.secCode = secCode;
+        this.addenda = addenda;
     }
     
     public CreateTransferSourceACH() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -99,6 +108,12 @@ public class CreateTransferSourceACH {
     @JsonIgnore
     public Optional<SECCode> secCode() {
         return (Optional<SECCode>) secCode;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<CreateTransferACHAddendaRecord>> addenda() {
+        return (Optional<List<CreateTransferACHAddendaRecord>>) addenda;
     }
 
     public static Builder builder() {
@@ -184,6 +199,19 @@ public class CreateTransferSourceACH {
         return this;
     }
 
+    public CreateTransferSourceACH withAddenda(List<CreateTransferACHAddendaRecord> addenda) {
+        Utils.checkNotNull(addenda, "addenda");
+        this.addenda = Optional.ofNullable(addenda);
+        return this;
+    }
+
+
+    public CreateTransferSourceACH withAddenda(Optional<? extends List<CreateTransferACHAddendaRecord>> addenda) {
+        Utils.checkNotNull(addenda, "addenda");
+        this.addenda = addenda;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -197,14 +225,15 @@ public class CreateTransferSourceACH {
             Utils.enhancedDeepEquals(this.companyEntryDescription, other.companyEntryDescription) &&
             Utils.enhancedDeepEquals(this.originatingCompanyName, other.originatingCompanyName) &&
             Utils.enhancedDeepEquals(this.debitHoldPeriod, other.debitHoldPeriod) &&
-            Utils.enhancedDeepEquals(this.secCode, other.secCode);
+            Utils.enhancedDeepEquals(this.secCode, other.secCode) &&
+            Utils.enhancedDeepEquals(this.addenda, other.addenda);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             companyEntryDescription, originatingCompanyName, debitHoldPeriod,
-            secCode);
+            secCode, addenda);
     }
     
     @Override
@@ -213,7 +242,8 @@ public class CreateTransferSourceACH {
                 "companyEntryDescription", companyEntryDescription,
                 "originatingCompanyName", originatingCompanyName,
                 "debitHoldPeriod", debitHoldPeriod,
-                "secCode", secCode);
+                "secCode", secCode,
+                "addenda", addenda);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -226,6 +256,8 @@ public class CreateTransferSourceACH {
         private Optional<? extends DebitHoldPeriod> debitHoldPeriod = Optional.empty();
 
         private Optional<? extends SECCode> secCode = Optional.empty();
+
+        private Optional<? extends List<CreateTransferACHAddendaRecord>> addenda = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -309,11 +341,24 @@ public class CreateTransferSourceACH {
             return this;
         }
 
+
+        public Builder addenda(List<CreateTransferACHAddendaRecord> addenda) {
+            Utils.checkNotNull(addenda, "addenda");
+            this.addenda = Optional.ofNullable(addenda);
+            return this;
+        }
+
+        public Builder addenda(Optional<? extends List<CreateTransferACHAddendaRecord>> addenda) {
+            Utils.checkNotNull(addenda, "addenda");
+            this.addenda = addenda;
+            return this;
+        }
+
         public CreateTransferSourceACH build() {
 
             return new CreateTransferSourceACH(
                 companyEntryDescription, originatingCompanyName, debitHoldPeriod,
-                secCode);
+                secCode, addenda);
         }
 
     }

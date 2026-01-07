@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 5d2c152edb26421d286c887757d23ac3
+  docChecksum: e01562d310fd7aa7c121970e2a647ba9
   docVersion: latest
-  speakeasyVersion: 1.680.5
-  generationVersion: 2.788.7
-  releaseVersion: 0.34.12
-  configChecksum: 6193230fcff80581b94bb4fd413da325
+  speakeasyVersion: 1.682.0
+  generationVersion: 2.791.1
+  releaseVersion: 0.34.13
+  configChecksum: ae8bb306bbf2e324573d32223cff47e9
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: fb775ebc-d62f-4dae-b7d0-8cef5077c3ef
-  pristine_commit_hash: d087d277f68c71da8d48f9dffd7300e4f0ba28c9
-  pristine_tree_hash: 4155d77238859d5aa161f8fc53374e126da0b23b
+  generation_id: 933c4b2e-c894-48f5-8678-985f5a4be09e
+  pristine_commit_hash: 99d26fea260667fa54a959f87db6ecb6404ea73d
+  pristine_tree_hash: 283c9cfe5caea3a70645cfd3e57dcd058c552762
 features:
   java:
     acceptHeaders: 2.81.2
@@ -77,8 +77,8 @@ trackedFiles:
     pristine_git_object: ad86a65fdac1e5d4fb1552aec0b790f3c17b049e
   docs/models/components/ACHTransactionDetails.md:
     id: b2dffe04048f
-    last_write_checksum: sha1:2394c1455a88d3f885e092b75792311643587c64
-    pristine_git_object: 32ddd5024f2bbdad668503213aebd7d8b26ac4e6
+    last_write_checksum: sha1:7204ed1faa29b3329b395413a535a13e3ad6be24
+    pristine_git_object: 916ae4f0f79ca7dffde86aabdc3b9ff389211607
   docs/models/components/ACHTransactionStatus.md:
     id: ca91babdae34
     last_write_checksum: sha1:052b5e2a46878e7e9e2aef858d22d2ae550a11fe
@@ -807,14 +807,18 @@ trackedFiles:
     id: cfa8e0085e3d
     last_write_checksum: sha1:b552e53d0b07405f682416721028539e7befd29e
     pristine_git_object: 8b99822be18bd0c9c6e4fc339e24f93c5357cdab
+  docs/models/components/CreateTransferACHAddendaRecord.md:
+    id: aa66f3023b15
+    last_write_checksum: sha1:4366ece1ff4ee927bd0512abc7361629ca2d27c9
+    pristine_git_object: 0729ff5dc73d142e2526acec11756522c07ed121
   docs/models/components/CreateTransferDestination.md:
     id: 66196005e2cd
     last_write_checksum: sha1:e4a53630d3ec0b3e3637749275977758214e4271
     pristine_git_object: bb04f14561a02bc9555fc91a762bbe1b0d0d52fd
   docs/models/components/CreateTransferDestinationACH.md:
     id: 02a639c245a8
-    last_write_checksum: sha1:33167f4518fd548e89dfe2e273071a34625e865e
-    pristine_git_object: 99da5390a5a293e6d1d8310cc692a8706fe17b8b
+    last_write_checksum: sha1:1651455c477a445fb13155d55d39c9588b4377be
+    pristine_git_object: e935d9acb0b6afb49abf5a523feb2923a6115b92
   docs/models/components/CreateTransferDestinationCard.md:
     id: 50f2de096d72
     last_write_checksum: sha1:10cc2a25f08e5a9336a62a5398be3e9222eaa3cb
@@ -853,8 +857,8 @@ trackedFiles:
     pristine_git_object: baea90ad2952d11d7c1b09512b1a287c7eadfac7
   docs/models/components/CreateTransferSourceACH.md:
     id: 7b4433a1edbd
-    last_write_checksum: sha1:759b6ee9d3a1fcc5e0c5d676b0677c4627a30691
-    pristine_git_object: bad0b9c1ad6bf8570eab805d348abec319ad0079
+    last_write_checksum: sha1:4f058644336fbaaa77ce6fb426ba33ac49010471
+    pristine_git_object: 2ce0c98239ed73b1b8506677306e984c8c75da22
   docs/models/components/CreateTransferSourceCard.md:
     id: b4801f7be822
     last_write_checksum: sha1:5846252d8160d82a76a9c7a1b8656e2699212b87
@@ -2043,6 +2047,10 @@ trackedFiles:
     id: 78c224258d94
     last_write_checksum: sha1:1fef9cd73f9e1b187c56727880d64c379b4ee4ab
     pristine_git_object: 202aad7b258117c9949bf8f5a0487a738faa6ef2
+  docs/models/components/TransferACHAddendaRecord.md:
+    id: 4b9b11ec6243
+    last_write_checksum: sha1:dca0733be1975d7a4025ab54311e17514ceb6af5
+    pristine_git_object: f6d6c41c5850a30021184c0ff8505e8c355f4878
   docs/models/components/TransferAccount.md:
     id: 51c55af08638
     last_write_checksum: sha1:d853b099b949cfd709b3b85b4b03e1a21f404586
@@ -4117,8 +4125,8 @@ trackedFiles:
     pristine_git_object: dcbab2e81d79a6a9b303f393270079410d6bcc67
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:97a2a148fee594099fc02585f6e996bfc02863ab
-    pristine_git_object: ff935cd6983899aa5b41e64deca00cdd4201ae6d
+    last_write_checksum: sha1:647e1fefefd4f4ae77879743b3406720f339e8db
+    pristine_git_object: cfefd7ad7ab05e5acb328d04a94dbff755e8e6a0
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4293,8 +4301,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:3b0746ec9987fd74f75ae5cb66d27489b379d5aa
-    pristine_git_object: 3b69472bf6bd1f75e56b1ada1c8ed29c602a556b
+    last_write_checksum: sha1:7f7e294ebea8e8349efe2147619ce74471019227
+    pristine_git_object: 30d01fb1d27159d6d469d98b8f4df4ce99f37c25
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:f2634b766e3dc03d4f3043aff0565c655dcf17be
@@ -4365,8 +4373,8 @@ trackedFiles:
     pristine_git_object: dccb83f4729b4b1da2cdb35048eefe960dcf2f01
   src/main/java/io/moov/sdk/models/components/ACHTransactionDetails.java:
     id: d737c75ff56d
-    last_write_checksum: sha1:205d5d59cdf61eb9330f48836fcde0664bd4e48e
-    pristine_git_object: 8d3ee975f2f05fd7ea68e472e16b43fbdbab7b0b
+    last_write_checksum: sha1:bb01f417a19c57fb58331d8997a222f3d29d1734
+    pristine_git_object: 36b52a08cacb917784a2e786a4bedcdafaa2372d
   src/main/java/io/moov/sdk/models/components/ACHTransactionStatus.java:
     id: dfbd6233e5b8
     last_write_checksum: sha1:6344500f9e9215a4f442855f08b529de88900f99
@@ -5095,14 +5103,18 @@ trackedFiles:
     id: "2785708398e3"
     last_write_checksum: sha1:7be335063b7f92f16bdd4dbb321323f0c0621a33
     pristine_git_object: 827fe2726772ea4f92e173a466f2714e5fc3312b
+  src/main/java/io/moov/sdk/models/components/CreateTransferACHAddendaRecord.java:
+    id: 973bd7e6e901
+    last_write_checksum: sha1:b400a8d2782cb74a9b2220907c74d4abcd748637
+    pristine_git_object: 95e402b83211063595954db39c680b08d6db4490
   src/main/java/io/moov/sdk/models/components/CreateTransferDestination.java:
     id: c29bd444a88b
     last_write_checksum: sha1:e6088bd8fad3e2011efe311cb295908e3ebed8ae
     pristine_git_object: 93c684f24d9d2dcf4adb63d586be1c7df598d3c0
   src/main/java/io/moov/sdk/models/components/CreateTransferDestinationACH.java:
     id: 2237ccff4349
-    last_write_checksum: sha1:b48623130b804d3f1e6c448c2ef7533812defd69
-    pristine_git_object: b4a494273cf05ee0ef7b5c4260dd47f1d4e7f381
+    last_write_checksum: sha1:c68c767ef3fa47e3d4db302cb4e4de2beff11dc3
+    pristine_git_object: 6eb074ebe62d5331148ff288829a2cc4b1e69039
   src/main/java/io/moov/sdk/models/components/CreateTransferDestinationCard.java:
     id: d3629b148117
     last_write_checksum: sha1:db8fe94e0488b76255a87b2efe2cd0105f6a6b1e
@@ -5141,8 +5153,8 @@ trackedFiles:
     pristine_git_object: cba5b755c75e668da20596addcadc5c2aad62306
   src/main/java/io/moov/sdk/models/components/CreateTransferSourceACH.java:
     id: ea7a5ac7dbff
-    last_write_checksum: sha1:d7d19dfa0935aaf34009bc0f869bcc65906a141b
-    pristine_git_object: 57b82e69c162af846f716354b6c62e9d18c3bee1
+    last_write_checksum: sha1:cf1ac12ad7b3f444865568c0161b70d262f96a09
+    pristine_git_object: 90e1ff1c4875a4dc0d0cccfb5ba573a1d78599df
   src/main/java/io/moov/sdk/models/components/CreateTransferSourceCard.java:
     id: 60ed139dde6e
     last_write_checksum: sha1:4476f415b2c92af8202e06388662c2539a56da78
@@ -6335,6 +6347,10 @@ trackedFiles:
     id: 8192fa1c33e4
     last_write_checksum: sha1:d42f6004ff09a1e27de5c99c2d3613c25eccd7e2
     pristine_git_object: 33d6c3fc2566736332ec055acac24d98778aee0d
+  src/main/java/io/moov/sdk/models/components/TransferACHAddendaRecord.java:
+    id: dd8e9a589f0c
+    last_write_checksum: sha1:061fac588b65be3564a55f894fb2badd23ca6c18
+    pristine_git_object: cb2a3e99bcafa1f8445e9b5cc83095e8f7d53aa5
   src/main/java/io/moov/sdk/models/components/TransferAccount.java:
     id: c91a68d0dba7
     last_write_checksum: sha1:1a830b7ed2b470173be911093cb249fa45b217a4
@@ -12451,7 +12467,7 @@ examples:
           application/json: {"allowScopes": {"0": "first element failed validation..."}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.transfers.create()`: \n  *  `response.invoiceid` **Added**\n  *  `error.invoiceid` **Added**\n* `moov.transfers.list()`:  `response.[].invoiceId` **Added**\n* `moov.transfers.get()`:  `response.invoiceid` **Added**\n* `moov.transfers.update()`:  `response.invoiceid` **Added**\n"
+releaseNotes: "## Java SDK Changes:\n* `moov.transfers.create()`: \n  *  `request.createtransfer` **Changed**\n  *  `response.source.achDetails.addenda` **Added**\n  *  `error.source.achDetails.addenda` **Added**\n* `moov.transfers.list()`:  `response.[].source.achDetails.addenda` **Added**\n* `moov.transfers.get()`:  `response.source.achDetails.addenda` **Added**\n* `moov.transfers.update()`:  `response.source.achDetails.addenda` **Added**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

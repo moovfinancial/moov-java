@@ -8,13 +8,19 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-public enum InvoiceExternalPaymentPaymentType {
-    EXTERNAL("external");
+/**
+ * WebhookStatus
+ * 
+ * <p>The status of a webhook.
+ */
+public enum WebhookStatus {
+    ENABLED("enabled"),
+    DISABLED("disabled");
 
     @JsonValue
     private final String value;
 
-    InvoiceExternalPaymentPaymentType(String value) {
+    WebhookStatus(String value) {
         this.value = value;
     }
     
@@ -22,8 +28,8 @@ public enum InvoiceExternalPaymentPaymentType {
         return value;
     }
     
-    public static Optional<InvoiceExternalPaymentPaymentType> fromValue(String value) {
-        for (InvoiceExternalPaymentPaymentType o: InvoiceExternalPaymentPaymentType.values()) {
+    public static Optional<WebhookStatus> fromValue(String value) {
+        for (WebhookStatus o: WebhookStatus.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

@@ -6,13 +6,20 @@ package io.moov.sdk;
 import static io.moov.sdk.operations.Operations.RequestOperation;
 
 import io.moov.sdk.models.components.CreateInvoice;
+import io.moov.sdk.models.components.CreateInvoicePayment;
 import io.moov.sdk.models.components.UpdateInvoice;
+import io.moov.sdk.models.operations.CreateInvoicePaymentRequest;
+import io.moov.sdk.models.operations.CreateInvoicePaymentRequestBuilder;
+import io.moov.sdk.models.operations.CreateInvoicePaymentResponse;
 import io.moov.sdk.models.operations.CreateInvoiceRequest;
 import io.moov.sdk.models.operations.CreateInvoiceRequestBuilder;
 import io.moov.sdk.models.operations.CreateInvoiceResponse;
 import io.moov.sdk.models.operations.GetInvoiceRequest;
 import io.moov.sdk.models.operations.GetInvoiceRequestBuilder;
 import io.moov.sdk.models.operations.GetInvoiceResponse;
+import io.moov.sdk.models.operations.ListInvoicePaymentsRequest;
+import io.moov.sdk.models.operations.ListInvoicePaymentsRequestBuilder;
+import io.moov.sdk.models.operations.ListInvoicePaymentsResponse;
 import io.moov.sdk.models.operations.ListInvoicesRequest;
 import io.moov.sdk.models.operations.ListInvoicesRequestBuilder;
 import io.moov.sdk.models.operations.ListInvoicesResponse;
@@ -20,6 +27,7 @@ import io.moov.sdk.models.operations.UpdateInvoiceRequest;
 import io.moov.sdk.models.operations.UpdateInvoiceRequestBuilder;
 import io.moov.sdk.models.operations.UpdateInvoiceResponse;
 import io.moov.sdk.operations.GetInvoice;
+import io.moov.sdk.operations.ListInvoicePayments;
 import io.moov.sdk.operations.ListInvoices;
 import io.moov.sdk.utils.Headers;
 import java.lang.String;
@@ -175,6 +183,88 @@ public class Invoices {
                 .build();
         RequestOperation<UpdateInvoiceRequest, UpdateInvoiceResponse> operation
               = new io.moov.sdk.operations.UpdateInvoice.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
+     * If a payment link was created for the invoice, the corresponding payment link is canceled, but a
+     * receipt is still sent.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @return The call builder
+     */
+    public CreateInvoicePaymentRequestBuilder createInvoicePayment() {
+        return new CreateInvoicePaymentRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
+     * If a payment link was created for the invoice, the corresponding payment link is canceled, but a
+     * receipt is still sent.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @param createInvoicePayment 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public CreateInvoicePaymentResponse createInvoicePayment(
+            String accountID, String invoiceID,
+            CreateInvoicePayment createInvoicePayment) {
+        CreateInvoicePaymentRequest request =
+            CreateInvoicePaymentRequest
+                .builder()
+                .accountID(accountID)
+                .invoiceID(invoiceID)
+                .createInvoicePayment(createInvoicePayment)
+                .build();
+        RequestOperation<CreateInvoicePaymentRequest, CreateInvoicePaymentResponse> operation
+              = new io.moov.sdk.operations.CreateInvoicePayment.Sync(sdkConfiguration, _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * List all the payments made towards an invoice.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
+     * 
+     * @return The call builder
+     */
+    public ListInvoicePaymentsRequestBuilder listInvoicePayments() {
+        return new ListInvoicePaymentsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * List all the payments made towards an invoice.
+     * 
+     * <p>To access this endpoint using an [access
+     * token](https://docs.moov.io/api/authentication/access-tokens/)
+     * you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
+     * 
+     * @param accountID 
+     * @param invoiceID 
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public ListInvoicePaymentsResponse listInvoicePayments(String accountID, String invoiceID) {
+        ListInvoicePaymentsRequest request =
+            ListInvoicePaymentsRequest
+                .builder()
+                .accountID(accountID)
+                .invoiceID(invoiceID)
+                .build();
+        RequestOperation<ListInvoicePaymentsRequest, ListInvoicePaymentsResponse> operation
+              = new ListInvoicePayments.Sync(sdkConfiguration, _headers);
         return operation.handleResponse(operation.doRequest(request));
     }
 

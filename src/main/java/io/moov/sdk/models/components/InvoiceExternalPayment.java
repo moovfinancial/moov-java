@@ -17,10 +17,6 @@ import java.util.Optional;
 
 public class InvoiceExternalPayment {
 
-    @JsonProperty("paymentType")
-    private InvoiceExternalPaymentPaymentType paymentType;
-
-
     @JsonProperty("description")
     private String description;
 
@@ -40,17 +36,14 @@ public class InvoiceExternalPayment {
 
     @JsonCreator
     public InvoiceExternalPayment(
-            @JsonProperty("paymentType") InvoiceExternalPaymentPaymentType paymentType,
             @JsonProperty("description") String description,
             @JsonProperty("foreignID") Optional<String> foreignID,
             @JsonProperty("paymentDate") Optional<OffsetDateTime> paymentDate,
             @JsonProperty("amount") AmountDecimal amount) {
-        Utils.checkNotNull(paymentType, "paymentType");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(paymentDate, "paymentDate");
         Utils.checkNotNull(amount, "amount");
-        this.paymentType = paymentType;
         this.description = description;
         this.foreignID = foreignID;
         this.paymentDate = paymentDate;
@@ -58,16 +51,10 @@ public class InvoiceExternalPayment {
     }
     
     public InvoiceExternalPayment(
-            InvoiceExternalPaymentPaymentType paymentType,
             String description,
             AmountDecimal amount) {
-        this(paymentType, description, Optional.empty(),
-            Optional.empty(), amount);
-    }
-
-    @JsonIgnore
-    public InvoiceExternalPaymentPaymentType paymentType() {
-        return paymentType;
+        this(description, Optional.empty(), Optional.empty(),
+            amount);
     }
 
     @JsonIgnore
@@ -94,12 +81,6 @@ public class InvoiceExternalPayment {
         return new Builder();
     }
 
-
-    public InvoiceExternalPayment withPaymentType(InvoiceExternalPaymentPaymentType paymentType) {
-        Utils.checkNotNull(paymentType, "paymentType");
-        this.paymentType = paymentType;
-        return this;
-    }
 
     public InvoiceExternalPayment withDescription(String description) {
         Utils.checkNotNull(description, "description");
@@ -149,7 +130,6 @@ public class InvoiceExternalPayment {
         }
         InvoiceExternalPayment other = (InvoiceExternalPayment) o;
         return 
-            Utils.enhancedDeepEquals(this.paymentType, other.paymentType) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
             Utils.enhancedDeepEquals(this.paymentDate, other.paymentDate) &&
@@ -159,14 +139,13 @@ public class InvoiceExternalPayment {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentType, description, foreignID,
-            paymentDate, amount);
+            description, foreignID, paymentDate,
+            amount);
     }
     
     @Override
     public String toString() {
         return Utils.toString(InvoiceExternalPayment.class,
-                "paymentType", paymentType,
                 "description", description,
                 "foreignID", foreignID,
                 "paymentDate", paymentDate,
@@ -175,8 +154,6 @@ public class InvoiceExternalPayment {
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
-
-        private InvoiceExternalPaymentPaymentType paymentType;
 
         private String description;
 
@@ -188,13 +165,6 @@ public class InvoiceExternalPayment {
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        public Builder paymentType(InvoiceExternalPaymentPaymentType paymentType) {
-            Utils.checkNotNull(paymentType, "paymentType");
-            this.paymentType = paymentType;
-            return this;
         }
 
 
@@ -240,8 +210,8 @@ public class InvoiceExternalPayment {
         public InvoiceExternalPayment build() {
 
             return new InvoiceExternalPayment(
-                paymentType, description, foreignID,
-                paymentDate, amount);
+                description, foreignID, paymentDate,
+                amount);
         }
 
     }

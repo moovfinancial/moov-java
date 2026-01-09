@@ -541,6 +541,17 @@ public class SDKAutoConfig {
         return moov.enrichedProfile();
     }
     /**
+     * Creates a Webhooks sub-SDK bean if none exists.
+     *
+     * @param moov the main SDK instance
+     * @return A configured Webhooks instance
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public Webhooks webhooks(Moov moov) {
+        return moov.webhooks();
+    }
+    /**
      * Creates a Industries sub-SDK bean if none exists.
      *
      * @param moov the main SDK instance

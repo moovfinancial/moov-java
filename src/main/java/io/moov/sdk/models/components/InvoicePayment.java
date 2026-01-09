@@ -21,8 +21,12 @@ import java.util.Optional;
  */
 public class InvoicePayment {
 
-    @JsonProperty("paymentType")
-    private InvoicePaymentType paymentType;
+    @JsonProperty("invoicePaymentID")
+    private String invoicePaymentID;
+
+
+    @JsonProperty("invoicePaymentType")
+    private InvoicePaymentType invoicePaymentType;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -36,25 +40,35 @@ public class InvoicePayment {
 
     @JsonCreator
     public InvoicePayment(
-            @JsonProperty("paymentType") InvoicePaymentType paymentType,
+            @JsonProperty("invoicePaymentID") String invoicePaymentID,
+            @JsonProperty("invoicePaymentType") InvoicePaymentType invoicePaymentType,
             @JsonProperty("transfer") Optional<? extends InvoiceTransferPayment> transfer,
             @JsonProperty("external") Optional<? extends InvoiceExternalPayment> external) {
-        Utils.checkNotNull(paymentType, "paymentType");
+        Utils.checkNotNull(invoicePaymentID, "invoicePaymentID");
+        Utils.checkNotNull(invoicePaymentType, "invoicePaymentType");
         Utils.checkNotNull(transfer, "transfer");
         Utils.checkNotNull(external, "external");
-        this.paymentType = paymentType;
+        this.invoicePaymentID = invoicePaymentID;
+        this.invoicePaymentType = invoicePaymentType;
         this.transfer = transfer;
         this.external = external;
     }
     
     public InvoicePayment(
-            InvoicePaymentType paymentType) {
-        this(paymentType, Optional.empty(), Optional.empty());
+            String invoicePaymentID,
+            InvoicePaymentType invoicePaymentType) {
+        this(invoicePaymentID, invoicePaymentType, Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
-    public InvoicePaymentType paymentType() {
-        return paymentType;
+    public String invoicePaymentID() {
+        return invoicePaymentID;
+    }
+
+    @JsonIgnore
+    public InvoicePaymentType invoicePaymentType() {
+        return invoicePaymentType;
     }
 
     @SuppressWarnings("unchecked")
@@ -74,9 +88,15 @@ public class InvoicePayment {
     }
 
 
-    public InvoicePayment withPaymentType(InvoicePaymentType paymentType) {
-        Utils.checkNotNull(paymentType, "paymentType");
-        this.paymentType = paymentType;
+    public InvoicePayment withInvoicePaymentID(String invoicePaymentID) {
+        Utils.checkNotNull(invoicePaymentID, "invoicePaymentID");
+        this.invoicePaymentID = invoicePaymentID;
+        return this;
+    }
+
+    public InvoicePayment withInvoicePaymentType(InvoicePaymentType invoicePaymentType) {
+        Utils.checkNotNull(invoicePaymentType, "invoicePaymentType");
+        this.invoicePaymentType = invoicePaymentType;
         return this;
     }
 
@@ -116,7 +136,8 @@ public class InvoicePayment {
         }
         InvoicePayment other = (InvoicePayment) o;
         return 
-            Utils.enhancedDeepEquals(this.paymentType, other.paymentType) &&
+            Utils.enhancedDeepEquals(this.invoicePaymentID, other.invoicePaymentID) &&
+            Utils.enhancedDeepEquals(this.invoicePaymentType, other.invoicePaymentType) &&
             Utils.enhancedDeepEquals(this.transfer, other.transfer) &&
             Utils.enhancedDeepEquals(this.external, other.external);
     }
@@ -124,13 +145,15 @@ public class InvoicePayment {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentType, transfer, external);
+            invoicePaymentID, invoicePaymentType, transfer,
+            external);
     }
     
     @Override
     public String toString() {
         return Utils.toString(InvoicePayment.class,
-                "paymentType", paymentType,
+                "invoicePaymentID", invoicePaymentID,
+                "invoicePaymentType", invoicePaymentType,
                 "transfer", transfer,
                 "external", external);
     }
@@ -138,7 +161,9 @@ public class InvoicePayment {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private InvoicePaymentType paymentType;
+        private String invoicePaymentID;
+
+        private InvoicePaymentType invoicePaymentType;
 
         private Optional<? extends InvoiceTransferPayment> transfer = Optional.empty();
 
@@ -149,9 +174,16 @@ public class InvoicePayment {
         }
 
 
-        public Builder paymentType(InvoicePaymentType paymentType) {
-            Utils.checkNotNull(paymentType, "paymentType");
-            this.paymentType = paymentType;
+        public Builder invoicePaymentID(String invoicePaymentID) {
+            Utils.checkNotNull(invoicePaymentID, "invoicePaymentID");
+            this.invoicePaymentID = invoicePaymentID;
+            return this;
+        }
+
+
+        public Builder invoicePaymentType(InvoicePaymentType invoicePaymentType) {
+            Utils.checkNotNull(invoicePaymentType, "invoicePaymentType");
+            this.invoicePaymentType = invoicePaymentType;
             return this;
         }
 
@@ -184,7 +216,8 @@ public class InvoicePayment {
         public InvoicePayment build() {
 
             return new InvoicePayment(
-                paymentType, transfer, external);
+                invoicePaymentID, invoicePaymentType, transfer,
+                external);
         }
 
     }

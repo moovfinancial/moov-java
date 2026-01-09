@@ -20,6 +20,15 @@ you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+* [createInvoicePayment](#createinvoicepayment) - Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
+If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+* [listInvoicePayments](#listinvoicepayments) - List all the payments made towards an invoice.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ## createInvoice
 
@@ -310,3 +319,130 @@ public class Application {
 | models/errors/GenericError       | 400, 409                         | application/json                 |
 | models/errors/UpdateInvoiceError | 422                              | application/json                 |
 | models/errors/APIException       | 4XX, 5XX                         | \*/\*                            |
+
+## createInvoicePayment
+
+Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
+If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="createInvoicePayment" method="post" path="/accounts/{accountID}/invoices/{invoiceID}/payments" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.CreateInvoicePayment;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.errors.CreateInvoicePaymentError;
+import io.moov.sdk.models.errors.GenericError;
+import io.moov.sdk.models.operations.CreateInvoicePaymentResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GenericError, CreateInvoicePaymentError, Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("<value>")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        CreateInvoicePaymentResponse res = sdk.invoices().createInvoicePayment()
+                .accountID("e02333e4-a835-46d1-8d02-9af7a405e65f")
+                .invoiceID("99e7ebb0-9996-49b2-98f0-304c7332ece6")
+                .createInvoicePayment(CreateInvoicePayment.builder()
+                    .build())
+                .call();
+
+        if (res.invoicePayment().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `accountID`                                                             | *String*                                                                | :heavy_check_mark:                                                      | N/A                                                                     |
+| `invoiceID`                                                             | *String*                                                                | :heavy_check_mark:                                                      | N/A                                                                     |
+| `createInvoicePayment`                                                  | [CreateInvoicePayment](../../models/components/CreateInvoicePayment.md) | :heavy_check_mark:                                                      | N/A                                                                     |
+
+### Response
+
+**[CreateInvoicePaymentResponse](../../models/operations/CreateInvoicePaymentResponse.md)**
+
+### Errors
+
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| models/errors/GenericError              | 400, 409                                | application/json                        |
+| models/errors/CreateInvoicePaymentError | 422                                     | application/json                        |
+| models/errors/APIException              | 4XX, 5XX                                | \*/\*                                   |
+
+## listInvoicePayments
+
+List all the payments made towards an invoice.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="listInvoicePayments" method="get" path="/accounts/{accountID}/invoices/{invoiceID}/payments" -->
+```java
+package hello.world;
+
+import io.moov.sdk.Moov;
+import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.operations.ListInvoicePaymentsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        Moov sdk = Moov.builder()
+                .xMoovVersion("<value>")
+                .security(Security.builder()
+                    .username("")
+                    .password("")
+                    .build())
+            .build();
+
+        ListInvoicePaymentsResponse res = sdk.invoices().listInvoicePayments()
+                .accountID("dcfbb04d-465e-4dbc-ad14-420961d94d21")
+                .invoiceID("d25d8b7f-bb29-420c-8185-4ed9df60ba13")
+                .call();
+
+        if (res.invoicePayments().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter          | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `accountID`        | *String*           | :heavy_check_mark: | N/A                |
+| `invoiceID`        | *String*           | :heavy_check_mark: | N/A                |
+
+### Response
+
+**[ListInvoicePaymentsResponse](../../models/operations/ListInvoicePaymentsResponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models/errors/APIException | 4XX, 5XX                   | \*/\*                      |

@@ -13,26 +13,14 @@ import java.lang.String;
 
 public class InvoiceTransferPayment {
 
-    @JsonProperty("paymentType")
-    private PaymentType paymentType;
-
-
     @JsonProperty("transferID")
     private String transferID;
 
     @JsonCreator
     public InvoiceTransferPayment(
-            @JsonProperty("paymentType") PaymentType paymentType,
             @JsonProperty("transferID") String transferID) {
-        Utils.checkNotNull(paymentType, "paymentType");
         Utils.checkNotNull(transferID, "transferID");
-        this.paymentType = paymentType;
         this.transferID = transferID;
-    }
-
-    @JsonIgnore
-    public PaymentType paymentType() {
-        return paymentType;
     }
 
     @JsonIgnore
@@ -44,12 +32,6 @@ public class InvoiceTransferPayment {
         return new Builder();
     }
 
-
-    public InvoiceTransferPayment withPaymentType(PaymentType paymentType) {
-        Utils.checkNotNull(paymentType, "paymentType");
-        this.paymentType = paymentType;
-        return this;
-    }
 
     public InvoiceTransferPayment withTransferID(String transferID) {
         Utils.checkNotNull(transferID, "transferID");
@@ -67,39 +49,28 @@ public class InvoiceTransferPayment {
         }
         InvoiceTransferPayment other = (InvoiceTransferPayment) o;
         return 
-            Utils.enhancedDeepEquals(this.paymentType, other.paymentType) &&
             Utils.enhancedDeepEquals(this.transferID, other.transferID);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            paymentType, transferID);
+            transferID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(InvoiceTransferPayment.class,
-                "paymentType", paymentType,
                 "transferID", transferID);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private PaymentType paymentType;
-
         private String transferID;
 
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        public Builder paymentType(PaymentType paymentType) {
-            Utils.checkNotNull(paymentType, "paymentType");
-            this.paymentType = paymentType;
-            return this;
         }
 
 
@@ -112,7 +83,7 @@ public class InvoiceTransferPayment {
         public InvoiceTransferPayment build() {
 
             return new InvoiceTransferPayment(
-                paymentType, transferID);
+                transferID);
         }
 
     }

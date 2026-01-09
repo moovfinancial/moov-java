@@ -127,6 +127,9 @@ public class Moov {
     private final EnrichedProfile enrichedProfile;
 
 
+    private final Webhooks webhooks;
+
+
     private final Industries industries;
 
 
@@ -296,6 +299,11 @@ public class Moov {
 
     public EnrichedProfile enrichedProfile() {
         return enrichedProfile;
+    }
+
+
+    public Webhooks webhooks() {
+        return webhooks;
     }
 
 
@@ -530,6 +538,7 @@ public class Moov {
         this.endToEndEncryption = new EndToEndEncryption(sdkConfiguration);
         this.enrichedAddress = new EnrichedAddress(sdkConfiguration);
         this.enrichedProfile = new EnrichedProfile(sdkConfiguration);
+        this.webhooks = new Webhooks(sdkConfiguration);
         this.industries = new Industries(sdkConfiguration);
         this.institutions = new Institutions(sdkConfiguration);
         this.issuingTransactions = new IssuingTransactions(sdkConfiguration);

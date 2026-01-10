@@ -50,14 +50,14 @@ public class Occurrence {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("runTransfer")
-    private Optional<? extends RunTransfer> runTransfer;
+    private Optional<? extends CreateRunTransfer> runTransfer;
 
     @JsonCreator
     public Occurrence(
             @JsonProperty("canceled") Optional<Boolean> canceled,
             @JsonProperty("occurrenceID") Optional<String> occurrenceID,
             @JsonProperty("runOn") Optional<OffsetDateTime> runOn,
-            @JsonProperty("runTransfer") Optional<? extends RunTransfer> runTransfer) {
+            @JsonProperty("runTransfer") Optional<? extends CreateRunTransfer> runTransfer) {
         Utils.checkNotNull(canceled, "canceled");
         Utils.checkNotNull(occurrenceID, "occurrenceID");
         Utils.checkNotNull(runOn, "runOn");
@@ -104,8 +104,8 @@ public class Occurrence {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<RunTransfer> runTransfer() {
-        return (Optional<RunTransfer>) runTransfer;
+    public Optional<CreateRunTransfer> runTransfer() {
+        return (Optional<CreateRunTransfer>) runTransfer;
     }
 
     public static Builder builder() {
@@ -177,7 +177,7 @@ public class Occurrence {
     /**
      * Defines the attributes of a transfer.
      */
-    public Occurrence withRunTransfer(RunTransfer runTransfer) {
+    public Occurrence withRunTransfer(CreateRunTransfer runTransfer) {
         Utils.checkNotNull(runTransfer, "runTransfer");
         this.runTransfer = Optional.ofNullable(runTransfer);
         return this;
@@ -187,7 +187,7 @@ public class Occurrence {
     /**
      * Defines the attributes of a transfer.
      */
-    public Occurrence withRunTransfer(Optional<? extends RunTransfer> runTransfer) {
+    public Occurrence withRunTransfer(Optional<? extends CreateRunTransfer> runTransfer) {
         Utils.checkNotNull(runTransfer, "runTransfer");
         this.runTransfer = runTransfer;
         return this;
@@ -234,7 +234,7 @@ public class Occurrence {
 
         private Optional<OffsetDateTime> runOn = Optional.empty();
 
-        private Optional<? extends RunTransfer> runTransfer = Optional.empty();
+        private Optional<? extends CreateRunTransfer> runTransfer = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -305,7 +305,7 @@ public class Occurrence {
         /**
          * Defines the attributes of a transfer.
          */
-        public Builder runTransfer(RunTransfer runTransfer) {
+        public Builder runTransfer(CreateRunTransfer runTransfer) {
             Utils.checkNotNull(runTransfer, "runTransfer");
             this.runTransfer = Optional.ofNullable(runTransfer);
             return this;
@@ -314,7 +314,7 @@ public class Occurrence {
         /**
          * Defines the attributes of a transfer.
          */
-        public Builder runTransfer(Optional<? extends RunTransfer> runTransfer) {
+        public Builder runTransfer(Optional<? extends CreateRunTransfer> runTransfer) {
             Utils.checkNotNull(runTransfer, "runTransfer");
             this.runTransfer = runTransfer;
             return this;

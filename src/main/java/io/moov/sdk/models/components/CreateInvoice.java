@@ -22,8 +22,9 @@ public class CreateInvoice {
     private String customerAccountID;
 
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
-    private String description;
+    private Optional<String> description;
 
     /**
      * A collection of line items for an invoice.
@@ -49,7 +50,7 @@ public class CreateInvoice {
     @JsonCreator
     public CreateInvoice(
             @JsonProperty("customerAccountID") String customerAccountID,
-            @JsonProperty("description") String description,
+            @JsonProperty("description") Optional<String> description,
             @JsonProperty("lineItems") CreateInvoiceLineItems lineItems,
             @JsonProperty("invoiceDate") Optional<OffsetDateTime> invoiceDate,
             @JsonProperty("dueDate") Optional<OffsetDateTime> dueDate,
@@ -70,9 +71,8 @@ public class CreateInvoice {
     
     public CreateInvoice(
             String customerAccountID,
-            String description,
             CreateInvoiceLineItems lineItems) {
-        this(customerAccountID, description, lineItems,
+        this(customerAccountID, Optional.empty(), lineItems,
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -82,7 +82,7 @@ public class CreateInvoice {
     }
 
     @JsonIgnore
-    public String description() {
+    public Optional<String> description() {
         return description;
     }
 
@@ -122,6 +122,13 @@ public class CreateInvoice {
     }
 
     public CreateInvoice withDescription(String description) {
+        Utils.checkNotNull(description, "description");
+        this.description = Optional.ofNullable(description);
+        return this;
+    }
+
+
+    public CreateInvoice withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
@@ -216,7 +223,7 @@ public class CreateInvoice {
 
         private String customerAccountID;
 
-        private String description;
+        private Optional<String> description = Optional.empty();
 
         private CreateInvoiceLineItems lineItems;
 
@@ -239,6 +246,12 @@ public class CreateInvoice {
 
 
         public Builder description(String description) {
+            Utils.checkNotNull(description, "description");
+            this.description = Optional.ofNullable(description);
+            return this;
+        }
+
+        public Builder description(Optional<String> description) {
             Utils.checkNotNull(description, "description");
             this.description = description;
             return this;

@@ -48,12 +48,10 @@ public class ScheduleListResponse {
     @JsonProperty("partnerAccountID")
     private String partnerAccountID;
 
-    /**
-     * Defines configuration for recurring transfers.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("recur")
-    private Optional<? extends Recur> recur;
+    private Optional<? extends RecurResponse> recur;
 
 
     @JsonProperty("scheduleID")
@@ -99,7 +97,7 @@ public class ScheduleListResponse {
             @JsonProperty("occurrences") Optional<? extends List<OccurrencesResponse>> occurrences,
             @JsonProperty("ownerAccountID") String ownerAccountID,
             @JsonProperty("partnerAccountID") String partnerAccountID,
-            @JsonProperty("recur") Optional<? extends Recur> recur,
+            @JsonProperty("recur") Optional<? extends RecurResponse> recur,
             @JsonProperty("scheduleID") String scheduleID,
             @JsonProperty("sourceAccountID") String sourceAccountID,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
@@ -193,13 +191,10 @@ public class ScheduleListResponse {
         return partnerAccountID;
     }
 
-    /**
-     * Defines configuration for recurring transfers.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Recur> recur() {
-        return (Optional<Recur>) recur;
+    public Optional<RecurResponse> recur() {
+        return (Optional<RecurResponse>) recur;
     }
 
     @JsonIgnore
@@ -309,20 +304,14 @@ public class ScheduleListResponse {
         return this;
     }
 
-    /**
-     * Defines configuration for recurring transfers.
-     */
-    public ScheduleListResponse withRecur(Recur recur) {
+    public ScheduleListResponse withRecur(RecurResponse recur) {
         Utils.checkNotNull(recur, "recur");
         this.recur = Optional.ofNullable(recur);
         return this;
     }
 
 
-    /**
-     * Defines configuration for recurring transfers.
-     */
-    public ScheduleListResponse withRecur(Optional<? extends Recur> recur) {
+    public ScheduleListResponse withRecur(Optional<? extends RecurResponse> recur) {
         Utils.checkNotNull(recur, "recur");
         this.recur = recur;
         return this;
@@ -476,7 +465,7 @@ public class ScheduleListResponse {
 
         private String partnerAccountID;
 
-        private Optional<? extends Recur> recur = Optional.empty();
+        private Optional<? extends RecurResponse> recur = Optional.empty();
 
         private String scheduleID;
 
@@ -562,19 +551,13 @@ public class ScheduleListResponse {
         }
 
 
-        /**
-         * Defines configuration for recurring transfers.
-         */
-        public Builder recur(Recur recur) {
+        public Builder recur(RecurResponse recur) {
             Utils.checkNotNull(recur, "recur");
             this.recur = Optional.ofNullable(recur);
             return this;
         }
 
-        /**
-         * Defines configuration for recurring transfers.
-         */
-        public Builder recur(Optional<? extends Recur> recur) {
+        public Builder recur(Optional<? extends RecurResponse> recur) {
             Utils.checkNotNull(recur, "recur");
             this.recur = recur;
             return this;

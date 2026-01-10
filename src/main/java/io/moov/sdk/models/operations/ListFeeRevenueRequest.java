@@ -29,6 +29,24 @@ public class ListFeeRevenueRequest {
     private String accountID;
 
     /**
+     * Optional transfer ID to filter the results by.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=transferID")
+    private Optional<String> transferID;
+
+    /**
+     * Optional dispute ID to filter the results by.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=disputeID")
+    private Optional<String> disputeID;
+
+    /**
+     * Optional residual ID to filter the results by.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=residualID")
+    private Optional<String> residualID;
+
+    /**
      * Optional date-time to inclusively filter all fees created after this date-time.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=startDateTime")
@@ -45,16 +63,25 @@ public class ListFeeRevenueRequest {
             Optional<Long> skip,
             Optional<Long> count,
             String accountID,
+            Optional<String> transferID,
+            Optional<String> disputeID,
+            Optional<String> residualID,
             Optional<String> startDateTime,
             Optional<String> endDateTime) {
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(accountID, "accountID");
+        Utils.checkNotNull(transferID, "transferID");
+        Utils.checkNotNull(disputeID, "disputeID");
+        Utils.checkNotNull(residualID, "residualID");
         Utils.checkNotNull(startDateTime, "startDateTime");
         Utils.checkNotNull(endDateTime, "endDateTime");
         this.skip = skip;
         this.count = count;
         this.accountID = accountID;
+        this.transferID = transferID;
+        this.disputeID = disputeID;
+        this.residualID = residualID;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
@@ -62,6 +89,7 @@ public class ListFeeRevenueRequest {
     public ListFeeRevenueRequest(
             String accountID) {
         this(Optional.empty(), Optional.empty(), accountID,
+            Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty());
     }
 
@@ -81,6 +109,30 @@ public class ListFeeRevenueRequest {
     @JsonIgnore
     public String accountID() {
         return accountID;
+    }
+
+    /**
+     * Optional transfer ID to filter the results by.
+     */
+    @JsonIgnore
+    public Optional<String> transferID() {
+        return transferID;
+    }
+
+    /**
+     * Optional dispute ID to filter the results by.
+     */
+    @JsonIgnore
+    public Optional<String> disputeID() {
+        return disputeID;
+    }
+
+    /**
+     * Optional residual ID to filter the results by.
+     */
+    @JsonIgnore
+    public Optional<String> residualID() {
+        return residualID;
     }
 
     /**
@@ -140,6 +192,63 @@ public class ListFeeRevenueRequest {
     }
 
     /**
+     * Optional transfer ID to filter the results by.
+     */
+    public ListFeeRevenueRequest withTransferID(String transferID) {
+        Utils.checkNotNull(transferID, "transferID");
+        this.transferID = Optional.ofNullable(transferID);
+        return this;
+    }
+
+
+    /**
+     * Optional transfer ID to filter the results by.
+     */
+    public ListFeeRevenueRequest withTransferID(Optional<String> transferID) {
+        Utils.checkNotNull(transferID, "transferID");
+        this.transferID = transferID;
+        return this;
+    }
+
+    /**
+     * Optional dispute ID to filter the results by.
+     */
+    public ListFeeRevenueRequest withDisputeID(String disputeID) {
+        Utils.checkNotNull(disputeID, "disputeID");
+        this.disputeID = Optional.ofNullable(disputeID);
+        return this;
+    }
+
+
+    /**
+     * Optional dispute ID to filter the results by.
+     */
+    public ListFeeRevenueRequest withDisputeID(Optional<String> disputeID) {
+        Utils.checkNotNull(disputeID, "disputeID");
+        this.disputeID = disputeID;
+        return this;
+    }
+
+    /**
+     * Optional residual ID to filter the results by.
+     */
+    public ListFeeRevenueRequest withResidualID(String residualID) {
+        Utils.checkNotNull(residualID, "residualID");
+        this.residualID = Optional.ofNullable(residualID);
+        return this;
+    }
+
+
+    /**
+     * Optional residual ID to filter the results by.
+     */
+    public ListFeeRevenueRequest withResidualID(Optional<String> residualID) {
+        Utils.checkNotNull(residualID, "residualID");
+        this.residualID = residualID;
+        return this;
+    }
+
+    /**
      * Optional date-time to inclusively filter all fees created after this date-time.
      */
     public ListFeeRevenueRequest withStartDateTime(String startDateTime) {
@@ -190,6 +299,9 @@ public class ListFeeRevenueRequest {
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
+            Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
+            Utils.enhancedDeepEquals(this.residualID, other.residualID) &&
             Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
             Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime);
     }
@@ -198,6 +310,7 @@ public class ListFeeRevenueRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             skip, count, accountID,
+            transferID, disputeID, residualID,
             startDateTime, endDateTime);
     }
     
@@ -207,6 +320,9 @@ public class ListFeeRevenueRequest {
                 "skip", skip,
                 "count", count,
                 "accountID", accountID,
+                "transferID", transferID,
+                "disputeID", disputeID,
+                "residualID", residualID,
                 "startDateTime", startDateTime,
                 "endDateTime", endDateTime);
     }
@@ -219,6 +335,12 @@ public class ListFeeRevenueRequest {
         private Optional<Long> count = Optional.empty();
 
         private String accountID;
+
+        private Optional<String> transferID = Optional.empty();
+
+        private Optional<String> disputeID = Optional.empty();
+
+        private Optional<String> residualID = Optional.empty();
 
         private Optional<String> startDateTime = Optional.empty();
 
@@ -266,6 +388,63 @@ public class ListFeeRevenueRequest {
 
 
         /**
+         * Optional transfer ID to filter the results by.
+         */
+        public Builder transferID(String transferID) {
+            Utils.checkNotNull(transferID, "transferID");
+            this.transferID = Optional.ofNullable(transferID);
+            return this;
+        }
+
+        /**
+         * Optional transfer ID to filter the results by.
+         */
+        public Builder transferID(Optional<String> transferID) {
+            Utils.checkNotNull(transferID, "transferID");
+            this.transferID = transferID;
+            return this;
+        }
+
+
+        /**
+         * Optional dispute ID to filter the results by.
+         */
+        public Builder disputeID(String disputeID) {
+            Utils.checkNotNull(disputeID, "disputeID");
+            this.disputeID = Optional.ofNullable(disputeID);
+            return this;
+        }
+
+        /**
+         * Optional dispute ID to filter the results by.
+         */
+        public Builder disputeID(Optional<String> disputeID) {
+            Utils.checkNotNull(disputeID, "disputeID");
+            this.disputeID = disputeID;
+            return this;
+        }
+
+
+        /**
+         * Optional residual ID to filter the results by.
+         */
+        public Builder residualID(String residualID) {
+            Utils.checkNotNull(residualID, "residualID");
+            this.residualID = Optional.ofNullable(residualID);
+            return this;
+        }
+
+        /**
+         * Optional residual ID to filter the results by.
+         */
+        public Builder residualID(Optional<String> residualID) {
+            Utils.checkNotNull(residualID, "residualID");
+            this.residualID = residualID;
+            return this;
+        }
+
+
+        /**
          * Optional date-time to inclusively filter all fees created after this date-time.
          */
         public Builder startDateTime(String startDateTime) {
@@ -306,6 +485,7 @@ public class ListFeeRevenueRequest {
 
             return new ListFeeRevenueRequest(
                 skip, count, accountID,
+                transferID, disputeID, residualID,
                 startDateTime, endDateTime);
         }
 

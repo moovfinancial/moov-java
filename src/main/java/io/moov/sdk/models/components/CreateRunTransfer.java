@@ -14,8 +14,12 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Optional;
 
-
-public class RunTransfer {
+/**
+ * CreateRunTransfer
+ * 
+ * <p>Defines the attributes of a transfer.
+ */
+public class CreateRunTransfer {
 
     @JsonProperty("amount")
     private Amount amount;
@@ -46,21 +50,22 @@ public class RunTransfer {
     private String description;
 
     /**
-     * Line items for a scheduled transfer.
+     * An optional collection of line items for a scheduled transfer.
+     * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lineItems")
-    private Optional<? extends ScheduledTransferLineItems> lineItems;
+    private Optional<? extends CreateScheduledTransferLineItems> lineItems;
 
     @JsonCreator
-    public RunTransfer(
+    public CreateRunTransfer(
             @JsonProperty("amount") Amount amount,
             @JsonProperty("salesTaxAmount") Optional<? extends Amount> salesTaxAmount,
             @JsonProperty("destination") SchedulePaymentMethod destination,
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("source") SchedulePaymentMethod source,
             @JsonProperty("description") String description,
-            @JsonProperty("lineItems") Optional<? extends ScheduledTransferLineItems> lineItems) {
+            @JsonProperty("lineItems") Optional<? extends CreateScheduledTransferLineItems> lineItems) {
         Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         Utils.checkNotNull(destination, "destination");
@@ -77,7 +82,7 @@ public class RunTransfer {
         this.lineItems = lineItems;
     }
     
-    public RunTransfer(
+    public CreateRunTransfer(
             Amount amount,
             SchedulePaymentMethod destination,
             String partnerAccountID,
@@ -126,12 +131,13 @@ public class RunTransfer {
     }
 
     /**
-     * Line items for a scheduled transfer.
+     * An optional collection of line items for a scheduled transfer.
+     * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ScheduledTransferLineItems> lineItems() {
-        return (Optional<ScheduledTransferLineItems>) lineItems;
+    public Optional<CreateScheduledTransferLineItems> lineItems() {
+        return (Optional<CreateScheduledTransferLineItems>) lineItems;
     }
 
     public static Builder builder() {
@@ -139,7 +145,7 @@ public class RunTransfer {
     }
 
 
-    public RunTransfer withAmount(Amount amount) {
+    public CreateRunTransfer withAmount(Amount amount) {
         Utils.checkNotNull(amount, "amount");
         this.amount = amount;
         return this;
@@ -148,7 +154,7 @@ public class RunTransfer {
     /**
      * Optional sales tax amount. This amount is included in the total transfer amount.
      */
-    public RunTransfer withSalesTaxAmount(Amount salesTaxAmount) {
+    public CreateRunTransfer withSalesTaxAmount(Amount salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = Optional.ofNullable(salesTaxAmount);
         return this;
@@ -158,25 +164,25 @@ public class RunTransfer {
     /**
      * Optional sales tax amount. This amount is included in the total transfer amount.
      */
-    public RunTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
+    public CreateRunTransfer withSalesTaxAmount(Optional<? extends Amount> salesTaxAmount) {
         Utils.checkNotNull(salesTaxAmount, "salesTaxAmount");
         this.salesTaxAmount = salesTaxAmount;
         return this;
     }
 
-    public RunTransfer withDestination(SchedulePaymentMethod destination) {
+    public CreateRunTransfer withDestination(SchedulePaymentMethod destination) {
         Utils.checkNotNull(destination, "destination");
         this.destination = destination;
         return this;
     }
 
-    public RunTransfer withPartnerAccountID(String partnerAccountID) {
+    public CreateRunTransfer withPartnerAccountID(String partnerAccountID) {
         Utils.checkNotNull(partnerAccountID, "partnerAccountID");
         this.partnerAccountID = partnerAccountID;
         return this;
     }
 
-    public RunTransfer withSource(SchedulePaymentMethod source) {
+    public CreateRunTransfer withSource(SchedulePaymentMethod source) {
         Utils.checkNotNull(source, "source");
         this.source = source;
         return this;
@@ -185,16 +191,17 @@ public class RunTransfer {
     /**
      * Simple description to place on the transfer.
      */
-    public RunTransfer withDescription(String description) {
+    public CreateRunTransfer withDescription(String description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
     }
 
     /**
-     * Line items for a scheduled transfer.
+     * An optional collection of line items for a scheduled transfer.
+     * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
      */
-    public RunTransfer withLineItems(ScheduledTransferLineItems lineItems) {
+    public CreateRunTransfer withLineItems(CreateScheduledTransferLineItems lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = Optional.ofNullable(lineItems);
         return this;
@@ -202,9 +209,10 @@ public class RunTransfer {
 
 
     /**
-     * Line items for a scheduled transfer.
+     * An optional collection of line items for a scheduled transfer.
+     * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
      */
-    public RunTransfer withLineItems(Optional<? extends ScheduledTransferLineItems> lineItems) {
+    public CreateRunTransfer withLineItems(Optional<? extends CreateScheduledTransferLineItems> lineItems) {
         Utils.checkNotNull(lineItems, "lineItems");
         this.lineItems = lineItems;
         return this;
@@ -218,7 +226,7 @@ public class RunTransfer {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        RunTransfer other = (RunTransfer) o;
+        CreateRunTransfer other = (CreateRunTransfer) o;
         return 
             Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.salesTaxAmount, other.salesTaxAmount) &&
@@ -239,7 +247,7 @@ public class RunTransfer {
     
     @Override
     public String toString() {
-        return Utils.toString(RunTransfer.class,
+        return Utils.toString(CreateRunTransfer.class,
                 "amount", amount,
                 "salesTaxAmount", salesTaxAmount,
                 "destination", destination,
@@ -264,7 +272,7 @@ public class RunTransfer {
 
         private String description;
 
-        private Optional<? extends ScheduledTransferLineItems> lineItems = Optional.empty();
+        private Optional<? extends CreateScheduledTransferLineItems> lineItems = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -329,26 +337,28 @@ public class RunTransfer {
 
 
         /**
-         * Line items for a scheduled transfer.
+         * An optional collection of line items for a scheduled transfer.
+         * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
          */
-        public Builder lineItems(ScheduledTransferLineItems lineItems) {
+        public Builder lineItems(CreateScheduledTransferLineItems lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = Optional.ofNullable(lineItems);
             return this;
         }
 
         /**
-         * Line items for a scheduled transfer.
+         * An optional collection of line items for a scheduled transfer.
+         * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
          */
-        public Builder lineItems(Optional<? extends ScheduledTransferLineItems> lineItems) {
+        public Builder lineItems(Optional<? extends CreateScheduledTransferLineItems> lineItems) {
             Utils.checkNotNull(lineItems, "lineItems");
             this.lineItems = lineItems;
             return this;
         }
 
-        public RunTransfer build() {
+        public CreateRunTransfer build() {
 
-            return new RunTransfer(
+            return new CreateRunTransfer(
                 amount, salesTaxAmount, destination,
                 partnerAccountID, source, description,
                 lineItems);

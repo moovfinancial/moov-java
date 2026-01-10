@@ -17,8 +17,9 @@ import java.util.Optional;
 
 public class InvoiceExternalPayment {
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
-    private String description;
+    private Optional<String> description;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -30,35 +31,25 @@ public class InvoiceExternalPayment {
     @JsonProperty("paymentDate")
     private Optional<OffsetDateTime> paymentDate;
 
-
-    @JsonProperty("amount")
-    private AmountDecimal amount;
-
     @JsonCreator
     public InvoiceExternalPayment(
-            @JsonProperty("description") String description,
+            @JsonProperty("description") Optional<String> description,
             @JsonProperty("foreignID") Optional<String> foreignID,
-            @JsonProperty("paymentDate") Optional<OffsetDateTime> paymentDate,
-            @JsonProperty("amount") AmountDecimal amount) {
+            @JsonProperty("paymentDate") Optional<OffsetDateTime> paymentDate) {
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(foreignID, "foreignID");
         Utils.checkNotNull(paymentDate, "paymentDate");
-        Utils.checkNotNull(amount, "amount");
         this.description = description;
         this.foreignID = foreignID;
         this.paymentDate = paymentDate;
-        this.amount = amount;
     }
     
-    public InvoiceExternalPayment(
-            String description,
-            AmountDecimal amount) {
-        this(description, Optional.empty(), Optional.empty(),
-            amount);
+    public InvoiceExternalPayment() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public String description() {
+    public Optional<String> description() {
         return description;
     }
 
@@ -72,17 +63,19 @@ public class InvoiceExternalPayment {
         return paymentDate;
     }
 
-    @JsonIgnore
-    public AmountDecimal amount() {
-        return amount;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
 
 
     public InvoiceExternalPayment withDescription(String description) {
+        Utils.checkNotNull(description, "description");
+        this.description = Optional.ofNullable(description);
+        return this;
+    }
+
+
+    public InvoiceExternalPayment withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
@@ -114,12 +107,6 @@ public class InvoiceExternalPayment {
         return this;
     }
 
-    public InvoiceExternalPayment withAmount(AmountDecimal amount) {
-        Utils.checkNotNull(amount, "amount");
-        this.amount = amount;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -132,15 +119,13 @@ public class InvoiceExternalPayment {
         return 
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
-            Utils.enhancedDeepEquals(this.paymentDate, other.paymentDate) &&
-            Utils.enhancedDeepEquals(this.amount, other.amount);
+            Utils.enhancedDeepEquals(this.paymentDate, other.paymentDate);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            description, foreignID, paymentDate,
-            amount);
+            description, foreignID, paymentDate);
     }
     
     @Override
@@ -148,20 +133,17 @@ public class InvoiceExternalPayment {
         return Utils.toString(InvoiceExternalPayment.class,
                 "description", description,
                 "foreignID", foreignID,
-                "paymentDate", paymentDate,
-                "amount", amount);
+                "paymentDate", paymentDate);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String description;
+        private Optional<String> description = Optional.empty();
 
         private Optional<String> foreignID = Optional.empty();
 
         private Optional<OffsetDateTime> paymentDate = Optional.empty();
-
-        private AmountDecimal amount;
 
         private Builder() {
           // force use of static builder() method
@@ -169,6 +151,12 @@ public class InvoiceExternalPayment {
 
 
         public Builder description(String description) {
+            Utils.checkNotNull(description, "description");
+            this.description = Optional.ofNullable(description);
+            return this;
+        }
+
+        public Builder description(Optional<String> description) {
             Utils.checkNotNull(description, "description");
             this.description = description;
             return this;
@@ -200,18 +188,10 @@ public class InvoiceExternalPayment {
             return this;
         }
 
-
-        public Builder amount(AmountDecimal amount) {
-            Utils.checkNotNull(amount, "amount");
-            this.amount = amount;
-            return this;
-        }
-
         public InvoiceExternalPayment build() {
 
             return new InvoiceExternalPayment(
-                description, foreignID, paymentDate,
-                amount);
+                description, foreignID, paymentDate);
         }
 
     }

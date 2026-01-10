@@ -67,7 +67,6 @@ public class Application {
                 .accountID("241bf524-e777-4941-a5e4-d7f3f34d7a00")
                 .createInvoice(CreateInvoice.builder()
                     .customerAccountID("<id>")
-                    .description("austere gah under ew failing provided repeatedly pick onto")
                     .lineItems(CreateInvoiceLineItems.builder()
                         .items(List.of())
                         .build())
@@ -335,8 +334,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 package hello.world;
 
 import io.moov.sdk.Moov;
-import io.moov.sdk.models.components.CreateInvoicePayment;
-import io.moov.sdk.models.components.Security;
+import io.moov.sdk.models.components.*;
 import io.moov.sdk.models.errors.CreateInvoicePaymentError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateInvoicePaymentResponse;
@@ -358,6 +356,10 @@ public class Application {
                 .accountID("e02333e4-a835-46d1-8d02-9af7a405e65f")
                 .invoiceID("99e7ebb0-9996-49b2-98f0-304c7332ece6")
                 .createInvoicePayment(CreateInvoicePayment.builder()
+                    .amount(AmountDecimal.builder()
+                        .currency("USD")
+                        .valueDecimal("12.987654321")
+                        .build())
                     .build())
                 .call();
 

@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * ScheduledTransferLineItem
+ * CreateScheduledTransferLineItem
  * 
  * <p>Represents a single item in a scheduled transfer, including optional modifiers and quantity.
  */
-public class ScheduledTransferLineItem {
+public class CreateScheduledTransferLineItem {
     /**
      * The name of the item.
      */
@@ -45,7 +45,7 @@ public class ScheduledTransferLineItem {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("options")
-    private Optional<? extends List<ScheduledTransferLineItemOption>> options;
+    private Optional<? extends List<CreateScheduledTransferLineItemOption>> options;
 
     /**
      * Optional unique identifier associating the line item with a product.
@@ -58,32 +58,32 @@ public class ScheduledTransferLineItem {
      * Optional list of images associated with this line item.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("images")
-    private Optional<? extends List<ScheduledTransferImageMetadata>> images;
+    @JsonProperty("imageIDs")
+    private Optional<? extends List<String>> imageIDs;
 
     @JsonCreator
-    public ScheduledTransferLineItem(
+    public CreateScheduledTransferLineItem(
             @JsonProperty("name") String name,
             @JsonProperty("basePrice") AmountDecimal basePrice,
             @JsonProperty("quantity") int quantity,
-            @JsonProperty("options") Optional<? extends List<ScheduledTransferLineItemOption>> options,
+            @JsonProperty("options") Optional<? extends List<CreateScheduledTransferLineItemOption>> options,
             @JsonProperty("productID") Optional<String> productID,
-            @JsonProperty("images") Optional<? extends List<ScheduledTransferImageMetadata>> images) {
+            @JsonProperty("imageIDs") Optional<? extends List<String>> imageIDs) {
         Utils.checkNotNull(name, "name");
         Utils.checkNotNull(basePrice, "basePrice");
         Utils.checkNotNull(quantity, "quantity");
         Utils.checkNotNull(options, "options");
         Utils.checkNotNull(productID, "productID");
-        Utils.checkNotNull(images, "images");
+        Utils.checkNotNull(imageIDs, "imageIDs");
         this.name = name;
         this.basePrice = basePrice;
         this.quantity = quantity;
         this.options = options;
         this.productID = productID;
-        this.images = images;
+        this.imageIDs = imageIDs;
     }
     
-    public ScheduledTransferLineItem(
+    public CreateScheduledTransferLineItem(
             String name,
             AmountDecimal basePrice,
             int quantity) {
@@ -120,8 +120,8 @@ public class ScheduledTransferLineItem {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<ScheduledTransferLineItemOption>> options() {
-        return (Optional<List<ScheduledTransferLineItemOption>>) options;
+    public Optional<List<CreateScheduledTransferLineItemOption>> options() {
+        return (Optional<List<CreateScheduledTransferLineItemOption>>) options;
     }
 
     /**
@@ -137,8 +137,8 @@ public class ScheduledTransferLineItem {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<ScheduledTransferImageMetadata>> images() {
-        return (Optional<List<ScheduledTransferImageMetadata>>) images;
+    public Optional<List<String>> imageIDs() {
+        return (Optional<List<String>>) imageIDs;
     }
 
     public static Builder builder() {
@@ -149,7 +149,7 @@ public class ScheduledTransferLineItem {
     /**
      * The name of the item.
      */
-    public ScheduledTransferLineItem withName(String name) {
+    public CreateScheduledTransferLineItem withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
         return this;
@@ -158,7 +158,7 @@ public class ScheduledTransferLineItem {
     /**
      * The base price of the item before applying option modifiers.
      */
-    public ScheduledTransferLineItem withBasePrice(AmountDecimal basePrice) {
+    public CreateScheduledTransferLineItem withBasePrice(AmountDecimal basePrice) {
         Utils.checkNotNull(basePrice, "basePrice");
         this.basePrice = basePrice;
         return this;
@@ -167,7 +167,7 @@ public class ScheduledTransferLineItem {
     /**
      * The quantity of this item.
      */
-    public ScheduledTransferLineItem withQuantity(int quantity) {
+    public CreateScheduledTransferLineItem withQuantity(int quantity) {
         Utils.checkNotNull(quantity, "quantity");
         this.quantity = quantity;
         return this;
@@ -176,7 +176,7 @@ public class ScheduledTransferLineItem {
     /**
      * Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
      */
-    public ScheduledTransferLineItem withOptions(List<ScheduledTransferLineItemOption> options) {
+    public CreateScheduledTransferLineItem withOptions(List<CreateScheduledTransferLineItemOption> options) {
         Utils.checkNotNull(options, "options");
         this.options = Optional.ofNullable(options);
         return this;
@@ -186,7 +186,7 @@ public class ScheduledTransferLineItem {
     /**
      * Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
      */
-    public ScheduledTransferLineItem withOptions(Optional<? extends List<ScheduledTransferLineItemOption>> options) {
+    public CreateScheduledTransferLineItem withOptions(Optional<? extends List<CreateScheduledTransferLineItemOption>> options) {
         Utils.checkNotNull(options, "options");
         this.options = options;
         return this;
@@ -195,7 +195,7 @@ public class ScheduledTransferLineItem {
     /**
      * Optional unique identifier associating the line item with a product.
      */
-    public ScheduledTransferLineItem withProductID(String productID) {
+    public CreateScheduledTransferLineItem withProductID(String productID) {
         Utils.checkNotNull(productID, "productID");
         this.productID = Optional.ofNullable(productID);
         return this;
@@ -205,7 +205,7 @@ public class ScheduledTransferLineItem {
     /**
      * Optional unique identifier associating the line item with a product.
      */
-    public ScheduledTransferLineItem withProductID(Optional<String> productID) {
+    public CreateScheduledTransferLineItem withProductID(Optional<String> productID) {
         Utils.checkNotNull(productID, "productID");
         this.productID = productID;
         return this;
@@ -214,9 +214,9 @@ public class ScheduledTransferLineItem {
     /**
      * Optional list of images associated with this line item.
      */
-    public ScheduledTransferLineItem withImages(List<ScheduledTransferImageMetadata> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = Optional.ofNullable(images);
+    public CreateScheduledTransferLineItem withImageIDs(List<String> imageIDs) {
+        Utils.checkNotNull(imageIDs, "imageIDs");
+        this.imageIDs = Optional.ofNullable(imageIDs);
         return this;
     }
 
@@ -224,9 +224,9 @@ public class ScheduledTransferLineItem {
     /**
      * Optional list of images associated with this line item.
      */
-    public ScheduledTransferLineItem withImages(Optional<? extends List<ScheduledTransferImageMetadata>> images) {
-        Utils.checkNotNull(images, "images");
-        this.images = images;
+    public CreateScheduledTransferLineItem withImageIDs(Optional<? extends List<String>> imageIDs) {
+        Utils.checkNotNull(imageIDs, "imageIDs");
+        this.imageIDs = imageIDs;
         return this;
     }
 
@@ -238,32 +238,32 @@ public class ScheduledTransferLineItem {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ScheduledTransferLineItem other = (ScheduledTransferLineItem) o;
+        CreateScheduledTransferLineItem other = (CreateScheduledTransferLineItem) o;
         return 
             Utils.enhancedDeepEquals(this.name, other.name) &&
             Utils.enhancedDeepEquals(this.basePrice, other.basePrice) &&
             Utils.enhancedDeepEquals(this.quantity, other.quantity) &&
             Utils.enhancedDeepEquals(this.options, other.options) &&
             Utils.enhancedDeepEquals(this.productID, other.productID) &&
-            Utils.enhancedDeepEquals(this.images, other.images);
+            Utils.enhancedDeepEquals(this.imageIDs, other.imageIDs);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             name, basePrice, quantity,
-            options, productID, images);
+            options, productID, imageIDs);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(ScheduledTransferLineItem.class,
+        return Utils.toString(CreateScheduledTransferLineItem.class,
                 "name", name,
                 "basePrice", basePrice,
                 "quantity", quantity,
                 "options", options,
                 "productID", productID,
-                "images", images);
+                "imageIDs", imageIDs);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -275,11 +275,11 @@ public class ScheduledTransferLineItem {
 
         private Integer quantity;
 
-        private Optional<? extends List<ScheduledTransferLineItemOption>> options = Optional.empty();
+        private Optional<? extends List<CreateScheduledTransferLineItemOption>> options = Optional.empty();
 
         private Optional<String> productID = Optional.empty();
 
-        private Optional<? extends List<ScheduledTransferImageMetadata>> images = Optional.empty();
+        private Optional<? extends List<String>> imageIDs = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -319,7 +319,7 @@ public class ScheduledTransferLineItem {
         /**
          * Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
          */
-        public Builder options(List<ScheduledTransferLineItemOption> options) {
+        public Builder options(List<CreateScheduledTransferLineItemOption> options) {
             Utils.checkNotNull(options, "options");
             this.options = Optional.ofNullable(options);
             return this;
@@ -328,7 +328,7 @@ public class ScheduledTransferLineItem {
         /**
          * Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations).
          */
-        public Builder options(Optional<? extends List<ScheduledTransferLineItemOption>> options) {
+        public Builder options(Optional<? extends List<CreateScheduledTransferLineItemOption>> options) {
             Utils.checkNotNull(options, "options");
             this.options = options;
             return this;
@@ -357,26 +357,26 @@ public class ScheduledTransferLineItem {
         /**
          * Optional list of images associated with this line item.
          */
-        public Builder images(List<ScheduledTransferImageMetadata> images) {
-            Utils.checkNotNull(images, "images");
-            this.images = Optional.ofNullable(images);
+        public Builder imageIDs(List<String> imageIDs) {
+            Utils.checkNotNull(imageIDs, "imageIDs");
+            this.imageIDs = Optional.ofNullable(imageIDs);
             return this;
         }
 
         /**
          * Optional list of images associated with this line item.
          */
-        public Builder images(Optional<? extends List<ScheduledTransferImageMetadata>> images) {
-            Utils.checkNotNull(images, "images");
-            this.images = images;
+        public Builder imageIDs(Optional<? extends List<String>> imageIDs) {
+            Utils.checkNotNull(imageIDs, "imageIDs");
+            this.imageIDs = imageIDs;
             return this;
         }
 
-        public ScheduledTransferLineItem build() {
+        public CreateScheduledTransferLineItem build() {
 
-            return new ScheduledTransferLineItem(
+            return new CreateScheduledTransferLineItem(
                 name, basePrice, quantity,
-                options, productID, images);
+                options, productID, imageIDs);
         }
 
     }

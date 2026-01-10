@@ -29,6 +29,10 @@ public class InvoicePayment {
     private InvoicePaymentType invoicePaymentType;
 
 
+    @JsonProperty("amount")
+    private AmountDecimal amount;
+
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transfer")
     private Optional<? extends InvoiceTransferPayment> transfer;
@@ -42,23 +46,27 @@ public class InvoicePayment {
     public InvoicePayment(
             @JsonProperty("invoicePaymentID") String invoicePaymentID,
             @JsonProperty("invoicePaymentType") InvoicePaymentType invoicePaymentType,
+            @JsonProperty("amount") AmountDecimal amount,
             @JsonProperty("transfer") Optional<? extends InvoiceTransferPayment> transfer,
             @JsonProperty("external") Optional<? extends InvoiceExternalPayment> external) {
         Utils.checkNotNull(invoicePaymentID, "invoicePaymentID");
         Utils.checkNotNull(invoicePaymentType, "invoicePaymentType");
+        Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(transfer, "transfer");
         Utils.checkNotNull(external, "external");
         this.invoicePaymentID = invoicePaymentID;
         this.invoicePaymentType = invoicePaymentType;
+        this.amount = amount;
         this.transfer = transfer;
         this.external = external;
     }
     
     public InvoicePayment(
             String invoicePaymentID,
-            InvoicePaymentType invoicePaymentType) {
-        this(invoicePaymentID, invoicePaymentType, Optional.empty(),
-            Optional.empty());
+            InvoicePaymentType invoicePaymentType,
+            AmountDecimal amount) {
+        this(invoicePaymentID, invoicePaymentType, amount,
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -69,6 +77,11 @@ public class InvoicePayment {
     @JsonIgnore
     public InvoicePaymentType invoicePaymentType() {
         return invoicePaymentType;
+    }
+
+    @JsonIgnore
+    public AmountDecimal amount() {
+        return amount;
     }
 
     @SuppressWarnings("unchecked")
@@ -97,6 +110,12 @@ public class InvoicePayment {
     public InvoicePayment withInvoicePaymentType(InvoicePaymentType invoicePaymentType) {
         Utils.checkNotNull(invoicePaymentType, "invoicePaymentType");
         this.invoicePaymentType = invoicePaymentType;
+        return this;
+    }
+
+    public InvoicePayment withAmount(AmountDecimal amount) {
+        Utils.checkNotNull(amount, "amount");
+        this.amount = amount;
         return this;
     }
 
@@ -138,6 +157,7 @@ public class InvoicePayment {
         return 
             Utils.enhancedDeepEquals(this.invoicePaymentID, other.invoicePaymentID) &&
             Utils.enhancedDeepEquals(this.invoicePaymentType, other.invoicePaymentType) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.transfer, other.transfer) &&
             Utils.enhancedDeepEquals(this.external, other.external);
     }
@@ -145,8 +165,8 @@ public class InvoicePayment {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            invoicePaymentID, invoicePaymentType, transfer,
-            external);
+            invoicePaymentID, invoicePaymentType, amount,
+            transfer, external);
     }
     
     @Override
@@ -154,6 +174,7 @@ public class InvoicePayment {
         return Utils.toString(InvoicePayment.class,
                 "invoicePaymentID", invoicePaymentID,
                 "invoicePaymentType", invoicePaymentType,
+                "amount", amount,
                 "transfer", transfer,
                 "external", external);
     }
@@ -164,6 +185,8 @@ public class InvoicePayment {
         private String invoicePaymentID;
 
         private InvoicePaymentType invoicePaymentType;
+
+        private AmountDecimal amount;
 
         private Optional<? extends InvoiceTransferPayment> transfer = Optional.empty();
 
@@ -184,6 +207,13 @@ public class InvoicePayment {
         public Builder invoicePaymentType(InvoicePaymentType invoicePaymentType) {
             Utils.checkNotNull(invoicePaymentType, "invoicePaymentType");
             this.invoicePaymentType = invoicePaymentType;
+            return this;
+        }
+
+
+        public Builder amount(AmountDecimal amount) {
+            Utils.checkNotNull(amount, "amount");
+            this.amount = amount;
             return this;
         }
 
@@ -216,8 +246,8 @@ public class InvoicePayment {
         public InvoicePayment build() {
 
             return new InvoicePayment(
-                invoicePaymentID, invoicePaymentType, transfer,
-                external);
+                invoicePaymentID, invoicePaymentType, amount,
+                transfer, external);
         }
 
     }

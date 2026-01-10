@@ -12,20 +12,21 @@ import java.lang.String;
 import java.util.List;
 
 /**
- * ScheduledTransferLineItems
+ * CreateScheduledTransferLineItems
  * 
- * <p>Line items for a scheduled transfer.
+ * <p>An optional collection of line items for a scheduled transfer.
+ * When line items are provided their total must equal `amount` minus `salesTaxAmount`.
  */
-public class ScheduledTransferLineItems {
+public class CreateScheduledTransferLineItems {
     /**
      * The list of line items.
      */
     @JsonProperty("items")
-    private List<ScheduledTransferLineItem> items;
+    private List<CreateScheduledTransferLineItem> items;
 
     @JsonCreator
-    public ScheduledTransferLineItems(
-            @JsonProperty("items") List<ScheduledTransferLineItem> items) {
+    public CreateScheduledTransferLineItems(
+            @JsonProperty("items") List<CreateScheduledTransferLineItem> items) {
         Utils.checkNotNull(items, "items");
         this.items = items;
     }
@@ -34,7 +35,7 @@ public class ScheduledTransferLineItems {
      * The list of line items.
      */
     @JsonIgnore
-    public List<ScheduledTransferLineItem> items() {
+    public List<CreateScheduledTransferLineItem> items() {
         return items;
     }
 
@@ -46,7 +47,7 @@ public class ScheduledTransferLineItems {
     /**
      * The list of line items.
      */
-    public ScheduledTransferLineItems withItems(List<ScheduledTransferLineItem> items) {
+    public CreateScheduledTransferLineItems withItems(List<CreateScheduledTransferLineItem> items) {
         Utils.checkNotNull(items, "items");
         this.items = items;
         return this;
@@ -60,7 +61,7 @@ public class ScheduledTransferLineItems {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ScheduledTransferLineItems other = (ScheduledTransferLineItems) o;
+        CreateScheduledTransferLineItems other = (CreateScheduledTransferLineItems) o;
         return 
             Utils.enhancedDeepEquals(this.items, other.items);
     }
@@ -73,14 +74,14 @@ public class ScheduledTransferLineItems {
     
     @Override
     public String toString() {
-        return Utils.toString(ScheduledTransferLineItems.class,
+        return Utils.toString(CreateScheduledTransferLineItems.class,
                 "items", items);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private List<ScheduledTransferLineItem> items;
+        private List<CreateScheduledTransferLineItem> items;
 
         private Builder() {
           // force use of static builder() method
@@ -90,15 +91,15 @@ public class ScheduledTransferLineItems {
         /**
          * The list of line items.
          */
-        public Builder items(List<ScheduledTransferLineItem> items) {
+        public Builder items(List<CreateScheduledTransferLineItem> items) {
             Utils.checkNotNull(items, "items");
             this.items = items;
             return this;
         }
 
-        public ScheduledTransferLineItems build() {
+        public CreateScheduledTransferLineItems build() {
 
-            return new ScheduledTransferLineItems(
+            return new CreateScheduledTransferLineItems(
                 items);
         }
 

@@ -22,6 +22,10 @@ public class CreateInvoicePayment {
     private Optional<String> foreignID;
 
 
+    @JsonProperty("amount")
+    private AmountDecimal amount;
+
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
     private Optional<String> description;
@@ -34,23 +38,33 @@ public class CreateInvoicePayment {
     @JsonCreator
     public CreateInvoicePayment(
             @JsonProperty("foreignID") Optional<String> foreignID,
+            @JsonProperty("amount") AmountDecimal amount,
             @JsonProperty("description") Optional<String> description,
             @JsonProperty("paymentDate") Optional<OffsetDateTime> paymentDate) {
         Utils.checkNotNull(foreignID, "foreignID");
+        Utils.checkNotNull(amount, "amount");
         Utils.checkNotNull(description, "description");
         Utils.checkNotNull(paymentDate, "paymentDate");
         this.foreignID = foreignID;
+        this.amount = amount;
         this.description = description;
         this.paymentDate = paymentDate;
     }
     
-    public CreateInvoicePayment() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+    public CreateInvoicePayment(
+            AmountDecimal amount) {
+        this(Optional.empty(), amount, Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
     public Optional<String> foreignID() {
         return foreignID;
+    }
+
+    @JsonIgnore
+    public AmountDecimal amount() {
+        return amount;
     }
 
     @JsonIgnore
@@ -78,6 +92,12 @@ public class CreateInvoicePayment {
     public CreateInvoicePayment withForeignID(Optional<String> foreignID) {
         Utils.checkNotNull(foreignID, "foreignID");
         this.foreignID = foreignID;
+        return this;
+    }
+
+    public CreateInvoicePayment withAmount(AmountDecimal amount) {
+        Utils.checkNotNull(amount, "amount");
+        this.amount = amount;
         return this;
     }
 
@@ -118,6 +138,7 @@ public class CreateInvoicePayment {
         CreateInvoicePayment other = (CreateInvoicePayment) o;
         return 
             Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
+            Utils.enhancedDeepEquals(this.amount, other.amount) &&
             Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.paymentDate, other.paymentDate);
     }
@@ -125,13 +146,15 @@ public class CreateInvoicePayment {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            foreignID, description, paymentDate);
+            foreignID, amount, description,
+            paymentDate);
     }
     
     @Override
     public String toString() {
         return Utils.toString(CreateInvoicePayment.class,
                 "foreignID", foreignID,
+                "amount", amount,
                 "description", description,
                 "paymentDate", paymentDate);
     }
@@ -140,6 +163,8 @@ public class CreateInvoicePayment {
     public final static class Builder {
 
         private Optional<String> foreignID = Optional.empty();
+
+        private AmountDecimal amount;
 
         private Optional<String> description = Optional.empty();
 
@@ -159,6 +184,13 @@ public class CreateInvoicePayment {
         public Builder foreignID(Optional<String> foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
             this.foreignID = foreignID;
+            return this;
+        }
+
+
+        public Builder amount(AmountDecimal amount) {
+            Utils.checkNotNull(amount, "amount");
+            this.amount = amount;
             return this;
         }
 
@@ -191,7 +223,8 @@ public class CreateInvoicePayment {
         public CreateInvoicePayment build() {
 
             return new CreateInvoicePayment(
-                foreignID, description, paymentDate);
+                foreignID, amount, description,
+                paymentDate);
         }
 
     }

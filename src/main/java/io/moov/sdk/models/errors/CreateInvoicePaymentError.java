@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.moov.sdk.models.components.AmountDecimalValidationError;
 import io.moov.sdk.utils.Utils;
 import jakarta.annotation.Nullable;
 import java.io.InputStream;
@@ -54,6 +55,11 @@ public class CreateInvoicePaymentError extends MoovError {
     }
 
     @Deprecated
+    public Optional<AmountDecimalValidationError> amount() {
+        return data().flatMap(Data::amount);
+    }
+
+    @Deprecated
     public Optional<String> foreignID() {
         return data().flatMap(Data::foreignID);
     }
@@ -82,6 +88,11 @@ public class CreateInvoicePaymentError extends MoovError {
     public static class Data {
 
         @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("amount")
+        private Optional<? extends AmountDecimalValidationError> amount;
+
+
+        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("foreignID")
         private Optional<String> foreignID;
 
@@ -97,19 +108,29 @@ public class CreateInvoicePaymentError extends MoovError {
 
         @JsonCreator
         public Data(
+                @JsonProperty("amount") Optional<? extends AmountDecimalValidationError> amount,
                 @JsonProperty("foreignID") Optional<String> foreignID,
                 @JsonProperty("description") Optional<String> description,
                 @JsonProperty("paymentDate") Optional<String> paymentDate) {
+            Utils.checkNotNull(amount, "amount");
             Utils.checkNotNull(foreignID, "foreignID");
             Utils.checkNotNull(description, "description");
             Utils.checkNotNull(paymentDate, "paymentDate");
+            this.amount = amount;
             this.foreignID = foreignID;
             this.description = description;
             this.paymentDate = paymentDate;
         }
         
         public Data() {
-            this(Optional.empty(), Optional.empty(), Optional.empty());
+            this(Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty());
+        }
+
+        @SuppressWarnings("unchecked")
+        @JsonIgnore
+        public Optional<AmountDecimalValidationError> amount() {
+            return (Optional<AmountDecimalValidationError>) amount;
         }
 
         @JsonIgnore
@@ -131,6 +152,19 @@ public class CreateInvoicePaymentError extends MoovError {
             return new Builder();
         }
 
+
+        public Data withAmount(AmountDecimalValidationError amount) {
+            Utils.checkNotNull(amount, "amount");
+            this.amount = Optional.ofNullable(amount);
+            return this;
+        }
+
+
+        public Data withAmount(Optional<? extends AmountDecimalValidationError> amount) {
+            Utils.checkNotNull(amount, "amount");
+            this.amount = amount;
+            return this;
+        }
 
         public Data withForeignID(String foreignID) {
             Utils.checkNotNull(foreignID, "foreignID");
@@ -181,6 +215,7 @@ public class CreateInvoicePaymentError extends MoovError {
             }
             Data other = (Data) o;
             return 
+                Utils.enhancedDeepEquals(this.amount, other.amount) &&
                 Utils.enhancedDeepEquals(this.foreignID, other.foreignID) &&
                 Utils.enhancedDeepEquals(this.description, other.description) &&
                 Utils.enhancedDeepEquals(this.paymentDate, other.paymentDate);
@@ -189,12 +224,14 @@ public class CreateInvoicePaymentError extends MoovError {
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                foreignID, description, paymentDate);
+                amount, foreignID, description,
+                paymentDate);
         }
         
         @Override
         public String toString() {
             return Utils.toString(Data.class,
+                    "amount", amount,
                     "foreignID", foreignID,
                     "description", description,
                     "paymentDate", paymentDate);
@@ -202,6 +239,8 @@ public class CreateInvoicePaymentError extends MoovError {
 
         @SuppressWarnings("UnusedReturnValue")
         public final static class Builder {
+
+            private Optional<? extends AmountDecimalValidationError> amount = Optional.empty();
 
             private Optional<String> foreignID = Optional.empty();
 
@@ -211,6 +250,19 @@ public class CreateInvoicePaymentError extends MoovError {
 
             private Builder() {
               // force use of static builder() method
+            }
+
+
+            public Builder amount(AmountDecimalValidationError amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = Optional.ofNullable(amount);
+                return this;
+            }
+
+            public Builder amount(Optional<? extends AmountDecimalValidationError> amount) {
+                Utils.checkNotNull(amount, "amount");
+                this.amount = amount;
+                return this;
             }
 
 
@@ -255,7 +307,8 @@ public class CreateInvoicePaymentError extends MoovError {
             public Data build() {
 
                 return new Data(
-                    foreignID, description, paymentDate);
+                    amount, foreignID, description,
+                    paymentDate);
             }
 
         }

@@ -58,9 +58,7 @@ public class OccurrencesResponse {
     @JsonProperty("runOn")
     private OffsetDateTime runOn;
 
-    /**
-     * Defines the attributes of a transfer.
-     */
+
     @JsonProperty("runTransfer")
     private RunTransfer runTransfer;
 
@@ -182,9 +180,6 @@ public class OccurrencesResponse {
         return runOn;
     }
 
-    /**
-     * Defines the attributes of a transfer.
-     */
     @JsonIgnore
     public RunTransfer runTransfer() {
         return runTransfer;
@@ -325,9 +320,6 @@ public class OccurrencesResponse {
         return this;
     }
 
-    /**
-     * Defines the attributes of a transfer.
-     */
     public OccurrencesResponse withRunTransfer(RunTransfer runTransfer) {
         Utils.checkNotNull(runTransfer, "runTransfer");
         this.runTransfer = runTransfer;
@@ -583,9 +575,6 @@ public class OccurrencesResponse {
         }
 
 
-        /**
-         * Defines the attributes of a transfer.
-         */
         public Builder runTransfer(RunTransfer runTransfer) {
             Utils.checkNotNull(runTransfer, "runTransfer");
             this.runTransfer = runTransfer;

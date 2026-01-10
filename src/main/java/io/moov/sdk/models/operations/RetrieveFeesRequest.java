@@ -31,6 +31,12 @@ public class RetrieveFeesRequest {
     private Optional<String> disputeID;
 
     /**
+     * Optional residual ID to filter the results by.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=residualID")
+    private Optional<String> residualID;
+
+    /**
      * Optional date-time to inclusively filter all fees created after this date-time.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=startDateTime")
@@ -55,6 +61,7 @@ public class RetrieveFeesRequest {
             String accountID,
             Optional<String> transferID,
             Optional<String> disputeID,
+            Optional<String> residualID,
             Optional<String> startDateTime,
             Optional<String> endDateTime,
             Optional<Long> skip,
@@ -62,6 +69,7 @@ public class RetrieveFeesRequest {
         Utils.checkNotNull(accountID, "accountID");
         Utils.checkNotNull(transferID, "transferID");
         Utils.checkNotNull(disputeID, "disputeID");
+        Utils.checkNotNull(residualID, "residualID");
         Utils.checkNotNull(startDateTime, "startDateTime");
         Utils.checkNotNull(endDateTime, "endDateTime");
         Utils.checkNotNull(skip, "skip");
@@ -69,6 +77,7 @@ public class RetrieveFeesRequest {
         this.accountID = accountID;
         this.transferID = transferID;
         this.disputeID = disputeID;
+        this.residualID = residualID;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.skip = skip;
@@ -79,7 +88,7 @@ public class RetrieveFeesRequest {
             String accountID) {
         this(accountID, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -101,6 +110,14 @@ public class RetrieveFeesRequest {
     @JsonIgnore
     public Optional<String> disputeID() {
         return disputeID;
+    }
+
+    /**
+     * Optional residual ID to filter the results by.
+     */
+    @JsonIgnore
+    public Optional<String> residualID() {
+        return residualID;
     }
 
     /**
@@ -175,6 +192,25 @@ public class RetrieveFeesRequest {
     public RetrieveFeesRequest withDisputeID(Optional<String> disputeID) {
         Utils.checkNotNull(disputeID, "disputeID");
         this.disputeID = disputeID;
+        return this;
+    }
+
+    /**
+     * Optional residual ID to filter the results by.
+     */
+    public RetrieveFeesRequest withResidualID(String residualID) {
+        Utils.checkNotNull(residualID, "residualID");
+        this.residualID = Optional.ofNullable(residualID);
+        return this;
+    }
+
+
+    /**
+     * Optional residual ID to filter the results by.
+     */
+    public RetrieveFeesRequest withResidualID(Optional<String> residualID) {
+        Utils.checkNotNull(residualID, "residualID");
+        this.residualID = residualID;
         return this;
     }
 
@@ -255,6 +291,7 @@ public class RetrieveFeesRequest {
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
             Utils.enhancedDeepEquals(this.transferID, other.transferID) &&
             Utils.enhancedDeepEquals(this.disputeID, other.disputeID) &&
+            Utils.enhancedDeepEquals(this.residualID, other.residualID) &&
             Utils.enhancedDeepEquals(this.startDateTime, other.startDateTime) &&
             Utils.enhancedDeepEquals(this.endDateTime, other.endDateTime) &&
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
@@ -265,8 +302,8 @@ public class RetrieveFeesRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             accountID, transferID, disputeID,
-            startDateTime, endDateTime, skip,
-            count);
+            residualID, startDateTime, endDateTime,
+            skip, count);
     }
     
     @Override
@@ -275,6 +312,7 @@ public class RetrieveFeesRequest {
                 "accountID", accountID,
                 "transferID", transferID,
                 "disputeID", disputeID,
+                "residualID", residualID,
                 "startDateTime", startDateTime,
                 "endDateTime", endDateTime,
                 "skip", skip,
@@ -289,6 +327,8 @@ public class RetrieveFeesRequest {
         private Optional<String> transferID = Optional.empty();
 
         private Optional<String> disputeID = Optional.empty();
+
+        private Optional<String> residualID = Optional.empty();
 
         private Optional<String> startDateTime = Optional.empty();
 
@@ -344,6 +384,25 @@ public class RetrieveFeesRequest {
         public Builder disputeID(Optional<String> disputeID) {
             Utils.checkNotNull(disputeID, "disputeID");
             this.disputeID = disputeID;
+            return this;
+        }
+
+
+        /**
+         * Optional residual ID to filter the results by.
+         */
+        public Builder residualID(String residualID) {
+            Utils.checkNotNull(residualID, "residualID");
+            this.residualID = Optional.ofNullable(residualID);
+            return this;
+        }
+
+        /**
+         * Optional residual ID to filter the results by.
+         */
+        public Builder residualID(Optional<String> residualID) {
+            Utils.checkNotNull(residualID, "residualID");
+            this.residualID = residualID;
             return this;
         }
 
@@ -415,8 +474,8 @@ public class RetrieveFeesRequest {
 
             return new RetrieveFeesRequest(
                 accountID, transferID, disputeID,
-                startDateTime, endDateTime, skip,
-                count);
+                residualID, startDateTime, endDateTime,
+                skip, count);
         }
 
     }

@@ -27,8 +27,9 @@ public class Invoice {
     private String invoiceNumber;
 
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
-    private String description;
+    private Optional<String> description;
 
 
     @JsonProperty("customerAccountID")
@@ -93,8 +94,8 @@ public class Invoice {
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("payments")
-    private Optional<? extends List<InvoicePayment>> payments;
+    @JsonProperty("invoicePayments")
+    private Optional<? extends List<InvoicePayment>> invoicePayments;
 
 
     @JsonProperty("createdOn")
@@ -129,7 +130,7 @@ public class Invoice {
     public Invoice(
             @JsonProperty("invoiceID") String invoiceID,
             @JsonProperty("invoiceNumber") String invoiceNumber,
-            @JsonProperty("description") String description,
+            @JsonProperty("description") Optional<String> description,
             @JsonProperty("customerAccountID") String customerAccountID,
             @JsonProperty("partnerAccountID") String partnerAccountID,
             @JsonProperty("status") InvoiceStatus status,
@@ -142,7 +143,7 @@ public class Invoice {
             @JsonProperty("refundedAmount") AmountDecimal refundedAmount,
             @JsonProperty("disputedAmount") AmountDecimal disputedAmount,
             @JsonProperty("paymentLinkCode") Optional<String> paymentLinkCode,
-            @JsonProperty("payments") Optional<? extends List<InvoicePayment>> payments,
+            @JsonProperty("invoicePayments") Optional<? extends List<InvoicePayment>> invoicePayments,
             @JsonProperty("createdOn") OffsetDateTime createdOn,
             @JsonProperty("invoiceDate") Optional<OffsetDateTime> invoiceDate,
             @JsonProperty("dueDate") Optional<OffsetDateTime> dueDate,
@@ -164,7 +165,7 @@ public class Invoice {
         Utils.checkNotNull(refundedAmount, "refundedAmount");
         Utils.checkNotNull(disputedAmount, "disputedAmount");
         Utils.checkNotNull(paymentLinkCode, "paymentLinkCode");
-        Utils.checkNotNull(payments, "payments");
+        Utils.checkNotNull(invoicePayments, "invoicePayments");
         Utils.checkNotNull(createdOn, "createdOn");
         Utils.checkNotNull(invoiceDate, "invoiceDate");
         Utils.checkNotNull(dueDate, "dueDate");
@@ -186,7 +187,7 @@ public class Invoice {
         this.refundedAmount = refundedAmount;
         this.disputedAmount = disputedAmount;
         this.paymentLinkCode = paymentLinkCode;
-        this.payments = payments;
+        this.invoicePayments = invoicePayments;
         this.createdOn = createdOn;
         this.invoiceDate = invoiceDate;
         this.dueDate = dueDate;
@@ -198,7 +199,6 @@ public class Invoice {
     public Invoice(
             String invoiceID,
             String invoiceNumber,
-            String description,
             String customerAccountID,
             String partnerAccountID,
             InvoiceStatus status,
@@ -211,7 +211,7 @@ public class Invoice {
             AmountDecimal refundedAmount,
             AmountDecimal disputedAmount,
             OffsetDateTime createdOn) {
-        this(invoiceID, invoiceNumber, description,
+        this(invoiceID, invoiceNumber, Optional.empty(),
             customerAccountID, partnerAccountID, status,
             lineItems, subtotalAmount, taxAmount,
             totalAmount, pendingAmount, paidAmount,
@@ -232,7 +232,7 @@ public class Invoice {
     }
 
     @JsonIgnore
-    public String description() {
+    public Optional<String> description() {
         return description;
     }
 
@@ -316,8 +316,8 @@ public class Invoice {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<InvoicePayment>> payments() {
-        return (Optional<List<InvoicePayment>>) payments;
+    public Optional<List<InvoicePayment>> invoicePayments() {
+        return (Optional<List<InvoicePayment>>) invoicePayments;
     }
 
     @JsonIgnore
@@ -368,6 +368,13 @@ public class Invoice {
     }
 
     public Invoice withDescription(String description) {
+        Utils.checkNotNull(description, "description");
+        this.description = Optional.ofNullable(description);
+        return this;
+    }
+
+
+    public Invoice withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
@@ -470,16 +477,16 @@ public class Invoice {
         return this;
     }
 
-    public Invoice withPayments(List<InvoicePayment> payments) {
-        Utils.checkNotNull(payments, "payments");
-        this.payments = Optional.ofNullable(payments);
+    public Invoice withInvoicePayments(List<InvoicePayment> invoicePayments) {
+        Utils.checkNotNull(invoicePayments, "invoicePayments");
+        this.invoicePayments = Optional.ofNullable(invoicePayments);
         return this;
     }
 
 
-    public Invoice withPayments(Optional<? extends List<InvoicePayment>> payments) {
-        Utils.checkNotNull(payments, "payments");
-        this.payments = payments;
+    public Invoice withInvoicePayments(Optional<? extends List<InvoicePayment>> invoicePayments) {
+        Utils.checkNotNull(invoicePayments, "invoicePayments");
+        this.invoicePayments = invoicePayments;
         return this;
     }
 
@@ -579,7 +586,7 @@ public class Invoice {
             Utils.enhancedDeepEquals(this.refundedAmount, other.refundedAmount) &&
             Utils.enhancedDeepEquals(this.disputedAmount, other.disputedAmount) &&
             Utils.enhancedDeepEquals(this.paymentLinkCode, other.paymentLinkCode) &&
-            Utils.enhancedDeepEquals(this.payments, other.payments) &&
+            Utils.enhancedDeepEquals(this.invoicePayments, other.invoicePayments) &&
             Utils.enhancedDeepEquals(this.createdOn, other.createdOn) &&
             Utils.enhancedDeepEquals(this.invoiceDate, other.invoiceDate) &&
             Utils.enhancedDeepEquals(this.dueDate, other.dueDate) &&
@@ -596,7 +603,7 @@ public class Invoice {
             lineItems, subtotalAmount, taxAmount,
             totalAmount, pendingAmount, paidAmount,
             refundedAmount, disputedAmount, paymentLinkCode,
-            payments, createdOn, invoiceDate,
+            invoicePayments, createdOn, invoiceDate,
             dueDate, sentOn, paidOn,
             canceledOn);
     }
@@ -619,7 +626,7 @@ public class Invoice {
                 "refundedAmount", refundedAmount,
                 "disputedAmount", disputedAmount,
                 "paymentLinkCode", paymentLinkCode,
-                "payments", payments,
+                "invoicePayments", invoicePayments,
                 "createdOn", createdOn,
                 "invoiceDate", invoiceDate,
                 "dueDate", dueDate,
@@ -635,7 +642,7 @@ public class Invoice {
 
         private String invoiceNumber;
 
-        private String description;
+        private Optional<String> description = Optional.empty();
 
         private String customerAccountID;
 
@@ -661,7 +668,7 @@ public class Invoice {
 
         private Optional<String> paymentLinkCode = Optional.empty();
 
-        private Optional<? extends List<InvoicePayment>> payments = Optional.empty();
+        private Optional<? extends List<InvoicePayment>> invoicePayments = Optional.empty();
 
         private OffsetDateTime createdOn;
 
@@ -695,6 +702,12 @@ public class Invoice {
 
 
         public Builder description(String description) {
+            Utils.checkNotNull(description, "description");
+            this.description = Optional.ofNullable(description);
+            return this;
+        }
+
+        public Builder description(Optional<String> description) {
             Utils.checkNotNull(description, "description");
             this.description = description;
             return this;
@@ -809,15 +822,15 @@ public class Invoice {
         }
 
 
-        public Builder payments(List<InvoicePayment> payments) {
-            Utils.checkNotNull(payments, "payments");
-            this.payments = Optional.ofNullable(payments);
+        public Builder invoicePayments(List<InvoicePayment> invoicePayments) {
+            Utils.checkNotNull(invoicePayments, "invoicePayments");
+            this.invoicePayments = Optional.ofNullable(invoicePayments);
             return this;
         }
 
-        public Builder payments(Optional<? extends List<InvoicePayment>> payments) {
-            Utils.checkNotNull(payments, "payments");
-            this.payments = payments;
+        public Builder invoicePayments(Optional<? extends List<InvoicePayment>> invoicePayments) {
+            Utils.checkNotNull(invoicePayments, "invoicePayments");
+            this.invoicePayments = invoicePayments;
             return this;
         }
 
@@ -901,7 +914,7 @@ public class Invoice {
                 lineItems, subtotalAmount, taxAmount,
                 totalAmount, pendingAmount, paidAmount,
                 refundedAmount, disputedAmount, paymentLinkCode,
-                payments, createdOn, invoiceDate,
+                invoicePayments, createdOn, invoiceDate,
                 dueDate, sentOn, paidOn,
                 canceledOn);
         }

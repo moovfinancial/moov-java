@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 124c8e996e0529dbe24c3a9a9aaadbca
+  docChecksum: b7b033372765a34ca897596f25beb355
   docVersion: latest
-  speakeasyVersion: 1.684.0
-  generationVersion: 2.793.0
-  releaseVersion: 0.34.15
-  configChecksum: 88ecc6ea32ba3e9af33cdc9ec9fe4bb6
+  speakeasyVersion: 1.685.0
+  generationVersion: 2.794.1
+  releaseVersion: 0.34.16
+  configChecksum: a7847458359d08d2eeee4dd97e5813a4
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: 5595aa0d-a5ca-4af6-95ca-1c954b41285e
-  pristine_commit_hash: 045ed7ce400a9abeff0041cefdf786733b927aac
-  pristine_tree_hash: 79a57778247679294f546c6bf3114f945aa38d02
+  generation_id: 7661ab37-5016-4fe7-a1e6-638803a3a0f6
+  pristine_commit_hash: e1f352b78615cae2f97fb782ca5c0d963c85b1ce
+  pristine_tree_hash: abbc6666536c0d79b5133a7f07892c4be1c8f602
 features:
   java:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.55.5
+    core: 3.55.7
     decimal: 0.0.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
@@ -4265,8 +4265,8 @@ trackedFiles:
     pristine_git_object: 5a1311f65cc22d82e0ed6eafb4b10f581d3ed7c5
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:23649201468c4138da8d484decb26d753e7b4572
-    pristine_git_object: 146857424893b5c646bb70bc981cc018c4b80375
+    last_write_checksum: sha1:cba7a06d9f98a0f7253d0a4a3e098692cbd8e4a5
+    pristine_git_object: 5a20571bad07867f49c8072f399e3f4e6ac33fed
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4441,8 +4441,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:2a4d0b6923e91a0e44002ee31625ebea03c09298
-    pristine_git_object: d0ed86211abbb53418c4eb35fe361ce55356a965
+    last_write_checksum: sha1:e794b3345be3d1fd96e5833ebca691cd7e1677f5
+    pristine_git_object: 1b797d9a906af9a9ff7f71253b95f61c8401ca9f
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:f2634b766e3dc03d4f3043aff0565c655dcf17be
@@ -10149,8 +10149,8 @@ trackedFiles:
     pristine_git_object: 5947c434b7885ec29d0068b90ddaffc91efe4870
   src/main/java/io/moov/sdk/utils/RequestBody.java:
     id: 3c3216f51eda
-    last_write_checksum: sha1:769646e5b20df0b8ab9eda4e4dd6607769b98d2e
-    pristine_git_object: d846ef70faf6508f3d4e3fb380507f510dfa5b2c
+    last_write_checksum: sha1:5a87dac03473d9928e85a51ab6ec18dde7af43b7
+    pristine_git_object: 7a2154eca3868f5d58cf45da374bcb2918268b1a
   src/main/java/io/moov/sdk/utils/RequestMetadata.java:
     id: fe6e8d9671cb
     last_write_checksum: sha1:e65e3f4ecad8fc6fc2727f3b717a4bf00579aef5
@@ -12918,7 +12918,6 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `moov.invoices.listInvoicePayments()`:  `response.[]` **Changed** **Breaking** :warning:\n* `moov.invoices.updateInvoice()`:  `response` **Changed** **Breaking** :warning:\n* `moov.invoices.createInvoicePayment()`: \n  *  `request.createinvoicepayment.amount` **Added** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n  *  `error.amount` **Added**\n* `moov.invoices.getInvoice()`:  `response` **Changed** **Breaking** :warning:\n* `moov.invoices.createInvoice()`: \n  *  `request.createinvoice.description` **Changed**\n  *  `response` **Changed** **Breaking** :warning:\n* `moov.invoices.listInvoices()`:  `response.[]` **Changed** **Breaking** :warning:\n* `moov.feePlans.retrieveFees()`: \n  *  `request.residualId` **Added**\n  *  `response.[].residualId` **Added**\n* `moov.scheduling.create()`: \n  *  `request.upsertschedule.occurrences.[].runTransfer.lineItems.items.[]` **Changed**\n  *  `response.occurrences.[].runTransfer.lineItems.items.[]` **Changed**\n* `moov.feePlans.listResidualFees()`:  `response.[].residualId` **Added**\n* `moov.feePlans.listFeeRevenue()`: \n  *  `request` **Changed**\n  *  `response.[].residualId` **Added**\n* `moov.feePlans.listFeesFetch()`:  `response.[].residualId` **Added**\n* `moov.scheduling.list()`:  `response.[].occurrences.[].runTransfer.lineItems.items.[]` **Changed**\n* `moov.scheduling.update()`: \n  *  `request.upsertschedule.occurrences.[].runTransfer.lineItems.items.[]` **Changed**\n  *  `response.occurrences.[].runTransfer.lineItems.items.[]` **Changed**\n* `moov.scheduling.get()`:  `response.occurrences.[].runTransfer.lineItems.items.[]` **Changed**\n* `moov.scheduling.getOccurrance()`:  `response.runtransfer.lineItems.items.[]` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

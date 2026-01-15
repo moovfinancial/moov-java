@@ -54,11 +54,12 @@ public class Application {
 
 ### Parameters
 
-| Parameter          | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `accountID`        | *String*           | :heavy_check_mark: | N/A                |                    |
-| `skip`             | *Optional\<Long>*  | :heavy_minus_sign: | N/A                | 60                 |
-| `count`            | *Optional\<Long>*  | :heavy_minus_sign: | N/A                | 20                 |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `accountID`                                                                               | *String*                                                                                  | :heavy_check_mark:                                                                        | N/A                                                                                       |                                                                                           |
+| `title`                                                                                   | *Optional\<String>*                                                                       | :heavy_minus_sign:                                                                        | Allows filtering products by title. This supports partial matches and is case-insensitive |                                                                                           |
+| `skip`                                                                                    | *Optional\<Long>*                                                                         | :heavy_minus_sign:                                                                        | N/A                                                                                       | 60                                                                                        |
+| `count`                                                                                   | *Optional\<Long>*                                                                         | :heavy_minus_sign:                                                                        | N/A                                                                                       | 20                                                                                        |
 
 ### Response
 

@@ -25,8 +25,9 @@ public class CardTransactionDetails {
     /**
      * Status of a transaction within the card payment lifecycle.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private CardTransactionStatus status;
+    private Optional<? extends CardTransactionStatus> status;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -107,7 +108,7 @@ public class CardTransactionDetails {
 
     @JsonCreator
     public CardTransactionDetails(
-            @JsonProperty("status") CardTransactionStatus status,
+            @JsonProperty("status") Optional<? extends CardTransactionStatus> status,
             @JsonProperty("failureCode") Optional<? extends CardTransactionFailureCode> failureCode,
             @JsonProperty("dynamicDescriptor") Optional<String> dynamicDescriptor,
             @JsonProperty("transactionSource") Optional<? extends TransactionSource> transactionSource,
@@ -148,9 +149,8 @@ public class CardTransactionDetails {
         this.authorizationCode = authorizationCode;
     }
     
-    public CardTransactionDetails(
-            CardTransactionStatus status) {
-        this(status, Optional.empty(), Optional.empty(),
+    public CardTransactionDetails() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -160,9 +160,10 @@ public class CardTransactionDetails {
     /**
      * Status of a transaction within the card payment lifecycle.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public CardTransactionStatus status() {
-        return status;
+    public Optional<CardTransactionStatus> status() {
+        return (Optional<CardTransactionStatus>) status;
     }
 
     @SuppressWarnings("unchecked")
@@ -258,6 +259,16 @@ public class CardTransactionDetails {
      * Status of a transaction within the card payment lifecycle.
      */
     public CardTransactionDetails withStatus(CardTransactionStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
+        return this;
+    }
+
+
+    /**
+     * Status of a transaction within the card payment lifecycle.
+     */
+    public CardTransactionDetails withStatus(Optional<? extends CardTransactionStatus> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -519,7 +530,7 @@ public class CardTransactionDetails {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private CardTransactionStatus status;
+        private Optional<? extends CardTransactionStatus> status = Optional.empty();
 
         private Optional<? extends CardTransactionFailureCode> failureCode = Optional.empty();
 
@@ -555,6 +566,15 @@ public class CardTransactionDetails {
          * Status of a transaction within the card payment lifecycle.
          */
         public Builder status(CardTransactionStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
+            return this;
+        }
+
+        /**
+         * Status of a transaction within the card payment lifecycle.
+         */
+        public Builder status(Optional<? extends CardTransactionStatus> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

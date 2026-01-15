@@ -25,12 +25,14 @@ public class ACHTransactionDetails {
     /**
      * Status of a transaction within the ACH lifecycle.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private ACHTransactionStatus status;
+    private Optional<? extends ACHTransactionStatus> status;
 
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("traceNumber")
-    private String traceNumber;
+    private Optional<String> traceNumber;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -113,8 +115,8 @@ public class ACHTransactionDetails {
 
     @JsonCreator
     public ACHTransactionDetails(
-            @JsonProperty("status") ACHTransactionStatus status,
-            @JsonProperty("traceNumber") String traceNumber,
+            @JsonProperty("status") Optional<? extends ACHTransactionStatus> status,
+            @JsonProperty("traceNumber") Optional<String> traceNumber,
             @JsonProperty("return") Optional<? extends ACHException> return_,
             @JsonProperty("correction") Optional<? extends ACHException> correction,
             @JsonProperty("companyEntryDescription") Optional<String> companyEntryDescription,
@@ -163,10 +165,8 @@ public class ACHTransactionDetails {
         this.addenda = addenda;
     }
     
-    public ACHTransactionDetails(
-            ACHTransactionStatus status,
-            String traceNumber) {
-        this(status, traceNumber, Optional.empty(),
+    public ACHTransactionDetails() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -177,13 +177,14 @@ public class ACHTransactionDetails {
     /**
      * Status of a transaction within the ACH lifecycle.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public ACHTransactionStatus status() {
-        return status;
+    public Optional<ACHTransactionStatus> status() {
+        return (Optional<ACHTransactionStatus>) status;
     }
 
     @JsonIgnore
-    public String traceNumber() {
+    public Optional<String> traceNumber() {
         return traceNumber;
     }
 
@@ -285,11 +286,28 @@ public class ACHTransactionDetails {
      */
     public ACHTransactionDetails withStatus(ACHTransactionStatus status) {
         Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
+        return this;
+    }
+
+
+    /**
+     * Status of a transaction within the ACH lifecycle.
+     */
+    public ACHTransactionDetails withStatus(Optional<? extends ACHTransactionStatus> status) {
+        Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
     }
 
     public ACHTransactionDetails withTraceNumber(String traceNumber) {
+        Utils.checkNotNull(traceNumber, "traceNumber");
+        this.traceNumber = Optional.ofNullable(traceNumber);
+        return this;
+    }
+
+
+    public ACHTransactionDetails withTraceNumber(Optional<String> traceNumber) {
         Utils.checkNotNull(traceNumber, "traceNumber");
         this.traceNumber = traceNumber;
         return this;
@@ -566,9 +584,9 @@ public class ACHTransactionDetails {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private ACHTransactionStatus status;
+        private Optional<? extends ACHTransactionStatus> status = Optional.empty();
 
-        private String traceNumber;
+        private Optional<String> traceNumber = Optional.empty();
 
         private Optional<? extends ACHException> return_ = Optional.empty();
 
@@ -608,12 +626,27 @@ public class ACHTransactionDetails {
          */
         public Builder status(ACHTransactionStatus status) {
             Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
+            return this;
+        }
+
+        /**
+         * Status of a transaction within the ACH lifecycle.
+         */
+        public Builder status(Optional<? extends ACHTransactionStatus> status) {
+            Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
 
 
         public Builder traceNumber(String traceNumber) {
+            Utils.checkNotNull(traceNumber, "traceNumber");
+            this.traceNumber = Optional.ofNullable(traceNumber);
+            return this;
+        }
+
+        public Builder traceNumber(Optional<String> traceNumber) {
             Utils.checkNotNull(traceNumber, "traceNumber");
             this.traceNumber = traceNumber;
             return this;

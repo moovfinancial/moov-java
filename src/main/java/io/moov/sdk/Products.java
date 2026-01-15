@@ -57,25 +57,28 @@ public class Products {
      * @throws RuntimeException subclass if the API call fails
      */
     public ListProductsResponse list(String accountID) {
-        return list(accountID, Optional.empty(), Optional.empty());
+        return list(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
      * List active (non-disabled) products for an account.
      * 
      * @param accountID 
+     * @param title Allows filtering products by title. This supports partial matches and is case-insensitive
      * @param skip 
      * @param count 
      * @return The response from the API call
      * @throws RuntimeException subclass if the API call fails
      */
     public ListProductsResponse list(
-            String accountID, Optional<Long> skip,
-            Optional<Long> count) {
+            String accountID, Optional<String> title,
+            Optional<Long> skip, Optional<Long> count) {
         ListProductsRequest request =
             ListProductsRequest
                 .builder()
                 .accountID(accountID)
+                .title(title)
                 .skip(skip)
                 .count(count)
                 .build();

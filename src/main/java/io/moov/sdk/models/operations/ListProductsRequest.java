@@ -18,6 +18,12 @@ public class ListProductsRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
+    /**
+     * Allows filtering products by title. This supports partial matches and is case-insensitive
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=title")
+    private Optional<String> title;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=false,name=skip")
     private Optional<Long> skip;
@@ -29,24 +35,36 @@ public class ListProductsRequest {
     @JsonCreator
     public ListProductsRequest(
             String accountID,
+            Optional<String> title,
             Optional<Long> skip,
             Optional<Long> count) {
         Utils.checkNotNull(accountID, "accountID");
+        Utils.checkNotNull(title, "title");
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         this.accountID = accountID;
+        this.title = title;
         this.skip = skip;
         this.count = count;
     }
     
     public ListProductsRequest(
             String accountID) {
-        this(accountID, Optional.empty(), Optional.empty());
+        this(accountID, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
     public String accountID() {
         return accountID;
+    }
+
+    /**
+     * Allows filtering products by title. This supports partial matches and is case-insensitive
+     */
+    @JsonIgnore
+    public Optional<String> title() {
+        return title;
     }
 
     @JsonIgnore
@@ -67,6 +85,25 @@ public class ListProductsRequest {
     public ListProductsRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
+        return this;
+    }
+
+    /**
+     * Allows filtering products by title. This supports partial matches and is case-insensitive
+     */
+    public ListProductsRequest withTitle(String title) {
+        Utils.checkNotNull(title, "title");
+        this.title = Optional.ofNullable(title);
+        return this;
+    }
+
+
+    /**
+     * Allows filtering products by title. This supports partial matches and is case-insensitive
+     */
+    public ListProductsRequest withTitle(Optional<String> title) {
+        Utils.checkNotNull(title, "title");
+        this.title = title;
         return this;
     }
 
@@ -107,6 +144,7 @@ public class ListProductsRequest {
         ListProductsRequest other = (ListProductsRequest) o;
         return 
             Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
             Utils.enhancedDeepEquals(this.skip, other.skip) &&
             Utils.enhancedDeepEquals(this.count, other.count);
     }
@@ -114,13 +152,15 @@ public class ListProductsRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accountID, skip, count);
+            accountID, title, skip,
+            count);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ListProductsRequest.class,
                 "accountID", accountID,
+                "title", title,
                 "skip", skip,
                 "count", count);
     }
@@ -129,6 +169,8 @@ public class ListProductsRequest {
     public final static class Builder {
 
         private String accountID;
+
+        private Optional<String> title = Optional.empty();
 
         private Optional<Long> skip = Optional.empty();
 
@@ -142,6 +184,25 @@ public class ListProductsRequest {
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
+            return this;
+        }
+
+
+        /**
+         * Allows filtering products by title. This supports partial matches and is case-insensitive
+         */
+        public Builder title(String title) {
+            Utils.checkNotNull(title, "title");
+            this.title = Optional.ofNullable(title);
+            return this;
+        }
+
+        /**
+         * Allows filtering products by title. This supports partial matches and is case-insensitive
+         */
+        public Builder title(Optional<String> title) {
+            Utils.checkNotNull(title, "title");
+            this.title = title;
             return this;
         }
 
@@ -174,7 +235,8 @@ public class ListProductsRequest {
         public ListProductsRequest build() {
 
             return new ListProductsRequest(
-                accountID, skip, count);
+                accountID, title, skip,
+                count);
         }
 
     }

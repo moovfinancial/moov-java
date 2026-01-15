@@ -24,8 +24,9 @@ public class RTPTransactionDetails {
     /**
      * Status of a transaction within the RTP lifecycle.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private RTPTransactionStatus status;
+    private Optional<? extends RTPTransactionStatus> status;
 
     /**
      * Response code returned by network on failure.
@@ -63,7 +64,7 @@ public class RTPTransactionDetails {
 
     @JsonCreator
     public RTPTransactionDetails(
-            @JsonProperty("status") RTPTransactionStatus status,
+            @JsonProperty("status") Optional<? extends RTPTransactionStatus> status,
             @JsonProperty("networkResponseCode") Optional<String> networkResponseCode,
             @JsonProperty("failureCode") Optional<? extends RTPFailureCode> failureCode,
             @JsonProperty("initiatedOn") Optional<OffsetDateTime> initiatedOn,
@@ -86,9 +87,8 @@ public class RTPTransactionDetails {
         this.acceptedWithoutPostingOn = acceptedWithoutPostingOn;
     }
     
-    public RTPTransactionDetails(
-            RTPTransactionStatus status) {
-        this(status, Optional.empty(), Optional.empty(),
+    public RTPTransactionDetails() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty());
     }
@@ -96,9 +96,10 @@ public class RTPTransactionDetails {
     /**
      * Status of a transaction within the RTP lifecycle.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public RTPTransactionStatus status() {
-        return status;
+    public Optional<RTPTransactionStatus> status() {
+        return (Optional<RTPTransactionStatus>) status;
     }
 
     /**
@@ -147,6 +148,16 @@ public class RTPTransactionDetails {
      * Status of a transaction within the RTP lifecycle.
      */
     public RTPTransactionDetails withStatus(RTPTransactionStatus status) {
+        Utils.checkNotNull(status, "status");
+        this.status = Optional.ofNullable(status);
+        return this;
+    }
+
+
+    /**
+     * Status of a transaction within the RTP lifecycle.
+     */
+    public RTPTransactionDetails withStatus(Optional<? extends RTPTransactionStatus> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -284,7 +295,7 @@ public class RTPTransactionDetails {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private RTPTransactionStatus status;
+        private Optional<? extends RTPTransactionStatus> status = Optional.empty();
 
         private Optional<String> networkResponseCode = Optional.empty();
 
@@ -307,6 +318,15 @@ public class RTPTransactionDetails {
          * Status of a transaction within the RTP lifecycle.
          */
         public Builder status(RTPTransactionStatus status) {
+            Utils.checkNotNull(status, "status");
+            this.status = Optional.ofNullable(status);
+            return this;
+        }
+
+        /**
+         * Status of a transaction within the RTP lifecycle.
+         */
+        public Builder status(Optional<? extends RTPTransactionStatus> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

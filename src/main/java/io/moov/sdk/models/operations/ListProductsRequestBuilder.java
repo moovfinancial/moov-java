@@ -16,6 +16,7 @@ import java.util.Optional;
 public class ListProductsRequestBuilder {
 
     private String accountID;
+    private Optional<String> title = Optional.empty();
     private Optional<Long> skip = Optional.empty();
     private Optional<Long> count = Optional.empty();
     private final SDKConfiguration sdkConfiguration;
@@ -28,6 +29,18 @@ public class ListProductsRequestBuilder {
     public ListProductsRequestBuilder accountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
+        return this;
+    }
+                
+    public ListProductsRequestBuilder title(String title) {
+        Utils.checkNotNull(title, "title");
+        this.title = Optional.of(title);
+        return this;
+    }
+
+    public ListProductsRequestBuilder title(Optional<String> title) {
+        Utils.checkNotNull(title, "title");
+        this.title = title;
         return this;
     }
                 
@@ -59,6 +72,7 @@ public class ListProductsRequestBuilder {
     private ListProductsRequest buildRequest() {
 
         ListProductsRequest request = new ListProductsRequest(accountID,
+            title,
             skip,
             count);
 

@@ -53,6 +53,12 @@ public class ACHFees {
     private BillingCountAndAmount noticeOfChange;
 
     /**
+     * Fees for successful bank account verifications via Plaid or MX.
+     */
+    @JsonProperty("bankAccountVerification")
+    private BillingCountAndAmount bankAccountVerification;
+
+    /**
      * Total ACH fees.
      */
     @JsonProperty("total")
@@ -66,6 +72,7 @@ public class ACHFees {
             @JsonProperty("return") BillingCountAndAmount return_,
             @JsonProperty("unauthorizedReturn") BillingCountAndAmount unauthorizedReturn,
             @JsonProperty("noticeOfChange") BillingCountAndAmount noticeOfChange,
+            @JsonProperty("bankAccountVerification") BillingCountAndAmount bankAccountVerification,
             @JsonProperty("total") BillingCountAndAmount total) {
         Utils.checkNotNull(standardCredit, "standardCredit");
         Utils.checkNotNull(sameDayCredit, "sameDayCredit");
@@ -73,6 +80,7 @@ public class ACHFees {
         Utils.checkNotNull(return_, "return_");
         Utils.checkNotNull(unauthorizedReturn, "unauthorizedReturn");
         Utils.checkNotNull(noticeOfChange, "noticeOfChange");
+        Utils.checkNotNull(bankAccountVerification, "bankAccountVerification");
         Utils.checkNotNull(total, "total");
         this.standardCredit = standardCredit;
         this.sameDayCredit = sameDayCredit;
@@ -80,6 +88,7 @@ public class ACHFees {
         this.return_ = return_;
         this.unauthorizedReturn = unauthorizedReturn;
         this.noticeOfChange = noticeOfChange;
+        this.bankAccountVerification = bankAccountVerification;
         this.total = total;
     }
 
@@ -129,6 +138,14 @@ public class ACHFees {
     @JsonIgnore
     public BillingCountAndAmount noticeOfChange() {
         return noticeOfChange;
+    }
+
+    /**
+     * Fees for successful bank account verifications via Plaid or MX.
+     */
+    @JsonIgnore
+    public BillingCountAndAmount bankAccountVerification() {
+        return bankAccountVerification;
     }
 
     /**
@@ -199,6 +216,15 @@ public class ACHFees {
     }
 
     /**
+     * Fees for successful bank account verifications via Plaid or MX.
+     */
+    public ACHFees withBankAccountVerification(BillingCountAndAmount bankAccountVerification) {
+        Utils.checkNotNull(bankAccountVerification, "bankAccountVerification");
+        this.bankAccountVerification = bankAccountVerification;
+        return this;
+    }
+
+    /**
      * Total ACH fees.
      */
     public ACHFees withTotal(BillingCountAndAmount total) {
@@ -223,6 +249,7 @@ public class ACHFees {
             Utils.enhancedDeepEquals(this.return_, other.return_) &&
             Utils.enhancedDeepEquals(this.unauthorizedReturn, other.unauthorizedReturn) &&
             Utils.enhancedDeepEquals(this.noticeOfChange, other.noticeOfChange) &&
+            Utils.enhancedDeepEquals(this.bankAccountVerification, other.bankAccountVerification) &&
             Utils.enhancedDeepEquals(this.total, other.total);
     }
     
@@ -231,7 +258,7 @@ public class ACHFees {
         return Utils.enhancedHash(
             standardCredit, sameDayCredit, debits,
             return_, unauthorizedReturn, noticeOfChange,
-            total);
+            bankAccountVerification, total);
     }
     
     @Override
@@ -243,6 +270,7 @@ public class ACHFees {
                 "return_", return_,
                 "unauthorizedReturn", unauthorizedReturn,
                 "noticeOfChange", noticeOfChange,
+                "bankAccountVerification", bankAccountVerification,
                 "total", total);
     }
 
@@ -260,6 +288,8 @@ public class ACHFees {
         private BillingCountAndAmount unauthorizedReturn;
 
         private BillingCountAndAmount noticeOfChange;
+
+        private BillingCountAndAmount bankAccountVerification;
 
         private BillingCountAndAmount total;
 
@@ -329,6 +359,16 @@ public class ACHFees {
 
 
         /**
+         * Fees for successful bank account verifications via Plaid or MX.
+         */
+        public Builder bankAccountVerification(BillingCountAndAmount bankAccountVerification) {
+            Utils.checkNotNull(bankAccountVerification, "bankAccountVerification");
+            this.bankAccountVerification = bankAccountVerification;
+            return this;
+        }
+
+
+        /**
          * Total ACH fees.
          */
         public Builder total(BillingCountAndAmount total) {
@@ -342,7 +382,7 @@ public class ACHFees {
             return new ACHFees(
                 standardCredit, sameDayCredit, debits,
                 return_, unauthorizedReturn, noticeOfChange,
-                total);
+                bankAccountVerification, total);
         }
 
     }

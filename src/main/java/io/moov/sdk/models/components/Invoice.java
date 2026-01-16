@@ -92,7 +92,9 @@ public class Invoice {
     @JsonProperty("paymentLinkCode")
     private Optional<String> paymentLinkCode;
 
-
+    /**
+     * Payment made towards an invoice, will be either a transfer or an external payment.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("invoicePayments")
     private Optional<? extends List<InvoicePayment>> invoicePayments;
@@ -314,6 +316,9 @@ public class Invoice {
         return paymentLinkCode;
     }
 
+    /**
+     * Payment made towards an invoice, will be either a transfer or an external payment.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<InvoicePayment>> invoicePayments() {
@@ -477,6 +482,9 @@ public class Invoice {
         return this;
     }
 
+    /**
+     * Payment made towards an invoice, will be either a transfer or an external payment.
+     */
     public Invoice withInvoicePayments(List<InvoicePayment> invoicePayments) {
         Utils.checkNotNull(invoicePayments, "invoicePayments");
         this.invoicePayments = Optional.ofNullable(invoicePayments);
@@ -484,6 +492,9 @@ public class Invoice {
     }
 
 
+    /**
+     * Payment made towards an invoice, will be either a transfer or an external payment.
+     */
     public Invoice withInvoicePayments(Optional<? extends List<InvoicePayment>> invoicePayments) {
         Utils.checkNotNull(invoicePayments, "invoicePayments");
         this.invoicePayments = invoicePayments;
@@ -822,12 +833,18 @@ public class Invoice {
         }
 
 
+        /**
+         * Payment made towards an invoice, will be either a transfer or an external payment.
+         */
         public Builder invoicePayments(List<InvoicePayment> invoicePayments) {
             Utils.checkNotNull(invoicePayments, "invoicePayments");
             this.invoicePayments = Optional.ofNullable(invoicePayments);
             return this;
         }
 
+        /**
+         * Payment made towards an invoice, will be either a transfer or an external payment.
+         */
         public Builder invoicePayments(Optional<? extends List<InvoicePayment>> invoicePayments) {
             Utils.checkNotNull(invoicePayments, "invoicePayments");
             this.invoicePayments = invoicePayments;

@@ -17,7 +17,10 @@ import java.util.Optional;
 
 
 public class CreateInvoice {
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonProperty("customerAccountID")
     private String customerAccountID;
 
@@ -76,6 +79,10 @@ public class CreateInvoice {
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public String customerAccountID() {
         return customerAccountID;
@@ -115,6 +122,10 @@ public class CreateInvoice {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public CreateInvoice withCustomerAccountID(String customerAccountID) {
         Utils.checkNotNull(customerAccountID, "customerAccountID");
         this.customerAccountID = customerAccountID;
@@ -238,6 +249,10 @@ public class CreateInvoice {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder customerAccountID(String customerAccountID) {
             Utils.checkNotNull(customerAccountID, "customerAccountID");
             this.customerAccountID = customerAccountID;

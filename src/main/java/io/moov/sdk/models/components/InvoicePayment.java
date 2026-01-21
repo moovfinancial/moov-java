@@ -20,7 +20,10 @@ import java.util.Optional;
  * <p>Payment made towards an invoice, will be either a transfer or an external payment.
  */
 public class InvoicePayment {
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonProperty("invoicePaymentID")
     private String invoicePaymentID;
 
@@ -69,6 +72,10 @@ public class InvoicePayment {
             Optional.empty(), Optional.empty());
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public String invoicePaymentID() {
         return invoicePaymentID;
@@ -101,6 +108,10 @@ public class InvoicePayment {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public InvoicePayment withInvoicePaymentID(String invoicePaymentID) {
         Utils.checkNotNull(invoicePaymentID, "invoicePaymentID");
         this.invoicePaymentID = invoicePaymentID;
@@ -197,6 +208,10 @@ public class InvoicePayment {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder invoicePaymentID(String invoicePaymentID) {
             Utils.checkNotNull(invoicePaymentID, "invoicePaymentID");
             this.invoicePaymentID = invoicePaymentID;

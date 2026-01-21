@@ -12,7 +12,10 @@ import java.lang.String;
 
 
 public class InvoiceTransferPayment {
-
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonProperty("transferID")
     private String transferID;
 
@@ -23,6 +26,10 @@ public class InvoiceTransferPayment {
         this.transferID = transferID;
     }
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     @JsonIgnore
     public String transferID() {
         return transferID;
@@ -33,6 +40,10 @@ public class InvoiceTransferPayment {
     }
 
 
+    /**
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+     */
     public InvoiceTransferPayment withTransferID(String transferID) {
         Utils.checkNotNull(transferID, "transferID");
         this.transferID = transferID;
@@ -74,6 +85,10 @@ public class InvoiceTransferPayment {
         }
 
 
+        /**
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+         */
         public Builder transferID(String transferID) {
             Utils.checkNotNull(transferID, "transferID");
             this.transferID = transferID;

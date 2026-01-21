@@ -16,7 +16,8 @@ import java.util.Optional;
 
 public class InvoiceLineItemImageMetadata {
     /**
-     * Unique identifier for a image resource.
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
      */
     @JsonProperty("imageID")
     private String imageID;
@@ -65,7 +66,8 @@ public class InvoiceLineItemImageMetadata {
     }
 
     /**
-     * Unique identifier for a image resource.
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
      */
     @JsonIgnore
     public String imageID() {
@@ -102,7 +104,8 @@ public class InvoiceLineItemImageMetadata {
 
 
     /**
-     * Unique identifier for a image resource.
+     * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+     * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
      */
     public InvoiceLineItemImageMetadata withImageID(String imageID) {
         Utils.checkNotNull(imageID, "imageID");
@@ -196,7 +199,8 @@ public class InvoiceLineItemImageMetadata {
 
 
         /**
-         * Unique identifier for a image resource.
+         * A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+         * or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
          */
         public Builder imageID(String imageID) {
             Utils.checkNotNull(imageID, "imageID");

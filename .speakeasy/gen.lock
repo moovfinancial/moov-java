@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c458b965-db3d-4ee0-aa0b-394a4071a559
 management:
-  docChecksum: 4e10116b5fa648cd341c14158c8473d7
+  docChecksum: f074fb6859ca885649179f8b7921f98e
   docVersion: latest
-  speakeasyVersion: 1.691.0
+  speakeasyVersion: 1.692.0
   generationVersion: 2.797.1
-  releaseVersion: 0.34.19
-  configChecksum: e21227cac463cd414c5020cffa143e18
+  releaseVersion: 0.34.20
+  configChecksum: a0e523acf4a5a490039bb0b69bc42849
   repoURL: https://github.com/moovfinancial/moov-java.git
   published: true
 persistentEdits:
-  generation_id: edd47d4b-4b9f-4ebe-a853-30a9e4a14b6d
-  pristine_commit_hash: c554d03923c9faf5a0d8e6fbb791093271ca403f
-  pristine_tree_hash: 32edaab41633b2ab07db337baedd271438028ab5
+  generation_id: c8700414-b478-4159-95c0-2cdde71cd5b5
+  pristine_commit_hash: 0e0c0640b0084fca9ee06b342c9234f2998f6d9b
+  pristine_tree_hash: ba02de6a5f5cc1514a3a2ca9147398ddf295a1a1
 features:
   java:
     acceptHeaders: 2.81.2
@@ -2589,8 +2589,8 @@ trackedFiles:
     pristine_git_object: 2721a6b3f59dafec8df4ecc3d185272763202697
   docs/models/errors/ListInvoicesValidationError.md:
     id: 96ae33bd3265
-    last_write_checksum: sha1:7fd9378413f1ed29f1022cce6d88b1c4e39743a5
-    pristine_git_object: eac3376d78f0642d9c9b102b7da6145f20f413a6
+    last_write_checksum: sha1:3b2810e7d6e9b2bd34210f6e7a16fd548685a2bb
+    pristine_git_object: ca354077cb732e44d9e998a9b2f4f04d448e9932
   docs/models/errors/ListTransfersValidationError.md:
     id: a308c2bd1558
     last_write_checksum: sha1:21831eaae960c8046f11ca0fb9bb2cf73f2d2006
@@ -3617,8 +3617,8 @@ trackedFiles:
     pristine_git_object: 822935adb470eb1c0063fc66937b53414b70a748
   docs/models/operations/ListInvoicesRequest.md:
     id: 1ed1835c35f3
-    last_write_checksum: sha1:e81347d91c33d6070da4fb6064a91204ae68e078
-    pristine_git_object: 808ceaba64e3544df456f426f5dcd15c9b858783
+    last_write_checksum: sha1:cc8449a6db5185c46aaabc9e52e0c401ea9ce87d
+    pristine_git_object: ddb37659516c1fa9eaf9e2c4cbaae253fedf36c1
   docs/models/operations/ListInvoicesResponse.md:
     id: cee609811316
     last_write_checksum: sha1:c2b11988bb10582ef259d579dd2ee316d014a594
@@ -4265,8 +4265,8 @@ trackedFiles:
     pristine_git_object: 5a1311f65cc22d82e0ed6eafb4b10f581d3ed7c5
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:4550d7a639d76ff1a6018e69f0eafc013aa3cfd6
-    pristine_git_object: e54ea8aa6779eb01e9e7a5c88f9b09e1a8250ebd
+    last_write_checksum: sha1:d8bea2248de4dde252d9bf2389409d3f913aff24
+    pristine_git_object: b7a625f50ce2bb8927627c3bc30a36ca3e957b06
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -4441,8 +4441,8 @@ trackedFiles:
     pristine_git_object: 64047d75ebffa5dbfe6b7461ed4d624f01890a51
   src/main/java/io/moov/sdk/SDKConfiguration.java:
     id: 55138921e14b
-    last_write_checksum: sha1:e0445c47d01961c7c17b9463fa8cecb95154d67a
-    pristine_git_object: da98f8e604b5b183e7a50886f01c6234cfbbf551
+    last_write_checksum: sha1:d7826ece7fa0999076e231908932213e5e8841f4
+    pristine_git_object: 7ff7d4c19ded8e99ddc1e417e83160da170b9f8d
   src/main/java/io/moov/sdk/Scheduling.java:
     id: 23cbd507c6c8
     last_write_checksum: sha1:f2634b766e3dc03d4f3043aff0565c655dcf17be
@@ -7049,8 +7049,8 @@ trackedFiles:
     pristine_git_object: 07046f3bfd23dd48f693468de865e6a09d9538c0
   src/main/java/io/moov/sdk/models/errors/ListInvoicesValidationError.java:
     id: 95562e37e3df
-    last_write_checksum: sha1:29f328e720eca81bcdd61ba07866d6621ab2c193
-    pristine_git_object: 29b6d8e8cc3ae8cc83e631f9f3a1a705d389e9a4
+    last_write_checksum: sha1:bb0a73816acdfb1efb486adec6b7ba5851a52edb
+    pristine_git_object: 0bb8e8198fb19475d06a5c6b96d407fd633db144
   src/main/java/io/moov/sdk/models/errors/ListTransfersValidationError.java:
     id: 1d1fad63b754
     last_write_checksum: sha1:1633b8615a764b096e908dabe5509b2d26d18331
@@ -8545,8 +8545,8 @@ trackedFiles:
     pristine_git_object: 790382c3091f47e2949fdc69e4a799f2bd3e9fc3
   src/main/java/io/moov/sdk/models/operations/ListInvoicesRequest.java:
     id: edc5ccdad823
-    last_write_checksum: sha1:25e6717ff42514be6e7f1a1950e2f57ade3b26e8
-    pristine_git_object: b16991dc936ca5bfe3fdbd8048d1d1d5ddc6aa72
+    last_write_checksum: sha1:42520f08e0f1ae7bee8fbb6f20e3112a39991c26
+    pristine_git_object: 321475d496847a53f84c75cb4ed0c1aa3a83e75d
   src/main/java/io/moov/sdk/models/operations/ListInvoicesRequestBuilder.java:
     id: 49009d7a7a2b
     last_write_checksum: sha1:36bbe37f1c056bcd4b19d1bcf6f4e520b54fb5fb
@@ -12918,6 +12918,7 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Java SDK Changes:\n* `moov.invoices.listInvoices()`: \n  *  `request` **Changed**\n  *  `error` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

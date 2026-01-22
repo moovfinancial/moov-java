@@ -64,6 +64,26 @@ public class ListInvoicesValidationError extends MoovError {
     }
 
     @Deprecated
+    public Optional<String> createdStartDateTime() {
+        return data().flatMap(Data::createdStartDateTime);
+    }
+
+    @Deprecated
+    public Optional<String> createdEndDateTime() {
+        return data().flatMap(Data::createdEndDateTime);
+    }
+
+    @Deprecated
+    public Optional<String> dueStartDateTime() {
+        return data().flatMap(Data::dueStartDateTime);
+    }
+
+    @Deprecated
+    public Optional<String> dueEndDateTime() {
+        return data().flatMap(Data::dueEndDateTime);
+    }
+
+    @Deprecated
     public Optional<String> skip() {
         return data().flatMap(Data::skip);
     }
@@ -97,6 +117,26 @@ public class ListInvoicesValidationError extends MoovError {
 
 
         @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("createdStartDateTime")
+        private Optional<String> createdStartDateTime;
+
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("createdEndDateTime")
+        private Optional<String> createdEndDateTime;
+
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("dueStartDateTime")
+        private Optional<String> dueStartDateTime;
+
+
+        @JsonInclude(Include.NON_ABSENT)
+        @JsonProperty("dueEndDateTime")
+        private Optional<String> dueEndDateTime;
+
+
+        @JsonInclude(Include.NON_ABSENT)
         @JsonProperty("skip")
         private Optional<String> skip;
 
@@ -109,21 +149,34 @@ public class ListInvoicesValidationError extends MoovError {
         public Data(
                 @JsonProperty("status") Optional<String> status,
                 @JsonProperty("customerAccountID") Optional<String> customerAccountID,
+                @JsonProperty("createdStartDateTime") Optional<String> createdStartDateTime,
+                @JsonProperty("createdEndDateTime") Optional<String> createdEndDateTime,
+                @JsonProperty("dueStartDateTime") Optional<String> dueStartDateTime,
+                @JsonProperty("dueEndDateTime") Optional<String> dueEndDateTime,
                 @JsonProperty("skip") Optional<String> skip,
                 @JsonProperty("count") Optional<String> count) {
             Utils.checkNotNull(status, "status");
             Utils.checkNotNull(customerAccountID, "customerAccountID");
+            Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+            Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+            Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+            Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
             Utils.checkNotNull(skip, "skip");
             Utils.checkNotNull(count, "count");
             this.status = status;
             this.customerAccountID = customerAccountID;
+            this.createdStartDateTime = createdStartDateTime;
+            this.createdEndDateTime = createdEndDateTime;
+            this.dueStartDateTime = dueStartDateTime;
+            this.dueEndDateTime = dueEndDateTime;
             this.skip = skip;
             this.count = count;
         }
         
         public Data() {
             this(Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty());
         }
 
         @JsonIgnore
@@ -134,6 +187,26 @@ public class ListInvoicesValidationError extends MoovError {
         @JsonIgnore
         public Optional<String> customerAccountID() {
             return customerAccountID;
+        }
+
+        @JsonIgnore
+        public Optional<String> createdStartDateTime() {
+            return createdStartDateTime;
+        }
+
+        @JsonIgnore
+        public Optional<String> createdEndDateTime() {
+            return createdEndDateTime;
+        }
+
+        @JsonIgnore
+        public Optional<String> dueStartDateTime() {
+            return dueStartDateTime;
+        }
+
+        @JsonIgnore
+        public Optional<String> dueEndDateTime() {
+            return dueEndDateTime;
         }
 
         @JsonIgnore
@@ -177,6 +250,58 @@ public class ListInvoicesValidationError extends MoovError {
             return this;
         }
 
+        public Data withCreatedStartDateTime(String createdStartDateTime) {
+            Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+            this.createdStartDateTime = Optional.ofNullable(createdStartDateTime);
+            return this;
+        }
+
+
+        public Data withCreatedStartDateTime(Optional<String> createdStartDateTime) {
+            Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+            this.createdStartDateTime = createdStartDateTime;
+            return this;
+        }
+
+        public Data withCreatedEndDateTime(String createdEndDateTime) {
+            Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+            this.createdEndDateTime = Optional.ofNullable(createdEndDateTime);
+            return this;
+        }
+
+
+        public Data withCreatedEndDateTime(Optional<String> createdEndDateTime) {
+            Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+            this.createdEndDateTime = createdEndDateTime;
+            return this;
+        }
+
+        public Data withDueStartDateTime(String dueStartDateTime) {
+            Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+            this.dueStartDateTime = Optional.ofNullable(dueStartDateTime);
+            return this;
+        }
+
+
+        public Data withDueStartDateTime(Optional<String> dueStartDateTime) {
+            Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+            this.dueStartDateTime = dueStartDateTime;
+            return this;
+        }
+
+        public Data withDueEndDateTime(String dueEndDateTime) {
+            Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
+            this.dueEndDateTime = Optional.ofNullable(dueEndDateTime);
+            return this;
+        }
+
+
+        public Data withDueEndDateTime(Optional<String> dueEndDateTime) {
+            Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
+            this.dueEndDateTime = dueEndDateTime;
+            return this;
+        }
+
         public Data withSkip(String skip) {
             Utils.checkNotNull(skip, "skip");
             this.skip = Optional.ofNullable(skip);
@@ -215,6 +340,10 @@ public class ListInvoicesValidationError extends MoovError {
             return 
                 Utils.enhancedDeepEquals(this.status, other.status) &&
                 Utils.enhancedDeepEquals(this.customerAccountID, other.customerAccountID) &&
+                Utils.enhancedDeepEquals(this.createdStartDateTime, other.createdStartDateTime) &&
+                Utils.enhancedDeepEquals(this.createdEndDateTime, other.createdEndDateTime) &&
+                Utils.enhancedDeepEquals(this.dueStartDateTime, other.dueStartDateTime) &&
+                Utils.enhancedDeepEquals(this.dueEndDateTime, other.dueEndDateTime) &&
                 Utils.enhancedDeepEquals(this.skip, other.skip) &&
                 Utils.enhancedDeepEquals(this.count, other.count);
         }
@@ -222,8 +351,9 @@ public class ListInvoicesValidationError extends MoovError {
         @Override
         public int hashCode() {
             return Utils.enhancedHash(
-                status, customerAccountID, skip,
-                count);
+                status, customerAccountID, createdStartDateTime,
+                createdEndDateTime, dueStartDateTime, dueEndDateTime,
+                skip, count);
         }
         
         @Override
@@ -231,6 +361,10 @@ public class ListInvoicesValidationError extends MoovError {
             return Utils.toString(Data.class,
                     "status", status,
                     "customerAccountID", customerAccountID,
+                    "createdStartDateTime", createdStartDateTime,
+                    "createdEndDateTime", createdEndDateTime,
+                    "dueStartDateTime", dueStartDateTime,
+                    "dueEndDateTime", dueEndDateTime,
                     "skip", skip,
                     "count", count);
         }
@@ -241,6 +375,14 @@ public class ListInvoicesValidationError extends MoovError {
             private Optional<String> status = Optional.empty();
 
             private Optional<String> customerAccountID = Optional.empty();
+
+            private Optional<String> createdStartDateTime = Optional.empty();
+
+            private Optional<String> createdEndDateTime = Optional.empty();
+
+            private Optional<String> dueStartDateTime = Optional.empty();
+
+            private Optional<String> dueEndDateTime = Optional.empty();
 
             private Optional<String> skip = Optional.empty();
 
@@ -277,6 +419,58 @@ public class ListInvoicesValidationError extends MoovError {
             }
 
 
+            public Builder createdStartDateTime(String createdStartDateTime) {
+                Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+                this.createdStartDateTime = Optional.ofNullable(createdStartDateTime);
+                return this;
+            }
+
+            public Builder createdStartDateTime(Optional<String> createdStartDateTime) {
+                Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+                this.createdStartDateTime = createdStartDateTime;
+                return this;
+            }
+
+
+            public Builder createdEndDateTime(String createdEndDateTime) {
+                Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+                this.createdEndDateTime = Optional.ofNullable(createdEndDateTime);
+                return this;
+            }
+
+            public Builder createdEndDateTime(Optional<String> createdEndDateTime) {
+                Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+                this.createdEndDateTime = createdEndDateTime;
+                return this;
+            }
+
+
+            public Builder dueStartDateTime(String dueStartDateTime) {
+                Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+                this.dueStartDateTime = Optional.ofNullable(dueStartDateTime);
+                return this;
+            }
+
+            public Builder dueStartDateTime(Optional<String> dueStartDateTime) {
+                Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+                this.dueStartDateTime = dueStartDateTime;
+                return this;
+            }
+
+
+            public Builder dueEndDateTime(String dueEndDateTime) {
+                Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
+                this.dueEndDateTime = Optional.ofNullable(dueEndDateTime);
+                return this;
+            }
+
+            public Builder dueEndDateTime(Optional<String> dueEndDateTime) {
+                Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
+                this.dueEndDateTime = dueEndDateTime;
+                return this;
+            }
+
+
             public Builder skip(String skip) {
                 Utils.checkNotNull(skip, "skip");
                 this.skip = Optional.ofNullable(skip);
@@ -305,8 +499,9 @@ public class ListInvoicesValidationError extends MoovError {
             public Data build() {
 
                 return new Data(
-                    status, customerAccountID, skip,
-                    count);
+                    status, customerAccountID, createdStartDateTime,
+                    createdEndDateTime, dueStartDateTime, dueEndDateTime,
+                    skip, count);
             }
 
         }

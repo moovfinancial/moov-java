@@ -12,6 +12,7 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 
@@ -33,6 +34,22 @@ public class ListInvoicesRequest {
     private Optional<String> customerAccountID;
 
 
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=createdStartDateTime")
+    private Optional<OffsetDateTime> createdStartDateTime;
+
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=createdEndDateTime")
+    private Optional<OffsetDateTime> createdEndDateTime;
+
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=dueStartDateTime")
+    private Optional<OffsetDateTime> dueStartDateTime;
+
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=false,name=dueEndDateTime")
+    private Optional<OffsetDateTime> dueEndDateTime;
+
+
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=accountID")
     private String accountID;
 
@@ -42,23 +59,36 @@ public class ListInvoicesRequest {
             Optional<Long> count,
             Optional<? extends InvoiceStatus> status,
             Optional<String> customerAccountID,
+            Optional<OffsetDateTime> createdStartDateTime,
+            Optional<OffsetDateTime> createdEndDateTime,
+            Optional<OffsetDateTime> dueStartDateTime,
+            Optional<OffsetDateTime> dueEndDateTime,
             String accountID) {
         Utils.checkNotNull(skip, "skip");
         Utils.checkNotNull(count, "count");
         Utils.checkNotNull(status, "status");
         Utils.checkNotNull(customerAccountID, "customerAccountID");
+        Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+        Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+        Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+        Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
         Utils.checkNotNull(accountID, "accountID");
         this.skip = skip;
         this.count = count;
         this.status = status;
         this.customerAccountID = customerAccountID;
+        this.createdStartDateTime = createdStartDateTime;
+        this.createdEndDateTime = createdEndDateTime;
+        this.dueStartDateTime = dueStartDateTime;
+        this.dueEndDateTime = dueEndDateTime;
         this.accountID = accountID;
     }
     
     public ListInvoicesRequest(
             String accountID) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), accountID);
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), accountID);
     }
 
     @JsonIgnore
@@ -80,6 +110,26 @@ public class ListInvoicesRequest {
     @JsonIgnore
     public Optional<String> customerAccountID() {
         return customerAccountID;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> createdStartDateTime() {
+        return createdStartDateTime;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> createdEndDateTime() {
+        return createdEndDateTime;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> dueStartDateTime() {
+        return dueStartDateTime;
+    }
+
+    @JsonIgnore
+    public Optional<OffsetDateTime> dueEndDateTime() {
+        return dueEndDateTime;
     }
 
     @JsonIgnore
@@ -144,6 +194,58 @@ public class ListInvoicesRequest {
         return this;
     }
 
+    public ListInvoicesRequest withCreatedStartDateTime(OffsetDateTime createdStartDateTime) {
+        Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+        this.createdStartDateTime = Optional.ofNullable(createdStartDateTime);
+        return this;
+    }
+
+
+    public ListInvoicesRequest withCreatedStartDateTime(Optional<OffsetDateTime> createdStartDateTime) {
+        Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+        this.createdStartDateTime = createdStartDateTime;
+        return this;
+    }
+
+    public ListInvoicesRequest withCreatedEndDateTime(OffsetDateTime createdEndDateTime) {
+        Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+        this.createdEndDateTime = Optional.ofNullable(createdEndDateTime);
+        return this;
+    }
+
+
+    public ListInvoicesRequest withCreatedEndDateTime(Optional<OffsetDateTime> createdEndDateTime) {
+        Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+        this.createdEndDateTime = createdEndDateTime;
+        return this;
+    }
+
+    public ListInvoicesRequest withDueStartDateTime(OffsetDateTime dueStartDateTime) {
+        Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+        this.dueStartDateTime = Optional.ofNullable(dueStartDateTime);
+        return this;
+    }
+
+
+    public ListInvoicesRequest withDueStartDateTime(Optional<OffsetDateTime> dueStartDateTime) {
+        Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+        this.dueStartDateTime = dueStartDateTime;
+        return this;
+    }
+
+    public ListInvoicesRequest withDueEndDateTime(OffsetDateTime dueEndDateTime) {
+        Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
+        this.dueEndDateTime = Optional.ofNullable(dueEndDateTime);
+        return this;
+    }
+
+
+    public ListInvoicesRequest withDueEndDateTime(Optional<OffsetDateTime> dueEndDateTime) {
+        Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
+        this.dueEndDateTime = dueEndDateTime;
+        return this;
+    }
+
     public ListInvoicesRequest withAccountID(String accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = accountID;
@@ -164,6 +266,10 @@ public class ListInvoicesRequest {
             Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.status, other.status) &&
             Utils.enhancedDeepEquals(this.customerAccountID, other.customerAccountID) &&
+            Utils.enhancedDeepEquals(this.createdStartDateTime, other.createdStartDateTime) &&
+            Utils.enhancedDeepEquals(this.createdEndDateTime, other.createdEndDateTime) &&
+            Utils.enhancedDeepEquals(this.dueStartDateTime, other.dueStartDateTime) &&
+            Utils.enhancedDeepEquals(this.dueEndDateTime, other.dueEndDateTime) &&
             Utils.enhancedDeepEquals(this.accountID, other.accountID);
     }
     
@@ -171,7 +277,8 @@ public class ListInvoicesRequest {
     public int hashCode() {
         return Utils.enhancedHash(
             skip, count, status,
-            customerAccountID, accountID);
+            customerAccountID, createdStartDateTime, createdEndDateTime,
+            dueStartDateTime, dueEndDateTime, accountID);
     }
     
     @Override
@@ -181,6 +288,10 @@ public class ListInvoicesRequest {
                 "count", count,
                 "status", status,
                 "customerAccountID", customerAccountID,
+                "createdStartDateTime", createdStartDateTime,
+                "createdEndDateTime", createdEndDateTime,
+                "dueStartDateTime", dueStartDateTime,
+                "dueEndDateTime", dueEndDateTime,
                 "accountID", accountID);
     }
 
@@ -194,6 +305,14 @@ public class ListInvoicesRequest {
         private Optional<? extends InvoiceStatus> status = Optional.empty();
 
         private Optional<String> customerAccountID = Optional.empty();
+
+        private Optional<OffsetDateTime> createdStartDateTime = Optional.empty();
+
+        private Optional<OffsetDateTime> createdEndDateTime = Optional.empty();
+
+        private Optional<OffsetDateTime> dueStartDateTime = Optional.empty();
+
+        private Optional<OffsetDateTime> dueEndDateTime = Optional.empty();
 
         private String accountID;
 
@@ -254,6 +373,58 @@ public class ListInvoicesRequest {
         }
 
 
+        public Builder createdStartDateTime(OffsetDateTime createdStartDateTime) {
+            Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+            this.createdStartDateTime = Optional.ofNullable(createdStartDateTime);
+            return this;
+        }
+
+        public Builder createdStartDateTime(Optional<OffsetDateTime> createdStartDateTime) {
+            Utils.checkNotNull(createdStartDateTime, "createdStartDateTime");
+            this.createdStartDateTime = createdStartDateTime;
+            return this;
+        }
+
+
+        public Builder createdEndDateTime(OffsetDateTime createdEndDateTime) {
+            Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+            this.createdEndDateTime = Optional.ofNullable(createdEndDateTime);
+            return this;
+        }
+
+        public Builder createdEndDateTime(Optional<OffsetDateTime> createdEndDateTime) {
+            Utils.checkNotNull(createdEndDateTime, "createdEndDateTime");
+            this.createdEndDateTime = createdEndDateTime;
+            return this;
+        }
+
+
+        public Builder dueStartDateTime(OffsetDateTime dueStartDateTime) {
+            Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+            this.dueStartDateTime = Optional.ofNullable(dueStartDateTime);
+            return this;
+        }
+
+        public Builder dueStartDateTime(Optional<OffsetDateTime> dueStartDateTime) {
+            Utils.checkNotNull(dueStartDateTime, "dueStartDateTime");
+            this.dueStartDateTime = dueStartDateTime;
+            return this;
+        }
+
+
+        public Builder dueEndDateTime(OffsetDateTime dueEndDateTime) {
+            Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
+            this.dueEndDateTime = Optional.ofNullable(dueEndDateTime);
+            return this;
+        }
+
+        public Builder dueEndDateTime(Optional<OffsetDateTime> dueEndDateTime) {
+            Utils.checkNotNull(dueEndDateTime, "dueEndDateTime");
+            this.dueEndDateTime = dueEndDateTime;
+            return this;
+        }
+
+
         public Builder accountID(String accountID) {
             Utils.checkNotNull(accountID, "accountID");
             this.accountID = accountID;
@@ -264,7 +435,8 @@ public class ListInvoicesRequest {
 
             return new ListInvoicesRequest(
                 skip, count, status,
-                customerAccountID, accountID);
+                customerAccountID, createdStartDateTime, createdEndDateTime,
+                dueStartDateTime, dueEndDateTime, accountID);
         }
 
     }

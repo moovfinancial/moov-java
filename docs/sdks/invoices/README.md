@@ -6,35 +6,35 @@
 
 * [createInvoice](#createinvoice) - Create an invoice for a Moov account.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 * [listInvoices](#listinvoices) - List all the invoices created under a Moov account.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 * [getInvoice](#getinvoice) - Retrieve an invoice by ID.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 * [updateInvoice](#updateinvoice) - Updates an invoice.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 * [createInvoicePayment](#createinvoicepayment) - Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
 If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 * [listInvoicePayments](#listinvoicepayments) - List all the payments made towards an invoice.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ## createInvoice
 
 Create an invoice for a Moov account.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
@@ -49,6 +49,7 @@ import io.moov.sdk.models.errors.CreateInvoiceError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateInvoiceResponse;
 import java.lang.Exception;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public class Application {
@@ -66,13 +67,24 @@ public class Application {
         CreateInvoiceResponse res = sdk.invoices().createInvoice()
                 .accountID("241bf524-e777-4941-a5e4-d7f3f34d7a00")
                 .createInvoice(CreateInvoice.builder()
-                    .customerAccountID("<id>")
+                    .customerAccountID("3dfff852-927d-47e8-822c-2fffc57ff6b9")
                     .lineItems(CreateInvoiceLineItems.builder()
-                        .items(List.of())
+                        .items(List.of(
+                            CreateInvoiceLineItem.builder()
+                                .name("Professional Services")
+                                .basePrice(AmountDecimal.builder()
+                                    .currency("USD")
+                                    .valueDecimal("1000.00")
+                                    .build())
+                                .quantity(1)
+                                .build()))
                         .build())
+                    .description("Professional services for Q1 2026")
+                    .invoiceDate(OffsetDateTime.parse("2026-01-15T00:00:00Z"))
+                    .dueDate(OffsetDateTime.parse("2026-02-15T00:00:00Z"))
                     .taxAmount(AmountDecimal.builder()
                         .currency("USD")
-                        .valueDecimal("12.987654321")
+                        .valueDecimal("80.00")
                         .build())
                     .build())
                 .call();
@@ -107,7 +119,7 @@ public class Application {
 
 List all the invoices created under a Moov account.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ### Example Usage
@@ -173,7 +185,7 @@ public class Application {
 
 Retrieve an invoice by ID.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ### Example Usage
@@ -232,7 +244,7 @@ public class Application {
 
 Updates an invoice.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
@@ -247,6 +259,7 @@ import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.errors.UpdateInvoiceError;
 import io.moov.sdk.models.operations.UpdateInvoiceResponse;
 import java.lang.Exception;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public class Application {
@@ -265,30 +278,20 @@ public class Application {
                 .accountID("ce46d65a-8504-4afa-b3f7-303401bd08b3")
                 .invoiceID("ef510999-370a-4350-87d5-bc81fc02a2ea")
                 .updateInvoice(UpdateInvoice.builder()
+                    .description("Updated professional services for Q1 2026")
                     .lineItems(CreateInvoiceLineItemsUpdate.builder()
                         .items(List.of(
                             CreateInvoiceLineItem.builder()
-                                .name("<value>")
+                                .name("Professional Services")
                                 .basePrice(AmountDecimal.builder()
                                     .currency("USD")
-                                    .valueDecimal("12.987654321")
+                                    .valueDecimal("1000.00")
                                     .build())
-                                .quantity(984515)
-                                .options(List.of(
-                                    CreateInvoiceLineItemOption.builder()
-                                        .name("<value>")
-                                        .quantity(761923)
-                                        .priceModifier(AmountDecimal.builder()
-                                            .currency("USD")
-                                            .valueDecimal("12.987654321")
-                                            .build())
-                                        .build()))
+                                .quantity(1)
                                 .build()))
                         .build())
-                    .taxAmount(AmountDecimalUpdate.builder()
-                        .currency("USD")
-                        .valueDecimal("12.987654321")
-                        .build())
+                    .invoiceDate(OffsetDateTime.parse("2026-01-16T00:00:00Z"))
+                    .dueDate(OffsetDateTime.parse("2026-02-16T00:00:00Z"))
                     .build())
                 .call();
 
@@ -324,7 +327,7 @@ public class Application {
 Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
 If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
@@ -339,6 +342,7 @@ import io.moov.sdk.models.errors.CreateInvoicePaymentError;
 import io.moov.sdk.models.errors.GenericError;
 import io.moov.sdk.models.operations.CreateInvoicePaymentResponse;
 import java.lang.Exception;
+import java.time.OffsetDateTime;
 
 public class Application {
 
@@ -358,8 +362,11 @@ public class Application {
                 .createInvoicePayment(CreateInvoicePayment.builder()
                     .amount(AmountDecimal.builder()
                         .currency("USD")
-                        .valueDecimal("12.987654321")
+                        .valueDecimal("500.00")
                         .build())
+                    .foreignID("EXT-PAY-12345")
+                    .description("Payment received via wire transfer")
+                    .paymentDate(OffsetDateTime.parse("2026-01-20T14:45:00Z"))
                     .build())
                 .call();
 
@@ -394,7 +401,7 @@ public class Application {
 
 List all the payments made towards an invoice.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ### Example Usage
